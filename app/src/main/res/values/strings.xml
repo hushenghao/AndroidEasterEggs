@@ -17,6 +17,7 @@
     <string name="title_android_l" translatable="false">Android 5.x (Lollipop)</string>
     <string name="title_android_k" translatable="false">Android 4.4 (KitKat)</string>
     <string name="title_android_j" translatable="false">Android 4.x (Jelly Bean)</string>
+    <string name="title_android_i" translatable="false">Android 4.0.x (Ice Cream Sandwich)</string>
 
     <string name="target_class_android_r" translatable="false">com.android_r.egg.PlatLogoActivity</string>
     <string name="target_class_android_q" translatable="false">com.android_q.egg.PlatLogoActivity</string>
@@ -27,5 +28,6 @@
     <string name="target_class_android_l" translatable="false">com.android_l.egg.PlatLogoActivity</string>
     <string name="target_class_android_k" translatable="false">com.android_k.egg.PlatLogoActivity</string>
     <string name="target_class_android_j" translatable="false">com.android_j.egg.PlatLogoActivity</string>
+    <string name="target_class_android_i" translatable="false">com.android_i.egg.PlatLogoActivity</string>
 
 </resources>

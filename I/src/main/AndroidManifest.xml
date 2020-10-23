@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android_i.egg">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application>
+        <activity
+            android:name=".PlatLogoActivity"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+
+        <!-- started from ... somewhere -->
+        <activity
+            android:name=".Nyandroid"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:hardwareAccelerated="true"
+            android:icon="@drawable/nyandroid04"
+            android:label="@string/i_egg_name"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+    </application>
+</manifest>
