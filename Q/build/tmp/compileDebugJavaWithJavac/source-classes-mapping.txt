@@ -1,8 +1,0 @@
-com/android_q/egg/PlatLogoActivity.java
- com.android_q.egg.PlatLogoActivity
- com.android_q.egg.PlatLogoActivity$1
- com.android_q.egg.PlatLogoActivity$BackslashDrawable
- com.android_q.egg.PlatLogoActivity$OneDrawable
- com.android_q.egg.PlatLogoActivity$ZeroDrawable
-com/android_q/egg/BuildConfig.java
- com.android_q.egg.BuildConfig
