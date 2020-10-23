@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="paint_color">#FFFFFFFF</color>
+    <color name="paper_color">#FF000000</color>
+    <color name="toolbar_bg_color">#FF333333</color>
+    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+</resources>

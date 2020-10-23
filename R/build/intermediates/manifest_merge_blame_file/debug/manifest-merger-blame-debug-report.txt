@@ -1,0 +1,23 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.android_r.egg" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="21"
+6-->/Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+7        android:targetSdkVersion="30" />
+7-->/Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+8
+9    <application>
+9-->/Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:5:5-12:19
+10        <activity
+10-->/Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:7:9-10:84
+11            android:name="com.android_r.egg.PlatLogoActivity"
+11-->/Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:8:13-45
+12            android:configChanges="orientation|keyboardHidden"
+12-->/Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:9:13-63
+13            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
+13-->/Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:10:13-81
+14    </application>
+15
+16</manifest>

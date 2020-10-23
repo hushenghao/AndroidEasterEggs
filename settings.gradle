@@ -1,0 +1,10 @@
+include ':L'
+include ':M'
+include ':N'
+include ':O'
+include ':P'
+include ':Q'
+include ':R'
+include ':basic'
+include ':app'
+rootProject.name = "Android Eggs"

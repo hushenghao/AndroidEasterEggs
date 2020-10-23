@@ -1,0 +1,7 @@
+R_DEF: Internal format may change without notice
+local
+drawable android_11_dial
+drawable ic_number11
+drawable r_icon
+drawable r_icon_bg
+string r_egg_name

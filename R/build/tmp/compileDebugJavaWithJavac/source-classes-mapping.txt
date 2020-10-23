@@ -1,0 +1,6 @@
+com/android_r/egg/PlatLogoActivity.java
+ com.android_r.egg.PlatLogoActivity
+ com.android_r.egg.PlatLogoActivity$BigDialView
+ com.android_r.egg.PlatLogoActivity$BigDialView$BigDialDrawable
+com/android_r/egg/BuildConfig.java
+ com.android_r.egg.BuildConfig

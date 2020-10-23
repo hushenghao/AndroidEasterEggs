@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android_r.egg">
+
+    <application>
+
+        <activity
+            android:name=".PlatLogoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
+
+    </application>
+
+</manifest>

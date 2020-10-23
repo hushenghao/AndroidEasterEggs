@@ -1,0 +1,45 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:2:1-18:12
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:2:1-18:12
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:2:1-18:12
+	package
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:3:5-32
+		INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml
+		INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:5:5-16:19
+activity#com.android_q.egg.PlatLogoActivity
+ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:6:9-9:84
+	android:configChanges
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:8:13-63
+	android:theme
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:9:13-81
+	android:name
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:7:13-45
+activity#com.android_q.egg.quares.QuaresActivity
+ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:11:9-15:50
+	android:label
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:14:13-47
+	android:icon
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:13:13-44
+	android:theme
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:15:13-47
+	android:name
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml:12:13-50
+uses-sdk
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml
+		INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml
+		INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/Q/AndroidManifest.xml

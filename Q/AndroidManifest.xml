@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android_q.egg">
+
+    <application>
+        <activity
+            android:name=".PlatLogoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
+
+        <activity
+            android:name=".quares.QuaresActivity"
+            android:icon="@drawable/q_icon"
+            android:label="@string/q_egg_name"
+            android:theme="@style/QuaresTheme" />
+    </application>
+
+</manifest>

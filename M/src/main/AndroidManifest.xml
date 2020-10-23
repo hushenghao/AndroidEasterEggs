@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android_m.egg">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application>
+        <activity
+            android:name=".PlatLogoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+
+        <activity android:name=".MLandActivity"
+            android:theme="@android:style/Theme.Material.NoActionBar"
+            android:exported="true"
+            android:icon="@drawable/m_icon"
+            android:label="@string/mland"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="locked"
+            android:excludeFromRecents="true"/>
+    </application>
+</manifest>

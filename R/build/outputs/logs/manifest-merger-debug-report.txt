@@ -1,0 +1,35 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:2:1-14:12
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:2:1-14:12
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:2:1-14:12
+	package
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:3:5-32
+		INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+		INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:5:5-12:19
+activity#com.android_r.egg.PlatLogoActivity
+ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:7:9-10:84
+	android:configChanges
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:9:13-63
+	android:theme
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:10:13-81
+	android:name
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml:8:13-45
+uses-sdk
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+		INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+		ADDED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml
+		INJECTED from /Users/dede/WorkSpace/Java/AndroidEggs/R/AndroidManifest.xml

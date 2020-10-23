@@ -1,0 +1,76 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/easter_egg_header">
+
+        <Preference
+            app:icon="@drawable/r_icon"
+            app:summary="@string/r_egg_name"
+            app:title="@string/title_android_R">
+            <intent
+                android:targetClass="@string/target_class_android_R"
+                android:targetPackage="@string/app_package" />
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/q_icon"
+            app:summary="@string/q_egg_name"
+            app:title="@string/title_android_Q">
+            <intent
+                android:targetClass="@string/target_class_android_Q"
+                android:targetPackage="@string/app_package" />
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/p_icon"
+            app:summary="@string/p_app_name"
+            app:title="@string/title_android_P">
+            <intent
+                android:targetClass="@string/target_class_android_P"
+                android:targetPackage="@string/app_package" />
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/o_icon"
+            app:summary="@string/o_app_name"
+            app:title="@string/title_android_O">
+            <intent
+                android:targetClass="@string/target_class_android_O"
+                android:targetPackage="@string/app_package" />
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/n_icon"
+            app:summary="@string/n_app_name"
+            app:title="@string/title_android_N">
+            <intent
+                android:targetClass="@string/target_class_android_N"
+                android:targetPackage="@string/app_package" />
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/m_icon"
+            app:summary="@string/mland"
+            app:title="@string/title_android_M">
+            <intent
+                android:targetClass="@string/target_class_android_M"
+                android:targetPackage="@string/app_package" />
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/l_icon"
+            app:summary="@string/lland"
+            app:title="@string/title_android_L">
+            <intent
+                android:targetClass="@string/target_class_android_L"
+                android:targetPackage="@string/app_package" />
+        </Preference>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="header_about">
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

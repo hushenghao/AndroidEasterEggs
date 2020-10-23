@@ -1,0 +1,30 @@
+R_DEF: Internal format may change without notice
+local
+color paint_color
+color paper_color
+color toolbar_bg_color
+color toolbar_icon_color
+drawable ic_clear
+drawable ic_dropper
+drawable ic_hourglass
+drawable p
+drawable p_icon
+drawable p_icon_bg
+drawable toolbar_bg
+drawable toolbar_button_bg
+id brushes
+id btnBrush
+id btnClear
+id btnColor
+id btnSample
+id btnZen
+id colors
+id contentView
+id toolbar
+layout activity_paint
+layout brushes
+layout colors
+layout toolbar
+string p_app_name
+style AppTheme
+styleable ToolbarView

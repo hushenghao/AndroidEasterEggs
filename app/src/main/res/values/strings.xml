@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Android Easter Eggs</string>
+    <!-- Settings Activity Title -->
+    <string name="title_activity_settings">Android Easter Eggs</string>
+    <string name="app_package">com.dede.android_eggs</string>
+
+    <!-- Preference Titles -->
+    <string name="easter_egg_header">Easter Eggs</string>
+    <string name="header_about">About</string>
+
+    <string name="title_android_R">Android 11 (R)</string>
+    <string name="title_android_Q">Android 10 (Q)</string>
+    <string name="title_android_P">Android 9 (Pie)</string>
+    <string name="title_android_O">Android 8.x (Oreo)</string>1
+    <string name="title_android_N">Android 7.x (Nougat)</string>
+    <string name="title_android_M">Android 6.x (Marshmallow)</string>
+    <string name="title_android_L">Android 5.x (Lollipop)</string>
+
+    <string name="target_class_android_R">com.android_r.egg.PlatLogoActivity</string>
+    <string name="target_class_android_Q">com.android_q.egg.PlatLogoActivity</string>
+    <string name="target_class_android_P">com.android_p.egg.PlatLogoActivity</string>
+    <string name="target_class_android_O">com.android_o.egg.PlatLogoActivity</string>
+    <string name="target_class_android_N">com.android_n.egg.PlatLogoActivity</string>
+    <string name="target_class_android_M">com.android_m.egg.PlatLogoActivity</string>
+    <string name="target_class_android_L">com.android_l.egg.PlatLogoActivity</string>
+
+</resources>

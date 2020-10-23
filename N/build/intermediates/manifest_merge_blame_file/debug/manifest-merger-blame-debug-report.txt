@@ -1,0 +1,117 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3Copyright (C) 2016 The Android Open Source Project
+4
+5   Licensed under the Apache License, Version 2.0 (the "License");
+6    you may not use this file except in compliance with the License.
+7    You may obtain a copy of the License at
+8
+9         http://www.apache.org/licenses/LICENSE-2.0
+10
+11    Unless required by applicable law or agreed to in writing, software
+12    distributed under the License is distributed on an "AS IS" BASIS,
+13    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+14    See the License for the specific language governing permissions and
+15    limitations under the License.
+16-->
+17<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+18    package="com.android_n.egg" >
+19
+20    <uses-sdk
+21        android:minSdkVersion="21"
+21-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml
+22        android:targetSdkVersion="30" />
+22-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml
+23
+24    <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />
+24-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:19:5-91
+24-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:19:22-88
+25
+26    <application>
+26-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:21:5-69:19
+27        <activity
+27-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:22:9-25:84
+28            android:name="com.android_n.egg.PlatLogoActivity"
+28-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:23:13-45
+29            android:configChanges="orientation|keyboardHidden"
+29-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:24:13-63
+30            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+30-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:25:13-81
+31
+32        <!-- Long press the QS tile to get here -->
+33        <activity
+33-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:28:9-36:20
+34            android:name="com.android_n.egg.neko.NekoLand"
+34-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:29:13-59
+35            android:label="@string/n_app_name"
+35-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:30:13-47
+36            android:theme="@android:style/Theme.Material.NoActionBar" >
+36-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:31:13-70
+37            <intent-filter>
+37-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:32:13-35:29
+38                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+38-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:33:17-99
+38-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:33:25-96
+39                <action android:name="android.intent.action.MAIN" />
+39-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:34:17-69
+39-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:34:25-66
+40            </intent-filter>
+41        </activity>
+42
+43        <!-- This is where the magic happens -->
+44        <service
+44-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:39:9-43:72
+45            android:name="com.android_n.egg.neko.NekoService"
+45-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:40:13-62
+46            android:enabled="true"
+46-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:41:13-35
+47            android:exported="true"
+47-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:42:13-36
+48            android:permission="android.permission.BIND_JOB_SERVICE" />
+48-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:43:13-69
+49
+50        <!-- Used to show over lock screen -->
+51        <activity
+51-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:46:9-50:86
+52            android:name="com.android_n.egg.neko.NekoLockedActivity"
+52-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:47:13-69
+53            android:excludeFromRecents="true"
+53-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:48:13-46
+54            android:showOnLockScreen="true"
+54-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:49:13-44
+55            android:theme="@android:style/Theme.Material.Light.Dialog.NoActionBar" />
+55-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:50:13-83
+56
+57        <!-- Used to enable easter egg -->
+58        <activity
+58-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:53:9-56:62
+59            android:name="com.android_n.egg.neko.NekoActivationActivity"
+59-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:54:13-73
+60            android:excludeFromRecents="true"
+60-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:55:13-46
+61            android:theme="@android:style/Theme.NoDisplay" />
+61-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:56:13-59
+62
+63        <!-- The quick settings tile, disabled by default -->
+64        <service
+64-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:59:9-68:19
+65            android:name="com.android_n.egg.neko.NekoTile"
+65-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:60:13-59
+66            android:enabled="false"
+66-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:61:13-36
+67            android:icon="@drawable/stat_icon"
+67-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:62:13-47
+68            android:label="@string/default_tile_name"
+68-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:63:13-54
+69            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE" >
+69-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:64:13-77
+70            <intent-filter>
+70-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:65:13-67:29
+71                <action android:name="android.service.quicksettings.action.QS_TILE" />
+71-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:66:17-87
+71-->/Users/dede/WorkSpace/Java/AndroidEggs/N/AndroidManifest.xml:66:25-84
+72            </intent-filter>
+73        </service>
+74    </application>
+75
+76</manifest>
