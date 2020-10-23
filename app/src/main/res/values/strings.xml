@@ -19,6 +19,7 @@
     <string name="title_android_j" translatable="false">Android 4.x (Jelly Bean)</string>
     <string name="title_android_i" translatable="false">Android 4.0.x (Ice Cream Sandwich)</string>
     <string name="title_android_h" translatable="false">Android 3.x (Honeycomb)</string>
+    <string name="title_android_g" translatable="false">Android 2.3.x (Gingerbread)</string>
 
     <string name="target_class_android_r" translatable="false">com.android_r.egg.PlatLogoActivity</string>
     <string name="target_class_android_q" translatable="false">com.android_q.egg.PlatLogoActivity</string>
@@ -31,5 +32,6 @@
     <string name="target_class_android_j" translatable="false">com.android_j.egg.PlatLogoActivity</string>
     <string name="target_class_android_i" translatable="false">com.android_i.egg.PlatLogoActivity</string>
     <string name="target_class_android_h" translatable="false">com.android_h.egg.PlatLogoActivity</string>
+    <string name="target_class_android_g" translatable="false">com.android_g.egg.PlatLogoActivity</string>
 
 </resources>

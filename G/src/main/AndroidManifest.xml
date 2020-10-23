@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android_g.egg">
+
+    <application>
+        <activity
+            android:name=".PlatLogoActivity"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+    </application>
+</manifest>

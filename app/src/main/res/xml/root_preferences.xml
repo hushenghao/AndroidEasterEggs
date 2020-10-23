@@ -102,6 +102,15 @@
                 android:targetPackage="@string/app_package" />
         </Preference>
 
+        <Preference
+            app:icon="@drawable/g_platlogo"
+            app:summary="@string/g_egg_name"
+            app:title="@string/title_android_g">
+            <intent
+                android:targetClass="@string/target_class_android_g"
+                android:targetPackage="@string/app_package" />
+        </Preference>
+
     </PreferenceCategory>
 
     <PreferenceCategory
