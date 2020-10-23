@@ -93,4 +93,11 @@ public class PlatLogoActivity extends Activity {
 
         setContentView(mContent);
     }
+
+    @Override
+    protected void onDestroy() {
+        // fix leak
+        mHandler.removeCallbacks(mSuperLongPress);
+        super.onDestroy();
+    }
 }
