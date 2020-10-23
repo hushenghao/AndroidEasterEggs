@@ -6,70 +6,79 @@
         <Preference
             app:icon="@drawable/r_icon"
             app:summary="@string/r_egg_name"
-            app:title="@string/title_android_R">
+            app:title="@string/title_android_r">
             <intent
-                android:targetClass="@string/target_class_android_R"
+                android:targetClass="@string/target_class_android_r"
                 android:targetPackage="@string/app_package" />
         </Preference>
 
         <Preference
             app:icon="@drawable/q_icon"
             app:summary="@string/q_egg_name"
-            app:title="@string/title_android_Q">
+            app:title="@string/title_android_q">
             <intent
-                android:targetClass="@string/target_class_android_Q"
+                android:targetClass="@string/target_class_android_q"
                 android:targetPackage="@string/app_package" />
         </Preference>
 
         <Preference
             app:icon="@drawable/p_icon"
             app:summary="@string/p_app_name"
-            app:title="@string/title_android_P">
+            app:title="@string/title_android_p">
             <intent
-                android:targetClass="@string/target_class_android_P"
+                android:targetClass="@string/target_class_android_p"
                 android:targetPackage="@string/app_package" />
         </Preference>
 
         <Preference
             app:icon="@drawable/o_icon"
             app:summary="@string/o_app_name"
-            app:title="@string/title_android_O">
+            app:title="@string/title_android_q">
             <intent
-                android:targetClass="@string/target_class_android_O"
+                android:targetClass="@string/target_class_android_o"
                 android:targetPackage="@string/app_package" />
         </Preference>
 
         <Preference
             app:icon="@drawable/n_icon"
             app:summary="@string/n_app_name"
-            app:title="@string/title_android_N">
+            app:title="@string/title_android_n">
             <intent
-                android:targetClass="@string/target_class_android_N"
+                android:targetClass="@string/target_class_android_n"
                 android:targetPackage="@string/app_package" />
         </Preference>
 
         <Preference
             app:icon="@drawable/m_icon"
             app:summary="@string/mland"
-            app:title="@string/title_android_M">
+            app:title="@string/title_android_m">
             <intent
-                android:targetClass="@string/target_class_android_M"
+                android:targetClass="@string/target_class_android_m"
                 android:targetPackage="@string/app_package" />
         </Preference>
 
         <Preference
             app:icon="@drawable/l_icon"
             app:summary="@string/lland"
-            app:title="@string/title_android_L">
+            app:title="@string/title_android_l">
             <intent
-                android:targetClass="@string/target_class_android_L"
+                android:targetClass="@string/target_class_android_l"
+                android:targetPackage="@string/app_package" />
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/k_platlogo"
+            app:summary="@string/dessert_case"
+            app:title="@string/title_android_k">
+            <intent
+                android:targetClass="@string/target_class_android_k"
                 android:targetPackage="@string/app_package" />
         </Preference>
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:title="header_about">
+        app:title="@string/header_about">
 
     </PreferenceCategory>
 

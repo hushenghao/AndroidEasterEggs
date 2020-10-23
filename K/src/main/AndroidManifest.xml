@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android_k.egg">
+
+    <application>
+        <activity
+            android:name=".PlatLogoActivity"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+
+        <activity
+            android:name=".DessertCase"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:hardwareAccelerated="true"
+            android:label="@string/dessert_case"
+            android:launchMode="singleInstance"
+            android:screenOrientation="locked"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+
+        <!-- a gallery of delicious treats -->
+        <service
+            android:name=".DessertCaseDream"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/k_platlogo"
+            android:label="@string/dessert_case"
+            android:permission="android.permission.BIND_DREAM_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

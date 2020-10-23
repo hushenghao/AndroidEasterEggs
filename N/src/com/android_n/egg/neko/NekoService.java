@@ -42,7 +42,7 @@ public class NekoService extends JobService {
     public static int JOB_ID = 42;
 
     public static int CAT_NOTIFICATION = 1;
-    public static String CAT_NOTIFICATION_CHANNEL_ID = "CAT_CHANNEL";
+    public static final String CAT_NOTIFICATION_CHANNEL_ID = "CAT_CHANNEL";
 
     public static float CAT_CAPTURE_PROB = 1.0f; // generous
 
@@ -58,15 +58,9 @@ public class NekoService extends JobService {
         Log.v(TAG, "Starting job: " + String.valueOf(params));
 
         NotificationManager noman = getSystemService(NotificationManager.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(CAT_NOTIFICATION_CHANNEL_ID,
-                    getString(R.string.notification_name), NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setShowBadge(true);
-            noman.createNotificationChannel(channel);
-        }
         if (NekoLand.DEBUG_NOTIFICATIONS) {
             final Bundle extras = new Bundle();
-            extras.putString("android.substName", getString(R.string.notification_name));
+//            extras.putString("android.substName", getString(R.string.notification_name));
             final int size = getResources()
                     .getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
             final Cat cat = Cat.create(this);
@@ -133,15 +127,25 @@ public class NekoService extends JobService {
         Log.v(TAG, "A cat will visit in " + interval + "ms: " + String.valueOf(jobInfo));
         jss.schedule(jobInfo);
 
+        NotificationManager noman = context.getSystemService(NotificationManager.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CAT_NOTIFICATION_CHANNEL_ID,
+                    context.getString(R.string.notification_name), NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setShowBadge(true);
+            noman.createNotificationChannel(channel);
+        }
         if (NekoLand.DEBUG_NOTIFICATIONS) {
-            NotificationManager noman = context.getSystemService(NotificationManager.class);
-            noman.notify(500, new Notification.Builder(context)
+            Notification.Builder builder = new Notification.Builder(context)
                     .setSmallIcon(R.drawable.stat_icon)
                     .setContentTitle(String.format("Job scheduled in %d min", (interval / MINUTES)))
                     .setContentText(String.valueOf(jobInfo))
                     .setPriority(Notification.PRIORITY_MIN)
                     .setCategory(Notification.CATEGORY_SERVICE)
-                    .setShowWhen(true)
+                    .setShowWhen(true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                builder.setChannelId(CAT_NOTIFICATION_CHANNEL_ID);
+            }
+            noman.notify(500, builder
                     .build());
         }
     }

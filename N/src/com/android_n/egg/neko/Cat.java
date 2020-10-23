@@ -214,11 +214,11 @@ public class Cat extends Drawable {
 
     public Notification.Builder buildNotification(Context context) {
         final Bundle extras = new Bundle();
-        extras.putString("android.substName", context.getString(R.string.notification_name));
+//        extras.putString("android.substName", context.getString(R.string.notification_name));
         final Intent intent = new Intent(Intent.ACTION_MAIN)
                 .setClass(context, NekoLand.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return new Notification.Builder(context)
+        Notification.Builder builder = new Notification.Builder(context)
                 .setSmallIcon(Icon.createWithResource(context, R.drawable.stat_icon))
                 .setColor(getBodyColor())
                 .setPriority(Notification.PRIORITY_LOW)
@@ -230,6 +230,10 @@ public class Cat extends Drawable {
                 .setAutoCancel(true)
                 .setVibrate(PURR)
                 .addExtras(extras);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            builder.setChannelId(NekoService.CAT_NOTIFICATION_CHANNEL_ID);
+        }
+        return builder;
     }
 
     public long getSeed() {

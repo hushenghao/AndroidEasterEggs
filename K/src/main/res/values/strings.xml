@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Name of the K-release easter egg: a display case for all our tastiest desserts. [CHAR LIMIT=30] -->
+    <string name="dessert_case">Dessert Case</string>
+
+    <!-- used by DessertCase -->
+    <dimen name="dessert_case_cell_size">192dp</dimen>
+</resources>

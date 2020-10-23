@@ -8,20 +8,22 @@
     <string name="easter_egg_header">Easter Eggs</string>
     <string name="header_about">About</string>
 
-    <string name="title_android_R">Android 11 (R)</string>
-    <string name="title_android_Q">Android 10 (Q)</string>
-    <string name="title_android_P">Android 9 (Pie)</string>
-    <string name="title_android_O">Android 8.x (Oreo)</string>1
-    <string name="title_android_N">Android 7.x (Nougat)</string>
-    <string name="title_android_M">Android 6.x (Marshmallow)</string>
-    <string name="title_android_L">Android 5.x (Lollipop)</string>
+    <string name="title_android_r">Android 11 (R)</string>
+    <string name="title_android_q">Android 10 (Q)</string>
+    <string name="title_android_p">Android 9 (Pie)</string>
+    <string name="title_android_o">Android 8.x (Oreo)</string>
+    <string name="title_android_n">Android 7.x (Nougat)</string>
+    <string name="title_android_m">Android 6.x (Marshmallow)</string>
+    <string name="title_android_l">Android 5.x (Lollipop)</string>
+    <string name="title_android_k">Android 4.4 (KitKat)</string>
 
-    <string name="target_class_android_R">com.android_r.egg.PlatLogoActivity</string>
-    <string name="target_class_android_Q">com.android_q.egg.PlatLogoActivity</string>
-    <string name="target_class_android_P">com.android_p.egg.PlatLogoActivity</string>
-    <string name="target_class_android_O">com.android_o.egg.PlatLogoActivity</string>
-    <string name="target_class_android_N">com.android_n.egg.PlatLogoActivity</string>
-    <string name="target_class_android_M">com.android_m.egg.PlatLogoActivity</string>
-    <string name="target_class_android_L">com.android_l.egg.PlatLogoActivity</string>
+    <string name="target_class_android_r">com.android_r.egg.PlatLogoActivity</string>
+    <string name="target_class_android_q">com.android_q.egg.PlatLogoActivity</string>
+    <string name="target_class_android_p">com.android_p.egg.PlatLogoActivity</string>
+    <string name="target_class_android_o">com.android_o.egg.PlatLogoActivity</string>
+    <string name="target_class_android_n">com.android_n.egg.PlatLogoActivity</string>
+    <string name="target_class_android_m">com.android_m.egg.PlatLogoActivity</string>
+    <string name="target_class_android_l">com.android_l.egg.PlatLogoActivity</string>
+    <string name="target_class_android_k">com.android_k.egg.PlatLogoActivity</string>
 
 </resources>
