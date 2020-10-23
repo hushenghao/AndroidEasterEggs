@@ -8,22 +8,24 @@
     <string name="easter_egg_header">Easter Eggs</string>
     <string name="header_about">About</string>
 
-    <string name="title_android_r">Android 11 (R)</string>
-    <string name="title_android_q">Android 10 (Q)</string>
-    <string name="title_android_p">Android 9 (Pie)</string>
-    <string name="title_android_o">Android 8.x (Oreo)</string>
-    <string name="title_android_n">Android 7.x (Nougat)</string>
-    <string name="title_android_m">Android 6.x (Marshmallow)</string>
-    <string name="title_android_l">Android 5.x (Lollipop)</string>
-    <string name="title_android_k">Android 4.4 (KitKat)</string>
+    <string name="title_android_r" translatable="false">Android 11 (R)</string>
+    <string name="title_android_q" translatable="false">Android 10 (Q)</string>
+    <string name="title_android_p" translatable="false">Android 9 (Pie)</string>
+    <string name="title_android_o" translatable="false">Android 8.x (Oreo)</string>
+    <string name="title_android_n" translatable="false">Android 7.x (Nougat)</string>
+    <string name="title_android_m" translatable="false">Android 6.x (Marshmallow)</string>
+    <string name="title_android_l" translatable="false">Android 5.x (Lollipop)</string>
+    <string name="title_android_k" translatable="false">Android 4.4 (KitKat)</string>
+    <string name="title_android_j" translatable="false">Android 4.x (Jelly Bean)</string>
 
-    <string name="target_class_android_r">com.android_r.egg.PlatLogoActivity</string>
-    <string name="target_class_android_q">com.android_q.egg.PlatLogoActivity</string>
-    <string name="target_class_android_p">com.android_p.egg.PlatLogoActivity</string>
-    <string name="target_class_android_o">com.android_o.egg.PlatLogoActivity</string>
-    <string name="target_class_android_n">com.android_n.egg.PlatLogoActivity</string>
-    <string name="target_class_android_m">com.android_m.egg.PlatLogoActivity</string>
-    <string name="target_class_android_l">com.android_l.egg.PlatLogoActivity</string>
-    <string name="target_class_android_k">com.android_k.egg.PlatLogoActivity</string>
+    <string name="target_class_android_r" translatable="false">com.android_r.egg.PlatLogoActivity</string>
+    <string name="target_class_android_q" translatable="false">com.android_q.egg.PlatLogoActivity</string>
+    <string name="target_class_android_p" translatable="false">com.android_p.egg.PlatLogoActivity</string>
+    <string name="target_class_android_o" translatable="false">com.android_o.egg.PlatLogoActivity</string>
+    <string name="target_class_android_n" translatable="false">com.android_n.egg.PlatLogoActivity</string>
+    <string name="target_class_android_m" translatable="false">com.android_m.egg.PlatLogoActivity</string>
+    <string name="target_class_android_l" translatable="false">com.android_l.egg.PlatLogoActivity</string>
+    <string name="target_class_android_k" translatable="false">com.android_k.egg.PlatLogoActivity</string>
+    <string name="target_class_android_j" translatable="false">com.android_j.egg.PlatLogoActivity</string>
 
 </resources>

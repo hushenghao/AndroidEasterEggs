@@ -75,6 +75,15 @@
                 android:targetPackage="@string/app_package" />
         </Preference>
 
+        <Preference
+            app:icon="@drawable/redbean2"
+            app:summary="@string/j_egg_name"
+            app:title="@string/title_android_j">
+            <intent
+                android:targetClass="@string/target_class_android_j"
+                android:targetPackage="@string/app_package" />
+        </Preference>
+
     </PreferenceCategory>
 
     <PreferenceCategory

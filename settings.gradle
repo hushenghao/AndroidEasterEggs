@@ -9,3 +9,4 @@ include ':basic'
 include ':app'
 rootProject.name = "Android Eggs"
 include ':K'
+include ':J'

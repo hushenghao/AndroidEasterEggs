@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Name of the Jelly Bean platlogo screensaver -->
+    <string name="jelly_bean_dream_name">BeanFlinger</string>
+    <string name="j_egg_name">BeanBag</string>
+</resources>
