@@ -293,7 +293,7 @@ public class PlatLogoActivity extends Activity {
             slashPaint.setColor(0xFF000000);
             tileCanvas.drawPath(path, slashPaint);
 
-            mPaint.setColor(0xFF0000FF);
+            //mPaint.setColor(0xFF0000FF);
             mShader = new BitmapShader(mTile, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
             mPaint.setShader(mShader);
         }
