@@ -1,11 +1,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/easter_egg_header">
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/easter_egg_header">
 
         <Preference
             app:icon="@drawable/r_icon"
-            app:summary="@string/r_egg_name"
+            app:summary="@string/summary_r_egg_name"
             app:title="@string/title_android_r">
             <intent
                 android:targetClass="@string/target_class_android_r"
@@ -114,7 +116,20 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        app:iconSpaceReserved="false"
         app:title="@string/header_about">
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="key_github"
+            app:summary="@string/summary_github"
+            app:title="@string/title_github" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="key_source"
+            app:summary="@string/summary_source"
+            app:title="@string/title_source" />
 
     </PreferenceCategory>
 

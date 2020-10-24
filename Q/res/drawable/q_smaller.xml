@@ -16,8 +16,8 @@ Copyright (C) 2019 The Android Open Source Project
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
         android:width="108dp"
         android:height="108dp"
-        android:insetBottom="30dp"
-        android:insetLeft="30dp"
-        android:insetRight="30dp"
-        android:insetTop="30dp"
+        android:insetBottom="35dp"
+        android:insetLeft="35dp"
+        android:insetRight="35dp"
+        android:insetTop="35dp"
         android:drawable="@drawable/q" />

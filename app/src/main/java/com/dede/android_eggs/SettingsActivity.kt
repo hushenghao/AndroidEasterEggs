@@ -1,11 +1,16 @@
 package com.dede.android_eggs
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.browser.trusted.TrustedWebActivityIntentBuilder
+import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.google.androidbrowserhelper.trusted.TwaLauncher
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -20,28 +25,48 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    class SettingsFragment : PreferenceFragmentCompat() {
+    class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClickListener {
 
         companion object {
-            const val KEY_FORMAT = "pref_key_%d"
+            const val KEY_GITHUB = "key_github"
+            const val KEY_SOURCE = "key_source"
         }
-
-        private lateinit var dispatcher: EasterEggsDispatcher
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
-//            dispatcher = EasterEggsDispatcher(requireContext())
-//                .register(Build.VERSION_CODES.R) {
-//                    Intent(Intent.ACTION_MAIN)
-//                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                        .setClassName("android", "com.android.internal.app.PlatLogoActivity")
-//                }
+            findPreference<Preference>(KEY_GITHUB)?.onPreferenceClickListener = this
+            findPreference<Preference>(KEY_SOURCE)?.onPreferenceClickListener = this
+        }
 
-            // 使用当前版本的彩蛋
-//            val key = String.format(KEY_FORMAT, Build.VERSION.SDK_INT)
-//            findPreference<Preference>(key)?.setOnPreferenceClickListener {
-//                return@setOnPreferenceClickListener dispatcher.dispatch(Build.VERSION.SDK_INT)
-//            }
+        override fun onPreferenceClick(preference: Preference?): Boolean {
+            return when (preference?.key) {
+                KEY_GITHUB -> {
+                    openTwaWeb("https://github.com/hushenghao/AndroidEasterEggs")
+                    true
+                }
+                KEY_SOURCE->{
+                    openTwaWeb("https://github.com/aosp-mirror/platform_frameworks_base")
+                    true
+                }
+                else -> false
+            }
+        }
+
+        private fun openTwaWeb(url: String) {
+            val uri = Uri.parse(url)
+            val twaLauncher = TwaLauncher(requireContext())
+            val builder = TrustedWebActivityIntentBuilder(uri)
+            try {
+                val field =
+                    TrustedWebActivityIntentBuilder::class.java.getDeclaredField("mIntentBuilder")
+                field.isAccessible = true
+                val customTabsBuilder = field.get(builder) as CustomTabsIntent.Builder
+                customTabsBuilder.setShowTitle(true)// 显示标题栏
+                    .addDefaultShareMenuItem()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            twaLauncher.launch(builder, null, null, null)
         }
     }
 

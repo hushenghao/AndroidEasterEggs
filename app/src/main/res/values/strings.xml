@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android Easter Eggs</string>
+    <string name="app_name">Easter Eggs</string>
     <!-- Settings Activity Title -->
     <string name="title_activity_settings">Android Easter Eggs</string>
     <string name="app_package">com.dede.android_eggs</string>
@@ -33,5 +33,12 @@
     <string name="target_class_android_i" translatable="false">com.android_i.egg.PlatLogoActivity</string>
     <string name="target_class_android_h" translatable="false">com.android_h.egg.PlatLogoActivity</string>
     <string name="target_class_android_g" translatable="false">com.android_g.egg.PlatLogoActivity</string>
+
+    <string name="title_github" translatable="false">GitHub</string>
+    <string name="title_source">System Source</string>
+
+    <string name="summary_r_egg_name" translatable="false">Cat Controls (Imperfect)</string>
+    <string name="summary_github">Source code for the current project</string>
+    <string name="summary_source">Contains the Easter egg source code project</string>
 
 </resources>
