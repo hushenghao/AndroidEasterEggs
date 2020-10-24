@@ -25,13 +25,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -43,6 +40,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -276,7 +274,7 @@ public class NekoLand extends Activity implements PrefsListener {
 
     private void shareCat(Cat cat) {
         final File dir = new File(
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                getCacheDir(),
                 getString(R.string.directory_name));
         if (!dir.exists() && !dir.mkdirs()) {
             Log.e("NekoLand", "save: error: can't create Pictures directory");
@@ -289,15 +287,17 @@ public class NekoLand extends Activity implements PrefsListener {
                 OutputStream os = new FileOutputStream(png);
                 bitmap.compress(Bitmap.CompressFormat.PNG, 0, os);
                 os.close();
-                MediaScannerConnection.scanFile(
-                        this,
-                        new String[]{png.toString()},
-                        new String[]{"image/png"},
-                        null);
-                Uri uri = Uri.fromFile(png);
+                Uri uri = FileProvider.getUriForFile(this, this.getPackageName() + ".fileprovider", png);
+//                MediaScannerConnection.scanFile(
+//                        this,
+//                        new String[]{png.toString()},
+//                        new String[]{"image/png"},
+//                        null);
+//                Uri uri = Uri.fromFile(png);
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.putExtra(Intent.EXTRA_STREAM, uri);
                 intent.putExtra(Intent.EXTRA_SUBJECT, cat.getName());
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.setType("image/png");
                 startActivity(Intent.createChooser(intent, null));
                 cat.logShare(this);
@@ -327,11 +327,11 @@ public class NekoLand extends Activity implements PrefsListener {
 
         public CatHolder(View itemView) {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(android.R.id.icon);
-            textView = (TextView) itemView.findViewById(android.R.id.title);
+            imageView = (ImageView) itemView.findViewById(R.id.icon);
+            textView = (TextView) itemView.findViewById(R.id.title);
             contextGroup = itemView.findViewById(R.id.contextGroup);
-            delete = itemView.findViewById(android.R.id.closeButton);
-            share = itemView.findViewById(android.R.id.shareText);
+            delete = itemView.findViewById(R.id.closeButton);
+            share = itemView.findViewById(R.id.shareText);
         }
     }
 }
