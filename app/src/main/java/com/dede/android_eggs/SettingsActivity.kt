@@ -1,13 +1,10 @@
 package com.dede.android_eggs
 
-import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.trusted.TrustedWebActivityIntentBuilder
-import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.google.androidbrowserhelper.trusted.TwaLauncher
@@ -44,7 +41,7 @@ class SettingsActivity : AppCompatActivity() {
                     openTwaWeb("https://github.com/hushenghao/AndroidEasterEggs")
                     true
                 }
-                KEY_SOURCE->{
+                KEY_SOURCE -> {
                     openTwaWeb("https://github.com/aosp-mirror/platform_frameworks_base")
                     true
                 }
