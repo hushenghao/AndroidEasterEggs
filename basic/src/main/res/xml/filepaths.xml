@@ -14,10 +14,7 @@ Copyright (C) 2017 The Android Open Source Project
     limitations under the License.
 -->
 <paths>
-    <cache-path
-        name="Cats"
-        path="Cats/" />
-<!--    <external-path-->
-<!--        name="cats"-->
-<!--        path="Pictures/Cats" />-->
+    <external-path
+        name="cats"
+        path="Pictures/Cats" />
 </paths>

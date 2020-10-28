@@ -3,6 +3,7 @@
 
     <PreferenceCategory
         app:iconSpaceReserved="false"
+        app:key="key_egg_group"
         app:title="@string/easter_egg_header">
 
         <Preference
