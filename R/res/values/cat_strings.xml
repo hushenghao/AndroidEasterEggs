@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="notification_name" translatable="false">Android Neko</string>
-    <string name="notification_channel_name" translatable="false">New cats</string>
+    <string name="notification_name" translatable="false">Android R Neko</string>
+    <string name="notification_channel_name_r" translatable="false">New cats(R)</string>
     <string name="notification_title" translatable="false">A cat is here.</string>
     <string name="default_cat_name" translatable="false">Cat #%s</string>
     <string name="directory_name" translatable="false">Cats</string>
     <string name="confirm_delete" translatable="false">Forget %s?</string>
-    <string-array name="food_names" translatable="false">
-        <item>Empty dish</item>
-        <item>Bits</item>
-        <item>Fish</item>
-        <item>Chicken</item>
-        <item>Treat</item>
-    </string-array>
-    <array name="food_icons_r">
-        <item>@drawable/food_dish</item>
-        <item>@drawable/food_bits</item>
-        <item>@drawable/food_sysuituna</item>
-        <item>@drawable/food_chicken</item>
-        <item>@drawable/food_cookie_r</item>
-    </array>
     <integer-array name="food_intervals">
         <item>0</item>
         <item>15</item>

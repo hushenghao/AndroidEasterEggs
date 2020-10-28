@@ -62,7 +62,7 @@ public class NekoService extends JobService {
     private static void setupNotificationChannels(Context context) {
         NotificationManager noman = context.getSystemService(NotificationManager.class);
         NotificationChannel eggChan = new NotificationChannel(CHAN_ID,
-                context.getString(R.string.notification_channel_name),
+                context.getString(R.string.notification_channel_name_r),
                 NotificationManager.IMPORTANCE_DEFAULT);
         eggChan.setSound(Uri.EMPTY, Notification.AUDIO_ATTRIBUTES_DEFAULT); // cats are quiet
         eggChan.setVibrationPattern(PURR); // not totally quiet though
