@@ -7,7 +7,7 @@
 
         <Preference
             app:icon="@drawable/r_icon"
-            app:summary="@string/summary_r_egg_name"
+            app:summary="@string/r_egg_name"
             app:title="@string/title_android_r">
             <intent
                 android:targetClass="@string/target_class_android_r"

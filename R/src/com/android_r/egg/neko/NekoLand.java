@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
- * except in compliance with the License. You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
-package com.android_n.egg.neko;
+package com.android_r.egg.neko;
 
 import android.Manifest;
 import android.app.ActionBar;
@@ -26,9 +28,11 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -44,8 +48,8 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android_n.egg.R;
-import com.android_n.egg.neko.PrefState.PrefsListener;
+import com.android_r.egg.R;
+import com.android_r.egg.neko.PrefState.PrefsListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -57,8 +61,10 @@ import java.util.List;
 
 //import com.android.internal.logging.MetricsLogger;
 
-@RequiresApi(Build.VERSION_CODES.N)
+@RequiresApi(30)
 public class NekoLand extends Activity implements PrefsListener {
+    public static String CHAN_ID = "EGG";
+
     public static boolean DEBUG = false;
     public static boolean DEBUG_NOTIFICATIONS = false;
 
@@ -85,7 +91,7 @@ public class NekoLand extends Activity implements PrefsListener {
 
         mPrefs = new PrefState(this);
         mPrefs.setListener(this);
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.holder);
+        final RecyclerView recyclerView = findViewById(R.id.holder);
         mAdapter = new CatAdapter();
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
@@ -135,7 +141,6 @@ public class NekoLand extends Activity implements PrefsListener {
         } else {
             showNameDialog(cat);
         }
-//      noman.notify(1, cat.buildNotification(NekoLand.this).build());
     }
 
     private void onCatRemove(Cat cat) {
@@ -239,7 +244,7 @@ public class NekoLand extends Activity implements PrefsListener {
                     new AlertDialog.Builder(NekoLand.this)
                             .setTitle(getString(R.string.confirm_delete, mCats[position].getName()))
                             .setNegativeButton(android.R.string.cancel, null)
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            .setPositiveButton(android.R.string.ok, new OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     onCatRemove(mCats[holder.getAdapterPosition()]);
@@ -274,8 +279,9 @@ public class NekoLand extends Activity implements PrefsListener {
 
     private void shareCat(Cat cat) {
         final File dir = new File(
+//                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
                 getCacheDir(),
-                getString(R.string.directory_name));
+                "Cats");
         if (!dir.exists() && !dir.mkdirs()) {
             Log.e("NekoLand", "save: error: can't create Pictures directory");
             return;
@@ -292,12 +298,14 @@ public class NekoLand extends Activity implements PrefsListener {
 //                        new String[]{png.toString()},
 //                        new String[]{"image/png"},
 //                        null);
+                Log.v("Neko", "cat file: " + png);
                 Uri uri;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     uri = FileProvider.getUriForFile(this, this.getPackageName() + ".fileprovider", png);
                 } else {
                     uri = Uri.fromFile(png);
                 }
+                Log.v("Neko", "cat uri: " + uri);
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.putExtra(Intent.EXTRA_STREAM, uri);
                 intent.putExtra(Intent.EXTRA_SUBJECT, cat.getName());

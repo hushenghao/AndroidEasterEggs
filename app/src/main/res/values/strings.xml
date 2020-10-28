@@ -37,7 +37,6 @@
     <string name="title_github" translatable="false">GitHub</string>
     <string name="title_source">System Source</string>
 
-    <string name="summary_r_egg_name" translatable="false">Cat Controls (Imperfect)</string>
     <string name="summary_github">Source code for the current project</string>
     <string name="summary_source">Contains the Easter egg source code project</string>
 
