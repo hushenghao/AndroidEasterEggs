@@ -5,113 +5,113 @@
         app:iconSpaceReserved="false"
         app:title="@string/easter_egg_header">
 
-        <Preference
+        <com.dede.android_eggs.EggPreference
             app:icon="@drawable/r_icon"
-            app:summary="@string/summary_r_egg_name"
+            app:summary="@string/r_egg_name"
             app:title="@string/title_android_r">
             <intent
                 android:targetClass="@string/target_class_android_r"
                 android:targetPackage="@string/app_package" />
-        </Preference>
+        </com.dede.android_eggs.EggPreference>
 
-        <Preference
+        <com.dede.android_eggs.EggPreference
             app:icon="@drawable/q_icon"
             app:summary="@string/q_egg_name"
             app:title="@string/title_android_q">
             <intent
                 android:targetClass="@string/target_class_android_q"
                 android:targetPackage="@string/app_package" />
-        </Preference>
+        </com.dede.android_eggs.EggPreference>
 
-        <Preference
+        <com.dede.android_eggs.EggPreference
             app:icon="@drawable/p_icon"
             app:summary="@string/p_app_name"
             app:title="@string/title_android_p">
             <intent
                 android:targetClass="@string/target_class_android_p"
                 android:targetPackage="@string/app_package" />
-        </Preference>
+        </com.dede.android_eggs.EggPreference>
 
-        <Preference
+        <com.dede.android_eggs.EggPreference
             app:icon="@drawable/o_icon"
             app:summary="@string/o_app_name"
             app:title="@string/title_android_o">
             <intent
                 android:targetClass="@string/target_class_android_o"
                 android:targetPackage="@string/app_package" />
-        </Preference>
+        </com.dede.android_eggs.EggPreference>
 
-        <Preference
+        <com.dede.android_eggs.EggPreference
             app:icon="@drawable/n_icon"
             app:summary="@string/n_app_name"
             app:title="@string/title_android_n">
             <intent
                 android:targetClass="@string/target_class_android_n"
                 android:targetPackage="@string/app_package" />
-        </Preference>
+        </com.dede.android_eggs.EggPreference>
 
-        <Preference
+        <com.dede.android_eggs.EggPreference
             app:icon="@drawable/m_icon"
             app:summary="@string/mland"
             app:title="@string/title_android_m">
             <intent
                 android:targetClass="@string/target_class_android_m"
                 android:targetPackage="@string/app_package" />
-        </Preference>
+        </com.dede.android_eggs.EggPreference>
 
-        <Preference
+        <com.dede.android_eggs.EggPreference
             app:icon="@drawable/l_icon"
             app:summary="@string/lland"
             app:title="@string/title_android_l">
             <intent
                 android:targetClass="@string/target_class_android_l"
                 android:targetPackage="@string/app_package" />
-        </Preference>
+        </com.dede.android_eggs.EggPreference>
 
-        <Preference
+        <com.dede.android_eggs.EggPreference
             app:icon="@drawable/k_platlogo"
             app:summary="@string/dessert_case"
             app:title="@string/title_android_k">
             <intent
                 android:targetClass="@string/target_class_android_k"
                 android:targetPackage="@string/app_package" />
-        </Preference>
+        </com.dede.android_eggs.EggPreference>
 
-        <Preference
+        <com.dede.android_eggs.EggPreference
             app:icon="@drawable/redbean2"
             app:summary="@string/j_egg_name"
             app:title="@string/title_android_j">
             <intent
                 android:targetClass="@string/target_class_android_j"
                 android:targetPackage="@string/app_package" />
-        </Preference>
+        </com.dede.android_eggs.EggPreference>
 
-        <Preference
+        <com.dede.android_eggs.EggPreference
             app:icon="@drawable/nyandroid04"
             app:summary="@string/i_egg_name"
             app:title="@string/title_android_i">
             <intent
                 android:targetClass="@string/target_class_android_i"
                 android:targetPackage="@string/app_package" />
-        </Preference>
+        </com.dede.android_eggs.EggPreference>
 
-        <Preference
+        <com.dede.android_eggs.EggPreference
             app:icon="@drawable/h_platlogo"
             app:summary="@string/h_egg_name"
             app:title="@string/title_android_h">
             <intent
                 android:targetClass="@string/target_class_android_h"
                 android:targetPackage="@string/app_package" />
-        </Preference>
+        </com.dede.android_eggs.EggPreference>
 
-        <Preference
+        <com.dede.android_eggs.EggPreference
             app:icon="@drawable/g_platlogo"
             app:summary="@string/g_egg_name"
             app:title="@string/title_android_g">
             <intent
                 android:targetClass="@string/target_class_android_g"
                 android:targetPackage="@string/app_package" />
-        </Preference>
+        </com.dede.android_eggs.EggPreference>
 
     </PreferenceCategory>
 
@@ -119,17 +119,21 @@
         app:iconSpaceReserved="false"
         app:title="@string/header_about">
 
-        <Preference
+        <com.dede.android_eggs.ChromeTabPreference
+            app:customUrl="@string/url_github"
             app:iconSpaceReserved="false"
-            app:key="key_github"
             app:summary="@string/summary_github"
             app:title="@string/title_github" />
 
-        <Preference
+        <com.dede.android_eggs.ChromeTabPreference
+            app:customUrl="@string/url_source"
             app:iconSpaceReserved="false"
-            app:key="key_source"
             app:summary="@string/summary_source"
             app:title="@string/title_source" />
+
+        <com.dede.android_eggs.VersionPreference
+            app:iconSpaceReserved="false"
+            app:title="@string/title_version" />
 
     </PreferenceCategory>
 

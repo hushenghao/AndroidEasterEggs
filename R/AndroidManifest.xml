@@ -2,12 +2,49 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android_r.egg">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- controls -->
+    <uses-permission android:name="android.permission.BIND_CONTROLS" />
+
     <application>
 
         <activity
             android:name=".PlatLogoActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
+
+        <!-- Android N easter egg bits -->
+        <activity
+            android:name=".neko.NekoLand"
+            android:exported="true"
+            android:label="@string/r_app_name"
+            android:theme="@android:style/Theme.Material.NoActionBar" />
+
+        <!-- This is where the magic happens -->
+        <service
+            android:name=".neko.NekoService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <!-- Used to enable easter egg -->
+        <activity
+            android:name=".neko.NekoActivationActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay" />
+
+        <service
+            android:name=".neko.NekoControlsService"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_fullcat_icon"
+            android:label="@string/r_egg_name"
+            android:permission="android.permission.BIND_CONTROLS">
+            <intent-filter>
+                <action android:name="android.service.controls.ControlsProviderService" />
+            </intent-filter>
+        </service>
 
     </application>
 

@@ -23,6 +23,7 @@ import android.app.job.JobScheduler;
 import android.app.job.JobService;
 import android.content.ComponentName;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,12 +38,14 @@ import java.util.Random;
 @RequiresApi(Build.VERSION_CODES.N)
 public class NekoService extends JobService {
 
+    public static final long[] PURR = {0, 40, 20, 40, 20, 40, 20, 40, 20, 40, 20, 40};
+
     private static final String TAG = "NekoService";
 
     public static int JOB_ID = 42;
 
     public static int CAT_NOTIFICATION = 1;
-    public static final String CAT_NOTIFICATION_CHANNEL_ID = "CAT_CHANNEL";
+    public static final String CHAN_ID = "EGG_N";
 
     public static float CAT_CAPTURE_PROB = 1.0f; // generous
 
@@ -129,9 +132,12 @@ public class NekoService extends JobService {
 
         NotificationManager noman = context.getSystemService(NotificationManager.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(CAT_NOTIFICATION_CHANNEL_ID,
-                    context.getString(R.string.notification_name), NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setShowBadge(true);
+            NotificationChannel channel = new NotificationChannel(CHAN_ID,
+                    context.getString(R.string.notification_channel_name), NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setSound(Uri.EMPTY, Notification.AUDIO_ATTRIBUTES_DEFAULT); // cats are quiet
+            channel.setVibrationPattern(PURR); // not totally quiet though
+            //eggChan.setBlockableSystem(true); // unlike a real cat, you can push this one off your lap
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC); // cats sit in the window
             noman.createNotificationChannel(channel);
         }
         if (NekoLand.DEBUG_NOTIFICATIONS) {
@@ -143,7 +149,7 @@ public class NekoService extends JobService {
                     .setCategory(Notification.CATEGORY_SERVICE)
                     .setShowWhen(true);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                builder.setChannelId(CAT_NOTIFICATION_CHANNEL_ID);
+                builder.setChannelId(CHAN_ID);
             }
             noman.notify(500, builder
                     .build());

@@ -21,15 +21,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,17 +37,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
-import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android_n.egg.R;
 import com.android_n.egg.neko.PrefState.PrefsListener;
+import com.dede.basic.ShareCatUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -273,37 +266,10 @@ public class NekoLand extends Activity implements PrefsListener {
     }
 
     private void shareCat(Cat cat) {
-        final File dir = new File(
-                getCacheDir(),
-                getString(R.string.directory_name));
-        if (!dir.exists() && !dir.mkdirs()) {
-            Log.e("NekoLand", "save: error: can't create Pictures directory");
-            return;
-        }
-        final File png = new File(dir, cat.getName().replaceAll("[/ #:]+", "_") + ".png");
         Bitmap bitmap = cat.createBitmap(EXPORT_BITMAP_SIZE, EXPORT_BITMAP_SIZE);
         if (bitmap != null) {
-            try {
-                OutputStream os = new FileOutputStream(png);
-                bitmap.compress(Bitmap.CompressFormat.PNG, 0, os);
-                os.close();
-                Uri uri = FileProvider.getUriForFile(this, this.getPackageName() + ".fileprovider", png);
-//                MediaScannerConnection.scanFile(
-//                        this,
-//                        new String[]{png.toString()},
-//                        new String[]{"image/png"},
-//                        null);
-//                Uri uri = Uri.fromFile(png);
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_STREAM, uri);
-                intent.putExtra(Intent.EXTRA_SUBJECT, cat.getName());
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intent.setType("image/png");
-                startActivity(Intent.createChooser(intent, null));
-                cat.logShare(this);
-            } catch (IOException e) {
-                Log.e("NekoLand", "save: error: " + e);
-            }
+            ShareCatUtils.share(this, bitmap, cat.getName());
+            cat.logShare(this);
         }
     }
 

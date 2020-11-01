@@ -41,7 +41,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,6 +49,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.animation.PathInterpolatorCompat;
 
+import com.android_r.egg.neko.NekoActivationActivity;
 import com.dede.basic.SpUtils;
 
 /**
@@ -100,24 +100,12 @@ public class PlatLogoActivity extends Activity {
                     locked ? 0 : System.currentTimeMillis());
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            // 使用了新特性，直接调用系统彩蛋
-            try {
-                startActivity(new Intent(Intent.ACTION_MAIN)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                | Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                        .addCategory("com.android.internal.category.PLATLOGO"));
-            } catch (ActivityNotFoundException ex) {
-                Log.e("com.android.internal.app.PlatLogoActivity", "No more eggs.");
-            }
-        } else {
-            if (SpUtils.getLong(this, R_EGG_UNLOCK_SETTING, 0) == 0) {
-                Log.v("Neko", "Disabling controls.");
-                Toast.makeText(this, "🚫", Toast.LENGTH_SHORT).show();
-            } else {
-                Log.v("Neko", "Enabling controls.");
-                Toast.makeText(this, "\uD83D\uDC31", Toast.LENGTH_SHORT).show();
-            }
+        try {
+            startActivity(new Intent(this, NekoActivationActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                            | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        } catch (ActivityNotFoundException ex) {
+            Log.e("com.android.internal.app.PlatLogoActivity", "No more eggs.");
         }
         //finish(); // no longer finish upon unlock; it's fun to frob the dial
     }
@@ -189,7 +177,7 @@ public class PlatLogoActivity extends Activity {
                     }
                     return true;
                 case MotionEvent.ACTION_UP:
-                    if (true || mWasLocked != mDialDrawable.isLocked()) {
+                    if (mWasLocked != mDialDrawable.isLocked()) {
                         launchNextStage(mDialDrawable.isLocked());
                     }
                     return true;

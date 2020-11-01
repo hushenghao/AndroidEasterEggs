@@ -231,7 +231,7 @@ public class Cat extends Drawable {
                 .setVibrate(PURR)
                 .addExtras(extras);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder.setChannelId(NekoService.CAT_NOTIFICATION_CHANNEL_ID);
+            builder.setChannelId(NekoService.CHAN_ID);
         }
         return builder;
     }
