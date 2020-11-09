@@ -1,15 +1,17 @@
-rootProject.name = "Android Eggs"
-include ':app'
-include ':basic'
-include ':G'
-include ':H'
-include ':I'
-include ':J'
-include ':K'
-include ':L'
-include ':M'
-include ':N'
-include ':O'
-include ':P'
-include ':Q'
-include ':R'
+rootProject.name = "Easter Eggs"
+include(
+        ":app",
+        ":basic",
+        ":eggs:G",
+        ":eggs:H",
+        ":eggs:I",
+        ":eggs:J",
+        ":eggs:K",
+        ":eggs:L",
+        ":eggs:M",
+        ":eggs:N",
+        ":eggs:O",
+        ":eggs:P",
+        ":eggs:Q",
+        ":eggs:R",
+)

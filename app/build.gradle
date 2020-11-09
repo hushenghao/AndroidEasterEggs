@@ -41,18 +41,18 @@ dependencies {
     implementation 'androidx.browser:browser:1.2.0'
     implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.0.1'
     implementation project(path: ':basic')
-    implementation project(path: ':R')
-    implementation project(path: ':Q')
-    implementation project(path: ':P')
-    implementation project(path: ':O')
-    implementation project(path: ':N')
-    implementation project(path: ':M')
-    implementation project(path: ':L')
-    implementation project(path: ':K')
-    implementation project(path: ':J')
-    implementation project(path: ':I')
-    implementation project(path: ':H')
-    implementation project(path: ':G')
+    implementation project(path: ':eggs:R')
+    implementation project(path: ':eggs:Q')
+    implementation project(path: ':eggs:P')
+    implementation project(path: ':eggs:O')
+    implementation project(path: ':eggs:N')
+    implementation project(path: ':eggs:M')
+    implementation project(path: ':eggs:L')
+    implementation project(path: ':eggs:K')
+    implementation project(path: ':eggs:J')
+    implementation project(path: ':eggs:I')
+    implementation project(path: ':eggs:H')
+    implementation project(path: ':eggs:G')
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
