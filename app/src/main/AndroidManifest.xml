@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AndroidEggs"
+        android:theme="@style/Theme.EasterEggs"
         tools:replace="android:icon,android:label">
         <activity
             android:name=".EasterEggsActivity"

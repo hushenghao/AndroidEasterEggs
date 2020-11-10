@@ -7,12 +7,16 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.WindowManager
+import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.addListener
 import androidx.preference.PreferenceFragmentCompat
 import kotlinx.android.synthetic.main.activity_easter_eggs.*
 import kotlin.math.hypot
 
+/**
+ * Easter Egg Collection
+ */
 class EasterEggsActivity : AppCompatActivity(), Runnable {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,35 +44,42 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
     }
 
     private fun postAnim() {
-        ll_content.visibility = View.INVISIBLE
-        ll_content.postDelayed(this, 300)
+        content.visibility = View.INVISIBLE
+        content.postDelayed(this, 200)
     }
 
     override fun run() {
-        val cx = iv_splash.x + iv_splash.width / 2f
-        val cy = iv_splash.y + iv_splash.height / 2f
-        val startRadius = hypot(iv_splash.width.toFloat(), iv_splash.height.toFloat())
-        val endRadius = hypot(ll_content.width.toFloat(), ll_content.height.toFloat())
-        val circularAnim =
-            ViewAnimationUtils.createCircularReveal(
-                ll_content,
-                cx.toInt(), cy.toInt(), startRadius, endRadius
-            ).apply {
-                duration = 1000
-                addListener(onStart = {
-                    ll_content.visibility = View.VISIBLE
-                })
+        val cx = logo.x + logo.width / 2f
+        val cy = logo.y + logo.height / 2f
+        val startRadius = hypot(logo.width.toFloat(), logo.height.toFloat())
+        val endRadius = hypot(content.width.toFloat(), content.height.toFloat())
+        val circularAnim = ViewAnimationUtils
+            .createCircularReveal(content, cx.toInt(), cy.toInt(), startRadius, endRadius)
+            .setDuration(800)
+        circularAnim.addListener(
+            onStart = {
+                content.visibility = View.VISIBLE
+            },
+            onEnd = {
+                logo.visibility = View.GONE
             }
-        val alphaAnim = ObjectAnimator.ofFloat(iv_splash, "alpha", 1f, 0f)
-            .apply {
-                duration = 800
-                addListener(onEnd = {
-                    iv_splash.visibility = View.GONE
-                })
-            }
-        AnimatorSet().apply {
-            playTogether(circularAnim, alphaAnim)
-        }.start()
+        )
+        val scaleYAnim = ObjectAnimator
+            .ofFloat(logo, "scaleY", 1f, 1.3f)
+            .setDuration(500)
+        val scaleXAnim = ObjectAnimator
+            .ofFloat(logo, "scaleX", 1f, 1.3f)
+            .setDuration(500)
+        val alphaAnim = ObjectAnimator
+            .ofFloat(logo, "alpha", 1f, 0f)
+            .setDuration(600)
+        val set = AnimatorSet()
+        set.interpolator = LinearInterpolator()
+        set.play(circularAnim)
+            .with(scaleXAnim)
+            .with(scaleYAnim)
+            .with(alphaAnim)
+        set.start()
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
