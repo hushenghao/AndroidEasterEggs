@@ -19,5 +19,11 @@ Copyright (C) 2018 The Android Open Source Project
 <!--</adaptive-icon>-->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/r_icon_bg" />
-    <item android:drawable="@drawable/android_11_dial" />
+    <item>
+        <inset
+            android:drawable="@drawable/android_11_dial"
+            android:inset="-18dp" />
+        <!--outset 18dp-->
+        <!-- https://developer.android.google.cn/guide/practices/ui_guidelines/icon_design_adaptive -->
+    </item>
 </layer-list>

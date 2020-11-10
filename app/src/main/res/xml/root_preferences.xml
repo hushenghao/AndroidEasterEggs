@@ -8,6 +8,7 @@
         <com.dede.android_eggs.EggPreference
             app:icon="@drawable/r_icon"
             app:summary="@string/r_egg_name"
+            app:supportAdaptiveIcon="oval"
             app:title="@string/title_android_r">
             <intent
                 android:targetClass="@string/target_class_android_r"
@@ -17,6 +18,7 @@
         <com.dede.android_eggs.EggPreference
             app:icon="@drawable/q_icon"
             app:summary="@string/q_egg_name"
+            app:supportAdaptiveIcon="oval"
             app:title="@string/title_android_q">
             <intent
                 android:targetClass="@string/target_class_android_q"
@@ -26,6 +28,7 @@
         <com.dede.android_eggs.EggPreference
             app:icon="@drawable/p_icon"
             app:summary="@string/p_app_name"
+            app:supportAdaptiveIcon="oval"
             app:title="@string/title_android_p">
             <intent
                 android:targetClass="@string/target_class_android_p"

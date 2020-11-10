@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ChromeTabPreference">
+        <attr name="customUrl" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="EggPreference">
+        <attr name="supportAdaptiveIcon" format="enum">
+            <enum name="corners" value="1" />
+            <enum name="oval" value="2" />
+        </attr>
+        <attr name="iconRadius" format="dimension" />
+    </declare-styleable>
+</resources>

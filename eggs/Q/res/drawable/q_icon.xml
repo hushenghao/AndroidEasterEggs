@@ -18,6 +18,10 @@
 <!--    <foreground android:drawable="@drawable/q_smaller"/>-->
 <!--</adaptive-icon>-->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/q_icon_bg"/>
-    <item android:drawable="@drawable/q_smaller"/>
+    <item android:drawable="@drawable/q_icon_bg" />
+    <item>
+        <inset
+            android:drawable="@drawable/q_smaller"
+            android:inset="-18dp" />
+    </item>
 </layer-list>

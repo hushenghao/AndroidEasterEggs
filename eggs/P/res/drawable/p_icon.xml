@@ -14,6 +14,10 @@
     limitations under the License.
 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/p_icon_bg"/>
-    <item android:drawable="@drawable/p"/>
+    <item android:drawable="@drawable/p_icon_bg" />
+    <item>
+        <inset
+            android:drawable="@drawable/p"
+            android:inset="-18dp" />
+    </item>
 </layer-list>

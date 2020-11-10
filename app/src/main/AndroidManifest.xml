@@ -12,7 +12,7 @@
         android:theme="@style/Theme.AndroidEggs"
         tools:replace="android:icon,android:label">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".EasterEggsActivity"
             android:label="@string/title_activity_settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

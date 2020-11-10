@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="ChromeTabPreference">
-        <attr name="customUrl" format="string" />
-    </declare-styleable>
-</resources>
