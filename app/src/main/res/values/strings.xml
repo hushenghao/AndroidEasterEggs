@@ -6,7 +6,7 @@
     <string name="app_package" translatable="false">com.dede.android_eggs</string>
 
     <!-- Preference Titles -->
-    <string name="easter_egg_header">Easter Eggs</string>
+    <string name="easter_egg_header">Easter Egg Collection</string>
     <string name="header_about">About</string>
 
     <string name="title_android_r" translatable="false">Android 11 (R)</string>

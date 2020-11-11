@@ -1,8 +1,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory
+    <com.dede.android_eggs.EggCollection
         app:iconSpaceReserved="false"
+        app:key="key_collection"
         app:title="@string/easter_egg_header">
 
         <com.dede.android_eggs.EggPreference
@@ -116,7 +117,7 @@
                 android:targetPackage="@string/app_package" />
         </com.dede.android_eggs.EggPreference>
 
-    </PreferenceCategory>
+    </com.dede.android_eggs.EggCollection>
 
     <PreferenceCategory
         app:iconSpaceReserved="false"

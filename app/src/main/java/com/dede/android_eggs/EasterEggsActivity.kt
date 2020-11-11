@@ -2,15 +2,19 @@ package com.dede.android_eggs
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewAnimationUtils
-import android.view.WindowManager
 import android.view.animation.LinearInterpolator
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.addListener
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceGroupAdapter
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_easter_eggs.*
 import kotlin.math.hypot
 
@@ -34,12 +38,15 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
     }
 
     private fun initStatusBar() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            window.setDecorFitsSystemWindows(false)
+//        } else {
         val option =
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         val decorView = window.decorView
         val visibility: Int = decorView.systemUiVisibility
         decorView.systemUiVisibility = visibility or option
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+//        }
         window.statusBarColor = Color.TRANSPARENT
     }
 
@@ -84,10 +91,48 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
 
     class SettingsFragment : PreferenceFragmentCompat() {
 
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey)
+        companion object {
+            const val KEY_COLLECTION = "key_collection"
         }
 
+        private lateinit var eggCollection: EggCollection
+
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            setPreferencesFromResource(R.xml.root_preferences, rootKey)
+            eggCollection = checkNotNull(findPreference(KEY_COLLECTION))
+            eggCollection.setOnPreferenceChangeListener { _, newValue ->
+                val isGrid = newValue as? Boolean ?: false
+                if (isGrid) {
+                    Toast.makeText(requireContext(), "Wow!!!", Toast.LENGTH_SHORT).show()
+                }
+                listView?.layoutManager = createLayoutManager(isGrid)
+                return@setOnPreferenceChangeListener true
+            }
+        }
+
+        private inner class SpanSizeLookup : GridLayoutManager.SpanSizeLookup() {
+            @SuppressLint("RestrictedApi")
+            override fun getSpanSize(position: Int): Int {
+                val adapter = listView.adapter as? PreferenceGroupAdapter
+                val item = adapter?.getItem(position)
+                if (item is EggPreference) {
+                    return 1
+                }
+                return 2
+            }
+        }
+
+        private fun createLayoutManager(isGrid: Boolean): RecyclerView.LayoutManager {
+            return if (isGrid) {
+                GridLayoutManager(requireContext(), 2).apply { spanSizeLookup = SpanSizeLookup() }
+            } else {
+                super.onCreateLayoutManager()
+            }
+        }
+
+        override fun onCreateLayoutManager(): RecyclerView.LayoutManager {
+            return createLayoutManager(eggCollection.isChecked())
+        }
     }
 
 }
