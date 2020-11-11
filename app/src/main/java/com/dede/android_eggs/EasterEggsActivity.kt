@@ -1,16 +1,12 @@
 package com.dede.android_eggs
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewAnimationUtils
-import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.animation.addListener
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceGroupAdapter
 import androidx.recyclerview.widget.GridLayoutManager
@@ -63,30 +59,19 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
         val circularAnim = ViewAnimationUtils
             .createCircularReveal(content, cx.toInt(), cy.toInt(), startRadius, endRadius)
             .setDuration(800)
-        circularAnim.addListener(
-            onStart = {
-                content.visibility = View.VISIBLE
-            },
-            onEnd = {
+        logo.animate()
+            .alpha(0f)
+            .scaleX(1.3f)
+            .scaleY(1.3f)
+            .setDuration(600)
+            .withEndAction {
                 logo.visibility = View.GONE
             }
-        )
-        val scaleYAnim = ObjectAnimator
-            .ofFloat(logo, "scaleY", 1f, 1.3f)
-            .setDuration(500)
-        val scaleXAnim = ObjectAnimator
-            .ofFloat(logo, "scaleX", 1f, 1.3f)
-            .setDuration(500)
-        val alphaAnim = ObjectAnimator
-            .ofFloat(logo, "alpha", 1f, 0f)
-            .setDuration(600)
-        val set = AnimatorSet()
-        set.interpolator = LinearInterpolator()
-        set.play(circularAnim)
-            .with(scaleXAnim)
-            .with(scaleYAnim)
-            .with(alphaAnim)
-        set.start()
+            .withStartAction {
+                content.visibility = View.VISIBLE
+                circularAnim.start()
+            }
+            .start()
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
