@@ -6,6 +6,9 @@
         <activity
             android:name=".PlatLogoActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
+            android:icon="@drawable/l_icon"
+            android:label="@string/lland"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
 
         <activity
@@ -13,6 +16,7 @@
             android:excludeFromRecents="true"
             android:exported="true"
             android:hardwareAccelerated="true"
+            android:icon="@drawable/l_icon"
             android:label="@string/lland"
             android:launchMode="singleInstance"
             android:screenOrientation="locked"

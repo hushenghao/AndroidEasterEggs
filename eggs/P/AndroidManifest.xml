@@ -20,6 +20,9 @@
         <activity
             android:name=".PlatLogoActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
+            android:icon="@drawable/p_icon"
+            android:label="@string/p_app_name"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen" />
 
         <activity

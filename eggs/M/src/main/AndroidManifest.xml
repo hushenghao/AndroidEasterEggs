@@ -8,16 +8,20 @@
         <activity
             android:name=".PlatLogoActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
-
-        <activity android:name=".MLandActivity"
-            android:theme="@android:style/Theme.Material.NoActionBar"
             android:exported="true"
             android:icon="@drawable/m_icon"
             android:label="@string/mland"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+
+        <activity
+            android:name=".MLandActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
             android:hardwareAccelerated="true"
+            android:icon="@drawable/m_icon"
+            android:label="@string/mland"
             android:launchMode="singleInstance"
             android:screenOrientation="locked"
-            android:excludeFromRecents="true"/>
+            android:theme="@android:style/Theme.Material.NoActionBar" />
     </application>
 </manifest>

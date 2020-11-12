@@ -6,6 +6,9 @@
         <activity
             android:name=".PlatLogoActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
+            android:icon="@drawable/q_icon"
+            android:label="@string/q_egg_name"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
 
         <activity

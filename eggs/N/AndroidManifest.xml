@@ -23,11 +23,15 @@ Copyright (C) 2016 The Android Open Source Project
         <activity
             android:name=".PlatLogoActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
+            android:icon="@drawable/n_icon"
+            android:label="@string/n_app_name"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
 
         <!-- Long press the QS tile to get here -->
         <activity
             android:name="com.android_n.egg.neko.NekoLand"
+            android:icon="@drawable/n_icon"
             android:label="@string/n_app_name"
             android:theme="@android:style/Theme.Material.NoActionBar">
             <intent-filter>

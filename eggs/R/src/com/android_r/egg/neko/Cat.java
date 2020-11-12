@@ -47,7 +47,9 @@ import static com.android_r.egg.neko.NekoLand.CHAN_ID;
 
 //import com.android.internal.logging.MetricsLogger;
 
-/** It's a cat. */
+/**
+ * It's a cat.
+ */
 @RequiresApi(30)
 public class Cat extends Drawable {
     public static final long[] PURR = {0, 40, 20, 40, 20, 40, 20, 40, 20, 40, 20, 40};
@@ -288,6 +290,7 @@ public class Cat extends Drawable {
                 .addExtras(extras);
     }
 
+    @RequiresApi(30)
     private Person createPerson() {
         return new Person.Builder()
                 .setName(getName())

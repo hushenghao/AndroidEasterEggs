@@ -11,12 +11,15 @@
         <activity
             android:name=".PlatLogoActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
+            android:icon="@drawable/r_icon"
+            android:label="@string/title_android_r"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
 
         <!-- Android N easter egg bits -->
         <activity
             android:name=".neko.NekoLand"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/r_app_name"
             android:theme="@android:style/Theme.Material.NoActionBar" />
 
@@ -31,7 +34,7 @@
         <activity
             android:name=".neko.NekoActivationActivity"
             android:excludeFromRecents="true"
-            android:exported="true"
+            android:exported="false"
             android:theme="@android:style/Theme.NoDisplay" />
 
         <service

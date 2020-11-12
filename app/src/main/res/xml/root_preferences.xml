@@ -82,7 +82,7 @@
         </com.dede.android_eggs.EggPreference>
 
         <com.dede.android_eggs.EggPreference
-            app:icon="@drawable/redbean2"
+            app:icon="@drawable/j_platlogo"
             app:summary="@string/j_egg_name"
             app:title="@string/title_android_j">
             <intent
@@ -91,7 +91,7 @@
         </com.dede.android_eggs.EggPreference>
 
         <com.dede.android_eggs.EggPreference
-            app:icon="@drawable/nyandroid04"
+            app:icon="@drawable/i_platlogo"
             app:summary="@string/i_egg_name"
             app:title="@string/title_android_i">
             <intent
