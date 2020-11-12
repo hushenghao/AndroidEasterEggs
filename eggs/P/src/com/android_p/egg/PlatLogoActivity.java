@@ -253,11 +253,11 @@ public class PlatLogoActivity extends Activity {
 
     private void launchNextStage() {
 
-        if (SpUtils.getLong(this, "egg_mode_p", 0) == 0) {
+        if (SpUtils.getLong(this, "p_egg_mode", 0) == 0) {
             // For posterity: the moment this user unlocked the easter egg
             try {
                 SpUtils.putLong(this,
-                        "egg_mode_p",
+                        "p_egg_mode",
                         System.currentTimeMillis());
             } catch (RuntimeException e) {
                 Log.e("PlatLogoActivity", "Can't write settings", e);

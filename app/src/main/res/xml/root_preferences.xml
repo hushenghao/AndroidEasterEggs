@@ -7,115 +7,79 @@
         app:title="@string/easter_egg_header">
 
         <com.dede.android_eggs.EggPreference
+            android:targetClass="@string/target_class_android_r"
             app:icon="@drawable/r_icon"
             app:summary="@string/r_egg_name"
             app:supportAdaptiveIcon="oval"
-            app:title="@string/title_android_r">
-            <intent
-                android:targetClass="@string/target_class_android_r"
-                android:targetPackage="@string/app_package" />
-        </com.dede.android_eggs.EggPreference>
+            app:title="@string/title_android_r" />
 
         <com.dede.android_eggs.EggPreference
+            android:targetClass="@string/target_class_android_q"
             app:icon="@drawable/q_icon"
             app:summary="@string/q_egg_name"
             app:supportAdaptiveIcon="oval"
-            app:title="@string/title_android_q">
-            <intent
-                android:targetClass="@string/target_class_android_q"
-                android:targetPackage="@string/app_package" />
-        </com.dede.android_eggs.EggPreference>
+            app:title="@string/title_android_q" />
 
         <com.dede.android_eggs.EggPreference
+            android:targetClass="@string/target_class_android_p"
             app:icon="@drawable/p_icon"
             app:summary="@string/p_app_name"
             app:supportAdaptiveIcon="oval"
-            app:title="@string/title_android_p">
-            <intent
-                android:targetClass="@string/target_class_android_p"
-                android:targetPackage="@string/app_package" />
-        </com.dede.android_eggs.EggPreference>
+            app:title="@string/title_android_p" />
 
         <com.dede.android_eggs.EggPreference
+            android:targetClass="@string/target_class_android_o"
             app:icon="@drawable/o_icon"
             app:summary="@string/o_app_name"
-            app:title="@string/title_android_o">
-            <intent
-                android:targetClass="@string/target_class_android_o"
-                android:targetPackage="@string/app_package" />
-        </com.dede.android_eggs.EggPreference>
+            app:title="@string/title_android_o" />
 
         <com.dede.android_eggs.EggPreference
+            android:targetClass="@string/target_class_android_n"
             app:icon="@drawable/n_icon"
             app:summary="@string/n_app_name"
-            app:title="@string/title_android_n">
-            <intent
-                android:targetClass="@string/target_class_android_n"
-                android:targetPackage="@string/app_package" />
-        </com.dede.android_eggs.EggPreference>
+            app:title="@string/title_android_n" />
 
         <com.dede.android_eggs.EggPreference
+            android:targetClass="@string/target_class_android_m"
             app:icon="@drawable/m_icon"
             app:summary="@string/mland"
-            app:title="@string/title_android_m">
-            <intent
-                android:targetClass="@string/target_class_android_m"
-                android:targetPackage="@string/app_package" />
-        </com.dede.android_eggs.EggPreference>
+            app:title="@string/title_android_m" />
 
         <com.dede.android_eggs.EggPreference
+            android:targetClass="@string/target_class_android_l"
             app:icon="@drawable/l_icon"
             app:summary="@string/lland"
-            app:title="@string/title_android_l">
-            <intent
-                android:targetClass="@string/target_class_android_l"
-                android:targetPackage="@string/app_package" />
-        </com.dede.android_eggs.EggPreference>
+            app:title="@string/title_android_l" />
 
         <com.dede.android_eggs.EggPreference
+            android:targetClass="@string/target_class_android_k"
             app:icon="@drawable/k_platlogo"
             app:summary="@string/dessert_case"
-            app:title="@string/title_android_k">
-            <intent
-                android:targetClass="@string/target_class_android_k"
-                android:targetPackage="@string/app_package" />
-        </com.dede.android_eggs.EggPreference>
+            app:title="@string/title_android_k" />
 
         <com.dede.android_eggs.EggPreference
+            android:targetClass="@string/target_class_android_j"
             app:icon="@drawable/j_platlogo"
             app:summary="@string/j_egg_name"
-            app:title="@string/title_android_j">
-            <intent
-                android:targetClass="@string/target_class_android_j"
-                android:targetPackage="@string/app_package" />
-        </com.dede.android_eggs.EggPreference>
+            app:title="@string/title_android_j" />
 
         <com.dede.android_eggs.EggPreference
-            app:icon="@drawable/i_platlogo"
+            android:targetClass="@string/target_class_android_i"
+            app:icon="@drawable/inset_i_platlogo"
             app:summary="@string/i_egg_name"
-            app:title="@string/title_android_i">
-            <intent
-                android:targetClass="@string/target_class_android_i"
-                android:targetPackage="@string/app_package" />
-        </com.dede.android_eggs.EggPreference>
+            app:title="@string/title_android_i" />
 
         <com.dede.android_eggs.EggPreference
+            android:targetClass="@string/target_class_android_h"
             app:icon="@drawable/h_platlogo"
             app:summary="@string/h_egg_name"
-            app:title="@string/title_android_h">
-            <intent
-                android:targetClass="@string/target_class_android_h"
-                android:targetPackage="@string/app_package" />
-        </com.dede.android_eggs.EggPreference>
+            app:title="@string/title_android_h" />
 
         <com.dede.android_eggs.EggPreference
+            android:targetClass="@string/target_class_android_g"
             app:icon="@drawable/g_platlogo"
             app:summary="@string/g_egg_name"
-            app:title="@string/title_android_g">
-            <intent
-                android:targetClass="@string/target_class_android_g"
-                android:targetPackage="@string/app_package" />
-        </com.dede.android_eggs.EggPreference>
+            app:title="@string/title_android_g" />
 
     </com.dede.android_eggs.EggCollection>
 

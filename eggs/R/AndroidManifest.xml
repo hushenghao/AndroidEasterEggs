@@ -13,7 +13,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:exported="true"
             android:icon="@drawable/r_icon"
-            android:label="@string/title_android_r"
+            android:label="@string/r_egg_name"
             android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
 
         <!-- Android N easter egg bits -->

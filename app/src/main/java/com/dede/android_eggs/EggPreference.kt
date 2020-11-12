@@ -1,5 +1,6 @@
 package com.dede.android_eggs
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Outline
@@ -27,6 +28,8 @@ class EggPreference : Preference {
 
     private val outlineProvider: ViewOutlineProvider?
 
+    private var className: String? = null
+
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         val arrays = context.obtainStyledAttributes(attrs, R.styleable.EggPreference)
@@ -40,6 +43,7 @@ class EggPreference : Preference {
             MODE_OVAL -> OvalOutlineProvider()
             else -> null
         }
+        className = arrays.getString(R.styleable.EggPreference_android_targetClass)
         arrays.recycle()
     }
 
@@ -52,6 +56,20 @@ class EggPreference : Preference {
             icon.clipToOutline = outlineProvider != null
             icon.outlineProvider = outlineProvider
         }
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun performClick() {
+        val className = className
+        if (className != null) {
+            val context = context
+            val intent = Intent()
+                .setClassName(context, className)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+            context.startActivity(intent)
+            return
+        }
+        super.performClick()
     }
 
     private class OvalOutlineProvider : ViewOutlineProvider() {

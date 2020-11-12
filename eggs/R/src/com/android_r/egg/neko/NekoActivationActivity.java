@@ -26,7 +26,7 @@ import com.dede.basic.SpUtils;
 //import com.android.internal.logging.MetricsLogger;
 
 public class NekoActivationActivity extends Activity {
-    private static final String R_EGG_UNLOCK_SETTING = "egg_mode_r";
+    private static final String R_EGG_UNLOCK_SETTING = "r_egg_mode";
 
     private void toastUp(String s) {
         Toast toast = Toast.makeText(this, s, Toast.LENGTH_SHORT);
