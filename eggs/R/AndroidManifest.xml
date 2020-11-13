@@ -19,7 +19,8 @@
         <!-- Android N easter egg bits -->
         <activity
             android:name=".neko.NekoLand"
-            android:exported="false"
+            android:exported="true"
+            android:icon="@drawable/r_icon"
             android:label="@string/r_app_name"
             android:theme="@android:style/Theme.Material.NoActionBar" />
 
