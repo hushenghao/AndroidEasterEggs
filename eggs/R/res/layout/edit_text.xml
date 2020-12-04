@@ -22,7 +22,7 @@
     android:paddingEnd="20dp">
 
     <EditText
-        android:id="@+id/edit"
+        android:id="@android:id/edit"
         android:maxLines="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
