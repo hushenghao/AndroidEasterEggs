@@ -52,7 +52,7 @@ public class PlatLogoActivity extends Activity {
     BackslashDrawable mBackslash;
     int mClicks;
 
-    static final Paint sPaint = new Paint();
+    static final Paint sPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     static {
         sPaint.setStyle(Paint.Style.STROKE);
@@ -258,7 +258,7 @@ public class PlatLogoActivity extends Activity {
 
     private static class BackslashDrawable extends Drawable implements TimeAnimator.TimeListener {
         Bitmap mTile;
-        Paint mPaint = new Paint();
+        Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         BitmapShader mShader;
         TimeAnimator mAnimator = new TimeAnimator();
         Matrix mMatrix = new Matrix();
@@ -287,7 +287,7 @@ public class PlatLogoActivity extends Activity {
             path.lineTo(0, h);
             path.close();
 
-            final Paint slashPaint = new Paint();
+            final Paint slashPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
             slashPaint.setAntiAlias(true);
             slashPaint.setStyle(Paint.Style.FILL);
             slashPaint.setColor(0xFF000000);

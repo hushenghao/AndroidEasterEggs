@@ -203,7 +203,7 @@ public class PlatLogoActivity extends Activity {
         private class BigDialDrawable extends Drawable {
             public final int STEPS = 10;
             private int mUnlockTries = 0;
-            final Paint mPaint = new Paint();
+            final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
             final Drawable mEleven;
             private boolean mNightMode;
             private float mValue = 0f;
