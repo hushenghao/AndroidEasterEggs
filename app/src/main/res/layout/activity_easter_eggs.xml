@@ -16,8 +16,9 @@
             android:background="?attr/colorPrimaryVariant"
             android:fitsSystemWindows="true" />
 
-        <FrameLayout
+        <fragment
             android:id="@+id/fl_eggs"
+            android:name="com.dede.android_eggs.EasterEggsActivity$SettingsFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

@@ -24,12 +24,6 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
         initStatusBar()
         setContentView(R.layout.activity_easter_eggs)
         setSupportActionBar(toolbar)
-        if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fl_eggs, SettingsFragment())
-                .commit()
-        }
         postAnim()
     }
 
