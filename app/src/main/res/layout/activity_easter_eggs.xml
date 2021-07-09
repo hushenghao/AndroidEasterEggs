@@ -1,5 +1,7 @@
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".EasterEggsActivity">
 
     <LinearLayout
@@ -30,4 +32,4 @@
         android:layout_gravity="center"
         android:src="@mipmap/ic_launcher" />
 
-</merge>
+</FrameLayout>

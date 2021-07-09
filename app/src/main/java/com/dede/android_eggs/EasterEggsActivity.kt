@@ -1,7 +1,6 @@
 package com.dede.android_eggs
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewAnimationUtils
@@ -11,7 +10,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceGroupAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_easter_eggs.*
+import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
 import kotlin.math.hypot
 
 /**
@@ -19,33 +18,33 @@ import kotlin.math.hypot
  */
 class EasterEggsActivity : AppCompatActivity(), Runnable {
 
+    private lateinit var binding: ActivityEasterEggsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initStatusBar()
-        setContentView(R.layout.activity_easter_eggs)
-        setSupportActionBar(toolbar)
+        binding = ActivityEasterEggsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         postAnim()
     }
 
     private fun initStatusBar() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-//            window.setDecorFitsSystemWindows(false)
-//        } else {
         val option =
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         val decorView = window.decorView
         val visibility: Int = decorView.systemUiVisibility
         decorView.systemUiVisibility = visibility or option
-//        }
-        window.statusBarColor = Color.TRANSPARENT
     }
 
     private fun postAnim() {
-        content.visibility = View.INVISIBLE
-        content.postDelayed(this, 200)
+        binding.content.visibility = View.INVISIBLE
+        binding.content.postDelayed(this, 200)
     }
 
     override fun run() {
+        val logo = binding.logo
+        val content = binding.content
         val cx = logo.x + logo.width / 2f
         val cy = logo.y + logo.height / 2f
         val startRadius = hypot(logo.width.toFloat(), logo.height.toFloat())

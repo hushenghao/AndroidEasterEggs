@@ -16,11 +16,9 @@
 
 package com.android_q.egg.quares
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.Icon
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.core.graphics.drawable.DrawableCompat
