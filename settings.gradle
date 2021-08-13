@@ -15,3 +15,4 @@ include(
         ":eggs:Q",
         ":eggs:R",
 )
+include ':eggs:S_beta'
