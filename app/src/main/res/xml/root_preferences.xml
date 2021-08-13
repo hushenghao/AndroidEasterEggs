@@ -7,6 +7,13 @@
         app:title="@string/easter_egg_header">
 
         <com.dede.android_eggs.EggPreference
+            android:targetClass="@string/target_class_android_s"
+            app:icon="@drawable/s_platlogo"
+            app:summary="@string/summary_android_s"
+            app:supportAdaptiveIcon="oval"
+            app:title="@string/title_android_s" />
+
+        <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_r"
             app:icon="@drawable/r_icon"
             app:summary="@string/r_egg_name"

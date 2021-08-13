@@ -14,5 +14,5 @@ include(
         ':eggs:Pie',
         ":eggs:Q",
         ":eggs:R",
+        ':eggs:S_beta'
 )
-include ':eggs:S_beta'

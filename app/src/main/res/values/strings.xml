@@ -9,6 +9,7 @@
     <string name="easter_egg_header">Easter Egg Collection</string>
     <string name="header_about">About</string>
 
+    <string name="title_android_s" translatable="false">Android 12 Beta 4 (S)</string>
     <string name="title_android_r" translatable="false">Android 11 (R)</string>
     <string name="title_android_q" translatable="false">Android 10 (Q)</string>
     <string name="title_android_p" translatable="false">Android 9 (Pie)</string>
@@ -22,6 +23,7 @@
     <string name="title_android_h" translatable="false">Android 3.x (Honeycomb)</string>
     <string name="title_android_g" translatable="false">Android 2.3.x (Gingerbread)</string>
 
+    <string name="target_class_android_s" translatable="false">com.android_s_beta.egg.PlatLogoActivity</string>
     <string name="target_class_android_r" translatable="false">com.android_r.egg.PlatLogoActivity</string>
     <string name="target_class_android_q" translatable="false">com.android_q.egg.PlatLogoActivity</string>
     <string name="target_class_android_p" translatable="false">com.android_p.egg.PlatLogoActivity</string>
@@ -34,6 +36,8 @@
     <string name="target_class_android_i" translatable="false">com.android_i.egg.PlatLogoActivity</string>
     <string name="target_class_android_h" translatable="false">com.android_h.egg.PlatLogoActivity</string>
     <string name="target_class_android_g" translatable="false">com.android_g.egg.PlatLogoActivity</string>
+
+    <string name="summary_android_s">Decompile from Beta 4</string>
 
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
     <string name="url_source" translatable="false">https://github.com/aosp-mirror/platform_frameworks_base</string>
