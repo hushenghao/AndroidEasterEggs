@@ -37,7 +37,7 @@
     <string name="target_class_android_h" translatable="false">com.android_h.egg.PlatLogoActivity</string>
     <string name="target_class_android_g" translatable="false">com.android_g.egg.PlatLogoActivity</string>
 
-    <string name="summary_android_s">Decompile from Beta 4</string>
+    <string name="summary_android_s">The decompiled version</string>
 
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
     <string name="url_source" translatable="false">https://github.com/aosp-mirror/platform_frameworks_base</string>
