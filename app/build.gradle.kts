@@ -1,3 +1,10 @@
+import java.util.*
+
+val keystoreProperties = Properties().apply {
+    rootProject.file("key.properties")
+        .takeIf { it.exists() }?.inputStream()?.use(this::load)
+}
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -19,7 +26,23 @@ android {
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
     }
 
+    signingConfigs {
+        if (keystoreProperties.isEmpty) return@signingConfigs
+        create("release") {
+            keyAlias = keystoreProperties.getProperty("keyAlias")
+            keyPassword = keystoreProperties.getProperty("keyPassword")
+            storeFile = file(keystoreProperties.getProperty("storeFile"))
+            storePassword = keystoreProperties.getProperty("storePassword")
+            enableV3Signing = true
+            enableV4Signing = true
+        }
+    }
+
     buildTypes {
+        val config = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
+        getByName("debug") {
+            signingConfig = config
+        }
         getByName("release") {
             isShrinkResources = false
             isMinifyEnabled = false
@@ -27,6 +50,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = config
         }
     }
 
@@ -70,4 +94,36 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+}
+
+val pgyer = tasks.create<Exec>("pgyer") {
+    val apiKey = keystoreProperties["pgyer.api_key"]
+    commandLine(
+        "curl", "-F",
+        "-F", "_api_key=$apiKey",
+        "-F", "buildUpdateDescription=Upload by gradle pgyer task",
+        "https://www.pgyer.com/apiv2/app/upload"
+    )
+    doLast {
+        if (apiKey == null) {
+            throw IllegalArgumentException("pgyer.api_key undefind")
+        }
+        println("\nUpload Completed!")
+    }
+}
+
+afterEvaluate {
+    val assemble = tasks.findByName("assembleRelease") as Task
+    pgyer.dependsOn("clean", assemble)
+    assemble.mustRunAfter("clean")
+//    pgyer.dependsOn(assemble)
+    assemble.doLast {
+        val tree = fileTree("build/outputs/apk/release") {
+            include("*.apk")
+        }
+        val apkFile = tree.singleFile
+        pgyer.commandLine = pgyer.commandLine.apply {
+            add(2, "file=@${apkFile.absolutePath}")
+        }
+    }
 }
