@@ -2,13 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion COMPILE_SDK
-    buildToolsVersion BUILD_TOOLS_VERSION
+    compileSdkVersion Versions.COMPILE_SDK
+    buildToolsVersion Versions.BUILD_TOOLS
 
     defaultConfig {
-        minSdkVersion MIN_SDK_VERSION
-        targetSdkVersion TARGET_SDK_VERSION
-
+        minSdkVersion Versions.MIN_SDK
+        targetSdkVersion Versions.TARGET_SDK
     }
 
     compileOptions {
@@ -37,10 +36,10 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation "androidx.recyclerview:recyclerview:${ANDROID_X_VERSION}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}"
+    implementation "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
+    implementation "androidx.core:core-ktx:${Versions.CORE_KTX}"
+    implementation "androidx.recyclerview:recyclerview:${Versions.RECYCLERVIEW}"
     implementation project(path: ':basic')
 }
 

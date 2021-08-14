@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion COMPILE_SDK
-    buildToolsVersion BUILD_TOOLS_VERSION
+    compileSdkVersion Versions.COMPILE_SDK
+    buildToolsVersion Versions.BUILD_TOOLS
 
     defaultConfig {
-        minSdkVersion MIN_SDK_VERSION
-        targetSdkVersion TARGET_SDK_VERSION
+        minSdkVersion Versions.MIN_SDK
+        targetSdkVersion Versions.TARGET_SDK
     }
 
     compileOptions {
@@ -32,9 +32,9 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation "androidx.dynamicanimation:dynamicanimation:${ANDROID_X_VERSION}"
+    implementation "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
+    implementation "androidx.core:core-ktx:${Versions.CORE_KTX}"
+    implementation "androidx.dynamicanimation:dynamicanimation:${Versions.DYNAMIC_ANIMATION}"
     implementation project(path: ':basic')
 }
 
