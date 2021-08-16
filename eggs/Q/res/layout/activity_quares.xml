@@ -18,7 +18,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    tools:context="com.android.egg.com.android_q.egg.quares.QuaresActivity">
+    tools:context="com.android_q.egg.quares.QuaresActivity">
 
    <GridLayout
         android:layout_width="wrap_content"
