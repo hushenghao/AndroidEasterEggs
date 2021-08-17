@@ -229,11 +229,17 @@ public class PlatLogoActivity extends Activity {
             canvas.save();
             canvas.scale(canvas.getWidth() / 24f, canvas.getHeight() / 24f);
 
-            final Path p = new Path();
-            p.moveTo(12f, 21.83f);
-            p.rLineTo(0f, -19.67f);
-            p.rLineTo(-5f, 0f);
-            canvas.drawPath(p, sPaint);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                canvas.drawLine(12f, 21.83f, 12f, 2.16f, sPaint);
+                canvas.drawLine(12f, 2.16f, 7f, 2.16f, sPaint);
+            } else {
+                // Why is Path ambiguous ???
+                final Path p = new Path();
+                p.moveTo(12f, 21.83f);
+                p.rLineTo(0f, -19.67f);
+                p.rLineTo(-5f, 0f);
+                canvas.drawPath(p, sPaint);
+            }
             canvas.restore();
         }
 
