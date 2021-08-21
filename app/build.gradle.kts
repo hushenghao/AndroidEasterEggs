@@ -1,3 +1,5 @@
+import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 import java.util.*
 
 val keystoreProperties = Properties().apply {
@@ -96,34 +98,42 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
 
-val pgyer = tasks.create<Exec>("pgyer") {
+tasks.register<Exec>("pgyer") {
     val apiKey = keystoreProperties["pgyer.api_key"]
-    commandLine(
-        "curl", "-F",
-        "-F", "_api_key=$apiKey",
-        "-F", "buildUpdateDescription=Upload by gradle pgyer task",
-        "https://www.pgyer.com/apiv2/app/upload"
-    )
-    doLast {
-        if (apiKey == null) {
-            throw IllegalArgumentException("pgyer.api_key undefind")
-        }
-        println("\nUpload Completed!")
-    }
-}
+        ?: throw IllegalArgumentException("pgyer.api_key not found")
 
-afterEvaluate {
-    val assemble = tasks.findByName("assembleRelease") as Task
-    pgyer.dependsOn("clean", assemble)
+    val assemble = tasks.named("assembleRelease").get()
+    dependsOn("clean", assemble)
     assemble.mustRunAfter("clean")
-//    pgyer.dependsOn(assemble)
-    assemble.doLast {
-        val tree = fileTree("build/outputs/apk/release") {
-            include("*.apk")
-        }
-        val apkFile = tree.singleFile
-        pgyer.commandLine = pgyer.commandLine.apply {
-            add(2, "file=@${apkFile.absolutePath}")
+
+    val tree = fileTree("build/outputs/apk/release") {
+        include("*.apk")
+        builtBy("assembleRelease")
+    }
+    doFirst {
+        val apkPath = tree.single().absolutePath
+        println("Upload Apk: $apkPath")
+
+        commandLine(
+            "curl", "-F", "file=@$apkPath",
+            "-F", "_api_key=$apiKey",
+            "-F", "buildUpdateDescription=Upload by gradle pgyer task",
+            "https://www.pgyer.com/apiv2/app/upload"
+        )
+    }
+    val output = ByteArrayOutputStream().apply {
+        standardOutput = this
+    }
+    doLast {
+        val result = output.toString()
+        val obj = org.json.JSONObject(result)
+        if (obj.getInt("code") == 0) {
+            val path = obj.getJSONObject("data")
+                .getString("buildShortcutUrl")
+            println("Uploaded successfully: https://www.pgyer.com/$path")
+        } else {
+            val message = obj.getString("message")
+            println("Upload failed: $message")
         }
     }
 }
