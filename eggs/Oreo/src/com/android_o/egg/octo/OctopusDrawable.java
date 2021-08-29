@@ -25,6 +25,7 @@ import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.Region;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
@@ -215,7 +216,9 @@ public class OctopusDrawable extends Drawable {
                     canvas.clipOutRect(point.x - 61f, point.y + 8f,
                             point.x + 61f, point.y + 12f);
                 } else {
-                    // todo support old version
+                    // support old version
+                    canvas.clipRect( point.x - 61f, point.y + 8f,
+                            point.x + 61f, point.y + 12f, Region.Op.DIFFERENCE);
                 }
                 canvas.drawOval(point.x - 40f, point.y - 60f, point.x + 40f, point.y + 40f, mPaint);
             }
