@@ -113,6 +113,9 @@ public class NekoTile extends TileService implements PrefsListener {
     private void showNekoDialog() {
         Log.d(TAG, "showNekoDialog");
 //        MetricsLogger.count(this, "egg_neko_select_food", 1);
-        showDialog(new NekoDialog(this));
+        try {
+            showDialog(new NekoDialog(this));
+        } catch (Exception ignore) {
+        }
     }
 }

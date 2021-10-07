@@ -20,8 +20,8 @@ android {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
-        versionCode = 7
-        versionName = "1.3.3"
+        versionCode = 8
+        versionName = "1.4.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.add("en")
@@ -78,8 +78,9 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation("androidx.browser:browser:1.3.0")
     implementation("com.google.androidbrowserhelper:androidbrowserhelper:2.2.0")
+    implementation("me.weishu:free_reflection:3.0.1")
     implementation(project(":basic"))
-    implementation(project(":eggs:S_beta"))
+    implementation(project(":eggs:S"))
     implementation(project(":eggs:R"))
     implementation(project(":eggs:Q"))
     implementation(project(":eggs:Pie"))
