@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AnalogClock">
+        <attr name="dial" format="reference" />
+        <attr name="hand_hour" format="reference" />
+        <attr name="hand_minute" format="reference" />
+        <attr name="hand_second" format="reference" />
+        <!-- Specifies the time zone to use. When this attribute is specified, the
+             TextClock will ignore the time zone of the system. To use the user's
+             time zone, do not specify this attribute. The default value is the
+             user's time zone. Please refer to {@link java.util.TimeZone} for more
+             information about time zone ids. -->
+<!--        <attr name="timeZone" format="string" />-->
+<!--        &lt;!&ndash; Tint to apply to the dial graphic. &ndash;&gt;-->
+<!--        <attr name="dialTint" format="color" />-->
+<!--        &lt;!&ndash; Blending mode used to apply the dial graphic tint. &ndash;&gt;-->
+<!--        <attr name="dialTintMode">-->
+<!--            &lt;!&ndash; The tint is drawn on top of the drawable.-->
+<!--                 [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc] &ndash;&gt;-->
+<!--            <enum name="src_over" value="3" />-->
+<!--            &lt;!&ndash; The tint is masked by the alpha channel of the drawable. The drawable’s-->
+<!--                 color channels are thrown out. [Sa * Da, Sc * Da] &ndash;&gt;-->
+<!--            <enum name="src_in" value="5" />-->
+<!--            &lt;!&ndash; The tint is drawn above the drawable, but with the drawable’s alpha-->
+<!--                 channel masking the result. [Da, Sc * Da + (1 - Sa) * Dc] &ndash;&gt;-->
+<!--            <enum name="src_atop" value="9" />-->
+<!--            &lt;!&ndash; Multiplies the color and alpha channels of the drawable with those of-->
+<!--                 the tint. [Sa * Da, Sc * Dc] &ndash;&gt;-->
+<!--            <enum name="multiply" value="14" />-->
+<!--            &lt;!&ndash; [Sa + Da - Sa * Da, Sc + Dc - Sc * Dc] &ndash;&gt;-->
+<!--            <enum name="screen" value="15" />-->
+<!--            &lt;!&ndash; Combines the tint and drawable color and alpha channels, clamping the-->
+<!--                 result to valid color values. Saturate(S + D) &ndash;&gt;-->
+<!--            <enum name="add" value="16" />-->
+<!--        </attr>-->
+<!--        &lt;!&ndash; Tint to apply to the hour hand graphic. &ndash;&gt;-->
+<!--        <attr name="hand_hourTint" format="color" />-->
+<!--        &lt;!&ndash; Blending mode used to apply the hour hand graphic tint. &ndash;&gt;-->
+<!--        <attr name="hand_hourTintMode">-->
+<!--            &lt;!&ndash; The tint is drawn on top of the drawable.-->
+<!--                 [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc] &ndash;&gt;-->
+<!--            <enum name="src_over" value="3" />-->
+<!--            &lt;!&ndash; The tint is masked by the alpha channel of the drawable. The drawable’s-->
+<!--                 color channels are thrown out. [Sa * Da, Sc * Da] &ndash;&gt;-->
+<!--            <enum name="src_in" value="5" />-->
+<!--            &lt;!&ndash; The tint is drawn above the drawable, but with the drawable’s alpha-->
+<!--                 channel masking the result. [Da, Sc * Da + (1 - Sa) * Dc] &ndash;&gt;-->
+<!--            <enum name="src_atop" value="9" />-->
+<!--            &lt;!&ndash; Multiplies the color and alpha channels of the drawable with those of-->
+<!--                 the tint. [Sa * Da, Sc * Dc] &ndash;&gt;-->
+<!--            <enum name="multiply" value="14" />-->
+<!--            &lt;!&ndash; [Sa + Da - Sa * Da, Sc + Dc - Sc * Dc] &ndash;&gt;-->
+<!--            <enum name="screen" value="15" />-->
+<!--            &lt;!&ndash; Combines the tint and drawable color and alpha channels, clamping the-->
+<!--                 result to valid color values. Saturate(S + D) &ndash;&gt;-->
+<!--            <enum name="add" value="16" />-->
+<!--        </attr>-->
+<!--        &lt;!&ndash; Tint to apply to the minute hand graphic. &ndash;&gt;-->
+<!--        <attr name="hand_minuteTint" format="color" />-->
+<!--        &lt;!&ndash; Blending mode used to apply the minute hand graphic tint. &ndash;&gt;-->
+<!--        <attr name="hand_minuteTintMode">-->
+<!--            &lt;!&ndash; The tint is drawn on top of the drawable.-->
+<!--                 [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc] &ndash;&gt;-->
+<!--            <enum name="src_over" value="3" />-->
+<!--            &lt;!&ndash; The tint is masked by the alpha channel of the drawable. The drawable’s-->
+<!--                 color channels are thrown out. [Sa * Da, Sc * Da] &ndash;&gt;-->
+<!--            <enum name="src_in" value="5" />-->
+<!--            &lt;!&ndash; The tint is drawn above the drawable, but with the drawable’s alpha-->
+<!--                 channel masking the result. [Da, Sc * Da + (1 - Sa) * Dc] &ndash;&gt;-->
+<!--            <enum name="src_atop" value="9" />-->
+<!--            &lt;!&ndash; Multiplies the color and alpha channels of the drawable with those of-->
+<!--                 the tint. [Sa * Da, Sc * Dc] &ndash;&gt;-->
+<!--            <enum name="multiply" value="14" />-->
+<!--            &lt;!&ndash; [Sa + Da - Sa * Da, Sc + Dc - Sc * Dc] &ndash;&gt;-->
+<!--            <enum name="screen" value="15" />-->
+<!--            &lt;!&ndash; Combines the tint and drawable color and alpha channels, clamping the-->
+<!--                 result to valid color values. Saturate(S + D) &ndash;&gt;-->
+<!--            <enum name="add" value="16" />-->
+<!--        </attr>-->
+<!--        &lt;!&ndash; Tint to apply to the second hand graphic. &ndash;&gt;-->
+<!--        <attr name="hand_secondTint" format="color" />-->
+<!--        &lt;!&ndash; Blending mode used to apply the second hand graphic tint. &ndash;&gt;-->
+<!--        <attr name="hand_secondTintMode">-->
+<!--            &lt;!&ndash; The tint is drawn on top of the drawable.-->
+<!--                 [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc] &ndash;&gt;-->
+<!--            <enum name="src_over" value="3" />-->
+<!--            &lt;!&ndash; The tint is masked by the alpha channel of the drawable. The drawable’s-->
+<!--                 color channels are thrown out. [Sa * Da, Sc * Da] &ndash;&gt;-->
+<!--            <enum name="src_in" value="5" />-->
+<!--            &lt;!&ndash; The tint is drawn above the drawable, but with the drawable’s alpha-->
+<!--                 channel masking the result. [Da, Sc * Da + (1 - Sa) * Dc] &ndash;&gt;-->
+<!--            <enum name="src_atop" value="9" />-->
+<!--            &lt;!&ndash; Multiplies the color and alpha channels of the drawable with those of-->
+<!--                 the tint. [Sa * Da, Sc * Dc] &ndash;&gt;-->
+<!--            <enum name="multiply" value="14" />-->
+<!--            &lt;!&ndash; [Sa + Da - Sa * Da, Sc + Dc - Sc * Dc] &ndash;&gt;-->
+<!--            <enum name="screen" value="15" />-->
+<!--            &lt;!&ndash; Combines the tint and drawable color and alpha channels, clamping the-->
+<!--                 result to valid color values. Saturate(S + D) &ndash;&gt;-->
+<!--            <enum name="add" value="16" />-->
+<!--        </attr>-->
+    </declare-styleable>
+</resources>

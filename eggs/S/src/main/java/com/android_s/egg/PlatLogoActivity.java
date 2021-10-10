@@ -27,9 +27,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -38,21 +36,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
-import android.widget.AnalogClock;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import androidx.annotation.RequiresApi;
+import com.dede.basic.DrawableKt;
 
-import org.json.JSONObject;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.time.Clock;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Android S
@@ -60,17 +49,16 @@ import java.util.Date;
 public class PlatLogoActivity extends Activity {
     private static final String TAG = "PlatLogoActivity";
 
-    private static final String S_EGG_UNLOCK_SETTING = "egg_mode_s";
+//    private static final String S_EGG_UNLOCK_SETTING = "egg_mode_s";
 
-    private AnalogClock mClock;
-    //    private SettableAnalogClock mClock;
+    private SettableAnalogClock mClock;
     private ImageView mLogo;
     private BubblesDrawable mBg;
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +72,7 @@ public class PlatLogoActivity extends Activity {
 
         final FrameLayout layout = new FrameLayout(this);
 
-        mClock = createAnalogClock(this);
+        mClock = new SettableAnalogClock(this);
 
         final DisplayMetrics dm = getResources().getDisplayMetrics();
         final float dp = dm.density;
@@ -109,9 +97,9 @@ public class PlatLogoActivity extends Activity {
         setContentView(layout);
     }
 
-    private boolean shouldWriteSettings() {
-        return getPackageName().equals("android");
-    }
+//    private boolean shouldWriteSettings() {
+//        return getPackageName().equals("android");
+//    }
 
     private void launchNextStage(boolean locked) {
         mClock.animate()
@@ -163,108 +151,65 @@ public class PlatLogoActivity extends Activity {
         //finish(); // no longer finish upon unlock; it's fun to frob the dial
     }
 
-    static final String TOUCH_STATS = "touch.stats";
-    double mPressureMin = 0, mPressureMax = -1;
-
-    private void measureTouchPressure(MotionEvent event) {
-        final float pressure = event.getPressure();
-        switch (event.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN:
-                if (mPressureMax < 0) {
-                    mPressureMin = mPressureMax = pressure;
-                }
-                break;
-            case MotionEvent.ACTION_MOVE:
-                if (pressure < mPressureMin) mPressureMin = pressure;
-                if (pressure > mPressureMax) mPressureMax = pressure;
-                break;
-        }
-    }
-
-    private void syncTouchPressure() {
-        try {
-            final String touchDataJson = Settings.System.getString(
-                    getContentResolver(), TOUCH_STATS);
-            final JSONObject touchData = new JSONObject(
-                    touchDataJson != null ? touchDataJson : "{}");
-            if (touchData.has("min")) {
-                mPressureMin = Math.min(mPressureMin, touchData.getDouble("min"));
-            }
-            if (touchData.has("max")) {
-                mPressureMax = Math.max(mPressureMax, touchData.getDouble("max"));
-            }
-            if (mPressureMax >= 0) {
-                touchData.put("min", mPressureMin);
-                touchData.put("max", mPressureMax);
-                if (shouldWriteSettings()) {
-                    Settings.System.putString(getContentResolver(), TOUCH_STATS,
-                            touchData.toString());
-                }
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Can't write touch settings", e);
-        }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
+//    static final String TOUCH_STATS = "touch.stats";
+//    double mPressureMin = 0, mPressureMax = -1;
+//
+//    private void measureTouchPressure(MotionEvent event) {
+//        final float pressure = event.getPressure();
+//        switch (event.getActionMasked()) {
+//            case MotionEvent.ACTION_DOWN:
+//                if (mPressureMax < 0) {
+//                    mPressureMin = mPressureMax = pressure;
+//                }
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                if (pressure < mPressureMin) mPressureMin = pressure;
+//                if (pressure > mPressureMax) mPressureMax = pressure;
+//                break;
+//        }
+//    }
+//
+//    private void syncTouchPressure() {
+//        try {
+//            final String touchDataJson = Settings.System.getString(
+//                    getContentResolver(), TOUCH_STATS);
+//            final JSONObject touchData = new JSONObject(
+//                    touchDataJson != null ? touchDataJson : "{}");
+//            if (touchData.has("min")) {
+//                mPressureMin = Math.min(mPressureMin, touchData.getDouble("min"));
+//            }
+//            if (touchData.has("max")) {
+//                mPressureMax = Math.max(mPressureMax, touchData.getDouble("max"));
+//            }
+//            if (mPressureMax >= 0) {
+//                touchData.put("min", mPressureMin);
+//                touchData.put("max", mPressureMax);
+//                if (shouldWriteSettings()) {
+//                    Settings.System.putString(getContentResolver(), TOUCH_STATS,
+//                            touchData.toString());
+//                }
+//            }
+//        } catch (Exception e) {
+//            Log.e(TAG, "Can't write touch settings", e);
+//        }
+//    }
+//
+//    @Override
+//    public void onStart() {
+//        super.onStart();
 //        syncTouchPressure();
-    }
-
-    @Override
-    public void onStop() {
+//    }
+//
+//    @Override
+//    public void onStop() {
 //        syncTouchPressure();
-        super.onStop();
-    }
-
-    private AnalogClock createAnalogClock(Context context) {
-        AnalogClock analogClock = null;
-        if (Build.VERSION.SDK_INT >= 31) {
-            SettableAnalogClock clock = new SettableAnalogClock(context);
-            if (clock.isSupported()) {
-                analogClock = clock;
-            }
-        }
-        if (analogClock == null) {
-            analogClock = new SupportAnalogClock(context);
-        }
-        return analogClock;
-    }
-
-    public class SupportAnalogClock extends AnalogClock {
-
-        public SupportAnalogClock(Context context) {
-            super(context);
-            setDrawable(context, "mDial", R.drawable.clock_dial);
-            setDrawable(context, "mHourHand", R.drawable.clock_hand_hour);
-            setDrawable(context, "mMinuteHand", R.drawable.clock_hand_minute);
-            setOnClickListener(view -> launchNextStage(false));
-        }
-
-        private void setDrawable(Context context, String field, int id) {
-            try {
-                Field mDial = AnalogClock.class.getDeclaredField(field);
-                mDial.setAccessible(true);
-                mDial.set(this, context.getDrawable(id));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    interface IAnalogClock {
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        default Instant now() {
-            return new Date().toInstant();
-        }
-    }
+//        super.onStop();
+//    }
 
     /**
      * Subclass of AnalogClock that allows the user to flip up the glass and adjust the hands.
      */
-    @RequiresApi(api = 31)
-    public class SettableAnalogClock extends SupportAnalogClock implements IAnalogClock {
+    public class SettableAnalogClock extends com.android_s.egg.AnalogClock {
         private int mOverrideHour = -1;
         private int mOverrideMinute = -1;
         private boolean mOverride = false;
@@ -273,42 +218,34 @@ public class PlatLogoActivity extends Activity {
             super(context);
         }
 
-        public boolean isSupported() {
-            return _now() != null && _onTimeChanged();
-        }
-
-        private Instant _now() {
-            try {
-                Field mClock = AnalogClock.class.getDeclaredField("mClock");
-                mClock.setAccessible(true);
-                Clock clock = (Clock) mClock.get(this);
-                if (clock != null) {
-                    return clock.instant();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
         @Override
-        public Instant now() {
-            Instant realNow = _now();
-            //final Instant realNow = super.now();
-            final ZoneId tz = Clock.systemDefaultZone().getZone();
-            final ZonedDateTime zdTime = realNow.atZone(tz);
+        public Calendar now() {
+            Calendar realNow = super.now();
             if (mOverride) {
                 if (mOverrideHour < 0) {
-                    mOverrideHour = zdTime.getHour();
+                    mOverrideHour = realNow.get(Calendar.HOUR_OF_DAY);
                 }
-                return Clock.fixed(zdTime
-                        .withHour(mOverrideHour)
-                        .withMinute(mOverrideMinute)
-                        .withSecond(0)
-                        .toInstant(), tz).instant();
-            } else {
-                return realNow;
+                realNow.set(Calendar.HOUR_OF_DAY, mOverrideHour);
+                realNow.set(Calendar.MINUTE, mOverrideMinute);
+                realNow.set(Calendar.SECOND, 0);
             }
+            return realNow;
+
+//            final Instant realNow = super.now();
+//            final ZoneId tz = Clock.systemDefaultZone().getZone();
+//            final ZonedDateTime zdTime = realNow.atZone(tz);
+//            if (mOverride) {
+//                if (mOverrideHour < 0) {
+//                    mOverrideHour = zdTime.getHour();
+//                }
+//                return Clock.fixed(zdTime
+//                        .withHour(mOverrideHour)
+//                        .withMinute(mOverrideMinute)
+//                        .withSecond(0)
+//                        .toInstant(), tz).instant();
+//            } else {
+//                return realNow;
+//            }
         }
 
         double toPositiveDegrees(double rad) {
@@ -349,8 +286,7 @@ public class PlatLogoActivity extends Activity {
                             performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK);
                         }
 
-//                        onTimeChanged();
-                        _onTimeChanged();
+                        onTimeChanged();
                         postInvalidate();
                     }
 
@@ -366,17 +302,6 @@ public class PlatLogoActivity extends Activity {
             return false;
         }
 
-        private boolean _onTimeChanged() {
-            try {
-                Method onTimeChanged = AnalogClock.class.getDeclaredMethod("onTimeChanged", new Class[0]);
-                onTimeChanged.setAccessible(true);
-                onTimeChanged.invoke(this);
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
     }
 
     static class Bubble {
@@ -387,7 +312,7 @@ public class PlatLogoActivity extends Activity {
     class BubblesDrawable extends Drawable {
         private static final int MAX_BUBBS = 2000;
 
-//        private final int[] mColorIds = {
+        //        private final int[] mColorIds = {
 //                android.R.color.system_accent1_400,
 //                android.R.color.system_accent1_500,
 //                android.R.color.system_accent1_600,
@@ -396,6 +321,15 @@ public class PlatLogoActivity extends Activity {
 //                android.R.color.system_accent2_500,
 //                android.R.color.system_accent2_600,
 //        };
+        private final String[] mColorIds = {
+                "system_accent1_400",
+                "system_accent1_500",
+                "system_accent1_600",
+
+                "system_accent2_400",
+                "system_accent2_500",
+                "system_accent2_600"
+        };
 
         //        private int[] mColors = new int[mColorIds.length];
         private int[] mColors = {0xff598df7, 0xff3771df, 0xff2559bc, 0xff8a91a3, 0xff707687, 0xff585e6f};
@@ -410,9 +344,12 @@ public class PlatLogoActivity extends Activity {
         public float minR = 0f;
 
         BubblesDrawable() {
-//            for (int i = 0; i < mColorIds.length; i++) {
-//                mColors[i] = getColor(mColorIds[i]);
-//            }
+            try {
+                for (int i = 0; i < mColorIds.length; i++) {
+                    mColors[i] = DrawableKt.getSystemColor(PlatLogoActivity.this, mColorIds[i]);
+                }
+            } catch (Exception ignore) {
+            }
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j] = new Bubble();
             }
