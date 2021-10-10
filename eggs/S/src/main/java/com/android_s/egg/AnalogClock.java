@@ -28,6 +28,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -38,6 +39,7 @@ import androidx.core.content.ContextCompat;
 
 import com.dede.basic.DrawableKt;
 
+import java.time.Clock;
 import java.time.ZoneId;
 import java.util.Calendar;
 
@@ -556,6 +558,7 @@ public class AnalogClock extends View {
         IntentFilter filter = new IntentFilter();
 
         if (!mReceiverAttached) {
+            filter.addAction(Intent.ACTION_TIME_TICK);
             filter.addAction(Intent.ACTION_TIME_CHANGED);
             filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
 
@@ -768,9 +771,9 @@ public class AnalogClock extends View {
     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (Intent.ACTION_TIMEZONE_CHANGED.equals(intent.getAction())) {
+//            if (Intent.ACTION_TIMEZONE_CHANGED.equals(intent.getAction())) {
                 createClock();
-            }
+//            }
 
             mTick.run();
         }
