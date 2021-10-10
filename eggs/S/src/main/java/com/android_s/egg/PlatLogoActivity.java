@@ -28,6 +28,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,8 +41,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.dede.basic.DrawableKt;
-
-import java.util.Calendar;
 
 /**
  * Android S
@@ -209,7 +208,7 @@ public class PlatLogoActivity extends Activity {
     /**
      * Subclass of AnalogClock that allows the user to flip up the glass and adjust the hands.
      */
-    public class SettableAnalogClock extends com.android_s.egg.AnalogClock {
+    public class SettableAnalogClock extends AnalogClock {
         private int mOverrideHour = -1;
         private int mOverrideMinute = -1;
         private boolean mOverride = false;
@@ -219,25 +218,18 @@ public class PlatLogoActivity extends Activity {
         }
 
         @Override
-        public Calendar now() {
-            Calendar realNow = super.now();
-            if (mOverride) {
-                if (mOverrideHour < 0) {
-                    mOverrideHour = realNow.get(Calendar.HOUR_OF_DAY);
-                }
-                realNow.set(Calendar.HOUR_OF_DAY, mOverrideHour);
-                realNow.set(Calendar.MINUTE, mOverrideMinute);
-                realNow.set(Calendar.SECOND, 0);
-            }
-            return realNow;
-
+        public Time now() {
+            Time realNow = super.now();
 //            final Instant realNow = super.now();
 //            final ZoneId tz = Clock.systemDefaultZone().getZone();
 //            final ZonedDateTime zdTime = realNow.atZone(tz);
-//            if (mOverride) {
-//                if (mOverrideHour < 0) {
+            if (mOverride) {
+                if (mOverrideHour < 0) {
 //                    mOverrideHour = zdTime.getHour();
-//                }
+                    mOverrideHour = realNow.hour;
+                }
+                realNow.set(0, mOverrideMinute, mOverrideHour,
+                        realNow.monthDay, realNow.month, realNow.year);
 //                return Clock.fixed(zdTime
 //                        .withHour(mOverrideHour)
 //                        .withMinute(mOverrideMinute)
@@ -245,7 +237,8 @@ public class PlatLogoActivity extends Activity {
 //                        .toInstant(), tz).instant();
 //            } else {
 //                return realNow;
-//            }
+            }
+            return realNow;
         }
 
         double toPositiveDegrees(double rad) {
