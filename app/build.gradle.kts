@@ -21,7 +21,7 @@ android {
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
         versionCode = 9
-        versionName = "1.4.2"
+        versionName = "1.4.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.add("en")
