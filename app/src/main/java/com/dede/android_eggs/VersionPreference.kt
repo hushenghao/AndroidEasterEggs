@@ -12,10 +12,10 @@ import com.dede.android_eggs.BuildConfig.VERSION_NAME
  * @author hsh
  * @since 2020/10/29 10:48 AM
  */
-class VersionPreference : Preference {
+class VersionPreference : ChromeTabPreference {
 
-    constructor(context: Context?) : this(context, null)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context) : this(context, null)
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
     init {
         summary = context.getString(R.string.summary_version, VERSION_NAME, VERSION_CODE)

@@ -4,7 +4,7 @@
     <com.dede.android_eggs.EggCollection
         app:iconSpaceReserved="false"
         app:key="key_collection"
-        app:title="@string/easter_egg_header">
+        app:title="@string/header_collection">
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_s"
@@ -112,8 +112,10 @@
             app:title="@string/title_source" />
 
         <com.dede.android_eggs.VersionPreference
+            app:customUrl="@string/url_beta"
             app:iconSpaceReserved="false"
-            app:title="@string/title_version" />
+            app:title="@string/title_version"
+            app:useTwa="false" />
 
     </PreferenceCategory>
 

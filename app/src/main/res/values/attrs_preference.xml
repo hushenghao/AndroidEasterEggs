@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="ChromeTabPreference">
         <attr name="customUrl" format="string" />
+        <attr name="useTwa" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="EggPreference">

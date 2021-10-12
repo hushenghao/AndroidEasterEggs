@@ -42,6 +42,7 @@
 
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
     <string name="url_source" translatable="false">https://github.com/aosp-mirror/platform_frameworks_base</string>
+    <string name="url_beta" translatable="false">https://www.pgyer.com/eggs</string>
 
     <string name="title_github" translatable="false">GitHub</string>
     <string name="title_source">System Source</string>
@@ -50,5 +51,6 @@
     <string name="summary_github">Source code for the current project</string>
     <string name="summary_source">Contains the Easter egg source code project</string>
     <string name="summary_version">%s (%d)</string>
+    <string name="title_open_with">Open with</string>
 
 </resources>

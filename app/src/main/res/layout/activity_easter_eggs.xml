@@ -15,12 +15,11 @@
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimaryVariant"
             android:fitsSystemWindows="true" />
 
         <fragment
             android:id="@+id/fl_eggs"
-            android:name="com.dede.android_eggs.EasterEggsActivity$SettingsFragment"
+            android:name="com.dede.android_eggs.EasterEggsFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

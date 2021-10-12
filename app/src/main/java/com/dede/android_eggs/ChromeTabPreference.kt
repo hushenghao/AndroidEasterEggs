@@ -1,6 +1,7 @@
 package com.dede.android_eggs
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.text.TextUtils
 import android.util.AttributeSet
@@ -14,9 +15,10 @@ import com.google.androidbrowserhelper.trusted.TwaLauncher
  * @author hsh
  * @since 2020/10/29 10:02 AM
  */
-class ChromeTabPreference : Preference, Preference.OnPreferenceClickListener {
+open class ChromeTabPreference : Preference, Preference.OnPreferenceClickListener {
 
     private var uri: Uri? = null
+    private val useTwa: Boolean
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -25,6 +27,7 @@ class ChromeTabPreference : Preference, Preference.OnPreferenceClickListener {
         if (!TextUtils.isEmpty(uriString)) {
             uri = Uri.parse(uriString)
         }
+        useTwa = arrays.getBoolean(R.styleable.ChromeTabPreference_useTwa, true)
         arrays.recycle()
 
         if (uri != null) {
@@ -37,10 +40,22 @@ class ChromeTabPreference : Preference, Preference.OnPreferenceClickListener {
     }
 
     override fun onPreferenceClick(preference: Preference?): Boolean {
+        val uri = this.uri
         if (uri != null) {
-            openTwaWeb(uri!!)
+            if (useTwa) {
+                openTwaWeb(uri)
+            } else {
+                openBrowser(uri)
+            }
         }
         return uri != null
+    }
+
+    private fun openBrowser(uri: Uri) {
+        val target = Intent(Intent.ACTION_VIEW, uri)
+        val intent =
+            Intent.createChooser(target, context.getString(R.string.title_open_with))
+        context.startActivity(intent)
     }
 
     private fun openTwaWeb(uri: Uri) {
