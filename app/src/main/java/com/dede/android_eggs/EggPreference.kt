@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.view.setPadding
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
@@ -25,12 +26,17 @@ class EggPreference : Preference {
         private const val MODE_DEFAULT = 0
         private const val MODE_CORNERS = 1
         private const val MODE_OVAL = 2
+
+        var showSuffix = true
+        private val suffixRegex = Regex("\\s*\\(.+\\)")
     }
 
     private val outlineProvider: ViewOutlineProvider?
 
     private val className: String?
     private val iconPadding: Int
+
+    private val finalTitle: CharSequence?
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -49,10 +55,17 @@ class EggPreference : Preference {
         iconPadding =
             arrays.getDimensionPixelSize(R.styleable.EggPreference_iconPadding, 0)
         arrays.recycle()
+
+        finalTitle = title
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder?) {
         super.onBindViewHolder(holder)
+
+        if (!showSuffix && finalTitle != null) {
+            val title = holder?.findViewById(android.R.id.title) as? TextView
+            title?.text = finalTitle.replace(suffixRegex,"")
+        }
 
         val icon = holder?.findViewById(android.R.id.icon) as? ImageView ?: return
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
