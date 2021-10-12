@@ -11,5 +11,6 @@
             <enum name="oval" value="2" />
         </attr>
         <attr name="iconRadius" format="dimension" />
+        <attr name="iconPadding" format="dimension" />
     </declare-styleable>
 </resources>

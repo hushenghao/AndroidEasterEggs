@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
+import androidx.core.view.setPadding
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 
@@ -28,7 +29,8 @@ class EggPreference : Preference {
 
     private val outlineProvider: ViewOutlineProvider?
 
-    private var className: String? = null
+    private val className: String?
+    private val iconPadding: Int
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -44,6 +46,8 @@ class EggPreference : Preference {
             else -> null
         }
         className = arrays.getString(R.styleable.EggPreference_android_targetClass)
+        iconPadding =
+            arrays.getDimensionPixelSize(R.styleable.EggPreference_iconPadding, 0)
         arrays.recycle()
     }
 
@@ -56,6 +60,7 @@ class EggPreference : Preference {
             icon.clipToOutline = outlineProvider != null
             icon.outlineProvider = outlineProvider
         }
+        icon.setPadding(iconPadding)
     }
 
     @SuppressLint("RestrictedApi")

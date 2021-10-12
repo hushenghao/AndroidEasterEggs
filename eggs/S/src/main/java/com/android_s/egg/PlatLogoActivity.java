@@ -27,6 +27,8 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.util.DisplayMetrics;
@@ -39,6 +41,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import androidx.core.content.ContextCompat;
 
 import com.dede.basic.DrawableKt;
 
@@ -83,7 +87,8 @@ public class PlatLogoActivity extends Activity {
 
         mLogo = new ImageView(this);
         mLogo.setVisibility(View.GONE);
-        mLogo.setImageResource(R.drawable.s_platlogo);
+//        mLogo.setImageResource(R.drawable.s_platlogo);
+        mLogo.setImageDrawable(createDrawable());
         layout.addView(mLogo, lp);
 
         mBg = new BubblesDrawable();
@@ -94,6 +99,22 @@ public class PlatLogoActivity extends Activity {
         layout.setBackground(mBg);
 
         setContentView(layout);
+    }
+
+    private Drawable createDrawable() {
+        int color = -1;
+        try {
+            color = DrawableKt.getSystemColor(this, "system_accent3_500");
+        } catch (Exception ignore) {
+        }
+        if (color != -1) {
+            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.s_platlogo_nobg);
+            GradientDrawable bg = new GradientDrawable();
+            bg.setShape(GradientDrawable.OVAL);
+            bg.setColor(color);
+            return new LayerDrawable(new Drawable[]{bg, drawable});
+        }
+        return ContextCompat.getDrawable(this, R.drawable.s_platlogo);
     }
 
 //    private boolean shouldWriteSettings() {
