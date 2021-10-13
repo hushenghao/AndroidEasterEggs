@@ -192,7 +192,7 @@ public class BeanBag extends Activity {
                 vy = randfrange(-40, 40) * z;
                 final float boardh = boardHeight;
                 final float boardw = boardWidth;
-                //android.util.Log.d("BeanBag", "reset: w="+w+" h="+h);
+                android.util.Log.d("BeanBag", "reset: w="+w+" h="+h);
                 if (flip()) {
                     x = (vx < 0 ? boardw + 2 * r : -r * 4f);
                     y = (randfrange(0, boardh - 3 * r) * 0.5f + ((vy < 0) ? boardh * 0.5f : 0));
@@ -261,7 +261,7 @@ public class BeanBag extends Activity {
         }
 
         private void reset() {
-//            android.util.Log.d("Nyandroid", "board reset");
+            android.util.Log.d("Nyandroid", "board reset");
             removeAllViews();
 
             final ViewGroup.LayoutParams wrap = new ViewGroup.LayoutParams(
@@ -328,7 +328,7 @@ public class BeanBag extends Activity {
             super.onSizeChanged(w, h, oldw, oldh);
             boardWidth = w;
             boardHeight = h;
-//            android.util.Log.d("Nyandroid", "resized: " + w + "x" + h);
+            android.util.Log.d("Nyandroid", "resized: " + w + "x" + h);
         }
 
         public void startAnimation() {

@@ -36,11 +36,8 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}"
-    implementation "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
-    implementation "androidx.recyclerview:recyclerview:${Versions.RECYCLERVIEW}"
-    implementation "androidx.dynamicanimation:dynamicanimation:${Versions.DYNAMIC_ANIMATION}"
+    implementation(deps.kotlin.stdlib)
+    implementation(deps.androidx.appcompat)
     implementation project(path: ':basic')
 }
 

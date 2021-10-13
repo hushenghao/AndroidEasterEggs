@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.KOTLIN}")
-    implementation("androidx.appcompat:appcompat:${Versions.APPCOMPAT}")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
+    implementation(deps.kotlin.stdlib)
+    implementation(deps.kotlinx.coroutines.core)
+    implementation(deps.androidx.appcompat)
 }

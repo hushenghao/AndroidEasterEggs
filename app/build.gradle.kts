@@ -1,4 +1,3 @@
-import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -24,7 +23,7 @@ android {
         versionName = "1.4.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        resourceConfigurations.add("en")
+        resourceConfigurations.addAll(listOf("zh", "en"))
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
     }
 
@@ -70,15 +69,16 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.KOTLIN}")
-    implementation("androidx.core:core-ktx:${Versions.CORE_KTX}")
-    implementation("androidx.appcompat:appcompat:${Versions.APPCOMPAT}")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.preference:preference-ktx:1.1.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    implementation("androidx.browser:browser:1.3.0")
-    implementation("com.google.androidbrowserhelper:androidbrowserhelper:2.2.0")
-    implementation("me.weishu:free_reflection:3.0.1")
+    implementation(deps.kotlin.stdlib)
+    implementation(deps.androidx.appcompat)
+    implementation(deps.androidx.core.ktx)
+    implementation(deps.androidx.preference.ktx)
+    implementation(deps.androidx.constraintlayout)
+    implementation(deps.androidx.browser)
+    implementation(deps.google.browserhelper)
+    implementation(deps.google.material)
+    implementation(deps.leakcanary)
+    implementation(deps.free.reflection)
     implementation(project(":basic"))
     implementation(project(":eggs:S"))
     implementation(project(":eggs:R"))
@@ -94,9 +94,8 @@ dependencies {
     implementation(project(":eggs:Honeycomb"))
     implementation(project(":eggs:Gingerbread"))
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation(deps.junit)
+    androidTestImplementation(deps.bundles.android.test)
 }
 
 tasks.register<Exec>("pgyer") {
@@ -122,9 +121,8 @@ tasks.register<Exec>("pgyer") {
             "https://www.pgyer.com/apiv2/app/upload"
         )
     }
-    val output = ByteArrayOutputStream().apply {
-        standardOutput = this
-    }
+    val output = ByteArrayOutputStream()
+    standardOutput = output
     doLast {
         val result = output.toString()
         val obj = org.json.JSONObject(result)

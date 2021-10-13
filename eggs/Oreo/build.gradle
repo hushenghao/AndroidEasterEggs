@@ -32,9 +32,7 @@ android {
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
-    implementation "androidx.core:core-ktx:${Versions.CORE_KTX}"
-    implementation "androidx.dynamicanimation:dynamicanimation:${Versions.DYNAMIC_ANIMATION}"
+    implementation(deps.androidx.dynamicanimation)
     implementation project(path: ':basic')
 }
 

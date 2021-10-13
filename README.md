@@ -4,6 +4,8 @@
 
 整理了Android系统各正式版内置彩蛋
 
+![icon](./app/src/main/ic_launcher-playstore.png)
+
 ## 截图
 ![截图1](./images/screenshot.jpeg)
 ![截图2](./images/image.jpeg)

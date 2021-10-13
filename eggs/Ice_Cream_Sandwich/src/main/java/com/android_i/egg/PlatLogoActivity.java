@@ -40,7 +40,7 @@ public class PlatLogoActivity extends Activity {
         public void run() {
             mCount++;
             Vibrator mZzz = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            mZzz.vibrate(50 * mCount);
+            mZzz.vibrate(50L * mCount);
             final float scale = 1f + 0.25f * mCount * mCount;
             mContent.setScaleX(scale);
             mContent.setScaleY(scale);

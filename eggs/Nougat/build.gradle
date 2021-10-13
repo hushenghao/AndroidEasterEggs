@@ -31,11 +31,8 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
-    implementation "androidx.core:core-ktx:${Versions.CORE_KTX}"
-    implementation "androidx.recyclerview:recyclerview:${Versions.RECYCLERVIEW}"
-    implementation "androidx.dynamicanimation:dynamicanimation:${Versions.DYNAMIC_ANIMATION}"
+    implementation(deps.androidx.recyclerview)
+    implementation(deps.androidx.dynamicanimation)
     implementation project(path: ':basic')
 }
 

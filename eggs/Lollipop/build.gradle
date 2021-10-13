@@ -24,6 +24,5 @@ android {
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
     implementation project(path: ':basic')
 }

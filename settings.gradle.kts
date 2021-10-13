@@ -1,4 +1,3 @@
-rootProject.name = "Easter Eggs"
 include(
     ":app",
     ":basic",
@@ -16,3 +15,15 @@ include(
     ":eggs:R",
     ":eggs:S"
 )
+rootProject.name = "Easter Eggs"
+
+enableFeaturePreview("VERSION_CATALOGS")
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("deps") {
+            // default path: gradle/libs.versions.toml
+            from(files("libs.versions.toml"))
+        }
+    }
+}

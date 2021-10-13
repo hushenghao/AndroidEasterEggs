@@ -36,10 +36,10 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}"
-    implementation "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
-    implementation "androidx.core:core-ktx:${Versions.CORE_KTX}"
-    implementation "androidx.recyclerview:recyclerview:${Versions.RECYCLERVIEW}"
+    implementation(deps.kotlin.stdlib)
+    implementation(deps.androidx.appcompat)
+    implementation(deps.androidx.core.ktx)
+    implementation(deps.androidx.recyclerview)
     implementation project(path: ':basic')
 }
 
