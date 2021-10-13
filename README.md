@@ -1,5 +1,7 @@
 # AndroidEasterEggs
 
+[![wakatime](https://wakatime.com/badge/user/5dcaf7c9-f166-4fc1-b818-5a6761bb52b6.svg)](https://wakatime.com/@5dcaf7c9-f166-4fc1-b818-5a6761bb52b6)
+
 整理了Android系统各正式版内置彩蛋
 
 ## 截图

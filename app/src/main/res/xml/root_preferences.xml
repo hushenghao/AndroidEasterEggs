@@ -10,7 +10,7 @@
             android:targetClass="@string/target_class_android_s"
             app:icon="@drawable/s_platlogo"
             app:iconPadding="2dp"
-            app:summary="@string/summary_android_s"
+            app:summary="@string/s_egg_name"
             app:title="@string/title_android_s" />
 
         <com.dede.android_eggs.EggPreference

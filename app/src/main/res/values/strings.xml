@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Easter Eggs</string>
+    <string name="app_name" translatable="false">Easter Eggs</string>
     <!-- Settings Activity Title -->
-    <string name="title_activity_settings">Easter Eggs</string>
+    <string name="title_activity_settings" translatable="false">Easter Eggs</string>
 
     <string name="app_package" translatable="false">com.dede.android_eggs</string>
 
@@ -38,8 +38,6 @@
     <string name="target_class_android_h" translatable="false">com.android_h.egg.PlatLogoActivity</string>
     <string name="target_class_android_g" translatable="false">com.android_g.egg.PlatLogoActivity</string>
 
-    <string name="summary_android_s">Snow Cone</string>
-
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
     <string name="url_source" translatable="false">https://github.com/aosp-mirror/platform_frameworks_base</string>
     <string name="url_beta" translatable="false">https://www.pgyer.com/eggs</string>
@@ -50,7 +48,7 @@
 
     <string name="summary_github">Source code for the current project</string>
     <string name="summary_source">Contains the Easter egg source code project</string>
-    <string name="summary_version">%s (%d)</string>
+    <string name="summary_version" translatable="false">%s (%d)</string>
     <string name="title_open_with">Open with</string>
 
 </resources>

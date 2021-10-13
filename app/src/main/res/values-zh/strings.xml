@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="header_collection">集合</string>
+    <string name="header_about">关于</string>
+    <string name="title_source">系统源码</string>
+    <string name="title_version">版本号</string>
+    <string name="summary_github">当前项目的源码</string>
+    <string name="summary_source">包含Android彩蛋源码的项目</string>
+    <string name="title_open_with">打开</string>
+</resources>
