@@ -91,7 +91,7 @@ public class Painting : View, SpotFilter.Plotter {
 
     private var _paintCanvas: Canvas? = null
     private val _bitmapLock = Object()
-    
+
     private var _drawPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var _lastX = 0f
     private var _lastY = 0f
@@ -276,9 +276,15 @@ public class Painting : View, SpotFilter.Plotter {
         invalidate()
     }
 
+    private val rect = Rect()
+
     fun sampleAt(x: Float, y: Float): Int {
         val localX = (x - left).toInt()
         val localY = (y - top).toInt()
+        rect.set(0, 0, bitmap?.width?:0, bitmap?.height?:0)
+        if (!rect.contains(localX, localY)) {
+            return Color.BLACK
+        }
         return bitmap?.getPixel(localX, localY) ?: Color.BLACK
     }
 
