@@ -46,8 +46,8 @@
     <string name="title_source">System Source</string>
     <string name="title_version">Version</string>
 
-    <string name="summary_github">Source code for the current project</string>
-    <string name="summary_source">Contains the Easter egg source code project</string>
+    <string name="summary_github">Source code repository</string>
+    <string name="summary_source">AOSP framework repository</string>
     <string name="summary_version" translatable="false">%s (%d)</string>
     <string name="title_open_with">Open with</string>
 

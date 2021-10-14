@@ -5,6 +5,6 @@
     <string name="title_source">系统源码</string>
     <string name="title_version">版本号</string>
     <string name="summary_github">项目源码</string>
-    <string name="summary_source">包含Android彩蛋源码的项目</string>
+    <string name="summary_source">AOSP framework 仓库</string>
     <string name="title_open_with">打开</string>
 </resources>
