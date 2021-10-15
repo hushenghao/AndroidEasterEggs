@@ -2,11 +2,11 @@ name: Android CI
 
 on:
   push:
-    branches: [ master ]
+#     branches: [ master ]
     tags:
       - 'v*'
-  pull_request:
-    branches: [ master ]
+#   pull_request:
+#     branches: [ master ]
 
 jobs:
   build:
@@ -30,7 +30,7 @@ jobs:
     - name: Stop gradle daemon
       run: ./gradlew --stop
       
-      if: contains(github.ref, 'tags/')
+#       if: contains(github.ref, 'tags/')
       
     - name: Create Release
       id: create_release
@@ -47,6 +47,12 @@ jobs:
         draft: false
         prerelease: false
         
+    - name: Get Apk Name
+      id: get_apk_name
+      run: |
+        APK_NAME=`cd ./app/build/outputs/apk/debug && ls *.apk`
+        echo ::set-output name=apk_name::$APK_NAME
+        
     - name: Upload Release Asset
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1
@@ -54,7 +60,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./app/build/outputs/apk/debug/easter_eggs_*-debug.apk
+        asset_path: ./app/build/outputs/apk/debug/${{ steps.get_apk_name.outputs.apk_name }}
         asset_name: Easter_eggs.apk
         asset_content_type: application/vnd.android.package-archive
 
