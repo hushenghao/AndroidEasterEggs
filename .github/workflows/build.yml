@@ -25,7 +25,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleRelease
       
     - name: Stop gradle daemon
       run: ./gradlew --stop
@@ -48,9 +48,9 @@ jobs:
         prerelease: false
         
     - name: Get Apk Name
-      id: get_apk_name
+      id: get-apk-name
       run: |
-        APK_NAME=`cd ./app/build/outputs/apk/debug && ls *.apk`
+        APK_NAME=`cd ./app/build/outputs/apk/release && ls *.apk`
         echo ::set-output name=apk_name::$APK_NAME
         
     - name: Upload Release Asset
@@ -60,8 +60,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./app/build/outputs/apk/debug/${{ steps.get_apk_name.outputs.apk_name }}
-        asset_name: Easter_eggs.apk
+        asset_path: ./app/build/outputs/apk/release/${{ steps.get-apk-name.outputs.apk_name }}
+        asset_name: Easter_Eggs_debug.apk
         asset_content_type: application/vnd.android.package-archive
 
         
