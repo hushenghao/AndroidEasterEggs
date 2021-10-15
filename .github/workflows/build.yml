@@ -33,7 +33,7 @@ jobs:
     - name: Upload build artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ github.sha }}
-        path: out
+#        name: ${{ github.sha }}
+        path: ./app/build/outputs/apk/debug/*.apk
 
         
