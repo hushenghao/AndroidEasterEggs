@@ -1,0 +1,51 @@
+name: Android Create Release CI
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      run: ./gradlew assembleDebug
+      
+    - name: Set Release name
+      run: echo ::set-env name=RELEASE_NAME::$(echo ${GITHUB_REF:11})
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ env.RELEASE_NAME }}
+          body: |
+            What is new :
+              - First Change
+              - Second Change
+          draft: false
+          prerelease: false
+        
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ github.sha }}
+        path: out
+
+        
