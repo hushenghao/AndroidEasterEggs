@@ -14,7 +14,8 @@
     <string name="title_android_r" translatable="false">Android 11 (Red Velvet Cake)</string>
     <string name="title_android_q" translatable="false">Android 10 (Queen Cake)</string>
     <string name="title_android_p" translatable="false">Android 9 (Pie)</string>
-    <string name="title_android_o" translatable="false">Android 8.x (Oreo)</string>
+    <string name="title_android_o" translatable="false">Android 8.0 (Oreo)</string>
+    <string name="title_android_o_point" translatable="false">Android 8.1 (Oreo)</string>
     <string name="title_android_n" translatable="false">Android 7.x (Nougat)</string>
     <string name="title_android_m" translatable="false">Android 6.x (Marshmallow)</string>
     <string name="title_android_l" translatable="false">Android 5.x (Lollipop)</string>

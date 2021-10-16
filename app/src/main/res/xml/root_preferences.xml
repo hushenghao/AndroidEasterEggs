@@ -38,6 +38,20 @@
             app:title="@string/title_android_p" />
 
         <com.dede.android_eggs.EggPreference
+            app:icon="@drawable/o_icon"
+            app:iconPadding="-1.5dp"
+            app:summary="@string/o_app_name"
+            app:title="@string/title_android_o_point">
+            <intent
+                android:targetClass="@string/target_class_android_o"
+                android:targetPackage="@string/app_package">
+                <extra
+                    android:name="isOreoPoint"
+                    android:value="true" />
+            </intent>
+        </com.dede.android_eggs.EggPreference>
+
+        <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_o"
             app:icon="@drawable/o_icon"
             app:iconPadding="-1.5dp"
