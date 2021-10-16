@@ -38,7 +38,7 @@ import com.dede.basic.SpUtils;
 
 
 public class PlatLogoActivity extends Activity {
-    public static final boolean REVEAL_THE_NAME = true;
+    public static final boolean REVEAL_THE_NAME = false;
     public static final boolean FINISH = false;
 
     FrameLayout mLayout;
@@ -98,7 +98,6 @@ public class PlatLogoActivity extends Activity {
                             ObjectAnimator.ofInt(overlay, "alpha", 0, 255)
                                     .setDuration(500)
                                     .start();
-                            return true;
                         }
 
                         if (SpUtils.getLong(PlatLogoActivity.this, "n_egg_mode", 0)
@@ -118,7 +117,7 @@ public class PlatLogoActivity extends Activity {
                                 try {
                                     startActivity(new Intent(PlatLogoActivity.this, NekoActivationActivity.class)
                                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK
                                                     | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
                                 } catch (ActivityNotFoundException ex) {
                                     Log.e("PlatLogoActivity", "No more eggs.");
