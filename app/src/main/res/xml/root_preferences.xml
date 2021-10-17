@@ -9,14 +9,14 @@
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_s"
             app:icon="@drawable/s_platlogo"
-            app:iconPadding="2dp"
+            app:iconPadding="1.5dp"
             app:summary="@string/s_egg_name"
             app:title="@string/title_android_s" />
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_r"
             app:icon="@drawable/r_icon"
-            app:iconPadding="2dp"
+            app:iconPadding="1.5dp"
             app:summary="@string/r_egg_name"
             app:supportAdaptiveIcon="oval"
             app:title="@string/title_android_r" />
@@ -24,7 +24,7 @@
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_q"
             app:icon="@drawable/q_icon"
-            app:iconPadding="2dp"
+            app:iconPadding="1.5dp"
             app:summary="@string/q_egg_name"
             app:supportAdaptiveIcon="oval"
             app:title="@string/title_android_q" />
@@ -32,15 +32,29 @@
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_p"
             app:icon="@drawable/p_icon"
-            app:iconPadding="2dp"
+            app:iconPadding="1.5dp"
             app:summary="@string/p_app_name"
             app:supportAdaptiveIcon="oval"
             app:title="@string/title_android_p" />
 
         <com.dede.android_eggs.EggPreference
+            app:icon="@drawable/o_icon"
+            app:iconPadding="-2dp"
+            app:summary="@string/o_app_name"
+            app:title="@string/title_android_o_point">
+            <intent
+                android:targetClass="@string/target_class_android_o"
+                android:targetPackage="@string/app_package">
+                <extra
+                    android:name="isOreoPoint"
+                    android:value="true" />
+            </intent>
+        </com.dede.android_eggs.EggPreference>
+
+        <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_o"
             app:icon="@drawable/o_icon"
-            app:iconPadding="-1.5dp"
+            app:iconPadding="-2dp"
             app:summary="@string/o_app_name"
             app:title="@string/title_android_o" />
 

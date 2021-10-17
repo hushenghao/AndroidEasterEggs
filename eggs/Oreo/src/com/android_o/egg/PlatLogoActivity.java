@@ -67,19 +67,28 @@ public class PlatLogoActivity extends Activity {
         im.setScaleY(0.5f);
         im.setAlpha(0f);
 
-        im.setBackground(new RippleDrawable(
-                ColorStateList.valueOf(0xFF776677),
-                getDrawable(R.drawable.o_platlogo),
-                null));
-        im.setOutlineProvider(new ViewOutlineProvider() {
-            @Override
-            public void getOutline(View view, Outline outline) {
-                final int w = view.getWidth();
-                final int h = view.getHeight();
-                outline.setOval((int) (w * .125), (int) (h * .125), (int) (w * .96), (int) (h * .96));
-            }
-        });
-        im.setElevation(12f * dp);
+        Intent intent = getIntent();
+        boolean isOreoPoint = intent.getBooleanExtra("isOreoPoint", false);
+        if (!isOreoPoint) {
+            im.setBackground(new RippleDrawable(
+                    ColorStateList.valueOf(0xFF776677),
+                    getDrawable(R.drawable.o_platlogo),
+                    null));
+        } else {
+            im.setBackground(new RippleDrawable(
+                    ColorStateList.valueOf(0xFF776677),
+                    getDrawable(R.drawable.o_point_platlogo),
+                    null));
+            im.setOutlineProvider(new ViewOutlineProvider() {
+                @Override
+                public void getOutline(View view, Outline outline) {
+                    final int w = view.getWidth();
+                    final int h = view.getHeight();
+                    outline.setOval((int) (w * .125), (int) (h * .125), (int) (w * .96), (int) (h * .96));
+                }
+            });
+            im.setElevation(12f * dp);
+        }
         im.setClickable(true);
         im.setOnClickListener(new View.OnClickListener() {
             @Override
