@@ -185,6 +185,7 @@ public class LLand extends FrameLayout {
 
     public void setScoreField(TextView tv) {
         mScoreField = tv;
+        setScore(mScore);
         if (tv != null) {
             tv.setTranslationZ(PARAMS.HUD_Z);
             if (!(mAnimating && mPlaying)) {
@@ -634,13 +635,15 @@ public class LLand extends FrameLayout {
         mDroid.unboost();
     }
 
+    final Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
+
     @Override
     public void onDraw(Canvas c) {
         super.onDraw(c);
 
         if (!DEBUG_DRAW) return;
 
-        final Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
+//        final Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
         pt.setColor(0xFFFFFFFF);
         final int L = mDroid.corners.length;
         final int N = L / 2;

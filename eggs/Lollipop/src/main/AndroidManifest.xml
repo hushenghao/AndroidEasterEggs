@@ -20,7 +20,7 @@
             android:label="@string/lland"
             android:launchMode="singleInstance"
             android:screenOrientation="locked"
-            android:theme="@android:style/Theme.Material.Light.NoActionBar" />
+            android:theme="@android:style/Theme.Material.NoActionBar" />
     </application>
 
 </manifest>
