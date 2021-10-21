@@ -90,14 +90,6 @@ class EggPreference : Preference {
         super.performClick()
     }
 
-    private class OvalOutlineProvider : ViewOutlineProvider() {
-        override fun getOutline(view: View, outline: Outline) {
-            outline.setOval(view.paddingLeft, view.paddingTop,
-                view.width - view.paddingRight,
-                view.height - view.paddingBottom)
-        }
-    }
-
     private class CornersOutlineProvider(val radius: Float) : ViewOutlineProvider() {
         override fun getOutline(view: View, outline: Outline) {
             outline.setRoundRect(view.paddingLeft, view.paddingTop,
