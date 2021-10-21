@@ -38,6 +38,7 @@ object ShareCatUtils {
                 put(MediaStore.Images.Media.MIME_TYPE, MIME_TYPE)
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                imageValues.put(MediaStore.Audio.Media.IS_PENDING, 1)
                 imageValues.put(
                     MediaStore.Images.Media.RELATIVE_PATH,
                     "${Environment.DIRECTORY_PICTURES}/$CATS_DIR"
@@ -79,6 +80,11 @@ object ShareCatUtils {
             resolver.runCatching {
                 openOutputStream(imageUri, "w").use {
                     bitmap.compress(Bitmap.CompressFormat.PNG, 0, it)
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    imageValues.clear()
+                    imageValues.put(MediaStore.Images.Media.IS_PENDING, 0)
+                    resolver.update(imageUri, imageValues, null, null)
                 }
             }.onFailure {
                 Log.e("NekoLand", "save: error: $it")
