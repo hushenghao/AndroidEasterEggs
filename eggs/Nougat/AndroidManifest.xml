@@ -17,7 +17,8 @@ Copyright (C) 2016 The Android Open Source Project
     package="com.android_n.egg">
 
     <!--    <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"/>
 
     <application>
         <activity

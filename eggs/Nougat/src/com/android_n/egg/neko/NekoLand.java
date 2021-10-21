@@ -246,6 +246,10 @@ public class NekoLand extends Activity implements PrefsListener {
                 public void onClick(View v) {
                     setContextGroupVisible(holder, false);
                     Cat cat = mCats[holder.getAdapterPosition()];
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        shareCat(cat);
+                        return;
+                    }
                     if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                             != PackageManager.PERMISSION_GRANTED) {
                         mPendingShareCat = cat;
