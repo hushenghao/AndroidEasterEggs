@@ -3,12 +3,12 @@
     <style name="Theme.EasterEggs" parent="Base.EasterEggs">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_700</item>
-        <item name="colorPrimaryVariant">@color/black</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@android:color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@android:color/black</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

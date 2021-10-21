@@ -14,6 +14,7 @@
         <activity
             android:name=".quares.QuaresActivity"
             android:icon="@drawable/q_icon"
+            android:exported="false"
             android:label="@string/q_egg_name"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
     </application>
