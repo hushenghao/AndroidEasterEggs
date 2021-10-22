@@ -22,8 +22,6 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
         binding = ActivityEasterEggsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        binding.logo.outlineProvider = OvalOutlineProvider()
-        binding.logo.clipToOutline = true
         postAnim()
     }
 
