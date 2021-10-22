@@ -22,7 +22,6 @@ import kotlinx.coroutines.withContext
 object ShareCatUtils {
 
     private const val CATS_DIR = "Cats"
-    private const val MIME_TYPE = "image/png"
 
     private suspend fun saveCat(context: Context, bitmap: Bitmap, catName: String): Uri? =
         withContext(Dispatchers.IO) {
@@ -47,7 +46,7 @@ object ShareCatUtils {
             intent.putExtra(Intent.EXTRA_STREAM, uri)
             intent.putExtra(Intent.EXTRA_SUBJECT, catName)
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            intent.type = MIME_TYPE
+            intent.type = MIME_PNG
             activity.startActivity(
                 Intent.createChooser(intent, null)
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)

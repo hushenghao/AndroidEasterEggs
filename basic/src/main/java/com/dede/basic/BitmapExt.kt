@@ -34,8 +34,8 @@ fun File.copyToAlbum(context: Context, fileName: String, relativePath: String?):
         return null
     }
 
-    this.inputStream().use { input ->
-        context.contentResolver.openOutputStream(imageUri, "w")?.use { output ->
+    context.contentResolver.openOutputStream(imageUri, "w")?.use { output ->
+        this.inputStream().use { input ->
             input.copyTo(output)
         }
     }
@@ -57,8 +57,8 @@ fun InputStream.saveToAlbum(context: Context, fileName: String, relativePath: St
         return null
     }
 
-    this.use { input ->
-        context.contentResolver.openOutputStream(imageUri, "w")?.use { output ->
+    context.contentResolver.openOutputStream(imageUri, "w")?.use { output ->
+        this.use { input ->
             input.copyTo(output)
         }
     }
@@ -94,7 +94,9 @@ fun Bitmap.saveToAlbum(
     // 保存图片
     resolver.runCatching {
         openOutputStream(imageUri, "w").use {
-            this@saveToAlbum.compress(fileName.getCompressFormat(), quality, it)
+            val format =
+                if (fileName.endsWith(".png")) Bitmap.CompressFormat.PNG else Bitmap.CompressFormat.JPEG
+            this@saveToAlbum.compress(format, quality, it)
         }
     }.onFailure {
         Log.e(TAG, "save: error: $it")
@@ -110,14 +112,6 @@ fun Bitmap.saveToAlbum(
     return imageUri
 }
 
-private fun String.getMimeType(): String {
-    return if (this.endsWith(".png")) MIME_PNG else MIME_JPG
-}
-
-private fun String.getCompressFormat(): Bitmap.CompressFormat {
-    return if (this.endsWith(".png")) Bitmap.CompressFormat.PNG else Bitmap.CompressFormat.JPEG
-}
-
 /**
  * 插入图片到媒体库
  */
@@ -127,7 +121,8 @@ private fun Context.insertMediaImage(
 ): Uri? {
     // 图片信息
     val imageValues = ContentValues().apply {
-        put(MediaStore.Images.Media.MIME_TYPE, fileName.getMimeType())
+        val mimeType = if (fileName.endsWith(".png")) MIME_PNG else MIME_JPG
+        put(MediaStore.Images.Media.MIME_TYPE, mimeType)
         put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
         put(MediaStore.Images.Media.DATE_MODIFIED, System.currentTimeMillis() / 1000)
     }
