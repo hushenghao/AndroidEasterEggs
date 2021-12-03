@@ -19,6 +19,9 @@ private const val TAG = "ImageExt"
 
 const val MIME_PNG = "image/png"
 const val MIME_JPG = "image/jpg"
+private val ALBUM_DIR = Environment.DIRECTORY_PICTURES
+
+private class OutputFileTaker(var file: File? = null)
 
 /**
  * 复制图片文件到相册的Pictures文件夹
@@ -29,23 +32,12 @@ const val MIME_JPG = "image/jpg"
  */
 fun File.copyToAlbum(context: Context, fileName: String, relativePath: String?): Uri? {
     if (!this.canRead() || !this.exists()) {
-        Log.w(TAG, "check: read error: $this")
+        Log.w(TAG, "check: read file error: $this")
         return null
     }
-    val resolver = context.contentResolver
-    val imageUri = resolver.insertMediaImage(fileName, relativePath)
-    if (imageUri == null) {
-        Log.w(TAG, "insert: error: uri == null")
-        return null
+    return this.inputStream().use {
+        it.saveToAlbum(context, fileName, relativePath)
     }
-
-    (imageUri.outputStream(resolver) ?: return null).use { output ->
-        this.inputStream().use { input ->
-            input.copyTo(output)
-            imageUri.finishPending(context, resolver)
-        }
-    }
-    return imageUri
 }
 
 /**
@@ -57,7 +49,8 @@ fun File.copyToAlbum(context: Context, fileName: String, relativePath: String?):
  */
 fun InputStream.saveToAlbum(context: Context, fileName: String, relativePath: String?): Uri? {
     val resolver = context.contentResolver
-    val imageUri = resolver.insertMediaImage(fileName, relativePath)
+    val outputFile = OutputFileTaker()
+    val imageUri = resolver.insertMediaImage(fileName, relativePath, outputFile)
     if (imageUri == null) {
         Log.w(TAG, "insert: error: uri == null")
         return null
@@ -66,7 +59,7 @@ fun InputStream.saveToAlbum(context: Context, fileName: String, relativePath: St
     (imageUri.outputStream(resolver) ?: return null).use { output ->
         this.use { input ->
             input.copyTo(output)
-            imageUri.finishPending(context, resolver)
+            imageUri.finishPending(context, resolver, outputFile.file)
         }
     }
     return imageUri
@@ -90,7 +83,8 @@ fun Bitmap.saveToAlbum(
 ): Uri? {
     // 插入图片信息
     val resolver = context.contentResolver
-    val imageUri = resolver.insertMediaImage(fileName, relativePath)
+    val outputFile = OutputFileTaker()
+    val imageUri = resolver.insertMediaImage(fileName, relativePath, outputFile)
     if (imageUri == null) {
         Log.w(TAG, "insert: error: uri == null")
         return null
@@ -101,7 +95,7 @@ fun Bitmap.saveToAlbum(
         val format =
             if (fileName.endsWith(".png")) Bitmap.CompressFormat.PNG else Bitmap.CompressFormat.JPEG
         this@saveToAlbum.compress(format, quality, it)
-        imageUri.finishPending(context, resolver)
+        imageUri.finishPending(context, resolver, outputFile.file)
     }
     return imageUri
 }
@@ -115,25 +109,35 @@ private fun Uri.outputStream(resolver: ContentResolver): OutputStream? {
     }
 }
 
-private fun Uri.finishPending(context: Context, resolver: ContentResolver) {
+private fun Uri.finishPending(
+    context: Context,
+    resolver: ContentResolver,
+    outputFile: File?
+) {
+    val imageValues = ContentValues()
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+        if (outputFile != null) {
+            imageValues.put(MediaStore.Images.Media.SIZE, outputFile.length())
+        }
+        resolver.update(this, imageValues, null, null)
         // 通知媒体库更新
         val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, this)
         context.sendBroadcast(intent)
-        return
+    } else {
+        // Android Q添加了IS_PENDING状态，为0时其他应用才可见
+        imageValues.put(MediaStore.Images.Media.IS_PENDING, 0)
+        resolver.update(this, imageValues, null, null)
     }
-
-    // Android Q添加了IS_PENDING状态，为0时其他应用才可见
-    val imageValues = ContentValues().apply {
-        put(MediaStore.Images.Media.IS_PENDING, 0)
-    }
-    resolver.update(this, imageValues, null, null)
 }
 
 /**
  * 插入图片到媒体库
  */
-private fun ContentResolver.insertMediaImage(fileName: String, relativePath: String?): Uri? {
+private fun ContentResolver.insertMediaImage(
+    fileName: String,
+    relativePath: String?,
+    outputFileTaker: OutputFileTaker? = null
+): Uri? {
     // 图片信息
     val imageValues = ContentValues().apply {
         val mimeType = if (fileName.endsWith(".png")) MIME_PNG else MIME_JPG
@@ -145,12 +149,7 @@ private fun ContentResolver.insertMediaImage(fileName: String, relativePath: Str
     // 保存的位置
     val collection: Uri
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        val path = if (relativePath != null) {
-            "${Environment.DIRECTORY_PICTURES}/${relativePath}"
-        } else {
-            Environment.DIRECTORY_PICTURES
-        }
-
+        val path = if (relativePath != null) "${ALBUM_DIR}/${relativePath}" else ALBUM_DIR
         imageValues.apply {
             put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
             put(MediaStore.Images.Media.RELATIVE_PATH, path)
@@ -160,7 +159,7 @@ private fun ContentResolver.insertMediaImage(fileName: String, relativePath: Str
         // 高版本不用查重直接插入，会自动重命名
     } else {
         // 老版本
-        val pictures = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        val pictures = Environment.getExternalStoragePublicDirectory(ALBUM_DIR)
         val saveDir = if (relativePath != null) File(pictures, relativePath) else pictures
 
         if (!saveDir.exists() && !saveDir.mkdirs()) {
@@ -173,12 +172,12 @@ private fun ContentResolver.insertMediaImage(fileName: String, relativePath: Str
         val fileNameWithoutExtension = imageFile.nameWithoutExtension
         val fileExtension = imageFile.extension
 
-        var queryUri = this.queryMediaImage(imageFile.absolutePath)
+        var queryUri = this.queryMediaImage28(imageFile.absolutePath)
         var suffix = 1
         while (queryUri != null) {
             val newName = fileNameWithoutExtension + "(${suffix++})." + fileExtension
             imageFile = File(saveDir, newName)
-            queryUri = this.queryMediaImage(imageFile.absolutePath)
+            queryUri = this.queryMediaImage28(imageFile.absolutePath)
         }
 
         imageValues.apply {
@@ -188,6 +187,7 @@ private fun ContentResolver.insertMediaImage(fileName: String, relativePath: Str
             Log.v(TAG, "save file: $imagePath")
             put(MediaStore.Images.Media.DATA, imagePath)
         }
+        outputFileTaker?.file = imageFile// 回传文件路径，用于设置文件大小
         collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
     }
     // 插入图片信息
@@ -198,7 +198,9 @@ private fun ContentResolver.insertMediaImage(fileName: String, relativePath: Str
  * Android Q以下版本，查询媒体库中当前路径是否存在
  * @return Uri 返回null时说明不存在，可以进行图片插入逻辑
  */
-private fun ContentResolver.queryMediaImage(imagePath: String): Uri? {
+private fun ContentResolver.queryMediaImage28(imagePath: String): Uri? {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) return null
+
     val imageFile = File(imagePath)
     if (imageFile.canRead() && imageFile.exists()) {
         Log.v(TAG, "query: path: $imagePath exists")

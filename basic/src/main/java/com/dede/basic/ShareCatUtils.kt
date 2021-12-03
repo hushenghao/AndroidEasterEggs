@@ -25,9 +25,6 @@ object ShareCatUtils {
 
     private suspend fun saveCat(context: Context, bitmap: Bitmap, catName: String): Uri? =
         withContext(Dispatchers.IO) {
-//            val connection =
-//                URL("https://assets.che300.com/wiki/2021-07-22/16269610882462412.png").openConnection() as HttpURLConnection
-//            connection.inputStream.saveToAlbum(context,"image_${System.currentTimeMillis()}.png","stream_image")
             bitmap.saveToAlbum(context, catName.toFileName(), CATS_DIR, 0)
         }
 
