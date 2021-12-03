@@ -128,8 +128,7 @@
         <com.dede.android_eggs.VersionPreference
             app:customUrl="@string/url_beta"
             app:iconSpaceReserved="false"
-            app:title="@string/title_version"
-            app:useTwa="false" />
+            app:title="@string/title_version" />
 
     </PreferenceCategory>
 

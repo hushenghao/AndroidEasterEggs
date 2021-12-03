@@ -75,7 +75,6 @@ dependencies {
     implementation(deps.androidx.preference.ktx)
     implementation(deps.androidx.constraintlayout)
     implementation(deps.androidx.browser)
-    implementation(deps.google.browserhelper)
     implementation(deps.google.material)
     implementation(deps.free.reflection)
     debugImplementation(deps.leakcanary)
