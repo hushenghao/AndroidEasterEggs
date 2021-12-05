@@ -19,8 +19,8 @@ android {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
-        versionCode = 11
-        versionName = "1.5.1"
+        versionCode = 12
+        versionName = "1.6.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.addAll(listOf("zh", "en"))
