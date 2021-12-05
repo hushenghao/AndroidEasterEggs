@@ -31,6 +31,7 @@ import android.graphics.ColorFilter;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
@@ -39,6 +40,7 @@ import com.android_r.egg.R;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -262,9 +264,13 @@ public class Cat extends Drawable {
                 .build();
         context.getSystemService(ShortcutManager.class).addDynamicShortcuts(List.of(shortcut));
 
+        int flag = PendingIntent.FLAG_IMMUTABLE;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            flag = PendingIntent.FLAG_MUTABLE;
+        }
         Notification.BubbleMetadata bubbs = new Notification.BubbleMetadata.Builder()
                 .setIntent(
-                        PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE))
+                        PendingIntent.getActivity(context, 0, intent, flag))
                 .setIcon(notificationIcon)
                 .setSuppressNotification(false)
                 .setDesiredHeight(context.getResources().getDisplayMetrics().heightPixels)
@@ -279,7 +285,7 @@ public class Cat extends Drawable {
                 .setCategory(Notification.CATEGORY_STATUS)
                 .setContentText(getName())
                 .setContentIntent(
-                        PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE))
+                        PendingIntent.getActivity(context, 0, intent, flag))
                 .setAutoCancel(true)
                 .setStyle(new Notification.MessagingStyle(createPerson())
                         .addMessage(mFirstMessage, System.currentTimeMillis(), createPerson())
