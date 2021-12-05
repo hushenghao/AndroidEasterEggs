@@ -63,4 +63,9 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
             .start()
     }
 
+    override fun onDestroy() {
+        binding.content.removeCallbacks(this)
+        super.onDestroy()
+    }
+
 }

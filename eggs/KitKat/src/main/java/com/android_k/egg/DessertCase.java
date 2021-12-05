@@ -46,18 +46,22 @@ public class DessertCase extends Activity {
         setContentView(container);
     }
 
+    private Runnable action;
+
     @Override
     public void onResume() {
         super.onResume();
-        mView.postDelayed(new Runnable() {
+        action = new Runnable() {
             public void run() {
                 mView.start();
             }
-        }, 1000);
+        };
+        mView.postDelayed(action, 1000);
     }
 
     @Override
     public void onPause() {
+        mView.removeCallbacks(action);
         super.onPause();
         mView.stop();
     }
