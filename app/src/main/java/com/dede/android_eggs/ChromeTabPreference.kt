@@ -5,9 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.text.TextUtils
 import android.util.AttributeSet
-import androidx.browser.trusted.TrustedWebActivityIntentBuilder
 import androidx.preference.Preference
-import com.google.androidbrowserhelper.trusted.TwaLauncher
 
 /**
  * Chrome Custom Tabs Preference
@@ -18,7 +16,11 @@ import com.google.androidbrowserhelper.trusted.TwaLauncher
 open class ChromeTabPreference : Preference, Preference.OnPreferenceClickListener {
 
     private var uri: Uri? = null
-    private val useTwa: Boolean
+    private val useChromeTab: Boolean
+
+    init {
+        ChromeTabsBrowser.warmup(context)
+    }
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -27,7 +29,7 @@ open class ChromeTabPreference : Preference, Preference.OnPreferenceClickListene
         if (!TextUtils.isEmpty(uriString)) {
             uri = Uri.parse(uriString)
         }
-        useTwa = arrays.getBoolean(R.styleable.ChromeTabPreference_useTwa, true)
+        useChromeTab = arrays.getBoolean(R.styleable.ChromeTabPreference_useChromeTab, true)
         arrays.recycle()
 
         if (uri != null) {
@@ -42,8 +44,8 @@ open class ChromeTabPreference : Preference, Preference.OnPreferenceClickListene
     override fun onPreferenceClick(preference: Preference?): Boolean {
         val uri = this.uri
         if (uri != null) {
-            if (useTwa) {
-                openTwaWeb(uri)
+            if (useChromeTab) {
+                openChromeTabs(uri)
             } else {
                 openBrowser(uri)
             }
@@ -58,10 +60,8 @@ open class ChromeTabPreference : Preference, Preference.OnPreferenceClickListene
         context.startActivity(intent)
     }
 
-    private fun openTwaWeb(uri: Uri) {
-        val twaLauncher = TwaLauncher(context)
-        val builder = TrustedWebActivityIntentBuilder(uri)
-        twaLauncher.launch(builder, null, null, null)
+    private fun openChromeTabs(uri: Uri) {
+        ChromeTabsBrowser.launchUrl(context, uri)
     }
 
 }

@@ -15,6 +15,7 @@
         tools:replace="android:icon,android:label">
         <activity
             android:name=".EasterEggsActivity"
+            android:exported="true"
             android:label="@string/title_activity_settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

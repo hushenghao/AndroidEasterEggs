@@ -36,18 +36,22 @@ public class DessertCaseDream extends DreamService {
         setContentView(mContainer);
     }
 
+    private Runnable action;
+
     @Override
     public void onDreamingStarted() {
         super.onDreamingStarted();
-        mView.postDelayed(new Runnable() {
+        action = new Runnable() {
             public void run() {
                 mView.start();
             }
-        }, 1000);
+        };
+        mView.postDelayed(action, 1000);
     }
 
     @Override
     public void onDreamingStopped() {
+        mView.removeCallbacks(action);
         super.onDreamingStopped();
         mView.stop();
     }

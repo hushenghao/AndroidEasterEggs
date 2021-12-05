@@ -303,7 +303,7 @@ public class MLand extends FrameLayout {
     }
 
     public Player getPlayer(int i) {
-        return i < mPlayers.size() ? mPlayers.get(i) : null;
+        return i > -1 && i < mPlayers.size() ? mPlayers.get(i) : null;
     }
 
     private int addPlayerInternal(Player p) {
