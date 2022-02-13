@@ -21,7 +21,9 @@ import static android.graphics.PixelFormat.TRANSLUCENT;
 import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
@@ -45,6 +47,7 @@ import android.widget.ImageView;
 import androidx.core.content.ContextCompat;
 
 import com.dede.basic.DrawableKt;
+import com.dede.basic.SpUtils;
 
 /**
  * Android S
@@ -52,7 +55,7 @@ import com.dede.basic.DrawableKt;
 public class PlatLogoActivity extends Activity {
     private static final String TAG = "PlatLogoActivity";
 
-//    private static final String S_EGG_UNLOCK_SETTING = "egg_mode_s";
+    private static final String S_EGG_UNLOCK_SETTING = "egg_mode_s";
 
     private SettableAnalogClock mClock;
     private ImageView mLogo;
@@ -117,9 +120,10 @@ public class PlatLogoActivity extends Activity {
         return ContextCompat.getDrawable(this, R.drawable.s_platlogo);
     }
 
-//    private boolean shouldWriteSettings() {
+    private boolean shouldWriteSettings() {
 //        return getPackageName().equals("android");
-//    }
+        return true;
+    }
 
     private void launchNextStage(boolean locked) {
         mClock.animate()
@@ -146,28 +150,23 @@ public class PlatLogoActivity extends Activity {
                 500
         );
 
-//        final ContentResolver cr = getContentResolver();
-//
-//        try {
-//            if (shouldWriteSettings()) {
-//                Log.v(TAG, "Saving egg unlock=" + locked);
+        if (shouldWriteSettings()) {
+            Log.v(TAG, "Saving egg unlock=" + locked);
 //                syncTouchPressure();
-//                Settings.System.putLong(cr,
-//                        S_EGG_UNLOCK_SETTING,
-//                        locked ? 0 : System.currentTimeMillis());
-//            }
-//        } catch (RuntimeException e) {
-//            Log.e(TAG, "Can't write settings", e);
-//        }
-//
-//        try {
-//            startActivity(new Intent(Intent.ACTION_MAIN)
+            SpUtils.putLong(this,
+                    S_EGG_UNLOCK_SETTING,
+                    locked ? 0 : System.currentTimeMillis());
+        }
+
+        try {
+            startActivity(new Intent(this, ComponentActivationActivity.class)
 //                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 //                            | Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//                    .addCategory("com.android.internal.category.PLATLOGO"));
-//        } catch (ActivityNotFoundException ex) {
-//            Log.e("com.android.internal.app.PlatLogoActivity", "No more eggs.");
-//        }
+//                    .addCategory("com.android.internal.category.PLATLOGO")
+            );
+        } catch (ActivityNotFoundException ex) {
+            Log.e("com.android.internal.app.PlatLogoActivity", "No more eggs.");
+        }
         //finish(); // no longer finish upon unlock; it's fun to frob the dial
     }
 
