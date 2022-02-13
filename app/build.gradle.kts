@@ -105,7 +105,7 @@ tasks.register<Exec>("pgyer") {
     dependsOn("clean", assemble)
     assemble.mustRunAfter("clean")
 
-    val tree = fileTree("build/outputs/apk/release") {
+    val tree = fileTree("build/intermediates/apk/release") {
         include("*.apk")
         builtBy("assembleRelease")
     }
