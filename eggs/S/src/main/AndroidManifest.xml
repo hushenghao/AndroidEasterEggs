@@ -9,6 +9,51 @@
             android:exported="true"
             android:icon="@drawable/s_platlogo"
             android:theme="@android:style/Theme.DeviceDefault.Wallpaper.NoTitleBar" />
+
+        <!-- Used to enable easter egg -->
+        <activity
+            android:name=".ComponentActivationActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.internal.category.PLATLOGO" />
+            </intent-filter>
+        </activity>
+
+        <!-- Android S easter egg bits -->
+
+        <!-- List of all system theme colors on the device. -->
+        <activity
+            android:name=".widget.PaintChipsActivity"
+            android:theme="@android:style/Theme.Material.Wallpaper.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode"
+            android:label="@string/s_egg_name"
+            android:enabled="false"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <!-- Homescreen widget also showing paint chips (may be affected by the exact position in
+             the workspace) -->
+        <receiver
+            android:name=".widget.PaintChipsWidget"
+            android:label="@string/s_egg_name"
+            android:exported="true"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/paint_chips_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
