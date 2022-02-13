@@ -20,7 +20,7 @@ android {
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
         versionCode = 13
-        versionName = "1.7.0"
+        versionName = "1.6.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.addAll(listOf("zh", "en"))

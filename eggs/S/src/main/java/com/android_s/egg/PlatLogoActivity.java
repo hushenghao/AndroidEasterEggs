@@ -159,10 +159,11 @@ public class PlatLogoActivity extends Activity {
         }
 
         try {
-            startActivity(new Intent(Intent.ACTION_MAIN)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                            | Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    .addCategory("com.android.internal.category.PLATLOGO"));
+            startActivity(new Intent(this, ComponentActivationActivity.class)
+//                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+//                            | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//                    .addCategory("com.android.internal.category.PLATLOGO")
+            );
         } catch (ActivityNotFoundException ex) {
             Log.e("com.android.internal.app.PlatLogoActivity", "No more eggs.");
         }
