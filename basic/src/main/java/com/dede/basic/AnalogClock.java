@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android_s.egg;
+package com.dede.basic;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -30,8 +30,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
-
-import com.dede.basic.DrawableKt;
 
 import java.util.TimeZone;
 

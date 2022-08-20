@@ -25,6 +25,7 @@
     <string name="title_android_h" translatable="false">Android 3.x (Honeycomb)</string>
     <string name="title_android_g" translatable="false">Android 2.3.x (Gingerbread)</string>
 
+    <string name="target_class_android_t" translatable="false">com.android_t.egg.PlatLogoActivity</string>
     <string name="target_class_android_s" translatable="false">com.android_s.egg.PlatLogoActivity</string>
     <string name="target_class_android_r" translatable="false">com.android_r.egg.PlatLogoActivity</string>
     <string name="target_class_android_q" translatable="false">com.android_q.egg.PlatLogoActivity</string>

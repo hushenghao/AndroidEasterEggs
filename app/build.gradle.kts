@@ -78,6 +78,7 @@ dependencies {
     implementation(deps.free.reflection)
     debugImplementation(deps.leakcanary)
     implementation(project(":basic"))
+    implementation(project(":eggs:T"))
     implementation(project(":eggs:S"))
     implementation(project(":eggs:R"))
     implementation(project(":eggs:Q"))

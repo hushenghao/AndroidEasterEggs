@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android_s.egg;
+package com.android_t.egg;
 
 import static android.graphics.PixelFormat.TRANSLUCENT;
 
@@ -22,6 +22,7 @@ import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -29,9 +30,8 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.format.Time;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -41,31 +41,35 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
+import com.dede.basic.AnalogClock;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import androidx.core.content.ContextCompat;
-
-import com.dede.basic.AnalogClock;
-import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
 
+import org.json.JSONObject;
+
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 /**
- * Android S
+ * @hide
  */
 public class PlatLogoActivity extends Activity {
     private static final String TAG = "PlatLogoActivity";
 
-    private static final String S_EGG_UNLOCK_SETTING = "egg_mode_s";
+    private static final String S_EGG_UNLOCK_SETTING = "egg_mode_t";
 
     private SettableAnalogClock mClock;
     private ImageView mLogo;
     private BubblesDrawable mBg;
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +95,7 @@ public class PlatLogoActivity extends Activity {
 
         mLogo = new ImageView(this);
         mLogo.setVisibility(View.GONE);
-//        mLogo.setImageResource(R.drawable.s_platlogo);
-        mLogo.setImageDrawable(createDrawable());
+        mLogo.setImageResource(R.drawable.t_platlogo);
         layout.addView(mLogo, lp);
 
         mBg = new BubblesDrawable();
@@ -101,24 +104,9 @@ public class PlatLogoActivity extends Activity {
         mBg.padding = 0.5f * dp;
         mBg.minR = 1 * dp;
         layout.setBackground(mBg);
+        layout.setOnLongClickListener(mBg);
 
         setContentView(layout);
-    }
-
-    private Drawable createDrawable() {
-        int color = -1;
-        try {
-            color = DrawableKt.getSystemColor(this, "system_accent3_500");
-        } catch (Exception ignore) {
-        }
-        if (color != -1) {
-            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.s_platlogo_nobg);
-            GradientDrawable bg = new GradientDrawable();
-            bg.setShape(GradientDrawable.OVAL);
-            bg.setColor(color);
-            return new LayerDrawable(new Drawable[]{bg, drawable});
-        }
-        return ContextCompat.getDrawable(this, R.drawable.s_platlogo);
     }
 
     private boolean shouldWriteSettings() {
@@ -151,20 +139,26 @@ public class PlatLogoActivity extends Activity {
                 500
         );
 
-        if (shouldWriteSettings()) {
-            Log.v(TAG, "Saving egg unlock=" + locked);
+//        final ContentResolver cr = getContentResolver();
+
+        try {
+            if (shouldWriteSettings()) {
+                Log.v(TAG, "Saving egg unlock=" + locked);
 //                syncTouchPressure();
-            SpUtils.putLong(this,
-                    S_EGG_UNLOCK_SETTING,
-                    locked ? 0 : System.currentTimeMillis());
+                SpUtils.putLong(this,
+                        S_EGG_UNLOCK_SETTING,
+                        locked ? 0 : System.currentTimeMillis());
+            }
+        } catch (RuntimeException e) {
+            Log.e(TAG, "Can't write settings", e);
         }
 
         try {
-            startActivity(new Intent(this, ComponentActivationActivity.class)
+//            startActivity(new Intent(Intent.ACTION_MAIN)
 //                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 //                            | Intent.FLAG_ACTIVITY_CLEAR_TASK)
 //                    .addCategory("com.android.internal.category.PLATLOGO")
-            );
+//            );
         } catch (ActivityNotFoundException ex) {
             Log.e("com.android.internal.app.PlatLogoActivity", "No more eggs.");
         }
@@ -210,7 +204,7 @@ public class PlatLogoActivity extends Activity {
 //                }
 //            }
 //        } catch (Exception e) {
-//            Log.e(TAG, "Can't write touch settings", e);
+//            Log.e("com.android.internal.app.PlatLogoActivity", "Can't write touch settings", e);
 //        }
 //    }
 //
@@ -238,19 +232,15 @@ public class PlatLogoActivity extends Activity {
             super(context);
         }
 
-        @Override
-        public Time now() {
-            Time realNow = super.now();
+//        @Override
+//        protected Instant now() {
 //            final Instant realNow = super.now();
 //            final ZoneId tz = Clock.systemDefaultZone().getZone();
 //            final ZonedDateTime zdTime = realNow.atZone(tz);
-            if (mOverride) {
-                if (mOverrideHour < 0) {
+//            if (mOverride) {
+//                if (mOverrideHour < 0) {
 //                    mOverrideHour = zdTime.getHour();
-                    mOverrideHour = realNow.hour;
-                }
-                realNow.set(0, mOverrideMinute, mOverrideHour,
-                        realNow.monthDay, realNow.month, realNow.year);
+//                }
 //                return Clock.fixed(zdTime
 //                        .withHour(mOverrideHour)
 //                        .withMinute(mOverrideMinute)
@@ -258,6 +248,18 @@ public class PlatLogoActivity extends Activity {
 //                        .toInstant(), tz).instant();
 //            } else {
 //                return realNow;
+//            }
+//        }
+
+        @Override
+        public Time now() {
+            Time realNow = super.now();
+            if (mOverride) {
+                if (mOverrideHour < 0) {
+                    mOverrideHour = realNow.hour;
+                }
+                realNow.set(0, mOverrideMinute, mOverrideHour,
+                        realNow.monthDay, realNow.month, realNow.year);
             }
             return realNow;
         }
@@ -306,8 +308,8 @@ public class PlatLogoActivity extends Activity {
 
                     return true;
                 case MotionEvent.ACTION_UP:
-                    if (mOverrideMinute == 0 && (mOverrideHour % 12) == 0) {
-                        Log.v(TAG, "12:00 let's gooooo");
+                    if (mOverrideMinute == 0 && (mOverrideHour % 12) == 1) {
+                        Log.v(TAG, "13:00");
                         performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                         launchNextStage(false);
                     }
@@ -315,38 +317,56 @@ public class PlatLogoActivity extends Activity {
             }
             return false;
         }
-
     }
+
+    private static final String[][] EMOJI_SETS = {
+            {"🍇", "🍈", "🍉", "🍊", "🍋", "🍌", "🍍", "🥭", "🍎", "🍏", "🍐", "🍑",
+                    "🍒", "🍓", "🫐", "🥝"},
+            {"😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾"},
+            {"😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂", "🙃", "🫠", "😉", "😊",
+                    "😇", "🥰", "😍", "🤩", "😘", "😗", "☺️", "😚", "😙", "🥲", "😋", "😛", "😜",
+                    "🤪", "😝", "🤑", "🤗", "🤭", "🫢", "🫣", "🤫", "🤔", "🫡", "🤐", "🤨", "😐",
+                    "😑", "😶", "🫥", "😏", "😒", "🙄", "😬", "🤥", "😌", "😔", "😪", "🤤", "😴",
+                    "😷"},
+            { "🤩", "😍", "🥰", "😘", "🥳", "🥲", "🥹" },
+            { "🫠" },
+            {"💘", "💝", "💖", "💗", "💓", "💞", "💕", "❣", "💔", "❤", "🧡", "💛",
+                    "💚", "💙", "💜", "🤎", "🖤", "🤍"},
+            // {"👁", "️🫦", "👁️"}, // this one is too much
+            {"👽", "🛸", "✨", "🌟", "💫", "🚀", "🪐", "🌙", "⭐", "🌍"},
+            {"🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"},
+            {"🐙", "🪸", "🦑", "🦀", "🦐", "🐡", "🦞", "🐠", "🐟", "🐳", "🐋", "🐬", "🫧", "🌊",
+                    "🦈"},
+            {"🙈", "🙉", "🙊", "🐵", "🐒"},
+            {"♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓"},
+            {"🕛", "🕧", "🕐", "🕜", "🕑", "🕝", "🕒", "🕞", "🕓", "🕟", "🕔", "🕠", "🕕", "🕡",
+                    "🕖", "🕢", "🕗", "🕣", "🕘", "🕤", "🕙", "🕥", "🕚", "🕦"},
+            {"🌺", "🌸", "💮", "🏵️", "🌼", "🌿"},
+            {"🐢", "✨", "🌟", "👑"}
+    };
 
     static class Bubble {
         public float x, y, r;
         public int color;
+        public String text = null;
     }
 
-    class BubblesDrawable extends Drawable {
+    class BubblesDrawable extends Drawable implements View.OnLongClickListener {
         private static final int MAX_BUBBS = 2000;
 
-        //        private final int[] mColorIds = {
-//                android.R.color.system_accent1_400,
-//                android.R.color.system_accent1_500,
-//                android.R.color.system_accent1_600,
-//
-//                android.R.color.system_accent2_400,
-//                android.R.color.system_accent2_500,
-//                android.R.color.system_accent2_600,
-//        };
-        private final String[] mColorIds = {
-                "system_accent1_400",
-                "system_accent1_500",
-                "system_accent1_600",
+        private final int[] mColorIds = {
+                android.R.color.system_accent3_400,
+                android.R.color.system_accent3_500,
+                android.R.color.system_accent3_600,
 
-                "system_accent2_400",
-                "system_accent2_500",
-                "system_accent2_600"
+                android.R.color.system_accent2_400,
+                android.R.color.system_accent2_500,
+                android.R.color.system_accent2_600,
         };
 
-        //        private int[] mColors = new int[mColorIds.length];
-        private int[] mColors = {0xff598df7, 0xff3771df, 0xff2559bc, 0xff8a91a3, 0xff707687, 0xff585e6f};
+        private int[] mColors = new int[mColorIds.length];
+
+        private int mEmojiSet = -1;
 
         private final Bubble[] mBubbs = new Bubble[MAX_BUBBS];
         private int mNumBubbs;
@@ -358,11 +378,8 @@ public class PlatLogoActivity extends Activity {
         public float minR = 0f;
 
         BubblesDrawable() {
-            try {
-                for (int i = 0; i < mColorIds.length; i++) {
-                    mColors[i] = DrawableKt.getSystemColor(PlatLogoActivity.this, mColorIds[i]);
-                }
-            } catch (Exception ignore) {
+            for (int i = 0; i < mColorIds.length; i++) {
+                mColors[i] = getColor(mColorIds[i]);
             }
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j] = new Bubble();
@@ -371,15 +388,32 @@ public class PlatLogoActivity extends Activity {
 
         @Override
         public void draw(Canvas canvas) {
+            if (getLevel() == 0) return;
             final float f = getLevel() / 10000f;
             mPaint.setStyle(Paint.Style.FILL);
+            mPaint.setTextAlign(Paint.Align.CENTER);
             int drawn = 0;
             for (int j = 0; j < mNumBubbs; j++) {
                 if (mBubbs[j].color == 0 || mBubbs[j].r == 0) continue;
-                mPaint.setColor(mBubbs[j].color);
-                canvas.drawCircle(mBubbs[j].x, mBubbs[j].y, mBubbs[j].r * f, mPaint);
+                if (mBubbs[j].text != null) {
+                    mPaint.setTextSize(mBubbs[j].r * 1.75f);
+                    canvas.drawText(mBubbs[j].text, mBubbs[j].x,
+                            mBubbs[j].y  + mBubbs[j].r * f * 0.6f, mPaint);
+                } else {
+                    mPaint.setColor(mBubbs[j].color);
+                    canvas.drawCircle(mBubbs[j].x, mBubbs[j].y, mBubbs[j].r * f, mPaint);
+                }
                 drawn++;
             }
+        }
+
+        public void chooseEmojiSet() {
+            mEmojiSet = (int) (Math.random() * EMOJI_SETS.length);
+            final String[] emojiSet = EMOJI_SETS[mEmojiSet];
+            for (int j = 0; j < mBubbs.length; j++) {
+                mBubbs[j].text = emojiSet[(int) (Math.random() * emojiSet.length)];
+            }
+            invalidateSelf();
         }
 
         @Override
@@ -443,16 +477,21 @@ public class PlatLogoActivity extends Activity {
         }
 
         @Override
-        public void setAlpha(int alpha) {
-        }
+        public void setAlpha(int alpha) { }
 
         @Override
-        public void setColorFilter(ColorFilter colorFilter) {
-        }
+        public void setColorFilter(ColorFilter colorFilter) { }
 
         @Override
         public int getOpacity() {
             return TRANSLUCENT;
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            if (getLevel() == 0) return false;
+            chooseEmojiSet();
+            return true;
         }
     }
 

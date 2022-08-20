@@ -2,9 +2,4 @@
 <resources>
     <string name="s_egg_name" translatable="false">Snow Cone</string>
 
-    <declare-styleable name="AnalogClock">
-        <attr name="dial" format="reference" />
-        <attr name="hand_hour" format="reference" />
-        <attr name="hand_minute" format="reference" />
-    </declare-styleable>
 </resources>
