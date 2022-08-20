@@ -19,7 +19,7 @@ android {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
-        versionCode = 15
+        versionCode = 16
         versionName = "1.7.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

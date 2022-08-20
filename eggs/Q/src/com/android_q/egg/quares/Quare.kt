@@ -131,7 +131,7 @@ class Quare(val width: Int, val height: Int, val depth: Int) : Parcelable {
         return 0
     }
 
-    override fun writeToParcel(p: Parcel?, flags: Int) {
+    override fun writeToParcel(p: Parcel, flags: Int) {
         p?.let {
             p.writeInt(width)
             p.writeInt(height)
