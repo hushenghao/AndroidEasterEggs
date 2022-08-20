@@ -8,7 +8,7 @@ val keystoreProperties = Properties().apply {
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -69,7 +69,6 @@ android {
 }
 
 dependencies {
-    implementation(deps.kotlin.stdlib)
     implementation(deps.androidx.appcompat)
     implementation(deps.androidx.core.ktx)
     implementation(deps.androidx.preference.ktx)

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     compileSdkVersion Versions.COMPILE_SDK
@@ -36,7 +36,6 @@ android {
 }
 
 dependencies {
-    implementation(deps.kotlin.stdlib)
     implementation(deps.androidx.appcompat)
     implementation project(path: ':basic')
 }

@@ -218,6 +218,10 @@ public class Cat extends Drawable {
         final Intent intent = new Intent(Intent.ACTION_MAIN)
                 .setClass(context, NekoLand.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        int flag = PendingIntent.FLAG_IMMUTABLE;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            flag = PendingIntent.FLAG_MUTABLE;
+        }
         Notification.Builder builder = new Notification.Builder(context)
                 .setSmallIcon(Icon.createWithResource(context, R.drawable.stat_icon))
                 .setColor(getBodyColor())
@@ -226,7 +230,7 @@ public class Cat extends Drawable {
                 .setShowWhen(true)
                 .setCategory(Notification.CATEGORY_STATUS)
                 .setContentText(getName())
-                .setContentIntent(PendingIntent.getActivity(context, 0, intent, 0))
+                .setContentIntent(PendingIntent.getActivity(context, 0, intent, flag))
                 .setAutoCancel(true)
                 .setVibrate(PURR)
                 .addExtras(extras);

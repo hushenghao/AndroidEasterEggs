@@ -1,3 +1,28 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+enableFeaturePreview("VERSION_CATALOGS")
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { setUrl("https://jitpack.io") }
+    }
+    versionCatalogs {
+        create("deps") {
+            // default path: gradle/libs.versions.toml
+            from(files("libs.versions.toml"))
+        }
+    }
+}
+
 include(
     ":app",
     ":basic",
@@ -16,14 +41,3 @@ include(
     ":eggs:S"
 )
 rootProject.name = "Easter Eggs"
-
-enableFeaturePreview("VERSION_CATALOGS")
-
-dependencyResolutionManagement {
-    versionCatalogs {
-        create("deps") {
-            // default path: gradle/libs.versions.toml
-            from(files("libs.versions.toml"))
-        }
-    }
-}

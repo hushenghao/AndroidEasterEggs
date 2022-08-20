@@ -1,6 +1,6 @@
 plugins {
     id("com.android.library")
-    id("kotlin-android")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -31,7 +31,6 @@ android {
 }
 
 dependencies {
-    implementation(deps.kotlin.stdlib)
     implementation(deps.kotlinx.coroutines.core)
     implementation(deps.androidx.appcompat)
 }

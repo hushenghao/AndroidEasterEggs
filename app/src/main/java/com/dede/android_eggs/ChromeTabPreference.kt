@@ -41,7 +41,7 @@ open class ChromeTabPreference : Preference, Preference.OnPreferenceClickListene
         this.uri = uri
     }
 
-    override fun onPreferenceClick(preference: Preference?): Boolean {
+    override fun onPreferenceClick(preference: Preference): Boolean {
         val uri = this.uri
         if (uri != null) {
             if (useChromeTab) {

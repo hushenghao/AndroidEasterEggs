@@ -59,15 +59,15 @@ class EggPreference : Preference {
         finalTitle = title
     }
 
-    override fun onBindViewHolder(holder: PreferenceViewHolder?) {
+    override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
 
         if (!showSuffix && finalTitle != null) {
-            val title = holder?.findViewById(android.R.id.title) as? TextView
+            val title = holder.findViewById(android.R.id.title) as? TextView
             title?.text = finalTitle.replace(suffixRegex,"")
         }
 
-        val icon = holder?.findViewById(android.R.id.icon) as? ImageView ?: return
+        val icon = holder.findViewById(android.R.id.icon) as? ImageView ?: return
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
             // support adaptive-icon
             icon.clipToOutline = outlineProvider != null
