@@ -20,7 +20,7 @@
     android:layout_gravity="fill" android:layout_columnWeight="1" android:layout_rowWeight="1"
     android:text="A1-500"
     android:backgroundTint="@android:color/system_accent1_500"
-    android:background="@drawable/roundrect"
+    android:background="@drawable/t_roundrect"
     android:gravity="center"
     android:textColor="?android:attr/textColorPrimary"
     android:fontFamily="?android:attr/textAppearanceLarge"

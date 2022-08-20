@@ -45,6 +45,7 @@ import com.dede.basic.AnalogClock;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
 
 import org.json.JSONObject;
@@ -154,11 +155,11 @@ public class PlatLogoActivity extends Activity {
         }
 
         try {
-//            startActivity(new Intent(Intent.ACTION_MAIN)
+            startActivity(new Intent(this, ComponentActivationActivity.class)
 //                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 //                            | Intent.FLAG_ACTIVITY_CLEAR_TASK)
 //                    .addCategory("com.android.internal.category.PLATLOGO")
-//            );
+            );
         } catch (ActivityNotFoundException ex) {
             Log.e("com.android.internal.app.PlatLogoActivity", "No more eggs.");
         }
@@ -354,17 +355,27 @@ public class PlatLogoActivity extends Activity {
     class BubblesDrawable extends Drawable implements View.OnLongClickListener {
         private static final int MAX_BUBBS = 2000;
 
-        private final int[] mColorIds = {
-                android.R.color.system_accent3_400,
-                android.R.color.system_accent3_500,
-                android.R.color.system_accent3_600,
+        //        private final int[] mColorIds = {
+//                android.R.color.system_accent1_400,
+//                android.R.color.system_accent1_500,
+//                android.R.color.system_accent1_600,
+//
+//                android.R.color.system_accent2_400,
+//                android.R.color.system_accent2_500,
+//                android.R.color.system_accent2_600,
+//        };
+        private final String[] mColorIds = {
+                "system_accent1_400",
+                "system_accent1_500",
+                "system_accent1_600",
 
-                android.R.color.system_accent2_400,
-                android.R.color.system_accent2_500,
-                android.R.color.system_accent2_600,
+                "system_accent2_400",
+                "system_accent2_500",
+                "system_accent2_600"
         };
 
-        private int[] mColors = new int[mColorIds.length];
+        //        private int[] mColors = new int[mColorIds.length];
+        private int[] mColors = {0xff598df7, 0xff3771df, 0xff2559bc, 0xff8a91a3, 0xff707687, 0xff585e6f};
 
         private int mEmojiSet = -1;
 
@@ -379,7 +390,7 @@ public class PlatLogoActivity extends Activity {
 
         BubblesDrawable() {
             for (int i = 0; i < mColorIds.length; i++) {
-                mColors[i] = getColor(mColorIds[i]);
+                mColors[i] = DrawableKt.getSystemColor(PlatLogoActivity.this, mColorIds[i]);
             }
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j] = new Bubble();

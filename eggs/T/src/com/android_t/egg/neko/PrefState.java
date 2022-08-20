@@ -19,11 +19,15 @@ package com.android_t.egg.neko;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 public class PrefState implements OnSharedPreferenceChangeListener {
 
     private static final String FILE_NAME = "T_mPrefs";

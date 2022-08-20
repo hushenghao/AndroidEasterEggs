@@ -23,17 +23,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +38,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.content.FileProvider;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,14 +46,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android_t.egg.R;
 import com.dede.basic.ShareCatUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 public class NekoLand extends Activity implements PrefState.PrefsListener {
     public static String CHAN_ID = "EGG";
 
@@ -78,7 +70,7 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.neko_activity);
+        setContentView(R.layout.t_neko_activity);
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setLogo(Cat.create(this));
@@ -149,7 +141,7 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
         final Context context = new ContextThemeWrapper(this,
                 android.R.style.Theme_Material_Light_Dialog_NoActionBar);
         // TODO: Move to XML, add correct margins.
-        View view = LayoutInflater.from(context).inflate(R.layout.edit_text, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.t_edit_text, null);
         final EditText text = (EditText) view.findViewById(android.R.id.edit);
         text.setText(cat.getName());
         text.setSelection(cat.getName().length());
@@ -187,7 +179,7 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
         @Override
         public CatHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             return new CatHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.cat_view, parent, false));
+                    .inflate(R.layout.t_cat_view, parent, false));
         }
 
         private void setContextGroupVisible(final CatHolder holder, boolean vis) {
@@ -218,7 +210,7 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
         @Override
         public void onBindViewHolder(final CatHolder holder, int position) {
             Context context = holder.itemView.getContext();
-            final int size = context.getResources().getDimensionPixelSize(R.dimen.neko_display_size);
+            final int size = context.getResources().getDimensionPixelSize(R.dimen.t_neko_display_size);
             holder.imageView.setImageIcon(mCats[position].createIcon(context, size, size));
             holder.textView.setText(mCats[position].getName());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -239,7 +231,7 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
                 public void onClick(View v) {
                     setContextGroupVisible(holder, false);
                     new AlertDialog.Builder(NekoLand.this)
-                            .setTitle(getString(R.string.confirm_delete, mCats[position].getName()))
+                            .setTitle(getString(R.string.t_confirm_delete, mCats[position].getName()))
                             .setNegativeButton(android.R.string.cancel, null)
                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 @Override

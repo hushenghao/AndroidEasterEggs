@@ -64,7 +64,7 @@ public class NekoService extends JobService {
     private static void setupNotificationChannels(Context context) {
         NotificationManager noman = context.getSystemService(NotificationManager.class);
         NotificationChannel eggChan = new NotificationChannel(CHAN_ID,
-                context.getString(R.string.notification_channel_name),
+                context.getString(R.string.t_notification_channel_name),
                 NotificationManager.IMPORTANCE_DEFAULT);
         eggChan.setSound(Uri.EMPTY, Notification.AUDIO_ATTRIBUTES_DEFAULT); // cats are quiet
         eggChan.setVibrationPattern(PURR); // not totally quiet though
@@ -80,7 +80,7 @@ public class NekoService extends JobService {
         if (NekoLand.DEBUG_NOTIFICATIONS) {
             NotificationManager noman = getSystemService(NotificationManager.class);
             final Bundle extras = new Bundle();
-            extras.putString("android.substName", getString(R.string.notification_name));
+            extras.putString("android.substName", getString(R.string.t_notification_name));
             final int size = getResources()
                     .getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
             final Cat cat = Cat.create(this);
@@ -107,7 +107,7 @@ public class NekoService extends JobService {
             if (rng.nextFloat() <= CAT_CAPTURE_PROB) {
                 Cat cat;
                 List<Cat> cats = prefs.getCats();
-                final int[] probs = context.getResources().getIntArray(R.array.food_new_cat_prob);
+                final int[] probs = context.getResources().getIntArray(R.array.t_food_new_cat_prob);
                 final float waterLevel100 = prefs.getWaterState() / 2; // water is 0..200
                 final float new_cat_prob = (float) ((food < probs.length)
                         ? probs[food]
@@ -179,7 +179,7 @@ public class NekoService extends JobService {
         if (NekoLand.DEBUG_NOTIFICATIONS) {
             NotificationManager noman = context.getSystemService(NotificationManager.class);
             noman.notify(DEBUG_NOTIFICATION, new Notification.Builder(context)
-                    .setSmallIcon(R.drawable.stat_icon)
+                    .setSmallIcon(R.drawable.t_stat_icon)
                     .setContentTitle(String.format("Job scheduled in %d min", (interval / MINUTES)))
                     .setContentText(String.valueOf(jobInfo))
                     .setPriority(Notification.PRIORITY_MIN)

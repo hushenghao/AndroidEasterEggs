@@ -18,12 +18,15 @@ package com.android_s.egg.widget
 
 import android.app.Activity
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.widget.FrameLayout
+import androidx.annotation.RequiresApi
 
 /**
  * Activity to show off the current dynamic system theme in all its glory.
  */
+@RequiresApi(api = Build.VERSION_CODES.S)
 class PaintChipsActivity : Activity() {
     private lateinit var layout: FrameLayout
 

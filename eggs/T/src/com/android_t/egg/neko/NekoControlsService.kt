@@ -55,10 +55,10 @@ const val COLOR_TOY_FG = 0xFFFF4080.toInt()
 const val COLOR_TOY_BG = COLOR_TOY_FG and 0x40FFFFFF.toInt()
 
 val P_TOY_ICONS = intArrayOf(
-        1, R.drawable.ic_toy_mouse,
-        1, R.drawable.ic_toy_fish,
-        1, R.drawable.ic_toy_ball,
-        1, R.drawable.ic_toy_laser
+        1, R.drawable.t_ic_toy_mouse,
+        1, R.drawable.t_ic_toy_fish,
+        1, R.drawable.t_ic_toy_ball,
+        1, R.drawable.t_ic_toy_laser
 )
 
 @RequiresApi(30)
@@ -129,14 +129,14 @@ public class NekoControlsService : ControlsProviderService(), PrefState.PrefsLis
                 .setCustomIcon(icon)
                         //  ?.setTint(COLOR_TOY_FG)) // TODO(b/159559045): uncomment when fixed
                 .setCustomColor(ColorStateList.valueOf(COLOR_TOY_BG))
-                .setTitle(colorize(getString(R.string.control_toy_title), COLOR_TOY_FG))
+                .setTitle(colorize(getString(R.string.t_control_toy_title), COLOR_TOY_FG))
                 .setStatusText(colorize(
-                        if (thrown) getString(R.string.control_toy_status) else "",
+                        if (thrown) getString(R.string.t_control_toy_status) else "",
                         COLOR_TOY_FG
                 ))
                 .setControlTemplate(StatelessTemplate("toy"))
                 .setStatus(Control.STATUS_OK)
-                .setSubtitle(if (thrown) "" else getString(R.string.control_toy_subtitle))
+                .setSubtitle(if (thrown) "" else getString(R.string.t_control_toy_subtitle))
                 .setAppIntent(getAppIntent())
                 .build()
     }
@@ -144,15 +144,15 @@ public class NekoControlsService : ControlsProviderService(), PrefState.PrefsLis
     private fun makeWaterBowlControl(fillLevel: Float): Control {
         return Control.StatefulBuilder(CONTROL_ID_WATER, getPendingIntent())
                 .setDeviceType(DeviceTypes.TYPE_KETTLE)
-                .setTitle(colorize(getString(R.string.control_water_title), COLOR_WATER_FG))
+                .setTitle(colorize(getString(R.string.t_control_water_title), COLOR_WATER_FG))
                 .setCustomColor(ColorStateList.valueOf(COLOR_WATER_BG))
                 .setCustomIcon(Icon.createWithResource(baseContext,
-                        if (fillLevel >= 100f) R.drawable.ic_water_filled else R.drawable.ic_water))
+                        if (fillLevel >= 100f) R.drawable.t_ic_water_filled else R.drawable.t_ic_water))
                         //.setTint(COLOR_WATER_FG)) // TODO(b/159559045): uncomment when fixed
                 .setControlTemplate(RangeTemplate("waterlevel", 0f, 200f, fillLevel, 10f,
                         "%.0f mL"))
                 .setStatus(Control.STATUS_OK)
-                .setSubtitle(if (fillLevel == 0f) getString(R.string.control_water_subtitle) else "")
+                .setSubtitle(if (fillLevel == 0f) getString(R.string.t_control_water_subtitle) else "")
                 .build()
     }
 
@@ -160,18 +160,18 @@ public class NekoControlsService : ControlsProviderService(), PrefState.PrefsLis
         return Control.StatefulBuilder(CONTROL_ID_FOOD, getPendingIntent())
                 .setDeviceType(DeviceTypes.TYPE_UNKNOWN)
                 .setCustomColor(ColorStateList.valueOf(COLOR_FOOD_BG))
-                .setTitle(colorize(getString(R.string.control_food_title), COLOR_FOOD_FG))
+                .setTitle(colorize(getString(R.string.t_control_food_title), COLOR_FOOD_FG))
                 .setCustomIcon(Icon.createWithResource(baseContext,
-                        if (filled) R.drawable.ic_foodbowl_filled else R.drawable.ic_bowl))
+                        if (filled) R.drawable.t_ic_foodbowl_filled else R.drawable.t_ic_bowl))
                         // .setTint(COLOR_FOOD_FG)) // TODO(b/159559045): uncomment when fixed
                 .setStatusText(
                         if (filled) colorize(
-                                getString(R.string.control_food_status_full), 0xCCFFFFFF.toInt())
+                                getString(R.string.t_control_food_status_full), 0xCCFFFFFF.toInt())
                         else colorize(
-                                getString(R.string.control_food_status_empty), 0x80FFFFFF.toInt()))
+                                getString(R.string.t_control_food_status_empty), 0x80FFFFFF.toInt()))
                 .setControlTemplate(ToggleTemplate("foodbowl", ControlButton(filled, "Refill")))
                 .setStatus(Control.STATUS_OK)
-                .setSubtitle(if (filled) "" else getString(R.string.control_food_subtitle))
+                .setSubtitle(if (filled) "" else getString(R.string.t_control_food_subtitle))
                 .build()
     }
 

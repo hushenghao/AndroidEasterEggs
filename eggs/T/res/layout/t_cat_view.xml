@@ -50,7 +50,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="8dp"
-                android:src="@drawable/ic_share"
+                android:src="@drawable/t_ic_share"
                 android:scaleType="fitCenter"
                 android:background="#40000000"/>
 
@@ -64,7 +64,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="4dp"
-                android:src="@drawable/ic_close"
+                android:src="@drawable/t_ic_close"
                 android:scaleType="fitCenter"
                 android:background="#40000000"/>
 

@@ -22,16 +22,19 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.SizeF
 import android.widget.RemoteViews
+import androidx.annotation.RequiresApi
 
 import com.android_t.egg.R
 
 /**
  * A homescreen widget to explore the current dynamic system theme.
  */
+@RequiresApi(api = Build.VERSION_CODES.S)
 class PaintChipsWidget : AppWidgetProvider() {
     override fun onUpdate(
         context: Context,
@@ -151,6 +154,7 @@ var COLORS = arrayOf(
     COLORS_ACCENT3
 )
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 internal fun updateAppWidget(
     context: Context,
     appWidgetManager: AppWidgetManager,
@@ -201,13 +205,15 @@ internal fun updateAppWidget(
     appWidgetManager.updateAppWidget(appWidgetId, RemoteViews(allSizes))
 }
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 fun buildFullWidget(context: Context, clickable: ClickBehavior): RemoteViews {
     return buildWidget(context, SHADE_NUMBERS.size, COLORS.size, clickable)
 }
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 fun buildWidget(context: Context, numShades: Int, numColors: Int, clickable: ClickBehavior):
         RemoteViews {
-    val grid = RemoteViews(context.packageName, R.layout.paint_chips_grid)
+    val grid = RemoteViews(context.packageName, R.layout.t_paint_chips_grid)
 
     // shouldn't be necessary but sometimes the RV instructions get played twice in launcher.
     grid.removeAllViews(R.id.paint_grid)
@@ -232,7 +238,7 @@ fun buildWidget(context: Context, numShades: Int, numColors: Int, clickable: Cli
                 100, 900 -> if (numShades < 5) return@shadeLoop
                 else -> if (numShades < SHADE_NUMBERS.size) return@shadeLoop
             }
-            val cell = RemoteViews(context.packageName, R.layout.paint_chip)
+            val cell = RemoteViews(context.packageName, R.layout.t_paint_chip)
             cell.setTextViewText(R.id.chip, "${COLOR_NAMES[i]}-${SHADE_NUMBERS[j]}")
             val textColor = if (SHADE_NUMBERS[j] > 500)
                     colorlist[0]
@@ -268,6 +274,7 @@ enum class ClickBehavior {
     LAUNCH
 }
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 fun makeTextSharePendingIntent(context: Context, text: String): PendingIntent {
     val shareIntent: Intent = Intent().apply {
         action = Intent.ACTION_SEND

@@ -63,7 +63,7 @@
             android:name=".neko.NekoControlsService"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/ic_fullcat_icon"
+            android:icon="@drawable/t_ic_fullcat_icon"
             android:label="@string/t_egg_name"
             android:permission="android.permission.BIND_CONTROLS">
             <intent-filter>
@@ -99,7 +99,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/paint_chips_widget_info" />
+                android:resource="@xml/t_paint_chips_widget_info" />
         </receiver>
     </application>
 
