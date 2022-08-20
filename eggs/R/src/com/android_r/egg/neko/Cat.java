@@ -58,8 +58,8 @@ public class Cat extends Drawable {
 
     public static final boolean ALL_CATS_IN_ONE_CONVERSATION = true;
 
-    public static final String GLOBAL_SHORTCUT_ID = "com.android.egg.neko:allcats";
-    public static final String SHORTCUT_ID_PREFIX = "com.android.egg.neko:cat:";
+    public static final String GLOBAL_SHORTCUT_ID = "com.android_r.egg.neko:allcats";
+    public static final String SHORTCUT_ID_PREFIX = "com.android_r.egg.neko:cat:";
 
     private Random mNotSoRandom;
     private Bitmap mBitmap;
