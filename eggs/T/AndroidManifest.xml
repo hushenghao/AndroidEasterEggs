@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android_t.egg"
-    android:versionCode="12"
-    android:versionName="1.0">
+    package="com.android_t.egg">
 
     <!--    <uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
 
@@ -13,7 +11,7 @@
 <!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
 
     <!-- controls -->
-<!--    <uses-permission android:name="android.permission.BIND_CONTROLS" />-->
+    <uses-permission android:name="android.permission.BIND_CONTROLS" />
 
 <!--    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />-->
 
@@ -32,7 +30,7 @@
             android:label="@string/t_app_name"
             android:theme="@android:style/Theme.Material.NoActionBar">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+<!--                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />-->
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />

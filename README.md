@@ -5,7 +5,7 @@
 ![icon](./app/src/main/ic_launcher-playstore.png)
 
 ## 截图
-![截图1](./images/screenshot.jpeg)
+![截图1](./images/Screenshot_20220820_184459.png)
 ![截图2](./images/image.jpeg)
 
 部分版本彩蛋使用了系统新特性，低版本只能使用部分功能，其他版本都是完整彩蛋功能。
