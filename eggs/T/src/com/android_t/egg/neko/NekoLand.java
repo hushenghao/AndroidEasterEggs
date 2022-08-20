@@ -336,7 +336,7 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
             textView = (TextView) itemView.findViewById(android.R.id.title);
             contextGroup = itemView.findViewById(R.id.contextGroup);
             delete = itemView.findViewById(android.R.id.closeButton);
-            share = itemView.findViewById(android.R.id.shareText);
+            share = itemView.findViewById(R.id.shareText);
         }
     }
 }
