@@ -80,13 +80,13 @@
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_l"
             app:icon="@drawable/l_icon"
-            app:summary="@string/lland"
+            app:summary="@string/l_lland"
             app:title="@string/title_android_l" />
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_k"
             app:icon="@drawable/ic_k_platlogo"
-            app:summary="@string/dessert_case"
+            app:summary="@string/k_dessert_case"
             app:title="@string/title_android_k" />
 
         <com.dede.android_eggs.EggPreference

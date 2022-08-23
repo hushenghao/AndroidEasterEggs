@@ -20,6 +20,7 @@
             android:name=".PlatLogoActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="true"
+            android:label="@string/t_egg_name"
             android:icon="@drawable/t_platlogo"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
 

@@ -52,37 +52,37 @@ public class DessertCaseView extends FrameLayout {
     private static final int TAG_SPAN = 0x2000002;
 
     private static final int[] PASTRIES = {
-            R.drawable.dessert_kitkat,      // used with permission
-            R.drawable.dessert_android,     // thx irina
+            R.drawable.k_dessert_kitkat,      // used with permission
+            R.drawable.k_dessert_android,     // thx irina
     };
 
     private static final int[] RARE_PASTRIES = {
-            R.drawable.dessert_cupcake,     // 2009
-            R.drawable.dessert_donut,       // 2009
-            R.drawable.dessert_eclair,      // 2009
-            R.drawable.dessert_froyo,       // 2010
-            R.drawable.dessert_gingerbread, // 2010
-            R.drawable.dessert_honeycomb,   // 2011
-            R.drawable.dessert_ics,         // 2011
-            R.drawable.dessert_jellybean,   // 2012
+            R.drawable.k_dessert_cupcake,     // 2009
+            R.drawable.k_dessert_donut,       // 2009
+            R.drawable.k_dessert_eclair,      // 2009
+            R.drawable.k_dessert_froyo,       // 2010
+            R.drawable.k_dessert_gingerbread, // 2010
+            R.drawable.k_dessert_honeycomb,   // 2011
+            R.drawable.k_dessert_ics,         // 2011
+            R.drawable.k_dessert_jellybean,   // 2012
     };
 
     private static final int[] XRARE_PASTRIES = {
-            R.drawable.dessert_petitfour,   // the original and still delicious
+            R.drawable.k_dessert_petitfour,   // the original and still delicious
 
-            R.drawable.dessert_donutburger, // remember kids, this was long before cronuts
+            R.drawable.k_dessert_donutburger, // remember kids, this was long before cronuts
 
-            R.drawable.dessert_flan,        //     sholes final approach
+            R.drawable.k_dessert_flan,        //     sholes final approach
                                             //     landing gear punted to flan
                                             //     runway foam glistens
                                             //         -- mcleron
 
-            R.drawable.dessert_keylimepie,  // from an alternative timeline
+            R.drawable.k_dessert_keylimepie,  // from an alternative timeline
     };
     private static final int[] XXRARE_PASTRIES = {
-            R.drawable.dessert_zombiegingerbread, // thx hackbod
-            R.drawable.dessert_dandroid,    // thx morrildl
-            R.drawable.dessert_jandycane,   // thx nes
+            R.drawable.k_dessert_zombiegingerbread, // thx hackbod
+            R.drawable.k_dessert_dandroid,    // thx morrildl
+            R.drawable.k_dessert_jandycane,   // thx nes
     };
 
     private static final int NUM_PASTRIES = PASTRIES.length + RARE_PASTRIES.length
@@ -162,7 +162,7 @@ public class DessertCaseView extends FrameLayout {
 
         mStarted = false;
 
-        mCellSize = res.getDimensionPixelSize(R.dimen.dessert_case_cell_size);
+        mCellSize = res.getDimensionPixelSize(R.dimen.k_dessert_case_cell_size);
         final BitmapFactory.Options opts = new BitmapFactory.Options();
         if (mCellSize < 512) { // assuming 512x512 images
             opts.inSampleSize = 2;

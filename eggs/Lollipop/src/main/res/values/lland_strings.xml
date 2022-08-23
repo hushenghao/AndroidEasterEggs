@@ -18,5 +18,5 @@
 -->
 <resources>
     <!-- Name of the L Land easter egg. DO NOT TRANSLATE -->
-    <string name="lland">L Land</string>
+    <string name="l_lland">L Land</string>
 </resources>

@@ -262,7 +262,9 @@ public class Cat extends Drawable {
                 .setIcon(createShortcutIcon(context))
                 .setLongLived(true)
                 .build();
-        context.getSystemService(ShortcutManager.class).addDynamicShortcuts(List.of(shortcut));
+        ArrayList<ShortcutInfo> infos = new ArrayList<>();
+        infos.add(shortcut);
+        context.getSystemService(ShortcutManager.class).addDynamicShortcuts(infos);
 
         int flag = PendingIntent.FLAG_IMMUTABLE;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {

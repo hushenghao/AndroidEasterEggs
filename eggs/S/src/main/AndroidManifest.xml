@@ -18,6 +18,7 @@
             android:name=".PlatLogoActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize"
             android:exported="true"
+            android:label="@string/s_egg_name"
             android:icon="@drawable/s_platlogo"
             android:theme="@android:style/Theme.DeviceDefault.Wallpaper.NoTitleBar" />
 

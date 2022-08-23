@@ -39,6 +39,7 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 
 import com.android_t.egg.R;
+import com.dede.basic.CatRandom;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -257,15 +258,14 @@ public class Cat extends Drawable {
                 .setIcon(createShortcutIcon(context))
                 .setLongLived(true)
                 .build();
-        ArrayList<ShortcutInfo> shortcutInfos = new ArrayList<>();
-        shortcutInfos.add(shortcut);
-        context.getSystemService(ShortcutManager.class).addDynamicShortcuts(shortcutInfos);
+        ArrayList<ShortcutInfo> infos = new ArrayList<>();
+        infos.add(shortcut);
+        context.getSystemService(ShortcutManager.class).addDynamicShortcuts(infos);
 
         int flag = PendingIntent.FLAG_IMMUTABLE;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             flag = PendingIntent.FLAG_MUTABLE;
         }
-
         Notification.BubbleMetadata bubbs = new Notification.BubbleMetadata.Builder()
                 .setIntent(
                         PendingIntent.getActivity(context, 0, intent, flag))

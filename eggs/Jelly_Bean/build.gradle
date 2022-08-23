@@ -11,6 +11,8 @@ android {
         targetSdkVersion Versions.TARGET_SDK
     }
 
+    resourcePrefix "j_"
+
     buildTypes {
         release {
             minifyEnabled false

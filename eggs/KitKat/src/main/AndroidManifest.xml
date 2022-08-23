@@ -7,7 +7,7 @@
             android:name=".PlatLogoActivity"
             android:exported="true"
             android:icon="@drawable/k_platlogo"
-            android:label="@string/dessert_case"
+            android:label="@string/k_dessert_case"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
 
         <activity
@@ -16,7 +16,7 @@
             android:exported="true"
             android:hardwareAccelerated="true"
             android:icon="@drawable/k_platlogo"
-            android:label="@string/dessert_case"
+            android:label="@string/k_dessert_case"
             android:launchMode="singleInstance"
             android:screenOrientation="locked"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
@@ -27,7 +27,7 @@
             android:enabled="false"
             android:exported="true"
             android:icon="@drawable/k_platlogo"
-            android:label="@string/dessert_case"
+            android:label="@string/k_dessert_case"
             android:permission="android.permission.BIND_DREAM_SERVICE">
             <intent-filter>
                 <action android:name="android.service.dreams.DreamService" />
