@@ -4,13 +4,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion Versions.COMPILE_SDK
+    compileSdkVersion 32
     buildToolsVersion Versions.BUILD_TOOLS
 
     defaultConfig {
         minSdkVersion Versions.MIN_SDK
         targetSdkVersion Versions.TARGET_SDK
     }
+
+    resourcePrefix "s_"
 
     buildTypes {
         release {
@@ -29,5 +31,6 @@ android {
 
 dependencies {
     implementation(deps.androidx.appcompat)
+    implementation(deps.androidx.recyclerview)
     implementation project(path: ':basic')
 }

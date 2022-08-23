@@ -213,7 +213,7 @@ fun buildFullWidget(context: Context, clickable: ClickBehavior): RemoteViews {
 @RequiresApi(Build.VERSION_CODES.S)
 fun buildWidget(context: Context, numShades: Int, numColors: Int, clickable: ClickBehavior):
         RemoteViews {
-    val grid = RemoteViews(context.packageName, R.layout.paint_chips_grid)
+    val grid = RemoteViews(context.packageName, R.layout.s_paint_chips_grid)
 
     // shouldn't be necessary but sometimes the RV instructions get played twice in launcher.
     grid.removeAllViews(R.id.paint_grid)
@@ -238,7 +238,7 @@ fun buildWidget(context: Context, numShades: Int, numColors: Int, clickable: Cli
                 100, 900 -> if (numShades < 5) return@shadeLoop
                 else -> if (numShades < SHADE_NUMBERS.size) return@shadeLoop
             }
-            val cell = RemoteViews(context.packageName, R.layout.paint_chip)
+            val cell = RemoteViews(context.packageName, R.layout.s_paint_chip)
             cell.setTextViewText(R.id.chip, "${COLOR_NAMES[i]}-${SHADE_NUMBERS[j]}")
             val textColor = if (SHADE_NUMBERS[j] > 500)
                     colorlist[0]

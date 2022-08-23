@@ -2,6 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android_s.egg">
 
+    <!--    <uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
+
+    <!-- used for cat notifications -->
+    <!--    <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />-->
+
+    <!-- used to save cat images -->
+    <!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+
+    <!-- controls -->
+    <uses-permission android:name="android.permission.BIND_CONTROLS" />
+
     <application>
         <activity
             android:name=".PlatLogoActivity"
@@ -9,6 +20,28 @@
             android:exported="true"
             android:icon="@drawable/s_platlogo"
             android:theme="@android:style/Theme.DeviceDefault.Wallpaper.NoTitleBar" />
+
+        <!-- Android N easter egg bits -->
+        <activity
+            android:name=".neko.NekoLand"
+            android:exported="true"
+            android:label="@string/s_app_name"
+            android:theme="@android:style/Theme.Material.NoActionBar">
+            <intent-filter>
+                <!--                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />-->
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- This is where the magic happens -->
+        <service
+            android:name=".neko.NekoService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- Used to show over lock screen -->
 
         <!-- Used to enable easter egg -->
         <activity
@@ -20,20 +53,31 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-<!--                <category android:name="com.android.internal.category.PLATLOGO" />-->
+                <!--                <category android:name="com.android.internal.category.PLATLOGO" />-->
             </intent-filter>
         </activity>
 
         <!-- Android S easter egg bits -->
+        <service
+            android:name=".neko.NekoControlsService"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/s_ic_fullcat_icon"
+            android:label="@string/s_egg_name"
+            android:permission="android.permission.BIND_CONTROLS">
+            <intent-filter>
+                <action android:name="android.service.controls.ControlsProviderService" />
+            </intent-filter>
+        </service>
 
         <!-- List of all system theme colors on the device. -->
         <activity
             android:name=".widget.PaintChipsActivity"
-            android:theme="@android:style/Theme.Material.Wallpaper.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize|uiMode"
-            android:label="@string/s_egg_name"
             android:enabled="false"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/s_egg_name"
+            android:theme="@android:style/Theme.Material.Wallpaper.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -43,16 +87,16 @@
              the workspace) -->
         <receiver
             android:name=".widget.PaintChipsWidget"
-            android:label="@string/s_egg_name"
+            android:enabled="false"
             android:exported="true"
-            android:enabled="false">
+            android:label="@string/s_egg_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/paint_chips_widget_info" />
+                android:resource="@xml/s_paint_chips_widget_info" />
         </receiver>
     </application>
 

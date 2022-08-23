@@ -54,7 +54,7 @@ import com.dede.basic.SpUtils;
 public class PlatLogoActivity extends Activity {
     private static final String TAG = "PlatLogoActivity";
 
-    private static final String S_EGG_UNLOCK_SETTING = "egg_mode_t";
+    private static final String S_EGG_UNLOCK_SETTING = "t_egg_mode";
 
     private SettableAnalogClock mClock;
     private ImageView mLogo;

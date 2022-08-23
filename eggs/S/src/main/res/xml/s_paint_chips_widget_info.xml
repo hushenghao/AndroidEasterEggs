@@ -14,17 +14,13 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/chip"
-    android:layout_width="10dp" android:layout_height="10dp"
-    android:layout_gravity="fill" android:layout_columnWeight="1" android:layout_rowWeight="1"
-    android:text="A1-500"
-    android:backgroundTint="@android:color/system_accent1_500"
-    android:background="@drawable/roundrect"
-    android:gravity="center"
-    android:textColor="?android:attr/textColorPrimary"
-    android:fontFamily="?android:attr/textAppearanceLarge"
-    android:layout_margin="2dp"
-    android:singleLine="true"
+    android:initialLayout="@layout/s_paint_chip"
+    android:previewLayout="@layout/s_paint_chips_widget_preview"
+    android:minWidth="50dp"
+    android:minHeight="50dp"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="86400000"
+    android:widgetCategory="home_screen"
     tools:targetApi="s" />

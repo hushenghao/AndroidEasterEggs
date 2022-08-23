@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android_s.egg.neko.NekoControlsService;
 import com.android_s.egg.widget.PaintChipsActivity;
 import com.android_s.egg.widget.PaintChipsWidget;
 import com.dede.basic.SpUtils;
@@ -32,7 +33,7 @@ import com.dede.basic.SpUtils;
 public class ComponentActivationActivity extends Activity {
     private static final String TAG = "EasterEgg";
 
-    private static final String S_EGG_UNLOCK_SETTING = "egg_mode_s";
+    private static final String S_EGG_UNLOCK_SETTING = "s_egg_mode";
 
     private void toastUp(String s) {
         Toast toast = Toast.makeText(this, s, Toast.LENGTH_SHORT);
@@ -50,7 +51,7 @@ public class ComponentActivationActivity extends Activity {
 
         final PackageManager pm = getPackageManager();
         final ComponentName[] cns = new ComponentName[]{
-                //new ComponentName(this, NekoControlsService.class),
+                new ComponentName(this, NekoControlsService.class),
                 new ComponentName(this, PaintChipsActivity.class),
                 new ComponentName(this, PaintChipsWidget.class)
         };

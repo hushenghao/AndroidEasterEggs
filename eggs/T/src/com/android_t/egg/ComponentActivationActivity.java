@@ -35,7 +35,7 @@ import com.android_t.egg.widget.PaintChipsWidget;
 public class ComponentActivationActivity extends Activity {
     private static final String TAG = "EasterEgg";
 
-    private static final String S_EGG_UNLOCK_SETTING = "egg_mode_s";
+    private static final String S_EGG_UNLOCK_SETTING = "t_egg_mode";
 
     private void toastUp(String s) {
         Toast toast = Toast.makeText(this, s, Toast.LENGTH_SHORT);
