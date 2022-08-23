@@ -22,16 +22,16 @@ import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.format.Time;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -41,19 +41,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
-import com.dede.basic.AnalogClock;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.dede.basic.AnalogClock;
 import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
-
-import org.json.JSONObject;
-
-import java.time.Clock;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 /**
  * @hide
@@ -329,11 +322,11 @@ public class PlatLogoActivity extends Activity {
                     "🤪", "😝", "🤑", "🤗", "🤭", "🫢", "🫣", "🤫", "🤔", "🫡", "🤐", "🤨", "😐",
                     "😑", "😶", "🫥", "😏", "😒", "🙄", "😬", "🤥", "😌", "😔", "😪", "🤤", "😴",
                     "😷"},
-            { "🤩", "😍", "🥰", "😘", "🥳", "🥲", "🥹" },
-            { "🫠" },
+            {"🤩", "😍", "🥰", "😘", "🥳", "🥲", "🥹"},
+            {"🫠"},
             {"💘", "💝", "💖", "💗", "💓", "💞", "💕", "❣", "💔", "❤", "🧡", "💛",
                     "💚", "💙", "💜", "🤎", "🖤", "🤍"},
-            // {"👁", "️🫦", "👁️"}, // this one is too much
+            {"👁", "️🫦", "👁️"}, // this one is too much
             {"👽", "🛸", "✨", "🌟", "💫", "🚀", "🪐", "🌙", "⭐", "🌍"},
             {"🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"},
             {"🐙", "🪸", "🦑", "🦀", "🦐", "🐡", "🦞", "🐠", "🐟", "🐳", "🐋", "🐬", "🫧", "🌊",
@@ -389,11 +382,18 @@ public class PlatLogoActivity extends Activity {
         public float minR = 0f;
 
         BubblesDrawable() {
-            for (int i = 0; i < mColorIds.length; i++) {
-                mColors[i] = DrawableKt.getSystemColor(PlatLogoActivity.this, mColorIds[i]);
+            try {
+                for (int i = 0; i < mColorIds.length; i++) {
+                    mColors[i] = DrawableKt.getSystemColor(PlatLogoActivity.this, mColorIds[i]);
+                }
+            } catch (Exception ignore) {
             }
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j] = new Bubble();
+            }
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                Typeface typeface = Typeface.createFromAsset(PlatLogoActivity.this.getAssets(), "NotoColorEmojiFlags.ttf");
+                mPaint.setTypeface(typeface);
             }
         }
 
@@ -409,7 +409,7 @@ public class PlatLogoActivity extends Activity {
                 if (mBubbs[j].text != null) {
                     mPaint.setTextSize(mBubbs[j].r * 1.75f);
                     canvas.drawText(mBubbs[j].text, mBubbs[j].x,
-                            mBubbs[j].y  + mBubbs[j].r * f * 0.6f, mPaint);
+                            mBubbs[j].y + mBubbs[j].r * f * 0.6f, mPaint);
                 } else {
                     mPaint.setColor(mBubbs[j].color);
                     canvas.drawCircle(mBubbs[j].x, mBubbs[j].y, mBubbs[j].r * f, mPaint);
@@ -488,10 +488,12 @@ public class PlatLogoActivity extends Activity {
         }
 
         @Override
-        public void setAlpha(int alpha) { }
+        public void setAlpha(int alpha) {
+        }
 
         @Override
-        public void setColorFilter(ColorFilter colorFilter) { }
+        public void setColorFilter(ColorFilter colorFilter) {
+        }
 
         @Override
         public int getOpacity() {
