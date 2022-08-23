@@ -16,11 +16,11 @@
 <animation-list
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:oneshot="false">
-    <item android:drawable="@drawable/star0" android:duration="200" />
-    <item android:drawable="@drawable/star1" android:duration="200" />
-    <item android:drawable="@drawable/star2" android:duration="200" />
-    <item android:drawable="@drawable/star3" android:duration="200" />
-    <item android:drawable="@drawable/star4" android:duration="200" />
-    <item android:drawable="@drawable/star5" android:duration="200" />
+    <item android:drawable="@drawable/i_star0" android:duration="200" />
+    <item android:drawable="@drawable/i_star1" android:duration="200" />
+    <item android:drawable="@drawable/i_star2" android:duration="200" />
+    <item android:drawable="@drawable/i_star3" android:duration="200" />
+    <item android:drawable="@drawable/i_star4" android:duration="200" />
+    <item android:drawable="@drawable/i_star5" android:duration="200" />
 </animation-list>
 

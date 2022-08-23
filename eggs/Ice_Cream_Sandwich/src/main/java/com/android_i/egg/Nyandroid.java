@@ -69,7 +69,7 @@ public class Nyandroid extends Activity {
 
             public FlyingCat(Context context, AttributeSet as) {
                 super(context, as);
-                setImageResource(R.drawable.nyandroid_anim); // @@@
+                setImageResource(R.drawable.i_nyandroid_anim); // @@@
 
                 if (DEBUG) setBackgroundColor(0x80FF0000);
             }
@@ -121,7 +121,7 @@ public class Nyandroid extends Activity {
                 for (int i = 0; i < 20; i++) {
                     ImageView fixedStar = new ImageView(getContext(), null);
                     if (DEBUG) fixedStar.setBackgroundColor(0x8000FF80);
-                    fixedStar.setImageResource(R.drawable.star_anim); // @@@
+                    fixedStar.setImageResource(R.drawable.i_star_anim); // @@@
                     addView(fixedStar, wrap);
                     final float scale = randfrange(0.1f, 1f);
                     fixedStar.setScaleX(scale);
