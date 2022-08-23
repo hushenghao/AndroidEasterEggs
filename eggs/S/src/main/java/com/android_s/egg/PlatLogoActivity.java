@@ -46,6 +46,7 @@ import android.widget.ImageView;
 
 import androidx.core.content.ContextCompat;
 
+import com.dede.basic.AnalogClock;
 import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
 

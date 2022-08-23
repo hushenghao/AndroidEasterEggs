@@ -8,7 +8,7 @@ val keystoreProperties = Properties().apply {
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -19,8 +19,8 @@ android {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
-        versionCode = 14
-        versionName = "1.6.2"
+        versionCode = 16
+        versionName = "1.7.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.addAll(listOf("zh", "en"))
@@ -69,7 +69,6 @@ android {
 }
 
 dependencies {
-    implementation(deps.kotlin.stdlib)
     implementation(deps.androidx.appcompat)
     implementation(deps.androidx.core.ktx)
     implementation(deps.androidx.preference.ktx)
@@ -79,6 +78,7 @@ dependencies {
     implementation(deps.free.reflection)
     debugImplementation(deps.leakcanary)
     implementation(project(":basic"))
+    implementation(project(":eggs:T"))
     implementation(project(":eggs:S"))
     implementation(project(":eggs:R"))
     implementation(project(":eggs:Q"))
@@ -105,8 +105,8 @@ tasks.register<Exec>("pgyer") {
     dependsOn("clean", assemble)
     assemble.mustRunAfter("clean")
 
-    val tree = fileTree("build/intermediates/apk/release") {
-        include("*.apk")
+    val tree = fileTree("build") {
+        include("outputs/apk/release/*.apk", "intermediates/apk/release/*.apk")
         builtBy("assembleRelease")
     }
     doFirst {

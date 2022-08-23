@@ -1,0 +1,42 @@
+
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdkVersion Versions.COMPILE_SDK
+    buildToolsVersion Versions.BUILD_TOOLS
+
+    defaultConfig {
+        minSdkVersion Versions.MIN_SDK
+        targetSdkVersion Versions.TARGET_SDK
+    }
+
+    resourcePrefix "t_"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+	sourceSets {
+		main {
+			res.srcDirs = ['res']
+			java.srcDirs = ['src']
+			manifest.srcFile 'AndroidManifest.xml'
+		}
+	}
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation(deps.androidx.appcompat)
+    implementation(deps.androidx.core.ktx)
+    implementation(deps.androidx.recyclerview)
+    implementation(deps.google.material)
+    implementation project(path: ':basic')
+}
+

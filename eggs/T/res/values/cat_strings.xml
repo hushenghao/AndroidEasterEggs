@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="t_notification_name" translatable="false">Android Neko</string>
+    <string name="t_notification_channel_name" translatable="false">New cats</string>
+    <string name="t_notification_title" translatable="false">A cat is here.</string>
+    <string name="t_default_cat_name" translatable="false">Cat #%s</string>
+    <string name="t_confirm_delete" translatable="false">Forget %s?</string>
+    <integer-array name="t_food_new_cat_prob">
+        <item>0</item>
+        <item>5</item>
+        <item>35</item>
+        <item>65</item>
+        <item>90</item>
+    </integer-array>
+    <string-array name="t_cat_messages" translatable="false">
+        <item>😸</item>
+        <item>😹</item>
+        <item>😺</item>
+        <item>😻</item>
+        <item>😼</item>
+        <item>😽</item>
+        <item>😾</item>
+        <item>😿</item>
+        <item>🙀</item>
+        <item>💩</item>
+        <item>🐁</item>
+    </string-array>
+    <string-array name="t_rare_cat_messages" translatable="false">
+        <item>🍩</item>
+        <item>🍭</item>
+        <item>🍫</item>
+        <item>🍨</item>
+        <item>🔔</item>
+        <item>🐝</item>
+        <item>🍪</item>
+        <item>🥧</item>
+    </string-array>
+    <string name="t_control_toy_title" translatable="false">Toy</string>
+    <string name="t_control_toy_subtitle" translatable="false">Tap to use</string>
+    <string name="t_control_toy_status" translatable="false">Cat attracted!</string>
+    <string name="t_control_water_title" translatable="false">Water bubbler</string>
+    <string name="t_control_water_subtitle" translatable="false">Swipe to fill</string>
+    <string name="t_control_food_title" translatable="false">Food bowl</string>
+    <string name="t_control_food_subtitle" translatable="false">Tap to refill</string>
+    <string name="t_control_food_status_full" translatable="false">Full</string>
+    <string name="t_control_food_status_empty" translatable="false">Empty</string>
+</resources>
+

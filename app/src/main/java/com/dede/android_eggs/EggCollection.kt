@@ -34,8 +34,8 @@ class EggCollection : PreferenceCategory {
         }
     }
 
-    override fun onGetDefaultValue(a: TypedArray?, index: Int): Boolean {
-        return a?.getBoolean(index, false) ?: false
+    override fun onGetDefaultValue(a: TypedArray, index: Int): Boolean {
+        return a.getBoolean(index, false)
     }
 
     override fun onSetInitialValue(defaultValue: Any?) {

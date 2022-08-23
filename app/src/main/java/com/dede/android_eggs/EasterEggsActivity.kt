@@ -6,6 +6,7 @@ import android.view.ViewAnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
+import com.google.android.material.internal.EdgeToEdgeUtils
 import kotlin.math.hypot
 
 /**
@@ -25,6 +26,7 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
         postAnim()
     }
 
+    @Suppress("DEPRECATION")
     private fun initStatusBar() {
         val option =
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE

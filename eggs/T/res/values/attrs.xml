@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="T_AppWidgetAttrs">
+        <attr name="t_appWidgetBackgroundColor" format="color" />
+        <attr name="t_appWidgetTextColor" format="color" />
+    </declare-styleable>
+</resources>
