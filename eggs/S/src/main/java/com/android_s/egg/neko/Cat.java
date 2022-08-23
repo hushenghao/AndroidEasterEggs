@@ -39,6 +39,7 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 
 import com.android_s.egg.R;
+import com.dede.basic.CatRandom;
 //import com.android.internal.logging.MetricsLogger;
 
 import java.io.ByteArrayOutputStream;
@@ -238,7 +239,7 @@ public class Cat extends Drawable {
     }
 
     public static Cat create(Context context) {
-        return new Cat(context, Math.abs(ThreadLocalRandom.current().nextInt()));
+        return new Cat(context, Math.abs(CatRandom.get().nextInt()));
     }
 
     public Notification.Builder buildNotification(Context context) {

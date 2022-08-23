@@ -48,6 +48,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import static com.android_r.egg.neko.NekoLand.CHAN_ID;
 
 //import com.android.internal.logging.MetricsLogger;
+import com.dede.basic.CatRandom;
 
 /**
  * It's a cat.
@@ -242,7 +243,7 @@ public class Cat extends Drawable {
     }
 
     public static Cat create(Context context) {
-        return new Cat(context, Math.abs(ThreadLocalRandom.current().nextInt()));
+        return new Cat(context, Math.abs(CatRandom.get().nextInt()));
     }
 
     public Notification.Builder buildNotification(Context context) {

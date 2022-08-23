@@ -238,7 +238,7 @@ public class Cat extends Drawable {
     }
 
     public static Cat create(Context context) {
-        return new Cat(context, Math.abs(ThreadLocalRandom.current().nextInt()));
+        return new Cat(context, Math.abs(CatRandom.get().nextInt()));
     }
 
     public Notification.Builder buildNotification(Context context) {
