@@ -1,7 +1,5 @@
 package com.dede.basic
 
-import kotlin.random.asJavaRandom
-
 /**
  * Cat Eggs Random impl
  *
@@ -13,7 +11,7 @@ object CatRandom {
     @JvmStatic
     fun get(): java.util.Random {
         //return ThreadLocalRandom.current()// default
-        return kotlin.random.Random.asJavaRandom()
+        return java.util.Random()
     }
 
 }
