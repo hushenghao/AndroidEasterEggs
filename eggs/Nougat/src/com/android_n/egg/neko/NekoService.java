@@ -45,7 +45,7 @@ public class NekoService extends JobService {
     public static int JOB_ID = 42;
 
     public static int CAT_NOTIFICATION = 1;
-    public static final String CHAN_ID = "EGG_N";
+    public static final String CHAN_ID = "N_EGG";
 
     public static float CAT_CAPTURE_PROB = 1.0f; // generous
 
@@ -82,7 +82,7 @@ public class NekoService extends JobService {
             if (rng.nextFloat() <= CAT_CAPTURE_PROB) {
                 Cat cat;
                 List<Cat> cats = prefs.getCats();
-                final int[] probs = getResources().getIntArray(R.array.food_new_cat_prob);
+                final int[] probs = getResources().getIntArray(R.array.n_food_new_cat_prob);
                 final float new_cat_prob = (float) ((food < probs.length) ? probs[food] : 50) / 100f;
 
                 if (cats.size() == 0 || rng.nextFloat() <= new_cat_prob) {
@@ -133,7 +133,7 @@ public class NekoService extends JobService {
         NotificationManager noman = context.getSystemService(NotificationManager.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(CHAN_ID,
-                    context.getString(R.string.notification_channel_name), NotificationManager.IMPORTANCE_DEFAULT);
+                    context.getString(R.string.n_notification_channel_name), NotificationManager.IMPORTANCE_DEFAULT);
             channel.setSound(Uri.EMPTY, Notification.AUDIO_ATTRIBUTES_DEFAULT); // cats are quiet
             channel.setVibrationPattern(PURR); // not totally quiet though
             //eggChan.setBlockableSystem(true); // unlike a real cat, you can push this one off your lap
@@ -142,7 +142,7 @@ public class NekoService extends JobService {
         }
         if (NekoLand.DEBUG_NOTIFICATIONS) {
             Notification.Builder builder = new Notification.Builder(context)
-                    .setSmallIcon(R.drawable.stat_icon)
+                    .setSmallIcon(R.drawable.n_stat_icon)
                     .setContentTitle(String.format("Job scheduled in %d min", (interval / MINUTES)))
                     .setContentText(String.valueOf(jobInfo))
                     .setPriority(Notification.PRIORITY_MIN)

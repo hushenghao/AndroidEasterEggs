@@ -53,7 +53,7 @@ import java.util.List;
 
 @RequiresApi(Build.VERSION_CODES.S)
 public class NekoLand extends Activity implements PrefsListener {
-    public static String CHAN_ID = "EGG";
+    public static String CHAN_ID = "S_EGG";
 
     public static boolean DEBUG = false;
     public static boolean DEBUG_NOTIFICATIONS = false;

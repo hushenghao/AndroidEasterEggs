@@ -16,35 +16,34 @@ Copyright (C) 2016 The Android Open Source Project
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="n_app_name">Neko</string>
-    <string name="notification_name" translatable="false">Android N Neko</string>
-    <string name="notification_channel_name" translatable="false">New cats(N)</string>
-    <string name="default_tile_name" translatable="false">\????</string>
+    <string name="n_notification_name" translatable="false">Android N Neko</string>
+    <string name="n_notification_channel_name" translatable="false">New cats(N)</string>
+    <string name="n_default_tile_name" translatable="false">\????</string>
     <string name="notification_title" translatable="false">A cat is here.</string>
-    <string name="default_cat_name" translatable="false">Cat #%s</string>
-    <string name="directory_name" translatable="false">Cats</string>
-    <string name="confirm_delete" translatable="false">Forget %s?</string>
-    <string-array name="food_names" translatable="false">
+    <string name="n_default_cat_name" translatable="false">Cat #%s</string>
+    <string name="n_confirm_delete" translatable="false">Forget %s?</string>
+    <string-array name="n_food_names" translatable="false">
         <item>Empty dish</item>
         <item>Bits</item>
         <item>Fish</item>
         <item>Chicken</item>
         <item>Treat</item>
     </string-array>
-    <array name="food_icons">
-        <item>@drawable/food_dish</item>
-        <item>@drawable/food_bits</item>
-        <item>@drawable/food_sysuituna</item>
-        <item>@drawable/food_chicken</item>
-        <item>@drawable/food_donut</item>
+    <array name="n_food_icons">
+        <item>@drawable/n_food_dish</item>
+        <item>@drawable/n_food_bits</item>
+        <item>@drawable/n_food_sysuituna</item>
+        <item>@drawable/n_food_chicken</item>
+        <item>@drawable/n_food_donut</item>
     </array>
-    <integer-array name="food_intervals">
+    <integer-array name="n_food_intervals">
         <item>0</item>
         <item>15</item>
         <item>30</item>
         <item>60</item>
         <item>120</item>
     </integer-array>
-    <integer-array name="food_new_cat_prob">
+    <integer-array name="n_food_new_cat_prob">
         <item>0</item>
         <item>5</item>
         <item>35</item>

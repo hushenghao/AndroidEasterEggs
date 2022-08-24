@@ -52,7 +52,7 @@ import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.S)
 public class NekoLand extends Activity implements PrefState.PrefsListener {
-    public static String CHAN_ID = "EGG";
+    public static String CHAN_ID = "T_EGG";
 
     public static boolean DEBUG = false;
     public static boolean DEBUG_NOTIFICATIONS = false;

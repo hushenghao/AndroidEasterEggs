@@ -33,7 +33,7 @@ public class Ocquarium extends Activity {
         super.onCreate(savedInstanceState);
         final float dp = getResources().getDisplayMetrics().density;
 
-        getWindow().setBackgroundDrawableResource(R.drawable.octo_bg);
+        getWindow().setBackgroundDrawableResource(R.drawable.o_octo_bg);
 
         FrameLayout bg = new FrameLayout(this);
         setContentView(bg);
