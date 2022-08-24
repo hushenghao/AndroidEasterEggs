@@ -18,6 +18,5 @@ Copyright (C) 2018 The Android Open Source Project
 
     <!-- name of the S easter egg, a widget that displays the system color palette
          in a manner similar to a set of paint samples from a hardware store -->
-<!--    <string name="s_egg_name" translatable="false">Paint Chips</string>-->
-    <string name="s_egg_name" translatable="false">Snow Cone</string>
+    <string name="s_egg_name" translatable="false">Paint Chips</string>
 </resources>

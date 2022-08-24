@@ -15,7 +15,7 @@
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_s"
-            app:icon="@drawable/s_platlogo"
+            app:icon="@drawable/s_icon"
             app:iconPadding="1.5dp"
             app:summary="@string/s_egg_name"
             app:title="@string/title_android_s" />
