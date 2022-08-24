@@ -36,7 +36,7 @@
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_gravity="center"
-            android:background="@drawable/ripplebg"
+            android:background="@drawable/m_ripplebg"
             android:clickable="true"
             android:focusable="true"
             android:onClick="startButtonPressed">
@@ -47,7 +47,7 @@
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:scaleType="fitCenter"
-                android:src="@drawable/play"
+                android:src="@drawable/m_play"
                 android:tint="#000000" />
 
             <TextView
@@ -77,7 +77,7 @@
             android:onClick="playerMinus"
             android:padding="10dp"
             android:scaleType="centerInside"
-            android:src="@drawable/minus" />
+            android:src="@drawable/m_minus" />
 
         <LinearLayout
             android:id="@+id/scores"
@@ -95,6 +95,6 @@
             android:onClick="playerPlus"
             android:padding="10dp"
             android:scaleType="centerInside"
-            android:src="@drawable/plus" />
+            android:src="@drawable/m_plus" />
     </LinearLayout>
 </FrameLayout>

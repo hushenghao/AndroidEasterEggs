@@ -15,29 +15,29 @@
      limitations under the License.
 -->
 <resources>
-    <dimen name="obstacle_spacing">380dp</dimen>
-    <dimen name="translation_per_sec">100dp</dimen>
-    <dimen name="boost_dv">550dp</dimen>
-    <dimen name="player_hit_size">40dp</dimen>
-    <dimen name="player_size">40dp</dimen>
-    <dimen name="obstacle_width">130dp</dimen>
-    <dimen name="obstacle_stem_width">8dp</dimen>
-    <dimen name="obstacle_gap">140dp</dimen>
-    <dimen name="obstacle_height_min">48dp</dimen>
-    <dimen name="building_width_min">50dp</dimen>
-    <dimen name="building_width_max">250dp</dimen>
-    <dimen name="building_height_min">20dp</dimen>
-    <dimen name="cloud_size_min">10dp</dimen>
-    <dimen name="cloud_size_max">100dp</dimen>
-    <dimen name="sun_size">45dp</dimen>
-    <dimen name="moon_size">30dp</dimen>
-    <dimen name="star_size_min">3dp</dimen>
-    <dimen name="star_size_max">5dp</dimen>
-    <dimen name="G">30dp</dimen>
-    <dimen name="max_v">1000dp</dimen>
-    <dimen name="scenery_z">6dp</dimen>
-    <dimen name="obstacle_z">18dp</dimen>
-    <dimen name="player_z">18dp</dimen>
-    <dimen name="player_z_boost">20dp</dimen>
-    <dimen name="hud_z">10dp</dimen>
+    <dimen name="m_obstacle_spacing">380dp</dimen>
+    <dimen name="m_translation_per_sec">100dp</dimen>
+    <dimen name="m_boost_dv">550dp</dimen>
+    <dimen name="m_player_hit_size">40dp</dimen>
+    <dimen name="m_player_size">40dp</dimen>
+    <dimen name="m_obstacle_width">130dp</dimen>
+    <dimen name="m_obstacle_stem_width">8dp</dimen>
+    <dimen name="m_obstacle_gap">140dp</dimen>
+    <dimen name="m_obstacle_height_min">48dp</dimen>
+    <dimen name="m_building_width_min">50dp</dimen>
+    <dimen name="m_building_width_max">250dp</dimen>
+    <dimen name="m_building_height_min">20dp</dimen>
+    <dimen name="m_cloud_size_min">10dp</dimen>
+    <dimen name="m_cloud_size_max">100dp</dimen>
+    <dimen name="m_sun_size">45dp</dimen>
+    <dimen name="m_moon_size">30dp</dimen>
+    <dimen name="m_star_size_min">3dp</dimen>
+    <dimen name="m_star_size_max">5dp</dimen>
+    <dimen name="m_G">30dp</dimen>
+    <dimen name="m_max_v">1000dp</dimen>
+    <dimen name="m_scenery_z">6dp</dimen>
+    <dimen name="m_obstacle_z">18dp</dimen>
+    <dimen name="m_player_z">18dp</dimen>
+    <dimen name="m_player_z_boost">20dp</dimen>
+    <dimen name="m_hud_z">10dp</dimen>
 </resources>

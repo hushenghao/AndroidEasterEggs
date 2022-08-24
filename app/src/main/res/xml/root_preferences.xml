@@ -74,7 +74,7 @@
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_m"
             app:icon="@drawable/m_icon"
-            app:summary="@string/mland"
+            app:summary="@string/m_mland"
             app:title="@string/title_android_m" />
 
         <com.dede.android_eggs.EggPreference

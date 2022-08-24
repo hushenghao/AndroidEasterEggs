@@ -121,6 +121,7 @@ private fun Uri.finishPending(
         }
         resolver.update(this, imageValues, null, null)
         // 通知媒体库更新
+        @Suppress("DEPRECATION")
         val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, this)
         context.sendBroadcast(intent)
     } else {

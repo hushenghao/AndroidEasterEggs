@@ -36,7 +36,7 @@
             android:paddingRight="16dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:background="@drawable/scorecard"
+            android:background="@drawable/l_scorecard"
             />
     <TextView
             android:id="@+id/welcome"

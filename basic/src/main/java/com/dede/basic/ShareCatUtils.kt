@@ -34,7 +34,6 @@ object ShareCatUtils {
 
     @JvmStatic
     fun share(activity: Activity, bitmap: Bitmap, catName: String) {
-
         GlobalScope.launch {
             val uri = saveCat(activity, bitmap, catName) ?: return@launch
             Log.v("Neko", "cat uri: $uri")
