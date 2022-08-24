@@ -17,9 +17,11 @@
 package com.android_p.egg.paint
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
-import android.view.*
+import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.WindowInsets
 import android.widget.LinearLayout
 
 class CutoutAvoidingToolbar : LinearLayout {
@@ -49,6 +51,9 @@ class CutoutAvoidingToolbar : LinearLayout {
     }
 
     fun adjustLayout() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            return
+        }
         _insets?.displayCutout?.boundingRects?.let {
             var cutoutCenter = 0
             var cutoutLeft = 0

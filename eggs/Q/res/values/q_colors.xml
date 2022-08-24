@@ -14,18 +14,18 @@
      limitations under the License.
 -->
 <resources>
-    <color name="emerald">#3ddc84</color>
-    <color name="red">#f8c734</color>
-    <color name="navy">#073042</color>
-    <color name="vapor">#d7effe</color>
-    <color name="tan">#eff7cf</color>
+    <color name="q_emerald">#3ddc84</color>
+    <color name="q_red">#f8c734</color>
+    <color name="q_navy">#073042</color>
+    <color name="q_vapor">#d7effe</color>
+    <color name="q_tan">#eff7cf</color>
 
-    <color name="pixel_off">#FFFFFF</color>
-    <color name="pixel_on">#000000</color>
+    <color name="q_pixel_off">#FFFFFF</color>
+    <color name="q_pixel_on">#000000</color>
 
-    <color name="q_clue_bg">@color/tan</color>
-    <color name="q_clue_text">@color/navy</color>
-    <color name="q_clue_bg_correct">@color/emerald</color>
+    <color name="q_clue_bg">@color/q_tan</color>
+    <color name="q_clue_text">@color/q_navy</color>
+    <color name="q_clue_bg_correct">@color/q_emerald</color>
 
-    <color name="q_icon_fg">@color/emerald</color>
+    <color name="q_icon_fg">@color/q_emerald</color>
 </resources>

@@ -21,7 +21,7 @@
     android:layout_height="50dp"
     android:orientation="horizontal"
     android:gravity="left"
-    android:background="@drawable/toolbar_bg"
+    android:background="@drawable/p_toolbar_bg"
     android:elevation="20dp"
     >
 
@@ -44,8 +44,8 @@
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:tint="@color/toolbar_icon_color"
-            android:background="@drawable/toolbar_button_bg"
+            android:tint="@color/p_toolbar_icon_color"
+            android:background="@drawable/p_toolbar_button_bg"
             />
 
         <ImageButton
@@ -53,8 +53,8 @@
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:tint="@color/toolbar_icon_color"
-            android:background="@drawable/toolbar_button_bg"
+            android:tint="@color/p_toolbar_icon_color"
+            android:background="@drawable/p_toolbar_button_bg"
             />
 
         <ImageButton
@@ -62,9 +62,9 @@
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/toolbar_button_bg"
-            android:tint="@color/toolbar_icon_color"
-            android:src="@drawable/ic_dropper" />
+            android:background="@drawable/p_toolbar_button_bg"
+            android:tint="@color/p_toolbar_icon_color"
+            android:src="@drawable/p_ic_dropper" />
 
     </LinearLayout>
 
@@ -87,18 +87,18 @@
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/toolbar_button_bg"
-            android:tint="@color/toolbar_icon_color"
-            android:src="@drawable/ic_hourglass" />
+            android:background="@drawable/p_toolbar_button_bg"
+            android:tint="@color/p_toolbar_icon_color"
+            android:src="@drawable/p_ic_hourglass" />
 
         <ImageButton
             android:id="@+id/btnClear"
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/toolbar_button_bg"
-            android:tint="@color/toolbar_icon_color"
-            android:src="@drawable/ic_clear" />
+            android:background="@drawable/p_toolbar_button_bg"
+            android:tint="@color/p_toolbar_icon_color"
+            android:src="@drawable/p_ic_clear" />
 
     </LinearLayout>
 

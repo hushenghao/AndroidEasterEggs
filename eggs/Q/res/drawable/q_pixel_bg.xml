@@ -16,12 +16,12 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     android:exitFadeDuration="100">
     <item android:state_pressed="true">
-        <shape><solid android:color="@color/red"/></shape>
+        <shape><solid android:color="@color/q_red"/></shape>
     </item>
     <item android:state_checked="true">
-        <shape><solid android:color="@color/pixel_on"/></shape>
+        <shape><solid android:color="@color/q_pixel_on"/></shape>
     </item>
     <item>
-        <shape><solid android:color="@color/pixel_off"/></shape>
+        <shape><solid android:color="@color/q_pixel_off"/></shape>
     </item>
 </selector>

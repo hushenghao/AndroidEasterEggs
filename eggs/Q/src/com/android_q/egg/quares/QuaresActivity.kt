@@ -61,7 +61,7 @@ class QuaresActivity : Activity() {
 
         actionBar?.hide()
 
-        setContentView(R.layout.activity_quares)
+        setContentView(R.layout.q_activity_quares)
 
         grid = findViewById(R.id.grid)
         label = findViewById(R.id.label)
@@ -102,7 +102,7 @@ class QuaresActivity : Activity() {
         resId = android.R.drawable.stat_sys_warning
         try {
             for (tries in 0..3) {
-                val ar = resources.obtainTypedArray(R.array.puzzles)
+                val ar = resources.obtainTypedArray(R.array.q_puzzles)
                 val newName = ar.getString(Random().nextInt(ar.length()))
                 if (newName == null) continue
 
@@ -271,7 +271,7 @@ class QuaresActivity : Activity() {
 
 class PixelButton(context: Context) : CompoundButton(context) {
     init {
-        setBackgroundResource(R.drawable.pixel_bg)
+        setBackgroundResource(R.drawable.q_pixel_bg)
         isClickable = true
         isEnabled = true
     }

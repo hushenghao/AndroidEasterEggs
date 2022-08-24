@@ -16,12 +16,14 @@
 
 package com.android_r.egg.neko;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -59,18 +61,18 @@ public class NekoLand extends Activity implements PrefsListener {
 
     private static final int EXPORT_BITMAP_SIZE = 600;
 
-    //private static final int STORAGE_PERM_REQUEST = 123;
+    private static final int STORAGE_PERM_REQUEST = 123;
 
     private static boolean CAT_GEN = false;
     private PrefState mPrefs;
     private CatAdapter mAdapter;
-    //private Cat mPendingShareCat;
+    private Cat mPendingShareCat;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.neko_activity);
+        setContentView(R.layout.r_neko_activity);
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setLogo(Cat.create(this));
@@ -141,7 +143,7 @@ public class NekoLand extends Activity implements PrefsListener {
         final Context context = new ContextThemeWrapper(this,
                 android.R.style.Theme_Material_Light_Dialog_NoActionBar);
         // TODO: Move to XML, add correct margins.
-        View view = LayoutInflater.from(context).inflate(R.layout.edit_text, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.r_edit_text, null);
         final EditText text = (EditText) view.findViewById(android.R.id.edit);
         text.setText(cat.getName());
         text.setSelection(cat.getName().length());
@@ -179,7 +181,7 @@ public class NekoLand extends Activity implements PrefsListener {
         @Override
         public CatHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             return new CatHolder(LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.cat_view, parent, false));
+                    .inflate(R.layout.r_cat_view, parent, false));
         }
 
         private void setContextGroupVisible(final CatHolder holder, boolean vis) {
@@ -210,7 +212,7 @@ public class NekoLand extends Activity implements PrefsListener {
         @Override
         public void onBindViewHolder(final CatHolder holder, int position) {
             Context context = holder.itemView.getContext();
-            final int size = context.getResources().getDimensionPixelSize(R.dimen.neko_display_size);
+            final int size = context.getResources().getDimensionPixelSize(R.dimen.r_neko_display_size);
             holder.imageView.setImageIcon(mCats[position].createIcon(context, size, size));
             holder.textView.setText(mCats[position].getName());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -231,7 +233,7 @@ public class NekoLand extends Activity implements PrefsListener {
                 public void onClick(View v) {
                     setContextGroupVisible(holder, false);
                     new AlertDialog.Builder(NekoLand.this)
-                            .setTitle(getString(R.string.confirm_delete, mCats[position].getName()))
+                            .setTitle(getString(R.string.r_confirm_delete, mCats[position].getName()))
                             .setNegativeButton(android.R.string.cancel, null)
                             .setPositiveButton(android.R.string.ok, new OnClickListener() {
                                 @Override
@@ -247,14 +249,18 @@ public class NekoLand extends Activity implements PrefsListener {
                 public void onClick(View v) {
                     setContextGroupVisible(holder, false);
                     Cat cat = mCats[holder.getAdapterPosition()];
-//                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                            != PackageManager.PERMISSION_GRANTED) {
-//                        mPendingShareCat = cat;
-//                        requestPermissions(
-//                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-//                                STORAGE_PERM_REQUEST);
-//                        return;
-//                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        shareCat(cat);
+                        return;
+                    }
+                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        mPendingShareCat = cat;
+                        requestPermissions(
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                STORAGE_PERM_REQUEST);
+                        return;
+                    }
                     shareCat(cat);
                 }
             });
@@ -274,16 +280,16 @@ public class NekoLand extends Activity implements PrefsListener {
         }
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode,
-//                                           String permissions[], int[] grantResults) {
-//        if (requestCode == STORAGE_PERM_REQUEST) {
-//            if (mPendingShareCat != null) {
-//                shareCat(mPendingShareCat);
-//                mPendingShareCat = null;
-//            }
-//        }
-//    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        if (requestCode == STORAGE_PERM_REQUEST) {
+            if (mPendingShareCat != null) {
+                shareCat(mPendingShareCat);
+                mPendingShareCat = null;
+            }
+        }
+    }
 
     private static class CatHolder extends RecyclerView.ViewHolder {
         private final ImageView imageView;

@@ -125,7 +125,7 @@ public class PaintActivity extends Activity {
     }
 
     void setupViews(Painting oldPainting) {
-        setContentView(R.layout.activity_paint);
+        setContentView(R.layout.p_activity_paint);
 
         painting = oldPainting != null ? oldPainting : new Painting(this);
         ((FrameLayout) findViewById(R.id.contentView)).addView(painting,
@@ -133,8 +133,8 @@ public class PaintActivity extends Activity {
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT));
 
-        painting.setPaperColor(ContextCompat.getColor(this, R.color.paper_color));
-        painting.setPaintColor(ContextCompat.getColor(this, R.color.paint_color));
+        painting.setPaperColor(ContextCompat.getColor(this, R.color.p_paper_color));
+        painting.setPaintColor(ContextCompat.getColor(this, R.color.p_paint_color));
 
         toolbar = findViewById(R.id.toolbar);
         brushes = findViewById(R.id.brushes);
@@ -211,9 +211,9 @@ public class PaintActivity extends Activity {
         });
 
         widthButtonDrawable = new BrushPropertyDrawable(this);
-        widthButtonDrawable.setFrameColor(ContextCompat.getColor(this, R.color.toolbar_icon_color));
+        widthButtonDrawable.setFrameColor(ContextCompat.getColor(this, R.color.p_toolbar_icon_color));
         colorButtonDrawable = new BrushPropertyDrawable(this);
-        colorButtonDrawable.setFrameColor(ContextCompat.getColor(this, R.color.toolbar_icon_color));
+        colorButtonDrawable.setFrameColor(ContextCompat.getColor(this, R.color.p_toolbar_icon_color));
 
         ((ImageButton) findViewById(R.id.btnBrush)).setImageDrawable(widthButtonDrawable);
         ((ImageButton) findViewById(R.id.btnColor)).setImageDrawable(colorButtonDrawable);
@@ -228,16 +228,16 @@ public class PaintActivity extends Activity {
         if (brushes.getChildCount() == 0) {
             for (int i = 0; i < NUM_BRUSHES; i++) {
                 final BrushPropertyDrawable icon = new BrushPropertyDrawable(this);
-                icon.setFrameColor(ContextCompat.getColor(this, R.color.toolbar_icon_color));
+                icon.setFrameColor(ContextCompat.getColor(this, R.color.p_toolbar_icon_color));
                 // exponentially increasing brush size
                 final float width = lerp(
                         (float) Math.pow((float) i / NUM_BRUSHES, 2f), minBrushWidth,
                         maxBrushWidth);
                 icon.setWellScale(width / maxBrushWidth);
-                icon.setWellColor(ContextCompat.getColor(this, R.color.toolbar_icon_color));
+                icon.setWellColor(ContextCompat.getColor(this, R.color.p_toolbar_icon_color));
                 final ImageButton button = new ImageButton(this);
                 button.setImageDrawable(icon);
-                button.setBackground(ContextCompat.getDrawable(this, R.drawable.toolbar_button_bg));
+                button.setBackground(ContextCompat.getDrawable(this, R.drawable.p_toolbar_button_bg));
                 button.setOnClickListener(
                         new View.OnClickListener() {
                             @Override
@@ -261,11 +261,11 @@ public class PaintActivity extends Activity {
             allColor[1] = Color.WHITE;
             for (final int c : allColor) {
                 final BrushPropertyDrawable icon = new BrushPropertyDrawable(this);
-                icon.setFrameColor(ContextCompat.getColor(this, R.color.toolbar_icon_color));
+                icon.setFrameColor(ContextCompat.getColor(this, R.color.p_toolbar_icon_color));
                 icon.setWellColor(c);
                 final ImageButton button = new ImageButton(this);
                 button.setImageDrawable(icon);
-                button.setBackground(ContextCompat.getDrawable(this, R.drawable.toolbar_button_bg));
+                button.setBackground(ContextCompat.getDrawable(this, R.drawable.p_toolbar_button_bg));
                 button.setOnClickListener(
                         new View.OnClickListener() {
                             @Override

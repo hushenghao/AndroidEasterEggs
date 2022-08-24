@@ -15,11 +15,6 @@
 -->
 <resources>
 
-<!--    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen">-->
-<!--        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>-->
-<!--        <item name="android:windowLightNavigationBar">true</item>-->
-<!--    </style>-->
-
 <!--    <style name="QuaresTheme" parent="@android:style/Theme.DeviceDefault.DayNight">-->
 <!--        <item name="android:windowIsTranslucent">true</item>-->
 <!--        <item name="android:windowBackground">@android:color/transparent</item>-->

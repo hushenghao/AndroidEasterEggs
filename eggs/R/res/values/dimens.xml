@@ -15,5 +15,5 @@ Copyright (C) 2016 The Android Open Source Project
     limitations under the License.
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <dimen name="neko_display_size">64dp</dimen>
+    <dimen name="r_neko_display_size">64dp</dimen>
 </resources>

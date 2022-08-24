@@ -15,7 +15,7 @@
 -->
 <resources>
 
-    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen">
+    <style name="PAppTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen">
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <item name="android:windowLightNavigationBar">true</item>
     </style>

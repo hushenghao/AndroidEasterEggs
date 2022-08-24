@@ -14,9 +14,9 @@
      limitations under the License.
 -->
 <resources>
-    <color name="pixel_off">#000000</color>
-    <color name="pixel_on">#FFFFFF</color>
+    <color name="q_pixel_off">#000000</color>
+    <color name="q_pixel_on">#FFFFFF</color>
 
-    <color name="q_clue_bg">@color/navy</color>
-    <color name="q_clue_text">@color/tan</color>
+    <color name="q_clue_bg">@color/q_navy</color>
+    <color name="q_clue_text">@color/q_tan</color>
 </resources>

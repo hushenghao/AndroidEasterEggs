@@ -15,7 +15,7 @@
     limitations under the License.
 -->
 <resources>
-    <color name="toolbar_bg_color">#FFDDDDDD</color>
-    <color name="paper_color">#FFFFFFFF</color>
-    <color name="paint_color">#FF000000</color>
+    <color name="p_toolbar_bg_color">#FFDDDDDD</color>
+    <color name="p_paper_color">#FFFFFFFF</color>
+    <color name="p_paint_color">#FF000000</color>
 </resources>

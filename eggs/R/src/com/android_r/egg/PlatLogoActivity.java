@@ -220,7 +220,7 @@ public class PlatLogoActivity extends Activity {
                 } else {
                     mNightMode = false;
                 }
-                mEleven = DrawableCompat.wrap(ContextCompat.getDrawable(getContext(), R.drawable.ic_number11));
+                mEleven = DrawableCompat.wrap(ContextCompat.getDrawable(getContext(), R.drawable.r_ic_number11));
                 mElevenShowAnimator.setInterpolator(PathInterpolatorCompat.create(0.4f, 0f, 0.2f, 1f));
                 mElevenHideAnimator.setInterpolator(PathInterpolatorCompat.create(0.8f, 0.2f, 0.6f, 1f));
             }

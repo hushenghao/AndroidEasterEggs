@@ -30,7 +30,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize|uiMode"
             android:exported="false"
             android:label="@string/p_app_name"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/PAppTheme" />
     </application>
 
 </manifest>

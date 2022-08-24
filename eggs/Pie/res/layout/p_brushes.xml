@@ -19,7 +19,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="left"
-    android:background="@drawable/toolbar_bg"
+    android:background="@drawable/p_toolbar_bg"
     android:elevation="10dp"
     >
 </LinearLayout>

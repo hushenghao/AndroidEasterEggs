@@ -23,20 +23,20 @@
     tools:context="com.android_p.egg.paint.PaintActivity"
     android:id="@+id/contentView" >
 
-    <include layout="@layout/toolbar"
+    <include layout="@layout/p_toolbar"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="top"
         />
-    <include layout="@layout/colors"
+    <include layout="@layout/p_colors"
         android:id="@+id/colors"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="top"
         android:visibility="gone"
         />
-    <include layout="@layout/brushes"
+    <include layout="@layout/p_brushes"
         android:id="@+id/brushes"
         android:layout_width="match_parent"
         android:layout_height="48dp"
