@@ -14,6 +14,7 @@
         <attr name="iconRadius" format="dimension" />
         <attr name="iconPadding" format="dimension" />
     </declare-styleable>
+
     <declare-styleable name="XXWHCA">
         <attr name="once" format="string" />
     </declare-styleable>

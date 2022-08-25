@@ -1,13 +1,22 @@
 package com.dede.android_eggs
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewAnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat.Type
+import androidx.core.view.updatePadding
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
+import com.google.android.material.color.DynamicColors
+import com.google.android.material.color.DynamicColorsOptions
+import com.google.android.material.color.MaterialColors
 import com.google.android.material.internal.EdgeToEdgeUtils
 import kotlin.math.hypot
+import com.google.android.material.R as MR
 
 /**
  * Easter Egg Collection
@@ -16,23 +25,29 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
 
     private lateinit var binding: ActivityEasterEggsBinding
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initStatusBar()
+
+        val options = DynamicColorsOptions.Builder()
+            .setThemeOverlay(MR.style.ThemeOverlay_Material3_DynamicColors_DayNight)
+            .build()
+        DynamicColors.applyToActivityIfAvailable(this, options)
+        val colorPrimary = MaterialColors.getColor(this, R.attr.colorPrimary, Color.WHITE)
+        EdgeToEdgeUtils.applyEdgeToEdge(window, true, colorPrimary, null)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
         binding = ActivityEasterEggsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        postAnim()
-    }
 
-    @Suppress("DEPRECATION")
-    private fun initStatusBar() {
-        val option =
-            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        val decorView = window.decorView
-        val visibility: Int = decorView.systemUiVisibility
-        decorView.systemUiVisibility = visibility or option
+        ViewCompat.setOnApplyWindowInsetsListener(binding.toolbar) { view, insets ->
+            val edge = insets.getInsets(Type.displayCutout() or Type.systemBars())
+            view.updatePadding(top = edge.top)
+            return@setOnApplyWindowInsetsListener insets
+        }
+
+        postAnim()
     }
 
     private fun postAnim() {

@@ -50,8 +50,8 @@
             app:summary="@string/o_app_name"
             app:title="@string/title_android_o_point">
             <intent
-                android:targetClass="@string/target_class_android_o"
-                android:targetPackage="@string/app_package">
+                android:targetClass="com.android_o.egg.PlatLogoActivity"
+                android:targetPackage="com.dede.android_eggs">
                 <extra
                     android:name="isOreoPoint"
                     android:value="true" />
