@@ -57,6 +57,7 @@ class EggPreference : Preference {
         arrays.recycle()
 
         finalTitle = title
+        isPersistent = false
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-conten>
+
+    <include domain="sharedpref" path="." />
+
+</full-backup-conten>
