@@ -19,15 +19,13 @@ package com.android_t.egg;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
-import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android_t.egg.neko.NekoControlsService;
 import com.android_t.egg.widget.PaintChipsActivity;
 import com.android_t.egg.widget.PaintChipsWidget;
-import com.android_t.egg.widget.PaintChipsActivity;
-import com.android_t.egg.widget.PaintChipsWidget;
+import com.dede.basic.SpUtils;
 
 /**
  * Launched from the PlatLogoActivity. Enables everything else in this easter egg.
@@ -56,7 +54,7 @@ public class ComponentActivationActivity extends Activity {
                 new ComponentName(this, PaintChipsActivity.class),
                 new ComponentName(this, PaintChipsWidget.class)
         };
-        final long unlockValue = Settings.System.getLong(getContentResolver(),
+        final long unlockValue = SpUtils.getLong(this,
                 S_EGG_UNLOCK_SETTING, 0);
         for (ComponentName cn : cns) {
             final boolean componentEnabled = pm.getComponentEnabledSetting(cn)
