@@ -1,12 +1,12 @@
 # Android Easter Eggs
 
-Organize the Easter eggs of the official versions of the Android system.
+整理了Android系统各正式版的彩蛋
 
 ![icon](./app/src/main/ic_launcher-playstore.png)
 
-The project contains the complete code of the system Easter eggs, which aims to organize and compatible with the system eggs, so as to ensure that most devices can experience different versions of Easter eggs and will not make too many modifications to the system egg code. Some versions use new features of the system, and lower versions can only use some functions.
+项目包含了系统彩蛋完整代码，旨在对系统彩蛋的整理和兼容，以保证大多数设备可以体验到不同版本的彩蛋，不会对系统彩蛋代码做过多修改。部分版本使用了系统新特性，低版本只能使用部分功能。
 
-| Version | Egg | Status | Use new features  |
+| 版本 | 彩蛋 | 状态 | 使用了系统新特性  |
 |---|---|:---:|:---:|
 | Android ➕ |  | ⌛️ |  |
 | Android 13 (Tiramisu) | Paint Chips | ✅ | ✅ |
@@ -24,11 +24,11 @@ The project contains the complete code of the system Easter eggs, which aims to 
 | Android 3.x (Honeycomb) | Honeycomb | ✅ | ❌ |
 | Android 2.3.x (Gingerbread) | Gingerbread | ✅ | ❌ |
 
-Among them, Easter eggs with new features of the system are used, and the old version of the system can only use some functions.
+其中使用了系统新特性的彩蛋，老版本系统只能使用部分功能。
 
-## Screenshots
-![Screenshots1](./images/Screenshot_20220820_184459.png)
-![Screenshots2](./images/image.jpeg)
+## 截图
+![截图1](./images/Screenshot_20220820_184459.png)
+![截图2](./images/image.jpeg)
 
-## Other
-[System source code](https://github.com/aosp-mirror/platform_frameworks_base)
+## 其他
+[系统源码](https://github.com/aosp-mirror/platform_frameworks_base)

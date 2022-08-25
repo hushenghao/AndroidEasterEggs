@@ -8,10 +8,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 
 /**
@@ -33,6 +30,7 @@ object ShareCatUtils {
     }
 
     @JvmStatic
+    @OptIn(DelicateCoroutinesApi::class)
     fun share(activity: Activity, bitmap: Bitmap, catName: String) {
         GlobalScope.launch {
             val uri = saveCat(activity, bitmap, catName) ?: return@launch
