@@ -5,7 +5,7 @@
     <!--    <uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
 
     <!-- used for cat notifications -->
-    <!--    <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />-->
+    <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />
 
     <!-- used to save cat images -->
     <uses-permission
@@ -15,15 +15,15 @@
     <!-- controls -->
     <uses-permission android:name="android.permission.BIND_CONTROLS" />
 
-<!--    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />-->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application>
         <activity
             android:name=".PlatLogoActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="true"
-            android:label="@string/t_egg_name"
             android:icon="@drawable/t_platlogo"
+            android:label="@string/t_egg_name"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
 
         <!-- Android N easter egg bits -->

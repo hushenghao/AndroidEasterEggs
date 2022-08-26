@@ -10,4 +10,9 @@ class EasterEggsApp : Application() {
         Reflection.unseal(base)
         super.attachBaseContext(base)
     }
+
+    override fun onCreate() {
+        super.onCreate()
+        registerActivityLifecycleCallbacks(ActivityPermissionRequester())
+    }
 }

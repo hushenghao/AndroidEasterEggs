@@ -78,7 +78,7 @@ public class NekoService extends JobService {
         if (NekoLand.DEBUG_NOTIFICATIONS) {
             NotificationManager noman = getSystemService(NotificationManager.class);
             final Bundle extras = new Bundle();
-//            extras.putString("android.substName", getString(R.string.notification_name));
+            extras.putString("android.substName", getString(R.string.r_notification_name));
             final int size = getResources()
                     .getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
             final Cat cat = Cat.create(this);

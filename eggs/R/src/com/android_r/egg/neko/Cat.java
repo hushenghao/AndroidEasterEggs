@@ -246,7 +246,7 @@ public class Cat extends Drawable {
 
     public Notification.Builder buildNotification(Context context) {
         final Bundle extras = new Bundle();
-//        extras.putString("android.substName", context.getString(R.string.notification_name));
+        extras.putString("android.substName", context.getString(R.string.r_notification_name));
 
         final Icon notificationIcon = createNotificationLargeIcon(context);
 
