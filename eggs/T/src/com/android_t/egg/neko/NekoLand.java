@@ -50,7 +50,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-@RequiresApi(api = Build.VERSION_CODES.S)
+@RequiresApi(api = Build.VERSION_CODES.R)
 public class NekoLand extends Activity implements PrefState.PrefsListener {
     public static String CHAN_ID = "T_EGG";
 

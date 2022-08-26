@@ -40,7 +40,7 @@ import com.android_s.egg.R;
 import java.util.List;
 import java.util.Random;
 
-@RequiresApi(Build.VERSION_CODES.S)
+@RequiresApi(Build.VERSION_CODES.R)
 public class NekoService extends JobService {
 
     private static final String TAG = "NekoService";

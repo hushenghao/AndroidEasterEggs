@@ -19,6 +19,7 @@ package com.android_s.egg;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -44,17 +45,23 @@ public class ComponentActivationActivity extends Activity {
     public void onStart() {
         super.onStart();
 
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.S) {
+        final ComponentName[] cns;
+        if (Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.R) {
             finish();
             return;
+        } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R) {
+            cns = new ComponentName[]{
+                    new ComponentName(this, NekoControlsService.class),
+                    new ComponentName(this, PaintChipsActivity.class),
+                    new ComponentName(this, PaintChipsWidget.class)
+            };
+        } else {
+            cns = new ComponentName[]{
+                    new ComponentName(this, NekoControlsService.class),
+            };
         }
 
         final PackageManager pm = getPackageManager();
-        final ComponentName[] cns = new ComponentName[]{
-                new ComponentName(this, NekoControlsService.class),
-                new ComponentName(this, PaintChipsActivity.class),
-                new ComponentName(this, PaintChipsWidget.class)
-        };
         final long unlockValue = SpUtils.getLong(this,
                 S_EGG_UNLOCK_SETTING, 0);
         for (ComponentName cn : cns) {

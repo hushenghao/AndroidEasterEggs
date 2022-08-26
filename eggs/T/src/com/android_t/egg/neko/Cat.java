@@ -48,7 +48,7 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /** It's a cat. */
-@RequiresApi(api = Build.VERSION_CODES.S)
+@RequiresApi(api = Build.VERSION_CODES.R)
 public class Cat extends Drawable {
     public static final long[] PURR = {0, 40, 20, 40, 20, 40, 20, 40, 20, 40, 20, 40};
 

@@ -290,6 +290,7 @@ fun makeTextSharePendingIntent(context: Context, text: String): PendingIntent {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 }
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 fun makeActivityLaunchPendingIntent(context: Context): PendingIntent {
     return PendingIntent.getActivity(context, 0,
         Intent().apply {

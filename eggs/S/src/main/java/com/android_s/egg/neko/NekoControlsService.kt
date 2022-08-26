@@ -68,7 +68,7 @@ fun Control_toString(control: Control): String {
         "title=${control.title}, template=${control.controlTemplate})")
 }
 
-@RequiresApi(Build.VERSION_CODES.S)
+@RequiresApi(Build.VERSION_CODES.R)
 public class NekoControlsService : ControlsProviderService(), PrefState.PrefsListener {
     private val TAG = "NekoControls"
 
