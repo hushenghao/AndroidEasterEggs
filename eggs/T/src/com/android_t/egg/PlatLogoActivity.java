@@ -54,7 +54,7 @@ import com.dede.basic.SpUtils;
 public class PlatLogoActivity extends Activity {
     private static final String TAG = "PlatLogoActivity";
 
-    private static final String S_EGG_UNLOCK_SETTING = "egg_mode_t";
+    private static final String S_EGG_UNLOCK_SETTING = "t_egg_mode";
 
     private SettableAnalogClock mClock;
     private ImageView mLogo;
@@ -392,7 +392,7 @@ public class PlatLogoActivity extends Activity {
                 mBubbs[j] = new Bubble();
             }
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                Typeface typeface = Typeface.createFromAsset(PlatLogoActivity.this.getAssets(), "NotoColorEmojiFlags.ttf");
+                Typeface typeface = Typeface.createFromAsset(PlatLogoActivity.this.getAssets(), "NotoColorEmojiSubset.ttf");
                 mPaint.setTypeface(typeface);
             }
         }
@@ -421,6 +421,7 @@ public class PlatLogoActivity extends Activity {
         public void chooseEmojiSet() {
             mEmojiSet = (int) (Math.random() * EMOJI_SETS.length);
             final String[] emojiSet = EMOJI_SETS[mEmojiSet];
+            Log.i(TAG, "chooseEmojiSet: " + mEmojiSet);
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j].text = emojiSet[(int) (Math.random() * emojiSet.length)];
             }

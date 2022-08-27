@@ -8,7 +8,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:exported="true"
             android:icon="@drawable/l_icon"
-            android:label="@string/lland"
+            android:label="@string/l_lland"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
 
         <activity
@@ -17,7 +17,7 @@
             android:exported="true"
             android:hardwareAccelerated="true"
             android:icon="@drawable/l_icon"
-            android:label="@string/lland"
+            android:label="@string/l_lland"
             android:launchMode="singleInstance"
             android:screenOrientation="locked"
             android:theme="@android:style/Theme.Material.NoActionBar" />

@@ -84,7 +84,7 @@ public class PlatLogoActivity extends Activity {
         final ActionBar ab = getActionBar();
         if (ab != null) ab.hide();
 
-        setContentView(R.layout.platlogo_layout);
+        setContentView(R.layout.q_platlogo_layout);
 
         mBackslash = new BackslashDrawable((int) (50 * dp));
 

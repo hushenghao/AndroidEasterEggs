@@ -2,7 +2,7 @@
 <resources>
     <declare-styleable name="ChromeTabPreference">
         <attr name="customUrl" format="string" />
-        <attr name="useChromeTab" format="boolean"/>
+        <attr name="useChromeTab" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="EggPreference">
@@ -13,5 +13,9 @@
         </attr>
         <attr name="iconRadius" format="dimension" />
         <attr name="iconPadding" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="XXWHCA">
+        <attr name="once" format="string" />
     </declare-styleable>
 </resources>

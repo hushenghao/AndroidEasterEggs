@@ -37,6 +37,7 @@ class EggPreference : Preference {
     private val iconPadding: Int
 
     private val finalTitle: CharSequence?
+    private val finalSummary: CharSequence?
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -57,6 +58,8 @@ class EggPreference : Preference {
         arrays.recycle()
 
         finalTitle = title
+        finalSummary = summary
+        isPersistent = false
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
@@ -65,6 +68,11 @@ class EggPreference : Preference {
         if (!showSuffix && finalTitle != null) {
             val title = holder.findViewById(android.R.id.title) as? TextView
             title?.text = finalTitle.replace(suffixRegex,"")
+        }
+
+        if (!showSuffix && finalSummary != null) {
+            val summary = holder.findViewById(android.R.id.summary) as? TextView
+            summary?.text = finalSummary.replace(suffixRegex,"")
         }
 
         val icon = holder.findViewById(android.R.id.icon) as? ImageView ?: return

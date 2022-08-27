@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -93,7 +92,7 @@ public class PlatLogoActivity extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         mContent = new ImageView(this);
-        mContent.setImageResource(R.drawable.platlogo_alt);
+        mContent.setImageResource(R.drawable.j_platlogo_alt);
         mContent.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
         final int p = (int) (32 * metrics.density);

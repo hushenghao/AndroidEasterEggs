@@ -90,15 +90,15 @@ public class BeanBag extends Activity {
         static int MAX_RADIUS = (int) (576 * MAX_SCALE);
 
         static int BEANS[] = {
-                R.drawable.redbean0,
-                R.drawable.redbean0,
-                R.drawable.redbean0,
-                R.drawable.redbean0,
-                R.drawable.redbean1,
-                R.drawable.redbean1,
-                R.drawable.redbean2,
-                R.drawable.redbean2,
-                R.drawable.redbeandroid,
+                R.drawable.j_redbean0,
+                R.drawable.j_redbean0,
+                R.drawable.j_redbean0,
+                R.drawable.j_redbean0,
+                R.drawable.j_redbean1,
+                R.drawable.j_redbean1,
+                R.drawable.j_redbean2,
+                R.drawable.j_redbean2,
+                R.drawable.j_redbeandroid,
         };
 
         static int COLORS[] = {
@@ -149,7 +149,7 @@ public class BeanBag extends Activity {
             private void pickBean() {
                 int beanId = pickInt(BEANS);
                 if (randfrange(0, 1) <= LUCKY) {
-                    beanId = R.drawable.jandycane;
+                    beanId = R.drawable.j_jandycane;
                 }
                 BitmapDrawable bean = (BitmapDrawable) getContext().getResources().getDrawable(beanId);
                 Bitmap beanBits = bean.getBitmap();
@@ -173,7 +173,7 @@ public class BeanBag extends Activity {
                 /* B */
                 M[10] = (float) ((color & 0x000000FF)) / 0xFF;
                 pt.setColorFilter(new ColorMatrixColorFilter(M));
-                setLayerType(View.LAYER_TYPE_HARDWARE, (beanId == R.drawable.jandycane) ? null : pt);
+                setLayerType(View.LAYER_TYPE_HARDWARE, (beanId == R.drawable.j_jandycane) ? null : pt);
             }
 
             public void reset() {

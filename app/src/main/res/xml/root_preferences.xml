@@ -15,7 +15,7 @@
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_s"
-            app:icon="@drawable/s_platlogo"
+            app:icon="@drawable/s_icon"
             app:iconPadding="1.5dp"
             app:summary="@string/s_egg_name"
             app:title="@string/title_android_s" />
@@ -50,8 +50,8 @@
             app:summary="@string/o_app_name"
             app:title="@string/title_android_o_point">
             <intent
-                android:targetClass="@string/target_class_android_o"
-                android:targetPackage="@string/app_package">
+                android:targetClass="com.android_o.egg.PlatLogoActivity"
+                android:targetPackage="com.dede.android_eggs">
                 <extra
                     android:name="isOreoPoint"
                     android:value="true" />
@@ -74,19 +74,19 @@
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_m"
             app:icon="@drawable/m_icon"
-            app:summary="@string/mland"
+            app:summary="@string/m_mland"
             app:title="@string/title_android_m" />
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_l"
             app:icon="@drawable/l_icon"
-            app:summary="@string/lland"
+            app:summary="@string/l_lland"
             app:title="@string/title_android_l" />
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_k"
             app:icon="@drawable/ic_k_platlogo"
-            app:summary="@string/dessert_case"
+            app:summary="@string/k_dessert_case"
             app:title="@string/title_android_k" />
 
         <com.dede.android_eggs.EggPreference

@@ -28,7 +28,7 @@ public class MLandActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mland);
+        setContentView(R.layout.m_mland);
         mLand = (MLand) findViewById(R.id.world);
         mLand.setScoreFieldHolder((ViewGroup) findViewById(R.id.scores));
         final View welcome = findViewById(R.id.welcome);

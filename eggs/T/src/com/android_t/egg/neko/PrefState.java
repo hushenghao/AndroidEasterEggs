@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@RequiresApi(api = Build.VERSION_CODES.S)
+@RequiresApi(api = Build.VERSION_CODES.R)
 public class PrefState implements OnSharedPreferenceChangeListener {
 
     private static final String FILE_NAME = "T_mPrefs";

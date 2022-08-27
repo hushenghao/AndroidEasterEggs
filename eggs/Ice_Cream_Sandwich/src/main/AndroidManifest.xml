@@ -18,7 +18,7 @@
             android:excludeFromRecents="true"
             android:exported="true"
             android:hardwareAccelerated="true"
-            android:icon="@drawable/nyandroid04"
+            android:icon="@drawable/i_nyandroid04"
             android:label="@string/i_egg_name"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />

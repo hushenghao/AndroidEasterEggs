@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher_round"
+        android:shortcutDisabledMessage="@string/t_egg_name"
+        android:shortcutId="android_t"
+        android:shortcutLongLabel="@string/t_egg_name"
+        android:shortcutShortLabel="@string/t_egg_name">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.android_t.egg.PlatLogoActivity"
+            android:targetPackage="com.dede.android_eggs" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/s_icon"
+        android:shortcutDisabledMessage="@string/s_egg_name"
+        android:shortcutId="android_s"
+        android:shortcutLongLabel="@string/s_egg_name"
+        android:shortcutShortLabel="@string/s_egg_name">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.android_s.egg.PlatLogoActivity"
+            android:targetPackage="com.dede.android_eggs" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/r_icon"
+        android:shortcutDisabledMessage="@string/r_egg_name"
+        android:shortcutId="android_r"
+        android:shortcutLongLabel="@string/r_egg_name"
+        android:shortcutShortLabel="@string/r_egg_short_name">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.android_r.egg.PlatLogoActivity"
+            android:targetPackage="com.dede.android_eggs" />
+    </shortcut>
+
+</shortcuts>

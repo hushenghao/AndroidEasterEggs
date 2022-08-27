@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android_r.egg">
 
-    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
     <!-- controls -->
     <uses-permission android:name="android.permission.BIND_CONTROLS" />
 
@@ -42,7 +45,7 @@
             android:name=".neko.NekoControlsService"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/ic_fullcat_icon"
+            android:icon="@drawable/r_ic_fullcat_icon"
             android:label="@string/r_egg_name"
             android:permission="android.permission.BIND_CONTROLS">
             <intent-filter>

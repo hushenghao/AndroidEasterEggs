@@ -41,15 +41,15 @@ import com.android_t.egg.R;
 import java.util.List;
 import java.util.Random;
 
-@RequiresApi(api = Build.VERSION_CODES.S)
+@RequiresApi(api = Build.VERSION_CODES.R)
 public class NekoService extends JobService {
 
     private static final String TAG = "NekoService";
 
-    public static int JOB_ID = 42;
+    public static int JOB_ID = 42 + Build.VERSION_CODES.TIRAMISU;
 
-    public static int CAT_NOTIFICATION = 1;
-    public static int DEBUG_NOTIFICATION = 1234;
+    public static int CAT_NOTIFICATION = 1 + Build.VERSION_CODES.TIRAMISU;
+    public static int DEBUG_NOTIFICATION = 1234 + Build.VERSION_CODES.TIRAMISU;
 
     public static float CAT_CAPTURE_PROB = 1.0f; // generous
 

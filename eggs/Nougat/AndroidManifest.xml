@@ -16,7 +16,7 @@ Copyright (C) 2016 The Android Open Source Project
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android_n.egg">
 
-    <!--    <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />-->
+    <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
@@ -71,8 +71,8 @@ Copyright (C) 2016 The Android Open Source Project
             android:name="com.android_n.egg.neko.NekoTile"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/stat_icon"
-            android:label="@string/default_tile_name"
+            android:icon="@drawable/n_stat_icon"
+            android:label="@string/n_default_tile_name"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />

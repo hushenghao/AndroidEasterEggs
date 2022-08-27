@@ -16,7 +16,7 @@
             android:excludeFromRecents="true"
             android:exported="true"
             android:hardwareAccelerated="true"
-            android:icon="@drawable/redbean2"
+            android:icon="@drawable/j_redbean2"
             android:label="@string/j_egg_name"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
@@ -26,8 +26,8 @@
             android:name=".BeanBagDream"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/redbean2"
-            android:label="@string/jelly_bean_dream_name"
+            android:icon="@drawable/j_redbean2"
+            android:label="@string/j_jelly_bean_dream_name"
             android:permission="android.permission.BIND_DREAM_SERVICE">
             <intent-filter>
                 <action android:name="android.service.dreams.DreamService" />

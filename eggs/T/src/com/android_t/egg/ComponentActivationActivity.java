@@ -19,15 +19,14 @@ package com.android_t.egg;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
-import android.provider.Settings;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android_t.egg.neko.NekoControlsService;
 import com.android_t.egg.widget.PaintChipsActivity;
 import com.android_t.egg.widget.PaintChipsWidget;
-import com.android_t.egg.widget.PaintChipsActivity;
-import com.android_t.egg.widget.PaintChipsWidget;
+import com.dede.basic.SpUtils;
 
 /**
  * Launched from the PlatLogoActivity. Enables everything else in this easter egg.
@@ -35,7 +34,7 @@ import com.android_t.egg.widget.PaintChipsWidget;
 public class ComponentActivationActivity extends Activity {
     private static final String TAG = "EasterEgg";
 
-    private static final String S_EGG_UNLOCK_SETTING = "egg_mode_s";
+    private static final String S_EGG_UNLOCK_SETTING = "t_egg_mode";
 
     private void toastUp(String s) {
         Toast toast = Toast.makeText(this, s, Toast.LENGTH_SHORT);
@@ -45,18 +44,24 @@ public class ComponentActivationActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.S) {
+        final ComponentName[] cns;
+        if (Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.R) {
             finish();
             return;
+        } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R) {
+            cns = new ComponentName[]{
+                    new ComponentName(this, NekoControlsService.class),
+                    new ComponentName(this, PaintChipsActivity.class),
+                    new ComponentName(this, PaintChipsWidget.class)
+            };
+        } else {
+            cns = new ComponentName[]{
+                    new ComponentName(this, NekoControlsService.class),
+            };
         }
 
         final PackageManager pm = getPackageManager();
-        final ComponentName[] cns = new ComponentName[] {
-                new ComponentName(this, NekoControlsService.class),
-                new ComponentName(this, PaintChipsActivity.class),
-                new ComponentName(this, PaintChipsWidget.class)
-        };
-        final long unlockValue = Settings.System.getLong(getContentResolver(),
+        final long unlockValue = SpUtils.getLong(this,
                 S_EGG_UNLOCK_SETTING, 0);
         for (ComponentName cn : cns) {
             final boolean componentEnabled = pm.getComponentEnabledSetting(cn)

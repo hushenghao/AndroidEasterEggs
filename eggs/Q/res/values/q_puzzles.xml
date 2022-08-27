@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="puzzles">
+    <string-array name="q_puzzles">
 
         <item>q</item>
         <item>q</item>

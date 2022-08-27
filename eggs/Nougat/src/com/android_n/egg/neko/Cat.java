@@ -34,11 +34,11 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 
 import com.android_n.egg.R;
+import com.dede.basic.CatRandom;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Method;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 //import com.android.internal.logging.MetricsLogger;
 
 @RequiresApi(Build.VERSION_CODES.N)
@@ -153,7 +153,7 @@ public class Cat extends Drawable {
         D = new CatParts(context);
         mSeed = seed;
 
-        setName(context.getString(R.string.default_cat_name,
+        setName(context.getString(R.string.n_default_cat_name,
                 String.valueOf(mSeed % 1000)));
 
         final Random nsr = notSoRandom(seed);
@@ -209,12 +209,12 @@ public class Cat extends Drawable {
     }
 
     public static Cat create(Context context) {
-        return new Cat(context, Math.abs(ThreadLocalRandom.current().nextInt()));
+        return new Cat(context, Math.abs(CatRandom.get().nextInt()));
     }
 
     public Notification.Builder buildNotification(Context context) {
         final Bundle extras = new Bundle();
-//        extras.putString("android.substName", context.getString(R.string.notification_name));
+        extras.putString("android.substName", context.getString(R.string.n_notification_name));
         final Intent intent = new Intent(Intent.ACTION_MAIN)
                 .setClass(context, NekoLand.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -223,7 +223,7 @@ public class Cat extends Drawable {
             flag = PendingIntent.FLAG_MUTABLE;
         }
         Notification.Builder builder = new Notification.Builder(context)
-                .setSmallIcon(Icon.createWithResource(context, R.drawable.stat_icon))
+                .setSmallIcon(Icon.createWithResource(context, R.drawable.n_stat_icon))
                 .setColor(getBodyColor())
                 .setPriority(Notification.PRIORITY_LOW)
                 .setContentTitle(context.getString(R.string.notification_title))
@@ -406,34 +406,34 @@ public class Cat extends Drawable {
         public Drawable[] drawingOrder;
 
         public CatParts(Context context) {
-            body = context.getDrawable(R.drawable.body);
-            head = context.getDrawable(R.drawable.head);
-            leg1 = context.getDrawable(R.drawable.leg1);
-            leg2 = context.getDrawable(R.drawable.leg2);
-            leg3 = context.getDrawable(R.drawable.leg3);
-            leg4 = context.getDrawable(R.drawable.leg4);
-            tail = context.getDrawable(R.drawable.tail);
-            leftEar = context.getDrawable(R.drawable.left_ear);
-            rightEar = context.getDrawable(R.drawable.right_ear);
-            rightEarInside = context.getDrawable(R.drawable.right_ear_inside);
-            leftEarInside = context.getDrawable(R.drawable.left_ear_inside);
-            faceSpot = context.getDrawable(R.drawable.face_spot);
-            cap = context.getDrawable(R.drawable.cap);
-            mouth = context.getDrawable(R.drawable.mouth);
-            foot4 = context.getDrawable(R.drawable.foot4);
-            foot3 = context.getDrawable(R.drawable.foot3);
-            foot1 = context.getDrawable(R.drawable.foot1);
-            foot2 = context.getDrawable(R.drawable.foot2);
-            leg2Shadow = context.getDrawable(R.drawable.leg2_shadow);
-            tailShadow = context.getDrawable(R.drawable.tail_shadow);
-            tailCap = context.getDrawable(R.drawable.tail_cap);
-            belly = context.getDrawable(R.drawable.belly);
-            back = context.getDrawable(R.drawable.back);
-            rightEye = context.getDrawable(R.drawable.right_eye);
-            leftEye = context.getDrawable(R.drawable.left_eye);
-            nose = context.getDrawable(R.drawable.nose);
-            collar = context.getDrawable(R.drawable.collar);
-            bowtie = context.getDrawable(R.drawable.bowtie);
+            body = context.getDrawable(R.drawable.n_body);
+            head = context.getDrawable(R.drawable.n_head);
+            leg1 = context.getDrawable(R.drawable.n_leg1);
+            leg2 = context.getDrawable(R.drawable.n_leg2);
+            leg3 = context.getDrawable(R.drawable.n_leg3);
+            leg4 = context.getDrawable(R.drawable.n_leg4);
+            tail = context.getDrawable(R.drawable.n_tail);
+            leftEar = context.getDrawable(R.drawable.n_left_ear);
+            rightEar = context.getDrawable(R.drawable.n_right_ear);
+            rightEarInside = context.getDrawable(R.drawable.n_right_ear_inside);
+            leftEarInside = context.getDrawable(R.drawable.n_left_ear_inside);
+            faceSpot = context.getDrawable(R.drawable.n_face_spot);
+            cap = context.getDrawable(R.drawable.n_cap);
+            mouth = context.getDrawable(R.drawable.n_mouth);
+            foot4 = context.getDrawable(R.drawable.n_foot4);
+            foot3 = context.getDrawable(R.drawable.n_foot3);
+            foot1 = context.getDrawable(R.drawable.n_foot1);
+            foot2 = context.getDrawable(R.drawable.n_foot2);
+            leg2Shadow = context.getDrawable(R.drawable.n_leg2_shadow);
+            tailShadow = context.getDrawable(R.drawable.n_tail_shadow);
+            tailCap = context.getDrawable(R.drawable.n_tail_cap);
+            belly = context.getDrawable(R.drawable.n_belly);
+            back = context.getDrawable(R.drawable.n_back);
+            rightEye = context.getDrawable(R.drawable.n_right_eye);
+            leftEye = context.getDrawable(R.drawable.n_left_eye);
+            nose = context.getDrawable(R.drawable.n_nose);
+            collar = context.getDrawable(R.drawable.n_collar);
+            bowtie = context.getDrawable(R.drawable.n_bowtie);
             drawingOrder = getDrawingOrder();
         }
 

@@ -33,15 +33,15 @@ import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
 
 class ToolbarView : FrameLayout {
-    var inTransition = false
-    var transitionListener: Transition.TransitionListener = object : TransitionListenerAdapter() {
-        override fun onTransitionStart(transition: Transition?) {
-            inTransition = true
-        }
-        override fun onTransitionEnd(transition: Transition?) {
-            inTransition = false
-        }
-    }
+//    var inTransition = false
+//    var transitionListener: Transition.TransitionListener = object : TransitionListenerAdapter() {
+//        override fun onTransitionStart(transition: Transition?) {
+//            inTransition = true
+//        }
+//        override fun onTransitionEnd(transition: Transition?) {
+//            inTransition = false
+//        }
+//    }
 
     constructor(context: Context) : super(context) {
         init(null, 0)

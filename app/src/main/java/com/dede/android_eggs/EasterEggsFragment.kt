@@ -1,8 +1,12 @@
 package com.dede.android_eggs
 
 import android.annotation.SuppressLint
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat.Type
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceGroupAdapter
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,6 +30,40 @@ class EasterEggsFragment : PreferenceFragmentCompat() {
             }
             listView?.layoutManager = createLayoutManager(isGrid)
             return@setOnPreferenceChangeListener true
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        ViewCompat.setOnApplyWindowInsetsListener(listView) { v, insets ->
+            val recyclerView = v as RecyclerView
+            val old = recyclerView.tag as? BottomEdgeItemDecoration
+            if (old != null) {
+                recyclerView.removeItemDecoration(old)
+            }
+            val edge = insets.getInsets(Type.displayCutout() or Type.systemBars())
+            val itemDecoration = BottomEdgeItemDecoration(bottom = edge.bottom)
+            recyclerView.addItemDecoration(itemDecoration)
+            recyclerView.tag = itemDecoration
+            return@setOnApplyWindowInsetsListener insets
+        }
+    }
+
+    /**
+     * RecyclerView 底部安全距离
+     */
+    private class BottomEdgeItemDecoration(val bottom: Int) : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State,
+        ) {
+            val itemCount = parent.adapter?.itemCount ?: return
+            val position = parent.getChildAdapterPosition(view)
+            if (itemCount - 1 == position) {
+                outRect.bottom = bottom
+            }
         }
     }
 

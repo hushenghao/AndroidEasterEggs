@@ -39,6 +39,7 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 
 import com.android_t.egg.R;
+import com.dede.basic.CatRandom;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -47,7 +48,7 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /** It's a cat. */
-@RequiresApi(api = Build.VERSION_CODES.S)
+@RequiresApi(api = Build.VERSION_CODES.R)
 public class Cat extends Drawable {
     public static final long[] PURR = {0, 40, 20, 40, 20, 40, 20, 40, 20, 40, 20, 40};
 
@@ -237,7 +238,7 @@ public class Cat extends Drawable {
     }
 
     public static Cat create(Context context) {
-        return new Cat(context, Math.abs(ThreadLocalRandom.current().nextInt()));
+        return new Cat(context, Math.abs(CatRandom.get().nextInt()));
     }
 
     public Notification.Builder buildNotification(Context context) {
@@ -257,15 +258,14 @@ public class Cat extends Drawable {
                 .setIcon(createShortcutIcon(context))
                 .setLongLived(true)
                 .build();
-        ArrayList<ShortcutInfo> shortcutInfos = new ArrayList<>();
-        shortcutInfos.add(shortcut);
-        context.getSystemService(ShortcutManager.class).addDynamicShortcuts(shortcutInfos);
+        ArrayList<ShortcutInfo> infos = new ArrayList<>();
+        infos.add(shortcut);
+        context.getSystemService(ShortcutManager.class).addDynamicShortcuts(infos);
 
         int flag = PendingIntent.FLAG_IMMUTABLE;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             flag = PendingIntent.FLAG_MUTABLE;
         }
-
         Notification.BubbleMetadata bubbs = new Notification.BubbleMetadata.Builder()
                 .setIntent(
                         PendingIntent.getActivity(context, 0, intent, flag))
