@@ -13,7 +13,7 @@ pip install -r requirements.txt
 python ./subset_noto_color_emoji.py
 ```
 
-Output: `../src/main/assets/NotoColorEmojiSubset.woff`
+Output: `../src/main/assets/NotoColorEmojiSubset.ttf`
 
 # About
 

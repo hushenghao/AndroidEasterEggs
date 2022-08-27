@@ -392,7 +392,7 @@ public class PlatLogoActivity extends Activity {
                 mBubbs[j] = new Bubble();
             }
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                Typeface typeface = Typeface.createFromAsset(PlatLogoActivity.this.getAssets(), "NotoColorEmojiSubset.woff");
+                Typeface typeface = Typeface.createFromAsset(PlatLogoActivity.this.getAssets(), "NotoColorEmojiSubset.ttf");
                 mPaint.setTypeface(typeface);
             }
         }
@@ -421,6 +421,7 @@ public class PlatLogoActivity extends Activity {
         public void chooseEmojiSet() {
             mEmojiSet = (int) (Math.random() * EMOJI_SETS.length);
             final String[] emojiSet = EMOJI_SETS[mEmojiSet];
+            Log.i(TAG, "chooseEmojiSet: " + mEmojiSet);
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j].text = emojiSet[(int) (Math.random() * emojiSet.length)];
             }

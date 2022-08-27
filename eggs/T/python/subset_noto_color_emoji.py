@@ -5,7 +5,7 @@ import zopfli
 output_dir = os.path.join(os.getcwd(), "../", "src", "main", "assets")
 if os.path.exists(output_dir) == False:
     os.makedirs(output_dir)
-output = os.path.abspath(os.path.join(output_dir, "NotoColorEmojiSubset.woff"))
+output = os.path.abspath(os.path.join(output_dir, "NotoColorEmojiSubset.ttf"))
 
 # https://fonttools.readthedocs.io/en/latest/subset/index.html
 args = [
@@ -17,7 +17,7 @@ args = [
     "--ignore-missing-unicodes",
     "--desubroutinize",
     "--recalc-timestamp",
-    "--flavor=woff",
+#     "--flavor=woff",
     "--with-zopfli",    # Google Zopfli -3~8% size
     "--no-hinting",
     "--no-notdef-glyph",
