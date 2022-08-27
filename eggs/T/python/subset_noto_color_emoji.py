@@ -11,7 +11,7 @@ output = os.path.abspath(os.path.join(output_dir, "NotoColorEmojiSubset.ttf"))
 args = [
     "NotoColorEmojiCompat.ttf",
     "--text-file=plain_text.txt",   # The end character of UTF-8 is ['U+FE0F']
-    "--output-file=" + output,
+    "--output-file=%s" % (output),
     "--drop-tables=meta",  # WARNING: meta NOT subset; don't know how to subset; dropped
     "--verbose",
     "--ignore-missing-unicodes",

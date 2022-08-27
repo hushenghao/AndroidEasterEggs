@@ -2,14 +2,22 @@
 
 Organize the Easter eggs of the official versions of the Android system.
 
-[Download](https://www.pgyer.com/eggs)
+![](https://img.shields.io/badge/Android-Easter%20Eggs-red?logo=android) ![GitHub top language](https://img.shields.io/github/languages/top/hushenghao/AndroidEasterEggs?logo=kotlin)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) ![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)
 
-![icon](./app/src/main/ic_launcher-playstore.png)
+![logo](./images/ic_launcher_round.png)
+
+**Download and install**
+
+[![googleplay](https://img.shields.io/badge/Google%20Play--34a853?logo=googleplay&style=for-the-badge)](https://play.google.com/store/apps/details?id=com.dede.android_eggs) 
+[![coolapk](https://img.shields.io/badge/Coolapk--4caf50?logo=android&style=for-the-badge)](https://www.coolapk.com/apk/com.dede.android_eggs) [![pgyer](https://img.shields.io/badge/Beta-Pgyer-1abc9c?logo=androidstudio&style=for-the-badge)](https://www.pgyer.com/eggs)
 
 The project contains the complete code of the system Easter eggs, which aims to organize and compatible with the system eggs, so as to ensure that most devices can experience different versions of Easter eggs and will not make too many modifications to the system egg code. Some versions use new features of the system, and lower versions can only use some functions.
 
+[中文](./README_zh.md)
+
 ## Details
-| Name | SDK | Egg | Status | Use new features [*](#id_new_features) | mini SDK [*](#id_full_egg_mini_sdk) |
+| Name | SDK | Egg | Status | Use new features [*](#id_new_features) | Minimum SDK [*](#id_full_egg_mini_sdk) |
 |---|:---:|---|:---:|:---:|:---:|
 | Android U |  |  | ⌛️ |  |  |
 | Android 13 (Tiramisu) | 33 | Paint Chips | ✅ | ✅ | 31 |
@@ -45,3 +53,5 @@ The project contains the complete code of the system Easter eggs, which aims to 
 If there are errors and problems, please submit [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues). If you are interested in this project, please submit [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) to participate.
 
 [System source code](https://github.com/aosp-mirror/platform_frameworks_base)
+
+[Contact me](mailto:dede.hu@qq.com)

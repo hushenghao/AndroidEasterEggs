@@ -2,13 +2,21 @@
 
 整理了Android系统各正式版的彩蛋
 
-[下载](https://www.pgyer.com/eggs)
+![](https://img.shields.io/badge/Android-Easter%20Eggs-red?logo=android) ![GitHub top language](https://img.shields.io/github/languages/top/hushenghao/AndroidEasterEggs?logo=kotlin)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) ![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)
 
-![icon](./app/src/main/ic_launcher-playstore.png)
+![logo](./images/ic_launcher_round.png)
+
+**下载安装**
+
+[![googleplay](https://img.shields.io/badge/Google%20Play--34a853?logo=googleplay&style=for-the-badge)](https://play.google.com/store/apps/details?id=com.dede.android_eggs) 
+[![coolapk](https://img.shields.io/badge/Coolapk--4caf50?logo=android&style=for-the-badge)](https://www.coolapk.com/apk/com.dede.android_eggs) [![pgyer](https://img.shields.io/badge/Beta-Pgyer-1abc9c?logo=androidstudio&style=for-the-badge)](https://www.pgyer.com/eggs)
 
 项目包含了系统彩蛋完整代码，旨在对系统彩蛋的整理和兼容，以保证大多数设备可以体验到不同版本的彩蛋，不会对系统彩蛋代码做过多修改。部分版本使用了系统新特性，低版本只能使用部分功能。
 
-## 详细细节
+[English](./README.md)
+
+## 版本明细
 | 名称 | SDK | 彩蛋 | 状态 | 有使用新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |
 |---|:---:|---|:---:|:---:|:---:|
 | Android U |  |  | ⌛️ |  |  |
@@ -45,3 +53,5 @@
 如果存在错误和问题，欢迎提交 [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues) 。如果你对本项目感兴趣，欢迎提交 [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) 参与。
 
 [系统源码](https://github.com/aosp-mirror/platform_frameworks_base)
+
+[联系我](mailto:dede.hu@qq.com)
