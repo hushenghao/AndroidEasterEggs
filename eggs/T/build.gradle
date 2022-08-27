@@ -19,13 +19,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-	sourceSets {
-		main {
-			res.srcDirs = ['res']
-			java.srcDirs = ['src']
-			manifest.srcFile 'AndroidManifest.xml'
-		}
-	}
+    sourceSets {
+        main {
+            res.srcDirs = ['res']
+            java.srcDirs = ['src']
+            manifest.srcFile 'AndroidManifest.xml'
+        }
+    }
     buildFeatures {
         viewBinding true
     }

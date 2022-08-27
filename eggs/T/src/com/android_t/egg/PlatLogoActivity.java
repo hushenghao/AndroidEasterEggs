@@ -392,7 +392,7 @@ public class PlatLogoActivity extends Activity {
                 mBubbs[j] = new Bubble();
             }
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                Typeface typeface = Typeface.createFromAsset(PlatLogoActivity.this.getAssets(), "NotoColorEmojiFlags.ttf");
+                Typeface typeface = Typeface.createFromAsset(PlatLogoActivity.this.getAssets(), "NotoColorEmojiSubset.woff");
                 mPaint.setTypeface(typeface);
             }
         }

@@ -26,6 +26,7 @@ import android.app.job.JobService;
 import android.content.ComponentName;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -44,10 +45,10 @@ public class NekoService extends JobService {
 
     private static final String TAG = "NekoService";
 
-    public static int JOB_ID = 42;
+    public static int JOB_ID = 42 + Build.VERSION_CODES.R;
 
-    public static int CAT_NOTIFICATION = 1;
-    public static int DEBUG_NOTIFICATION = 1234;
+    public static int CAT_NOTIFICATION = 1 + Build.VERSION_CODES.R;
+    public static int DEBUG_NOTIFICATION = 1234 + Build.VERSION_CODES.R;
 
     public static float CAT_CAPTURE_PROB = 1.0f; // generous
 

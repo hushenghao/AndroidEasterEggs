@@ -42,9 +42,9 @@ public class NekoService extends JobService {
 
     private static final String TAG = "NekoService";
 
-    public static int JOB_ID = 42;
+    public static int JOB_ID = 42 + Build.VERSION_CODES.N;
 
-    public static int CAT_NOTIFICATION = 1;
+    public static int CAT_NOTIFICATION = 1 + Build.VERSION_CODES.N;
     public static final String CHAN_ID = "N_EGG";
 
     public static float CAT_CAPTURE_PROB = 1.0f; // generous
