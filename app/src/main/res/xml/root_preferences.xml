@@ -122,19 +122,19 @@
 
         <com.dede.android_eggs.ChromeTabPreference
             app:customUrl="@string/url_github"
-            app:iconSpaceReserved="false"
+            app:icon="@drawable/ic_logo_github"
             app:summary="@string/summary_github"
             app:title="@string/title_github" />
 
         <com.dede.android_eggs.ChromeTabPreference
             app:customUrl="@string/url_source"
-            app:iconSpaceReserved="false"
+            app:icon="@drawable/ic_logo_android"
             app:summary="@string/summary_source"
             app:title="@string/title_source" />
 
         <com.dede.android_eggs.VersionPreference
             app:customUrl="@string/url_beta"
-            app:iconSpaceReserved="false"
+            app:icon="@drawable/ic_logo_color_pgyer"
             app:title="@string/title_version" />
 
     </PreferenceCategory>
