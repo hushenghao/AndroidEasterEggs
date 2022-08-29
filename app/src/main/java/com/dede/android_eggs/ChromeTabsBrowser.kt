@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.*
+import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
 
 /**
@@ -65,7 +66,10 @@ object ChromeTabsBrowser {
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
                 CustomTabsIntent.COLOR_SCHEME_DARK else CustomTabsIntent.COLOR_SCHEME_LIGHT
 
-        val color = MaterialColors.getColor(context, android.R.attr.colorPrimary, Color.WHITE)
+        val dynamicContext = DynamicColors.wrapContextIfAvailable(context)
+        val color = MaterialColors.getColor(dynamicContext,
+            com.google.android.material.R.attr.colorSurface,
+            Color.WHITE)
         val params = CustomTabColorSchemeParams.Builder()
             .setToolbarColor(color)
             .build()
