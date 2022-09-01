@@ -179,23 +179,29 @@ public class Nyandroid extends Activity {
             });
         }
 
+        private final Runnable postStart = new Runnable() {
+            public void run() {
+                reset();
+                mAnim.start();
+            }
+        };
+
         @Override
         protected void onSizeChanged(int w, int h, int oldw, int oldh) {
             super.onSizeChanged(w, h, oldw, oldh);
             android.util.Log.d("Nyandroid", "resized: " + w + "x" + h);
-            post(new Runnable() {
-                public void run() {
-                    reset();
-                    mAnim.start();
-                }
-            });
+            post(postStart);
         }
 
 
         @Override
         protected void onDetachedFromWindow() {
             super.onDetachedFromWindow();
-            mAnim.cancel();
+            removeCallbacks(postStart);
+            if (mAnim != null) {
+                // fix NPE, post
+                mAnim.cancel();
+            }
         }
 
         @Override
