@@ -20,7 +20,7 @@ The project contains the complete code of the system Easter eggs, which aims to 
 | Name | SDK | Egg | Status | Use new features [*](#id_new_features) | Minimum SDK [*](#id_full_egg_mini_sdk) |
 |---|:---:|---|:---:|:---:|:---:|
 | Android 14 (Upside Down Cake) |  |  | ⌛️ |  |  |
-| Android 13 (Tiramisu) | 33 | Paint Chips | ✅ | ✅ | 31 |
+| Android 13 (Tiramisu) | 33 | Paint Chips | ✅ | ✅ | 31 [*](#id_color_vector_fonts) |
 | Android 12 (Snow Cone) | 31~32 | Paint Chips | ✅ | ✅ | 31 |
 | Android 11 (Red Velvet Cake) | 30 | Cat Controls(Collection) | ✅ | ✅ | 30 |
 | Android 10 (Queen Cake) | 29 | Icon Quiz | ✅ | ❌ | - |
@@ -42,6 +42,7 @@ The project contains the complete code of the system Easter eggs, which aims to 
 
 * <span id='id_new_features'>Easter eggs with new features of the system are used, and the old version of the system can only use some functions.</span>
 * <span id='id_full_egg_mini_sdk'>The minimum SDK version required to fully experience Easter Egg.</span>
+* <span id='id_color_vector_fonts'>Starting in [Android 13](https://developer.android.google.cn/about/versions/13/features#color-vector-fonts), the system includes rendering support for [COLRv1](https://developer.chrome.com/blog/colrv1-fonts/) fonts and updates system emoji to the COLRv1 format.</span>
 * <span id='id_egg_name'>There is no specific name for the old version of Easter eggs, and the system version alias are used here.</span>
 
 ## Screenshots

@@ -20,7 +20,7 @@
 | 名称 | SDK | 彩蛋 | 状态 | 有使用新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |
 |---|:---:|---|:---:|:---:|:---:|
 | Android 14 (Upside Down Cake) |  |  | ⌛️ |  |  |
-| Android 13 (Tiramisu) | 33 | Paint Chips | ✅ | ✅ | 31 |
+| Android 13 (Tiramisu) | 33 | Paint Chips | ✅ | ✅ | 31 [*](#id_color_vector_fonts) |
 | Android 12 (Snow Cone) | 31~32 | Paint Chips | ✅ | ✅ | 31 |
 | Android 11 (Red Velvet Cake) | 30 | Cat Controls(Collection) | ✅ | ✅ | 30 |
 | Android 10 (Queen Cake) | 29 | Icon Quiz | ✅ | ❌ | - |
@@ -42,6 +42,7 @@
 
 * <span id='id_new_features'>使用了系统新特性的彩蛋，老版本系统只能使用部分功能。</span>
 * <span id='id_full_egg_mini_sdk'>完整体验彩蛋所需要的最低SDK版本。</span>
+* <span id='id_color_vector_fonts'>[Android 13](https://developer.android.google.cn/about/versions/13/features#color-vector-fonts) 可支持呈现 [COLRv1](https://developer.chrome.com/blog/colrv1-fonts/) 字体，并将系统表情符号更新成了 COLRv1 格式。</span>
 * <span id='id_egg_name'>老版本的彩蛋没有具体命名，这里使用系统版本别名。</span>
 
 ## 截图
