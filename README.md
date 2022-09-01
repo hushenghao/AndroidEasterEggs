@@ -46,7 +46,9 @@ The project contains the complete code of the system Easter eggs, which aims to 
 * <span id='id_egg_name'>There is no specific name for the old version of Easter eggs, and the system version alias are used here.</span>
 
 ## Screenshots
-![](./images/Screenshot_20220901_135512.png) ![](./images/STIIITCH_2022_09_01_02_14_28.PNG) ![](./images/STIIITCH_2022_09_01_02_13_58.PNG)
+<img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/Screenshot_20220901_135512.png"/>
+<img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_14_28.PNG"/>
+<img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_13_58.PNG"/>
 
 ## Other
 
