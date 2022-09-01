@@ -45,8 +45,7 @@ The project contains the complete code of the system Easter eggs, which aims to 
 * <span id='id_egg_name'>There is no specific name for the old version of Easter eggs, and the system version alias are used here.</span>
 
 ## Screenshots
-![Screenshots1](./images/Screenshot_20220820_184459.png)
-![Screenshots2](./images/image.jpeg)
+![](./images/Screenshot_20220901_135512.png) ![](./images/STIIITCH_2022_09_01_02_14_28.PNG) ![](./images/STIIITCH_2022_09_01_02_13_58.PNG)
 
 ## Other
 

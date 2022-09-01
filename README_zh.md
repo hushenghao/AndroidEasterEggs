@@ -45,8 +45,7 @@
 * <span id='id_egg_name'>老版本的彩蛋没有具体命名，这里使用系统版本别名。</span>
 
 ## 截图
-![截图1](./images/Screenshot_20220820_184459.png)
-![截图2](./images/image.jpeg)
+![](./images/Screenshot_20220901_135512.png) ![](./images/STIIITCH_2022_09_01_02_14_28.PNG) ![](./images/STIIITCH_2022_09_01_02_13_58.PNG) 
 
 ## 其他
 
