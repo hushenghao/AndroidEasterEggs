@@ -71,6 +71,8 @@ android {
 dependencies {
     implementation(deps.androidx.appcompat)
     implementation(deps.androidx.core.ktx)
+    implementation(deps.androidx.lifecycle.runtime.ktx)
+    implementation(deps.androidx.lifecycle.viewmodel.ktx)
     implementation(deps.androidx.preference.ktx)
     implementation(deps.androidx.constraintlayout)
     implementation(deps.androidx.browser)
