@@ -33,4 +33,6 @@ android {
 dependencies {
     implementation(deps.kotlinx.coroutines.core)
     implementation(deps.androidx.appcompat)
+    implementation(deps.androidx.lifecycle.runtime.ktx)
+    implementation(deps.androidx.lifecycle.viewmodel.ktx)
 }

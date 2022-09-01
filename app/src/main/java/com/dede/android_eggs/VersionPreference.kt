@@ -2,7 +2,6 @@ package com.dede.android_eggs
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.preference.Preference
 import com.dede.android_eggs.BuildConfig.VERSION_CODE
 import com.dede.android_eggs.BuildConfig.VERSION_NAME
 

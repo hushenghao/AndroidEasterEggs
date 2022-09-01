@@ -1,22 +1,20 @@
 package com.dede.android_eggs
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.view.ViewAnimationUtils
+import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat.Type
-import androidx.core.view.updatePadding
+import androidx.appcompat.widget.AppCompatImageView
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
 import com.google.android.material.color.DynamicColors
-import com.google.android.material.color.DynamicColorsOptions
-import com.google.android.material.color.MaterialColors
 import com.google.android.material.internal.EdgeToEdgeUtils
+import com.google.android.material.shape.MaterialShapeDrawable
 import kotlin.math.hypot
-import com.google.android.material.R as MR
 
 /**
  * Easter Egg Collection
@@ -24,40 +22,42 @@ import com.google.android.material.R as MR
 class EasterEggsActivity : AppCompatActivity(), Runnable {
 
     private lateinit var binding: ActivityEasterEggsBinding
+    private lateinit var ivLogo: ImageView
 
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val options = DynamicColorsOptions.Builder()
-            .setThemeOverlay(MR.style.ThemeOverlay_Material3_DynamicColors_DayNight)
-            .build()
-        DynamicColors.applyToActivityIfAvailable(this, options)
-        val colorPrimary = MaterialColors.getColor(this, R.attr.colorPrimary, Color.WHITE)
-        EdgeToEdgeUtils.applyEdgeToEdge(window, true, colorPrimary, null)
+        DynamicColors.applyToActivityIfAvailable(this)
+        EdgeToEdgeUtils.applyEdgeToEdge(window, true)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
         binding = ActivityEasterEggsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+        binding.appBar.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(this)
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.toolbar) { view, insets ->
-            val edge = insets.getInsets(Type.displayCutout() or Type.systemBars())
-            view.updatePadding(top = edge.top)
-            return@setOnApplyWindowInsetsListener insets
+        ivLogo = AppCompatImageView(this).apply {
+            setImageResource(R.drawable.t_platlogo)
         }
+        val layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        ).apply { gravity = Gravity.CENTER }
+        addContentView(ivLogo, layoutParams)
 
         postAnim()
     }
 
     private fun postAnim() {
-        binding.content.visibility = View.INVISIBLE
-        binding.content.postDelayed(this, 200)
+        binding.root.visibility = View.INVISIBLE
+        binding.root.post(this)
     }
 
     override fun run() {
-        val logo = binding.logo
-        val content = binding.content
+        val logo = ivLogo
+        val content = binding.root
         val cx = logo.x + logo.width / 2f
         val cy = logo.y + logo.height / 2f
         val startRadius = hypot(logo.width.toFloat(), logo.height.toFloat())
@@ -81,7 +81,7 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
     }
 
     override fun onDestroy() {
-        binding.content.removeCallbacks(this)
+        binding.root.removeCallbacks(this)
         super.onDestroy()
     }
 

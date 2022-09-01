@@ -19,8 +19,8 @@ android {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
-        versionCode = 18
-        versionName = "1.7.2"
+        versionCode = 19
+        versionName = "1.7.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.addAll(listOf("zh", "en"))
@@ -71,6 +71,8 @@ android {
 dependencies {
     implementation(deps.androidx.appcompat)
     implementation(deps.androidx.core.ktx)
+    implementation(deps.androidx.lifecycle.runtime.ktx)
+    implementation(deps.androidx.lifecycle.viewmodel.ktx)
     implementation(deps.androidx.preference.ktx)
     implementation(deps.androidx.constraintlayout)
     implementation(deps.androidx.browser)
