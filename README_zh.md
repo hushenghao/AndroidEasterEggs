@@ -46,9 +46,7 @@
 * <span id='id_egg_name'>老版本的彩蛋没有具体命名，这里使用系统版本别名。</span>
 
 ## 截图
-<img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/Screenshot_20220901_135512.png"/>
-<img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_14_28.PNG"/>
-<img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_13_58.PNG"/> 
+<img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/Screenshot_20220901_135512.png"/> <img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_14_28.PNG"/> <img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_13_58.PNG"/>
 
 ## 其他
 
