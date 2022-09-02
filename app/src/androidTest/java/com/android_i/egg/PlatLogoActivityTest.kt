@@ -1,6 +1,8 @@
 package com.android_i.egg
 
 
+import android.view.InputDevice
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import android.widget.ImageView
@@ -8,7 +10,9 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
+import androidx.test.espresso.action.GeneralLocation
 import androidx.test.espresso.action.MotionEvents
+import androidx.test.espresso.action.Press
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -46,9 +50,13 @@ class PlatLogoActivityTest : EasterEggsActivityBaseTest() {
                 }
 
                 override fun perform(uiController: UiController, view: View) {
-                    MotionEvents.sendDown(uiController,
-                        floatArrayOf(view.x + view.width / 2f, view.y + view.height / 2f),
-                        floatArrayOf(0f, 0f))
+                    MotionEvents.sendDown(
+                        uiController,
+                        GeneralLocation.CENTER.calculateCoordinates(view),
+                        Press.FINGER.describePrecision(),
+                        InputDevice.SOURCE_UNKNOWN,
+                        MotionEvent.BUTTON_PRIMARY
+                    )
                     // launch Nyandroid
                     uiController.loopMainThreadForAtLeast(ViewConfiguration.getLongPressTimeout() * 2 * 3L)
                 }

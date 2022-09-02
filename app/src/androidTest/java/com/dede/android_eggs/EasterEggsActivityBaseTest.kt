@@ -1,7 +1,6 @@
 package com.dede.android_eggs
 
 import androidx.annotation.StringRes
-import androidx.preference.R
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -23,7 +22,7 @@ open class EasterEggsActivityBaseTest {
 
         fun testPlatLogo(@StringRes titleRes: Int) {
             // EasterEggsActivity launch Easter Egg
-            onView(withId(R.id.recycler_view))
+            onView(withId(androidx.preference.R.id.recycler_view))
                 .check(matches(ViewMatchers.isDisplayed()))
                 .perform(actionOnHolderItem(EggPreferenceMatcher(titleRes), click()))
         }

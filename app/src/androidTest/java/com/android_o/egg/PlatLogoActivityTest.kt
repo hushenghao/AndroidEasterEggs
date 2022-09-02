@@ -1,4 +1,4 @@
-package com.android_l.egg
+package com.android_o.egg
 
 
 import android.view.KeyEvent
@@ -20,7 +20,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * Android Lollipop PlatLogo test
+ * Android Oreo PlatLogo test
  */
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -29,7 +29,7 @@ class PlatLogoActivityTest : EasterEggsActivityBaseTest() {
     @Test
     fun platLogoActivityTest() {
 
-        testPlatLogo(R.string.title_android_l)
+        testPlatLogo(R.string.title_android_o)
 
         onView(
             allOf(
@@ -46,17 +46,27 @@ class PlatLogoActivityTest : EasterEggsActivityBaseTest() {
                 longClick()
             )
 
-        onView(withId(com.android_l.egg.R.id.world))
-            .check(matches(isDisplayed()))
-            .perform(
-                // play game
-                click(),
-                click(pressKey(KeyEvent.KEYCODE_SPACE)),
-                delay(2000),
-                // play again
-                click(pressKey(KeyEvent.KEYCODE_ENTER)),
-                click()
+        onView(
+            allOf(
+                withId(android.R.id.content),
+                withChild(withChild(`is`(instanceOf(ImageView::class.java))))
             )
+        ).check(matches(isDisplayed()))
+
+        pressBack()
+    }
+
+    @Test
+    fun pointPlatLogoActivityTest() {
+
+        testPlatLogo(R.string.title_android_o_point)
+
+        onView(
+            allOf(
+                withId(android.R.id.content),
+                withChild(withChild(`is`(instanceOf(ImageView::class.java))))
+            )
+        ).check(matches(isDisplayed()))
 
         pressBack()
     }

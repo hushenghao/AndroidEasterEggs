@@ -3,6 +3,7 @@ package com.dede.android_eggs
 import android.view.View
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
 import org.hamcrest.Matcher
 
@@ -13,6 +14,10 @@ import org.hamcrest.Matcher
  * @since 2022/9/2
  */
 object ViewActionsExt {
+
+    fun loopClick(loopCount: Int): Array<ViewAction> {
+        return (0 until loopCount).map { click() }.toTypedArray()
+    }
 
     fun delay(millisDelay: Long): ViewAction {
         return object : ViewAction {

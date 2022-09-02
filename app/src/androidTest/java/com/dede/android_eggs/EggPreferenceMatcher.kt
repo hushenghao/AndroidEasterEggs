@@ -19,7 +19,7 @@ class EggPreferenceMatcher(@StringRes val titleRes: Int) :
     private var expectedText: String? = null
 
     override fun describeTo(description: Description) {
-        description.appendText("item title res id: $titleRes")
+        description.appendText("item title res id: $titleRes,")
     }
 
     override fun matchesSafely(item: PreferenceViewHolder, description: Description): Boolean {
@@ -27,11 +27,14 @@ class EggPreferenceMatcher(@StringRes val titleRes: Int) :
             try {
                 expectedText = item.itemView.resources.getString(titleRes)
             } catch (e: Resources.NotFoundException) {
+                description.appendText(" title res not found")
             }
         } else {
             description.appendText(" title: $expectedText")
         }
+        val expected = expectedText
         val titleView = item.findViewById(android.R.id.title) as TextView
-        return titleView.text == expectedText
+        val actual = titleView.text.toString()
+        return actual == expected || (expected != null && expected.startsWith(actual))
     }
 }
