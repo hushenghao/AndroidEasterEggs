@@ -16,6 +16,9 @@ The project contains the complete code of the system Easter eggs, which aims to 
 
 [中文](./README_zh.md)
 
+## Screenshots
+<img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/Screenshot_20220901_135512.png"/> <img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_14_28.PNG"/> <img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_13_58.PNG"/>
+
 ## Details
 | Name | SDK | Egg | Status | Use new features [*](#id_new_features) | Minimum SDK [*](#id_full_egg_mini_sdk) |
 |---|:---:|---|:---:|:---:|:---:|
@@ -44,9 +47,6 @@ The project contains the complete code of the system Easter eggs, which aims to 
 * <span id='id_full_egg_mini_sdk'>The minimum SDK version required to fully experience Easter Egg.</span>
 * <span id='id_color_vector_fonts'>Starting in [Android 13](https://developer.android.google.cn/about/versions/13/features#color-vector-fonts), the system includes rendering support for [COLRv1](https://developer.chrome.com/blog/colrv1-fonts/) fonts and updates system emoji to the COLRv1 format.</span>
 * <span id='id_egg_name'>There is no specific name for the old version of Easter eggs, and the system version alias are used here.</span>
-
-## Screenshots
-<img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/Screenshot_20220901_135512.png"/> <img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_14_28.PNG"/> <img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_13_58.PNG"/>
 
 ## Other
 
