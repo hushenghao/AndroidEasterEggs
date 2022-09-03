@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.text.format.Time;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
@@ -43,6 +44,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import androidx.core.content.ContextCompat;
 
 import com.dede.basic.AnalogClock;
 import com.dede.basic.DrawableKt;
@@ -345,10 +348,17 @@ public class PlatLogoActivity extends Activity {
             {"🐢", "✨", "🌟", "👑"}
     };
 
+    private static final int[][] EMOJI_RES_SETS = {
+            {R.drawable.t_funny_1, R.drawable.t_funny_2, R.drawable.t_funny_3, R.drawable.t_funny_4,
+                    R.drawable.t_funny_5, R.drawable.t_funny_6},
+    };
+    private static final SparseArray<Drawable> cachedDrawable = new SparseArray<>();
+
     static class Bubble {
         public float x, y, r;
         public int color;
         public String text = null;
+        public Drawable drawable = null;
     }
 
     class BubblesDrawable extends Drawable implements View.OnLongClickListener {
@@ -425,6 +435,13 @@ public class PlatLogoActivity extends Activity {
                     mPaint.setTextSize(mBubbs[j].r * 1.75f);
                     canvas.drawText(mBubbs[j].text, mBubbs[j].x,
                             mBubbs[j].y + mBubbs[j].r * f * 0.6f, mPaint);
+                } else if (mBubbs[j].drawable != null) {
+                    mBubbs[j].drawable.setBounds(
+                            (int) (mBubbs[j].x - mBubbs[j].r * f),
+                            (int) (mBubbs[j].y - mBubbs[j].r * f),
+                            (int) (mBubbs[j].x + mBubbs[j].r * f),
+                            (int) (mBubbs[j].y + mBubbs[j].r * f));
+                    mBubbs[j].drawable.draw(canvas);
                 } else {
                     mPaint.setColor(mBubbs[j].color);
                     canvas.drawCircle(mBubbs[j].x, mBubbs[j].y, mBubbs[j].r * f, mPaint);
@@ -434,6 +451,24 @@ public class PlatLogoActivity extends Activity {
         }
 
         public void chooseEmojiSet() {
+            if (Math.random() <= (EMOJI_RES_SETS.length * 1f / (EMOJI_SETS.length + EMOJI_RES_SETS.length))) {
+                mEmojiSet = (int) (Math.random() * EMOJI_RES_SETS.length);
+                int[] emojiSet = EMOJI_RES_SETS[mEmojiSet];
+                Log.i(TAG, "chooseEmojiResSet: " + mEmojiSet);
+                for (int j = 0; j < mBubbs.length; j++) {
+                    mBubbs[j].text = null;
+                    int id = emojiSet[(int) (Math.random() * emojiSet.length)];
+                    Drawable cache = cachedDrawable.get(id);
+                    if (cache == null) {
+                        cache = ContextCompat.getDrawable(PlatLogoActivity.this, id);
+                        cachedDrawable.put(id, cache);
+                    }
+                    mBubbs[j].drawable = cache;
+                }
+                invalidateSelf();
+                return;
+            }
+            
             mEmojiSet = (int) (Math.random() * EMOJI_SETS.length);
             final String[] emojiSet = EMOJI_SETS[mEmojiSet];
             Log.i(TAG, "chooseEmojiSet: " + mEmojiSet);
