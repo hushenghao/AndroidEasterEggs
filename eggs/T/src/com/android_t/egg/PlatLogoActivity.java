@@ -103,6 +103,12 @@ public class PlatLogoActivity extends Activity {
         setContentView(layout);
     }
 
+    @Override
+    protected void onDestroy() {
+        mBg.reset();
+        super.onDestroy();
+    }
+
     private boolean shouldWriteSettings() {
 //        return getPackageName().equals("android");
         return true;
@@ -346,6 +352,15 @@ public class PlatLogoActivity extends Activity {
     }
 
     class BubblesDrawable extends Drawable implements View.OnLongClickListener {
+
+        public void reset() {
+            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                // Will system fonts be affected?
+                // Some devices will cause other apps to display emoji abnormally, here restore the default font.
+                mPaint.setTypeface(Typeface.DEFAULT);
+            }
+        }
+
         private static final int MAX_BUBBS = 2000;
 
         //        private final int[] mColorIds = {
