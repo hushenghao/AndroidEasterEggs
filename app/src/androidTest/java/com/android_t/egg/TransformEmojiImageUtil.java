@@ -1,0 +1,107 @@
+package com.android_t.egg;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+
+import com.dede.basic.UtilExt;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.HashSet;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+
+/**
+ * Transform Emoji Image
+ *
+ * @author shhu
+ * @since 2022/9/6
+ */
+@Ignore("Transform Emoji Image Only")
+@RunWith(AndroidJUnit4.class)
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+public class TransformEmojiImageUtil {
+
+    private static final String ZIP_NAME = "emojis.zip";
+    private static final String EMOJI_IMAGE_NAME_FORMAT = "t_emoji_%s.png";
+    private static final int IMAGE_SIZE = 512;
+    private static final float EMOJI_SIZE = 430f;
+    private static final int IMAGE_QUALITY = 100;
+    private String[][] EMOJI_SETS;
+
+    private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint.FontMetrics fontMetrics;
+    private File outputDir;
+
+    @Before
+    public void setup() throws IllegalAccessException, NoSuchFieldException {
+        Field field = PlatLogoActivity.class.getDeclaredField("EMOJI_SETS");
+        field.setAccessible(true);
+        EMOJI_SETS = (String[][]) field.get(null);
+
+        paint.setTextSize(EMOJI_SIZE);
+        paint.setTextAlign(Paint.Align.CENTER);
+        fontMetrics = paint.getFontMetrics();
+
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        outputDir = new File(context.getCacheDir(), "emoji_images");
+        outputDir.mkdirs();
+    }
+
+    @Test
+    public void transform() throws IOException {
+        float x = IMAGE_SIZE / 2f;
+        float y = IMAGE_SIZE / 2f + (-fontMetrics.ascent - (fontMetrics.descent - fontMetrics.ascent) / 2f);
+        Canvas canvas = new Canvas();
+
+        File zipFile = new File(outputDir, ZIP_NAME);
+        zipFile.createNewFile();
+        ZipOutputStream zipOutput = new ZipOutputStream(new FileOutputStream(zipFile));
+        HashSet<String> emojiSet = new HashSet<>();
+        for (int i = 0; i < EMOJI_SETS.length; i++) {
+            String[] emojis = EMOJI_SETS[i];
+            for (int j = 0; j < emojis.length; j++) {
+                String emoji = emojis[j];
+                if (emojiSet.contains(emoji)) {
+                    continue;// 🤩
+                }
+                emojiSet.add(emoji);
+                Bitmap bitmap = Bitmap.createBitmap(IMAGE_SIZE, IMAGE_SIZE, Bitmap.Config.ARGB_8888);
+                canvas.setBitmap(bitmap);
+                canvas.drawText(emoji, x, y, paint);
+                String fileName = String.format(EMOJI_IMAGE_NAME_FORMAT, UtilExt.unicode(emoji));
+                ByteArrayOutputStream byreArray = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, IMAGE_QUALITY, byreArray);
+                bitmap.recycle();
+                ZipEntry zipEntry = new ZipEntry("emojis/" + fileName);
+                zipOutput.putNextEntry(zipEntry);
+                zipOutput.write(byreArray.toByteArray());
+
+                if (i == 0 && j == 0) {
+                    File sampleFile = new File(outputDir, fileName);
+                    sampleFile.createNewFile();
+                    FileOutputStream sampleOutput = new FileOutputStream(sampleFile);
+                    sampleOutput.write(byreArray.toByteArray());
+                    sampleOutput.close();
+                }
+            }
+        }
+        zipOutput.close();
+    }
+
+}

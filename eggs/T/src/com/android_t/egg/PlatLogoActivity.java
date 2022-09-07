@@ -28,7 +28,6 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,11 +44,13 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import androidx.core.content.ContextCompat;
+import androidx.annotation.ChecksSdkIntAtLeast;
 
 import com.dede.basic.AnalogClock;
 import com.dede.basic.DrawableKt;
+import com.dede.basic.LargeDrawableAccessor;
 import com.dede.basic.SpUtils;
+import com.dede.basic.UtilExt;
 
 /**
  * @hide
@@ -104,12 +105,6 @@ public class PlatLogoActivity extends Activity {
         layout.setOnLongClickListener(mBg);
 
         setContentView(layout);
-    }
-
-    @Override
-    protected void onDestroy() {
-        mBg.reset();
-        super.onDestroy();
     }
 
     private boolean shouldWriteSettings() {
@@ -363,14 +358,6 @@ public class PlatLogoActivity extends Activity {
 
     class BubblesDrawable extends Drawable implements View.OnLongClickListener {
 
-        public void reset() {
-            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                // Will system fonts be affected?
-                // Some devices will cause other apps to display emoji abnormally, here restore the default font.
-                mPaint.setTypeface(Typeface.DEFAULT);
-            }
-        }
-
         private static final int MAX_BUBBS = 2000;
 
         //        private final int[] mColorIds = {
@@ -406,6 +393,10 @@ public class PlatLogoActivity extends Activity {
         public float padding = 0f;
         public float minR = 0f;
 
+        @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.TIRAMISU)
+        private final boolean supportCOLR = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU;
+        private final LargeDrawableAccessor drawableAccessor = new LargeDrawableAccessor(PlatLogoActivity.this);
+
         BubblesDrawable() {
             try {
                 for (int i = 0; i < mColorIds.length; i++) {
@@ -415,10 +406,6 @@ public class PlatLogoActivity extends Activity {
             }
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j] = new Bubble();
-            }
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                Typeface typeface = Typeface.createFromAsset(PlatLogoActivity.this.getAssets(), "NotoColorEmojiSubset.ttf");
-                mPaint.setTypeface(typeface);
             }
         }
 
@@ -458,22 +445,24 @@ public class PlatLogoActivity extends Activity {
                 for (int j = 0; j < mBubbs.length; j++) {
                     mBubbs[j].text = null;
                     int id = emojiSet[(int) (Math.random() * emojiSet.length)];
-                    Drawable cache = cachedDrawable.get(id);
-                    if (cache == null) {
-                        cache = ContextCompat.getDrawable(PlatLogoActivity.this, id);
-                        cachedDrawable.put(id, cache);
-                    }
-                    mBubbs[j].drawable = cache;
+                    mBubbs[j].drawable = drawableAccessor.requireDrawable(id);
                 }
                 invalidateSelf();
                 return;
             }
-            
+
             mEmojiSet = (int) (Math.random() * EMOJI_SETS.length);
             final String[] emojiSet = EMOJI_SETS[mEmojiSet];
             Log.i(TAG, "chooseEmojiSet: " + mEmojiSet);
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j].text = emojiSet[(int) (Math.random() * emojiSet.length)];
+
+                // support code
+                if (!supportCOLR) {
+                    int id = drawableAccessor.getIdentifier(String.format("t_emoji_%s", UtilExt.unicode(mBubbs[j].text)));
+                    mBubbs[j].drawable = drawableAccessor.requireDrawable(id);
+                    mBubbs[j].text = null;
+                }
             }
             invalidateSelf();
         }
