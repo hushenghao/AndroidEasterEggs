@@ -395,6 +395,7 @@ public class PlatLogoActivity extends Activity {
 
         @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.TIRAMISU)
         private final boolean supportCOLR = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU;
+        //private final boolean supportCOLR = false;
         private final LargeDrawableAccessor drawableAccessor = new LargeDrawableAccessor(PlatLogoActivity.this);
 
         BubblesDrawable() {
