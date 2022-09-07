@@ -97,6 +97,7 @@ dependencies {
 
     testImplementation(deps.junit)
     androidTestImplementation(deps.bundles.android.test)
+    androidTestImplementation("org.nanohttpd:nanohttpd:2.3.1")
 }
 
 tasks.register<Exec>("pgyer") {
