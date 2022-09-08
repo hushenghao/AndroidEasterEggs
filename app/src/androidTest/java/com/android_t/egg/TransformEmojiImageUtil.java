@@ -15,6 +15,7 @@ import com.dede.android_eggs.EasterEggsServer;
 import com.dede.basic.UtilExt;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -36,7 +37,7 @@ import fi.iki.elonen.NanoHTTPD;
  * @author shhu
  * @since 2022/9/6
  */
-//@Ignore("Transform Emoji Image Only")// remove this line
+@Ignore("Transform Emoji Image Only")// remove this line
 @RunWith(AndroidJUnit4.class)
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 public class TransformEmojiImageUtil {
@@ -110,6 +111,7 @@ public class TransformEmojiImageUtil {
                 }
             }
         }
+        canvas.setBitmap(null);
         zipOutput.close();
 
         // launch http server and wait download emoji.zip request

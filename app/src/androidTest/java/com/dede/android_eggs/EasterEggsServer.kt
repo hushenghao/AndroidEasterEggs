@@ -2,7 +2,6 @@ package com.dede.android_eggs
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.net.wifi.WifiManager
 import android.util.Log
 import androidx.collection.ArrayMap
 import androidx.core.graphics.drawable.toBitmap
@@ -23,14 +22,6 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
     companion object {
         private const val TAG = "EasterEggsServer"
         private const val PORT = 8888
-
-        fun getAddress(context: Context): String {
-            val wifiManager = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
-            val ipAddress = wifiManager.connectionInfo.ipAddress
-            return String.format("%d.%d.%d.%d",
-                ipAddress and 0xff, ipAddress shr 8 and 0xff, ipAddress shr 16 and 0xff,
-                ipAddress shr 24 and 0xff)
-        }
     }
 
     class WaitFinishLock(private val timeout: Long) {
@@ -78,8 +69,19 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
 
     private var host: String = "http://localhost:$PORT"
 
+    private fun initHost(context: Context) {
+        val ipv4AddressRequest = Ipv4AddressRequest()
+        ipv4AddressRequest.request(context, object : Ipv4AddressRequest.Callback {
+            override fun onResult(ipv4Address: String?) {
+                if (ipv4Address != null) {
+                    host = "http://${ipv4Address}:$PORT"
+                }
+            }
+        })
+    }
+
     init {
-        host = "http://${getAddress(context)}:$PORT"
+        initHost(context)
         setTempFileManagerFactory {
             return@setTempFileManagerFactory CallFinishTempFileManager()
         }
