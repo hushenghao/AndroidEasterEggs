@@ -150,6 +150,8 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
                 }
             } catch (e: IOException) {
                 Log.w(TAG, "serve error.", e)
+                return newFixedLengthResponse(Response.Status.INTERNAL_ERROR,
+                    MIME_HTML, e.toString())
             }
         }
         return super.serve(session)

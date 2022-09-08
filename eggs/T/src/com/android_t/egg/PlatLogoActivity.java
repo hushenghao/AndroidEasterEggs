@@ -34,7 +34,6 @@ import android.os.Bundle;
 import android.text.format.Time;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
@@ -343,12 +342,6 @@ public class PlatLogoActivity extends Activity {
             {"🐢", "✨", "🌟", "👑"}
     };
 
-    private static final int[][] EMOJI_RES_SETS = {
-            {R.drawable.t_funny_1, R.drawable.t_funny_2, R.drawable.t_funny_3, R.drawable.t_funny_4,
-                    R.drawable.t_funny_5, R.drawable.t_funny_6},
-    };
-    private static final SparseArray<Drawable> cachedDrawable = new SparseArray<>();
-
     static class Bubble {
         public float x, y, r;
         public int color;
@@ -439,19 +432,6 @@ public class PlatLogoActivity extends Activity {
         }
 
         public void chooseEmojiSet() {
-            if (Math.random() <= (EMOJI_RES_SETS.length * 1f / (EMOJI_SETS.length + EMOJI_RES_SETS.length))) {
-                mEmojiSet = (int) (Math.random() * EMOJI_RES_SETS.length);
-                int[] emojiSet = EMOJI_RES_SETS[mEmojiSet];
-                Log.i(TAG, "chooseEmojiResSet: " + mEmojiSet);
-                for (int j = 0; j < mBubbs.length; j++) {
-                    mBubbs[j].text = null;
-                    int id = emojiSet[(int) (Math.random() * emojiSet.length)];
-                    mBubbs[j].drawable = drawableAccessor.requireDrawable(id);
-                }
-                invalidateSelf();
-                return;
-            }
-
             mEmojiSet = (int) (Math.random() * EMOJI_SETS.length);
             final String[] emojiSet = EMOJI_SETS[mEmojiSet];
             Log.i(TAG, "chooseEmojiSet: " + mEmojiSet);
