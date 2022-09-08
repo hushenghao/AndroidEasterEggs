@@ -19,7 +19,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -37,7 +36,7 @@ import fi.iki.elonen.NanoHTTPD;
  * @author shhu
  * @since 2022/9/6
  */
-@Ignore("Transform Emoji Image Only")// remove this line
+@Ignore("Transform Emoji Image Only")// remove this line to run test
 @RunWith(AndroidJUnit4.class)
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 public class TransformEmojiImageUtil {
@@ -48,8 +47,6 @@ public class TransformEmojiImageUtil {
     private static final int IMAGE_SIZE = 512;
     private static final float EMOJI_SIZE = IMAGE_SIZE * 0.85f;
     private static final int IMAGE_QUALITY = 75;
-
-    private static final boolean ENABLE_SIMPLE = false;
 
     private String[][] EMOJI_SETS;
 
@@ -95,20 +92,10 @@ public class TransformEmojiImageUtil {
                 canvas.setBitmap(bitmap);
                 canvas.drawText(emoji, x, y, paint);
                 String fileName = String.format(EMOJI_IMAGE_NAME_FORMAT, UtilExt.unicode(emoji));
-                ByteArrayOutputStream byreArray = new ByteArrayOutputStream();
-                bitmap.compress(COMPRESS_FORMAT, IMAGE_QUALITY, byreArray);
-                bitmap.recycle();
-                ZipEntry zipEntry = new ZipEntry("emojis/" + fileName);
+                ZipEntry zipEntry = new ZipEntry("emojis" + File.separator + fileName);
                 zipOutput.putNextEntry(zipEntry);
-                zipOutput.write(byreArray.toByteArray());
-
-                if (ENABLE_SIMPLE && i == 0 && j == 0) {
-                    File sampleFile = new File(outputDir, fileName);
-                    sampleFile.createNewFile();
-                    FileOutputStream sampleOutput = new FileOutputStream(sampleFile);
-                    sampleOutput.write(byreArray.toByteArray());
-                    sampleOutput.close();
-                }
+                bitmap.compress(COMPRESS_FORMAT, IMAGE_QUALITY, zipOutput);
+                bitmap.recycle();
             }
         }
         canvas.setBitmap(null);
@@ -117,6 +104,7 @@ public class TransformEmojiImageUtil {
         // launch http server and wait download emoji.zip request
         EasterEggsServer.WaitFinishLock lock = new EasterEggsServer.WaitFinishLock(30 * 1000L);
         EasterEggsServer server = new EasterEggsServer(context);
+        lock.withServer(server);
         server.registerHandler("/" + ZIP_NAME, new EasterEggsServer.Handler() {
             @Override
             public NanoHTTPD.Response onHandler(@NonNull NanoHTTPD.IHTTPSession session) throws IOException {

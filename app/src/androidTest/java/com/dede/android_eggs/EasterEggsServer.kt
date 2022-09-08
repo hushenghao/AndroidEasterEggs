@@ -28,9 +28,21 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
 
         private val lock = Object()
 
+        fun withServer(server: EasterEggsServer) {
+            server.setOnShutdownListener(object : OnShutdownListener {
+                override fun onShutdown() {
+                    unlock()
+                }
+            })
+        }
+
         fun await() {
             synchronized(lock) {
-                lock.wait(timeout)
+                if (timeout > 0) {
+                    lock.wait(timeout)
+                } else {
+                    lock.wait()
+                }
             }
         }
 
@@ -39,6 +51,10 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
                 lock.notify()
             }
         }
+    }
+
+    interface OnShutdownListener {
+        fun onShutdown()
     }
 
     abstract class Handler {
@@ -70,6 +86,8 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
 
     private var host: String = "http://localhost:$PORT"
 
+    private var shutdownListener: OnShutdownListener? = null
+
     private fun initHost(context: Context) {
         val ipv4AddressRequest = Ipv4AddressRequest()
         ipv4AddressRequest.request(context, object : Ipv4AddressRequest.Callback {
@@ -89,14 +107,25 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
         val homepage = object : Handler() {
             override fun onHandler(session: IHTTPSession): Response? {
                 routes.sort()
-                val sb = StringBuilder("<h1>Hello from Easter Eggs server!</h1>")
+                val sb = StringBuilder()
+                sb.append("<html>")
+                sb.append("<head>")
+                sb.append("<title>Easter Eggs server</title>")
+                sb.append("</head>")
+                sb.append("<body>")
+                sb.append("<h1>Hello from Easter Eggs server!</h1>")
                 for (route in routes) {
                     sb.append("<a href='")
                         .append(route)
                         .append("'>")
                         .append(route)
-                        .append("</a></br>")
+                        .append("</a><br/>")
                 }
+                sb.append("<br/><form action='/shutdown' method='get'>")
+                sb.append("<button type='submit'>Shut Down</button>")
+                sb.append("</form>")
+                sb.append("</body>")
+                sb.append("</html>")
                 return newFixedLengthResponse(sb.toString())
             }
         }
@@ -105,17 +134,31 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
         registerHandler("/favicon.ico", object : Handler() {
             override fun onHandler(session: IHTTPSession): Response? {
                 val drawable = context.requireDrawable(R.mipmap.ic_launcher_round)
-                val bitmap = drawable.toBitmap(48, 48)
+                val bitmap = drawable.toBitmap(64, 64)
                 val output = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
+                bitmap.compress(Bitmap.CompressFormat.WEBP_LOSSY, 100, output)
                 val byte = output.toByteArray()
                 val input = ByteArrayInputStream(byte)
                 return newFixedLengthResponse(Response.Status.OK,
-                    "image/*",
+                    "image/webp",
                     input,
                     input.available().toLong())
             }
         }, true)
+        registerHandler("/shutdown", object : Handler() {
+            override fun onHandler(session: IHTTPSession): Response? {
+                return newFixedLengthResponse("Shutting Down...")
+            }
+
+            override fun onFinish() {
+                stop()
+            }
+        }, false)
+    }
+
+    override fun stop() {
+        super.stop()
+        shutdownListener?.onShutdown()
     }
 
     override fun start() {
@@ -125,6 +168,10 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
     override fun start(timeout: Int, daemon: Boolean) {
         super.start(timeout, daemon)
         Log.i(TAG, "Open $host in your browser")
+    }
+
+    fun setOnShutdownListener(listener: OnShutdownListener) {
+        shutdownListener = listener
     }
 
     private fun registerHandler(uri: String?, handler: Handler, route: Boolean) {
