@@ -115,7 +115,7 @@ public class TransformEmojiImageUtil {
         zipOutput.close();
 
         // launch http server and wait download emoji.zip request
-        EasterEggsServer.WaitFinishLock lock = new EasterEggsServer.WaitFinishLock(15 * 1000L);
+        EasterEggsServer.WaitFinishLock lock = new EasterEggsServer.WaitFinishLock(30 * 1000L);
         EasterEggsServer server = new EasterEggsServer(context);
         server.registerHandler("/" + ZIP_NAME, new EasterEggsServer.Handler() {
             @Override

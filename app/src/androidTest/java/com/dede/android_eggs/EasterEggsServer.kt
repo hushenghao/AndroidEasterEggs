@@ -66,6 +66,7 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
     }
 
     private val handlers = ArrayMap<String?, Handler>()
+    private val routes = ArrayList<String>()
 
     private var host: String = "http://localhost:$PORT"
 
@@ -87,7 +88,16 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
         }
         val homepage = object : Handler() {
             override fun onHandler(session: IHTTPSession): Response? {
-                return newFixedLengthResponse("Hello from Easter Eggs server!")
+                routes.sort()
+                val sb = StringBuilder("<h1>Hello from Easter Eggs server!</h1>")
+                for (route in routes) {
+                    sb.append("<a href='")
+                        .append(route)
+                        .append("'>")
+                        .append(route)
+                        .append("</a></br>")
+                }
+                return newFixedLengthResponse(sb.toString())
             }
         }
         registerHandler(null, homepage, false)
@@ -105,7 +115,7 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
                     input,
                     input.available().toLong())
             }
-        }, false)
+        }, true)
     }
 
     override fun start() {
@@ -117,10 +127,11 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
         Log.i(TAG, "Open $host in your browser")
     }
 
-    private fun registerHandler(uri: String?, handler: Handler, log: Boolean) {
+    private fun registerHandler(uri: String?, handler: Handler, route: Boolean) {
         handlers[uri] = handler
-        if (log)
-            Log.i(TAG, "registerRoute: ${host}$uri")
+        if (route && uri != null) {
+            routes.add(uri)
+        }
     }
 
     fun registerHandler(uri: String, handler: Handler) {
