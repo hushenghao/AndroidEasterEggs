@@ -440,7 +440,8 @@ public class PlatLogoActivity extends Activity {
 
                 // support code
                 if (!supportCOLR) {
-                    int id = drawableAccessor.getIdentifier(String.format("t_emoji_%s", UtilExt.unicode(mBubbs[j].text)));
+                    int id = drawableAccessor.getIdentifier(String.format("t_emoji_%s",
+                            UtilExt.toUnicode(mBubbs[j].text,"u","_")));
                     mBubbs[j].drawable = drawableAccessor.requireDrawable(id);
                     mBubbs[j].text = null;
                 }

@@ -91,7 +91,7 @@ public class TransformEmojiImageUtil {
                 Bitmap bitmap = Bitmap.createBitmap(IMAGE_SIZE, IMAGE_SIZE, Bitmap.Config.ARGB_8888);
                 canvas.setBitmap(bitmap);
                 canvas.drawText(emoji, x, y, paint);
-                String fileName = String.format(EMOJI_IMAGE_NAME_FORMAT, UtilExt.unicode(emoji));
+                String fileName = String.format(EMOJI_IMAGE_NAME_FORMAT, UtilExt.toUnicode(emoji,"u","_"));
                 ZipEntry zipEntry = new ZipEntry("emojis" + File.separator + fileName);
                 zipOutput.putNextEntry(zipEntry);
                 bitmap.compress(COMPRESS_FORMAT, IMAGE_QUALITY, zipOutput);
