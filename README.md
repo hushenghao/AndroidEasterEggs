@@ -48,6 +48,20 @@ The project contains the complete code of the system Easter eggs, which aims to 
 * <span id='id_color_vector_fonts'>Starting in [Android 13](https://developer.android.google.cn/about/versions/13/features#color-vector-fonts), the system includes rendering support for [COLRv1](https://developer.chrome.com/blog/colrv1-fonts/) fonts and updates system emoji to the COLRv1 format.</span>
 * <span id='id_egg_name'>There is no specific name for the old version of Easter eggs, and the system version alias are used here.</span>
 
+## Test
+
+Using Android devices or emulators.
+```shell
+./gradlew app:cAT
+```
+
+Device type for emulators to be managed by the Android Gradle Plugin.
+
+```shell
+./gradlew app:pixel4Api33DebugAndroidTest
+./gradlew app:nexusOneApi21DebugAndroidTest
+```
+
 ## Other
 
 If there are errors and problems, please submit [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues). If you are interested in this project, please submit [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) to participate.

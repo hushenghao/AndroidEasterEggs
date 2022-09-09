@@ -46,7 +46,7 @@ class PlatLogoActivityTest : EasterEggsActivityBaseTest() {
                 longClick()
             )
 
-        pressBack()
+        //pressBack()
     }
 
 }

@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.ManagedVirtualDevice
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -65,6 +66,27 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    testOptions {
+        animationsDisabled = true
+
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+
+        managedDevices {
+            devices.register<ManagedVirtualDevice>("pixel4Api33") {
+                apiLevel = 33
+                systemImageSource = "google"
+                device = "Pixel 4"
+            }
+            devices.register<ManagedVirtualDevice>("nexusOneApi21") {
+                apiLevel = 21
+                systemImageSource = "aosp"
+                device = "Nexus One"
+            }
+        }
     }
 }
 
