@@ -1,10 +1,11 @@
-package com.dede.android_eggs
+package com.dede.android_eggs.fake_test
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.collection.ArrayMap
 import androidx.core.graphics.drawable.toBitmap
+import com.dede.android_eggs.R
 import com.dede.basic.requireDrawable
 import fi.iki.elonen.NanoHTTPD
 import java.io.ByteArrayInputStream

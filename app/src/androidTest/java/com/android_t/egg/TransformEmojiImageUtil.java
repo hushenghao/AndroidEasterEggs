@@ -11,7 +11,7 @@ import androidx.annotation.RequiresApi;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.dede.android_eggs.EasterEggsServer;
+import com.dede.android_eggs.fake_test.EasterEggsServer;
 import com.dede.basic.UtilExt;
 
 import org.junit.Before;
