@@ -51,6 +51,7 @@ object ChromeTabsBrowser {
         override fun build(session: CustomTabsSession): TrustedWebActivityIntent {
             return super.build(session).apply {
                 intent.putExtra(TrustedWebUtils.EXTRA_LAUNCH_AS_TRUSTED_WEB_ACTIVITY, false)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
         }
 
