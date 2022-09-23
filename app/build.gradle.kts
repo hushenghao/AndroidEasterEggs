@@ -15,6 +15,7 @@ plugins {
 android {
     compileSdk = Versions.COMPILE_SDK
     buildToolsVersion = Versions.BUILD_TOOLS
+    namespace = "com.dede.android_eggs"
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
