@@ -57,9 +57,12 @@ public class MLandActivity extends Activity {
         }
     }
 
+    private boolean resumed = false;
+
     @Override
     public void onPause() {
         mLand.stop();
+        resumed = false;
         super.onPause();
     }
 
@@ -70,6 +73,7 @@ public class MLandActivity extends Activity {
         mLand.onAttachedToWindow(); // resets and starts animation
         updateSplashPlayers();
         mLand.showSplash();
+        resumed = true;
     }
 
     public void playerMinus(View v) {
@@ -83,6 +87,7 @@ public class MLandActivity extends Activity {
     }
 
     public void startButtonPressed(View v) {
+        if (!resumed) return;
         findViewById(R.id.player_minus_button).setVisibility(View.INVISIBLE);
         findViewById(R.id.player_plus_button).setVisibility(View.INVISIBLE);
         mLand.start(true);
