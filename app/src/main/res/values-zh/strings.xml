@@ -7,4 +7,9 @@
     <string name="summary_github">项目源码</string>
     <string name="summary_source">AOSP framework 仓库</string>
     <string name="title_open_with">打开</string>
+    <string name="label_drawer_close">关闭</string>
+    <string name="label_drawer_open">菜单</string>
+    <string name="title_beta">获取Beta版</string>
+    <string name="label_menu_source">源码</string>
+    <string name="title_privacy_agreement">隐私协议</string>
 </resources>

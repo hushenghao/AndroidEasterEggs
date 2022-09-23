@@ -1,6 +1,7 @@
 package com.dede.android_eggs
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatDelegate
@@ -50,6 +51,12 @@ object ChromeTabsBrowser {
         override fun build(session: CustomTabsSession): TrustedWebActivityIntent {
             return super.build(session).apply {
                 intent.putExtra(TrustedWebUtils.EXTRA_LAUNCH_AS_TRUSTED_WEB_ACTIVITY, false)
+            }
+        }
+
+        override fun buildCustomTabsIntent(): CustomTabsIntent {
+            return super.buildCustomTabsIntent().apply {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
         }
     }
