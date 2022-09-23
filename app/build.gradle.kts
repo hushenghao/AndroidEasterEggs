@@ -57,7 +57,7 @@ android {
     }
 
     viewBinding {
-        isEnabled = true
+        enable = true
     }
 
     compileOptions {
@@ -80,11 +80,6 @@ android {
                 apiLevel = 33
                 systemImageSource = "google"
                 device = "Pixel 4"
-            }
-            devices.register<ManagedVirtualDevice>("nexusOneApi21") {
-                apiLevel = 21
-                systemImageSource = "aosp"
-                device = "Nexus One"
             }
         }
     }
