@@ -16,6 +16,9 @@
 
 [English](./README.md)
 
+## 截图
+<img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/Screenshot_20220901_135512.png"/> <img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_14_28.PNG"/> <img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_13_58.PNG"/>
+
 ## 版本明细
 | 名称 | SDK | 彩蛋 | 状态 | 有使用新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |
 |---|:---:|---|:---:|:---:|:---:|
@@ -45,8 +48,19 @@
 * <span id='id_color_vector_fonts'>[Android 13](https://developer.android.google.cn/about/versions/13/features#color-vector-fonts) 可支持呈现 [COLRv1](https://developer.chrome.com/blog/colrv1-fonts/) 字体，并将系统表情符号更新成了 COLRv1 格式。</span>
 * <span id='id_egg_name'>老版本的彩蛋没有具体命名，这里使用系统版本别名。</span>
 
-## 截图
-<img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/Screenshot_20220901_135512.png"/> <img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_14_28.PNG"/> <img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_13_58.PNG"/>
+## 测试
+
+使用Android设备或者模拟器.
+```shell
+./gradlew app:cAT
+```
+
+由Android Gradle插件管理的模拟器的设备类型。
+
+```shell
+./gradlew app:pixel4Api33DebugAndroidTest
+./gradlew app:nexusOneApi21DebugAndroidTest
+```
 
 ## 其他
 

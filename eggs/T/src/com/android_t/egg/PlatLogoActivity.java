@@ -28,7 +28,6 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -44,9 +43,13 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import androidx.annotation.ChecksSdkIntAtLeast;
+
 import com.dede.basic.AnalogClock;
 import com.dede.basic.DrawableKt;
+import com.dede.basic.LargeDrawableAccessor;
 import com.dede.basic.SpUtils;
+import com.dede.basic.UtilExt;
 
 /**
  * @hide
@@ -343,9 +346,11 @@ public class PlatLogoActivity extends Activity {
         public float x, y, r;
         public int color;
         public String text = null;
+        public Drawable drawable = null;
     }
 
     class BubblesDrawable extends Drawable implements View.OnLongClickListener {
+
         private static final int MAX_BUBBS = 2000;
 
         //        private final int[] mColorIds = {
@@ -381,6 +386,11 @@ public class PlatLogoActivity extends Activity {
         public float padding = 0f;
         public float minR = 0f;
 
+        @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.TIRAMISU)
+        private final boolean supportCOLR = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU;
+        //private final boolean supportCOLR = false;
+        private final LargeDrawableAccessor drawableAccessor = new LargeDrawableAccessor(PlatLogoActivity.this);
+
         BubblesDrawable() {
             try {
                 for (int i = 0; i < mColorIds.length; i++) {
@@ -390,10 +400,6 @@ public class PlatLogoActivity extends Activity {
             }
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j] = new Bubble();
-            }
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                Typeface typeface = Typeface.createFromAsset(PlatLogoActivity.this.getAssets(), "NotoColorEmojiSubset.ttf");
-                mPaint.setTypeface(typeface);
             }
         }
 
@@ -410,6 +416,13 @@ public class PlatLogoActivity extends Activity {
                     mPaint.setTextSize(mBubbs[j].r * 1.75f);
                     canvas.drawText(mBubbs[j].text, mBubbs[j].x,
                             mBubbs[j].y + mBubbs[j].r * f * 0.6f, mPaint);
+                } else if (mBubbs[j].drawable != null) {
+                    mBubbs[j].drawable.setBounds(
+                            (int) (mBubbs[j].x - mBubbs[j].r * f),
+                            (int) (mBubbs[j].y - mBubbs[j].r * f),
+                            (int) (mBubbs[j].x + mBubbs[j].r * f),
+                            (int) (mBubbs[j].y + mBubbs[j].r * f));
+                    mBubbs[j].drawable.draw(canvas);
                 } else {
                     mPaint.setColor(mBubbs[j].color);
                     canvas.drawCircle(mBubbs[j].x, mBubbs[j].y, mBubbs[j].r * f, mPaint);
@@ -424,6 +437,14 @@ public class PlatLogoActivity extends Activity {
             Log.i(TAG, "chooseEmojiSet: " + mEmojiSet);
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j].text = emojiSet[(int) (Math.random() * emojiSet.length)];
+
+                // support code
+                if (!supportCOLR) {
+                    int id = drawableAccessor.getIdentifier(String.format("t_emoji_%s",
+                            UtilExt.toUnicode(mBubbs[j].text,"u","_")));
+                    mBubbs[j].drawable = drawableAccessor.requireDrawable(id);
+                    mBubbs[j].text = null;
+                }
             }
             invalidateSelf();
         }

@@ -495,6 +495,13 @@ public class DessertCaseView extends FrameLayout {
         }
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        // fix place anim
+        mHandler.removeCallbacks(mJuggle);
+        super.onDetachedFromWindow();
+    }
+
     public static class RescalingContainer extends FrameLayout {
         private DessertCaseView mView;
         private float mDarkness;

@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.ManagedVirtualDevice
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -19,8 +20,8 @@ android {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
-        versionCode = 19
-        versionName = "1.7.3"
+        versionCode = 20
+        versionName = "1.7.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.addAll(listOf("zh", "en"))
@@ -66,6 +67,27 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    testOptions {
+        animationsDisabled = true
+
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+
+        managedDevices {
+            devices.register<ManagedVirtualDevice>("pixel4Api33") {
+                apiLevel = 33
+                systemImageSource = "google"
+                device = "Pixel 4"
+            }
+            devices.register<ManagedVirtualDevice>("nexusOneApi21") {
+                apiLevel = 21
+                systemImageSource = "aosp"
+                device = "Nexus One"
+            }
+        }
+    }
 }
 
 dependencies {
@@ -97,6 +119,7 @@ dependencies {
 
     testImplementation(deps.junit)
     androidTestImplementation(deps.bundles.android.test)
+    androidTestImplementation(deps.nanohttpd)
 }
 
 tasks.register<Exec>("pgyer") {
