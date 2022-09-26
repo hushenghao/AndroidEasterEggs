@@ -79,7 +79,8 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
                 BuildConfig.VERSION_CODE)
         ViewCompat.setOnApplyWindowInsetsListener(headerView,
             OnApplyWindowInsetsListener { v, insets ->
-                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout())
                 v.updatePadding(top = systemBars.top)
                 return@OnApplyWindowInsetsListener insets
             })
