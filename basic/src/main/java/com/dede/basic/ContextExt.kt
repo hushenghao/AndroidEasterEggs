@@ -22,7 +22,7 @@ object GlobalContext {
         private set
 
     fun init(context: Context) {
-        globalContext = context.applicationContext
+        globalContext = context
     }
 }
 
