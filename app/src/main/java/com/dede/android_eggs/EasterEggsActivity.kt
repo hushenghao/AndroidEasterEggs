@@ -20,6 +20,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
+import com.dede.basic.string
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.internal.EdgeToEdgeUtils
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -57,17 +58,17 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
         binding.navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_github -> {
-                    ChromeTabsBrowser.launchUrl(this, Uri.parse(getString(R.string.url_github)))
+                    ChromeTabsBrowser.launchUrl(this, Uri.parse(R.string.url_github.string))
                 }
                 R.id.menu_source -> {
-                    ChromeTabsBrowser.launchUrl(this, Uri.parse(getString(R.string.url_source)))
+                    ChromeTabsBrowser.launchUrl(this, Uri.parse(R.string.url_source.string))
                 }
                 R.id.menu_privacy_agreement -> {
                     ChromeTabsBrowser.launchUrl(this,
-                        Uri.parse(getString(R.string.url_privacy_agreement)))
+                        Uri.parse(R.string.url_privacy_agreement.string))
                 }
                 R.id.menu_beta -> {
-                    ChromeTabsBrowser.launchUrl(this, Uri.parse(getString(R.string.url_beta)))
+                    ChromeTabsBrowser.launchUrl(this, Uri.parse(R.string.url_beta.string))
                 }
             }
             return@setNavigationItemSelectedListener true
