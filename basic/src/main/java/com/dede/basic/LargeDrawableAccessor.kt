@@ -20,7 +20,7 @@ class LargeDrawableAccessor(private val context: Context) {
     }
 
     fun requireDrawable(id: Int): Drawable {
-        var cache = cachedDrawable.get(id).get()
+        var cache = cachedDrawable.get(id)?.get()
         if (cache == null) {
             cache = context.requireDrawable(id)
             cachedDrawable.put(id, WeakReference(cache))
