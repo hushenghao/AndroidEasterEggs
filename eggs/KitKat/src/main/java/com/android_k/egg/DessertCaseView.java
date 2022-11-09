@@ -269,6 +269,8 @@ public class DessertCaseView extends FrameLayout {
         fillFreeList(DURATION);
     }
 
+    private Runnable delayFillFreeList;
+
     public synchronized void fillFreeList(int animationLen) {
         final Context ctx = getContext();
         final LayoutParams lp = new LayoutParams(mCellSize, mCellSize);
@@ -285,7 +287,7 @@ public class DessertCaseView extends FrameLayout {
                 @Override
                 public void onClick(View view) {
                     place(v, true);
-                    postDelayed(new Runnable() { public void run() { fillFreeList(); } }, DURATION/2);
+                    postDelayed(delayFillFreeList = new Runnable() { public void run() { fillFreeList(); } }, DURATION/2);
                 }
             });
 
@@ -499,6 +501,7 @@ public class DessertCaseView extends FrameLayout {
     protected void onDetachedFromWindow() {
         // fix place anim
         mHandler.removeCallbacks(mJuggle);
+        removeCallbacks(delayFillFreeList);
         super.onDetachedFromWindow();
     }
 
