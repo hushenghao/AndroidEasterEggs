@@ -15,13 +15,14 @@ plugins {
 android {
     compileSdk = Versions.COMPILE_SDK
     buildToolsVersion = Versions.BUILD_TOOLS
+    namespace = "com.dede.android_eggs"
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
-        versionCode = 20
-        versionName = "1.7.4"
+        versionCode = 22
+        versionName = "1.8.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.addAll(listOf("zh", "en"))
@@ -57,7 +58,7 @@ android {
     }
 
     viewBinding {
-        isEnabled = true
+        enable = true
     }
 
     compileOptions {
@@ -81,11 +82,6 @@ android {
                 systemImageSource = "google"
                 device = "Pixel 4"
             }
-            devices.register<ManagedVirtualDevice>("nexusOneApi21") {
-                apiLevel = 21
-                systemImageSource = "aosp"
-                device = "Nexus One"
-            }
         }
     }
 }
@@ -97,7 +93,7 @@ dependencies {
     implementation(deps.androidx.lifecycle.viewmodel.ktx)
     implementation(deps.androidx.preference.ktx)
     implementation(deps.androidx.constraintlayout)
-    implementation(deps.androidx.browser)
+    implementation(deps.google.browser)
     implementation(deps.google.material)
     implementation(deps.free.reflection)
     debugImplementation(deps.leakcanary)

@@ -18,10 +18,6 @@ open class ChromeTabPreference : Preference, Preference.OnPreferenceClickListene
     private var uri: Uri? = null
     private val useChromeTab: Boolean
 
-    init {
-        ChromeTabsBrowser.warmup(context)
-    }
-
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         val arrays = context.obtainStyledAttributes(attrs, R.styleable.ChromeTabPreference)

@@ -54,5 +54,11 @@
     <string name="summary_source">AOSP framework repository</string>
     <string name="summary_version" translatable="false">%s (%d)</string>
     <string name="title_open_with">Open with</string>
+    <string name="label_drawer_close">Close</string>
+    <string name="label_drawer_open">Menu</string>
+    <string name="title_beta">Get Beta</string>
+    <string name="label_menu_source">Source</string>
+    <string name="title_privacy_agreement">Privacy Agreement</string>
+    <string name="url_privacy_agreement" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE</string>
 
 </resources>
