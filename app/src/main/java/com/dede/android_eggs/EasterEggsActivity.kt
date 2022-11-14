@@ -87,7 +87,7 @@ class EasterEggsActivity : AppCompatActivity(), Runnable {
             })
 
         ivLogo = AppCompatImageView(this).apply {
-            setImageResource(R.drawable.t_platlogo)
+            setImageResource(com.android_t.egg.R.drawable.t_platlogo)
         }
         val layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
