@@ -17,7 +17,7 @@
 [English](./README.md)
 
 ## 截图
-<img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/Screenshot_20220901_135512.png"/> <img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_14_28.PNG"/> <img height="512" src="https://github.com/hushenghao/AndroidEasterEggs/raw/master/images/STIIITCH_2022_09_01_02_13_58.PNG"/>
+<img height="512" src="./images/Screenshot_20221116_163229_framed.png"/> <img height="512" src="./images/Screenshot_grid_framed.png"/>
 
 ## 版本明细
 | 名称                                 |  SDK  | 彩蛋                            | 状态  | 有使用新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |
