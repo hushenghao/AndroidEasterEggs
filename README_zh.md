@@ -17,7 +17,7 @@
 [English](./README.md)
 
 ## 截图
-<img height="512" src="./images/Screenshot_20221116_163229_framed.png"/> <img height="512" src="./images/Screenshot_grid_framed.png"/>
+<img height="512" src="./images/Screenshot_1668588678_framed.png"/> <img height="512" src="./images/Screenshot_grid_framed.png"/>
 
 ## 版本明细
 | 名称                                 |  SDK  | 彩蛋                            | 状态  | 有使用新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |

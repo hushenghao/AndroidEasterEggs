@@ -17,7 +17,7 @@ The project contains the complete code of the system Easter eggs, which aims to 
 [中文](./README_zh.md)
 
 ## Screenshots
-<img height="512" src="./images/Screenshot_20221116_163229_framed.png"/> <img height="512" src="./images/Screenshot_grid_framed.png"/>
+<img height="512" src="./images/Screenshot_1668588678_framed.png"/> <img height="512" src="./images/Screenshot_grid_framed.png"/>
 
 ## Details
 | Name                               |  SDK  | Egg                           | Status | Use new features [*](#id_new_features) | Minimum SDK [*](#id_full_egg_mini_sdk) |
