@@ -3,7 +3,7 @@ import fontTools.subset
 import zopfli
 
 output_dir = os.path.join(os.getcwd(), "../", "src", "main", "assets")
-if os.path.exists(output_dir) == False:
+if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 output = os.path.abspath(os.path.join(output_dir, "NotoColorEmojiSubset.ttf"))
 
