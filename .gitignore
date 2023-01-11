@@ -1,6 +1,5 @@
 *.iml
 .gradle
-/local.properties
 /.idea
 .DS_Store
 /build
@@ -9,3 +8,4 @@
 .cxx
 local.properties
 key.properties
+Gemfile.lock
