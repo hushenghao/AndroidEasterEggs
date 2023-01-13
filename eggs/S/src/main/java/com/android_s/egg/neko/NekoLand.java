@@ -29,6 +29,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -156,8 +157,13 @@ public class NekoLand extends Activity implements PrefsListener {
                 .setPositiveButton(android.R.string.ok, new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        String name = text.getText().toString().trim();
+                        if (TextUtils.isEmpty(name)) {
+                            // make cat.getName() notnull, ShortcutInfo.Builder#setShortLabel(getName())
+                            return;
+                        }
                         cat.logRename(context);
-                        cat.setName(text.getText().toString().trim());
+                        cat.setName(name);
                         mPrefs.addCat(cat);
                     }
                 }).show();
