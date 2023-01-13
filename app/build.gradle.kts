@@ -93,7 +93,7 @@ dependencies {
     implementation(deps.androidx.lifecycle.viewmodel.ktx)
     implementation(deps.androidx.preference.ktx)
     implementation(deps.androidx.constraintlayout)
-    implementation(deps.google.browser)
+    implementation(deps.androidx.browser)
     implementation(deps.google.material)
     implementation(deps.free.reflection)
     debugImplementation(deps.leakcanary)
