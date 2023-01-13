@@ -23,7 +23,8 @@ platform :android do
 
   desc "Submit a new Beta Build to Pgyer"
   lane :beta do
-    gradle(task: "clean app:pgyer")
+    gradle(task: "clean assembleRelease")
+    pgyer(api_key: ENV["PGYER_API_KEY"])
     # crashlytics
 
     # sh "your_script.sh"

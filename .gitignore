@@ -8,4 +8,5 @@
 .cxx
 local.properties
 key.properties
-Gemfile.lock
+
+fastlane/report.xml
