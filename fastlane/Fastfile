@@ -18,7 +18,7 @@ default_platform(:android)
 platform :android do
   desc "Runs all the tests"
   lane :test do
-    gradle(task: "test")
+    gradle(task: "app:cAT")
   end
 
   desc "Submit a new Beta Build to Pgyer"
@@ -32,7 +32,7 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do
-    gradle(task: "clean assembleRelease")
+    gradle(task: "clean bundleRelease")
     upload_to_play_store
   end
 end

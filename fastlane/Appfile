@@ -1,2 +1,2 @@
-json_key_file("../../pc-api-6228430041501357569-115-9f2a1118db15.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+json_key_file(ENV["JSON_KEY_FILE"]) # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
 package_name("com.dede.android_eggs") # e.g. com.krausefx.app
