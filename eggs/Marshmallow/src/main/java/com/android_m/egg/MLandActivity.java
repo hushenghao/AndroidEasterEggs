@@ -61,8 +61,8 @@ public class MLandActivity extends Activity {
 
     @Override
     public void onPause() {
-        mLand.stop();
         resumed = false;
+        mLand.stop();
         super.onPause();
     }
 
