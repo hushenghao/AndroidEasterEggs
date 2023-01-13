@@ -333,6 +333,10 @@ public class DessertCaseView extends FrameLayout {
         return new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animator) {
+                if (!isAttachedToWindow()) {
+                    // fix place anim start
+                    return;
+                }
                 v.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                 v.buildLayer();
             }
@@ -500,7 +504,7 @@ public class DessertCaseView extends FrameLayout {
     @Override
     protected void onDetachedFromWindow() {
         // fix place anim
-        mHandler.removeCallbacks(mJuggle);
+        stop();
         removeCallbacks(delayFillFreeList);
         super.onDetachedFromWindow();
     }
