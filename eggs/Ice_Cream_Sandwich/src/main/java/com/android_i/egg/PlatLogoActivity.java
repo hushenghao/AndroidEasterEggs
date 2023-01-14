@@ -20,6 +20,8 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -42,8 +44,21 @@ public class PlatLogoActivity extends Activity {
             Vibrator mZzz = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             mZzz.vibrate(50L * mCount);
             final float scale = 1f + 0.25f * mCount * mCount;
-            mContent.setScaleX(scale);
-            mContent.setScaleY(scale);
+
+            Drawable drawable = mContent.getDrawable();
+            if (drawable instanceof VectorDrawable) {
+                // Scale VectorDrawable
+                float newWidth = drawable.getIntrinsicWidth() * scale;
+                float newHeight = drawable.getIntrinsicHeight() * scale;
+                int left = -(int) ((newWidth - drawable.getIntrinsicWidth()) / 2f);
+                int top = -(int) ((newHeight - drawable.getIntrinsicHeight()) / 2f);
+                int right = (int) (newWidth + left);
+                int bottom = (int) (newHeight + top);
+                drawable.setBounds(left, top, right, bottom);
+            } else {
+                mContent.setScaleX(scale);
+                mContent.setScaleY(scale);
+            }
 
             if (mCount <= 3) {
                 mHandler.postDelayed(mSuperLongPress, ViewConfiguration.getLongPressTimeout());
