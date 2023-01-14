@@ -7,18 +7,19 @@
 
 ![logo](./images/ic_launcher_round.png)
 
-**下载安装**
+[English](./README.md)
 
-<a href='https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img height='60' alt='下载应用，请到 Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/zh-cn_badge_web_generic.png'/></a>
+## 下载安装
 
-[![coolapk](https://img.shields.io/badge/Coolapk--4caf50?logo=android&style=for-the-badge)](https://www.coolapk.com/apk/com.dede.android_eggs) [![pgyer](https://img.shields.io/badge/Beta-Pgyer-1abc9c?logo=androidstudio&style=for-the-badge)](https://www.pgyer.com/eggs)
+| [![下载应用，请到 Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/zh-cn_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) | [![](./images/badge_coolapk.png)](https://www.coolapk.com/apk/com.dede.android_eggs) | [![Beta](./images/badge_pgyer.png)](https://www.pgyer.com/eggs) |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------------------------|
 
 项目包含了系统彩蛋完整代码，旨在对系统彩蛋的整理和兼容，以保证大多数设备可以体验到不同版本的彩蛋，不会对系统彩蛋代码做过多修改。部分版本使用了系统新特性，低版本只能使用部分功能。
 
-[English](./README.md)
-
 ## 截图
-<img height="512" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png"/> <img height="512" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png"/>
+
+| ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) |
+|----------------------------------------------------------------------|----------------------------------------------------------------------|
 
 ## 版本明细
 | 名称                                 |  SDK  | 彩蛋                            | 状态  | 有使用新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |

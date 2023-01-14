@@ -7,18 +7,19 @@ Organize the Easter eggs of the official versions of the Android system.
 
 ![logo](./images/ic_launcher_round.png)
 
-**Download and install**
+[中文](./README_zh.md)
 
-<a href='https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img height='60' alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
- 
-[![coolapk](https://img.shields.io/badge/Coolapk--4caf50?logo=android&style=for-the-badge)](https://www.coolapk.com/apk/com.dede.android_eggs) [![pgyer](https://img.shields.io/badge/Beta-Pgyer-1abc9c?logo=androidstudio&style=for-the-badge)](https://www.pgyer.com/eggs)
+## Download and install
+
+| [![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) | [![](./images/badge_coolapk.png)](https://www.coolapk.com/apk/com.dede.android_eggs) | [![Beta](./images/badge_pgyer.png)](https://www.pgyer.com/eggs) |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------------------------|
 
 The project contains the complete code of the system Easter eggs, which aims to organize and compatible with the system eggs, so as to ensure that most devices can experience different versions of Easter eggs and will not make too many modifications to the system egg code. Some versions use new features of the system, and lower versions can only use some functions.
 
-[中文](./README_zh.md)
-
 ## Screenshots
-<img height="512" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png"/> <img height="512" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png"/>
+
+| ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) |
+|----------------------------------------------------------------------|----------------------------------------------------------------------|
 
 ## Details
 | Name                               |  SDK  | Egg                           | Status | Use new features [*](#id_new_features) | Minimum SDK [*](#id_full_egg_mini_sdk) |
