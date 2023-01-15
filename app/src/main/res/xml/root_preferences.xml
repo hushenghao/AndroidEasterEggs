@@ -3,6 +3,7 @@
 
     <com.dede.android_eggs.EggCollection
         app:iconSpaceReserved="false"
+        app:initialExpandedChildrenCount="15"
         app:key="key_collection"
         app:title="@string/header_collection">
 
@@ -69,50 +70,98 @@
             android:targetClass="@string/target_class_android_n"
             app:icon="@drawable/n_icon"
             app:summary="@string/n_app_name"
-            app:title="@string/title_android_n" />
+            app:title="@string/title_android_n"
+            app:versionComment="@string/version_comment_android_n" />
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_m"
             app:icon="@drawable/m_icon"
             app:summary="@string/m_mland"
-            app:title="@string/title_android_m" />
+            app:title="@string/title_android_m"
+            app:versionComment="@string/version_comment_android_m" />
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_l"
             app:icon="@drawable/l_icon"
             app:summary="@string/l_lland"
-            app:title="@string/title_android_l" />
+            app:title="@string/title_android_l"
+            app:versionComment="@string/version_comment_android_l" />
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_k"
             app:icon="@drawable/ic_k_platlogo"
             app:summary="@string/k_dessert_case"
-            app:title="@string/title_android_k" />
+            app:title="@string/title_android_k"
+            app:versionComment="@string/version_comment_android_k" />
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_j"
             app:icon="@drawable/j_platlogo"
             app:summary="@string/j_egg_name"
-            app:title="@string/title_android_j" />
+            app:title="@string/title_android_j"
+            app:versionComment="@string/version_comment_android_j" />
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_i"
             app:icon="@drawable/i_platlogo"
             app:iconPadding="2.5dp"
             app:summary="@string/i_egg_name"
-            app:title="@string/title_android_i" />
+            app:title="@string/title_android_i"
+            app:versionComment="@string/version_comment_android_i" />
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_h"
             app:icon="@drawable/h_platlogo"
             app:summary="@string/h_egg_name"
-            app:title="@string/title_android_h" />
+            app:title="@string/title_android_h"
+            app:versionComment="@string/version_comment_android_h" />
 
         <com.dede.android_eggs.EggPreference
             android:targetClass="@string/target_class_android_g"
             app:icon="@drawable/g_platlogo"
             app:summary="@string/g_egg_name"
-            app:title="@string/title_android_g" />
+            app:title="@string/title_android_g"
+            app:versionComment="@string/version_comment_android_g" />
+
+        <com.dede.android_eggs.EggPreference
+            app:icon="@drawable/ic_android_froyo"
+            app:iconPadding="1.5dp"
+            app:summary="@string/summary_android_froyo"
+            app:supportAdaptiveIcon="oval"
+            app:title="@string/title_android_froyo"
+            app:versionComment="@string/version_comment_android_froyo" />
+
+        <com.dede.android_eggs.EggPreference
+            app:icon="@drawable/ic_android_eclair"
+            app:iconPadding="1.5dp"
+            app:summary="@string/summary_android_eclair"
+            app:supportAdaptiveIcon="oval"
+            app:title="@string/title_android_eclair"
+            app:versionComment="@string/version_comment_android_eclair" />
+
+        <com.dede.android_eggs.EggPreference
+            app:icon="@drawable/ic_android_donut"
+            app:iconPadding="1.5dp"
+            app:summary="@string/summary_android_donut"
+            app:supportAdaptiveIcon="oval"
+            app:title="@string/title_android_donut" />
+
+        <com.dede.android_eggs.EggPreference
+            app:icon="@drawable/ic_android_cupcake"
+            app:iconPadding="1.5dp"
+            app:summary="@string/summary_android_cupcake"
+            app:supportAdaptiveIcon="oval"
+            app:title="@string/title_android_cupcake" />
+
+        <com.dede.android_eggs.EggPreference
+            app:iconPadding="1.5dp"
+            app:summary="@string/summary_android_petit_four"
+            app:title="@string/title_android_petit_four" />
+
+        <com.dede.android_eggs.EggPreference
+            app:iconPadding="1.5dp"
+            app:summary="@string/summary_android_base"
+            app:title="@string/title_android_base" />
 
     </com.dede.android_eggs.EggCollection>
 
