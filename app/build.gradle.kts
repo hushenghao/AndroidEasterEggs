@@ -1,5 +1,4 @@
 import com.android.build.api.dsl.ManagedVirtualDevice
-import java.io.ByteArrayOutputStream
 import java.util.*
 
 val keystoreProperties = Properties().apply {
@@ -21,8 +20,8 @@ android {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
-        versionCode = 22
-        versionName = "1.8.0"
+        versionCode = 23
+        versionName = "1.8.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.addAll(listOf("zh", "en"))
@@ -93,7 +92,7 @@ dependencies {
     implementation(deps.androidx.lifecycle.viewmodel.ktx)
     implementation(deps.androidx.preference.ktx)
     implementation(deps.androidx.constraintlayout)
-    implementation(deps.google.browser)
+    implementation(deps.androidx.browser)
     implementation(deps.google.material)
     implementation(deps.free.reflection)
     debugImplementation(deps.leakcanary)
@@ -116,43 +115,4 @@ dependencies {
     testImplementation(deps.junit)
     androidTestImplementation(deps.bundles.android.test)
     androidTestImplementation(deps.nanohttpd)
-}
-
-tasks.register<Exec>("pgyer") {
-    val apiKey = keystoreProperties["pgyer.api_key"]
-        ?: throw IllegalArgumentException("pgyer.api_key not found")
-
-    val assemble = tasks.named("assembleRelease").get()
-    dependsOn("clean", assemble)
-    assemble.mustRunAfter("clean")
-
-    val tree = fileTree("build") {
-        include("outputs/apk/release/*.apk", "intermediates/apk/release/*.apk")
-        builtBy("assembleRelease")
-    }
-    doFirst {
-        val apkPath = tree.single().absolutePath
-        println("Upload Apk: $apkPath")
-
-        commandLine(
-            "curl", "-F", "file=@$apkPath",
-            "-F", "_api_key=$apiKey",
-            "-F", "buildUpdateDescription=Upload by gradle pgyer task",
-            "https://www.pgyer.com/apiv2/app/upload"
-        )
-    }
-    val output = ByteArrayOutputStream()
-    standardOutput = output
-    doLast {
-        val result = output.toString()
-        val obj = org.json.JSONObject(result)
-        if (obj.getInt("code") == 0) {
-            val path = obj.getJSONObject("data")
-                .getString("buildShortcutUrl")
-            println("Uploaded successfully: https://www.pgyer.com/$path")
-        } else {
-            val message = obj.getString("message")
-            println("Upload failed: $message")
-        }
-    }
 }

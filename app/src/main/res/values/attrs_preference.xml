@@ -13,6 +13,7 @@
         </attr>
         <attr name="iconRadius" format="dimension" />
         <attr name="iconPadding" format="dimension" />
+        <attr name="versionComment" format="string" />
     </declare-styleable>
 
     <declare-styleable name="XXWHCA">

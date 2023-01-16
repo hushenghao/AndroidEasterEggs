@@ -6,16 +6,18 @@
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
     </style>
 
-    <style name="QuaresTheme" parent="@android:style/Theme.DeviceDefault">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowShowWallpaper">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-    </style>
+    <!-- 老版本系统无法显示壁纸样式，这里显示声明这个样式 -->
+    <style name="QuaresTheme" parent="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+<!--    <style name="QuaresTheme" parent="@android:style/Theme.DeviceDefault">-->
+<!--        <item name="android:windowIsTranslucent">true</item>-->
+<!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+<!--        <item name="android:colorBackgroundCacheHint">@null</item>-->
+<!--        <item name="android:windowShowWallpaper">true</item>-->
+<!--        <item name="android:windowContentOverlay">@null</item>-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--        <item name="android:windowFullscreen">true</item>-->
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+<!--        <item name="android:navigationBarColor">@android:color/transparent</item>-->
+<!--    </style>-->
 
 </resources>

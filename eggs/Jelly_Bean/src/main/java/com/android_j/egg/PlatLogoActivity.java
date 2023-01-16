@@ -31,6 +31,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class PlatLogoActivity extends Activity {
     Toast mToast;
     ImageView mContent;
@@ -67,7 +69,7 @@ public class PlatLogoActivity extends Activity {
         tv.setTextColor(0xFFFFFFFF);
         tv.setShadowLayer(4 * metrics.density, 0, 2 * metrics.density, 0x66000000);
 //        tv.setText("Android " + Build.VERSION.RELEASE);
-        tv.setText("Android 4.x");
+        tv.setText("Android 4." + (new Random().nextInt(3) + 1));
         view.addView(tv, lp);
 
         tv = new TextView(this);

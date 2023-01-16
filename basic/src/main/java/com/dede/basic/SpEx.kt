@@ -33,3 +33,11 @@ fun Context.getLong(key: String, default: Long): Long {
 fun Context.putLong(key: String, value: Long) {
     sp.edit().putLong(key, value).apply()
 }
+
+fun Context.getBoolean(key: String, default: Boolean): Boolean {
+    return sp.getBoolean(key, default)
+}
+
+fun Context.putBoolean(key: String, value: Boolean) {
+    sp.edit().putBoolean(key, value).apply()
+}
