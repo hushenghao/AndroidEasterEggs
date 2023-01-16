@@ -19,7 +19,7 @@
     </style>
 
     <style name="TextAppearance.NightModeSwitch" parent="">
-        <item name="android:textColor">?attr/colorControlActivated</item>
-        <item name="android:textSize" tools:ignore="SpUsage">15dp</item>
+        <item name="android:textColor">?attr/colorButtonNormal</item>
+        <item name="android:textSize" tools:ignore="SpUsage">16dp</item>
     </style>
 </resources>

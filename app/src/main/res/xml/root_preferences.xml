@@ -160,7 +160,6 @@
 
         <com.dede.android_eggs.EggPreference
             app:iconPadding="1.5dp"
-            app:summary="@string/summary_android_base"
             app:title="@string/title_android_base" />
 
     </com.dede.android_eggs.EggCollection>

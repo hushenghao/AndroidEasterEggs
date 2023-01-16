@@ -37,7 +37,6 @@
     <string name="summary_android_donut" translatable="false">Donut</string>
     <string name="summary_android_cupcake" translatable="false">Cupcake</string>
     <string name="summary_android_petit_four" translatable="false">Petit Four</string>
-    <string name="summary_android_base">The first release doesn\'t have a nickname, it\'s called the "Singularity"</string>
 
     <string name="version_comment_android_n" formatted="false" translatable="false">
         SDK 24~25\nAndroid 7.0~7.1.2

@@ -44,6 +44,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:textOff="@string/icon_light_mode"
+        android:textOn="@string/icon_dark_mode"
         app:layout_constraintBottom_toBottomOf="@id/tv_version"
         app:layout_constraintEnd_toEndOf="parent"
         app:showText="true"

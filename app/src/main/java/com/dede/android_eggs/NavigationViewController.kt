@@ -65,8 +65,6 @@ class NavigationViewController(private val activity: AppCompatActivity) {
             AppCompatDelegate.setDefaultNightMode(nightMode)
             activity.putBoolean("key_night_mode", isChecked)
         }
-        switchNightMode.textOff = "\ue518"// light_mode
-        switchNightMode.textOn = "\ue51c"// dark_mode
         switchNightMode.setSwitchTypeface(Typeface.createFromAsset(activity.assets, "icons.otf"))
         switchNightMode.isChecked = activity.getBoolean("key_night_mode", false)
     }
