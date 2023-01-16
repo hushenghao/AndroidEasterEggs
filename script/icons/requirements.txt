@@ -1,0 +1,2 @@
+fontTools==4.38.0
+zopfli==0.2.1

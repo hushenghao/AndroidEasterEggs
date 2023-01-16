@@ -2,19 +2,27 @@ package com.dede.android_eggs
 
 import android.app.Activity
 import android.content.res.Configuration
+import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
+import android.text.style.ForegroundColorSpan
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.text.set
+import androidx.core.text.toSpannable
 import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.drawerlayout.widget.DrawerLayout
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
+import com.dede.android_eggs.databinding.LayoutNavigationHeaderBinding
+import com.dede.basic.getBoolean
+import com.dede.basic.putBoolean
 import com.dede.basic.string
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -42,15 +50,32 @@ class NavigationViewController(private val activity: AppCompatActivity) {
 
         val listeners = Listeners(activity)
         binding.navigationView.setNavigationItemSelectedListener(listeners)
-
         val headerView = binding.navigationView.getHeaderView(0)
-        headerView.findViewById<TextView>(R.id.tv_version).text =
+        val headerBinding = LayoutNavigationHeaderBinding.bind(headerView)
+        ViewCompat.setOnApplyWindowInsetsListener(headerView, listeners)
+        headerBinding.tvVersion.text =
             activity.getString(
                 R.string.summary_version,
                 BuildConfig.VERSION_NAME,
                 BuildConfig.VERSION_CODE
             )
-        ViewCompat.setOnApplyWindowInsetsListener(headerView, listeners)
+        val switchNightMode = headerBinding.switchNightMode
+        switchNightMode.setOnCheckedChangeListener { _, isChecked ->
+            val nightMode = if (isChecked) AppCompatDelegate.MODE_NIGHT_YES
+            else AppCompatDelegate.MODE_NIGHT_NO
+            if (nightMode == AppCompatDelegate.getDefaultNightMode()) {
+                return@setOnCheckedChangeListener
+            }
+            AppCompatDelegate.setDefaultNightMode(nightMode)
+            activity.putBoolean("key_night_mode", isChecked)
+        }
+        val typeface = Typeface.createFromAsset(activity.assets, "icons.otf")
+        switchNightMode.textOff = "\uE3AC"// brightness_7
+            .toSpannable().apply { this[0, 1] = ForegroundColorSpan(Color.WHITE) }
+        switchNightMode.textOn = "\uE3A9"// brightness_4
+            .toSpannable().apply { this[0, 1] = ForegroundColorSpan(Color.WHITE) }
+        switchNightMode.setSwitchTypeface(typeface)
+        switchNightMode.isChecked = activity.getBoolean("key_night_mode", false)
     }
 
     fun onConfigurationChanged(newConfig: Configuration) {
@@ -62,7 +87,7 @@ class NavigationViewController(private val activity: AppCompatActivity) {
     }
 
     private class DrawerLayoutBackPressedDispatcher(
-        private val drawerLayout: DrawerLayout
+        private val drawerLayout: DrawerLayout,
     ) : OnBackPressedCallback(false), Runnable, DrawerLayout.DrawerListener {
 
         fun bind(activity: AppCompatActivity) {
