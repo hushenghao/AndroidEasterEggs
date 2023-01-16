@@ -41,23 +41,12 @@ open class ChromeTabPreference : Preference, Preference.OnPreferenceClickListene
         val uri = this.uri
         if (uri != null) {
             if (useChromeTab) {
-                openChromeTabs(uri)
+                ChromeTabsBrowser.launchUrl(context, uri)
             } else {
-                openBrowser(uri)
+                ChromeTabsBrowser.launchUrlByBrowser(context, uri)
             }
         }
         return uri != null
-    }
-
-    private fun openBrowser(uri: Uri) {
-        val target = Intent(Intent.ACTION_VIEW, uri)
-        val intent =
-            Intent.createChooser(target, context.getString(R.string.title_open_with))
-        context.startActivity(intent)
-    }
-
-    private fun openChromeTabs(uri: Uri) {
-        ChromeTabsBrowser.launchUrl(context, uri)
     }
 
 }

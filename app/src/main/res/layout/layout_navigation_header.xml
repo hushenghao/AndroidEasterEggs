@@ -44,10 +44,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@id/tv_version"
         app:layout_constraintEnd_toEndOf="parent"
         app:showText="true"
+        app:switchTextAppearance="@style/TextAppearance.NightModeSwitch"
         tools:textOff="☀️"
         tools:textOn="🌙" />
 

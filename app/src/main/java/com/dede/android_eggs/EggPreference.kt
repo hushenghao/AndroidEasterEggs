@@ -16,6 +16,8 @@ import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.text.set
+import androidx.core.text.toSpannable
 import androidx.core.view.setPadding
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
@@ -95,29 +97,15 @@ class EggPreference : Preference {
                     val range = result.range
                     title.movementMethod = LinkMovementMethod.getInstance()
                     title.highlightColor = Color.TRANSPARENT
-                    val span = SpannableString(text)
+                    val span = text.toSpannable()
                     if (range.first > 0) {
-                        span.setSpan(
-                            DefaultClickSpan(this),
-                            0,
-                            range.first,
-                            Spannable.SPAN_INCLUSIVE_EXCLUSIVE
-                        )
+                        span[0, range.first] = DefaultClickSpan(this)
                     }
                     if (range.last + 1 < text.length) {
-                        span.setSpan(
-                            DefaultClickSpan(this),
-                            range.last + 1,
-                            text.length,
-                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                        )
+                        span[range.last + 1, text.length] = DefaultClickSpan(this)
                     }
-                    span.setSpan(
-                        CommentClickSpan(icon, finalTitle, versionComment),
-                        range.first,
-                        range.last + 1,
-                        Spannable.SPAN_INCLUSIVE_INCLUSIVE
-                    )
+                    span[range.first, range.last + 1] =
+                        CommentClickSpan(icon, finalTitle, versionComment)
                     title.text = span
                 }
             }
@@ -168,7 +156,7 @@ class EggPreference : Preference {
     private class CommentClickSpan(
         val icon: Drawable?,
         val title: CharSequence?,
-        val message: CharSequence?
+        val message: CharSequence?,
     ) : ClickableSpan() {
         override fun onClick(widget: View) {
             MaterialAlertDialogBuilder(widget.context)

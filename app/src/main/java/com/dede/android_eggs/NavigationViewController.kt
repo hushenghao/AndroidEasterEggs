@@ -2,18 +2,14 @@ package com.dede.android_eggs
 
 import android.app.Activity
 import android.content.res.Configuration
-import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
-import android.text.style.ForegroundColorSpan
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.text.set
-import androidx.core.text.toSpannable
 import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -62,19 +58,16 @@ class NavigationViewController(private val activity: AppCompatActivity) {
         val switchNightMode = headerBinding.switchNightMode
         switchNightMode.setOnCheckedChangeListener { _, isChecked ->
             val nightMode = if (isChecked) AppCompatDelegate.MODE_NIGHT_YES
-            else AppCompatDelegate.MODE_NIGHT_NO
+            else AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
             if (nightMode == AppCompatDelegate.getDefaultNightMode()) {
                 return@setOnCheckedChangeListener
             }
             AppCompatDelegate.setDefaultNightMode(nightMode)
             activity.putBoolean("key_night_mode", isChecked)
         }
-        val typeface = Typeface.createFromAsset(activity.assets, "icons.otf")
-        switchNightMode.textOff = "\uE3AC"// brightness_7
-            .toSpannable().apply { this[0, 1] = ForegroundColorSpan(Color.WHITE) }
-        switchNightMode.textOn = "\uE3A9"// brightness_4
-            .toSpannable().apply { this[0, 1] = ForegroundColorSpan(Color.WHITE) }
-        switchNightMode.setSwitchTypeface(typeface)
+        switchNightMode.textOff = "\ue518"// light_mode
+        switchNightMode.textOn = "\ue51c"// dark_mode
+        switchNightMode.setSwitchTypeface(Typeface.createFromAsset(activity.assets, "icons.otf"))
         switchNightMode.isChecked = activity.getBoolean("key_night_mode", false)
     }
 

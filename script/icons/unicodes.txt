@@ -1,5 +1,4 @@
-# brightness_4
-e3a9
-# brightness_7
-e3ac
-
+# light_mode
+e518
+# dark_mode
+e51c

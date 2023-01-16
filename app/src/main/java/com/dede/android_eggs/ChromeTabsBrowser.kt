@@ -28,9 +28,11 @@ object ChromeTabsBrowser {
         }
 
         val dynamicContext = DynamicColors.wrapContextIfAvailable(context)
-        val color = MaterialColors.getColor(dynamicContext,
+        val color = MaterialColors.getColor(
+            dynamicContext,
             com.google.android.material.R.attr.colorSurface,
-            Color.WHITE)
+            Color.WHITE
+        )
         val params = CustomTabColorSchemeParams.Builder()
             .setToolbarColor(color)
             .build()
@@ -48,12 +50,13 @@ object ChromeTabsBrowser {
         try {
             customTabsIntent.launchUrl(context, uri)
         } catch (e: Exception) {
-            launchFailback(context, uri)
+            launchUrlByBrowser(context, uri)
         }
     }
 
-    private fun launchFailback(context: Context, uri: Uri) {
-        val intent = Intent(Intent.ACTION_VIEW, uri)
+    fun launchUrlByBrowser(context: Context, uri: Uri) {
+        val target = Intent(Intent.ACTION_VIEW, uri)
+        val intent = Intent.createChooser(target, context.getString(R.string.title_open_with))
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         try {
             ContextCompat.startActivity(context, intent, null)

@@ -23,7 +23,7 @@ class EasterEggsApp : Application() {
 
     private fun applyNightMode() {
         val nightMode = if (getBoolean("key_night_mode", false))
-            AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+            AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         AppCompatDelegate.setDefaultNightMode(nightMode)
     }
 }
