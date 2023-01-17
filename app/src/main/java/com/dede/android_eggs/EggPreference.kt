@@ -134,7 +134,9 @@ class EggPreference : Preference {
             return
         }
 
-        MaterialAlertDialogBuilder(context)
+        val res =
+            com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered
+        MaterialAlertDialogBuilder(context, res)
             .setTitle(finalTitle)
             .setMessage(finalSummary)
             .setIcon(icon)

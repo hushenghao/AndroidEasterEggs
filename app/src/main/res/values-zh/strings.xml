@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="header_collection">集合</string>
     <string name="header_about">关于</string>
     <string name="title_source">系统源码</string>
@@ -12,5 +12,7 @@
     <string name="title_beta">获取Beta版</string>
     <string name="label_menu_source">源码</string>
     <string name="title_privacy_agreement">隐私协议</string>
-    <string name="expand_button_title">典藏版本</string>
+    <string name="expand_button_title" tools:override="true">典藏版本</string>
+    <string name="label_email">联系我</string>
+    <string name="label_star">给个好评</string>
 </resources>

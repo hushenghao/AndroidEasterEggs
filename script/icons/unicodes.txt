@@ -1,4 +1,17 @@
 # light_mode
-e518
+#e518
 # dark_mode
-e51c
+#e51c
+
+# android
+e859
+# brightness_auto
+e1ab
+# brightness_4
+e3a9
+# email
+e0be
+# star
+e838
+# policy
+ea17

@@ -23,14 +23,22 @@
             <item
                 android:id="@+id/menu_privacy_agreement"
                 android:checkable="true"
-                android:icon="@drawable/ic_baseline_privacy_tip"
                 android:title="@string/title_privacy_agreement" />
 
             <item
                 android:id="@+id/menu_beta"
                 android:checkable="true"
-                android:icon="@drawable/ic_logo_android"
                 android:title="@string/title_beta" />
+
+            <item
+                android:id="@+id/menu_star"
+                android:checkable="true"
+                android:title="@string/label_star" />
+
+            <item
+                android:id="@+id/menu_email"
+                android:checkable="true"
+                android:title="@string/label_email" />
         </menu>
     </item>
 </menu>
