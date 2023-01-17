@@ -3,12 +3,17 @@
 # dark_mode
 #e51c
 
-# android
-e859
 # brightness_auto
 e1ab
 # brightness_4
 e3a9
+
+# home
+e88a
+# device_hub
+e335
+# android
+e859
 # email
 e0be
 # star

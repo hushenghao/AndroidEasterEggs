@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <item android:title="@string/label_menu_source">
         <menu>
             <item
                 android:id="@+id/menu_github"
                 android:checkable="true"
-                android:icon="@drawable/ic_logo_github"
                 android:title="@string/title_github"
-                android:tooltipText="@string/summary_github" />
+                android:tooltipText="@string/summary_github"
+                tools:targetApi="o" />
 
             <item
                 android:id="@+id/menu_source"
                 android:checkable="true"
-                android:icon="@drawable/ic_android_cs"
                 android:title="@string/title_source"
-                android:tooltipText="@string/summary_source" />
+                android:tooltipText="@string/summary_source"
+                tools:targetApi="o" />
         </menu>
     </item>
 
