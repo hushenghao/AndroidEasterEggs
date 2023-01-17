@@ -132,7 +132,7 @@
             app:versionComment="@string/version_comment_android_froyo" />
 
         <com.dede.android_eggs.EggPreference
-            app:icon="@drawable/ic_android_eclair"
+            app:icon="@drawable/ic_test"
             app:iconPadding="1.5dp"
             app:summary="@string/summary_android_eclair"
             app:supportAdaptiveIcon="oval"
@@ -140,14 +140,14 @@
             app:versionComment="@string/version_comment_android_eclair" />
 
         <com.dede.android_eggs.EggPreference
-            app:icon="@drawable/ic_android_donut"
+            app:icon="@drawable/ic_android_donut_2"
             app:iconPadding="1.5dp"
             app:summary="@string/summary_android_donut"
             app:supportAdaptiveIcon="oval"
             app:title="@string/title_android_donut" />
 
         <com.dede.android_eggs.EggPreference
-            app:icon="@drawable/ic_android_cupcake"
+            app:icon="@drawable/ic_android_cupcake_2"
             app:iconPadding="1.5dp"
             app:summary="@string/summary_android_cupcake"
             app:supportAdaptiveIcon="oval"
