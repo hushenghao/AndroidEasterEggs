@@ -52,8 +52,7 @@ class FontIconsDrawable(
         paint.color = color
         if (size > 0) {
             dimension = size.dp
-            paint.textSize = dimension.toFloat()
-            paint.getFontMetrics(metrics)
+            computeIconSize()
         }
     }
 

@@ -10,17 +10,17 @@ import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.webkit.WebView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.TintTypedArray
 import androidx.core.content.ContextCompat
-import androidx.core.view.OnApplyWindowInsetsListener
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
+import androidx.core.view.*
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
 import com.dede.android_eggs.databinding.LayoutNavigationHeaderBinding
 import com.dede.basic.dp
@@ -32,7 +32,9 @@ import com.google.android.material.resources.MaterialAttributes
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.R as M3R
 
-class NavigationViewController(private val activity: AppCompatActivity) {
+class NavigationViewController(private val activity: AppCompatActivity) : DefaultLifecycleObserver {
+
+    interface AppJs
 
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
 
@@ -51,22 +53,42 @@ class NavigationViewController(private val activity: AppCompatActivity) {
             R.string.label_drawer_close
         ).apply { syncState() }
 
-        DrawerBackPressedDispatcher(binding.drawerLayout).bind(activity)
+        DrawerBackPressedDispatcher(binding.drawerLayout, binding.webView).bind(activity)
+        activity.lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onDestroy(owner: LifecycleOwner) {
+                binding.webView.stopLoading()
+                binding.webView.destroy()
+            }
+        })
+        val settings = binding.webView.settings
+        @SuppressLint("SetJavaScriptEnabled")
+        settings.javaScriptEnabled = true
+        settings.displayZoomControls = false
+        settings.loadWithOverviewMode = false
+        settings.useWideViewPort = true
+        settings.setSupportZoom(false)
+        settings.domStorageEnabled = true// require dom storage
+        binding.webView.loadUrl("file:///android_asset/chrome-dino-enhanced/index.html")
+        binding.ivReload.setImageDrawable(FontIconsDrawable(activity, "\ue88a", 18f))
+        binding.ivReload.setOnClickListener {
+            binding.webView.reload()
+        }
 
         val listeners = Listeners(activity)
         binding.navigationView.setNavigationItemSelectedListener(listeners)
         bindMenuIcons(activity, binding.navigationView.menu)
-        val headerView = binding.navigationView.getHeaderView(0)
-        val headerBinding = LayoutNavigationHeaderBinding.bind(headerView)
-        ViewCompat.setOnApplyWindowInsetsListener(headerView, listeners)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.navigationView, listeners)
+
+        val headerBinding = LayoutNavigationHeaderBinding.bind(
+            binding.navigationView.getHeaderView(0)
+        )
         headerBinding.tvVersion.text =
             activity.getString(
                 R.string.summary_version,
                 BuildConfig.VERSION_NAME,
                 BuildConfig.VERSION_CODE
             )
-        val switchNightMode = headerBinding.switchNightMode
-        switchNightMode.setOnCheckedChangeListener { _, isChecked ->
+        headerBinding.switchNightMode.setOnCheckedChangeListener { _, isChecked ->
             val nightMode = if (isChecked) AppCompatDelegate.MODE_NIGHT_YES
             else AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
             if (nightMode == AppCompatDelegate.getDefaultNightMode()) {
@@ -75,8 +97,8 @@ class NavigationViewController(private val activity: AppCompatActivity) {
             AppCompatDelegate.setDefaultNightMode(nightMode)
             activity.putBoolean("key_night_mode", isChecked)
         }
-        switchNightMode.setSwitchTypeface(FontIconsDrawable.ICONS_TYPEFACE)
-        switchNightMode.isChecked = activity.getBoolean("key_night_mode", false)
+        headerBinding.switchNightMode.setSwitchTypeface(FontIconsDrawable.ICONS_TYPEFACE)
+        headerBinding.switchNightMode.isChecked = activity.getBoolean("key_night_mode", false)
     }
 
     fun onConfigurationChanged(newConfig: Configuration) {
@@ -122,6 +144,7 @@ class NavigationViewController(private val activity: AppCompatActivity) {
 
     private class DrawerBackPressedDispatcher(
         private val drawerLayout: DrawerLayout,
+        private val webView: WebView,
     ) : OnBackPressedCallback(false), Runnable, DrawerLayout.DrawerListener {
 
         fun bind(activity: AppCompatActivity) {
@@ -140,10 +163,14 @@ class NavigationViewController(private val activity: AppCompatActivity) {
 
         override fun onDrawerOpened(drawerView: View) {
             isEnabled = true
+            webView.onResume()
+            webView.requestFocus()
         }
 
         override fun onDrawerClosed(drawerView: View) {
             isEnabled = false
+            webView.loadUrl("javascript:runner.stop()")
+            webView.onPause()
         }
 
         override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
@@ -193,7 +220,7 @@ class NavigationViewController(private val activity: AppCompatActivity) {
                 WindowInsetsCompat.Type.systemBars()
                         or WindowInsetsCompat.Type.displayCutout()
             )
-            v.updatePadding(top = systemBars.top)
+            v.updatePadding(top = systemBars.top, bottom = systemBars.bottom)
             return insets
         }
     }
