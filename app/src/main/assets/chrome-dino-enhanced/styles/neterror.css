@@ -82,7 +82,6 @@ html[dir='rtl'].offline .icon-offline {
   padding-top: 80px;
   position: relative;
   width: 100%;
-  height: 0;/* Note: add line wrap height */
 }
 
 .offline .runner-container {

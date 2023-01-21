@@ -6,21 +6,23 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
+import android.graphics.drawable.AnimationDrawable
 import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.webkit.WebView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.TintTypedArray
 import androidx.core.content.ContextCompat
-import androidx.core.view.*
+import androidx.core.view.OnApplyWindowInsetsListener
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
 import com.dede.android_eggs.databinding.LayoutNavigationHeaderBinding
 import com.dede.basic.dp
@@ -53,25 +55,11 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
             R.string.label_drawer_close
         ).apply { syncState() }
 
-        DrawerBackPressedDispatcher(binding.drawerLayout, binding.webView).bind(activity)
-        activity.lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onDestroy(owner: LifecycleOwner) {
-                binding.webView.stopLoading()
-                binding.webView.destroy()
-            }
-        })
-        val settings = binding.webView.settings
-        @SuppressLint("SetJavaScriptEnabled")
-        settings.javaScriptEnabled = true
-        settings.displayZoomControls = false
-        settings.loadWithOverviewMode = false
-        settings.useWideViewPort = true
-        settings.setSupportZoom(false)
-        settings.domStorageEnabled = true// require dom storage
-        binding.webView.loadUrl("file:///android_asset/chrome-dino-enhanced/index.html")
-        binding.ivReload.setImageDrawable(FontIconsDrawable(activity, "\ue88a", 18f))
-        binding.ivReload.setOnClickListener {
-            binding.webView.reload()
+        DrawerBackPressedDispatcher(binding.drawerLayout).bind(activity)
+        binding.ivDino.setImageResource(R.drawable.anim_dino_logo)
+        (binding.ivDino.drawable as AnimationDrawable).start()
+        binding.ivDino.setOnClickListener {
+            activity.startActivity(Intent(activity, DinoEggActivity::class.java))
         }
 
         val listeners = Listeners(activity)
@@ -142,10 +130,8 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
         }
     }
 
-    private class DrawerBackPressedDispatcher(
-        private val drawerLayout: DrawerLayout,
-        private val webView: WebView,
-    ) : OnBackPressedCallback(false), Runnable, DrawerLayout.DrawerListener {
+    private class DrawerBackPressedDispatcher(private val drawerLayout: DrawerLayout) :
+        OnBackPressedCallback(false), Runnable, DrawerLayout.DrawerListener {
 
         fun bind(activity: AppCompatActivity) {
             drawerLayout.addDrawerListener(this)
@@ -163,14 +149,10 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
 
         override fun onDrawerOpened(drawerView: View) {
             isEnabled = true
-            webView.onResume()
-            webView.requestFocus()
         }
 
         override fun onDrawerClosed(drawerView: View) {
             isEnabled = false
-            webView.loadUrl("javascript:runner.stop()")
-            webView.onPause()
         }
 
         override fun onDrawerSlide(drawerView: View, slideOffset: Float) {

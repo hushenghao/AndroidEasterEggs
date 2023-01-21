@@ -42,26 +42,13 @@
         app:insetForeground="@null"
         app:menu="@menu/menu_navigation">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom">
-
-            <WebView
-                android:id="@+id/web_view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="H,16:9" />
-
-            <ImageView
-                android:id="@+id/iv_reload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                app:layout_constraintStart_toStartOf="@id/web_view"
-                app:layout_constraintTop_toTopOf="@id/web_view" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/iv_dino"
+            android:layout_width="18dp"
+            android:adjustViewBounds="true"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="2dp" />
 
     </com.google.android.material.navigation.NavigationView>
 

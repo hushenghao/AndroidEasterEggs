@@ -28,6 +28,7 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+        <activity android:name="com.dede.android_eggs.DinoEggActivity" />
     </application>
 
 </manifest>

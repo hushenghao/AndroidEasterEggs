@@ -343,8 +343,7 @@ input[type=checkbox]:checked ~ .checkbox::before {
 
   #details,
   #main-content {
-    /*padding-bottom: 40px;*/
-    padding-bottom: 0px;/* Note: change line remove bottom space */
+    padding-bottom: 40px;
   }
 
   #details {
