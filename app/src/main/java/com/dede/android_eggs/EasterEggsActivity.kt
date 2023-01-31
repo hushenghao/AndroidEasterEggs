@@ -25,7 +25,9 @@ class EasterEggsActivity : AppCompatActivity() {
         val binding = ActivityEasterEggsBinding.inflate(layoutInflater)
         navigationViewController.bind(binding)
 
-        EasterEggsSplash(this, binding.root).welcome()
+        if (savedInstanceState == null) {
+            EasterEggsSplash(this, binding.root).welcome()
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

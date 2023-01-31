@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
-import android.graphics.drawable.AnimationDrawable
 import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
@@ -54,11 +53,6 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
         ).apply { syncState() }
 
         DrawerBackPressedDispatcher(binding.drawerLayout).bind(activity)
-        binding.ivDino.setImageResource(R.drawable.anim_dino_logo)
-        (binding.ivDino.drawable as AnimationDrawable).start()
-        binding.ivDino.setOnClickListener {
-            activity.startActivity(Intent(activity, DinoEggActivity::class.java))
-        }
 
         val listeners = Listeners(activity)
         binding.navigationView.setNavigationItemSelectedListener(listeners)
@@ -190,6 +184,9 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
                         activity,
                         Uri.parse("market://details?id=" + activity.packageName)
                     )
+                }
+                R.id.menu_dino -> {
+                    activity.startActivity(Intent(activity, DinoEggActivity::class.java))
                 }
             }
             return true

@@ -154,7 +154,7 @@ class FontIconsDrawable(
             paint.color = colorStateList.getColorForState(state, colorStateList.defaultColor)
         }
         val y = (metrics.descent - metrics.ascent) / 2 - metrics.ascent / 2 + padding.top
-        val x = tempBounds.exactCenterX() + padding.left
+        val x = tempBounds.exactCenterX()
         canvas.drawText(unicode, x, y, paint)
     }
 

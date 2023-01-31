@@ -40,16 +40,6 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/layout_navigation_header"
         app:insetForeground="@null"
-        app:menu="@menu/menu_navigation">
-
-        <ImageView
-            android:id="@+id/iv_dino"
-            android:layout_width="22dp"
-            android:adjustViewBounds="true"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="6dp" />
-
-    </com.google.android.material.navigation.NavigationView>
+        app:menu="@menu/menu_navigation" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

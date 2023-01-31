@@ -22,6 +22,13 @@
     <item android:title="@string/header_about">
         <menu>
             <item
+                android:id="@+id/menu_dino"
+                android:checkable="true"
+                android:icon="@drawable/ic_dino_logo"
+                android:title="Dino"
+                tools:ignore="HardcodedText" />
+
+            <item
                 android:id="@+id/menu_privacy_agreement"
                 android:checkable="true"
                 android:title="@string/title_privacy_agreement" />
