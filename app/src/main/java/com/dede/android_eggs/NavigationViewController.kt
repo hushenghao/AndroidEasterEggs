@@ -36,8 +36,6 @@ import com.google.android.material.R as M3R
 
 class NavigationViewController(private val activity: AppCompatActivity) : DefaultLifecycleObserver {
 
-    interface AppJs
-
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
 
     fun bind(binding: ActivityEasterEggsBinding) {
@@ -60,7 +58,6 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
         (binding.ivDino.drawable as AnimationDrawable).start()
         binding.ivDino.setOnClickListener {
             activity.startActivity(Intent(activity, DinoEggActivity::class.java))
-            binding.drawerLayout.close()
         }
 
         val listeners = Listeners(activity)

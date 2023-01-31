@@ -44,11 +44,11 @@
 
         <ImageView
             android:id="@+id/iv_dino"
-            android:layout_width="18dp"
+            android:layout_width="22dp"
             android:adjustViewBounds="true"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_margin="4dp" />
+            android:layout_margin="6dp" />
 
     </com.google.android.material.navigation.NavigationView>
 

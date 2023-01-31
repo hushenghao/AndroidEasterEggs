@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:once="XXWHCA">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".EasterEggsApp"
@@ -12,9 +15,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:localeConfig="@xml/locales_config"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.EasterEggs">
+        android:theme="@style/Theme.EasterEggs"
+        tools:targetApi="tiramisu">
         <activity
             android:name=".EasterEggsActivity"
             android:exported="true"
@@ -28,7 +32,9 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-        <activity android:name="com.dede.android_eggs.DinoEggActivity" />
+        <activity
+            android:name="com.dede.android_eggs.DinoEggActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

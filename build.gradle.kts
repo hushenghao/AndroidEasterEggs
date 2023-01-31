@@ -19,7 +19,9 @@ rootProject.allprojects {
         if (this.plugins.hasPlugin(LibraryPlugin::class) && this.path.contains("eggs")) {
             val project = this
             this.extensions.configure<LibraryExtension>("android") {
-                resourcePrefix(project.name.substring(0, 1).toLowerCase() + "_")
+                val s = project.name.substring(0, 1).toLowerCase()
+                namespace = "com.android_$s.egg"
+                resourcePrefix("${s}_")
                 lint {
                     baseline = project.file("lint-baseline.xml")
                 }
