@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.4.0" type="baseline" client="gradle" dependencies="false" name="AGP (7.4.0)" variant="all" version="7.4.0">
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getHeight()` instead"
+        errorLine1="                antenna.setBounds(0, 0, c.getWidth(), c.getHeight());"
+        errorLine2="                                                      ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="1292"
+            column="55"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getWidth()` instead"
+        errorLine1="                antenna.setBounds(0, 0, c.getWidth(), c.getHeight());"
+        errorLine2="                                        ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="1292"
+            column="41"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getHeight()` instead"
+        errorLine1="                eyes.setBounds(0, 0, c.getWidth(), c.getHeight());"
+        errorLine2="                                                   ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="1296"
+            column="52"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getWidth()` instead"
+        errorLine1="                eyes.setBounds(0, 0, c.getWidth(), c.getHeight());"
+        errorLine2="                                     ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="1296"
+            column="38"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getHeight()` instead"
+        errorLine1="                mouth.setBounds(0, 0, c.getWidth(), c.getHeight());"
+        errorLine2="                                                    ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="1300"
+            column="53"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getWidth()` instead"
+        errorLine1="                mouth.setBounds(0, 0, c.getWidth(), c.getHeight());"
+        errorLine2="                                      ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="1300"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getWidth()` instead"
+        errorLine1="            final int w = c.getWidth();"
+        errorLine2="                          ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="1350"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getHeight()` instead"
+        errorLine1="            final int h = c.getHeight();"
+        errorLine2="                          ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="1351"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getBounds().getWidth()` instead"
+        errorLine1="                final float r = c.getWidth() / 2f;"
+        errorLine2="                                ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/PlatLogoActivity.java"
+            line="102"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getBounds().getHeight()` instead"
+        errorLine1="                M.setBounds(0, 0, c.getWidth(), c.getHeight());"
+        errorLine2="                                                ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/PlatLogoActivity.java"
+            line="105"
+            column="49"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getBounds().getWidth()` instead"
+        errorLine1="                M.setBounds(0, 0, c.getWidth(), c.getHeight());"
+        errorLine2="                                  ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/PlatLogoActivity.java"
+            line="105"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="InflateParams"
+        message="Avoid passing `null` as the view root (needed to resolve layout parameters on the inflated layout&apos;s root element)"
+        errorLine1="            LayoutInflater.from(getContext()).inflate(R.layout.m_mland_scorefield, null);"
+        errorLine2="                                                                                   ~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="313"
+            column="84"/>
+    </issue>
+
+    <issue
+        id="SpUsage"
+        message="Should use &quot;`sp`&quot; instead of &quot;`dp`&quot; for text sizes"
+        errorLine1="                android:textSize=&quot;40dp&quot; />"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/m_mland.xml"
+            line="60"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="UseAppTint"
+        message="Must use `app:tint` instead of `android:tint`"
+        errorLine1="                android:tint=&quot;#000000&quot; />"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/m_mland.xml"
+            line="51"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            antenna = context.getDrawable(pick(ANTENNAE));"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="1250"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="                eyes = context.getDrawable(pick(EYES));"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="1252"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="                    mouth = context.getDrawable(pick(MOUTHS));"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="1254"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="        final Drawable M = getDrawable(R.drawable.m_platlogo_m);"
+        errorLine2="                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/PlatLogoActivity.java"
+            line="85"
+            column="28"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="        final Drawable fg = getDrawable(R.drawable.m_platlogo);"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/PlatLogoActivity.java"
+            line="198"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="UsingOnClickInXml"
+        message="Use databinding or explicit wiring of click listener in code"
+        errorLine1="            android:onClick=&quot;startButtonPressed&quot;>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/m_mland.xml"
+            line="42"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UsingOnClickInXml"
+        message="Use databinding or explicit wiring of click listener in code"
+        errorLine1="            android:onClick=&quot;playerMinus&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/m_mland.xml"
+            line="77"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UsingOnClickInXml"
+        message="Use databinding or explicit wiring of click listener in code"
+        errorLine1="            android:onClick=&quot;playerPlus&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/m_mland.xml"
+            line="95"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="DrawAllocation"
+        message="Avoid object allocations during draw/layout operations (preallocate and reuse instead)"
+        errorLine1="        final StringBuilder sb = new StringBuilder(&quot;obstacles: &quot;);"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="997"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (922 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="        android:pathData=&quot;M36.3,25.5c-0.4,-0.3,-1,-0.5,-1.5,-0.5c-0.1,0,-0.3,0,-0.4,0c-0.3,0,-0.5,0,-0.7,0.1c-0.6,0.1,-1.1,0.4,-1.5,0.8   c-0.8,0.6,-1.2,1.6,-1.2,2.7v3.5h-1.2V14c0,-1.4,-0.6,-2.7,-1.6,-3.6c-0.4,-0.4,-0.9,-0.8,-1.5,-1c-0.4,-0.1,-0.7,-0.2,-1.1,-0.3   C25.2,9,24.9,9,24.7,9s-0.5,0,-0.8,0.1c-0.4,0.1,-0.8,0.2,-1.1,0.3c-0.6,0.2,-1.1,0.6,-1.5,1c-1,0.9,-1.6,2.2,-1.6,3.6v10.3h-2.4v-4.5   c0,-1.2,-0.6,-2.2,-1.5,-2.8c-0.4,-0.3,-1,-0.5,-1.5,-0.6c-0.2,0,-0.3,-0.1,-0.5,-0.1c-0.2,0,-0.4,0,-0.6,0.1c-0.6,0.1,-1.1,0.3,-1.5,0.7   c-0.8,0.6,-1.4,1.6,-1.4,2.7v8c0,1.1,0.5,2.1,1.4,2.7c0.4,0.3,0.9,0.6,1.5,0.7c0.2,0,0.4,0.1,0.6,0.1h0.5h1.5h3.8V48   c0,1.4,0.6,2.7,1.6,3.6c0.4,0.4,0.9,0.8,1.5,1c0.4,0.1,0.7,0.2,1.1,0.3c0.2,0,0.5,0.1,0.8,0.1s0.5,0,0.8,-0.1   c0.4,-0.1,0.8,-0.2,1.1,-0.3c0.6,-0.2,1.1,-0.6,1.5,-1c1,-0.9,1.6,-2.2,1.6,-3.6v-9.1h1.2h1.2h1.5h0.7c0.1,0,0.3,0,0.4,0   c0.6,-0.1,1.1,-0.2,1.5,-0.5c0.9,-0.6,1.6,-1.7,1.6,-2.9v-7C37.9,27.2,37.3,26.1,36.3,25.5z&quot;"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/m_cactus1.xml"
+            line="22"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (983 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="        android:pathData=&quot;M19.400000,10.000000c-0.700000,-3.400000 -3.700000,-6.000000 -7.400000,-6.000000c-1.500000,0.000000 -2.900000,0.400000 -4.000000,1.200000l1.500000,1.500000C10.200000,6.200000 11.100000,6.000000 12.000000,6.000000c3.000000,0.000000 5.500000,2.500000 5.500000,5.500000L17.500000,12.000000L19.000000,12.000000c1.700000,0.000000 3.000000,1.300000 3.000000,3.000000c0.000000,1.100000 -0.600000,2.100000 -1.600000,2.600000l1.500000,1.500000c1.300000,-0.900000 2.100000,-2.400000 2.100000,-4.100000C24.000000,12.400000 21.900000,10.200000 19.400000,10.000000zM3.000000,5.300000L5.800000,8.000000C2.600000,8.200000 0.000000,10.800000 0.000000,14.000000c0.000000,3.300000 2.700000,6.000000 6.000000,6.000000l11.700000,0.000000l2.000000,2.000000l1.300000,-1.300000L4.300000,4.000000L3.000000,5.300000zM7.700000,10.000000l8.000000,8.000000L6.000000,18.000000c-2.200000,0.000000 -4.000000,-1.800000 -4.000000,-4.000000c0.000000,-2.200000 1.800000,-4.000000 4.000000,-4.000000L7.700000,10.000000z&quot;"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/m_cloud_off.xml"
+            line="22"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="MergeRootFrame"
+        message="This `&lt;FrameLayout>` can be replaced with a `&lt;merge>` tag"
+        errorLine1="&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/layout/m_mland.xml"
+            line="16"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="ClickableViewAccessibility"
+        message="Custom view `MLand` overrides `onTouchEvent` but not `performClick`"
+        errorLine1="    public boolean onTouchEvent(MotionEvent ev) {"
+        errorLine2="                   ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="830"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/m_mland.xml"
+            line="44"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageButton"
+        errorLine2="         ~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/m_mland.xml"
+            line="72"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageButton"
+        errorLine2="         ~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/m_mland.xml"
+            line="90"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="KeyboardInaccessibleWidget"
+        message="&apos;clickable&apos; attribute found, please also add &apos;focusable&apos;"
+        errorLine1="        android:clickable=&quot;true&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/m_mland.xml"
+            line="31"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Use &quot;`Gravity.START`&quot; instead of &quot;`Gravity.LEFT`&quot; to ensure correct behavior in right-to-left locales"
+        errorLine1="                    Gravity.TOP|Gravity.LEFT));"
+        errorLine2="                                        ~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="762"
+            column="41"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Use &quot;`Gravity.START`&quot; instead of &quot;`Gravity.LEFT`&quot; to ensure correct behavior in right-to-left locales"
+        errorLine1="                    Gravity.TOP|Gravity.LEFT));"
+        errorLine2="                                        ~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="776"
+            column="41"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Use &quot;`Gravity.START`&quot; instead of &quot;`Gravity.LEFT`&quot; to ensure correct behavior in right-to-left locales"
+        errorLine1="                    Gravity.TOP|Gravity.LEFT));"
+        errorLine2="                                        ~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="797"
+            column="41"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Use &quot;`Gravity.START`&quot; instead of &quot;`Gravity.LEFT`&quot; to ensure correct behavior in right-to-left locales"
+        errorLine1="                    Gravity.TOP|Gravity.LEFT));"
+        errorLine2="                                        ~~~~">
+        <location
+            file="src/main/java/com/android_m/egg/MLand.java"
+            line="811"
+            column="41"/>
+    </issue>
+
+</issues>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.4.0" type="baseline" client="gradle" dependencies="false" name="AGP (7.4.0)" variant="all" version="7.4.0">
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getWidth()` instead"
+        errorLine1="            final int w = c.getWidth();"
+        errorLine2="                          ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/LLand.java"
+            line="901"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getHeight()` instead"
+        errorLine1="            final int h = c.getHeight();"
+        errorLine2="                          ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/LLand.java"
+            line="902"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getWidth()` instead"
+        errorLine1="                final int w = c.getWidth();"
+        errorLine2="                              ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/PlatLogoActivity.java"
+            line="108"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getHeight()` instead"
+        errorLine1="                final int h = c.getHeight() / 2;"
+        errorLine2="                              ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/PlatLogoActivity.java"
+            line="109"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="        final Drawable platlogo = getDrawable(R.drawable.l_platlogo);"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/PlatLogoActivity.java"
+            line="135"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="DrawAllocation"
+        message="Avoid object allocations during draw/layout operations (preallocate and reuse instead)"
+        errorLine1="                final Rect r = new Rect();"
+        errorLine2="                               ~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/LLand.java"
+            line="673"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="DrawAllocation"
+        message="Avoid object allocations during draw/layout operations (preallocate and reuse instead)"
+        errorLine1="        final StringBuilder sb = new StringBuilder(&quot;obstacles: &quot;);"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/LLand.java"
+            line="680"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="DrawAllocation"
+        message="Avoid object allocations during draw/layout operations (preallocate and reuse instead)"
+        errorLine1="            final GradientDrawable g = new GradientDrawable();"
+        errorLine2="                                       ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/LLand.java"
+            line="903"
+            column="40"/>
+    </issue>
+
+    <issue
+        id="DrawAllocation"
+        message="Avoid object allocations during draw/layout operations (preallocate and reuse instead)"
+        errorLine1="            g.setColors(new int[]{0xFFFFFFFF, 0xFFAAAAAA});"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/LLand.java"
+            line="906"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="DrawAllocation"
+        message="Avoid object allocations during draw/layout operations (preallocate and reuse instead)"
+        errorLine1="                final GradientDrawable g = new GradientDrawable();"
+        errorLine2="                                           ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/PlatLogoActivity.java"
+            line="111"
+            column="44"/>
+    </issue>
+
+    <issue
+        id="DrawAllocation"
+        message="Avoid object allocations during draw/layout operations (preallocate and reuse instead)"
+        errorLine1="                g.setColors(new int[]{0xFFFFFFFF, 0xFFAAAAAA});"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/PlatLogoActivity.java"
+            line="114"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (983 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="        android:pathData=&quot;M19.400000,10.000000c-0.700000,-3.400000 -3.700000,-6.000000 -7.400000,-6.000000c-1.500000,0.000000 -2.900000,0.400000 -4.000000,1.200000l1.500000,1.500000C10.200000,6.200000 11.100000,6.000000 12.000000,6.000000c3.000000,0.000000 5.500000,2.500000 5.500000,5.500000L17.500000,12.000000L19.000000,12.000000c1.700000,0.000000 3.000000,1.300000 3.000000,3.000000c0.000000,1.100000 -0.600000,2.100000 -1.600000,2.600000l1.500000,1.500000c1.300000,-0.900000 2.100000,-2.400000 2.100000,-4.100000C24.000000,12.400000 21.900000,10.200000 19.400000,10.000000zM3.000000,5.300000L5.800000,8.000000C2.600000,8.200000 0.000000,10.800000 0.000000,14.000000c0.000000,3.300000 2.700000,6.000000 6.000000,6.000000l11.700000,0.000000l2.000000,2.000000l1.300000,-1.300000L4.300000,4.000000L3.000000,5.300000zM7.700000,10.000000l8.000000,8.000000L6.000000,18.000000c-2.200000,0.000000 -4.000000,-1.800000 -4.000000,-4.000000c0.000000,-2.200000 1.800000,-4.000000 4.000000,-4.000000L7.700000,10.000000z&quot;"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/l_cloud_off.xml"
+            line="22"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (1087 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="        android:pathData=&quot;M58.658001,89.648003c-19.330000,0.000000 -35.000000,-15.670000 -35.000000,-35.000000c0.000000,-13.531000 10.969000,-24.500000 24.500000,-24.500000c9.472000,0.000000 17.150000,7.679000 17.150000,17.150000c0.000000,6.631000 -5.375000,12.006000 -12.006000,12.006000c-3.798000,0.000000 -7.004000,-2.522000 -8.045000,-5.982000c1.021000,1.136000 2.497000,1.854000 4.145000,1.854000c2.644000,0.000000 4.853000,-1.841000 5.428000,-4.310000c0.175000,-0.558000 0.271000,-1.150000 0.271000,-1.766000c0.000000,-4.642000 -3.763000,-8.404000 -8.403000,-8.404000c-6.631000,0.000000 -12.006000,5.375000 -12.006000,12.006000c0.000000,9.472000 7.679000,17.149000 17.150000,17.149000c13.531000,0.000000 24.500000,-10.969000 24.500000,-24.500000c0.000000,-19.330000 -15.670000,-35.000000 -35.000000,-35.000000c-12.963000,0.000000 -24.773001,4.935000 -33.657001,13.025000C2.824000,31.087000 0.000000,40.212002 0.000000,50.000000c0.000000,27.615000 22.386000,50.000000 50.000000,50.000000c17.825001,0.000000 33.462002,-9.335000 42.313999,-23.375999C83.431000,84.714996 71.621002,89.648003 58.658001,89.648003z&quot;"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/l_pop_vortex.xml"
+            line="25"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (1966 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="        android:pathData=&quot;M21.250000,78.369003c-13.200000,-16.000000 -10.930000,-39.671001 5.070000,-52.870998c12.799000,-10.560000 31.737000,-8.743000 42.294998,4.057000c8.448000,10.239000 6.996000,25.389000 -3.244000,33.837002c-8.191000,6.759000 -20.311001,5.596000 -27.068001,-2.596000c-5.408000,-6.554000 -4.478000,-16.249001 2.076000,-21.656000c5.242000,-4.325000 12.998000,-3.581000 17.323999,1.661000c3.460000,4.194000 2.865000,10.399000 -1.330000,13.859000c-3.354000,2.769000 -8.318000,2.293000 -11.087000,-1.062000c-2.214000,-2.685000 -1.833000,-6.655000 0.851000,-8.870000c2.147000,-1.771000 5.324000,-1.468000 7.096000,0.681000c1.393000,1.688000 1.174000,4.165000 -0.464000,5.596000c0.409000,-0.564000 0.657000,-1.253000 0.657000,-2.004000c0.000000,-1.021000 -0.455000,-1.928000 -1.165000,-2.556000c-0.067000,-0.112000 -0.134000,-0.226000 -0.220000,-0.329000c-1.135000,-1.373000 -3.168000,-1.568000 -4.542000,-0.435000c-1.719000,1.417000 -1.962000,3.958000 -0.544000,5.677000c1.771000,2.146000 4.949000,2.451000 7.096000,0.680000c2.684000,-2.215000 3.064000,-6.186000 0.851000,-8.870000c-2.769000,-3.356000 -7.732000,-3.831000 -11.087000,-1.063000c-4.195000,3.460000 -4.790000,9.665000 -1.330000,13.859000c4.326000,5.244000 12.082000,5.987000 17.323999,1.662000c6.554000,-5.407000 7.484000,-15.102000 2.076000,-21.656000c-6.758000,-8.191000 -18.875999,-9.354000 -27.069000,-2.596000c-10.239000,8.448000 -11.691000,23.598000 -3.244000,33.837002c10.560000,12.800000 29.497000,14.616000 42.296001,4.056000c16.000000,-13.199000 18.270000,-36.869999 5.070000,-52.868999C68.397003,5.620000 52.516998,-0.139000 37.205002,1.659000c-8.665000,2.287000 -16.410999,6.836000 -22.561001,12.985000C5.597000,23.693001 0.000000,36.193001 0.000000,50.000000c0.000000,13.808000 5.597000,26.308001 14.645000,35.355000C23.693001,94.403999 36.193001,100.000000 50.000000,100.000000c11.935000,0.000000 22.886999,-4.187000 31.482000,-11.164000C61.909000,100.523003 36.202999,96.495003 21.250000,78.369003z&quot;"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/l_pop_vortex2.xml"
+            line="25"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="MergeRootFrame"
+        message="This `&lt;FrameLayout>` can be replaced with a `&lt;merge>` tag"
+        errorLine1="&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/layout/l_lland.xml"
+            line="17"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="ClickableViewAccessibility"
+        message="Custom view `LLand` overrides `onTouchEvent` but not `performClick`"
+        errorLine1="    public boolean onTouchEvent(MotionEvent ev) {"
+        errorLine2="                   ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/LLand.java"
+            line="552"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Use &quot;`Gravity.START`&quot; instead of &quot;`Gravity.LEFT`&quot; to ensure correct behavior in right-to-left locales"
+        errorLine1="                    Gravity.TOP | Gravity.LEFT));"
+        errorLine2="                                          ~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/LLand.java"
+            line="484"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Use &quot;`Gravity.START`&quot; instead of &quot;`Gravity.LEFT`&quot; to ensure correct behavior in right-to-left locales"
+        errorLine1="                    Gravity.TOP | Gravity.LEFT));"
+        errorLine2="                                          ~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/LLand.java"
+            line="498"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Use &quot;`Gravity.START`&quot; instead of &quot;`Gravity.LEFT`&quot; to ensure correct behavior in right-to-left locales"
+        errorLine1="                    Gravity.TOP | Gravity.LEFT));"
+        errorLine2="                                          ~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/LLand.java"
+            line="519"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Use &quot;`Gravity.START`&quot; instead of &quot;`Gravity.LEFT`&quot; to ensure correct behavior in right-to-left locales"
+        errorLine1="                    Gravity.TOP | Gravity.LEFT));"
+        errorLine2="                                          ~~~~">
+        <location
+            file="src/main/java/com/android_l/egg/LLand.java"
+            line="533"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_marginLeft` with `android:layout_marginStart=&quot;16dp&quot;` to better support right-to-left layouts"
+        errorLine1="            android:layout_marginLeft=&quot;16dp&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/l_lland.xml"
+            line="33"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Use &quot;`start`&quot; instead of &quot;`left`&quot; to ensure correct behavior in right-to-left locales"
+        errorLine1="            android:layout_gravity=&quot;top|left&quot;"
+        errorLine2="                                    ~~~~~~~~">
+        <location
+            file="src/main/res/layout/l_lland.xml"
+            line="34"
+            column="37"/>
+    </issue>
+
+</issues>

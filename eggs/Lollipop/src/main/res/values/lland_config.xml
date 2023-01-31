@@ -33,7 +33,7 @@
     <dimen name="l_cloud_size_min">10dp</dimen>
     <dimen name="l_cloud_size_max">100dp</dimen>
     <dimen name="l_sun_size">45dp</dimen>
-    <dimen name="l_moon_size">30dp</dimen>
+<!--    <dimen name="l_moon_size">30dp</dimen>-->
     <dimen name="l_star_size_min">3dp</dimen>
     <dimen name="l_star_size_max">5dp</dimen>
     <dimen name="l_G">30dp</dimen>

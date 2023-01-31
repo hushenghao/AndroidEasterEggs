@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.4.0" type="baseline" client="gradle" dependencies="false" name="AGP (7.4.0)" variant="all" version="7.4.0">
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getBounds().getHeight()` instead"
+        errorLine1="            canvas.scale(canvas.getWidth() / 24f, canvas.getHeight() / 24f);"
+        errorLine2="                                                  ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/PlatLogoActivity.java"
+            line="197"
+            column="51"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getBounds().getWidth()` instead"
+        errorLine1="            canvas.scale(canvas.getWidth() / 24f, canvas.getHeight() / 24f);"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/PlatLogoActivity.java"
+            line="197"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getBounds().getHeight()` instead"
+        errorLine1="            canvas.scale(canvas.getWidth() / 24f, canvas.getHeight() / 24f);"
+        errorLine2="                                                  ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/PlatLogoActivity.java"
+            line="230"
+            column="51"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getBounds().getWidth()` instead"
+        errorLine1="            canvas.scale(canvas.getWidth() / 24f, canvas.getHeight() / 24f);"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/PlatLogoActivity.java"
+            line="230"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Referencing `Canvas.width` is usually wrong; you should be referencing `width` instead"
+        errorLine1="            val x = canvas.width / 2f"
+        errorLine2="                    ~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/quares/QuaresActivity.kt"
+            line="328"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Referencing `Canvas.height` is usually wrong; you should be referencing `height` instead"
+        errorLine1="            val y = canvas.height / 2f"
+        errorLine2="                    ~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/quares/QuaresActivity.kt"
+            line="329"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Referencing `Canvas.width` is usually wrong; you should be referencing `width` instead"
+        errorLine1="            var textWidth = canvas.width"
+        errorLine2="                            ~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/quares/QuaresActivity.kt"
+            line="330"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Referencing `Canvas.height` is usually wrong; you should be referencing `height` instead"
+        errorLine1="                textWidth = canvas.height"
+        errorLine2="                            ~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/quares/QuaresActivity.kt"
+            line="333"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 27 (current min is 21): `android.view.HapticFeedbackConstants#TEXT_HANDLE_MOVE`"
+        errorLine1="                        v.performHapticFeedback(HapticFeedbackConstants.TEXT_HANDLE_MOVE);"
+        errorLine2="                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/PlatLogoActivity.java"
+            line="128"
+            column="49"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 30 (current min is 21): `android.view.HapticFeedbackConstants#CONFIRM`"
+        errorLine1="            mOneView.performHapticFeedback(HapticFeedbackConstants.CONFIRM);"
+        errorLine2="                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/PlatLogoActivity.java"
+            line="158"
+            column="44"/>
+    </issue>
+
+    <issue
+        id="LongLogTag"
+        message="The logging tag can be at most 23 characters, was 41 (com.android.internal.app.PlatLogoActivity)"
+        errorLine1="                Log.e(&quot;com.android.internal.app.PlatLogoActivity&quot;, &quot;Can&apos;t write settings&quot;, e);"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/PlatLogoActivity.java"
+            line="180"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="VectorRaster"
+        message="Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more"
+        errorLine1="        android:width=&quot;290dp&quot;"
+        errorLine2="                       ~~~~~">
+        <location
+            file="res/drawable/q_android_logotype.xml"
+            line="17"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="SpUsage"
+        message="Should use &quot;`sp`&quot; instead of &quot;`dp`&quot; for text sizes"
+        errorLine1="        android:textSize=&quot;18dp&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/q_activity_quares.xml"
+            line="37"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="DiscouragedApi"
+        message="Use of this function is discouraged because resource reflection makes it harder to perform build optimizations and compile-time verification of code. It is much more efficient to retrieve resources by identifier (e.g. `R.foo.bar`) than by name (e.g. `getIdentifier(&quot;bar&quot;, &quot;foo&quot;, null)`)."
+        errorLine1="                    .getIdentifier(newName, &quot;drawable&quot;, pkg)"
+        errorLine2="                     ~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/quares/QuaresActivity.kt"
+            line="113"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="UseAppTint"
+        message="Must use `app:tint` instead of `android:tint`"
+        errorLine1="        android:tint=&quot;?android:attr/textColorPrimary&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_layout.xml"
+            line="30"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseAppTint"
+        message="Must use `app:tint` instead of `android:tint`"
+        errorLine1="        android:tint=&quot;?android:attr/textColorPrimary&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_layout.xml"
+            line="39"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseAppTint"
+        message="Must use `app:tint` instead of `android:tint`"
+        errorLine1="        android:tint=&quot;?android:attr/textColorPrimary&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_layout.xml"
+            line="48"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `ResourcesCompat.getDrawable()`"
+        errorLine1="            return (res ?: resources).getDrawable(resId, theme)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/quares/QuaresActivity.kt"
+            line="137"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="Typos"
+        message="Did you mean &quot;ic_signal_cellular_!&quot; instead of &quot;ic_signal_cellular_1&quot;?"
+        errorLine1="        &lt;item>android:drawable/ic_signal_cellular_1_4_bar&lt;/item>"
+        errorLine2="                               ^">
+        <location
+            file="res/values/q_puzzles.xml"
+            line="79"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="Typos"
+        message="Did you mean &quot;ic_signal_cellular_!&quot; instead of &quot;ic_signal_cellular_1&quot;?"
+        errorLine1="        &lt;item>android:drawable/ic_signal_cellular_1_5_bar&lt;/item>"
+        errorLine2="                               ^">
+        <location
+            file="res/values/q_puzzles.xml"
+            line="80"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="Typos"
+        message="Did you mean &quot;ic_wifi_signal_!&quot; instead of &quot;ic_wifi_signal_1&quot;?"
+        errorLine1="        &lt;item>android:drawable/ic_wifi_signal_1&lt;/item>"
+        errorLine2="                               ^">
+        <location
+            file="res/values/q_puzzles.xml"
+            line="90"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="DrawAllocation"
+        message="Avoid object allocations during draw/layout operations (preallocate and reuse instead)"
+        errorLine1="                    StaticLayout("
+        errorLine2="                    ^">
+        <location
+            file="src/com/android_q/egg/quares/QuaresActivity.kt"
+            line="341"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="Recycle"
+        message="This `TypedArray` should be recycled after use with `#recycle()`"
+        errorLine1="                val ar = resources.obtainTypedArray(R.array.q_puzzles)"
+        errorLine2="                                   ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/quares/QuaresActivity.kt"
+            line="105"
+            column="36"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="Unnecessary; SDK_INT is always >= 21"
+        errorLine1="        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_q/egg/PlatLogoActivity.java"
+            line="79"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MergeRootFrame"
+        message="This `&lt;FrameLayout>` can be replaced with a `&lt;merge>` tag"
+        errorLine1="&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="res/layout/q_activity_quares.xml"
+            line="16"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.q_vapor` appears to be unused"
+        errorLine1="    &lt;color name=&quot;q_vapor&quot;>#d7effe&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~">
+        <location
+            file="res/values/q_colors.xml"
+            line="20"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_layout.xml"
+            line="21"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_layout.xml"
+            line="32"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_layout.xml"
+            line="41"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_marginLeft` with `android:layout_marginStart=&quot;24dp&quot;` to better support right-to-left layouts"
+        errorLine1="        android:layout_marginLeft=&quot;24dp&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_layout.xml"
+            line="36"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_alignLeft` with `android:layout_alignStart=&quot;@id/text&quot;` to better support right-to-left layouts"
+        errorLine1="        android:layout_alignLeft=&quot;@id/text&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_layout.xml"
+            line="38"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_marginRight` with `android:layout_marginEnd=&quot;34dp&quot;` to better support right-to-left layouts"
+        errorLine1="        android:layout_marginRight=&quot;34dp&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_layout.xml"
+            line="45"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_alignRight` with `android:layout_alignEnd=&quot;@id/text&quot;` to better support right-to-left layouts"
+        errorLine1="        android:layout_alignRight=&quot;@id/text&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_layout.xml"
+            line="47"
+            column="9"/>
+    </issue>
+
+</issues>

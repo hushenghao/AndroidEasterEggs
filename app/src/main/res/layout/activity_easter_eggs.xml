@@ -48,7 +48,7 @@
             android:adjustViewBounds="true"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_margin="2dp" />
+            android:layout_margin="4dp" />
 
     </com.google.android.material.navigation.NavigationView>
 

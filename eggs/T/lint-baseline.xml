@@ -1,0 +1,2834 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.4.0" type="baseline" client="gradle" dependencies="false" name="AGP (7.4.0)" variant="all" version="7.4.0">
+
+    <issue
+        id="RecyclerView"
+        message="Do not treat position as fixed; only use immediately and call `holder.getAdapterPosition()` to look it up later"
+        errorLine1="        public void onBindViewHolder(final CatHolder holder, int position) {"
+        errorLine2="                                                             ~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/NekoLand.java"
+            line="217"
+            column="62"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getBounds().getHeight()` instead"
+        errorLine1="        final int w = Math.min(canvas.getWidth(), canvas.getHeight());"
+        errorLine2="                                                  ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="311"
+            column="51"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getBounds().getWidth()` instead"
+        errorLine1="        final int w = Math.min(canvas.getWidth(), canvas.getHeight());"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="311"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="                    .setContentTitle(String.format(&quot;Job scheduled in %d min&quot;, (interval / MINUTES)))"
+        errorLine2="                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/NekoService.java"
+            line="183"
+            column="38"/>
+    </issue>
+
+    <issue
+        id="DiscouragedPrivateApi"
+        message="Reflective access to getBitmap, which is not part of the public SDK and therefore likely to change in future Android releases"
+        errorLine1="            final Bitmap bits = (Bitmap) Icon.class.getDeclaredMethod(&quot;getBitmap&quot;).invoke(bitmapIcon);"
+        errorLine2="                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="345"
+            column="42"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_0`"
+        errorLine1="    android.R.color.system_neutral1_0,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="66"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_10`"
+        errorLine1="    android.R.color.system_neutral1_10,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="67"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_50`"
+        errorLine1="    android.R.color.system_neutral1_50,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="68"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_100`"
+        errorLine1="    android.R.color.system_neutral1_100,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="69"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_200`"
+        errorLine1="    android.R.color.system_neutral1_200,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="70"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_300`"
+        errorLine1="    android.R.color.system_neutral1_300,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="71"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_400`"
+        errorLine1="    android.R.color.system_neutral1_400,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="72"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_500`"
+        errorLine1="    android.R.color.system_neutral1_500,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="73"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_600`"
+        errorLine1="    android.R.color.system_neutral1_600,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="74"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_700`"
+        errorLine1="    android.R.color.system_neutral1_700,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="75"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_800`"
+        errorLine1="    android.R.color.system_neutral1_800,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="76"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_900`"
+        errorLine1="    android.R.color.system_neutral1_900,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="77"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral1_1000`"
+        errorLine1="    android.R.color.system_neutral1_1000"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="78"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_0`"
+        errorLine1="    android.R.color.system_neutral2_0,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="82"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_10`"
+        errorLine1="    android.R.color.system_neutral2_10,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="83"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_50`"
+        errorLine1="    android.R.color.system_neutral2_50,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="84"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_100`"
+        errorLine1="    android.R.color.system_neutral2_100,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="85"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_200`"
+        errorLine1="    android.R.color.system_neutral2_200,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="86"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_300`"
+        errorLine1="    android.R.color.system_neutral2_300,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="87"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_400`"
+        errorLine1="    android.R.color.system_neutral2_400,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="88"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_500`"
+        errorLine1="    android.R.color.system_neutral2_500,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="89"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_600`"
+        errorLine1="    android.R.color.system_neutral2_600,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="90"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_700`"
+        errorLine1="    android.R.color.system_neutral2_700,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="91"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_800`"
+        errorLine1="    android.R.color.system_neutral2_800,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="92"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_900`"
+        errorLine1="    android.R.color.system_neutral2_900,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="93"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_neutral2_1000`"
+        errorLine1="    android.R.color.system_neutral2_1000"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="94"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_0`"
+        errorLine1="    android.R.color.system_accent1_0,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="98"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_10`"
+        errorLine1="    android.R.color.system_accent1_10,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="99"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_50`"
+        errorLine1="    android.R.color.system_accent1_50,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="100"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_100`"
+        errorLine1="    android.R.color.system_accent1_100,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="101"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_200`"
+        errorLine1="    android.R.color.system_accent1_200,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="102"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_300`"
+        errorLine1="    android.R.color.system_accent1_300,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="103"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_400`"
+        errorLine1="    android.R.color.system_accent1_400,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="104"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_500`"
+        errorLine1="    android.R.color.system_accent1_500,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="105"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_600`"
+        errorLine1="    android.R.color.system_accent1_600,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="106"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_700`"
+        errorLine1="    android.R.color.system_accent1_700,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="107"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_800`"
+        errorLine1="    android.R.color.system_accent1_800,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="108"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_900`"
+        errorLine1="    android.R.color.system_accent1_900,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="109"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent1_1000`"
+        errorLine1="    android.R.color.system_accent1_1000"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="110"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_0`"
+        errorLine1="    android.R.color.system_accent2_0,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="114"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_10`"
+        errorLine1="    android.R.color.system_accent2_10,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="115"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_50`"
+        errorLine1="    android.R.color.system_accent2_50,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="116"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_100`"
+        errorLine1="    android.R.color.system_accent2_100,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="117"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_200`"
+        errorLine1="    android.R.color.system_accent2_200,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="118"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_300`"
+        errorLine1="    android.R.color.system_accent2_300,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="119"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_400`"
+        errorLine1="    android.R.color.system_accent2_400,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="120"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_500`"
+        errorLine1="    android.R.color.system_accent2_500,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="121"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_600`"
+        errorLine1="    android.R.color.system_accent2_600,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="122"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_700`"
+        errorLine1="    android.R.color.system_accent2_700,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="123"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_800`"
+        errorLine1="    android.R.color.system_accent2_800,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="124"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_900`"
+        errorLine1="    android.R.color.system_accent2_900,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="125"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent2_1000`"
+        errorLine1="    android.R.color.system_accent2_1000"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="126"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_0`"
+        errorLine1="    android.R.color.system_accent3_0,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="130"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_10`"
+        errorLine1="    android.R.color.system_accent3_10,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="131"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_50`"
+        errorLine1="    android.R.color.system_accent3_50,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="132"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_100`"
+        errorLine1="    android.R.color.system_accent3_100,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="133"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_200`"
+        errorLine1="    android.R.color.system_accent3_200,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="134"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_300`"
+        errorLine1="    android.R.color.system_accent3_300,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="135"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_400`"
+        errorLine1="    android.R.color.system_accent3_400,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="136"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_500`"
+        errorLine1="    android.R.color.system_accent3_500,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="137"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_600`"
+        errorLine1="    android.R.color.system_accent3_600,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="138"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_700`"
+        errorLine1="    android.R.color.system_accent3_700,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="139"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_800`"
+        errorLine1="    android.R.color.system_accent3_800,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="140"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_900`"
+        errorLine1="    android.R.color.system_accent3_900,"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="141"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 31 (current min is 21): `android.R.color#system_accent3_1000`"
+        errorLine1="    android.R.color.system_accent3_1000"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="142"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 23 (current min is 21): `android.app.PendingIntent#FLAG_IMMUTABLE`"
+        errorLine1="        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="299"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Class requires API level 31 (current min is 21): `PaintChipsActivity`"
+        errorLine1="            component = ComponentName(context, PaintChipsActivity::class.java)"
+        errorLine2="                                               ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="296"
+            column="48"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Class requires API level 31 (current min is 21): `PaintChipsActivity`"
+        errorLine1="            component = ComponentName(context, PaintChipsActivity::class.java)"
+        errorLine2="                                               ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/widget/PaintChipsWidget.kt"
+            line="296"
+            column="48"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="`@android:color/system_accent1_500` requires API level 31 (current min is 21)"
+        errorLine1="    android:backgroundTint=&quot;@android:color/system_accent1_500&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_paint_chip.xml"
+            line="22"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="`@android:color/system_neutral1_500` requires API level 31 (current min is 21)"
+        errorLine1="        android:backgroundTint=&quot;@android:color/system_neutral1_500&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_paint_chips_widget_preview.xml"
+            line="18"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="`@android:color/system_neutral2_500` requires API level 31 (current min is 21)"
+        errorLine1="        android:backgroundTint=&quot;@android:color/system_neutral2_500&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_paint_chips_widget_preview.xml"
+            line="32"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="`@android:color/system_accent1_500` requires API level 31 (current min is 21)"
+        errorLine1="        android:backgroundTint=&quot;@android:color/system_accent1_500&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_paint_chips_widget_preview.xml"
+            line="46"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="`@android:color/system_accent2_500` requires API level 31 (current min is 21)"
+        errorLine1="        android:backgroundTint=&quot;@android:color/system_accent2_500&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_paint_chips_widget_preview.xml"
+            line="60"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="`@android:color/system_accent3_500` requires API level 31 (current min is 21)"
+        errorLine1="        android:backgroundTint=&quot;@android:color/system_accent3_500&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_paint_chips_widget_preview.xml"
+            line="74"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `previewLayout` is only used in API level 31 and higher (current min is 21)"
+        errorLine1="    android:previewLayout=&quot;@layout/t_paint_chips_widget_preview&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/xml/t_paint_chips_widget_info.xml"
+            line="19"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="LongLogTag"
+        message="The logging tag can be at most 23 characters, was 41 (com.android.internal.app.PlatLogoActivity)"
+        errorLine1="            Log.e(&quot;com.android.internal.app.PlatLogoActivity&quot;, &quot;No more eggs.&quot;);"
+        errorLine2="                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/PlatLogoActivity.java"
+            line="160"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="ProtectedPermissions"
+        message="Permission is only granted to system apps"
+        errorLine1="    &lt;uses-permission android:name=&quot;android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME&quot; />"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="AndroidManifest.xml"
+            line="8"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ProtectedPermissions"
+        message="Permission is only granted to system apps"
+        errorLine1="    &lt;uses-permission android:name=&quot;android.permission.BIND_CONTROLS&quot; />"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="AndroidManifest.xml"
+            line="16"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            body = context.getDrawable(R.drawable.t_body);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="483"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            head = context.getDrawable(R.drawable.t_head);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="484"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leg1 = context.getDrawable(R.drawable.t_leg1);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="485"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leg2 = context.getDrawable(R.drawable.t_leg2);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="486"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leg3 = context.getDrawable(R.drawable.t_leg3);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="487"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leg4 = context.getDrawable(R.drawable.t_leg4);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="488"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            tail = context.getDrawable(R.drawable.t_tail);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="489"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leftEar = context.getDrawable(R.drawable.t_left_ear);"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="490"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            rightEar = context.getDrawable(R.drawable.t_right_ear);"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="491"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            rightEarInside = context.getDrawable(R.drawable.t_right_ear_inside);"
+        errorLine2="                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="492"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leftEarInside = context.getDrawable(R.drawable.t_left_ear_inside);"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="493"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            faceSpot = context.getDrawable(R.drawable.t_face_spot);"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="494"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            cap = context.getDrawable(R.drawable.t_cap);"
+        errorLine2="                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="495"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            mouth = context.getDrawable(R.drawable.t_mouth);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="496"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            foot4 = context.getDrawable(R.drawable.t_foot4);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="497"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            foot3 = context.getDrawable(R.drawable.t_foot3);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="498"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            foot1 = context.getDrawable(R.drawable.t_foot1);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="499"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            foot2 = context.getDrawable(R.drawable.t_foot2);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="500"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leg2Shadow = context.getDrawable(R.drawable.t_leg2_shadow);"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="501"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            tailShadow = context.getDrawable(R.drawable.t_tail_shadow);"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="502"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            tailCap = context.getDrawable(R.drawable.t_tail_cap);"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="503"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            belly = context.getDrawable(R.drawable.t_belly);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="504"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            back = context.getDrawable(R.drawable.t_back);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="505"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            rightEye = context.getDrawable(R.drawable.t_right_eye);"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="506"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leftEye = context.getDrawable(R.drawable.t_left_eye);"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="507"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            nose = context.getDrawable(R.drawable.t_nose);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="508"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            collar = context.getDrawable(R.drawable.t_collar);"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="509"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            bowtie = context.getDrawable(R.drawable.t_bowtie);"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/Cat.java"
+            line="510"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="NotifyDataSetChanged"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
+        errorLine1="            notifyDataSetChanged();"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/neko/NekoLand.java"
+            line="182"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (1011 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M22,4C22,3.4477 21.5523,3 21,3C20.4477,3 20,3.4477 20,4L22,4ZM15,9C14.873,9.9919 14.8735,9.992 14.874,9.992C14.8742,9.9921 14.8747,9.9921 14.8751,9.9922C14.8759,9.9923 14.8768,9.9924 14.8778,9.9925C14.8798,9.9928 14.8821,9.993 14.8848,9.9934C14.8902,9.994 14.8971,9.9948 14.9054,9.9958C14.922,9.9976 14.9442,10 14.9718,10.0026C15.027,10.0079 15.1036,10.0143 15.1985,10.02C15.3881,10.0312 15.6534,10.0396 15.9697,10.0294C16.5957,10.0092 17.455,9.9156 18.3326,9.6062C19.2147,9.2951 20.1482,8.7534 20.8583,7.8203C21.5743,6.8795 22,5.6234 22,4L20,4C20,5.2607 19.6757,6.0717 19.2667,6.6091C18.8518,7.1543 18.2853,7.5021 17.6674,7.72C17.045,7.9395 16.4043,8.0144 15.9053,8.0304C15.6591,8.0384 15.4556,8.0317 15.3171,8.0235C15.248,8.0194 15.1957,8.0149 15.1629,8.0118C15.1466,8.0102 15.1352,8.009 15.129,8.0083C15.126,8.008 15.1242,8.0077 15.1239,8.0077C15.1237,8.0077 15.1239,8.0077 15.1244,8.0078C15.1247,8.0078 15.125,8.0078 15.1254,8.0079C15.1256,8.0079 15.126,8.008 15.1262,8.008C15.1266,8.008 15.127,8.0081 15,9Z&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/t_ic_toy_mouse.xml"
+            line="43"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (840 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M17.654,7.563L12,2L6.346,7.563C5.6036,8.2877 5.0136,9.1533 4.6108,10.1094C4.2079,11.0654 4.0002,12.0924 4,13.1299C4.0174,15.2343 4.87,17.2458 6.3703,18.7217C7.8705,20.1975 9.8956,21.017 12,21C14.1044,21.017 16.1295,20.1975 17.6297,18.7217C19.13,17.2458 19.9826,15.2343 20,13.1299C20,12.0924 19.7925,11.0654 19.3896,10.1094C18.9867,9.1533 18.3966,8.2875 17.654,7.563V7.563ZM12,18C11.7348,18 11.4804,17.8946 11.2929,17.707C11.1054,17.5195 11,17.2652 11,17C11,16.7348 11.1054,16.4805 11.2929,16.293C11.4804,16.1054 11.7348,16 12,16C12.7956,16 13.5587,15.6837 14.1213,15.1211C14.6839,14.5585 15,13.7956 15,13C15,12.7348 15.1054,12.4805 15.2929,12.293C15.4804,12.1054 15.7348,12 16,12C16.2652,12 16.5196,12.1054 16.7071,12.293C16.8946,12.4805 17,12.7348 17,13C16.9984,14.3256 16.4711,15.5964 15.5338,16.5337C14.5964,17.471 13.3256,17.9984 12,18Z&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/t_ic_water_filled.xml"
+            line="22"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (860 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M13.4135,6.3907L12,5L10.5865,6.3907C10.4009,6.5719 10.2534,6.7883 10.1527,7.0273C10.052,7.2663 10.0001,7.5231 10,7.7825C10.0044,8.3086 10.2175,8.8115 10.5926,9.1804C10.9676,9.5494 11.4739,9.7543 12,9.75C12.5261,9.7543 13.0324,9.5494 13.4074,9.1804C13.7825,8.8115 13.9956,8.3086 14,7.7825C14,7.5231 13.9481,7.2664 13.8474,7.0273C13.7467,6.7883 13.5991,6.5719 13.4135,6.3907V6.3907ZM12,9C11.9337,9 11.8701,8.9736 11.8232,8.9268C11.7763,8.8799 11.75,8.8163 11.75,8.75C11.75,8.6837 11.7763,8.6201 11.8232,8.5732C11.8701,8.5264 11.9337,8.5 12,8.5C12.1989,8.5 12.3897,8.4209 12.5303,8.2803C12.671,8.1396 12.75,7.9489 12.75,7.75C12.75,7.6837 12.7763,7.6201 12.8232,7.5732C12.8701,7.5264 12.9337,7.5 13,7.5C13.0663,7.5 13.1299,7.5264 13.1768,7.5732C13.2237,7.6201 13.25,7.6837 13.25,7.75C13.2496,8.0814 13.1178,8.3991 12.8834,8.6334C12.6491,8.8678 12.3314,8.9996 12,9Z&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/t_ic_waterbowl_filled.xml"
+            line="31"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (875 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="        android:pathData=&quot;M11,0.3c0.6,-0.3 1.4,-0.3 2,0l0.6,0.4c0.7,0.4 1.4,0.6 2.2,0.6l0.7,-0.1c0.7,0 1.4,0.3 1.8,0.9l0.3,0.6c0.4,0.7 1,1.2 1.7,1.5L21,4.5c0.7,0.3 1.1,0.9 1.2,1.7v0.7C22.2,7.7 22.5,8.4 23,9l0.4,0.5c0.4,0.6 0.5,1.3 0.2,2l-0.3,0.6c-0.3,0.7 -0.4,1.5 -0.3,2.3l0.1,0.7c0.1,0.7 -0.2,1.4 -0.7,1.9L22,17.5c-0.6,0.5 -1.1,1.1 -1.3,1.9L20.5,20c-0.2,0.7 -0.8,1.2 -1.5,1.4l-0.7,0.1c-0.8,0.2 -1.4,0.5 -2,1.1l-0.5,0.5c-0.5,0.5 -1.3,0.7 -2,0.5l-0.6,-0.2c-0.8,-0.2 -1.5,-0.2 -2.3,0l-0.6,0.2c-0.7,0.2 -1.5,0 -2,-0.5l-0.5,-0.5c-0.5,-0.5 -1.2,-0.9 -2,-1.1L5,21.4c-0.7,-0.2 -1.3,-0.7 -1.5,-1.4l-0.2,-0.7C3.1,18.6 2.6,18 2,17.5l-0.6,-0.4c-0.6,-0.5 -0.8,-1.2 -0.7,-1.9l0.1,-0.7c0.1,-0.8 0,-1.6 -0.3,-2.3l-0.3,-0.6c-0.3,-0.7 -0.2,-1.4 0.2,-2L1,9c0.5,-0.6 0.7,-1.4 0.8,-2.2V6.2C1.9,5.5 2.3,4.8 3,4.5l0.6,-0.3c0.7,-0.3 1.3,-0.9 1.7,-1.5l0.3,-0.6c0.4,-0.6 1.1,-1 1.8,-0.9l0.7,0.1c0.8,0 1.6,-0.2 2.2,-0.6L11,0.3z&quot;"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable-v32/t_platlogo.xml"
+            line="23"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (875 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="        android:pathData=&quot;M11,0.3c0.6,-0.3 1.4,-0.3 2,0l0.6,0.4c0.7,0.4 1.4,0.6 2.2,0.6l0.7,-0.1c0.7,0 1.4,0.3 1.8,0.9l0.3,0.6c0.4,0.7 1,1.2 1.7,1.5L21,4.5c0.7,0.3 1.1,0.9 1.2,1.7v0.7C22.2,7.7 22.5,8.4 23,9l0.4,0.5c0.4,0.6 0.5,1.3 0.2,2l-0.3,0.6c-0.3,0.7 -0.4,1.5 -0.3,2.3l0.1,0.7c0.1,0.7 -0.2,1.4 -0.7,1.9L22,17.5c-0.6,0.5 -1.1,1.1 -1.3,1.9L20.5,20c-0.2,0.7 -0.8,1.2 -1.5,1.4l-0.7,0.1c-0.8,0.2 -1.4,0.5 -2,1.1l-0.5,0.5c-0.5,0.5 -1.3,0.7 -2,0.5l-0.6,-0.2c-0.8,-0.2 -1.5,-0.2 -2.3,0l-0.6,0.2c-0.7,0.2 -1.5,0 -2,-0.5l-0.5,-0.5c-0.5,-0.5 -1.2,-0.9 -2,-1.1L5,21.4c-0.7,-0.2 -1.3,-0.7 -1.5,-1.4l-0.2,-0.7C3.1,18.6 2.6,18 2,17.5l-0.6,-0.4c-0.6,-0.5 -0.8,-1.2 -0.7,-1.9l0.1,-0.7c0.1,-0.8 0,-1.6 -0.3,-2.3l-0.3,-0.6c-0.3,-0.7 -0.2,-1.4 0.2,-2L1,9c0.5,-0.6 0.7,-1.4 0.8,-2.2V6.2C1.9,5.5 2.3,4.8 3,4.5l0.6,-0.3c0.7,-0.3 1.3,-0.9 1.7,-1.5l0.3,-0.6c0.4,-0.6 1.1,-1 1.8,-0.9l0.7,0.1c0.8,0 1.6,-0.2 2.2,-0.6L11,0.3z&quot;"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/t_platlogo.xml"
+            line="23"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="MergeRootFrame"
+        message="This `&lt;FrameLayout>` can be replaced with a `&lt;merge>` tag"
+        errorLine1="&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="res/layout/t_neko_activity.xml"
+            line="17"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `?android:attr/selectableItemBackgroundBorderless` with a theme that also paints a background (inferred theme is `@android_style/Theme_Material_NoActionBar`)"
+        errorLine1="    android:background=&quot;?android:attr/selectableItemBackgroundBorderless&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_cat_view.xml"
+            line="25"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.t_light_blue_50` appears to be unused"
+        errorLine1="    &lt;color name=&quot;t_light_blue_50&quot;>#FFE1F5FE&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/colors.xml"
+            line="17"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.t_light_blue_200` appears to be unused"
+        errorLine1="    &lt;color name=&quot;t_light_blue_200&quot;>#FF81D4FA&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/colors.xml"
+            line="18"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.t_light_blue_600` appears to be unused"
+        errorLine1="    &lt;color name=&quot;t_light_blue_600&quot;>#FF039BE5&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/colors.xml"
+            line="19"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.t_light_blue_900` appears to be unused"
+        errorLine1="    &lt;color name=&quot;t_light_blue_900&quot;>#FF01579B&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/colors.xml"
+            line="20"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_android_13` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="res/drawable/t_android_13.xml"
+            line="16"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_android_13_mono` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="res/drawable/t_android_13_mono.xml"
+            line="16"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u263a_ufe0f` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u263a_ufe0f.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u2648` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u2648.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u2649` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u2649.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u264a` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u264a.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u264b` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u264b.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u264c` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u264c.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u264d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u264d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u264e` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u264e.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u264f` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u264f.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u2650` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u2650.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u2651` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u2651.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u2652` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u2652.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u2653` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u2653.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u2728` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u2728.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u2763` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u2763.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u2764` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u2764.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_u2b50` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_u2b50.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf0a` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf0a.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf0d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf0d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf11` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf11.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf12` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf12.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf13` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf13.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf14` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf14.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf15` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf15.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf16` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf16.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf17` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf17.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf18` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf18.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf19` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf19.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf1f` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf1f.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf38` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf38.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf3a` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf3a.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf3c` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf3c.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf3f` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf3f.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf47` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf47.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf48` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf48.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf49` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf49.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf4a` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf4a.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf4b` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf4b.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf4c` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf4c.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf4d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf4d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf4e` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf4e.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf4f` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf4f.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf50` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf50.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf51` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf51.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf52` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf52.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udf53` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udf53.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83c_udff5_ufe0f` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83c_udff5_ufe0f.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc0b` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc0b.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc12` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc12.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc19` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc19.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc1f` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc1f.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc20` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc20.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc21` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc21.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc22` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc22.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc2c` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc2c.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc33` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc33.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc35` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc35.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc41` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc41.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc41_ufe0f` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc41_ufe0f.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc51` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc51.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc7d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc7d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc93` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc93.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc94` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc94.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc95` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc95.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc96` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc96.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc97` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc97.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc98` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc98.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc99` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc99.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc9a` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc9a.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc9b` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc9b.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc9c` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc9c.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc9d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc9d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udc9e` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc9e.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udcab` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udcab.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udcae` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udcae.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd50` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd50.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd51` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd51.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd52` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd52.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd53` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd53.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd54` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd54.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd55` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd55.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd56` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd56.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd57` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd57.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd58` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd58.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd59` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd59.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd5a` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd5a.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd5b` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd5b.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd5c` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd5c.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd5d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd5d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd5e` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd5e.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd5f` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd5f.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd60` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd60.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd61` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd61.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd62` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd62.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd63` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd63.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd64` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd64.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd65` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd65.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd66` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd66.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udd67` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udd67.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udda4` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udda4.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude00` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude00.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude01` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude01.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude02` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude02.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude03` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude03.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude04` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude04.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude05` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude05.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude06` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude06.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude07` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude07.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude09` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude09.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude0a` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude0a.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude0b` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude0b.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude0c` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude0c.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude0d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude0d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude0f` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude0f.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude10` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude10.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude11` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude11.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude12` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude12.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude14` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude14.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude17` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude17.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude18` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude18.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude19` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude19.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude1a` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude1a.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude1b` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude1b.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude1c` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude1c.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude1d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude1d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude2a` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude2a.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude2c` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude2c.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude34` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude34.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude36` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude36.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude37` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude37.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude38` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude38.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude39` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude39.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude3a` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude3a.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude3b` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude3b.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude3c` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude3c.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude3d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude3d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude3e` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude3e.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude3f` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude3f.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude40` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude40.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude42` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude42.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude43` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude43.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude44` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude44.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude48` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude48.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude49` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude49.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude4a` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude4a.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_ude80` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_ude80.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83d_udef8` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udef8.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd0d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd0d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd0e` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd0e.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd10` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd10.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd11` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd11.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd14` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd14.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd17` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd17.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd23` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd23.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd24` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd24.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd25` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd25.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd28` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd28.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd29` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd29.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd2a` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd2a.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd2b` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd2b.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd2d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd2d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd5d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd5d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd6d` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd6d.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd70` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd70.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd72` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd72.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd73` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd73.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd79` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd79.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd80` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd80.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd88` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd88.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd90` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd90.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd91` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd91.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udd9e` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udd9e.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udde1` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udde1.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_ude90` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_ude90.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udeb8` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udeb8.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_uded0` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_uded0.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udee0` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udee0.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udee1` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udee1.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udee2` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udee2.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udee3` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udee3.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udee5` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udee5.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ud83e_udee7` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83e_udee7.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_emoji_ufe0f_ud83e_udee6` appears to be unused">
+        <location
+            file="res/drawable-nodpi/t_emoji_ufe0f_ud83e_udee6.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.t_ic_waterbowl_filled` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="res/drawable/t_ic_waterbowl_filled.xml"
+            line="16"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.style.ThemeOverlay_EasterEgg_AppWidgetContainer` appears to be unused"
+        errorLine1="    &lt;style name=&quot;ThemeOverlay.EasterEgg.AppWidgetContainer&quot; parent=&quot;&quot;>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/themes.xml"
+            line="3"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: t_emoji_ud83d_udc41.webp, t_emoji_ud83d_udc41_ufe0f.webp">
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc41_ufe0f.webp"/>
+        <location
+            file="res/drawable-nodpi/t_emoji_ud83d_udc41.webp"/>
+    </issue>
+
+    <issue
+        id="TextFields"
+        message="This text field does not specify an `inputType`"
+        errorLine1="    &lt;EditText"
+        errorLine2="     ~~~~~~~~">
+        <location
+            file="res/layout/t_edit_text.xml"
+            line="24"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="Autofill"
+        message="Missing `autofillHints` attribute"
+        errorLine1="    &lt;EditText"
+        errorLine2="     ~~~~~~~~">
+        <location
+            file="res/layout/t_edit_text.xml"
+            line="24"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ClickableViewAccessibility"
+        message="Custom view `SettableAnalogClock` overrides `onTouchEvent` but not `performClick`"
+        errorLine1="        public boolean onTouchEvent(MotionEvent ev) {"
+        errorLine2="                       ~~~~~~~~~~~~">
+        <location
+            file="src/com/android_t/egg/PlatLogoActivity.java"
+            line="269"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="res/layout/t_cat_view.xml"
+            line="33"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="res/layout/t_cat_view.xml"
+            line="48"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="res/layout/t_cat_view.xml"
+            line="62"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="LabelFor"
+        message="Missing accessibility label: provide either a view with an `android:labelFor` that references this view or provide an `android:hint`"
+        errorLine1="    &lt;EditText"
+        errorLine2="     ~~~~~~~~">
+        <location
+            file="res/layout/t_edit_text.xml"
+            line="24"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;A1-500&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;A1-500&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_paint_chip.xml"
+            line="21"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;N1-500&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;N1-500&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_paint_chips_widget_preview.xml"
+            line="21"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;N2-500&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;N2-500&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_paint_chips_widget_preview.xml"
+            line="35"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;A1-500&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;A1-500&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_paint_chips_widget_preview.xml"
+            line="49"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;A2-500&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;A2-500&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_paint_chips_widget_preview.xml"
+            line="63"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;A3-500&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;A3-500&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/t_paint_chips_widget_preview.xml"
+            line="77"
+            column="9"/>
+    </issue>
+
+</issues>

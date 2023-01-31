@@ -34,7 +34,6 @@ android {
         jvmTarget = '1.8'
     }
 
-    resourcePrefix "r_"
 }
 
 dependencies {

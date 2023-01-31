@@ -480,17 +480,21 @@ public class DessertCaseView extends FrameLayout {
         return (int)(frand(a, b));
     }
 
+    // optimize DrawAllocation
+    private final Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Rect check = new Rect();
+
     @Override
     public void onDraw(Canvas c) {
         super.onDraw(c);
         if (!DEBUG) return;
 
-        Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
+        //Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
         pt.setStyle(Paint.Style.STROKE);
         pt.setColor(0xFFCCCCCC);
         pt.setStrokeWidth(2.0f);
 
-        final Rect check = new Rect();
+        //final Rect check = new Rect();
         final int N = getChildCount();
         for (int i = 0; i < N; i++) {
             View stone = getChildAt(i);

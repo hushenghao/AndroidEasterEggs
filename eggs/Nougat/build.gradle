@@ -29,7 +29,6 @@ android {
         }
     }
 
-    resourcePrefix "n_"
 }
 
 dependencies {

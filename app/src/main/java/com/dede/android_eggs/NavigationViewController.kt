@@ -60,6 +60,7 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
         (binding.ivDino.drawable as AnimationDrawable).start()
         binding.ivDino.setOnClickListener {
             activity.startActivity(Intent(activity, DinoEggActivity::class.java))
+            binding.drawerLayout.close()
         }
 
         val listeners = Listeners(activity)
