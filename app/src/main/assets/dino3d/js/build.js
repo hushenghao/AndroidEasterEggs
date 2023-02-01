@@ -809,9 +809,11 @@ class ScoreManager {
 
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-      this.ctx.font = '28px "Press Start 2P"';
+//      this.ctx.font = '28px "Press Start 2P"';
+      this.ctx.font = '16px "Press Start 2P"';
       this.ctx.fillStyle = 'rgba(106,133,145,1)';
-      this.ctx.fillText(text, 0, 60);
+//      this.ctx.fillText(text, 0, 60);
+      this.ctx.fillText(text, 120, 50);
     }
   }
 /**
@@ -2822,6 +2824,8 @@ class GameManager {
                 } else {
                     game.interface.buttons.start.classList.remove('hidden');
                     game.setStarter();
+                    
+                    window.nativeBridge.postStatus(0);
                 }
             }, function() {
                 // progress
@@ -2966,6 +2970,8 @@ class GameManager {
         if(visibly.hidden()) {
             this.pause();
         }
+
+        window.nativeBridge.postStatus(1);
 	}
 
     stop() {
@@ -2990,7 +2996,9 @@ class GameManager {
         audio.play('killed');
 
         // set starters
-        this.setStarter(0);
+        this.setStarter(2);
+
+        window.nativeBridge.postStatus(2);
     }
 
     pause() {
@@ -2999,6 +3007,8 @@ class GameManager {
         this.isPaused = true;
         this.isPlaying = false;
         audio.pause('bg');
+
+        window.nativeBridge.postStatus(3);
     }
 
     resume() {
@@ -3011,6 +3021,8 @@ class GameManager {
         clock.getDelta(); // drop delta
         this.render();
         this.loop();
+
+        window.nativeBridge.postStatus(1);
     }
 
     reset() {
@@ -3105,7 +3117,9 @@ class InterfaceManager {
     constructor() {
     	this.buttons = {
     		"start": document.getElementById('game-start'),
-    		"restart": document.getElementById('game-restart')
+    		"restart": document.getElementById('game-restart'),
+    		"restart_icon": document.getElementById('game-restart-icon'),
+    		"exit": document.getElementById('game-exit'),
     	};
 
     	this.indicators = {
@@ -3121,12 +3135,19 @@ class InterfaceManager {
     init() {
     	// hook buttons
     	this.buttons.start.addEventListener('click', this.btnStartClick);
-    	this.buttons.restart.addEventListener('click', this.btnRestartClick);
+    	this.buttons.restart_icon.addEventListener('click', this.btnRestartClick);
+    	this.buttons.exit.addEventListener('click', this.btnExitClick);
+    }
+
+    btnExitClick(e) {
+        // call native exit func
+        window.nativeBridge.exit();
     }
 
     btnStartClick(e) {
     	game.interface.buttons.start.display = 'none'; //hide
    		document.body.classList.add('game-started');
+   		game.interface.buttons.exit.style.display = 'inline';// show exit
 
    		game.start();
     }

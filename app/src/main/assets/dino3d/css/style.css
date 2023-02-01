@@ -44,7 +44,7 @@ html, body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-image: url(../media/preloader-dino.png);
+    background-image: url(../media/preloader-dino-0.5x.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 505px; }
@@ -660,6 +660,7 @@ END // CHART'S RULES
   font-family: 'Press Start 2P', cursive;
   text-align: center;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   /* iOS Safari */
   -webkit-user-select: none;

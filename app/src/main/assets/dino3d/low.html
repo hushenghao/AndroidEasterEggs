@@ -5,12 +5,12 @@
 	<title>T-Rex Run 3D</title>
 
 	<!-- Custom CSS -->
-	<link rel="stylesheet" href="css/style.min.css?patch=3x1">
+	<link rel="stylesheet" href="css/style.css" />
 
 	<!-- Preload -->
 	<link rel="preload" as="image" href="media/repeat.png" />
-	<link rel="preload" as="image" href="media/preloader-dino-0.5x.png">
-	<link rel="preload" as="image" href="media/3d-title.png">
+	<link rel="preload" as="image" href="media/preloader-dino-0.5x.png" />
+	<link rel="preload" as="image" href="media/3d-title.png" />
 
 </head>
 <body>
@@ -55,7 +55,11 @@
 
 	<div id="game-restart" class="hidden">
 		<h1>GAME OVER</h1>
-		<img src="media/repeat.png">
+		<img src="media/repeat.png" id="game-restart-icon" />
+	</div>
+
+	<div id="game-exit" style="position: fixed; top: 10%; left: 4%; display: none">
+		<h1 style="font-family: 'Press Start 2P'; font-size: 18px; user-select: none">Exit</h1>
 	</div>
 
 	<script src="libs/three/three.min.js"></script>
@@ -80,7 +84,7 @@
 
 	<script src="libs/visibly/visibly.js"></script>
 	<script src="js/config-low.js?patch=3x1"></script>
-	<script src="js/build.min.js?patch=3x1"></script>
+	<script src="js/build.js"></script>
 
 </body>
 </html>
