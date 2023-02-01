@@ -106,20 +106,6 @@ class DinoEggActivity : AppCompatActivity() {
 
     private class DinoServer(val context: Context) : NanoHTTPD(IP, PORT) {
 
-        companion object {
-            private const val PORT = 8888
-            private const val IP = "127.0.0.1"
-            const val HOST = "http://$IP:$PORT"
-        }
-
-        fun launch() {
-            try {
-                start()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-
         override fun serve(session: IHTTPSession): Response {
             Log.i("NanoHTTPD", "serve: ${session.uri}")
             if (session.uri == "/") {
@@ -132,15 +118,18 @@ class DinoEggActivity : AppCompatActivity() {
                 return newFixedLengthResponse(
                     Response.Status.NOT_FOUND,
                     MIME_PLAINTEXT,
-                    "404 Not Found"
+                    "Not Found"
                 )
             }
             val path = session.uri.substring(1)
             val stream = try {
                 context.assets.open(path)
             } catch (e: IOException) {
-                e.printStackTrace()
-                return super.serve(session)
+                return newFixedLengthResponse(
+                    Response.Status.INTERNAL_ERROR,
+                    MIME_PLAINTEXT,
+                    "Internal Error: " + e.message
+                )
             }
             return newFixedLengthResponse(
                 Response.Status.OK,
@@ -148,6 +137,20 @@ class DinoEggActivity : AppCompatActivity() {
                 stream,
                 stream.available().toLong()
             )
+        }
+
+        fun launch() {
+            try {
+                start()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        companion object {
+            private const val PORT = 8888
+            private const val IP = "127.0.0.1"
+            const val HOST = "http://$IP:$PORT"
         }
     }
 
