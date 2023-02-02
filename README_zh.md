@@ -68,6 +68,9 @@
 
 如果存在错误和问题，欢迎提交 [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues) 。如果你对本项目感兴趣，欢迎提交 [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) 参与。
 
+[联系我](mailto:dede.hu@qq.com)
+
+### 感谢
 [系统源码](https://github.com/aosp-mirror/platform_frameworks_base)
 
-[联系我](mailto:dede.hu@qq.com)
+[T-Rex Run 3D](https://github.com/Priler/dino3d)

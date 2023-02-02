@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.net.Uri
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -17,19 +16,12 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.TintTypedArray
-import androidx.core.content.ContextCompat
-import androidx.core.view.OnApplyWindowInsetsListener
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updateLayoutParams
+import androidx.core.view.*
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
 import com.dede.android_eggs.databinding.LayoutNavigationHeaderBinding
-import com.dede.basic.dp
-import com.dede.basic.getBoolean
-import com.dede.basic.putBoolean
-import com.dede.basic.string
+import com.dede.basic.*
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.resources.MaterialAttributes
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -177,11 +169,7 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
                     ChromeTabsBrowser.launchUrl(activity, Uri.parse(R.string.url_beta.string))
                 }
                 R.id.menu_email -> {
-                    val intent =
-                        Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:dede.hu@qq.com")).addFlags(
-                            Intent.FLAG_ACTIVITY_NEW_TASK
-                        )
-                    ContextCompat.startActivity(activity, Intent.createChooser(intent, null), null)
+                    ChromeTabsBrowser.launchUrlByBrowser(activity, Uri.parse("mailto:dede.hu@qq.com"))
                 }
                 R.id.menu_star -> {
                     ChromeTabsBrowser.launchUrlByBrowser(

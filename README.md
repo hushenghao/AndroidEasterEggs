@@ -68,6 +68,9 @@ Device type for emulators to be managed by the Android Gradle Plugin.
 
 If there are errors and problems, please submit [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues). If you are interested in this project, please submit [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) to participate.
 
+[Contact me](mailto:dede.hu@qq.com)
+
+### Thanks
 [System source code](https://github.com/aosp-mirror/platform_frameworks_base)
 
-[Contact me](mailto:dede.hu@qq.com)
+[T-Rex Run 3D](https://github.com/Priler/dino3d)
