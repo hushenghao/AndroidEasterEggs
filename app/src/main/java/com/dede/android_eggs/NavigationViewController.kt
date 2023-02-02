@@ -20,6 +20,7 @@ import androidx.core.view.*
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
+import com.dede.android_eggs.databinding.ActivityEasterEggsLandBinding
 import com.dede.android_eggs.databinding.LayoutNavigationHeaderBinding
 import com.dede.basic.*
 import com.google.android.material.navigation.NavigationView
@@ -30,6 +31,21 @@ import com.google.android.material.R as M3R
 class NavigationViewController(private val activity: AppCompatActivity) : DefaultLifecycleObserver {
 
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
+
+    fun bind(binding: ActivityEasterEggsLandBinding) {
+        activity.setContentView(binding.root)
+
+        val headerBinding = LayoutNavigationHeaderBinding.bind(
+            binding.navigationView.getHeaderView(0)
+        )
+
+        val listeners = Listeners(activity, headerBinding)
+        binding.navigationView.setNavigationItemSelectedListener(listeners)
+        bindMenuIcons(activity, binding.navigationView.menu)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.navigationView, listeners)
+
+       bindHeaderView(headerBinding)
+    }
 
     fun bind(binding: ActivityEasterEggsBinding) {
         activity.setContentView(binding.root)
@@ -57,6 +73,10 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
         bindMenuIcons(activity, binding.navigationView.menu)
         ViewCompat.setOnApplyWindowInsetsListener(binding.navigationView, listeners)
 
+        bindHeaderView(headerBinding)
+    }
+
+    private fun bindHeaderView(headerBinding: LayoutNavigationHeaderBinding) {
         headerBinding.tvVersion.text =
             activity.getString(
                 R.string.summary_version,

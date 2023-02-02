@@ -37,12 +37,12 @@ class EasterEggsFragment : PreferenceFragmentCompat() {
         super.onViewCreated(view, savedInstanceState)
         ViewCompat.setOnApplyWindowInsetsListener(listView) { v, insets ->
             val recyclerView = v as RecyclerView
-            val old = recyclerView.tag as? BottomEdgeItemDecoration
+            val old = recyclerView.tag as? EdgeItemDecoration
             if (old != null) {
                 recyclerView.removeItemDecoration(old)
             }
             val edge = insets.getInsets(Type.displayCutout() or Type.systemBars())
-            val itemDecoration = BottomEdgeItemDecoration(bottom = edge.bottom)
+            val itemDecoration = EdgeItemDecoration(edge.top, edge.bottom)
             recyclerView.addItemDecoration(itemDecoration)
             recyclerView.tag = itemDecoration
             return@setOnApplyWindowInsetsListener insets
@@ -50,9 +50,10 @@ class EasterEggsFragment : PreferenceFragmentCompat() {
     }
 
     /**
-     * RecyclerView 底部安全距离
+     * RecyclerView 安全距离
      */
-    private class BottomEdgeItemDecoration(val bottom: Int) : RecyclerView.ItemDecoration() {
+    private class EdgeItemDecoration(val top: Int, val bottom: Int) :
+        RecyclerView.ItemDecoration() {
         override fun getItemOffsets(
             outRect: Rect,
             view: View,
@@ -63,6 +64,8 @@ class EasterEggsFragment : PreferenceFragmentCompat() {
             val position = parent.getChildAdapterPosition(view)
             if (itemCount - 1 == position) {
                 outRect.bottom = bottom
+            } else if (position == 0) {
+                outRect.top = top
             }
         }
     }
