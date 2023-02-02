@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -107,7 +106,6 @@ class DinoEggActivity : AppCompatActivity() {
     private class DinoServer(val context: Context) : NanoHTTPD(IP, PORT) {
 
         override fun serve(session: IHTTPSession): Response {
-            Log.i("NanoHTTPD", "serve: ${session.uri}")
             if (session.uri == "/") {
                 return newFixedLengthResponse(Response.Status.REDIRECT.name).apply {
                     status = Response.Status.REDIRECT

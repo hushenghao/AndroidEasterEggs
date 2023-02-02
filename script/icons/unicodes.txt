@@ -10,8 +10,8 @@ e3a9
 
 # home
 e88a
-# device_hub
-e335
+# download
+f090
 # android
 e859
 # email
@@ -22,6 +22,3 @@ e838
 ea17
 # home
 e88a
-
-# arrow_back_ios_new
-e2ea

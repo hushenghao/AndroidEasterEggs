@@ -117,5 +117,4 @@ dependencies {
 
     testImplementation(deps.junit)
     androidTestImplementation(deps.bundles.android.test)
-    androidTestImplementation(deps.nanohttpd)
 }

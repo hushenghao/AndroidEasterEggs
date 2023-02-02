@@ -25,7 +25,7 @@
                 android:id="@+id/menu_dino"
                 android:checkable="true"
                 android:icon="@drawable/ic_dino_logo"
-                android:title="Dino"
+                android:title="T-Rex Run 3D"
                 tools:ignore="HardcodedText" />
 
             <item
