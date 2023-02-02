@@ -180,6 +180,9 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
                     activity.startActivity(Intent(activity, DinoEggActivity::class.java))
                 }
             }
+            uiExecutor.execute {
+                item.isChecked = false
+            }
             return true
         }
 
