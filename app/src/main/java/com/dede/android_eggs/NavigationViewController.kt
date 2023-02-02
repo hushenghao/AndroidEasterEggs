@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.TintTypedArray
 import androidx.core.view.*
+import androidx.core.view.WindowInsetsCompat.Type
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
@@ -35,16 +36,7 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
     fun bind(binding: ActivityEasterEggsLandBinding) {
         activity.setContentView(binding.root)
 
-        val headerBinding = LayoutNavigationHeaderBinding.bind(
-            binding.navigationView.getHeaderView(0)
-        )
-
-        val listeners = Listeners(activity, headerBinding)
-        binding.navigationView.setNavigationItemSelectedListener(listeners)
-        bindMenuIcons(activity, binding.navigationView.menu)
-        ViewCompat.setOnApplyWindowInsetsListener(binding.navigationView, listeners)
-
-       bindHeaderView(headerBinding)
+        bindNavigationView(binding.navigationView)
     }
 
     fun bind(binding: ActivityEasterEggsBinding) {
@@ -64,19 +56,19 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
 
         DrawerBackPressedDispatcher(binding.drawerLayout).bind(activity)
 
+        bindNavigationView(binding.navigationView)
+    }
+
+    private fun bindNavigationView(navigationView: NavigationView) {
         val headerBinding = LayoutNavigationHeaderBinding.bind(
-            binding.navigationView.getHeaderView(0)
+            navigationView.getHeaderView(0)
         )
 
         val listeners = Listeners(activity, headerBinding)
-        binding.navigationView.setNavigationItemSelectedListener(listeners)
-        bindMenuIcons(activity, binding.navigationView.menu)
-        ViewCompat.setOnApplyWindowInsetsListener(binding.navigationView, listeners)
+        navigationView.setNavigationItemSelectedListener(listeners)
+        bindMenuIcons(activity, navigationView.menu)
+        ViewCompat.setOnApplyWindowInsetsListener(navigationView, listeners)
 
-        bindHeaderView(headerBinding)
-    }
-
-    private fun bindHeaderView(headerBinding: LayoutNavigationHeaderBinding) {
         headerBinding.tvVersion.text =
             activity.getString(
                 R.string.summary_version,
@@ -189,7 +181,10 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
                     ChromeTabsBrowser.launchUrl(activity, Uri.parse(R.string.url_beta.string))
                 }
                 R.id.menu_email -> {
-                    ChromeTabsBrowser.launchUrlByBrowser(activity, Uri.parse("mailto:dede.hu@qq.com"))
+                    ChromeTabsBrowser.launchUrlByBrowser(
+                        activity,
+                        Uri.parse("mailto:dede.hu@qq.com")
+                    )
                 }
                 R.id.menu_star -> {
                     ChromeTabsBrowser.launchUrlByBrowser(
@@ -207,11 +202,9 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
         }
 
         override fun onApplyWindowInsets(v: View, insets: WindowInsetsCompat): WindowInsetsCompat {
-            val systemBars = insets.getInsets(
-                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
-            )
+            val edge = insets.getInsets(Type.displayCutout() or Type.systemBars())
             headerBinding.spaceTop.updateLayoutParams<MarginLayoutParams> {
-                topMargin = systemBars.top
+                topMargin = edge.top
             }
             return insets
         }

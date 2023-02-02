@@ -30,7 +30,7 @@ class EasterEggsActivity : AppCompatActivity() {
         }
 
         if (savedInstanceState == null) {
-            EasterEggsSplash(this, window.decorView).welcome()
+            EasterEggsSplash(this, findViewById(android.R.id.content)).welcome()
         }
     }
 

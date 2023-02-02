@@ -3,7 +3,10 @@ package com.dede.android_eggs
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
+import android.view.ViewGroup.MarginLayoutParams
+import androidx.core.view.updateLayoutParams
 import androidx.preference.PreferenceCategory
+import androidx.preference.PreferenceViewHolder
 
 /**
  * Egg
@@ -61,5 +64,12 @@ class EggCollection : PreferenceCategory {
 
     override fun isSelectable(): Boolean {
         return true
+    }
+
+    override fun onBindViewHolder(holder: PreferenceViewHolder) {
+        holder.itemView.updateLayoutParams<MarginLayoutParams> {
+            topMargin = 0
+        }
+        super.onBindViewHolder(holder)
     }
 }

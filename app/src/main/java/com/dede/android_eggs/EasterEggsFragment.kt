@@ -42,7 +42,8 @@ class EasterEggsFragment : PreferenceFragmentCompat() {
                 recyclerView.removeItemDecoration(old)
             }
             val edge = insets.getInsets(Type.displayCutout() or Type.systemBars())
-            val itemDecoration = EdgeItemDecoration(edge.top, edge.bottom)
+            val top = if ((requireActivity() as EasterEggsActivity).isWideSize()) edge.top else 0
+            val itemDecoration = EdgeItemDecoration(top, edge.bottom)
             recyclerView.addItemDecoration(itemDecoration)
             recyclerView.tag = itemDecoration
             return@setOnApplyWindowInsetsListener insets
