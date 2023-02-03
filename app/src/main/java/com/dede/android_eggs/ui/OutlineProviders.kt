@@ -1,4 +1,4 @@
-package com.dede.android_eggs
+package com.dede.android_eggs.ui
 
 import android.graphics.Outline
 import android.view.View
@@ -15,6 +15,16 @@ class OvalOutlineProvider : ViewOutlineProvider() {
             view.paddingLeft, view.paddingTop,
             view.width - view.paddingRight,
             view.height - view.paddingBottom
+        )
+    }
+}
+
+class CornersOutlineProvider(val radius: Float) : ViewOutlineProvider() {
+    override fun getOutline(view: View, outline: Outline) {
+        outline.setRoundRect(
+            view.paddingLeft, view.paddingTop,
+            view.width - view.paddingRight,
+            view.height - view.paddingBottom, radius
         )
     }
 }

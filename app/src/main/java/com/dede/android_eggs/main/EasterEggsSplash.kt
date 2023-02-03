@@ -1,4 +1,4 @@
-package com.dede.android_eggs
+package com.dede.android_eggs.main
 
 import android.view.Gravity
 import android.view.View
@@ -11,12 +11,14 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import kotlin.math.hypot
 
-class EasterEggsSplash(private val activity: AppCompatActivity, private val root: View) : Runnable,
+class EasterEggsSplash(private val activity: AppCompatActivity) : Runnable,
     DefaultLifecycleObserver {
 
     private lateinit var ivLogo: ImageView
+    private lateinit var root: View
 
     fun welcome() {
+        root = activity.findViewById(android.R.id.content)
         ivLogo = AppCompatImageView(activity).apply {
             setImageResource(com.android_t.egg.R.drawable.t_platlogo)
         }

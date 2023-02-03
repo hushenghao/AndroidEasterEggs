@@ -1,11 +1,12 @@
-package com.dede.android_eggs
+package com.dede.android_eggs.ui
 
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.text.TextUtils
 import android.util.AttributeSet
 import androidx.preference.Preference
+import com.dede.android_eggs.util.ChromeTabsBrowser
+import com.dede.android_eggs.R
 
 /**
  * Chrome Custom Tabs Preference

@@ -1,4 +1,4 @@
-package com.dede.android_eggs
+package com.dede.android_eggs.main
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -14,61 +14,73 @@ import android.view.ViewGroup.MarginLayoutParams
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.TintTypedArray
 import androidx.core.view.*
 import androidx.core.view.WindowInsetsCompat.Type
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.DefaultLifecycleObserver
-import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
-import com.dede.android_eggs.databinding.ActivityEasterEggsLandBinding
+import com.dede.android_eggs.BuildConfig
+import com.dede.android_eggs.R
+import com.dede.android_eggs.databinding.LayoutEasterEggsContentBinding
 import com.dede.android_eggs.databinding.LayoutNavigationHeaderBinding
-import com.dede.basic.*
+import com.dede.android_eggs.dino.DinoEggActivity
+import com.dede.android_eggs.ui.FontIconsDrawable
+import com.dede.android_eggs.util.ChromeTabsBrowser
+import com.dede.android_eggs.util.NightModeManager
+import com.dede.basic.dp
+import com.dede.basic.string
+import com.dede.basic.uiExecutor
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.resources.MaterialAttributes
 import com.google.android.material.shape.MaterialShapeDrawable
+import com.dede.android_eggs.R.layout.activity_easter_eggs as content_view
+import com.dede.android_eggs.R.layout.activity_easter_eggs_land as content_view_land
 import com.google.android.material.R as M3R
 
 class NavigationViewController(private val activity: AppCompatActivity) : DefaultLifecycleObserver {
 
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
 
-    fun bind(binding: ActivityEasterEggsLandBinding) {
-        activity.setContentView(binding.root)
-
-        bindNavigationView(binding.navigationView)
+    private fun isWideSize(): Boolean {
+        val configuration = activity.resources.configuration
+        return configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
+                configuration.smallestScreenWidthDp >= 600
     }
 
-    fun bind(binding: ActivityEasterEggsBinding) {
-        activity.setContentView(binding.root)
+    fun setContentView() {
+        activity.setContentView(if (isWideSize()) content_view_land else content_view)
+        val binding =
+            LayoutEasterEggsContentBinding.bind(activity.findViewById(R.id.layout_content))
+        val navigationView: NavigationView = activity.findViewById(R.id.navigation_view)
         activity.setSupportActionBar(binding.toolbar)
-
         binding.appBar.statusBarForeground =
             MaterialShapeDrawable.createWithElevationOverlay(activity)
 
-        actionBarDrawerToggle = ActionBarDrawerToggle(
-            activity,
-            binding.drawerLayout,
-            binding.toolbar,
-            R.string.label_drawer_open,
-            R.string.label_drawer_close
-        ).apply { syncState() }
+        bindNavigationView(navigationView)
 
-        DrawerBackPressedDispatcher(binding.drawerLayout).bind(activity)
+        val drawerLayout: DrawerLayout? = activity.findViewById(R.id.drawer_layout)
+        if (drawerLayout != null) {
+            actionBarDrawerToggle = ActionBarDrawerToggle(
+                activity,
+                drawerLayout,
+                binding.toolbar,
+                R.string.label_drawer_open,
+                R.string.label_drawer_close
+            ).apply { syncState() }
 
-        bindNavigationView(binding.navigationView)
+            DrawerBackPressedDispatcher(drawerLayout).bind(activity)
+        }
     }
 
     private fun bindNavigationView(navigationView: NavigationView) {
-        val headerBinding = LayoutNavigationHeaderBinding.bind(
-            navigationView.getHeaderView(0)
-        )
+        val headerBinding = LayoutNavigationHeaderBinding.bind(navigationView.getHeaderView(0))
 
         val listeners = Listeners(activity, headerBinding)
         navigationView.setNavigationItemSelectedListener(listeners)
         bindMenuIcons(activity, navigationView.menu)
         ViewCompat.setOnApplyWindowInsetsListener(navigationView, listeners)
 
+        val nightModeManager = NightModeManager(activity)
         headerBinding.tvVersion.text =
             activity.getString(
                 R.string.summary_version,
@@ -76,16 +88,10 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
                 BuildConfig.VERSION_CODE
             )
         headerBinding.switchNightMode.setOnCheckedChangeListener { _, isChecked ->
-            val nightMode = if (isChecked) AppCompatDelegate.MODE_NIGHT_YES
-            else AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-            if (nightMode == AppCompatDelegate.getDefaultNightMode()) {
-                return@setOnCheckedChangeListener
-            }
-            AppCompatDelegate.setDefaultNightMode(nightMode)
-            activity.putBoolean("key_night_mode", isChecked)
+            nightModeManager.setNightMode(isChecked)
         }
         headerBinding.switchNightMode.setSwitchTypeface(FontIconsDrawable.ICONS_TYPEFACE)
-        headerBinding.switchNightMode.isChecked = activity.getBoolean("key_night_mode", false)
+        headerBinding.switchNightMode.isChecked = nightModeManager.isNightMode()
     }
 
     fun onConfigurationChanged(newConfig: Configuration) {
@@ -203,6 +209,7 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
 
         override fun onApplyWindowInsets(v: View, insets: WindowInsetsCompat): WindowInsetsCompat {
             val edge = insets.getInsets(Type.displayCutout() or Type.systemBars())
+            v.updatePadding(left = edge.left)
             headerBinding.spaceTop.updateLayoutParams<MarginLayoutParams> {
                 topMargin = edge.top
             }

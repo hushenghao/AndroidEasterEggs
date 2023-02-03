@@ -1,4 +1,4 @@
-package com.dede.android_eggs
+package com.dede.android_eggs.util
 
 import android.Manifest
 import android.app.Activity

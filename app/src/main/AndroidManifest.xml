@@ -20,7 +20,7 @@
         android:theme="@style/Theme.EasterEggs"
         tools:targetApi="tiramisu">
         <activity
-            android:name=".EasterEggsActivity"
+            android:name=".main.EasterEggsActivity"
             android:exported="true"
             android:label="@string/title_activity_settings">
             <intent-filter>
@@ -33,7 +33,7 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name="com.dede.android_eggs.DinoEggActivity"
+            android:name="com.dede.android_eggs.dino.DinoEggActivity"
             android:process=":dino"
             android:screenOrientation="landscape" />
     </application>

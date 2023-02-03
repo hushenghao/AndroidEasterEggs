@@ -1,10 +1,9 @@
-package com.dede.android_eggs
+package com.dede.android_eggs.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Outline
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -21,6 +20,8 @@ import androidx.core.text.toSpannable
 import androidx.core.view.setPadding
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
+import com.dede.android_eggs.R
+import com.google.android.material.R as M3R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -134,10 +135,10 @@ class EggPreference : Preference {
             return
         }
 
-        val res =
-            com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered
-        MaterialAlertDialogBuilder(context, res)
-            .setTitle(finalTitle)
+        MaterialAlertDialogBuilder(
+            context,
+            M3R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered
+        ).setTitle(finalTitle)
             .setMessage(finalSummary)
             .setIcon(icon)
             .setPositiveButton(android.R.string.ok, null)
@@ -172,16 +173,6 @@ class EggPreference : Preference {
         override fun updateDrawState(ds: TextPaint) {
             //super.updateDrawState(ds)
             ds.isUnderlineText = false
-        }
-    }
-
-    private class CornersOutlineProvider(val radius: Float) : ViewOutlineProvider() {
-        override fun getOutline(view: View, outline: Outline) {
-            outline.setRoundRect(
-                view.paddingLeft, view.paddingTop,
-                view.width - view.paddingRight,
-                view.height - view.paddingBottom, radius
-            )
         }
     }
 

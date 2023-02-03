@@ -1,11 +1,9 @@
-package com.dede.android_eggs
+package com.dede.android_eggs.main
 
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
-import com.dede.android_eggs.databinding.ActivityEasterEggsLandBinding
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.internal.EdgeToEdgeUtils
 
@@ -23,20 +21,11 @@ class EasterEggsActivity : AppCompatActivity() {
         @Suppress("RestrictedApi")
         EdgeToEdgeUtils.applyEdgeToEdge(window, true)
 
-        if (isWideSize()) {
-            navigationViewController.bind(ActivityEasterEggsLandBinding.inflate(layoutInflater))
-        } else {
-            navigationViewController.bind(ActivityEasterEggsBinding.inflate(layoutInflater))
-        }
+        navigationViewController.setContentView()
 
         if (savedInstanceState == null) {
-            EasterEggsSplash(this, findViewById(android.R.id.content)).welcome()
+            EasterEggsSplash(this).welcome()
         }
-    }
-
-    fun isWideSize(): Boolean {
-        return resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
-                resources.configuration.smallestScreenWidthDp >= 600
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

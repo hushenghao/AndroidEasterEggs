@@ -1,4 +1,4 @@
-package com.dede.android_eggs
+package com.dede.android_eggs.dino
 
 import android.annotation.SuppressLint
 import android.content.Context

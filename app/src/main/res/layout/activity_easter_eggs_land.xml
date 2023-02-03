@@ -3,26 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EasterEggsActivity">
+    tools:viewBindingIgnore="true"
+    tools:context=".main.EasterEggsActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fl_eggs"
-        android:name="com.dede.android_eggs.EasterEggsFragment"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:tag="easter_eggs"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/navigation_view" />
+        app:layout_constraintStart_toEndOf="@id/navigation_view">
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:saveEnabled="false"
-        app:headerLayout="@layout/layout_navigation_header"
-        app:insetForeground="@null"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_navigation" />
+        <include layout="@layout/layout_easter_eggs_content" />
+    </FrameLayout>
+
+    <include
+        layout="@layout/layout_easter_eggs_navigation"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

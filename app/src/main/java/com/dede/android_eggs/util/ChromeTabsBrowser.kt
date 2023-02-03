@@ -1,4 +1,4 @@
-package com.dede.android_eggs
+package com.dede.android_eggs.util
 
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import com.dede.android_eggs.R
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
 

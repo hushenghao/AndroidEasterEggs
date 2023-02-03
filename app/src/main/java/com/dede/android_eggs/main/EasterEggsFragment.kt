@@ -1,4 +1,4 @@
-package com.dede.android_eggs
+package com.dede.android_eggs.main
 
 import android.annotation.SuppressLint
 import android.graphics.Rect
@@ -11,6 +11,9 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceGroupAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dede.android_eggs.R
+import com.dede.android_eggs.ui.EggCollection
+import com.dede.android_eggs.ui.EggPreference
 
 class EasterEggsFragment : PreferenceFragmentCompat() {
 
@@ -42,8 +45,7 @@ class EasterEggsFragment : PreferenceFragmentCompat() {
                 recyclerView.removeItemDecoration(old)
             }
             val edge = insets.getInsets(Type.displayCutout() or Type.systemBars())
-            val top = if ((requireActivity() as EasterEggsActivity).isWideSize()) edge.top else 0
-            val itemDecoration = EdgeItemDecoration(top, edge.bottom)
+            val itemDecoration = EdgeItemDecoration(0, edge.bottom)
             recyclerView.addItemDecoration(itemDecoration)
             recyclerView.tag = itemDecoration
             return@setOnApplyWindowInsetsListener insets
