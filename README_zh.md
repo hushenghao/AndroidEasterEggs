@@ -18,8 +18,8 @@
 
 ## 截图
 
-| ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) |
-|----------------------------------------------------------------------|----------------------------------------------------------------------|
+| ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) |
+|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
 
 ## Android版本
 | 名称                                     |  SDK  | 彩蛋                            | 状态  | 有使用新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |
@@ -68,9 +68,9 @@
 
 如果存在错误和问题，欢迎提交 [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues) 。如果你对本项目感兴趣，欢迎提交 [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) 参与。
 
-[联系我](mailto:dede.hu@qq.com)
+[联系我 📧](mailto:dede.hu@qq.com)
 
 ### 感谢
 [系统源码](https://github.com/aosp-mirror/platform_frameworks_base)
 
-[T-Rex Run 3D](https://github.com/Priler/dino3d)
+[🦖 T-Rex Run 3D](https://github.com/Priler/dino3d)

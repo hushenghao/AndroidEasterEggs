@@ -10,13 +10,15 @@ import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup.MarginLayoutParams
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.TintTypedArray
-import androidx.core.view.*
+import androidx.core.view.OnApplyWindowInsetsListener
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsCompat.Type
+import androidx.core.view.updatePadding
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.dede.android_eggs.BuildConfig
@@ -25,9 +27,11 @@ import com.dede.android_eggs.databinding.LayoutEasterEggsContentBinding
 import com.dede.android_eggs.databinding.LayoutNavigationHeaderBinding
 import com.dede.android_eggs.dino.DinoEggActivity
 import com.dede.android_eggs.ui.FontIconsDrawable
+import com.dede.android_eggs.ui.ScaleTypeDrawable
 import com.dede.android_eggs.util.ChromeTabsBrowser
 import com.dede.android_eggs.util.NightModeManager
 import com.dede.basic.dp
+import com.dede.basic.requireDrawable
 import com.dede.basic.string
 import com.dede.basic.uiExecutor
 import com.google.android.material.navigation.NavigationView
@@ -74,7 +78,10 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
 
     private fun bindNavigationView(navigationView: NavigationView) {
         val headerBinding = LayoutNavigationHeaderBinding.bind(navigationView.getHeaderView(0))
-
+        headerBinding.root.background = ScaleTypeDrawable(
+            activity.requireDrawable(R.drawable.img_nav_header_bg),
+            com.dede.android_eggs.ui.ScaleType.CENTER_CROP
+        )
         val listeners = Listeners(activity, headerBinding)
         navigationView.setNavigationItemSelectedListener(listeners)
         bindMenuIcons(activity, navigationView.menu)
@@ -210,9 +217,7 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
         override fun onApplyWindowInsets(v: View, insets: WindowInsetsCompat): WindowInsetsCompat {
             val edge = insets.getInsets(Type.displayCutout() or Type.systemBars())
             v.updatePadding(left = edge.left)
-            headerBinding.spaceTop.updateLayoutParams<MarginLayoutParams> {
-                topMargin = edge.top
-            }
+            headerBinding.root.updatePadding(top = edge.top)
             return insets
         }
     }
