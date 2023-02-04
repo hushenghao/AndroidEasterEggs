@@ -11,8 +11,8 @@ import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
+import com.dede.android_eggs.util.WindowEdgeUtilsAccessor
 import com.google.android.material.color.DynamicColors
-import com.google.android.material.internal.EdgeToEdgeUtils
 import fi.iki.elonen.NanoHTTPD
 import java.io.IOException
 
@@ -30,8 +30,7 @@ class DinoEggActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DynamicColors.applyToActivityIfAvailable(this)
-        @Suppress("RestrictedApi")
-        EdgeToEdgeUtils.applyEdgeToEdge(window, true)
+        WindowEdgeUtilsAccessor.applyEdgeToEdge(window, true)
 
         webView = WebView(this)
         val settings = webView.settings

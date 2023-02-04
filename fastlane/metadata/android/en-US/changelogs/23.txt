@@ -1,2 +1,3 @@
 Fix known problems
 Add to F-Droid
+Add Google Chrome T-Rex Run! in 3D

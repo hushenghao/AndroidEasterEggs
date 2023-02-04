@@ -4,8 +4,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.dede.android_eggs.util.WindowEdgeUtilsAccessor
 import com.google.android.material.color.DynamicColors
-import com.google.android.material.internal.EdgeToEdgeUtils
 
 /**
  * Easter Egg Collection
@@ -18,8 +18,7 @@ class EasterEggsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         DynamicColors.applyToActivityIfAvailable(this)
-        @Suppress("RestrictedApi")
-        EdgeToEdgeUtils.applyEdgeToEdge(window, true)
+        WindowEdgeUtilsAccessor.applyEdgeToEdge(window, true)
 
         navigationViewController.setContentView()
 
