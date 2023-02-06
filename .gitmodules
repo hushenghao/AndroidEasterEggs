@@ -1,0 +1,3 @@
+[submodule "app/src/main/assets/dino3d"]
+	path = app/src/main/assets/dino3d
+	url = git@github.com:hushenghao/dino3d.git
