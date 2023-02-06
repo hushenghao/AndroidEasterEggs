@@ -46,7 +46,7 @@ class DinoEggActivity : AppCompatActivity() {
 
         server = DinoServer(applicationContext).apply { launch() }
         webView.webViewClient = WebViewClient()
-        webView.loadUrl(DinoServer.HOST)
+        webView.loadUrl(DinoServer.MAIN_PAGER)
         WebViewDinoController(this).attach(webView)
     }
 
@@ -147,7 +147,7 @@ class DinoEggActivity : AppCompatActivity() {
         companion object {
             private const val PORT = 8888
             private const val IP = "127.0.0.1"
-            const val HOST = "http://$IP:$PORT"
+            const val MAIN_PAGER = "http://$IP:$PORT/dino3d/index.html"
         }
     }
 
