@@ -108,7 +108,7 @@ class DinoEggActivity : AppCompatActivity() {
             if (session.uri == "/") {
                 return newFixedLengthResponse(Response.Status.REDIRECT.name).apply {
                     status = Response.Status.REDIRECT
-                    addHeader("Location", "/dino3d/low.html")
+                    addHeader("Location", "/dino3d/index.html")
                 }
             }
             if (!session.uri.startsWith("/dino3d")) {
