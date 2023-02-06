@@ -18,8 +18,8 @@ The project contains the complete code of the system Easter eggs, which aims to 
 
 ## Screenshots
 
-| ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) |
-|----------------------------------------------------------------------|----------------------------------------------------------------------|
+| ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) |
+|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
 
 ## Android Versions
 | Name                                   |  SDK  | Egg                           | Status | Use new features [*](#id_new_features) | Minimum SDK [*](#id_full_egg_mini_sdk) |
@@ -68,6 +68,9 @@ Device type for emulators to be managed by the Android Gradle Plugin.
 
 If there are errors and problems, please submit [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues). If you are interested in this project, please submit [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) to participate.
 
+[Contact me 📧](mailto:dede.hu@qq.com)
+
+### Thanks
 [System source code](https://github.com/aosp-mirror/platform_frameworks_base)
 
-[Contact me](mailto:dede.hu@qq.com)
+[🦖 T-Rex Run 3D](https://github.com/Priler/dino3d)

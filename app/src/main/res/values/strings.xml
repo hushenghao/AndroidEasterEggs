@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">Easter Eggs</string>
     <!-- Settings Activity Title -->
     <string name="title_activity_settings" translatable="false">Easter Eggs</string>
@@ -8,7 +8,7 @@
     <!-- Preference Titles -->
     <string name="header_collection">Collection</string>
     <string name="header_about">About</string>
-    <string name="expand_button_title">Ancient version</string>
+    <string name="expand_button_title" tools:override="true">Ancient version</string>
 
     <string name="title_android_t" translatable="false">Android 13 (Tiramisu)</string>
     <string name="title_android_s" translatable="false">Android 12 (Snow Cone)</string>
@@ -37,7 +37,6 @@
     <string name="summary_android_donut" translatable="false">Donut</string>
     <string name="summary_android_cupcake" translatable="false">Cupcake</string>
     <string name="summary_android_petit_four" translatable="false">Petit Four</string>
-    <string name="summary_android_base">The first release doesn\'t have a nickname, it\'s called the "Singularity"</string>
 
     <string name="version_comment_android_n" formatted="false" translatable="false">
         SDK 24~25\nAndroid 7.0~7.1.2
@@ -90,6 +89,7 @@
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
     <string name="url_source" translatable="false">https://github.com/aosp-mirror/platform_frameworks_base</string>
     <string name="url_beta" translatable="false">https://www.pgyer.com/eggs</string>
+    <string name="url_privacy_agreement" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE</string>
 
     <string name="title_github" translatable="false">GitHub</string>
     <string name="title_source">System Source</string>
@@ -104,6 +104,7 @@
     <string name="title_beta">Get Beta</string>
     <string name="label_menu_source">Source</string>
     <string name="title_privacy_agreement">Privacy Agreement</string>
-    <string name="url_privacy_agreement" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE</string>
+    <string name="label_email">Contact me</string>
+    <string name="label_star">Star</string>
 
 </resources>

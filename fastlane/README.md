@@ -11,15 +11,6 @@ xcode-select --install
 
 For _fastlane_ installation instructions, see [Installing _fastlane_](https://docs.fastlane.tools/#installing-fastlane)
 
-Required environment variables
-
-```shell
-export PGYER_API_KEY="Pgyer api_key"
-export JSON_KEY_FILE="Path to the json secret file"
-```
-
-Follow https://docs.fastlane.tools/actions/supply/#setup to get one
-
 # Available Actions
 
 ## Android

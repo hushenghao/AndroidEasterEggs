@@ -4,7 +4,7 @@
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor" >@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="Theme.EasterEggs" parent="Base.EasterEggs">
@@ -16,5 +16,10 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@android:color/black</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="TextAppearance.NightModeSwitch" parent="">
+        <item name="android:textColor">?attr/colorButtonNormal</item>
+        <item name="android:textSize" tools:ignore="SpUsage">16dp</item>
     </style>
 </resources>

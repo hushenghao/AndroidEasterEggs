@@ -1,36 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <item android:title="@string/label_menu_source">
         <menu>
             <item
                 android:id="@+id/menu_github"
                 android:checkable="true"
-                android:icon="@drawable/ic_logo_github"
                 android:title="@string/title_github"
-                android:tooltipText="@string/summary_github" />
+                android:tooltipText="@string/summary_github"
+                tools:targetApi="o" />
 
             <item
                 android:id="@+id/menu_source"
                 android:checkable="true"
-                android:icon="@drawable/ic_android_cs"
                 android:title="@string/title_source"
-                android:tooltipText="@string/summary_source" />
+                android:tooltipText="@string/summary_source"
+                tools:targetApi="o" />
         </menu>
     </item>
 
     <item android:title="@string/header_about">
         <menu>
             <item
+                android:id="@+id/menu_dino"
+                android:checkable="true"
+                android:icon="@drawable/ic_dino_logo"
+                android:title="T-Rex Run 3D"
+                tools:ignore="HardcodedText" />
+
+            <item
                 android:id="@+id/menu_privacy_agreement"
                 android:checkable="true"
-                android:icon="@drawable/ic_baseline_privacy_tip"
                 android:title="@string/title_privacy_agreement" />
 
             <item
                 android:id="@+id/menu_beta"
                 android:checkable="true"
-                android:icon="@drawable/ic_logo_android"
                 android:title="@string/title_beta" />
+
+            <item
+                android:id="@+id/menu_star"
+                android:checkable="true"
+                android:title="@string/label_star" />
+
+            <item
+                android:id="@+id/menu_email"
+                android:checkable="true"
+                android:title="@string/label_email" />
         </menu>
     </item>
 </menu>

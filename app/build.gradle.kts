@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import com.android.build.api.dsl.ManagedVirtualDevice
 import java.util.*
 
@@ -21,7 +23,7 @@ android {
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
         versionCode = 23
-        versionName = "1.8.1"
+        versionName = "1.9.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.addAll(listOf("zh", "en"))
@@ -95,6 +97,7 @@ dependencies {
     implementation(deps.androidx.browser)
     implementation(deps.google.material)
     implementation(deps.free.reflection)
+    implementation(deps.nanohttpd)
     debugImplementation(deps.leakcanary)
     implementation(project(":basic"))
     implementation(project(":eggs:T"))
@@ -114,5 +117,4 @@ dependencies {
 
     testImplementation(deps.junit)
     androidTestImplementation(deps.bundles.android.test)
-    androidTestImplementation(deps.nanohttpd)
 }

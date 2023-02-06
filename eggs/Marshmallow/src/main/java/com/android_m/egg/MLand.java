@@ -931,6 +931,9 @@ public class MLand extends FrameLayout {
         p.unboost();
     }
 
+    private final Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Rect r = new Rect();
+
     @Override
     public void onDraw(Canvas c) {
         super.onDraw(c);
@@ -955,7 +958,7 @@ public class MLand extends FrameLayout {
 
         if (!DEBUG_DRAW) return;
 
-        final Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
+        //final Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
         pt.setColor(0xFFFFFFFF);
         for (Player p : mPlayers) {
             final int L = p.corners.length;
@@ -984,7 +987,7 @@ public class MLand extends FrameLayout {
                 final Pop pop = (Pop) v;
                 c.drawCircle(pop.cx, pop.cy, pop.r, pt);
             } else {
-                final Rect r = new Rect();
+                //final Rect r = new Rect();
                 v.getHitRect(r);
                 c.drawRect(r, pt);
             }

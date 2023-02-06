@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.4.0" type="baseline" client="gradle" dependencies="false" name="AGP (7.4.0)" variant="all" version="7.4.0">
+
+    <issue
+        id="RecyclerView"
+        message="Do not treat position as fixed; only use immediately and call `holder.getAdapterPosition()` to look it up later"
+        errorLine1="        public void onBindViewHolder(final CatHolder holder, int position) {"
+        errorLine2="                                                             ~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/NekoLand.java"
+            line="219"
+            column="62"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getBounds().getHeight()` instead"
+        errorLine1="        final int w = Math.min(canvas.getWidth(), canvas.getHeight());"
+        errorLine2="                                                  ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="315"
+            column="51"/>
+    </issue>
+
+    <issue
+        id="CanvasSize"
+        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getBounds().getWidth()` instead"
+        errorLine1="        final int w = Math.min(canvas.getWidth(), canvas.getHeight());"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="315"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="                    .setContentTitle(String.format(&quot;Job scheduled in %d min&quot;, (interval / MINUTES)))"
+        errorLine2="                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/NekoService.java"
+            line="182"
+            column="38"/>
+    </issue>
+
+    <issue
+        id="DiscouragedPrivateApi"
+        message="Reflective access to getBitmap, which is not part of the public SDK and therefore likely to change in future Android releases"
+        errorLine1="            final Bitmap bits = (Bitmap) Icon.class.getDeclaredMethod(&quot;getBitmap&quot;).invoke(bitmapIcon);"
+        errorLine2="                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="349"
+            column="42"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 30 (current min is 21): `android.view.HapticFeedbackConstants#CONFIRM`"
+        errorLine1="                                ? HapticFeedbackConstants.CONFIRM"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/PlatLogoActivity.java"
+            line="177"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="LongLogTag"
+        message="The logging tag can be at most 23 characters, was 41 (com.android.internal.app.PlatLogoActivity)"
+        errorLine1="            Log.e(&quot;com.android.internal.app.PlatLogoActivity&quot;, &quot;No more eggs.&quot;);"
+        errorLine2="                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/PlatLogoActivity.java"
+            line="110"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="ProtectedPermissions"
+        message="Permission is only granted to system apps"
+        errorLine1="    &lt;uses-permission android:name=&quot;android.permission.BIND_CONTROLS&quot; />"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="AndroidManifest.xml"
+            line="10"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="AppCompatCustomView"
+        message="This custom view should extend `androidx.appcompat.widget.AppCompatImageView` instead"
+        errorLine1="    class BigDialView extends ImageView {"
+        errorLine2="                              ~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/PlatLogoActivity.java"
+            line="115"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            body = context.getDrawable(R.drawable.r_body);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="487"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            head = context.getDrawable(R.drawable.r_head);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="488"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leg1 = context.getDrawable(R.drawable.r_leg1);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="489"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leg2 = context.getDrawable(R.drawable.r_leg2);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="490"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leg3 = context.getDrawable(R.drawable.r_leg3);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="491"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leg4 = context.getDrawable(R.drawable.r_leg4);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="492"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            tail = context.getDrawable(R.drawable.r_tail);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="493"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leftEar = context.getDrawable(R.drawable.r_left_ear);"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="494"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            rightEar = context.getDrawable(R.drawable.r_right_ear);"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="495"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            rightEarInside = context.getDrawable(R.drawable.r_right_ear_inside);"
+        errorLine2="                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="496"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leftEarInside = context.getDrawable(R.drawable.r_left_ear_inside);"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="497"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            faceSpot = context.getDrawable(R.drawable.r_face_spot);"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="498"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            cap = context.getDrawable(R.drawable.r_cap);"
+        errorLine2="                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="499"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            mouth = context.getDrawable(R.drawable.r_mouth);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="500"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            foot4 = context.getDrawable(R.drawable.r_foot4);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="501"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            foot3 = context.getDrawable(R.drawable.r_foot3);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="502"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            foot1 = context.getDrawable(R.drawable.r_foot1);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="503"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            foot2 = context.getDrawable(R.drawable.r_foot2);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="504"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leg2Shadow = context.getDrawable(R.drawable.r_leg2_shadow);"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="505"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            tailShadow = context.getDrawable(R.drawable.r_tail_shadow);"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="506"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            tailCap = context.getDrawable(R.drawable.r_tail_cap);"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="507"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            belly = context.getDrawable(R.drawable.r_belly);"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="508"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            back = context.getDrawable(R.drawable.r_back);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="509"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            rightEye = context.getDrawable(R.drawable.r_right_eye);"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="510"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            leftEye = context.getDrawable(R.drawable.r_left_eye);"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="511"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            nose = context.getDrawable(R.drawable.r_nose);"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="512"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            collar = context.getDrawable(R.drawable.r_collar);"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="513"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="UseCompatLoadingForDrawables"
+        message="Use `AppCompatResources.getDrawable()`"
+        errorLine1="            bowtie = context.getDrawable(R.drawable.r_bowtie);"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/Cat.java"
+            line="514"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="NotifyDataSetChanged"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
+        errorLine1="            notifyDataSetChanged();"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/neko/NekoLand.java"
+            line="184"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="Unnecessary; SDK_INT is always >= 21"
+        errorLine1="        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/PlatLogoActivity.java"
+            line="75"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="Unnecessary; SDK_INT is always >= 21"
+        errorLine1="        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/PlatLogoActivity.java"
+            line="139"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (1011 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M22,4C22,3.4477 21.5523,3 21,3C20.4477,3 20,3.4477 20,4L22,4ZM15,9C14.873,9.9919 14.8735,9.992 14.874,9.992C14.8742,9.9921 14.8747,9.9921 14.8751,9.9922C14.8759,9.9923 14.8768,9.9924 14.8778,9.9925C14.8798,9.9928 14.8821,9.993 14.8848,9.9934C14.8902,9.994 14.8971,9.9948 14.9054,9.9958C14.922,9.9976 14.9442,10 14.9718,10.0026C15.027,10.0079 15.1036,10.0143 15.1985,10.02C15.3881,10.0312 15.6534,10.0396 15.9697,10.0294C16.5957,10.0092 17.455,9.9156 18.3326,9.6062C19.2147,9.2951 20.1482,8.7534 20.8583,7.8203C21.5743,6.8795 22,5.6234 22,4L20,4C20,5.2607 19.6757,6.0717 19.2667,6.6091C18.8518,7.1543 18.2853,7.5021 17.6674,7.72C17.045,7.9395 16.4043,8.0144 15.9053,8.0304C15.6591,8.0384 15.4556,8.0317 15.3171,8.0235C15.248,8.0194 15.1957,8.0149 15.1629,8.0118C15.1466,8.0102 15.1352,8.009 15.129,8.0083C15.126,8.008 15.1242,8.0077 15.1239,8.0077C15.1237,8.0077 15.1239,8.0077 15.1244,8.0078C15.1247,8.0078 15.125,8.0078 15.1254,8.0079C15.1256,8.0079 15.126,8.008 15.1262,8.008C15.1266,8.008 15.127,8.0081 15,9Z&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/r_ic_toy_mouse.xml"
+            line="43"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (840 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M17.654,7.563L12,2L6.346,7.563C5.6036,8.2877 5.0136,9.1533 4.6108,10.1094C4.2079,11.0654 4.0002,12.0924 4,13.1299C4.0174,15.2343 4.87,17.2458 6.3703,18.7217C7.8705,20.1975 9.8956,21.017 12,21C14.1044,21.017 16.1295,20.1975 17.6297,18.7217C19.13,17.2458 19.9826,15.2343 20,13.1299C20,12.0924 19.7925,11.0654 19.3896,10.1094C18.9867,9.1533 18.3966,8.2875 17.654,7.563V7.563ZM12,18C11.7348,18 11.4804,17.8946 11.2929,17.707C11.1054,17.5195 11,17.2652 11,17C11,16.7348 11.1054,16.4805 11.2929,16.293C11.4804,16.1054 11.7348,16 12,16C12.7956,16 13.5587,15.6837 14.1213,15.1211C14.6839,14.5585 15,13.7956 15,13C15,12.7348 15.1054,12.4805 15.2929,12.293C15.4804,12.1054 15.7348,12 16,12C16.2652,12 16.5196,12.1054 16.7071,12.293C16.8946,12.4805 17,12.7348 17,13C16.9984,14.3256 16.4711,15.5964 15.5338,16.5337C14.5964,17.471 13.3256,17.9984 12,18Z&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/r_ic_water_filled.xml"
+            line="22"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (860 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M13.4135,6.3907L12,5L10.5865,6.3907C10.4009,6.5719 10.2534,6.7883 10.1527,7.0273C10.052,7.2663 10.0001,7.5231 10,7.7825C10.0044,8.3086 10.2175,8.8115 10.5926,9.1804C10.9676,9.5494 11.4739,9.7543 12,9.75C12.5261,9.7543 13.0324,9.5494 13.4074,9.1804C13.7825,8.8115 13.9956,8.3086 14,7.7825C14,7.5231 13.9481,7.2664 13.8474,7.0273C13.7467,6.7883 13.5991,6.5719 13.4135,6.3907V6.3907ZM12,9C11.9337,9 11.8701,8.9736 11.8232,8.9268C11.7763,8.8799 11.75,8.8163 11.75,8.75C11.75,8.6837 11.7763,8.6201 11.8232,8.5732C11.8701,8.5264 11.9337,8.5 12,8.5C12.1989,8.5 12.3897,8.4209 12.5303,8.2803C12.671,8.1396 12.75,7.9489 12.75,7.75C12.75,7.6837 12.7763,7.6201 12.8232,7.5732C12.8701,7.5264 12.9337,7.5 13,7.5C13.0663,7.5 13.1299,7.5264 13.1768,7.5732C13.2237,7.6201 13.25,7.6837 13.25,7.75C13.2496,8.0814 13.1178,8.3991 12.8834,8.6334C12.6491,8.8678 12.3314,8.9996 12,9Z&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/r_ic_waterbowl_filled.xml"
+            line="31"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="MergeRootFrame"
+        message="This `&lt;FrameLayout>` can be replaced with a `&lt;merge>` tag"
+        errorLine1="&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="res/layout/r_neko_activity.xml"
+            line="17"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `?android:attr/selectableItemBackgroundBorderless` with a theme that also paints a background (inferred theme is `@android_style/Theme_Material_NoActionBar`)"
+        errorLine1="    android:background=&quot;?android:attr/selectableItemBackgroundBorderless&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/r_cat_view.xml"
+            line="25"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.r_directory_name` appears to be unused"
+        errorLine1="    &lt;string name=&quot;r_directory_name&quot; translatable=&quot;false&quot;>Cats&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/cat_strings.xml"
+            line="7"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.array.r_food_intervals` appears to be unused"
+        errorLine1="    &lt;integer-array name=&quot;r_food_intervals&quot;>"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/cat_strings.xml"
+            line="9"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.r_ic_clear` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="res/drawable/r_ic_clear.xml"
+            line="16"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.r_ic_dropper` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="res/drawable/r_ic_dropper.xml"
+            line="16"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.r_ic_hourglass` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="res/drawable/r_ic_hourglass.xml"
+            line="16"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.r_ic_waterbowl_filled` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="res/drawable/r_ic_waterbowl_filled.xml"
+            line="16"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="TextFields"
+        message="This text field does not specify an `inputType`"
+        errorLine1="    &lt;EditText"
+        errorLine2="     ~~~~~~~~">
+        <location
+            file="res/layout/r_edit_text.xml"
+            line="24"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="Autofill"
+        message="Missing `autofillHints` attribute"
+        errorLine1="    &lt;EditText"
+        errorLine2="     ~~~~~~~~">
+        <location
+            file="res/layout/r_edit_text.xml"
+            line="24"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ClickableViewAccessibility"
+        message="`BigDialView#onTouchEvent` should call `BigDialView#performClick` when a click is detected"
+        errorLine1="        public boolean onTouchEvent(MotionEvent ev) {"
+        errorLine2="                       ~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/PlatLogoActivity.java"
+            line="161"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="ClickableViewAccessibility"
+        message="`BigDialView#performClick` should call `super#performClick`"
+        errorLine1="        public boolean performClick() {"
+        errorLine2="                       ~~~~~~~~~~~~">
+        <location
+            file="src/com/android_r/egg/PlatLogoActivity.java"
+            line="191"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="res/layout/r_cat_view.xml"
+            line="33"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="res/layout/r_cat_view.xml"
+            line="48"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="res/layout/r_cat_view.xml"
+            line="62"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="LabelFor"
+        message="Missing accessibility label: provide either a view with an `android:labelFor` that references this view or provide an `android:hint`"
+        errorLine1="    &lt;EditText"
+        errorLine2="     ~~~~~~~~">
+        <location
+            file="res/layout/r_edit_text.xml"
+            line="24"
+            column="6"/>
+    </issue>
+
+</issues>

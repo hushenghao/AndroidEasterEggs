@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:background="@drawable/img_nav_header_bg"
+    tools:layout_height="wrap_content"
+    tools:layout_width="280dp">
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="24dp"
         android:contentDescription="@string/app_name"
         android:src="@mipmap/ic_launcher_round"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +26,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:text="@string/app_name"
-        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_icon" />
 
@@ -32,22 +35,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="4dp"
-        android:textAppearance="?attr/textAppearanceCaption"
+        android:layout_marginBottom="16dp"
+        android:textAppearance="?attr/textAppearanceBody2"
         android:tooltipText="@string/title_version"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         tools:text="1.7.4(20)" />
 
-    <androidx.appcompat.widget.SwitchCompat
+    <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/switch_night_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:textColor="@android:color/white"
+        android:textOff="\ue1ab"
+        android:textOn="\ue3a9"
         app:layout_constraintBottom_toBottomOf="@id/tv_version"
         app:layout_constraintEnd_toEndOf="parent"
         app:showText="true"
+        app:switchTextAppearance="@style/TextAppearance.NightModeSwitch"
+        tools:ignore="HardcodedText"
         tools:textOff="☀️"
         tools:textOn="🌙" />
 

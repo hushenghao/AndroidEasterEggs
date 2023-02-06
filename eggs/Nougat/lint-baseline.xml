@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.4.0" type="baseline" client="gradle" dependencies="false" name="AGP (7.4.0)" variant="all" version="7.4.0">
+
+    <issue
+        id="RecyclerView"
+        message="Do not treat position as fixed; only use immediately and call `holder.getAdapterPosition()` to look it up later"
+        errorLine1="        public void onBindViewHolder(final CatHolder holder, int position) {"
+        errorLine2="                                                             ~~~~~~~~~~~~">
+        <location
+            file="src/com/android_n/egg/neko/NekoLand.java"
+            line="210"
+            column="62"/>
+    </issue>
+
+</issues>

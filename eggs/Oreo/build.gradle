@@ -29,7 +29,6 @@ android {
         }
     }
 
-    resourcePrefix "o_"
 }
 
 dependencies {

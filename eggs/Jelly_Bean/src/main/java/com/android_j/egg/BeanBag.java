@@ -360,12 +360,14 @@ public class BeanBag extends Activity {
             return false;
         }
 
+        private final Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
+
         @Override
         public void onDraw(Canvas c) {
             if (DEBUG) {
                 //android.util.Log.d("BeanBag", "onDraw");
-                Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
-                pt.setAntiAlias(true);
+                //Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
+                //pt.setAntiAlias(true);
                 pt.setStyle(Paint.Style.STROKE);
                 pt.setColor(0xFFFF0000);
                 pt.setStrokeWidth(4.0f);

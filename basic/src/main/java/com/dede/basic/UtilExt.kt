@@ -2,6 +2,9 @@
 
 package com.dede.basic
 
+import android.util.TypedValue
+import kotlin.math.roundToInt
+
 /**
  * Unicode编码规则: Unicode码对每一个字符用4位16进制数表示。
  * 具体规则是：将一个字符(char)的高8位与低8位分别取出，转化为16进制数，
@@ -37,3 +40,17 @@ fun String?.toUnicode(prefix: String = "\\u", join: String = ""): String {
     }
     return sb.toString()
 }
+
+val Number.dp: Int
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this.toFloat(),
+        globalContext.resources.displayMetrics
+    ).roundToInt()
+
+val Number.dpf: Float
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this.toFloat(),
+        globalContext.resources.displayMetrics
+    )

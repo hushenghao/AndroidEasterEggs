@@ -1,5 +1,24 @@
+# light_mode
+#e518
+# dark_mode
+#e51c
+
+# brightness_auto
+e1ab
 # brightness_4
 e3a9
-# brightness_7
-e3ac
 
+# home
+e88a
+# download
+f090
+# android
+e859
+# email
+e0be
+# star
+e838
+# policy
+ea17
+# home
+e88a
