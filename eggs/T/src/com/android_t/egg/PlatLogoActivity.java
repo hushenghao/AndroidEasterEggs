@@ -29,15 +29,12 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.SparseArray;
-import android.util.SparseIntArray;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
@@ -53,9 +50,6 @@ import com.dede.basic.AnalogClock;
 import com.dede.basic.DrawableKt;
 import com.dede.basic.LargeBitmapAccessor;
 import com.dede.basic.SpUtils;
-import com.dede.basic.UtilExt;
-
-import java.util.HashMap;
 
 /**
  * @hide
@@ -348,7 +342,7 @@ public class PlatLogoActivity extends Activity {
             {"🐢", "✨", "🌟", "👑"}
     };
 
-    static class Bubble {
+    public static class Bubble {
         public float x, y, r;
         public int color;
         public String text = null;
@@ -360,7 +354,7 @@ public class PlatLogoActivity extends Activity {
 //        private static final int MAX_BUBBS = 2000;
 
         // Optimize memory usage
-        private final int MAX_BUBBS = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? 2000 : 1000;
+        private final int MAX_BUBBS = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? 2000 : 800;
 
         //        private final int[] mColorIds = {
 //                android.R.color.system_accent1_400,
@@ -398,7 +392,7 @@ public class PlatLogoActivity extends Activity {
         @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.TIRAMISU)
         private final boolean supportCOLR = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU;
         //private final boolean supportCOLR = false;
-        private final LargeBitmapAccessor drawableAccessor = new LargeBitmapAccessor(PlatLogoActivity.this);
+        private final LargeBitmapAccessor bitmapAccessor = new LargeBitmapAccessor(PlatLogoActivity.this);
 
         BubblesDrawable() {
             try {
@@ -411,8 +405,6 @@ public class PlatLogoActivity extends Activity {
                 mBubbs[j] = new Bubble();
             }
         }
-
-        private RectF rectF = new RectF();
 
         @Override
         public void draw(Canvas canvas) {
@@ -428,13 +420,7 @@ public class PlatLogoActivity extends Activity {
                     canvas.drawText(mBubbs[j].text, mBubbs[j].x,
                             mBubbs[j].y + mBubbs[j].r * f * 0.6f, mPaint);
                 } else if (mBubbs[j].bitmap != null) {
-                    rectF.set(
-                            mBubbs[j].x - mBubbs[j].r * f,
-                            mBubbs[j].y - mBubbs[j].r * f,
-                            mBubbs[j].x + mBubbs[j].r * f,
-                            mBubbs[j].y + mBubbs[j].r * f
-                    );
-                    canvas.drawBitmap(mBubbs[j].bitmap, null, rectF, mPaint);
+                    COLRBitmapCompat.drawCOLRBitmap(canvas, mBubbs[j], f, mPaint);
                 } else {
                     mPaint.setColor(mBubbs[j].color);
                     canvas.drawCircle(mBubbs[j].x, mBubbs[j].y, mBubbs[j].r * f, mPaint);
@@ -453,23 +439,7 @@ public class PlatLogoActivity extends Activity {
             }
             // support code
             if (!supportCOLR) {
-                HashMap<String, Float> sizeMap = new HashMap<>();
-                for (int i = 0; i < mBubbs.length; i++) {
-                    Float s = sizeMap.get(mBubbs[i].text);
-                    if (s == null) {
-                        s = mBubbs[i].r;
-                        sizeMap.put(mBubbs[i].text, s);
-                    } else {
-                        sizeMap.put(mBubbs[i].text, Math.max(s, mBubbs[i].r));
-                    }
-                }
-                for (int i = 0; i < mBubbs.length; i++) {
-                    int id = drawableAccessor.getIdentifier(String.format("t_emoji_%s",
-                            UtilExt.toUnicode(mBubbs[i].text, "u", "_")));
-                    int size = Math.round(sizeMap.get(mBubbs[i].text) * 2);
-                    mBubbs[i].bitmap = drawableAccessor.requireBitmap(id, size, size);
-                    mBubbs[i].text = null;
-                }
+                COLRBitmapCompat.convertCOLRBitmap(mBubbs, bitmapAccessor);
             }
             invalidateSelf();
         }
