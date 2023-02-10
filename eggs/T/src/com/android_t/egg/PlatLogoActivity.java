@@ -24,10 +24,12 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -47,7 +49,7 @@ import androidx.annotation.ChecksSdkIntAtLeast;
 
 import com.dede.basic.AnalogClock;
 import com.dede.basic.DrawableKt;
-import com.dede.basic.LargeDrawableAccessor;
+import com.dede.basic.LargeBitmapAccessor;
 import com.dede.basic.SpUtils;
 import com.dede.basic.UtilExt;
 
@@ -346,12 +348,15 @@ public class PlatLogoActivity extends Activity {
         public float x, y, r;
         public int color;
         public String text = null;
-        public Drawable drawable = null;
+        public Bitmap bitmap = null;
     }
 
     class BubblesDrawable extends Drawable implements View.OnLongClickListener {
 
-        private static final int MAX_BUBBS = 2000;
+//        private static final int MAX_BUBBS = 2000;
+
+        // Optimize memory usage
+        private final int MAX_BUBBS = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? 2000 : 1000;
 
         //        private final int[] mColorIds = {
 //                android.R.color.system_accent1_400,
@@ -389,7 +394,7 @@ public class PlatLogoActivity extends Activity {
         @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.TIRAMISU)
         private final boolean supportCOLR = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU;
         //private final boolean supportCOLR = false;
-        private final LargeDrawableAccessor drawableAccessor = new LargeDrawableAccessor(PlatLogoActivity.this);
+        private final LargeBitmapAccessor drawableAccessor = new LargeBitmapAccessor(PlatLogoActivity.this);
 
         BubblesDrawable() {
             try {
@@ -402,6 +407,8 @@ public class PlatLogoActivity extends Activity {
                 mBubbs[j] = new Bubble();
             }
         }
+
+        private RectF rectF = new RectF();
 
         @Override
         public void draw(Canvas canvas) {
@@ -416,13 +423,14 @@ public class PlatLogoActivity extends Activity {
                     mPaint.setTextSize(mBubbs[j].r * 1.75f);
                     canvas.drawText(mBubbs[j].text, mBubbs[j].x,
                             mBubbs[j].y + mBubbs[j].r * f * 0.6f, mPaint);
-                } else if (mBubbs[j].drawable != null) {
-                    mBubbs[j].drawable.setBounds(
-                            (int) (mBubbs[j].x - mBubbs[j].r * f),
-                            (int) (mBubbs[j].y - mBubbs[j].r * f),
-                            (int) (mBubbs[j].x + mBubbs[j].r * f),
-                            (int) (mBubbs[j].y + mBubbs[j].r * f));
-                    mBubbs[j].drawable.draw(canvas);
+                } else if (mBubbs[j].bitmap != null) {
+                    rectF.set(
+                            mBubbs[j].x - mBubbs[j].r * f,
+                            mBubbs[j].y - mBubbs[j].r * f,
+                            mBubbs[j].x + mBubbs[j].r * f,
+                            mBubbs[j].y + mBubbs[j].r * f
+                    );
+                    canvas.drawBitmap(mBubbs[j].bitmap, null, rectF, mPaint);
                 } else {
                     mPaint.setColor(mBubbs[j].color);
                     canvas.drawCircle(mBubbs[j].x, mBubbs[j].y, mBubbs[j].r * f, mPaint);
@@ -435,14 +443,22 @@ public class PlatLogoActivity extends Activity {
             mEmojiSet = (int) (Math.random() * EMOJI_SETS.length);
             final String[] emojiSet = EMOJI_SETS[mEmojiSet];
             Log.i(TAG, "chooseEmojiSet: " + mEmojiSet);
+            int size = 0;
+            if (!supportCOLR) {
+                float maxR = 0;
+                for (int i = 0; i < mBubbs.length; i++) {
+                    maxR = Math.max(mBubbs[i].r, maxR);
+                }
+                size = Math.round(maxR);//Most of them are small bitmaps, use middle size
+            }
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j].text = emojiSet[(int) (Math.random() * emojiSet.length)];
 
                 // support code
                 if (!supportCOLR) {
                     int id = drawableAccessor.getIdentifier(String.format("t_emoji_%s",
-                            UtilExt.toUnicode(mBubbs[j].text,"u","_")));
-                    mBubbs[j].drawable = drawableAccessor.requireDrawable(id);
+                            UtilExt.toUnicode(mBubbs[j].text, "u", "_")));
+                    mBubbs[j].bitmap = drawableAccessor.requireBitmap(id, size, size);
                     mBubbs[j].text = null;
                 }
             }
