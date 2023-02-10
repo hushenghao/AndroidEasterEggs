@@ -36,6 +36,8 @@ import android.os.Bundle;
 import android.text.format.Time;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
@@ -52,6 +54,8 @@ import com.dede.basic.DrawableKt;
 import com.dede.basic.LargeBitmapAccessor;
 import com.dede.basic.SpUtils;
 import com.dede.basic.UtilExt;
+
+import java.util.HashMap;
 
 /**
  * @hide
@@ -443,23 +447,28 @@ public class PlatLogoActivity extends Activity {
             mEmojiSet = (int) (Math.random() * EMOJI_SETS.length);
             final String[] emojiSet = EMOJI_SETS[mEmojiSet];
             Log.i(TAG, "chooseEmojiSet: " + mEmojiSet);
-            int size = 0;
-            if (!supportCOLR) {
-                float maxR = 0;
-                for (int i = 0; i < mBubbs.length; i++) {
-                    maxR = Math.max(mBubbs[i].r, maxR);
-                }
-                size = Math.round(maxR);//Most of them are small bitmaps, use middle size
-            }
+
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j].text = emojiSet[(int) (Math.random() * emojiSet.length)];
-
-                // support code
-                if (!supportCOLR) {
+            }
+            // support code
+            if (!supportCOLR) {
+                HashMap<String, Float> sizeMap = new HashMap<>();
+                for (int i = 0; i < mBubbs.length; i++) {
+                    Float s = sizeMap.get(mBubbs[i].text);
+                    if (s == null) {
+                        s = mBubbs[i].r;
+                        sizeMap.put(mBubbs[i].text, s);
+                    } else {
+                        sizeMap.put(mBubbs[i].text, Math.max(s, mBubbs[i].r));
+                    }
+                }
+                for (int i = 0; i < mBubbs.length; i++) {
                     int id = drawableAccessor.getIdentifier(String.format("t_emoji_%s",
-                            UtilExt.toUnicode(mBubbs[j].text, "u", "_")));
-                    mBubbs[j].bitmap = drawableAccessor.requireBitmap(id, size, size);
-                    mBubbs[j].text = null;
+                            UtilExt.toUnicode(mBubbs[i].text, "u", "_")));
+                    int size = Math.round(sizeMap.get(mBubbs[i].text) * 2);
+                    mBubbs[i].bitmap = drawableAccessor.requireBitmap(id, size, size);
+                    mBubbs[i].text = null;
                 }
             }
             invalidateSelf();
