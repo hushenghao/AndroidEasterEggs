@@ -22,13 +22,6 @@
     <item android:title="@string/header_about">
         <menu>
             <item
-                android:id="@+id/menu_dino"
-                android:checkable="true"
-                android:icon="@drawable/ic_dino_logo"
-                android:title="T-Rex Run 3D"
-                tools:ignore="HardcodedText" />
-
-            <item
                 android:id="@+id/menu_privacy_agreement"
                 android:checkable="true"
                 android:title="@string/title_privacy_agreement" />
@@ -47,6 +40,17 @@
                 android:id="@+id/menu_email"
                 android:checkable="true"
                 android:title="@string/label_email" />
+        </menu>
+    </item>
+
+    <item android:title="@string/label_other">
+        <menu>
+            <item
+                android:id="@+id/menu_dino"
+                android:checkable="true"
+                android:icon="@drawable/ic_dino_logo"
+                android:title="T-Rex Run 3D"
+                tools:ignore="HardcodedText" />
         </menu>
     </item>
 </menu>

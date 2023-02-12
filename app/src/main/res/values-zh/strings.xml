@@ -20,5 +20,7 @@
     <string name="label_timeline">时间表、里程碑和更新</string>
     <string name="label_releases">版本</string>
 
+    <string name="label_other">其他</string>
+
     <string name="url_android_releases">https://developer.android.google.cn/about/versions</string>
 </resources>

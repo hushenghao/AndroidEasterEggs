@@ -111,5 +111,6 @@
     <string name="label_star">Star</string>
     <string name="label_timeline">Timeline, milestones, and updates</string>
     <string name="label_releases">Releases</string>
+    <string name="label_other">Other</string>
 
 </resources>
