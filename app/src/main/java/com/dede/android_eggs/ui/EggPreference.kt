@@ -30,7 +30,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  * @author hsh
  * @since 2020/10/29 10:29 AM
  */
-class EggPreference : Preference {
+open class EggPreference : Preference {
 
     companion object {
         private const val MODE_DEFAULT = 0

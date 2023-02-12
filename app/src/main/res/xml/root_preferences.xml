@@ -3,9 +3,12 @@
 
     <com.dede.android_eggs.ui.EggCollection
         app:iconSpaceReserved="false"
-        app:initialExpandedChildrenCount="15"
         app:key="key_collection"
         app:title="@string/header_collection">
+
+        <com.dede.android_eggs.ui.TimelinePreference
+            app:icon="@drawable/android_14"
+            app:title="@string/title_android_u" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_t"

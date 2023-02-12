@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/label_timeline"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+        <FrameLayout
+            android:id="@+id/scroll_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="RtlHardcoded">
+
+            <SeekBar
+                android:id="@+id/progress_timeline"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:layout_marginTop="104dp"
+                android:max="5"
+                android:paddingLeft="45dp"
+                android:paddingRight="198dp"
+                android:progressDrawable="@null"
+                android:thumb="@drawable/timeline_seekbar_thumb" />
+
+            <ImageView
+                android:id="@+id/iv_release"
+                android:layout_width="106dp"
+                android:layout_height="34dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="104dp"
+                android:layout_marginRight="11dp"
+                android:src="@drawable/timeline_release" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/timeline_bg" />
+
+        </FrameLayout>
+    </HorizontalScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

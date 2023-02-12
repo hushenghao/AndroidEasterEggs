@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.dede.basic.dp
 import kotlin.math.hypot
 
 class EasterEggsSplash(private val activity: AppCompatActivity) : Runnable,
@@ -22,10 +23,8 @@ class EasterEggsSplash(private val activity: AppCompatActivity) : Runnable,
         ivLogo = AppCompatImageView(activity).apply {
             setImageResource(com.android_t.egg.R.drawable.t_platlogo)
         }
-        val layoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.WRAP_CONTENT,
-            FrameLayout.LayoutParams.WRAP_CONTENT
-        ).apply { gravity = Gravity.CENTER }
+        val layoutParams = FrameLayout.LayoutParams(108.dp, 108.dp)
+            .apply { gravity = Gravity.CENTER }
         activity.addContentView(ivLogo, layoutParams)
 
         root.visibility = View.INVISIBLE
