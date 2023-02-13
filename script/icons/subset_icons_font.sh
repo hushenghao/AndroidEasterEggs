@@ -1,17 +1,18 @@
 #!/usr/bin/env sh
 
-HOME="$(git rev-parse --show-toplevel)"
-echo "$HOME"
+ROOT=$(cd $(dirname "$0") || exit; pwd)
+GIT_ROOT="$(git rev-parse --show-toplevel)"
 
-TARGET_DIR="$HOME/app/src/main/assets"
+TARGET_DIR="$GIT_ROOT/app/src/main/assets"
+OUTPUT_FILE="$ROOT/icons.otf"
 
 # Install requirements
-pip3 install -r requirements.txt
+pip3 install -t "$ROOT/Library" -r "$ROOT/requirements.txt"
 
 # https://fonttools.readthedocs.io/en/latest/subset/index.html
-pyftsubset MaterialIconsOutlined-Regular.otf \
-  --unicodes-file=unicodes.txt \
-  --output-file=icons.otf \
+pyftsubset "$ROOT/MaterialIconsOutlined-Regular.otf" \
+  --unicodes-file="$ROOT/unicodes.txt" \
+  --output-file="$OUTPUT_FILE" \
   --drop-tables=meta \
   --ignore-missing-unicodes \
   --desubroutinize \
@@ -20,6 +21,6 @@ pyftsubset MaterialIconsOutlined-Regular.otf \
   --no-hinting \
   --verbose
 
-cp icons.otf "$TARGET_DIR"
+cp "$OUTPUT_FILE" "$TARGET_DIR"
 
 exit 0

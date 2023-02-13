@@ -25,7 +25,15 @@ class EggCollection : PreferenceCategory {
         isPersistent = true
     }
 
+    private fun canApplyChecked(): Boolean {
+        return context.resources.configuration.smallestScreenWidthDp >= 400
+    }
+
     override fun onClick() {
+        if (!canApplyChecked()) {
+            return
+        }
+
         if (clickCount < 4) {
             clickCount++
             return

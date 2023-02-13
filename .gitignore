@@ -10,7 +10,3 @@ local.properties
 key.properties
 
 fastlane/report.xml
-
-# script pip dir
-.rustup
-/Library
