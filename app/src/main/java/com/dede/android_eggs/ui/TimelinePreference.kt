@@ -23,7 +23,7 @@ class TimelinePreference(context: Context, attrs: AttributeSet?) : EggPreference
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         summary = if (year > TIMELINE_YEAR) {
-            "The final version has pushed."
+            context.getString(R.string.summary_android_release_pushed)
         } else {
             context.getString(R.string.summary_android_waiting)
         }
@@ -63,7 +63,6 @@ class TimelinePreference(context: Context, attrs: AttributeSet?) : EggPreference
                 binding.scrollView.smoothScrollTo(it.width, 0)
             }
         }
-
 
         MaterialAlertDialogBuilder(context)
             .setIcon(icon)

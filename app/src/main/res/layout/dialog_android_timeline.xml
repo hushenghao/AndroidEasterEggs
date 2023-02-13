@@ -43,9 +43,9 @@
             <ImageView
                 android:id="@+id/iv_release"
                 android:layout_width="106dp"
-                android:layout_height="34dp"
+                android:layout_height="36dp"
                 android:layout_gravity="right"
-                android:layout_marginTop="104dp"
+                android:layout_marginTop="103dp"
                 android:layout_marginRight="11dp"
                 android:src="@drawable/timeline_release" />
 

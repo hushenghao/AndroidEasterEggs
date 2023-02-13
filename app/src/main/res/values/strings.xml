@@ -5,6 +5,7 @@
     <string name="header_collection">Collection</string>
     <string name="expand_button_title" tools:override="true">Ancient version</string>
     <string name="summary_android_waiting">Waiting…</string>
+    <string name="summary_android_release_pushed">The final release version has pushed</string>
 
     <string name="label_drawer_close">Close</string>
     <string name="label_drawer_open">Menu</string>
