@@ -16,6 +16,12 @@ class NightModeManager(val context: Context) {
 
     companion object {
         private const val KEY_NIGHT_MODE = "key_night_mode"
+
+        fun applyNightMode(context: Context) {
+            NightModeManager(context).apply {
+                setNightMode(isNightMode())
+            }
+        }
     }
 
     fun isNightMode(): Boolean {

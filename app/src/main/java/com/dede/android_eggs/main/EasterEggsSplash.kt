@@ -21,7 +21,7 @@ class EasterEggsSplash(private val activity: AppCompatActivity) : Runnable,
     fun welcome() {
         root = activity.findViewById(android.R.id.content)
         ivLogo = AppCompatImageView(activity).apply {
-            setImageResource(com.android_t.egg.R.drawable.t_platlogo)
+            setImageResource(com.dede.android_eggs.R.drawable.android_14)
         }
         val layoutParams = FrameLayout.LayoutParams(108.dp, 108.dp)
             .apply { gravity = Gravity.CENTER }
