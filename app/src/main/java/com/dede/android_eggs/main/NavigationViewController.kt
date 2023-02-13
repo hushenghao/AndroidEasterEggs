@@ -3,7 +3,6 @@ package com.dede.android_eggs.main
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.net.Uri
@@ -25,7 +24,6 @@ import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.LayoutEasterEggsContentBinding
 import com.dede.android_eggs.databinding.LayoutNavigationHeaderBinding
-import com.dede.android_eggs.dino.DinoEggActivity
 import com.dede.android_eggs.ui.FontIconsDrawable
 import com.dede.android_eggs.ui.ScaleTypeDrawable
 import com.dede.android_eggs.util.ChromeTabsBrowser
@@ -203,9 +201,6 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
                     ChromeTabsBrowser.launchUrlByBrowser(
                         activity, Uri.parse("market://details?id=" + activity.packageName)
                     )
-                }
-                R.id.menu_dino -> {
-                    activity.startActivity(Intent(activity, DinoEggActivity::class.java))
                 }
             }
             uiExecutor.execute {

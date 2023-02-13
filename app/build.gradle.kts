@@ -97,7 +97,6 @@ dependencies {
     implementation(deps.androidx.browser)
     implementation(deps.google.material)
     implementation(deps.free.reflection)
-    implementation(deps.nanohttpd)
     debugImplementation(deps.leakcanary)
     implementation(project(":basic"))
     implementation(project(":eggs:T"))
@@ -116,5 +115,6 @@ dependencies {
     implementation(project(":eggs:Gingerbread"))
 
     testImplementation(deps.junit)
+    androidTestImplementation(deps.nanohttpd)
     androidTestImplementation(deps.bundles.android.test)
 }

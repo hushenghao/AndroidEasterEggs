@@ -43,14 +43,4 @@
         </menu>
     </item>
 
-    <item android:title="@string/label_other">
-        <menu>
-            <item
-                android:id="@+id/menu_dino"
-                android:checkable="true"
-                android:icon="@drawable/ic_dino_logo"
-                android:title="T-Rex Run 3D"
-                tools:ignore="HardcodedText" />
-        </menu>
-    </item>
 </menu>
