@@ -52,7 +52,7 @@
             app:icon="@drawable/o_icon"
             app:iconPadding="-2dp"
             app:summary="@string/o_app_name"
-            app:title="@string/title_android_o_point">
+            app:title="@string/title_android_o_1">
             <intent
                 android:targetClass="com.android_o.egg.PlatLogoActivity"
                 android:targetPackage="com.dede.android_eggs">
@@ -151,13 +151,13 @@
             app:title="@string/title_android_cupcake" />
 
         <com.dede.android_eggs.ui.EggPreference
-            android:icon="@drawable/ic_android_1point"
+            android:icon="@drawable/ic_android_classic"
             app:iconPadding="5dp"
             app:summary="@string/summary_android_petit_four"
             app:title="@string/title_android_petit_four" />
 
         <com.dede.android_eggs.ui.EggPreference
-            android:icon="@drawable/ic_android_1point"
+            android:icon="@drawable/ic_android_classic"
             app:iconPadding="5dp"
             app:title="@string/title_android_base" />
 

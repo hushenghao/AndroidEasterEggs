@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Preference Titles -->
     <string name="header_collection">集合</string>
-    <string name="header_about">关于</string>
-    <string name="title_source">系统源码</string>
-    <string name="title_version">版本号</string>
-    <string name="summary_github">项目源码</string>
-    <string name="summary_source">AOSP framework 仓库</string>
-    <string name="title_open_with">打开</string>
+    <string name="expand_button_title" tools:override="true">典藏版本</string>
+    <string name="summary_android_waiting">等待中…</string>
+
     <string name="label_drawer_close">关闭</string>
     <string name="label_drawer_open">菜单</string>
-    <string name="title_beta">获取Beta版</string>
+
+    <string name="title_open_with">打开</string>
+
+    <string name="url_android_releases">https://developer.android.google.cn/about/versions</string>
+
     <string name="label_menu_source">源码</string>
-    <string name="title_privacy_agreement">隐私协议</string>
-    <string name="expand_button_title" tools:override="true">典藏版本</string>
+    <string name="label_menu_about">关于</string>
+
+    <string name="label_source">系统源码</string>
+    <string name="label_beta">获取Beta版</string>
+    <string name="label_privacy_agreement">隐私协议</string>
     <string name="label_email">联系我</string>
     <string name="label_star">给个好评</string>
 
-    <string name="summary_android_waiting">等待中…</string>
-    <string name="label_timeline">时间表、里程碑和更新</string>
-    <string name="label_releases">版本</string>
+    <string name="title_version">版本号</string>
 
-    <string name="url_android_releases">https://developer.android.google.cn/about/versions</string>
+    <string name="label_timeline_title">时间表、里程碑和更新</string>
+    <string name="label_timeline_releases">版本</string>
+
 </resources>

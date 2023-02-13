@@ -71,7 +71,7 @@ class TimelinePreference(context: Context, attrs: AttributeSet?) : EggPreference
             .setMessage(summary)
             .setView(binding.root)
             .setPositiveButton(android.R.string.ok, null)
-            .setNeutralButton(R.string.label_releases) { _, _ ->
+            .setNeutralButton(R.string.label_timeline_releases) { _, _ ->
                 ChromeTabsBrowser.launchUrl(
                     context,
                     Uri.parse(context.getString(R.string.url_android_releases))

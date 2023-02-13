@@ -1,92 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">Easter Eggs</string>
-    <!-- Settings Activity Title -->
-    <string name="title_activity_settings" translatable="false">Easter Eggs</string>
-
-    <string name="app_package" translatable="false">com.dede.android_eggs</string>
 
     <!-- Preference Titles -->
     <string name="header_collection">Collection</string>
-    <string name="header_about">About</string>
     <string name="expand_button_title" tools:override="true">Ancient version</string>
-
-    <string name="title_android_u" translatable="false">Android 14 (Upside Down Cake)</string>
-    <string name="title_android_t" translatable="false">Android 13 (Tiramisu)</string>
-    <string name="title_android_s" translatable="false">Android 12 (Snow Cone)</string>
-    <string name="title_android_r" translatable="false">Android 11 (Red Velvet Cake)</string>
-    <string name="title_android_q" translatable="false">Android 10 (Queen Cake)</string>
-    <string name="title_android_p" translatable="false">Android 9 (Pie)</string>
-    <string name="title_android_o" translatable="false">Android 8.0 (Oreo)</string>
-    <string name="title_android_o_point" translatable="false">Android 8.1 (Oreo)</string>
-    <string name="title_android_n" translatable="false">Android 7.* (Nougat)</string>
-    <string name="title_android_m" translatable="false">Android 6.0.* (Marshmallow)</string>
-    <string name="title_android_l" translatable="false">Android 5.* (Lollipop)</string>
-    <string name="title_android_k" translatable="false">Android 4.4.* (KitKat)</string>
-    <string name="title_android_j" translatable="false">Android 4.* (Jelly Bean)</string>
-    <string name="title_android_i" translatable="false">Android 4.0.* (Ice Cream Sandwich)</string>
-    <string name="title_android_h" translatable="false">Android 3.* (Honeycomb)</string>
-    <string name="title_android_g" translatable="false">Android 2.3.* (Gingerbread)</string>
-    <string name="title_android_froyo" translatable="false">Android 2.2.* (Froyo)</string>
-    <string name="title_android_eclair" translatable="false">Android 2.* (Eclair)</string>
-    <string name="title_android_donut" translatable="false">Android 1.6 (Donut)</string>
-    <string name="title_android_cupcake" translatable="false">Android 1.5 (Cupcake)</string>
-    <string name="title_android_petit_four" translatable="false">Android 1.1 (Petit Four)</string>
-    <string name="title_android_base" translatable="false">Android 1.0</string>
-
-    <string name="summary_android_froyo" translatable="false">Froyo</string>
-    <string name="summary_android_eclair" translatable="false">Eclair</string>
-    <string name="summary_android_donut" translatable="false">Donut</string>
-    <string name="summary_android_cupcake" translatable="false">Cupcake</string>
-    <string name="summary_android_petit_four" translatable="false">Petit Four</string>
     <string name="summary_android_waiting">Waiting…</string>
 
-    <string name="version_comment_android_n" formatted="false" translatable="false">
-        SDK 24~25\nAndroid 7.0~7.1.2
-    </string>
-    <string name="version_comment_android_m" formatted="false" translatable="false">
-        SDK 23\nAndroid 6.0~6.0.1
-    </string>
-    <string name="version_comment_android_l" formatted="false" translatable="false">
-        SDK 21~22\nAndroid 5.0~5.1
-    </string>
-    <string name="version_comment_android_k" formatted="false" translatable="false">
-        SDK 19~20\nAndroid 4.4~4.4.4
-    </string>
-    <string name="version_comment_android_j" formatted="false" translatable="false">
-        SDK 16~18\nAndroid 4.1~4.3
-    </string>
-    <string name="version_comment_android_i" formatted="false" translatable="false">
-        SDK 14~15\nAndroid 4.0~4.0.4
-    </string>
-    <string name="version_comment_android_h" formatted="false" translatable="false">
-        SDK 11~13\nAndroid 3.0~3.2
-    </string>
-    <string name="version_comment_android_g" formatted="false" translatable="false">
-        SDK 9~10\nAndroid 2.3~2.3.7
-    </string>
-    <string name="version_comment_android_froyo" formatted="false" translatable="false">
-        SDK 8\nAndroid 2.2~2.2.3
-    </string>
-    <string name="version_comment_android_eclair" formatted="false" translatable="false">
-        SDK 5~7\nAndroid 2.0~2.1
-    </string>
+    <string name="label_drawer_close">Close</string>
+    <string name="label_drawer_open">Menu</string>
 
-    <string name="target_class_android_t" translatable="false">com.android_t.egg.PlatLogoActivity</string>
-    <string name="target_class_android_s" translatable="false">com.android_s.egg.PlatLogoActivity</string>
-    <string name="target_class_android_r" translatable="false">com.android_r.egg.PlatLogoActivity</string>
-    <string name="target_class_android_q" translatable="false">com.android_q.egg.PlatLogoActivity</string>
-    <string name="target_class_android_p" translatable="false">com.android_p.egg.PlatLogoActivity</string>
-    <string name="target_class_android_o" translatable="false">com.android_o.egg.PlatLogoActivity</string>
-    <string name="target_class_android_n" translatable="false">com.android_n.egg.PlatLogoActivity</string>
-    <string name="target_class_android_m" translatable="false">com.android_m.egg.PlatLogoActivity</string>
-    <string name="target_class_android_l" translatable="false">com.android_l.egg.PlatLogoActivity</string>
-    <string name="target_class_android_k" translatable="false">com.android_k.egg.PlatLogoActivity</string>
-    <string name="target_class_android_j" translatable="false">com.android_j.egg.PlatLogoActivity</string>
-    <string name="target_class_android_i" translatable="false">com.android_i.egg.PlatLogoActivity</string>
-    <string name="target_class_android_h" translatable="false">com.android_h.egg.PlatLogoActivity</string>
-    <string name="target_class_android_g" translatable="false">com.android_g.egg.PlatLogoActivity</string>
-
-    <string name="r_egg_short_name" translatable="false">Cat Controls</string>
+    <string name="title_open_with">Open with</string>
 
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
     <string name="url_source" translatable="false">https://github.com/aosp-mirror/platform_frameworks_base</string>
@@ -94,22 +17,20 @@
     <string name="url_privacy_agreement" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE</string>
     <string name="url_android_releases" translatable="false">https://developer.android.com/about/versions</string>
 
-    <string name="title_github" translatable="false">GitHub</string>
-    <string name="title_source">System Source</string>
-    <string name="title_version">Version</string>
-
-    <string name="summary_github">Source code repository</string>
-    <string name="summary_source">AOSP framework repository</string>
-    <string name="summary_version" translatable="false">%s (%d)</string>
-    <string name="title_open_with">Open with</string>
-    <string name="label_drawer_close">Close</string>
-    <string name="label_drawer_open">Menu</string>
-    <string name="title_beta">Get Beta</string>
     <string name="label_menu_source">Source</string>
-    <string name="title_privacy_agreement">Privacy Agreement</string>
+    <string name="label_menu_about">About</string>
+
+    <string name="label_github" translatable="false">GitHub</string>
+    <string name="label_source">System Source</string>
+    <string name="label_beta">Get Beta</string>
+    <string name="label_privacy_agreement">Privacy Agreement</string>
     <string name="label_email">Contact me</string>
     <string name="label_star">Star</string>
-    <string name="label_timeline">Timeline, milestones, and updates</string>
-    <string name="label_releases">Releases</string>
+
+    <string name="title_version">Version</string>
+    <string name="label_version" translatable="false">%s (%d)</string>
+
+    <string name="label_timeline_title">Timeline, milestones, and updates</string>
+    <string name="label_timeline_releases">Releases</string>
 
 </resources>

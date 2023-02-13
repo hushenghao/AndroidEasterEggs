@@ -88,7 +88,7 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
         val nightModeManager = NightModeManager(activity)
         headerBinding.tvVersion.text =
             activity.getString(
-                R.string.summary_version,
+                R.string.label_version,
                 BuildConfig.VERSION_NAME,
                 BuildConfig.VERSION_CODE
             )

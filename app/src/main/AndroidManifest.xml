@@ -18,8 +18,7 @@
         tools:targetApi="tiramisu">
         <activity
             android:name=".main.EasterEggsActivity"
-            android:exported="true"
-            android:label="@string/title_activity_settings">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

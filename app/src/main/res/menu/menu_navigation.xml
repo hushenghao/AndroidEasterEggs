@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="@string/label_menu_source">
         <menu>
             <item
                 android:id="@+id/menu_github"
                 android:checkable="true"
-                android:title="@string/title_github"
-                android:tooltipText="@string/summary_github"
-                tools:targetApi="o" />
+                android:title="@string/label_github"/>
 
             <item
                 android:id="@+id/menu_source"
                 android:checkable="true"
-                android:title="@string/title_source"
-                android:tooltipText="@string/summary_source"
-                tools:targetApi="o" />
+                android:title="@string/label_source" />
         </menu>
     </item>
 
-    <item android:title="@string/header_about">
+    <item android:title="@string/label_menu_about">
         <menu>
             <item
                 android:id="@+id/menu_privacy_agreement"
                 android:checkable="true"
-                android:title="@string/title_privacy_agreement" />
+                android:title="@string/label_privacy_agreement" />
 
             <item
                 android:id="@+id/menu_beta"
                 android:checkable="true"
-                android:title="@string/title_beta" />
+                android:title="@string/label_beta" />
 
             <item
                 android:id="@+id/menu_star"
