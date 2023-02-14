@@ -50,6 +50,7 @@
                 android:src="@drawable/timeline_release" />
 
             <ImageView
+                android:id="@+id/iv_timeline"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:adjustViewBounds="true"

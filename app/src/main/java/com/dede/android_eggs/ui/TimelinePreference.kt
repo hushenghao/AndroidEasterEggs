@@ -1,6 +1,7 @@
 package com.dede.android_eggs.ui
 
 import android.content.Context
+import android.graphics.ColorMatrixColorFilter
 import android.net.Uri
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -9,8 +10,9 @@ import androidx.core.view.isVisible
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.DialogAndroidTimelineBinding
 import com.dede.android_eggs.util.ChromeTabsBrowser
+import com.dede.android_eggs.util.NightModeManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.util.Calendar
+import java.util.*
 import kotlin.math.roundToInt
 
 class TimelinePreference(context: Context, attrs: AttributeSet?) : EggPreference(context, attrs) {
@@ -61,6 +63,21 @@ class TimelinePreference(context: Context, attrs: AttributeSet?) : EggPreference
             binding.ivRelease.isVisible = true
             binding.scrollContent.doOnPreDraw {
                 binding.scrollView.smoothScrollTo(it.width, 0)
+            }
+        }
+        if (NightModeManager.isSystemNightMode(context)) {
+            binding.ivTimeline.drawable?.apply {
+                /**
+                 * Color matrix that flips the components (`-1.0f * c + 255 = 255 - c`)
+                 * and keeps the alpha intact.
+                 */
+                val negative = floatArrayOf(
+                    -1.0f, 0f, 0f, 0f, 255f,    // red
+                    0f, -1.0f, 0f, 0f, 255f,    // green
+                    0f, 0f, -1.0f, 0f, 255f,    // blue
+                    0f, 0f, 0f, 1.0f, 0f        // alpha
+                )
+                colorFilter = ColorMatrixColorFilter(negative)
             }
         }
 

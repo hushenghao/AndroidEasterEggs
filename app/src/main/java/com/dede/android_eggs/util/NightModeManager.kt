@@ -22,6 +22,10 @@ class NightModeManager(val context: Context) {
                 setNightMode(isNightMode())
             }
         }
+
+        fun isSystemNightMode(context: Context): Boolean {
+           return (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+        }
     }
 
     fun isNightMode(): Boolean {
@@ -39,7 +43,7 @@ class NightModeManager(val context: Context) {
     }
 
     fun isSystemNightMode(): Boolean {
-        return (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+        return Companion.isSystemNightMode(context)
     }
 
 }
