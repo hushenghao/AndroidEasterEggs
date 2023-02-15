@@ -1,6 +1,7 @@
 package com.dede.android_eggs.ui
 
 import android.content.Context
+import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.net.Uri
 import android.util.AttributeSet
@@ -67,17 +68,10 @@ class TimelinePreference(context: Context, attrs: AttributeSet?) : EggPreference
         }
         if (NightModeManager.isSystemNightMode(context)) {
             binding.ivTimeline.drawable?.apply {
-                /**
-                 * Color matrix that flips the components (`-1.0f * c + 255 = 255 - c`)
-                 * and keeps the alpha intact.
-                 */
-                val negative = floatArrayOf(
-                    -1.0f, 0f, 0f, 0f, 255f,    // red
-                    0f, -1.0f, 0f, 0f, 255f,    // green
-                    0f, 0f, -1.0f, 0f, 255f,    // blue
-                    0f, 0f, 0f, 1.0f, 0f        // alpha
-                )
-                colorFilter = ColorMatrixColorFilter(negative)
+                val matrix = ColorMatrix()
+                // Increase the overall brightness and more blue brightness
+                matrix.setScale(1.3f, 1.5f, 2f, 1f)
+                colorFilter = ColorMatrixColorFilter(matrix)
             }
         }
 
