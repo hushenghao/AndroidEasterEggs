@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Preference Titles -->
     <string name="header_collection">集合</string>
-    <string name="expand_button_title" tools:override="true">典藏版本</string>
+    <string name="title_ancient_version">典藏版本</string>
     <string name="summary_android_waiting">等待中…</string>
     <string name="summary_android_release_pushed">最终版本已经发布</string>
 
@@ -12,7 +12,7 @@
 
     <string name="title_open_with">打开</string>
 
-    <string name="url_android_releases">https://developer.android.google.cn/about/versions</string>
+    <string name="url_android_releases" translatable="false">https://developer.android.google.cn/about/versions</string>
 
     <string name="label_menu_source">源码</string>
     <string name="label_menu_about">关于</string>

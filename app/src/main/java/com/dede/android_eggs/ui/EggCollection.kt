@@ -26,7 +26,7 @@ class EggCollection : PreferenceCategory {
     }
 
     private fun canApplyChecked(): Boolean {
-        return context.resources.configuration.smallestScreenWidthDp >= 400
+        return context.resources.configuration.smallestScreenWidthDp >= 360
     }
 
     override fun onClick() {

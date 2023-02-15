@@ -7,13 +7,14 @@ import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat.Type
 import androidx.core.view.updatePadding
-import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceGroupAdapter
+import androidx.preference.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.EggCollection
 import com.dede.android_eggs.ui.EggPreference
+import com.dede.android_eggs.ui.FontIconsDrawable
+import com.dede.basic.dp
 
 class EasterEggsFragment : PreferenceFragmentCompat() {
 
@@ -22,6 +23,7 @@ class EasterEggsFragment : PreferenceFragmentCompat() {
     }
 
     private lateinit var eggCollection: EggCollection
+    private lateinit var preferenceAdapter: PreferenceGroupAdapter
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -46,11 +48,23 @@ class EasterEggsFragment : PreferenceFragmentCompat() {
         }
     }
 
+    override fun onCreateAdapter(preferenceScreen: PreferenceScreen): RecyclerView.Adapter<*> {
+        preferenceAdapter = super.onCreateAdapter(preferenceScreen) as PreferenceGroupAdapter
+        val expandButton = PreferenceAccessor.findGroupExpandButton(preferenceAdapter, eggCollection)
+        if (expandButton != null) {
+            expandButton.setTitle(R.string.title_ancient_version)
+            expandButton.icon = FontIconsDrawable(requireContext(), "\ue7c8", 48f).apply {
+                setColor(-0xb52376)// 0xFF4ADC8A
+                setPadding(8.dp)
+            }
+        }
+        return preferenceAdapter
+    }
+
     private inner class SpanSizeLookup : GridLayoutManager.SpanSizeLookup() {
         @SuppressLint("RestrictedApi")
         override fun getSpanSize(position: Int): Int {
-            val adapter = listView.adapter as? PreferenceGroupAdapter
-            val item = adapter?.getItem(position)
+            val item = preferenceAdapter.getItem(position)
             if (item is EggPreference) {
                 return 1
             }

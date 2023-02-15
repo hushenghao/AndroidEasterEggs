@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.TextPaint
 import androidx.annotation.Dimension
+import androidx.annotation.FloatRange
 import androidx.core.graphics.component1
 import androidx.core.graphics.component2
 import androidx.core.graphics.component3
@@ -42,6 +43,7 @@ class FontIconsDrawable(
 
     private var dimension: Int = -1
     private var colorStateList: ColorStateList? = null
+    private var degree: Float = 0f
 
     init {
         paint.typeface = ICONS_TYPEFACE
@@ -54,6 +56,11 @@ class FontIconsDrawable(
             dimension = size.dp
             computeIconSize()
         }
+    }
+
+    fun setRotate(@FloatRange(from = 0.0, to = 360.0) degree: Float) {
+        this.degree = degree % 360
+        invalidateSelf()
     }
 
     fun setColor(color: Int) {
@@ -149,13 +156,16 @@ class FontIconsDrawable(
     override fun draw(canvas: Canvas) {
         if (unicode.isEmpty()) return
 
+        val count = canvas.save()
+        val x = tempBounds.exactCenterX()
+        canvas.rotate(degree, x, tempBounds.exactCenterY())
         val colorStateList = this.colorStateList
         if (colorStateList != null) {
             paint.color = colorStateList.getColorForState(state, colorStateList.defaultColor)
         }
         val y = (metrics.descent - metrics.ascent) / 2 - metrics.ascent / 2 + padding.top
-        val x = tempBounds.exactCenterX()
         canvas.drawText(unicode, x, y, paint)
+        canvas.restoreToCount(count)
     }
 
     override fun setAlpha(alpha: Int) {

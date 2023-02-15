@@ -73,4 +73,6 @@ If there are errors and problems, please submit [Issues](https://github.com/hush
 ### Thanks
 [System source code](https://github.com/aosp-mirror/platform_frameworks_base)
 
+<!--
 [🦖 T-Rex Run 3D](https://github.com/Priler/dino3d)
+-->

@@ -2,6 +2,14 @@
 
 FontTools Subset [Material Design Icons](https://fonts.google.com/icons) font
 
+## Material Icons
+
+https://github.com/google/material-design-icons#material-icons
+* font/MaterialIconsOutlined-Regular.otf
+* font/MaterialIconsOutlined-Regular.codepoints
+
+Git md5: **511eea577b20d2b02ad77477750da1e44c66a52c**
+
 # Usage
 
 ## Quick(Linux/MacOS)
