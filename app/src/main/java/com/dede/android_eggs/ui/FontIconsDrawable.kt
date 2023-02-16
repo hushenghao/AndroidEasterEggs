@@ -54,6 +54,7 @@ class FontIconsDrawable(
         paint.color = color
         if (size > 0) {
             dimension = size.dp
+            setBounds(0, 0, dimension, dimension)
             computeIconSize()
         }
     }
@@ -174,6 +175,8 @@ class FontIconsDrawable(
     }
 
     override fun setColorFilter(colorFilter: ColorFilter?) {
+        paint.colorFilter = colorFilter
+        invalidateSelf()
     }
 
     override fun getOpacity(): Int {

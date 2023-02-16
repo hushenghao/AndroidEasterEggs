@@ -16,7 +16,11 @@ import kotlin.math.roundToInt
  */
 class LargeBitmapAccessor(private val context: Context) {
 
-    private val cached = LruCache<Key, WeakReference<Bitmap>>(50)
+    private val cached = object : LruCache<Key, WeakReference<Bitmap>>(20 * 1024 * 1024) {
+        override fun sizeOf(key: Key, value: WeakReference<Bitmap>): Int {
+            return value.get()?.byteCount ?: 0
+        }
+    }
     private val options = BitmapFactory.Options()
 
     private data class Key(val id: Int, val width: Int, val height: Int) {

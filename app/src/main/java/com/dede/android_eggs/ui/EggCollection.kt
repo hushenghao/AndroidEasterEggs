@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.ViewGroup.MarginLayoutParams
+import android.widget.TextView
 import androidx.core.view.updateLayoutParams
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceViewHolder
+import com.dede.basic.dp
 
 /**
  * Egg
@@ -79,5 +81,12 @@ class EggCollection : PreferenceCategory {
             topMargin = 0
         }
         super.onBindViewHolder(holder)
+        val title = holder.findViewById(android.R.id.title) as? TextView
+        if (title != null) {
+            val icon = FontIconsDrawable(context, "\ue7c8", 16f)
+            icon.setColor(title.currentTextColor)
+            title.compoundDrawablePadding = 6.dp
+            title.setCompoundDrawablesRelative(null, null, icon, null)
+        }
     }
 }
