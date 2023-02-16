@@ -14,6 +14,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.EggCollection
 import com.dede.android_eggs.ui.EggPreference
 import com.dede.android_eggs.ui.FontIconsDrawable
+import com.dede.android_eggs.ui.Icons
 import com.dede.basic.dp
 
 class EasterEggsFragment : PreferenceFragmentCompat() {
@@ -53,7 +54,7 @@ class EasterEggsFragment : PreferenceFragmentCompat() {
         val expandButton = PreferenceAccessor.findGroupExpandButton(preferenceAdapter, eggCollection)
         if (expandButton != null) {
             expandButton.setTitle(R.string.title_ancient_version)
-            expandButton.icon = FontIconsDrawable(requireContext(), "\ue7c8", 48f).apply {
+            expandButton.icon = FontIconsDrawable(requireContext(), Icons.INTERESTS, 48f).apply {
                 setColor(-0xb52376)// 0xFF4ADC8A
                 setPadding(8.dp)
             }

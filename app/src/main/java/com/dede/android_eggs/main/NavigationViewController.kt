@@ -25,6 +25,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.LayoutEasterEggsContentBinding
 import com.dede.android_eggs.databinding.LayoutNavigationHeaderBinding
 import com.dede.android_eggs.ui.FontIconsDrawable
+import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.ScaleTypeDrawable
 import com.dede.android_eggs.util.ChromeTabsBrowser
 import com.dede.android_eggs.util.NightModeManager
@@ -110,12 +111,12 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
     @SuppressLint("RestrictedApi", "PrivateResource")
     private fun bindMenuIcons(context: Context, menu: Menu) {
         val parts = listOf(
-            R.id.menu_github to "\ue88a",           // home
-            R.id.menu_source to "\ue859",           // android
-            R.id.menu_privacy_agreement to "\uea17",// policy
-            R.id.menu_beta to "\uf090",             // download
-            R.id.menu_star to "\ue838",             // star
-            R.id.menu_email to "\ue0be",            // email
+            R.id.menu_github to Icons.HOME,
+            R.id.menu_source to Icons.ANDROID,
+            R.id.menu_privacy_agreement to Icons.POLICY,
+            R.id.menu_beta to Icons.DOWNLOAD,
+            R.id.menu_star to Icons.STAR,
+            R.id.menu_email to Icons.EMAIL,
         )
         var colorStateList: ColorStateList? = null
         // getColorStateList(R.styleable.NavigationView_itemIconTint)

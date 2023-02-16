@@ -83,7 +83,7 @@ class EggCollection : PreferenceCategory {
         super.onBindViewHolder(holder)
         val title = holder.findViewById(android.R.id.title) as? TextView
         if (title != null) {
-            val icon = FontIconsDrawable(context, "\ue7c8", 16f)
+            val icon = FontIconsDrawable(context, Icons.INTERESTS, 16f)
             icon.setColor(title.currentTextColor)
             title.compoundDrawablePadding = 6.dp
             title.setCompoundDrawablesRelative(null, null, icon, null)

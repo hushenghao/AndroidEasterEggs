@@ -33,5 +33,7 @@
 
     <string name="label_timeline_title">Timeline, milestones, and updates</string>
     <string name="label_timeline_releases">Releases</string>
+    
+    <string name="message_trypophobia_warning">This is a warning to those with &lt;b&gt;Trypophobia&lt;/b&gt; that some images may cause discomfort. Do you want to continue?</string>
 
 </resources>
