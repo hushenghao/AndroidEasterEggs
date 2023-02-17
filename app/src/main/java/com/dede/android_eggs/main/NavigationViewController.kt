@@ -118,23 +118,20 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
             R.id.menu_star to Icons.STAR,
             R.id.menu_email to Icons.EMAIL,
         )
-        var colorStateList: ColorStateList? = null
-        // getColorStateList(R.styleable.NavigationView_itemIconTint)
-        // default: R.color.m3_navigation_item_icon_tint
+        // NavigationView init getColorStateList(R.styleable.NavigationView_itemIconTint)
+        // navigationViewStyle: @style/Widget.Material3.NavigationView
+        // itemIconTint: @color/m3_navigation_item_icon_tint
         val typeValue = MaterialAttributes.resolve(context, M3R.attr.navigationViewStyle)
-        if (typeValue != null) {
-            val typedArray = TintTypedArray.obtainStyledAttributes(
-                context, typeValue.resourceId, intArrayOf(M3R.attr.itemIconTint)
-            )
-            colorStateList = typedArray.getColorStateList(0)
-            typedArray.recycle()
-        }
+        val resId = typeValue?.resourceId ?: M3R.color.m3_navigation_item_icon_tint
+        val typedArray = TintTypedArray.obtainStyledAttributes(
+            context, resId, intArrayOf(M3R.attr.itemIconTint)
+        )
+        val colorStateList: ColorStateList = typedArray.getColorStateList(0)
+        typedArray.recycle()
         for (pair in parts) {
             menu.findItem(pair.first).icon = FontIconsDrawable(context, pair.second).apply {
                 setPadding(.5f.dp)
-                if (colorStateList != null) {
-                    setColorStateList(colorStateList)
-                }
+                setColorStateList(colorStateList)
             }
         }
     }
