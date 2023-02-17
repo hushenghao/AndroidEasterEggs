@@ -35,7 +35,7 @@ for line in lines:
         icons.append({"name": name, "value": value})
         print("parser: %s=%s" % (name, value))
     else:
-        print("unknown line: " % line)
+        print("unknown line: %s" % line)
         
 icons = sorted(icons, key=lambda icon: icon["name"])
 icons = map(lambda icon: property_format %

@@ -197,7 +197,7 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
                 }
                 R.id.menu_star -> {
                     ChromeTabsBrowser.launchUrlByBrowser(
-                        activity, Uri.parse("market://details?id=" + activity.packageName)
+                        activity, Uri.parse("market://details?id=%s".format(activity.packageName))
                     )
                 }
             }
