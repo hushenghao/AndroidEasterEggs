@@ -9,6 +9,7 @@ import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.CompoundButton
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -29,10 +30,7 @@ import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.ScaleTypeDrawable
 import com.dede.android_eggs.util.ChromeTabsBrowser
 import com.dede.android_eggs.util.NightModeManager
-import com.dede.basic.dp
-import com.dede.basic.requireDrawable
-import com.dede.basic.string
-import com.dede.basic.uiExecutor
+import com.dede.basic.*
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.resources.MaterialAttributes
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -93,9 +91,10 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
                 BuildConfig.VERSION_NAME,
                 BuildConfig.VERSION_CODE
             )
-        headerBinding.switchNightMode.setOnCheckedChangeListener { _, isChecked ->
-            nightModeManager.setNightMode(isChecked)
-        }
+        headerBinding.switchNightMode.setOnCheckedChangeListener(
+            NightModeSwitchCheckedChangeDelegate { _, isChecked ->
+                nightModeManager.setNightMode(isChecked)
+            })
         headerBinding.switchNightMode.setSwitchTypeface(FontIconsDrawable.ICONS_TYPEFACE)
         headerBinding.switchNightMode.isChecked = nightModeManager.isNightMode()
     }
@@ -133,6 +132,25 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
                 setPadding(.5f.dp)
                 setColorStateList(colorStateList)
             }
+        }
+    }
+
+    private class NightModeSwitchCheckedChangeDelegate(val delegate: CompoundButton.OnCheckedChangeListener) :
+        CompoundButton.OnCheckedChangeListener, Runnable {
+
+        private var buttonView: CompoundButton? = null
+        private var isChecked: Boolean? = null
+        override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
+            uiHandler.removeCallbacks(this)
+            this.buttonView = buttonView
+            this.isChecked = isChecked
+            // androidx.appcompat.widget.SwitchCompat.THUMB_ANIMATION_DURATION
+            uiHandler.postDelayed(this, 250)
+        }
+
+        override fun run() {
+            val isChecked = this.isChecked ?: return
+            delegate.onCheckedChanged(buttonView, isChecked)
         }
     }
 
