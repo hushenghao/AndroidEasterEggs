@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.StringRes
@@ -18,8 +19,9 @@ import com.dede.android_eggs.ui.FontIconsDrawable
 import com.dede.android_eggs.ui.Icons
 import com.dede.basic.getBoolean
 import com.dede.basic.putBoolean
+import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlin.reflect.KClass
+import com.google.android.material.R as M3R
 
 class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
 
@@ -89,6 +91,8 @@ class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
             )
             val wrapperContext = getThemeWrapperContext(activity)
             val icon = FontIconsDrawable(wrapperContext, Icons.TIPS_AND_UPDATES, 48f)
+            val color = MaterialColors.getColor(wrapperContext, M3R.attr.colorControlNormal, Color.BLACK)
+            icon.setColor(color)
             MaterialAlertDialogBuilder(wrapperContext)
                 .setIcon(icon)
                 .setTitle(info.title)
