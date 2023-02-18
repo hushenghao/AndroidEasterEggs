@@ -43,14 +43,17 @@ class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
         )
 
         companion object {
-            private val trypophobiaActionInfo = ActionInfo(
-                "key_warning_t",
-                android.R.string.dialog_alert_title,
-                R.string.message_trypophobia_warning
-            )
-            private val target = mapOf<KClass<*>, ActionInfo>(
-                com.android_t.egg.PlatLogoActivity::class to trypophobiaActionInfo,
-                com.android_s.egg.PlatLogoActivity::class to trypophobiaActionInfo,
+            private val target = mapOf(
+                com.android_t.egg.PlatLogoActivity::class to ActionInfo(
+                    "key_t_trypophobia_warning",
+                    android.R.string.dialog_alert_title,
+                    R.string.message_trypophobia_warning
+                ),
+                com.android_s.egg.PlatLogoActivity::class to ActionInfo(
+                    "key_s_trypophobia_warning",
+                    android.R.string.dialog_alert_title,
+                    R.string.message_trypophobia_warning
+                ),
             )
         }
 
