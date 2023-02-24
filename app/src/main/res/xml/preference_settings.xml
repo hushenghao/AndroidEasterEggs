@@ -2,6 +2,14 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <com.dede.android_eggs.settings.NightModeSwitchPreference
+        android:key="key_night_mode"
+        android:summaryOff="@string/summary_theme_follow_system"
+        android:summaryOn="@string/summary_theme_dark_mode"
+        android:switchTextOff="\ue1ab"
+        android:switchTextOn="\ue3a9"
+        android:title="@string/pref_title_theme" />
+
     <ListPreference
         android:defaultValue=""
         android:entries="@array/icon_shape_override_paths_names"

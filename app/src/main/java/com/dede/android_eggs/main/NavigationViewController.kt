@@ -9,7 +9,6 @@ import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.CompoundButton
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +20,6 @@ import androidx.core.view.WindowInsetsCompat.Type
 import androidx.core.view.updatePadding
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.DefaultLifecycleObserver
-import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.LayoutEasterEggsContentBinding
 import com.dede.android_eggs.databinding.LayoutNavigationHeaderBinding
@@ -29,7 +27,6 @@ import com.dede.android_eggs.ui.FontIconsDrawable
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.ScaleTypeDrawable
 import com.dede.android_eggs.util.ChromeTabsBrowser
-import com.dede.android_eggs.util.NightModeManager
 import com.dede.basic.*
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.resources.MaterialAttributes
@@ -83,20 +80,6 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
         navigationView.setNavigationItemSelectedListener(listeners)
         bindMenuIcons(activity, navigationView.menu)
         ViewCompat.setOnApplyWindowInsetsListener(navigationView, listeners)
-
-        val nightModeManager = NightModeManager(activity)
-        headerBinding.tvVersion.text =
-            activity.getString(
-                R.string.label_version,
-                BuildConfig.VERSION_NAME,
-                BuildConfig.VERSION_CODE
-            )
-        headerBinding.switchNightMode.setOnCheckedChangeListener(
-            NightModeSwitchCheckedChangeDelegate { _, isChecked ->
-                nightModeManager.setNightMode(isChecked)
-            })
-        headerBinding.switchNightMode.setSwitchTypeface(FontIconsDrawable.ICONS_TYPEFACE)
-        headerBinding.switchNightMode.isChecked = nightModeManager.isNightMode()
     }
 
     fun onConfigurationChanged(newConfig: Configuration) {
@@ -132,25 +115,6 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
                 setPadding(.5f.dp)
                 setColorStateList(colorStateList)
             }
-        }
-    }
-
-    private class NightModeSwitchCheckedChangeDelegate(val delegate: CompoundButton.OnCheckedChangeListener) :
-        CompoundButton.OnCheckedChangeListener, Runnable {
-
-        private var buttonView: CompoundButton? = null
-        private var isChecked: Boolean? = null
-        override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
-            uiHandler.removeCallbacks(this)
-            this.buttonView = buttonView
-            this.isChecked = isChecked
-            // androidx.appcompat.widget.SwitchCompat.THUMB_ANIMATION_DURATION
-            uiHandler.postDelayed(this, 250)
-        }
-
-        override fun run() {
-            val isChecked = this.isChecked ?: return
-            delegate.onCheckedChanged(buttonView, isChecked)
         }
     }
 

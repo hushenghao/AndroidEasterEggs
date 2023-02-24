@@ -3,8 +3,7 @@ package com.dede.android_eggs.util
 import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
-import com.dede.basic.getBoolean
-import com.dede.basic.putBoolean
+import androidx.preference.PreferenceManager
 
 /**
  * Created by shhu on 2023/2/3 13:41.
@@ -15,7 +14,7 @@ import com.dede.basic.putBoolean
 class NightModeManager(val context: Context) {
 
     companion object {
-        private const val KEY_NIGHT_MODE = "key_night_mode"
+        const val KEY_NIGHT_MODE = "key_night_mode"
 
         fun applyNightMode(context: Context) {
             NightModeManager(context).apply {
@@ -24,12 +23,14 @@ class NightModeManager(val context: Context) {
         }
 
         fun isSystemNightMode(context: Context): Boolean {
-           return (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+            return (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
         }
     }
 
+    private val pref = PreferenceManager.getDefaultSharedPreferences(context)
+
     fun isNightMode(): Boolean {
-        return context.getBoolean(KEY_NIGHT_MODE, false)
+        return pref.getBoolean(KEY_NIGHT_MODE, false)
     }
 
     fun setNightMode(nightMode: Boolean) {
@@ -39,7 +40,7 @@ class NightModeManager(val context: Context) {
             return
         }
         AppCompatDelegate.setDefaultNightMode(mode)
-        context.putBoolean(KEY_NIGHT_MODE, nightMode)
+        pref.edit().putBoolean(KEY_NIGHT_MODE, nightMode).apply()
     }
 
     fun isSystemNightMode(): Boolean {

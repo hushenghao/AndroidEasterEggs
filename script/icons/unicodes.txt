@@ -2,6 +2,8 @@
 e1ab
 # brightness_4
 e3a9
+# brightness_6
+e3ab
 
 # home
 e88a

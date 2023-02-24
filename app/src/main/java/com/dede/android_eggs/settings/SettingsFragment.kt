@@ -3,29 +3,26 @@ package com.dede.android_eggs.settings
 import android.app.Dialog
 import android.app.LocaleManager
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import androidx.core.view.updatePadding
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreferenceCompat
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.FontIconsDrawable
 import com.dede.android_eggs.util.IconShapeOverride
+import com.dede.android_eggs.util.NightModeManager
 import com.dede.android_eggs.util.WindowEdgeUtilsAccessor
 import com.dede.android_eggs.util.requirePreference
 import com.dede.basic.dp
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.color.MaterialColors
-import com.google.android.material.R as M3R
 
 class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
@@ -48,6 +45,16 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             addPreferencesFromResource(R.xml.preference_settings)
+
+            requirePreference<SwitchPreferenceCompat>(NightModeManager.KEY_NIGHT_MODE).apply {
+                icon = createFontIcon("\ue3ab")
+                setOnPreferenceChangeListener { _, newValue ->
+                    NightModeManager(requireContext())
+                        .setNightMode(newValue as Boolean)
+                    return@setOnPreferenceChangeListener true
+                }
+            }
+
             requirePreference<ListPreference>(IconShapeOverride.KEY_PREFERENCE).apply {
                 icon = createFontIcon("\ue920")
                 isEnabled = IconShapeOverride.isSupported()
@@ -56,20 +63,14 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
             requirePreference<Preference>(PREF_VERSION).apply {
                 icon = createFontIcon("\ue88e")
-                summary =
-                    requireContext().getString(
-                        R.string.label_version,
-                        BuildConfig.VERSION_NAME,
-                        BuildConfig.VERSION_CODE
-                    )
+                summary = requireContext().getString(
+                    R.string.label_version,
+                    BuildConfig.VERSION_NAME,
+                    BuildConfig.VERSION_CODE
+                )
             }
 
             configureChangeLanguagePreference()
-        }
-
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
-            listView.updatePadding(top = 20.dp, bottom = 180.dp)
         }
 
         private fun configureChangeLanguagePreference() {
@@ -99,7 +100,9 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
         )
 
         private fun createFontIcon(unicode: String): Drawable {
-            return FontIconsDrawable(requireContext(), unicode, 24f)
+            return FontIconsDrawable(requireContext(), unicode, 36f).apply {
+                setPadding(12.dp, 6.dp, 0, 0)
+            }
         }
     }
 }
