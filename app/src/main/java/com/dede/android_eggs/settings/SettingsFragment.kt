@@ -36,7 +36,8 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
         return dialog
     }
 
-    class Settings : PreferenceFragmentCompat() {
+    class Settings : PreferenceFragmentCompat(),
+        PreferenceFragmentCompat.OnPreferenceDisplayDialogCallback {
 
         companion object {
             private const val PREF_LANGUAGE = "pref_language"
@@ -103,6 +104,17 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
             return FontIconsDrawable(requireContext(), unicode, 36f).apply {
                 setPadding(12.dp, 6.dp, 0, 0)
             }
+        }
+
+        override fun onPreferenceDisplayDialog(
+            caller: PreferenceFragmentCompat,
+            pref: Preference
+        ): Boolean {
+            if (pref is ListPreference) {
+                MaterialListPreferenceDialog.newInstance(pref).show()
+                return true
+            }
+            return false
         }
     }
 }
