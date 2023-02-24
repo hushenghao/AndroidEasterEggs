@@ -7,6 +7,7 @@ import android.graphics.Paint.FontMetrics
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.TextPaint
+import androidx.annotation.AttrRes
 import androidx.annotation.Dimension
 import androidx.annotation.FloatRange
 import androidx.core.graphics.component1
@@ -36,6 +37,16 @@ class FontIconsDrawable(
         }
     }
 
+    constructor(
+        context: Context,
+        unicode: String,
+        @AttrRes colorAttributeResId: Int,
+        @Dimension(unit = Dimension.DP) size: Float = -1f
+    ) : this(context, unicode, size) {
+        val color = MaterialColors.getColor(context, colorAttributeResId, Color.WHITE)
+        setColor(color)
+    }
+
     private val paint = TextPaint(Paint.ANTI_ALIAS_FLAG)
     private val metrics = FontMetrics()
     private val padding = Rect()
@@ -49,7 +60,7 @@ class FontIconsDrawable(
         paint.typeface = ICONS_TYPEFACE
         paint.textAlign = Paint.Align.CENTER
         val color = MaterialColors.getColor(
-            context, com.google.android.material.R.attr.colorAccent, Color.WHITE
+            context, com.google.android.material.R.attr.colorControlNormal, Color.WHITE
         )
         paint.color = color
         if (size > 0) {

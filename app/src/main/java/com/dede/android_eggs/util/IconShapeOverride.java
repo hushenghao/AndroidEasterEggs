@@ -17,8 +17,7 @@ package com.dede.android_eggs.util;
 
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.app.ProgressDialog;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +26,7 @@ import android.os.Build;
 import android.os.Process;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,13 +35,14 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 
 import com.dede.android_eggs.R;
+import com.dede.android_eggs.databinding.ProgressDialogMaterialBinding;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.lang.reflect.Field;
 
 /**
  * Utility class to override shape of {@link android.graphics.drawable.AdaptiveIconDrawable}.
  */
-@TargetApi(Build.VERSION_CODES.O)
 public class IconShapeOverride {
 
     private static final String TAG = "IconShapeOverride";
@@ -52,13 +53,28 @@ public class IconShapeOverride {
     // sufficient time so that there is no flicker.
     private static final long PROCESS_KILL_DELAY_MS = 1000;
 
-    public static boolean isSupported() {
-        if (Build.VERSION_CODES.O > Build.VERSION.SDK_INT) {
-            return false;
+    private static class Api29Impl {
+        @Nullable
+        private static Resources sOverrideResources;
+
+        public static boolean isSupported() {
+            return getConfigResId() != 0;
         }
 
-        // android Q use app resources
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+        public static Resources getOverrideResources(Context context, Resources parent) {
+            if (sOverrideResources == null) {
+                String path = getAppliedValue(context);
+                if (!TextUtils.isEmpty(path)) {
+                    sOverrideResources = new ResourcesOverride(parent, getConfigResId(), path);
+                }
+            }
+            return sOverrideResources == null ? parent : sOverrideResources;
+        }
+    }
+
+    private static class Api26Impl {
+
+        public static boolean isSupported() {
             try {
                 if (getSystemResField().get(null) != Resources.getSystem()) {
                     // Our assumption that mSystem is the system resource is not true.
@@ -68,61 +84,77 @@ public class IconShapeOverride {
                 // Ignore, not supported
                 return false;
             }
+            return getConfigResId() != 0;
         }
 
-        return getConfigResId() != 0;
+        public static void apply(Context context) {
+            String path = getAppliedValue(context);
+            if (TextUtils.isEmpty(path)) {
+                return;
+            }
+            if (!isSupported()) {
+                return;
+            }
+
+            // magic
+            try {
+                Resources override =
+                        new ResourcesOverride(Resources.getSystem(), getConfigResId(), path);
+                getSystemResField().set(null, override);
+            } catch (Exception e) {
+                Log.e(TAG, "Unable to override icon shape", e);
+                // revert value.
+                getDevicePrefs(context).edit().remove(KEY_PREFERENCE).apply();
+            }
+        }
+
+        private static Field getSystemResField() throws Exception {
+            @SuppressWarnings("JavaReflectionMemberAccess") @SuppressLint("DiscouragedPrivateApi")
+            Field staticField = Resources.class.getDeclaredField("mSystem");
+            staticField.setAccessible(true);
+            return staticField;
+        }
+    }
+
+    public static class App extends Application {
+        @Override
+        protected void attachBaseContext(Context base) {
+            super.attachBaseContext(base);
+            apply(base);
+        }
+
+        @Override
+        public Resources getResources() {
+            return getOverrideResources(this, super.getResources());
+        }
     }
 
     public static void apply(Context context) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O ||
-                Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
-            return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O &&
+                Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            Api26Impl.apply(context);
         }
-        String path = getAppliedValue(context);
-        if (TextUtils.isEmpty(path)) {
-            return;
-        }
-        if (!isSupported()) {
-            return;
-        }
+    }
 
-        // magic
-        try {
-            Resources override =
-                    new ResourcesOverride(Resources.getSystem(), getConfigResId(), path);
-            getSystemResField().set(null, override);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e(TAG, "Unable to override icon shape", e);
-            // revert value.
-            getDevicePrefs(context).edit().remove(KEY_PREFERENCE).apply();
+    public static Resources getOverrideResources(Context context, Resources parent) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            return Api29Impl.getOverrideResources(context, parent);
+        }
+        return parent;
+    }
+
+    public static boolean isSupported() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            return false;
+        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            return Api26Impl.isSupported();
+        } else {
+            return Api29Impl.isSupported();
         }
     }
 
     private static SharedPreferences getDevicePrefs(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
-    }
-
-    @Nullable
-    private static Resources sOverrideResources;
-
-    public static Resources getResources(Context context, Resources parent) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
-            if (sOverrideResources == null) {
-                String path = getAppliedValue(context);
-                if (!TextUtils.isEmpty(path)) {
-                    sOverrideResources = new ResourcesOverride(parent, getConfigResId(), path);
-                }
-            }
-        }
-        return sOverrideResources == null ? parent : sOverrideResources;
-    }
-
-    private static Field getSystemResField() throws Exception {
-        @SuppressWarnings("JavaReflectionMemberAccess") @SuppressLint("DiscouragedPrivateApi")
-        Field staticField = Resources.class.getDeclaredField("mSystem");
-        staticField.setAccessible(true);
-        return staticField;
     }
 
     @SuppressLint("DiscouragedApi")
@@ -174,11 +206,13 @@ public class IconShapeOverride {
             String newValue = (String) o;
             if (!getAppliedValue(mContext).equals(newValue)) {
                 // Value has changed
-                ProgressDialog.show(mContext,
-                        null /* title */,
-                        mContext.getString(R.string.icon_shape_override_progress),
-                        true /* indeterminate */,
-                        false /* cancelable */);
+                ProgressDialogMaterialBinding binding = ProgressDialogMaterialBinding.inflate(LayoutInflater.from(mContext));
+                binding.progress.setIndeterminate(true);
+                binding.message.setText(R.string.icon_shape_override_progress);
+                new MaterialAlertDialogBuilder(mContext)
+                        .setCancelable(false)
+                        .setView(binding.getRoot())
+                        .show();
 
                 new Thread(new OverrideApplyHandler(mContext, newValue)).start();
             }

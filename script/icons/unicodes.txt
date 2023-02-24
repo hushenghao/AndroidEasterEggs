@@ -23,3 +23,9 @@ e79a
 
 # settings
 e8b8
+# rounded_corner
+e920
+# language
+e894
+# info
+e88e

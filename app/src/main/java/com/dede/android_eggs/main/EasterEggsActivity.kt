@@ -50,10 +50,8 @@ class EasterEggsActivity : AppCompatActivity(), MenuProvider {
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_settings, menu)
-        val color = MaterialColors.getColor(this, M3R.attr.actionMenuTextColor, Color.GRAY)
-        menu.findItem(R.id.menu_settings).icon = FontIconsDrawable(this, "\ue8b8", 24f).apply {
-            setColor(color)
-        }
+        menu.findItem(R.id.menu_settings).icon =
+            FontIconsDrawable(this, "\ue8b8", M3R.attr.actionMenuTextColor, 24f)
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {

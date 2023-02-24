@@ -3,6 +3,8 @@ package com.dede.android_eggs.settings
 import android.app.Dialog
 import android.app.LocaleManager
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -15,12 +17,15 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
+import com.dede.android_eggs.ui.FontIconsDrawable
 import com.dede.android_eggs.util.IconShapeOverride
 import com.dede.android_eggs.util.WindowEdgeUtilsAccessor
 import com.dede.android_eggs.util.requirePreference
 import com.dede.basic.dp
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.color.MaterialColors
+import com.google.android.material.R as M3R
 
 class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
@@ -37,27 +42,29 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
     class Settings : PreferenceFragmentCompat() {
 
         companion object {
-            const val PREF_LANGUAGE = "pref_language"
-            const val PREF_VERSION = "pref_version"
+            private const val PREF_LANGUAGE = "pref_language"
+            private const val PREF_VERSION = "pref_version"
         }
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             addPreferencesFromResource(R.xml.preference_settings)
             requirePreference<ListPreference>(IconShapeOverride.KEY_PREFERENCE).apply {
-                isEnabled = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+                icon = createFontIcon("\ue920")
+                isEnabled = IconShapeOverride.isSupported()
                 IconShapeOverride.handlePreferenceUi(this)
             }
 
-            requirePreference<Preference>(PREF_VERSION).summary =
-                requireContext().getString(
-                    R.string.label_version,
-                    BuildConfig.VERSION_NAME,
-                    BuildConfig.VERSION_CODE
-                )
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                configureChangeLanguagePreference()
+            requirePreference<Preference>(PREF_VERSION).apply {
+                icon = createFontIcon("\ue88e")
+                summary =
+                    requireContext().getString(
+                        R.string.label_version,
+                        BuildConfig.VERSION_NAME,
+                        BuildConfig.VERSION_CODE
+                    )
             }
+
+            configureChangeLanguagePreference()
         }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,18 +72,23 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
             listView.updatePadding(top = 20.dp, bottom = 180.dp)
         }
 
-        @RequiresApi(Build.VERSION_CODES.TIRAMISU)
         private fun configureChangeLanguagePreference() {
             requirePreference<Preference>(PREF_LANGUAGE).apply {
-                val localeManager = requireContext().getSystemService<LocaleManager>()
-                if (localeManager != null) {
-                    summary = localeManager.applicationLocales.toLanguageTags()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    val localeManager = requireContext().getSystemService<LocaleManager>()
+                    if (localeManager != null) {
+                        val locales = localeManager.applicationLocales
+                        if (!locales.isEmpty) {
+                            summary = locales.get(0).displayName
+                        }
+                    }
+                    setOnPreferenceClickListener {
+                        startActivity(createActionAppLocaleSettingsIntent())
+                        return@setOnPreferenceClickListener true
+                    }
                 }
                 isEnabled = true
-                setOnPreferenceClickListener {
-                    startActivity(createActionAppLocaleSettingsIntent())
-                    return@setOnPreferenceClickListener true
-                }
+                icon = createFontIcon("\ue894")
             }
         }
 
@@ -85,5 +97,9 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
             android.provider.Settings.ACTION_APP_LOCALE_SETTINGS,
             Uri.fromParts("package", requireActivity().packageName, null)
         )
+
+        private fun createFontIcon(unicode: String): Drawable {
+            return FontIconsDrawable(requireContext(), unicode, 24f)
+        }
     }
 }
