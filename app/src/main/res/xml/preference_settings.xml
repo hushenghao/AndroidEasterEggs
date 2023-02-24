@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ListPreference
+        android:defaultValue=""
+        android:entries="@array/icon_shape_override_paths_names"
+        android:entryValues="@array/icon_shape_override_paths_values"
+        android:key="pref_override_icon_shape"
+        android:title="@string/icon_shape_override_label"
+        app:useSimpleSummaryProvider="true" />
+
+    <Preference
+        android:enabled="false"
+        android:key="pref_language"
+        android:persistent="false"
+        android:title="@string/pref_title_language" />
+
+    <Preference
+        android:key="pref_version"
+        android:persistent="false"
+        android:title="@string/pref_title_about" />
+
+</PreferenceScreen>
+
+

@@ -20,3 +20,6 @@ ea17
 e7c8
 # tips_and_updates
 e79a
+
+# settings
+e8b8

@@ -118,7 +118,7 @@ open class EggPreference : Preference {
         }
 
         val icon = holder.findViewById(android.R.id.icon) as? ImageView ?: return
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O || icon.drawable !is AdaptiveIconDrawable) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || icon.drawable !is AdaptiveIconDrawable) {
             // support adaptive-icon
             icon.clipToOutline = outlineProvider != null
             icon.outlineProvider = outlineProvider
