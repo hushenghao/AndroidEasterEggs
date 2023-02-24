@@ -13,8 +13,6 @@ class NightModeSwitchPreference(context: Context, attrs: AttributeSet?) :
 
     init {
         widgetLayoutResource = R.layout.layout_widget_night_mode_switch
-        switchTextOff = "\ue1ab"
-        switchTextOn = "\ue3a9"
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
