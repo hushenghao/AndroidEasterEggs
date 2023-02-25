@@ -55,7 +55,7 @@
     <string name="icon_shape_override_progress">Applying icon shape changes</string>
 
     <string name="pref_title_language">Language</string>
-    <string name="pref_title_about">About</string>
+    <string name="pref_title_version">Version</string>
     <string name="pref_title_theme">Theme</string>
     <string name="summary_theme_follow_system">Follow system</string>
     <string name="summary_theme_dark_mode">Dark theme</string>

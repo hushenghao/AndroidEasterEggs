@@ -41,7 +41,7 @@
     <string name="icon_shape_override_progress">"正在应用图标形状更改"</string>
 
     <string name="pref_title_language">语言</string>
-    <string name="pref_title_about">关于</string>
+    <string name="pref_title_version">版本</string>
     <string name="pref_title_theme">主题</string>
     <string name="summary_theme_follow_system">跟随系统</string>
     <string name="summary_theme_dark_mode">深色主题</string>
