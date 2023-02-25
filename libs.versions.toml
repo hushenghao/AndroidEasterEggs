@@ -15,6 +15,7 @@ androidx-browser = "androidx.browser:browser:1.4.0"
 #google-browser = "com.google.androidbrowserhelper:androidbrowserhelper:2.3.0"
 google-material = "com.google.android.material:material:1.9.0-alpha02"
 
+io-coil = "io.coil-kt:coil:2.2.2"
 free-reflection = "com.github.tiann:FreeReflection:3.1.0"
 leakcanary = "com.squareup.leakcanary:leakcanary-android:2.10"
 nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"

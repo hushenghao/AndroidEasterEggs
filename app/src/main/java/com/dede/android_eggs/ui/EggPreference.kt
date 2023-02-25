@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.*
@@ -12,7 +11,6 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.set
@@ -20,9 +18,12 @@ import androidx.core.text.toSpannable
 import androidx.core.view.setPadding
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
+import coil.load
+import coil.transform.CircleCropTransformation
+import coil.transform.RoundedCornersTransformation
 import com.dede.android_eggs.R
-import com.google.android.material.R as M3R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.R as M3R
 
 /**
  * Easter Egg Preference
@@ -45,8 +46,8 @@ open class EggPreference : Preference {
             Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
     }
 
-    private val outlineProvider: ViewOutlineProvider?
-
+    private val supportAdaptiveIconMode: Int
+    private var iconRadius: Float = 0f
     private val iconPadding: Int
 
     private val finalTitle: CharSequence?
@@ -56,15 +57,10 @@ open class EggPreference : Preference {
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         val arrays = context.obtainStyledAttributes(attrs, R.styleable.EggPreference)
-        val supportAdaptiveIcon =
+        supportAdaptiveIconMode =
             arrays.getInt(R.styleable.EggPreference_supportAdaptiveIcon, MODE_DEFAULT)
-        outlineProvider = when (supportAdaptiveIcon) {
-            MODE_CORNERS -> {
-                val radius = arrays.getDimension(R.styleable.EggPreference_iconRadius, 0f)
-                CornersOutlineProvider(radius)
-            }
-            MODE_OVAL -> OvalOutlineProvider()
-            else -> null
+        if (supportAdaptiveIconMode == MODE_CORNERS) {
+            iconRadius = arrays.getDimension(R.styleable.EggPreference_iconRadius, 0f)
         }
         val className = arrays.getString(R.styleable.EggPreference_android_targetClass)
         if (className != null) {
@@ -118,10 +114,16 @@ open class EggPreference : Preference {
         }
 
         val icon = holder.findViewById(android.R.id.icon) as? ImageView ?: return
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || icon.drawable !is AdaptiveIconDrawable) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O && supportAdaptiveIconMode != MODE_DEFAULT) {
             // support adaptive-icon
-            icon.clipToOutline = outlineProvider != null
-            icon.outlineProvider = outlineProvider
+            icon.load(icon.drawable) {
+                val transformation = when (supportAdaptiveIconMode) {
+                    MODE_CORNERS -> RoundedCornersTransformation(iconRadius)
+                    MODE_OVAL -> CircleCropTransformation()
+                    else -> throw UnsupportedOperationException()
+                }
+                transformations(transformation)
+            }
         }
         icon.setPadding(iconPadding)
     }

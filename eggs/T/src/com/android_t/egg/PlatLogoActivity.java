@@ -48,7 +48,6 @@ import androidx.annotation.ChecksSdkIntAtLeast;
 
 import com.dede.basic.AnalogClock;
 import com.dede.basic.DrawableKt;
-import com.dede.basic.LargeBitmapAccessor;
 import com.dede.basic.SpUtils;
 
 /**
@@ -392,7 +391,6 @@ public class PlatLogoActivity extends Activity {
         @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.TIRAMISU)
         private final boolean supportCOLR = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU;
         //private final boolean supportCOLR = false;
-        private final LargeBitmapAccessor bitmapAccessor = new LargeBitmapAccessor(PlatLogoActivity.this);
 
         BubblesDrawable() {
             try {
@@ -415,7 +413,7 @@ public class PlatLogoActivity extends Activity {
             int drawn = 0;
             for (int j = 0; j < mNumBubbs; j++) {
                 if (mBubbs[j].color == 0 || mBubbs[j].r == 0) continue;
-                if (mBubbs[j].text != null) {
+                if (mBubbs[j].text != null && supportCOLR) {
                     mPaint.setTextSize(mBubbs[j].r * 1.75f);
                     canvas.drawText(mBubbs[j].text, mBubbs[j].x,
                             mBubbs[j].y + mBubbs[j].r * f * 0.6f, mPaint);
@@ -439,9 +437,14 @@ public class PlatLogoActivity extends Activity {
             }
             // support code
             if (!supportCOLR) {
-                COLRBitmapCompat.convertCOLRBitmap(mBubbs, bitmapAccessor);
+                COLRBitmapCompat.convertCOLRBitmap(mBubbs, PlatLogoActivity.this, () -> {
+                    Log.i(TAG, "chooseEmojiSet: result");
+                    invalidateSelf();
+                    return null;
+                });
+            } else {
+                invalidateSelf();
             }
-            invalidateSelf();
         }
 
         @Override

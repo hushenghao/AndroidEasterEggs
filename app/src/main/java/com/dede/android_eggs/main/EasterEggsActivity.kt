@@ -1,7 +1,6 @@
 package com.dede.android_eggs.main
 
 import android.content.res.Configuration
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,7 +12,6 @@ import com.dede.android_eggs.settings.SettingsFragment
 import com.dede.android_eggs.ui.FontIconsDrawable
 import com.dede.android_eggs.util.WindowEdgeUtilsAccessor
 import com.google.android.material.color.DynamicColors
-import com.google.android.material.color.MaterialColors
 import com.google.android.material.R as M3R
 
 /**
@@ -55,8 +53,7 @@ class EasterEggsActivity : AppCompatActivity(), MenuProvider {
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        SettingsFragment()
-            .show(supportFragmentManager, "Settings")
+        SettingsFragment().show(supportFragmentManager, "Settings")
         return true
     }
 
