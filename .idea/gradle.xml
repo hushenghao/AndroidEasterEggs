@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="11" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/basic" />
+            <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/eggs" />
+            <option value="$PROJECT_DIR$/eggs/Gingerbread" />
+            <option value="$PROJECT_DIR$/eggs/Honeycomb" />
+            <option value="$PROJECT_DIR$/eggs/Ice_Cream_Sandwich" />
+            <option value="$PROJECT_DIR$/eggs/Jelly_Bean" />
+            <option value="$PROJECT_DIR$/eggs/KitKat" />
+            <option value="$PROJECT_DIR$/eggs/Lollipop" />
+            <option value="$PROJECT_DIR$/eggs/Marshmallow" />
+            <option value="$PROJECT_DIR$/eggs/Nougat" />
+            <option value="$PROJECT_DIR$/eggs/Oreo" />
+            <option value="$PROJECT_DIR$/eggs/Pie" />
+            <option value="$PROJECT_DIR$/eggs/Q" />
+            <option value="$PROJECT_DIR$/eggs/R" />
+            <option value="$PROJECT_DIR$/eggs/S" />
+            <option value="$PROJECT_DIR$/eggs/T" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
