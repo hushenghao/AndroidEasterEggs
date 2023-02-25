@@ -7,19 +7,20 @@
         app:title="@string/header_collection">
 
         <com.dede.android_eggs.ui.TimelinePreference
-            app:icon="@drawable/android_14"
+            app:icon="@drawable/u_icon"
             app:supportAdaptiveIcon="oval"
             app:title="@string/title_android_u" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_t"
-            app:icon="@drawable/t_platlogo"
+            app:icon="@drawable/t_icon"
             app:summary="@string/t_egg_name"
+            app:supportAdaptiveIcon="oval"
             app:title="@string/title_android_t" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_s"
-            app:icon="@drawable/s_icon"
+            app:icon="@drawable/s_icon_1"
             app:summary="@string/s_egg_name"
             app:supportAdaptiveIcon="oval"
             app:title="@string/title_android_s" />

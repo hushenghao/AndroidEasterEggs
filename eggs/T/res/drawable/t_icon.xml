@@ -1,0 +1,8 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/t_system_accent3_800" />
+    <item>
+        <inset
+            android:drawable="@drawable/t_icon_fg"
+            android:inset="-21dp" />
+    </item>
+</layer-list>
