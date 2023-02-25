@@ -89,7 +89,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
                         return@setOnPreferenceClickListener true
                     }
                 }
-                isEnabled = true
+                isEnabled = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
                 icon = createFontIcon("\ue894")
             }
         }

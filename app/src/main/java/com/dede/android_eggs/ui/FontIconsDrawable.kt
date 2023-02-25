@@ -18,6 +18,7 @@ import com.dede.basic.dp
 import com.dede.basic.globalContext
 import com.google.android.material.color.MaterialColors
 import kotlin.math.min
+import com.google.android.material.R as M3R
 
 /**
  * Material Icons.
@@ -59,9 +60,7 @@ class FontIconsDrawable(
     init {
         paint.typeface = ICONS_TYPEFACE
         paint.textAlign = Paint.Align.CENTER
-        val color = MaterialColors.getColor(
-            context, com.google.android.material.R.attr.colorControlNormal, Color.WHITE
-        )
+        val color = MaterialColors.getColor(context, M3R.attr.colorControlNormal, Color.WHITE)
         paint.color = color
         if (size > 0) {
             dimension = size.dp

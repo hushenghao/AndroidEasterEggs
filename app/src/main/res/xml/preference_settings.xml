@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.dede.android_eggs.settings.NightModeSwitchPreference
+        android:defaultValue="false"
         android:key="key_night_mode"
         android:summaryOff="@string/summary_theme_follow_system"
         android:summaryOn="@string/summary_theme_dark_mode"

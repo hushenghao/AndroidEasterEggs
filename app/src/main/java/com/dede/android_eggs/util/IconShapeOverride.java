@@ -30,6 +30,7 @@ import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.ResourcesOverride;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -64,11 +65,10 @@ public class IconShapeOverride {
         public static Resources getOverrideResources(Context context, Resources parent) {
             if (sOverrideResources == null) {
                 String path = getAppliedValue(context);
-                if (!TextUtils.isEmpty(path)) {
-                    sOverrideResources = new ResourcesOverride(parent, getConfigResId(), path);
-                }
+                sOverrideResources = TextUtils.isEmpty(path) ? parent :
+                        new ResourcesOverride(parent, getConfigResId(), path);
             }
-            return sOverrideResources == null ? parent : sOverrideResources;
+            return sOverrideResources;
         }
     }
 
@@ -170,27 +170,6 @@ public class IconShapeOverride {
         Context context = preference.getContext();
         preference.setValue(getAppliedValue(context));
         preference.setOnPreferenceChangeListener(new PreferenceChangeHandler(context));
-    }
-
-    private static class ResourcesOverride extends Resources {
-
-        private final int mOverrideId;
-        private final String mOverrideValue;
-
-        public ResourcesOverride(Resources parent, int overrideId, String overrideValue) {
-            super(parent.getAssets(), parent.getDisplayMetrics(), parent.getConfiguration());
-            mOverrideId = overrideId;
-            mOverrideValue = overrideValue;
-        }
-
-        @NonNull
-        @Override
-        public String getString(int id) throws NotFoundException {
-            if (id == mOverrideId) {
-                return mOverrideValue;
-            }
-            return super.getString(id);
-        }
     }
 
     private static class PreferenceChangeHandler implements Preference.OnPreferenceChangeListener {
