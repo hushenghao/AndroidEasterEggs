@@ -32,12 +32,13 @@
 
     <string name="label_settings">设置</string>
 
-    <string name="icon_shape_override_label">"更改图标形状"</string>
-    <string name="icon_shape_system_default">"使用系统默认设置"</string>
+    <string name="icon_shape_override_label">"图标形状"</string>
+    <string name="icon_shape_system_default">"系统设置"</string>
     <string name="icon_shape_square">"方形"</string>
     <string name="icon_shape_squircle">"方圆形"</string>
     <string name="icon_shape_circle">"圆形"</string>
     <string name="icon_shape_teardrop">"泪珠形"</string>
+    <string name="icon_shape_rounded_square">圆角方形</string>
     <string name="icon_shape_override_progress">"正在应用图标形状更改"</string>
 
     <string name="pref_title_language">语言</string>

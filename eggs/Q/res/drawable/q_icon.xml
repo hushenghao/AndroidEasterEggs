@@ -21,7 +21,7 @@
     <item android:drawable="@drawable/q_icon_bg" />
     <item>
         <inset
-            android:drawable="@drawable/q_smaller"
-            android:inset="-26.5dp" />
+            android:drawable="@drawable/q"
+            android:inset="8.6dp" />
     </item>
 </layer-list>
