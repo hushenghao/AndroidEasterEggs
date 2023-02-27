@@ -13,6 +13,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.TypedArrayUtils
+import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.PathParser
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
@@ -22,6 +24,7 @@ import androidx.core.view.setPadding
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import coil.decode.DecodeUtils
+import coil.dispose
 import coil.load
 import coil.size.*
 import coil.transform.CircleCropTransformation
@@ -56,13 +59,23 @@ open class EggPreference : Preference {
     private val supportAdaptiveIconMode: Int
     private var iconRadius: Float = 0f
     private val iconPadding: Int
+    private var iconResId: Int = 0
 
     private val finalTitle: CharSequence?
     private val finalSummary: CharSequence?
     private val versionComment: String?
 
     constructor(context: Context) : this(context, null)
+
+    @SuppressLint("RestrictedApi", "PrivateResource")
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        context.withStyledAttributes(attrs, androidx.preference.R.styleable.Preference) {
+            iconResId = TypedArrayUtils.getResourceId(
+                this, androidx.preference.R.styleable.Preference_icon,
+                androidx.preference.R.styleable.Preference_android_icon, 0
+            )
+        }
+
         val arrays = context.obtainStyledAttributes(attrs, R.styleable.EggPreference)
         supportAdaptiveIconMode =
             arrays.getInt(R.styleable.EggPreference_supportAdaptiveIcon, MODE_DEFAULT)
@@ -120,19 +133,22 @@ open class EggPreference : Preference {
             summary?.text = finalSummary.replace(suffixRegex, "")
         }
 
-        val icon = holder.findViewById(android.R.id.icon) as? ImageView ?: return
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O && supportAdaptiveIconMode != MODE_DEFAULT) {
-            // support adaptive-icon
-            icon.load(icon.drawable) {
-                val shapePath = IconShapeOverride.getAppliedValue(context)
-                if (!TextUtils.isEmpty(shapePath)) {
-                    transformations(SupportAdaptiveIconTransformation(shapePath))
-                } else {
-                    transformations(CircleCropTransformation())
+        val icon = holder.findViewById(android.R.id.icon) as? ImageView
+        if (icon != null) {
+            icon.dispose()
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O && supportAdaptiveIconMode != MODE_DEFAULT) {
+                // support adaptive-icon
+                icon.load(iconResId) {
+                    val shapePath = IconShapeOverride.getAppliedValue(context)
+                    if (!TextUtils.isEmpty(shapePath)) {
+                        transformations(SupportAdaptiveIconTransformation(shapePath))
+                    } else {
+                        transformations(CircleCropTransformation())
+                    }
                 }
             }
+            icon.setPadding(iconPadding)
         }
-        icon.setPadding(iconPadding)
     }
 
     private class SupportAdaptiveIconTransformation(val maskPathStr: String) : Transformation {
@@ -147,29 +163,57 @@ open class EggPreference : Preference {
             val safeConfig = input.config ?: Bitmap.Config.ARGB_8888
             val output = createBitmap(outputWidth, outputHeight, safeConfig)
             output.applyCanvas {
-                val matrix = Matrix()
-                val path = PathParser.createPathFromPathData(maskPathStr)
-                val pathRectF = RectF()
-                path.computeBounds(pathRectF, true)
-
-                val multiplier = DecodeUtils.computeSizeMultiplier(
-                    srcWidth = pathRectF.width().toInt(),
-                    srcHeight = pathRectF.height().toInt(),
-                    dstWidth = outputWidth,
-                    dstHeight = outputHeight,
-                    scale = Scale.FILL
-                ).toFloat()
-                val dx = (outputWidth - multiplier * pathRectF.width().toInt()) / 2
-                val dy = (outputHeight - multiplier * pathRectF.height().toInt()) / 2
-                matrix.setTranslate(dx, dy)
-                matrix.preScale(multiplier, multiplier)
-                path.transform(matrix)
+                drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+                paint.shader = getBitmapShader(input, outputWidth, outputHeight)
+                val path = getPath(maskPathStr, outputWidth, outputHeight)
                 drawPath(path, paint)
-
-                paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-                drawBitmap(input, 0f, 0f, paint)
+                setBitmap(null)
             }
             return output
+        }
+
+        private fun getPath(pathStr: String, outputWidth: Int, outputHeight: Int): Path {
+            val matrix = Matrix()
+            val path = PathParser.createPathFromPathData(pathStr)
+            val pathRectF = RectF()
+            path.computeBounds(pathRectF, true)
+
+            val multiplier = DecodeUtils.computeSizeMultiplier(
+                srcWidth = pathRectF.width().toInt(),
+                srcHeight = pathRectF.height().toInt(),
+                dstWidth = outputWidth,
+                dstHeight = outputHeight,
+                scale = Scale.FILL
+            ).toFloat()
+            val dx = (outputWidth - multiplier * pathRectF.width().toInt()) / 2
+            val dy = (outputHeight - multiplier * pathRectF.height().toInt()) / 2
+            matrix.setTranslate(dx, dy)
+            matrix.preScale(multiplier, multiplier)
+            path.transform(matrix)
+            return path
+        }
+
+        private fun getBitmapShader(
+            input: Bitmap,
+            outputWidth: Int,
+            outputHeight: Int
+        ): BitmapShader {
+            val matrix = Matrix()
+            val multiplier = DecodeUtils.computeSizeMultiplier(
+                srcWidth = input.width,
+                srcHeight = input.height,
+                dstWidth = outputWidth,
+                dstHeight = outputHeight,
+                scale = Scale.FILL
+            ).toFloat()
+            val dx = (outputWidth - multiplier * input.width) / 2
+            val dy = (outputHeight - multiplier * input.height) / 2
+            matrix.setTranslate(dx, dy)
+            matrix.preScale(multiplier, multiplier)
+
+            val shader = BitmapShader(input, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+            shader.setLocalMatrix(matrix)
+            return shader
         }
 
         private fun calculateOutputSize(input: Bitmap, size: Size): Pair<Int, Int> {
