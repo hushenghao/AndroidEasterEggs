@@ -58,7 +58,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
             requirePreference<ListPreference>(IconShapeOverride.KEY_PREFERENCE).apply {
                 icon = createFontIcon("\ue920")
-                isEnabled = IconShapeOverride.isSupported()
+                //isEnabled = IconShapeOverride.isSupported()
                 IconShapeOverride.handlePreferenceUi(this)
             }
 

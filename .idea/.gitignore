@@ -1,5 +1,11 @@
 # Default ignored files
 /shelf/
-/workspace.xml
-/assetWizardSettings.xml
-/deploymentTargetDropDown.xml
+/inspectionProfiles
+/libraries
+/modules
+androidTestResultsUserPreferences.xml
+encodings.xml
+jarRepositories.xml
+workspace.xml
+assetWizardSettings.xml
+deploymentTargetDropDown.xml

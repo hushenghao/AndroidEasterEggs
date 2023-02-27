@@ -3,7 +3,7 @@ package com.dede.android_eggs.ui
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
+import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.*
@@ -13,16 +13,23 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.graphics.PathParser
+import androidx.core.graphics.applyCanvas
+import androidx.core.graphics.createBitmap
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.core.view.setPadding
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
+import coil.decode.DecodeUtils
 import coil.load
+import coil.size.*
 import coil.transform.CircleCropTransformation
-import coil.transform.RoundedCornersTransformation
+import coil.transform.Transformation
 import com.dede.android_eggs.R
+import com.dede.android_eggs.util.IconShapeOverride
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlin.math.roundToInt
 import com.google.android.material.R as M3R
 
 /**
@@ -117,15 +124,84 @@ open class EggPreference : Preference {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O && supportAdaptiveIconMode != MODE_DEFAULT) {
             // support adaptive-icon
             icon.load(icon.drawable) {
-                val transformation = when (supportAdaptiveIconMode) {
-                    MODE_CORNERS -> RoundedCornersTransformation(iconRadius)
-                    MODE_OVAL -> CircleCropTransformation()
-                    else -> throw UnsupportedOperationException()
+                val shapePath = IconShapeOverride.getAppliedValue(context)
+                if (!TextUtils.isEmpty(shapePath)) {
+                    transformations(SupportAdaptiveIconTransformation(shapePath))
+                } else {
+                    transformations(CircleCropTransformation())
                 }
-                transformations(transformation)
             }
         }
         icon.setPadding(iconPadding)
+    }
+
+    private class SupportAdaptiveIconTransformation(val maskPathStr: String) : Transformation {
+
+        override val cacheKey: String = "${javaClass.name}-$maskPathStr"
+
+        override suspend fun transform(input: Bitmap, size: Size): Bitmap {
+            val paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
+
+            val (outputWidth, outputHeight) = calculateOutputSize(input, size)
+
+            val safeConfig = input.config ?: Bitmap.Config.ARGB_8888
+            val output = createBitmap(outputWidth, outputHeight, safeConfig)
+            output.applyCanvas {
+                val matrix = Matrix()
+                val path = PathParser.createPathFromPathData(maskPathStr)
+                val pathRectF = RectF()
+                path.computeBounds(pathRectF, true)
+
+                val multiplier = DecodeUtils.computeSizeMultiplier(
+                    srcWidth = pathRectF.width().toInt(),
+                    srcHeight = pathRectF.height().toInt(),
+                    dstWidth = outputWidth,
+                    dstHeight = outputHeight,
+                    scale = Scale.FILL
+                ).toFloat()
+                val dx = (outputWidth - multiplier * pathRectF.width().toInt()) / 2
+                val dy = (outputHeight - multiplier * pathRectF.height().toInt()) / 2
+                matrix.setTranslate(dx, dy)
+                matrix.preScale(multiplier, multiplier)
+                path.transform(matrix)
+                drawPath(path, paint)
+
+                paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+                drawBitmap(input, 0f, 0f, paint)
+            }
+            return output
+        }
+
+        private fun calculateOutputSize(input: Bitmap, size: Size): Pair<Int, Int> {
+            if (size.isOriginal) {
+                return input.width to input.height
+            }
+
+            val (dstWidth, dstHeight) = size
+            if (dstWidth is Dimension.Pixels && dstHeight is Dimension.Pixels) {
+                return dstWidth.px to dstHeight.px
+            }
+
+            val multiplier = DecodeUtils.computeSizeMultiplier(
+                srcWidth = input.width,
+                srcHeight = input.height,
+                dstWidth = size.width.pxOrElse { Int.MIN_VALUE },
+                dstHeight = size.height.pxOrElse { Int.MIN_VALUE },
+                scale = Scale.FILL
+            )
+            val outputWidth = (multiplier * input.width).roundToInt()
+            val outputHeight = (multiplier * input.height).roundToInt()
+            return outputWidth to outputHeight
+        }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            return other is SupportAdaptiveIconTransformation && this.maskPathStr == other.maskPathStr
+        }
+
+        override fun hashCode(): Int {
+            return this.maskPathStr.hashCode()
+        }
     }
 
     @SuppressLint("RestrictedApi")
