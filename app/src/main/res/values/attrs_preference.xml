@@ -7,10 +7,7 @@
 
     <declare-styleable name="EggPreference">
         <attr name="android:targetClass" format="string" />
-        <attr name="supportAdaptiveIcon" format="enum">
-            <enum name="corners" value="1" />
-            <enum name="oval" value="2" />
-        </attr>
+        <attr name="supportAdaptiveIcon" format="boolean" />
         <attr name="iconRadius" format="dimension" />
         <attr name="iconPadding" format="dimension" />
         <attr name="versionComment" format="string" />

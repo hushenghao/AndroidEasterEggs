@@ -40,6 +40,7 @@ import com.dede.android_eggs.databinding.ProgressDialogMaterialBinding;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 /**
  * Utility class to override shape of {@link android.graphics.drawable.AdaptiveIconDrawable}.
@@ -160,6 +161,12 @@ public class IconShapeOverride {
     @SuppressLint("DiscouragedApi")
     private static int getConfigResId() {
         return Resources.getSystem().getIdentifier("config_icon_mask", "string", "android");
+    }
+
+    public static boolean isSquareShape(Context context, String value) {
+        String[] values = context.getResources().getStringArray(R.array.icon_shape_override_paths_values);
+        int index = context.getResources().getInteger(R.integer.icon_shape_square_index);
+        return Objects.equals(values[index], value);
     }
 
     public static String getAppliedValue(Context context) {

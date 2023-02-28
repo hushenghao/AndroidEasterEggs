@@ -44,9 +44,6 @@ import com.google.android.material.R as M3R
 open class EggPreference : Preference {
 
     companion object {
-        private const val MODE_DEFAULT = 0
-        private const val MODE_CORNERS = 1
-        private const val MODE_OVAL = 2
 
         var showSuffix = true
         private val suffixRegex = Regex("\\s*\\(.+\\)")
@@ -56,8 +53,7 @@ open class EggPreference : Preference {
             Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
     }
 
-    private val supportAdaptiveIconMode: Int
-    private var iconRadius: Float = 0f
+    private val supportAdaptiveIcon: Boolean
     private val iconPadding: Int
     private var iconResId: Int = 0
 
@@ -77,11 +73,8 @@ open class EggPreference : Preference {
         }
 
         val arrays = context.obtainStyledAttributes(attrs, R.styleable.EggPreference)
-        supportAdaptiveIconMode =
-            arrays.getInt(R.styleable.EggPreference_supportAdaptiveIcon, MODE_DEFAULT)
-        if (supportAdaptiveIconMode == MODE_CORNERS) {
-            iconRadius = arrays.getDimension(R.styleable.EggPreference_iconRadius, 0f)
-        }
+        supportAdaptiveIcon =
+            arrays.getBoolean(R.styleable.EggPreference_supportAdaptiveIcon, false)
         val className = arrays.getString(R.styleable.EggPreference_android_targetClass)
         if (className != null) {
             val intent = Intent()
@@ -136,14 +129,17 @@ open class EggPreference : Preference {
         val icon = holder.findViewById(android.R.id.icon) as? ImageView
         if (icon != null) {
             icon.dispose()
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O && supportAdaptiveIconMode != MODE_DEFAULT) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O && supportAdaptiveIcon) {
                 // support adaptive-icon
                 icon.load(iconResId) {
                     val shapePath = IconShapeOverride.getAppliedValue(context)
-                    if (!TextUtils.isEmpty(shapePath)) {
-                        transformations(SupportAdaptiveIconTransformation(shapePath))
-                    } else {
-                        transformations(CircleCropTransformation())
+                    if (!IconShapeOverride.isSquareShape(context, shapePath)) {
+                        if (!TextUtils.isEmpty(shapePath)) {
+                            transformations(SupportAdaptiveIconTransformation(shapePath))
+                        } else {
+                            transformations(CircleCropTransformation())
+                        }
+                        Region()
                     }
                 }
             }
@@ -152,6 +148,10 @@ open class EggPreference : Preference {
     }
 
     private class SupportAdaptiveIconTransformation(val maskPathStr: String) : Transformation {
+
+        companion object {
+            private const val MASK_SIZE = 100f
+        }
 
         override val cacheKey: String = "${javaClass.name}-$maskPathStr"
 
@@ -162,33 +162,20 @@ open class EggPreference : Preference {
 
             val safeConfig = input.config ?: Bitmap.Config.ARGB_8888
             val output = createBitmap(outputWidth, outputHeight, safeConfig)
-            output.applyCanvas {
+            return output.applyCanvas {
                 drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
                 paint.shader = getBitmapShader(input, outputWidth, outputHeight)
-                val path = getPath(maskPathStr, outputWidth, outputHeight)
+                val path = getMaskPath(maskPathStr, outputWidth, outputHeight)
                 drawPath(path, paint)
+
                 setBitmap(null)
             }
-            return output
         }
 
-        private fun getPath(pathStr: String, outputWidth: Int, outputHeight: Int): Path {
+        private fun getMaskPath(pathStr: String, outputWidth: Int, outputHeight: Int): Path {
             val matrix = Matrix()
             val path = PathParser.createPathFromPathData(pathStr)
-            val pathRectF = RectF()
-            path.computeBounds(pathRectF, true)
-
-            val multiplier = DecodeUtils.computeSizeMultiplier(
-                srcWidth = pathRectF.width().toInt(),
-                srcHeight = pathRectF.height().toInt(),
-                dstWidth = outputWidth,
-                dstHeight = outputHeight,
-                scale = Scale.FILL
-            ).toFloat()
-            val dx = (outputWidth - multiplier * pathRectF.width().toInt()) / 2
-            val dy = (outputHeight - multiplier * pathRectF.height().toInt()) / 2
-            matrix.setTranslate(dx, dy)
-            matrix.preScale(multiplier, multiplier)
+            matrix.setScale(outputWidth / MASK_SIZE, outputHeight / MASK_SIZE)
             path.transform(matrix)
             return path
         }
@@ -196,7 +183,7 @@ open class EggPreference : Preference {
         private fun getBitmapShader(
             input: Bitmap,
             outputWidth: Int,
-            outputHeight: Int
+            outputHeight: Int,
         ): BitmapShader {
             val matrix = Matrix()
             val multiplier = DecodeUtils.computeSizeMultiplier(
