@@ -18,7 +18,7 @@
         <!-- Option to not change the icon shape on home screen. [CHAR LIMIT=50] -->
         <item>@string/icon_shape_system_default</item>
         <item>@string/icon_shape_square</item>
-        <item>@string/icon_shape_rounded_square</item>
+        <item>@string/icon_shape_rounded_corners</item>
         <item>@string/icon_shape_squircle</item>
         <item>@string/icon_shape_circle</item>
         <item>@string/icon_shape_teardrop</item>
