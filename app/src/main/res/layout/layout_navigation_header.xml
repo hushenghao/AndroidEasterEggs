@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="20dp"
+    android:paddingBottom="26dp"
     tools:background="@drawable/img_nav_header_bg"
     tools:layout_height="wrap_content"
     tools:layout_width="280dp">
@@ -14,7 +14,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="40dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/android_14"
         app:layout_constraintStart_toStartOf="parent"
