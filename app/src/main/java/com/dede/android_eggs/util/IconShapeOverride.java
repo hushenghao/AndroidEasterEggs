@@ -132,16 +132,29 @@ public class IconShapeOverride {
 
     public static void apply(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O &&
-                Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                Build.VERSION.SDK_INT < Build.VERSION_CODES.Q &&
+                isEnabled()
+        ) {
             Api26Impl.apply(context);
         }
     }
 
     public static Resources getOverrideResources(Context context, Resources parent) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && isEnabled()) {
             return Api29Impl.getOverrideResources(context, parent);
         }
         return parent;
+    }
+
+    public static boolean isEnabled() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            // support adaptive-icon
+            return true;
+        }
+        if (Utils.isXiaomi()) {
+            return false;
+        }
+        return isSupported();
     }
 
     public static boolean isSupported() {

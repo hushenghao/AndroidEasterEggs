@@ -2,7 +2,7 @@ package com.dede.android_eggs.settings
 
 import android.app.Dialog
 import android.app.LocaleManager
-import android.content.DialogInterface
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -76,7 +76,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
             requirePreference<ListPreference>(IconShapeOverride.KEY_PREFERENCE).apply {
                 icon = createFontIcon("\ue920")
-                //isEnabled = IconShapeOverride.isSupported()
+                isEnabled = IconShapeOverride.isEnabled()
                 IconShapeOverride.handlePreferenceUi(this)
             }
 
@@ -95,28 +95,47 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
         private fun configureChangeLanguagePreference() {
             requirePreference<Preference>(PREF_LANGUAGE).apply {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    val localeManager = requireContext().getSystemService<LocaleManager>()
-                    if (localeManager != null) {
-                        val locales = localeManager.applicationLocales
-                        if (!locales.isEmpty) {
-                            summary = locales.get(0).displayName
-                        }
-                    }
                     setOnPreferenceClickListener {
-                        startActivity(createActionAppLocaleSettingsIntent())
+                        runCatching {
+                            startActivity(createActionAppLocaleSettingsIntent())
+                        }
                         return@setOnPreferenceClickListener true
                     }
                 }
+                summary = getLocalDisplayName(requireContext())
                 isEnabled = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
                 icon = createFontIcon("\ue894")
             }
+        }
+
+        private fun getLocalDisplayName(context: Context): String? {
+            var name: String? = null
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                val localeManager = context.getSystemService<LocaleManager>()
+                if (localeManager != null) {
+                    val locales = localeManager.applicationLocales
+                    if (!locales.isEmpty) {
+                        name = locales.get(0).displayName
+                    }
+                }
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                val locales = context.resources.configuration.locales
+                if (!locales.isEmpty) {
+                    name = locales.get(0).displayName
+                }
+            } else {
+                @Suppress("DEPRECATION")
+                val locale = context.resources.configuration.locale
+                name = locale.displayName
+            }
+            return name
         }
 
         @RequiresApi(Build.VERSION_CODES.TIRAMISU)
         private fun createActionAppLocaleSettingsIntent(): Intent = Intent(
             android.provider.Settings.ACTION_APP_LOCALE_SETTINGS,
             Uri.fromParts("package", requireActivity().packageName, null)
-        )
+        ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         private fun createFontIcon(unicode: String): Drawable {
             return FontIconsDrawable(requireContext(), unicode, 36f).apply {
