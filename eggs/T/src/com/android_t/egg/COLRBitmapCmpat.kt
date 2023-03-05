@@ -11,10 +11,7 @@ import coil.imageLoader
 import coil.request.ImageRequest
 import com.android_t.egg.PlatLogoActivity.Bubble
 import com.dede.basic.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import kotlin.math.max
 import kotlin.math.roundToInt
 
@@ -37,6 +34,7 @@ fun Canvas.drawCOLRBitmap(bubble: Bubble, p: Float, paint: Paint) {
     this.drawBitmap(bubble.bitmap, null, rectF, paint)
 }
 
+private var job: Job? = null
 fun Array<Bubble>.convertCOLRBitmap(activity: Activity, result: () -> Unit) {
     val sizeMap = HashMap<String, Float>()
     var r: Float?
@@ -49,7 +47,8 @@ fun Array<Bubble>.convertCOLRBitmap(activity: Activity, result: () -> Unit) {
             sizeMap[bubble.text] = max(r, bubble.r)
         }
     }
-    GlobalScope.launch {
+    job?.cancel()
+    job = GlobalScope.launch(Dispatchers.IO) {
         for ((i, bubble) in this@convertCOLRBitmap.withIndex()) {
             val id: Int = activity.getIdentifier(
                 String.format(
@@ -60,7 +59,7 @@ fun Array<Bubble>.convertCOLRBitmap(activity: Activity, result: () -> Unit) {
                 activity.packageName
             )
             val size = ((sizeMap[bubble.text] ?: 0f) * 2).roundToInt()
-            if (bubble.r > 0f) {
+            if (size > 0f) {
                 val request = ImageRequest.Builder(activity)
                     .data(id)
                     .size(size)
@@ -74,7 +73,9 @@ fun Array<Bubble>.convertCOLRBitmap(activity: Activity, result: () -> Unit) {
             }
             if (i >= this@convertCOLRBitmap.size - 1) {
                 withContext(Dispatchers.Main) {
-                    result.invoke()
+                    if (isActive) {
+                        result.invoke()
+                    }
                 }
             }
         }
