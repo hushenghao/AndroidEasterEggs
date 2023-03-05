@@ -1,5 +1,6 @@
 package com.dede.android_eggs.main
 
+import android.animation.ObjectAnimator
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
@@ -29,10 +30,6 @@ class EasterEggsActivity : AppCompatActivity(), MenuProvider {
 
         navigationViewController.setContentView()
 
-        if (savedInstanceState == null) {
-            EasterEggsSplash(this).welcome()
-        }
-
         addMenuProvider(this, this)
     }
 
@@ -53,7 +50,21 @@ class EasterEggsActivity : AppCompatActivity(), MenuProvider {
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        SettingsFragment().show(supportFragmentManager, "Settings")
+        when (menuItem.itemId) {
+            R.id.menu_settings -> {
+                val icon = menuItem.icon as FontIconsDrawable
+                SettingsFragment().apply {
+                    onSlide = {
+                        icon.setRotate(360f * it)
+                    }
+                    show(supportFragmentManager, "Settings")
+                }
+                ObjectAnimator.ofFloat(icon, "rotate", 0f, 360f)
+                    .setDuration(500)
+                    .start()
+            }
+            else -> return false
+        }
         return true
     }
 

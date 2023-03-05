@@ -2,11 +2,13 @@ package com.dede.android_eggs.settings
 
 import android.app.Dialog
 import android.app.LocaleManager
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import androidx.preference.ListPreference
@@ -21,15 +23,31 @@ import com.dede.android_eggs.util.NightModeManager
 import com.dede.android_eggs.util.WindowEdgeUtilsAccessor
 import com.dede.android_eggs.util.requirePreference
 import com.dede.basic.dp
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
+    var onSlide: Function1<Float, Unit>? = null
+
+    private var lastSlideOffset: Float = -1f
+    private val callback = object : BottomSheetBehavior.BottomSheetCallback() {
+        override fun onStateChanged(bottomSheet: View, newState: Int) {
+        }
+
+        override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            if (lastSlideOffset == slideOffset) return
+            onSlide?.invoke(slideOffset)
+            lastSlideOffset = slideOffset
+        }
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
         WindowEdgeUtilsAccessor.applyEdgeToEdge(dialog.window!!, true)
         val bottomSheetBehavior = dialog.behavior
+        bottomSheetBehavior.addBottomSheetCallback(callback)
         bottomSheetBehavior.isFitToContents = true
         bottomSheetBehavior.skipCollapsed = true
         dialog.dismissWithAnimation = true
