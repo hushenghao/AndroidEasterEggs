@@ -36,4 +36,28 @@
     
     <string name="message_trypophobia_warning">This is a warning to those with &lt;b&gt;Trypophobia&lt;/b&gt; that some images may cause discomfort. Do you want to continue?</string>
 
+    <string name="label_settings">Settings</string>
+
+    <!-- Developer setting to change the shape of icons on home screen. [CHAR LIMIT=50] -->
+    <string name="icon_shape_override_label">Icon Shape</string>
+    <!-- Option to not change the icon shape on home screen and use the system default setting instead. [CHAR LIMIT=50] -->
+    <string name="icon_shape_system_default">Set by System</string>
+    <!-- Option to change the shape of the home screen icons to a square. [CHAR LIMIT=50] -->
+    <string name="icon_shape_square">Square</string>
+    <!-- Option to change the shape of the home screen icons to a squircle. This represents the name of the shape somewhere between a circle and a square. [CHAR LIMIT=50] -->
+    <string name="icon_shape_squircle">Squircle</string>
+    <!-- Option to change the shape of the home screen icons to a circle. [CHAR LIMIT=50] -->
+    <string name="icon_shape_circle">Circle</string>
+    <!-- Option to change the shape of the home screen icons to a teardrop. This represents the name of the shape similar to a circle with with the bottom right corner pushed out like a square [CHAR LIMIT=50] -->
+    <string name="icon_shape_teardrop">Teardrop</string>
+    <string name="icon_shape_rounded_corners">Rounded Corners</string>
+
+    <!-- Message shown in the progress dialog when the icon shape override is being applied [CHAR LIMIT=100]-->
+    <string name="icon_shape_override_progress">Applying icon shape changes</string>
+
+    <string name="pref_title_language">Language</string>
+    <string name="pref_title_version">Version</string>
+    <string name="pref_title_theme">Theme</string>
+    <string name="summary_theme_follow_system">Follow system</string>
+    <string name="summary_theme_dark_mode">Dark theme</string>
 </resources>

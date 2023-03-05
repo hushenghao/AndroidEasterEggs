@@ -24,7 +24,11 @@ platform :android do
   desc "Submit a new Beta Build to Pgyer"
   lane :beta do
     gradle(task: "clean assembleRelease")
-    pgyer(api_key: ENV["PGYER_API_KEY"])
+    # https://www.pgyer.com/doc/view/fastlane
+    pgyer(
+      api_key: ENV["PGYER_API_KEY"],
+      update_description: changelog_from_git_commits(commits_count: 3)
+    )
     # crashlytics
 
     # sh "your_script.sh"
@@ -34,6 +38,15 @@ platform :android do
   desc "Deploy a new version to the Google Play"
   lane :deploy do
     gradle(task: "clean bundleRelease")
-    upload_to_play_store
+
+    # https://docs.fastlane.tools/actions/upload_to_play_store/
+    # skip_upload_metadata	Whether to skip uploading metadata, changelogs not included	false
+    # skip_upload_images	Whether to skip uploading images, screenshots not included	false
+    # skip_upload_screenshots	Whether to skip uploading SCREENSHOTS	false
+    upload_to_play_store(
+       skip_upload_metadata: true,
+       skip_upload_images: true,
+       skip_upload_screenshots: true
+    )
   end
 end

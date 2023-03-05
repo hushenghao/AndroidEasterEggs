@@ -34,5 +34,6 @@ dependencies {
     implementation(deps.androidx.core.ktx)
     implementation(deps.androidx.recyclerview)
     implementation project(path: ':basic')
+    implementation(deps.io.coil)
 }
 

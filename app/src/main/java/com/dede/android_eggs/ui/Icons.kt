@@ -27,6 +27,9 @@ object Icons {
     /** policy */
     const val POLICY = "\uEA17"
 
+    /** settings */
+    const val SETTINGS = "\uE8B8"
+
     /** star */
     const val STAR = "\uE838"
 

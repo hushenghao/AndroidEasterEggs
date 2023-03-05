@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:targetApi="n_mr1">
 
     <shortcut
         android:enabled="true"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/t_icon"
         android:shortcutDisabledMessage="@string/t_egg_name"
         android:shortcutId="android_t"
         android:shortcutLongLabel="@string/t_egg_name"
@@ -16,7 +18,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/s_icon"
+        android:icon="@drawable/s_icon_1"
         android:shortcutDisabledMessage="@string/s_egg_name"
         android:shortcutId="android_s"
         android:shortcutLongLabel="@string/s_egg_name"

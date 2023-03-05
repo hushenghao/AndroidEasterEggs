@@ -29,4 +29,21 @@
     <string name="label_timeline_releases">版本</string>
 
     <string name="message_trypophobia_warning">对有&lt;b&gt;密集恐惧症&lt;/b&gt;的提示，一些画面可能会引起不适。是否继续？</string>
+
+    <string name="label_settings">设置</string>
+
+    <string name="icon_shape_override_label">"图标形状"</string>
+    <string name="icon_shape_system_default">"系统设置"</string>
+    <string name="icon_shape_square">"方形"</string>
+    <string name="icon_shape_squircle">"方圆形"</string>
+    <string name="icon_shape_circle">"圆形"</string>
+    <string name="icon_shape_teardrop">"泪珠形"</string>
+    <string name="icon_shape_rounded_corners">圆角方形</string>
+    <string name="icon_shape_override_progress">"正在应用图标形状更改"</string>
+
+    <string name="pref_title_language">语言</string>
+    <string name="pref_title_version">版本</string>
+    <string name="pref_title_theme">主题</string>
+    <string name="summary_theme_follow_system">跟随系统</string>
+    <string name="summary_theme_dark_mode">深色主题</string>
 </resources>

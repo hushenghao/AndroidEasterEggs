@@ -1,0 +1,4 @@
+- Optimized egg ICONS
+- Enhanced Settings
+- Streamlined T-Rex Run!
+- Other function optimization

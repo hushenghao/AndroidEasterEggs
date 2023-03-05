@@ -2,6 +2,8 @@
 e1ab
 # brightness_4
 e3a9
+# brightness_6
+e3ab
 
 # home
 e88a
@@ -20,3 +22,12 @@ ea17
 e7c8
 # tips_and_updates
 e79a
+
+# settings
+e8b8
+# rounded_corner
+e920
+# language
+e894
+# info
+e88e

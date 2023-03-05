@@ -7,51 +7,49 @@
         app:title="@string/header_collection">
 
         <com.dede.android_eggs.ui.TimelinePreference
-            app:icon="@drawable/android_14"
+            app:icon="@drawable/u_icon"
+            app:supportAdaptiveIcon="true"
             app:title="@string/title_android_u" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_t"
-            app:icon="@drawable/t_platlogo"
-            app:iconPadding="1.5dp"
+            app:icon="@drawable/t_icon"
             app:summary="@string/t_egg_name"
+            app:supportAdaptiveIcon="true"
             app:title="@string/title_android_t" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_s"
-            app:icon="@drawable/s_icon"
-            app:iconPadding="1.5dp"
+            app:icon="@drawable/s_icon_1"
             app:summary="@string/s_egg_name"
+            app:supportAdaptiveIcon="true"
             app:title="@string/title_android_s" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_r"
             app:icon="@drawable/r_icon"
-            app:iconPadding="1.5dp"
             app:summary="@string/r_egg_name"
-            app:supportAdaptiveIcon="oval"
+            app:supportAdaptiveIcon="true"
             app:title="@string/title_android_r" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_q"
             app:icon="@drawable/q_icon"
-            app:iconPadding="1.5dp"
             app:summary="@string/q_egg_name"
-            app:supportAdaptiveIcon="oval"
+            app:supportAdaptiveIcon="true"
             app:title="@string/title_android_q" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_p"
             app:icon="@drawable/p_icon"
-            app:iconPadding="1.5dp"
             app:summary="@string/p_app_name"
-            app:supportAdaptiveIcon="oval"
+            app:supportAdaptiveIcon="true"
             app:title="@string/title_android_p" />
 
         <com.dede.android_eggs.ui.EggPreference
-            app:icon="@drawable/o_icon"
-            app:iconPadding="-2dp"
+            app:icon="@drawable/o_icon_1"
             app:summary="@string/o_app_name"
+            app:supportAdaptiveIcon="true"
             app:title="@string/title_android_o_1">
             <intent
                 android:targetClass="com.android_o.egg.PlatLogoActivity"
@@ -64,29 +62,32 @@
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_o"
-            app:icon="@drawable/o_icon"
-            app:iconPadding="-2dp"
+            app:icon="@drawable/o_icon_1"
             app:summary="@string/o_app_name"
+            app:supportAdaptiveIcon="true"
             app:title="@string/title_android_o" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_n"
-            app:icon="@drawable/n_icon"
+            app:icon="@drawable/n_icon_1"
             app:summary="@string/n_app_name"
+            app:supportAdaptiveIcon="true"
             app:title="@string/title_android_n"
             app:versionComment="@string/version_comment_android_n" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_m"
-            app:icon="@drawable/m_icon"
+            app:icon="@drawable/m_icon_1"
             app:summary="@string/m_mland"
+            app:supportAdaptiveIcon="true"
             app:title="@string/title_android_m"
             app:versionComment="@string/version_comment_android_m" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_l"
-            app:icon="@drawable/l_icon"
+            app:icon="@drawable/l_icon_1"
             app:summary="@string/l_lland"
+            app:supportAdaptiveIcon="true"
             app:title="@string/title_android_l"
             app:versionComment="@string/version_comment_android_l" />
 

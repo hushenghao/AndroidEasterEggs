@@ -1,13 +1,13 @@
 package com.dede.android_eggs
 
-import android.app.Application
 import android.content.Context
 import com.dede.android_eggs.util.ActivityActionDispatcher
+import com.dede.android_eggs.util.IconShapeOverride
 import com.dede.android_eggs.util.NightModeManager
 import com.dede.basic.GlobalContext
 import me.weishu.reflection.Reflection
 
-class EasterEggsApp : Application() {
+class EasterEggsApp : IconShapeOverride.App() {
 
     override fun attachBaseContext(base: Context?) {
         Reflection.unseal(base)

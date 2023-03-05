@@ -96,6 +96,7 @@ dependencies {
     implementation(deps.androidx.constraintlayout)
     implementation(deps.androidx.browser)
     implementation(deps.google.material)
+    implementation(deps.io.coil)
     implementation(deps.free.reflection)
     debugImplementation(deps.leakcanary)
     implementation(project(":basic"))
