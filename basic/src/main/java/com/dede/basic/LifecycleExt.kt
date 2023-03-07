@@ -36,7 +36,9 @@ val Activity.androidLifecycle: Lifecycle
         if (this is ComponentActivity) {
             return lifecycle
         }
-
+        // Can make use of [androidx.lifecycle.ReportFragment],
+        // But the API may change.
+        //return ReportFragmentAccessor.injectIfNeededIn(this)
         val fm = fragmentManager
         var current = fm.findFragmentByTag(TAG_FRAGMENT) as? LifecycleFragment
         if (current == null) {
@@ -61,8 +63,8 @@ internal class LifecycleFragment : android.app.Fragment(), LifecycleOwner {
 
     private val lifecycleRegistry = LifecycleRegistry(this)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
     }
 
