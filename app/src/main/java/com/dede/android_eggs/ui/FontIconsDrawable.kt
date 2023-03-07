@@ -10,6 +10,7 @@ import android.text.TextPaint
 import androidx.annotation.AttrRes
 import androidx.annotation.Dimension
 import androidx.annotation.FloatRange
+import androidx.annotation.Keep
 import androidx.core.graphics.component1
 import androidx.core.graphics.component2
 import androidx.core.graphics.component3
@@ -69,10 +70,17 @@ class FontIconsDrawable(
         }
     }
 
-    fun setRotate(@FloatRange(from = 0.0, to = 360.0) degree: Float) {
-        this.degree = degree % 360
-        invalidateSelf()
+    @Keep
+    fun setRotate(@FloatRange(from = -360.0, to = 360.0) degree: Float) {
+        val newDegree = degree % 360f
+        if (newDegree != this.degree) {
+            this.degree = newDegree
+            invalidateSelf()
+        }
     }
+
+    @Keep
+    fun getRotate(): Float = this.degree
 
     fun setColor(color: Int) {
         if (color != paint.color) {

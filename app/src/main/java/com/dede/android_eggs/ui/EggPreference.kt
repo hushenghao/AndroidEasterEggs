@@ -129,7 +129,7 @@ open class EggPreference : Preference {
         val icon = holder.findViewById(android.R.id.icon) as? ImageView
         if (icon != null) {
             icon.dispose()
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O && supportAdaptiveIcon) {
+            if (supportAdaptiveIcon && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
                 // support adaptive-icon
                 icon.load(iconResId) {
                     val shapePath = IconShapeOverride.getAppliedValue(context)
