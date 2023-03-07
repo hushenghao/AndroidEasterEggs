@@ -124,6 +124,7 @@
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_g"
             app:icon="@drawable/ic_android_gingerbread"
+            app:iconPadding="-2dp"
             app:summary="@string/g_egg_name"
             app:title="@string/title_android_g"
             app:versionComment="@string/version_comment_android_g" />
