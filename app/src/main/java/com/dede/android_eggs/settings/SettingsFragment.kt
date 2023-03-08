@@ -74,7 +74,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
             }
 
             requirePreference<ListPreference>(IconShapeOverride.KEY_PREFERENCE).apply {
-                icon = createFontIcon(Icons.LANGUAGE)
+                icon = createFontIcon(Icons.ROUNDED_CORNER)
                 isEnabled = IconShapeOverride.isEnabled()
                 IconShapeOverride.handlePreferenceUi(this)
             }
@@ -94,7 +94,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
                 }
                 summary = getLocalDisplayName(requireContext())
                 isEnabled = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-                icon = createFontIcon("\ue894")
+                icon = createFontIcon(Icons.LANGUAGE)
             }
         }
 
