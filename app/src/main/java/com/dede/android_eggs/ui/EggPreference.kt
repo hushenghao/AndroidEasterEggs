@@ -10,14 +10,21 @@ import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.AttributeSet
+import android.view.ContextMenu
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.view.View.OnCreateContextMenuListener
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.content.res.TypedArrayUtils
 import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.PathParser
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
+import androidx.core.graphics.drawable.IconCompat
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.core.view.setPadding
@@ -61,6 +68,8 @@ open class EggPreference : Preference {
     private val finalSummary: CharSequence?
     private val versionComment: String?
 
+    private lateinit var onCreateShortcutListener: OnCreateShortcutListener
+
     constructor(context: Context) : this(context, null)
 
     @SuppressLint("RestrictedApi", "PrivateResource")
@@ -77,8 +86,9 @@ open class EggPreference : Preference {
             arrays.getBoolean(R.styleable.EggPreference_supportAdaptiveIcon, false)
         val className = arrays.getString(R.styleable.EggPreference_android_targetClass)
         if (className != null) {
-            val intent = Intent()
+            val intent = Intent(Intent.ACTION_VIEW)
                 .setClassName(context, className)
+                .addFlags(ACTIVITY_TASK_FLAGS)
             setIntent(intent)
         }
         iconPadding =
@@ -94,56 +104,109 @@ open class EggPreference : Preference {
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
 
-        val title = holder.findViewById(android.R.id.title) as? TextView
-        if (title != null) {
-            if (!showSuffix && finalTitle != null) {
-                title.text = finalTitle.replace(suffixRegex, "")
-            }
+        configureTitle(holder, finalTitle)
 
-            if (versionComment != null) {
-                val text = title.text.toString()
-                val result = versionRegex.find(text)
-                if (result != null) {
-                    val range = result.range
-                    title.movementMethod = LinkMovementMethod.getInstance()
-                    title.highlightColor = Color.TRANSPARENT
-                    val span = text.toSpannable()
-                    if (range.first > 0) {
-                        span[0, range.first] = DefaultClickSpan(this)
-                    }
-                    if (range.last + 1 < text.length) {
-                        span[range.last + 1, text.length] = DefaultClickSpan(this)
-                    }
-                    span[range.first, range.last + 1] =
-                        CommentClickSpan(icon, finalTitle, versionComment)
-                    title.text = span
-                }
-            }
+        configureSummary(holder, finalSummary)
+
+        configureIcon(holder)
+
+        configureLongPress(holder)
+    }
+
+    private fun configureTitle(holder: PreferenceViewHolder, finalTitle: CharSequence?) {
+        val title = holder.findViewById(android.R.id.title) as? TextView ?: return
+        if (!showSuffix && finalTitle != null) {
+            title.text = finalTitle.replace(suffixRegex, "")
         }
 
+        if (versionComment != null) {
+            val text = title.text.toString()
+            val result = versionRegex.find(text)
+            if (result != null) {
+                val range = result.range
+                title.movementMethod = LinkMovementMethod.getInstance()
+                title.highlightColor = Color.TRANSPARENT
+                val span = text.toSpannable()
+                if (range.first > 0) {
+                    span[0, range.first] = DefaultClickSpan(this)
+                }
+                if (range.last + 1 < text.length) {
+                    span[range.last + 1, text.length] = DefaultClickSpan(this)
+                }
+                span[range.first, range.last + 1] =
+                    CommentClickSpan(icon, finalTitle, versionComment)
+                title.text = span
+            }
+        }
+    }
+
+    private fun configureSummary(holder: PreferenceViewHolder, finalSummary: CharSequence?) {
         if (!showSuffix && finalSummary != null) {
             val summary = holder.findViewById(android.R.id.summary) as? TextView
             summary?.text = finalSummary.replace(suffixRegex, "")
         }
+    }
 
-        val icon = holder.findViewById(android.R.id.icon) as? ImageView
-        if (icon != null) {
-            icon.dispose()
-            if (supportAdaptiveIcon && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-                // support adaptive-icon
-                icon.load(iconResId) {
-                    val shapePath = IconShapeOverride.getAppliedValue(context)
-                    if (!IconShapeOverride.isSquareShape(context, shapePath)) {
-                        if (!TextUtils.isEmpty(shapePath)) {
-                            transformations(SupportAdaptiveIconTransformation(shapePath))
-                        } else {
-                            transformations(CircleCropTransformation())
-                        }
-                        Region()
+    private fun configureIcon(holder: PreferenceViewHolder) {
+        val icon = holder.findViewById(android.R.id.icon) as? ImageView ?: return
+        icon.dispose()
+        if (supportAdaptiveIcon && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            // support adaptive-icon
+            icon.load(iconResId) {
+                val shapePath = IconShapeOverride.getAppliedValue(context)
+                if (!IconShapeOverride.isSquareShape(context, shapePath)) {
+                    if (!TextUtils.isEmpty(shapePath)) {
+                        transformations(SupportAdaptiveIconTransformation(shapePath))
+                    } else {
+                        transformations(CircleCropTransformation())
                     }
+                    Region()
                 }
             }
-            icon.setPadding(iconPadding)
+        }
+        icon.setPadding(iconPadding)
+    }
+
+    private fun configureLongPress(holder: PreferenceViewHolder) {
+        var enableLongPress = intent != null && key != null
+        if (enableLongPress && !::onCreateShortcutListener.isInitialized) {
+            onCreateShortcutListener = OnCreateShortcutListener(this)
+        }
+        enableLongPress = enableLongPress && onCreateShortcutListener.isSupport()
+        holder.itemView.setOnCreateContextMenuListener(if (enableLongPress) onCreateShortcutListener else null)
+        holder.itemView.isLongClickable = enableLongPress
+    }
+
+    private class OnCreateShortcutListener(private val preference: EggPreference) :
+        OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
+
+        fun isSupport(): Boolean {
+            return ShortcutManagerCompat.isRequestPinShortcutSupported(preference.context)
+        }
+
+        override fun onCreateContextMenu(
+            menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?,
+        ) {
+            menu.setHeaderTitle(preference.finalTitle)
+            menu.add(Menu.NONE, Menu.NONE, Menu.NONE, R.string.label_add_shortcut)
+                .setOnMenuItemClickListener(this)
+        }
+
+        override fun onMenuItemClick(item: MenuItem): Boolean {
+            val intent = preference.intent
+            val key = preference.key
+            val label = preference.finalSummary
+            if (intent == null || key == null || TextUtils.isEmpty(label) || !isSupport()) return false
+
+            val context = preference.context
+            val shortcut = ShortcutInfoCompat.Builder(context, key)
+                .setIcon(IconCompat.createWithResource(context, preference.iconResId))
+                .setIntent(intent)
+                .setShortLabel(label!!)
+                .setLongLabel(label)
+                .build()
+            ShortcutManagerCompat.requestPinShortcut(context, shortcut, null)
+            return true
         }
     }
 
@@ -239,7 +302,6 @@ open class EggPreference : Preference {
     override fun performClick() {
         val intent = this.intent
         if (intent != null) {
-            intent.addFlags(ACTIVITY_TASK_FLAGS)
             super.performClick()
             return
         }

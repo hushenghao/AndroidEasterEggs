@@ -46,4 +46,5 @@
     <string name="pref_title_theme">主题</string>
     <string name="summary_theme_follow_system">跟随系统</string>
     <string name="summary_theme_dark_mode">深色主题</string>
+    <string name="label_add_shortcut">添加快捷方式</string>
 </resources>

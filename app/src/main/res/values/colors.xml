@@ -5,5 +5,7 @@
     <color name="teal_200">#80cbc4</color>
     <color name="teal_700">#00796b</color>
 
-    <color name="u_icon_bg">#3ddc84</color>
+    <color name="ic_android_udc_bg">#3ddc84</color>
+    <color name="ic_android_lollipop_bg">#9B27AF</color>
+    <color name="ic_android_nougat_bg">#B5DDEF</color>
 </resources>

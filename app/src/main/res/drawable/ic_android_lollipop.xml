@@ -19,7 +19,7 @@ Copyright (C) 2014 The Android Open Source Project
     android:viewportWidth="560.0"
     android:viewportHeight="560.0">
     <path
-        android:fillColor="@color/l_icon_1_bg"
+        android:fillColor="@color/ic_android_lollipop_bg"
         android:pathData="M0,0 L560,0 L560,560 L0,560z" />
     <group
         android:scaleX="1.1"

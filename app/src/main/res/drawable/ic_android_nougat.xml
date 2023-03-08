@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/o_octo_bg" />
+    <item android:drawable="@color/ic_android_nougat_bg" />
     <item>
         <inset
-            android:drawable="@drawable/o_icon_1_fg"
+            android:drawable="@drawable/ic_android_nougat_fg"
             android:inset="-18dp" />
     </item>
 </layer-list>
