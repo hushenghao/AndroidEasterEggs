@@ -25,10 +25,7 @@
         android:persistent="false"
         android:title="@string/pref_title_language" />
 
-    <Preference
-        android:key="pref_version"
-        android:persistent="false"
-        android:title="@string/pref_title_version" />
+    <com.dede.android_eggs.ui.VersionPreference />
 
 </PreferenceScreen>
 

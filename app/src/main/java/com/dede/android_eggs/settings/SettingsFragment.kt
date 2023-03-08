@@ -15,9 +15,9 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
-import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.FontIconsDrawable
+import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.util.IconShapeOverride
 import com.dede.android_eggs.util.NightModeManager
 import com.dede.android_eggs.util.WindowEdgeUtilsAccessor
@@ -59,14 +59,13 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
         companion object {
             private const val PREF_LANGUAGE = "pref_language"
-            private const val PREF_VERSION = "pref_version"
         }
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             addPreferencesFromResource(R.xml.preference_settings)
 
             requirePreference<SwitchPreferenceCompat>(NightModeManager.KEY_NIGHT_MODE).apply {
-                icon = createFontIcon("\ue3ab")
+                icon = createFontIcon(Icons.BRIGHTNESS_6)
                 setOnPreferenceChangeListener { _, newValue ->
                     NightModeManager(requireContext())
                         .setNightMode(newValue as Boolean)
@@ -75,18 +74,9 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
             }
 
             requirePreference<ListPreference>(IconShapeOverride.KEY_PREFERENCE).apply {
-                icon = createFontIcon("\ue920")
+                icon = createFontIcon(Icons.LANGUAGE)
                 isEnabled = IconShapeOverride.isEnabled()
                 IconShapeOverride.handlePreferenceUi(this)
-            }
-
-            requirePreference<Preference>(PREF_VERSION).apply {
-                icon = createFontIcon("\ue88e")
-                summary = requireContext().getString(
-                    R.string.label_version,
-                    BuildConfig.VERSION_NAME,
-                    BuildConfig.VERSION_CODE
-                )
             }
 
             configureChangeLanguagePreference()
@@ -145,7 +135,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
         override fun onPreferenceDisplayDialog(
             caller: PreferenceFragmentCompat,
-            pref: Preference
+            pref: Preference,
         ): Boolean {
             if (pref is ListPreference) {
                 MaterialListPreferenceDialog.newInstance(pref).show()

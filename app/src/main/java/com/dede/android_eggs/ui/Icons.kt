@@ -9,6 +9,9 @@ object Icons {
     /** brightness_4 */
     const val BRIGHTNESS_4 = "\uE3A9"
 
+    /** brightness_6 */
+    const val BRIGHTNESS_6 = "\uE3AB"
+
     /** brightness_auto */
     const val BRIGHTNESS_AUTO = "\uE1AB"
 
@@ -21,11 +24,20 @@ object Icons {
     /** home */
     const val HOME = "\uE88A"
 
+    /** info */
+    const val INFO = "\uE88E"
+
     /** interests */
     const val INTERESTS = "\uE7C8"
 
+    /** language */
+    const val LANGUAGE = "\uE894"
+
     /** policy */
     const val POLICY = "\uEA17"
+
+    /** rounded_corner */
+    const val ROUNDED_CORNER = "\uE920"
 
     /** settings */
     const val SETTINGS = "\uE8B8"
