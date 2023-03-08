@@ -4,6 +4,7 @@
 
 ![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-red?logo=android) ![GitHub top language](https://img.shields.io/github/languages/top/hushenghao/AndroidEasterEggs?logo=kotlin)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) [![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/releases)
+[![Alt](https://repobeats.axiom.co/api/embed/66c4053d3e594aed0242e0bac779378ef4da9129.svg "Repobeats analytics image")](https://github.com/hushenghao/AndroidEasterEggs/pulse)
 
 ![logo](./images/ic_launcher_round.png)
 
@@ -50,9 +51,6 @@
 * <span id='id_full_egg_mini_sdk'>完整体验彩蛋所需要的最低SDK版本。</span>
 * <span id='id_color_vector_fonts'>[Android 13](https://developer.android.google.cn/about/versions/13/features#color-vector-fonts) 可支持呈现 [COLRv1](https://developer.chrome.com/blog/colrv1-fonts/) 字体，并将系统表情符号更新成了 COLRv1 格式。</span>
 * <span id='id_egg_name'>老版本的彩蛋没有具体命名，这里使用系统版本别名。</span>
-
-## 活动
-[![Alt](https://repobeats.axiom.co/api/embed/66c4053d3e594aed0242e0bac779378ef4da9129.svg "Repobeats analytics image")](https://github.com/hushenghao/AndroidEasterEggs/pulse)
 
 ## 测试
 

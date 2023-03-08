@@ -4,6 +4,7 @@ Organize the Easter eggs of the official versions of the Android system.
 
 ![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-red?logo=android) ![GitHub top language](https://img.shields.io/github/languages/top/hushenghao/AndroidEasterEggs?logo=kotlin)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) [![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/releases)
+[![Alt](https://repobeats.axiom.co/api/embed/66c4053d3e594aed0242e0bac779378ef4da9129.svg "Repobeats analytics image")](https://github.com/hushenghao/AndroidEasterEggs/pulse)
 
 ![logo](./images/ic_launcher_round.png)
 
@@ -50,9 +51,6 @@ The project contains the complete code of the system Easter eggs, which aims to 
 * <span id='id_full_egg_mini_sdk'>The minimum SDK version required to fully experience Easter Egg.</span>
 * <span id='id_color_vector_fonts'>Starting in [Android 13](https://developer.android.google.cn/about/versions/13/features#color-vector-fonts), the system includes rendering support for [COLRv1](https://developer.chrome.com/blog/colrv1-fonts/) fonts and updates system emoji to the COLRv1 format.</span>
 * <span id='id_egg_name'>There is no specific name for the old version of Easter eggs, and the system version alias are used here.</span>
-
-## Activity
-[![Alt](https://repobeats.axiom.co/api/embed/66c4053d3e594aed0242e0bac779378ef4da9129.svg "Repobeats analytics image")](https://github.com/hushenghao/AndroidEasterEggs/pulse)
 
 ## Test
 
