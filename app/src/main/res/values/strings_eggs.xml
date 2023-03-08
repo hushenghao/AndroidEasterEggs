@@ -31,36 +31,27 @@
     <string name="summary_android_cupcake" translatable="false">Cupcake</string>
     <string name="summary_android_petit_four" translatable="false">Petit Four</string>
 
-    <string name="version_comment_android_n" formatted="false" translatable="false">
-        SDK 24~25\nAndroid 7.0~7.1.2
-    </string>
-    <string name="version_comment_android_m" formatted="false" translatable="false">
-        SDK 23\nAndroid 6.0~6.0.1
-    </string>
-    <string name="version_comment_android_l" formatted="false" translatable="false">
-        SDK 21~22\nAndroid 5.0~5.1
-    </string>
-    <string name="version_comment_android_k" formatted="false" translatable="false">
-        SDK 19~20\nAndroid 4.4~4.4.4
-    </string>
-    <string name="version_comment_android_j" formatted="false" translatable="false">
-        SDK 16~18\nAndroid 4.1~4.3
-    </string>
-    <string name="version_comment_android_i" formatted="false" translatable="false">
-        SDK 14~15\nAndroid 4.0~4.0.4
-    </string>
-    <string name="version_comment_android_h" formatted="false" translatable="false">
-        SDK 11~13\nAndroid 3.0~3.2
-    </string>
-    <string name="version_comment_android_g" formatted="false" translatable="false">
-        SDK 9~10\nAndroid 2.3~2.3.7
-    </string>
-    <string name="version_comment_android_froyo" formatted="false" translatable="false">
-        SDK 8\nAndroid 2.2~2.2.3
-    </string>
-    <string name="version_comment_android_eclair" formatted="false" translatable="false">
-        SDK 5~7\nAndroid 2.0~2.1
-    </string>
+    <string name="version_comment_android_u" translatable="false">SDK 34\nAndroid 14</string>
+    <string name="version_comment_android_t" translatable="false">SDK 33\nAndroid 13</string>
+    <string name="version_comment_android_s" translatable="false">SDK 31~32\nAndroid 12~12L</string>
+    <string name="version_comment_android_r" translatable="false">SDK 30\nAndroid 11</string>
+    <string name="version_comment_android_q" translatable="false">SDK 29\nAndroid 10</string>
+    <string name="version_comment_android_p" translatable="false">SDK 28\nAndroid 9</string>
+    <string name="version_comment_android_o" translatable="false">SDK 26~27\nAndroid 8.0~8.1</string>
+    <string name="version_comment_android_n" translatable="false">SDK 24~25\nAndroid 7.0~7.1.2</string>
+    <string name="version_comment_android_m" translatable="false">SDK 23\nAndroid 6.0~6.0.1</string>
+    <string name="version_comment_android_l" translatable="false">SDK 21~22\nAndroid 5.0~5.1</string>
+    <string name="version_comment_android_k" translatable="false">SDK 19~20\nAndroid 4.4~4.4.4</string>
+    <string name="version_comment_android_j" translatable="false">SDK 16~18\nAndroid 4.1~4.3</string>
+    <string name="version_comment_android_i" translatable="false">SDK 14~15\nAndroid 4.0~4.0.4</string>
+    <string name="version_comment_android_h" translatable="false">SDK 11~13\nAndroid 3.0~3.2</string>
+    <string name="version_comment_android_g" translatable="false">SDK 9~10\nAndroid 2.3~2.3.7</string>
+    <string name="version_comment_android_froyo" translatable="false">SDK 8\nAndroid 2.2~2.2.3</string>
+    <string name="version_comment_android_eclair" translatable="false">SDK 5~7\nAndroid 2.0~2.1</string>
+    <string name="version_comment_android_donut" translatable="false">SDK 4\nAndroid 1.6</string>
+    <string name="version_comment_android_cupcake" translatable="false">SDK 3\nAndroid 1.5</string>
+    <string name="version_comment_android_petit_four" translatable="false">SDK 2\nAndroid 1.1</string>
+    <string name="version_comment_android_base" translatable="false">SDK 1\nAndroid 1.0</string>
 
     <string name="target_class_android_t" translatable="false">com.android_t.egg.PlatLogoActivity</string>
     <string name="target_class_android_s" translatable="false">com.android_s.egg.PlatLogoActivity</string>

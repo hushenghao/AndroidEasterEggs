@@ -4,17 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.*
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
 import android.util.AttributeSet
-import android.view.ContextMenu
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.view.View.OnCreateContextMenuListener
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.pm.ShortcutInfoCompat
@@ -25,8 +18,6 @@ import androidx.core.graphics.PathParser
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.IconCompat
-import androidx.core.text.set
-import androidx.core.text.toSpannable
 import androidx.core.view.setPadding
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
@@ -38,6 +29,7 @@ import coil.transform.CircleCropTransformation
 import coil.transform.Transformation
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.IconShapeOverride
+import com.dede.android_eggs.util.applyIf
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlin.math.roundToInt
 import com.google.android.material.R as M3R
@@ -54,7 +46,6 @@ open class EggPreference : Preference {
 
         var showSuffix = true
         private val suffixRegex = Regex("\\s*\\(.+\\)")
-        private val versionRegex = Regex("Android\\s*\\d+(.\\d)*(.\\*)?")
 
         private const val ACTIVITY_TASK_FLAGS =
             Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
@@ -67,8 +58,6 @@ open class EggPreference : Preference {
     private val finalTitle: CharSequence?
     private val finalSummary: CharSequence?
     private val versionComment: String?
-
-    private lateinit var onCreateShortcutListener: OnCreateShortcutListener
 
     constructor(context: Context) : this(context, null)
 
@@ -89,7 +78,7 @@ open class EggPreference : Preference {
             val intent = Intent(Intent.ACTION_VIEW)
                 .setClassName(context, className)
                 .addFlags(ACTIVITY_TASK_FLAGS)
-            setIntent(intent)
+            @Suppress("LeakingThis") setIntent(intent)
         }
         iconPadding =
             arrays.getDimensionPixelSize(R.styleable.EggPreference_iconPadding, 0)
@@ -104,48 +93,22 @@ open class EggPreference : Preference {
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
 
-        configureTitle(holder, finalTitle)
-
-        configureSummary(holder, finalSummary)
+        if (!showSuffix) {
+            if (finalTitle != null) {
+                val title = holder.findViewById(android.R.id.title) as? TextView
+                title?.text = finalTitle.replace(suffixRegex, "")
+            }
+            if (finalSummary != null) {
+                val summary = holder.findViewById(android.R.id.summary) as? TextView
+                summary?.text = finalSummary.replace(suffixRegex, "")
+            }
+        }
 
         configureIcon(holder)
 
-        configureLongPress(holder)
+        holder.itemView.setOnLongClickListener(OnLongPressListener(this))
     }
 
-    private fun configureTitle(holder: PreferenceViewHolder, finalTitle: CharSequence?) {
-        val title = holder.findViewById(android.R.id.title) as? TextView ?: return
-        if (!showSuffix && finalTitle != null) {
-            title.text = finalTitle.replace(suffixRegex, "")
-        }
-
-        if (versionComment != null) {
-            val text = title.text.toString()
-            val result = versionRegex.find(text)
-            if (result != null) {
-                val range = result.range
-                title.movementMethod = LinkMovementMethod.getInstance()
-                title.highlightColor = Color.TRANSPARENT
-                val span = text.toSpannable()
-                if (range.first > 0) {
-                    span[0, range.first] = DefaultClickSpan(this)
-                }
-                if (range.last + 1 < text.length) {
-                    span[range.last + 1, text.length] = DefaultClickSpan(this)
-                }
-                span[range.first, range.last + 1] =
-                    CommentClickSpan(icon, finalTitle, versionComment)
-                title.text = span
-            }
-        }
-    }
-
-    private fun configureSummary(holder: PreferenceViewHolder, finalSummary: CharSequence?) {
-        if (!showSuffix && finalSummary != null) {
-            val summary = holder.findViewById(android.R.id.summary) as? TextView
-            summary?.text = finalSummary.replace(suffixRegex, "")
-        }
-    }
 
     private fun configureIcon(holder: PreferenceViewHolder) {
         val icon = holder.findViewById(android.R.id.icon) as? ImageView ?: return
@@ -167,45 +130,37 @@ open class EggPreference : Preference {
         icon.setPadding(iconPadding)
     }
 
-    private fun configureLongPress(holder: PreferenceViewHolder) {
-        var enableLongPress = intent != null && key != null
-        if (enableLongPress && !::onCreateShortcutListener.isInitialized) {
-            onCreateShortcutListener = OnCreateShortcutListener(this)
-        }
-        enableLongPress = enableLongPress && onCreateShortcutListener.isSupport()
-        holder.itemView.setOnCreateContextMenuListener(if (enableLongPress) onCreateShortcutListener else null)
-        holder.itemView.isLongClickable = enableLongPress
-    }
+    private class OnLongPressListener(private val preference: EggPreference) :
+        View.OnLongClickListener {
 
-    private class OnCreateShortcutListener(private val preference: EggPreference) :
-        OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
+        private val supportShortcut: Boolean
+            get() = preference.intent != null && preference.key != null &&
+                    !TextUtils.isEmpty(preference.finalSummary) &&
+                    ShortcutManagerCompat.isRequestPinShortcutSupported(preference.context)
 
-        fun isSupport(): Boolean {
-            return ShortcutManagerCompat.isRequestPinShortcutSupported(preference.context)
-        }
 
-        override fun onCreateContextMenu(
-            menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?,
-        ) {
-            menu.setHeaderTitle(preference.finalTitle)
-            menu.add(Menu.NONE, Menu.NONE, Menu.NONE, R.string.label_add_shortcut)
-                .setOnMenuItemClickListener(this)
-        }
-
-        override fun onMenuItemClick(item: MenuItem): Boolean {
-            val intent = preference.intent
-            val key = preference.key
-            val label = preference.finalSummary
-            if (intent == null || key == null || TextUtils.isEmpty(label) || !isSupport()) return false
-
+        override fun onLongClick(v: View): Boolean {
             val context = preference.context
-            val shortcut = ShortcutInfoCompat.Builder(context, key)
-                .setIcon(IconCompat.createWithResource(context, preference.iconResId))
-                .setIntent(intent)
-                .setShortLabel(label!!)
-                .setLongLabel(label)
-                .build()
-            ShortcutManagerCompat.requestPinShortcut(context, shortcut, null)
+            MaterialAlertDialogBuilder(
+                context,
+                M3R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered
+            ).setIcon(preference.icon)
+                .setTitle(preference.finalTitle)
+                .setMessage(preference.versionComment)
+                .applyIf(supportShortcut) {
+                    setNeutralButton(R.string.label_add_shortcut) { _, _ ->
+                        val icon = IconCompat.createWithResource(context, preference.iconResId)
+                        val shortcut = ShortcutInfoCompat.Builder(context, preference.key)
+                            .setIcon(icon)
+                            .setIntent(preference.intent!!)
+                            .setShortLabel(preference.finalSummary!!)
+                            .setLongLabel(preference.finalSummary)
+                            .build()
+                        ShortcutManagerCompat.requestPinShortcut(context, shortcut, null)
+                    }
+                }
+                .setPositiveButton(android.R.string.ok, null)
+                .show()
             return true
         }
     }
@@ -295,55 +250,6 @@ open class EggPreference : Preference {
 
         override fun hashCode(): Int {
             return this.maskPathStr.hashCode()
-        }
-    }
-
-    @SuppressLint("RestrictedApi")
-    override fun performClick() {
-        val intent = this.intent
-        if (intent != null) {
-            super.performClick()
-            return
-        }
-
-        MaterialAlertDialogBuilder(
-            context,
-            M3R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered
-        ).setTitle(finalTitle)
-            .setMessage(finalSummary)
-            .setIcon(icon)
-            .setPositiveButton(android.R.string.ok, null)
-            .show()
-    }
-
-    private class DefaultClickSpan(val preference: Preference) : ClickableSpan() {
-        @SuppressLint("RestrictedApi")
-        override fun onClick(widget: View) {
-            preference.performClick()
-        }
-
-        override fun updateDrawState(ds: TextPaint) {
-            ds.isUnderlineText = false
-        }
-    }
-
-    private class CommentClickSpan(
-        val icon: Drawable?,
-        val title: CharSequence?,
-        val message: CharSequence?,
-    ) : ClickableSpan() {
-        override fun onClick(widget: View) {
-            MaterialAlertDialogBuilder(widget.context)
-                .setIcon(icon)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(android.R.string.ok, null)
-                .show()
-        }
-
-        override fun updateDrawState(ds: TextPaint) {
-            //super.updateDrawState(ds)
-            ds.isUnderlineText = false
         }
     }
 

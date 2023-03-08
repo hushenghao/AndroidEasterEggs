@@ -27,7 +27,7 @@ class EasterEggsFragment : PreferenceFragmentCompat() {
     private lateinit var preferenceAdapter: PreferenceGroupAdapter
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.root_preferences, rootKey)
+        setPreferencesFromResource(R.xml.preference_eggs, rootKey)
         eggCollection = checkNotNull(findPreference(KEY_COLLECTION))
         eggCollection.setOnPreferenceChangeListener { _, newValue ->
             val isGrid = newValue as? Boolean ?: false

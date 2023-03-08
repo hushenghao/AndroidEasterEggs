@@ -9,7 +9,8 @@
         <com.dede.android_eggs.ui.TimelinePreference
             app:icon="@drawable/ic_android_udc"
             app:supportAdaptiveIcon="true"
-            app:title="@string/title_android_u" />
+            app:title="@string/title_android_u"
+            app:versionComment="@string/version_comment_android_u" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_t"
@@ -17,7 +18,8 @@
             app:key="key_egg_t"
             app:summary="@string/t_egg_name"
             app:supportAdaptiveIcon="true"
-            app:title="@string/title_android_t" />
+            app:title="@string/title_android_t"
+            app:versionComment="@string/version_comment_android_t" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_s"
@@ -25,7 +27,8 @@
             app:key="key_egg_s"
             app:summary="@string/s_egg_name"
             app:supportAdaptiveIcon="true"
-            app:title="@string/title_android_s" />
+            app:title="@string/title_android_s"
+            app:versionComment="@string/version_comment_android_s" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_r"
@@ -33,7 +36,8 @@
             app:key="key_egg_r"
             app:summary="@string/r_egg_name"
             app:supportAdaptiveIcon="true"
-            app:title="@string/title_android_r" />
+            app:title="@string/title_android_r"
+            app:versionComment="@string/version_comment_android_r" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_q"
@@ -41,7 +45,8 @@
             app:key="key_egg_q"
             app:summary="@string/q_egg_name"
             app:supportAdaptiveIcon="true"
-            app:title="@string/title_android_q" />
+            app:title="@string/title_android_q"
+            app:versionComment="@string/version_comment_android_q" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_p"
@@ -49,14 +54,16 @@
             app:key="key_egg_p"
             app:summary="@string/p_app_name"
             app:supportAdaptiveIcon="true"
-            app:title="@string/title_android_p" />
+            app:title="@string/title_android_p"
+            app:versionComment="@string/version_comment_android_p" />
 
         <com.dede.android_eggs.ui.EggPreference
             app:icon="@drawable/ic_android_oreo"
             app:key="key_egg_o_1"
             app:summary="@string/o_app_name"
             app:supportAdaptiveIcon="true"
-            app:title="@string/title_android_o_1">
+            app:title="@string/title_android_o_1"
+            app:versionComment="@string/version_comment_android_o">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetClass="com.android_o.egg.PlatLogoActivity"
@@ -73,7 +80,8 @@
             app:key="key_egg_o"
             app:summary="@string/o_app_name"
             app:supportAdaptiveIcon="true"
-            app:title="@string/title_android_o" />
+            app:title="@string/title_android_o"
+            app:versionComment="@string/version_comment_android_o" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:targetClass="@string/target_class_android_n"
@@ -160,23 +168,27 @@
             app:icon="@drawable/ic_android_donut"
             app:iconPadding="1dp"
             app:summary="@string/summary_android_donut"
-            app:title="@string/title_android_donut" />
+            app:title="@string/title_android_donut"
+            app:versionComment="@string/version_comment_android_donut" />
 
         <com.dede.android_eggs.ui.EggPreference
             app:icon="@drawable/ic_android_cupcake"
             app:summary="@string/summary_android_cupcake"
-            app:title="@string/title_android_cupcake" />
+            app:title="@string/title_android_cupcake"
+            app:versionComment="@string/version_comment_android_cupcake" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:icon="@drawable/ic_android_classic"
             app:iconPadding="5dp"
             app:summary="@string/summary_android_petit_four"
-            app:title="@string/title_android_petit_four" />
+            app:title="@string/title_android_petit_four"
+            app:versionComment="@string/version_comment_android_petit_four" />
 
         <com.dede.android_eggs.ui.EggPreference
             android:icon="@drawable/ic_android_classic"
             app:iconPadding="5dp"
-            app:title="@string/title_android_base" />
+            app:title="@string/title_android_base"
+            app:versionComment="@string/version_comment_android_base" />
 
     </com.dede.android_eggs.ui.EggCollection>
 
