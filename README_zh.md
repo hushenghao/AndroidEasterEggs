@@ -51,6 +51,9 @@
 * <span id='id_color_vector_fonts'>[Android 13](https://developer.android.google.cn/about/versions/13/features#color-vector-fonts) 可支持呈现 [COLRv1](https://developer.chrome.com/blog/colrv1-fonts/) 字体，并将系统表情符号更新成了 COLRv1 格式。</span>
 * <span id='id_egg_name'>老版本的彩蛋没有具体命名，这里使用系统版本别名。</span>
 
+## 活动
+[![Alt](https://repobeats.axiom.co/api/embed/66c4053d3e594aed0242e0bac779378ef4da9129.svg "Repobeats analytics image")](https://github.com/hushenghao/AndroidEasterEggs/pulse)
+
 ## 测试
 
 使用Android设备或者模拟器.
