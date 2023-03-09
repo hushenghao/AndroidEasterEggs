@@ -33,6 +33,9 @@ object Icons {
     /** language */
     const val LANGUAGE = "\uE894"
 
+    /** palette */
+    const val PALETTE = "\uE40A"
+
     /** policy */
     const val POLICY = "\uEA17"
 

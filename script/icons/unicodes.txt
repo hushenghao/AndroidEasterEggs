@@ -31,3 +31,5 @@ e920
 e894
 # info
 e88e
+# palette
+e40a

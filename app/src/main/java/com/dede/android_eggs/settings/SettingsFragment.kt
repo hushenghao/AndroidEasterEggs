@@ -18,10 +18,7 @@ import androidx.preference.SwitchPreferenceCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.FontIconsDrawable
 import com.dede.android_eggs.ui.Icons
-import com.dede.android_eggs.util.IconShapeOverride
-import com.dede.android_eggs.util.NightModeManager
-import com.dede.android_eggs.util.WindowEdgeUtilsAccessor
-import com.dede.android_eggs.util.requirePreference
+import com.dede.android_eggs.util.*
 import com.dede.basic.dp
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -77,6 +74,16 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
                 icon = createFontIcon(Icons.ROUNDED_CORNER)
                 isEnabled = IconShapeOverride.isEnabled()
                 IconShapeOverride.handlePreferenceUi(this)
+            }
+
+            requirePreference<SwitchPreferenceCompat>(DynamicColorManager.KEY_DYNAMIC_COLOR).apply {
+                icon = createFontIcon(Icons.PALETTE)
+                isEnabled = DynamicColorManager.isDynamicColorAvailable()
+                setOnPreferenceChangeListener { _, newValue ->
+                    DynamicColorManager()
+                        .setDynamicColorEnable(requireContext(), newValue as Boolean)
+                    return@setOnPreferenceChangeListener true
+                }
             }
 
             configureChangeLanguagePreference()

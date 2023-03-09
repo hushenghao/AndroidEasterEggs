@@ -12,7 +12,6 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.settings.SettingsFragment
 import com.dede.android_eggs.ui.FontIconsDrawable
 import com.dede.android_eggs.util.WindowEdgeUtilsAccessor
-import com.google.android.material.color.DynamicColors
 import com.google.android.material.R as M3R
 
 /**
@@ -25,7 +24,6 @@ class EasterEggsActivity : AppCompatActivity(), MenuProvider {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        DynamicColors.applyToActivityIfAvailable(this)
         WindowEdgeUtilsAccessor.applyEdgeToEdge(window, true)
 
         navigationViewController.setContentView()
