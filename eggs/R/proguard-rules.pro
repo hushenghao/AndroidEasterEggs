@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Keep ObjectAnimator
+-keepclassmembers class com.android_r.egg.PlatLogoActivity.BigDialView.BigDialDrawable {
+    float mElevenAnim;
+    void setElevenAnim(float);
+    float getElevenAnim();
+}

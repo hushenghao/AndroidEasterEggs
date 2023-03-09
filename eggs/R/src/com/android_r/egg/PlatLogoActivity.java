@@ -42,7 +42,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -207,7 +206,6 @@ public class PlatLogoActivity extends Activity {
             final Drawable mEleven;
             private boolean mNightMode;
             private float mValue = 0f;
-            @Keep// ObjectAnimator
             float mElevenAnim = 0f;
             ObjectAnimator mElevenShowAnimator = ObjectAnimator.ofFloat(this, "elevenAnim", 0f,
                     1f).setDuration(300);
@@ -256,12 +254,10 @@ public class PlatLogoActivity extends Activity {
                 setValue(getValue() + ((float) i) / STEPS);
             }
 
-            @Keep
             public float getElevenAnim() {
                 return mElevenAnim;
             }
 
-            @Keep
             public void setElevenAnim(float f) {
                 if (mElevenAnim != f) {
                     mElevenAnim = f;

@@ -104,6 +104,7 @@ class QuaresActivity : Activity() {
             for (tries in 0..3) {
                 val ar = resources.obtainTypedArray(R.array.q_puzzles)
                 val newName = ar.getString(Random().nextInt(ar.length()))
+                ar.recycle()
                 if (newName == null) continue
 
                 Log.v(TAG, "Looking for icon " + newName)
