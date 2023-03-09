@@ -30,8 +30,8 @@
         android:defaultValue="true"
         android:key="key_dynamic_color"
         android:title="Dynamic Color"
-        app:summaryOff="@string/v7_preference_off"
-        app:summaryOn="@string/v7_preference_on"
+        app:summaryOff="@string/preference_off"
+        app:summaryOn="@string/preference_on"
         app:widgetLayout="@layout/layout_widget_material_switch"
         tools:ignore="PrivateResource" />
 

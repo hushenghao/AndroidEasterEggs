@@ -61,4 +61,7 @@
     <string name="summary_theme_follow_system">Follow system</string>
     <string name="summary_theme_dark_mode">Dark theme</string>
     <string name="label_add_shortcut">Add shortcut</string>
+
+    <string name="preference_on">ON</string>
+    <string name="preference_off">OFF</string>
 </resources>
