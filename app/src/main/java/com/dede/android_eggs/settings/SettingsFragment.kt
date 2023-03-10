@@ -7,7 +7,6 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.dede.android_eggs.R
-import com.dede.android_eggs.util.WindowEdgeUtilsAccessor
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -30,7 +29,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
-        WindowEdgeUtilsAccessor.applyEdgeToEdge(dialog.window!!, true)
+        EdgePref.applyEdge(requireContext(), dialog.window!!)
         val bottomSheetBehavior = dialog.behavior
         bottomSheetBehavior.addBottomSheetCallback(callback)
         bottomSheetBehavior.isFitToContents = true
@@ -46,6 +45,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
             NightModePref(),
             IconShapePerf(),
             LanguagePerf(),
+            EdgePref(),
             DynamicColorPref(),
             VersionPerf()
         )

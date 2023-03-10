@@ -64,6 +64,7 @@
     <string name="summary_theme_dark_mode">Dark theme</string>
     <string name="label_add_shortcut">Add shortcut</string>
 
-    <string name="preference_on">ON</string>
-    <string name="preference_off">OFF</string>
+    <string name="preference_on">On</string>
+    <string name="preference_off">Off</string>
+    <string name="pref_title_edge" translatable="false">Edge to edge</string>
 </resources>

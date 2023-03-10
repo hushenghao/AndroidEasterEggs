@@ -4,8 +4,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.dede.android_eggs.settings.EdgePref
 import com.dede.android_eggs.settings.SettingsPageController
-import com.dede.android_eggs.util.WindowEdgeUtilsAccessor
 
 /**
  * Easter Egg Collection
@@ -17,7 +17,7 @@ class EasterEggsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowEdgeUtilsAccessor.applyEdgeToEdge(window, true)
+        EdgePref.applyEdge(this, window)
         navigationViewController.setContentView()
         settingsPageController.onCreate(savedInstanceState)
     }

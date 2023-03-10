@@ -21,6 +21,9 @@ object Icons {
     /** email */
     const val EMAIL = "\uE0BE"
 
+    /** fullscreen */
+    const val FULLSCREEN = "\uE5D0"
+
     /** home */
     const val HOME = "\uE88A"
 

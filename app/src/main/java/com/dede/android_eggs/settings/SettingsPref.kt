@@ -1,5 +1,6 @@
 package com.dede.android_eggs.settings
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.app.LocaleManager
@@ -11,6 +12,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.LocaleList
 import android.provider.Settings
+import android.view.Window
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -31,6 +33,7 @@ import com.google.android.material.color.DynamicColorsOptions
 import com.google.android.material.color.HarmonizedColors
 import com.google.android.material.color.HarmonizedColorsOptions
 import com.google.android.material.internal.ContextUtils
+import com.google.android.material.internal.EdgeToEdgeUtils
 import java.util.*
 
 
@@ -39,6 +42,12 @@ private fun Preference.setup(prefs: SettingsPref<*>) {
     isEnabled = prefs.isEnable()
     if (hasKey()) {
         setDefaultValue(prefs.getDefaultOption())
+    }
+}
+
+private fun createFontIcon(context: Context, unicode: String): Drawable {
+    return FontIconsDrawable(context, unicode, 36f).apply {
+        setPadding(12.dp, 6.dp, 0, 0)
     }
 }
 
@@ -83,9 +92,53 @@ abstract class SettingsPref<T>(open val key: String? = null) :
     }
 }
 
-private fun createFontIcon(context: Context, unicode: String): Drawable {
-    return FontIconsDrawable(context, unicode, 36f).apply {
-        setPadding(12.dp, 6.dp, 0, 0)
+abstract class BoolSettingsPref(key: String, private val default: Boolean) :
+    SettingsPref<Boolean>(key) {
+
+    override fun getDefaultOption(): Boolean = default
+    override fun getOption(context: Context): Boolean {
+        return context.pref.getBoolean(key, getDefaultOption())
+    }
+
+    override fun setOption(context: Context, newValue: Boolean) {
+        context.pref.edit(true) {
+            putBoolean(key, newValue)
+        }
+        super.setOption(context, newValue)
+    }
+}
+
+class EdgePref : BoolSettingsPref("key_pref_edge", true) {
+
+    companion object {
+        fun applyEdge(context: Context, window: Window) {
+            applyEdge(window, EdgePref().getOption(context))
+        }
+
+        @SuppressLint("RestrictedApi")
+        private fun applyEdge(window: Window, edgeToEdgeEnabled: Boolean) {
+            EdgeToEdgeUtils.applyEdgeToEdge(window, edgeToEdgeEnabled)
+        }
+    }
+
+    override fun onCreatePreference(context: Context): Preference {
+        return SwitchPreferenceCompat(context).apply {
+            setup(this@EdgePref)
+            setTitle(R.string.pref_title_edge)
+            isChecked = getOption(context)
+            icon = createFontIcon(context, Icons.FULLSCREEN)
+            widgetLayoutResource = R.layout.layout_widget_material_switch
+            if (isEnabled) {
+                setSummaryOff(R.string.preference_off)
+                setSummaryOn(R.string.preference_on)
+            }
+            onPreferenceChangeListener = this@EdgePref
+        }
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun onApply(context: Context, value: Boolean) {
+        ContextUtils.getActivity(context)?.recreate()
     }
 }
 
@@ -184,14 +237,11 @@ class IconShapePerf : SettingsPref<String>(IconShapeOverride.KEY_PREFERENCE) {
     }
 }
 
-class DynamicColorPref : SettingsPref<Boolean>("key_dynamic_color"), DynamicColors.Precondition,
-    DynamicColors.OnAppliedCallback {
+class DynamicColorPref :
+    BoolSettingsPref("key_dynamic_color", DynamicColors.isDynamicColorAvailable()),
+    DynamicColors.Precondition, DynamicColors.OnAppliedCallback {
 
     override fun isEnable(): Boolean {
-        return DynamicColors.isDynamicColorAvailable()
-    }
-
-    override fun getDefaultOption(): Boolean {
         return DynamicColors.isDynamicColorAvailable()
     }
 
@@ -208,17 +258,6 @@ class DynamicColorPref : SettingsPref<Boolean>("key_dynamic_color"), DynamicColo
             }
             onPreferenceChangeListener = this@DynamicColorPref
         }
-    }
-
-    override fun getOption(context: Context): Boolean {
-        return context.pref.getBoolean(key, getDefaultOption())
-    }
-
-    override fun setOption(context: Context, newValue: Boolean) {
-        context.pref.edit(true) {
-            putBoolean(key, newValue)
-        }
-        super.setOption(context, newValue)
     }
 
     override fun onApply(context: Context, value: Boolean) {
@@ -247,17 +286,13 @@ class DynamicColorPref : SettingsPref<Boolean>("key_dynamic_color"), DynamicColo
     }
 }
 
-class NightModePref : SettingsPref<Boolean>("key_night_mode") {
+class NightModePref : BoolSettingsPref("key_night_mode", false) {
 
     companion object {
         fun isSystemNightMode(context: Context): Boolean {
             return (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
                     Configuration.UI_MODE_NIGHT_YES
         }
-    }
-
-    override fun getDefaultOption(): Boolean {
-        return false
     }
 
     override fun onCreatePreference(context: Context): Preference {
@@ -281,11 +316,6 @@ class NightModePref : SettingsPref<Boolean>("key_night_mode") {
             return
         }
         AppCompatDelegate.setDefaultNightMode(mode)
-        context.pref.edit().putBoolean(key, value).apply()
-    }
-
-    override fun getOption(context: Context): Boolean {
-        return context.pref.getBoolean(key, getDefaultOption())
     }
 
 }

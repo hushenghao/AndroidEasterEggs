@@ -4,8 +4,6 @@
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-
         <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
             animated drawable. One of these is required. -->
         <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/avd_anim</item>

@@ -23,7 +23,11 @@ pyftsubset "$ROOT/MaterialIconsOutlined-Regular.otf" \
 
 cp "$OUTPUT_FILE" "$TARGET_DIR"
 
-python "$ROOT/generate_icons_kt.py"
+# Detect the platform (similar to $OSTYPE)
+if [ "$(uname)" = 'WindowsNT' ]; then
+   python "$ROOT/generate_icons_kt.py"
+fi
+  python3 "$ROOT/generate_icons_kt.py"
 
 cp "$ROOT/Icons.kt" "$GIT_ROOT/app/src/main/java/com/dede/android_eggs/ui/"
 

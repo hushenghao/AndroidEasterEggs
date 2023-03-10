@@ -33,3 +33,5 @@ e894
 e88e
 # palette
 e40a
+# fullscreen
+e5d0
