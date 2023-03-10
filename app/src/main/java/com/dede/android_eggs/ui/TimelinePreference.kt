@@ -10,8 +10,8 @@ import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.DialogAndroidTimelineBinding
+import com.dede.android_eggs.settings.NightModePref
 import com.dede.android_eggs.util.ChromeTabsBrowser
-import com.dede.android_eggs.util.NightModeManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.*
 import kotlin.math.roundToInt
@@ -66,7 +66,7 @@ class TimelinePreference(context: Context, attrs: AttributeSet?) : EggPreference
                 binding.scrollView.smoothScrollTo(it.width, 0)
             }
         }
-        if (NightModeManager.isSystemNightMode(context)) {
+        if (NightModePref.isSystemNightMode(context)) {
             binding.ivTimeline.drawable?.apply {
                 val matrix = ColorMatrix()
                 // Increase the overall brightness and more blue brightness

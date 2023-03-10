@@ -5,17 +5,25 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Build
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.ImageSpan
+import android.text.style.URLSpan
 import android.util.AttributeSet
+import android.view.View
+import android.widget.TextView
 import androidx.core.graphics.withTranslation
 import androidx.preference.Preference
+import androidx.preference.PreferenceViewHolder
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
+import com.dede.android_eggs.util.ChromeTabsBrowser
 import com.dede.basic.dp
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.R as M3R
@@ -43,8 +51,27 @@ class VersionPreference(context: Context, attrs: AttributeSet?) : Preference(con
                 ForegroundColorSpan(
                     MaterialColors.getColor(context, M3R.attr.colorAccent, Color.WHITE)
                 ),
+                CommitURLSpan(context, BuildConfig.GIT_HASH),
                 AbsoluteSizeSpan(11, true)
             )
+    }
+
+    override fun onBindViewHolder(holder: PreferenceViewHolder) {
+        super.onBindViewHolder(holder)
+        val summary = holder.findViewById(android.R.id.summary) as? TextView
+        if (summary != null) {
+            summary.movementMethod = LinkMovementMethod.getInstance()
+        }
+    }
+
+    private class CommitURLSpan(context: Context, hash: String) :
+        URLSpan(context.getString(R.string.url_github_commit, hash)) {
+        override fun updateDrawState(ds: TextPaint) {
+        }
+
+        override fun onClick(widget: View) {
+            ChromeTabsBrowser.launchUrl(widget.context, Uri.parse(url))
+        }
     }
 
     private fun createImageSpan(context: Context, res: Int): ImageSpan {

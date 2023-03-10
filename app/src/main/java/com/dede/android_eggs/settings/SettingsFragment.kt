@@ -1,25 +1,13 @@
 package com.dede.android_eggs.settings
 
 import android.app.Dialog
-import android.app.LocaleManager
-import android.content.Context
-import android.content.Intent
-import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.RequiresApi
-import androidx.core.content.getSystemService
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreferenceCompat
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.FontIconsDrawable
-import com.dede.android_eggs.ui.Icons
-import com.dede.android_eggs.util.*
-import com.dede.basic.dp
+import com.dede.android_eggs.util.WindowEdgeUtilsAccessor
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -54,89 +42,19 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
     class Settings : PreferenceFragmentCompat(),
         PreferenceFragmentCompat.OnPreferenceDisplayDialogCallback {
 
-        companion object {
-            private const val PREF_LANGUAGE = "pref_language"
-        }
+        private val prefs = listOf(
+            NightModePref(),
+            IconShapePerf(),
+            LanguagePerf(),
+            DynamicColorPref(),
+            VersionPerf()
+        )
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            addPreferencesFromResource(R.xml.preference_settings)
-
-            requirePreference<SwitchPreferenceCompat>(NightModeManager.KEY_NIGHT_MODE).apply {
-                icon = createFontIcon(Icons.BRIGHTNESS_6)
-                setOnPreferenceChangeListener { _, newValue ->
-                    NightModeManager(requireContext())
-                        .setNightMode(newValue as Boolean)
-                    return@setOnPreferenceChangeListener true
+            preferenceScreen = preferenceManager.createPreferenceScreen(requireContext()).apply {
+                for (pref in prefs) {
+                    addPreference(pref.createPreference(requireContext()))
                 }
-            }
-
-            requirePreference<ListPreference>(IconShapeOverride.KEY_PREFERENCE).apply {
-                icon = createFontIcon(Icons.ROUNDED_CORNER)
-                isEnabled = IconShapeOverride.isEnabled()
-                IconShapeOverride.handlePreferenceUi(this)
-            }
-
-            requirePreference<SwitchPreferenceCompat>(DynamicColorManager.KEY_DYNAMIC_COLOR).apply {
-                icon = createFontIcon(Icons.PALETTE)
-                isEnabled = DynamicColorManager.isDynamicColorAvailable()
-                setOnPreferenceChangeListener { _, newValue ->
-                    DynamicColorManager()
-                        .setDynamicColorEnable(requireContext(), newValue as Boolean)
-                    return@setOnPreferenceChangeListener true
-                }
-            }
-
-            configureChangeLanguagePreference()
-        }
-
-        private fun configureChangeLanguagePreference() {
-            requirePreference<Preference>(PREF_LANGUAGE).apply {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    setOnPreferenceClickListener {
-                        runCatching {
-                            startActivity(createActionAppLocaleSettingsIntent())
-                        }
-                        return@setOnPreferenceClickListener true
-                    }
-                }
-                summary = getLocalDisplayName(requireContext())
-                isEnabled = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-                icon = createFontIcon(Icons.LANGUAGE)
-            }
-        }
-
-        private fun getLocalDisplayName(context: Context): String? {
-            var name: String? = null
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                val localeManager = context.getSystemService<LocaleManager>()
-                if (localeManager != null) {
-                    val locales = localeManager.applicationLocales
-                    if (!locales.isEmpty) {
-                        name = locales.get(0).displayName
-                    }
-                }
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                val locales = context.resources.configuration.locales
-                if (!locales.isEmpty) {
-                    name = locales.get(0).displayName
-                }
-            } else {
-                @Suppress("DEPRECATION")
-                val locale = context.resources.configuration.locale
-                name = locale.displayName
-            }
-            return name
-        }
-
-        @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-        private fun createActionAppLocaleSettingsIntent(): Intent = Intent(
-            android.provider.Settings.ACTION_APP_LOCALE_SETTINGS,
-            Uri.fromParts("package", requireActivity().packageName, null)
-        ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-        private fun createFontIcon(unicode: String): Drawable {
-            return FontIconsDrawable(requireContext(), unicode, 36f).apply {
-                setPadding(12.dp, 6.dp, 0, 0)
             }
         }
 
