@@ -8,11 +8,11 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.FontIconsDrawable
 import com.google.android.material.materialswitch.MaterialSwitch
 
-class NightModeSwitchPreference(context: Context, attrs: AttributeSet?) :
+class FontIconSwitchPreference(context: Context, attrs: AttributeSet?) :
     SwitchPreferenceCompat(context, attrs) {
 
     init {
-        widgetLayoutResource = R.layout.layout_widget_night_mode_switch
+        widgetLayoutResource = R.layout.layout_widget_font_icon_material_switch
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {

@@ -30,7 +30,7 @@
     <string name="label_star">Star</string>
 
     <string name="title_version">Version</string>
-    <string name="label_version" translatable="false">%s (%d)</string>
+    <string name="label_version" translatable="false">v%s (%d)</string>
 
     <string name="label_timeline_title">Timeline, milestones, and updates</string>
     <string name="label_timeline_releases">Releases</string>

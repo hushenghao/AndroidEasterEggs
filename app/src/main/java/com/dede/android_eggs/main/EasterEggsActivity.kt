@@ -1,6 +1,7 @@
 package com.dede.android_eggs.main
 
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,9 @@ class EasterEggsActivity : AppCompatActivity() {
         EdgePref.applyEdge(this, window)
         navigationViewController.setContentView()
         settingsPageController.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+            EasterEggsSplash(this).welcome()
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

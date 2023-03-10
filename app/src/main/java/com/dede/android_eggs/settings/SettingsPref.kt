@@ -7,7 +7,6 @@ import android.app.LocaleManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.LocaleList
@@ -45,15 +44,25 @@ private fun Preference.setup(prefs: SettingsPref<*>) {
     }
 }
 
-private fun createFontIcon(context: Context, unicode: String): Drawable {
+private fun createFontIcon(context: Context, unicode: String): FontIconsDrawable {
     return FontIconsDrawable(context, unicode, 36f).apply {
         setPadding(12.dp, 6.dp, 0, 0)
     }
 }
 
+object SettingsPrefs {
+    fun providePrefs(): List<SettingsPref<*>> = listOf(
+        NightModePref(),
+        IconShapePerf(),
+        LanguagePerf(),
+        EdgePref(),
+        DynamicColorPref(),
+        VersionPerf()
+    )
+}
+
 abstract class SettingsPref<T>(open val key: String? = null) :
-    Preference.OnPreferenceChangeListener,
-    Preference.OnPreferenceClickListener {
+    Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
     companion object {
 
@@ -69,6 +78,7 @@ abstract class SettingsPref<T>(open val key: String? = null) :
     abstract fun onCreatePreference(context: Context): Preference
 
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
+        @Suppress("UNCHECKED_CAST")
         setOption(preference.context, newValue as T)
         return true
     }
@@ -126,7 +136,9 @@ class EdgePref : BoolSettingsPref("key_pref_edge", true) {
             setup(this@EdgePref)
             setTitle(R.string.pref_title_edge)
             isChecked = getOption(context)
-            icon = createFontIcon(context, Icons.FULLSCREEN)
+            icon = createFontIcon(context, Icons.FULLSCREEN).apply {
+                setPadding(9.dp, 4.5f.dp, 0, 0)
+            }
             widgetLayoutResource = R.layout.layout_widget_material_switch
             if (isEnabled) {
                 setSummaryOff(R.string.preference_off)
@@ -296,7 +308,7 @@ class NightModePref : BoolSettingsPref("key_night_mode", false) {
     }
 
     override fun onCreatePreference(context: Context): Preference {
-        return NightModeSwitchPreference(context, null).apply {
+        return FontIconSwitchPreference(context, null).apply {
             setup(this@NightModePref)
             setTitle(R.string.pref_title_theme)
             icon = createFontIcon(context, Icons.BRIGHTNESS_6)

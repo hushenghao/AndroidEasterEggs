@@ -41,18 +41,9 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
     class Settings : PreferenceFragmentCompat(),
         PreferenceFragmentCompat.OnPreferenceDisplayDialogCallback {
 
-        private val prefs = listOf(
-            NightModePref(),
-            IconShapePerf(),
-            LanguagePerf(),
-            EdgePref(),
-            DynamicColorPref(),
-            VersionPerf()
-        )
-
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             preferenceScreen = preferenceManager.createPreferenceScreen(requireContext()).apply {
-                for (pref in prefs) {
+                for (pref in SettingsPrefs.providePrefs()) {
                     addPreference(pref.onCreatePreference(requireContext()))
                 }
             }

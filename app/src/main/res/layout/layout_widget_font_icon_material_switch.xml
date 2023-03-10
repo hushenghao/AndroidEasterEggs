@@ -8,4 +8,5 @@
     app:showText="true"
     app:switchTextAppearance="@style/TextAppearance.NightModeSwitch"
     tools:textOff="☀"
-    tools:textOn="🌙" />
+    tools:textOn="🌙"
+    tools:viewBindingIgnore="true" />
