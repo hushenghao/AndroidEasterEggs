@@ -53,7 +53,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             preferenceScreen = preferenceManager.createPreferenceScreen(requireContext()).apply {
                 for (pref in prefs) {
-                    addPreference(pref.createPreference(requireContext()))
+                    addPreference(pref.onCreatePreference(requireContext()))
                 }
             }
         }

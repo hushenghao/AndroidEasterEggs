@@ -34,7 +34,16 @@ import com.google.android.material.internal.ContextUtils
 import java.util.*
 
 
-interface SettingsPref<T> : Preference.OnPreferenceChangeListener,
+private fun Preference.setup(prefs: SettingsPref<*>) {
+    key = prefs.key
+    isEnabled = prefs.isEnable()
+    if (hasKey()) {
+        setDefaultValue(prefs.getDefaultOption())
+    }
+}
+
+abstract class SettingsPref<T>(open val key: String? = null) :
+    Preference.OnPreferenceChangeListener,
     Preference.OnPreferenceClickListener {
 
     companion object {
@@ -45,11 +54,10 @@ interface SettingsPref<T> : Preference.OnPreferenceChangeListener,
         }
     }
 
-    val key: String
-    val defaultOption: T
-    val enable: Boolean
+    abstract fun getDefaultOption(): T
+    open fun isEnable(): Boolean = true
 
-    fun createPreference(context: Context): Preference
+    abstract fun onCreatePreference(context: Context): Preference
 
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         setOption(preference.context, newValue as T)
@@ -61,18 +69,17 @@ interface SettingsPref<T> : Preference.OnPreferenceChangeListener,
     }
 
     fun apply(context: Context) {
-        val value = getOption(context)
-        onApply(context, value)
+        onApply(context, getOption(context))
     }
 
-    fun onApply(context: Context, value: T) {}
+    open fun onApply(context: Context, value: T) {}
 
-    fun setOption(context: Context, newValue: T) {
+    open fun setOption(context: Context, newValue: T) {
         onApply(context, newValue)
     }
 
-    fun getOption(context: Context): T {
-        return defaultOption
+    open fun getOption(context: Context): T {
+        return getDefaultOption()
     }
 }
 
@@ -82,14 +89,18 @@ private fun createFontIcon(context: Context, unicode: String): Drawable {
     }
 }
 
-class LanguagePerf : SettingsPref<String?> {
-    override val key: String = ""
-    override val defaultOption: String? = null
-    override val enable: Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+class LanguagePerf : SettingsPref<String?>() {
+    override fun getDefaultOption(): String? {
+        return null
+    }
 
-    override fun createPreference(context: Context): Preference {
+    override fun isEnable(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+    }
+
+    override fun onCreatePreference(context: Context): Preference {
         return Preference(context).apply {
-            isEnabled = enable
+            setup(this@LanguagePerf)
             icon = createFontIcon(context, Icons.LANGUAGE)
             setTitle(R.string.pref_title_language)
             summary = getLocalDisplayName(context)
@@ -140,28 +151,25 @@ class LanguagePerf : SettingsPref<String?> {
 
 }
 
-class VersionPerf : SettingsPref<String?> {
-    override val key: String = ""
-    override val defaultOption: String? = null
-    override val enable: Boolean = true
+class VersionPerf : SettingsPref<String?>() {
 
-    override fun createPreference(context: Context): Preference {
+    override fun getDefaultOption(): String? = null
+
+    override fun onCreatePreference(context: Context): Preference {
         return VersionPreference(context, null).apply {
             icon = createFontIcon(context, Icons.INFO)
         }
     }
 }
 
-class IconShapePerf : SettingsPref<String> {
+class IconShapePerf : SettingsPref<String>(IconShapeOverride.KEY_PREFERENCE) {
 
-    override val key: String = "pref_override_icon_shape"
-    override val defaultOption: String = ""
-    override val enable: Boolean = IconShapeOverride.isEnabled()
+    override fun getDefaultOption(): String = ""
+    override fun isEnable(): Boolean = IconShapeOverride.isEnabled()
 
-    override fun createPreference(context: Context): Preference {
+    override fun onCreatePreference(context: Context): Preference {
         return ListPreference(context).apply {
-            key = this@IconShapePerf.key
-            isEnabled = enable
+            setup(this@IconShapePerf)
             icon = createFontIcon(context, Icons.ROUNDED_CORNER)
             setTitle(R.string.icon_shape_override_label)
             summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
@@ -176,23 +184,25 @@ class IconShapePerf : SettingsPref<String> {
     }
 }
 
-class DynamicColorPref : SettingsPref<Boolean>, DynamicColors.Precondition,
+class DynamicColorPref : SettingsPref<Boolean>("key_dynamic_color"), DynamicColors.Precondition,
     DynamicColors.OnAppliedCallback {
 
-    override val key: String = "key_dynamic_color"
-    override val enable: Boolean = DynamicColors.isDynamicColorAvailable()
-    override val defaultOption: Boolean = DynamicColors.isDynamicColorAvailable()
+    override fun isEnable(): Boolean {
+        return DynamicColors.isDynamicColorAvailable()
+    }
 
-    override fun createPreference(context: Context): Preference {
+    override fun getDefaultOption(): Boolean {
+        return DynamicColors.isDynamicColorAvailable()
+    }
+
+    override fun onCreatePreference(context: Context): Preference {
         return SwitchPreferenceCompat(context).apply {
-            key = this@DynamicColorPref.key
-            title = "Dynamic Color"
-            isEnabled = enable
-            setDefaultValue(defaultOption)
+            setup(this@DynamicColorPref)
+            setTitle(R.string.pref_title_dynamic_color)
             isChecked = getOption(context)
             icon = createFontIcon(context, Icons.PALETTE)
             widgetLayoutResource = R.layout.layout_widget_material_switch
-            if (enable) {
+            if (isEnabled) {
                 setSummaryOff(R.string.preference_off)
                 setSummaryOn(R.string.preference_on)
             }
@@ -201,7 +211,7 @@ class DynamicColorPref : SettingsPref<Boolean>, DynamicColors.Precondition,
     }
 
     override fun getOption(context: Context): Boolean {
-        return context.pref.getBoolean(key, defaultOption)
+        return context.pref.getBoolean(key, getDefaultOption())
     }
 
     override fun setOption(context: Context, newValue: Boolean) {
@@ -237,7 +247,7 @@ class DynamicColorPref : SettingsPref<Boolean>, DynamicColors.Precondition,
     }
 }
 
-class NightModePref : SettingsPref<Boolean> {
+class NightModePref : SettingsPref<Boolean>("key_night_mode") {
 
     companion object {
         fun isSystemNightMode(context: Context): Boolean {
@@ -246,20 +256,19 @@ class NightModePref : SettingsPref<Boolean> {
         }
     }
 
-    override val key: String = "key_night_mode"
-    override val enable: Boolean = true
-    override val defaultOption: Boolean = false
+    override fun getDefaultOption(): Boolean {
+        return false
+    }
 
-    override fun createPreference(context: Context): Preference {
+    override fun onCreatePreference(context: Context): Preference {
         return NightModeSwitchPreference(context, null).apply {
-            key = this@NightModePref.key
+            setup(this@NightModePref)
             setTitle(R.string.pref_title_theme)
             icon = createFontIcon(context, Icons.BRIGHTNESS_6)
             setSummaryOff(R.string.summary_theme_follow_system)
             setSummaryOn(R.string.summary_theme_dark_mode)
             switchTextOff = Icons.BRIGHTNESS_AUTO
             switchTextOn = Icons.BRIGHTNESS_4
-            setDefaultValue(defaultOption)
             isChecked = getOption(context)
             onPreferenceChangeListener = this@NightModePref
         }
@@ -276,7 +285,7 @@ class NightModePref : SettingsPref<Boolean> {
     }
 
     override fun getOption(context: Context): Boolean {
-        return context.pref.getBoolean(key, defaultOption)
+        return context.pref.getBoolean(key, getDefaultOption())
     }
 
 }
