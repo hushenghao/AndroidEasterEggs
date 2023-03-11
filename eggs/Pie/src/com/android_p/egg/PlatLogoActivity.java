@@ -19,6 +19,7 @@ package com.android_p.egg;
 import android.animation.TimeAnimator;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -44,13 +45,14 @@ public class PlatLogoActivity extends Activity {
     TimeAnimator anim;
     PBackground bg;
 
-    private class PBackground extends Drawable {
+    static class PBackground extends Drawable {
         private float maxRadius, radius, x, y, dp;
         private int[] palette;
         private int darkest;
         private float offset;
 
-        public PBackground() {
+        public PBackground(Context context) {
+            if (dp == 0) dp = context.getResources().getDisplayMetrics().density;
             randomizePalette();
         }
 
@@ -108,7 +110,6 @@ public class PlatLogoActivity extends Activity {
 
         @Override
         public void draw(Canvas canvas) {
-            if (dp == 0) dp = getResources().getDisplayMetrics().density;
             final float width = canvas.getWidth();
             final float height = canvas.getHeight();
             if (radius == 0) {
@@ -183,7 +184,7 @@ public class PlatLogoActivity extends Activity {
         layout = new FrameLayout(this);
         setContentView(layout);
 
-        bg = new PBackground();
+        bg = new PBackground(this);
         layout.setBackground(bg);
 
         layout.setOnTouchListener(new View.OnTouchListener() {

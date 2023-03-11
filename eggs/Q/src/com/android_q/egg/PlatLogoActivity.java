@@ -262,7 +262,7 @@ public class PlatLogoActivity extends Activity {
         }
     }
 
-    private static class BackslashDrawable extends Drawable implements TimeAnimator.TimeListener {
+    static class BackslashDrawable extends Drawable implements TimeAnimator.TimeListener {
         Bitmap mTile;
         Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         BitmapShader mShader;

@@ -94,7 +94,7 @@ public class PlatLogoActivity extends Activity {
         mLogo.setImageResource(R.drawable.t_platlogo);
         layout.addView(mLogo, lp);
 
-        mBg = new BubblesDrawable();
+        mBg = new BubblesDrawable(this);
         mBg.setLevel(0);
         mBg.avoid = widgetSize / 2;
         mBg.padding = 0.5f * dp;
@@ -348,7 +348,7 @@ public class PlatLogoActivity extends Activity {
         public Bitmap bitmap = null;
     }
 
-    class BubblesDrawable extends Drawable implements View.OnLongClickListener {
+    static class BubblesDrawable extends Drawable implements View.OnLongClickListener {
 
 //        private static final int MAX_BUBBS = 2000;
 
@@ -388,14 +388,16 @@ public class PlatLogoActivity extends Activity {
         public float padding = 0f;
         public float minR = 0f;
 
+        private final Context context;
         @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.TIRAMISU)
         private final boolean supportCOLR = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU;
         //private final boolean supportCOLR = false;
 
-        BubblesDrawable() {
+        BubblesDrawable(Context context) {
+            this.context = context;
             try {
                 for (int i = 0; i < mColorIds.length; i++) {
-                    mColors[i] = DrawableKt.getSystemColor(PlatLogoActivity.this, mColorIds[i]);
+                    mColors[i] = DrawableKt.getSystemColor(context, mColorIds[i]);
                 }
             } catch (Exception ignore) {
             }
@@ -437,7 +439,7 @@ public class PlatLogoActivity extends Activity {
             }
             // support code
             if (!supportCOLR) {
-                COLRBitmapCompat.convertCOLRBitmap(mBubbs, PlatLogoActivity.this, () -> {
+                COLRBitmapCompat.convertCOLRBitmap(mBubbs, (Activity) context, () -> {
                     Log.i(TAG, "chooseEmojiSet: result");
                     invalidateSelf();
                     return null;

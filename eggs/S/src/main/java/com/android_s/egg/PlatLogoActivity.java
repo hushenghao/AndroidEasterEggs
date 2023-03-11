@@ -91,11 +91,10 @@ public class PlatLogoActivity extends Activity {
 
         mLogo = new ImageView(this);
         mLogo.setVisibility(View.GONE);
-//        mLogo.setImageResource(R.drawable.s_platlogo);
-        mLogo.setImageDrawable(createDrawable());
+        mLogo.setImageResource(R.drawable.s_platlogo);
         layout.addView(mLogo, lp);
 
-        mBg = new BubblesDrawable();
+        mBg = new BubblesDrawable(this);
         mBg.setLevel(0);
         mBg.avoid = widgetSize / 2;
         mBg.padding = 0.5f * dp;
@@ -103,22 +102,6 @@ public class PlatLogoActivity extends Activity {
         layout.setBackground(mBg);
 
         setContentView(layout);
-    }
-
-    private Drawable createDrawable() {
-        int color = -1;
-        try {
-            color = DrawableKt.getSystemColor(this, "system_accent3_500");
-        } catch (Exception ignore) {
-        }
-        if (color != -1) {
-            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.s_platlogo_nobg);
-            GradientDrawable bg = new GradientDrawable();
-            bg.setShape(GradientDrawable.OVAL);
-            bg.setColor(color);
-            return new LayerDrawable(new Drawable[]{bg, drawable});
-        }
-        return ContextCompat.getDrawable(this, R.drawable.s_platlogo);
     }
 
     private boolean shouldWriteSettings() {
@@ -323,7 +306,7 @@ public class PlatLogoActivity extends Activity {
         public int color;
     }
 
-    class BubblesDrawable extends Drawable {
+    static class BubblesDrawable extends Drawable {
         private static final int MAX_BUBBS = 2000;
 
         //        private final int[] mColorIds = {
@@ -357,10 +340,10 @@ public class PlatLogoActivity extends Activity {
         public float padding = 0f;
         public float minR = 0f;
 
-        BubblesDrawable() {
+        BubblesDrawable(Context context) {
             try {
                 for (int i = 0; i < mColorIds.length; i++) {
-                    mColors[i] = DrawableKt.getSystemColor(PlatLogoActivity.this, mColorIds[i]);
+                    mColors[i] = DrawableKt.getSystemColor(context, mColorIds[i]);
                 }
             } catch (Exception ignore) {
             }
