@@ -41,8 +41,8 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
 
     private fun isWideSize(): Boolean {
         val configuration = activity.resources.configuration
-        return configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
-                configuration.smallestScreenWidthDp >= 600
+        //return configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
+        return configuration.smallestScreenWidthDp >= 600
     }
 
     fun setContentView() {

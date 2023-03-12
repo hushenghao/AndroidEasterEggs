@@ -22,7 +22,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fl_eggs"
-        android:name="com.dede.android_eggs.main.SnapshotFragment"
+        android:name="com.dede.android_eggs.main.EasterEggsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

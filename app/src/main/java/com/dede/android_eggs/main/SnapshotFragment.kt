@@ -10,7 +10,6 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentSnapshotBinding
 import com.dede.basic.PlatLogoSnapshotProvider
 import com.google.android.material.carousel.CarouselLayoutManager
-import com.google.android.material.carousel.MaskableFrameLayout
 
 
 class SnapshotFragment : Fragment(R.layout.fragment_snapshot) {
@@ -20,10 +19,8 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSnapshotBinding.bind(view)
-//        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
         binding.recyclerView.layoutManager = CarouselLayoutManager()
         binding.recyclerView.adapter = SnapshotAdapter()
-        binding.recyclerView.isNestedScrollingEnabled = false
     }
 
     private class SnapshotAdapter : RecyclerView.Adapter<SnapshotHolder>() {
@@ -55,21 +52,20 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot) {
         }
 
         override fun getItemCount(): Int {
-            return Int.MAX_VALUE
+            return snapshotList.size
         }
 
         override fun onBindViewHolder(holder: SnapshotHolder, position: Int) {
         }
 
         override fun getItemViewType(position: Int): Int {
-            // disable recycler
             return position % snapshotList.size
         }
     }
 
     private class SnapshotHolder(view: View, val provider: PlatLogoSnapshotProvider) :
         RecyclerView.ViewHolder(view) {
-        val maskable: MaskableFrameLayout = itemView.findViewById(R.id.carousel_item_container)
+        val maskable: ViewGroup = itemView.findViewById(R.id.carousel_item_container)
 
         fun bind() {
             maskable.removeAllViewsInLayout()

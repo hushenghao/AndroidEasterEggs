@@ -6,6 +6,13 @@
         app:key="key_collection"
         app:title="@string/header_collection">
 
+        <Preference app:title="Snapshot">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetClass="com.dede.android_eggs.main.SnapshotActivity"
+                android:targetPackage="com.dede.android_eggs" />
+        </Preference>
+
         <com.dede.android_eggs.ui.TimelinePreference
             app:icon="@drawable/ic_android_udc"
             app:supportAdaptiveIcon="true"

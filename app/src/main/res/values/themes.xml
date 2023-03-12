@@ -6,7 +6,8 @@
         <item name="windowNoTitle">true</item>
         <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
             animated drawable. One of these is required. -->
-        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/avd_anim</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/avd_anim
+        </item>
         <!-- Required for animated icons -->
         <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">600</item>
     </style>
@@ -38,6 +39,12 @@
         <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
         <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
+    </style>
+
+    <style name="Theme.EasterEggs.Snapshot" parent="Theme.EasterEggs">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowShowWallpaper">true</item>
     </style>
 
     <style name="TextAppearance.NightModeSwitch" parent="">
