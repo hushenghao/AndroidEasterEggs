@@ -7,19 +7,19 @@ import android.graphics.drawable.LayerDrawable;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.core.graphics.drawable.ColorDrawableKt;
 
+import com.dede.basic.ContextExt;
 import com.dede.basic.UtilExt;
 
 public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotProvider {
     @NonNull
     @Override
     public View create(@NonNull Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.q_platlogo_layout, null, false);
+        Context contextWrapper = ContextExt.createScaleWrapper(context, 0.75f);
+        View view = LayoutInflater.from(contextWrapper).inflate(R.layout.q_platlogo_layout, null, false);
 
         Drawable mBackslash = new PlatLogoActivity.BackslashDrawable(UtilExt.getDp(50));
         mBackslash.setAlpha(0x20);
@@ -37,9 +37,7 @@ public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotPro
                 mBackslash,
         });
 
-        final ViewGroup root = (ViewGroup) mOneView.getParent();
-        root.setClipChildren(false);
-        root.setBackground(bg);
+        view.setBackground(bg);
         return view;
     }
 }

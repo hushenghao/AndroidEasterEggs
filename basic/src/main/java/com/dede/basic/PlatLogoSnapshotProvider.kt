@@ -27,9 +27,5 @@ abstract class PlatLogoSnapshotProvider {
         return view
     }
 
-    fun updateCache(view: View) {
-        cache = WeakReference(view)
-    }
-
     abstract fun create(context: Context): View
 }

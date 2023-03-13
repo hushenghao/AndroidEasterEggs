@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.carousel.MaskableFrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.carousel.MaskableFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/carousel_item_container"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="4dp"
+    android:layout_marginHorizontal="4dp"
     android:foreground="?attr/selectableItemBackground"
-    app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
+    app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge"
+    tools:layout_height="300dp"
+    tools:viewBindingIgnore="true">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_snapshot_default_bg" />
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </com.google.android.material.carousel.MaskableFrameLayout>

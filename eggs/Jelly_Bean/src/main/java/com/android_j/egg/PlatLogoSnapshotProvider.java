@@ -16,7 +16,7 @@ public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotPro
         mContent.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
         final int p = (int) (32 * metrics.density);
-        mContent.setPadding(p, p, p, p);
+        mContent.setPadding(p, 0, p, 0);
 
         return mContent;
     }

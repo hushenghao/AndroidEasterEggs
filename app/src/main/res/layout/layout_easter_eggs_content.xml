@@ -18,11 +18,18 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways|snap"
             app:titleCentered="true" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fl_snapshot"
+            android:name="com.dede.android_eggs.main.SnapshotFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fl_eggs"
-        android:name="com.dede.android_eggs.main.EasterEggsFragment"
+        android:name="com.dede.android_eggs.main.EasterEggListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
