@@ -1,15 +1,21 @@
 package com.dede.android_eggs.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentSnapshotHeaderBinding
 import com.dede.basic.PlatLogoSnapshotProvider
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.internal.ContextUtils
 
 
 class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
@@ -22,6 +28,7 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
         binding.snapshotList.adapter = SnapshotAdapter()
     }
 
+    // todo 优化性能
     private class SnapshotAdapter : RecyclerView.Adapter<SnapshotHolder>() {
         companion object {
             private val snapshotList = listOf(
@@ -63,16 +70,28 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
         }
     }
 
-    private class SnapshotHolder(view: View) :
-        RecyclerView.ViewHolder(view) {
+    private class SnapshotHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         private val group: ViewGroup = itemView.findViewById(R.id.fl_content)
+        private val background: ImageView = itemView.findViewById(R.id.iv_background)
+
+        @SuppressLint("RestrictedApi")
+        override fun onClick(v: View) {
+            val activity = ContextUtils.getActivity(v.context) as? FragmentActivity ?: return
+            val easterEggListFragment = activity.supportFragmentManager
+                .findFragmentById(R.id.fl_eggs) as? EasterEggListFragment ?: return
+            activity.findViewById<AppBarLayout>(R.id.app_bar)
+                ?.setExpanded(false, true)
+            easterEggListFragment.smoothScrollToPosition(layoutPosition)
+        }
 
         fun bind(provider: PlatLogoSnapshotProvider) {
+            background.load(R.drawable.img_snapshot_default_bg)
             group.removeAllViewsInLayout()
             group.addView(
                 provider.create(itemView.context),
-                LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+                LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT
             )
+            itemView.setOnClickListener(this)
         }
     }
 }

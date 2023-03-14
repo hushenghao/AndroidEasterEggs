@@ -1,7 +1,9 @@
 package com.dede.android_eggs.main
 
+import android.content.Context
 import android.graphics.Shader
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -14,7 +16,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
+import coil.dispose
 import coil.load
+import coil.size.Size
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentEasterEggListBinding
 import com.dede.android_eggs.databinding.ItemEasterEggLayoutBinding
@@ -39,8 +43,7 @@ import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.adapter.VType
 import com.dede.basic.requireDrawable
-import com.google.android.material.color.MaterialColors
-import com.google.android.material.R as M3R
+import java.lang.ref.WeakReference
 
 
 class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
@@ -54,8 +57,9 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
                 R.string.version_comment_android_u,
                 R.string.target_class_android_t,
                 true,
-                itemType = 1
+                itemType = Egg.VIEW_TYPE_PREVIEW
             ),
+            Wavy(R.drawable.ic_wavy_line),
             Egg(
                 R.drawable.ic_android_tiramisu,
                 R.string.title_android_t,
@@ -239,9 +243,13 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEasterEggListBinding.bind(view)
         binding.recyclerView.adapter = VAdapter(eggList) {
-            addViewType(R.layout.item_easter_egg_layout, 0, EggHolder::class)
-            addViewType(R.layout.item_easter_egg_layout, 1, PreviewHolder::class)
-            addViewType(R.layout.item_easter_egg_wavy, -1, WavyHolder::class)
+            addViewType(R.layout.item_easter_egg_layout, Egg.VIEW_TYPE_EGG, EggHolder::class)
+            addViewType(
+                R.layout.item_easter_egg_layout,
+                Egg.VIEW_TYPE_PREVIEW,
+                PreviewHolder::class
+            )
+            addViewType(R.layout.item_easter_egg_wavy, Egg.VIEW_TYPE_WAVY, WavyHolder::class)
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(
@@ -255,20 +263,38 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
             })
     }
 
+    fun smoothScrollToPosition(providerIndex: Int) {
+        val fistOffset = eggList.indexOfFirst { it is Egg && it.shortcutKey != null }
+        val position = fistOffset + providerIndex + 1
+        binding.recyclerView.smoothScrollToPosition(position)
+    }
+
     private class WavyHolder(view: View) : VHolder<Wavy>(view) {
         private val imageView = itemView.findViewById<ImageView>(R.id.iv_icon)
-        override fun onBindViewHolder(t: Wavy) {
-            if (!t.repeat) {
-                imageView.setImageResource(t.wavyRes)
+        private var cacheRepeatWavy: WeakReference<Drawable>? = null
+
+        private fun getRepeatWavyDrawable(context: Context, wavyRes: Int): Drawable {
+            var drawable = cacheRepeatWavy?.get()
+            if (drawable == null) {
+                val bitmap = context.requireDrawable(wavyRes).toBitmap()
+                drawable = BitmapDrawable(context.resources, bitmap).apply {
+                    setTileModeXY(Shader.TileMode.REPEAT, null)
+                }
+                cacheRepeatWavy = WeakReference(drawable)
+            }
+            return drawable
+        }
+
+        @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+        override fun onBindViewHolder(wavy: Wavy) {
+            imageView.dispose()
+            if (!wavy.repeat) {
+                imageView.load(wavy.wavyRes) {
+                    size(Size.ORIGINAL)
+                }
                 return
             }
-            imageView.setImageDrawable(null)
-            val bitmap = imageView.context.requireDrawable(t.wavyRes).toBitmap()
-            val drawable = BitmapDrawable(imageView.resources, bitmap).apply {
-                setTileModeXY(Shader.TileMode.REPEAT, null)
-                setTint(MaterialColors.getColor(imageView, M3R.attr.colorSecondary))
-            }
-            imageView.background = drawable
+            imageView.background = getRepeatWavyDrawable(imageView.context, wavy.wavyRes)
         }
     }
 
@@ -298,12 +324,12 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
                 applySupportAdaptiveIcon(itemView.context, egg.supportAdaptiveIcon)
             }
             itemView.setOnClickListener { eggActionController.onClick(egg) }
-            itemView.setOnLongClickListener { eggActionController.onLongPress(egg) }
+            binding.ivIcon.setOnClickListener { eggActionController.showVersionCommentDialog(egg) }
         }
     }
 
     private class Wavy(val wavyRes: Int, val repeat: Boolean = false) : VType {
-        override val viewType: Int = -1
+        override val viewType: Int = Egg.VIEW_TYPE_WAVY
     }
 
     data class Egg(
@@ -315,8 +341,15 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         val supportAdaptiveIcon: Boolean = false,
         val shortcutKey: String? = null,
         val extras: Bundle? = null,
-        private val itemType: Int = 0,
+        private val itemType: Int = VIEW_TYPE_EGG,
     ) : VType {
+
+        companion object {
+            const val VIEW_TYPE_EGG = 0
+            const val VIEW_TYPE_WAVY = -1
+            const val VIEW_TYPE_PREVIEW = 1
+        }
+
         override val viewType: Int = itemType
     }
 

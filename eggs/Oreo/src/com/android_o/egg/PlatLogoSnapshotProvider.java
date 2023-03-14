@@ -1,7 +1,6 @@
 package com.android_o.egg;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Outline;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -18,13 +17,6 @@ public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotPro
 
     public PlatLogoSnapshotProvider(boolean isOreoPoint) {
         this.isOreoPoint = isOreoPoint;
-    }
-
-    @NonNull
-    @Override
-    public Intent getPlatLogoIntent(@NonNull Context context) {
-        return super.getPlatLogoIntent(context)
-                .putExtra("isOreoPoint", isOreoPoint);
     }
 
     @NonNull

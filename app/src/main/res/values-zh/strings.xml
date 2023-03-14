@@ -36,6 +36,9 @@
     <string name="icon_shape_circle">"圆形"</string>
     <string name="icon_shape_teardrop">"泪珠形"</string>
     <string name="icon_shape_rounded_corners">圆角方形</string>
+    <string name="icon_shape_clover">三叶草</string>
+    <string name="icon_shape_scallop">扇贝</string>
+    <string name="icon_shape_plum_blossom">梅花</string>
     <string name="icon_shape_override_progress">"正在应用图标形状更改"</string>
 
     <string name="pref_title_language">语言</string>

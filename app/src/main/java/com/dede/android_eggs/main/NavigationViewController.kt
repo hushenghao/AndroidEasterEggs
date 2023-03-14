@@ -53,6 +53,7 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
             LayoutEasterEggsContentBinding.bind(activity.findViewById(R.id.layout_content))
         val navigationView: NavigationView = activity.findViewById(R.id.navigation_view)
         activity.setSupportActionBar(binding.toolbar)
+        binding.appBar.setExpanded(false)
 
         bindNavigationView(navigationView)
 

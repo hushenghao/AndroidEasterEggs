@@ -160,7 +160,7 @@ class EggActionController(val context: Context) {
         context.startActivity(intent)
     }
 
-    fun onLongPress(egg: EasterEggListFragment.Egg): Boolean {
+    fun showVersionCommentDialog(egg: EasterEggListFragment.Egg) {
         showDialogInternal(
             egg.iconRes,
             egg.androidRes,
@@ -169,7 +169,6 @@ class EggActionController(val context: Context) {
             context.getString(egg.eggNameRes),
             createIntent(egg.targetClassRes)
         )
-        return true
     }
 
     private fun showDialogInternal(

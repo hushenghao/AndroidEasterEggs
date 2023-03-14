@@ -49,8 +49,8 @@
     <!-- Option to change the shape of the home screen icons to a teardrop. This represents the name of the shape similar to a circle with with the bottom right corner pushed out like a square [CHAR LIMIT=50] -->
     <string name="icon_shape_teardrop">Teardrop</string>
     <string name="icon_shape_rounded_corners">Rounded Corners</string>
-    <string name="icon_shape_petal">Petal</string>
-    <string name="icon_shape_wave">Wave</string>
+    <string name="icon_shape_clover">Clover</string>
+    <string name="icon_shape_scallop">Scallop</string>
     <string name="icon_shape_plum_blossom">Plum Blossom</string>
 
     <!-- Message shown in the progress dialog when the icon shape override is being applied [CHAR LIMIT=100]-->
