@@ -2,14 +2,12 @@ package com.android_l.egg;
 
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.util.DisplayMetrics;
@@ -29,7 +27,7 @@ public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotPro
         final DisplayMetrics dm = context.getResources().getDisplayMetrics();
         final float dp = dm.density;
         final int size = (int)
-                (Math.min(Math.min(dm.widthPixels, dm.heightPixels), 600 * dp) - 100 * dp);
+                (Math.min(Math.min(dm.widthPixels, dm.heightPixels), 500 * dp) - 200 * dp);
 
         final View stick = new View(context) {
             Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -103,9 +101,6 @@ public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotPro
         final int idx = newColorIndex();
         final ShapeDrawable popbg = new ShapeDrawable(new OvalShape());
         popbg.getPaint().setColor(FLAVORS[idx]);
-        final RippleDrawable ripple = new RippleDrawable(
-                ColorStateList.valueOf(FLAVORS[idx + 1]),
-                popbg, null);
-        return ripple;
+        return popbg;
     }
 }

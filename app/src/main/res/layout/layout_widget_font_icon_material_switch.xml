@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:showText="true"
-    app:switchTextAppearance="@style/TextAppearance.NightModeSwitch"
+    app:switchTextAppearance="@style/TextAppearance.FontIconSwitch"
     tools:textOff="☀"
     tools:textOn="🌙"
     tools:viewBindingIgnore="true" />

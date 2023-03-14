@@ -18,8 +18,7 @@ public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotPro
     @NonNull
     @Override
     public View create(@NonNull Context context) {
-        Context contextWrapper = ContextExt.createScaleWrapper(context, 0.75f);
-        View view = LayoutInflater.from(contextWrapper).inflate(R.layout.q_platlogo_layout, null, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.q_platlogo_snapshot_layout, null, false);
 
         Drawable mBackslash = new PlatLogoActivity.BackslashDrawable(UtilExt.getDp(50));
         mBackslash.setAlpha(0x20);

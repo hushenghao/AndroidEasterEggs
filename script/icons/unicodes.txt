@@ -18,8 +18,6 @@ e838
 # policy
 ea17
 
-# interests
-e7c8
 # tips_and_updates
 e79a
 

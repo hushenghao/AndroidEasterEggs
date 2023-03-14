@@ -27,10 +27,12 @@ import com.dede.android_eggs.ui.FontIconsDrawable
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.ScaleTypeDrawable
 import com.dede.android_eggs.util.ChromeTabsBrowser
-import com.dede.basic.*
+import com.dede.basic.dp
+import com.dede.basic.requireDrawable
+import com.dede.basic.string
+import com.dede.basic.uiExecutor
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.resources.MaterialAttributes
-import com.google.android.material.shape.MaterialShapeDrawable
 import com.dede.android_eggs.R.layout.activity_easter_eggs as content_view
 import com.dede.android_eggs.R.layout.activity_easter_eggs_land as content_view_land
 import com.google.android.material.R as M3R
@@ -41,8 +43,8 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
 
     private fun isWideSize(): Boolean {
         val configuration = activity.resources.configuration
-        //return configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
-        return configuration.smallestScreenWidthDp >= 600
+        return configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
+                configuration.smallestScreenWidthDp >= 600
     }
 
     fun setContentView() {
@@ -51,8 +53,6 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
             LayoutEasterEggsContentBinding.bind(activity.findViewById(R.id.layout_content))
         val navigationView: NavigationView = activity.findViewById(R.id.navigation_view)
         activity.setSupportActionBar(binding.toolbar)
-        binding.appBar.statusBarForeground =
-            MaterialShapeDrawable.createWithElevationOverlay(activity)
 
         bindNavigationView(navigationView)
 

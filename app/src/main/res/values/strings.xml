@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Easter Eggs</string>
 
-    <!-- Preference Titles -->
-    <string name="header_collection">Collection</string>
-    <string name="title_ancient_version">Ancient version</string>
     <string name="summary_android_waiting">Waiting…</string>
     <string name="summary_android_release_pushed">The final release version has pushed</string>
 
@@ -52,6 +49,9 @@
     <!-- Option to change the shape of the home screen icons to a teardrop. This represents the name of the shape similar to a circle with with the bottom right corner pushed out like a square [CHAR LIMIT=50] -->
     <string name="icon_shape_teardrop">Teardrop</string>
     <string name="icon_shape_rounded_corners">Rounded Corners</string>
+    <string name="icon_shape_petal">Petal</string>
+    <string name="icon_shape_wave">Wave</string>
+    <string name="icon_shape_plum_blossom">Plum Blossom</string>
 
     <!-- Message shown in the progress dialog when the icon shape override is being applied [CHAR LIMIT=100]-->
     <string name="icon_shape_override_progress">Applying icon shape changes</string>

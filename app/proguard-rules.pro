@@ -23,3 +23,7 @@
 -dontwarn org.bouncycastle.jsse.**
 -dontwarn org.conscrypt.**
 -dontwarn org.openjsse.**
+
+-keepclassmembers class * extends com.dede.android_eggs.ui.adapter.VHolder {
+    public <init>(android.view.View);
+}

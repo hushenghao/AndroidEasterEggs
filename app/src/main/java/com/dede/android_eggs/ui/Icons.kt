@@ -30,9 +30,6 @@ object Icons {
     /** info */
     const val INFO = "\uE88E"
 
-    /** interests */
-    const val INTERESTS = "\uE7C8"
-
     /** language */
     const val LANGUAGE = "\uE894"
 

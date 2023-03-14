@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.dede.android_eggs.R
@@ -68,11 +69,10 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
 
         fun bind(provider: PlatLogoSnapshotProvider) {
             group.removeAllViewsInLayout()
-            group.addView(provider.create(itemView.context))
-//            itemView.setOnClickListener {
-//                val intent = provider.getPlatLogoIntent(it.context)
-//                it.context.startActivity(intent)
-//            }
+            group.addView(
+                provider.create(itemView.context),
+                LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+            )
         }
     }
 }

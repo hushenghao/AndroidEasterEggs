@@ -13,7 +13,7 @@
         android:layout_marginVertical="10dp"
         app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="W,3:5"
+        app:layout_constraintDimensionRatio="W,1:2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

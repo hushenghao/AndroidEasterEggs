@@ -47,8 +47,12 @@
         <item name="android:windowShowWallpaper">true</item>
     </style>
 
-    <style name="TextAppearance.NightModeSwitch" parent="">
+    <style name="TextAppearance.FontIconSwitch" parent="">
         <item name="android:textColor">?attr/colorControlNormal</item>
         <item name="android:textSize" tools:ignore="SpUsage">16dp</item>
+    </style>
+
+    <style name="TextAppearance.Title" parent="TextAppearance.Material3.ActionBar.Title">
+        <item name="fontFamily">sans-serif-medium</item>
     </style>
 </resources>

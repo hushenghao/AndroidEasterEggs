@@ -20,14 +20,17 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import com.dede.basic.UtilExt;
+
 public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotProvider {
     @NonNull
     @Override
     public View create(@NonNull Context context) {
         ImageView imageView = new ImageView(context);
+        int padding = UtilExt.getDp(30f);
+        imageView.setPadding(padding, padding, padding, padding);
         imageView.setImageDrawable(new BigDialDrawable(context));
         final FrameLayout layout = new FrameLayout(context);
-        layout.setBackgroundColor(0xFFFF0000);
         layout.addView(imageView, FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT);
 
@@ -91,7 +94,7 @@ public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotPro
                 canvas.save();
                 final float angle = valueToAngle(f);
                 canvas.rotate(-angle, w2, h2);
-                canvas.drawCircle(cx, h2,  20 , mPaint);
+                canvas.drawCircle(cx, h2, 20, mPaint);
                 canvas.restore();
             }
 

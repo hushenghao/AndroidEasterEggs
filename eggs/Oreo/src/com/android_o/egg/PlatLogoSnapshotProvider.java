@@ -2,9 +2,7 @@ package com.android_o.egg;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Outline;
-import android.graphics.drawable.RippleDrawable;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -36,24 +34,15 @@ public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotPro
 
         final DisplayMetrics dm = context.getResources().getDisplayMetrics();
         final float dp = dm.density;
-        final int size = (int)
-                (Math.min(Math.min(dm.widthPixels, dm.heightPixels), 600 * dp) - 100 * dp);
 
         final ImageView im = new ImageView(context);
-        final int pad = (int) (40 * dp);
-        im.setPadding(pad, pad, pad, pad);
         im.setTranslationZ(20);
+        im.setAdjustViewBounds(true);
 
         if (!isOreoPoint) {
-            im.setBackground(new RippleDrawable(
-                    ColorStateList.valueOf(0xFF776677),
-                    context.getDrawable(R.drawable.o_platlogo),
-                    null));
+            im.setImageResource(R.drawable.o_platlogo);
         } else {
-            im.setBackground(new RippleDrawable(
-                    ColorStateList.valueOf(0xFF776677),
-                    context.getDrawable(R.drawable.o_point_platlogo),
-                    null));
+            im.setImageResource(R.drawable.o_point_platlogo);
             im.setOutlineProvider(new ViewOutlineProvider() {
                 @Override
                 public void getOutline(View view, Outline outline) {
@@ -65,7 +54,7 @@ public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotPro
             im.setElevation(12f * dp);
         }
 
-        mLayout.addView(im, new FrameLayout.LayoutParams(size, size, Gravity.CENTER));
+        mLayout.addView(im, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER));
         return mLayout;
     }
 }

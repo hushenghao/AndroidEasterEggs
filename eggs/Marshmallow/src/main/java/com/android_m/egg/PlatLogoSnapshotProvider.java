@@ -3,14 +3,12 @@ package com.android_m.egg;
 import static com.android_m.egg.PlatLogoActivity.HSBtoColor;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RippleDrawable;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -29,17 +27,10 @@ public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotPro
         final DisplayMetrics dm = context.getResources().getDisplayMetrics();
         final float dp = dm.density;
         final int size = (int)
-                (Math.min(Math.min(dm.widthPixels, dm.heightPixels), 600 * dp) - 100 * dp);
+                (Math.min(Math.min(dm.widthPixels, dm.heightPixels), 500 * dp) - 200 * dp);
 
         final View im = new View(context);
         im.setTranslationZ(20);
-        im.setOutlineProvider(new ViewOutlineProvider() {
-            @Override
-            public void getOutline(View view, Outline outline) {
-                final int pad = (int) (8 * dp);
-                outline.setOval(pad, pad, view.getWidth() - pad, view.getHeight() - pad);
-            }
-        });
         final float hue = (float) Math.random();
         final Paint bgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         bgPaint.setColor(HSBtoColor(hue, 0.4f, 1f));
@@ -69,10 +60,7 @@ public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotPro
                 M.draw(c);
             }
         };
-        im.setBackground(new RippleDrawable(
-                ColorStateList.valueOf(0xFFFFFFFF),
-                platlogo,
-                null));
+        im.setBackground(platlogo);
         im.setOutlineProvider(new ViewOutlineProvider() {
             @Override
             public void getOutline(View view, Outline outline) {

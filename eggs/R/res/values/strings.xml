@@ -16,5 +16,5 @@ Copyright (C) 2018 The Android Open Source Project
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="r_app_name" translatable="false">Android R Easter Egg</string>
 
-    <string name="r_egg_name" translatable="false">Cat Controls(Collection)</string>
+    <string name="r_egg_name" translatable="false">Cat Controls (Collection)</string>
 </resources>

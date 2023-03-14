@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
-    android:layout_marginBottom="10dp"
+    android:layout_marginVertical="5dp"
     android:foreground="?attr/selectableItemBackground"
     app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
 
@@ -20,6 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
+            android:fontFamily="sans-serif-medium"
             android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
             app:layout_constraintEnd_toStartOf="@id/iv_icon"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +31,7 @@
             android:id="@+id/iv_icon"
             android:layout_width="42dp"
             android:layout_height="42dp"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
@@ -40,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             tools:text="@tools:sample/lorem[9]" />
