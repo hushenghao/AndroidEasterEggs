@@ -4,11 +4,38 @@ import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.reflect.Constructor
 import java.util.*
 import kotlin.reflect.KClass
 
+inline fun <reified VH : VHolder<out VType>> VAdapter.addViewType(
+    @LayoutRes layoutRes: Int,
+    viewType: Int,
+) {
+    addViewType(layoutRes, viewType, VH::class.java)
+}
+
+private class VHolderImpl<T : VType>(view: View) : VHolder<T>(view)
+private class VTypeImpl<T>(val impl: T, type: Int) : VType {
+    override val viewType: Int = type
+}
+
+fun <T> VAdapter(
+    @LayoutRes layoutRes: Int,
+    list: List<T>,
+    onBindView: (holder: VHolder<VType>, t: T) -> Unit,
+): VAdapter {
+    return VAdapter(list.map { VTypeImpl(it, 0) }) {
+        addViewType(layoutRes, 0, VHolderImpl::class)
+        onBindViewHolder = { holder, vType ->
+            @Suppress("UNCHECKED_CAST")
+            val vTypeImpl = vType as VTypeImpl<T>
+            onBindView(holder, vTypeImpl.impl)
+        }
+    }
+}
 
 class VAdapter(
     list: List<VType> = emptyList(),
@@ -18,9 +45,11 @@ class VAdapter(
     private val list: List<VType>
     private val viewTypeMapping = SparseArray<Mapping>()
 
+    var onBindViewHolder: ((holder: VHolder<VType>, vType: VType) -> Unit)? = null
+
     private class Mapping(
         val layoutRes: Int,
-        val viewHolderClass: Class<out VHolder<out VType>>,
+        val vhClass: Class<out VHolder<out VType>>,
     )
 
     init {
@@ -28,21 +57,29 @@ class VAdapter(
         setup.invoke(this)
     }
 
-    fun addViewType(layoutRes: Int, viewType: Int, viewHolderClass: KClass<out VHolder<out VType>>) {
-        addViewType(layoutRes, viewType, viewHolderClass.java)
+    fun addViewType(
+        @LayoutRes layoutRes: Int,
+        viewType: Int,
+        vhClass: KClass<out VHolder<out VType>>,
+    ) {
+        addViewType(layoutRes, viewType, vhClass.java)
     }
 
-    fun addViewType(layoutRes: Int, viewType: Int, viewHolderClass: Class<out VHolder<out VType>>) {
+    fun addViewType(
+        @LayoutRes layoutRes: Int,
+        viewType: Int,
+        vhClass: Class<out VHolder<out VType>>,
+    ) {
         if (viewTypeMapping[viewType] != null) {
             throw IllegalArgumentException("viewType: (%d) is added!".format(viewType))
         }
-        val mapping = Mapping(layoutRes, viewHolderClass)
+        val mapping = Mapping(layoutRes, vhClass)
         viewTypeMapping.put(viewType, mapping)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val mapping = viewTypeMapping[viewType]
-        return VHolder.createViewHolder(parent, mapping.viewHolderClass, mapping.layoutRes)
+        return VHolder.createViewHolder(parent, mapping.vhClass, mapping.layoutRes)
     }
 
     override fun getItemCount(): Int {
@@ -50,8 +87,12 @@ class VAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val vType = list[position]
+
         @Suppress("UNCHECKED_CAST")
-        (holder as VHolder<VType>).onBindViewHolder(list[position])
+        val vHolder = holder as VHolder<VType>
+        onBindViewHolder?.invoke(vHolder, vType)
+        vHolder.onBindViewHolder(vType)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -90,7 +131,10 @@ abstract class VHolder<T : VType>(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+    fun <T : View> findViewById(id: Int): T {
+        return itemView.findViewById(id)
+    }
+
     open fun onBindViewHolder(t: T) {
     }
 }

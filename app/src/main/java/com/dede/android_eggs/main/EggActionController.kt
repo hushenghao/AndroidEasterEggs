@@ -153,7 +153,7 @@ class EggActionController(val context: Context) {
             .addFlags(ACTIVITY_TASK_FLAGS)
     }
 
-    fun onClick(egg: EasterEggListFragment.Egg) {
+    fun openEgg(egg: EasterEggListFragment.Egg) {
         val intent = createIntent(egg.targetClassRes) ?: return
         if (egg.extras != null)
             intent.putExtras(egg.extras)

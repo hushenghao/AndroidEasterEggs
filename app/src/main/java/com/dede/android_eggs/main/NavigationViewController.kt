@@ -3,7 +3,6 @@ package com.dede.android_eggs.main
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.net.Uri
 import android.view.Menu
@@ -12,7 +11,6 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.TintTypedArray
 import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -27,12 +25,12 @@ import com.dede.android_eggs.ui.FontIconsDrawable
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.ScaleTypeDrawable
 import com.dede.android_eggs.util.ChromeTabsBrowser
+import com.dede.android_eggs.util.resolveColorStateList
 import com.dede.basic.dp
 import com.dede.basic.requireDrawable
 import com.dede.basic.string
 import com.dede.basic.uiExecutor
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.resources.MaterialAttributes
 import com.dede.android_eggs.R.layout.activity_easter_eggs as content_view
 import com.dede.android_eggs.R.layout.activity_easter_eggs_land as content_view_land
 import com.google.android.material.R as M3R
@@ -103,13 +101,12 @@ class NavigationViewController(private val activity: AppCompatActivity) : Defaul
         // NavigationView init getColorStateList(R.styleable.NavigationView_itemIconTint)
         // navigationViewStyle: @style/Widget.Material3.NavigationView
         // itemIconTint: @color/m3_navigation_item_icon_tint
-        val typeValue = MaterialAttributes.resolve(context, M3R.attr.navigationViewStyle)
-        val resId = typeValue?.resourceId ?: M3R.color.m3_navigation_item_icon_tint
-        val typedArray = TintTypedArray.obtainStyledAttributes(
-            context, resId, intArrayOf(M3R.attr.itemIconTint)
+        val colorStateList = context.resolveColorStateList(
+            styleAttr = M3R.attr.navigationViewStyle,
+            colorAttr = M3R.attr.itemIconTint,
+            useTint = true,
+            defaultId = M3R.color.m3_navigation_item_icon_tint
         )
-        val colorStateList: ColorStateList = typedArray.getColorStateList(0)
-        typedArray.recycle()
         for (pair in parts) {
             menu.findItem(pair.first).icon = FontIconsDrawable(context, pair.second).apply {
                 setPadding(.5f.dp)

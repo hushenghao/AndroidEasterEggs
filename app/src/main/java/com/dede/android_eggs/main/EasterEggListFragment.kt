@@ -1,14 +1,22 @@
 package com.dede.android_eggs.main
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.Shader
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.StateSet
 import android.view.View
 import android.widget.ImageView
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
 import androidx.core.view.OnApplyWindowInsetsListener
@@ -16,7 +24,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import coil.dispose
 import coil.load
 import coil.size.Size
@@ -43,8 +50,13 @@ import com.dede.android_eggs.main.EggActionController.Companion.applySupportAdap
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.adapter.VType
+import com.dede.android_eggs.ui.adapter.addViewType
+import com.dede.android_eggs.util.resolveColor
+import com.dede.android_eggs.util.resolveColorStateList
 import com.dede.basic.requireDrawable
-import java.lang.ref.WeakReference
+import com.google.android.material.color.MaterialColors
+import com.google.android.material.resources.MaterialAttributes
+import com.google.android.material.R as M3R
 
 
 class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
@@ -244,13 +256,9 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEasterEggListBinding.bind(view)
         binding.recyclerView.adapter = VAdapter(eggList) {
-            addViewType(R.layout.item_easter_egg_layout, Egg.VIEW_TYPE_EGG, EggHolder::class)
-            addViewType(
-                R.layout.item_easter_egg_layout,
-                Egg.VIEW_TYPE_PREVIEW,
-                PreviewHolder::class
-            )
-            addViewType(R.layout.item_easter_egg_wavy, Egg.VIEW_TYPE_WAVY, WavyHolder::class)
+            addViewType<EggHolder>(R.layout.item_easter_egg_layout, Egg.VIEW_TYPE_EGG)
+            addViewType<PreviewHolder>(R.layout.item_easter_egg_layout, Egg.VIEW_TYPE_PREVIEW)
+            addViewType<WavyHolder>(R.layout.item_easter_egg_wavy, Egg.VIEW_TYPE_WAVY)
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(
@@ -272,18 +280,13 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
 
     private class WavyHolder(view: View) : VHolder<Wavy>(view) {
         private val imageView = itemView.findViewById<ImageView>(R.id.iv_icon)
-        private var cacheRepeatWavy: WeakReference<Drawable>? = null
 
         private fun getRepeatWavyDrawable(context: Context, wavyRes: Int): Drawable {
-            var drawable = cacheRepeatWavy?.get()
-            if (drawable == null) {
-                val bitmap = context.requireDrawable(wavyRes).toBitmap()
-                drawable = BitmapDrawable(context.resources, bitmap).apply {
-                    setTileModeXY(Shader.TileMode.REPEAT, null)
-                }
-                cacheRepeatWavy = WeakReference(drawable)
+            val bitmap = context.requireDrawable(wavyRes).toBitmap()
+            return BitmapDrawable(context.resources, bitmap).apply {
+                setTileModeXY(Shader.TileMode.REPEAT, null)
+                setTint(context.resolveColor(M3R.attr.colorSecondaryContainer))
             }
-            return drawable
         }
 
         @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
@@ -300,9 +303,51 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
     }
 
     private class PreviewHolder(view: View) : EggHolder(view) {
+
+        @Suppress("SameParameterValue")
+        private fun createHarmonizeWithPrimaryColorStateList(
+            context: Context, @ColorInt color: Int,
+        ): ColorStateList {
+            val stateSet = intArrayOf(android.R.attr.state_pressed)
+            val defaultColor = MaterialColors.harmonizeWithPrimary(context, color)
+
+            var pressedColor = context.resolveColorStateList(
+                M3R.attr.materialCardViewFilledStyle, M3R.attr.cardBackgroundColor
+            )?.getColorForState(stateSet, defaultColor) ?: defaultColor
+            pressedColor = MaterialColors.harmonize(color, pressedColor)
+
+            return ColorStateList(
+                arrayOf(stateSet, StateSet.WILD_CARD),
+                intArrayOf(pressedColor, defaultColor)
+            )
+        }
+
+        @SuppressLint("RestrictedApi")
+        private fun getLightTextColor(context: Context, @AttrRes textAppearanceAttrRes: Int): Int {
+            // always use dark mode color
+            val wrapper = ContextThemeWrapper(context, M3R.style.Theme_Material3_DynamicColors_Dark)
+            val value = MaterialAttributes.resolve(wrapper, textAppearanceAttrRes)
+            var color = Color.WHITE
+            if (value != null) {
+                wrapper.withStyledAttributes(
+                    value.resourceId,
+                    intArrayOf(android.R.attr.textColor)
+                ) {
+                    color = getColor(0, color)
+                }
+            }
+            return color
+        }
+
         override fun onBindViewHolder(egg: Egg) {
             super.onBindViewHolder(egg)
-            val context = itemView.context
+            val colorStateList =
+                createHarmonizeWithPrimaryColorStateList(context, 0xFF073042.toInt())
+            val titleTextColor = getLightTextColor(context, M3R.attr.textAppearanceHeadlineSmall)
+            val summaryTextColor = getLightTextColor(context, M3R.attr.textAppearanceBodyMedium)
+            binding.tvTitle.setTextColor(titleTextColor)
+            binding.tvSummary.setTextColor(summaryTextColor)
+            binding.root.setCardBackgroundColor(colorStateList)
             binding.tvSummary.text = EggActionController.getTimelineMessage(context)
             itemView.setOnClickListener {
                 EggActionController.showTimelineDialog(
@@ -314,17 +359,17 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
 
     private open class EggHolder(view: View) : VHolder<Egg>(view) {
         val binding: ItemEasterEggLayoutBinding = ItemEasterEggLayoutBinding.bind(view)
-
-        private val eggActionController = EggActionController(itemView.context)
+        val context: Context = itemView.context
+        private val eggActionController = EggActionController(context)
 
         @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun onBindViewHolder(egg: Egg) {
             binding.tvTitle.setText(egg.eggNameRes)
             binding.tvSummary.setText(egg.androidRes)
             binding.ivIcon.load(egg.iconRes) {
-                applySupportAdaptiveIcon(itemView.context, egg.supportAdaptiveIcon)
+                applySupportAdaptiveIcon(context, egg.supportAdaptiveIcon)
             }
-            itemView.setOnClickListener { eggActionController.onClick(egg) }
+            itemView.setOnClickListener { eggActionController.openEgg(egg) }
             binding.ivIcon.setOnClickListener { eggActionController.showVersionCommentDialog(egg) }
         }
     }
