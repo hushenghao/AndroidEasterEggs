@@ -247,6 +247,7 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
                 R.string.version_comment_android_base
             ),
             Wavy(R.drawable.ic_wavy_line_1, true),
+            Footer()
         )
     }
 
@@ -259,6 +260,7 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
             addViewType<EggHolder>(R.layout.item_easter_egg_layout, Egg.VIEW_TYPE_EGG)
             addViewType<PreviewHolder>(R.layout.item_easter_egg_layout, Egg.VIEW_TYPE_PREVIEW)
             addViewType<WavyHolder>(R.layout.item_easter_egg_wavy, Egg.VIEW_TYPE_WAVY)
+            addViewType<FooterHolder>(R.layout.item_easter_egg_footer, -2)
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(
@@ -276,6 +278,16 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         val fistOffset = eggList.indexOfFirst { it is Egg && it.shortcutKey != null }
         val position = fistOffset + providerIndex + 1
         binding.recyclerView.smoothScrollToPosition(position)
+    }
+
+    private class Footer : VType {
+        override val viewType: Int = -2
+    }
+
+    private class FooterHolder(view: View) : VHolder<Footer>(view) {
+        override fun onBindViewHolder(t: Footer) {
+
+        }
     }
 
     private class WavyHolder(view: View) : VHolder<Wavy>(view) {
