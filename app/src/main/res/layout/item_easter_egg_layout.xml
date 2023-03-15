@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp">
+        android:layout_margin="22dp">
 
         <TextView
             android:id="@+id/tv_title"
@@ -29,8 +29,8 @@
 
         <ImageView
             android:id="@+id/iv_icon"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -44,7 +44,7 @@
             android:fontFamily="sans-serif"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
-            tools:text="@tools:sample/lorem[9]" />
+            tools:text="@tools:sample/lorem[10]" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
