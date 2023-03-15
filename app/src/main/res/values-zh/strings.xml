@@ -4,17 +4,13 @@
     <string name="summary_android_waiting">等待中…</string>
     <string name="summary_android_release_pushed">最终版本已经发布</string>
 
-    <string name="label_drawer_close">关闭</string>
-    <string name="label_drawer_open">菜单</string>
-
     <string name="title_open_with">打开</string>
 
     <string name="url_android_releases" translatable="false">https://developer.android.google.cn/about/versions</string>
 
     <string name="label_menu_source">源码</string>
-    <string name="label_menu_about">关于</string>
+    <string name="label_other">其他</string>
 
-    <string name="label_source">系统源码</string>
     <string name="label_beta">获取Beta版</string>
     <string name="label_privacy_agreement">隐私协议</string>
     <string name="label_email">联系我</string>
@@ -28,6 +24,7 @@
     <string name="message_trypophobia_warning">对有&lt;b&gt;密集恐惧症&lt;/b&gt;的提示，一些画面可能会引起不适。是否继续？</string>
 
     <string name="label_settings">设置</string>
+    <string name="label_project_desc">项目包含了系统彩蛋完整代码，旨在对系统彩蛋的整理和兼容，以保证大多数设备可以体验到不同版本的彩蛋，不会对系统彩蛋代码做过多修改。部分版本使用了系统新特性，低版本只能使用部分功能。</string>
 
     <string name="icon_shape_override_label">"图标形状"</string>
     <string name="icon_shape_system_default">"系统设置"</string>

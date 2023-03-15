@@ -4,9 +4,6 @@
     <string name="summary_android_waiting">Waiting…</string>
     <string name="summary_android_release_pushed">The final release version has pushed</string>
 
-    <string name="label_drawer_close">Close</string>
-    <string name="label_drawer_open">Menu</string>
-
     <string name="title_open_with">Open with</string>
 
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
@@ -17,10 +14,10 @@
     <string name="url_android_releases" translatable="false">https://developer.android.com/about/versions</string>
 
     <string name="label_menu_source">Source</string>
-    <string name="label_menu_about">About</string>
+    <string name="label_other">Other</string>
 
     <string name="label_github" translatable="false">GitHub</string>
-    <string name="label_source">System Source</string>
+    <string name="label_frameworks" translatable="false">Frameworks</string>
     <string name="label_beta">Get Beta</string>
     <string name="label_privacy_agreement">Privacy Agreement</string>
     <string name="label_email">Contact me</string>

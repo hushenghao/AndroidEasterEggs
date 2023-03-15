@@ -5,19 +5,6 @@ e3a9
 # brightness_6
 e3ab
 
-# home
-e88a
-# download
-f090
-# android
-e859
-# email
-e0be
-# star
-e838
-# policy
-ea17
-
 # tips_and_updates
 e79a
 

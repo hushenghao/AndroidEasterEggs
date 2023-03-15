@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingHorizontal="24dp"
-    android:paddingVertical="30dp">
+    android:paddingBottom="30dp">
 
     <ImageView
         android:id="@+id/iv_icon"
@@ -37,7 +37,7 @@
         android:id="@+id/tv_github"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/label_github"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
@@ -46,23 +46,23 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title_source" />
 
     <TextView
-        android:id="@+id/tv_source"
+        android:id="@+id/tv_frameworks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-medium"
-        android:text="@string/label_source"
+        android:text="@string/label_frameworks"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:textColor="?attr/colorSecondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_github" />
 
     <TextView
-        android:id="@+id/tv_title_about"
+        android:id="@+id/tv_title_other"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/label_menu_about"
+        android:text="@string/label_other"
         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -73,24 +73,24 @@
         android:id="@+id/tv_star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/label_star"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:textColor="?attr/colorSecondary"
-        app:layout_constraintStart_toStartOf="@id/tv_title_about"
+        app:layout_constraintStart_toStartOf="@id/tv_title_other"
         app:layout_constraintTop_toBottomOf="@id/tv_title_source" />
 
     <TextView
         android:id="@+id/tv_beta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/label_beta"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:textColor="?attr/colorSecondary"
-        app:layout_constraintStart_toStartOf="@id/tv_title_about"
+        app:layout_constraintStart_toStartOf="@id/tv_title_other"
         app:layout_constraintTop_toBottomOf="@id/tv_star" />
 
     <view
@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:itemSpacing="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_source"
+        app:layout_constraintTop_toBottomOf="@id/tv_frameworks"
         app:lineSpacing="20dp">
 
         <TextView

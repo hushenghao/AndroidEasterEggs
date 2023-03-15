@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Shader
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.StateSet
 import android.view.View
@@ -29,6 +30,7 @@ import coil.load
 import coil.size.Size
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentEasterEggListBinding
+import com.dede.android_eggs.databinding.ItemEasterEggFooterBinding
 import com.dede.android_eggs.databinding.ItemEasterEggLayoutBinding
 import com.dede.android_eggs.main.EggActionController.Companion.EXTRA_O_POINT
 import com.dede.android_eggs.main.EggActionController.Companion.KEY_EGG_G
@@ -51,9 +53,11 @@ import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.adapter.VType
 import com.dede.android_eggs.ui.adapter.addViewType
+import com.dede.android_eggs.util.ChromeTabsBrowser
 import com.dede.android_eggs.util.resolveColor
 import com.dede.android_eggs.util.resolveColorStateList
 import com.dede.basic.requireDrawable
+import com.dede.basic.string
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.resources.MaterialAttributes
 import com.google.android.material.R as M3R
@@ -260,7 +264,7 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
             addViewType<EggHolder>(R.layout.item_easter_egg_layout, Egg.VIEW_TYPE_EGG)
             addViewType<PreviewHolder>(R.layout.item_easter_egg_layout, Egg.VIEW_TYPE_PREVIEW)
             addViewType<WavyHolder>(R.layout.item_easter_egg_wavy, Egg.VIEW_TYPE_WAVY)
-            addViewType<FooterHolder>(R.layout.item_easter_egg_footer, -2)
+            addViewType<FooterHolder>(R.layout.item_easter_egg_footer, Egg.VIEW_TYPE_FOOTER)
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(
@@ -281,12 +285,48 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
     }
 
     private class Footer : VType {
-        override val viewType: Int = -2
+        override val viewType: Int = Egg.VIEW_TYPE_FOOTER
     }
 
-    private class FooterHolder(view: View) : VHolder<Footer>(view) {
+    private class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
+        private val binding = ItemEasterEggFooterBinding.bind(view)
         override fun onBindViewHolder(t: Footer) {
+            binding.tvGithub.setOnClickListener(this)
+            binding.tvFrameworks.setOnClickListener(this)
+            binding.tvStar.setOnClickListener(this)
+            binding.tvBeta.setOnClickListener(this)
+            binding.tvPrivacyAgreement.setOnClickListener(this)
+            binding.tvFeedback.setOnClickListener(this)
+        }
 
+        override fun onClick(v: View) {
+            val context = v.context
+            when (v.id) {
+                R.id.tv_github -> {
+                    ChromeTabsBrowser.launchUrl(context, Uri.parse(R.string.url_github.string))
+                }
+                R.id.tv_frameworks -> {
+                    ChromeTabsBrowser.launchUrl(context, Uri.parse(R.string.url_source.string))
+                }
+                R.id.tv_star -> {
+                    ChromeTabsBrowser.launchUrlByBrowser(
+                        context, Uri.parse("market://details?id=%s".format(context.packageName))
+                    )
+                }
+                R.id.tv_beta -> {
+                    ChromeTabsBrowser.launchUrl(context, Uri.parse(R.string.url_beta.string))
+                }
+                R.id.tv_privacy_agreement -> {
+                    ChromeTabsBrowser.launchUrl(
+                        context, Uri.parse(R.string.url_privacy_agreement.string)
+                    )
+                }
+                R.id.tv_feedback -> {
+                    ChromeTabsBrowser.launchUrlByBrowser(
+                        context, Uri.parse("mailto:dede.hu@qq.com")
+                    )
+                }
+            }
         }
     }
 
@@ -310,6 +350,7 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
                 }
                 return
             }
+            imageView.setImageDrawable(null)
             imageView.background = getRepeatWavyDrawable(imageView.context, wavy.wavyRes)
         }
     }
@@ -359,7 +400,7 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
             val summaryTextColor = getLightTextColor(context, M3R.attr.textAppearanceBodyMedium)
             binding.tvTitle.setTextColor(titleTextColor)
             binding.tvSummary.setTextColor(summaryTextColor)
-            binding.root.setCardBackgroundColor(colorStateList)
+            binding.cardView.setCardBackgroundColor(colorStateList)
             binding.tvSummary.text = EggActionController.getTimelineMessage(context)
             itemView.setOnClickListener {
                 EggActionController.showTimelineDialog(
@@ -406,6 +447,7 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
             const val VIEW_TYPE_EGG = 0
             const val VIEW_TYPE_WAVY = -1
             const val VIEW_TYPE_PREVIEW = 1
+            const val VIEW_TYPE_FOOTER = -2
         }
 
         override val viewType: Int = itemType
