@@ -14,8 +14,8 @@ import com.dede.android_eggs.settings.NightModePref
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.adapter.VType
+import com.dede.android_eggs.util.BlurHashDrawable
 import com.dede.android_eggs.util.blurHash
-import com.dede.android_eggs.util.buildBlurHashUri
 import com.dede.basic.PlatLogoSnapshotProvider
 import com.google.android.material.appbar.AppBarLayout
 
@@ -71,9 +71,10 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
         val group: ViewGroup = holder.findViewById(R.id.fl_content)
         val background: ImageView = holder.findViewById(R.id.iv_background)
         val hash = if (!NightModePref.isSystemNightMode(requireContext()))
-            "blur-hash://LVPO*{9docS\$}Nn4R.oy\$]\${n\$bI/?w=200&h=150"
+            "LVPO*{9docS\$}Nn4R.oy\$]\${n\$bI"
         else
-            "blur-hash://LOFqFcNxsQS6|,oIj@ax=cxFjufk/?w=200&h=150"
+            "LOFqFcNxsQS6|,oIj@ax=cxFjufk"
+//        background.setImageDrawable(BlurHashDrawable(hash))
         background.load(hash, imageLoader) {
             size(200, 150)
         }

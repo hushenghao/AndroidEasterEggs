@@ -3,6 +3,8 @@ package com.dede.android_eggs.util
 import android.content.ComponentCallbacks2
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.*
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.core.graphics.drawable.toDrawable
 import coil.ImageLoader
@@ -26,6 +28,50 @@ private const val DEFAULT_WIDTH = 200
 private const val DEFAULT_HEIGHT = 150
 private const val SIZE_UNDEFINED = -1
 
+class BlurHashDrawable(
+    hash: String?,
+    width: Int = DEFAULT_WIDTH,
+    height: Int = DEFAULT_HEIGHT
+) : Drawable() {
+
+    private val blurHashFinder = BlurHashFinder(hash)
+
+    private val width = blurHashFinder.getWidth(DEFAULT_WIDTH)
+    private val height = blurHashFinder.getHeight(DEFAULT_HEIGHT)
+
+    private val bitmap: Bitmap? by lazy {
+        BlurHashDecoder.decode(blurHashFinder.getHash(), width, height)
+    }
+    private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+    override fun getIntrinsicHeight(): Int {
+        return height
+    }
+
+    override fun getIntrinsicWidth(): Int {
+        return width
+    }
+
+    override fun draw(canvas: Canvas) {
+        if (width <= 0 || height <= 0 || bitmap == null) return
+        canvas.drawBitmap(bitmap!!, 0f, 0f, paint)
+    }
+
+    override fun setAlpha(alpha: Int) {
+        paint.alpha = alpha
+        invalidateSelf()
+    }
+
+    override fun setColorFilter(colorFilter: ColorFilter?) {
+        paint.colorFilter = colorFilter
+        invalidateSelf()
+    }
+
+    override fun getOpacity(): Int {
+        return PixelFormat.TRANSPARENT
+    }
+}
+
 fun ImageLoader.Builder.blurHash() = components {
     add(BlurHashMapper())
     add(BlurHashStringMapper())
@@ -40,7 +86,7 @@ fun buildBlurHashUri(
     return Uri.Builder()
         .scheme(BLUR_HASH_SCHEME)
         .encodedAuthority(hash)
-        .encodedPath("/")
+        .encodedPath("/")// Used to separate hash and parameter
         .applyIf(width > SIZE_UNDEFINED) {
             appendQueryParameter(QUERY_KEY_W, width.toString())
         }
@@ -62,25 +108,62 @@ private class BlurHashMapper : Mapper<BlurHash, Uri> {
     }
 }
 
-private class BlurHashStringMapper : Mapper<String, Uri> {
-    private val regex =
-        Regex("^(blur-hash://)?([\\dA-Za-z#\$%*+,\\-.:;=?@\\[\\]^_{|}~]{6,})/?\\??\\S*$")
+private class BlurHashFinder(hashStr: String?) {
 
-    override fun map(data: String, options: Options): Uri? {
-        var hash = data.findHash()
-        if (hash != null) {
-            return buildBlurHashUri(hash)
+    companion object {
+        private val regex =
+            Regex("^(blur-hash://)?([\\dA-Za-z#\$%*+,\\-.:;=?@\\[\\]^_{|}~]{6,})/?\\??\\S*$")
+
+        fun Uri.getSizeParameter(key: String, default: Int): Int {
+            var size = getQueryParameter(key)?.toIntOrNull() ?: default
+            if (size <= SIZE_UNDEFINED) {
+                size = default
+            }
+            return size
         }
-        val decode = URLDecoder.decode(data, "utf-8")
-        hash = decode.findHash()
-        if (hash != null) {
-            return buildBlurHashUri(hash)
+    }
+
+    private var blurHashUri: Uri? = null
+
+    init {
+        if (hashStr != null) {
+            var hash = hashStr.findHash()
+            if (hash != null) {
+                blurHashUri = buildBlurHashUri(hash)
+            } else {
+                val decode = URLDecoder.decode(hashStr, "utf-8")
+                hash = decode.findHash()
+                if (hash != null) {
+                    blurHashUri = buildBlurHashUri(hash)
+                }
+            }
         }
-        return null
     }
 
     private fun String.findHash(): String? {
         return regex.matchEntire(this)?.groups?.get(2)?.value
+    }
+
+    fun getUri(): Uri? {
+        return blurHashUri
+    }
+
+    fun getWidth(default: Int): Int {
+        return blurHashUri?.getSizeParameter(QUERY_KEY_W, default) ?: default
+    }
+
+    fun getHeight(default: Int): Int {
+        return blurHashUri?.getSizeParameter(QUERY_KEY_H, default) ?: default
+    }
+
+    fun getHash(): String? {
+        return blurHashUri?.authority
+    }
+}
+
+private class BlurHashStringMapper : Mapper<String, Uri> {
+    override fun map(data: String, options: Options): Uri? {
+        return BlurHashFinder(data).getUri()
     }
 }
 
