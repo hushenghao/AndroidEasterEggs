@@ -6,12 +6,16 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import coil.ImageLoader
 import coil.load
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentSnapshotHeaderBinding
+import com.dede.android_eggs.settings.NightModePref
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.adapter.VType
+import com.dede.android_eggs.util.blurHash
+import com.dede.android_eggs.util.buildBlurHashUri
 import com.dede.basic.PlatLogoSnapshotProvider
 import com.google.android.material.appbar.AppBarLayout
 
@@ -57,11 +61,22 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
         easterEggListFragment.smoothScrollToPosition(position)
     }
 
+    private val imageLoader by lazy {
+        ImageLoader.Builder(requireContext())
+            .blurHash()
+            .build()
+    }
+
     private fun onBindSnapshot(holder: VHolder<VType>, provider: PlatLogoSnapshotProvider) {
         val group: ViewGroup = holder.findViewById(R.id.fl_content)
         val background: ImageView = holder.findViewById(R.id.iv_background)
-
-        background.load(R.drawable.img_snapshot_default_bg)
+        val hash = if (!NightModePref.isSystemNightMode(requireContext()))
+            "blur-hash://LVPO*{9docS\$}Nn4R.oy\$]\${n\$bI/?w=200&h=150"
+        else
+            "blur-hash://LOFqFcNxsQS6|,oIj@ax=cxFjufk/?w=200&h=150"
+        background.load(hash, imageLoader) {
+            size(200, 150)
+        }
         group.removeAllViewsInLayout()
         group.addView(
             provider.create(group.context),

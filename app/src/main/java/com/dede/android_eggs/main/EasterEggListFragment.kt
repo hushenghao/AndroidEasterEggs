@@ -344,13 +344,14 @@ class EasterEggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun onBindViewHolder(wavy: Wavy) {
             imageView.dispose()
+            imageView.setImageDrawable(null)
+            imageView.background = null
             if (!wavy.repeat) {
                 imageView.load(wavy.wavyRes) {
                     size(Size.ORIGINAL)
                 }
                 return
             }
-            imageView.setImageDrawable(null)
             imageView.background = getRepeatWavyDrawable(imageView.context, wavy.wavyRes)
         }
     }
