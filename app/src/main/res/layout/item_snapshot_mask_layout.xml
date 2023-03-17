@@ -17,8 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@null"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/img_snapshot_default_bg" />
+        tools:src="@tools:sample/avatars"
+        android:scaleType="centerCrop" />
 
     <FrameLayout
         android:id="@+id/fl_content"
