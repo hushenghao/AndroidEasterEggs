@@ -9,8 +9,7 @@
     android:layout_gravity="center_horizontal"
     android:layout_marginVertical="5dp"
     android:foreground="?attr/selectableItemBackground"
-    app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge"
-    tools:layout_marginHorizontal="10dp">
+    app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

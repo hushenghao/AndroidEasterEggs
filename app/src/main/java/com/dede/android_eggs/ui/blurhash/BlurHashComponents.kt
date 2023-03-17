@@ -17,6 +17,7 @@ import coil.map.Mapper
 import coil.request.Options
 import coil.size.pxOrElse
 import com.dede.android_eggs.ui.blurhash.BlurHashFinder.Companion.getSizeParameter
+import com.dede.android_eggs.ui.blurhash.BlurHashFinder.Companion.isApplicable
 import com.dede.android_eggs.util.applyIf
 import java.net.URLDecoder
 import java.util.concurrent.atomic.AtomicBoolean
@@ -99,15 +100,16 @@ private class BlurHashFinder(hashStr: String?) {
 
     companion object {
         private val regex =
-            Regex("^(blur-hash://)?([\\dA-Za-z#\$%*+,\\-.:;=?@\\[\\]^_{|}~]{6,})/?\\??\\S*$")
+            Regex("^(blur-hash://)?([\\w#\$%*+,\\-.:;=?@\\[\\]^{|}~]{6,})/?\\S*$")
 
         fun Uri?.getSizeParameter(key: String, default: Int): Int {
             if (this == null) return default
-            var size = getQueryParameter(key)?.toIntOrNull() ?: default
-            if (size <= SIZE_UNDEFINED) {
-                size = default
-            }
-            return size
+            val size = getQueryParameter(key)?.toIntOrNull() ?: default
+            return if (size > SIZE_UNDEFINED) size else default
+        }
+
+        fun Uri.isApplicable(): Boolean {
+            return scheme == BLUR_HASH_SCHEME && !authority.isNullOrBlank()
         }
     }
 
@@ -115,6 +117,10 @@ private class BlurHashFinder(hashStr: String?) {
 
     private fun parseBlurHashUri(hashStr: String?): Uri? {
         if (hashStr == null) return null
+        val uri = Uri.parse(hashStr)
+        if (uri.isApplicable()) {
+            return uri
+        }
         var hash = hashStr.findHash()
         if (hash != null) {
             return buildBlurHashUri(hash)
@@ -244,12 +250,8 @@ private class BlurHashFetcher(private val data: Uri, private val options: Option
 
     class Factory : Fetcher.Factory<Uri> {
         override fun create(data: Uri, options: Options, imageLoader: ImageLoader): Fetcher? {
-            if (!isApplicable(data)) return null
+            if (!data.isApplicable()) return null
             return BlurHashFetcher(data, options)
-        }
-
-        private fun isApplicable(data: Uri): Boolean {
-            return data.scheme == BLUR_HASH_SCHEME && data.authority != null
         }
     }
 }
