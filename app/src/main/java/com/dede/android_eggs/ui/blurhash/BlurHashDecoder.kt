@@ -2,7 +2,7 @@
 
 // https://github.com/woltapp/blurhash/blob/master/Kotlin/lib/src/main/java/com/wolt/blurhashkt/BlurHashDecoder.kt
 
-package com.wolt.blurhashkt
+package com.dede.android_eggs.ui.blurhash
 
 import android.graphics.Bitmap
 import android.graphics.Color

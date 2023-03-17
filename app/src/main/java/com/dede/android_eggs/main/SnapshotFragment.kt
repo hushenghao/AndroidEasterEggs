@@ -6,16 +6,12 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import coil.ImageLoader
-import coil.load
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentSnapshotHeaderBinding
-import com.dede.android_eggs.settings.NightModePref
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.adapter.VType
-import com.dede.android_eggs.util.BlurHashDrawable
-import com.dede.android_eggs.util.blurHash
+import com.dede.android_eggs.ui.blurhash.BlurHashDrawable
 import com.dede.basic.PlatLogoSnapshotProvider
 import com.google.android.material.appbar.AppBarLayout
 
@@ -54,30 +50,17 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
     }
 
     private fun onSnapshotClick(position: Int) {
-        val easterEggListFragment = requireActivity().supportFragmentManager
-            .findFragmentById(R.id.fl_eggs) as? EasterEggListFragment ?: return
+        val eggListFragment = requireActivity().supportFragmentManager
+            .findFragmentById(R.id.fl_eggs) as? EggListFragment ?: return
         requireActivity().findViewById<AppBarLayout>(R.id.app_bar)
             ?.setExpanded(false, true)
-        easterEggListFragment.smoothScrollToPosition(position)
-    }
-
-    private val imageLoader by lazy {
-        ImageLoader.Builder(requireContext())
-            .blurHash()
-            .build()
+        eggListFragment.smoothScrollToPosition(position)
     }
 
     private fun onBindSnapshot(holder: VHolder<VType>, provider: PlatLogoSnapshotProvider) {
         val group: ViewGroup = holder.findViewById(R.id.fl_content)
         val background: ImageView = holder.findViewById(R.id.iv_background)
-        val hash = if (!NightModePref.isSystemNightMode(requireContext()))
-            "LVPO*{9docS\$}Nn4R.oy\$]\${n\$bI"
-        else
-            "LOFqFcNxsQS6|,oIj@ax=cxFjufk"
-//        background.setImageDrawable(BlurHashDrawable(hash))
-        background.load(hash, imageLoader) {
-            size(200, 150)
-        }
+        background.setImageDrawable(BlurHashDrawable(requireContext(), R.string.hash_snapshot_bg))
         group.removeAllViewsInLayout()
         group.addView(
             provider.create(group.context),

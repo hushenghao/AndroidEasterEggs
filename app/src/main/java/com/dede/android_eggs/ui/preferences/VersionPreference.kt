@@ -1,8 +1,7 @@
-package com.dede.android_eggs.ui
+package com.dede.android_eggs.ui.preferences
 
 import android.content.Context
 import android.net.Uri
-import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.TextPaint
 import android.text.style.AbsoluteSizeSpan
@@ -14,6 +13,8 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
+import com.dede.android_eggs.ui.drawables.FontIconsDrawable
+import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.util.*
 import com.dede.basic.dp
 import com.google.android.material.R as M3R

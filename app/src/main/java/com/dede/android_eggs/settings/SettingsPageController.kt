@@ -8,7 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.FontIconsDrawable
+import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.Icons
 import com.google.android.material.R as M3R
 

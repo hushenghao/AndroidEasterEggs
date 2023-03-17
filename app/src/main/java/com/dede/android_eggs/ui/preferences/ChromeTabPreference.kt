@@ -1,4 +1,4 @@
-package com.dede.android_eggs.ui
+package com.dede.android_eggs.ui.preferences
 
 import android.content.Context
 import android.net.Uri

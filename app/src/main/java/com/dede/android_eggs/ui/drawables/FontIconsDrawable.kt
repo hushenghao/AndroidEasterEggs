@@ -1,4 +1,4 @@
-package com.dede.android_eggs.ui
+package com.dede.android_eggs.ui.drawables
 
 import android.content.Context
 import android.content.res.ColorStateList

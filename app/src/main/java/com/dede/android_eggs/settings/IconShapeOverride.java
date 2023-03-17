@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dede.android_eggs.util;
+package com.dede.android_eggs.settings;
 
 
 import android.annotation.SuppressLint;
@@ -37,6 +37,7 @@ import androidx.preference.PreferenceManager;
 
 import com.dede.android_eggs.R;
 import com.dede.android_eggs.databinding.ProgressDialogMaterialBinding;
+import com.dede.android_eggs.util.Utils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.lang.reflect.Field;

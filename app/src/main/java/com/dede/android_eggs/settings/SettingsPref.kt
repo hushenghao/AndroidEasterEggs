@@ -21,10 +21,10 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.FontIconsDrawable
+import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.Icons
-import com.dede.android_eggs.ui.VersionPreference
-import com.dede.android_eggs.util.IconShapeOverride
+import com.dede.android_eggs.ui.preferences.VersionPreference
+import com.dede.android_eggs.ui.preferences.FontIconSwitchPreference
 import com.dede.android_eggs.util.pref
 import com.dede.basic.dp
 import com.google.android.material.color.DynamicColors

@@ -1,0 +1,1 @@
+blurhash-python==1.1.3

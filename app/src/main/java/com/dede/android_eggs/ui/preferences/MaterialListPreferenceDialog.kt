@@ -1,4 +1,4 @@
-package com.dede.android_eggs.settings
+package com.dede.android_eggs.ui.preferences
 
 import android.content.DialogInterface
 import androidx.preference.ListPreference

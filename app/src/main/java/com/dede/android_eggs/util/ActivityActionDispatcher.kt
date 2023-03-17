@@ -15,7 +15,7 @@ import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.app.ActivityCompat
 import androidx.core.text.HtmlCompat
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.FontIconsDrawable
+import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.Icons
 import com.dede.basic.getBoolean
 import com.dede.basic.putBoolean

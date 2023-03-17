@@ -3,7 +3,7 @@ package com.dede.android_eggs
 import android.content.Context
 import com.dede.android_eggs.settings.SettingsPref
 import com.dede.android_eggs.util.ActivityActionDispatcher
-import com.dede.android_eggs.util.IconShapeOverride
+import com.dede.android_eggs.settings.IconShapeOverride
 import com.dede.basic.GlobalContext
 import me.weishu.reflection.Reflection
 

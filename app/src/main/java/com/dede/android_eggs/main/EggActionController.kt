@@ -19,10 +19,11 @@ import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.DialogAndroidTimelineBinding
+import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.settings.NightModePref
 import com.dede.android_eggs.ui.SupportAdaptiveIconTransformation
 import com.dede.android_eggs.util.ChromeTabsBrowser
-import com.dede.android_eggs.util.IconShapeOverride
+import com.dede.android_eggs.settings.IconShapeOverride
 import com.dede.android_eggs.util.applyIf
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.*
@@ -153,14 +154,14 @@ class EggActionController(val context: Context) {
             .addFlags(ACTIVITY_TASK_FLAGS)
     }
 
-    fun openEgg(egg: EasterEggListFragment.Egg) {
+    fun openEgg(egg: Egg) {
         val intent = createIntent(egg.targetClassRes) ?: return
         if (egg.extras != null)
             intent.putExtras(egg.extras)
         context.startActivity(intent)
     }
 
-    fun showVersionCommentDialog(egg: EasterEggListFragment.Egg) {
+    fun showVersionCommentDialog(egg: Egg) {
         showDialogInternal(
             egg.iconRes,
             egg.androidRes,
