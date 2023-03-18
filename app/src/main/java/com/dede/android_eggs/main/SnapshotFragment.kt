@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentSnapshotHeaderBinding
@@ -60,7 +61,12 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
     private fun onBindSnapshot(holder: VHolder<VType>, provider: PlatLogoSnapshotProvider) {
         val group: ViewGroup = holder.findViewById(R.id.fl_content)
         val background: ImageView = holder.findViewById(R.id.iv_background)
-        background.setImageDrawable(BlurHashDrawable(requireContext(), R.string.hash_snapshot_bg))
+        background.isVisible = !provider.includeBackground
+        if (!provider.includeBackground && background.drawable == null) {
+            background.setImageDrawable(
+                BlurHashDrawable(requireContext(), R.string.hash_snapshot_bg)
+            )
+        }
         group.removeAllViewsInLayout()
         group.addView(
             provider.create(group.context),

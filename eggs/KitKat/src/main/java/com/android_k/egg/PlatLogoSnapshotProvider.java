@@ -12,6 +12,11 @@ import android.widget.ImageView;
 public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotProvider {
 
     @Override
+    public boolean getIncludeBackground() {
+        return true;
+    }
+
+    @Override
     public View create(Context context) {
         FrameLayout mContent = new FrameLayout(context);
 

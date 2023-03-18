@@ -7,6 +7,8 @@ import java.lang.ref.WeakReference
 
 abstract class PlatLogoSnapshotProvider {
 
+    open val includeBackground: Boolean = false
+
     private var cache: WeakReference<View>? = null
 
     fun get(context: Context): View {

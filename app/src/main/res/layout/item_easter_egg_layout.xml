@@ -7,9 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:layout_margin="5dp"
+    android:layout_marginHorizontal="5dp"
     android:foreground="?attr/selectableItemBackground"
-    app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
+    app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge"
+    tools:layout_marginTop="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

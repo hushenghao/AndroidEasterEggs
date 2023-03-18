@@ -7,6 +7,12 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 
 public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotProvider {
+
+    @Override
+    public boolean getIncludeBackground() {
+        return true;
+    }
+
     @NonNull
     @Override
     public View create(@NonNull Context context) {

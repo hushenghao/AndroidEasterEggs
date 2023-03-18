@@ -1,12 +1,13 @@
 package com.dede.android_eggs.main
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentEasterEggListBinding
 import com.dede.android_eggs.main.entity.Egg
@@ -17,6 +18,7 @@ import com.dede.android_eggs.main.holders.PreviewHolder
 import com.dede.android_eggs.main.holders.WavyHolder
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.addViewType
+import com.dede.basic.dp
 
 
 class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
@@ -39,7 +41,10 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
                 val edge = insets.getInsets(
                     WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
                 )
-                v.updatePadding(bottom = edge.bottom)
+                if (binding.recyclerView.itemDecorationCount > 0) {
+                    binding.recyclerView.removeItemDecorationAt(0)
+                }
+                binding.recyclerView.addItemDecoration(EggDivider(10.dp, edge.bottom))
                 return@OnApplyWindowInsetsListener insets
             })
     }
@@ -50,4 +55,26 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         binding.recyclerView.smoothScrollToPosition(position)
     }
 
+    private class EggDivider(val divider: Int, val bottomInset: Int) :
+        RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            val position = parent.getChildAdapterPosition(view)
+            if (position == 0) {
+                outRect.top = divider
+            }
+            outRect.bottom = divider
+
+            val adapter = parent.adapter ?: return
+            if (position == adapter.itemCount - 1) {
+                outRect.bottom = divider + bottomInset
+            }
+        }
+
+    }
 }
