@@ -22,7 +22,7 @@ import com.dede.android_eggs.databinding.DialogAndroidTimelineBinding
 import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.settings.NightModePref
 import com.dede.android_eggs.ui.SupportAdaptiveIconTransformation
-import com.dede.android_eggs.util.ChromeTabsBrowser
+import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.settings.IconShapeOverride
 import com.dede.android_eggs.util.applyIf
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -138,7 +138,7 @@ class EggActionController(val context: Context) {
                 .setView(binding.root)
                 .setPositiveButton(android.R.string.ok, null)
                 .setNeutralButton(R.string.label_timeline_releases) { _, _ ->
-                    ChromeTabsBrowser.launchUrl(
+                    CustomTabsBrowser.launchUrl(
                         context,
                         Uri.parse(context.getString(R.string.url_android_releases))
                     )

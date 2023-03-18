@@ -6,7 +6,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.ItemEasterEggFooterBinding
 import com.dede.android_eggs.main.entity.Footer
 import com.dede.android_eggs.ui.adapter.VHolder
-import com.dede.android_eggs.util.ChromeTabsBrowser
+import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.basic.string
 
 
@@ -26,26 +26,26 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
         val context = v.context
         when (v.id) {
             R.id.tv_github -> {
-                ChromeTabsBrowser.launchUrl(context, Uri.parse(R.string.url_github.string))
+                CustomTabsBrowser.launchUrl(context, Uri.parse(R.string.url_github.string))
             }
             R.id.tv_frameworks -> {
-                ChromeTabsBrowser.launchUrl(context, Uri.parse(R.string.url_source.string))
+                CustomTabsBrowser.launchUrl(context, Uri.parse(R.string.url_source.string))
             }
             R.id.tv_star -> {
-                ChromeTabsBrowser.launchUrlByBrowser(
+                CustomTabsBrowser.launchUrlByBrowser(
                     context, Uri.parse("market://details?id=%s".format(context.packageName))
                 )
             }
             R.id.tv_beta -> {
-                ChromeTabsBrowser.launchUrl(context, Uri.parse(R.string.url_beta.string))
+                CustomTabsBrowser.launchUrl(context, Uri.parse(R.string.url_beta.string))
             }
             R.id.tv_privacy_agreement -> {
-                ChromeTabsBrowser.launchUrl(
+                CustomTabsBrowser.launchUrl(
                     context, Uri.parse(R.string.url_privacy_agreement.string)
                 )
             }
             R.id.tv_feedback -> {
-                ChromeTabsBrowser.launchUrlByBrowser(
+                CustomTabsBrowser.launchUrlByBrowser(
                     context, Uri.parse("mailto:dede.hu@qq.com")
                 )
             }

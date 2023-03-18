@@ -7,6 +7,7 @@ import android.view.ViewGroup.LayoutParams
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentSnapshotHeaderBinding
 import com.dede.android_eggs.ui.adapter.VAdapter
@@ -39,11 +40,10 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
         )
     }
 
-    private lateinit var binding: FragmentSnapshotHeaderBinding
+    private val binding: FragmentSnapshotHeaderBinding by viewBinding(FragmentSnapshotHeaderBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentSnapshotHeaderBinding.bind(view)
         binding.snapshotList.adapter = VAdapter(
             R.layout.item_snapshot_mask_layout,
             snapshotList, this::onBindSnapshot

@@ -55,7 +55,7 @@ fun customTabURLSpan(url: String): URLSpan = object : URLSpan(url) {
     }
 
     override fun onClick(widget: View) {
-        ChromeTabsBrowser.launchUrl(widget.context, Uri.parse(url))
+        CustomTabsBrowser.launchUrl(widget.context, Uri.parse(url))
     }
 }
 

@@ -5,7 +5,7 @@ import android.net.Uri
 import android.text.TextUtils
 import android.util.AttributeSet
 import androidx.preference.Preference
-import com.dede.android_eggs.util.ChromeTabsBrowser
+import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.R
 
 /**
@@ -42,9 +42,9 @@ open class ChromeTabPreference : Preference, Preference.OnPreferenceClickListene
         val uri = this.uri
         if (uri != null) {
             if (useChromeTab) {
-                ChromeTabsBrowser.launchUrl(context, uri)
+                CustomTabsBrowser.launchUrl(context, uri)
             } else {
-                ChromeTabsBrowser.launchUrlByBrowser(context, uri)
+                CustomTabsBrowser.launchUrlByBrowser(context, uri)
             }
         }
         return uri != null

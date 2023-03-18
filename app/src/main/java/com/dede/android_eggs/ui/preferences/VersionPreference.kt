@@ -59,7 +59,7 @@ class VersionPreference(context: Context, attrs: AttributeSet?) : Preference(con
         }
 
         override fun onClick(widget: View) {
-            ChromeTabsBrowser.launchUrl(widget.context, Uri.parse(url))
+            CustomTabsBrowser.launchUrl(widget.context, Uri.parse(url))
         }
     }
 

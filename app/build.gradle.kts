@@ -95,6 +95,7 @@ dependencies {
     implementation(deps.google.material)
     implementation(deps.io.coil)
     implementation(deps.free.reflection)
+    implementation(deps.viewbinding.delegate)
     debugImplementation(deps.leakcanary)
     implementation(project(":basic"))
     implementation(project(":eggs:T"))

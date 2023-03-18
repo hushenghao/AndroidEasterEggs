@@ -19,7 +19,7 @@ import com.google.android.material.color.MaterialColors
  * @author hsh
  * @since 2021/11/19 2:14 下午
  */
-object ChromeTabsBrowser {
+object CustomTabsBrowser {
 
     fun launchUrl(context: Context, uri: Uri) {
         val colorScheme = when (AppCompatDelegate.getDefaultNightMode()) {
