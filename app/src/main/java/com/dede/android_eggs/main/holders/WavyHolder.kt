@@ -11,11 +11,14 @@ import coil.dispose
 import coil.load
 import coil.size.Size
 import com.dede.android_eggs.R
+import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.main.entity.Wavy
 import com.dede.android_eggs.ui.adapter.VHolder
+import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.util.resolveColor
 import com.dede.basic.requireDrawable
 
+@VHType(viewType = Egg.VIEW_TYPE_WAVY)
 class WavyHolder(view: View) : VHolder<Wavy>(view) {
 
     private val imageView = itemView.findViewById<ImageView>(R.id.iv_icon)

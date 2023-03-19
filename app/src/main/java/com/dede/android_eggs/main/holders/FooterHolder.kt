@@ -4,12 +4,14 @@ import android.net.Uri
 import android.view.View
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.ItemEasterEggFooterBinding
+import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.main.entity.Footer
 import com.dede.android_eggs.ui.adapter.VHolder
+import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.basic.string
 
-
+@VHType(viewType = Egg.VIEW_TYPE_FOOTER)
 class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
 
     private val binding = ItemEasterEggFooterBinding.bind(view)

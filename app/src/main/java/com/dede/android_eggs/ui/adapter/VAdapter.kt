@@ -10,33 +10,6 @@ import java.lang.reflect.Constructor
 import java.util.*
 import kotlin.reflect.KClass
 
-inline fun <reified VH : VHolder<out VType>> VAdapter.addViewType(
-    @LayoutRes layoutRes: Int,
-    viewType: Int,
-) {
-    addViewType(layoutRes, viewType, VH::class.java)
-}
-
-private class VHolderImpl<T : VType>(view: View) : VHolder<T>(view)
-private class VTypeImpl<T>(val impl: T, type: Int) : VType {
-    override val viewType: Int = type
-}
-
-fun <T> VAdapter(
-    @LayoutRes layoutRes: Int,
-    list: List<T>,
-    onBindView: (holder: VHolder<VType>, t: T) -> Unit,
-): VAdapter {
-    return VAdapter(list.map { VTypeImpl(it, 0) }) {
-        addViewType(layoutRes, 0, VHolderImpl::class)
-        onBindViewHolder = { holder, vType ->
-            @Suppress("UNCHECKED_CAST")
-            val vTypeImpl = vType as VTypeImpl<T>
-            onBindView(holder, vTypeImpl.impl)
-        }
-    }
-}
-
 class VAdapter(
     list: List<VType> = emptyList(),
     setup: VAdapter.() -> Unit,
@@ -44,7 +17,7 @@ class VAdapter(
 
     private val list: List<VType>
     private val viewTypeMapping = SparseArray<Mapping>()
-
+    val headerFooterExt = HeaderFooterExt(this)
     var onBindViewHolder: ((holder: VHolder<VType>, vType: VType) -> Unit)? = null
 
     private class Mapping(
@@ -78,16 +51,23 @@ class VAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val viewHolder = headerFooterExt.createViewHolder(parent, viewType)
+        if (viewHolder != null) {
+            return viewHolder
+        }
         val mapping = viewTypeMapping[viewType]
         return VHolder.createViewHolder(parent, mapping.vhClass, mapping.layoutRes)
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return headerFooterExt.getItemCount(list)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val vType = list[position]
+        if (headerFooterExt.bindViewHolder(holder)) return
+
+        val p = headerFooterExt.calculatePosition(position)
+        val vType = list[p]
 
         @Suppress("UNCHECKED_CAST")
         val vHolder = holder as VHolder<VType>
@@ -96,7 +76,7 @@ class VAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return list[position].viewType
+        return headerFooterExt.getViewType(list, position)
     }
 }
 

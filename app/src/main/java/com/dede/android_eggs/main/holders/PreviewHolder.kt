@@ -12,11 +12,13 @@ import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.withStyledAttributes
 import com.dede.android_eggs.main.EggActionController
 import com.dede.android_eggs.main.entity.Egg
+import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.util.resolveColorStateList
 import com.google.android.material.R
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.resources.MaterialAttributes
 
+@VHType(viewType = Egg.VIEW_TYPE_PREVIEW)
 class PreviewHolder(view: View) : EggHolder(view) {
 
     @Suppress("SameParameterValue")

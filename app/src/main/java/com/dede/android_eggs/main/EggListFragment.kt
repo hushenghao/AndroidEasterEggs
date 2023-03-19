@@ -27,10 +27,10 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.adapter = VAdapter(EggDateSource.eggList) {
-            addViewType<EggHolder>(R.layout.item_easter_egg_layout, Egg.VIEW_TYPE_EGG)
-            addViewType<PreviewHolder>(R.layout.item_easter_egg_layout, Egg.VIEW_TYPE_PREVIEW)
-            addViewType<WavyHolder>(R.layout.item_easter_egg_wavy, Egg.VIEW_TYPE_WAVY)
-            addViewType<FooterHolder>(R.layout.item_easter_egg_footer, Egg.VIEW_TYPE_FOOTER)
+            addViewType<EggHolder>(R.layout.item_easter_egg_layout)
+            addViewType<PreviewHolder>(R.layout.item_easter_egg_layout)
+            addViewType<WavyHolder>(R.layout.item_easter_egg_wavy)
+            addViewType<FooterHolder>(R.layout.item_easter_egg_footer)
         }
 
         binding.recyclerView.onApplyWindowEdge {

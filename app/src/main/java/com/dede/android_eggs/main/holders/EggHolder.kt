@@ -8,7 +8,9 @@ import com.dede.android_eggs.main.EggActionController
 import com.dede.android_eggs.main.EggActionController.Companion.applySupportAdaptiveIcon
 import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.ui.adapter.VHolder
+import com.dede.android_eggs.ui.adapter.VHType
 
+@VHType(viewType = Egg.VIEW_TYPE_EGG)
 open class EggHolder(view: View) : VHolder<Egg>(view) {
 
     val binding: ItemEasterEggLayoutBinding = ItemEasterEggLayoutBinding.bind(view)
