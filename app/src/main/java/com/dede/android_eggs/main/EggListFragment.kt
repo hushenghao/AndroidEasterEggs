@@ -9,7 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentEasterEggListBinding
 import com.dede.android_eggs.main.entity.Egg
-import com.dede.android_eggs.main.entity.EggDateSource
+import com.dede.android_eggs.main.entity.EggDatas
 import com.dede.android_eggs.main.holders.EggHolder
 import com.dede.android_eggs.main.holders.FooterHolder
 import com.dede.android_eggs.main.holders.PreviewHolder
@@ -26,7 +26,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.adapter = VAdapter(EggDateSource.eggList) {
+        binding.recyclerView.adapter = VAdapter(EggDatas.eggList) {
             addViewType<EggHolder>(R.layout.item_easter_egg_layout)
             addViewType<PreviewHolder>(R.layout.item_easter_egg_layout)
             addViewType<WavyHolder>(R.layout.item_easter_egg_wavy)
@@ -42,7 +42,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
     }
 
     fun smoothScrollToPosition(providerIndex: Int) {
-        val fistOffset = EggDateSource.eggList.indexOfFirst { it is Egg && it.shortcutKey != null }
+        val fistOffset = EggDatas.eggList.indexOfFirst { it is Egg && it.shortcutKey != null }
         val position = fistOffset + providerIndex + 1
         binding.recyclerView.smoothScrollToPosition(position)
     }

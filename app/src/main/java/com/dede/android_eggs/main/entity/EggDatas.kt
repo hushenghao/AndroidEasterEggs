@@ -2,10 +2,46 @@ package com.dede.android_eggs.main.entity
 
 import androidx.core.os.bundleOf
 import com.dede.android_eggs.R
-import com.dede.android_eggs.main.EggActionController
 
 
-object EggDateSource {
+object EggDatas {
+
+    private const val EXTRA_O_POINT = "isOreoPoint"
+
+    private const val KEY_EGG_T = "key_egg_t"
+    private const val KEY_EGG_S = "key_egg_s"
+    private const val KEY_EGG_R = "key_egg_r"
+    private const val KEY_EGG_Q = "key_egg_q"
+    private const val KEY_EGG_P = "key_egg_p"
+    private const val KEY_EGG_O_1 = "key_egg_o_1"
+    private const val KEY_EGG_O = "key_egg_o"
+    private const val KEY_EGG_N = "key_egg_n"
+    private const val KEY_EGG_M = "key_egg_m"
+    private const val KEY_EGG_L = "key_egg_l"
+    private const val KEY_EGG_K = "key_egg_k"
+    private const val KEY_EGG_J = "key_egg_j"
+    private const val KEY_EGG_I = "key_egg_i"
+    private const val KEY_EGG_H = "key_egg_h"
+    private const val KEY_EGG_G = "key_egg_g"
+
+    val snapshotList = listOf(
+        com.android_t.egg.PlatLogoSnapshotProvider(),
+        com.android_s.egg.PlatLogoSnapshotProvider(),
+        com.android_r.egg.PlatLogoSnapshotProvider(),
+        com.android_q.egg.PlatLogoSnapshotProvider(),
+        com.android_p.egg.PlatLogoSnapshotProvider(),
+        com.android_o.egg.PlatLogoSnapshotProvider(true),
+        com.android_o.egg.PlatLogoSnapshotProvider(false),
+        com.android_n.egg.PlatLogoSnapshotProvider(),
+        com.android_m.egg.PlatLogoSnapshotProvider(),
+        com.android_l.egg.PlatLogoSnapshotProvider(),
+        com.android_k.egg.PlatLogoSnapshotProvider(),
+        com.android_j.egg.PlatLogoSnapshotProvider(),
+        com.android_i.egg.PlatLogoSnapshotProvider(),
+        com.android_h.egg.PlatLogoSnapshotProvider(),
+        com.android_g.egg.PlatLogoSnapshotProvider(),
+    )
+    
     val eggList = listOf(
         Egg(
             R.drawable.ic_android_udc,
@@ -24,7 +60,7 @@ object EggDateSource {
             R.string.version_comment_android_t,
             R.string.target_class_android_t,
             true,
-            EggActionController.KEY_EGG_T
+            KEY_EGG_T
         ),
         Egg(
             R.drawable.ic_android_s,
@@ -33,7 +69,7 @@ object EggDateSource {
             R.string.version_comment_android_s,
             R.string.target_class_android_s,
             true,
-            EggActionController.KEY_EGG_S
+            KEY_EGG_S
         ),
         Egg(
             com.android_r.egg.R.drawable.r_icon,
@@ -42,7 +78,7 @@ object EggDateSource {
             R.string.version_comment_android_r,
             R.string.target_class_android_r,
             true,
-            EggActionController.KEY_EGG_R
+            KEY_EGG_R
         ),
         Egg(
             com.android_q.egg.R.drawable.q_icon,
@@ -51,7 +87,7 @@ object EggDateSource {
             R.string.version_comment_android_q,
             R.string.target_class_android_q,
             true,
-            EggActionController.KEY_EGG_Q
+            KEY_EGG_Q
         ),
         Egg(
             com.android_p.egg.R.drawable.p_icon,
@@ -60,7 +96,7 @@ object EggDateSource {
             R.string.version_comment_android_p,
             R.string.target_class_android_p,
             true,
-            EggActionController.KEY_EGG_P
+            KEY_EGG_P
         ),
         Egg(
             R.drawable.ic_android_oreo,
@@ -69,8 +105,8 @@ object EggDateSource {
             R.string.version_comment_android_o,
             R.string.target_class_android_o,
             true,
-            EggActionController.KEY_EGG_O_POINT,
-            bundleOf(EggActionController.EXTRA_O_POINT to true)
+            KEY_EGG_O_1,
+            bundleOf(EXTRA_O_POINT to true)
         ),
         Egg(
             R.drawable.ic_android_oreo,
@@ -79,7 +115,7 @@ object EggDateSource {
             R.string.version_comment_android_o,
             R.string.target_class_android_o,
             true,
-            EggActionController.KEY_EGG_O
+            KEY_EGG_O
         ),
         Egg(
             R.drawable.ic_android_nougat,
@@ -88,7 +124,7 @@ object EggDateSource {
             R.string.version_comment_android_n,
             R.string.target_class_android_n,
             true,
-            EggActionController.KEY_EGG_N
+            KEY_EGG_N
         ),
         Egg(
             R.drawable.ic_android_marshmallow,
@@ -97,7 +133,7 @@ object EggDateSource {
             R.string.version_comment_android_m,
             R.string.target_class_android_m,
             true,
-            EggActionController.KEY_EGG_M
+            KEY_EGG_M
         ),
         Egg(
             R.drawable.ic_android_lollipop,
@@ -106,7 +142,7 @@ object EggDateSource {
             R.string.version_comment_android_l,
             R.string.target_class_android_l,
             true,
-            EggActionController.KEY_EGG_L
+            KEY_EGG_L
         ),
         Egg(
             R.drawable.ic_android_kitkat,
@@ -115,7 +151,7 @@ object EggDateSource {
             R.string.version_comment_android_k,
             R.string.target_class_android_k,
             false,
-            EggActionController.KEY_EGG_K
+            KEY_EGG_K
         ),
         Egg(
             R.drawable.ic_android_jelly_bean,
@@ -124,7 +160,7 @@ object EggDateSource {
             R.string.version_comment_android_j,
             R.string.target_class_android_j,
             false,
-            EggActionController.KEY_EGG_J
+            KEY_EGG_J
         ),
         Egg(
             R.drawable.ic_android_ics,
@@ -133,7 +169,7 @@ object EggDateSource {
             R.string.version_comment_android_i,
             R.string.target_class_android_i,
             false,
-            EggActionController.KEY_EGG_I
+            KEY_EGG_I
         ),
         Egg(
             R.drawable.ic_android_honeycomb,
@@ -142,7 +178,7 @@ object EggDateSource {
             R.string.version_comment_android_h,
             R.string.target_class_android_h,
             false,
-            EggActionController.KEY_EGG_H
+            KEY_EGG_H
         ),
         Egg(
             R.drawable.ic_android_gingerbread,
@@ -151,7 +187,7 @@ object EggDateSource {
             R.string.version_comment_android_g,
             R.string.target_class_android_g,
             false,
-            EggActionController.KEY_EGG_G
+            KEY_EGG_G
         ),
         Wavy(R.drawable.ic_wavy_line),
         Egg(
