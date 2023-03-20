@@ -1,5 +1,6 @@
 package com.dede.android_eggs.ui.adapter
 
+import android.annotation.SuppressLint
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
@@ -8,21 +9,25 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.reflect.Constructor
 import java.util.*
-import kotlin.reflect.KClass
+
+typealias BindViewHolder<T> = (holder: VHolder<T>, t: T) -> Unit
+typealias CreateViewHolder = (parent: ViewGroup, viewType: Int) -> RecyclerView.ViewHolder
 
 class VAdapter(
-    list: List<VType> = emptyList(),
+    list: List<Any> = emptyList(),
     setup: VAdapter.() -> Unit,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val list: List<VType>
+    private var list: List<Any>
     private val viewTypeMapping = SparseArray<Mapping>()
+
     val headerFooterExt = HeaderFooterExt(this)
-    var onBindViewHolder: ((holder: VHolder<VType>, vType: VType) -> Unit)? = null
+    var onBindViewHolder: BindViewHolder<Any>? = null
+    var onCreateViewHolder: CreateViewHolder? = null
 
     private class Mapping(
         val layoutRes: Int,
-        val vhClass: Class<out VHolder<out VType>>,
+        val vhClass: Class<out VHolder<out Any>>,
     )
 
     init {
@@ -30,19 +35,29 @@ class VAdapter(
         setup.invoke(this)
     }
 
-    fun addViewType(
-        @LayoutRes layoutRes: Int,
-        viewType: Int,
-        vhClass: KClass<out VHolder<out VType>>,
-    ) {
-        addViewType(layoutRes, viewType, vhClass.java)
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(list: List<Any>) {
+        this.list = list
+        notifyDataSetChanged()
+    }
+
+    fun append(list: List<Any>) {
+        val newList = ArrayList<Any>()
+        val oldSize = this.list.size
+        newList.addAll(this.list)
+        newList.addAll(list)
+        this.list = newList
+        notifyItemRangeInserted(oldSize, list.size)
     }
 
     fun addViewType(
         @LayoutRes layoutRes: Int,
         viewType: Int,
-        vhClass: Class<out VHolder<out VType>>,
+        vhClass: Class<out VHolder<out Any>>,
     ) {
+        if (viewType == TYPE_FOOTER || viewType == TYPE_HEADER) {
+            throw IllegalArgumentException("viewType: (%d) is internal used!".format(viewType))
+        }
         if (viewTypeMapping[viewType] != null) {
             throw IllegalArgumentException("viewType: (%d) is added!".format(viewType))
         }
@@ -51,7 +66,11 @@ class VAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val viewHolder = headerFooterExt.createViewHolder(parent, viewType)
+        var viewHolder = headerFooterExt.createViewHolder(parent, viewType)
+        if (viewHolder != null) {
+            return viewHolder
+        }
+        viewHolder = onCreateViewHolder?.invoke(parent, viewType)
         if (viewHolder != null) {
             return viewHolder
         }
@@ -69,8 +88,7 @@ class VAdapter(
         val p = headerFooterExt.calculatePosition(position)
         val vType = list[p]
 
-        @Suppress("UNCHECKED_CAST")
-        val vHolder = holder as VHolder<VType>
+        @Suppress("UNCHECKED_CAST") val vHolder = holder as VHolder<Any>
         onBindViewHolder?.invoke(vHolder, vType)
         vHolder.onBindViewHolder(vType)
     }
@@ -84,7 +102,7 @@ interface VType {
     val viewType: Int
 }
 
-abstract class VHolder<T : VType>(view: View) : RecyclerView.ViewHolder(view) {
+abstract class VHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
 
     companion object {
 
@@ -94,13 +112,13 @@ abstract class VHolder<T : VType>(view: View) : RecyclerView.ViewHolder(view) {
         }
 
         private val constructorCache =
-            WeakHashMap<Class<out VHolder<out VType>>, Constructor<out VHolder<out VType>>>()
+            WeakHashMap<Class<out VHolder<*>>, Constructor<out VHolder<*>>>()
 
         fun createViewHolder(
             parent: ViewGroup,
-            clazz: Class<out VHolder<out VType>>,
+            clazz: Class<out VHolder<*>>,
             layoutRes: Int,
-        ): VHolder<out VType> {
+        ): VHolder<*> {
             var constructor = constructorCache[clazz]
             if (constructor == null) {
                 constructor = clazz.getConstructor(View::class.java)
@@ -111,8 +129,14 @@ abstract class VHolder<T : VType>(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
+    private val viewRef = SparseArray<View>()
+
     fun <T : View> findViewById(id: Int): T {
-        return itemView.findViewById(id)
+        @Suppress("UNCHECKED_CAST") var view = viewRef.get(id) as? T
+        if (view != null) return view
+        view = itemView.findViewById(id)
+        viewRef.put(id, view)
+        return view
     }
 
     open fun onBindViewHolder(t: T) {

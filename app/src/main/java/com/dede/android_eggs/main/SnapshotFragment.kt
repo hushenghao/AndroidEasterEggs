@@ -58,7 +58,7 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
         eggListFragment.smoothScrollToPosition(position)
     }
 
-    private fun onBindSnapshot(holder: VHolder<VType>, provider: PlatLogoSnapshotProvider) {
+    private fun onBindSnapshot(holder: VHolder<*>, provider: PlatLogoSnapshotProvider) {
         holder.setIsRecyclable(false)
         val group: ViewGroup = holder.findViewById(R.id.fl_content)
         val background: ImageView = holder.findViewById(R.id.iv_background)

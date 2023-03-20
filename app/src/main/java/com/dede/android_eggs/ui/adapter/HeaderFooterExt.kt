@@ -12,8 +12,8 @@ import com.dede.android_eggs.R
 import com.google.android.material.carousel.CarouselLayoutManager
 
 
-private const val TYPE_HEADER = Int.MIN_VALUE
-private const val TYPE_FOOTER = Int.MAX_VALUE
+const val TYPE_HEADER = Int.MIN_VALUE
+const val TYPE_FOOTER = Int.MAX_VALUE
 
 
 fun VAdapter.addFooter(view: View) {
@@ -95,7 +95,7 @@ class HeaderFooterExt(private val vAdapter: VAdapter) {
         return if (hasHeader) position - 1 else position
     }
 
-    fun getViewType(list: List<VType>, position: Int): Int {
+    fun getViewType(list: List<*>, position: Int): Int {
         if (hasHeader && position == 0) {
             return TYPE_HEADER
         }
@@ -103,7 +103,8 @@ class HeaderFooterExt(private val vAdapter: VAdapter) {
             return TYPE_FOOTER
         }
         val p = calculatePosition(position)
-        return list[p].viewType
+        val data = list[p]
+        return if (data is VType) data.viewType else 0
     }
 
     fun bindViewHolder(holder: ViewHolder): Boolean {

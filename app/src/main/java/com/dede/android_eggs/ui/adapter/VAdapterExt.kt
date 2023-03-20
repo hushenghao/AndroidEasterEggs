@@ -2,19 +2,20 @@ package com.dede.android_eggs.ui.adapter
 
 import android.view.View
 import androidx.annotation.LayoutRes
+import kotlin.reflect.KClass
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS)
 annotation class VHType(val viewType: Int = 0)
 
-inline fun <reified VH : VHolder<out VType>> VAdapter.addViewType(
+inline fun <reified VH : VHolder<out Any>> VAdapter.addViewType(
     @LayoutRes layoutRes: Int,
     viewType: Int,
 ) {
     addViewType(layoutRes, viewType, VH::class.java)
 }
 
-inline fun <reified VH : VHolder<out VType>> VAdapter.addViewType(@LayoutRes layoutRes: Int) {
+inline fun <reified VH : VHolder<out Any>> VAdapter.addViewType(@LayoutRes layoutRes: Int) {
     val vhClass = VH::class.java
     val vhType = vhClass.getAnnotation(VHType::class.java)
         ?: throw IllegalArgumentException(
@@ -24,22 +25,19 @@ inline fun <reified VH : VHolder<out VType>> VAdapter.addViewType(@LayoutRes lay
 }
 
 
-private class VHolderImpl<T : VType>(view: View) : VHolder<T>(view)
-private class VTypeImpl<T>(val impl: T, type: Int) : VType {
-    override val viewType: Int = type
-}
+private class VHolderImpl(view: View) : VHolder<Any>(view)
 
-fun <T> VAdapter(
+fun <T : Any> VAdapter(
     @LayoutRes layoutRes: Int,
     list: List<T>,
-    onBindView: (holder: VHolder<VType>, t: T) -> Unit,
+    onBindView: BindViewHolder<T>,
 ): VAdapter {
-    return VAdapter(list.map { VTypeImpl(it, 0) }) {
-        addViewType(layoutRes, 0, VHolderImpl::class)
-        onBindViewHolder = { holder, vType ->
-            @Suppress("UNCHECKED_CAST")
-            val vTypeImpl = vType as VTypeImpl<T>
-            onBindView(holder, vTypeImpl.impl)
+    return VAdapter(list) {
+        addViewType<VHolderImpl>(layoutRes, 0)
+        onBindViewHolder = { vHolder: VHolder<Any>, vType: Any ->
+            @Suppress("UNCHECKED_CAST") val holder = vHolder as VHolder<T>
+            @Suppress("UNCHECKED_CAST") val data = vType as T
+            onBindView(holder, data)
         }
     }
 }
