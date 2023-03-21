@@ -48,6 +48,10 @@ class VersionPreference(context: Context, attrs: AttributeSet?) : Preference(con
             )
     }
 
+    override fun onClick() {
+        CustomTabsBrowser.launchUrl(context, Uri.parse(context.getString(R.string.url_beta)))
+    }
+
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
         (holder.findViewById(android.R.id.summary) as? TextView)?.enableClickSpan()

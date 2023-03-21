@@ -29,8 +29,13 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         binding.ivIcon.load(egg.iconRes) {
             applySupportAdaptiveIcon(context, egg.supportAdaptiveIcon)
         }
-        itemView.setOnClickListener { eggActionController.openEgg(egg) }
+        binding.cardView.setOnClickListener { eggActionController.openEgg(egg) }
         binding.ivIcon.setOnClickListener { eggActionController.showVersionCommentDialog(egg) }
+
+        binding.tvBgMessage.setText(egg.versionCommentRes)
+        binding.ivBgIcon.load(egg.iconRes) {
+            applySupportAdaptiveIcon(context, egg.supportAdaptiveIcon)
+        }
     }
 
     private fun ImageRequest.Builder.applySupportAdaptiveIcon(
