@@ -7,7 +7,8 @@ e3ab
 
 # tips_and_updates
 e79a
-
+# shortcut
+f060
 # settings
 e8b8
 # rounded_corner

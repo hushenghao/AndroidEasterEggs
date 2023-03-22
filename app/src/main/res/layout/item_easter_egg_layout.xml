@@ -7,34 +7,9 @@
     android:layout_marginHorizontal="5dp"
     tools:layout_marginTop="5dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:padding="22dp">
-
-        <ImageView
-            android:id="@+id/iv_bg_icon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@mipmap/ic_launcher_round"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_bg_message"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:gravity="end"
-            android:textAppearance="?textAppearanceBodyMedium"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/iv_bg_icon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/lorem[10]" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/background"
+        layout="@layout/layout_item_egg_background" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view"

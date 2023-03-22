@@ -44,7 +44,10 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
             last = EggListDivider(10.dp, it.bottom)
             addItemDecoration(last!!)
         }
-        val itemTouchHelper = ItemTouchHelper(EggListItemTouchHelperCallback())
+        val itemTouchHelper = ItemTouchHelper(EggListItemTouchHelperCallback {
+            val egg = EggDatas.eggList[it] as? Egg ?: return@EggListItemTouchHelperCallback
+            EggActionHelp.addShortcutDialog(requireContext(), egg)
+        })
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
     }
 
@@ -54,8 +57,8 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         binding.recyclerView.smoothScrollToPosition(position)
     }
 
-    private class EggListItemTouchHelperCallback :
-        ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.START) {
+    private class EggListItemTouchHelperCallback(val onItemSwiped: (position: Int) -> Unit) :
+        ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.START or ItemTouchHelper.END) {
 
         private fun RecyclerView.ViewHolder?.getCardView(): View? {
             return if (this is EggHolder) this.binding.cardView else null
@@ -68,6 +71,18 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         ): Boolean = false
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            if (direction == ItemTouchHelper.START) {
+                onItemSwiped.invoke(viewHolder.bindingAdapterPosition)
+            }
+            val cardView = viewHolder.getCardView()
+            if (cardView != null) {
+                getDefaultUIUtil().clearView(cardView)
+            }
+            viewHolder.bindingAdapter?.notifyItemChanged(viewHolder.bindingAdapterPosition)
+        }
+
+        override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder): Float {
+            return 0.6f
         }
 
         override fun isLongPressDragEnabled(): Boolean {

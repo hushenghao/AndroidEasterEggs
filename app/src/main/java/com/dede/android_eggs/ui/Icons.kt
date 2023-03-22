@@ -30,6 +30,9 @@ object Icons {
     /** settings */
     const val SETTINGS = "\uE8B8"
 
+    /** shortcut */
+    const val SHORTCUT = "\uF060"
+
     /** tips_and_updates */
     const val TIPS_AND_UPDATES = "\uE79A"
 

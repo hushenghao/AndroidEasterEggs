@@ -83,7 +83,7 @@ class PreviewHolder(view: View) : EggHolder(view) {
         binding.tvSummary.setTextColor(summaryTextColor)
         binding.cardView.setCardBackgroundColor(colorStateList)
         binding.tvSummary.text = getTimelineMessage(context)
-        itemView.setOnClickListener {
+        binding.cardView.setOnClickListener {
             showTimelineDialog(
                 context,
                 com.dede.android_eggs.R.drawable.ic_android_udc,

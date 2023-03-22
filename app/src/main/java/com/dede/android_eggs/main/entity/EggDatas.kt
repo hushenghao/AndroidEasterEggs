@@ -41,14 +41,14 @@ object EggDatas {
         com.android_h.egg.PlatLogoSnapshotProvider(),
         com.android_g.egg.PlatLogoSnapshotProvider(),
     )
-    
+
     val eggList = listOf(
         Egg(
             R.drawable.ic_android_udc,
             R.string.title_android_u,
             R.string.title_android_u,
             R.string.version_comment_android_u,
-            R.string.target_class_android_t,
+            -1,
             true,
             itemType = Egg.VIEW_TYPE_PREVIEW
         ),

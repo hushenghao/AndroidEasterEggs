@@ -24,7 +24,7 @@ pyftsubset "$ROOT/MaterialIconsOutlined-Regular.otf" \
 cp "$OUTPUT_FILE" "$TARGET_DIR"
 
 # Detect the platform (similar to $OSTYPE)
-if [ "$(uname)"='WindowsNT' ]; then
+if [ "$(uname)" = 'WindowsNT' ]; then
   python "$ROOT/generate_icons_kt.py"
 else
   python3 "$ROOT/generate_icons_kt.py"
