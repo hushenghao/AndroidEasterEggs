@@ -65,4 +65,6 @@
     <string name="preference_on">On</string>
     <string name="preference_off">Off</string>
     <string name="pref_title_edge" translatable="false">Edge to edge</string>
+
+    <string name="toast_shortcut_added">Shortcut added</string>
 </resources>

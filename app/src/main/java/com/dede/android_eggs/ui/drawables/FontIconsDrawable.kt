@@ -43,7 +43,7 @@ class FontIconsDrawable(
         context: Context,
         unicode: String,
         @AttrRes colorAttributeResId: Int,
-        @Dimension(unit = Dimension.DP) size: Float = -1f
+        @Dimension(unit = Dimension.DP) size: Float = -1f,
     ) : this(context, unicode, size) {
         val color = MaterialColors.getColor(context, colorAttributeResId, Color.WHITE)
         setColor(color)
@@ -92,12 +92,14 @@ class FontIconsDrawable(
     fun setColorStateList(colorStateList: ColorStateList?) {
         if (colorStateList != this.colorStateList) {
             this.colorStateList = colorStateList
-            invalidateSelf()
+            onStateChange(state)
         }
     }
 
     override fun onStateChange(state: IntArray): Boolean {
+        val colorStateList = this.colorStateList
         if (colorStateList != null) {
+            setColor(colorStateList.getColorForState(state, colorStateList.defaultColor))
             return true
         }
         return super.onStateChange(state)
@@ -178,10 +180,6 @@ class FontIconsDrawable(
         val count = canvas.save()
         val x = tempBounds.exactCenterX()
         canvas.rotate(degree, x, tempBounds.exactCenterY())
-        val colorStateList = this.colorStateList
-        if (colorStateList != null) {
-            paint.color = colorStateList.getColorForState(state, colorStateList.defaultColor)
-        }
         val y = (metrics.descent - metrics.ascent) / 2 - metrics.ascent / 2 + padding.top
         canvas.drawText(unicode, x, y, paint)
         canvas.restoreToCount(count)

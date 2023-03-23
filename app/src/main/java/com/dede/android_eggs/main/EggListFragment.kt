@@ -46,7 +46,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         }
         val itemTouchHelper = ItemTouchHelper(EggListItemTouchHelperCallback {
             val egg = EggDatas.eggList[it] as? Egg ?: return@EggListItemTouchHelperCallback
-            EggActionHelp.addShortcutDialog(requireContext(), egg)
+            EggActionHelp.addShortcut(requireContext(), egg)
         })
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
     }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Build
 import android.text.TextUtils
 import android.view.View
-import androidx.core.view.isVisible
 import coil.load
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
@@ -17,6 +16,8 @@ import com.dede.android_eggs.ui.SupportAdaptiveIconTransformation
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
+import com.dede.android_eggs.util.resolveColorStateList
+import com.google.android.material.R as M3R
 
 @VHType(viewType = Egg.VIEW_TYPE_EGG)
 open class EggHolder(view: View) : VHolder<Egg>(view) {
@@ -36,12 +37,15 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         binding.background.ivBgIcon.load(egg.iconRes) {
             applySupportAdaptiveIcon(context, egg.supportAdaptiveIcon)
         }
-        binding.background.tvAddShortcut.isVisible = EggActionHelp.supportShortcut(context, egg)
-        val drawable = FontIconsDrawable(
-            context,
-            Icons.SHORTCUT,
-            22f
+
+        binding.background.tvAddShortcut.isEnabled = EggActionHelp.supportShortcut(context, egg)
+        val color = context.resolveColorStateList(
+            M3R.attr.textAppearanceLabelMedium,
+            android.R.attr.textColor
         )
+        val drawable = FontIconsDrawable(context, Icons.SHORTCUT, 22f).apply {
+            setColorStateList(color)
+        }
         binding.background.tvAddShortcut.setCompoundDrawablesRelative(null, null, drawable, null)
     }
 

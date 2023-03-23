@@ -47,4 +47,6 @@
 
     <string name="preference_on">开启</string>
     <string name="preference_off">关闭</string>
+
+    <string name="toast_shortcut_added">已添加快捷方式</string>
 </resources>

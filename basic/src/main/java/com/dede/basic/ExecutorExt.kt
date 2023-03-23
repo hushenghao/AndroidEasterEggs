@@ -3,14 +3,21 @@ package com.dede.basic
 import android.os.Handler
 import android.os.Looper
 import androidx.core.os.ExecutorCompat
+import androidx.core.os.HandlerCompat
 
-/**
- * Created by shhu on 2023/2/2 16:44.
- *
- * @author shhu
- * @since 2023/2/2
- */
 
 val uiHandler = Handler(Looper.getMainLooper())
+
+fun delay(delayMillis: Long, token: Any? = null, r: Runnable) {
+    HandlerCompat.postDelayed(uiHandler, r, token, delayMillis)
+}
+
+fun cancel(r: Runnable) {
+    uiHandler.removeCallbacks(r)
+}
+
+fun cancel(token: Any) {
+    uiHandler.removeCallbacksAndMessages(token)
+}
 
 val uiExecutor = ExecutorCompat.create(uiHandler)
