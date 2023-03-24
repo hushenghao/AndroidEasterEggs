@@ -8,6 +8,7 @@ import fontTools.subset
 UNICODES = 'unicodes.json'
 
 fonts = {'filled': 'MaterialIcons-Regular.ttf',
+         'rounded': 'MaterialIconsRound-Regular.otf',
          'outlined': 'MaterialIconsOutlined-Regular.otf'}
 FORMAT_OUT_FONT = 'icons_%s.%s'
 
@@ -33,9 +34,15 @@ FORMAT_PROPERTY = """
 """
 
 
+FONT_DIR="../../app/src/main/assets"
+ICONSKT_DIR="../../app/src/main/java/com/dede/android_eggs/ui"
+
 def subset_icons_fonts(iconsGroup):
     for type in iconsGroup.keys():
         font = fonts[type]
+        icons = iconsGroup[type].values()
+        if len(icons) == 0:
+            continue
         output = FORMAT_OUT_FONT % (type.lower(), font.split('.')[1])
         unicodes = ','.join(iconsGroup[type].values())
 
@@ -58,7 +65,10 @@ def generate_icons_kt(iconsGroup, output):
     allIcons = []
     for group in iconsGroup.items():
         type = group[0]
-        icons = sorted(group[1].items(), key=lambda icon: icon[0])
+        icons = group[1].items()
+        if len(icons) == 0:
+            continue
+        icons = sorted(icons, key=lambda icon: icon[0])
         icons = map(lambda icon: FORMAT_PROPERTY %
                     (icon[0], icon[0], icon[1].upper()), icons)
         allIcons.append(

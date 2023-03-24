@@ -20,8 +20,9 @@ else
 fi
 
 # Copy product
-cp "$ROOT/icons_outlined.otf" "$FONT_DIR"
-cp "$ROOT/icons_filled.ttf" "$FONT_DIR"
+#cp "$ROOT/icons_outlined.otf" "$FONT_DIR"
+#cp "$ROOT/icons_filled.ttf" "$FONT_DIR"
+cp "$ROOT/icons_rounded.otf" "$FONT_DIR"
 cp "$ROOT/Icons.kt" "$ICONSKT_DIR"
 
 exit 0

@@ -44,11 +44,11 @@ class SettingsPageController(private val activity: AppCompatActivity) : MenuProv
         menuInflater.inflate(R.menu.menu_settings, menu)
         settingsIcon = FontIconsDrawable(
             activity,
-            Icons.Filled.settings,
+            Icons.Rounded.settings,
             M3R.attr.colorControlNormal,
             24f
         ).apply {
-            setTypeface(FontIconsDrawable.Typefaces.filled)
+            setTypeface(FontIconsDrawable.Typefaces.rounded)
         }
         menu.findItem(R.id.menu_settings).icon = settingsIcon
     }

@@ -40,6 +40,9 @@ class FontIconsDrawable(
         val filled: Typeface by lazy {
             Typeface.createFromAsset(globalContext.assets, "icons_filled.ttf")
         }
+        val rounded: Typeface by lazy {
+            Typeface.createFromAsset(globalContext.assets, "icons_rounded.otf")
+        }
     }
 
     constructor(
@@ -62,7 +65,7 @@ class FontIconsDrawable(
     private var degree: Float = 0f
 
     init {
-        paint.typeface = Typefaces.outlined
+        paint.typeface = Typefaces.rounded
         paint.textAlign = Paint.Align.CENTER
         val color = MaterialColors.getColor(context, M3R.attr.colorControlNormal, Color.WHITE)
         paint.color = color
