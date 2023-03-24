@@ -8,8 +8,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.Icons
+import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.google.android.material.R as M3R
 
 
@@ -42,8 +42,14 @@ class SettingsPageController(private val activity: AppCompatActivity) : MenuProv
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_settings, menu)
-        settingsIcon =
-            FontIconsDrawable(activity, Icons.SETTINGS, M3R.attr.colorControlNormal, 24f)
+        settingsIcon = FontIconsDrawable(
+            activity,
+            Icons.Filled.settings,
+            M3R.attr.colorControlNormal,
+            24f
+        ).apply {
+            setTypeface(FontIconsDrawable.Typefaces.filled)
+        }
         menu.findItem(R.id.menu_settings).icon = settingsIcon
     }
 

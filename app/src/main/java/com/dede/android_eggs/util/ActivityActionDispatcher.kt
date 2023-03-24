@@ -90,7 +90,7 @@ class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
                 HtmlCompat.FROM_HTML_MODE_COMPACT
             )
             val wrapperContext = getThemeWrapperContext(activity)
-            val icon = FontIconsDrawable(wrapperContext, Icons.TIPS_AND_UPDATES, 48f)
+            val icon = FontIconsDrawable(wrapperContext, Icons.Outlined.tips_and_updates, 48f)
             val color = MaterialColors.getColor(wrapperContext, M3R.attr.colorControlNormal, Color.BLACK)
             icon.setColor(color)
             MaterialAlertDialogBuilder(wrapperContext)

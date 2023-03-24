@@ -33,9 +33,12 @@ class FontIconsDrawable(
     @Dimension(unit = Dimension.DP) size: Float = -1f,
 ) : Drawable() {
 
-    companion object {
-        val ICONS_TYPEFACE: Typeface by lazy {
-            Typeface.createFromAsset(globalContext.assets, "icons.otf")
+    object Typefaces {
+        val outlined: Typeface by lazy {
+            Typeface.createFromAsset(globalContext.assets, "icons_outlined.otf")
+        }
+        val filled: Typeface by lazy {
+            Typeface.createFromAsset(globalContext.assets, "icons_filled.ttf")
         }
     }
 
@@ -59,7 +62,7 @@ class FontIconsDrawable(
     private var degree: Float = 0f
 
     init {
-        paint.typeface = ICONS_TYPEFACE
+        paint.typeface = Typefaces.outlined
         paint.textAlign = Paint.Align.CENTER
         val color = MaterialColors.getColor(context, M3R.attr.colorControlNormal, Color.WHITE)
         paint.color = color
@@ -81,6 +84,11 @@ class FontIconsDrawable(
 
     @Keep
     fun getRotate(): Float = this.degree
+
+    fun setTypeface(typeface: Typeface) {
+        paint.typeface = typeface
+        invalidateSelf()
+    }
 
     fun setColor(color: Int) {
         if (color != paint.color) {

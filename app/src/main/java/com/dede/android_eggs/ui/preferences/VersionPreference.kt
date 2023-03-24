@@ -26,7 +26,7 @@ class VersionPreference(context: Context, attrs: AttributeSet?) : Preference(con
         isPersistent = false
         isCopyingEnabled = true
         title = context.getString(R.string.title_version)
-        icon = FontIconsDrawable(context, Icons.INFO, 36f).apply {
+        icon = FontIconsDrawable(context, Icons.Outlined.info, 36f).apply {
             setPadding(12.dp, 6.dp, 0, 0)
         }
         val versionLabel = context.getString(

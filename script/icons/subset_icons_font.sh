@@ -3,33 +3,25 @@
 ROOT=$(cd $(dirname "$0") || exit; pwd)
 GIT_ROOT="$(git rev-parse --show-toplevel)"
 
-TARGET_DIR="$GIT_ROOT/app/src/main/assets"
-OUTPUT_FILE="$ROOT/icons.otf"
+FONT_DIR="$GIT_ROOT/app/src/main/assets"
+ICONSKT_DIR="$GIT_ROOT/app/src/main/java/com/dede/android_eggs/ui"
+
+PYTHON_EXE="$ROOT/subset_icons_font.py"
 
 # Install requirements
-pip3 install -t "$ROOT/Library" -r "$ROOT/requirements.txt"
+pip3 install -r "$ROOT/requirements.txt"
 
-# https://fonttools.readthedocs.io/en/latest/subset/index.html
-pyftsubset "$ROOT/MaterialIconsOutlined-Regular.otf" \
-  --unicodes-file="$ROOT/unicodes.txt" \
-  --output-file="$OUTPUT_FILE" \
-  --drop-tables=meta \
-  --ignore-missing-unicodes \
-  --desubroutinize \
-  --recalc-timestamp \
-  --with-zopfli \
-  --no-hinting \
-  --verbose
-
-cp "$OUTPUT_FILE" "$TARGET_DIR"
-
+# Subset and general Icon.kt
 # Detect the platform (similar to $OSTYPE)
 if [ "$(uname)" = 'WindowsNT' ]; then
-  python "$ROOT/generate_icons_kt.py"
+  python "$PYTHON_EXE"
 else
-  python3 "$ROOT/generate_icons_kt.py"
+  python3 "$PYTHON_EXE"
 fi
 
-cp "$ROOT/Icons.kt" "$GIT_ROOT/app/src/main/java/com/dede/android_eggs/ui/"
+# Copy product
+cp "$ROOT/icons_outlined.otf" "$FONT_DIR"
+cp "$ROOT/icons_filled.ttf" "$FONT_DIR"
+cp "$ROOT/Icons.kt" "$ICONSKT_DIR"
 
 exit 0

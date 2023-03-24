@@ -1,39 +1,47 @@
 package com.dede.android_eggs.ui
 
-/** Generated automatically via **generate_icons_kt.py**, do not modify this file. */
+/** Generated automatically via **subset_icons_font.py**, do not modify this file. */
 object Icons {
 
-    /** brightness_4 */
-    const val BRIGHTNESS_4 = "\uE3A9"
+    object Outlined {
+        
+        /** brightness_4 */
+        const val brightness_4 = "\uE3A9"
 
-    /** brightness_6 */
-    const val BRIGHTNESS_6 = "\uE3AB"
+        /** brightness_6 */
+        const val brightness_6 = "\uE3AB"
 
-    /** brightness_auto */
-    const val BRIGHTNESS_AUTO = "\uE1AB"
+        /** brightness_auto */
+        const val brightness_auto = "\uE1AB"
 
-    /** fullscreen */
-    const val FULLSCREEN = "\uE5D0"
+        /** fullscreen */
+        const val fullscreen = "\uE5D0"
 
-    /** info */
-    const val INFO = "\uE88E"
+        /** info */
+        const val info = "\uE88E"
 
-    /** language */
-    const val LANGUAGE = "\uE894"
+        /** language */
+        const val language = "\uE894"
 
-    /** palette */
-    const val PALETTE = "\uE40A"
+        /** palette */
+        const val palette = "\uE40A"
 
-    /** rounded_corner */
-    const val ROUNDED_CORNER = "\uE920"
+        /** rounded_corner */
+        const val rounded_corner = "\uE920"
 
-    /** settings */
-    const val SETTINGS = "\uE8B8"
+        /** shortcut */
+        const val shortcut = "\uF060"
 
-    /** shortcut */
-    const val SHORTCUT = "\uF060"
+        /** tips_and_updates */
+        const val tips_and_updates = "\uE79A"
 
-    /** tips_and_updates */
-    const val TIPS_AND_UPDATES = "\uE79A"
+    }
+
+    object Filled {
+        
+        /** settings */
+        const val settings = "\uE8B8"
+
+    }
 
 }
