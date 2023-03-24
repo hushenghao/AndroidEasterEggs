@@ -1,13 +1,14 @@
 {
-    "outlined": {},
+    "outlined": {
+        "rounded_corner": "e920",
+        "language": "e894"
+    },
     "rounded": {
         "brightness_auto": "e1ab",
         "brightness_4": "e3a9",
         "brightness_6": "e3ab",
         "tips_and_updates": "e79a",
         "shortcut": "f060",
-        "rounded_corner": "e920",
-        "language": "e894",
         "info": "e88e",
         "palette": "e40a",
         "settings": "e8b8",

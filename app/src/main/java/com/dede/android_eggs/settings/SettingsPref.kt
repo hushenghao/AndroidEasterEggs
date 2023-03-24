@@ -166,7 +166,7 @@ class LanguagePerf : SettingsPref<String?>() {
     override fun onCreatePreference(context: Context): Preference {
         return Preference(context).apply {
             setup(this@LanguagePerf)
-            icon = createFontIcon(context, Icons.Rounded.language)
+            icon = createFontIcon(context, Icons.Outlined.language)
             setTitle(R.string.pref_title_language)
             summary = getLocalDisplayName(context)
             onPreferenceClickListener = this@LanguagePerf
@@ -235,7 +235,7 @@ class IconShapePerf : SettingsPref<String>(IconShapeOverride.KEY_PREFERENCE) {
     override fun onCreatePreference(context: Context): Preference {
         return ListPreference(context).apply {
             setup(this@IconShapePerf)
-            icon = createFontIcon(context, Icons.Rounded.rounded_corner)
+            icon = createFontIcon(context, Icons.Outlined.rounded_corner)
             setTitle(R.string.icon_shape_override_label)
             summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
             entries = context.resources.getStringArray(R.array.icon_shape_override_paths_names)

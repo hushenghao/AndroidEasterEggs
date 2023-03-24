@@ -17,7 +17,7 @@ class FontIconSwitchPreference(context: Context, attrs: AttributeSet?) :
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
         val switch = holder.findViewById(R.id.switchWidget) as MaterialSwitch
-        switch.setSwitchTypeface(FontIconsDrawable.Typefaces.rounded)
+        switch.setSwitchTypeface(FontIconsDrawable.typeface)
         super.onBindViewHolder(holder)
     }
 }

@@ -3,6 +3,16 @@ package com.dede.android_eggs.ui
 /** Generated automatically via **subset_icons_font.py**, do not modify this file. */
 object Icons {
 
+    object Outlined {
+        
+        /** language */
+        const val language = "\uE894"
+
+        /** rounded_corner */
+        const val rounded_corner = "\uE920"
+
+    }
+
     object Rounded {
         
         /** brightness_4 */
@@ -20,14 +30,8 @@ object Icons {
         /** info */
         const val info = "\uE88E"
 
-        /** language */
-        const val language = "\uE894"
-
         /** palette */
         const val palette = "\uE40A"
-
-        /** rounded_corner */
-        const val rounded_corner = "\uE920"
 
         /** settings */
         const val settings = "\uE8B8"

@@ -14,11 +14,17 @@ Git md5: **511eea577b20d2b02ad77477750da1e44c66a52c**
 
 # Usage
 
+## Install requirements
 ```shell
-sh ./subset_icons_font.sh
+pip install -r requirements.txt
 ```
 
-## Subset Shell
+## Run
+```shell
+python subset_icons_font.py
+```
+
+## Subset
 ```shell
 pyftsubset "MaterialIconsOutlined-Regular.otf" \
   --unicodes-file="unicodes.txt" \
@@ -32,6 +38,14 @@ pyftsubset "MaterialIconsOutlined-Regular.otf" \
   --verbose
 ```
 
+## Merge
+```shell
+pyftmerge "icons_rounded.otf" "icons_outlined.otf" \
+  --output-file="icons.ttf" \
+  --verbose
+```
+
 # About
 
-[FontTools](https://fonttools.readthedocs.io/en/latest/subset/index.html)
+[fontTools.subset](https://fonttools.readthedocs.io/en/latest/subset/index.html)
+[fontTools.megre](https://fonttools.readthedocs.io/en/latest/merge.html)

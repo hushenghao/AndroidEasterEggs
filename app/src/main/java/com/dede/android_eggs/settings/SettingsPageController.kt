@@ -42,14 +42,8 @@ class SettingsPageController(private val activity: AppCompatActivity) : MenuProv
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_settings, menu)
-        settingsIcon = FontIconsDrawable(
-            activity,
-            Icons.Rounded.settings,
-            M3R.attr.colorControlNormal,
-            24f
-        ).apply {
-            setTypeface(FontIconsDrawable.Typefaces.rounded)
-        }
+        settingsIcon =
+            FontIconsDrawable(activity, Icons.Rounded.settings, M3R.attr.colorControlNormal, 24f)
         menu.findItem(R.id.menu_settings).icon = settingsIcon
     }
 
