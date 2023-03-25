@@ -148,5 +148,6 @@ if len(subset_fonts) > 0:
     merge_icons_fonts(subset_fonts, 'icons.ttf')
     copy('icons.ttf', font_dir)
 
-generate_icons_kt(icons_group, 'Icons.kt')
-copy('Icons.kt', icons_kt_dir)
+if len(icons_group) > 0:
+    generate_icons_kt(icons_group, 'Icons.kt')
+    copy('Icons.kt', icons_kt_dir)
