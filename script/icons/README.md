@@ -10,7 +10,7 @@ https://github.com/google/material-design-icons#material-icons
 * font/MaterialIconsOutlined-Regular.otf
 * font/MaterialIconsOutlined-Regular.codepoints
 
-Git md5: **511eea577b20d2b02ad77477750da1e44c66a52c**
+Git md5: **f7bd4f25f3764883717c09a1fd867f560c9a9581**
 
 # Usage
 
@@ -48,4 +48,5 @@ pyftmerge "icons_rounded.otf" "icons_outlined.otf" \
 # About
 
 [fontTools.subset](https://fonttools.readthedocs.io/en/latest/subset/index.html)
+
 [fontTools.megre](https://fonttools.readthedocs.io/en/latest/merge.html)

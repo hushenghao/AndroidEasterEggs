@@ -56,7 +56,7 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         if (!supportAdaptiveIcon || Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return
         }
-        val shapePath = IconShapeOverride.getAppliedValue(context)
+        val shapePath = IconShapeOverride.getPathValue(context)
         if (!IconShapeOverride.isSquareShape(context, shapePath)) {
             if (!TextUtils.isEmpty(shapePath)) {
                 transformations(SupportAdaptiveIconTransformation(shapePath))

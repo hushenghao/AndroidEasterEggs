@@ -36,13 +36,12 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
             addViewType<FooterHolder>(R.layout.item_easter_egg_footer)
         }
 
-        var last: ItemDecoration? = null
+        var last: ItemDecoration = EggListDivider(10.dp, 0)
+        binding.recyclerView.addItemDecoration(last)
         binding.recyclerView.onApplyWindowEdge {
-            if (last != null) {
-                removeItemDecoration(last!!)
-            }
+            removeItemDecoration(last)
             last = EggListDivider(10.dp, it.bottom)
-            addItemDecoration(last!!)
+            addItemDecoration(last)
         }
         val itemTouchHelper = ItemTouchHelper(EggListItemTouchHelperCallback {
             val egg = EggDatas.eggList[it] as? Egg ?: return@EggListItemTouchHelperCallback

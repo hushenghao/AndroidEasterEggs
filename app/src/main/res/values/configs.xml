@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Values for icon shape overrides. These should correspond to entries defined
-     in icon_shape_override_paths_names -->
-    <string-array name="icon_shape_override_paths_values" translatable="false">
+    <!-- Path values for icon shape overrides. -->
+    <string-array name="icon_shape_override_paths" translatable="false">
         <item></item>
-        <item>M50,0L100,0 100,100 0,100 0,0z</item>
+        <item>@string/icon_shape_square_path</item>
         <item>M0,24 A24 24 0 0 1 24,0 L76,0 A24 24 0 0 1 100,24 L100,76 A24 24 0 0 1 76,100 L24,100 A24 24 0 0 1 0,76 z"</item>
         <item>M50,0 C10,0 0,10 0,50 0,90 10,100 50,100 90,100 100,90 100,50 100,10 90,0 50,0 Z</item>
         <item>M50 0A50 50,0,1,1,50 100A50 50,0,1,1,50 0</item>
@@ -15,7 +14,21 @@
         <item>M 96.174 50.107 C 104.186 65.039 98.134 78.559 82.681 82.681 C 78.559 98.134 65.042 104.186 50.107 96.174 C 35.172 104.186 21.652 98.134 17.532 82.681 C 2.08 78.559 -3.972 65.041 4.039 50.107 C -3.972 35.173 2.08 21.652 17.532 17.532 C 21.652 2.08 35.172 -3.972 50.107 4.039 C 65.039 -3.972 78.559 2.08 82.681 17.532 C 98.134 21.652 104.186 35.173 96.174 50.107 Z</item>
     </string-array>
 
-    <integer name="icon_shape_square_index">1</integer>
+    <string name="icon_shape_square_path" translatable="false">M50,0L100,0 100,100 0,100 0,0z</string>
+
+    <!-- Values for icon shape overrides. These should correspond to entries defined
+     in icon_shape_override_paths_names -->
+    <string-array name="icon_shape_override_paths_values" translatable="false">
+        <item></item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
 
     <string-array name="icon_shape_override_paths_names" translatable="false">
         <!-- Option to not change the icon shape on home screen. [CHAR LIMIT=50] -->

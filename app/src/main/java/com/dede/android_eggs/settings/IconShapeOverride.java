@@ -66,7 +66,7 @@ public class IconShapeOverride {
 
         public static Resources getOverrideResources(Context context, Resources parent) {
             if (sOverrideResources == null) {
-                String path = getAppliedValue(context);
+                String path = getPathValueInternal(context, parent);
                 sOverrideResources = TextUtils.isEmpty(path) ? parent :
                         new ResourcesOverride(parent, getConfigResId(), path);
             }
@@ -90,7 +90,7 @@ public class IconShapeOverride {
         }
 
         public static void apply(Context context) {
-            String path = getAppliedValue(context);
+            String path = getPathValue(context);
             if (TextUtils.isEmpty(path)) {
                 return;
             }
@@ -177,14 +177,28 @@ public class IconShapeOverride {
         return Resources.getSystem().getIdentifier("config_icon_mask", "string", "android");
     }
 
-    public static boolean isSquareShape(Context context, String value) {
-        String[] values = context.getResources().getStringArray(R.array.icon_shape_override_paths_values);
-        int index = context.getResources().getInteger(R.integer.icon_shape_square_index);
-        return Objects.equals(values[index], value);
+    public static boolean isSquareShape(Context context, @Nullable String value) {
+        return Objects.equals(value, context.getString(R.string.icon_shape_square_path));
     }
 
     public static String getAppliedValue(Context context) {
         return getDevicePrefs(context).getString(KEY_PREFERENCE, "");
+    }
+
+    private static String getPathValueInternal(Context context, Resources resources) {
+        String value = getAppliedValue(context);
+        String[] array = resources.getStringArray(R.array.icon_shape_override_paths_values);
+        for (int i = 0, l = array.length; i < l; i++) {
+            if (Objects.equals(value, array[i])) {
+                String[] paths = resources.getStringArray(R.array.icon_shape_override_paths);
+                return paths[i];
+            }
+        }
+        return "";
+    }
+
+    public static String getPathValue(Context context) {
+        return getPathValueInternal(context, context.getResources());
     }
 
     public static void handlePreferenceUi(ListPreference preference) {
