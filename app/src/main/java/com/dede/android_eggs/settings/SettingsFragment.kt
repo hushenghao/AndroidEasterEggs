@@ -14,7 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
-    var onSlide: Function1<Float, Unit>? = null
+    var onSlide: ((offset: Float) -> Unit)? = null
 
     private var lastSlideOffset: Float = -1f
     private val callback = object : BottomSheetBehavior.BottomSheetCallback() {
@@ -55,7 +55,11 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
             pref: Preference,
         ): Boolean {
             if (pref is ListPreference) {
-                MaterialListPreferenceDialog.newInstance(pref).show()
+                if (pref.key == IconShapeOverride.KEY_PREFERENCE) {
+                    MaterialListPreferenceDialog.IconShape.newInstance(pref).show()
+                } else {
+                    MaterialListPreferenceDialog.newInstance(pref).show()
+                }
                 return true
             }
             return false

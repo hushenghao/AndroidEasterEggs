@@ -17,6 +17,7 @@ import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.util.resolveColorStateList
+import com.dede.android_eggs.util.updateCompoundDrawablesRelative
 import com.google.android.material.R as M3R
 
 @VHType(viewType = Egg.VIEW_TYPE_EGG)
@@ -40,13 +41,12 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
 
         binding.background.tvAddShortcut.isEnabled = EggActionHelp.supportShortcut(context, egg)
         val color = context.resolveColorStateList(
-            M3R.attr.textAppearanceLabelMedium,
-            android.R.attr.textColor
+            M3R.attr.textAppearanceLabelMedium, android.R.attr.textColor
         )
         val drawable = FontIconsDrawable(context, Icons.Rounded.shortcut, 22f).apply {
             setColorStateList(color)
         }
-        binding.background.tvAddShortcut.setCompoundDrawablesRelative(null, null, drawable, null)
+        binding.background.tvAddShortcut.updateCompoundDrawablesRelative(bottom = drawable)
     }
 
     private fun ImageRequest.Builder.applySupportAdaptiveIcon(

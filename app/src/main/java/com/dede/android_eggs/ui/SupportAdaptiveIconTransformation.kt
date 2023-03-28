@@ -13,6 +13,16 @@ class SupportAdaptiveIconTransformation(private val maskPathStr: String) : Trans
 
     companion object {
         private const val MASK_SIZE = 100f
+
+        fun getShapeMaskPath(pathStr: String?, width: Int, height: Int): Path {
+            if (pathStr.isNullOrBlank()) return Path()
+
+            val path = PathParser.createPathFromPathData(pathStr)
+            val matrix = Matrix()
+            matrix.setScale(width / MASK_SIZE, height / MASK_SIZE)
+            path.transform(matrix)
+            return path
+        }
     }
 
     override val cacheKey: String = "${javaClass.name}-$maskPathStr"
@@ -27,19 +37,11 @@ class SupportAdaptiveIconTransformation(private val maskPathStr: String) : Trans
         return output.applyCanvas {
             drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
             paint.shader = getBitmapShader(input, outputWidth, outputHeight)
-            val path = getMaskPath(maskPathStr, outputWidth, outputHeight)
+            val path = getShapeMaskPath(maskPathStr, outputWidth, outputHeight)
             drawPath(path, paint)
 
             setBitmap(null)
         }
-    }
-
-    private fun getMaskPath(pathStr: String, outputWidth: Int, outputHeight: Int): Path {
-        val matrix = Matrix()
-        val path = PathParser.createPathFromPathData(pathStr)
-        matrix.setScale(outputWidth / MASK_SIZE, outputHeight / MASK_SIZE)
-        path.transform(matrix)
-        return path
     }
 
     private fun getBitmapShader(

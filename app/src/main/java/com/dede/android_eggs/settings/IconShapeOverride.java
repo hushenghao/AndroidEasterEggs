@@ -185,13 +185,17 @@ public class IconShapeOverride {
         return getDevicePrefs(context).getString(KEY_PREFERENCE, "");
     }
 
+    public static String getPathValueByIndex(Resources resources, int index) {
+        String[] paths = resources.getStringArray(R.array.icon_shape_override_paths);
+        return paths[index % paths.length];
+    }
+
     private static String getPathValueInternal(Context context, Resources resources) {
         String value = getAppliedValue(context);
         String[] array = resources.getStringArray(R.array.icon_shape_override_paths_values);
         for (int i = 0, l = array.length; i < l; i++) {
             if (Objects.equals(value, array[i])) {
-                String[] paths = resources.getStringArray(R.array.icon_shape_override_paths);
-                return paths[i];
+                return getPathValueByIndex(resources, i);
             }
         }
         return "";

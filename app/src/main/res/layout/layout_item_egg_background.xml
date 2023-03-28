@@ -34,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawablePadding="4dp"
+        android:gravity="end"
         android:paddingVertical="10dp"
         android:text="@string/label_add_shortcut"
         android:textAppearance="?textAppearanceLabelLarge"
