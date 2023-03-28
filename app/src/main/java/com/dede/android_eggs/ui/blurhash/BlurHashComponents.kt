@@ -109,7 +109,7 @@ private class BlurHashFinder(hashStr: String?) {
         }
 
         fun Uri.isApplicable(): Boolean {
-            return scheme == BLUR_HASH_SCHEME && !authority.isNullOrBlank()
+            return scheme == BLUR_HASH_SCHEME && BlurHashDecoder.isValidBlurhash(authority)
         }
     }
 

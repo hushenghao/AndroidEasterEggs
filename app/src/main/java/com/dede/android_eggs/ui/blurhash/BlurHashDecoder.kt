@@ -34,6 +34,22 @@ object BlurHashDecoder {
     }
 
     /**
+     * Check the correctness of the blur hash.
+     */
+    fun isValidBlurhash(blurHash: String?): Boolean {
+        if (blurHash == null || blurHash.length < 6) {
+            return false
+        }
+        val numCompEnc = decode83(blurHash, 0, 1)
+        val numCompX = (numCompEnc % 9) + 1
+        val numCompY = (numCompEnc / 9) + 1
+        if (blurHash.length != 4 + 2 * numCompX * numCompY) {
+            return false
+        }
+        return true
+    }
+
+    /**
      * Decode a blur hash into a new bitmap.
      *
      * @param useCache use in memory cache for the calculated math, reused by images with same size.
