@@ -36,7 +36,7 @@ object BlurHashDecoder {
     /**
      * Check the correctness of the blur hash.
      */
-    fun isValidBlurhash(blurHash: String?): Boolean {
+    fun checkBlurHash(blurHash: String?): Boolean {
         if (blurHash == null || blurHash.length < 6) {
             return false
         }

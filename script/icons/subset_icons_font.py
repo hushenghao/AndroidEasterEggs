@@ -111,7 +111,7 @@ def generate_icons_kt(icons_group, output):
 
 
 def copy(src_file, dts_dir):
-    path, name = os.path.split(src_file)
+    name = os.path.split(src_file)[1]
     shutil.copyfile(src_file, os.path.join(dts_dir, name))
 
 
