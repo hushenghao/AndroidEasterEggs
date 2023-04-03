@@ -48,6 +48,8 @@ platform :android do
         options[:skip_upload_images] = true
         options[:skip_upload_screenshots] = true
     end
+    # override default (skip_upload_images:false)
+    print options
     upload_to_play_store(options)
   end
 end
