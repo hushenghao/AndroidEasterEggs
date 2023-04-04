@@ -34,7 +34,7 @@ public class Food {
         mType = type;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public Icon getIcon(Context context) {
         if (sIcons == null) {
             TypedArray icons = context.getResources().obtainTypedArray(R.array.n_food_icons);

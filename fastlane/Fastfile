@@ -36,17 +36,20 @@ platform :android do
   end
 
   desc "Deploy a new version to the Google Play"
-  lane :deploy do
+  lane :deploy do |options|
     gradle(task: "clean bundleRelease")
 
     # https://docs.fastlane.tools/actions/upload_to_play_store/
     # skip_upload_metadata	Whether to skip uploading metadata, changelogs not included	false
     # skip_upload_images	Whether to skip uploading images, screenshots not included	false
     # skip_upload_screenshots	Whether to skip uploading SCREENSHOTS	false
-    upload_to_play_store(
-       skip_upload_metadata: true,
-       skip_upload_images: true,
-       skip_upload_screenshots: true
-    )
+    if options.size == 0
+        options[:skip_upload_metadata] = true
+        options[:skip_upload_images] = true
+        options[:skip_upload_screenshots] = true
+    end
+    # override default (skip_upload_images:false)
+    print options
+    upload_to_play_store(options)
   end
 end

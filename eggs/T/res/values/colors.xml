@@ -19,8 +19,4 @@
     <color name="t_light_blue_600">#FF039BE5</color>
     <color name="t_light_blue_900">#FF01579B</color>
 
-    <color name="t_system_accent1_400">#219BCC</color>
-    <color name="t_system_accent1_800">#003549</color>
-    <color name="t_system_accent3_800">#352B4D</color>
-    <color name="t_system_neutral1_100">#E2E2E2</color>
 </resources>

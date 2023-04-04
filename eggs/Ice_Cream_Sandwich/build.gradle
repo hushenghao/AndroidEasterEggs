@@ -11,6 +11,10 @@ android {
         targetSdkVersion Versions.TARGET_SDK
     }
 
+    buildFeatures {
+        buildConfig = false
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,4 +28,5 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':basic')
 }

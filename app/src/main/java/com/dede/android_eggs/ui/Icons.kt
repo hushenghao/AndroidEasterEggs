@@ -1,39 +1,48 @@
 package com.dede.android_eggs.ui
 
-/** Generated automatically via **generate_icons_kt.py**, do not modify this file. */
+/** Generated automatically via **subset_icons_font.py**, do not modify this file. */
+// 1679713062 
 object Icons {
 
-    /** android */
-    const val ANDROID = "\uE859"
+    object Outlined {
+        
+        /** language */
+        const val language = "\uE894"
 
-    /** brightness_4 */
-    const val BRIGHTNESS_4 = "\uE3A9"
+        /** rounded_corner */
+        const val rounded_corner = "\uE920"
 
-    /** brightness_auto */
-    const val BRIGHTNESS_AUTO = "\uE1AB"
+    }
 
-    /** download */
-    const val DOWNLOAD = "\uF090"
+    object Rounded {
+        
+        /** brightness_4 */
+        const val brightness_4 = "\uE3A9"
 
-    /** email */
-    const val EMAIL = "\uE0BE"
+        /** brightness_6 */
+        const val brightness_6 = "\uE3AB"
 
-    /** home */
-    const val HOME = "\uE88A"
+        /** brightness_auto */
+        const val brightness_auto = "\uE1AB"
 
-    /** interests */
-    const val INTERESTS = "\uE7C8"
+        /** fullscreen */
+        const val fullscreen = "\uE5D0"
 
-    /** policy */
-    const val POLICY = "\uEA17"
+        /** info */
+        const val info = "\uE88E"
 
-    /** settings */
-    const val SETTINGS = "\uE8B8"
+        /** palette */
+        const val palette = "\uE40A"
 
-    /** star */
-    const val STAR = "\uE838"
+        /** settings */
+        const val settings = "\uE8B8"
 
-    /** tips_and_updates */
-    const val TIPS_AND_UPDATES = "\uE79A"
+        /** shortcut */
+        const val shortcut = "\uF060"
+
+        /** tips_and_updates */
+        const val tips_and_updates = "\uE79A"
+
+    }
 
 }

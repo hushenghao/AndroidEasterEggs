@@ -1,0 +1,3 @@
+image/img_snapshot_default_bg.jpg
+
+image/night/img_snapshot_default_bg.jpg

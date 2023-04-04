@@ -1,0 +1,18 @@
+{
+    "outlined": [
+        "rounded_corner",
+        "language"
+    ],
+    "rounded": [
+        "brightness_auto",
+        "brightness_4",
+        "brightness_6",
+        "tips_and_updates",
+        "shortcut",
+        "info",
+        "palette",
+        "settings",
+        "fullscreen"
+    ],
+    "filled": []
+}

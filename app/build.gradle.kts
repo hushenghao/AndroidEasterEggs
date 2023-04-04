@@ -1,12 +1,9 @@
 @file:Suppress("UnstableApiUsage")
 
+import Versions.gitHash
+import Versions.keyprops
 import com.android.build.api.dsl.ManagedVirtualDevice
 import java.util.*
-
-val keystoreProperties = Properties().apply {
-    rootProject.file("key.properties")
-        .takeIf { it.exists() }?.inputStream()?.use(this::load)
-}
 
 plugins {
     id("com.android.application")
@@ -22,21 +19,21 @@ android {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
-        versionCode = 25
-        versionName = "1.9.2"
-
+        versionCode = 26
+        versionName = "1.9.3"
+        buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.addAll(listOf("zh", "en"))
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
     }
 
     signingConfigs {
-        if (keystoreProperties.isEmpty) return@signingConfigs
+        if (keyprops.isEmpty) return@signingConfigs
         create("release") {
-            keyAlias = keystoreProperties.getProperty("keyAlias")
-            keyPassword = keystoreProperties.getProperty("keyPassword")
-            storeFile = file(keystoreProperties.getProperty("storeFile"))
-            storePassword = keystoreProperties.getProperty("storePassword")
+            keyAlias = keyprops.getProperty("keyAlias")
+            keyPassword = keyprops.getProperty("keyPassword")
+            storeFile = file(keyprops.getProperty("storeFile"))
+            storePassword = keyprops.getProperty("storePassword")
             enableV3Signing = true
             enableV4Signing = true
         }
@@ -48,8 +45,8 @@ android {
             signingConfig = config
         }
         getByName("release") {
-            isShrinkResources = false
-            isMinifyEnabled = false
+            isShrinkResources = true
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -98,6 +95,7 @@ dependencies {
     implementation(deps.google.material)
     implementation(deps.io.coil)
     implementation(deps.free.reflection)
+    implementation(deps.viewbinding.delegate)
     debugImplementation(deps.leakcanary)
     implementation(project(":basic"))
     implementation(project(":eggs:T"))

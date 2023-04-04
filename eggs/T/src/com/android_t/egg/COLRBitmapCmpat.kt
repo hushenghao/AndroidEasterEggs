@@ -48,18 +48,20 @@ fun Array<Bubble>.convertCOLRBitmap(activity: Activity, result: () -> Unit) {
         }
     }
     job?.cancel()
-    job = GlobalScope.launch(Dispatchers.IO) {
-        for ((i, bubble) in this@convertCOLRBitmap.withIndex()) {
-            val id: Int = activity.getIdentifier(
-                String.format(
-                    "t_emoji_%s",
-                    bubble.text.toUnicode("u", "_")
-                ),
-                DefType.DRAWABLE,
-                activity.packageName
-            )
+    job = activity.androidLifecycle.launch {
+        val iterator = this@convertCOLRBitmap.iterator()
+        while (isActive && iterator.hasNext()) {
+            val bubble = iterator.next()
             val size = ((sizeMap[bubble.text] ?: 0f) * 2).roundToInt()
             if (size > 0f) {
+                val id: Int = activity.getIdentifier(
+                    String.format(
+                        "t_emoji_%s",
+                        bubble.text.toUnicode("u", "_")
+                    ),
+                    DefType.DRAWABLE,
+                    activity.packageName
+                )
                 val request = ImageRequest.Builder(activity)
                     .data(id)
                     .size(size)
@@ -71,13 +73,7 @@ fun Array<Bubble>.convertCOLRBitmap(activity: Activity, result: () -> Unit) {
                     bubble.text = null
                 }
             }
-            if (i >= this@convertCOLRBitmap.size - 1) {
-                withContext(Dispatchers.Main) {
-                    if (isActive) {
-                        result.invoke()
-                    }
-                }
-            }
         }
+        if (isActive) result.invoke()
     }
 }

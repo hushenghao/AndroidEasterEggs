@@ -62,6 +62,7 @@ const val TAG = "PaintChips"
 
 val SHADE_NUMBERS = intArrayOf(0, 10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000)
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 val COLORS_NEUTRAL1 = intArrayOf(
     android.R.color.system_neutral1_0,
     android.R.color.system_neutral1_10,
@@ -78,6 +79,7 @@ val COLORS_NEUTRAL1 = intArrayOf(
     android.R.color.system_neutral1_1000
 )
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 val COLORS_NEUTRAL2 = intArrayOf(
     android.R.color.system_neutral2_0,
     android.R.color.system_neutral2_10,
@@ -94,6 +96,7 @@ val COLORS_NEUTRAL2 = intArrayOf(
     android.R.color.system_neutral2_1000
 )
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 var COLORS_ACCENT1 = intArrayOf(
     android.R.color.system_accent1_0,
     android.R.color.system_accent1_10,
@@ -110,6 +113,7 @@ var COLORS_ACCENT1 = intArrayOf(
     android.R.color.system_accent1_1000
 )
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 var COLORS_ACCENT2 = intArrayOf(
     android.R.color.system_accent2_0,
     android.R.color.system_accent2_10,
@@ -126,6 +130,7 @@ var COLORS_ACCENT2 = intArrayOf(
     android.R.color.system_accent2_1000
 )
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 var COLORS_ACCENT3 = intArrayOf(
     android.R.color.system_accent3_0,
     android.R.color.system_accent3_10,
@@ -146,6 +151,7 @@ var COLOR_NAMES = arrayOf(
     "N1", "N2", "A1", "A2", "A3"
 )
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 var COLORS = arrayOf(
     COLORS_NEUTRAL1,
     COLORS_NEUTRAL2,
@@ -290,6 +296,7 @@ fun makeTextSharePendingIntent(context: Context, text: String): PendingIntent {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 }
 
+@RequiresApi(api = Build.VERSION_CODES.S)
 fun makeActivityLaunchPendingIntent(context: Context): PendingIntent {
     return PendingIntent.getActivity(context, 0,
         Intent().apply {

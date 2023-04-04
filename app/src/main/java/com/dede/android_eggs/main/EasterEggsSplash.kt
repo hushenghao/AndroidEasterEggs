@@ -1,5 +1,6 @@
 package com.dede.android_eggs.main
 
+import android.graphics.drawable.Animatable
 import android.view.Gravity
 import android.view.View
 import android.view.ViewAnimationUtils
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.dede.android_eggs.R
 import com.dede.basic.dp
 import kotlin.math.hypot
 
@@ -21,9 +23,10 @@ class EasterEggsSplash(private val activity: AppCompatActivity) : Runnable,
     fun welcome() {
         root = activity.findViewById(android.R.id.content)
         ivLogo = AppCompatImageView(activity).apply {
-            setImageResource(com.dede.android_eggs.R.drawable.android_14)
+            setImageResource(R.drawable.avd_anim)
         }
-        val layoutParams = FrameLayout.LayoutParams(108.dp, 108.dp)
+        (ivLogo.drawable as Animatable).start()
+        val layoutParams = FrameLayout.LayoutParams(192.dp, 192.dp)
             .apply { gravity = Gravity.CENTER }
         activity.addContentView(ivLogo, layoutParams)
 

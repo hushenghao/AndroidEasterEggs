@@ -5,7 +5,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/t_icon"
+        android:icon="@drawable/ic_android_tiramisu"
         android:shortcutDisabledMessage="@string/t_egg_name"
         android:shortcutId="android_t"
         android:shortcutLongLabel="@string/t_egg_name"
@@ -18,7 +18,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/s_icon_1"
+        android:icon="@drawable/ic_android_s"
         android:shortcutDisabledMessage="@string/s_egg_name"
         android:shortcutId="android_s"
         android:shortcutLongLabel="@string/s_egg_name"
