@@ -1,0 +1,4 @@
+- New UI 🎉
+- Enhanced Settings
+- Optimize the APK size
+- Other function optimization
