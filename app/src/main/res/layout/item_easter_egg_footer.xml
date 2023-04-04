@@ -28,7 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/label_menu_source"
+        android:text="@string/label_open_source"
         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
         app:layout_constraintEnd_toStartOf="@id/tv_title_other"
         app:layout_constraintHorizontal_weight="1"
@@ -48,6 +48,18 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title_source" />
 
     <TextView
+        android:id="@+id/tv_license"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/label_license"
+        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+        android:textColor="?attr/colorSecondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_github" />
+
+    <TextView
         android:id="@+id/tv_frameworks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,7 +69,7 @@
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:textColor="?attr/colorSecondary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_github" />
+        app:layout_constraintTop_toBottomOf="@id/tv_license" />
 
     <TextView
         android:id="@+id/tv_title_other"
@@ -114,11 +126,11 @@
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
 
         <TextView
-            android:id="@+id/tv_privacy_agreement"
+            android:id="@+id/tv_privacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:text="@string/label_privacy_agreement"
+            android:text="@string/label_privacy_policy"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
             android:textColor="?attr/colorSecondary" />
 

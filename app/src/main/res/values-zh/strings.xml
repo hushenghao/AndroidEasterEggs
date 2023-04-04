@@ -8,11 +8,11 @@
 
     <string name="url_android_releases" translatable="false">https://developer.android.google.cn/about/versions</string>
 
-    <string name="label_menu_source">源码</string>
+    <string name="label_open_source">开源相关</string>
     <string name="label_other">其他</string>
 
     <string name="label_beta">获取Beta版</string>
-    <string name="label_privacy_agreement">隐私协议</string>
+    <string name="label_privacy_policy">隐私协议</string>
     <string name="label_email">联系我</string>
     <string name="label_star">给个好评</string>
 
