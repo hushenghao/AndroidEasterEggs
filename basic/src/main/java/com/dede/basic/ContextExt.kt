@@ -49,9 +49,3 @@ fun Context.createScaleWrapper(scale: Float): Context {
         applyOverrideConfiguration(override)
     }
 }
-
-val Int.string: String get() = globalContext.getString(this)
-
-val Int.color: Int get() = ContextCompat.getColor(globalContext, this)
-
-val Int.drawable: Drawable get() = globalContext.requireDrawable(this)

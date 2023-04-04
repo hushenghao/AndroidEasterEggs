@@ -46,7 +46,7 @@ object CustomTabsBrowser {
         val customTabsIntent = builder.build()
         customTabsIntent.intent.putExtra(
             Intent.EXTRA_REFERRER,
-            Uri.parse("android-app://${context.packageName}")
+            Uri.parse("android-app://%s".format(context.packageName))
         )
         try {
             customTabsIntent.launchUrl(context, uri)

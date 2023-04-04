@@ -41,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-medium"
+        android:tag="@string/url_github"
         android:text="@string/label_github"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:textColor="?attr/colorSecondary"
@@ -53,6 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-medium"
+        android:tag="@string/url_license"
         android:text="@string/label_license"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:textColor="?attr/colorSecondary"
@@ -65,6 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-medium"
+        android:tag="@string/url_source"
         android:text="@string/label_frameworks"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:textColor="?attr/colorSecondary"
@@ -80,15 +83,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@id/tv_title_source"
         app:layout_constraintStart_toEndOf="@id/tv_title_source"
-        app:layout_constraintTop_toBottomOf="@id/tv_summary" />
+        app:layout_constraintTop_toBottomOf="@id/tv_summary"
+        app:layout_constraintTop_toTopOf="@id/tv_title_source" />
 
     <TextView
         android:id="@+id/tv_star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:tag="@string/url_market_detail"
         android:fontFamily="sans-serif-medium"
         android:text="@string/label_star"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
@@ -102,6 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-medium"
+        android:tag="@string/url_beta"
         android:text="@string/label_beta"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:textColor="?attr/colorSecondary"
@@ -130,6 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
+            android:tag="@string/url_privacy"
             android:text="@string/label_privacy_policy"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
             android:textColor="?attr/colorSecondary" />
@@ -139,6 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
+            android:tag="@string/url_mail"
             android:text="@string/label_email"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
             android:textColor="?attr/colorSecondary" />
