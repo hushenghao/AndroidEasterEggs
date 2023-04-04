@@ -2,12 +2,10 @@ package com.dede.android_eggs
 
 import androidx.annotation.StringRes
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnHolderItem
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import com.dede.android_eggs.ViewActionsExt.clickChildViewWithId
 import com.dede.android_eggs.main.EasterEggsActivity
 import org.junit.Rule
 
@@ -23,9 +21,13 @@ open class EasterEggsActivityBaseTest {
 
         fun testPlatLogo(@StringRes titleRes: Int) {
             // EasterEggsActivity launch Easter Egg
-            onView(withId(androidx.preference.R.id.recycler_view))
-                .check(matches(ViewMatchers.isDisplayed()))
-                .perform(actionOnHolderItem(EggPreferenceMatcher(titleRes), click()))
+            onView(withId(R.id.recycler_view))
+                .perform(
+                    actionOnHolderItem(
+                        EggItemMatcher(titleRes),
+                        clickChildViewWithId(R.id.card_view)
+                    )
+                )
         }
     }
 
