@@ -18,6 +18,7 @@ import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import com.dede.android_eggs.databinding.DialogAndroidTimelineBinding
 import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.settings.NightModePref
@@ -129,6 +130,10 @@ class PreviewHolder(view: View) : EggHolder(view) {
             val progress = month - 1
             binding.progressTimeline.progress = progress
             binding.scrollContent.doOnPreDraw {
+                binding.progressTimeline.updatePadding(
+                    left = (50f / 789f * it.width).roundToInt(),
+                    right = (220f / 789f * it.width).roundToInt()
+                )
                 val x = (it.width * (progress / 8f)).roundToInt()
                 binding.scrollView.smoothScrollTo(x, 0)
             }

@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/tv_bg_message"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:maxLines="2"
@@ -27,7 +27,9 @@
         app:layout_constraintEnd_toStartOf="@id/tv_add_shortcut"
         app:layout_constraintStart_toEndOf="@id/iv_bg_icon"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/lorem[6]" />
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintWidth="wrap_content_constrained"
+        tools:text="@tools:sample/lorem[3]" />
 
     <TextView
         android:id="@+id/tv_add_shortcut"

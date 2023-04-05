@@ -23,15 +23,22 @@
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         app:layout_constraintTop_toBottomOf="@id/iv_icon" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
     <TextView
         android:id="@+id/tv_title_source"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/label_open_source"
         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-        app:layout_constraintEnd_toStartOf="@id/tv_title_other"
-        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintEnd_toStartOf="@id/guide_line_center"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_summary" />
 
@@ -76,14 +83,13 @@
 
     <TextView
         android:id="@+id/tv_title_other"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_other"
         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/tv_title_source"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/guide_line_center"
         app:layout_constraintTop_toBottomOf="@id/tv_summary"
         app:layout_constraintTop_toTopOf="@id/tv_title_source" />
 
@@ -92,8 +98,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:tag="@string/url_market_detail"
         android:fontFamily="sans-serif-medium"
+        android:tag="@string/url_market_detail"
         android:text="@string/label_star"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:textColor="?attr/colorSecondary"
