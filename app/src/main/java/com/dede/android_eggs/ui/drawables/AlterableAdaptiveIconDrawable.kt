@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.TextUtils
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import androidx.core.graphics.PathParser
 import com.dede.android_eggs.R
 import com.dede.basic.requireDrawable
@@ -52,7 +53,7 @@ class AlterableAdaptiveIconDrawable(
 
     init {
         var pathStr = maskPathStr
-        if (TextUtils.isEmpty(pathStr)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && TextUtils.isEmpty(pathStr)) {
             val resId = getConfigResId(context.resources)
             if (resId != Resources.ID_NULL) {
                 pathStr = context.resources.getString(resId)
@@ -74,6 +75,7 @@ class AlterableAdaptiveIconDrawable(
     }
 
     @SuppressLint("DiscouragedApi")
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun getConfigResId(resources: Resources): Int {
         return resources.getIdentifier("config_icon_mask", "string", "android")
     }

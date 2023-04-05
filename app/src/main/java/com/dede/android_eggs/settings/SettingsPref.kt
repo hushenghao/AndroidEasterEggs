@@ -25,6 +25,7 @@ import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.preferences.FontIconSwitchPreference
 import com.dede.android_eggs.ui.preferences.VersionPreference
+import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.pref
 import com.dede.basic.dp
 import com.google.android.material.color.DynamicColors
@@ -230,7 +231,8 @@ class VersionPerf : SettingsPref<String?>() {
 class IconShapePerf : SettingsPref<String>(KEY_PREFERENCE) {
 
     companion object {
-
+        const val ACTION_ON_CHANGED = "com.dede.easter_eggs.IconShapeChanged"
+        const val ACTION_CLOSE_SETTING = "com.dede.easter_eggs.CloseSetting"
         const val KEY_PREFERENCE = "pref_override_icon_shape"
         private const val DEFAULT_VALUE = ""
 
@@ -265,12 +267,17 @@ class IconShapePerf : SettingsPref<String>(KEY_PREFERENCE) {
             entryValues = context.resources.getStringArray(R.array.icon_shape_override_paths_values)
             value = getOption(context)
             onPreferenceChangeListener = this@IconShapePerf
+            onPreferenceClickListener = this@IconShapePerf
         }
     }
 
-    @SuppressLint("RestrictedApi")
     override fun onApply(context: Context, value: String) {
-        ContextUtils.getActivity(context)?.recreate()
+        LocalEvent.get(context).post(ACTION_ON_CHANGED)
+    }
+
+    override fun onPreferenceClick(preference: Preference): Boolean {
+        LocalEvent.get(preference.context).post(ACTION_CLOSE_SETTING)
+        return false
     }
 
     override fun getOption(context: Context): String {

@@ -17,9 +17,11 @@ import com.dede.android_eggs.main.holders.EggHolder
 import com.dede.android_eggs.main.holders.FooterHolder
 import com.dede.android_eggs.main.holders.PreviewHolder
 import com.dede.android_eggs.main.holders.WavyHolder
+import com.dede.android_eggs.settings.IconShapePerf
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.addViewType
 import com.dede.android_eggs.ui.views.onApplyWindowEdge
+import com.dede.android_eggs.util.LocalEvent
 import com.dede.basic.dp
 
 
@@ -48,6 +50,10 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
             EggActionHelp.addShortcut(requireContext(), egg)
         })
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+        LocalEvent.get(this).register(IconShapePerf.ACTION_ON_CHANGED) {
+            @Suppress("NotifyDataSetChanged")
+            binding.recyclerView.adapter?.notifyDataSetChanged()
+        }
     }
 
     fun smoothScrollToPosition(providerIndex: Int) {

@@ -8,6 +8,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.preferences.MaterialListPreferenceDialog
+import com.dede.android_eggs.util.LocalEvent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -37,6 +38,13 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
         bottomSheetBehavior.skipCollapsed = true
         dialog.dismissWithAnimation = true
         return dialog
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        LocalEvent.get(this).register(IconShapePerf.ACTION_CLOSE_SETTING) {
+            dismiss()
+        }
     }
 
     class Settings : PreferenceFragmentCompat(),
