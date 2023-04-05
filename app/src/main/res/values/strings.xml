@@ -55,9 +55,6 @@
     <string name="icon_shape_scallop">Scallop</string>
     <string name="icon_shape_plum_blossom">Plum Blossom</string>
 
-    <!-- Message shown in the progress dialog when the icon shape override is being applied [CHAR LIMIT=100]-->
-    <string name="icon_shape_override_progress">Applying icon shape changes</string>
-
     <string name="pref_title_language">Language</string>
     <string name="pref_title_version">Version</string>
     <string name="pref_title_theme">Theme</string>

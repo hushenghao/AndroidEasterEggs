@@ -4,6 +4,6 @@
     <item>
         <inset
             android:drawable="@drawable/ic_android_marshmallow_fg"
-            android:inset="-27dp" />
+            android:inset="-12dp" />
     </item>
 </layer-list>

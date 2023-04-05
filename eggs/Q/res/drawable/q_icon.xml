@@ -22,6 +22,6 @@
     <item>
         <inset
             android:drawable="@drawable/q"
-            android:inset="8.6dp" />
+            android:inset="5dp" />
     </item>
 </layer-list>

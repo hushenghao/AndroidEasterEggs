@@ -26,17 +26,16 @@
     <string name="label_settings">设置</string>
     <string name="label_project_desc">项目包含了系统彩蛋完整代码，旨在对系统彩蛋的整理和兼容，以保证大多数设备可以体验到不同版本的彩蛋，不会对系统彩蛋代码做过多修改。部分版本使用了系统新特性，低版本只能使用部分功能。</string>
 
-    <string name="icon_shape_override_label">"图标形状"</string>
-    <string name="icon_shape_system_default">"系统设置"</string>
-    <string name="icon_shape_square">"方形"</string>
-    <string name="icon_shape_squircle">"方圆形"</string>
-    <string name="icon_shape_circle">"圆形"</string>
-    <string name="icon_shape_teardrop">"泪珠形"</string>
+    <string name="icon_shape_override_label">图标形状</string>
+    <string name="icon_shape_system_default">系统设置</string>
+    <string name="icon_shape_square">方形</string>
+    <string name="icon_shape_squircle">方圆形</string>
+    <string name="icon_shape_circle">圆形</string>
+    <string name="icon_shape_teardrop">泪珠形</string>
     <string name="icon_shape_rounded_corners">圆角方形</string>
     <string name="icon_shape_clover">三叶草</string>
     <string name="icon_shape_scallop">扇贝</string>
     <string name="icon_shape_plum_blossom">梅花</string>
-    <string name="icon_shape_override_progress">"正在应用图标形状更改"</string>
 
     <string name="pref_title_language">语言</string>
     <string name="pref_title_version">版本</string>

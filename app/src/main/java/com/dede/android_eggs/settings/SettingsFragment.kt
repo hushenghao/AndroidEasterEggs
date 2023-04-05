@@ -55,7 +55,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
             pref: Preference,
         ): Boolean {
             if (pref is ListPreference) {
-                if (pref.key == IconShapeOverride.KEY_PREFERENCE) {
+                if (pref.key == IconShapePerf.KEY_PREFERENCE) {
                     MaterialListPreferenceDialog.IconShape.newInstance(pref).show()
                 } else {
                     MaterialListPreferenceDialog.newInstance(pref).show()

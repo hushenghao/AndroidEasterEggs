@@ -3,6 +3,6 @@
     <item>
         <inset
             android:drawable="@drawable/ic_android_nougat_fg"
-            android:inset="-18dp" />
+            android:inset="-14dp" />
     </item>
 </layer-list>

@@ -21,10 +21,10 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.Icons
-import com.dede.android_eggs.ui.preferences.VersionPreference
+import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.preferences.FontIconSwitchPreference
+import com.dede.android_eggs.ui.preferences.VersionPreference
 import com.dede.android_eggs.util.pref
 import com.dede.basic.dp
 import com.google.android.material.color.DynamicColors
@@ -227,10 +227,33 @@ class VersionPerf : SettingsPref<String?>() {
     }
 }
 
-class IconShapePerf : SettingsPref<String>(IconShapeOverride.KEY_PREFERENCE) {
+class IconShapePerf : SettingsPref<String>(KEY_PREFERENCE) {
 
-    override fun getDefaultOption(): String = ""
-    override fun isEnable(): Boolean = IconShapeOverride.isEnabled()
+    companion object {
+
+        const val KEY_PREFERENCE = "pref_override_icon_shape"
+        private const val DEFAULT_VALUE = ""
+
+        fun getMaskPath(context: Context): String {
+            val value = IconShapePerf().getOption(context)
+            val array = context.resources.getStringArray(R.array.icon_shape_override_paths_values)
+            var index = 0
+            for (i in array.indices) {
+                if (array[i] == value) {
+                    index = i
+                    break
+                }
+            }
+            return getMaskPathByIndex(context, index)
+        }
+
+        fun getMaskPathByIndex(context: Context, index: Int): String {
+            val paths = context.resources.getStringArray(R.array.icon_shape_override_paths)
+            return paths[index % paths.size]
+        }
+    }
+
+    override fun getDefaultOption(): String = DEFAULT_VALUE
 
     override fun onCreatePreference(context: Context): Preference {
         return ListPreference(context).apply {
@@ -240,12 +263,18 @@ class IconShapePerf : SettingsPref<String>(IconShapeOverride.KEY_PREFERENCE) {
             summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
             entries = context.resources.getStringArray(R.array.icon_shape_override_paths_names)
             entryValues = context.resources.getStringArray(R.array.icon_shape_override_paths_values)
-            IconShapeOverride.handlePreferenceUi(this)
+            value = getOption(context)
+            onPreferenceChangeListener = this@IconShapePerf
         }
     }
 
+    @SuppressLint("RestrictedApi")
+    override fun onApply(context: Context, value: String) {
+        ContextUtils.getActivity(context)?.recreate()
+    }
+
     override fun getOption(context: Context): String {
-        return IconShapeOverride.getAppliedValue(context)
+        return context.pref.getString(KEY_PREFERENCE, DEFAULT_VALUE) ?: DEFAULT_VALUE
     }
 }
 
