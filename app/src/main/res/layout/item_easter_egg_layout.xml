@@ -37,7 +37,8 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@tools:sample/full_names" />
+                app:layout_constraintWidth="wrap_content_constrained"
+                tools:text="@tools:sample/lorem[5]" />
 
             <ImageView
                 android:id="@+id/iv_icon"
@@ -57,7 +58,7 @@
                 android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
-                tools:text="@tools:sample/lorem[10]" />
+                tools:text="@tools:sample/lorem[4]" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
