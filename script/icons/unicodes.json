@@ -1,18 +1,18 @@
 {
-    "outlined": [
-        "rounded_corner",
-        "language"
-    ],
-    "rounded": [
-        "brightness_auto",
-        "brightness_4",
-        "brightness_6",
-        "tips_and_updates",
-        "shortcut",
-        "info",
-        "palette",
-        "settings",
-        "fullscreen"
-    ],
-    "filled": []
+  "outlined": [
+    "app_shortcut",
+    "language",
+    "rounded_corner"
+  ],
+  "rounded": [
+    "brightness_auto",
+    "brightness_4",
+    "brightness_6",
+    "fullscreen",
+    "info",
+    "palette",
+    "settings",
+    "tips_and_updates"
+  ],
+  "filled": []
 }

@@ -3,7 +3,9 @@ package com.dede.android_eggs.main
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.HapticFeedbackConstants
 import android.view.View
+import android.view.animation.PathInterpolator
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +24,10 @@ import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.addViewType
 import com.dede.android_eggs.ui.views.onApplyWindowEdge
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.util.isLayoutRtl
 import com.dede.basic.dp
+import kotlin.math.abs
+import kotlin.math.sign
 
 
 class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
@@ -62,8 +67,10 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         binding.recyclerView.smoothScrollToPosition(position)
     }
 
-    private class EggListItemTouchHelperCallback(val onItemSwiped: (position: Int) -> Unit) :
-        ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.START or ItemTouchHelper.END) {
+    private class EggListItemTouchHelperCallback(
+        private val targetDirection: Int = ItemTouchHelper.START,
+        private val onItemSwiped: (position: Int) -> Unit,
+    ) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.START or ItemTouchHelper.END) {
 
         private fun RecyclerView.ViewHolder?.getCardView(): View? {
             return if (this is EggHolder) this.binding.cardView else null
@@ -76,7 +83,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         ): Boolean = false
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            if (direction == ItemTouchHelper.START) {
+            if (direction == targetDirection) {
                 onItemSwiped.invoke(viewHolder.bindingAdapterPosition)
             }
             val cardView = viewHolder.getCardView()
@@ -86,16 +93,19 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
             viewHolder.bindingAdapter?.notifyItemChanged(viewHolder.bindingAdapterPosition)
         }
 
-        override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder): Float {
-            return 0.6f
-        }
-
         override fun isLongPressDragEnabled(): Boolean {
             return false
         }
 
         override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
             getDefaultUIUtil().onSelected(viewHolder.getCardView() ?: return)
+        }
+
+        private var feedback = false
+        private val interpolator = PathInterpolator(.59f, .72f, .82f, .32f)
+
+        private fun calculateX(x: Float, width: Int): Float {
+            return interpolator.getInterpolation(abs(x) / width) * width * sign(x)
         }
 
         override fun onChildDraw(
@@ -107,29 +117,42 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
             actionState: Int,
             isCurrentlyActive: Boolean,
         ) {
+            val width = viewHolder.itemView.width
             getDefaultUIUtil().onDraw(
                 c, recyclerView, viewHolder.getCardView() ?: return,
-                dX, dY, actionState, isCurrentlyActive
+                calculateX(dX, width), dY, actionState, isCurrentlyActive
             )
-        }
-
-        override fun onChildDrawOver(
-            c: Canvas,
-            recyclerView: RecyclerView,
-            viewHolder: RecyclerView.ViewHolder?,
-            dX: Float,
-            dY: Float,
-            actionState: Int,
-            isCurrentlyActive: Boolean,
-        ) {
-            getDefaultUIUtil().onDrawOver(
-                c, recyclerView, viewHolder.getCardView() ?: return,
-                dX, dY, actionState, isCurrentlyActive
-            )
+            if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && isCurrentlyActive && !feedback) {
+                when (targetDirection) {
+                    ItemTouchHelper.LEFT -> if (dX > 0) return
+                    ItemTouchHelper.RIGHT -> if (dX < 0) return
+                    ItemTouchHelper.START -> {
+                        if (recyclerView.isLayoutRtl) {
+                            if (dX < 0) return
+                        } else {
+                            if (dX > 0) return
+                        }
+                    }
+                    ItemTouchHelper.END -> {
+                        if (recyclerView.isLayoutRtl) {
+                            if (dX < 0) return
+                        } else {
+                            if (dX > 0) return
+                        }
+                    }
+                }
+                val threshold = width * getSwipeThreshold(viewHolder)
+                feedback = abs(dX) >= threshold
+                if (feedback) {
+                    viewHolder.itemView.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+                }
+            }
         }
 
         override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
-            getDefaultUIUtil().clearView(viewHolder.getCardView() ?: return)
+            val cardView = viewHolder.getCardView() ?: return
+            feedback = false
+            getDefaultUIUtil().clearView(cardView)
         }
     }
 

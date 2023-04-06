@@ -50,10 +50,10 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         val color = context.resolveColorStateList(
             M3R.attr.textAppearanceLabelMedium, android.R.attr.textColor
         )
-        val drawable = FontIconsDrawable(context, Icons.Rounded.shortcut, 22f).apply {
+        val drawable = FontIconsDrawable(context, Icons.Outlined.app_shortcut, 22f).apply {
             setColorStateList(color)
         }
-        binding.background.tvAddShortcut.updateCompoundDrawablesRelative(bottom = drawable)
+        binding.background.tvAddShortcut.updateCompoundDrawablesRelative(end = drawable)
     }
 
 }

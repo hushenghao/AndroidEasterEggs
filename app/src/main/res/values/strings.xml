@@ -61,7 +61,7 @@
     <string name="pref_title_dynamic_color" translatable="false">Dynamic Color</string>
     <string name="summary_theme_follow_system">Follow system</string>
     <string name="summary_theme_dark_mode">Dark theme</string>
-    <string name="label_add_shortcut">Add shortcut</string>
+    <string name="label_add_shortcut">Shortcut</string>
 
     <string name="preference_on">On</string>
     <string name="preference_off">Off</string>
