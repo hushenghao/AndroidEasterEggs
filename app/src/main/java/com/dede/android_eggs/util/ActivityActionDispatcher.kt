@@ -3,20 +3,16 @@ package com.dede.android_eggs.util
 import android.Manifest
 import android.app.Activity
 import android.app.Application
-import android.content.Context
-import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.app.ActivityCompat
 import androidx.core.text.HtmlCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.Icons
+import com.dede.basic.createThemeWrapperContext
 import com.dede.basic.getBoolean
 import com.dede.basic.putBoolean
 import com.google.android.material.color.MaterialColors
@@ -59,27 +55,6 @@ class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
             )
         }
 
-        private fun getThemeWrapperContext(base: Activity): Context {
-            if (base is AppCompatActivity) {
-                return base
-            }
-            // androidx.appcompat.app.AppCompatDelegateImpl.attachBaseContext2
-            val themeWrapper = ContextThemeWrapper(base, R.style.Theme_EasterEggs)
-            val mode = when (AppCompatDelegate.getDefaultNightMode()) {
-                AppCompatDelegate.MODE_NIGHT_YES -> Configuration.UI_MODE_NIGHT_YES
-                AppCompatDelegate.MODE_NIGHT_NO -> Configuration.UI_MODE_NIGHT_NO
-                else -> {
-                    val appConfig = base.applicationContext.resources.configuration
-                    appConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK
-                }
-            }
-            val config = Configuration()
-            config.fontScale = 0f
-            config.uiMode = mode or (config.uiMode and Configuration.UI_MODE_NIGHT_MASK.inv())
-            themeWrapper.applyOverrideConfiguration(config)
-            return themeWrapper
-        }
-
         override fun onCreate(activity: Activity) {
             val info = target[activity.javaClass.kotlin] ?: return
             val agreed = activity.getBoolean(info.key, false)
@@ -89,7 +64,7 @@ class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
                 activity.getString(info.message),
                 HtmlCompat.FROM_HTML_MODE_COMPACT
             )
-            val wrapperContext = getThemeWrapperContext(activity)
+            val wrapperContext = activity.createThemeWrapperContext()
             val icon = FontIconsDrawable(wrapperContext, Icons.Rounded.tips_and_updates, 48f)
             val color = MaterialColors.getColor(wrapperContext, M3R.attr.colorControlNormal, Color.BLACK)
             icon.setColor(color)

@@ -289,6 +289,12 @@ class DynamicColorPref :
     BoolSettingsPref("key_dynamic_color", DynamicColors.isDynamicColorAvailable()),
     DynamicColors.Precondition, DynamicColors.OnAppliedCallback {
 
+    companion object {
+        fun isDynamicColorEnable(context: Context): Boolean {
+            return DynamicColorPref().getOption(context)
+        }
+    }
+
     override fun isEnable(): Boolean {
         return DynamicColors.isDynamicColorAvailable()
     }
