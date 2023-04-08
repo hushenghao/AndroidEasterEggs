@@ -52,6 +52,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
                 requireContext(), this, ::onOrientationAnglesUpdate
             )
         } else if (!enable) {
+            onOrientationAnglesUpdate(0f, 0f)
             orientationAngleSensor?.destroy()
             orientationAngleSensor = null
         }
