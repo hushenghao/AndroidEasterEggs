@@ -11,6 +11,7 @@ import android.text.TextUtils
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.PathParser
+import androidx.core.graphics.withSave
 import com.dede.android_eggs.R
 import com.dede.basic.requireDrawable
 
@@ -27,6 +28,9 @@ class AlterableAdaptiveIconDrawable(
         private const val EXTRA_INSET_PERCENTAGE = 1 / 4f
         private const val DEFAULT_VIEW_PORT_SCALE = 1f / (1 + 2 * EXTRA_INSET_PERCENTAGE)
 
+        private const val BACKGROUND_ID = 0
+        private const val FOREGROUND_ID = 1
+
         fun getMaskPath(pathStr: String?, width: Int, height: Int): Path {
             if (TextUtils.isEmpty(pathStr)) return Path()
 
@@ -42,14 +46,15 @@ class AlterableAdaptiveIconDrawable(
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
     private val maskMatrix = Matrix()
 
-    private val childDrawables: Array<Drawable>
+    private val childDrawables: Array<ChildDrawable>
     private val mask: Path = Path()
 
     private val layerCanvas = Canvas()
     private var layerBitmap: Bitmap? = null
     private var layerShader: BitmapShader? = null
 
-    private val isAdaptiveIconDrawable: Boolean
+    val isAdaptiveIconDrawable: Boolean
+    private val foregroundMatrix = Matrix()
 
     init {
         var pathStr = maskPathStr
@@ -66,10 +71,13 @@ class AlterableAdaptiveIconDrawable(
 
         val drawable = context.requireDrawable(res)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && drawable is AdaptiveIconDrawable) {
-            childDrawables = arrayOf(drawable.background, drawable.foreground)
+            childDrawables = arrayOf(
+                ChildDrawable(drawable.background, BACKGROUND_ID),
+                ChildDrawable(drawable.foreground, FOREGROUND_ID)
+            )
             isAdaptiveIconDrawable = true
         } else {
-            childDrawables = arrayOf(drawable)
+            childDrawables = arrayOf(ChildDrawable(drawable, BACKGROUND_ID))
             isAdaptiveIconDrawable = false
         }
     }
@@ -87,6 +95,13 @@ class AlterableAdaptiveIconDrawable(
         invalidateSelf()
     }
 
+    fun setForegroundMatrix(matrix: Matrix) {
+        if (!isAdaptiveIconDrawable) return
+        foregroundMatrix.set(matrix)
+        layerShader = null
+        invalidateSelf()
+    }
+
     override fun draw(canvas: Canvas) {
         val layerBitmap: Bitmap = this.layerBitmap ?: return
 
@@ -94,7 +109,14 @@ class AlterableAdaptiveIconDrawable(
             layerCanvas.setBitmap(layerBitmap)
             layerCanvas.drawColor(Color.BLACK)
             for (childDrawable in childDrawables) {
-                childDrawable.draw(layerCanvas)
+                if (childDrawable.isForeground()) {
+                    layerCanvas.withSave {
+                        layerCanvas.setMatrix(foregroundMatrix)
+                        childDrawable.draw(layerCanvas)
+                    }
+                } else {
+                    childDrawable.draw(layerCanvas)
+                }
             }
 
             layerShader = BitmapShader(layerBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
@@ -133,7 +155,7 @@ class AlterableAdaptiveIconDrawable(
         }
 
         for (drawable in childDrawables) {
-            drawable.bounds = outRect
+            drawable.setBounds(outRect)
         }
     }
 
@@ -151,6 +173,20 @@ class AlterableAdaptiveIconDrawable(
         }
         paint.shader = null
         layerShader = null
+    }
+
+    private class ChildDrawable(val drawable: Drawable, val id: Int) {
+
+        fun isBackground(): Boolean = id == BACKGROUND_ID
+        fun isForeground(): Boolean = id == FOREGROUND_ID
+
+        fun setBounds(bounds: Rect) {
+            drawable.bounds = bounds
+        }
+
+        fun draw(canvas: Canvas) {
+            drawable.draw(canvas)
+        }
     }
 
     override fun setAlpha(alpha: Int) {

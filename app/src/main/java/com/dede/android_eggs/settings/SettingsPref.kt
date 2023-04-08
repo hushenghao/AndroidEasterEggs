@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
+import androidx.core.os.bundleOf
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
@@ -55,11 +56,12 @@ object SettingsPrefs {
     fun providePrefs(): List<SettingsPref<*>> = listOf(
         NightModePref(),
         IconShapePerf(),
-        LanguagePerf(),
+        IconVisualEffectsPref(),
         EdgePref(),
         DynamicColorPref(),
+        LanguagePerf(),
         VersionPerf()
-    )
+    ).filter { it.isEnable() }
 }
 
 abstract class SettingsPref<T>(open val key: String? = null) :
@@ -117,6 +119,40 @@ abstract class BoolSettingsPref(key: String, private val default: Boolean) :
         }
         super.setOption(context, newValue)
     }
+}
+
+class IconVisualEffectsPref : BoolSettingsPref("key_pref_icon_visual_effects", false) {
+
+    companion object {
+        const val ACTION_CHANGED = "com.dede.android_eggs.IconVisualEffectsChanged"
+        const val EXTRA_VALUE = "extra_value"
+
+        fun isEnable(context: Context): Boolean {
+            return IconVisualEffectsPref().getOption(context)
+        }
+    }
+
+    override fun onCreatePreference(context: Context): Preference {
+        return SwitchPreferenceCompat(context).apply {
+            setup(this@IconVisualEffectsPref)
+            setTitle(R.string.pref_title_icon_visual_effects)
+            isChecked = getOption(context)
+            icon = createFontIcon(context, Icons.Outlined.animation).apply {
+                setPadding(9.dp, 4.5f.dp, 0, 0)
+            }
+            widgetLayoutResource = R.layout.layout_widget_material_switch
+            if (isEnabled) {
+                setSummaryOff(R.string.preference_off)
+                setSummaryOn(R.string.preference_on)
+            }
+            onPreferenceChangeListener = this@IconVisualEffectsPref
+        }
+    }
+
+    override fun onApply(context: Context, value: Boolean) {
+        LocalEvent.get(context).post(ACTION_CHANGED, bundleOf(EXTRA_VALUE to value))
+    }
+
 }
 
 class EdgePref : BoolSettingsPref("key_pref_edge", true) {
@@ -231,7 +267,7 @@ class VersionPerf : SettingsPref<String?>() {
 class IconShapePerf : SettingsPref<String>(KEY_PREFERENCE) {
 
     companion object {
-        const val ACTION_ON_CHANGED = "com.dede.easter_eggs.IconShapeChanged"
+        const val ACTION_CHANGED = "com.dede.easter_eggs.IconShapeChanged"
         const val ACTION_CLOSE_SETTING = "com.dede.easter_eggs.CloseSetting"
         const val KEY_PREFERENCE = "pref_override_icon_shape"
         private const val DEFAULT_VALUE = ""
@@ -272,7 +308,7 @@ class IconShapePerf : SettingsPref<String>(KEY_PREFERENCE) {
     }
 
     override fun onApply(context: Context, value: String) {
-        LocalEvent.get(context).post(ACTION_ON_CHANGED)
+        LocalEvent.get(context).post(ACTION_CHANGED)
     }
 
     override fun onPreferenceClick(preference: Preference): Boolean {

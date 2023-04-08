@@ -89,8 +89,8 @@ class VAdapter(
         val vType = list[p]
 
         @Suppress("UNCHECKED_CAST") val vHolder = holder as VHolder<Any>
-        onBindViewHolder?.invoke(vHolder, vType)
         vHolder.onBindViewHolder(vType)
+        onBindViewHolder?.invoke(vHolder, vType)
     }
 
     override fun getItemViewType(position: Int): Int {
