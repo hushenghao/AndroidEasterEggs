@@ -17,7 +17,8 @@ import androidx.lifecycle.LifecycleOwner
 @Suppress("MemberVisibilityCanBePrivate")
 class OrientationAngleSensor(
     private val context: Context, private val owner: LifecycleOwner?,
-    private val onOrientationAnglesUpdate: (xAngle: Float, yAngle: Float) -> Unit
+    private val onOrientationAnglesUpdate: (zAngle: Float, xAngle: Float, yAngle: Float) -> Unit,
+    private val handleDefaultOffset: Boolean = true
 ) : SensorEventListener, DefaultLifecycleObserver {
 
     private val sensorManager: SensorManager = context.getSystemService()!!
@@ -25,6 +26,7 @@ class OrientationAngleSensor(
     private val magnetometerReading = FloatArray(3)
 
     private val rotationMatrix = FloatArray(9)
+    private val remapRotationMatrix = FloatArray(9)
     private val orientationAngles = FloatArray(3)
 
     private val defaultOrientationAngles = FloatArray(3)
@@ -129,48 +131,51 @@ class OrientationAngleSensor(
             accelerometerReading,
             magnetometerReading
         )
-        // "mRotationMatrix" now has up-to-date information.
 
-        // Express the updated rotation matrix as three orientation angles.
-        SensorManager.getOrientation(rotationMatrix, orientationAngles)
-        // "mOrientationAngles" now has up-to-date information.
-
-
-        // https://developer.android.google.cn/guide/topics/sensors/sensors_position?hl=zh-cn#sensors-pos-orient
-        // Handles the default offset.
-        // take the result of the first callback as the default offset
-        if (!isInvalidDefaultOrientationAngles()) {
-            for (i in orientationAngles.indices) {
-                defaultOrientationAngles[i] = 0f - orientationAngles[i]
-            }
-        }
-        for (i in 1 until orientationAngles.size) {
-            // add offset
-            orientationAngles[i] = orientationAngles[i] + defaultOrientationAngles[i]
-        }
-
-        val xAngle: Float
-        val yAngle: Float
         // The Angle is converted according to the device orientation.
-        when (context.getRotation()) {
-            Surface.ROTATION_180 -> {
-                xAngle = orientationAngles[1] * -1f
-                yAngle = orientationAngles[2] * -1f
+        var xAxis = SensorManager.AXIS_X
+        var yAxis = SensorManager.AXIS_Y
+        when (val rotation = context.getRotation()) {
+            Surface.ROTATION_0 -> {
+                // default
             }
             Surface.ROTATION_90 -> {
-                xAngle = orientationAngles[2]
-                yAngle = orientationAngles[1] * -1f
+                xAxis = SensorManager.AXIS_Y
+                yAxis = SensorManager.AXIS_MINUS_X
+            }
+            Surface.ROTATION_180 -> {
+                xAxis = SensorManager.AXIS_MINUS_X
+                yAxis = SensorManager.AXIS_MINUS_Y
             }
             Surface.ROTATION_270 -> {
-                xAngle = orientationAngles[2] * -1f
-                yAngle = orientationAngles[1]
+                xAxis = SensorManager.AXIS_MINUS_Y
+                yAxis = SensorManager.AXIS_X
             }
-            else -> {
-                xAngle = orientationAngles[1]
-                yAngle = orientationAngles[2]
+            else -> throw IllegalArgumentException("Display rotation error: %d".format(rotation))
+        }
+        SensorManager.remapCoordinateSystem(rotationMatrix, xAxis, yAxis, remapRotationMatrix)
+        // Express the updated rotation matrix as three orientation angles.
+        SensorManager.getOrientation(remapRotationMatrix, orientationAngles)
+        // "mOrientationAngles" now has up-to-date information.
+
+        // Handles the default offset.
+        if (handleDefaultOffset) {
+            // take the result of the first callback as the default offset
+            if (!isInvalidDefaultOrientationAngles()) {
+                for (i in orientationAngles.indices) {
+                    defaultOrientationAngles[i] = 0f - orientationAngles[i]
+                }
+            }
+            for (i in 1 until orientationAngles.size) {
+                // add offset
+                orientationAngles[i] = orientationAngles[i] + defaultOrientationAngles[i]
             }
         }
-        onOrientationAnglesUpdate(xAngle, yAngle)
+
+        val zAngle: Float = orientationAngles[0]
+        val xAngle: Float = orientationAngles[1]
+        val yAngle: Float = orientationAngles[2]
+        onOrientationAnglesUpdate(zAngle, xAngle, yAngle)
     }
 
     private fun Context.getRotation(): Int {
@@ -179,6 +184,7 @@ class OrientationAngleSensor(
             currentDisplay = display
         }
         if (currentDisplay == null && this is Activity) {
+            @Suppress("DEPRECATION")
             currentDisplay = windowManager.defaultDisplay
         }
         if (currentDisplay != null) {

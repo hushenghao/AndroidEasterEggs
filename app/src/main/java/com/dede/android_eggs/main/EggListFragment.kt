@@ -52,7 +52,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
                 requireContext(), this, ::onOrientationAnglesUpdate
             )
         } else if (!enable) {
-            onOrientationAnglesUpdate(0f, 0f)
+            onOrientationAnglesUpdate(0f, 0f, 0f)
             orientationAngleSensor?.destroy()
             orientationAngleSensor = null
         }
@@ -94,11 +94,11 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         }
     }
 
-    private fun onOrientationAnglesUpdate(xAngle: Float, yAngle: Float) {
+    private fun onOrientationAnglesUpdate(zAngle: Float, xAngle: Float, yAngle: Float) {
         if (!isRecyclerViewIdle) return
         val manager = binding.recyclerView.layoutManager as LinearLayoutManager
-        val first = manager.findFirstCompletelyVisibleItemPosition()
-        val last = manager.findLastCompletelyVisibleItemPosition()
+        val first = manager.findFirstVisibleItemPosition()
+        val last = manager.findLastVisibleItemPosition()
         for (i in first..last) {
             val holder = binding.recyclerView.findViewHolderForLayoutPosition(i) ?: continue
             if (holder is EggHolder) {
