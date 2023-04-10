@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.HapticFeedbackConstants
 import android.view.View
 import android.view.animation.PathInterpolator
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,10 +27,12 @@ import com.dede.android_eggs.settings.IconVisualEffectsPref
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.addViewType
 import com.dede.android_eggs.ui.views.onApplyWindowEdge
+import com.dede.android_eggs.util.EasterUtils
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.isLayoutRtl
 import com.dede.basic.dp
+import java.util.*
 import kotlin.math.abs
 import kotlin.math.sign
 
@@ -44,6 +47,11 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         handleOrientationAngleSensor(IconVisualEffectsPref.isEnable(requireContext()))
+
+        if (EasterUtils.isEaster()) {
+            Toast.makeText(requireContext(), R.string.toast_easter, Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
     private fun handleOrientationAngleSensor(enable: Boolean) {
