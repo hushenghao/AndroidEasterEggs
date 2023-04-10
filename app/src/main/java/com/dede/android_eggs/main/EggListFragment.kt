@@ -47,14 +47,15 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
     }
 
     private fun handleOrientationAngleSensor(enable: Boolean) {
+        val orientationAngleSensor = this.orientationAngleSensor
         if (enable && orientationAngleSensor == null) {
-            orientationAngleSensor = OrientationAngleSensor(
+            this.orientationAngleSensor = OrientationAngleSensor(
                 requireContext(), this, ::onOrientationAnglesUpdate
             )
-        } else if (!enable) {
+        } else if (!enable && orientationAngleSensor != null) {
             onOrientationAnglesUpdate(0f, 0f, 0f)
-            orientationAngleSensor?.destroy()
-            orientationAngleSensor = null
+            orientationAngleSensor.destroy()
+            this.orientationAngleSensor = null
         }
     }
 

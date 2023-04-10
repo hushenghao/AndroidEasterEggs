@@ -49,8 +49,8 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         if (max(abs(lastXDegrees - xDegrees), abs(lastYDegrees - yDegrees)) < 6f) return
 
         val bounds = iconDrawable.bounds
-        val width = bounds.width() / 4f
-        val height = bounds.height() / 4f
+        val width = bounds.width() / 6f
+        val height = bounds.height() / 6f
 
         val saveLastXDegrees = lastXDegrees
         val saveLastYDegrees = lastYDegrees
