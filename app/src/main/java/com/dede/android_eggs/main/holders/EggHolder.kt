@@ -1,9 +1,11 @@
 package com.dede.android_eggs.main.holders
 
+import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.view.View
+import android.view.animation.LinearInterpolator
 import coil.dispose
 import coil.load
 import com.dede.android_eggs.databinding.ItemEasterEggLayoutBinding
@@ -30,7 +32,8 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
     private val matrix = Matrix()
     private var lastXDegrees: Float = 0f
     private var lastYDegrees: Float = 0f
-    private var animator: ValueAnimator? = null
+    private var animator: Animator? = null
+    private val interpolator = LinearInterpolator()
 
     private fun Float.toRoundDegrees(): Float {
         return ((Math.toDegrees(toDouble())) % 90f).toFloat()
@@ -46,30 +49,32 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
 
         val xDegrees = xAngle.toRoundDegrees()// 俯仰角
         val yDegrees = yAngle.toRoundDegrees()// 侧倾角
-        if (max(abs(lastXDegrees - xDegrees), abs(lastYDegrees - yDegrees)) < 6f) return
+        if (max(abs(lastXDegrees - xDegrees), abs(lastYDegrees - yDegrees)) < 5f) return
 
         val bounds = iconDrawable.bounds
-        val width = bounds.width() / 6f
-        val height = bounds.height() / 6f
+        val width = bounds.width() / 4f
+        val height = bounds.height() / 4f
 
-        val saveLastXDegrees = lastXDegrees
-        val saveLastYDegrees = lastYDegrees
-        val animator = ValueAnimator.ofFloat(0f, 1f)
-        animator.duration = 100
-        animator.addUpdateListener {
-            val animX = calculateAnimDegrees(saveLastXDegrees, xDegrees, it.animatedFraction)
-            val animY = calculateAnimDegrees(saveLastYDegrees, yDegrees, it.animatedFraction)
-            val dx = animY / 90f * width * -1f
-            val dy = animX / 90f * height
-            matrix.reset()
-            matrix.setTranslate(dx, dy)
-            iconDrawable.setForegroundMatrix(matrix)
-        }
-        animator.start()
-        this.animator?.cancel()
-        this.animator = animator
-        this.lastYDegrees = yDegrees
-        this.lastXDegrees = xDegrees
+        animator?.cancel()
+        val saveXDegrees = lastXDegrees
+        val saveYDegrees = lastYDegrees
+        animator = ValueAnimator.ofFloat(0f, 1f)
+            .setDuration(100)
+            .apply {
+                interpolator = this@EggHolder.interpolator
+                addUpdateListener {
+                    val fraction = it.animatedFraction
+                    val cXDegrees = calculateAnimDegrees(saveXDegrees, xDegrees, fraction)
+                    val cYDegrees = calculateAnimDegrees(saveYDegrees, yDegrees, fraction)
+                    val dx = cYDegrees / 90f * width * -1f
+                    val dy = cXDegrees / 90f * height
+                    matrix.setTranslate(dx, dy)
+                    iconDrawable.setForegroundMatrix(matrix)
+                }
+                start()
+            }
+        lastYDegrees = yDegrees
+        lastXDegrees = xDegrees
     }
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")

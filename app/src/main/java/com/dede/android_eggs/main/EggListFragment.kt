@@ -21,8 +21,8 @@ import com.dede.android_eggs.main.holders.EggHolder
 import com.dede.android_eggs.main.holders.FooterHolder
 import com.dede.android_eggs.main.holders.PreviewHolder
 import com.dede.android_eggs.main.holders.WavyHolder
-import com.dede.android_eggs.settings.IconVisualEffectsPref
 import com.dede.android_eggs.settings.IconShapePerf
+import com.dede.android_eggs.settings.IconVisualEffectsPref
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.addViewType
 import com.dede.android_eggs.ui.views.onApplyWindowEdge
