@@ -96,6 +96,7 @@ dependencies {
     implementation(deps.io.coil)
     implementation(deps.free.reflection)
     implementation(deps.viewbinding.delegate)
+    implementation(deps.blurhash.android)
     debugImplementation(deps.leakcanary)
     implementation(project(":basic"))
     implementation(project(":eggs:T"))

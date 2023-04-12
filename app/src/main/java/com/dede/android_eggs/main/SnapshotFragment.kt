@@ -13,9 +13,9 @@ import com.dede.android_eggs.databinding.FragmentSnapshotHeaderBinding
 import com.dede.android_eggs.main.entity.EggDatas
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VHolder
-import com.dede.android_eggs.ui.blurhash.BlurHashDrawable
 import com.dede.android_eggs.util.findFragmentById
 import com.dede.basic.PlatLogoSnapshotProvider
+import com.dede.blurhash_android.BlurHashDrawable
 import com.google.android.material.appbar.AppBarLayout
 
 
@@ -45,7 +45,7 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
         background.isVisible = !provider.includeBackground
         if (!provider.includeBackground && background.drawable == null) {
             background.setImageDrawable(
-                BlurHashDrawable(requireContext(), R.string.hash_snapshot_bg)
+                BlurHashDrawable(requireContext(), R.string.hash_snapshot_bg, 54, 32)
             )
         }
         group.removeAllViewsInLayout()
