@@ -86,10 +86,10 @@ android {
 
 dependencies {
     implementation(deps.androidx.appcompat)
-    implementation(deps.androidx.core.ktx)
-    implementation(deps.androidx.lifecycle.runtime.ktx)
-    implementation(deps.androidx.lifecycle.viewmodel.ktx)
-    implementation(deps.androidx.preference.ktx)
+    implementation(deps.androidx.core)
+    implementation(deps.androidx.lifecycle.runtime)
+    implementation(deps.androidx.lifecycle.viewmodel)
+    implementation(deps.androidx.preference)
     implementation(deps.androidx.constraintlayout)
     implementation(deps.androidx.browser)
     implementation(deps.google.material)
@@ -97,6 +97,7 @@ dependencies {
     implementation(deps.free.reflection)
     implementation(deps.viewbinding.delegate)
     implementation(deps.blurhash.android)
+    implementation(deps.play.review)
     debugImplementation(deps.leakcanary)
     implementation(project(":basic"))
     implementation(project(":eggs:T"))

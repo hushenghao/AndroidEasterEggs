@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:once="XXWHCA">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".EasterEggsApp"
         android:allowBackup="true"
