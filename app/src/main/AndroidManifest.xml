@@ -19,6 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasterEggs"
         tools:targetApi="tiramisu">
+        <property
+            android:name="android.window.PROPERTY_ACTIVITY_EMBEDDING_SPLITS_ENABLED"
+            android:value="true" />
+
         <activity
             android:name=".main.EasterEggsActivity"
             android:exported="true">
@@ -31,6 +35,7 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+        <activity android:name=".main.PlaceholderActivity" />
     </application>
 
 </manifest>

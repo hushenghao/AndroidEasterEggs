@@ -158,6 +158,9 @@ class IconVisualEffectsPref : BoolSettingsPref("key_pref_icon_visual_effects", f
 class EdgePref : BoolSettingsPref("key_pref_edge", true) {
 
     companion object {
+
+        const val ACTION_CHANGED = "com.dede.android_eggs.EdgeToEdgeChanged"
+
         fun applyEdge(context: Context, window: Window) {
             applyEdge(window, EdgePref().getOption(context))
         }
@@ -187,6 +190,7 @@ class EdgePref : BoolSettingsPref("key_pref_edge", true) {
 
     @SuppressLint("RestrictedApi")
     override fun onApply(context: Context, value: Boolean) {
+        LocalEvent.get(context).post(ACTION_CHANGED)
         ContextUtils.getActivity(context)?.recreate()
     }
 }

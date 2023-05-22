@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.dede.android_eggs.settings.SettingsPref
 import com.dede.android_eggs.util.ActivityActionDispatcher
+import com.dede.android_eggs.util.SplitUtils
 import com.dede.basic.GlobalContext
 import me.weishu.reflection.Reflection
 
@@ -19,6 +20,7 @@ class EasterEggsApp : Application() {
         super.onCreate()
         SettingsPref.apply(this)
         ActivityActionDispatcher.register(this)
+        SplitUtils.initialize(this)
     }
 
 }

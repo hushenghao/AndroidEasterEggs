@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:window="http://schemas.android.com/apk/res-auto">
+
+    <!-- Define a split for the named activities. -->
+    <SplitPairRule
+        window:clearTop="true"
+        window:finishPrimaryWithSecondary="never"
+        window:finishSecondaryWithPrimary="always"
+        window:splitMinSmallestWidthDp="600"
+        window:splitRatio="0.5">
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_t" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_s" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_r" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_q" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_p" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_o" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_n" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_l" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_k" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_j" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_i" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_h" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="@string/target_class_android_g" />
+    </SplitPairRule>
+
+    <!-- Specify a placeholder for the secondary container when content is
+         not available. -->
+    <SplitPlaceholderRule
+        window:finishPrimaryWithPlaceholder="always"
+        window:placeholderActivityName=".main.PlaceholderActivity"
+        window:splitMinSmallestWidthDp="600"
+        window:splitRatio="0.5">
+        <ActivityFilter window:activityName=".main.EasterEggsActivity" />
+    </SplitPlaceholderRule>
+
+    <!-- Define activities that should never be part of a split. Note: Takes
+         precedence over other split rules. -->
+    <ActivityRule window:alwaysExpand="true">
+        <!--            <ActivityFilter-->
+        <!--                window:activityName=".ExpandedActivity"/>-->
+    </ActivityRule>
+
+</resources>

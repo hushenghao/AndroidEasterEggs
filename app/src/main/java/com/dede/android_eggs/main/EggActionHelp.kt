@@ -13,6 +13,7 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.entity.Egg
+import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
 import com.dede.basic.cancel
 import com.dede.basic.delay
@@ -27,7 +28,9 @@ object EggActionHelp {
         if (egg.targetClassRes == -1) return null
         return Intent(Intent.ACTION_VIEW)
             .setClassName(context, context.getString(egg.targetClassRes))
-            .addFlags(ACTIVITY_TASK_FLAGS)
+            .applyIf(!SplitUtils.isSplitSupported()) {
+                addFlags(ACTIVITY_TASK_FLAGS)
+            }
             .applyIf(egg.extras != null) {
                 putExtras(egg.extras!!)
             }

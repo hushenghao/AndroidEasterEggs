@@ -92,6 +92,7 @@ dependencies {
     implementation(deps.androidx.preference)
     implementation(deps.androidx.constraintlayout)
     implementation(deps.androidx.browser)
+    implementation(deps.androidx.window)
     implementation(deps.google.material)
     implementation(deps.io.coil)
     implementation(deps.free.reflection)
