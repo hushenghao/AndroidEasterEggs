@@ -1,5 +1,6 @@
 package com.dede.android_eggs.main.holders
 
+import android.content.Context
 import android.view.View
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
@@ -8,7 +9,6 @@ import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.main.entity.Footer
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.ui.adapter.VHolder
-import com.dede.android_eggs.util.AppReviewLauncher
 import com.dede.android_eggs.util.CustomTabsBrowser
 
 @VHType(viewType = Egg.VIEW_TYPE_FOOTER)
@@ -36,13 +36,18 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
                 CustomTabsBrowser.launchUrl(context, v.tagString.toUri())
             }
             R.id.tv_star -> {
-                AppReviewLauncher.launchMarket(context)
+                launchMarket(context)
             }
             R.id.tv_feedback -> {
                 CustomTabsBrowser.launchUrlByBrowser(context, v.tagString.toUri())
             }
             else -> throw UnsupportedOperationException()
         }
+    }
+
+    private fun launchMarket(context: Context) {
+        val uri = context.getString(R.string.url_market_detail, context.packageName).toUri()
+        CustomTabsBrowser.launchUrlByBrowser(context, uri)
     }
 
     private inline val View.tagString get() = tag as String

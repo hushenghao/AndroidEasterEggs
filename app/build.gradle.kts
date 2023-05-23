@@ -98,7 +98,6 @@ dependencies {
     implementation(deps.free.reflection)
     implementation(deps.viewbinding.delegate)
     implementation(deps.blurhash.android)
-    implementation(deps.play.review)
     debugImplementation(deps.leakcanary)
     implementation(project(":basic"))
     implementation(project(":eggs:T"))

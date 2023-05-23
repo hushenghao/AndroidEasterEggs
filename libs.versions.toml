@@ -15,7 +15,6 @@ androidx-browser = "androidx.browser:browser:1.4.0"
 androidx-window = "androidx.window:window:1.1.0-rc01"
 google-material = "com.google.android.material:material:1.9.0"
 
-play-review = "com.google.android.play:review-ktx:2.0.1"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
 viewbinding-delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.8"
 io-coil = "io.coil-kt:coil:2.2.2"
