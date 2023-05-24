@@ -28,7 +28,7 @@ object EggActionHelp {
         if (egg.targetClassRes == -1) return null
         return Intent(Intent.ACTION_VIEW)
             .setClassName(context, context.getString(egg.targetClassRes))
-            .applyIf(!SplitUtils.isSplitSupported(context)) {
+            .applyIf(!SplitUtils.isActivityEmbedded(context)) {
                 addFlags(ACTIVITY_TASK_FLAGS)
             }
             .applyIf(egg.extras != null) {
