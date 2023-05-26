@@ -39,6 +39,7 @@ object CustomTabsBrowser {
             .build()
 
         val builder = CustomTabsIntent.Builder()
+            .setShowTitle(true)
             .setColorScheme(colorScheme)
             .setShareState(CustomTabsIntent.SHARE_STATE_ON)
             .setDefaultColorSchemeParams(params)
