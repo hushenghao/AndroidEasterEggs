@@ -11,14 +11,17 @@ plugins {
 }
 
 android {
-    compileSdk = Versions.COMPILE_SDK
-    buildToolsVersion = Versions.BUILD_TOOLS
+//    compileSdk = Versions.COMPILE_SDK
+//    buildToolsVersion = Versions.BUILD_TOOLS
+    compileSdkPreview = "UpsideDownCake"
+    buildToolsVersion = "34.0.0-rc4"
     namespace = "com.dede.android_eggs"
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
+//        targetSdk = Versions.TARGET_SDK
+        targetSdkPreview = "UpsideDownCake"
         versionCode = 26
         versionName = "1.9.3"
         buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")
@@ -87,6 +90,7 @@ android {
 dependencies {
     implementation(deps.androidx.appcompat)
     implementation(deps.androidx.core)
+    implementation(deps.androidx.activity)
     implementation(deps.androidx.lifecycle.runtime)
     implementation(deps.androidx.lifecycle.viewmodel)
     implementation(deps.androidx.preference)

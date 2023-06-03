@@ -11,10 +11,12 @@ import androidx.annotation.AttrRes
 import androidx.annotation.Dimension
 import androidx.annotation.FloatRange
 import androidx.annotation.Keep
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.component1
 import androidx.core.graphics.component2
 import androidx.core.graphics.component3
 import androidx.core.graphics.component4
+import com.dede.android_eggs.R
 import com.dede.basic.dp
 import com.dede.basic.globalContext
 import com.google.android.material.color.MaterialColors
@@ -35,7 +37,7 @@ class FontIconsDrawable(
 
     companion object {
         val typeface: Typeface by lazy {
-            Typeface.createFromAsset(globalContext.assets, "icons.ttf")
+            checkNotNull(ResourcesCompat.getFont(globalContext, R.font.icons))
         }
     }
 

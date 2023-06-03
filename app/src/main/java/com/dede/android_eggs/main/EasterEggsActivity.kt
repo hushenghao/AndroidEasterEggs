@@ -30,6 +30,7 @@ class EasterEggsActivity : AppCompatActivity(R.layout.activity_easter_eggs) {
             EasterEggsSplash(this).welcome()
         }
         appBarExpandedState.restore(savedInstanceState)
+        BackPressedHandler(this).register()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

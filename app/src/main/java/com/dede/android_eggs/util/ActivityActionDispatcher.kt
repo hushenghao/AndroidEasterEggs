@@ -10,8 +10,8 @@ import androidx.annotation.StringRes
 import androidx.core.app.ActivityCompat
 import androidx.core.text.HtmlCompat
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.Icons
+import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.basic.createThemeWrapperContext
 import com.dede.basic.getBoolean
 import com.dede.basic.putBoolean
@@ -66,7 +66,8 @@ class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
             )
             val wrapperContext = activity.createThemeWrapperContext()
             val icon = FontIconsDrawable(wrapperContext, Icons.Rounded.tips_and_updates, 48f)
-            val color = MaterialColors.getColor(wrapperContext, M3R.attr.colorControlNormal, Color.BLACK)
+            val color =
+                MaterialColors.getColor(wrapperContext, M3R.attr.colorControlNormal, Color.BLACK)
             icon.setColor(color)
             MaterialAlertDialogBuilder(wrapperContext)
                 .setIcon(icon)
@@ -102,7 +103,7 @@ class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
 
         override fun onCreate(activity: Activity) {
             val permissions = mapping[activity.javaClass.kotlin]
-            if (permissions != null && permissions.isNotEmpty()) {
+            if (!permissions.isNullOrEmpty()) {
                 ActivityCompat.requestPermissions(activity, permissions, 0)
             }
         }
