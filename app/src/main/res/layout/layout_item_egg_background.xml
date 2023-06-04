@@ -25,9 +25,9 @@
         android:textAppearance="?textAppearanceBodyMedium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_add_shortcut"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/iv_bg_icon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintWidth="wrap_content_constrained"
         tools:text="@tools:sample/lorem[3]" />
 
@@ -35,8 +35,7 @@
         android:id="@+id/tv_add_shortcut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawablePadding="4dp"
-        android:gravity="end"
+        android:drawablePadding="2dp"
         android:paddingVertical="10dp"
         android:text="@string/label_add_shortcut"
         android:textAppearance="?textAppearanceLabelLarge"

@@ -1,11 +1,11 @@
 {
   "outlined": [
     "animation",
-    "app_shortcut",
     "language",
     "rounded_corner"
   ],
   "rounded": [
+    "arrow_back",
     "brightness_auto",
     "brightness_4",
     "brightness_6",
@@ -13,6 +13,7 @@
     "info",
     "palette",
     "settings",
+    "swipe_left_alt",
     "tips_and_updates"
   ],
   "filled": []

@@ -1,16 +1,13 @@
 package com.dede.android_eggs.ui
 
 /** Generated automatically via **subset_icons_font.py**, do not modify this file. */
-// 1680944845 
+// 1685854813 
 object Icons {
 
     object Outlined {
         
         /** animation */
         const val animation = "\uE71C"
-
-        /** app_shortcut */
-        const val app_shortcut = "\uEAE4"
 
         /** language */
         const val language = "\uE894"
@@ -22,6 +19,9 @@ object Icons {
 
     object Rounded {
         
+        /** arrow_back */
+        const val arrow_back = "\uE5C4"
+
         /** brightness_4 */
         const val brightness_4 = "\uE3A9"
 
@@ -42,6 +42,9 @@ object Icons {
 
         /** settings */
         const val settings = "\uE8B8"
+
+        /** swipe_left_alt */
+        const val swipe_left_alt = "\uEB33"
 
         /** tips_and_updates */
         const val tips_and_updates = "\uE79A"

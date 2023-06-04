@@ -1,8 +1,8 @@
 package com.dede.android_eggs.util
 
-import android.view.View
-import androidx.appcompat.widget.ViewUtils
+import android.content.res.Resources
+import android.util.LayoutDirection
 
-val View.isLayoutRtl: Boolean
-    get() = @Suppress("RestrictedApi") ViewUtils.isLayoutRtl(this)
+val isRtl: Boolean
+    get() = Resources.getSystem().configuration.layoutDirection == LayoutDirection.RTL
 

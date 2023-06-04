@@ -30,7 +30,7 @@ import com.dede.android_eggs.ui.views.onApplyWindowEdge
 import com.dede.android_eggs.util.EasterUtils
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
-import com.dede.android_eggs.util.isLayoutRtl
+import com.dede.android_eggs.util.isRtl
 import com.dede.basic.dp
 import java.util.*
 import kotlin.math.abs
@@ -182,14 +182,14 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
                     ItemTouchHelper.LEFT -> if (dX > 0) return
                     ItemTouchHelper.RIGHT -> if (dX < 0) return
                     ItemTouchHelper.START -> {
-                        if (recyclerView.isLayoutRtl) {
+                        if (isRtl) {
                             if (dX < 0) return
                         } else {
                             if (dX > 0) return
                         }
                     }
                     ItemTouchHelper.END -> {
-                        if (recyclerView.isLayoutRtl) {
+                        if (isRtl) {
                             if (dX < 0) return
                         } else {
                             if (dX > 0) return

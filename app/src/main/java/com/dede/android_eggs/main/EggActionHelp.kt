@@ -85,7 +85,12 @@ object EggActionHelp {
                 if (receiver == null) {
                     receiver = PinShortcutReceiver()
                     val intentFilter = IntentFilter(ACTION)
-                    context.applicationContext.registerReceiver(receiver, intentFilter)
+                    val appCtx = context.applicationContext
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        appCtx.registerReceiver(receiver, intentFilter, Context.RECEIVER_EXPORTED)
+                    } else {
+                        appCtx.registerReceiver(receiver, intentFilter)
+                    }
                     this.receiver = receiver
                 } else {
                     cancel(token)

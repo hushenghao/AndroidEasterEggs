@@ -46,7 +46,7 @@ class BackPressedHandler(private val host: AppCompatActivity) :
 
     private val backPressedDrawable: Drawable by lazy {
         val blurHashDrawable = BlurHashDrawable(
-            host, R.string.hash_snapshot_bg,
+            host, R.string.hash_back_pressed_bg,
             (displayMetrics.widthPixels * 0.1f).toInt(),
             (displayMetrics.heightPixels * 0.1f).toInt()
         )
