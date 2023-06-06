@@ -1,0 +1,4 @@
+- Added visual action for Icons 🎉
+- Added predictive return gesture animation
+- Optimize folding screen devices 💻
+- Other function optimization

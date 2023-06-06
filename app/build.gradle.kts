@@ -20,10 +20,10 @@ android {
     defaultConfig {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
-//        targetSdk = Versions.TARGET_SDK
-        targetSdkPreview = "UpsideDownCake"
-        versionCode = 26
-        versionName = "1.9.3"
+        targetSdk = Versions.TARGET_SDK
+//        targetSdkPreview = "UpsideDownCake"
+        versionCode = 27
+        versionName = "1.9.4"
         buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.addAll(listOf("zh", "en"))
