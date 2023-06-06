@@ -40,7 +40,7 @@ object CustomTabsBrowser {
 
         val closeIcon = FontIconsDrawable(
             context, Icons.Rounded.arrow_back,
-            M3R.attr.colorControlNormal, 24f
+            M3R.attr.colorSurfaceVariant, 24f
         ).toBitmap()
         val builder = CustomTabsIntent.Builder()
             .setShowTitle(true)
