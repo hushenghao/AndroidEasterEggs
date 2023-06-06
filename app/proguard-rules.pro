@@ -14,7 +14,7 @@
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+-keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
@@ -24,6 +24,7 @@
 -dontwarn org.conscrypt.**
 -dontwarn org.openjsse.**
 
+-keepnames class * extends com.dede.android_eggs.ui.adapter.VHolder
 -keepclassmembers class * extends com.dede.android_eggs.ui.adapter.VHolder {
     public <init>(android.view.View);
 }
