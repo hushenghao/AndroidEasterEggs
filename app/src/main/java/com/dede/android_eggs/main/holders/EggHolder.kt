@@ -83,7 +83,7 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         binding.tvTitle.setText(egg.eggNameRes)
         binding.tvSummary.setText(egg.androidRes)
         binding.cardView.setOnClickListener { EggActionHelp.launchEgg(context, egg) }
-        binding.background.tvBgMessage.setText(egg.versionCommentRes)
+        binding.background.tvBgMessage.text = egg.versionCommentFormatter.format(context)
         binding.background.tvAddShortcut.isEnabled = EggActionHelp.supportShortcut(context, egg)
 
         binding.ivIcon.dispose()

@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.IntentSender
 import android.os.Build
+import android.view.View
 import android.widget.Toast
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -25,7 +26,7 @@ object EggActionHelp {
         Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
 
     private fun createIntent(context: Context, egg: Egg): Intent? {
-        if (egg.targetClassRes == -1) return null
+        if (egg.targetClassRes == View.NO_ID) return null
         return Intent(Intent.ACTION_VIEW)
             .setClassName(context, context.getString(egg.targetClassRes))
             .applyIf(!SplitUtils.isActivityEmbedded(context)) {
@@ -43,7 +44,7 @@ object EggActionHelp {
 
     fun supportShortcut(context: Context, egg: Egg): Boolean {
         if (egg.shortcutKey == null) return false
-        if (egg.targetClassRes == -1) return false
+        if (egg.targetClassRes == View.NO_ID) return false
         return ShortcutManagerCompat.isRequestPinShortcutSupported(context)
     }
 
