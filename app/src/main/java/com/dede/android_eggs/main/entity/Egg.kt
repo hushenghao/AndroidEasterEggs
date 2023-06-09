@@ -1,5 +1,6 @@
 package com.dede.android_eggs.main.entity
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -12,7 +13,7 @@ data class Egg(
     @StringRes val androidRes: Int,
     @StringRes val eggNameRes: Int,
     val versionCommentFormatter: CharSequenceFormatter,
-    @StringRes val targetClassRes: Int = View.NO_ID,
+    val targetClass: Class<out Activity>? = null,
     val supportAdaptiveIcon: Boolean = false,
     val shortcutKey: String? = null,
     val extras: Bundle? = null,

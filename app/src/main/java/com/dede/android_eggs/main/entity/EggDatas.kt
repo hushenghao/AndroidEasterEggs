@@ -50,8 +50,7 @@ object EggDatas {
             R.string.title_android_u,
             R.string.title_android_u,
             CharSequenceFormatter(R.string.version_comment_once, 34, "14"),
-            -1,
-            true,
+            supportAdaptiveIcon = true,
             itemType = Egg.VIEW_TYPE_PREVIEW
         ),
         Wavy(R.drawable.ic_wavy_line),
@@ -64,7 +63,7 @@ object EggDatas {
                 VERSION_CODES.TIRAMISU,
                 "13"
             ),
-            R.string.target_class_android_t,
+            com.android_t.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_T
         ),
@@ -77,7 +76,7 @@ object EggDatas {
                 VERSION_CODES.S, VERSION_CODES.S_V2,
                 "12", "12L"
             ),
-            R.string.target_class_android_s,
+            com.android_s.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_S
         ),
@@ -90,7 +89,7 @@ object EggDatas {
                 VERSION_CODES.R,
                 "11"
             ),
-            R.string.target_class_android_r,
+            com.android_r.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_R
         ),
@@ -103,7 +102,7 @@ object EggDatas {
                 VERSION_CODES.Q,
                 "10"
             ),
-            R.string.target_class_android_q,
+            com.android_q.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_Q
         ),
@@ -116,7 +115,7 @@ object EggDatas {
                 VERSION_CODES.P,
                 "9"
             ),
-            R.string.target_class_android_p,
+            com.android_p.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_P
         ),
@@ -129,7 +128,7 @@ object EggDatas {
                 VERSION_CODES.O, VERSION_CODES.O_MR1,
                 "8.0", "8.1"
             ),
-            R.string.target_class_android_o,
+            com.android_o.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_O_1,
             bundleOf(EXTRA_O_POINT to true)
@@ -143,7 +142,7 @@ object EggDatas {
                 VERSION_CODES.O, VERSION_CODES.O_MR1,
                 "8.0", "8.1"
             ),
-            R.string.target_class_android_o,
+            com.android_o.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_O
         ),
@@ -156,7 +155,7 @@ object EggDatas {
                 VERSION_CODES.N, VERSION_CODES.N_MR1,
                 "7.0", "7.1"
             ),
-            R.string.target_class_android_n,
+            com.android_n.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_N
         ),
@@ -169,7 +168,7 @@ object EggDatas {
                 VERSION_CODES.M,
                 "6.0"
             ),
-            R.string.target_class_android_m,
+            com.android_m.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_M
         ),
@@ -182,7 +181,7 @@ object EggDatas {
                 VERSION_CODES.LOLLIPOP, VERSION_CODES.LOLLIPOP_MR1,
                 "5.0", "5.1"
             ),
-            R.string.target_class_android_l,
+            com.android_l.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_L
         ),
@@ -195,7 +194,7 @@ object EggDatas {
                 VERSION_CODES.KITKAT, VERSION_CODES.KITKAT_WATCH,
                 "4.4", "4.4W"
             ),
-            R.string.target_class_android_k,
+            com.android_k.egg.PlatLogoActivity::class.java,
             false,
             KEY_EGG_K
         ),
@@ -208,7 +207,7 @@ object EggDatas {
                 VERSION_CODES.JELLY_BEAN, VERSION_CODES.JELLY_BEAN_MR2,
                 "4.1", "4.3"
             ),
-            R.string.target_class_android_j,
+            com.android_j.egg.PlatLogoActivity::class.java,
             false,
             KEY_EGG_J
         ),
@@ -221,7 +220,7 @@ object EggDatas {
                 VERSION_CODES.ICE_CREAM_SANDWICH, VERSION_CODES.ICE_CREAM_SANDWICH_MR1,
                 "4.0", "4.0.3"
             ),
-            R.string.target_class_android_i,
+            com.android_i.egg.PlatLogoActivity::class.java,
             false,
             KEY_EGG_I
         ),
@@ -234,7 +233,7 @@ object EggDatas {
                 VERSION_CODES.HONEYCOMB, VERSION_CODES.HONEYCOMB_MR2,
                 "3.0", "3.2"
             ),
-            R.string.target_class_android_h,
+            com.android_h.egg.PlatLogoActivity::class.java,
             false,
             KEY_EGG_H
         ),
@@ -247,7 +246,7 @@ object EggDatas {
                 VERSION_CODES.GINGERBREAD, VERSION_CODES.GINGERBREAD_MR1,
                 "2.3", "2.3.3"
             ),
-            R.string.target_class_android_g,
+            com.android_g.egg.PlatLogoActivity::class.java,
             false,
             KEY_EGG_G
         ),

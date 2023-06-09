@@ -6,10 +6,13 @@ import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.Paint
 import android.graphics.PixelFormat
+import android.graphics.RectF
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ProgressBar
 import com.dede.basic.dp
+import com.dede.basic.dpf
+import com.google.android.material.color.MaterialColors
 import kotlin.math.min
 import com.google.android.material.R as M3R
 
@@ -73,16 +76,31 @@ class AndroidTimelineView @JvmOverloads constructor(
     }
 
     init {
-        progressDrawable = TimelineDrawable()
-        isIndeterminate = true
+        progressDrawable = TimelineDrawable(context)
+        isIndeterminate = false
     }
 
-    private class TimelineDrawable : Drawable(), Drawable.Callback {
+    private class TimelineDrawable(val context: Context) : Drawable(), Drawable.Callback {
 
-        private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+        private val progressPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        private val trackPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        private val padding = RectF(2.dpf, 2.dpf, 2.dpf, 2.dpf)
+
+        init {
+            progressPaint.color =
+                MaterialColors.getColor(context, M3R.attr.colorPrimaryContainer, Color.WHITE)
+            trackPaint.color =
+                MaterialColors.getColor(context, M3R.attr.colorTertiary, Color.WHITE)
+        }
 
         override fun getIntrinsicWidth(): Int {
             return 18.dp
+        }
+
+        override fun onLevelChange(level: Int): Boolean {
+            invalidateSelf()
+            return true
         }
 
         override fun draw(canvas: Canvas) {
@@ -90,12 +108,23 @@ class AndroidTimelineView @JvmOverloads constructor(
             val w = bound.width().toFloat()
             val h = bound.height().toFloat()
             val r = min(w, h) / 2f
-            paint.color = Color.MAGENTA
             canvas.drawRoundRect(
                 0f, 0f, w, h,
                 r, r,
-                paint
+                progressPaint
             )
+
+            val split = (h - padding.top - padding.bottom) / timelines.size
+            var radius = (w - padding.left - padding.right) / 2f
+            radius = min(split / 2f, radius)
+            var index = 0
+            val cx = w / 2f
+            var cy = padding.top + (split - radius * 2) / 2f + radius
+            for (pair in timelines) {
+                canvas.drawCircle(cx, cy, radius, trackPaint)
+                cy += split
+                index++
+            }
         }
 
         override fun setAlpha(alpha: Int) {

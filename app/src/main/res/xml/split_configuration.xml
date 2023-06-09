@@ -10,43 +10,43 @@
         window:splitRatio="0.5">
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_t" />
+            window:secondaryActivityName="com.android_t.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_s" />
+            window:secondaryActivityName="com.android_s.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_r" />
+            window:secondaryActivityName="com.android_r.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_q" />
+            window:secondaryActivityName="com.android_q.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_p" />
+            window:secondaryActivityName="com.android_p.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_o" />
+            window:secondaryActivityName="com.android_o.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_n" />
+            window:secondaryActivityName="com.android_n.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_l" />
+            window:secondaryActivityName="com.android_l.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_k" />
+            window:secondaryActivityName="com.android_k.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_j" />
+            window:secondaryActivityName="com.android_j.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_i" />
+            window:secondaryActivityName="com.android_i.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_h" />
+            window:secondaryActivityName="com.android_h.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName="@string/target_class_android_g" />
+            window:secondaryActivityName="com.android_g.egg.PlatLogoActivity" />
     </SplitPairRule>
 
     <!-- Specify a placeholder for the secondary container when content is

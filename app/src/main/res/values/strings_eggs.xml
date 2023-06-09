@@ -35,20 +35,5 @@
     <string name="version_comment_once" translatable="false">API %d\nAndroid %s</string>
     <string name="version_comment_range" translatable="false">API %d~%d\nAndroid %s~%s</string>
 
-    <string name="target_class_android_t" translatable="false">com.android_t.egg.PlatLogoActivity</string>
-    <string name="target_class_android_s" translatable="false">com.android_s.egg.PlatLogoActivity</string>
-    <string name="target_class_android_r" translatable="false">com.android_r.egg.PlatLogoActivity</string>
-    <string name="target_class_android_q" translatable="false">com.android_q.egg.PlatLogoActivity</string>
-    <string name="target_class_android_p" translatable="false">com.android_p.egg.PlatLogoActivity</string>
-    <string name="target_class_android_o" translatable="false">com.android_o.egg.PlatLogoActivity</string>
-    <string name="target_class_android_n" translatable="false">com.android_n.egg.PlatLogoActivity</string>
-    <string name="target_class_android_m" translatable="false">com.android_m.egg.PlatLogoActivity</string>
-    <string name="target_class_android_l" translatable="false">com.android_l.egg.PlatLogoActivity</string>
-    <string name="target_class_android_k" translatable="false">com.android_k.egg.PlatLogoActivity</string>
-    <string name="target_class_android_j" translatable="false">com.android_j.egg.PlatLogoActivity</string>
-    <string name="target_class_android_i" translatable="false">com.android_i.egg.PlatLogoActivity</string>
-    <string name="target_class_android_h" translatable="false">com.android_h.egg.PlatLogoActivity</string>
-    <string name="target_class_android_g" translatable="false">com.android_g.egg.PlatLogoActivity</string>
-
     <string name="r_egg_short_name" translatable="false">Cat Controls</string>
 </resources>

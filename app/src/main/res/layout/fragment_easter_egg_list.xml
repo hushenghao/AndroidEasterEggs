@@ -19,12 +19,4 @@
         tools:itemCount="17"
         tools:listitem="@layout/item_easter_egg_layout" />
 
-    <com.dede.android_eggs.ui.views.AndroidTimelineView
-        android:id="@+id/android_timeline"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginVertical="80dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
