@@ -118,6 +118,19 @@
         app:layout_constraintStart_toStartOf="@id/tv_title_other"
         app:layout_constraintTop_toBottomOf="@id/tv_star" />
 
+    <TextView
+        android:id="@+id/tv_dino_3d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-medium"
+        android:tag="@string/url_dino_3d"
+        android:text="@string/label_dino_3d"
+        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+        android:textColor="?attr/colorSecondary"
+        app:layout_constraintStart_toStartOf="@id/tv_title_other"
+        app:layout_constraintTop_toBottomOf="@id/tv_beta" />
+
     <view
         class="com.google.android.material.internal.FlowLayout"
         android:layout_width="match_parent"

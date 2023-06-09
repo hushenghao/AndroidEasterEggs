@@ -18,7 +18,7 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
     override fun onBindViewHolder(t: Footer) {
         val views = arrayOf(
             binding.tvGithub, binding.tvLicense, binding.tvFrameworks,
-            binding.tvStar, binding.tvBeta,
+            binding.tvStar, binding.tvBeta, binding.tvDino3d,
             binding.tvPrivacy, binding.tvFeedback
         )
         for (view in views) {
@@ -30,7 +30,7 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
         val context = v.context
         when (v.id) {
             R.id.tv_github, R.id.tv_license, R.id.tv_frameworks,
-            R.id.tv_beta,
+            R.id.tv_beta, R.id.tv_dino_3d,
             R.id.tv_privacy,
             -> {
                 CustomTabsBrowser.launchUrl(context, v.tagString.toUri())
