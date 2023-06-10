@@ -76,11 +76,11 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
             addViewType<FooterHolder>(R.layout.item_easter_egg_footer)
         }
 
-        var last: ItemDecoration = EggListDivider(10.dp, 0)
+        var last: ItemDecoration = EggListDivider(10.dp, 0, 0)
         binding.recyclerView.addItemDecoration(last)
         binding.recyclerView.onApplyWindowEdge {
             removeItemDecoration(last)
-            last = EggListDivider(10.dp, it.bottom)
+            last = EggListDivider(10.dp, 0, it.bottom)
             addItemDecoration(last)
         }
         binding.recyclerView.addOnScrollListener(object : OnScrollListener() {
@@ -188,6 +188,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
                             if (dX > 0) return
                         }
                     }
+
                     ItemTouchHelper.END -> {
                         if (isRtl) {
                             if (dX < 0) return
@@ -211,7 +212,11 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         }
     }
 
-    private class EggListDivider(private val divider: Int, private val bottomInset: Int) :
+    class EggListDivider(
+        private val divider: Int,
+        private val topInset: Int,
+        private val bottomInset: Int
+    ) :
         ItemDecoration() {
 
         override fun getItemOffsets(
@@ -222,7 +227,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         ) {
             val position = parent.getChildAdapterPosition(view)
             if (position == 0) {
-                outRect.top = divider
+                outRect.top = divider + topInset
             }
             outRect.bottom = divider
 

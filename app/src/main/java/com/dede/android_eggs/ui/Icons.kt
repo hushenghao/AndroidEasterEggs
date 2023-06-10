@@ -1,7 +1,7 @@
 package com.dede.android_eggs.ui
 
 /** Generated automatically via **subset_icons_font.py**, do not modify this file. */
-// 1685854813 
+// 1686363563 
 object Icons {
 
     object Outlined {
@@ -21,6 +21,9 @@ object Icons {
         
         /** arrow_back */
         const val arrow_back = "\uE5C4"
+
+        /** arrow_drop_down */
+        const val arrow_drop_down = "\uE5C5"
 
         /** brightness_4 */
         const val brightness_4 = "\uE3A9"

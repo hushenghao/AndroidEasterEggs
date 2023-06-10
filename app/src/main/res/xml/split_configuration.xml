@@ -53,7 +53,7 @@
          not available. -->
     <SplitPlaceholderRule
         window:finishPrimaryWithPlaceholder="always"
-        window:placeholderActivityName=".main.PlaceholderActivity"
+        window:placeholderActivityName=".main.AndroidTimelineActivity"
         window:splitMinSmallestWidthDp="600"
         window:splitRatio="0.5">
         <ActivityFilter window:activityName=".main.EasterEggsActivity" />

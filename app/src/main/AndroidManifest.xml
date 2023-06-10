@@ -36,7 +36,7 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-        <activity android:name=".main.PlaceholderActivity" />
+        <activity android:name=".main.AndroidTimelineActivity" />
     </application>
 
 </manifest>
