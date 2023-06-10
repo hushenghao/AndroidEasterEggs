@@ -2,9 +2,11 @@ package com.dede.android_eggs.main
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +22,7 @@ import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.views.onApplyWindowEdge
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.updateCompoundDrawablesRelative
+import com.dede.basic.dp
 import com.dede.basic.dpf
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -174,6 +177,10 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
             val last = timelines[index - 1]
             return last.year != current.year
         }
+
+        private fun isLast(current: TimelineEvent): Boolean {
+            return timelines.last() === current
+        }
     }
 
     private val binding by viewBinding(ActivityAndroidTimelineBinding::bind)
@@ -210,8 +217,16 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
                     }
                     text = timelineEvent.event
                 }
+                holder.findViewById<ImageView>(R.id.iv_arrow_left).setImageDrawable(
+                    FontIconsDrawable(
+                        holder.itemView.context,
+                        Icons.Outlined.arrow_left,
+                        M3R.attr.colorPrimaryContainer
+                    )
+                )
                 holder.findViewById<TextView>(R.id.tv_month).text = timelineEvent.month
                 holder.findViewById<ImageView>(R.id.iv_logo).load(timelineEvent.logoRes)
+                holder.findViewById<View>(R.id.line_bottom).isGone = isLast(timelineEvent)
             }
         var last: RecyclerView.ItemDecoration = EggListFragment.EggListDivider(0, 0, 0)
         binding.recyclerView.addItemDecoration(last)

@@ -19,6 +19,7 @@
         tools:src="@tools:sample/avatars" />
 
     <View
+        android:id="@+id/line_top"
         android:layout_width="2dp"
         android:layout_height="0dp"
         android:layout_marginBottom="4dp"
@@ -29,6 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
+        android:id="@+id/line_bottom"
         android:layout_width="2dp"
         android:layout_height="0dp"
         android:layout_marginTop="4dp"
@@ -44,7 +46,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="4dp"
         android:textAppearance="?attr/textAppearanceTitleLarge"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/iv_logo"
@@ -62,12 +63,21 @@
         app:layout_constraintTop_toTopOf="@id/tv_event"
         tools:text="@tools:sample/date/hhmm" />
 
+    <ImageView
+        android:id="@+id/iv_arrow_left"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="-10dp"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="@id/iv_logo"
+        app:layout_constraintEnd_toStartOf="@id/tv_event"
+        app:layout_constraintTop_toTopOf="@id/iv_logo" />
+
     <TextView
         android:id="@+id/tv_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="10dp"
         android:paddingHorizontal="10dp"
         android:paddingVertical="8dp"

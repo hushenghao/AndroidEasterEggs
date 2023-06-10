@@ -1,13 +1,16 @@
 package com.dede.android_eggs.ui
 
 /** Generated automatically via **subset_icons_font.py**, do not modify this file. */
-// 1686363563 
+// 1686392839 
 object Icons {
 
     object Outlined {
         
         /** animation */
         const val animation = "\uE71C"
+
+        /** arrow_left */
+        const val arrow_left = "\uE5DE"
 
         /** language */
         const val language = "\uE894"
