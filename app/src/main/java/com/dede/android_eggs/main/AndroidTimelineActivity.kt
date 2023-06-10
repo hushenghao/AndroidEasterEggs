@@ -35,14 +35,14 @@ import com.google.android.material.R as M3R
 class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_timeline) {
 
     companion object {
-        val timelines = listOf(
+        private val timelines = listOf(
             TimelineEvent("2023", "September", R.drawable.ic_android_udc, "Upside Down Cake.🎉"),
             TimelineEvent("2022", "September", R.drawable.ic_android_tiramisu, "Tiramisu."),
             TimelineEvent(
                 "2021", "December", R.drawable.ic_android_s,
                 "S V2. Once more unto the breach, dear friends, once more."
             ),
-            TimelineEvent("2021", "September", R.drawable.ic_android_s, "S.", false),
+            TimelineEvent("2021", "September", R.drawable.ic_android_s, "S."),
             TimelineEvent(
                 "2020",
                 "September",
@@ -63,7 +63,7 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
             ),
             TimelineEvent(
                 "2017", "August", R.drawable.ic_android_oreo,
-                "O.\nReleased publicly as Android 8.0 in August 2017.", false
+                "O.\nReleased publicly as Android 8.0 in August 2017."
             ),
             TimelineEvent(
                 "2016", "October", R.drawable.ic_android_nougat,
@@ -83,7 +83,7 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
             ),
             TimelineEvent(
                 "2014", "November", R.drawable.ic_android_lollipop,
-                "L.\nReleased publicly as Android 5.0 in November 2014.", false
+                "L.\nReleased publicly as Android 5.0 in November 2014."
             ),
             TimelineEvent(
                 "2014", "June", R.drawable.ic_android_kitkat,
@@ -91,19 +91,19 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
             ),
             TimelineEvent(
                 "2013", "October", R.drawable.ic_android_kitkat,
-                "K.\nReleased publicly as Android 4.4 in October 2013.", false
+                "K.\nReleased publicly as Android 4.4 in October 2013."
             ),
             TimelineEvent(
-                "2013", "June", R.drawable.ic_android_jelly_bean,
+                "2013", "July", R.drawable.ic_android_jelly_bean,
                 "J MR2.\nReleased publicly as Android 4.3 in July 2013."
             ),
             TimelineEvent(
                 "2012", "November", R.drawable.ic_android_jelly_bean,
-                "J MR1.\nReleased publicly as Android 4.2 in November 2012.", false
+                "J MR1.\nReleased publicly as Android 4.2 in November 2012."
             ),
             TimelineEvent(
-                "2012", "June", R.drawable.ic_android_jelly_bean,
-                "J.\nReleased publicly as Android 4.1 in July 2012.", false
+                "2012", "July", R.drawable.ic_android_jelly_bean,
+                "J.\nReleased publicly as Android 4.1 in July 2012."
             ),
             TimelineEvent(
                 "2011", "December", R.drawable.ic_android_ics,
@@ -111,7 +111,7 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
             ),
             TimelineEvent(
                 "2011", "October", R.drawable.ic_android_ics,
-                "I.\nReleased publicly as Android 4.0 in October 2011.", false
+                "I.\nReleased publicly as Android 4.0 in October 2011."
             ),
             TimelineEvent(
                 "2011", "July", R.drawable.ic_android_honeycomb,
@@ -119,15 +119,15 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
             ),
             TimelineEvent(
                 "2011", "May", R.drawable.ic_android_honeycomb,
-                "H MR1.\nReleased publicly as Android 3.1 in May 2011.", false
+                "H MR1.\nReleased publicly as Android 3.1 in May 2011."
             ),
             TimelineEvent(
                 "2011", "February", R.drawable.ic_android_honeycomb,
-                "H.\nReleased publicly as Android 3.0 in February 2011.", false
+                "H.\nReleased publicly as Android 3.0 in February 2011."
             ),
             TimelineEvent(
                 "2011", "February", R.drawable.ic_android_gingerbread,
-                "G MR1.\nReleased publicly as Android 2.3.3 in February 2011.", false
+                "G MR1.\nReleased publicly as Android 2.3.3 in February 2011."
             ),
             TimelineEvent(
                 "2010", "December", R.drawable.ic_android_gingerbread,
@@ -135,11 +135,11 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
             ),
             TimelineEvent(
                 "2010", "May", R.drawable.ic_android_froyo,
-                "F.\nReleased publicly as Android 2.2 in May 2010.", false
+                "F.\nReleased publicly as Android 2.2 in May 2010."
             ),
             TimelineEvent(
                 "2010", "January", R.drawable.ic_android_eclair,
-                "E MR1.\nReleased publicly as Android 2.1 in January 2010.", false
+                "E MR1.\nReleased publicly as Android 2.1 in January 2010."
             ),
             TimelineEvent(
                 "2009", "December", R.drawable.ic_android_eclair,
@@ -147,25 +147,33 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
             ),
             TimelineEvent(
                 "2009", "October", R.drawable.ic_android_eclair,
-                "E.\nReleased publicly as Android 2.0 in October 2009.", false
+                "E.\nReleased publicly as Android 2.0 in October 2009."
             ),
             TimelineEvent(
                 "2009", "September", R.drawable.ic_android_donut,
-                "D.\nReleased publicly as Android 1.6 in September 2009.", false
+                "D.\nReleased publicly as Android 1.6 in September 2009."
             ),
             TimelineEvent(
                 "2009", "April", R.drawable.ic_android_cupcake,
-                "C.\nReleased publicly as Android 1.5 in April 2009.", false
+                "C.\nReleased publicly as Android 1.5 in April 2009."
             ),
             TimelineEvent(
                 "2009", "February", R.drawable.ic_android_classic,
-                "First Android update.\nReleased publicly as Android 1.1 in February 2009.", false
+                "First Android update.\nReleased publicly as Android 1.1 in February 2009."
             ),
             TimelineEvent(
                 "2008", "September", R.drawable.ic_android_classic,
                 "The original, first, version of Android. Yay!\nReleased publicly as Android 1.0 in September 2008."
             )
         )
+
+        private fun isNewGroup(current: TimelineEvent): Boolean {
+            val index = timelines.indexOf(current)
+            if (index == -1) return true
+            if (index == 0) return true
+            val last = timelines[index - 1]
+            return last.year != current.year
+        }
     }
 
     private val binding by viewBinding(ActivityAndroidTimelineBinding::bind)
@@ -179,7 +187,7 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
         binding.recyclerView.adapter =
             VAdapter(R.layout.item_android_timeline, timelines) { holder, timelineEvent ->
                 with(holder.findViewById<TextView>(R.id.tv_year)) {
-                    isVisible = timelineEvent.showYear
+                    isVisible = isNewGroup(timelineEvent)
                     text = timelineEvent.year
                     val draw = FontIconsDrawable(
                         context,

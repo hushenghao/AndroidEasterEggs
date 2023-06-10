@@ -7,5 +7,4 @@ data class TimelineEvent(
     val month: String,
     @DrawableRes val logoRes: Int,
     val event: CharSequence,
-    val showYear: Boolean = true
 )
