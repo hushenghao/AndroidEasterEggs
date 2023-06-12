@@ -11,10 +11,9 @@ plugins {
 }
 
 android {
-//    compileSdk = Versions.COMPILE_SDK
-//    buildToolsVersion = Versions.BUILD_TOOLS
+    compileSdk = Versions.COMPILE_SDK
     compileSdkPreview = "UpsideDownCake"
-    buildToolsVersion = "34.0.0-rc4"
+    buildToolsVersion = Versions.BUILD_TOOLS
     namespace = "com.dede.android_eggs"
 
     defaultConfig {

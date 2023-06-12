@@ -17,7 +17,6 @@ import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
-import com.dede.android_eggs.util.isRtl
 import com.dede.android_eggs.util.resolveColorStateList
 import com.dede.android_eggs.util.updateCompoundDrawablesRelative
 import kotlin.math.abs
@@ -106,9 +105,7 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         )
         val drawable = FontIconsDrawable(context, Icons.Rounded.swipe_left_alt, 24f).apply {
             setColorStateList(color)
-            if (isRtl) {
-                setRotate(180f)
-            }
+            isAutoMirrored = true
         }
         binding.background.tvAddShortcut.updateCompoundDrawablesRelative(end = drawable)
     }

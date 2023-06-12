@@ -28,3 +28,8 @@
 -keepclassmembers class * extends com.dede.android_eggs.ui.adapter.VHolder {
     public <init>(android.view.View);
 }
+
+# temp fix
+-keep class androidx.activity.OnBackPressedDispatcher {
+    private android.window.OnBackInvokedCallback onBackInvokedCallback;
+}

@@ -13,13 +13,13 @@
         android:layout_marginTop="5dp"
         android:nestedScrollingEnabled="false"
         android:overScrollMode="never"
-        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="W,5:3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_max="@dimen/item_max_width"
+        tools:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
         tools:listitem="@layout/item_snapshot_mask_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

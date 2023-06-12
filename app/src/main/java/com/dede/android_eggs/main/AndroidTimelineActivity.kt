@@ -22,7 +22,6 @@ import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.views.onApplyWindowEdge
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.updateCompoundDrawablesRelative
-import com.dede.basic.dp
 import com.dede.basic.dpf
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -222,7 +221,9 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
                         holder.itemView.context,
                         Icons.Outlined.arrow_left,
                         M3R.attr.colorPrimaryContainer
-                    )
+                    ).apply {
+                        isAutoMirrored = true
+                    }
                 )
                 holder.findViewById<TextView>(R.id.tv_month).text = timelineEvent.month
                 holder.findViewById<ImageView>(R.id.iv_logo).load(timelineEvent.logoRes)

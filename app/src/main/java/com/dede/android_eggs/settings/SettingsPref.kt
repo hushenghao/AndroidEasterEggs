@@ -24,6 +24,7 @@ import androidx.preference.SwitchPreferenceCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
+import com.dede.android_eggs.ui.drawables.FontIconsDrawable.Companion.setPaddingRelative
 import com.dede.android_eggs.ui.preferences.FontIconSwitchPreference
 import com.dede.android_eggs.ui.preferences.VersionPreference
 import com.dede.android_eggs.util.LocalEvent
@@ -48,7 +49,7 @@ private fun Preference.setup(prefs: SettingsPref<*>) {
 
 private fun createFontIcon(context: Context, unicode: String): FontIconsDrawable {
     return FontIconsDrawable(context, unicode, 36f).apply {
-        setPadding(12.dp, 6.dp, 0, 0)
+        setPaddingRelative(12.dp, 6.dp, 0, 0)
     }
 }
 

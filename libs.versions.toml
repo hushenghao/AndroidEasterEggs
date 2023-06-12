@@ -4,7 +4,7 @@
 kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.0"
 androidx-core = "androidx.core:core-ktx:1.9.0"
-androidx-activity="androidx.activity:activity-ktx:1.8.0-alpha04"
+androidx-activity="androidx.activity:activity-ktx:1.8.0-alpha05"
 androidx-lifecycle-viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
 androidx-lifecycle-runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
 androidx-recyclerview = "androidx.recyclerview:recyclerview:1.2.1"
