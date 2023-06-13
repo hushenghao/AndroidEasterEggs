@@ -1,14 +1,14 @@
 package com.dede.android_eggs.ui.adapter
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.dede.android_eggs.R
 import com.google.android.material.carousel.CarouselLayoutManager
 
 
@@ -34,53 +34,44 @@ fun VAdapter.removeHeader(view: View) {
 
 class HeaderFooterExt(private val vAdapter: VAdapter) {
 
-    private lateinit var headerView: ViewGroup
-    private lateinit var footerView: ViewGroup
-
-    private val headers = ArrayList<View>()
-    private val footers = ArrayList<View>()
+    private lateinit var headerView: LinearLayout
+    private lateinit var footerView: LinearLayout
 
     private val hasHeader: Boolean
-        get() = headers.size > 0 || (::headerView.isInitialized && headerView.childCount > 0)
+        get() = ::headerView.isInitialized && headerView.childCount > 0
 
     private val hasFooter: Boolean
-        get() = footers.size > 0 || (::footerView.isInitialized && footerView.childCount > 0)
+        get() = ::footerView.isInitialized && footerView.childCount > 0
 
     fun addHeader(view: View) {
-        if (::headerView.isInitialized) {
-            val notify = !hasHeader
-            headerView.addView(view)
-            if (notify) vAdapter.notifyItemInserted(0)
-        } else {
-            headers.add(view)
+        if (!::headerView.isInitialized) {
+            headerView = LinearLayout(view.context)
         }
+        val notify = !hasHeader
+        headerView.addView(view)
+        if (notify) vAdapter.notifyItemInserted(0)
     }
 
     fun removeHeader(view: View) {
-        if (::headerView.isInitialized) {
+        if (hasHeader) {
             headerView.removeView(view)
             if (!hasHeader) vAdapter.notifyItemRemoved(0)
-        } else {
-            headers.remove(view)
         }
     }
 
     fun addFooter(view: View) {
-        if (::footerView.isInitialized) {
-            val notify = !hasFooter
-            footerView.addView(view)
-            if (notify) vAdapter.notifyItemInserted(vAdapter.itemCount - 1)
-        } else {
-            footers.add(view)
+        if (!::footerView.isInitialized) {
+            footerView = LinearLayout(view.context)
         }
+        val notify = !hasFooter
+        footerView.addView(view)
+        if (notify) vAdapter.notifyItemInserted(vAdapter.itemCount - 1)
     }
 
     fun removeFooter(view: View) {
-        if (::footerView.isInitialized) {
+        if (hasFooter) {
             footerView.removeView(view)
             if (!hasFooter) vAdapter.notifyItemRemoved(vAdapter.itemCount - 1)
-        } else {
-            footers.remove(view)
         }
     }
 
@@ -108,44 +99,31 @@ class HeaderFooterExt(private val vAdapter: VAdapter) {
     }
 
     fun bindViewHolder(holder: ViewHolder): Boolean {
-        when (holder.itemViewType) {
-            TYPE_HEADER -> {
-                val headerHolder = (holder as HeadFootHolder)
-                for (header in headers) {
-                    headerHolder.group.addView(header)
-                }
-                headers.clear()
-                headerView = headerHolder.group
-            }
-            TYPE_FOOTER -> {
-                val footerHolder = (holder as HeadFootHolder)
-                for (footer in footers) {
-                    footerHolder.group.addView(footer)
-                }
-                footers.clear()
-                footerView = footerHolder.group
-            }
-            else -> return false
+        return when (holder.itemViewType) {
+            TYPE_HEADER,
+            TYPE_FOOTER,
+            -> true
+
+            else -> false
         }
-        return true
     }
 
     fun createViewHolder(parent: ViewGroup, viewType: Int): ViewHolder? {
         return when (viewType) {
-            TYPE_HEADER,
-            TYPE_FOOTER -> {
-                HeadFootHolder(createView(parent)).apply {
-                    setIsRecyclable(false)
-                }
-            }
+            TYPE_HEADER -> HeadFootHolder(setupView(headerView, parent))
+            TYPE_FOOTER -> HeadFootHolder(setupView(footerView, parent))
             else -> null
         }
     }
 
-    private fun createView(parent: ViewGroup): ViewGroup {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_header_footer_group, parent, false) as LinearLayout
-        view.orientation = getOrientation(parent)
+    private fun setupView(view: LinearLayout, parent: ViewGroup): ViewGroup {
+        val orientation = getOrientation(parent)
+        view.layoutParams = if (orientation == LinearLayout.VERTICAL) {
+            RecyclerView.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+        } else {
+            RecyclerView.LayoutParams(WRAP_CONTENT, MATCH_PARENT)
+        }
+        view.orientation = orientation
         return view
     }
 
@@ -159,7 +137,9 @@ class HeaderFooterExt(private val vAdapter: VAdapter) {
     }
 
     private class HeadFootHolder(view: View) : ViewHolder(view) {
-        val group: ViewGroup = itemView.findViewById(R.id.ll_group)
+        init {
+            setIsRecyclable(false)
+        }
     }
 }
 

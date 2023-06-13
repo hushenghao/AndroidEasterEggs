@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_event"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@drawable/ic_android_classic" />
 
     <View
         android:id="@+id/line_top"
@@ -47,10 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textAppearance="?attr/textAppearanceTitleLarge"
-        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/iv_logo"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/date/mmddyy" />
+        tools:text="2008" />
 
     <TextView
         android:id="@+id/tv_month"
@@ -61,7 +61,7 @@
         app:layout_constraintBottom_toBottomOf="@id/tv_event"
         app:layout_constraintEnd_toStartOf="@id/iv_logo"
         app:layout_constraintTop_toTopOf="@id/tv_event"
-        tools:text="@tools:sample/date/hhmm" />
+        tools:text="September" />
 
     <ImageView
         android:id="@+id/iv_arrow_left"
