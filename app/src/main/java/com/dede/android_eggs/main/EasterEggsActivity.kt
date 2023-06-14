@@ -20,8 +20,8 @@ class EasterEggsActivity : AppCompatActivity(R.layout.activity_easter_eggs) {
     private val appBarExpandedState = AppBarExpandedState(this, R.id.app_bar)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         EdgePref.applyEdge(this, window)
+        super.onCreate(savedInstanceState)
 
         setSupportActionBar(binding.toolbar)
 

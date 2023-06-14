@@ -138,11 +138,11 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         ): Boolean = false
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            if (direction == targetDirection) {
-                onItemSwiped.invoke(viewHolder.bindingAdapterPosition)
-            }
             val cardView = viewHolder.getCardView()
             if (cardView != null) {
+                if (direction == targetDirection) {
+                    onItemSwiped.invoke(viewHolder.bindingAdapterPosition)
+                }
                 getDefaultUIUtil().clearView(cardView)
             }
             viewHolder.bindingAdapter?.notifyItemChanged(viewHolder.bindingAdapterPosition)
@@ -215,7 +215,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
     class EggListDivider(
         private val divider: Int,
         private val topInset: Int,
-        private val bottomInset: Int
+        private val bottomInset: Int,
     ) :
         ItemDecoration() {
 

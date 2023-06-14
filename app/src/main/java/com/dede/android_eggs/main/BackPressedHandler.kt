@@ -38,7 +38,9 @@ class BackPressedHandler(private val host: AppCompatActivity) :
     }
 
     private val displayMetrics = Resources.getSystem().displayMetrics
-    private val maxXShift = displayMetrics.widthPixels / 20
+
+    // https://developer.android.google.cn/design/ui/mobile/guides/patterns/predictive-back?hl=zh-cn
+    private val maxXShift: Float = displayMetrics.widthPixels / 20 - 8 * displayMetrics.density
     private var maskableShapeSize: Float = 0f
     private var scaledTouchSlop: Int = 0
 
@@ -150,8 +152,8 @@ class BackPressedHandler(private val host: AppCompatActivity) :
             BackEvent.EDGE_RIGHT ->
                 contentView.translationX = -(backEvent.progress * maxXShift)
         }
-        contentView.scaleX = 1F - (0.15F * backEvent.progress)
-        contentView.scaleY = 1F - (0.15F * backEvent.progress)
+        contentView.scaleX = 1F - (0.1F * backEvent.progress)
+        contentView.scaleY = 1F - (0.1F * backEvent.progress)
     }
 
     override fun handleOnBackCancelled() {
