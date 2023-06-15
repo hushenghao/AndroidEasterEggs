@@ -126,6 +126,10 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         private var isFeedback: Boolean = false
         private var postInvokeCallback: Boolean = false
 
+        override fun onSwipeCaptured(capturedChild: View) {
+            isFeedback = false
+        }
+
         override fun onSwipePositionChanged(changedView: View, left: Int, dx: Int) {
             val halfWidth = changedView.width / 2
             val isSwipedStartHalf = if (!isRtl) {
@@ -141,7 +145,6 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         }
 
         override fun onSwipeReleased(releasedChild: View) {
-            isFeedback = false
             if (postInvokeCallback) {
                 callback.invoke()
                 postInvokeCallback = false
