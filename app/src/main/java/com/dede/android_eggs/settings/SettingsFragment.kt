@@ -2,12 +2,10 @@ package com.dede.android_eggs.settings
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dede.android_eggs.R
+import com.dede.android_eggs.databinding.FragmentSettingsBinding
 import com.dede.android_eggs.util.LocalEvent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -29,6 +27,8 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
         }
     }
 
+    private val binding by viewBinding(FragmentSettingsBinding::bind)
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
         EdgePref.applyEdge(requireContext(), dialog.window!!)
@@ -42,32 +42,11 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        LocalEvent.get(this).register(IconShapePref.ACTION_CLOSE_SETTING) {
+        for (pref in SettingsPrefs.providerPrefs()) {
+            binding.llSettings.addView(pref.onCreateView(requireContext()))
+        }
+        LocalEvent.get(this).register(SettingsPrefs.ACTION_CLOSE_SETTING) {
             dismiss()
-        }
-    }
-
-    class Settings : Fragment() {
-        override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?,
-        ): View {
-            return LinearLayout(requireContext()).apply {
-                layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-                orientation = LinearLayout.VERTICAL
-            }
-        }
-
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
-            val layout = (view as ViewGroup)
-            for (pref in SettingsPrefs.providerPrefs()) {
-                layout.addView(pref.onCreateView(requireContext()))
-            }
         }
     }
 

@@ -20,24 +20,16 @@
         android:id="@+id/bt_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="6dp"
         android:gravity="center_horizontal"
-        app:singleSelection="true"
-        app:selectionRequired="true"
         android:saveEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title">
-
-        <com.google.android.material.button.MaterialButton
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="@tools:sample/cities" />
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:selectionRequired="true"
+        app:singleSelection="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

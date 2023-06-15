@@ -1,7 +1,7 @@
 package com.dede.android_eggs.ui
 
 /** Generated automatically via **subset_icons_font.py**, do not modify this file. */
-// 1686823111 
+// 1686835303 
 object Icons {
 
     object Outlined {
@@ -12,13 +12,13 @@ object Icons {
         /** arrow_left */
         const val arrow_left = "\uE5DE"
 
-        /** language */
-        const val language = "\uE894"
-
     }
 
     object Rounded {
         
+        /** android */
+        const val android = "\uE859"
+
         /** arrow_back */
         const val arrow_back = "\uE5C4"
 
@@ -36,9 +36,6 @@ object Icons {
 
         /** fullscreen_exit */
         const val fullscreen_exit = "\uE5D1"
-
-        /** info */
-        const val info = "\uE88E"
 
         /** palette */
         const val palette = "\uE40A"

@@ -29,13 +29,13 @@ import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.pref
 import com.dede.basic.dp
-import com.dede.basic.globalContext
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.DynamicColorsOptions
 import com.google.android.material.color.HarmonizedColors
 import com.google.android.material.color.HarmonizedColorsOptions
+import com.google.android.material.color.MaterialColors
 import com.google.android.material.internal.ContextUtils
 import com.google.android.material.internal.EdgeToEdgeUtils
 import java.util.*
@@ -47,6 +47,9 @@ private fun createFontIcon(context: Context, unicode: String): FontIconsDrawable
 }
 
 object SettingsPrefs {
+
+    const val ACTION_CLOSE_SETTING = "com.dede.easter_eggs.CloseSetting"
+
     fun providerPrefs(): List<SettingPref> = listOf(
         NightModePref(),
         IconShapePref(),
@@ -72,10 +75,11 @@ abstract class SettingPref(
         val title: CharSequence? = null,
         @StringRes val titleRes: Int = View.NO_ID,
         val iconUnicode: String? = null,
-        val icon: Drawable? = null,
     ) {
 
         val id = ViewCompat.generateViewId()
+
+        var iconMaker: ((context: Context) -> Drawable)? = null
 
         companion object {
             const val ON = 1
@@ -119,11 +123,11 @@ abstract class SettingPref(
     open fun onCreateView(context: Context): View {
         val binding = ItemSettingPrefGroupBinding.inflate(LayoutInflater.from(context))
         selectedValue = getValue(context, selectedValue)
-        var label = title
-        if (label.isNullOrEmpty() && titleRes != View.NO_ID) {
-            label = context.getString(titleRes)
+        if (titleRes != View.NO_ID) {
+            binding.tvTitle.setText(titleRes)
+        } else if (title != null) {
+            binding.tvTitle.text = title
         }
-        binding.tvTitle.text = label
         binding.btGroup.removeAllViewsInLayout()
         for (op in options) {
             val button = MaterialButton(
@@ -132,18 +136,18 @@ abstract class SettingPref(
                 M3R.attr.materialButtonOutlinedStyle
             ).apply {
                 id = op.id
-                var buttonLabel = op.title
-                if (buttonLabel.isNullOrEmpty() && op.titleRes != View.NO_ID) {
-                    buttonLabel = context.getString(op.titleRes)
+                if (op.titleRes != View.NO_ID) {
+                    text = context.getString(op.titleRes)
+                } else if (op.title != null) {
+                    text = op.title
                 }
-                text = buttonLabel
-                if (op.icon != null) {
-                    icon = op.icon
-                }
-                if (op.iconUnicode != null) {
+                if (op.iconMaker != null) {
+                    icon = op.iconMaker!!.invoke(context)
+                } else if (op.iconUnicode != null) {
                     icon = createFontIcon(context, op.iconUnicode)
                 }
-                iconPadding = if (buttonLabel.isNullOrEmpty()) 0 else 4.dp
+                iconTint = MaterialColors.getColorStateListOrNull(context, M3R.attr.colorSecondary)
+                iconPadding = if (text.isNullOrEmpty()) 0 else 4.dp
                 setPadding(8.dp, 0, 12.dp, 0)
                 minWidth = 0
                 minimumWidth = 0
@@ -199,38 +203,38 @@ private fun createShapeIcon(context: Context, index: Int): Drawable {
     )
     bitmap.applyCanvas {
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-//        paint.color = MaterialColors.getColor(context, M3R.attr.colorSecondary, "")
-        paint.color = Color.RED
+        paint.color = Color.BLACK
         drawPath(shapePath, paint)
 
         setBitmap(null)
     }
-    return BitmapDrawable(context.resources, bitmap).apply {
-        setBounds(0, 0, bitmap.width, bitmap.height)
-    }
+    return BitmapDrawable(context.resources, bitmap)
 }
 
 private fun iconShapeOp(index: Int): SettingPref.Op {
-    return SettingPref.Op(index, icon = createShapeIcon(globalContext, index))
+    return SettingPref.Op(index).apply {
+        iconMaker = {
+            createShapeIcon(it, this.value)
+        }
+    }
 }
 
 class IconShapePref : SettingPref(
     "pref_key_override_icon_shape",
     listOf(
-        Op(0, titleRes = R.string.summary_theme_follow_system),
+        Op(-1, titleRes = R.string.summary_follow_system, iconUnicode = Icons.Rounded.android),
+        iconShapeOp(0),
+        iconShapeOp(1),
         iconShapeOp(2),
         iconShapeOp(3),
         iconShapeOp(4),
         iconShapeOp(5),
         iconShapeOp(6),
-        iconShapeOp(7),
-        iconShapeOp(8),
     ),
-    0
+    -1
 ) {
     companion object {
         const val ACTION_CHANGED = "com.dede.easter_eggs.IconShapeChanged"
-        const val ACTION_CLOSE_SETTING = "com.dede.easter_eggs.CloseSetting"
 
         fun getMaskPath(context: Context): String {
             val index = IconShapePref().getSelectedOp(context)?.value ?: 0
@@ -244,12 +248,12 @@ class IconShapePref : SettingPref(
     }
 
     override val titleRes: Int
-        get() = R.string.icon_shape_override_label
+        get() = R.string.pref_title_icon_shape_override
 
     override fun onOptionSelected(context: Context, option: Op) {
         LocalEvent.get(context).apply {
             post(ACTION_CHANGED)
-            post(ACTION_CLOSE_SETTING)
+            post(SettingsPrefs.ACTION_CLOSE_SETTING)
         }
     }
 }
@@ -276,7 +280,7 @@ class IconVisualEffectsPref : SettingPref(
 
     override fun onOptionSelected(context: Context, option: Op) {
         LocalEvent.get(context).apply {
-            post(IconShapePref.ACTION_CLOSE_SETTING)
+            post(SettingsPrefs.ACTION_CLOSE_SETTING)
             post(ACTION_CHANGED, bundleOf(EXTRA_VALUE to option.isEnable()))
         }
     }
@@ -357,7 +361,7 @@ class NightModePref : SettingPref(
     listOf(
         Op(
             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM,
-            titleRes = R.string.summary_theme_follow_system,
+            titleRes = R.string.summary_follow_system,
             iconUnicode = Icons.Rounded.brightness_auto
         ),
         Op(
