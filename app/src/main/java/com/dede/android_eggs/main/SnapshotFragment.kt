@@ -40,8 +40,6 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
 
     private fun onSnapshotClick(position: Int) {
         val fragment = requireActivity().findFragmentById<EggListFragment>(R.id.fl_eggs) ?: return
-        requireActivity().findViewById<AppBarLayout>(R.id.app_bar)
-            ?.setExpanded(false, true)
         fragment.smoothScrollToPosition(position)
     }
 

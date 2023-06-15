@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.dede.android_eggs.ui.views.HorizontalSwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="5dp"
     tools:layout_marginTop="5dp">
 
     <include
@@ -16,9 +15,11 @@
         style="@style/Widget.Material3.CardView.Filled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
+        android:tag="@string/tag_swipe_view"
         app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,4 +64,4 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
-</FrameLayout>
+</com.dede.android_eggs.ui.views.HorizontalSwipeLayout>

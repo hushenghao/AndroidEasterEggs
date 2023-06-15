@@ -70,6 +70,8 @@
     <string name="preference_off">Off</string>
     <string name="pref_title_edge" translatable="false">Edge to edge</string>
 
+    <string name="tag_swipe_view" translatable="false">swipe</string>
+
     <string name="toast_shortcut_added">Shortcut added</string>
     <string name="toast_easter" translatable="false">🐰🥚🍫🌷🎉</string>
 </resources>
