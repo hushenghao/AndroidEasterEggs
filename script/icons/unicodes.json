@@ -2,15 +2,15 @@
   "outlined": [
     "animation",
     "arrow_left",
-    "language",
-    "rounded_corner"
+    "language"
   ],
   "rounded": [
     "arrow_back",
     "brightness_auto",
     "brightness_4",
-    "brightness_6",
+    "brightness_7",
     "fullscreen",
+    "fullscreen_exit",
     "info",
     "palette",
     "settings",

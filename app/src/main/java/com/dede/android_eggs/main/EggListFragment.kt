@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.core.view.doOnAttach
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +21,7 @@ import com.dede.android_eggs.main.holders.EggHolder
 import com.dede.android_eggs.main.holders.FooterHolder
 import com.dede.android_eggs.main.holders.PreviewHolder
 import com.dede.android_eggs.main.holders.WavyHolder
-import com.dede.android_eggs.settings.IconShapePerf
+import com.dede.android_eggs.settings.IconShapePref
 import com.dede.android_eggs.settings.IconVisualEffectsPref
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.addHeader
@@ -85,7 +86,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
                 isRecyclerViewIdle = newState == RecyclerView.SCROLL_STATE_IDLE
             }
         })
-        LocalEvent.get(this).register(IconShapePerf.ACTION_CHANGED) {
+        LocalEvent.get(this).register(IconShapePref.ACTION_CHANGED) {
             @Suppress("NotifyDataSetChanged")
             binding.recyclerView.adapter?.notifyDataSetChanged()
         }
@@ -102,7 +103,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             id = R.id.fl_snapshot
-            post {
+            doOnAttach {
                 childFragmentManager.beginTransaction()
                     .replace(R.id.fl_snapshot, SnapshotFragment())
                     .commit()

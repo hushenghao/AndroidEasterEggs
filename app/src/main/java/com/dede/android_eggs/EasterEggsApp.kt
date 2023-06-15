@@ -2,7 +2,7 @@ package com.dede.android_eggs
 
 import android.app.Application
 import android.content.Context
-import com.dede.android_eggs.settings.SettingsPref
+import com.dede.android_eggs.settings.SettingsPrefs
 import com.dede.android_eggs.util.ActivityActionDispatcher
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.basic.GlobalContext
@@ -18,7 +18,7 @@ class EasterEggsApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        SettingsPref.apply(this)
+        SettingsPrefs.apply(this)
         ActivityActionDispatcher.register(this)
         SplitUtils.initialize(this)
     }

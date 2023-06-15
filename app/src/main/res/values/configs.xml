@@ -18,20 +18,6 @@
     <!-- Android 8 below, Default icon shape -->
     <string name="icon_shape_circle_path" translatable="false">M50 0A50 50,0,1,1,50 100A50 50,0,1,1,50 0</string>
 
-    <!-- Values for icon shape overrides. These should correspond to entries defined
-     in icon_shape_override_paths_names -->
-    <string-array name="icon_shape_override_paths_values" translatable="false">
-        <item></item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-    </string-array>
-
     <string-array name="icon_shape_override_paths_names" translatable="false">
         <!-- Option to not change the icon shape on home screen. [CHAR LIMIT=50] -->
         <item>@string/icon_shape_system_default</item>

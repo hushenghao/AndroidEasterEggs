@@ -41,8 +41,9 @@
     <string name="pref_title_version">版本</string>
     <string name="pref_title_theme">主题</string>
     <string name="pref_title_icon_visual_effects">图标视觉动效</string>
-    <string name="summary_theme_follow_system">跟随系统</string>
-    <string name="summary_theme_dark_mode">深色主题</string>
+    <string name="summary_theme_follow_system">系统</string>
+    <string name="summary_theme_dark_mode">深色</string>
+    <string name="summary_theme_light_mode">浅色</string>
     <string name="label_add_shortcut">快捷方式</string>
 
     <string name="preference_on">开启</string>

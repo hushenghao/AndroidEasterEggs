@@ -13,7 +13,7 @@ import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import androidx.preference.ListPreference
-import com.dede.android_eggs.settings.IconShapePerf
+import com.dede.android_eggs.settings.IconShapePref
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.updateCompoundDrawablesRelative
 import com.dede.basic.dp
@@ -87,7 +87,7 @@ open class MaterialListPreferenceDialog(open val pref: ListPreference) :
                 return super.getView(position, convertView, parent).apply {
                     val textView = this as TextView
                     val bitmap = createBitmap(24.dp, 24.dp, Bitmap.Config.ARGB_8888)
-                    val pathStr = IconShapePerf.getMaskPathByIndex(context, position)
+                    val pathStr = IconShapePref.getMaskPathByIndex(context, position)
                     val shapePath = AlterableAdaptiveIconDrawable.getMaskPath(
                         pathStr, bitmap.width, bitmap.height
                     )

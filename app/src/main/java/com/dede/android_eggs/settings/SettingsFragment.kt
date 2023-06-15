@@ -2,12 +2,12 @@ package com.dede.android_eggs.settings
 
 import android.app.Dialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.preference.ListPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.preferences.MaterialListPreferenceDialog
 import com.dede.android_eggs.util.LocalEvent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -42,35 +42,33 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        LocalEvent.get(this).register(IconShapePerf.ACTION_CLOSE_SETTING) {
+        LocalEvent.get(this).register(IconShapePref.ACTION_CLOSE_SETTING) {
             dismiss()
         }
     }
 
-    class Settings : PreferenceFragmentCompat(),
-        PreferenceFragmentCompat.OnPreferenceDisplayDialogCallback {
-
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            preferenceScreen = preferenceManager.createPreferenceScreen(requireContext()).apply {
-                for (pref in SettingsPrefs.providePrefs()) {
-                    addPreference(pref.onCreatePreference(requireContext()))
-                }
+    class Settings : Fragment() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?,
+        ): View {
+            return LinearLayout(requireContext()).apply {
+                layoutParams = LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+                orientation = LinearLayout.VERTICAL
             }
         }
 
-        override fun onPreferenceDisplayDialog(
-            caller: PreferenceFragmentCompat,
-            pref: Preference,
-        ): Boolean {
-            if (pref is ListPreference) {
-                if (pref.key == IconShapePerf.KEY_PREFERENCE) {
-                    MaterialListPreferenceDialog.IconShape.newInstance(pref).show()
-                } else {
-                    MaterialListPreferenceDialog.newInstance(pref).show()
-                }
-                return true
+        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+            super.onViewCreated(view, savedInstanceState)
+            val layout = (view as ViewGroup)
+            for (pref in SettingsPrefs.providerPrefs()) {
+                layout.addView(pref.onCreateView(requireContext()))
             }
-            return false
         }
     }
+
 }
