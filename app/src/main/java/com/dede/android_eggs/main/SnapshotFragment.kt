@@ -16,7 +16,6 @@ import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.util.findFragmentById
 import com.dede.basic.PlatLogoSnapshotProvider
 import com.dede.blurhash_android.BlurHashDrawable
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.carousel.CarouselSnapHelper
 import com.google.android.material.carousel.HeroCarouselStrategy

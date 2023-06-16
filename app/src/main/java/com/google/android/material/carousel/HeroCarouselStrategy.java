@@ -45,8 +45,8 @@ import com.google.android.material.carousel.KeylineState;
  *
  * <p>This class will automatically be reversed by {@link CarouselLayoutManager} if being laid out
  * right-to-left and does not need to make any account for layout direction itself.
+ * todo 更新material 替换为内部实现
  */
-// todo 升级 material 后面版本已经内置了
 public class HeroCarouselStrategy extends CarouselStrategy {
 
   private static final int[] SMALL_COUNTS = new int[] {1};
