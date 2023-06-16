@@ -222,16 +222,16 @@ private fun iconShapeOp(index: Int): SettingPref.Op {
 class IconShapePref : SettingPref(
     "pref_key_override_icon_shape",
     listOf(
-        Op(-1, titleRes = R.string.summary_follow_system, iconUnicode = Icons.Rounded.android),
-        iconShapeOp(0),
+        Op(0, titleRes = R.string.summary_follow_system, iconUnicode = Icons.Rounded.android),
         iconShapeOp(1),
         iconShapeOp(2),
         iconShapeOp(3),
         iconShapeOp(4),
         iconShapeOp(5),
         iconShapeOp(6),
+        iconShapeOp(7),
     ),
-    -1
+    0
 ) {
     companion object {
         const val ACTION_CHANGED = "com.dede.easter_eggs.IconShapeChanged"
