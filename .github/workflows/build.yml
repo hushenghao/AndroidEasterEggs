@@ -12,12 +12,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
-    - name: Get Change logs
-      id: get-change-logs
-      run: |
-        CHANGE_LOGS=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
-        echo "CHANGE_LOGS=$CHANGE_LOGS" >> "$GITHUB_OUTPUT"
     
     - name: set up JDK
       uses: actions/setup-java@v2
@@ -39,11 +33,18 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+
     - name: Build with Gradle
       run: ./gradlew assembleRelease
 
     - name: Stop gradle daemon
       run: ./gradlew --stop
+
+    - name: Get Change logs
+      id: get-change-logs
+      run: |
+        CHANGE_LOGS=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
+        echo "CHANGE_LOGS=$CHANGE_LOGS" >> "$GITHUB_OUTPUT"
 
     - name: Create Release
       id: create_release
@@ -53,10 +54,10 @@ jobs:
 #        tag: ${{ github.ref }}
 #        name: Release ${{ github.ref }}
         # todo replace github.ref
-        tag: v1.9.4
-        name: Release v1.9.4
+        tag: v1.9.4-prerelease
+        name: PreRelease v1.9.4
         commit: release/1.9.4
-        bodyFile: ${{ steps.get-change-logs.outputs.CHANGE_LOGS }}
+        bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get-change-logs.outputs.CHANGE_LOGS }}
         draft: false
         prerelease: true
         artifacts: ./app/build/outputs/apk/release/*.apk
