@@ -12,6 +12,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: Get Change logs
+      id: get-change-logs
+      run: |
+        CHANGE_LOGS=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
+        echo ::set-output name=change_logs::$CHANGE_LOGS
     
     - name: set up JDK
       uses: actions/setup-java@v2
@@ -47,8 +53,10 @@ jobs:
         # todo replace github.ref
         tag: v1.9.4
         name: Release v1.9.4
-        bodyFile: ./fastlane/metadata/android/en-US/changelogs/27.txt
+        bodyFile: ${{ steps.get-change-logs.outputs.change_logs }}
         draft: false
         prerelease: true
         artifacts: ./app/build/outputs/apk/release/*.apk
         artifactContentType: application/vnd.android.package-archive
+        allowUpdates: true
+        updateOnlyUnreleased: true
