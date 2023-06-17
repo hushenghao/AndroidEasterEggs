@@ -5,28 +5,44 @@ package com.dede.basic
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
-import android.graphics.drawable.Drawable
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.view.ContextThemeWrapper
-import androidx.core.content.ContextCompat
 
-/**
- * Created by shhu on 2022/9/27 14:26.
- *
- * @author shhu
- * @since 2022/9/27
- */
 
 val globalContext: Context get() = GlobalContext.globalContext
+val globalThemeContext: Context get() = GlobalContext.globalThemeContext
 
 @SuppressLint("StaticFieldLeak")
 object GlobalContext {
     lateinit var globalContext: Context
         private set
+    val globalThemeContext by lazy { globalContext.createThemeWrapperContext() }
 
     fun init(context: Context) {
         globalContext = context
     }
+}
+
+fun Context.createThemeWrapperContext(): Context {
+    if (this is AppCompatActivity) {
+        return this
+    }
+    // androidx.appcompat.app.AppCompatDelegateImpl.attachBaseContext2
+    val themeWrapper = ContextThemeWrapper(this, applicationInfo.theme)
+    val mode = when (AppCompatDelegate.getDefaultNightMode()) {
+        AppCompatDelegate.MODE_NIGHT_YES -> Configuration.UI_MODE_NIGHT_YES
+        AppCompatDelegate.MODE_NIGHT_NO -> Configuration.UI_MODE_NIGHT_NO
+        else -> {
+            val appConfig = this.applicationContext.resources.configuration
+            appConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        }
+    }
+    val config = Configuration()
+    config.fontScale = 0f
+    config.uiMode = mode or (config.uiMode and Configuration.UI_MODE_NIGHT_MASK.inv())
+    themeWrapper.applyOverrideConfiguration(config)
+    return themeWrapper
 }
 
 fun Context.createScaleWrapper(scale: Float): Context {
@@ -49,9 +65,3 @@ fun Context.createScaleWrapper(scale: Float): Context {
         applyOverrideConfiguration(override)
     }
 }
-
-val Int.string: String get() = globalContext.getString(this)
-
-val Int.color: Int get() = ContextCompat.getColor(globalContext, this)
-
-val Int.drawable: Drawable get() = globalContext.requireDrawable(this)

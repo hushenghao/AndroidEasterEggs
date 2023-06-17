@@ -1,18 +1,20 @@
 {
-    "outlined": [
-        "rounded_corner",
-        "language"
-    ],
-    "rounded": [
-        "brightness_auto",
-        "brightness_4",
-        "brightness_6",
-        "tips_and_updates",
-        "shortcut",
-        "info",
-        "palette",
-        "settings",
-        "fullscreen"
-    ],
-    "filled": []
+  "outlined": [
+    "animation",
+    "arrow_left"
+  ],
+  "rounded": [
+    "android",
+    "arrow_back",
+    "brightness_auto",
+    "brightness_4",
+    "brightness_7",
+    "fullscreen",
+    "fullscreen_exit",
+    "palette",
+    "settings",
+    "swipe_left_alt",
+    "tips_and_updates"
+  ],
+  "filled": []
 }

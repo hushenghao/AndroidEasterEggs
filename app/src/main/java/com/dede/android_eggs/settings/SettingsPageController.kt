@@ -37,6 +37,7 @@ class SettingsPageController(private val activity: AppCompatActivity) : MenuProv
     }
 
     private fun onSlide(offset: Float) {
+        if (!::settingsIcon.isInitialized) return
         settingsIcon.setRotate(360f * offset)
     }
 

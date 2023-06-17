@@ -2,7 +2,6 @@ package com.dede.android_eggs.ui.adapter
 
 import android.view.View
 import androidx.annotation.LayoutRes
-import kotlin.reflect.KClass
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS)

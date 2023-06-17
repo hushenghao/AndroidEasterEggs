@@ -17,11 +17,9 @@ class EasterEggsActivity : AppCompatActivity(R.layout.activity_easter_eggs) {
     private val settingsPageController = SettingsPageController(this)
     private val binding: ActivityEasterEggsBinding by viewBinding(ActivityEasterEggsBinding::bind)
 
-    private val appBarExpandedState = AppBarExpandedState(this, R.id.app_bar)
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         EdgePref.applyEdge(this, window)
+        super.onCreate(savedInstanceState)
 
         setSupportActionBar(binding.toolbar)
 
@@ -29,12 +27,7 @@ class EasterEggsActivity : AppCompatActivity(R.layout.activity_easter_eggs) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
             EasterEggsSplash(this).welcome()
         }
-        appBarExpandedState.restore(savedInstanceState)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        appBarExpandedState.saveState(outState)
-        super.onSaveInstanceState(outState)
+        BackPressedHandler(this).register()
     }
 
 }

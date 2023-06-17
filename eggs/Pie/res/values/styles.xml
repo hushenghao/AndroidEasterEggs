@@ -13,11 +13,11 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="PAppTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen">
-        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
-        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:ignore="NewApi">shortEdges</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
     </style>
 
 </resources>

@@ -4,18 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:once="XXWHCA">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".EasterEggsApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/backup_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_config_old"
         android:hasFragileUserData="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:localeConfig="@xml/locales_config"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
         android:theme="@style/Theme.EasterEggs"
         tools:targetApi="tiramisu">
+        <property
+            android:name="android.window.PROPERTY_ACTIVITY_EMBEDDING_SPLITS_ENABLED"
+            android:value="true" />
+
         <activity
             android:name=".main.EasterEggsActivity"
             android:exported="true">
@@ -28,6 +36,8 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+        <activity android:name=".main.AndroidTimelineActivity" />
+        <activity android:name=".main.PlaceholderActivity" />
     </application>
 
 </manifest>

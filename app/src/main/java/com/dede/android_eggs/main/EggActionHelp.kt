@@ -13,6 +13,7 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.entity.Egg
+import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
 import com.dede.basic.cancel
 import com.dede.basic.delay
@@ -24,10 +25,12 @@ object EggActionHelp {
         Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
 
     private fun createIntent(context: Context, egg: Egg): Intent? {
-        if (egg.targetClassRes == -1) return null
+        if (egg.targetClass == null) return null
         return Intent(Intent.ACTION_VIEW)
-            .setClassName(context, context.getString(egg.targetClassRes))
-            .addFlags(ACTIVITY_TASK_FLAGS)
+            .setClass(context, egg.targetClass)
+            .applyIf(!SplitUtils.isActivityEmbedded(context)) {
+                addFlags(ACTIVITY_TASK_FLAGS)
+            }
             .applyIf(egg.extras != null) {
                 putExtras(egg.extras!!)
             }
@@ -39,8 +42,7 @@ object EggActionHelp {
     }
 
     fun supportShortcut(context: Context, egg: Egg): Boolean {
-        if (egg.shortcutKey == null) return false
-        if (egg.targetClassRes == -1) return false
+        if (egg.shortcutKey == null || egg.targetClass == null) return false
         return ShortcutManagerCompat.isRequestPinShortcutSupported(context)
     }
 
@@ -82,7 +84,12 @@ object EggActionHelp {
                 if (receiver == null) {
                     receiver = PinShortcutReceiver()
                     val intentFilter = IntentFilter(ACTION)
-                    context.applicationContext.registerReceiver(receiver, intentFilter)
+                    val appCtx = context.applicationContext
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        appCtx.registerReceiver(receiver, intentFilter, Context.RECEIVER_EXPORTED)
+                    } else {
+                        appCtx.registerReceiver(receiver, intentFilter)
+                    }
                     this.receiver = receiver
                 } else {
                     cancel(token)

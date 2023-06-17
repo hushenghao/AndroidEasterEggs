@@ -30,8 +30,8 @@ class PlayStoreTopLargePictureUtil {
         private const val PICTURE_HEIGHT = 500
 
         private const val ICON_SIZE = 500
-        private const val ICON_RES = R.mipmap.ic_launcher_round
-        private const val BG_COLOR_RES = R.color.ic_launcher_background
+        private val ICON_RES = R.mipmap.ic_launcher_round
+        private val BG_COLOR_RES = com.dede.basic.R.color.system_accent3_800
     }
 
     @Test

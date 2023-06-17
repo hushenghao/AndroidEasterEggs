@@ -2,11 +2,9 @@ name: Android CI
 
 on:
   push:
-#     branches: [ master ]
+#    branches: [ release/1.9.4 ]
     tags:
       - 'v*'
-#   pull_request:
-#     branches: [ master ]
 
 jobs:
   build:
@@ -15,53 +13,53 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: set up JDK 11
+    - name: set up JDK
       uses: actions/setup-java@v2
       with:
-        java-version: '11'
+        java-version: '17'
         distribution: 'adopt'
         cache: gradle
 
+    - name: Retrieve the secret and decode it to a file
+      env:
+        KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        KEY_PROPERTIES_BASE64: ${{ secrets.KEY_PROPERTIES_BASE64 }}
+      run: |
+        echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
+        echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
+
+    - name: Print root files
+      run: ls -l
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+
     - name: Build with Gradle
       run: ./gradlew assembleRelease
-      
+
     - name: Stop gradle daemon
       run: ./gradlew --stop
-      
-#       if: contains(github.ref, 'tags/')
-      
+
+    - name: Get Change logs
+      id: get-change-logs
+      run: |
+        CHANGE_LOGS=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
+        echo "CHANGE_LOGS=$CHANGE_LOGS" >> "$GITHUB_OUTPUT"
+
     - name: Create Release
       id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      uses: ncipollo/release-action@v1
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-#         body: |
-#           Changes in this Release
-#           - First Change
-#           - Second Change
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref }}
+        name: Release ${{ github.ref }}
+#        tag: v1.9.4-prerelease
+#        name: PreRelease v1.9.4
+#        commit: release/1.9.4
         draft: false
         prerelease: false
-        
-    - name: Get Apk Name
-      id: get-apk-name
-      run: |
-        APK_NAME=`cd ./app/build/outputs/apk/release && ls *.apk`
-        echo ::set-output name=apk_name::$APK_NAME
-        
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./app/build/outputs/apk/release/${{ steps.get-apk-name.outputs.apk_name }}
-        asset_name: Easter_Eggs_debug.apk
-        asset_content_type: application/vnd.android.package-archive
-
-        
+        bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get-change-logs.outputs.CHANGE_LOGS }}
+        artifacts: ./app/build/outputs/apk/release/*.apk
+        artifactContentType: application/vnd.android.package-archive
+        allowUpdates: true
+        updateOnlyUnreleased: true

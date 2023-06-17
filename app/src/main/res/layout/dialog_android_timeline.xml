@@ -20,6 +20,7 @@
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layoutDirection="ltr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title">
 
@@ -35,8 +36,8 @@
                 android:layout_height="34dp"
                 android:layout_marginTop="104dp"
                 android:max="5"
-                android:paddingLeft="45dp"
-                android:paddingRight="198dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="220dp"
                 android:progressDrawable="@null"
                 android:thumb="@drawable/timeline_seekbar_thumb" />
 
@@ -47,7 +48,7 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="103dp"
                 android:layout_marginRight="11dp"
-                android:src="@drawable/timeline_release" />
+                android:src="@drawable/timeline_release_thumb" />
 
             <ImageView
                 android:id="@+id/iv_timeline"

@@ -1,6 +1,9 @@
 package com.dede.android_eggs.main.entity
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.dede.android_eggs.ui.adapter.VType
@@ -9,13 +12,21 @@ data class Egg(
     @DrawableRes val iconRes: Int,
     @StringRes val androidRes: Int,
     @StringRes val eggNameRes: Int,
-    @StringRes val versionCommentRes: Int,
-    @StringRes val targetClassRes: Int = -1,
+    val versionCommentFormatter: CharSequenceFormatter,
+    val targetClass: Class<out Activity>? = null,
     val supportAdaptiveIcon: Boolean = false,
     val shortcutKey: String? = null,
     val extras: Bundle? = null,
     private val itemType: Int = VIEW_TYPE_EGG,
 ) : VType {
+
+    class CharSequenceFormatter(@StringRes val resId: Int, vararg formatArgs: Any) {
+
+        private val args: Array<out Any> = formatArgs
+        fun format(context: Context): CharSequence {
+            return context.getString(resId, *args)
+        }
+    }
 
     companion object {
         const val VIEW_TYPE_EGG = 0

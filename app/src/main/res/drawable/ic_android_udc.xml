@@ -4,6 +4,6 @@
     <item>
         <inset
             android:drawable="@drawable/ic_android_udc_fg"
-            android:inset="-18dp" />
+            android:inset="-11dp" />
     </item>
 </layer-list>

@@ -1,7 +1,9 @@
 package com.dede.android_eggs.main.entity
 
+import android.os.Build.VERSION_CODES
 import androidx.core.os.bundleOf
 import com.dede.android_eggs.R
+import com.dede.android_eggs.main.entity.Egg.CharSequenceFormatter
 
 
 object EggDatas {
@@ -47,9 +49,8 @@ object EggDatas {
             R.drawable.ic_android_udc,
             R.string.title_android_u,
             R.string.title_android_u,
-            R.string.version_comment_android_u,
-            -1,
-            true,
+            CharSequenceFormatter(R.string.version_comment_once, 34, "14"),
+            supportAdaptiveIcon = true,
             itemType = Egg.VIEW_TYPE_PREVIEW
         ),
         Wavy(R.drawable.ic_wavy_line),
@@ -57,8 +58,12 @@ object EggDatas {
             R.drawable.ic_android_tiramisu,
             R.string.title_android_t,
             com.android_t.egg.R.string.t_egg_name,
-            R.string.version_comment_android_t,
-            R.string.target_class_android_t,
+            CharSequenceFormatter(
+                R.string.version_comment_once,
+                VERSION_CODES.TIRAMISU,
+                "13"
+            ),
+            com.android_t.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_T
         ),
@@ -66,8 +71,12 @@ object EggDatas {
             R.drawable.ic_android_s,
             R.string.title_android_s,
             com.android_s.egg.R.string.s_egg_name,
-            R.string.version_comment_android_s,
-            R.string.target_class_android_s,
+            CharSequenceFormatter(
+                R.string.version_comment_range,
+                VERSION_CODES.S, VERSION_CODES.S_V2,
+                "12", "12L"
+            ),
+            com.android_s.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_S
         ),
@@ -75,8 +84,12 @@ object EggDatas {
             com.android_r.egg.R.drawable.r_icon,
             R.string.title_android_r,
             com.android_r.egg.R.string.r_egg_name,
-            R.string.version_comment_android_r,
-            R.string.target_class_android_r,
+            CharSequenceFormatter(
+                R.string.version_comment_once,
+                VERSION_CODES.R,
+                "11"
+            ),
+            com.android_r.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_R
         ),
@@ -84,8 +97,12 @@ object EggDatas {
             com.android_q.egg.R.drawable.q_icon,
             R.string.title_android_q,
             com.android_q.egg.R.string.q_egg_name,
-            R.string.version_comment_android_q,
-            R.string.target_class_android_q,
+            CharSequenceFormatter(
+                R.string.version_comment_once,
+                VERSION_CODES.Q,
+                "10"
+            ),
+            com.android_q.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_Q
         ),
@@ -93,8 +110,12 @@ object EggDatas {
             com.android_p.egg.R.drawable.p_icon,
             R.string.title_android_p,
             com.android_p.egg.R.string.p_app_name,
-            R.string.version_comment_android_p,
-            R.string.target_class_android_p,
+            CharSequenceFormatter(
+                R.string.version_comment_once,
+                VERSION_CODES.P,
+                "9"
+            ),
+            com.android_p.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_P
         ),
@@ -102,8 +123,12 @@ object EggDatas {
             R.drawable.ic_android_oreo,
             R.string.title_android_o_1,
             com.android_o.egg.R.string.o_app_name,
-            R.string.version_comment_android_o,
-            R.string.target_class_android_o,
+            CharSequenceFormatter(
+                R.string.version_comment_range,
+                VERSION_CODES.O, VERSION_CODES.O_MR1,
+                "8.0", "8.1"
+            ),
+            com.android_o.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_O_1,
             bundleOf(EXTRA_O_POINT to true)
@@ -112,8 +137,12 @@ object EggDatas {
             R.drawable.ic_android_oreo,
             R.string.title_android_o,
             com.android_o.egg.R.string.o_app_name,
-            R.string.version_comment_android_o,
-            R.string.target_class_android_o,
+            CharSequenceFormatter(
+                R.string.version_comment_range,
+                VERSION_CODES.O, VERSION_CODES.O_MR1,
+                "8.0", "8.1"
+            ),
+            com.android_o.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_O
         ),
@@ -121,8 +150,12 @@ object EggDatas {
             R.drawable.ic_android_nougat,
             R.string.title_android_n,
             com.android_n.egg.R.string.n_app_name,
-            R.string.version_comment_android_n,
-            R.string.target_class_android_n,
+            CharSequenceFormatter(
+                R.string.version_comment_range,
+                VERSION_CODES.N, VERSION_CODES.N_MR1,
+                "7.0", "7.1"
+            ),
+            com.android_n.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_N
         ),
@@ -130,8 +163,12 @@ object EggDatas {
             R.drawable.ic_android_marshmallow,
             R.string.title_android_m,
             com.android_m.egg.R.string.m_mland,
-            R.string.version_comment_android_m,
-            R.string.target_class_android_m,
+            CharSequenceFormatter(
+                R.string.version_comment_once,
+                VERSION_CODES.M,
+                "6.0"
+            ),
+            com.android_m.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_M
         ),
@@ -139,8 +176,12 @@ object EggDatas {
             R.drawable.ic_android_lollipop,
             R.string.title_android_l,
             com.android_l.egg.R.string.l_lland,
-            R.string.version_comment_android_l,
-            R.string.target_class_android_l,
+            CharSequenceFormatter(
+                R.string.version_comment_range,
+                VERSION_CODES.LOLLIPOP, VERSION_CODES.LOLLIPOP_MR1,
+                "5.0", "5.1"
+            ),
+            com.android_l.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_L
         ),
@@ -148,8 +189,12 @@ object EggDatas {
             R.drawable.ic_android_kitkat,
             R.string.title_android_k,
             com.android_k.egg.R.string.k_dessert_case,
-            R.string.version_comment_android_k,
-            R.string.target_class_android_k,
+            CharSequenceFormatter(
+                R.string.version_comment_range,
+                VERSION_CODES.KITKAT, VERSION_CODES.KITKAT_WATCH,
+                "4.4", "4.4W"
+            ),
+            com.android_k.egg.PlatLogoActivity::class.java,
             false,
             KEY_EGG_K
         ),
@@ -157,8 +202,12 @@ object EggDatas {
             R.drawable.ic_android_jelly_bean,
             R.string.title_android_j,
             com.android_j.egg.R.string.j_egg_name,
-            R.string.version_comment_android_j,
-            R.string.target_class_android_j,
+            CharSequenceFormatter(
+                R.string.version_comment_range,
+                VERSION_CODES.JELLY_BEAN, VERSION_CODES.JELLY_BEAN_MR2,
+                "4.1", "4.3"
+            ),
+            com.android_j.egg.PlatLogoActivity::class.java,
             false,
             KEY_EGG_J
         ),
@@ -166,8 +215,12 @@ object EggDatas {
             R.drawable.ic_android_ics,
             R.string.title_android_i,
             com.android_i.egg.R.string.i_egg_name,
-            R.string.version_comment_android_i,
-            R.string.target_class_android_i,
+            CharSequenceFormatter(
+                R.string.version_comment_range,
+                VERSION_CODES.ICE_CREAM_SANDWICH, VERSION_CODES.ICE_CREAM_SANDWICH_MR1,
+                "4.0", "4.0.3"
+            ),
+            com.android_i.egg.PlatLogoActivity::class.java,
             false,
             KEY_EGG_I
         ),
@@ -175,8 +228,12 @@ object EggDatas {
             R.drawable.ic_android_honeycomb,
             R.string.title_android_h,
             com.android_h.egg.R.string.h_egg_name,
-            R.string.version_comment_android_h,
-            R.string.target_class_android_h,
+            CharSequenceFormatter(
+                R.string.version_comment_range,
+                VERSION_CODES.HONEYCOMB, VERSION_CODES.HONEYCOMB_MR2,
+                "3.0", "3.2"
+            ),
+            com.android_h.egg.PlatLogoActivity::class.java,
             false,
             KEY_EGG_H
         ),
@@ -184,8 +241,12 @@ object EggDatas {
             R.drawable.ic_android_gingerbread,
             R.string.title_android_g,
             com.android_g.egg.R.string.g_egg_name,
-            R.string.version_comment_android_g,
-            R.string.target_class_android_g,
+            CharSequenceFormatter(
+                R.string.version_comment_range,
+                VERSION_CODES.GINGERBREAD, VERSION_CODES.GINGERBREAD_MR1,
+                "2.3", "2.3.3"
+            ),
+            com.android_g.egg.PlatLogoActivity::class.java,
             false,
             KEY_EGG_G
         ),
@@ -194,37 +255,61 @@ object EggDatas {
             R.drawable.ic_android_froyo,
             R.string.title_android_froyo,
             R.string.summary_android_froyo,
-            R.string.version_comment_android_froyo
+            CharSequenceFormatter(
+                R.string.version_comment_once,
+                VERSION_CODES.FROYO,
+                "2.2"
+            )
         ),
         Egg(
             R.drawable.ic_android_eclair,
             R.string.title_android_eclair,
             R.string.summary_android_eclair,
-            R.string.version_comment_android_eclair
+            CharSequenceFormatter(
+                R.string.version_comment_range,
+                VERSION_CODES.ECLAIR, VERSION_CODES.ECLAIR_MR1,
+                "2.0", "2.1"
+            )
         ),
         Egg(
             R.drawable.ic_android_donut,
             R.string.title_android_donut,
             R.string.summary_android_donut,
-            R.string.version_comment_android_donut
+            CharSequenceFormatter(
+                R.string.version_comment_once,
+                VERSION_CODES.DONUT,
+                "1.6"
+            )
         ),
         Egg(
             R.drawable.ic_android_cupcake,
             R.string.title_android_cupcake,
             R.string.summary_android_cupcake,
-            R.string.version_comment_android_cupcake
+            CharSequenceFormatter(
+                R.string.version_comment_once,
+                VERSION_CODES.CUPCAKE,
+                "1.5"
+            )
         ),
         Egg(
             R.drawable.ic_android_classic,
             R.string.title_android_petit_four,
             R.string.summary_android_petit_four,
-            R.string.version_comment_android_petit_four
+            CharSequenceFormatter(
+                R.string.version_comment_once,
+                VERSION_CODES.BASE_1_1,
+                "1.1"
+            )
         ),
         Egg(
             R.drawable.ic_android_classic,
             R.string.title_android_base,
-            R.string.title_android_base,
-            R.string.version_comment_android_base
+            R.string.summary_android_base,
+            CharSequenceFormatter(
+                R.string.version_comment_once,
+                VERSION_CODES.BASE,
+                "1.0"
+            )
         ),
         Wavy(R.drawable.ic_wavy_line_1, true),
         Footer()

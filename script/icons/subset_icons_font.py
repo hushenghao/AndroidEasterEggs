@@ -48,7 +48,7 @@ material_fonts = {
 
 root_path = sys.path[0]
 font_dir = os.path.abspath(os.path.join(
-    root_path, '../../app/src/main/assets'))
+    root_path, '../../app/src/main/res/font'))
 icons_kt_dir = os.path.abspath(os.path.join(
     root_path, '../../app/src/main/java/com/dede/android_eggs/ui'))
 

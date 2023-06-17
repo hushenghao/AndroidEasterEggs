@@ -1,9 +1,12 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
+import os
 import blurhash
 
 with open("images.txt", "r", encoding='utf-8') as f:
     paths = f.readlines()
+
+xml_format = "<string name=\"{}\" translatable=\"false\">{}</string>\n"
 
 for path in paths:
     path = path.strip()
@@ -11,4 +14,5 @@ for path in paths:
         continue
     print(path)
     hash = blurhash.encode(path, x_components=4, y_components=3)
-    print(hash)
+    name = os.path.split(path)[1].split(".")[0]
+    print(xml_format.format(name, hash))

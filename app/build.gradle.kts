@@ -12,6 +12,7 @@ plugins {
 
 android {
     compileSdk = Versions.COMPILE_SDK
+    compileSdkPreview = "UpsideDownCake"
     buildToolsVersion = Versions.BUILD_TOOLS
     namespace = "com.dede.android_eggs"
 
@@ -19,8 +20,9 @@ android {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
-        versionCode = 26
-        versionName = "1.9.3"
+//        targetSdkPreview = "UpsideDownCake"
+        versionCode = 27
+        versionName = "1.9.4"
         buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations.addAll(listOf("zh", "en"))
@@ -60,11 +62,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     testOptions {
@@ -86,16 +88,19 @@ android {
 
 dependencies {
     implementation(deps.androidx.appcompat)
-    implementation(deps.androidx.core.ktx)
-    implementation(deps.androidx.lifecycle.runtime.ktx)
-    implementation(deps.androidx.lifecycle.viewmodel.ktx)
-    implementation(deps.androidx.preference.ktx)
+    implementation(deps.androidx.core)
+    implementation(deps.androidx.activity)
+    implementation(deps.androidx.lifecycle.runtime)
+    implementation(deps.androidx.lifecycle.viewmodel)
+    implementation(deps.androidx.preference)
     implementation(deps.androidx.constraintlayout)
     implementation(deps.androidx.browser)
+    implementation(deps.androidx.window)
     implementation(deps.google.material)
     implementation(deps.io.coil)
     implementation(deps.free.reflection)
     implementation(deps.viewbinding.delegate)
+    implementation(deps.blurhash.android)
     debugImplementation(deps.leakcanary)
     implementation(project(":basic"))
     implementation(project(":eggs:T"))

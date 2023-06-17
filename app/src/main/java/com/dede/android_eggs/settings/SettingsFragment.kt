@@ -3,11 +3,10 @@ package com.dede.android_eggs.settings
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
-import androidx.preference.ListPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.preferences.MaterialListPreferenceDialog
+import com.dede.android_eggs.databinding.FragmentSettingsBinding
+import com.dede.android_eggs.util.LocalEvent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -28,6 +27,8 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
         }
     }
 
+    private val binding by viewBinding(FragmentSettingsBinding::bind)
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
         EdgePref.applyEdge(requireContext(), dialog.window!!)
@@ -39,30 +40,14 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
         return dialog
     }
 
-    class Settings : PreferenceFragmentCompat(),
-        PreferenceFragmentCompat.OnPreferenceDisplayDialogCallback {
-
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            preferenceScreen = preferenceManager.createPreferenceScreen(requireContext()).apply {
-                for (pref in SettingsPrefs.providePrefs()) {
-                    addPreference(pref.onCreatePreference(requireContext()))
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        for (pref in SettingsPrefs.providerPrefs()) {
+            binding.llSettings.addView(pref.onCreateView(requireContext()))
         }
-
-        override fun onPreferenceDisplayDialog(
-            caller: PreferenceFragmentCompat,
-            pref: Preference,
-        ): Boolean {
-            if (pref is ListPreference) {
-                if (pref.key == IconShapeOverride.KEY_PREFERENCE) {
-                    MaterialListPreferenceDialog.IconShape.newInstance(pref).show()
-                } else {
-                    MaterialListPreferenceDialog.newInstance(pref).show()
-                }
-                return true
-            }
-            return false
+        LocalEvent.get(this).register(SettingsPrefs.ACTION_CLOSE_SETTING) {
+            dismiss()
         }
     }
+
 }

@@ -3,6 +3,6 @@
     <item>
         <inset
             android:drawable="@drawable/ic_android_tiramisu_fg"
-            android:inset="-21dp" />
+            android:inset="-12dp" />
     </item>
 </layer-list>

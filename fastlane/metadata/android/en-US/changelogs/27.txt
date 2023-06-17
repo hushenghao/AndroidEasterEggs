@@ -1,0 +1,5 @@
+- Added visual action for Icons 🎉
+- Added Android timeline
+- Added predictive return gesture animation
+- Optimize folding screen devices 💻
+- Other function optimization
