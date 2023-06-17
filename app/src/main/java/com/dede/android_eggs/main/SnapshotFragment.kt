@@ -16,7 +16,9 @@ import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.util.findFragmentById
 import com.dede.basic.PlatLogoSnapshotProvider
 import com.dede.blurhash_android.BlurHashDrawable
-import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.carousel.CarouselLayoutManager
+import com.google.android.material.carousel.CarouselSnapHelper
+import com.google.android.material.carousel.HeroCarouselStrategy
 
 
 class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
@@ -25,6 +27,10 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.snapshotList.layoutManager = CarouselLayoutManager().apply {
+            setCarouselStrategy(HeroCarouselStrategy())
+        }
+        CarouselSnapHelper(true).attachToRecyclerView(binding.snapshotList)
         binding.snapshotList.adapter = VAdapter(
             R.layout.item_snapshot_mask_layout,
             EggDatas.snapshotList, this::onBindSnapshot
@@ -33,8 +39,6 @@ class SnapshotFragment : Fragment(R.layout.fragment_snapshot_header) {
 
     private fun onSnapshotClick(position: Int) {
         val fragment = requireActivity().findFragmentById<EggListFragment>(R.id.fl_eggs) ?: return
-        requireActivity().findViewById<AppBarLayout>(R.id.app_bar)
-            ?.setExpanded(false, true)
         fragment.smoothScrollToPosition(position)
     }
 

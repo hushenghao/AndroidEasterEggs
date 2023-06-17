@@ -10,6 +10,7 @@
     <string name="url_github_commit" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/commit/%s</string>
     <string name="url_source" translatable="false">https://github.com/aosp-mirror/platform_frameworks_base</string>
     <string name="url_beta" translatable="false">https://www.pgyer.com/eggs</string>
+    <string name="url_dino_3d" translatable="false">https://www.pgyer.com/dino3d</string>
     <string name="url_privacy" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE</string>
     <string name="url_license" translatable="false">https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/master/LICENSE</string>
     <string name="url_android_releases" translatable="false">https://developer.android.com/about/versions</string>
@@ -22,6 +23,7 @@
     <string name="label_github" translatable="false">GitHub</string>
     <string name="label_frameworks" translatable="false">Frameworks</string>
     <string name="label_beta">Get Beta</string>
+    <string name="label_dino_3d" translatable="false">Dino 3D</string>
     <string name="label_privacy_policy">Privacy</string>
     <string name="label_license" translatable="false">License</string>
     <string name="label_email">Contact me</string>
@@ -38,35 +40,22 @@
     <string name="label_settings">Settings</string>
     <string name="label_project_desc">The project contains the complete code of the system Easter eggs, which aims to organize and compatible with the system eggs, so as to ensure that most devices can experience different versions of Easter eggs and will not make too many modifications to the system egg code. Some versions use new features of the system, and lower versions can only use some functions.</string>
 
-    <!-- Developer setting to change the shape of icons on home screen. [CHAR LIMIT=50] -->
-    <string name="icon_shape_override_label">Icon Shape</string>
-    <!-- Option to not change the icon shape on home screen and use the system default setting instead. [CHAR LIMIT=50] -->
-    <string name="icon_shape_system_default">Set by System</string>
-    <!-- Option to change the shape of the home screen icons to a square. [CHAR LIMIT=50] -->
-    <string name="icon_shape_square">Square</string>
-    <!-- Option to change the shape of the home screen icons to a squircle. This represents the name of the shape somewhere between a circle and a square. [CHAR LIMIT=50] -->
-    <string name="icon_shape_squircle">Squircle</string>
-    <!-- Option to change the shape of the home screen icons to a circle. [CHAR LIMIT=50] -->
-    <string name="icon_shape_circle">Circle</string>
-    <!-- Option to change the shape of the home screen icons to a teardrop. This represents the name of the shape similar to a circle with with the bottom right corner pushed out like a square [CHAR LIMIT=50] -->
-    <string name="icon_shape_teardrop">Teardrop</string>
-    <string name="icon_shape_rounded_corners">Rounded Corners</string>
-    <string name="icon_shape_clover">Clover</string>
-    <string name="icon_shape_scallop">Scallop</string>
-    <string name="icon_shape_plum_blossom">Plum Blossom</string>
-
+    <string name="pref_title_icon_shape_override">Icon Shape</string>
     <string name="pref_title_language">Language</string>
     <string name="pref_title_version">Version</string>
     <string name="pref_title_theme">Theme</string>
     <string name="pref_title_dynamic_color" translatable="false">Dynamic Color</string>
-    <string name="pref_title_icon_visual_effects">Icon visual effects</string>
-    <string name="summary_theme_follow_system">Follow system</string>
-    <string name="summary_theme_dark_mode">Dark theme</string>
+    <string name="pref_title_icon_visual_effects">Icon Visual Effects</string>
+    <string name="summary_follow_system">System</string>
+    <string name="summary_theme_dark_mode">Dark</string>
+    <string name="summary_theme_light_mode">Light</string>
     <string name="label_add_shortcut">Shortcut</string>
 
     <string name="preference_on">On</string>
     <string name="preference_off">Off</string>
-    <string name="pref_title_edge" translatable="false">Edge to edge</string>
+    <string name="pref_title_edge" translatable="false">Edge to Edge</string>
+
+    <string name="tag_swipe_view" translatable="false">swipe</string>
 
     <string name="toast_shortcut_added">Shortcut added</string>
     <string name="toast_easter" translatable="false">🐰🥚🍫🌷🎉</string>

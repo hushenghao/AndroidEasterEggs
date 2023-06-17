@@ -7,8 +7,9 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewConfiguration
 import android.window.BackEvent
+import androidx.activity.BackEventCompat
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.RequiresApi
+import androidx.activity.OnBackPressedDispatcherAccessor
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
@@ -37,7 +38,9 @@ class BackPressedHandler(private val host: AppCompatActivity) :
     }
 
     private val displayMetrics = Resources.getSystem().displayMetrics
-    private val maxXShift = displayMetrics.widthPixels / 20
+
+    // https://developer.android.google.cn/design/ui/mobile/guides/patterns/predictive-back?hl=zh-cn
+    private val maxXShift: Float = displayMetrics.widthPixels / 20 - 8 * displayMetrics.density
     private var maskableShapeSize: Float = 0f
     private var scaledTouchSlop: Int = 0
 
@@ -60,6 +63,7 @@ class BackPressedHandler(private val host: AppCompatActivity) :
 
     @SuppressLint("RestrictedApi")
     fun register() {
+        OnBackPressedDispatcherAccessor.fixApi34(host)
         host.onBackPressedDispatcher.addCallback(this)
         host.lifecycle.addObserver(this)
 
@@ -116,14 +120,12 @@ class BackPressedHandler(private val host: AppCompatActivity) :
     }
 
 
-    @RequiresApi(34)
-    override fun handleOnBackStarted(backEvent: BackEvent) {
+    override fun handleOnBackStarted(backEvent: BackEventCompat) {
         touchX = backEvent.touchX
         touchY = backEvent.touchY
     }
 
-    @RequiresApi(34)
-    override fun handleOnBackProgressed(backEvent: BackEvent) {
+    override fun handleOnBackProgressed(backEvent: BackEventCompat) {
         if (!isProgressed && max(
                 abs(touchX - backEvent.touchX),
                 abs(touchY - backEvent.touchY)

@@ -31,20 +31,20 @@
 | Android 10 (Queen Cake)                |  29   | Icon Quiz                     |  ✅  |              ❌               |                -                |
 | Android 9 (Pie)                        |  28   | PAINT.APK                     |  ✅  |              ❌               |                -                |
 | Android 8.0~8.1 (Oreo)                 | 26~27 | Octopus                       |  ✅  |              ❌               |                -                |
-| Android 7.0~7.1.2 (Nougat)             | 24~25 | Neko                          |  ✅  |              ✅               |               24                |
-| Android 6.0~6.0.1 (Marshmallow)        |  23   | Marshmallow Land              |  ✅  |              ❌               |                -                |
+| Android 7.0~7.1 (Nougat)               | 24~25 | Neko                          |  ✅  |              ✅               |               24                |
+| Android 6.0 (Marshmallow)              |  23   | Marshmallow Land              |  ✅  |              ❌               |                -                |
 | Android 5.0~5.1 (Lollipop)             | 21~22 | L Land                        |  ✅  |              ❌               |                -                |
-| Android 4.4~4.4.4 (KitKat)             | 19~20 | Dessert Case                  |  ✅  |              ❌               |                -                |
+| Android 4.4~4.4W (KitKat)              | 19~20 | Dessert Case                  |  ✅  |              ❌               |                -                |
 | Android 4.1~4.3 (Jelly Bean)           | 16~18 | BeanBag                       |  ✅  |              ❌               |                -                |
-| Android 4.0~4.0.4 (Ice Cream Sandwich) | 14~15 | Nyandroid                     |  ✅  |              ❌               |                -                |
+| Android 4.0~4.0.3 (Ice Cream Sandwich) | 14~15 | Nyandroid                     |  ✅  |              ❌               |                -                |
 | Android 3.0~3.2 (Honeycomb)            | 11~13 | Honeycomb [*](#id_egg_name)   |  ✅  |              ❌               |                -                |
-| Android 2.3~2.3.7 (Gingerbread)        | 9~10  | Gingerbread [*](#id_egg_name) |  ✅  |              ❌               |                -                |
-| Android 2.2~2.2.3 (Froyo)              |   8   | -                             |  -  |              -               |                -                |
+| Android 2.3~2.3.3 (Gingerbread)        | 9~10  | Gingerbread [*](#id_egg_name) |  ✅  |              ❌               |                -                |
+| Android 2.2 (Froyo)                    |   8   | -                             |  -  |              -               |                -                |
 | Android 2.0~2.1 (Eclair)               |  5~7  | -                             |  -  |              -               |                -                |
 | Android 1.6 (Donut)                    |   4   | -                             |  -  |              -               |                -                |
 | Android 1.5 (Cupcake)                  |   3   | -                             |  -  |              -               |                -                |
 | Android 1.1 (Petit Four)               |   2   | -                             |  -  |              -               |                -                |
-| Android 1.0                            |   1   | -                             |  -  |              -               |                -                |
+| Android 1.0 (Base)                     |   1   | -                             |  -  |              -               |                -                |
 
 * <span id='id_new_features'>使用了系统新特性的彩蛋，老版本系统只能使用部分功能。</span>
 * <span id='id_full_egg_mini_sdk'>完整体验彩蛋所需要的最低SDK版本。</span>

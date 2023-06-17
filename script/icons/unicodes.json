@@ -1,16 +1,16 @@
 {
   "outlined": [
     "animation",
-    "language",
-    "rounded_corner"
+    "arrow_left"
   ],
   "rounded": [
+    "android",
     "arrow_back",
     "brightness_auto",
     "brightness_4",
-    "brightness_6",
+    "brightness_7",
     "fullscreen",
-    "info",
+    "fullscreen_exit",
     "palette",
     "settings",
     "swipe_left_alt",

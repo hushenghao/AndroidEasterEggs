@@ -48,7 +48,7 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="103dp"
                 android:layout_marginRight="11dp"
-                android:src="@drawable/timeline_release" />
+                android:src="@drawable/timeline_release_thumb" />
 
             <ImageView
                 android:id="@+id/iv_timeline"

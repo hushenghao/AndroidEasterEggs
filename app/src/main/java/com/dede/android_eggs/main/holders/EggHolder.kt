@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
+import android.view.HapticFeedbackConstants
 import android.view.View
 import android.view.animation.LinearInterpolator
 import coil.dispose
@@ -11,12 +12,13 @@ import coil.load
 import com.dede.android_eggs.databinding.ItemEasterEggLayoutBinding
 import com.dede.android_eggs.main.EggActionHelp
 import com.dede.android_eggs.main.entity.Egg
-import com.dede.android_eggs.settings.IconShapePerf
+import com.dede.android_eggs.settings.IconShapePref
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
+import com.dede.android_eggs.ui.views.HorizontalSwipeLayout
 import com.dede.android_eggs.util.isRtl
 import com.dede.android_eggs.util.resolveColorStateList
 import com.dede.android_eggs.util.updateCompoundDrawablesRelative
@@ -83,13 +85,13 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         binding.tvTitle.setText(egg.eggNameRes)
         binding.tvSummary.setText(egg.androidRes)
         binding.cardView.setOnClickListener { EggActionHelp.launchEgg(context, egg) }
-        binding.background.tvBgMessage.setText(egg.versionCommentRes)
+        binding.background.tvBgMessage.text = egg.versionCommentFormatter.format(context)
         binding.background.tvAddShortcut.isEnabled = EggActionHelp.supportShortcut(context, egg)
 
         binding.ivIcon.dispose()
         binding.background.ivBgIcon.dispose()
         if (egg.supportAdaptiveIcon) {
-            val pathStr = IconShapePerf.getMaskPath(context)
+            val pathStr = IconShapePref.getMaskPath(context)
             binding.ivIcon.setImageDrawable(
                 AlterableAdaptiveIconDrawable(context, egg.iconRes, pathStr)
             )
@@ -106,11 +108,48 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         )
         val drawable = FontIconsDrawable(context, Icons.Rounded.swipe_left_alt, 24f).apply {
             setColorStateList(color)
-            if (isRtl) {
-                setRotate(180f)
-            }
+            isAutoMirrored = true
         }
         binding.background.tvAddShortcut.updateCompoundDrawablesRelative(end = drawable)
+        binding.root.swipeListener = SwipeAddShortcut({
+            it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+        }) {
+            EggActionHelp.addShortcut(context, egg)
+        }
+    }
+
+    private class SwipeAddShortcut(
+        private val onSwipedStartHalfFeedback: (view: View) -> Unit,
+        private val callback: () -> Unit,
+    ) : HorizontalSwipeLayout.OnSwipeListener {
+
+        private var isFeedback: Boolean = false
+        private var postInvokeCallback: Boolean = false
+
+        override fun onSwipeCaptured(capturedChild: View) {
+            isFeedback = false
+        }
+
+        override fun onSwipePositionChanged(changedView: View, left: Int, dx: Int) {
+            val halfWidth = changedView.width / 2
+            val isSwipedStartHalf = if (!isRtl) {
+                left <= -halfWidth
+            } else {
+                left >= halfWidth
+            }
+            postInvokeCallback = isSwipedStartHalf
+            if (!isFeedback && isSwipedStartHalf) {
+                onSwipedStartHalfFeedback.invoke(changedView)
+                isFeedback = true
+            }
+        }
+
+        override fun onSwipeReleased(releasedChild: View) {
+            if (postInvokeCallback) {
+                callback.invoke()
+                postInvokeCallback = false
+            }
+        }
     }
 
 }

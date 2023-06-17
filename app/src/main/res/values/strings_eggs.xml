@@ -18,55 +18,22 @@
     <string name="title_android_i" translatable="false">Android 4.0.* (Ice Cream Sandwich)</string>
     <string name="title_android_h" translatable="false">Android 3.* (Honeycomb)</string>
     <string name="title_android_g" translatable="false">Android 2.3.* (Gingerbread)</string>
-    <string name="title_android_froyo" translatable="false">Android 2.2.* (Froyo)</string>
+    <string name="title_android_froyo" translatable="false">Android 2.2 (Froyo)</string>
     <string name="title_android_eclair" translatable="false">Android 2.* (Eclair)</string>
     <string name="title_android_donut" translatable="false">Android 1.6 (Donut)</string>
     <string name="title_android_cupcake" translatable="false">Android 1.5 (Cupcake)</string>
     <string name="title_android_petit_four" translatable="false">Android 1.1 (Petit Four)</string>
-    <string name="title_android_base" translatable="false">Android 1.0</string>
+    <string name="title_android_base" translatable="false">Android 1.0 (Base)</string>
 
     <string name="summary_android_froyo" translatable="false">Froyo</string>
     <string name="summary_android_eclair" translatable="false">Eclair</string>
     <string name="summary_android_donut" translatable="false">Donut</string>
     <string name="summary_android_cupcake" translatable="false">Cupcake</string>
     <string name="summary_android_petit_four" translatable="false">Petit Four</string>
+    <string name="summary_android_base" translatable="false">Base</string>
 
-    <string name="version_comment_android_u" translatable="false">SDK 34\nAndroid 14</string>
-    <string name="version_comment_android_t" translatable="false">SDK 33\nAndroid 13</string>
-    <string name="version_comment_android_s" translatable="false">SDK 31~32\nAndroid 12~12L</string>
-    <string name="version_comment_android_r" translatable="false">SDK 30\nAndroid 11</string>
-    <string name="version_comment_android_q" translatable="false">SDK 29\nAndroid 10</string>
-    <string name="version_comment_android_p" translatable="false">SDK 28\nAndroid 9</string>
-    <string name="version_comment_android_o" translatable="false">SDK 26~27\nAndroid 8.0~8.1</string>
-    <string name="version_comment_android_n" translatable="false">SDK 24~25\nAndroid 7.0~7.1.2</string>
-    <string name="version_comment_android_m" translatable="false">SDK 23\nAndroid 6.0~6.0.1</string>
-    <string name="version_comment_android_l" translatable="false">SDK 21~22\nAndroid 5.0~5.1</string>
-    <string name="version_comment_android_k" translatable="false">SDK 19~20\nAndroid 4.4~4.4.4</string>
-    <string name="version_comment_android_j" translatable="false">SDK 16~18\nAndroid 4.1~4.3</string>
-    <string name="version_comment_android_i" translatable="false">SDK 14~15\nAndroid 4.0~4.0.4</string>
-    <string name="version_comment_android_h" translatable="false">SDK 11~13\nAndroid 3.0~3.2</string>
-    <string name="version_comment_android_g" translatable="false">SDK 9~10\nAndroid 2.3~2.3.7</string>
-    <string name="version_comment_android_froyo" translatable="false">SDK 8\nAndroid 2.2~2.2.3</string>
-    <string name="version_comment_android_eclair" translatable="false">SDK 5~7\nAndroid 2.0~2.1</string>
-    <string name="version_comment_android_donut" translatable="false">SDK 4\nAndroid 1.6</string>
-    <string name="version_comment_android_cupcake" translatable="false">SDK 3\nAndroid 1.5</string>
-    <string name="version_comment_android_petit_four" translatable="false">SDK 2\nAndroid 1.1</string>
-    <string name="version_comment_android_base" translatable="false">SDK 1\nAndroid 1.0</string>
-
-    <string name="target_class_android_t" translatable="false">com.android_t.egg.PlatLogoActivity</string>
-    <string name="target_class_android_s" translatable="false">com.android_s.egg.PlatLogoActivity</string>
-    <string name="target_class_android_r" translatable="false">com.android_r.egg.PlatLogoActivity</string>
-    <string name="target_class_android_q" translatable="false">com.android_q.egg.PlatLogoActivity</string>
-    <string name="target_class_android_p" translatable="false">com.android_p.egg.PlatLogoActivity</string>
-    <string name="target_class_android_o" translatable="false">com.android_o.egg.PlatLogoActivity</string>
-    <string name="target_class_android_n" translatable="false">com.android_n.egg.PlatLogoActivity</string>
-    <string name="target_class_android_m" translatable="false">com.android_m.egg.PlatLogoActivity</string>
-    <string name="target_class_android_l" translatable="false">com.android_l.egg.PlatLogoActivity</string>
-    <string name="target_class_android_k" translatable="false">com.android_k.egg.PlatLogoActivity</string>
-    <string name="target_class_android_j" translatable="false">com.android_j.egg.PlatLogoActivity</string>
-    <string name="target_class_android_i" translatable="false">com.android_i.egg.PlatLogoActivity</string>
-    <string name="target_class_android_h" translatable="false">com.android_h.egg.PlatLogoActivity</string>
-    <string name="target_class_android_g" translatable="false">com.android_g.egg.PlatLogoActivity</string>
+    <string name="version_comment_once" translatable="false">API %d\nAndroid %s</string>
+    <string name="version_comment_range" translatable="false">API %d~%d\nAndroid %s~%s</string>
 
     <string name="r_egg_short_name" translatable="false">Cat Controls</string>
 </resources>

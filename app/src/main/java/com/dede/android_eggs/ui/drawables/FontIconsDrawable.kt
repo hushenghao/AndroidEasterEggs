@@ -2,11 +2,18 @@ package com.dede.android_eggs.ui.drawables
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.Paint
 import android.graphics.Paint.FontMetrics
+import android.graphics.PixelFormat
+import android.graphics.Rect
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.TextPaint
+import android.util.LayoutDirection
 import androidx.annotation.AttrRes
 import androidx.annotation.Dimension
 import androidx.annotation.FloatRange
@@ -16,6 +23,8 @@ import androidx.core.graphics.component1
 import androidx.core.graphics.component2
 import androidx.core.graphics.component3
 import androidx.core.graphics.component4
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.graphics.withSave
 import com.dede.android_eggs.R
 import com.dede.basic.dp
 import com.dede.basic.globalContext
@@ -41,6 +50,19 @@ class FontIconsDrawable(
         val typeface: Typeface by lazy {
             checkNotNull(ResourcesCompat.getFont(globalContext, R.font.icons))
         }
+
+        fun FontIconsDrawable.setPaddingRelative(
+            @Dimension start: Int,
+            @Dimension top: Int,
+            @Dimension end: Int,
+            @Dimension bottom: Int,
+        ) {
+            if (DrawableCompat.getLayoutDirection(this) == LayoutDirection.RTL) {
+                setPadding(end, top, start, bottom)
+            } else {
+                setPadding(start, top, end, bottom)
+            }
+        }
     }
 
     constructor(
@@ -61,8 +83,10 @@ class FontIconsDrawable(
     private var dimension: Int = -1
     private var colorStateList: ColorStateList? = null
     private var degree: Float = 0f
+    private var autoMirrored = false
 
     init {
+        DrawableCompat.setLayoutDirection(this, context.resources.configuration.layoutDirection)
         paint.typeface = typeface
         paint.textAlign = Paint.Align.CENTER
         val color = MaterialColors.getColor(context, M3R.attr.colorControlNormal, Color.WHITE)
@@ -146,10 +170,6 @@ class FontIconsDrawable(
         invalidateSelf()
     }
 
-    fun setPadding(padding: Rect) {
-        setPadding(padding.left, padding.top, padding.right, padding.bottom)
-    }
-
     private fun computeIconSize() {
         if (dimension > 0) {
             tempBounds.set(0, 0, dimension, dimension)
@@ -186,12 +206,39 @@ class FontIconsDrawable(
     override fun draw(canvas: Canvas) {
         if (unicode.isEmpty()) return
 
-        val count = canvas.save()
         val x = tempBounds.exactCenterX()
-        canvas.rotate(degree, x, tempBounds.exactCenterY())
-        val y = (metrics.descent - metrics.ascent) / 2 - metrics.ascent / 2 + padding.top
-        canvas.drawText(unicode, x, y, paint)
-        canvas.restoreToCount(count)
+        canvas.withSave {
+            rotate(degree, x, tempBounds.exactCenterY())
+            val y = (metrics.descent - metrics.ascent) / 2 - metrics.ascent / 2 + padding.top
+            if (needAutoMirrored()) {
+                scale(-1f, 1f, x, tempBounds.exactCenterY())
+            }
+            canvas.drawText(unicode, x, y, paint)
+        }
+    }
+
+    override fun onLayoutDirectionChanged(layoutDirection: Int): Boolean {
+        invalidateSelf()
+        return true
+    }
+
+    private fun needAutoMirrored(): Boolean {
+        return isAutoMirrored && DrawableCompat.getLayoutDirection(this) == LayoutDirection.RTL
+    }
+
+    override fun setAutoMirrored(mirrored: Boolean) {
+        if (autoMirrored != mirrored) {
+            autoMirrored = mirrored
+            invalidateSelf()
+        }
+    }
+
+    override fun isAutoMirrored(): Boolean {
+        return autoMirrored;
+    }
+
+    override fun getAlpha(): Int {
+        return paint.alpha
     }
 
     override fun setAlpha(alpha: Int) {

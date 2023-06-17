@@ -1,6 +1,8 @@
 package com.dede.android_eggs.main
 
 import android.os.Bundle
+import android.view.Gravity
+import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
@@ -8,6 +10,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.settings.EdgePref
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.basic.dp
 import kotlin.random.Random
 
 /**
@@ -16,16 +19,17 @@ import kotlin.random.Random
  * @author shhu
  * @since 2023/5/22
  */
-class PlaceholderActivity : AppCompatActivity(R.layout.activity_placeholder) {
+class PlaceholderActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         EdgePref.applyEdge(this, window)
+        super.onCreate(savedInstanceState)
         LocalEvent.get(this as LifecycleOwner).register(EdgePref.ACTION_CHANGED) {
             recreate()
         }
+
         val drawable = AlterableAdaptiveIconDrawable(this, randomRes(), randomPath())
-        findViewById<ImageView>(R.id.iv_icon).apply {
+        val imageView = ImageView(this).apply {
             setImageDrawable(drawable)
             scaleX = 0.5f
             scaleY = 0.5f
@@ -37,6 +41,10 @@ class PlaceholderActivity : AppCompatActivity(R.layout.activity_placeholder) {
                 .setDuration(300L)
                 .start()
         }
+        val params = FrameLayout.LayoutParams(56.dp, 56.dp).apply {
+            gravity = Gravity.CENTER
+        }
+        setContentView(imageView, params)
     }
 
     private fun randomRes(): Int {
@@ -58,8 +66,8 @@ class PlaceholderActivity : AppCompatActivity(R.layout.activity_placeholder) {
 
     private fun randomPath(): String {
         val array = resources.getStringArray(R.array.icon_shape_override_paths)
-        // 排除前两个
-        val index = Random.nextInt(array.size - 2) + 2
+        // 排除第一个
+        val index = Random.nextInt(array.size - 1) + 1
         return array[index]
     }
 }

@@ -93,7 +93,6 @@ internal class LifecycleFragment : android.app.Fragment(), LifecycleOwner {
         super.onDestroy()
     }
 
-    override fun getLifecycle(): Lifecycle {
-        return lifecycleRegistry
-    }
+    override val lifecycle: Lifecycle
+        get() = lifecycleRegistry
 }

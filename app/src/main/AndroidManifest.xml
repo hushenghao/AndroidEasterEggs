@@ -10,6 +10,7 @@
         android:name=".EasterEggsApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/backup_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_config_old"
         android:hasFragileUserData="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +18,6 @@
         android:localeConfig="@xml/locales_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:enableOnBackInvokedCallback="true"
         android:theme="@style/Theme.EasterEggs"
         tools:targetApi="tiramisu">
         <property
@@ -36,6 +36,7 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+        <activity android:name=".main.AndroidTimelineActivity" />
         <activity android:name=".main.PlaceholderActivity" />
     </application>
 
