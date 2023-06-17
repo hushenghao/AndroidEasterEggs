@@ -1,4 +1,4 @@
-package com.dede.android_eggs.main
+package com.dede.android_eggs.ui.views
 
 import android.app.Activity
 import android.os.Bundle

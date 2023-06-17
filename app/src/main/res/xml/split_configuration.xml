@@ -10,6 +10,9 @@
         window:splitRatio="0.5">
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName=".main.AndroidTimelineActivity" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
             window:secondaryActivityName="com.android_t.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
@@ -53,7 +56,7 @@
          not available. -->
     <SplitPlaceholderRule
         window:finishPrimaryWithPlaceholder="always"
-        window:placeholderActivityName=".main.AndroidTimelineActivity"
+        window:placeholderActivityName=".main.PlaceholderActivity"
         window:splitMinSmallestWidthDp="600"
         window:splitRatio="0.5">
         <ActivityFilter window:activityName=".main.EasterEggsActivity" />
