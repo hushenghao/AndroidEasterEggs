@@ -17,7 +17,7 @@ jobs:
       id: get-change-logs
       run: |
         CHANGE_LOGS=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
-        echo ::set-output name=change_logs::$CHANGE_LOGS
+        echo "CHANGE_LOGS=$CHANGE_LOGS" >> "$GITHUB_OUTPUT"
     
     - name: set up JDK
       uses: actions/setup-java@v2
@@ -30,7 +30,9 @@ jobs:
       env:
         KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         KEY_PROPERTIES_BASE64: ${{ secrets.KEY_PROPERTIES_BASE64 }}
-      run: echo $KEY_PROPERTIES_BASE64 | base64 --decode > key.properties && echo $KEYSTORE_BASE64 | base64 --decode > keystore.jks
+      run: |
+        echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
+        echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
 
     - name: Print root files
       run: ls -l
@@ -53,7 +55,8 @@ jobs:
         # todo replace github.ref
         tag: v1.9.4
         name: Release v1.9.4
-        bodyFile: ${{ steps.get-change-logs.outputs.change_logs }}
+        commit: release/1.9.4
+        bodyFile: ${{ steps.get-change-logs.outputs.CHANGE_LOGS }}
         draft: false
         prerelease: true
         artifacts: ./app/build/outputs/apk/release/*.apk
