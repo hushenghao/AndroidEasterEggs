@@ -38,5 +38,6 @@ dependencies {
     implementation(deps.androidx.core)
     implementation(deps.androidx.lifecycle.runtime)
     implementation(deps.androidx.lifecycle.viewmodel)
+    implementation(deps.androidx.startup)
     implementation(deps.io.coil)
 }

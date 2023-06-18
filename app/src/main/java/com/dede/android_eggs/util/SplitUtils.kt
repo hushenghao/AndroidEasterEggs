@@ -22,12 +22,6 @@ object SplitUtils {
         return ActivityEmbeddingController.getInstance(context).isActivityEmbedded(activity)
     }
 
-    fun initialize(context: Context) {
-        val ruleController = RuleController.getInstance(context)
-        val rules = RuleController.parseRules(context, R.xml.split_configuration)
-        ruleController.setRules(rules)
-    }
-
     fun isSplitSupported(context: Context): Boolean {
         return SplitController.getInstance(context).splitSupportStatus ==
                 SplitController.SplitSupportStatus.SPLIT_AVAILABLE

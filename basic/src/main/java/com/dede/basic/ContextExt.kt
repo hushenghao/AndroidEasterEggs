@@ -19,8 +19,12 @@ object GlobalContext {
         private set
     val globalThemeContext by lazy { globalContext.createThemeWrapperContext() }
 
-    fun init(context: Context) {
-        globalContext = context
+    class Initializer : androidx.startup.Initializer<Unit> {
+        override fun create(context: Context) {
+            globalContext = context
+        }
+
+        override fun dependencies(): List<Class<out androidx.startup.Initializer<*>>> = emptyList()
     }
 }
 
