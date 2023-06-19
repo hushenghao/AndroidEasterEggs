@@ -12,7 +12,6 @@ plugins {
 
 android {
     compileSdk = Versions.COMPILE_SDK
-    compileSdkPreview = "UpsideDownCake"
     buildToolsVersion = Versions.BUILD_TOOLS
     namespace = "com.dede.android_eggs"
 

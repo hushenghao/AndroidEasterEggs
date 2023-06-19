@@ -14,7 +14,7 @@ androidx-preference = "androidx.preference:preference-ktx:1.2.0"
 androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-browser = "androidx.browser:browser:1.5.0"
 androidx-window = "androidx.window:window:1.1.0"
-google-material = "com.google.android.material:material:1.10.0-alpha03"
+google-material = "com.google.android.material:material:1.10.0-alpha04"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"

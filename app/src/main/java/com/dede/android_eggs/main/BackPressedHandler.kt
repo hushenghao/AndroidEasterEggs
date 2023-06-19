@@ -3,9 +3,13 @@ package com.dede.android_eggs.main
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.res.Resources
+import android.graphics.Outline
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewConfiguration
+import android.view.ViewGroup
+import android.view.ViewOutlineProvider
 import android.window.BackEvent
 import androidx.activity.BackEventCompat
 import androidx.activity.OnBackPressedCallback
@@ -20,11 +24,10 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.ScaleType
 import com.dede.android_eggs.ui.drawables.ScaleTypeDrawable
 import com.dede.android_eggs.util.applyIf
+import com.dede.android_eggs.util.resolveColor
 import com.dede.basic.dpf
 import com.dede.blurhash_android.BlurHashDrawable
-import com.google.android.material.carousel.MaskableFrameLayout
 import com.google.android.material.resources.MaterialAttributes
-import com.google.android.material.shape.ShapeAppearanceModel
 import kotlin.math.abs
 import kotlin.math.max
 import com.google.android.material.R as M3R
@@ -44,8 +47,8 @@ class BackPressedHandler(private val host: AppCompatActivity) :
     private var maskableShapeSize: Float = 0f
     private var scaledTouchSlop: Int = 0
 
-    private val contentView: MaskableFrameLayout by lazy { host.findViewById(R.id.fl_mask) }
-    private val androidContent: View by lazy { host.findViewById(android.R.id.content) }
+    private val androidContent: ViewGroup by lazy { host.findViewById(android.R.id.content) }
+    private val contentView: View by lazy { androidContent.getChildAt(0) }
 
     private val backPressedDrawable: Drawable by lazy {
         val blurHashDrawable = BlurHashDrawable(
@@ -61,7 +64,7 @@ class BackPressedHandler(private val host: AppCompatActivity) :
     private var touchY = 0f
     private var isProgressed = false
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint("RestrictedApi", "UnsafeOptInUsageError")
     fun register() {
         OnBackPressedDispatcherAccessor.fixApi34(host)
         host.onBackPressedDispatcher.addCallback(this)
@@ -77,6 +80,8 @@ class BackPressedHandler(private val host: AppCompatActivity) :
         host.withStyledAttributes(value.resourceId, attrs) {
             maskableShapeSize = getDimension(0, 32.dpf)
         }
+        androidContent.background = null
+        contentView.background = ColorDrawable(host.resolveColor(M3R.attr.colorSurface))
     }
 
     override fun onStart(owner: LifecycleOwner) {
@@ -103,8 +108,7 @@ class BackPressedHandler(private val host: AppCompatActivity) :
             .start()
         with(ObjectAnimator.ofFloat(maskableShapeSize, 0f)) {
             addUpdateListener {
-                contentView.shapeAppearanceModel =
-                    createShapeAppearanceModel(it.animatedValue as Float)
+                setCornerRadius(it.animatedValue as Float)
             }
             doOnEnd {
                 androidContent.background = null
@@ -133,8 +137,7 @@ class BackPressedHandler(private val host: AppCompatActivity) :
         ) {
             with(ObjectAnimator.ofFloat(0f, maskableShapeSize)) {
                 addUpdateListener {
-                    contentView.shapeAppearanceModel =
-                        createShapeAppearanceModel(it.animatedValue as Float)
+                    setCornerRadius(it.animatedValue as Float)
                 }
                 doOnStart {
                     androidContent.background = backPressedDrawable
@@ -167,8 +170,23 @@ class BackPressedHandler(private val host: AppCompatActivity) :
         isEnabled = true
     }
 
-    private fun createShapeAppearanceModel(cornerSizes: Float): ShapeAppearanceModel {
-        return ShapeAppearanceModel.builder().setAllCornerSizes(cornerSizes).build()
+    private lateinit var outlineProvider: RoundOutline
+
+    private class RoundOutline(var radius: Float) : ViewOutlineProvider() {
+
+        override fun getOutline(view: View, outline: Outline) {
+            outline.setRoundRect(0, 0, view.width, view.height, radius)
+        }
+    }
+
+    private fun setCornerRadius(cornerSizes: Float) {
+        if (!::outlineProvider.isInitialized) {
+            outlineProvider = RoundOutline(cornerSizes)
+            contentView.outlineProvider = outlineProvider
+            contentView.clipToOutline = true
+        }
+        outlineProvider.radius = cornerSizes
+        contentView.invalidateOutline()
     }
 
 }
