@@ -7,7 +7,7 @@
 
 ![logo](./images/ic_launcher_round.png)
 
-[English](./README.md)
+[English](./README.md) • [中文](./README_zh.md)
 
 ## 下载安装
 
