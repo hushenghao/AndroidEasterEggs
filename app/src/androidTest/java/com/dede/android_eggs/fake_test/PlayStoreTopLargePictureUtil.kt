@@ -55,21 +55,12 @@ class PlayStoreTopLargePictureUtil {
         bitmap.recycle()
         val byteArray = stream.toByteArray()
 
-        val lock = EasterEggsServer.WaitFinishLock(30 * 1000L)
-        val server = EasterEggsServer(context)
-        lock.withServer(server)
-        server.registerHandler("/play_store_top_large_picture.jpeg",
-            object : EasterEggsServer.Handler() {
-                override fun onHandler(session: NanoHTTPD.IHTTPSession): NanoHTTPD.Response? {
-                    return NanoHTTPD.newFixedLengthResponse(
-                        NanoHTTPD.Response.Status.OK, "image/jpeg",
-                        ByteArrayInputStream(byteArray),
-                        byteArray.size.toLong()
-                    )
-                }
-            })
-        server.start()
-        lock.await()
-        server.stop()
+        EasterEggsServer.disposable(context, "/play_store_top_large_picture.jpeg") {
+            NanoHTTPD.newFixedLengthResponse(
+                NanoHTTPD.Response.Status.OK, "image/jpeg",
+                ByteArrayInputStream(byteArray),
+                byteArray.size.toLong()
+            )
+        }
     }
 }

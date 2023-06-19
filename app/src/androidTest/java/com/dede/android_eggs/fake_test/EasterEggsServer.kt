@@ -23,6 +23,26 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
     companion object {
         private const val TAG = "EasterEggsServer"
         private const val PORT = 8888
+
+        fun disposable(
+            context: Context,
+            uri: String,
+            timeout: Long = 30 * 1000L,
+            onHandler: IHTTPSession.() -> Response?,
+        ) {
+            val lock = WaitFinishLock(timeout)
+            val server = EasterEggsServer(context)
+            lock.withServer(server)
+            server.registerHandler(uri, object : Handler() {
+                override fun onHandler(session: IHTTPSession): Response? {
+                    return onHandler.invoke(session)
+                }
+            })
+
+            server.start()
+            lock.await()
+            server.stop()
+        }
     }
 
     class WaitFinishLock(private val timeout: Long) {
@@ -140,10 +160,12 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
                 bitmap.compress(Bitmap.CompressFormat.WEBP_LOSSY, 100, output)
                 val byte = output.toByteArray()
                 val input = ByteArrayInputStream(byte)
-                return newFixedLengthResponse(Response.Status.OK,
+                return newFixedLengthResponse(
+                    Response.Status.OK,
                     "image/webp",
                     input,
-                    input.available().toLong())
+                    input.available().toLong()
+                )
             }
         }, true)
         registerHandler("/shutdown", object : Handler() {
@@ -198,8 +220,10 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
                 }
             } catch (e: IOException) {
                 Log.w(TAG, "serve error.", e)
-                return newFixedLengthResponse(Response.Status.INTERNAL_ERROR,
-                    MIME_HTML, e.toString())
+                return newFixedLengthResponse(
+                    Response.Status.INTERNAL_ERROR,
+                    MIME_HTML, e.toString()
+                )
             }
         }
         return super.serve(session)

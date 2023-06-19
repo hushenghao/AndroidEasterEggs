@@ -7,7 +7,7 @@ Organize the Easter eggs of the official versions of the Android system.
 
 ![logo](./images/ic_launcher_round.png)
 
-[English](./README.md) • [中文](./README_zh.md)
+**[English](./README.md) • [中文](./README_zh.md)**
 
 ## Download and install
 

@@ -7,7 +7,7 @@
 
 ![logo](./images/ic_launcher_round.png)
 
-[English](./README.md) • [中文](./README_zh.md)
+**[English](./README.md) • [中文](./README_zh.md)**
 
 ## 下载安装
 
@@ -73,6 +73,4 @@
 ### 感谢
 [系统源码](https://github.com/aosp-mirror/platform_frameworks_base)
 
-<!--
 [🦖 T-Rex Run 3D](https://github.com/Priler/dino3d)
--->
