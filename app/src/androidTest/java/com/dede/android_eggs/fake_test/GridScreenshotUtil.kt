@@ -2,15 +2,16 @@ package com.dede.android_eggs.fake_test
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.drawable.BitmapDrawable
 import android.util.Size
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
-import androidx.core.graphics.withScale
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.dede.android_eggs.ui.drawables.ScaleType
+import com.dede.android_eggs.ui.drawables.ScaleTypeDrawable
 import com.dede.basic.dpf
 import fi.iki.elonen.NanoHTTPD
 import org.junit.Ignore
@@ -33,17 +34,17 @@ class GridScreenshotUtil {
         // Pixel 6
         private val TARGET_SIZE = Size(1080, 2400)
         private val GRIDS = listOf(
-            Grid(1, 590),
+            Grid(1, 600),
             Grid(3, 360),
             Grid(3, 360),
             Grid(3, 360),
             Grid(3, 360),
-            Grid(2, 370),
+            Grid(2, 360),
         )
     }
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.WHITE
+        color = Color.BLACK
         strokeWidth = 2.dpf
         style = Paint.Style.STROKE
     }
@@ -56,22 +57,14 @@ class GridScreenshotUtil {
         targetWidth: Int,
         targetHeight: Int,
     ): Bitmap {
-        val fullBitmap = context.assets.open("screenshots/$screenshot").use {
-            BitmapFactory.decodeStream(it)
+        val delegate = context.assets.open("screenshots/$screenshot").use {
+            BitmapDrawable(context.resources, it)
         }
-        val width = fullBitmap.width
-        val height = fullBitmap.height
+        val drawable = ScaleTypeDrawable(delegate, ScaleType.CENTER_CROP).apply {
+            setBounds(0, 0, targetWidth, targetHeight)
+        }
         return createBitmap(targetWidth, targetHeight).applyCanvas {
-            val s = targetWidth * 1f / width
-            withScale(s, s, targetWidth / 2f, targetHeight / 2f) {
-                drawBitmap(
-                    fullBitmap,
-                    -(width - targetWidth) / 2f,
-                    -(height - targetHeight) / 2f,
-                    paint
-                )
-            }
-            fullBitmap.recycle()
+            drawable.draw(this)
             drawRect(0f, 0f, targetWidth.toFloat(), targetHeight.toFloat(), paint)
         }
     }
@@ -97,7 +90,7 @@ class GridScreenshotUtil {
         }
 
         val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream)
         bitmap.recycle()
         val byteArray = stream.toByteArray()
 
