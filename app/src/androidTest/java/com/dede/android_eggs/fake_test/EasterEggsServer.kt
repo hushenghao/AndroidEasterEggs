@@ -33,11 +33,26 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
             val lock = WaitFinishLock(timeout)
             val server = EasterEggsServer(context)
             lock.withServer(server)
-            server.registerHandler(uri, object : Handler() {
+            server.registerHandler(uri, onHandler)
+
+            server.start()
+            lock.await()
+            server.stop()
+        }
+
+        fun EasterEggsServer.registerHandler(uri: String, onHandler: IHTTPSession.() -> Response?) {
+            registerHandler(uri, object : Handler() {
                 override fun onHandler(session: IHTTPSession): Response? {
                     return onHandler.invoke(session)
                 }
             })
+        }
+
+        fun start(context: Context, function: EasterEggsServer.() -> Unit) {
+            val lock = WaitFinishLock(0)
+            val server = EasterEggsServer(context)
+            lock.withServer(server)
+            function.invoke(server)
 
             server.start()
             lock.await()

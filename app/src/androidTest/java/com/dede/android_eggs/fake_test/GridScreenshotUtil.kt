@@ -10,15 +10,19 @@ import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.dede.android_eggs.fake_test.EasterEggsServer.Companion.registerHandler
 import com.dede.android_eggs.ui.drawables.ScaleType
 import com.dede.android_eggs.ui.drawables.ScaleTypeDrawable
 import com.dede.basic.dpf
 import fi.iki.elonen.NanoHTTPD
+import fi.iki.elonen.NanoHTTPD.Response
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.File
+import kotlin.math.min
 
 /**
  * Generate Grid Screenshot picture.
@@ -41,6 +45,8 @@ class GridScreenshotUtil {
             Grid(3, 360),
             Grid(2, 360),
         )
+
+        private const val ASSET_DIR = "screenshots"
     }
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -51,21 +57,31 @@ class GridScreenshotUtil {
 
     private data class Grid(val row: Int, val height: Int)
 
-    private fun getGridBitmap(
+    private fun cropScreenshot(
         context: Context,
         screenshot: String,
-        targetWidth: Int,
-        targetHeight: Int,
+        targetWidth: Int = -1,
+        targetHeight: Int = -1,
+        drawBorder: Boolean = false,
     ): Bitmap {
-        val delegate = context.assets.open("screenshots/$screenshot").use {
+        val delegate = context.assets.open("$ASSET_DIR/$screenshot").use {
             BitmapDrawable(context.resources, it)
         }
-        val drawable = ScaleTypeDrawable(delegate, ScaleType.CENTER_CROP).apply {
-            setBounds(0, 0, targetWidth, targetHeight)
+        var width = targetWidth
+        var height = targetHeight
+        if (width <= 0 || height <= 0) {
+            val size = min(delegate.bitmap.width, delegate.bitmap.height)
+            width = size
+            height = size
         }
-        return createBitmap(targetWidth, targetHeight).applyCanvas {
+        val drawable = ScaleTypeDrawable(delegate, ScaleType.CENTER_CROP).apply {
+            setBounds(0, 0, width, height)
+        }
+        return createBitmap(width, height).applyCanvas {
             drawable.draw(this)
-            drawRect(0f, 0f, targetWidth.toFloat(), targetHeight.toFloat(), paint)
+            if (drawBorder) {
+                drawRect(0f, 0f, width.toFloat(), height.toFloat(), paint)
+            }
         }
     }
 
@@ -73,7 +89,7 @@ class GridScreenshotUtil {
     fun generate() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val bitmap = createBitmap(TARGET_SIZE.width, TARGET_SIZE.height)
-        val screenshots = context.assets.list("screenshots")!!.toList().reversed()
+        val screenshots = requireNotNull(context.assets.list(ASSET_DIR)).reversed()
         bitmap.applyCanvas {
             var snapshotIndex = 0
             var top = 0
@@ -82,24 +98,35 @@ class GridScreenshotUtil {
                 val height = grid.height
                 for (i in 0 until grid.row) {
                     val snapshot = screenshots.getOrNull(snapshotIndex++) ?: break@out
-                    val snapshotBitmap = getGridBitmap(context, snapshot, width, height)
+                    val snapshotBitmap = cropScreenshot(context, snapshot, width, height, true)
                     drawBitmap(snapshotBitmap, i * width.toFloat(), top.toFloat(), paint)
                 }
                 top += height
             }
         }
 
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream)
-        bitmap.recycle()
-        val byteArray = stream.toByteArray()
-
-        EasterEggsServer.disposable(context, "/ic_grid_screenshot.jpeg", 60 * 1000L) {
-            NanoHTTPD.newFixedLengthResponse(
-                NanoHTTPD.Response.Status.OK, "image/jpeg",
-                ByteArrayInputStream(byteArray),
-                byteArray.size.toLong()
-            )
+        EasterEggsServer.start(context) {
+            for (screenshot in screenshots) {
+                val name = File(screenshot).nameWithoutExtension
+                registerHandler("/$name.jpeg") {
+                    cropScreenshot(context, screenshot).toResponse()
+                }
+            }
+            registerHandler("/ic_grid_screenshot.jpeg") {
+                bitmap.toResponse()
+            }
         }
+    }
+
+    private fun Bitmap.toResponse(): Response {
+        val stream = ByteArrayOutputStream()
+        compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        recycle()
+        val byteArray = stream.toByteArray()
+        return NanoHTTPD.newFixedLengthResponse(
+            Response.Status.OK, "image/jpeg",
+            ByteArrayInputStream(byteArray),
+            byteArray.size.toLong()
+        )
     }
 }
