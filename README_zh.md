@@ -3,7 +3,7 @@
 整理了Android系统各正式版的彩蛋
 
 ![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-red?logo=android) ![GitHub top language](https://img.shields.io/github/languages/top/hushenghao/AndroidEasterEggs?logo=kotlin)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) [![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/releases)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) [![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/build.yml) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/releases) ![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs)
 
 ![logo](./images/ic_launcher_round.png)
 
@@ -11,8 +11,8 @@
 
 ## 下载
 
-| [![下载应用，请到 F-Droid](https://fdroid.gitlab.io/artwork/badge/get-it-on-zh-cn.svg)](https://f-droid.org/packages/com.dede.android_eggs) | [![下载应用，请到 Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/zh-cn_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) | [![](./images/badge_coolapk.png)](https://www.coolapk.com/apk/com.dede.android_eggs) | [![Beta](./images/badge_pgyer.png)](https://www.pgyer.com/eggs) |
-|--------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| [![下载应用，请到 F-Droid](https://fdroid.gitlab.io/artwork/badge/get-it-on-zh-cn.svg)](https://f-droid.org/packages/com.dede.android_eggs) | [![下载应用，请到 Google Play](./images/badge_playstore_fixpadding-zh.png)](https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) | [![](./images/badge_coolapk.png)](https://www.coolapk.com/apk/com.dede.android_eggs) | [![Beta](./images/badge_pgyer.png)](https://www.pgyer.com/eggs) |
+|--------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------------------------|
 
 项目包含了系统彩蛋完整代码，旨在对系统彩蛋的整理和兼容，以保证大多数设备可以体验到不同版本的彩蛋，不会对系统彩蛋代码做过多修改。部分版本使用了系统新特性，低版本只能使用部分功能。
 
@@ -22,7 +22,7 @@
 |----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
 
 ## Android 版本
-| 名称                                     |  SDK  | 彩蛋                            | 状态  | 有使用新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |
+| 名称                                     |  SDK  | 彩蛋                            | 状态  | 使用了新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |
 |----------------------------------------|:-----:|-------------------------------|:---:|:----------------------------:|:-------------------------------:|
 | Android 14 (Upside Down Cake)          |  34   |                               | ⌛️  |                              |                                 |
 | Android 13 (Tiramisu)                  |  33   | Paint Chips                   |  ✅  |              ✅               | 31 [*](#id_color_vector_fonts)  |

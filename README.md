@@ -1,9 +1,9 @@
 # Android Easter Eggs
 
-Organize the Easter eggs of the official versions of the Android system.
+Organize the Android release Easter eggs
 
 ![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-red?logo=android) ![GitHub top language](https://img.shields.io/github/languages/top/hushenghao/AndroidEasterEggs?logo=kotlin)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) [![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/releases)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) [![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/build.yml) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/releases) ![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs)
 
 ![logo](./images/ic_launcher_round.png)
 
@@ -73,6 +73,4 @@ If there are errors and problems, please submit [Issues](https://github.com/hush
 ### Thanks
 [System source code](https://github.com/aosp-mirror/platform_frameworks_base)
 
-<!--
 [🦖 T-Rex Run 3D](https://github.com/Priler/dino3d)
--->
