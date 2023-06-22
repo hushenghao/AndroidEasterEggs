@@ -6,15 +6,19 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.InsetDrawable
 import android.util.Size
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.dede.android_eggs.R
 import com.dede.android_eggs.fake_test.EasterEggsServer.Companion.registerHandler
 import com.dede.android_eggs.ui.drawables.ScaleType
 import com.dede.android_eggs.ui.drawables.ScaleTypeDrawable
 import com.dede.basic.dpf
+import com.dede.basic.requireDrawable
+import com.wolt.blurhashkt.BlurHashDecoder
 import fi.iki.elonen.NanoHTTPD
 import fi.iki.elonen.NanoHTTPD.Response
 import org.junit.Ignore
@@ -40,11 +44,11 @@ class GridScreenshotUtil {
         private val TARGET_SIZE = Size(1080, 2400)
 
         private val GROUPS = listOf(
-            Triple(720, true, 3),  // 3
+            Tetrad(810, false, 4),  // 4
             Split(360, 3),                // 3
-            Triple(540, false, 4),  // 3
-            Split(270, 4),                // 4
-            Split(420, 2),                // 2
+            Triple(580, true, 4),   // 3
+            Split(290, 4),                // 4
+            Split(360, 2),                // 2
         )
 
         private const val ASSET_DIR = "screenshots"
@@ -123,9 +127,9 @@ class GridScreenshotUtil {
                 val end = width / column
                 listOf(
                     Rect(end, top, width, top + height),
+                    Rect(0, top, end, top + splitH),
                     Rect(0, top + splitH, end, top + splitH * 2),
                     Rect(0, top + splitH * 2, end, top + height),
-                    Rect(0, top, end, top + splitH),
                 )
             } else {
                 val end = (width * (column - 1) / column)
@@ -173,18 +177,14 @@ class GridScreenshotUtil {
         }
     }
 
-    @Test
-    fun generate() {
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
-        val bitmap = createBitmap(TARGET_SIZE.width, TARGET_SIZE.height)
-        val screenshots = requireNotNull(context.assets.list(ASSET_DIR)).reversed()
-        bitmap.applyCanvas {
+    private fun createGridScreenshot(context: Context, screenshots: List<String>): Bitmap {
+        return createBitmap(TARGET_SIZE.width, TARGET_SIZE.height).applyCanvas {
             var top = 0
             var index = 0
             out@ for (group in GROUPS) {
                 val bounds = group.convertBounds(TARGET_SIZE.width, top)
                 for (rect in bounds) {
-                    val snapshot = screenshots.getOrNull(index++) ?: break
+                    val snapshot = screenshots.getOrNull(index++) ?: break@out
                     val cropBitmap =
                         cropScreenshot(context, snapshot, rect.width(), rect.height(), true)
                     drawBitmap(cropBitmap, rect.left.toFloat(), rect.top.toFloat(), paint)
@@ -192,7 +192,12 @@ class GridScreenshotUtil {
                 top += group.height
             }
         }
+    }
 
+    @Test
+    fun generate() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val screenshots = requireNotNull(context.assets.list(ASSET_DIR)).reversed()
         EasterEggsServer.start(context) {
             for (screenshot in screenshots) {
                 val name = File(screenshot).nameWithoutExtension
@@ -200,8 +205,25 @@ class GridScreenshotUtil {
                     cropScreenshot(context, screenshot).toResponse()
                 }
             }
+            registerHandler("/u.jpeg") {
+                val drawable = InsetDrawable(
+                    context.requireDrawable(R.drawable.ic_android_udc),
+                    0.15f
+                )
+                createBitmap(TARGET_SIZE.width, TARGET_SIZE.width).applyCanvas {
+                    val blurhash = BlurHashDecoder.decode(
+                        context.getString(R.string.hash_snapshot_bg),
+                        TARGET_SIZE.width, TARGET_SIZE.height
+                    )
+                    if (blurhash != null) {
+                        drawBitmap(blurhash, 0f, 0f, paint)
+                    }
+                    drawable.setBounds(0, 0, TARGET_SIZE.width, TARGET_SIZE.width)
+                    drawable.draw(this)
+                }.toResponse()
+            }
             registerHandler("/ic_grid_screenshot.jpeg") {
-                bitmap.toResponse()
+                createGridScreenshot(context, screenshots).toResponse()
             }
         }
     }
