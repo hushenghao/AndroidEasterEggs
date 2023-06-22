@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.util.Size
 import androidx.core.graphics.applyCanvas
@@ -37,16 +38,105 @@ class GridScreenshotUtil {
     companion object {
         // Pixel 6
         private val TARGET_SIZE = Size(1080, 2400)
-        private val GRIDS = listOf(
-            Grid(1, 600),
-            Grid(3, 360),
-            Grid(3, 360),
-            Grid(3, 360),
-            Grid(3, 360),
-            Grid(2, 360),
+
+        private val GROUPS = listOf(
+            Triple(720, true, 3),  // 3
+            Split(360, 3),                // 3
+            Triple(540, false, 4),  // 3
+            Split(270, 4),                // 4
+            Split(420, 2),                // 2
         )
 
         private const val ASSET_DIR = "screenshots"
+    }
+
+    interface Group {
+
+        val height: Int
+
+        fun convertBounds(width: Int, top: Int): List<Rect>
+    }
+
+    /**
+     * --------------
+     * |        |   |
+     * |        |---|
+     * |        |   |
+     * --------------
+     */
+    private class Triple(
+        override val height: Int,
+        private val reverse: Boolean,
+        private val column: Int = 3
+    ) : Group {
+        override fun convertBounds(width: Int, top: Int): List<Rect> {
+            val halfHeight = height / 2
+            return if (reverse) {
+                val split = width / column
+                listOf(
+                    Rect(split, top, width, top + height),
+                    Rect(0, top, split, top + halfHeight),
+                    Rect(0, top + halfHeight, split, top + height),
+                )
+            } else {
+                val split = (width * (column - 1) / column)
+                listOf(
+                    Rect(0, top, split, top + height),
+                    Rect(split, top, width, top + halfHeight),
+                    Rect(split, top + halfHeight, width, top + height),
+                )
+            }
+        }
+    }
+
+    /**
+     * -----
+     * |   | ... column
+     * -----
+     */
+    private class Split(override val height: Int, private val column: Int = 3) : Group {
+        override fun convertBounds(width: Int, top: Int): List<Rect> {
+            val w = width / column
+            return (0 until column).map {
+                Rect(w * it, top, w * (it + 1), top + height)
+            }
+        }
+    }
+
+    /**
+     * ------------------
+     * |            |   |
+     * |            |---|
+     * |            |   |
+     * |            |---|
+     * |            |   |
+     * ------------------
+     */
+    private class Tetrad(
+        override val height: Int,
+        private val reverse: Boolean,
+        private val column: Int = 4
+    ) : Group {
+        override fun convertBounds(width: Int, top: Int): List<Rect> {
+            val splitH = height / 3
+            return if (reverse) {
+                val end = width / column
+                listOf(
+                    Rect(end, top, width, top + height),
+                    Rect(0, top + splitH, end, top + splitH * 2),
+                    Rect(0, top + splitH * 2, end, top + height),
+                    Rect(0, top, end, top + splitH),
+                )
+            } else {
+                val end = (width * (column - 1) / column)
+                listOf(
+                    Rect(0, top, end, top + height),
+                    Rect(end, top, width, top + splitH),
+                    Rect(end, top + splitH, width, top + splitH * 2),
+                    Rect(end, top + splitH * 2, width, top + height),
+                )
+            }
+        }
     }
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -54,8 +144,6 @@ class GridScreenshotUtil {
         strokeWidth = 2.dpf
         style = Paint.Style.STROKE
     }
-
-    private data class Grid(val row: Int, val height: Int)
 
     private fun cropScreenshot(
         context: Context,
@@ -91,17 +179,17 @@ class GridScreenshotUtil {
         val bitmap = createBitmap(TARGET_SIZE.width, TARGET_SIZE.height)
         val screenshots = requireNotNull(context.assets.list(ASSET_DIR)).reversed()
         bitmap.applyCanvas {
-            var snapshotIndex = 0
             var top = 0
-            out@ for (grid in GRIDS) {
-                val width = TARGET_SIZE.width / grid.row
-                val height = grid.height
-                for (i in 0 until grid.row) {
-                    val snapshot = screenshots.getOrNull(snapshotIndex++) ?: break@out
-                    val snapshotBitmap = cropScreenshot(context, snapshot, width, height, true)
-                    drawBitmap(snapshotBitmap, i * width.toFloat(), top.toFloat(), paint)
+            var index = 0
+            out@ for (group in GROUPS) {
+                val bounds = group.convertBounds(TARGET_SIZE.width, top)
+                for (rect in bounds) {
+                    val snapshot = screenshots.getOrNull(index++) ?: break
+                    val cropBitmap =
+                        cropScreenshot(context, snapshot, rect.width(), rect.height(), true)
+                    drawBitmap(cropBitmap, rect.left.toFloat(), rect.top.toFloat(), paint)
                 }
-                top += height
+                top += group.height
             }
         }
 
