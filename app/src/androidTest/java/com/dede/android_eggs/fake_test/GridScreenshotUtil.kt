@@ -21,7 +21,6 @@ import com.dede.basic.requireDrawable
 import com.wolt.blurhashkt.BlurHashDecoder
 import fi.iki.elonen.NanoHTTPD
 import fi.iki.elonen.NanoHTTPD.Response
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.ByteArrayInputStream
@@ -35,7 +34,7 @@ import kotlin.math.min
  * @author shhu
  * @since 2023/6/19
  */
-@Ignore("Generate Grid Screenshot picture") // remove this line to run test
+@org.junit.Ignore("Generate Grid Screenshot picture") // remove this line to run test
 @RunWith(AndroidJUnit4::class)
 class GridScreenshotUtil {
 
@@ -43,12 +42,12 @@ class GridScreenshotUtil {
         // Pixel 6
         private val TARGET_SIZE = Size(1080, 2400)
 
-        private val GROUPS = listOf(
-            Tetrad(810, false, 4),  // 4
-            Split(360, 3),                // 3
-            Triple(580, true, 4),   // 3
-            Split(290, 4),                // 4
-            Split(360, 2),                // 2
+        private val GROUPS = listOf<Group>(
+            Split(510, 1),                // 1
+            Triple(540, true, 4),  // 3
+            Split(270, 4),                // 4
+            Pentad(540, false),            // 5
+            Triple(540, true, 4),   // 3
         )
 
         private const val ASSET_DIR = "screenshots"
@@ -61,18 +60,26 @@ class GridScreenshotUtil {
         fun convertBounds(width: Int, top: Int): List<Rect>
     }
 
+    interface Reversal {
+        val reverse: Boolean
+    }
+
+    interface Column {
+        val column: Int
+    }
+
     /**
      * --------------
-     * |        |   |
-     * |        |---|
-     * |        |   |
+     * |        | 2 |
+     * |   1    |---|
+     * |        | 3 |
      * --------------
      */
     private class Triple(
         override val height: Int,
-        private val reverse: Boolean,
-        private val column: Int = 3
-    ) : Group {
+        override val reverse: Boolean,
+        override val column: Int = 3
+    ) : Group, Reversal, Column {
         override fun convertBounds(width: Int, top: Int): List<Rect> {
             val halfHeight = height / 2
             return if (reverse) {
@@ -94,11 +101,11 @@ class GridScreenshotUtil {
     }
 
     /**
-     * -----
-     * |   | ... column
-     * -----
+     * -------------
+     * | 1 |...| n |
+     * -------------
      */
-    private class Split(override val height: Int, private val column: Int = 3) : Group {
+    private class Split(override val height: Int, override val column: Int = 3) : Group, Column {
         override fun convertBounds(width: Int, top: Int): List<Rect> {
             val w = width / column
             return (0 until column).map {
@@ -109,18 +116,18 @@ class GridScreenshotUtil {
 
     /**
      * ------------------
-     * |            |   |
+     * |            | 2 |
      * |            |---|
-     * |            |   |
+     * |      1     | 3 |
      * |            |---|
-     * |            |   |
+     * |            | 4 |
      * ------------------
      */
     private class Tetrad(
         override val height: Int,
-        private val reverse: Boolean,
-        private val column: Int = 4
-    ) : Group {
+        override val reverse: Boolean,
+        override val column: Int = 4
+    ) : Group, Reversal, Column {
         override fun convertBounds(width: Int, top: Int): List<Rect> {
             val splitH = height / 3
             return if (reverse) {
@@ -141,6 +148,42 @@ class GridScreenshotUtil {
                 )
             }
         }
+    }
+
+    /**
+     * ------------------
+     * |        | 2 | 3 |
+     * |   1    |---|---|
+     * |        | 4 | 5 |
+     * ------------------
+     */
+    private class Pentad(
+        override val height: Int,
+        override val reverse: Boolean,
+    ) : Group, Reversal {
+        override fun convertBounds(width: Int, top: Int): List<Rect> {
+            val halfW = width / 2
+            val quarter = width / 4
+            val halfH = height / 2
+            return if (reverse) {
+                listOf(
+                    Rect(halfW, top, width, top + height),
+                    Rect(0, top, quarter, top + halfH),
+                    Rect(quarter, top, halfW, top + halfH),
+                    Rect(0, top + halfH, quarter, top + height),
+                    Rect(quarter, top + halfH, halfW, top + height),
+                )
+            } else {
+                listOf(
+                    Rect(0, top, halfW, top + height),
+                    Rect(halfW, top, halfW + quarter, top + halfH),
+                    Rect(halfW + quarter, top, width, top + halfH),
+                    Rect(halfW, top + halfH, halfW + quarter, top + height),
+                    Rect(halfW + quarter, top + halfH, width, top + height),
+                )
+            }
+        }
+
     }
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -197,7 +240,11 @@ class GridScreenshotUtil {
     @Test
     fun generate() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        val screenshots = requireNotNull(context.assets.list(ASSET_DIR)).reversed()
+        val screenshots =
+            requireNotNull(context.assets.list(ASSET_DIR)).reversed() as MutableList<String>
+        // 让g显示在最后一个
+        val g = screenshots.removeAt(screenshots.size - 1)
+        screenshots.add(screenshots.size - 2, g)
         EasterEggsServer.start(context) {
             for (screenshot in screenshots) {
                 val name = File(screenshot).nameWithoutExtension
@@ -208,7 +255,7 @@ class GridScreenshotUtil {
             registerHandler("/u.jpeg") {
                 val drawable = InsetDrawable(
                     context.requireDrawable(R.drawable.ic_android_udc),
-                    0.15f
+                    0.25f
                 )
                 createBitmap(TARGET_SIZE.width, TARGET_SIZE.width).applyCanvas {
                     val blurhash = BlurHashDecoder.decode(
