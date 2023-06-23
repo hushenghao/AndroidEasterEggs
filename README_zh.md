@@ -71,6 +71,6 @@
 [联系我 📧](mailto:dede.hu@qq.com)
 
 ### 感谢
-[系统源码](https://github.com/aosp-mirror/platform_frameworks_base)
+[AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)
 
 [🦖 T-Rex Run 3D](https://github.com/Priler/dino3d)
