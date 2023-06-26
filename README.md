@@ -3,7 +3,7 @@
 Organize the Android release Easter eggs
 
 ![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-red?logo=android) ![GitHub top language](https://img.shields.io/github/languages/top/hushenghao/AndroidEasterEggs?logo=kotlin)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) [![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/build.yml) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/releases) ![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) [![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE) [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/releases) [![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs)](https://f-droid.org/packages/com.dede.android_eggs/) [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
 
 ![logo](./images/ic_launcher_round.png)
 
@@ -50,6 +50,20 @@ The project contains the complete code of the system Easter eggs, which aims to 
 * <span id='id_full_egg_mini_sdk'>The minimum SDK version required to fully experience Easter Egg.</span>
 * <span id='id_color_vector_fonts'>Starting in [Android 13](https://developer.android.google.cn/about/versions/13/features#color-vector-fonts), the system includes rendering support for [COLRv1](https://developer.chrome.com/blog/colrv1-fonts/) fonts and updates system emoji to the COLRv1 format.</span>
 * <span id='id_egg_name'>There is no specific name for the old version of Easter eggs, and the system version alias are used here.</span>
+
+## Build
+
+Prerequisites The `Java17` and `Android SDK` have been installed, and environment variables have been configured.
+
+```shell
+./gradlew assembleRelease
+```
+
+Windows need to use `gradlew.bat`:
+
+```shell
+gradlew.bat assembleRelease
+```
 
 ## Test
 

@@ -3,7 +3,7 @@
 整理了Android系统各正式版的彩蛋
 
 ![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-red?logo=android) ![GitHub top language](https://img.shields.io/github/languages/top/hushenghao/AndroidEasterEggs?logo=kotlin)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) [![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/build.yml) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/releases) ![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) [![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE) [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/releases) [![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs)](https://f-droid.org/packages/com.dede.android_eggs/) [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
 
 ![logo](./images/ic_launcher_round.png)
 
@@ -50,6 +50,20 @@
 * <span id='id_full_egg_mini_sdk'>完整体验彩蛋所需要的最低SDK版本。</span>
 * <span id='id_color_vector_fonts'>[Android 13](https://developer.android.google.cn/about/versions/13/features#color-vector-fonts) 可支持呈现 [COLRv1](https://developer.chrome.com/blog/colrv1-fonts/) 字体，并将系统表情符号更新成了 COLRv1 格式。</span>
 * <span id='id_egg_name'>老版本的彩蛋没有具体命名，这里使用系统版本别名。</span>
+
+## 编译
+
+前提是已安装了 `Java17` 和 `Android SDK`，并配置了对应环境变量。
+
+```shell
+./gradlew assembleRelease
+```
+
+Windows 需要使用 `gradlew.bat`： 
+
+```shell
+gradlew.bat assembleRelease
+```
 
 ## 测试
 
