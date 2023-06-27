@@ -2,8 +2,14 @@
 
 Organize the Android release Easter eggs
 
-![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-red?logo=android) ![GitHub top language](https://img.shields.io/github/languages/top/hushenghao/AndroidEasterEggs?logo=kotlin)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs) [![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE) [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/releases) [![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs)](https://f-droid.org/packages/com.dede.android_eggs/) [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
+![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-red?logo=android)
+![GitHub top language](https://img.shields.io/github/languages/top/hushenghao/AndroidEasterEggs?logo=kotlin)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs)
+[![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs)](https://github.com/hushenghao/AndroidEasterEggs/releases)
+[![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs)](https://f-droid.org/packages/com.dede.android_eggs/)
+[![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
 
 ![logo](./images/ic_launcher_round.png)
 
