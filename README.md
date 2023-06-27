@@ -82,6 +82,8 @@ Device type for emulators to be managed by the Android Gradle Plugin.
 
 If there are errors and problems, please submit [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues). If you are interested in this project, please submit [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) to participate.
 
+[Join the Translation Project](https://crowdin.com/project/easter-eggs)
+
 [Contact me 📧](mailto:dede.hu@qq.com)
 
 ### Thanks

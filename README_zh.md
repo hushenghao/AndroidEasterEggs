@@ -82,6 +82,8 @@ gradlew.bat assembleRelease
 
 如果存在错误和问题，欢迎提交 [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues) 。如果你对本项目感兴趣，欢迎提交 [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) 参与。
 
+[参与项目翻译](https://crowdin.com/project/easter-eggs)
+
 [联系我 📧](mailto:dede.hu@qq.com)
 
 ### 感谢
