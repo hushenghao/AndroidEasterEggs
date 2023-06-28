@@ -31,10 +31,10 @@
 | 名称                                     |  SDK  | 彩蛋                            | 状态  | 使用了新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |
 |----------------------------------------|:-----:|-------------------------------|:---:|:----------------------------:|:-------------------------------:|
 | Android 14 (Upside Down Cake)          |  34   |                               | ⌛️  |                              |                                 |
-| Android 13 (Tiramisu)                  |  33   | Paint Chips                   |  ✅  |              ✅               | 31 [*](#id_color_vector_fonts)  |
+| Android 13 (Tiramisu)                  |  33   | Paint Chips                   |  :check_mark_button:  |              :check_mark:               | 31 [*](#id_color_vector_fonts)  |
 | Android 12 (Snow Cone)                 | 31~32 | Paint Chips                   |  ✅  |              ✅               |               31                |
 | Android 11 (Red Velvet Cake)           |  30   | Cat Controls(Collection)      |  ✅  |              ✅               |               30                |
-| Android 10 (Queen Cake)                |  29   | Icon Quiz                     |  ✅  |              ❌               |                -                |
+| Android 10 (Queen Cake)                |  29   | Icon Quiz                     |  ✅  |              :multiply:               |                -                |
 | Android 9 (Pie)                        |  28   | PAINT.APK                     |  ✅  |              ❌               |                -                |
 | Android 8.0~8.1 (Oreo)                 | 26~27 | Octopus                       |  ✅  |              ❌               |                -                |
 | Android 7.0~7.1 (Nougat)               | 24~25 | Neko                          |  ✅  |              ✅               |               24                |
