@@ -11,7 +11,7 @@ import kotlin.math.roundToInt
  * 如果转化的16进制数的长度不足2位，则在高位补0，然后将高、低8位转成的16进制字符串拼接起来并在前面补上"\\u" 即可。
  */
 fun String?.toUnicode(prefix: String = "\\u", join: String = ""): String {
-    if (this == null || this.isEmpty()) {
+    if (this.isNullOrEmpty()) {
         return ""
     }
     val sb = StringBuilder()

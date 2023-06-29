@@ -39,6 +39,8 @@ val Activity.androidLifecycle: Lifecycle
         // Can make use of [androidx.lifecycle.ReportFragment],
         // But the API may change.
         //return ReportFragmentAccessor.injectIfNeededIn(this)
+
+        // com.bumptech.glide.manager.RequestManagerRetriever#get(android.app.Activity)
         val fm = fragmentManager
         var current = fm.findFragmentByTag(TAG_FRAGMENT) as? LifecycleFragment
         if (current == null) {
