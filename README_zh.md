@@ -26,9 +26,8 @@
 | [![下载应用，请到 F-Droid](https://fdroid.gitlab.io/artwork/badge/get-it-on-zh-cn.svg)](https://f-droid.org/packages/com.dede.android_eggs) | [![下载应用，请到 Google Play](./images/badge_playstore_fixpadding-zh.png)](https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) | [![下载应用，请到 CoolApk](./images/badge_coolapk.png)](https://www.coolapk.com/apk/com.dede.android_eggs) | [![Beta](./images/badge_pgyer.png)](https://www.pgyer.com/eggs) |
 |--------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
 
-**Google Play** 使用 [Play 应用签名功能](https://support.google.com/googleplay/android-developer/answer/9842756)，可能出现无法和其他下载渠道互相升级的问题。
-
-**蒲公英** 下载的是预览版本，可能包含了一些尚未稳定的新功能。
+**Google Play** 使用 [Play 应用签名功能](https://support.google.com/googleplay/android-developer/answer/9842756)，可能出现无法和其他下载渠道互相升级的问题。</br>
+**蒲公英** 下载的是Beta版本，可能包含了一些尚未稳定的新功能。
 
 ## 截图
 
@@ -36,7 +35,7 @@
 |----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
 
 ## Android 版本
-| 名称                                     | API level | 彩蛋                            | 使用了新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |
+| 名称                                     | API level | 彩蛋                            | 使用了新特性 [*](#id_new_features) | 最低 API [*](#id_full_egg_mini_api) |
 |----------------------------------------|:---------:|-------------------------------|:----------------------------:|:-------------------------------:|
 | Android 14 (Upside Down Cake)          |    34     | ⌛️                            |                              |                                 |
 | Android 13 (Tiramisu)                  |    33     | Paint Chips                   |             Yes              |      31 [*](#id_android12)      |
@@ -61,7 +60,7 @@
 | Android 1.0 (Base)                     |     1     | -                             |              -               |                -                |
 
 * <span id='id_new_features'>使用了系统新特性的彩蛋，老版本系统只能使用部分功能。</span>
-* <span id='id_full_egg_mini_sdk'>完整体验彩蛋所需要的最低SDK版本。</span>
+* <span id='id_full_egg_mini_api'>完整体验彩蛋所需要的最低API版本。</span>
 * <span id='id_android12'>Android 12 (API level 31) 改进了现有的 [Widgets API](https://developer.android.google.cn/about/versions/12/features/widgets?hl=zh-cn)，以改善平台和启动器中的用户和开发者体验。</span>
 * <span id='id_android11'>在 Android 11 (API level 30) 及更高版本中，[快速访问设备控制器](https://developer.android.google.cn/guide/topics/ui/device-control?hl=zh-cn) 功能可让用户通过 Android 电源菜单快速查看和控制外部设备。</span>
 * <span id='id_android7'>在 Android 7 (API level 24) 中，扩展了 [快速设置](https://developer.android.google.cn/about/versions/nougat/android-7.0?hl=zh-cn#tile_api) 的范围，使其更加有用而且更方便。</span>
@@ -98,11 +97,10 @@ gradlew.bat assembleRelease
 
 如果存在错误和问题，欢迎提交 [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues) 。如果你对本项目感兴趣，欢迎提交 [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) 参与。
 
-[参与项目翻译](https://crowdin.com/project/easter-eggs)
-
+[参与项目翻译](https://crowdin.com/project/easter-eggs)</br>
+[隐私协议](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)</br>
 [联系我 📧](mailto:dede.hu@qq.com)
 
 ### 感谢
-[AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)
-
+[AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)</br>
 [🦖 T-Rex Run 3D](https://github.com/Priler/dino3d)

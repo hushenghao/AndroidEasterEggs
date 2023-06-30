@@ -26,9 +26,8 @@ The project contains the complete code of the system Easter eggs, which aims to 
 | [![Get it on F-Droid](https://fdroid.gitlab.io/artwork/badge/get-it-on.svg)](https://f-droid.org/packages/com.dede.android_eggs) | [![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) | [![Get it on CoolApk](./images/badge_coolapk.png)](https://www.coolapk.com/apk/com.dede.android_eggs) | [![Beta](./images/badge_pgyer.png)](https://www.pgyer.com/eggs) |
 |----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
 
-**Google Play** use [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756), which may not be able to upgrade with other download channels.
-
-**Pgyer** downloaded the preview version, which may contain some new features that are not yet stable.
+**Google Play** use [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756), which may not be able to upgrade with other download channels.</br>
+**Pgyer** downloaded the Beta version, which may contain some new features that are not yet stable.
 
 ## Screenshots
 
@@ -36,7 +35,7 @@ The project contains the complete code of the system Easter eggs, which aims to 
 |----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
 
 ## Android Versions
-| Name                                   | API level | Egg                           | Use new features [*](#id_new_features) | Minimum SDK [*](#id_full_egg_mini_sdk) |
+| Name                                   | API level | Egg                           | Use new features [*](#id_new_features) | Minimum API [*](#id_full_egg_mini_api) |
 |----------------------------------------|:---------:|-------------------------------|:--------------------------------------:|:--------------------------------------:|
 | Android 14 (Upside Down Cake)          |    34     | ⌛️                            |                                        |                                        |
 | Android 13 (Tiramisu)                  |    33     | Paint Chips                   |                  Yes                   |         31 [*](#id_android12)          |
@@ -61,7 +60,7 @@ The project contains the complete code of the system Easter eggs, which aims to 
 | Android 1.0 (Base)                     |     1     | -                             |                   -                    |                   -                    |
 
 * <span id='id_new_features'>Easter eggs with new features of the system are used, and the old version of the system can only use some functions.</span>
-* <span id='id_full_egg_mini_sdk'>The minimum SDK version required to fully experience Easter Egg.</span>
+* <span id='id_full_egg_mini_api'>The minimum API level required to fully experience Easter Egg.</span>
 * <span id='id_android12'>Android 12 (API level 31) revamps the existing [Widgets API](https://developer.android.com/about/versions/12/features/widgets) to improve the user and developer experience in the platform and launchers.</span>
 * <span id='id_android11'>In Android 11 (API level 30) and later, the [Quick Access Device Controls](https://developer.android.com/develop/ui/views/device-control) feature lets the user quickly view and control external devices.</span>
 * <span id='id_android7'>In Android 7.0 (API level 24), expanded the scope of [Quick Settings](https://developer.android.com/about/versions/nougat/android-7.0#tile_api) to make it even more useful and convenient.</span>
@@ -98,11 +97,11 @@ Device type for emulators to be managed by the Android Gradle Plugin.
 
 If there are errors and problems, please submit [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues). If you are interested in this project, please submit [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) to participate.
 
-[Join the Translation Project](https://crowdin.com/project/easter-eggs)
-
+[Join the Translation Project](https://crowdin.com/project/easter-eggs)</br>
+[Privacy](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)</br>
 [Contact me 📧](mailto:dede.hu@qq.com)
 
 ### Thanks
-[AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)
 
+[AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)</br>
 [🦖 T-Rex Run 3D](https://github.com/Priler/dino3d)
