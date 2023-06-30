@@ -27,6 +27,7 @@ The project contains the complete code of the system Easter eggs, which aims to 
 |----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
 
 **Google Play** use [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756), which may not be able to upgrade with other download channels.</br>
+
 **Pgyer** downloaded the Beta version, which may contain some new features that are not yet stable.
 
 ## Screenshots
@@ -97,11 +98,14 @@ Device type for emulators to be managed by the Android Gradle Plugin.
 
 If there are errors and problems, please submit [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues). If you are interested in this project, please submit [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) to participate.
 
-[Join the Translation Project](https://crowdin.com/project/easter-eggs)</br>
-[Privacy](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)</br>
+[Join the Translation Project](https://crowdin.com/project/easter-eggs)
+
+[Privacy](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)
+
 [Contact me 📧](mailto:dede.hu@qq.com)
 
 ### Thanks
 
-[AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)</br>
+[AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)
+
 [🦖 T-Rex Run 3D](https://github.com/Priler/dino3d)

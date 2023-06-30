@@ -27,6 +27,7 @@
 |--------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
 
 **Google Play** 使用 [Play 应用签名功能](https://support.google.com/googleplay/android-developer/answer/9842756)，可能出现无法和其他下载渠道互相升级的问题。</br>
+
 **蒲公英** 下载的是Beta版本，可能包含了一些尚未稳定的新功能。
 
 ## 截图
@@ -97,10 +98,13 @@ gradlew.bat assembleRelease
 
 如果存在错误和问题，欢迎提交 [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues) 。如果你对本项目感兴趣，欢迎提交 [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) 参与。
 
-[参与项目翻译](https://crowdin.com/project/easter-eggs)</br>
-[隐私协议](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)</br>
+[参与项目翻译](https://crowdin.com/project/easter-eggs)
+
+[隐私协议](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)
+
 [联系我 📧](mailto:dede.hu@qq.com)
 
 ### 感谢
-[AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)</br>
+[AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)
+
 [🦖 T-Rex Run 3D](https://github.com/Priler/dino3d)
