@@ -28,35 +28,35 @@
 |----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
 
 ## Android 版本
-| 名称                                     |  SDK  | 彩蛋                            | 使用了新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |
-|----------------------------------------|:-----:|-------------------------------|:----------------------------:|:-------------------------------:|
-| Android 14 (Upside Down Cake)          |  34   | ⌛️                            |                              |                                 |
-| Android 13 (Tiramisu)                  |  33   | Paint Chips                   |             Yes️             |      31 [*](#id_android12)      |
-| Android 12 (Snow Cone)                 | 31~32 | Paint Chips                   |             Yes️             |      31 [*](#id_android12)      |
-| Android 11 (Red Velvet Cake)           |  30   | Cat Controls(Collection)      |             Yes️             |      30 [*](#id_android11)      |
-| Android 10 (Queen Cake)                |  29   | Icon Quiz                     |              No              |                -                |
-| Android 9 (Pie)                        |  28   | PAINT.APK                     |              No              |                -                |
-| Android 8.0~8.1 (Oreo)                 | 26~27 | Octopus                       |              No              |                -                |
-| Android 7.0~7.1 (Nougat)               | 24~25 | Neko                          |             Yes️             |      24 [*](#id_android7)       |
-| Android 6.0 (Marshmallow)              |  23   | Marshmallow Land              |              No              |                -                |
-| Android 5.0~5.1 (Lollipop)             | 21~22 | L Land                        |              No              |                -                |
-| Android 4.4~4.4W (KitKat)              | 19~20 | Dessert Case                  |              No              |                -                |
-| Android 4.1~4.3 (Jelly Bean)           | 16~18 | BeanBag                       |              No              |                -                |
-| Android 4.0~4.0.3 (Ice Cream Sandwich) | 14~15 | Nyandroid                     |              No              |                -                |
-| Android 3.0~3.2 (Honeycomb)            | 11~13 | Honeycomb [*](#id_egg_name)   |              No              |                -                |
-| Android 2.3~2.3.3 (Gingerbread)        | 9~10  | Gingerbread [*](#id_egg_name) |              No              |                -                |
-| Android 2.2 (Froyo)                    |   8   | -                             |              -               |                -                |
-| Android 2.0~2.1 (Eclair)               |  5~7  | -                             |              -               |                -                |
-| Android 1.6 (Donut)                    |   4   | -                             |              -               |                -                |
-| Android 1.5 (Cupcake)                  |   3   | -                             |              -               |                -                |
-| Android 1.1 (Petit Four)               |   2   | -                             |              -               |                -                |
-| Android 1.0 (Base)                     |   1   | -                             |              -               |                -                |
+| 名称                                     | API level | 彩蛋                            | 使用了新特性 [*](#id_new_features) | 最小版本 [*](#id_full_egg_mini_sdk) |
+|----------------------------------------|:---------:|-------------------------------|:----------------------------:|:-------------------------------:|
+| Android 14 (Upside Down Cake)          |    34     | ⌛️                            |                              |                                 |
+| Android 13 (Tiramisu)                  |    33     | Paint Chips                   |             Yes              |      31 [*](#id_android12)      |
+| Android 12 (Snow Cone)                 |   31~32   | Paint Chips                   |             Yes              |      31 [*](#id_android12)      |
+| Android 11 (Red Velvet Cake)           |    30     | Cat Controls(Collection)      |             Yes              |      30 [*](#id_android11)      |
+| Android 10 (Queen Cake)                |    29     | Icon Quiz                     |              No              |                -                |
+| Android 9 (Pie)                        |    28     | PAINT.APK                     |              No              |                -                |
+| Android 8.0~8.1 (Oreo)                 |   26~27   | Octopus                       |              No              |                -                |
+| Android 7.0~7.1 (Nougat)               |   24~25   | Neko                          |             Yes              |      24 [*](#id_android7)       |
+| Android 6.0 (Marshmallow)              |    23     | Marshmallow Land              |              No              |                -                |
+| Android 5.0~5.1 (Lollipop)             |   21~22   | L Land                        |              No              |                -                |
+| Android 4.4~4.4W (KitKat)              |   19~20   | Dessert Case                  |              No              |                -                |
+| Android 4.1~4.3 (Jelly Bean)           |   16~18   | BeanBag                       |              No              |                -                |
+| Android 4.0~4.0.3 (Ice Cream Sandwich) |   14~15   | Nyandroid                     |              No              |                -                |
+| Android 3.0~3.2 (Honeycomb)            |   11~13   | Honeycomb [*](#id_egg_name)   |              No              |                -                |
+| Android 2.3~2.3.3 (Gingerbread)        |   9~10    | Gingerbread [*](#id_egg_name) |              No              |                -                |
+| Android 2.2 (Froyo)                    |     8     | -                             |              -               |                -                |
+| Android 2.0~2.1 (Eclair)               |    5~7    | -                             |              -               |                -                |
+| Android 1.6 (Donut)                    |     4     | -                             |              -               |                -                |
+| Android 1.5 (Cupcake)                  |     3     | -                             |              -               |                -                |
+| Android 1.1 (Petit Four)               |     2     | -                             |              -               |                -                |
+| Android 1.0 (Base)                     |     1     | -                             |              -               |                -                |
 
 * <span id='id_new_features'>使用了系统新特性的彩蛋，老版本系统只能使用部分功能。</span>
 * <span id='id_full_egg_mini_sdk'>完整体验彩蛋所需要的最低SDK版本。</span>
-* <span id='id_android12'>Android 12 改进了现有的 [Widgets API](https://developer.android.google.cn/about/versions/12/features/widgets?hl=zh-cn)，以改善平台和启动器中的用户和开发者体验。</span>
-* <span id='id_android11'>在 Android 11 及更高版本中，[快速访问设备控制器](https://developer.android.google.cn/guide/topics/ui/device-control?hl=zh-cn) 功能可让用户通过 Android 电源菜单快速查看和控制外部设备。</span>
-* <span id='id_android7'>Android 7 新增了 [Quick Settings Tile API](https://developer.android.google.cn/about/versions/nougat/android-7.0?hl=zh-cn#tile_api)。</span>
+* <span id='id_android12'>Android 12 (API level 31) 改进了现有的 [Widgets API](https://developer.android.google.cn/about/versions/12/features/widgets?hl=zh-cn)，以改善平台和启动器中的用户和开发者体验。</span>
+* <span id='id_android11'>在 Android 11 (API level 30) 及更高版本中，[快速访问设备控制器](https://developer.android.google.cn/guide/topics/ui/device-control?hl=zh-cn) 功能可让用户通过 Android 电源菜单快速查看和控制外部设备。</span>
+* <span id='id_android7'>在 Android 7 (API level 24) 中，扩展了 [快速设置](https://developer.android.google.cn/about/versions/nougat/android-7.0?hl=zh-cn#tile_api) 的范围，使其更加有用而且更方便。</span>
 * <span id='id_egg_name'>老版本的彩蛋没有具体命名，这里使用系统版本别名。</span>
 
 ## 编译
