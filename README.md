@@ -11,9 +11,13 @@ Organize the Android release Easter eggs
 [![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs)](https://f-droid.org/packages/com.dede.android_eggs/)
 [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
 
+<div align="center">
+
 ![logo](./images/ic_launcher_round.png)
 
 **[English](./README.md) • [中文](./README_zh.md)**
+
+</div>
 
 ## Download
 
