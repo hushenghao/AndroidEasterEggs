@@ -1,5 +1,7 @@
 Sorted out the official versions of Android system built-in eggs
-Except for Android 11 and Android 7, which use new features of the system, the lower version can only use some functions, and other versions are full of egg functions.
+
+Except for Android 13, 12, 11 and 7, which use new features of the system, the lower version can only use some functions, and other versions are full of egg functions.
+
 The project contains the system egg complete code, only do part of the API compatibility.
 
 GitHub：
