@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:once="XXWHCA">
 
+    <uses-permission
+        android:name="com.android.launcher.permission.INSTALL_SHORTCUT"
+        android:maxSdkVersion="26" />
+
     <application
         android:name=".EasterEggsApp"
         android:allowBackup="true"

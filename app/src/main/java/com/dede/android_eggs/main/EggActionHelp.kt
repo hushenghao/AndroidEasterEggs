@@ -11,12 +11,15 @@ import android.widget.Toast
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.entity.Egg
+import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
 import com.dede.basic.cancel
 import com.dede.basic.delay
+import com.dede.basic.dp
 
 
 object EggActionHelp {
@@ -41,17 +44,21 @@ object EggActionHelp {
         context.startActivity(intent)
     }
 
-    fun supportShortcut(context: Context, egg: Egg): Boolean {
-        if (egg.shortcutKey == null || egg.targetClass == null) return false
-        return ShortcutManagerCompat.isRequestPinShortcutSupported(context)
+    fun enableShortcut(egg: Egg): Boolean {
+        return egg.shortcutKey != null && egg.targetClass != null
     }
 
     fun addShortcut(context: Context, egg: Egg) {
-        if (egg.shortcutKey == null) return
+        if (egg.shortcutKey == null || !enableShortcut(egg)) return
         val intent = createIntent(context, egg) ?: return
-        if (!supportShortcut(context, egg)) return
 
-        val icon = IconCompat.createWithResource(context, egg.iconRes)
+        val icon = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            val bitmap = AlterableAdaptiveIconDrawable(context, egg.iconRes)
+                .toBitmap(48.dp, 48.dp)
+            IconCompat.createWithBitmap(bitmap)
+        } else {
+            IconCompat.createWithResource(context, egg.iconRes)
+        }
         val shortcut = ShortcutInfoCompat.Builder(context, egg.shortcutKey)
             .setIcon(icon)
             .setIntent(intent)
