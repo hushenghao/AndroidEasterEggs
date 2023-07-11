@@ -3,10 +3,7 @@ package com.dede.android_eggs.main
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.core.view.doOnAttach
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -93,21 +90,6 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         LocalEvent.get(this).register(IconVisualEffectsPref.ACTION_CHANGED) {
             val enable = it.getBooleanExtra(IconVisualEffectsPref.EXTRA_VALUE, false)
             handleOrientationAngleSensor(enable)
-        }
-    }
-
-    private fun createSnapshotView(): View {
-        return FrameLayout(requireContext()).apply {
-            layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-            id = R.id.fl_snapshot
-            doOnAttach {
-                childFragmentManager.beginTransaction()
-                    .replace(R.id.fl_snapshot, SnapshotFragment())
-                    .commit()
-            }
         }
     }
 
