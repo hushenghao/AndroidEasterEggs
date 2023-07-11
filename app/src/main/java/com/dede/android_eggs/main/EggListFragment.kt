@@ -67,7 +67,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.adapter = VAdapter(EggDatas.eggList) {
-            addHeader(createSnapshotView())
+            addHeader(SnapshotFragment.createSnapshotView(requireContext()))
             addViewType<EggHolder>(R.layout.item_easter_egg_layout)
             addViewType<PreviewHolder>(R.layout.item_easter_egg_layout)
             addViewType<WavyHolder>(R.layout.item_easter_egg_wavy)

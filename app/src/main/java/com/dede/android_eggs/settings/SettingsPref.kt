@@ -27,6 +27,7 @@ import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.util.getActivity
 import com.dede.android_eggs.util.pref
 import com.dede.basic.dp
 import com.google.android.material.button.MaterialButton
@@ -36,7 +37,6 @@ import com.google.android.material.color.DynamicColorsOptions
 import com.google.android.material.color.HarmonizedColors
 import com.google.android.material.color.HarmonizedColorsOptions
 import com.google.android.material.color.MaterialColors
-import com.google.android.material.internal.ContextUtils
 import com.google.android.material.internal.EdgeToEdgeUtils
 import java.util.*
 import com.google.android.material.R as M3R
@@ -309,10 +309,9 @@ class EdgePref : SettingPref(
     override val titleRes: Int
         get() = R.string.pref_title_edge
 
-    @SuppressLint("RestrictedApi")
     override fun onOptionSelected(context: Context, option: Op) {
         LocalEvent.get(context).post(ACTION_CHANGED)
-        ContextUtils.getActivity(context)?.recreate()
+        context.getActivity<Activity>()?.recreate()
     }
 }
 
@@ -338,8 +337,7 @@ class DynamicColorPref : SettingPref(
                 .setOnAppliedCallback(this)
                 .build()
         )
-        @Suppress("RestrictedApi")
-        ContextUtils.getActivity(context)?.recreate()
+        context.getActivity<Activity>()?.recreate()
     }
 
     override fun shouldApplyDynamicColors(activity: Activity, theme: Int): Boolean {

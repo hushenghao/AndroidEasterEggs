@@ -92,7 +92,7 @@ dependencies {
     implementation(deps.androidx.activity)
     implementation(deps.androidx.lifecycle.runtime)
     implementation(deps.androidx.lifecycle.viewmodel)
-    implementation(deps.androidx.preference)
+    compileOnly(deps.androidx.preference)// Optimize apk size and ensure proper compilation of preference components.
     implementation(deps.androidx.constraintlayout)
     implementation(deps.androidx.browser)
     implementation(deps.androidx.window)
