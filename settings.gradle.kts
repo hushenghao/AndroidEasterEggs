@@ -40,5 +40,6 @@ include(
     ":eggs:R",
     ":eggs:S",
     ":eggs:T",
+    ":eggs:U",
 )
 rootProject.name = "Easter Eggs"

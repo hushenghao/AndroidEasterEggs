@@ -252,23 +252,6 @@ class GridScreenshotUtil {
                     cropScreenshot(context, screenshot).toResponse()
                 }
             }
-            registerHandler("/u.jpeg") {
-                val drawable = InsetDrawable(
-                    context.requireDrawable(R.drawable.ic_android_udc),
-                    0.25f
-                )
-                createBitmap(TARGET_SIZE.width, TARGET_SIZE.width).applyCanvas {
-                    val blurhash = BlurHashDecoder.decode(
-                        context.getString(R.string.hash_snapshot_bg),
-                        TARGET_SIZE.width, TARGET_SIZE.height
-                    )
-                    if (blurhash != null) {
-                        drawBitmap(blurhash, 0f, 0f, paint)
-                    }
-                    drawable.setBounds(0, 0, TARGET_SIZE.width, TARGET_SIZE.width)
-                    drawable.draw(this)
-                }.toResponse()
-            }
             registerHandler("/ic_grid_screenshot.jpeg") {
                 createGridScreenshot(context, screenshots).toResponse()
             }

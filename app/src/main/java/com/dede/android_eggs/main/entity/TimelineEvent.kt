@@ -35,7 +35,12 @@ data class TimelineEvent(
         }
 
         val timelines = listOf(
-            TimelineEvent("2023", "September", R.drawable.ic_android_udc, "Upside Down Cake."),
+            TimelineEvent(
+                "2023",
+                "September",
+                com.android_u.egg.R.drawable.u_android14_patch_adaptive,
+                "Upside Down Cake."
+            ),
             TimelineEvent("2022", "September", R.drawable.ic_android_tiramisu, "Tiramisu."),
             TimelineEvent(
                 "2021", "December", R.drawable.ic_android_s,

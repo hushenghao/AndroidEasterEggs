@@ -49,7 +49,7 @@ class PlaceholderActivity : AppCompatActivity() {
 
     private fun randomRes(): Int {
         val array = intArrayOf(
-            R.drawable.ic_android_udc,
+            com.android_u.egg.R.drawable.u_android14_patch_adaptive,
             R.drawable.ic_android_tiramisu,
             R.drawable.ic_android_s,
             com.android_r.egg.R.drawable.r_icon,

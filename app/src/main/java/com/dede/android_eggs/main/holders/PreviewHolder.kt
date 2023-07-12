@@ -87,7 +87,7 @@ class PreviewHolder(view: View) : EggHolder(view) {
         binding.cardView.setOnClickListener {
             showTimelineDialog(
                 context,
-                com.dede.android_eggs.R.drawable.ic_android_udc,
+                com.android_u.egg.R.drawable.u_android14_patch_adaptive,
                 com.dede.android_eggs.R.string.title_android_u
             )
         }

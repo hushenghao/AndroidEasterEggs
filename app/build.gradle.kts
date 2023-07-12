@@ -104,6 +104,7 @@ dependencies {
     implementation(deps.blurhash.android)
     debugImplementation(deps.leakcanary)
     implementation(project(":basic"))
+    implementation(project(":eggs:U"))
     implementation(project(":eggs:T"))
     implementation(project(":eggs:S"))
     implementation(project(":eggs:R"))

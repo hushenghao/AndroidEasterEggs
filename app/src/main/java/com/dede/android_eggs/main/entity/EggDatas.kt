@@ -10,6 +10,7 @@ object EggDatas {
 
     private const val EXTRA_O_POINT = "isOreoPoint"
 
+    private const val KEY_EGG_U = "key_egg_u"
     private const val KEY_EGG_T = "key_egg_t"
     private const val KEY_EGG_S = "key_egg_s"
     private const val KEY_EGG_R = "key_egg_r"
@@ -46,12 +47,13 @@ object EggDatas {
 
     val eggList = listOf(
         Egg(
-            R.drawable.ic_android_udc,
+            com.android_u.egg.R.drawable.u_android14_patch_adaptive,
             R.string.title_android_u,
-            R.string.title_android_u,
+            com.android_u.egg.R.string.u_egg_name,
             CharSequenceFormatter(R.string.version_comment_once, 34, "14"),
-            supportAdaptiveIcon = true,
-            itemType = Egg.VIEW_TYPE_PREVIEW
+            com.android_u.egg.PlatLogoActivity::class.java,
+            true,
+            KEY_EGG_U
         ),
         Wavy(R.drawable.ic_wavy_line),
         Egg(
