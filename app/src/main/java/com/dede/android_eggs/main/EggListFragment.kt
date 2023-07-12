@@ -1,8 +1,10 @@
 package com.dede.android_eggs.main
 
+import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +25,7 @@ import com.dede.android_eggs.settings.IconVisualEffectsPref
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.addHeader
 import com.dede.android_eggs.ui.adapter.addViewType
+import com.dede.android_eggs.ui.views.SnapshotGroupView
 import com.dede.android_eggs.ui.views.onApplyWindowEdge
 import com.dede.android_eggs.util.EasterUtils
 import com.dede.android_eggs.util.LocalEvent
@@ -64,7 +67,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.adapter = VAdapter(EggDatas.eggList) {
-            addHeader(SnapshotFragment.createSnapshotView(requireContext()))
+            addHeader(createSnapshotView(requireContext()))
             addViewType<EggHolder>(R.layout.item_easter_egg_layout)
             addViewType<PreviewHolder>(R.layout.item_easter_egg_layout)
             addViewType<WavyHolder>(R.layout.item_easter_egg_wavy)
@@ -90,6 +93,15 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         LocalEvent.get(this).register(IconVisualEffectsPref.ACTION_CHANGED) {
             val enable = it.getBooleanExtra(IconVisualEffectsPref.EXTRA_VALUE, false)
             handleOrientationAngleSensor(enable)
+        }
+    }
+
+    private fun createSnapshotView(context: Context): View {
+        return SnapshotGroupView(context).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
         }
     }
 
