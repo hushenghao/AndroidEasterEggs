@@ -32,6 +32,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
 import androidx.core.os.HandlerCompat;
 import androidx.core.view.WindowCompat;
@@ -230,7 +231,8 @@ public class PlatLogoActivity extends Activity {
     /* JADX INFO: Access modifiers changed from: private */
     public void startWarp() {
         stopWarp();
-        ObjectAnimator duration = ObjectAnimator.ofFloat(this.mStarfield, "warp", 1.0f, MAX_WARP).setDuration(5000L);
+        ObjectAnimator duration = ObjectAnimator.ofFloat(this.mStarfield, "warp", 1.0f, MAX_WARP)
+                .setDuration(5000L);
         this.mWarpAnim = duration;
         duration.start();
         this.mLogo.postDelayed(this.mLaunchNextStage, 6000L);
@@ -293,10 +295,12 @@ public class PlatLogoActivity extends Activity {
         private final Rect mSpace = new Rect();
         private float mWarp = 1.0f;
 
+        @Keep
         public void setWarp(float warp) {
             this.mWarp = warp;
         }
 
+        @Keep
         public float getWarp() {
             return this.mWarp;
         }
