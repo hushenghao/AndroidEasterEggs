@@ -5,6 +5,19 @@
 
     <shortcut
         android:enabled="true"
+        android:icon="@drawable/u_android14_patch_adaptive"
+        android:shortcutDisabledMessage="@string/u_egg_name"
+        android:shortcutId="android_u"
+        android:shortcutLongLabel="@string/u_egg_name"
+        android:shortcutShortLabel="@string/u_egg_name">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.android_u.egg.PlatLogoActivity"
+            android:targetPackage="com.dede.android_eggs" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
         android:icon="@drawable/ic_android_tiramisu"
         android:shortcutDisabledMessage="@string/t_egg_name"
         android:shortcutId="android_t"
@@ -26,19 +39,6 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="com.android_s.egg.PlatLogoActivity"
-            android:targetPackage="com.dede.android_eggs" />
-    </shortcut>
-
-    <shortcut
-        android:enabled="true"
-        android:icon="@drawable/r_icon"
-        android:shortcutDisabledMessage="@string/r_egg_name"
-        android:shortcutId="android_r"
-        android:shortcutLongLabel="@string/r_egg_name"
-        android:shortcutShortLabel="@string/r_egg_short_name">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="com.android_r.egg.PlatLogoActivity"
             android:targetPackage="com.dede.android_eggs" />
     </shortcut>
 

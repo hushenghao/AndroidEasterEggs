@@ -13,6 +13,9 @@
             window:secondaryActivityName=".main.AndroidTimelineActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
+            window:secondaryActivityName="com.android_u.egg.PlatLogoActivity" />
+        <SplitPairFilter
+            window:primaryActivityName=".main.EasterEggsActivity"
             window:secondaryActivityName="com.android_t.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"

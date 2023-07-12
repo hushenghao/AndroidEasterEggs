@@ -1,0 +1,5 @@
+- Added Android 14 Easter Egg (decompiled)🎉
+- Added shortcut support to Android 5.0
+- Add traditional Chinese
+- Optimized predictive return gesture animation
+- Fix known issues and optimize performance

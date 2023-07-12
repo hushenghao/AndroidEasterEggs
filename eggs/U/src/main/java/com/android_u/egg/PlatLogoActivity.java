@@ -20,16 +20,17 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.os.VibratorManager;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.os.HandlerCompat;
@@ -37,8 +38,6 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
-import com.android_u.egg.landroid.EasterEggLauncher;
-import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
 
 import java.util.Random;
@@ -106,7 +105,6 @@ public class PlatLogoActivity extends Activity {
 
     /* loaded from: classes4.dex */
     private class RumblePack implements Handler.Callback {
-        private static final int INTERVAL = 50;
         private static final int MSG = 6464;
         private long mLastVibe = 0;
         private boolean mSpinPrimitiveSupported = false;
@@ -146,7 +144,6 @@ public class PlatLogoActivity extends Activity {
                         .areAllPrimitivesSupported(VibrationEffect.Composition.PRIMITIVE_SPIN);
             } else {
                 this.mVibeMan = null;
-                Vibrator mVibe = (Vibrator) PlatLogoActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
             }
             HandlerThread handlerThread = new HandlerThread("VibratorThread");
             this.mVibeThread = handlerThread;
@@ -207,7 +204,7 @@ public class PlatLogoActivity extends Activity {
         int minSide = Math.min(dm.widthPixels, dm.heightPixels);
         int widgetSize = (int) (minSide * 0.75d);
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(widgetSize, widgetSize);
-        lp.gravity = 17;
+        lp.gravity = Gravity.CENTER;
         ImageView imageView = new ImageView(this);
         this.mLogo = imageView;
         imageView.setImageResource(R.drawable.u_platlogo);
@@ -255,7 +252,6 @@ public class PlatLogoActivity extends Activity {
     public void onResume() {
         super.onResume();
         startAnimating();
-        EasterEggLauncher.launch(this);
     }
 
     @Override // android.app.Activity
@@ -270,7 +266,12 @@ public class PlatLogoActivity extends Activity {
         Log.v(TAG, "Saving egg locked=" + locked);
         SpUtils.putLong(this, U_EGG_UNLOCK_SETTING, locked ? 0L : System.currentTimeMillis());
         try {
+            // It cannot be decompiled,
+            // and the kotlin version is not compatible as a jar package dependency.
+            //  R. reference issue needs to be resolved
+            Toast.makeText(this, "Decompiled version does not support more features!", Toast.LENGTH_SHORT).show();
 //            Intent eggActivity = new Intent(Intent.ACTION_MAIN);
+//                    .setClass(this, Class.forName("com.android.egg.landroid.MainActivity"));
 //            Log.v(TAG, "launching: " + eggActivity);
 //            startActivity(eggActivity);
         } catch (ActivityNotFoundException e2) {

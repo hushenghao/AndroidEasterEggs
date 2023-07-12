@@ -28,6 +28,7 @@ object EggDatas {
     private const val KEY_EGG_G = "key_egg_g"
 
     val snapshotList = listOf(
+        com.android_u.egg.PlatLogoSnapshotProvider(),
         com.android_t.egg.PlatLogoSnapshotProvider(),
         com.android_s.egg.PlatLogoSnapshotProvider(),
         com.android_r.egg.PlatLogoSnapshotProvider(),
@@ -46,6 +47,7 @@ object EggDatas {
     )
 
     val eggList = listOf(
+        Wavy(R.drawable.ic_wavy_line),
         Egg(
             com.android_u.egg.R.drawable.u_android14_patch_adaptive,
             R.string.title_android_u,
@@ -55,7 +57,6 @@ object EggDatas {
             true,
             KEY_EGG_U
         ),
-        Wavy(R.drawable.ic_wavy_line),
         Egg(
             R.drawable.ic_android_tiramisu,
             R.string.title_android_t,
