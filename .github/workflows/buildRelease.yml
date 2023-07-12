@@ -51,7 +51,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ github.ref }}
+        # tag: ${{ github.ref }}
 #        name: Release ${{ github.ref }}
 #        tag: v1.9.4-prerelease
 #        name: PreRelease v1.9.4
