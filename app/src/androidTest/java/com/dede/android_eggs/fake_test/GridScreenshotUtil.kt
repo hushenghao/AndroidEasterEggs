@@ -6,26 +6,21 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.InsetDrawable
 import android.util.Size
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.dede.android_eggs.R
 import com.dede.android_eggs.fake_test.EasterEggsServer.Companion.registerHandler
 import com.dede.android_eggs.ui.drawables.ScaleType
 import com.dede.android_eggs.ui.drawables.ScaleTypeDrawable
 import com.dede.basic.dpf
-import com.dede.basic.requireDrawable
-import com.wolt.blurhashkt.BlurHashDecoder
 import fi.iki.elonen.NanoHTTPD
 import fi.iki.elonen.NanoHTTPD.Response
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.io.File
 import kotlin.math.min
 
 /**
@@ -78,7 +73,7 @@ class GridScreenshotUtil {
     private class Triple(
         override val height: Int,
         override val reverse: Boolean,
-        override val column: Int = 3
+        override val column: Int = 3,
     ) : Group, Reversal, Column {
         override fun convertBounds(width: Int, top: Int): List<Rect> {
             val halfHeight = height / 2
@@ -126,7 +121,7 @@ class GridScreenshotUtil {
     private class Tetrad(
         override val height: Int,
         override val reverse: Boolean,
-        override val column: Int = 4
+        override val column: Int = 4,
     ) : Group, Reversal, Column {
         override fun convertBounds(width: Int, top: Int): List<Rect> {
             val splitH = height / 3
@@ -247,8 +242,7 @@ class GridScreenshotUtil {
         screenshots.add(screenshots.size - 2, g)
         EasterEggsServer.start(context) {
             for (screenshot in screenshots) {
-                val name = File(screenshot).nameWithoutExtension
-                registerHandler("/$name.jpeg") {
+                registerHandler("/$screenshot") {
                     cropScreenshot(context, screenshot).toResponse()
                 }
             }
