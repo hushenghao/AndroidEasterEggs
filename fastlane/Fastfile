@@ -27,12 +27,8 @@ platform :android do
     # https://www.pgyer.com/doc/view/fastlane
     pgyer(
       api_key: ENV["PGYER_API_KEY"],
-      update_description: changelog_from_git_commits(commits_count: 3)
+      update_description: File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1])
     )
-    # crashlytics
-
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
   end
 
   desc "Deploy a new version to the Google Play"
