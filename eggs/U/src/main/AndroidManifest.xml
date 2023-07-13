@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -11,13 +12,15 @@
             android:icon="@drawable/u_platlogo"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
 
-<!--        <activity-->
-<!--            android:name="com.android.egg.landroid.MainActivity"-->
-<!--            android:configChanges="density|screenSize|screenLayout|orientation"-->
-<!--            android:exported="true"-->
-<!--            android:icon="@drawable/u_android14_patch_adaptive"-->
-<!--            android:label="@string/u_egg_name"-->
-<!--            android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />-->
+        <activity
+            android:name="com.android.egg.landroid.MainActivity"
+            android:configChanges="density|screenSize|screenLayout|orientation"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/u_android14_patch_adaptive"
+            android:label="@string/u_egg_name"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen"
+            tools:ignore="MissingClass" />
 
     </application>
 </manifest>

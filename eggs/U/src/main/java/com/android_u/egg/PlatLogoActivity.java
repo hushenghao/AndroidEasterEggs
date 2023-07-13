@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -26,6 +25,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -228,6 +228,26 @@ public class PlatLogoActivity extends Activity {
         this.mAnim = null;
     }
 
+    @Override // android.app.Activity, android.view.KeyEvent.Callback
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_SPACE) {
+            if (event.getRepeatCount() == 0) {
+                startWarp();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override // android.app.Activity, android.view.KeyEvent.Callback
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_SPACE) {
+            stopWarp();
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
     /* JADX INFO: Access modifiers changed from: private */
     public void startWarp() {
         stopWarp();
@@ -272,12 +292,12 @@ public class PlatLogoActivity extends Activity {
             // and the kotlin version is not compatible as a jar package dependency.
             //  R. reference issue needs to be resolved
             Toast.makeText(this, "Decompiled version does not support more features!", Toast.LENGTH_SHORT).show();
-//            Intent eggActivity = new Intent(Intent.ACTION_MAIN);
+//            Intent eggActivity = new Intent(Intent.ACTION_MAIN)
 //                    .setClass(this, Class.forName("com.android.egg.landroid.MainActivity"));
 //            Log.v(TAG, "launching: " + eggActivity);
 //            startActivity(eggActivity);
-        } catch (ActivityNotFoundException e2) {
-            Log.e(TAG, "No more eggs.");
+        } catch (Exception e2) {
+            Log.e(TAG, "No more eggs.", e2);
         }
     }
 

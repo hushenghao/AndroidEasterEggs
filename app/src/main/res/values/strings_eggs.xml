@@ -36,4 +36,5 @@
     <string name="version_comment_range" translatable="false">API %d~%d\nAndroid %s~%s</string>
 
     <string name="r_egg_short_name" translatable="false">Cat Controls</string>
+    <string name="u_egg_name_override" translatable="false">Upside Down Cake</string>
 </resources>
