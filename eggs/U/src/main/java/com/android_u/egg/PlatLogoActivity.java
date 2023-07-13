@@ -128,15 +128,11 @@ public class PlatLogoActivity extends Activity {
                                 .compose();
                         this.mVibeMan.vibrate(CombinedVibration.createParallel(vibrationEffect));
                     }
-                    return false;
                 }
-                return false;
             } else if (PlatLogoActivity.this.mRandom.nextFloat() < warpFrac) {
                 PlatLogoActivity.this.mLogo.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK);
-                return false;
-            } else {
-                return false;
             }
+            return false;
         }
 
         RumblePack() {
