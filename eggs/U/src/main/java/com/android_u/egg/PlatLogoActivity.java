@@ -4,7 +4,9 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -288,15 +290,18 @@ public class PlatLogoActivity extends Activity {
         Log.v(TAG, "Saving egg locked=" + locked);
         SpUtils.putLong(this, U_EGG_UNLOCK_SETTING, locked ? 0L : System.currentTimeMillis());
         try {
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                Intent eggActivity = new Intent(Intent.ACTION_MAIN)
+                        .addCategory("com.android.internal.category.PLATLOGO");
+                Log.v(TAG, "launching: " + eggActivity);
+                startActivity(eggActivity);
+                return;
+            }
             // It cannot be decompiled,
             // and the kotlin version is not compatible as a jar package dependency.
             //  R. reference issue needs to be resolved
             Toast.makeText(this, "Decompiled version does not support more features!", Toast.LENGTH_SHORT).show();
-//            Intent eggActivity = new Intent(Intent.ACTION_MAIN)
-//                    .setClass(this, Class.forName("com.android.egg.landroid.MainActivity"));
-//            Log.v(TAG, "launching: " + eggActivity);
-//            startActivity(eggActivity);
-        } catch (Exception e2) {
+        } catch (ActivityNotFoundException e2) {
             Log.e(TAG, "No more eggs.", e2);
         }
     }
