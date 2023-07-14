@@ -33,42 +33,47 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do |options|
-    skip_upload_aab = options[:skip_upload_aab]
-    if skip_upload_aab == nil || !skip_upload_aab
-        gradle(task: "clean bundleRelease")
-    end
-
     # https://docs.fastlane.tools/actions/upload_to_play_store/
-    # skip_upload_metadata	Whether to skip uploading metadata, changelogs not included	false
-    # skip_upload_images	Whether to skip uploading images, screenshots not included	false
-    # skip_upload_screenshots	Whether to skip uploading SCREENSHOTS	false
-    if options.size == 0
-        options[:skip_upload_metadata] = true
-        options[:skip_upload_images] = true
-        options[:skip_upload_screenshots] = true
+    # skip_upload_aab           Whether to skip uploading AAB	                                false
+    # skip_upload_metadata      Whether to skip uploading metadata, changelogs not included	    false
+    # skip_upload_images        Whether to skip uploading images, screenshots not included	    false
+    # skip_upload_screenshots   Whether to skip uploading SCREENSHOTS	                        false
+    # skip_upload_changelogs    Whether to skip uploading changelogs	                        false
+    case options[:mode]
+    when "metadata"
+        # Upload metadata and images, screenshots not included
+        upload_to_play_store(
+            skip_upload_aab: true,
+            skip_upload_screenshots: true,
+            skip_upload_changelogs: true
+        )
+    when "screenshots"
+        # Device art generator
+        #   https://developer.android.google.cn/distribute/marketing-tools/device-art-generator
+        # Screenshot Devices:
+        #   phone:      Pixel 6                     1080x2400
+        #   sevenInch:  7.6" Foldable main screen   1768x2208
+        #   tenInch:    Nexus 9                     1536x2048
+        # Style:
+        #   [ ] Shadow  [x] Screen Glare
+        upload_to_play_store(
+            skip_upload_aab: true,
+            skip_upload_metadata: true,
+            skip_upload_images: true,
+            skip_upload_changelogs: true
+        )
+    when "full"
+        # Upload All
+        gradle(task: "clean bundleRelease")
+        upload_to_play_store
+    else
+        # Upload new version
+        gradle(task: "clean bundleRelease")
+        upload_to_play_store(
+            skip_upload_metadata: true,
+            skip_upload_images: true,
+            skip_upload_screenshots: true
+        )
     end
-    # override default (skip_upload_images:false)
-    print options
-    upload_to_play_store(options)
-  end
-
-  desc "Upload screenshots to the Google Play"
-  lane :upload_screenshots do
-    # Device art generator
-    #   https://developer.android.google.cn/distribute/marketing-tools/device-art-generator
-    # Screenshot Devices:
-    #   phone:      Pixel 6                     1080x2400
-    #   sevenInch:  7.6" Foldable main screen   1768x2208
-    #   tenInch:    Nexus 9                     1536x2048
-    # Style:
-    #   [ ] Shadow
-    #   [x] Screen Glare
-    upload_to_play_store(
-        skip_upload_apk: true,
-        skip_upload_aab: true,
-        skip_upload_metadata: true,
-        skip_upload_images: true,
-        skip_upload_changelogs: true
-    )
   end
 end

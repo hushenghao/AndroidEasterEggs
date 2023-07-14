@@ -39,14 +39,6 @@ Submit a new Beta Build to Pgyer
 
 Deploy a new version to the Google Play
 
-### android upload_screenshots
-
-```sh
-[bundle exec] fastlane android upload_screenshots
-```
-
-Upload screenshots to the Google Play
-
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
