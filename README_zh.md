@@ -4,11 +4,11 @@
 
 ![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-E8DEF8?logo=android&labelColor=6750A4
 )
-[![GitHub](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache&logoColor=D22128)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
-[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml?logo=androidstudio)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs?logo=github)](https://github.com/hushenghao/AndroidEasterEggs/releases)
-[![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs?logo=fdroid)](https://f-droid.org/packages/com.dede.android_eggs/)
+[![GitHub license](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache&logoColor=D22128)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
 [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml?logo=githubactions)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs?logo=github&logoColor=181717)](https://github.com/hushenghao/AndroidEasterEggs/releases)
+[![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs?logo=fdroid&logoColor=1976D2)](https://f-droid.org/packages/com.dede.android_eggs)
 
 <div align="center">
 

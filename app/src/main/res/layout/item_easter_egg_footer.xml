@@ -125,7 +125,7 @@
         android:layout_marginTop="12dp"
         android:background="?attr/selectableItemBackground"
         android:fontFamily="sans-serif-medium"
-        android:text="Timeline"
+        android:text="@string/label_timeline"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:textColor="?attr/colorSecondary"
         app:layout_constraintStart_toStartOf="@id/tv_title_other"

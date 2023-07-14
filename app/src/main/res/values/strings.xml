@@ -24,6 +24,7 @@
     <string name="label_frameworks" translatable="false">Frameworks</string>
     <string name="label_beta">Get Beta</string>
     <string name="label_dino_3d" translatable="false">Dino 3D</string>
+    <string name="label_timeline" translatable="false">Timeline</string>
     <string name="label_privacy_policy">Privacy</string>
     <string name="label_license" translatable="false">License</string>
     <string name="label_email">Contact me</string>
