@@ -22,8 +22,8 @@ The project contains the complete code of the system Easter eggs, which aims to 
 
 ## Download
 
-| [![Get it on F-Droid](https://fdroid.gitlab.io/artwork/badge/get-it-on.svg)](https://f-droid.org/packages/com.dede.android_eggs) | [![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) | [![Get it on CoolApk](./images/badge_coolapk.png)](https://www.coolapk.com/apk/com.dede.android_eggs) | [![Beta](./images/badge_pgyer.png)](https://www.pgyer.com/eggs) |
-|----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| [![Get it on F-Droid](https://fdroid.gitlab.io/artwork/badge/get-it-on.svg)](https://f-droid.org/packages/com.dede.android_eggs) | [![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) | [![Get it on CoolApk](./images/badge_coolapk-en.svg)](https://www.coolapk.com/apk/com.dede.android_eggs) | [![Beta](./images/badge_pgyer.svg)](https://www.pgyer.com/eggs) |
+|----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
 
 * **Google Play** use [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756), which may not be able to upgrade with other download channels.
 * **Pgyer** downloaded the Beta version, which may contain some new features that are not yet stable.
@@ -94,11 +94,11 @@ Device type for emulators to be managed by the Android Gradle Plugin.
 
 ## Other
 
-If there are errors and problems, please submit [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues). If you are interested in this project, please submit [Pull requests](https://github.com/hushenghao/AndroidEasterEggs/pulls) to participate.
+If there are errors and problems, please submit [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues). If you are interested in this project, please submit [PR](https://github.com/hushenghao/AndroidEasterEggs/pulls) to participate.
 
-[Join the Translation Project](https://crowdin.com/project/easter-eggs)
+[Translation and Localization](https://crowdin.com/project/easter-eggs)
 
-[Privacy](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)
+[Privacy Policy](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)
 
 [Contact me 📧](mailto:dede.hu@qq.com)
 
