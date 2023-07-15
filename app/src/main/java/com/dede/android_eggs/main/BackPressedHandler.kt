@@ -13,7 +13,6 @@ import android.view.ViewOutlineProvider
 import android.window.BackEvent
 import androidx.activity.BackEventCompat
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.OnBackPressedDispatcherAccessor
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
@@ -66,7 +65,6 @@ class BackPressedHandler(private val host: AppCompatActivity) :
 
     @SuppressLint("RestrictedApi", "UnsafeOptInUsageError")
     fun register() {
-        OnBackPressedDispatcherAccessor.fixApi34(host)
         host.onBackPressedDispatcher.addCallback(this)
         host.lifecycle.addObserver(this)
 

@@ -4,9 +4,13 @@ import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
+import android.graphics.drawable.StateListDrawable
+import android.util.StateSet
+import android.view.Gravity
 import android.view.HapticFeedbackConstants
 import android.view.View
 import android.view.animation.LinearInterpolator
+import androidx.core.view.GravityCompat
 import coil.dispose
 import coil.load
 import com.dede.android_eggs.databinding.ItemEasterEggLayoutBinding
@@ -22,8 +26,11 @@ import com.dede.android_eggs.ui.views.HorizontalSwipeLayout
 import com.dede.android_eggs.util.isRtl
 import com.dede.android_eggs.util.resolveColorStateList
 import com.dede.android_eggs.util.updateCompoundDrawablesRelative
+import com.dede.basic.dp
+import com.dede.basic.dpf
 import kotlin.math.abs
 import kotlin.math.max
+import kotlin.math.min
 import com.google.android.material.R as M3R
 
 @VHType(viewType = Egg.VIEW_TYPE_EGG)
@@ -86,7 +93,10 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         binding.tvSummary.setText(egg.androidRes)
         binding.cardView.setOnClickListener { EggActionHelp.launchEgg(context, egg) }
         binding.background.tvBgMessage.text = egg.versionCommentFormatter.format(context)
-        binding.background.tvAddShortcut.isEnabled = EggActionHelp.enableShortcut(egg)
+        val enableShortcut = EggActionHelp.enableShortcut(egg)
+        binding.background.tvAddShortcut.isEnabled = enableShortcut
+        binding.root.swipeGravity =
+            if (enableShortcut) Gravity.FILL_HORIZONTAL else GravityCompat.END
 
         binding.ivIcon.dispose()
         binding.background.ivBgIcon.dispose()
@@ -103,23 +113,43 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
             binding.background.ivBgIcon.load(egg.iconRes)
         }
 
-        val color = context.resolveColorStateList(
-            M3R.attr.textAppearanceLabelMedium, android.R.attr.textColor
-        )
-        val drawable = FontIconsDrawable(context, Icons.Rounded.swipe_left_alt, 24f).apply {
-            setColorStateList(color)
+        val drawable = StateListDrawable().apply {
+            val color = context.resolveColorStateList(
+                M3R.attr.textAppearanceLabelMedium, android.R.attr.textColor
+            )
+            addState(
+                intArrayOf(android.R.attr.state_selected),
+                FontIconsDrawable(context, Icons.Rounded.app_shortcut, color)
+            )
+            addState(
+                StateSet.NOTHING,
+                FontIconsDrawable(context, Icons.Rounded.swipe_left_alt, color)
+            )
+            setBounds(0, 0, 30.dp, 30.dp)
             isAutoMirrored = true
         }
         binding.background.tvAddShortcut.updateCompoundDrawablesRelative(end = drawable)
-        binding.root.swipeListener = SwipeAddShortcut({
-            it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
-        }) {
-            EggActionHelp.addShortcut(context, egg)
-        }
+        binding.root.swipeListener = SwipeAddShortcut(
+            onSwipedPositionChanged = { v, _, p ->
+                val symbol = if (v.isRtl) 1 else -1
+                binding.background.tvAddShortcut.translationX = 12.dpf * symbol * p
+            },
+            onSwipedStartHalfFeedback = {
+                binding.background.tvAddShortcut.isSelected = true
+                it.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+            },
+            onSwipedRelease = {
+                binding.background.tvAddShortcut.isSelected = false
+            },
+            callback = {
+                EggActionHelp.addShortcut(context, egg)
+            })
     }
 
     private class SwipeAddShortcut(
+        private val onSwipedPositionChanged: (view: View, left: Int, p: Float) -> Unit,
         private val onSwipedStartHalfFeedback: (view: View) -> Unit,
+        private val onSwipedRelease: () -> Unit,
         private val callback: () -> Unit,
     ) : HorizontalSwipeLayout.OnSwipeListener {
 
@@ -132,11 +162,18 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
 
         override fun onSwipePositionChanged(changedView: View, left: Int, dx: Int) {
             val halfWidth = changedView.width / 2
-            val isSwipedStartHalf = if (!isRtl) {
+            val rtl = isRtl
+            val isSwipedStartHalf = if (!rtl) {
                 left <= -halfWidth
             } else {
                 left >= halfWidth
             }
+            val p = if (!rtl) {
+                -left * 1f / halfWidth
+            } else {
+                left * 1f / halfWidth
+            }
+            onSwipedPositionChanged.invoke(changedView, left, max(-1f, min(p, 1f)))
             postInvokeCallback = isSwipedStartHalf
             if (!isFeedback && isSwipedStartHalf) {
                 onSwipedStartHalfFeedback.invoke(changedView)
@@ -149,6 +186,7 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
                 callback.invoke()
                 postInvokeCallback = false
             }
+            onSwipedRelease.invoke()
         }
     }
 

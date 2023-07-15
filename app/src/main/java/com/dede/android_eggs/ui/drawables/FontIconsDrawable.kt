@@ -75,6 +75,15 @@ class FontIconsDrawable(
         setColor(color)
     }
 
+    constructor(
+        context: Context,
+        unicode: String,
+        color: ColorStateList?,
+        @Dimension(unit = Dimension.DP) size: Float = -1f,
+    ) : this(context, unicode, size) {
+        setColorStateList(color)
+    }
+
     private val paint = TextPaint(Paint.ANTI_ALIAS_FLAG)
     private val metrics = FontMetrics()
     private val padding = Rect()

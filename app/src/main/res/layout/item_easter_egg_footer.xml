@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
         app:layout_constraintBottom_toBottomOf="@id/iv_icon"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="@id/tv_version"
         app:layout_constraintTop_toBottomOf="@id/tv_version"
         tools:text="3b455a" />
