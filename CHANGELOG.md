@@ -1,3 +1,8 @@
+### master
+
+- Optimize Android Timeline
+- Optimize sideslip to add shortcuts
+
 ### v1.9.5 (2023-07-13)
 
 - Added Android 14 Easter Egg (decompiled)🎉
