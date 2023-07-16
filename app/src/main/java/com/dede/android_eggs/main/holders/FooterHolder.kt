@@ -1,6 +1,7 @@
 package com.dede.android_eggs.main.holders
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.View
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
@@ -26,11 +27,12 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
             BuildConfig.VERSION_CODE
         )
         binding.tvGitHash.text = BuildConfig.GIT_HASH
+        binding.tvGitHash.paintFlags = binding.tvGitHash.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         val views = arrayOf(
             binding.tvGitHash,
-            binding.tvGithub, binding.tvLicense, binding.tvFrameworks, binding.tvTranslation,
+            binding.tvGithub, binding.tvFrameworks, binding.tvTranslation,
             binding.tvTimeline, binding.tvStar, binding.tvBeta, binding.tvDino3d,
-            binding.tvPrivacy, binding.tvFeedback
+            binding.tvPrivacy, binding.tvLicense, binding.tvFeedback,
         )
         for (view in views) {
             view.setOnClickListener(this)
@@ -50,9 +52,9 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
                 AndroidTimelineFragment.show(activity.supportFragmentManager)
             }
 
-            R.id.tv_github, R.id.tv_license, R.id.tv_frameworks, R.id.tv_translation,
+            R.id.tv_github, R.id.tv_frameworks, R.id.tv_translation,
             R.id.tv_beta, R.id.tv_dino_3d,
-            R.id.tv_privacy,
+            R.id.tv_privacy, R.id.tv_license,
             -> {
                 CustomTabsBrowser.launchUrl(context, v.tagString.toUri())
             }

@@ -78,7 +78,7 @@ class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_andr
                 FontIconsDrawable(
                     holder.itemView.context,
                     Icons.Outlined.arrow_left,
-                    com.google.android.material.R.attr.colorPrimaryContainer
+                    M3R.attr.colorPrimaryContainer
                 ).apply {
                     isAutoMirrored = true
                 }
