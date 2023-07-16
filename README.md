@@ -94,6 +94,10 @@ Device type for emulators to be managed by the Android Gradle Plugin.
 
 ## Other
 
+### Some problems
+
+* [The application failed to uninstall](uninstall/README.md)
+
 If there are errors and problems, please submit [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues). If you are interested in this project, please submit [PR](https://github.com/hushenghao/AndroidEasterEggs/pulls) to participate.
 
 [Translation and Localization](https://crowdin.com/project/easter-eggs)

@@ -94,6 +94,10 @@ gradlew.bat assembleRelease
 
 ## 其他
 
+### 一些问题
+
+* [应用卸载失败](uninstall/README.md)
+
 如果存在错误和问题，欢迎提交 [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues) 。如果你对本项目感兴趣，欢迎提交 [PR](https://github.com/hushenghao/AndroidEasterEggs/pulls) 参与。
 
 [翻译和国际化](https://crowdin.com/project/easter-eggs)
