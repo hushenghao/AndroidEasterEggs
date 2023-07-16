@@ -1,4 +1,4 @@
-package com.dede.android_eggs.settings
+package com.dede.android_eggs.views.settings
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -22,7 +22,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.ItemSettingPrefGroupBinding
-import com.dede.android_eggs.settings.SettingPref.Op.Companion.isEnable
+import com.dede.android_eggs.views.settings.SettingPref.Op.Companion.isEnable
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
@@ -299,7 +299,8 @@ class EdgePref : SettingPref(
         const val ACTION_CHANGED = "com.dede.android_eggs.EdgeToEdgeChanged"
 
         @SuppressLint("RestrictedApi")
-        fun applyEdge(context: Context, window: Window) {
+        fun applyEdge(context: Context, window: Window?) {
+            if (window == null) return
             val edgeToEdgeEnabled = EdgePref().getSelectedOp(context).isEnable()
             EdgeToEdgeUtils.applyEdgeToEdge(window, edgeToEdgeEnabled)
         }

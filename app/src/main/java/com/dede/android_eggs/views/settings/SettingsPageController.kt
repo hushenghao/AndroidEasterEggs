@@ -1,4 +1,4 @@
-package com.dede.android_eggs.settings
+package com.dede.android_eggs.views.settings
 
 import android.animation.ObjectAnimator
 import android.os.Bundle

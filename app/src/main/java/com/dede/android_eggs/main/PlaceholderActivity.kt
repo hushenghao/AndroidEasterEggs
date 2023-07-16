@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import com.dede.android_eggs.R
-import com.dede.android_eggs.settings.EdgePref
+import com.dede.android_eggs.views.settings.EdgePref
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.basic.dp

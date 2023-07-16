@@ -1,49 +1,54 @@
-package com.dede.android_eggs.main
+package com.dede.android_eggs.views.timeline
 
+import android.app.Dialog
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.lifecycle.LifecycleOwner
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.FragmentManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import com.dede.android_eggs.R
-import com.dede.android_eggs.databinding.ActivityAndroidTimelineBinding
+import com.dede.android_eggs.databinding.FragmentAndroidTimelineBinding
 import com.dede.android_eggs.main.entity.TimelineEvent
 import com.dede.android_eggs.main.entity.TimelineEvent.Companion.isLast
 import com.dede.android_eggs.main.entity.TimelineEvent.Companion.isNewGroup
-import com.dede.android_eggs.settings.EdgePref
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
-import com.dede.android_eggs.ui.views.onApplyWindowEdge
-import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.views.settings.EdgePref
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
-import com.google.android.material.R as M3R
 
-/**
- * Split Placeholder
- *
- * @author shhu
- * @since 2023/5/22
- */
-class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_timeline) {
+class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_android_timeline) {
 
-    private val binding by viewBinding(ActivityAndroidTimelineBinding::bind)
+    companion object {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        EdgePref.applyEdge(this, window)
-        super.onCreate(savedInstanceState)
-        LocalEvent.get(this as LifecycleOwner).register(EdgePref.ACTION_CHANGED) {
-            recreate()
+        fun show(fm: FragmentManager) {
+            val fragment = AndroidTimelineFragment()
+            fragment.show(fm, "AndroidTimeline")
         }
+    }
+
+    private val binding by viewBinding(FragmentAndroidTimelineBinding::bind)
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
+        EdgePref.applyEdge(requireContext(), dialog.window)
+        val bottomSheetBehavior = dialog.behavior
+        bottomSheetBehavior.isFitToContents = true
+        bottomSheetBehavior.skipCollapsed = true
+        return dialog
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.adapter = VAdapter(
             R.layout.item_android_timeline,
             TimelineEvent.timelines
@@ -55,12 +60,15 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
             with(holder.findViewById<TextView>(R.id.tv_event)) {
                 val builder = ShapeAppearanceModel.builder(
                     context,
-                    M3R.style.ShapeAppearance_Material3_Corner_Medium,
+                    com.google.android.material.R.style.ShapeAppearance_Material3_Corner_Medium,
                     0,
                 ).build()
                 background = MaterialShapeDrawable(builder).apply {
                     fillColor = ColorStateList.valueOf(
-                        MaterialColors.getColor(this@with, M3R.attr.colorPrimaryContainer)
+                        MaterialColors.getColor(
+                            this@with,
+                            com.google.android.material.R.attr.colorPrimaryContainer
+                        )
                     )
                 }
                 text = timelineEvent.eventSpan
@@ -69,7 +77,7 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
                 FontIconsDrawable(
                     holder.itemView.context,
                     Icons.Outlined.arrow_left,
-                    M3R.attr.colorPrimaryContainer
+                    com.google.android.material.R.attr.colorPrimaryContainer
                 ).apply {
                     isAutoMirrored = true
                 }
@@ -78,13 +86,5 @@ class AndroidTimelineActivity : AppCompatActivity(R.layout.activity_android_time
             holder.findViewById<ImageView>(R.id.iv_logo).load(timelineEvent.logoRes)
             holder.findViewById<View>(R.id.line_bottom).isGone = timelineEvent.isLast()
         }
-        var last: RecyclerView.ItemDecoration = EggListFragment.EggListDivider(0, 0, 0)
-        binding.recyclerView.addItemDecoration(last)
-        binding.recyclerView.onApplyWindowEdge {
-            removeItemDecoration(last)
-            last = EggListFragment.EggListDivider(0, it.top, it.bottom)
-            addItemDecoration(last)
-        }
     }
-
 }

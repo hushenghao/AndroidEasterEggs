@@ -1,18 +1,19 @@
 package com.dede.android_eggs.main.holders
 
 import android.content.Context
-import android.content.Intent
 import android.view.View
 import androidx.core.net.toUri
+import androidx.fragment.app.FragmentActivity
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.ItemEasterEggFooterBinding
-import com.dede.android_eggs.main.AndroidTimelineActivity
 import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.main.entity.Footer
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.util.CustomTabsBrowser
+import com.dede.android_eggs.util.getActivity
+import com.dede.android_eggs.views.timeline.AndroidTimelineFragment
 
 @VHType(viewType = Egg.VIEW_TYPE_FOOTER)
 class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
@@ -43,9 +44,10 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
                 val commitId = context.getString(R.string.url_github_commit, BuildConfig.GIT_HASH)
                 CustomTabsBrowser.launchUrl(context, commitId.toUri())
             }
+
             R.id.tv_timeline -> {
-                val intent = Intent(context, AndroidTimelineActivity::class.java)
-                context.startActivity(intent)
+                val activity = context.getActivity<FragmentActivity>() ?: return
+                AndroidTimelineFragment.show(activity.supportFragmentManager)
             }
 
             R.id.tv_github, R.id.tv_license, R.id.tv_frameworks,

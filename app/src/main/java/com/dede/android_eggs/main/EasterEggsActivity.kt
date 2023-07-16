@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
-import com.dede.android_eggs.settings.EdgePref
-import com.dede.android_eggs.settings.SettingsPageController
+import com.dede.android_eggs.views.settings.EdgePref
+import com.dede.android_eggs.views.settings.SettingsPageController
 
 /**
  * Easter Egg Collection

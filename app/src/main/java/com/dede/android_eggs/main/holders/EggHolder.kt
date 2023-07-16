@@ -16,7 +16,7 @@ import coil.load
 import com.dede.android_eggs.databinding.ItemEasterEggLayoutBinding
 import com.dede.android_eggs.main.EggActionHelp
 import com.dede.android_eggs.main.entity.Egg
-import com.dede.android_eggs.settings.IconShapePref
+import com.dede.android_eggs.views.settings.IconShapePref
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.ui.adapter.VHolder

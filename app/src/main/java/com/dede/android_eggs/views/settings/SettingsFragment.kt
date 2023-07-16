@@ -1,4 +1,4 @@
-package com.dede.android_eggs.settings
+package com.dede.android_eggs.views.settings
 
 import android.app.Dialog
 import android.os.Bundle
@@ -31,7 +31,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
-        EdgePref.applyEdge(requireContext(), dialog.window!!)
+        EdgePref.applyEdge(requireContext(), dialog.window)
         val bottomSheetBehavior = dialog.behavior
         bottomSheetBehavior.addBottomSheetCallback(callback)
         bottomSheetBehavior.isFitToContents = true

@@ -10,9 +10,6 @@
         window:splitRatio="0.5">
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
-            window:secondaryActivityName=".main.AndroidTimelineActivity" />
-        <SplitPairFilter
-            window:primaryActivityName=".main.EasterEggsActivity"
             window:secondaryActivityName="com.android_u.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName=".main.EasterEggsActivity"
