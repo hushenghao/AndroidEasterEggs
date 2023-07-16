@@ -55,4 +55,12 @@
     <style name="TextAppearance.Title" parent="TextAppearance.Material3.ActionBar.Title">
         <item name="fontFamily">sans-serif-medium</item>
     </style>
+
+    <style name="ThemeOverlay.BottomSheetDialog.Scrollable" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.BottomSheet.Modal.Scrollable</item>
+    </style>
+
+    <style name="Widget.BottomSheet.Modal.Scrollable" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="paddingBottomSystemWindowInsets">false</item>
+    </style>
 </resources>

@@ -4,6 +4,7 @@
     <string name="summary_android_release_pushed">最終版本已經發佈</string>
     <string name="title_open_with">打開</string>
     <string name="label_open_source">開源相關</string>
+    <string name="label_translation">翻譯與國際化</string>
     <string name="label_other">其它</string>
     <string name="label_beta">获取Beta版</string>
     <string name="label_privacy_policy">隱私協定</string>

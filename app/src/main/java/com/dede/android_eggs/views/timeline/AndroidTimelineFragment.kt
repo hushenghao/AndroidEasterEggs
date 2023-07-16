@@ -13,18 +13,21 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentAndroidTimelineBinding
+import com.dede.android_eggs.main.EggListFragment
 import com.dede.android_eggs.main.entity.TimelineEvent
 import com.dede.android_eggs.main.entity.TimelineEvent.Companion.isLast
 import com.dede.android_eggs.main.entity.TimelineEvent.Companion.isNewGroup
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
+import com.dede.android_eggs.ui.views.onApplyWindowEdge
 import com.dede.android_eggs.views.settings.EdgePref
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
+import com.google.android.material.R as M3R
 
 class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_android_timeline) {
 
@@ -39,7 +42,8 @@ class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_andr
     private val binding by viewBinding(FragmentAndroidTimelineBinding::bind)
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
+        val dialog =
+            BottomSheetDialog(requireContext(), R.style.ThemeOverlay_BottomSheetDialog_Scrollable)
         EdgePref.applyEdge(requireContext(), dialog.window)
         val bottomSheetBehavior = dialog.behavior
         bottomSheetBehavior.isFitToContents = true
@@ -60,15 +64,12 @@ class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_andr
             with(holder.findViewById<TextView>(R.id.tv_event)) {
                 val builder = ShapeAppearanceModel.builder(
                     context,
-                    com.google.android.material.R.style.ShapeAppearance_Material3_Corner_Medium,
+                    M3R.style.ShapeAppearance_Material3_Corner_Medium,
                     0,
                 ).build()
                 background = MaterialShapeDrawable(builder).apply {
                     fillColor = ColorStateList.valueOf(
-                        MaterialColors.getColor(
-                            this@with,
-                            com.google.android.material.R.attr.colorPrimaryContainer
-                        )
+                        MaterialColors.getColor(this@with, M3R.attr.colorPrimaryContainer)
                     )
                 }
                 text = timelineEvent.eventSpan
@@ -85,6 +86,13 @@ class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_andr
             holder.findViewById<TextView>(R.id.tv_month).text = timelineEvent.localMonth
             holder.findViewById<ImageView>(R.id.iv_logo).load(timelineEvent.logoRes)
             holder.findViewById<View>(R.id.line_bottom).isGone = timelineEvent.isLast()
+        }
+        var last = EggListFragment.EggListDivider(0, 0, 0)
+        binding.recyclerView.addItemDecoration(last)
+        binding.recyclerView.onApplyWindowEdge {
+            removeItemDecoration(last)
+            last = EggListFragment.EggListDivider(0, 0, it.bottom)
+            addItemDecoration(last)
         }
     }
 }

@@ -13,6 +13,7 @@
     <string name="url_dino_3d" translatable="false">https://www.pgyer.com/dino3d</string>
     <string name="url_privacy" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE</string>
     <string name="url_license" translatable="false">https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/master/LICENSE</string>
+    <string name="url_translation" translatable="false">https://crowdin.com/project/easter-eggs</string>
     <string name="url_android_releases" translatable="false">https://developer.android.com/about/versions</string>
     <string name="url_market_detail" translatable="false">market://details?id=%s</string>
     <string name="url_mail" translatable="false">mailto:dede.hu@qq.com</string>
@@ -22,6 +23,7 @@
 
     <string name="label_github" translatable="false">GitHub</string>
     <string name="label_frameworks" translatable="false">Frameworks</string>
+    <string name="label_translation">Translation</string>
     <string name="label_beta">Get Beta</string>
     <string name="label_dino_3d" translatable="false">Dino 3D</string>
     <string name="label_timeline" translatable="false">Timeline</string>

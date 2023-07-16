@@ -28,7 +28,7 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
         binding.tvGitHash.text = BuildConfig.GIT_HASH
         val views = arrayOf(
             binding.tvGitHash,
-            binding.tvGithub, binding.tvLicense, binding.tvFrameworks,
+            binding.tvGithub, binding.tvLicense, binding.tvFrameworks, binding.tvTranslation,
             binding.tvTimeline, binding.tvStar, binding.tvBeta, binding.tvDino3d,
             binding.tvPrivacy, binding.tvFeedback
         )
@@ -50,7 +50,7 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
                 AndroidTimelineFragment.show(activity.supportFragmentManager)
             }
 
-            R.id.tv_github, R.id.tv_license, R.id.tv_frameworks,
+            R.id.tv_github, R.id.tv_license, R.id.tv_frameworks, R.id.tv_translation,
             R.id.tv_beta, R.id.tv_dino_3d,
             R.id.tv_privacy,
             -> {
