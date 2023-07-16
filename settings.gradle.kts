@@ -41,5 +41,7 @@ include(
     ":eggs:S",
     ":eggs:T",
     ":eggs:U",
+    // help uninstall easter eggs
+    ":uninstall"
 )
 rootProject.name = "Easter Eggs"

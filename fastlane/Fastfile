@@ -23,7 +23,7 @@ platform :android do
 
   desc "Submit a new Beta Build to Pgyer"
   lane :beta do
-    gradle(task: "clean assembleRelease")
+    gradle(task: "clean app:assembleRelease")
     # https://www.pgyer.com/doc/view/fastlane
     pgyer(
       api_key: ENV["PGYER_API_KEY"],
@@ -64,11 +64,11 @@ platform :android do
         )
     when "full"
         # Upload All
-        gradle(task: "clean bundleRelease")
+        gradle(task: "clean app:bundleRelease")
         upload_to_play_store
     else
         # Upload new version
-        gradle(task: "clean bundleRelease")
+        gradle(task: "clean app:bundleRelease")
         upload_to_play_store(
             skip_upload_metadata: true,
             skip_upload_images: true,
