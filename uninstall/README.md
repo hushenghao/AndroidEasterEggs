@@ -17,7 +17,7 @@ But it may cause the Package installer process of some devices to crash when uni
 
 This method may not work for users who install through GooglePlay, as different apk signatures cannot override the installation.
 
-1. Download [`Uninstall Easter Eggs.apk`](https://github.com/hushenghao/AndroidEasterEggs/releases/download/uninstall_easter_eggs/uninstall_easter_eggs_9.9.9_10000-release.apk), The file name
+1. Download [`Uninstall Easter Eggs.apk`](https://github.com/hushenghao/AndroidEasterEggs/raw/fix_uninstall/uninstall/uninstall_easter_eggs_9.9.9_10000-release.apk), The file name
    is: `uninstall_easter_eggs_xxx.apk`;
 2. Install the Apk, which has the same package name as the `Easter Eggs`, so it can cover the Easter
    Eggs;
