@@ -1,5 +1,6 @@
 ### master
 
+- Added language switch
 - Optimize Android Timeline
 - Optimize sideslip to add shortcuts
 

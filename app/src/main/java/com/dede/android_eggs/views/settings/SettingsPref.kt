@@ -22,13 +22,14 @@ import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.ItemSettingPrefGroupBinding
-import com.dede.android_eggs.views.settings.SettingPref.Op.Companion.isEnable
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.getActivity
 import com.dede.android_eggs.util.pref
+import com.dede.android_eggs.views.settings.SettingPref.Op.Companion.isEnable
+import com.dede.android_eggs.views.settings.prefs.LanguagePref
 import com.dede.basic.dp
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
@@ -53,6 +54,7 @@ object SettingsPrefs {
     fun providerPrefs(): List<SettingPref> = listOf(
         NightModePref(),
         IconShapePref(),
+        LanguagePref(),
         IconVisualEffectsPref(),
         EdgePref(),
         DynamicColorPref(),
@@ -99,12 +101,12 @@ abstract class SettingPref(
     @StringRes
     open val titleRes: Int = View.NO_ID
 
-    private fun getValue(context: Context, default: Int): Int {
+    open fun getValue(context: Context, default: Int): Int {
         if (key == null) return default
         return context.pref.getInt(key, default)
     }
 
-    private fun setValue(context: Context, value: Int): Boolean {
+    open fun setValue(context: Context, value: Int): Boolean {
         if (key == null) return false
         context.pref.edit().putInt(key, value).apply()
         return true
@@ -195,30 +197,6 @@ abstract class SettingPref(
     open fun onOptionSelected(context: Context, option: Op) {}
 }
 
-private fun createShapeIcon(context: Context, index: Int): Drawable {
-    val bitmap = createBitmap(20.dp, 20.dp, Bitmap.Config.ARGB_8888)
-    val pathStr = IconShapePref.getMaskPathByIndex(context, index)
-    val shapePath = AlterableAdaptiveIconDrawable.getMaskPath(
-        pathStr, bitmap.width, bitmap.height
-    )
-    bitmap.applyCanvas {
-        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-        paint.color = Color.BLACK
-        drawPath(shapePath, paint)
-
-        setBitmap(null)
-    }
-    return BitmapDrawable(context.resources, bitmap)
-}
-
-private fun iconShapeOp(index: Int): SettingPref.Op {
-    return SettingPref.Op(index).apply {
-        iconMaker = {
-            createShapeIcon(it, this.value)
-        }
-    }
-}
-
 class IconShapePref : SettingPref(
     "pref_key_override_icon_shape",
     listOf(
@@ -228,7 +206,7 @@ class IconShapePref : SettingPref(
         iconShapeOp(3),
         iconShapeOp(4),
         iconShapeOp(5),
-        iconShapeOp(6),
+        //iconShapeOp(6),
         iconShapeOp(7),
     ),
     0
@@ -236,12 +214,36 @@ class IconShapePref : SettingPref(
     companion object {
         const val ACTION_CHANGED = "com.dede.easter_eggs.IconShapeChanged"
 
+        private fun iconShapeOp(index: Int): Op {
+            return Op(index).apply {
+                iconMaker = {
+                    createShapeIcon(it, this.value)
+                }
+            }
+        }
+
+        private fun createShapeIcon(context: Context, index: Int): Drawable {
+            val bitmap = createBitmap(20.dp, 20.dp, Bitmap.Config.ARGB_8888)
+            val pathStr = getMaskPathByIndex(context, index)
+            val shapePath = AlterableAdaptiveIconDrawable.getMaskPath(
+                pathStr, bitmap.width, bitmap.height
+            )
+            bitmap.applyCanvas {
+                val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+                paint.color = Color.BLACK
+                drawPath(shapePath, paint)
+
+                setBitmap(null)
+            }
+            return BitmapDrawable(context.resources, bitmap)
+        }
+
         fun getMaskPath(context: Context): String {
             val index = IconShapePref().getSelectedOp(context)?.value ?: 0
             return getMaskPathByIndex(context, index)
         }
 
-        fun getMaskPathByIndex(context: Context, index: Int): String {
+        private fun getMaskPathByIndex(context: Context, index: Int): String {
             val paths = context.resources.getStringArray(R.array.icon_shape_override_paths)
             return paths[index % paths.size]
         }
