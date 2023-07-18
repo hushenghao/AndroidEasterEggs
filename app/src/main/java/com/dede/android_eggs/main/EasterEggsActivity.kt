@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
-import com.dede.android_eggs.views.settings.EdgePref
+import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.views.settings.SettingsPageController
 
 /**
@@ -18,7 +18,7 @@ class EasterEggsActivity : AppCompatActivity(R.layout.activity_easter_eggs) {
     private val binding: ActivityEasterEggsBinding by viewBinding(ActivityEasterEggsBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        EdgePref.applyEdge(this, window)
+        EdgeUtils.applyEdge(window)
         super.onCreate(savedInstanceState)
 
         setSupportActionBar(binding.toolbar)

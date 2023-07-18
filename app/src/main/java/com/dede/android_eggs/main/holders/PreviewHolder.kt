@@ -3,6 +3,7 @@ package com.dede.android_eggs.main.holders
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
@@ -21,7 +22,6 @@ import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import com.dede.android_eggs.databinding.DialogAndroidTimelineBinding
 import com.dede.android_eggs.main.entity.Egg
-import com.dede.android_eggs.views.settings.NightModePref
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.resolveColorStateList
@@ -145,7 +145,7 @@ class PreviewHolder(view: View) : EggHolder(view) {
                 binding.scrollView.smoothScrollTo(it.width, 0)
             }
         }
-        if (NightModePref.isSystemNightMode(context)) {
+        if (isSystemNightMode(context)) {
             binding.ivTimeline.drawable?.apply {
                 val matrix = ColorMatrix()
                 // Increase the overall brightness and more blue brightness
@@ -167,5 +167,10 @@ class PreviewHolder(view: View) : EggHolder(view) {
                 )
             }
             .show()
+    }
+
+    private fun isSystemNightMode(context: Context): Boolean {
+        return (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+                Configuration.UI_MODE_NIGHT_YES
     }
 }

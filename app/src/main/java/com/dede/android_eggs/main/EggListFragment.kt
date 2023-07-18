@@ -20,8 +20,6 @@ import com.dede.android_eggs.main.holders.EggHolder
 import com.dede.android_eggs.main.holders.FooterHolder
 import com.dede.android_eggs.main.holders.PreviewHolder
 import com.dede.android_eggs.main.holders.WavyHolder
-import com.dede.android_eggs.views.settings.IconShapePref
-import com.dede.android_eggs.views.settings.IconVisualEffectsPref
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.addHeader
 import com.dede.android_eggs.ui.adapter.addViewType
@@ -30,6 +28,8 @@ import com.dede.android_eggs.ui.views.onApplyWindowEdge
 import com.dede.android_eggs.util.EasterUtils
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
+import com.dede.android_eggs.views.settings.prefs.IconShapePref
+import com.dede.android_eggs.views.settings.prefs.IconVisualEffectsPref
 import com.dede.basic.dp
 import java.util.*
 

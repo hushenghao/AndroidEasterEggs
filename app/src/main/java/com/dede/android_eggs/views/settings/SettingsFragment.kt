@@ -6,6 +6,7 @@ import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentSettingsBinding
+import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.LocalEvent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -31,7 +32,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
-        EdgePref.applyEdge(requireContext(), dialog.window)
+        EdgeUtils.applyEdge(dialog.window)
         val bottomSheetBehavior = dialog.behavior
         bottomSheetBehavior.addBottomSheetCallback(callback)
         bottomSheetBehavior.isFitToContents = true

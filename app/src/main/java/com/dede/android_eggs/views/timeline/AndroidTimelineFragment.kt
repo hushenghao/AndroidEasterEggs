@@ -21,7 +21,7 @@ import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.views.onApplyWindowEdge
-import com.dede.android_eggs.views.settings.EdgePref
+import com.dede.android_eggs.util.EdgeUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.color.MaterialColors
@@ -44,7 +44,7 @@ class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_andr
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog =
             BottomSheetDialog(requireContext(), R.style.ThemeOverlay_BottomSheetDialog_Scrollable)
-        EdgePref.applyEdge(requireContext(), dialog.window)
+        EdgeUtils.applyEdge(dialog.window)
         val bottomSheetBehavior = dialog.behavior
         bottomSheetBehavior.isFitToContents = true
         bottomSheetBehavior.skipCollapsed = true

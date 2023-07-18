@@ -7,8 +7,8 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import com.dede.android_eggs.R
-import com.dede.android_eggs.views.settings.EdgePref
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
+import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.basic.dp
 import kotlin.random.Random
@@ -22,11 +22,8 @@ import kotlin.random.Random
 class PlaceholderActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        EdgePref.applyEdge(this, window)
+        EdgeUtils.applyEdge(window)
         super.onCreate(savedInstanceState)
-        LocalEvent.get(this as LifecycleOwner).register(EdgePref.ACTION_CHANGED) {
-            recreate()
-        }
 
         val drawable = AlterableAdaptiveIconDrawable(this, randomRes(), randomPath())
         val imageView = ImageView(this).apply {

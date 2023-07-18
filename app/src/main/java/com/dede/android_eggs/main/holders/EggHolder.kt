@@ -16,7 +16,6 @@ import coil.load
 import com.dede.android_eggs.databinding.ItemEasterEggLayoutBinding
 import com.dede.android_eggs.main.EggActionHelp
 import com.dede.android_eggs.main.entity.Egg
-import com.dede.android_eggs.views.settings.IconShapePref
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.ui.adapter.VHolder
@@ -26,6 +25,7 @@ import com.dede.android_eggs.ui.views.HorizontalSwipeLayout
 import com.dede.android_eggs.util.isRtl
 import com.dede.android_eggs.util.resolveColorStateList
 import com.dede.android_eggs.util.updateCompoundDrawablesRelative
+import com.dede.android_eggs.views.settings.prefs.IconShapePref
 import com.dede.basic.dp
 import com.dede.basic.dpf
 import kotlin.math.abs

@@ -5,7 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.Icons
+import com.dede.android_eggs.ui.Icons.Outlined.language
 import com.dede.android_eggs.views.settings.SettingPref
 import java.util.Locale
 
@@ -13,11 +13,7 @@ import java.util.Locale
 class LanguagePref : SettingPref(
     null,
     listOf(
-        Op(
-            SYSTEM,
-            titleRes = R.string.summary_follow_system,
-            iconUnicode = Icons.Outlined.language
-        ),
+        Op(SYSTEM, titleRes = R.string.summary_follow_system, iconUnicode = language),
         Op(SIMPLIFIED_CHINESE, "🇨🇳 简"),
         Op(TRADITIONAL_CHINESE, "🇭🇰 繁"),
         Op(ENGLISH, "EN")
