@@ -41,11 +41,13 @@ object EggActionHelp {
     }
 
     fun launchEgg(context: Context, egg: Egg) {
-        val task = AppTaskManager.getInstance()
-            .findActivityTask(context, egg.targetClass)
-        if (task != null) {
-            task.moveToFront()
-            return
+        if (!SplitUtils.isActivityEmbedded(context)) {
+            val eggIntent = AppTaskManager.getInstance()
+                .findActivityTask(context, egg.targetClass)?.taskInfo?.baseIntent
+            if (eggIntent != null) {
+                context.startActivity(eggIntent)
+                return
+            }
         }
         val intent = createIntent(context, egg) ?: return
         context.startActivity(intent)
