@@ -18,6 +18,7 @@ class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
         fun onResume(activity: Activity) {}
 
         fun onPause(activity: Activity) {}
+
         fun onDestroyed(activity: Activity) {}
     }
 
@@ -30,7 +31,7 @@ class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
     private val actions = arrayListOf(
         PermissionRequestAction(),
         WarningDialogAction(),
-        AppTaskManager(),
+        AppTaskManager.getInstance(),
     )
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {

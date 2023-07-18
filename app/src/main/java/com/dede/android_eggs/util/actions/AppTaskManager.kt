@@ -24,6 +24,12 @@ class AppTaskManager : ActivityActionDispatcher.ActivityAction {
             com.android_p.egg.paint.PaintActivity::class.java,
             com.android_q.egg.quares.QuaresActivity::class.java,
         )
+
+        private val instance = AppTaskManager()
+
+        fun getInstance(): AppTaskManager {
+            return instance
+        }
     }
 
     override fun onCreate(activity: Activity) {
@@ -43,27 +49,30 @@ class AppTaskManager : ActivityActionDispatcher.ActivityAction {
         if (appTasks.size <= maxCount) {
             return
         }
-        val subList = appTasks.subList(maxCount - 1, appTasks.lastIndex)
+        val subList = appTasks.subList(maxCount - 1, appTasks.size)
         for (task in subList) {
             task.finishAndRemoveTask()
         }
     }
 
-    private fun moveMainToFront(activity: Activity) {
-        var handled = false
-        val targetClass = EasterEggsActivity::class.java
-
-        val activityManager = activity.getSystemService<ActivityManager>()
-        if (activityManager != null) {
-            for (task in activityManager.appTasks) {
-                val taskInfo = task.taskInfo ?: continue
-                if (taskInfo.baseIntent.component?.className == targetClass.name) {
-                    task.moveToFront()
-                    handled = true
-                }
+    fun findActivityTask(context: Context, clazz: Class<out Activity>?): ActivityManager.AppTask? {
+        if (clazz == null || !Activity::class.java.isAssignableFrom(clazz)) return null
+        val activityManager = context.getSystemService<ActivityManager>() ?: return null
+        for (task in activityManager.appTasks) {
+            val taskInfo = task.taskInfo ?: continue
+            if (taskInfo.baseIntent.component?.className == clazz.name) {
+                return task
             }
         }
-        if (handled) return
+        return null
+    }
+
+    private fun moveMainToFront(activity: Activity) {
+        val task = findActivityTask(activity, EasterEggsActivity::class.java)
+        if (task != null) {
+            task.moveToFront()
+            return
+        }
 
         // relaunch
         val intent = activity.packageManager

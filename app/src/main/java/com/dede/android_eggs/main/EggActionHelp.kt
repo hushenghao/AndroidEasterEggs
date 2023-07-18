@@ -16,6 +16,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.SplitUtils
+import com.dede.android_eggs.util.actions.AppTaskManager
 import com.dede.android_eggs.util.applyIf
 import com.dede.basic.cancel
 import com.dede.basic.delay
@@ -40,6 +41,12 @@ object EggActionHelp {
     }
 
     fun launchEgg(context: Context, egg: Egg) {
+        val task = AppTaskManager.getInstance()
+            .findActivityTask(context, egg.targetClass)
+        if (task != null) {
+            task.moveToFront()
+            return
+        }
         val intent = createIntent(context, egg) ?: return
         context.startActivity(intent)
     }
