@@ -21,7 +21,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -33,11 +32,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dede.basic.SpUtils;
+import com.dede.basic.TransformationMethodUtils;
 
 public class PlatLogoActivity extends Activity {
     FrameLayout mContent;
-    int mCount;
-    final Handler mHandler = new Handler();
+    //    int mCount;
+//    final Handler mHandler = new Handler();
     static final int BGCOLOR = 0xffed1d24;
 
     @Override
@@ -84,7 +84,7 @@ public class PlatLogoActivity extends Activity {
         tv.setPadding(p, p, p, p);
         tv.setTextColor(0xFFFFFFFF);
         tv.setGravity(Gravity.CENTER);
-        tv.setTransformationMethod(new AllCapsTransformationMethod(this));
+        tv.setTransformationMethod(TransformationMethodUtils.createAllCapsTransformationMethod(this));
 //        tv.setText("Android " + Build.VERSION.RELEASE);
         tv.setText("Android 4.4");
         tv.setVisibility(View.INVISIBLE);

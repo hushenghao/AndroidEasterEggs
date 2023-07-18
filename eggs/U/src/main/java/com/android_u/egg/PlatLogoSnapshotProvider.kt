@@ -11,6 +11,9 @@ import java.util.Random
 
 class PlatLogoSnapshotProvider : PlatLogoSnapshotProvider() {
 
+    override val includeBackground: Boolean
+        get() = true
+
     override fun create(context: Context): View {
         val dp = context.resources.displayMetrics.density
         val random = Random()

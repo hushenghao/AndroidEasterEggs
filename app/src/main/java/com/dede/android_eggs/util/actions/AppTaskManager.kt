@@ -1,0 +1,73 @@
+package com.dede.android_eggs.util.actions
+
+import android.app.Activity
+import android.app.ActivityManager
+import android.content.Context
+import androidx.core.content.getSystemService
+import com.dede.android_eggs.main.EasterEggsActivity
+import com.dede.android_eggs.util.ActivityActionDispatcher
+
+
+class AppTaskManager : ActivityActionDispatcher.ActivityAction {
+
+    companion object {
+
+        private const val MAX_APP_TASK_COUNT = 6
+
+        private val LIST = arrayOf(
+            com.android_i.egg.Nyandroid::class.java,
+            com.android_j.egg.BeanBag::class.java,
+            com.android_k.egg.DessertCase::class.java,
+            com.android_l.egg.LLandActivity::class.java,
+            com.android_m.egg.MLandActivity::class.java,
+            com.android_o.egg.octo.Ocquarium::class.java,
+            com.android_p.egg.paint.PaintActivity::class.java,
+            com.android_q.egg.quares.QuaresActivity::class.java,
+        )
+    }
+
+    override fun onCreate(activity: Activity) {
+        tryTrimTaskCount(activity)
+    }
+
+    override fun onDestroyed(activity: Activity) {
+        if (LIST.contains(activity.javaClass)) {
+            moveMainToFront(activity)
+        }
+    }
+
+    private fun tryTrimTaskCount(context: Context) {
+        val activityManager = context.getSystemService<ActivityManager>() ?: return
+        val maxCount = MAX_APP_TASK_COUNT
+        val appTasks = activityManager.appTasks
+        if (appTasks.size <= maxCount) {
+            return
+        }
+        val subList = appTasks.subList(maxCount - 1, appTasks.lastIndex)
+        for (task in subList) {
+            task.finishAndRemoveTask()
+        }
+    }
+
+    private fun moveMainToFront(activity: Activity) {
+        var handled = false
+        val targetClass = EasterEggsActivity::class.java
+
+        val activityManager = activity.getSystemService<ActivityManager>()
+        if (activityManager != null) {
+            for (task in activityManager.appTasks) {
+                val taskInfo = task.taskInfo ?: continue
+                if (taskInfo.baseIntent.component?.className == targetClass.name) {
+                    task.moveToFront()
+                    handled = true
+                }
+            }
+        }
+        if (handled) return
+
+        // relaunch
+        val intent = activity.packageManager
+            .getLaunchIntentForPackage(activity.packageName) ?: return
+        activity.startActivity(intent)
+    }
+}

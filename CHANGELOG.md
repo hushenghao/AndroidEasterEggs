@@ -3,6 +3,7 @@
 - Added language switch
 - Optimize Android Timeline
 - Optimize sideslip to add shortcuts
+- Optimize task stack management 
 
 ### v1.9.5 (2023-07-13)
 
