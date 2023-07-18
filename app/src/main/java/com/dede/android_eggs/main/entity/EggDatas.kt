@@ -34,8 +34,8 @@ object EggDatas {
         com.android_r.egg.PlatLogoSnapshotProvider(),
         com.android_q.egg.PlatLogoSnapshotProvider(),
         com.android_p.egg.PlatLogoSnapshotProvider(),
-        com.android_o.egg.PlatLogoSnapshotProvider(true),
-        com.android_o.egg.PlatLogoSnapshotProvider(false),
+        com.android_o.egg.PlatLogoSnapshotProvider.Point1(),
+        com.android_o.egg.PlatLogoSnapshotProvider(),
         com.android_n.egg.PlatLogoSnapshotProvider(),
         com.android_m.egg.PlatLogoSnapshotProvider(),
         com.android_l.egg.PlatLogoSnapshotProvider(),
@@ -131,10 +131,9 @@ object EggDatas {
                 VERSION_CODES.O, VERSION_CODES.O_MR1,
                 "8.0", "8.1"
             ),
-            com.android_o.egg.PlatLogoActivity::class.java,
+            com.android_o.egg.PlatLogoActivity.Point1::class.java,
             true,
             KEY_EGG_O_1,
-            bundleOf(EXTRA_O_POINT to true)
         ),
         Egg(
             R.drawable.ic_android_oreo,

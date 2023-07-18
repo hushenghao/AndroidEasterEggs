@@ -18,6 +18,8 @@ import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.actions.AppTaskManager
 import com.dede.android_eggs.util.applyIf
+import com.dede.android_eggs.util.applyNotNull
+import com.dede.android_eggs.util.isEquals
 import com.dede.basic.cancel
 import com.dede.basic.delay
 import com.dede.basic.dp
@@ -28,28 +30,30 @@ object EggActionHelp {
     private const val ACTIVITY_TASK_FLAGS =
         Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
 
-    private fun createIntent(context: Context, egg: Egg): Intent? {
+    private fun createIntent(context: Context, egg: Egg, retainInRecents: Boolean = true): Intent? {
         if (egg.targetClass == null) return null
         return Intent(Intent.ACTION_VIEW)
             .setClass(context, egg.targetClass)
-            .applyIf(!SplitUtils.isActivityEmbedded(context)) {
+            .applyIf(retainInRecents) {
                 addFlags(ACTIVITY_TASK_FLAGS)
             }
-            .applyIf(egg.extras != null) {
-                putExtras(egg.extras!!)
-            }
+            .applyNotNull(egg.extras, Intent::putExtras)
     }
 
     fun launchEgg(context: Context, egg: Egg) {
-        if (!SplitUtils.isActivityEmbedded(context)) {
-            val eggIntent = AppTaskManager.getInstance()
-                .findActivityTask(context, egg.targetClass)?.taskInfo?.baseIntent
-            if (eggIntent != null) {
+        val embedded = SplitUtils.isActivityEmbedded(context)
+        val task = AppTaskManager.getInstance().findActivityTask(context, egg.targetClass)
+        if (!embedded) {
+            val eggIntent = task?.taskInfo?.baseIntent
+            if (eggIntent != null && eggIntent.extras.isEquals(egg.extras)) {
                 context.startActivity(eggIntent)
                 return
             }
+        } else {
+            // finish retained task
+            task?.finishAndRemoveTask()
         }
-        val intent = createIntent(context, egg) ?: return
+        val intent = createIntent(context, egg, !embedded) ?: return
         context.startActivity(intent)
     }
 

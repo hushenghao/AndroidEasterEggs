@@ -26,6 +26,15 @@ Copyright (C) 2016 The Android Open Source Project
             android:label="@string/o_app_name"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
 
+        <!-- Android 8.1 -->
+        <activity
+            android:name=".PlatLogoActivity$Point1"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
+            android:icon="@drawable/o_icon"
+            android:label="@string/o_app_name"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+
         <activity
             android:name=".octo.Ocquarium"
             android:exported="false"

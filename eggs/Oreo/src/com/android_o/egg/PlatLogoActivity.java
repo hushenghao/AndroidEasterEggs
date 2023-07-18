@@ -37,6 +37,19 @@ import com.android_o.egg.octo.Ocquarium;
 import com.dede.basic.SpUtils;
 
 public class PlatLogoActivity extends Activity {
+
+    // Android 8.1
+    public final static class Point1 extends PlatLogoActivity {
+
+        private static final String EXTRA_IS_OREO_POINT = "isOreoPoint";
+
+        @Override
+        public void onAttachedToWindow() {
+            getIntent().putExtra(EXTRA_IS_OREO_POINT, true);
+            super.onAttachedToWindow();
+        }
+    }
+
     public static final boolean FINISH = true;
 
     FrameLayout mLayout;
@@ -68,7 +81,7 @@ public class PlatLogoActivity extends Activity {
         im.setAlpha(0f);
 
         Intent intent = getIntent();
-        boolean isOreoPoint = intent.getBooleanExtra("isOreoPoint", false);
+        boolean isOreoPoint = intent.getBooleanExtra(Point1.EXTRA_IS_OREO_POINT, false);
         if (!isOreoPoint) {
             im.setBackground(new RippleDrawable(
                     ColorStateList.valueOf(0xFF776677),

@@ -12,7 +12,7 @@ class AppTaskManager : ActivityActionDispatcher.ActivityAction {
 
     companion object {
 
-        private const val MAX_APP_TASK_COUNT = 6
+        private const val MAX_APP_TASK_COUNT = 5
 
         private val LIST = arrayOf(
             com.android_i.egg.Nyandroid::class.java,
@@ -45,11 +45,11 @@ class AppTaskManager : ActivityActionDispatcher.ActivityAction {
     private fun tryTrimTaskCount(context: Context) {
         val activityManager = context.getSystemService<ActivityManager>() ?: return
         val maxCount = MAX_APP_TASK_COUNT
-        val appTasks = activityManager.appTasks
+        val appTasks = activityManager.appTasks.filter { !it.isTask(EasterEggsActivity::class.java) }
         if (appTasks.size <= maxCount) {
             return
         }
-        val subList = appTasks.subList(maxCount - 1, appTasks.size)
+        val subList = appTasks.subList(maxCount, appTasks.size)
         for (task in subList) {
             task.finishAndRemoveTask()
         }
@@ -59,8 +59,7 @@ class AppTaskManager : ActivityActionDispatcher.ActivityAction {
         if (clazz == null || !Activity::class.java.isAssignableFrom(clazz)) return null
         val activityManager = context.getSystemService<ActivityManager>() ?: return null
         for (task in activityManager.appTasks) {
-            val taskInfo = task.taskInfo ?: continue
-            if (taskInfo.baseIntent.component?.className == clazz.name) {
+            if (task.isTask(clazz)) {
                 return task
             }
         }
@@ -78,5 +77,9 @@ class AppTaskManager : ActivityActionDispatcher.ActivityAction {
         val intent = activity.packageManager
             .getLaunchIntentForPackage(activity.packageName) ?: return
         activity.startActivity(intent)
+    }
+
+    private fun ActivityManager.AppTask.isTask(clazz: Class<out Activity>): Boolean {
+        return this.taskInfo.baseIntent.component?.className == clazz.name
     }
 }

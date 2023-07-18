@@ -13,9 +13,19 @@ import androidx.annotation.NonNull;
 
 public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotProvider {
 
+    public static class Point1 extends PlatLogoSnapshotProvider {
+        public Point1() {
+            super(true);
+        }
+    }
+
     private final boolean isOreoPoint;
 
-    public PlatLogoSnapshotProvider(boolean isOreoPoint) {
+    public PlatLogoSnapshotProvider() {
+        this(false);
+    }
+
+    PlatLogoSnapshotProvider(boolean isOreoPoint) {
         this.isOreoPoint = isOreoPoint;
     }
 
