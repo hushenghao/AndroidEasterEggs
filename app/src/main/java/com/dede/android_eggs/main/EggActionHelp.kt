@@ -52,6 +52,7 @@ object EggActionHelp {
             // android M Recent task list:
             // Not following `android:documentLaunchMode="intoExisting"` behavior.
             // ???
+            // https://developer.android.google.cn/guide/topics/manifest/activity-element?hl=zh-cn#dlmode
             val eggIntent = task?.taskInfo?.baseIntent
             if (eggIntent != null && eggIntent.extras.isEquals(egg.extras)) {
                 context.startActivity(eggIntent)

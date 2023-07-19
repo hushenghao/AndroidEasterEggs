@@ -23,7 +23,7 @@ android {
         versionName = "1.9.5"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        resourceConfigurations.addAll(listOf("zh-rCN", "zh-rHK", "en"))
+        resourceConfigurations.addAll(listOf("zh", "zh-rHK", "en"))
 
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
         buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")
