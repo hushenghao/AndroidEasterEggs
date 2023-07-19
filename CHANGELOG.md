@@ -1,5 +1,6 @@
 ### master
 
+- Android 14 icons
 - Added language switch
 - Optimize Android Timeline
 - Optimize sideslip to add shortcuts
