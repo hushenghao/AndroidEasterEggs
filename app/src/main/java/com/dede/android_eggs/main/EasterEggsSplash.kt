@@ -23,7 +23,7 @@ class EasterEggsSplash(private val activity: AppCompatActivity) : Runnable,
     fun welcome() {
         root = activity.findViewById(android.R.id.content)
         ivLogo = AppCompatImageView(activity).apply {
-            setImageResource(R.drawable.avd_anim)
+            setImageResource(R.drawable.avd_anim_u_platlogo)
         }
         (ivLogo.drawable as Animatable).start()
         val layoutParams = FrameLayout.LayoutParams(192.dp, 192.dp)

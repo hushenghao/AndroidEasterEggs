@@ -6,11 +6,13 @@
         <item name="windowNoTitle">true</item>
         <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
             animated drawable. One of these is required. -->
-        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/avd_anim
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/avd_anim_u_platlogo
         </item>
         <!-- Required for animated icons -->
         <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">600</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/splash_background_color</item>
     </style>
+    <color name="splash_background_color">@color/md_theme_light_background</color>
 
     <style name="Theme.EasterEggs" parent="Base.EasterEggs">
         <item name="colorPrimary">@color/md_theme_light_primary</item>

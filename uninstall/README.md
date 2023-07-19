@@ -7,11 +7,11 @@ Easter Eggs is configured `android:hasFragileUserData="true"` on manifest.
 Whether to show the user a prompt to keep the app's data when the user uninstalls the app. 
 ```
 
-![To Uninstall](../images/img_to_uninstall.png)
+![To Uninstall](../assets/image/img_to_uninstall.png)
 
 But it may cause the Package installer process of some devices to crash when uninstalling `Easter Eggs`.
 
-![Uninstall failed](../images/img_uninstall_failed.jpg)
+![Uninstall failed](../assets/image/img_uninstall_failed.jpg)
 
 ## How to Uninstall (Recommended)
 
