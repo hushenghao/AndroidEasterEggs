@@ -27,7 +27,7 @@ import com.dede.basic.dp
 
 object EggActionHelp {
 
-    private const val ACTIVITY_TASK_FLAGS =
+    private const val DOCUMENT_LAUNCH_MODE_INTO_EXISTING =
         Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
 
     private fun createIntent(context: Context, egg: Egg, retainInRecents: Boolean = true): Intent? {
@@ -35,7 +35,7 @@ object EggActionHelp {
         return Intent(Intent.ACTION_VIEW)
             .setClass(context, egg.targetClass)
             .applyIf(retainInRecents) {
-                addFlags(ACTIVITY_TASK_FLAGS)
+                addFlags(DOCUMENT_LAUNCH_MODE_INTO_EXISTING)
             }
             .applyNotNull(egg.extras, Intent::putExtras)
     }
@@ -43,15 +43,20 @@ object EggActionHelp {
     fun launchEgg(context: Context, egg: Egg) {
         val embedded = SplitUtils.isActivityEmbedded(context)
         val task = AppTaskManager.getInstance().findActivityTask(context, egg.targetClass)
-        if (!embedded) {
+        if (embedded) {
+            // finish retained task
+            task?.finishAndRemoveTask()
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            // relaunch
+            // android M Recent task list:
+            // Not following `android:documentLaunchMode="intoExisting"` behavior.
+            // ???
             val eggIntent = task?.taskInfo?.baseIntent
             if (eggIntent != null && eggIntent.extras.isEquals(egg.extras)) {
                 context.startActivity(eggIntent)
                 return
             }
-        } else {
-            // finish retained task
-            task?.finishAndRemoveTask()
         }
         val intent = createIntent(context, egg, !embedded) ?: return
         context.startActivity(intent)
