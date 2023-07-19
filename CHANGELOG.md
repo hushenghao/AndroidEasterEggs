@@ -1,4 +1,4 @@
-### master
+### v1.9.6
 
 - Android 14 icons
 - Added language switch
