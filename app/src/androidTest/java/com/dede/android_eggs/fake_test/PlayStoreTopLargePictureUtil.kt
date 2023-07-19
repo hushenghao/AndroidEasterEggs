@@ -2,7 +2,6 @@ package com.dede.android_eggs.fake_test
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.dede.android_eggs.R
@@ -31,7 +30,7 @@ class PlayStoreTopLargePictureUtil {
 
         private const val ICON_SIZE = 500
         private val ICON_RES = R.mipmap.ic_launcher_round
-        private val BG_COLOR_RES = com.dede.basic.R.color.system_accent3_800
+        private const val BG_COLOR = 0xfff86734.toInt()
     }
 
     @Test
@@ -40,7 +39,7 @@ class PlayStoreTopLargePictureUtil {
         val bitmap =
             Bitmap.createBitmap(PICTURE_WIDTH, PICTURE_HEIGHT, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-        canvas.drawColor(ContextCompat.getColor(context, BG_COLOR_RES))
+        canvas.drawColor(BG_COLOR)
         val drawable = context.requireDrawable(ICON_RES)
         drawable.setBounds(
             (PICTURE_WIDTH / 2f - ICON_SIZE / 2f).roundToInt(),
@@ -55,7 +54,7 @@ class PlayStoreTopLargePictureUtil {
         bitmap.recycle()
         val byteArray = stream.toByteArray()
 
-        EasterEggsServer.disposable(context, "/play_store_top_large_picture.jpeg") {
+        EasterEggsServer.disposable(context, "/featureGraphic.jpeg") {
             NanoHTTPD.newFixedLengthResponse(
                 NanoHTTPD.Response.Status.OK, "image/jpeg",
                 ByteArrayInputStream(byteArray),
