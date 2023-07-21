@@ -1,7 +1,7 @@
 [versions]
 
 [libraries]
-kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
 androidx-core = "androidx.core:core-ktx:1.10.1"
 androidx-activity="androidx.activity:activity-ktx:1.8.0-alpha06"
@@ -14,14 +14,14 @@ androidx-preference = "androidx.preference:preference-ktx:1.2.0"
 androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-browser = "androidx.browser:browser:1.5.0"
 androidx-window = "androidx.window:window:1.1.0"
-google-material = "com.google.android.material:material:1.10.0-alpha05"
+google-material = "com.google.android.material:material:1.11.0-alpha01"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
-viewbinding-delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.8"
-io-coil = "io.coil-kt:coil:2.2.2"
+viewbinding-delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9"
+io-coil = "io.coil-kt:coil:2.4.0"
 free-reflection = "com.github.tiann:FreeReflection:3.2.0"
-leakcanary = "com.squareup.leakcanary:leakcanary-android:2.10"
+leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.12"
 nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
 
 junit = "junit:junit:4.13.2"
