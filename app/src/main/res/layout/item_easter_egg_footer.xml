@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="24dp"
+    android:paddingHorizontal="26dp"
     android:paddingBottom="30dp">
 
     <ImageView
@@ -30,6 +30,7 @@
         android:id="@+id/tv_git_hash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@id/iv_icon"
@@ -42,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif"
         android:text="@string/label_project_desc"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         app:layout_constraintTop_toBottomOf="@id/iv_icon" />
@@ -132,13 +134,23 @@
             android:textColor="?attr/colorSecondary" />
     </view>
 
+    <ImageView
+        android:id="@+id/iv_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="28dp"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toBottomOf="@id/flow_layout"
+        app:tint="?attr/colorSecondaryContainer"
+        tools:scaleType="center"
+        tools:src="@drawable/ic_wavy_line_1" />
+
     <view
         class="com.google.android.material.internal.FlowLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:itemSpacing="30dp"
-        app:layout_constraintTop_toBottomOf="@id/flow_layout"
+        app:itemSpacing="20dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_line"
         app:lineSpacing="20dp">
 
         <TextView

@@ -1,6 +1,7 @@
 package com.dede.android_eggs.ui.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
@@ -130,6 +131,8 @@ abstract class VHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     private val viewRef = SparseArray<View>()
+
+    val context: Context get() = itemView.context
 
     fun <T : View> findViewById(id: Int): T {
         @Suppress("UNCHECKED_CAST") var view = viewRef.get(id) as? T

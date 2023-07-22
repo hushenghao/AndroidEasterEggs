@@ -2,7 +2,6 @@ package com.dede.android_eggs.main.holders
 
 import android.animation.Animator
 import android.animation.ValueAnimator
-import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.StateListDrawable
 import android.util.StateSet
@@ -37,7 +36,6 @@ import com.google.android.material.R as M3R
 open class EggHolder(view: View) : VHolder<Egg>(view) {
 
     val binding: ItemEasterEggLayoutBinding = ItemEasterEggLayoutBinding.bind(view)
-    val context: Context = itemView.context
 
     private val matrix = Matrix()
     private var lastXDegrees: Float = 0f

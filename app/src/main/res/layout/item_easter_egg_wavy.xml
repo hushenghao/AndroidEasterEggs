@@ -13,6 +13,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="30dp"
-        app:tint="?attr/colorPrimary"
+        app:tint="?attr/colorSecondary"
         tools:src="@drawable/ic_wavy_line" />
 </FrameLayout>

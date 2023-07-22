@@ -21,6 +21,7 @@ import com.dede.android_eggs.ui.views.text.ClickSpan
 import com.dede.android_eggs.ui.views.text.SpaceSpan.Companion.appendSpace
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.applyIf
+import com.dede.android_eggs.util.createRepeatWavyDrawable
 import com.dede.android_eggs.util.getActivity
 import com.dede.android_eggs.util.isRtl
 import com.dede.android_eggs.views.timeline.AndroidTimelineFragment
@@ -48,6 +49,13 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
             view.setOnClickListener(this)
         }
         handleFlowLayoutChild()
+
+        binding.ivLine.setImageDrawable(
+            createRepeatWavyDrawable(
+                itemView.context,
+                R.drawable.ic_wavy_line_1
+            )
+        )
     }
 
     private fun handleFlowLayoutChild() {

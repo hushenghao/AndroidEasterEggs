@@ -313,7 +313,7 @@ object EggDatas {
                 "1.0"
             )
         ),
-        Wavy(R.drawable.ic_wavy_line_1, true),
+        Wavy(R.drawable.ic_wavy_line),
         Footer()
     )
 }
