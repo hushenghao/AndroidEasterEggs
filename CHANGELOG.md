@@ -1,10 +1,11 @@
 ### v1.9.6
 
 - Android 14 icons
-- Added language switch
+- Added the language region switching function
+- Added Egg search function
 - Optimize Android Timeline
 - Optimize sideslip to add shortcuts
-- Optimize task stack management 
+- Optimize task stack management
 
 ### v1.9.5 (2023-07-13)
 
