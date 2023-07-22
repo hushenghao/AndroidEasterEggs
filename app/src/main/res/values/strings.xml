@@ -29,7 +29,7 @@
     <string name="label_timeline" translatable="false">Timeline</string>
     <string name="label_privacy_policy">Privacy</string>
     <string name="label_license" translatable="false">License</string>
-    <string name="label_email">Contact me</string>
+    <string name="label_email">Feedback</string>
     <string name="label_star">Star</string>
 
     <string name="title_version">Version</string>

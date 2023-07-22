@@ -1,6 +1,7 @@
 package com.dede.android_eggs.ui.views
 
 import android.content.Context
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import coil.dispose
+import coil.load
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.EggListFragment
 import com.dede.android_eggs.main.entity.EggDatas
@@ -21,6 +24,7 @@ import com.dede.blurhash_android.BlurHashDrawable
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.carousel.CarouselSnapHelper
 import com.google.android.material.carousel.HeroCarouselStrategy
+import kotlin.random.Random
 
 class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
     ConstraintLayout(context, attrs) {
@@ -46,10 +50,14 @@ class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: Attri
         val group: ViewGroup = holder.findViewById(R.id.fl_content)
         val background: ImageView = holder.findViewById(R.id.iv_background)
         background.isVisible = !provider.includeBackground
+        background.dispose()
         if (!provider.includeBackground && background.drawable == null) {
-            background.setImageDrawable(
+            val placeholder =
                 BlurHashDrawable(holder.itemView.context, R.string.hash_snapshot_bg, 54, 32)
-            )
+            background.load(randomBgUri()) {
+                placeholder(placeholder)
+                error(placeholder)
+            }
         }
         group.removeAllViewsInLayout()
         group.addView(
@@ -63,5 +71,12 @@ class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: Attri
             val position = holder.layoutPosition
             fragment.smoothScrollToPosition(position)
         }
+    }
+
+    private fun randomBgUri(): Uri? {
+        val list = context.assets.list("gallery")
+        if (list.isNullOrEmpty()) return null
+        val index = Random.nextInt(list.size)
+        return Uri.parse("file:///android_asset/gallery/%s".format(list[index]))
     }
 }
