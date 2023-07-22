@@ -127,7 +127,7 @@ abstract class SettingPref(
                 }
                 iconTint = MaterialColors.getColorStateListOrNull(context, R.attr.colorSecondary)
                 iconPadding = if (text.isNullOrEmpty()) 0 else 4.dp
-                setPadding(8.dp, 0, 12.dp, 0)
+                setPadding(12.dp, 0, 12.dp, 0)
                 minWidth = 0
                 minimumWidth = 0
                 isSaveEnabled = false

@@ -8,6 +8,8 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.browser.customtabs.CustomTabsIntent.ACTIVITY_HEIGHT_ADJUSTABLE
+import androidx.browser.customtabs.CustomTabsIntent.ACTIVITY_HEIGHT_FIXED
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.dede.android_eggs.R
@@ -49,6 +51,7 @@ object CustomTabsBrowser {
             .setShareState(CustomTabsIntent.SHARE_STATE_ON)
             .setDefaultColorSchemeParams(params)
             .setCloseButtonIcon(closeIcon)
+            .setInitialActivityHeightPx((context.resources.displayMetrics.heightPixels * 0.75).toInt())
 
         val customTabsIntent = builder.build()
         customTabsIntent.intent.putExtra(

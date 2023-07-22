@@ -2,8 +2,13 @@ package com.dede.android_eggs.main.holders
 
 import android.content.Context
 import android.graphics.Paint
+import android.text.Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+import android.text.SpannableStringBuilder
+import android.text.method.LinkMovementMethod
 import android.view.View
+import android.widget.TextView
 import androidx.core.net.toUri
+import androidx.core.view.get
 import androidx.fragment.app.FragmentActivity
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
@@ -12,12 +17,19 @@ import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.main.entity.Footer
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.ui.adapter.VHolder
+import com.dede.android_eggs.ui.views.text.ClickSpan
+import com.dede.android_eggs.ui.views.text.SpaceSpan.Companion.appendSpace
 import com.dede.android_eggs.util.CustomTabsBrowser
+import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.getActivity
+import com.dede.android_eggs.util.isRtl
 import com.dede.android_eggs.views.timeline.AndroidTimelineFragment
+import com.dede.basic.dp
 
 @VHType(viewType = Egg.VIEW_TYPE_FOOTER)
 class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
+
+    private var appended = false
 
     private val binding = ItemEasterEggFooterBinding.bind(view)
     override fun onBindViewHolder(t: Footer) {
@@ -30,13 +42,36 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
         binding.tvGitHash.paintFlags = binding.tvGitHash.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         val views = arrayOf(
             binding.tvGitHash,
-            binding.tvGithub, binding.tvFrameworks, binding.tvTranslation,
-            binding.tvTimeline, binding.tvStar, binding.tvBeta, binding.tvDino3d,
             binding.tvPrivacy, binding.tvLicense, binding.tvFeedback,
         )
         for (view in views) {
             view.setOnClickListener(this)
         }
+        handleFlowLayoutChild()
+    }
+
+    private fun handleFlowLayoutChild() {
+        if (appended) return
+        for (i in 0 until binding.flowLayout.childCount) {
+            val textView = binding.flowLayout[i] as TextView
+            val unLast = i < binding.flowLayout.childCount - 1
+            val span = SpannableStringBuilder()
+            if (isRtl) {
+                span.applyIf(unLast) {
+                    append("/")
+                    appendSpace(8.dp)
+                }.append(textView.text, ClickSpan(this), SPAN_INCLUSIVE_EXCLUSIVE)
+            } else {
+                span.append(textView.text, ClickSpan(this), SPAN_INCLUSIVE_EXCLUSIVE)
+                    .applyIf(unLast) {
+                        appendSpace(8.dp)
+                        append("/")
+                    }
+            }
+            textView.movementMethod = LinkMovementMethod.getInstance()
+            textView.text = span
+        }
+        appended = true
     }
 
     override fun onClick(v: View) {

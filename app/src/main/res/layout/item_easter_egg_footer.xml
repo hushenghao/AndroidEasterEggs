@@ -31,8 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-        app:layout_constraintBottom_toBottomOf="@id/iv_icon"
         android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@id/iv_icon"
         app:layout_constraintStart_toStartOf="@id/tv_version"
         app:layout_constraintTop_toBottomOf="@id/tv_version"
         tools:text="3b455a" />
@@ -46,132 +46,91 @@
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         app:layout_constraintTop_toBottomOf="@id/iv_icon" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_line_center"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <TextView
-        android:id="@+id/tv_title_source"
-        android:layout_width="wrap_content"
+    <view
+        android:id="@+id/flow_layout"
+        class="com.google.android.material.internal.FlowLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/label_open_source"
-        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-        app:layout_constraintEnd_toStartOf="@id/guide_line_center"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_summary" />
-
-    <TextView
-        android:id="@+id/tv_github"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="?attr/selectableItemBackground"
-        android:fontFamily="sans-serif-medium"
-        android:tag="@string/url_github"
-        android:text="@string/label_github"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-        android:textColor="?attr/colorSecondary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_source" />
-
-    <TextView
-        android:id="@+id/tv_frameworks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="?attr/selectableItemBackground"
-        android:fontFamily="sans-serif-medium"
-        android:tag="@string/url_source"
-        android:text="@string/label_frameworks"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-        android:textColor="?attr/colorSecondary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_github" />
-
-    <TextView
-        android:id="@+id/tv_translation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="?attr/selectableItemBackground"
-        android:fontFamily="sans-serif-medium"
-        android:tag="@string/url_translation"
-        android:text="@string/label_translation"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-        android:textColor="?attr/colorSecondary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_frameworks" />
-
-    <TextView
-        android:id="@+id/tv_title_other"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_other"
-        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@id/guide_line_center"
+        app:itemSpacing="8dp"
         app:layout_constraintTop_toBottomOf="@id/tv_summary"
-        app:layout_constraintTop_toTopOf="@id/tv_title_source" />
+        app:lineSpacing="10dp">
 
-    <TextView
-        android:id="@+id/tv_timeline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="?attr/selectableItemBackground"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/label_timeline"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-        android:textColor="?attr/colorSecondary"
-        app:layout_constraintStart_toStartOf="@id/tv_title_other"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_source" />
+        <TextView
+            android:id="@+id/tv_github"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif"
+            android:tag="@string/url_github"
+            android:text="@string/label_github"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textColor="?attr/colorSecondary" />
 
-    <TextView
-        android:id="@+id/tv_star"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="?attr/selectableItemBackground"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/label_star"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-        android:textColor="?attr/colorSecondary"
-        app:layout_constraintStart_toStartOf="@id/tv_title_other"
-        app:layout_constraintTop_toBottomOf="@id/tv_timeline" />
+        <TextView
+            android:id="@+id/tv_frameworks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif"
+            android:tag="@string/url_source"
+            android:text="@string/label_frameworks"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textColor="?attr/colorSecondary" />
 
-    <TextView
-        android:id="@+id/tv_beta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="?attr/selectableItemBackground"
-        android:fontFamily="sans-serif-medium"
-        android:tag="@string/url_beta"
-        android:text="@string/label_beta"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-        android:textColor="?attr/colorSecondary"
-        app:layout_constraintStart_toStartOf="@id/tv_title_other"
-        app:layout_constraintTop_toBottomOf="@id/tv_star" />
+        <TextView
+            android:id="@+id/tv_translation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif"
+            android:tag="@string/url_translation"
+            android:text="@string/label_translation"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textColor="?attr/colorSecondary" />
 
-    <TextView
-        android:id="@+id/tv_dino_3d"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="?attr/selectableItemBackground"
-        android:fontFamily="sans-serif-medium"
-        android:tag="@string/url_dino_3d"
-        android:text="@string/label_dino_3d"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-        android:textColor="?attr/colorSecondary"
-        app:layout_constraintStart_toStartOf="@id/tv_title_other"
-        app:layout_constraintTop_toBottomOf="@id/tv_beta" />
+        <TextView
+            android:id="@+id/tv_timeline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/label_timeline"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textColor="?attr/colorSecondary" />
+
+        <TextView
+            android:id="@+id/tv_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/label_star"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textColor="?attr/colorSecondary" />
+
+        <TextView
+            android:id="@+id/tv_beta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif"
+            android:tag="@string/url_beta"
+            android:text="@string/label_beta"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textColor="?attr/colorSecondary" />
+
+        <TextView
+            android:id="@+id/tv_dino_3d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif"
+            android:tag="@string/url_dino_3d"
+            android:text="@string/label_dino_3d"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textColor="?attr/colorSecondary" />
+    </view>
 
     <view
         class="com.google.android.material.internal.FlowLayout"
@@ -179,7 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         app:itemSpacing="30dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_dino_3d"
+        app:layout_constraintTop_toBottomOf="@id/flow_layout"
         app:lineSpacing="20dp">
 
         <TextView
