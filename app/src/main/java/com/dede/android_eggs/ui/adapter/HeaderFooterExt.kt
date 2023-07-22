@@ -48,6 +48,10 @@ class HeaderFooterExt(private val vAdapter: VAdapter) {
             headerView = LinearLayout(view.context)
         }
         val notify = !hasHeader
+        val parent = view.parent
+        if (parent is ViewGroup) {
+            parent.removeView(view)
+        }
         headerView.addView(view)
         if (notify) vAdapter.notifyItemInserted(0)
     }
@@ -64,6 +68,10 @@ class HeaderFooterExt(private val vAdapter: VAdapter) {
             footerView = LinearLayout(view.context)
         }
         val notify = !hasFooter
+        val parent = view.parent
+        if (parent is ViewGroup) {
+            parent.removeView(view)
+        }
         footerView.addView(view)
         if (notify) vAdapter.notifyItemInserted(vAdapter.itemCount - 1)
     }

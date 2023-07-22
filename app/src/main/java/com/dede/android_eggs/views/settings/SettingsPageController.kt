@@ -5,21 +5,28 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.FragmentActivity
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.google.android.material.R as M3R
 
 
-class SettingsPageController(private val activity: AppCompatActivity) : MenuProvider {
+class SettingsPageController(private val activity: FragmentActivity) : MenuProvider {
 
     companion object {
         private const val FRAGMENT_TAG = "Settings"
     }
 
+    interface OnSearchTextChangeListener {
+        fun onSearchTextChange(newText: String)
+    }
+
     private lateinit var settingsIcon: FontIconsDrawable
+
+    var onSearchTextChangeListener: OnSearchTextChangeListener? = null
 
     fun onCreate(savedInstanceState: Bundle?) {
         activity.addMenuProvider(this, activity)
@@ -46,6 +53,18 @@ class SettingsPageController(private val activity: AppCompatActivity) : MenuProv
         settingsIcon =
             FontIconsDrawable(activity, Icons.Rounded.settings, M3R.attr.colorControlNormal, 24f)
         menu.findItem(R.id.menu_settings).icon = settingsIcon
+
+        val searchView = menu.findItem(R.id.menu_search).actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                onSearchTextChangeListener?.onSearchTextChange(newText)
+                return true
+            }
+        })
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -58,6 +77,7 @@ class SettingsPageController(private val activity: AppCompatActivity) : MenuProv
                     .setDuration(500)
                     .start()
             }
+
             else -> return false
         }
         return true

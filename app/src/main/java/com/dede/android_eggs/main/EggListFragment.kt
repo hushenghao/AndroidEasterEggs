@@ -5,6 +5,7 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,7 @@ import com.dede.android_eggs.main.holders.FooterHolder
 import com.dede.android_eggs.main.holders.PreviewHolder
 import com.dede.android_eggs.main.holders.WavyHolder
 import com.dede.android_eggs.ui.adapter.VAdapter
+import com.dede.android_eggs.ui.adapter.VType
 import com.dede.android_eggs.ui.adapter.addHeader
 import com.dede.android_eggs.ui.adapter.addViewType
 import com.dede.android_eggs.ui.views.SnapshotGroupView
@@ -28,13 +30,15 @@ import com.dede.android_eggs.ui.views.onApplyWindowEdge
 import com.dede.android_eggs.util.EasterUtils
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
+import com.dede.android_eggs.views.settings.SettingsPageController
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
 import com.dede.android_eggs.views.settings.prefs.IconVisualEffectsPref
 import com.dede.basic.dp
 import java.util.*
 
 
-class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
+class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
+    SettingsPageController.OnSearchTextChangeListener {
 
     private val binding: FragmentEasterEggListBinding by viewBinding(FragmentEasterEggListBinding::bind)
 
@@ -44,6 +48,10 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         handleOrientationAngleSensor(IconVisualEffectsPref.isEnable(requireContext()))
+        SettingsPageController(requireActivity()).apply {
+            onCreate(savedInstanceState)
+            onSearchTextChangeListener = this@EggListFragment
+        }
 
         if (EasterUtils.isEaster()) {
             Toast.makeText(requireContext(), R.string.toast_easter, Toast.LENGTH_SHORT)
@@ -64,10 +72,59 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
         }
     }
 
+    override fun onSearchTextChange(newText: String) {
+        eggFilter.filter(newText)
+    }
+
+    private val eggFilter = object : Filter() {
+
+        private val allEggList = EggDatas.eggList
+        val eggList = ArrayList(allEggList)
+
+        override fun performFiltering(constraint: CharSequence): FilterResults {
+            val resultList = ArrayList<VType>()
+            if (constraint.isEmpty()) {
+                resultList.addAll(allEggList)
+            } else {
+                val context = requireContext()
+                for (vType in allEggList) {
+                    if (vType !is Egg) continue
+                    val filter = constraint.toString().lowercase(Locale.ROOT)
+                    if (context.getString(vType.eggNameRes)
+                            .lowercase(Locale.ROOT)
+                            .contains(filter) ||
+                        context.getString(vType.androidRes)
+                            .lowercase(Locale.ROOT)
+                            .contains(filter)
+                    ) {
+                        resultList.add(vType)
+                    }
+                }
+            }
+            return FilterResults().apply { values = resultList }
+        }
+
+        override fun publishResults(constraint: CharSequence, filterResults: FilterResults) {
+            @Suppress("UNCHECKED_CAST")
+            val newList = filterResults.values as Collection<VType>
+            eggList.clear()
+            eggList.addAll(newList)
+            val vAdapter = binding.recyclerView.adapter as VAdapter
+            if (constraint.isEmpty()) {
+                vAdapter.headerFooterExt.addHeader(snapshotView)
+            } else {
+                vAdapter.headerFooterExt.removeHeader(snapshotView)
+            }
+            vAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private val snapshotView by lazy { createSnapshotView(requireContext()) }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.adapter = VAdapter(EggDatas.eggList) {
-            addHeader(createSnapshotView(requireContext()))
+        binding.recyclerView.adapter = VAdapter(eggFilter.eggList) {
+            addHeader(snapshotView)
             addViewType<EggHolder>(R.layout.item_easter_egg_layout)
             addViewType<PreviewHolder>(R.layout.item_easter_egg_layout)
             addViewType<WavyHolder>(R.layout.item_easter_egg_wavy)
@@ -87,7 +144,6 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list) {
             }
         })
         LocalEvent.get(this).register(IconShapePref.ACTION_CHANGED) {
-            @Suppress("NotifyDataSetChanged")
             binding.recyclerView.adapter?.notifyDataSetChanged()
         }
         LocalEvent.get(this).register(IconVisualEffectsPref.ACTION_CHANGED) {
