@@ -23,6 +23,7 @@ rootProject.allprojects {
                 resourcePrefix("${s}_")
                 lint {
                     baseline = project.file("lint-baseline.xml")
+                    fatal += listOf("NewApi", "InlineApi")
                 }
             }
         }

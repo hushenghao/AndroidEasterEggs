@@ -63,6 +63,7 @@ android {
 
     lint {
         disable += listOf("NotifyDataSetChanged")
+        fatal += listOf("NewApi", "InlineApi")
     }
 
     compileOptions {
