@@ -24,7 +24,6 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
@@ -345,17 +344,14 @@ public class PlatLogoActivity extends Activity {
         public float x, y, r;
         public int color;
         public String text = null;
-        public Bitmap bitmap = null;
+        public Drawable drawable = null;
     }
 
     class BubblesDrawable extends Drawable implements View.OnLongClickListener {
 
-//        private static final int MAX_BUBBS = 2000;
+        private static final int MAX_BUBBS = 2000;
 
-        // Optimize memory usage
-        private final int MAX_BUBBS = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? 2000 : 800;
-
-        //        private final int[] mColorIds = {
+//        private final int[] mColorIds = {
 //                android.R.color.system_accent1_400,
 //                android.R.color.system_accent1_500,
 //                android.R.color.system_accent1_600,
@@ -417,8 +413,8 @@ public class PlatLogoActivity extends Activity {
                     mPaint.setTextSize(mBubbs[j].r * 1.75f);
                     canvas.drawText(mBubbs[j].text, mBubbs[j].x,
                             mBubbs[j].y + mBubbs[j].r * f * 0.6f, mPaint);
-                } else if (mBubbs[j].bitmap != null) {
-                    COLRBitmapCompat.drawCOLRBitmap(canvas, mBubbs[j], f, mPaint);
+                } else if (mBubbs[j].drawable != null) {
+                    COLREmojiCompat.drawCOLREmoji(canvas, mBubbs[j], f);
                 } else {
                     mPaint.setColor(mBubbs[j].color);
                     canvas.drawCircle(mBubbs[j].x, mBubbs[j].y, mBubbs[j].r * f, mPaint);
@@ -437,14 +433,9 @@ public class PlatLogoActivity extends Activity {
             }
             // support code
             if (!supportCOLR) {
-                COLRBitmapCompat.convertCOLRBitmap(mBubbs, PlatLogoActivity.this, () -> {
-                    Log.i(TAG, "chooseEmojiSet: result");
-                    invalidateSelf();
-                    return null;
-                });
-            } else {
-                invalidateSelf();
+                COLREmojiCompat.identifierCOLREmoji(mBubbs, PlatLogoActivity.this);
             }
+            invalidateSelf();
         }
 
         @Override
