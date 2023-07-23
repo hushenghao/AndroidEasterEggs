@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Toast
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -133,7 +134,11 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
 
         var last: ItemDecoration = EggListDivider(10.dp, 0, 0)
         binding.recyclerView.addItemDecoration(last)
-        binding.recyclerView.onApplyWindowEdge {
+        binding.recyclerView.onApplyWindowEdge(
+            WindowInsetsCompat.Type.systemBars() or
+                    WindowInsetsCompat.Type.displayCutout() or
+                    WindowInsetsCompat.Type.ime()
+        ) {
             removeItemDecoration(last)
             last = EggListDivider(10.dp, 0, it.bottom)
             addItemDecoration(last)

@@ -17,3 +17,11 @@ fun <T : View> T.onApplyWindowEdge(
         return@OnApplyWindowInsetsListener insets
     })
 }
+
+fun <T : View> T.onApplyWindowInsets(onApplyWindowInsets: T.(insets: WindowInsetsCompat) -> Unit) {
+    ViewCompat.setOnApplyWindowInsetsListener(this, OnApplyWindowInsetsListener { v, insets ->
+        @Suppress("UNCHECKED_CAST")
+        onApplyWindowInsets(v as T, insets)
+        return@OnApplyWindowInsetsListener insets
+    })
+}
