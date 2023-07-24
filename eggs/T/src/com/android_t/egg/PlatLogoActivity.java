@@ -61,10 +61,10 @@ public class PlatLogoActivity extends Activity {
     private ImageView mLogo;
     private BubblesDrawable mBg;
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,6 +215,12 @@ public class PlatLogoActivity extends Activity {
 //        super.onStop();
 //    }
 
+    @Override
+    protected void onDestroy() {
+        COLREmojiCompat.releaseIdentifiedCOLREmoji();
+        super.onDestroy();
+    }
+
     /**
      * Subclass of AnalogClock that allows the user to flip up the glass and adjust the hands.
      */
@@ -349,7 +355,10 @@ public class PlatLogoActivity extends Activity {
 
     class BubblesDrawable extends Drawable implements View.OnLongClickListener {
 
-        private static final int MAX_BUBBS = 2000;
+//        private static final int MAX_BUBBS = 2000;
+
+        // Optimize memory usage
+        private final int MAX_BUBBS = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? 2000 : 1000;
 
 //        private final int[] mColorIds = {
 //                android.R.color.system_accent1_400,

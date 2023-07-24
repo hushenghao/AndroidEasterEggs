@@ -2,6 +2,7 @@
 
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.LibraryPlugin
+import com.dede.easter_eggs.EmojiSvg2XmlTask
 
 plugins {
     id("com.android.application") version "8.0.2" apply false
@@ -28,4 +29,8 @@ rootProject.allprojects {
             }
         }
     }
+}
+
+task<EmojiSvg2XmlTask>("emojiSvg2Xml") {
+    group = "script"
 }
