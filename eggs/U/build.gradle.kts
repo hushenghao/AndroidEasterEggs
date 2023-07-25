@@ -11,6 +11,10 @@ android {
         targetSdk = Versions.TARGET_SDK
 
         consumerProguardFiles("consumer-rules.pro")
+
+        vectorDrawables {
+            useSupportLibrary = false
+        }
     }
 
     buildTypes {

@@ -32,6 +32,7 @@ inline fun <T, I> T.applyNotNull(input: I?, block: T.(input: I) -> Unit): T {
     return this
 }
 
+@Suppress("DEPRECATION")
 fun Bundle?.isEquals(other: Any?): Boolean {
     if (this === other) return true
     if (this == null || other == null) return false

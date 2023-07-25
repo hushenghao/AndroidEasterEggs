@@ -1,4 +1,5 @@
 @file:JvmName("DrawableKt")
+@file:JvmMultifileClass
 
 package com.dede.basic
 
@@ -7,7 +8,12 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.util.LruCache
+import android.util.Xml
+import androidx.annotation.XmlRes
 import androidx.core.content.ContextCompat
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
+import org.xmlpull.v1.XmlPullParser
+import org.xmlpull.v1.XmlPullParserException
 
 @SuppressLint("DiscouragedApi")
 @Throws(Resources.NotFoundException::class)
@@ -18,13 +24,17 @@ fun Context.getSystemColor(resName: String): Int {
 
 enum class DefType {
     DRAWABLE,
-    COLOR
+    COLOR,
+    RAW,
+    XML
     ;
 
     override fun toString(): String {
         return when (this) {
             DRAWABLE -> "drawable"
             COLOR -> "color"
+            RAW -> "raw"
+            XML -> "xml"
         }
     }
 }
@@ -41,10 +51,7 @@ fun Context.getIdentifier(name: String, defType: DefType, defPackage: String = p
     val key = makeKey(name, defType, defPackage)
     var id = identifierCache.get(key)
     if (id == null) {
-        val type = when (defType) {
-            DefType.DRAWABLE -> "drawable"
-            DefType.COLOR -> "color"
-        }
+        val type = defType.toString()
         id = resources.getIdentifier(name, type, defPackage)
         identifierCache.put(key, id)
     }
@@ -53,4 +60,23 @@ fun Context.getIdentifier(name: String, defType: DefType, defPackage: String = p
 
 fun Context.requireDrawable(id: Int): Drawable {
     return requireNotNull(ContextCompat.getDrawable(this, id))
+}
+
+/**
+ * Some Egg can't enable `useSupportLibrary = true`
+ */
+fun Context.createVectorDrawableCompatFromXml(
+    @XmlRes id: Int,
+): VectorDrawableCompat {
+    val parser = resources.getXml(id)
+    val attrs = Xml.asAttributeSet(parser)
+    var type: Int
+    while (parser.next().also { type = it } != XmlPullParser.START_TAG &&
+        type != XmlPullParser.END_DOCUMENT) {
+        // Empty loop
+    }
+    if (type != XmlPullParser.START_TAG) {
+        throw XmlPullParserException("No start tag found")
+    }
+    return VectorDrawableCompat.createFromXmlInner(resources, parser, attrs, theme)
 }

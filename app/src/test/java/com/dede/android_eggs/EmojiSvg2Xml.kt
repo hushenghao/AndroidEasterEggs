@@ -1,13 +1,13 @@
-package com.dede.easter_eggs
+package com.dede.android_eggs
 
 import com.android.ide.common.vectordrawable.Svg2Vector
-import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.TaskAction
+import com.dede.basic.getEmojiUnicode
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.junit.Before
+import org.junit.Ignore
+import org.junit.Test
 import java.io.File
-import java.net.URI
-import java.net.http.HttpClient
-import java.net.http.HttpRequest
-import java.net.http.HttpResponse
 
 /**
  * Downlad emoji svg and convert to android drawable xml.
@@ -19,7 +19,8 @@ import java.net.http.HttpResponse
  * @author shhu
  * @since 2023/7/24
  */
-open class EmojiSvg2XmlTask : DefaultTask() {
+@Ignore
+class EmojiSvg2Xml {
 
     companion object {
         private const val EMOJI_SVG_URL =
@@ -53,23 +54,30 @@ open class EmojiSvg2XmlTask : DefaultTask() {
         private const val DIR_XML = "xml"
     }
 
-    private val svgDir = File(project.buildDir, DIR_SVG)
-    private val xmlDir = File(project.buildDir, DIR_XML)
+    private val buildDir = File("build")
+    private val svgDir = File(buildDir, DIR_SVG)
+    private val xmlDir = File(buildDir, DIR_XML)
 
-    private lateinit var httpClient: HttpClient
+    private lateinit var httpClient: OkHttpClient
 
-    @TaskAction
+    @Before
+    fun prepare() {
+        httpClient = OkHttpClient.Builder().build()
+        if (!xmlDir.exists()) {
+            xmlDir.mkdirs()
+        }
+        if (!svgDir.exists()) {
+            svgDir.mkdirs()
+        }
+    }
+
+    @Test
     fun action() {
-        initHttpClient()
-
         var c = 0
         val size = EMOJI_SETS.size
         for (emoji in EMOJI_SETS) {
             println("Start process emoji: $emoji")
-            val svgFile = downloadSvg(emoji)
-            if (svgFile == null) {
-                continue
-            }
+            val svgFile = downloadSvg(emoji) ?: continue
             println("Download emoji svg success: $svgFile")
 
             println("Convert svg 2 xml: $emoji")
@@ -80,9 +88,6 @@ open class EmojiSvg2XmlTask : DefaultTask() {
     }
 
     private fun svg2xml(svgFile: File): File? {
-        if (!xmlDir.exists()) {
-            xmlDir.mkdirs()
-        }
         val xmlFile = File(xmlDir, "t_" + svgFile.nameWithoutExtension + ".xml")
         val error = Svg2Vector.parseSvgToXml(svgFile.toPath(), xmlFile.outputStream())
         if (!error.isNullOrEmpty()) {
@@ -95,29 +100,6 @@ open class EmojiSvg2XmlTask : DefaultTask() {
         return xmlFile
     }
 
-    private fun getEmojiUnicode(
-        emoji: CharSequence,
-        separator: CharSequence = "\\u",
-        prefix: CharSequence = "",
-        postfix: CharSequence = "",
-        temp: MutableList<CharSequence>? = null,
-    ): CharSequence {
-        val list: MutableList<CharSequence> = if (temp != null) {
-            temp.clear();temp
-        } else ArrayList()
-        var offset = 0
-        while (offset < emoji.length) {
-            val codePoint = Character.codePointAt(emoji, offset)
-            offset += Character.charCount(codePoint)
-            if (codePoint == 0xFE0F) {
-                // the codepoint is a emoji style standardized variation selector
-                continue
-            }
-            list.add("%04x".format(codePoint))
-        }
-        return list.joinToString(separator = separator, prefix = prefix, postfix = postfix)
-    }
-
     private fun downloadSvg(emoji: CharSequence): File? {
         val svgFileName = getEmojiUnicode(
             emoji,
@@ -127,17 +109,15 @@ open class EmojiSvg2XmlTask : DefaultTask() {
         ).toString()
         val url = EMOJI_SVG_URL.format(svgFileName)
         val request = createHttpRequest(url)
-        val response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream())
-        if (response.statusCode() != 200) {
-            println("Download emoji svg failure: ${response.statusCode()} -> $url")
+        val response = httpClient.newCall(request).execute()
+        val responseBody = response.body
+        if (response.code != 200 || responseBody == null) {
+            println("Download emoji svg failure: ${response.code} -> $url")
             return null
         }
 
-        if (!svgDir.exists()) {
-            svgDir.mkdirs()
-        }
         val svgFile = File(svgDir, svgFileName)
-        response.body().use { input ->
+        responseBody.byteStream().use { input ->
             svgFile.outputStream().use {
                 input.copyTo(it)
             }
@@ -145,15 +125,10 @@ open class EmojiSvg2XmlTask : DefaultTask() {
         return svgFile
     }
 
-    private fun createHttpRequest(url: String): HttpRequest {
-        return HttpRequest.newBuilder(URI.create(url))
-            .GET()
-            .build()
-    }
-
-    private fun initHttpClient() {
-        httpClient = HttpClient.newBuilder()
-            .followRedirects(HttpClient.Redirect.NORMAL)
+    private fun createHttpRequest(url: String): Request {
+        return Request.Builder()
+            .url(url)
+            .get()
             .build()
     }
 }

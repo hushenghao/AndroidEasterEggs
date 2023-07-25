@@ -27,6 +27,10 @@ android {
 
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
         buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")
+
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     signingConfigs {
@@ -126,6 +130,8 @@ dependencies {
     implementation(project(":eggs:Gingerbread"))
 
     testImplementation(deps.junit)
+    testImplementation("com.android.tools:sdk-common:31.0.2")
+    testImplementation("com.squareup.okhttp3:okhttp:4.11.0")
     androidTestImplementation(deps.nanohttpd)
     androidTestImplementation(deps.bundles.android.test)
 }

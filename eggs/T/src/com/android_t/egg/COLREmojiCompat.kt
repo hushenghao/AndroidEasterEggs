@@ -30,29 +30,6 @@ fun Canvas.drawCOLREmoji(bubble: Bubble, p: Float) {
     drawable.draw(this)
 }
 
-fun getEmojiUnicode(
-    emoji: CharSequence,
-    separator: CharSequence = "\\u",
-    prefix: CharSequence = "",
-    postfix: CharSequence = "",
-    temp: MutableList<CharSequence>? = null,
-): CharSequence {
-    val list: MutableList<CharSequence> = if (temp != null) {
-        temp.clear();temp
-    } else ArrayList()
-    var offset = 0
-    while (offset < emoji.length) {
-        val codePoint = Character.codePointAt(emoji, offset)
-        offset += Character.charCount(codePoint)
-        if (codePoint == 0xFE0F) {
-            // the codepoint is a emoji style standardized variation selector
-            continue
-        }
-        list.add("%04x".format(codePoint))
-    }
-    return list.joinToString(separator = separator, prefix = prefix, postfix = postfix)
-}
-
 private val cachedDrawable = WeakHashMap<CharSequence, Drawable>()
 
 fun Context.identifierEmojiDrawable(
@@ -69,11 +46,11 @@ fun Context.identifierEmojiDrawable(
         prefix = "t_emoji_u",
         temp = temp
     ).toString()
-    val id: Int = this.getIdentifier(drawableName, DefType.DRAWABLE, this.packageName)
+    val id: Int = this.getIdentifier(drawableName, DefType.XML, this.packageName)
     if (id == 0) {
-        throw IllegalStateException("Emoji Drawable not found, name: %s".format(drawableName))
+        throw IllegalStateException("Emoji xml not found, name: %s".format(drawableName))
     }
-    return this.requireDrawable(id).apply {
+    return createVectorDrawableCompatFromXml(id).apply {
         cachedDrawable[emoji] = this
     }
 }

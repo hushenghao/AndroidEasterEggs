@@ -8,8 +8,6 @@ import com.dede.android_eggs.main.entity.Egg.CharSequenceFormatter
 
 object EggDatas {
 
-    private const val EXTRA_O_POINT = "isOreoPoint"
-
     private const val KEY_EGG_U = "key_egg_u"
     private const val KEY_EGG_T = "key_egg_t"
     private const val KEY_EGG_S = "key_egg_s"

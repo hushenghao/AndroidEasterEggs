@@ -19,9 +19,9 @@ package com.android_q.egg.quares
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.core.graphics.drawable.DrawableCompat
 import java.util.ArrayList
 import kotlin.math.abs
 import kotlin.math.round
@@ -48,19 +48,25 @@ class Quare(val width: Int, val height: Int, val depth: Int) : Parcelable {
     }
 
     fun load(drawable: Drawable) {
-        val resized = Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8)
+        val resized = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8)
+        } else {
+            // Fix it:
+            // Bitmap.Config.ALPHA_8, Bitmap.getPixels() don't work on Android 5.
+            // https://issuetracker.google.com/issues/37041559
+            Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        }
         val canvas = Canvas(resized)
         drawable.setBounds(0, 0, width, height)
-        DrawableCompat.setTint(drawable, 0xFF000000.toInt())
-//        drawable.setTint(0xFF000000.toInt())
+        drawable.setTint(0xFF000000.toInt())
         drawable.draw(canvas)
         loadAndQuantize(resized)
         resized.recycle()
     }
 
-    fun bitmap(): Bitmap {
-        return Bitmap.createBitmap(data, width, height, Bitmap.Config.ALPHA_8)
-    }
+//    fun bitmap(): Bitmap {
+//        return Bitmap.createBitmap(data, width, height, Bitmap.Config.ALPHA_8)
+//    }
 
     fun getUserMark(x: Int, y: Int): Int {
         return user[y * width + x] ushr 24

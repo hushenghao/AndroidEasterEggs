@@ -37,7 +37,6 @@ import android.widget.Button
 import android.widget.CompoundButton
 import android.widget.GridLayout
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import com.android_q.egg.R
 import java.util.*
 
@@ -158,8 +157,7 @@ class QuaresActivity : Activity() {
             label.text = resName.replace(Regex("^.*/"), "")
             val drawable = icon?.also {
                 it.setBounds(0, 0, (32 * dp).toInt(), (32 * dp).toInt())
-                DrawableCompat.setTint(it, label.currentHintTextColor)
-//                it.setTint(label.currentTextColor)
+                it.setTint(label.currentTextColor)
             }
             label.setCompoundDrawables(drawable, null, null, null)
 
@@ -181,7 +179,6 @@ class QuaresActivity : Activity() {
             recreate()
             return
         }
-        icon = DrawableCompat.wrap(icon!!)
         q.load(icon!!)
 
         if (q.isBlank()) {

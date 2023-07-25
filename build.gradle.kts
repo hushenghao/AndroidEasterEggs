@@ -1,8 +1,7 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+@file:Suppress("UnstableApiUsage")
 
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.LibraryPlugin
-import com.dede.easter_eggs.EmojiSvg2XmlTask
 
 plugins {
     id("com.android.application") version "8.0.2" apply false
@@ -19,6 +18,14 @@ rootProject.allprojects {
         if (this.plugins.hasPlugin(LibraryPlugin::class) && this.path.contains("eggs")) {
             val project = this
             this.extensions.configure<LibraryExtension>("android") {
+                defaultConfig {
+                    vectorDrawables {
+                        if  (useSupportLibrary != true) {
+                            // support API<24 but only generate hdpi to trim apk size
+                            generatedDensities("hdpi")
+                        }
+                    }
+                }
                 val s = project.name.substring(0, 1).lowercase()
                 namespace = "com.android_$s.egg"
                 resourcePrefix("${s}_")
@@ -29,8 +36,4 @@ rootProject.allprojects {
             }
         }
     }
-}
-
-task<EmojiSvg2XmlTask>("emojiSvg2Xml") {
-    group = "script"
 }
