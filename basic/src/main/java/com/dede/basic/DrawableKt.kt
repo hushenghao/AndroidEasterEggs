@@ -9,6 +9,7 @@ import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.util.LruCache
 import android.util.Xml
+import androidx.annotation.DrawableRes
 import androidx.annotation.XmlRes
 import androidx.core.content.ContextCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
@@ -58,8 +59,12 @@ fun Context.getIdentifier(name: String, defType: DefType, defPackage: String = p
     return id
 }
 
-fun Context.requireDrawable(id: Int): Drawable {
+fun Context.requireDrawable(@DrawableRes id: Int): Drawable {
     return requireNotNull(ContextCompat.getDrawable(this, id))
+}
+
+fun Context.createVectorDrawableCompat(@DrawableRes id: Int): VectorDrawableCompat {
+    return requireNotNull(VectorDrawableCompat.create(this.resources, id, this.theme))
 }
 
 /**

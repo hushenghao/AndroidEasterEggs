@@ -34,6 +34,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.android_o.egg.octo.Ocquarium;
+import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
 
 public class PlatLogoActivity extends Activity {
@@ -90,7 +91,7 @@ public class PlatLogoActivity extends Activity {
         } else {
             im.setBackground(new RippleDrawable(
                     ColorStateList.valueOf(0xFF776677),
-                    getDrawable(R.drawable.o_point_platlogo),
+                    DrawableKt.createVectorDrawableCompat(this, R.drawable.o_point_platlogo),
                     null));
             im.setOutlineProvider(new ViewOutlineProvider() {
                 @Override

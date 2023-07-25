@@ -33,7 +33,6 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
-    namespace 'com.android_s.egg'
 }
 
 dependencies {

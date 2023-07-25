@@ -9,7 +9,6 @@ android {
     defaultConfig {
         minSdkVersion Versions.MIN_SDK
         targetSdkVersion Versions.TARGET_SDK
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildFeatures {
@@ -26,7 +25,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-    namespace 'com.android_k.egg'
 }
 
 dependencies {

@@ -11,6 +11,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
+import com.dede.basic.DrawableKt;
+
 public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotProvider {
 
     public static class Point1 extends PlatLogoSnapshotProvider {
@@ -44,7 +46,8 @@ public class PlatLogoSnapshotProvider extends com.dede.basic.PlatLogoSnapshotPro
         if (!isOreoPoint) {
             im.setImageResource(R.drawable.o_platlogo);
         } else {
-            im.setImageResource(R.drawable.o_point_platlogo);
+//            im.setImageResource(R.drawable.o_point_platlogo);
+            im.setImageDrawable(DrawableKt.createVectorDrawableCompat(context, R.drawable.o_point_platlogo));
             im.setOutlineProvider(new ViewOutlineProvider() {
                 @Override
                 public void getOutline(View view, Outline outline) {
