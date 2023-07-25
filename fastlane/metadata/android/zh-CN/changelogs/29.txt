@@ -4,3 +4,5 @@
 - 优化Android事件线
 - 优化侧滑添加快捷方式功能
 - 优化彩蛋任务栈逻辑
+- 优化APK文件大小
+- 修复Android Q egg 在 Android 5设备的问题

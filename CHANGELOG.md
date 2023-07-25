@@ -6,6 +6,8 @@
 - Optimize Android Timeline
 - Optimize sideslip to add shortcuts
 - Optimize task stack management
+- Optimize APK file size
+- Fix Android Q Easter egg, on Android 5 devices
 
 ### v1.9.5 (2023-07-13)
 
