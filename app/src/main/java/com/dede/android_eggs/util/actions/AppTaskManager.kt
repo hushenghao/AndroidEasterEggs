@@ -14,17 +14,6 @@ class AppTaskManager : ActivityActionDispatcher.ActivityAction {
 
         private const val MAX_APP_TASK_COUNT = 5
 
-        private val LIST = arrayOf(
-            com.android_i.egg.Nyandroid::class.java,
-            com.android_j.egg.BeanBag::class.java,
-            com.android_k.egg.DessertCase::class.java,
-            com.android_l.egg.LLandActivity::class.java,
-            com.android_m.egg.MLandActivity::class.java,
-            com.android_o.egg.octo.Ocquarium::class.java,
-            com.android_p.egg.paint.PaintActivity::class.java,
-            com.android_q.egg.quares.QuaresActivity::class.java,
-        )
-
         private val instance = AppTaskManager()
 
         fun getInstance(): AppTaskManager {
@@ -36,16 +25,11 @@ class AppTaskManager : ActivityActionDispatcher.ActivityAction {
         tryTrimTaskCount(activity)
     }
 
-    override fun onDestroyed(activity: Activity) {
-        if (LIST.contains(activity.javaClass)) {
-            moveMainToFront(activity)
-        }
-    }
-
     private fun tryTrimTaskCount(context: Context) {
         val activityManager = context.getSystemService<ActivityManager>() ?: return
         val maxCount = MAX_APP_TASK_COUNT
-        val appTasks = activityManager.appTasks.filter { !it.isTask(EasterEggsActivity::class.java) }
+        val appTasks = activityManager.appTasks
+            .filter { !it.isTask(EasterEggsActivity::class.java) }
         if (appTasks.size <= maxCount) {
             return
         }
@@ -64,19 +48,6 @@ class AppTaskManager : ActivityActionDispatcher.ActivityAction {
             }
         }
         return null
-    }
-
-    private fun moveMainToFront(activity: Activity) {
-        val task = findActivityTask(activity, EasterEggsActivity::class.java)
-        if (task != null) {
-            task.moveToFront()
-            return
-        }
-
-        // relaunch
-        val intent = activity.packageManager
-            .getLaunchIntentForPackage(activity.packageName) ?: return
-        activity.startActivity(intent)
     }
 
     private fun ActivityManager.AppTask.isTask(clazz: Class<out Activity>): Boolean {

@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.view.ViewCompat
 import com.dede.android_eggs.databinding.ItemSettingPrefGroupBinding
@@ -15,6 +16,7 @@ import com.dede.android_eggs.views.settings.prefs.IconVisualEffectsPref
 import com.dede.android_eggs.views.settings.prefs.LanguagePref
 import com.dede.android_eggs.views.settings.prefs.NightModePref
 import com.dede.basic.dp
+import com.dede.basic.requireDrawable
 import com.google.android.material.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
@@ -53,11 +55,12 @@ abstract class SettingPref(
         val title: CharSequence? = null,
         @StringRes val titleRes: Int = View.NO_ID,
         val iconUnicode: String? = null,
+        @DrawableRes val iconRes: Int = View.NO_ID,
     ) {
 
         val id = ViewCompat.generateViewId()
 
-        var iconMaker: ((context: Context) -> Drawable)? = null
+        var iconMaker: ((context: Context, view: View) -> Drawable)? = null
 
         companion object {
             const val ON = 1
@@ -121,9 +124,12 @@ abstract class SettingPref(
                 }
                 val iconMaker = op.iconMaker
                 if (iconMaker != null) {
-                    icon = iconMaker.invoke(context)
+                    icon = iconMaker.invoke(context, this)
                 } else if (op.iconUnicode != null) {
                     icon = FontIconsDrawable(context, op.iconUnicode, R.attr.colorSecondary, 24f)
+                } else if (op.iconRes != View.NO_ID) {
+                    icon = context.requireDrawable(op.iconRes)
+                    iconSize = 24.dp
                 }
                 iconTint = MaterialColors.getColorStateListOrNull(context, R.attr.colorSecondary)
                 iconPadding = if (text.isNullOrEmpty()) 0 else 4.dp

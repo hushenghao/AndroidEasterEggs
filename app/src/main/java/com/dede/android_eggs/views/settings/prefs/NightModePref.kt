@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons.Rounded.brightness_4
 import com.dede.android_eggs.ui.Icons.Rounded.brightness_7
-import com.dede.android_eggs.ui.Icons.Rounded.brightness_auto
 import com.dede.android_eggs.views.settings.SettingPref
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM as SYSTEM
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO as NO
@@ -15,7 +14,11 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES as YES
 class NightModePref : SettingPref(
     "pref_key_night_mode",
     listOf(
-        Op(SYSTEM, titleRes = R.string.summary_follow_system, iconUnicode = brightness_auto),
+        Op(
+            SYSTEM,
+            titleRes = R.string.summary_follow_system,
+            iconRes = R.drawable.ic_android_classic
+        ),
         Op(NO, titleRes = R.string.summary_theme_light_mode, iconUnicode = brightness_7),
         Op(YES, titleRes = R.string.summary_theme_dark_mode, iconUnicode = brightness_4)
     ),

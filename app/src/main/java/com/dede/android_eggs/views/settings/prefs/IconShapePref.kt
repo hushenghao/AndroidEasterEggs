@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.settings.SettingPref
@@ -20,13 +19,13 @@ import com.dede.basic.dp
 class IconShapePref : SettingPref(
     "pref_key_override_icon_shape",
     listOf(
-        Op(0, titleRes = R.string.summary_follow_system, iconUnicode = Icons.Rounded.android),
+        Op(0, iconRes = R.drawable.ic_android_classic),
         iconShapeOp(1),
         iconShapeOp(2),
         iconShapeOp(3),
         iconShapeOp(4),
         iconShapeOp(5),
-        //iconShapeOp(6),
+        iconShapeOp(6),
         iconShapeOp(7),
     ),
     0
@@ -36,8 +35,8 @@ class IconShapePref : SettingPref(
 
         private fun iconShapeOp(index: Int): Op {
             return Op(index).apply {
-                iconMaker = {
-                    createShapeIcon(it, this.value)
+                iconMaker = { ctx, _ ->
+                    createShapeIcon(ctx, this.value)
                 }
             }
         }
