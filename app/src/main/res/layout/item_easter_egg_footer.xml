@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="26dp"
+    android:paddingHorizontal="24dp"
     android:paddingBottom="30dp">
 
     <ImageView
@@ -30,8 +30,7 @@
         android:id="@+id/tv_git_hash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@id/iv_icon"
         app:layout_constraintStart_toStartOf="@id/tv_version"
@@ -43,9 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif"
         android:text="@string/label_project_desc"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
         app:layout_constraintTop_toBottomOf="@id/iv_icon" />
 
     <view
@@ -62,75 +60,61 @@
             android:id="@+id/tv_github"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="sans-serif"
             android:tag="@string/url_github"
             android:text="@string/label_github"
-            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="?attr/colorSecondary" />
 
         <TextView
             android:id="@+id/tv_frameworks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="sans-serif"
             android:tag="@string/url_source"
             android:text="@string/label_frameworks"
-            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="?attr/colorSecondary" />
 
         <TextView
             android:id="@+id/tv_translation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="sans-serif"
             android:tag="@string/url_translation"
             android:text="@string/label_translation"
-            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="?attr/colorSecondary" />
 
         <TextView
             android:id="@+id/tv_timeline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="sans-serif"
             android:text="@string/label_timeline"
-            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="?attr/colorSecondary" />
 
         <TextView
             android:id="@+id/tv_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="sans-serif"
             android:text="@string/label_star"
-            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="?attr/colorSecondary" />
 
         <TextView
             android:id="@+id/tv_beta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="sans-serif"
             android:tag="@string/url_beta"
             android:text="@string/label_beta"
-            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="?attr/colorSecondary" />
 
         <TextView
             android:id="@+id/tv_dino_3d"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="sans-serif"
             android:tag="@string/url_dino_3d"
             android:text="@string/label_dino_3d"
-            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="?attr/colorSecondary" />
     </view>
 
@@ -157,7 +141,6 @@
             android:id="@+id/tv_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
 
@@ -166,7 +149,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:fontFamily="sans-serif-medium"
             android:tag="@string/url_privacy"
             android:text="@string/label_privacy_policy"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
@@ -177,7 +159,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:fontFamily="sans-serif-medium"
             android:tag="@string/url_license"
             android:text="@string/label_license"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
@@ -188,7 +169,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:fontFamily="sans-serif-medium"
             android:tag="@string/url_mail"
             android:text="@string/label_email"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"

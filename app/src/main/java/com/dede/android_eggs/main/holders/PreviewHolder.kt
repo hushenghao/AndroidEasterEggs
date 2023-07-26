@@ -3,7 +3,6 @@ package com.dede.android_eggs.main.holders
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
@@ -24,6 +23,7 @@ import com.dede.android_eggs.databinding.DialogAndroidTimelineBinding
 import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.util.CustomTabsBrowser
+import com.dede.android_eggs.util.isSystemNightMode
 import com.dede.android_eggs.util.resolveColorStateList
 import com.google.android.material.R
 import com.google.android.material.color.MaterialColors
@@ -169,8 +169,4 @@ class PreviewHolder(view: View) : EggHolder(view) {
             .show()
     }
 
-    private fun isSystemNightMode(context: Context): Boolean {
-        return (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
-                Configuration.UI_MODE_NIGHT_YES
-    }
 }

@@ -2,6 +2,8 @@
 
 package com.dede.android_eggs.util
 
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import java.util.*
@@ -12,6 +14,11 @@ import kotlin.contracts.contract
 
 fun isXiaomi(): Boolean {
     return Build.MANUFACTURER.lowercase(Locale.ENGLISH) == "xiaomi"
+}
+
+fun isSystemNightMode(context: Context): Boolean {
+    return (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+            Configuration.UI_MODE_NIGHT_YES
 }
 
 @OptIn(ExperimentalContracts::class)

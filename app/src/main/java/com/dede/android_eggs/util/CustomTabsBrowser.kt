@@ -35,14 +35,14 @@ object CustomTabsBrowser {
         }
 
         val dynamicContext = DynamicColors.wrapContextIfAvailable(context)
-        val color = MaterialColors.getColor(dynamicContext, M3R.attr.colorPrimary, Color.WHITE)
+        val color = MaterialColors.getColor(dynamicContext, M3R.attr.colorSurfaceVariant, Color.WHITE)
         val params = CustomTabColorSchemeParams.Builder()
             .setToolbarColor(color)
             .build()
 
         val closeIcon = FontIconsDrawable(
             context, Icons.Rounded.arrow_back,
-            M3R.attr.colorSurfaceVariant, 24f
+            M3R.attr.colorSurfaceInverse, 24f
         ).toBitmap()
         val builder = CustomTabsIntent.Builder()
             .setShowTitle(true)

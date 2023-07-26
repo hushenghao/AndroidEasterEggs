@@ -1,10 +1,13 @@
 package com.dede.android_eggs.ui.views
 
 import android.content.Context
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.net.Uri
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
@@ -19,6 +22,7 @@ import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.util.findFragmentById
 import com.dede.android_eggs.util.getActivity
+import com.dede.android_eggs.util.isSystemNightMode
 import com.dede.basic.PlatLogoSnapshotProvider
 import com.dede.blurhash_android.BlurHashDrawable
 import com.google.android.material.carousel.CarouselLayoutManager
@@ -52,18 +56,21 @@ class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: Attri
         background.isVisible = !provider.includeBackground
         background.dispose()
         if (!provider.includeBackground && background.drawable == null) {
-            val placeholder =
-                BlurHashDrawable(holder.itemView.context, R.string.hash_snapshot_bg, 54, 32)
+            val placeholder = BlurHashDrawable(context, R.string.hash_snapshot_bg, 54, 32)
             background.load(randomBgUri()) {
                 placeholder(placeholder)
                 error(placeholder)
             }
+            if (isSystemNightMode(context)) {
+                val matrix = ColorMatrix()
+                matrix.setScale(0.8f, 0.8f, 0.8f, 0.8f)
+                background.colorFilter = ColorMatrixColorFilter(matrix)
+            } else {
+                background.colorFilter = null
+            }
         }
         group.removeAllViewsInLayout()
-        group.addView(
-            provider.create(group.context),
-            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
-        )
+        group.addView(provider.create(group.context), MATCH_PARENT, MATCH_PARENT)
         holder.itemView.setOnClickListener {
             val fragment = it.context.getActivity<FragmentActivity>()
                 ?.findFragmentById<EggListFragment>(R.id.fl_eggs)
