@@ -111,7 +111,7 @@ dependencies {
     implementation(deps.free.reflection)
     implementation(deps.viewbinding.delegate)
     implementation(deps.blurhash.android)
-    debugImplementation(deps.leakcanary)
+    debugImplementation(deps.squareup.leakcanary)
     implementation(project(":basic"))
     implementation(project(":eggs:U"))
     implementation(project(":eggs:T"))
@@ -130,8 +130,8 @@ dependencies {
     implementation(project(":eggs:Gingerbread"))
 
     testImplementation(deps.junit)
-    testImplementation("com.android.tools:sdk-common:31.0.2")
-    testImplementation("com.squareup.okhttp3:okhttp:4.11.0")
+    testImplementation(deps.android.tools.sdk.common)
+    testImplementation(deps.squareup.okhttp)
     androidTestImplementation(deps.nanohttpd)
     androidTestImplementation(deps.bundles.android.test)
 }

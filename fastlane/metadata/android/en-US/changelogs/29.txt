@@ -1,6 +1,7 @@
 - Android 14 icons
 - Added the language region switching function
 - Added Egg search function
+- Added OLED night theme
 - Optimize Android Timeline
 - Optimize sideslip to add shortcuts
 - Optimize task stack management

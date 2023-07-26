@@ -22,6 +22,7 @@ import kotlin.random.Random
 class PlaceholderActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        EdgeUtils.tryApplyOLEDTheme(this)
         EdgeUtils.applyEdge(window)
         super.onCreate(savedInstanceState)
 

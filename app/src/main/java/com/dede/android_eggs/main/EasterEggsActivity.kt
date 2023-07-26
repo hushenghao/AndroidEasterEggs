@@ -16,6 +16,7 @@ class EasterEggsActivity : AppCompatActivity(R.layout.activity_easter_eggs) {
     private val binding: ActivityEasterEggsBinding by viewBinding(ActivityEasterEggsBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        EdgeUtils.tryApplyOLEDTheme(this)
         EdgeUtils.applyEdge(window)
         super.onCreate(savedInstanceState)
 

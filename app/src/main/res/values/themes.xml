@@ -1,17 +1,20 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.EasterEggs" parent="Theme.Material3.DynamicColors.DayNight">
-        <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
             animated drawable. One of these is required. -->
-        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/avd_anim_u_platlogo
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">
+            @drawable/avd_anim_u_platlogo
         </item>
         <!-- Required for animated icons -->
         <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">600</item>
-        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/splash_background_color</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">
+            @color/splash_background_color
+        </item>
     </style>
+
     <color name="splash_background_color">@color/md_theme_light_background</color>
 
     <style name="Theme.EasterEggs" parent="Base.EasterEggs">
@@ -43,10 +46,11 @@
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
     </style>
 
-    <style name="Theme.EasterEggs.Snapshot" parent="Theme.EasterEggs">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowShowWallpaper">true</item>
+    <style name="ThemeOverlay.EasterEggs.OLED" parent="">
+        <item name="colorSurface">@android:color/black</item>
+        <item name="colorOnSurface">@color/md_theme_dark_onSurfaceVariant</item>
+        <item name="colorSurfaceVariant">@color/md_theme_dark_surface</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_dark_inverseOnSurface</item>
     </style>
 
     <style name="TextAppearance.FontIconSwitch" parent="">
