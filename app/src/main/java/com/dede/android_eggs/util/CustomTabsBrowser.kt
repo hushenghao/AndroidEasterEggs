@@ -35,7 +35,7 @@ object CustomTabsBrowser {
         }
 
         val dynamicContext = DynamicColors.wrapContextIfAvailable(context)
-        val color = MaterialColors.getColor(dynamicContext, M3R.attr.colorSurfaceVariant, Color.WHITE)
+        val color = MaterialColors.getColor(dynamicContext, M3R.attr.colorSurface, Color.WHITE)
         val params = CustomTabColorSchemeParams.Builder()
             .setToolbarColor(color)
             .build()
