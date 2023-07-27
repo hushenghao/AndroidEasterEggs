@@ -48,9 +48,8 @@
 
     <style name="ThemeOverlay.EasterEggs.OLED" parent="">
         <item name="colorSurface">@android:color/black</item>
-        <item name="colorOnSurface">@color/md_theme_dark_onSurfaceVariant</item>
         <item name="colorSurfaceVariant">@color/md_theme_dark_surface</item>
-        <item name="colorOnSurfaceVariant">@color/md_theme_dark_inverseOnSurface</item>
+        <item name="isOLEDTheme">true</item>
     </style>
 
     <style name="TextAppearance.FontIconSwitch" parent="">

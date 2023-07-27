@@ -5,7 +5,9 @@
         <attr name="useChromeTab" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="XXWHCA">
-        <attr name="once" format="string" />
-    </declare-styleable>
+    <attr name="once" format="enum">
+        <enum name="XXWHCA" value="1" />
+        <enum name="dede" value="0" />
+    </attr>
+    <attr name="isOLEDTheme" format="boolean" />
 </resources>
