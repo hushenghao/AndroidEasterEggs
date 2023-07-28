@@ -8,7 +8,6 @@ android {
     buildToolsVersion = Versions.BUILD_TOOLS
     defaultConfig {
         minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
 
         consumerProguardFiles("consumer-rules.pro")
 

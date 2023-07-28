@@ -11,7 +11,6 @@ android {
     namespace = "com.dede.basic"
     defaultConfig {
         minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
     }
 
     buildTypes {

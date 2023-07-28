@@ -1,6 +1,5 @@
 import org.gradle.api.Project
-import java.io.ByteArrayOutputStream
-import java.util.*
+import java.util.Properties
 
 object Versions {
 
@@ -11,12 +10,9 @@ object Versions {
 
     val Project.gitHash: String
         get() {
-            val stdout = ByteArrayOutputStream()
-            exec {
+            return providers.exec {
                 commandLine("git", "rev-parse", "--short", "HEAD")
-                standardOutput = stdout
-            }
-            return stdout.toString().trim()
+            }.standardOutput.asText.get().trim()
         }
 
     private lateinit var _keyprops: Properties

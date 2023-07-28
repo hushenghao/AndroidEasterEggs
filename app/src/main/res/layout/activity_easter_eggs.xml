@@ -17,8 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titleCentered="true"
-            app:titleTextAppearance="@style/TextAppearance.Title" />
+            app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
