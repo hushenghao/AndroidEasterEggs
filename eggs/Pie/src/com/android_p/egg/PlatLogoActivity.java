@@ -275,8 +275,10 @@ public class PlatLogoActivity extends Activity {
         }
         try {
             startActivity(new Intent(this, PaintActivity.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                            | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                            .setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+//                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+//                            | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            );
         } catch (ActivityNotFoundException ex) {
             Log.e("PlatLogoActivity", "No more eggs.");
         }
