@@ -19,13 +19,14 @@ import com.dede.android_eggs.databinding.FragmentEasterEggListBinding
 import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.main.entity.EggDatas
 import com.dede.android_eggs.main.holders.EggHolder
-import com.dede.android_eggs.main.holders.FooterHolder
 import com.dede.android_eggs.main.holders.PreviewHolder
 import com.dede.android_eggs.main.holders.WavyHolder
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VType
+import com.dede.android_eggs.ui.adapter.addFooter
 import com.dede.android_eggs.ui.adapter.addHeader
 import com.dede.android_eggs.ui.adapter.addViewType
+import com.dede.android_eggs.ui.views.EasterEggFooterView
 import com.dede.android_eggs.ui.views.SnapshotGroupView
 import com.dede.android_eggs.ui.views.onApplyWindowEdge
 import com.dede.android_eggs.util.EasterUtils
@@ -113,14 +114,17 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
             val vAdapter = binding.recyclerView.adapter as VAdapter
             if (constraint.isEmpty()) {
                 vAdapter.headerFooterExt.addHeader(snapshotView)
+                vAdapter.headerFooterExt.addFooter(footerView)
             } else {
                 vAdapter.headerFooterExt.removeHeader(snapshotView)
+                vAdapter.headerFooterExt.removeFooter(footerView)
             }
             vAdapter.notifyDataSetChanged()
         }
     }
 
     private val snapshotView by lazy { createSnapshotView(requireContext()) }
+    private val footerView by lazy { EasterEggFooterView(requireContext()) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -129,7 +133,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
             addViewType<EggHolder>(R.layout.item_easter_egg_layout)
             addViewType<PreviewHolder>(R.layout.item_easter_egg_layout)
             addViewType<WavyHolder>(R.layout.item_easter_egg_wavy)
-            addViewType<FooterHolder>(R.layout.item_easter_egg_footer)
+            addFooter(footerView)
         }
 
         var last: ItemDecoration = EggListDivider(10.dp, 0, 0)

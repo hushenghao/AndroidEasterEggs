@@ -32,7 +32,6 @@ data class Egg(
         const val VIEW_TYPE_EGG = 0
         const val VIEW_TYPE_WAVY = -1
         const val VIEW_TYPE_PREVIEW = 1
-        const val VIEW_TYPE_FOOTER = -2
     }
 
     override val viewType: Int = itemType
@@ -40,8 +39,4 @@ data class Egg(
 
 class Wavy(val wavyRes: Int, val repeat: Boolean = false) : VType {
     override val viewType: Int = Egg.VIEW_TYPE_WAVY
-}
-
-class Footer : VType {
-    override val viewType: Int = Egg.VIEW_TYPE_FOOTER
 }

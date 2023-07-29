@@ -1,39 +1,43 @@
-package com.dede.android_eggs.main.holders
+package com.dede.android_eggs.ui.views
 
 import android.content.Context
 import android.graphics.Paint
-import android.text.Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
+import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.view.get
 import androidx.fragment.app.FragmentActivity
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
-import com.dede.android_eggs.databinding.ItemEasterEggFooterBinding
-import com.dede.android_eggs.main.entity.Egg
-import com.dede.android_eggs.main.entity.Footer
-import com.dede.android_eggs.ui.adapter.VHType
-import com.dede.android_eggs.ui.adapter.VHolder
+import com.dede.android_eggs.databinding.ViewEasterEggFooterBinding
 import com.dede.android_eggs.ui.views.text.ClickSpan
 import com.dede.android_eggs.ui.views.text.SpaceSpan.Companion.appendSpace
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.createRepeatWavyDrawable
 import com.dede.android_eggs.util.getActivity
-import com.dede.android_eggs.util.isRtl
 import com.dede.android_eggs.views.timeline.AndroidTimelineFragment
 import com.dede.basic.dp
 
-@VHType(viewType = Egg.VIEW_TYPE_FOOTER)
-class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
+class EasterEggFooterView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : ConstraintLayout(context, attrs, defStyleAttr), View.OnClickListener {
+
+    private val binding = ViewEasterEggFooterBinding.inflate(LayoutInflater.from(context), this)
 
     private var appended = false
 
-    private val binding = ItemEasterEggFooterBinding.bind(view)
-    override fun onBindViewHolder(t: Footer) {
+    init {
+        setPadding(24.dp, 0, 24.dp, 30.dp)
+
         binding.tvVersion.text = binding.root.context.getString(
             R.string.label_version,
             BuildConfig.VERSION_NAME,
@@ -51,10 +55,7 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
         handleFlowLayoutChild()
 
         binding.ivLine.setImageDrawable(
-            createRepeatWavyDrawable(
-                itemView.context,
-                R.drawable.ic_wavy_line_1
-            )
+            createRepeatWavyDrawable(context, R.drawable.ic_wavy_line_1)
         )
     }
 
@@ -64,13 +65,13 @@ class FooterHolder(view: View) : VHolder<Footer>(view), View.OnClickListener {
             val textView = binding.flowLayout[i] as TextView
             val unLast = i < binding.flowLayout.childCount - 1
             val span = SpannableStringBuilder()
-            if (isRtl) {
+            if (com.dede.android_eggs.util.isRtl) {
                 span.applyIf(unLast) {
                     append("/")
                     appendSpace(8.dp)
-                }.append(textView.text, ClickSpan(this), SPAN_INCLUSIVE_EXCLUSIVE)
+                }.append(textView.text, ClickSpan(this), Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
             } else {
-                span.append(textView.text, ClickSpan(this), SPAN_INCLUSIVE_EXCLUSIVE)
+                span.append(textView.text, ClickSpan(this), Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
                     .applyIf(unLast) {
                         appendSpace(8.dp)
                         append("/")
