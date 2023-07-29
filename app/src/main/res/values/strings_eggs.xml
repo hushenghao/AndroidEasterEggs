@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_package" translatable="false">com.dede.android_eggs</string>
-
     <string name="title_android_u" translatable="false">Android 14 (Upside Down Cake)</string>
     <string name="title_android_t" translatable="false">Android 13 (Tiramisu)</string>
     <string name="title_android_s" translatable="false">Android 12 (Snow Cone)</string>

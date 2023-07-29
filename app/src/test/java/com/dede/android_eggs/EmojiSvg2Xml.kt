@@ -10,7 +10,7 @@ import org.junit.Test
 import java.io.File
 
 /**
- * Downlad emoji svg and convert to android drawable xml.
+ * Download emoji svg and convert to android drawable xml.
  * For Android T Easter Egg.
  *
  * 🤫    \u1f92b    emoji_u1f92b.xml

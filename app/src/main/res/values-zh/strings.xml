@@ -8,15 +8,12 @@
 
     <string name="url_android_releases" translatable="false">https://developer.android.google.cn/about/versions</string>
 
-    <string name="label_open_source">开源相关</string>
-    <string name="label_other">其他</string>
     <string name="label_translation">翻译与国际化</string>
     <string name="label_beta">获取Beta版</string>
     <string name="label_privacy_policy">隐私协议</string>
     <string name="label_email">联系我</string>
     <string name="label_star">给个好评</string>
 
-    <string name="title_version">版本号</string>
 
     <string name="label_timeline_title">时间表、里程碑和更新</string>
     <string name="label_timeline_releases">版本</string>
@@ -28,7 +25,6 @@
 
     <string name="pref_title_icon_shape_override">图标形状</string>
     <string name="pref_title_language">语言</string>
-    <string name="pref_title_version">版本</string>
     <string name="pref_title_theme">主题</string>
     <string name="pref_title_icon_visual_effects">图标视觉动效</string>
     <string name="summary_follow_system">系统</string>
