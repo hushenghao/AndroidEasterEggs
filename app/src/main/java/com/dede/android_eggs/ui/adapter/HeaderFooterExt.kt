@@ -5,10 +5,13 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
+import androidx.core.view.children
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.dede.android_eggs.R
 import com.google.android.material.carousel.CarouselLayoutManager
 
 
@@ -52,6 +55,10 @@ class HeaderFooterExt(private val vAdapter: VAdapter) {
         if (parent is ViewGroup) {
             parent.removeView(view)
         }
+        val params = view.layoutParams
+        if (params != null) {
+            view.setTag(R.id.adapter_hf_lp, params)
+        }
         headerView.addView(view)
         if (notify) vAdapter.notifyItemInserted(0)
     }
@@ -59,6 +66,7 @@ class HeaderFooterExt(private val vAdapter: VAdapter) {
     fun removeHeader(view: View) {
         if (hasHeader) {
             headerView.removeView(view)
+            view.setTag(R.id.adapter_hf_lp, null)
             if (!hasHeader) vAdapter.notifyItemRemoved(0)
         }
     }
@@ -72,6 +80,10 @@ class HeaderFooterExt(private val vAdapter: VAdapter) {
         if (parent is ViewGroup) {
             parent.removeView(view)
         }
+        val params = view.layoutParams
+        if (params != null) {
+            view.setTag(R.id.adapter_hf_lp, params)
+        }
         footerView.addView(view)
         if (notify) vAdapter.notifyItemInserted(vAdapter.itemCount - 1)
     }
@@ -79,6 +91,7 @@ class HeaderFooterExt(private val vAdapter: VAdapter) {
     fun removeFooter(view: View) {
         if (hasFooter) {
             footerView.removeView(view)
+            view.setTag(R.id.adapter_hf_lp, null)
             if (!hasFooter) vAdapter.notifyItemRemoved(vAdapter.itemCount - 1)
         }
     }
@@ -132,6 +145,18 @@ class HeaderFooterExt(private val vAdapter: VAdapter) {
             RecyclerView.LayoutParams(WRAP_CONTENT, MATCH_PARENT)
         }
         view.orientation = orientation
+        for (child in view.children) {
+            val savedParams = child.getTag(R.id.adapter_hf_lp)
+            if (savedParams != null) {
+                continue
+            }
+            val params = if (orientation == LinearLayout.VERTICAL) {
+                LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+            } else {
+                LinearLayout.LayoutParams(WRAP_CONTENT, MATCH_PARENT)
+            }
+            child.layoutParams = params
+        }
         return view
     }
 

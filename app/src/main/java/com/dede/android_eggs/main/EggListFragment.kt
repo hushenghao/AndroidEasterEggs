@@ -26,6 +26,8 @@ import com.dede.android_eggs.ui.adapter.VType
 import com.dede.android_eggs.ui.adapter.addFooter
 import com.dede.android_eggs.ui.adapter.addHeader
 import com.dede.android_eggs.ui.adapter.addViewType
+import com.dede.android_eggs.ui.adapter.removeFooter
+import com.dede.android_eggs.ui.adapter.removeHeader
 import com.dede.android_eggs.ui.views.EasterEggFooterView
 import com.dede.android_eggs.ui.views.SnapshotGroupView
 import com.dede.android_eggs.ui.views.onApplyWindowEdge
@@ -113,17 +115,17 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
             eggList.addAll(newList)
             val vAdapter = binding.recyclerView.adapter as VAdapter
             if (constraint.isEmpty()) {
-                vAdapter.headerFooterExt.addHeader(snapshotView)
-                vAdapter.headerFooterExt.addFooter(footerView)
+                vAdapter.addHeader(snapshotView)
+                vAdapter.addFooter(footerView)
             } else {
-                vAdapter.headerFooterExt.removeHeader(snapshotView)
-                vAdapter.headerFooterExt.removeFooter(footerView)
+                vAdapter.removeHeader(snapshotView)
+                vAdapter.removeFooter(footerView)
             }
             vAdapter.notifyDataSetChanged()
         }
     }
 
-    private val snapshotView by lazy { createSnapshotView(requireContext()) }
+    private val snapshotView by lazy { SnapshotGroupView(requireContext()) }
     private val footerView by lazy { EasterEggFooterView(requireContext()) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -158,15 +160,6 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
         LocalEvent.get(this).register(IconVisualEffectsPref.ACTION_CHANGED) {
             val enable = it.getBooleanExtra(IconVisualEffectsPref.EXTRA_VALUE, false)
             handleOrientationAngleSensor(enable)
-        }
-    }
-
-    private fun createSnapshotView(context: Context): View {
-        return SnapshotGroupView(context).apply {
-            layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
         }
     }
 
