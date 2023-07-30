@@ -1,5 +1,6 @@
 package com.dede.android_eggs.main
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.FrameLayout
@@ -10,8 +11,11 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.util.resolveColor
+import com.dede.android_eggs.views.settings.prefs.NightModePref.Companion.ACTION_NIGHT_MODE_CHANGED
 import com.dede.basic.dp
 import kotlin.random.Random
+import com.google.android.material.R as M3R
 
 /**
  * Split Placeholder
@@ -43,6 +47,13 @@ class PlaceholderActivity : AppCompatActivity() {
             gravity = Gravity.CENTER
         }
         setContentView(imageView, params)
+
+        window.setBackgroundDrawable(ColorDrawable(resolveColor(M3R.attr.colorSurface)))
+
+        LocalEvent.get(this as LifecycleOwner)
+            .register(ACTION_NIGHT_MODE_CHANGED) {
+                recreate()
+            }
     }
 
     private fun randomRes(): Int {

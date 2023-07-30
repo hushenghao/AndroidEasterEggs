@@ -9,6 +9,7 @@ import com.dede.android_eggs.ui.Icons.Rounded.brightness_4
 import com.dede.android_eggs.ui.Icons.Rounded.brightness_7
 import com.dede.android_eggs.ui.Icons.Rounded.brightness_auto
 import com.dede.android_eggs.ui.Icons.Rounded.brightness_low
+import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.getActivity
 import com.dede.android_eggs.views.settings.SettingPref
 import com.google.android.material.resources.MaterialAttributes
@@ -30,6 +31,7 @@ class NightModePref : SettingPref(
 
     companion object {
         private const val OLED = -2
+        const val ACTION_NIGHT_MODE_CHANGED = "action_night_mode_changed"
 
         fun isOLEDMode(context: Context): Boolean {
             return NightModePref().getValue(context, SYSTEM) == OLED
@@ -54,9 +56,11 @@ class NightModePref : SettingPref(
         if (mode == AppCompatDelegate.getDefaultNightMode()) {
             if ((option.value == OLED) != isOLEDTheme(context)) {
                 context.getActivity<Activity>()?.recreate()
+                LocalEvent.get(context).post(ACTION_NIGHT_MODE_CHANGED)
             }
             return
         }
         AppCompatDelegate.setDefaultNightMode(mode)
+        LocalEvent.get(context).post(ACTION_NIGHT_MODE_CHANGED)
     }
 }

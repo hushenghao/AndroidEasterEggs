@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:paddingHorizontal="26dp">
+    android:paddingHorizontal="28dp">
 
     <ImageView
         android:id="@+id/iv_bg_icon"
