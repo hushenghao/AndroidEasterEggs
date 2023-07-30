@@ -124,8 +124,8 @@ dependencies {
     implementation(project(":eggs:Marshmallow"))
     implementation(project(":eggs:Lollipop"))
     implementation(project(":eggs:KitKat"))
-    implementation(project(":eggs:Jelly_Bean"))
-    implementation(project(":eggs:Ice_Cream_Sandwich"))
+    implementation(project(":eggs:JellyBean"))
+    implementation(project(":eggs:IceCreamSandwich"))
     implementation(project(":eggs:Honeycomb"))
     implementation(project(":eggs:Gingerbread"))
 
