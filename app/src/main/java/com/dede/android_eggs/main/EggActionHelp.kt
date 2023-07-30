@@ -102,12 +102,12 @@ object EggActionHelp {
         return targetTask
     }
 
-    fun enableShortcut(egg: Egg): Boolean {
-        return egg.shortcutKey != null && egg.targetClass != null
+    fun isShortcutEnable(egg: Egg): Boolean {
+        return egg.key != null && egg.targetClass != null
     }
 
     fun addShortcut(context: Context, egg: Egg) {
-        if (egg.shortcutKey == null || !enableShortcut(egg)) return
+        if (egg.key == null || !isShortcutEnable(egg)) return
         val intent = createIntent(context, egg) ?: return
 
         val icon = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
@@ -117,7 +117,7 @@ object EggActionHelp {
         } else {
             IconCompat.createWithResource(context, egg.iconRes)
         }
-        val shortcut = ShortcutInfoCompat.Builder(context, egg.shortcutKey)
+        val shortcut = ShortcutInfoCompat.Builder(context, egg.key)
             .setIcon(icon)
             .setIntent(intent)
             .setShortLabel(context.getString(egg.eggNameRes))

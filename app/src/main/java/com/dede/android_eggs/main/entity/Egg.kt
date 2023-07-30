@@ -3,7 +3,6 @@ package com.dede.android_eggs.main.entity
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.dede.android_eggs.ui.adapter.VType
@@ -15,7 +14,7 @@ data class Egg(
     val versionCommentFormatter: CharSequenceFormatter,
     val targetClass: Class<out Activity>? = null,
     val supportAdaptiveIcon: Boolean = false,
-    val shortcutKey: String? = null,
+    val key: String? = null,
     val extras: Bundle? = null,
     private val itemType: Int = VIEW_TYPE_EGG,
 ) : VType {

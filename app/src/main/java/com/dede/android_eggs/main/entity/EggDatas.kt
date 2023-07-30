@@ -1,7 +1,6 @@
 package com.dede.android_eggs.main.entity
 
 import android.os.Build.VERSION_CODES
-import androidx.core.os.bundleOf
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.entity.Egg.CharSequenceFormatter
 
@@ -26,22 +25,22 @@ object EggDatas {
     private const val KEY_EGG_G = "key_egg_g"
 
     val snapshotList = listOf(
-        com.android_u.egg.PlatLogoSnapshotProvider(),
-        com.android_t.egg.PlatLogoSnapshotProvider(),
-        com.android_s.egg.PlatLogoSnapshotProvider(),
-        com.android_r.egg.PlatLogoSnapshotProvider(),
-        com.android_q.egg.PlatLogoSnapshotProvider(),
-        com.android_p.egg.PlatLogoSnapshotProvider(),
-        com.android_o.egg.PlatLogoSnapshotProvider.Point1(),
-        com.android_o.egg.PlatLogoSnapshotProvider(),
-        com.android_n.egg.PlatLogoSnapshotProvider(),
-        com.android_m.egg.PlatLogoSnapshotProvider(),
-        com.android_l.egg.PlatLogoSnapshotProvider(),
-        com.android_k.egg.PlatLogoSnapshotProvider(),
-        com.android_j.egg.PlatLogoSnapshotProvider(),
-        com.android_i.egg.PlatLogoSnapshotProvider(),
-        com.android_h.egg.PlatLogoSnapshotProvider(),
-        com.android_g.egg.PlatLogoSnapshotProvider(),
+        Snapshot(com.android_u.egg.PlatLogoSnapshotProvider(), KEY_EGG_U),
+        Snapshot(com.android_t.egg.PlatLogoSnapshotProvider(), KEY_EGG_T),
+        Snapshot(com.android_s.egg.PlatLogoSnapshotProvider(), KEY_EGG_S),
+        Snapshot(com.android_r.egg.PlatLogoSnapshotProvider(), KEY_EGG_R),
+        Snapshot(com.android_q.egg.PlatLogoSnapshotProvider(), KEY_EGG_Q),
+        Snapshot(com.android_p.egg.PlatLogoSnapshotProvider(), KEY_EGG_P),
+        Snapshot(com.android_o.egg.PlatLogoSnapshotProvider.Point1(), KEY_EGG_O_1),
+        Snapshot(com.android_o.egg.PlatLogoSnapshotProvider(), KEY_EGG_O),
+        Snapshot(com.android_n.egg.PlatLogoSnapshotProvider(), KEY_EGG_N),
+        Snapshot(com.android_m.egg.PlatLogoSnapshotProvider(), KEY_EGG_M),
+        Snapshot(com.android_l.egg.PlatLogoSnapshotProvider(), KEY_EGG_L),
+        Snapshot(com.android_k.egg.PlatLogoSnapshotProvider(), KEY_EGG_K),
+        Snapshot(com.android_j.egg.PlatLogoSnapshotProvider(), KEY_EGG_J),
+        Snapshot(com.android_i.egg.PlatLogoSnapshotProvider(), KEY_EGG_I),
+        Snapshot(com.android_h.egg.PlatLogoSnapshotProvider(), KEY_EGG_H),
+        Snapshot(com.android_g.egg.PlatLogoSnapshotProvider(), KEY_EGG_G),
     )
 
     val eggList = listOf(

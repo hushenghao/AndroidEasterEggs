@@ -1,10 +1,8 @@
 package com.dede.android_eggs.main
 
-import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Toast
 import androidx.core.view.WindowInsetsCompat
@@ -177,9 +175,9 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
         }
     }
 
-    fun smoothScrollToPosition(providerIndex: Int) {
-        val fistOffset = EggDatas.eggList.indexOfFirst { it is Egg && it.shortcutKey != null }
-        val position = fistOffset + providerIndex + 1
+    fun smoothScrollToEgg(eggKey: String) {
+        val fistOffset = EggDatas.eggList.indexOfFirst { it is Egg && it.key == eggKey }
+        val position = fistOffset + 1// header offset
         binding.recyclerView.smoothScrollToPosition(position)
     }
 

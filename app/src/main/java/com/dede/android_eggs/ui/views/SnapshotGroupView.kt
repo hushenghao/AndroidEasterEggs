@@ -18,6 +18,7 @@ import coil.load
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.EggListFragment
 import com.dede.android_eggs.main.entity.EggDatas
+import com.dede.android_eggs.main.entity.Snapshot
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.util.findFragmentById
@@ -49,10 +50,11 @@ class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: Attri
         )
     }
 
-    private fun onBindSnapshot(holder: VHolder<*>, provider: PlatLogoSnapshotProvider) {
+    private fun onBindSnapshot(holder: VHolder<*>, snapshot: Snapshot) {
         holder.setIsRecyclable(false)
         val group: ViewGroup = holder.findViewById(R.id.fl_content)
         val background: ImageView = holder.findViewById(R.id.iv_background)
+        val provider: PlatLogoSnapshotProvider = snapshot.provider
         background.isVisible = !provider.includeBackground
         background.dispose()
         if (!provider.includeBackground && background.drawable == null) {
@@ -75,8 +77,7 @@ class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: Attri
             val fragment = it.context.getActivity<FragmentActivity>()
                 ?.findFragmentById<EggListFragment>(R.id.fl_eggs)
                 ?: return@setOnClickListener
-            val position = holder.layoutPosition
-            fragment.smoothScrollToPosition(position)
+            fragment.smoothScrollToEgg(snapshot.key)
         }
     }
 

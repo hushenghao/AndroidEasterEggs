@@ -91,7 +91,7 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         binding.tvSummary.setText(egg.androidRes)
         binding.cardView.setOnClickListener { EggActionHelp.launchEgg(context, egg) }
         binding.background.tvBgMessage.text = egg.versionCommentFormatter.format(context)
-        val enableShortcut = EggActionHelp.enableShortcut(egg)
+        val enableShortcut = EggActionHelp.isShortcutEnable(egg)
         binding.background.tvAddShortcut.isEnabled = enableShortcut
         binding.root.swipeGravity =
             if (enableShortcut) Gravity.FILL_HORIZONTAL else GravityCompat.END
