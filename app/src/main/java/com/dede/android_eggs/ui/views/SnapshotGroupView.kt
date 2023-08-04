@@ -21,9 +21,9 @@ import com.dede.android_eggs.main.entity.EggDatas
 import com.dede.android_eggs.main.entity.Snapshot
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VHolder
+import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.findFragmentById
 import com.dede.android_eggs.util.getActivity
-import com.dede.android_eggs.util.isSystemNightMode
 import com.dede.basic.PlatLogoSnapshotProvider
 import com.dede.blurhash_android.BlurHashDrawable
 import com.google.android.material.carousel.CarouselLayoutManager
@@ -63,7 +63,7 @@ class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: Attri
                 placeholder(placeholder)
                 error(placeholder)
             }
-            if (isSystemNightMode(context)) {
+            if (ThemeUtils.isSystemNightMode(context)) {
                 val matrix = ColorMatrix()
                 matrix.setScale(0.8f, 0.8f, 0.8f, 0.8f)
                 background.colorFilter = ColorMatrixColorFilter(matrix)

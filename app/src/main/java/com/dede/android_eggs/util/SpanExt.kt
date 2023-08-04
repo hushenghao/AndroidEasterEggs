@@ -47,7 +47,7 @@ fun centerImageSpan(context: Context, @DrawableRes resourceId: Int): ImageSpan =
         ImageSpan(context, resourceId, ImageSpan.ALIGN_CENTER)
     } else {
         // apply tint
-        CenterImageSpan(context.requireDrawable(resourceId))
+        API28CenterImageSpan(context.requireDrawable(resourceId))
     }
 
 fun customTabURLSpan(url: String): URLSpan = object : URLSpan(url) {
@@ -64,7 +64,7 @@ fun TextView.enableClickSpan() {
     highlightColor = Color.TRANSPARENT
 }
 
-class CenterImageSpan : ImageSpan {
+private class API28CenterImageSpan : ImageSpan {
 
     constructor(drawable: Drawable) : super(drawable)
 
@@ -88,5 +88,3 @@ class CenterImageSpan : ImageSpan {
         }
     }
 }
-
-

@@ -20,8 +20,8 @@ import com.dede.android_eggs.main.entity.TimelineEvent.Companion.isNewGroup
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
-import com.dede.android_eggs.ui.views.onApplyWindowEdge
 import com.dede.android_eggs.util.EdgeUtils
+import com.dede.android_eggs.util.EdgeUtils.onApplyWindowEdge
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.color.MaterialColors

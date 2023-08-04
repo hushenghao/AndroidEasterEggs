@@ -23,7 +23,7 @@ import com.dede.android_eggs.databinding.DialogAndroidTimelineBinding
 import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.util.CustomTabsBrowser
-import com.dede.android_eggs.util.isSystemNightMode
+import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.resolveColorStateList
 import com.google.android.material.R
 import com.google.android.material.color.MaterialColors
@@ -145,7 +145,7 @@ class PreviewHolder(view: View) : EggHolder(view) {
                 binding.scrollView.smoothScrollTo(it.width, 0)
             }
         }
-        if (isSystemNightMode(context)) {
+        if (ThemeUtils.isSystemNightMode(context)) {
             binding.ivTimeline.drawable?.apply {
                 val matrix = ColorMatrix()
                 // Increase the overall brightness and more blue brightness

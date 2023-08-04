@@ -2,6 +2,7 @@ package com.dede.android_eggs.util
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Configuration
 import androidx.annotation.StyleRes
 import com.dede.android_eggs.R
 import com.dede.android_eggs.views.settings.prefs.NightModePref
@@ -10,6 +11,11 @@ import com.google.android.material.resources.MaterialAttributes
 
 
 object ThemeUtils {
+
+    fun isSystemNightMode(context: Context): Boolean {
+        return (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+                Configuration.UI_MODE_NIGHT_YES
+    }
 
     @SuppressLint("RestrictedApi")
     fun applyThemeOverlay(context: Context, @StyleRes theme: Int) {

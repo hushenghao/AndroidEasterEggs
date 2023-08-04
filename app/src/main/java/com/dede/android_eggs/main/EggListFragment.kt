@@ -28,8 +28,9 @@ import com.dede.android_eggs.ui.adapter.removeFooter
 import com.dede.android_eggs.ui.adapter.removeHeader
 import com.dede.android_eggs.ui.views.EasterEggFooterView
 import com.dede.android_eggs.ui.views.SnapshotGroupView
-import com.dede.android_eggs.ui.views.onApplyWindowEdge
 import com.dede.android_eggs.util.EasterUtils
+import com.dede.android_eggs.util.EdgeUtils
+import com.dede.android_eggs.util.EdgeUtils.onApplyWindowEdge
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.views.settings.SettingsPageController
@@ -139,9 +140,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
         var last: ItemDecoration = EggListDivider(10.dp, 0, 0)
         binding.recyclerView.addItemDecoration(last)
         binding.recyclerView.onApplyWindowEdge(
-            WindowInsetsCompat.Type.systemBars() or
-                    WindowInsetsCompat.Type.displayCutout() or
-                    WindowInsetsCompat.Type.ime()
+            EdgeUtils.DEFAULT_EDGE_MASK or WindowInsetsCompat.Type.ime()
         ) {
             removeItemDecoration(last)
             last = EggListDivider(10.dp, 0, it.bottom)
