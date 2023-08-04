@@ -41,6 +41,7 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
+import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
 
 import java.util.Random;
@@ -206,7 +207,8 @@ public class PlatLogoActivity extends Activity {
         lp.gravity = Gravity.CENTER;
         ImageView imageView = new ImageView(this);
         this.mLogo = imageView;
-        imageView.setImageResource(R.drawable.u_platlogo);
+        Drawable drawable = DrawableKt.createVectorDrawableCompat(this, R.drawable.u_platlogo);
+        imageView.setImageDrawable(drawable);
         this.mLogo.setOnTouchListener(this.mTouchListener);
         this.mLogo.requestFocus();
         this.mLayout.addView(this.mLogo, lp);

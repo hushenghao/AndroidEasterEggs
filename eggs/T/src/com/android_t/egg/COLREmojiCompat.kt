@@ -46,11 +46,11 @@ fun Context.identifierEmojiDrawable(
         prefix = "t_emoji_u",
         temp = temp
     ).toString()
-    val id: Int = this.getIdentifier(drawableName, DefType.XML, this.packageName)
+    val id: Int = this.getIdentifier(drawableName, DefType.DRAWABLE, this.packageName)
     if (id == 0) {
         throw IllegalStateException("Emoji xml not found, name: %s".format(drawableName))
     }
-    return createVectorDrawableCompatFromXml(id).apply {
+    return createVectorDrawableCompat(id).apply {
         cachedDrawable[emoji] = this
     }
 }
