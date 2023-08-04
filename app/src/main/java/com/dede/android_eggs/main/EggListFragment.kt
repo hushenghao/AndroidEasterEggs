@@ -4,7 +4,6 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import android.widget.Filter
-import android.widget.Toast
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +32,7 @@ import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.EdgeUtils.onApplyWindowEdge
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
+import com.dede.android_eggs.util.toast
 import com.dede.android_eggs.views.settings.SettingsPageController
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
 import com.dede.android_eggs.views.settings.prefs.IconVisualEffectsPref
@@ -57,8 +57,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
         }
 
         if (EasterUtils.isEaster()) {
-            Toast.makeText(requireContext(), R.string.toast_easter, Toast.LENGTH_SHORT)
-                .show()
+            requireContext().toast(R.string.toast_easter)
         }
     }
 

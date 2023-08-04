@@ -24,4 +24,6 @@
     <string name="preference_on">開啟</string>
     <string name="preference_off">關閉</string>
     <string name="toast_shortcut_added">已添加快捷方式</string>
+    <string name="toast_github_sponsor">你可以通過項目的“Github Sponsor”進行捐贈</string>
+    <string name="label_donate">捐贈</string>
 </resources>

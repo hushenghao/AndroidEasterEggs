@@ -10,7 +10,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.IntentSender
 import android.os.Build
-import android.widget.Toast
 import androidx.core.content.getSystemService
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -23,6 +22,7 @@ import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.applyNotNull
 import com.dede.android_eggs.util.isEquals
+import com.dede.android_eggs.util.toast
 import com.dede.basic.cancel
 import com.dede.basic.delay
 import com.dede.basic.dp
@@ -173,7 +173,7 @@ object EggActionHelp {
         }
 
         override fun onReceive(context: Context, intent: Intent) {
-            Toast.makeText(context, R.string.toast_shortcut_added, Toast.LENGTH_SHORT).show()
+            context.toast(R.string.toast_shortcut_added)
             unregister(context)
             cancel(token)
         }

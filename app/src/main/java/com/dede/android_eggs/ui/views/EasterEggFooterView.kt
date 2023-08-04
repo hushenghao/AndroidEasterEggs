@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.view.get
@@ -22,13 +23,14 @@ import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.createRepeatWavyDrawable
 import com.dede.android_eggs.util.getActivity
+import com.dede.android_eggs.util.toast
 import com.dede.android_eggs.views.timeline.AndroidTimelineFragment
 import com.dede.basic.dp
 
 class EasterEggFooterView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr), View.OnClickListener {
 
     private val binding = ViewEasterEggFooterBinding.inflate(LayoutInflater.from(context), this)
@@ -94,6 +96,11 @@ class EasterEggFooterView @JvmOverloads constructor(
             R.id.tv_timeline -> {
                 val activity = context.getActivity<FragmentActivity>() ?: return
                 AndroidTimelineFragment.show(activity.supportFragmentManager)
+            }
+
+            R.id.tv_donate -> {
+                CustomTabsBrowser.launchUrl(context, v.tagString.toUri())
+                context.toast(R.string.toast_github_sponsor, Toast.LENGTH_LONG)
             }
 
             R.id.tv_github, R.id.tv_frameworks, R.id.tv_translation,
