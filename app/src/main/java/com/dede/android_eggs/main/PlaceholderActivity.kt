@@ -11,6 +11,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.resolveColor
 import com.dede.android_eggs.views.settings.prefs.NightModePref.Companion.ACTION_NIGHT_MODE_CHANGED
 import com.dede.basic.dp
@@ -26,7 +27,7 @@ import com.google.android.material.R as M3R
 class PlaceholderActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        EdgeUtils.tryApplyOLEDTheme(this)
+        ThemeUtils.tryApplyOLEDTheme(this)
         EdgeUtils.applyEdge(window)
         super.onCreate(savedInstanceState)
 

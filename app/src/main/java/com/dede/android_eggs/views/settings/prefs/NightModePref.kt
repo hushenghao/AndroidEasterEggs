@@ -1,6 +1,5 @@
 package com.dede.android_eggs.views.settings.prefs
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
@@ -10,9 +9,9 @@ import com.dede.android_eggs.ui.Icons.Rounded.brightness_7
 import com.dede.android_eggs.ui.Icons.Rounded.brightness_auto
 import com.dede.android_eggs.ui.Icons.Rounded.brightness_low
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.getActivity
 import com.dede.android_eggs.views.settings.SettingPref
-import com.google.android.material.resources.MaterialAttributes
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM as SYSTEM
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO as NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES as YES
@@ -46,15 +45,10 @@ class NightModePref : SettingPref(
         return value
     }
 
-    @SuppressLint("RestrictedApi")
-    private fun isOLEDTheme(context: Context): Boolean {
-        return MaterialAttributes.resolveBoolean(context, R.attr.isOLEDTheme, false)
-    }
-
     override fun onOptionSelected(context: Context, option: Op) {
         val mode = option.toAppCompatNightMode()
         if (mode == AppCompatDelegate.getDefaultNightMode()) {
-            if ((option.value == OLED) != isOLEDTheme(context)) {
+            if ((option.value == OLED) != ThemeUtils.isOLEDTheme(context)) {
                 context.getActivity<Activity>()?.recreate()
                 LocalEvent.get(context).post(ACTION_NIGHT_MODE_CHANGED)
             }
