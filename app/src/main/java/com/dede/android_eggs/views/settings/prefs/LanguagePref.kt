@@ -18,24 +18,28 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
         private const val SIMPLIFIED_CHINESE = 2    // zh-CN
         private const val TRADITIONAL_CHINESE = 3   // zh-HK
         private const val ENGLISH = 4               // en
+        private const val RUSSIAN = 5               // ru
 
         // Locale.TRADITIONAL_CHINESE is zh-TW, expected is HongKong.
         private const val HK = "zh-HK"
+        private const val RU = "ru"
 
         private val options = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             listOf(
                 Op(SYSTEM, titleRes = R.string.summary_follow_system, iconUnicode = language),
-                Op(SIMPLIFIED_CHINESE, "🇨🇳 简"),
-                Op(TRADITIONAL_CHINESE, "🇭🇰 繁"),
-                Op(ENGLISH, "EN")
+                Op(SIMPLIFIED_CHINESE, titleRes = R.string.language_zh_sc),
+                Op(TRADITIONAL_CHINESE, titleRes = R.string.language_zh_tc),
+                Op(ENGLISH, titleRes = R.string.language_en),
+                Op(RUSSIAN, titleRes = R.string.language_ru),
             )
         } else {
             // For API<24 the application does not have a localeList instead it has a single locale
             // Unsupported region
             listOf(
                 Op(SYSTEM, titleRes = R.string.summary_follow_system, iconUnicode = language),
-                Op(CHINESE, "🇨🇳 中"),
-                Op(ENGLISH, "EN")
+                Op(CHINESE, titleRes = R.string.language_ch),
+                Op(ENGLISH, titleRes = R.string.language_en),
+                Op(RUSSIAN, titleRes = R.string.language_ru),
             )
         }
 
@@ -45,6 +49,7 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
                 SIMPLIFIED_CHINESE -> LocaleListCompat.create(Locale.SIMPLIFIED_CHINESE)
                 TRADITIONAL_CHINESE -> LocaleListCompat.forLanguageTags(HK)
                 ENGLISH -> LocaleListCompat.create(Locale.ENGLISH)
+                RUSSIAN -> LocaleListCompat.forLanguageTags(RU)
                 else -> LocaleListCompat.getEmptyLocaleList()
             }
         }
@@ -53,9 +58,9 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
             if (localeList.isEmpty) {
                 return SYSTEM
             }
-            val languageTags = localeList.toLanguageTags()
-            if (languageTags == HK) {
-                return TRADITIONAL_CHINESE
+            when (localeList.toLanguageTags()) {
+                HK -> return TRADITIONAL_CHINESE
+                RU -> return RUSSIAN
             }
             return when (localeList.get(0)) {
                 Locale.CHINESE -> CHINESE

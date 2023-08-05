@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.ViewCompat
 import com.dede.android_eggs.databinding.ItemSettingPrefGroupBinding
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
@@ -132,7 +133,12 @@ abstract class SettingPref(
                     iconSize = 24.dp
                 }
                 iconTint = MaterialColors.getColorStateListOrNull(context, R.attr.colorSecondary)
-                iconPadding = if (text.isNullOrEmpty()) 0 else 4.dp
+                if (text.isNullOrEmpty()) {
+                    iconPadding = 0
+                } else {
+                    iconPadding = 4.dp
+                    TooltipCompat.setTooltipText(this, text)
+                }
                 setPadding(12.dp, 0, 12.dp, 0)
                 minWidth = 0
                 minimumWidth = 0
