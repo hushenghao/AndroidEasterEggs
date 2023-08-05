@@ -1,4 +1,4 @@
-### v1.9.6
+### v1.9.6 (2023-08-05)
 
 - Android 14 icons
 - Added the language region switching function

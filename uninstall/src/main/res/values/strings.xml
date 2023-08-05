@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Uninstall Easter Eggs</string>
+    <string name="app_name">Easter Eggs</string>
+    <string name="label_name">Uninstall Easter Eggs</string>
 </resources>
