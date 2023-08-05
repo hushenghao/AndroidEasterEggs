@@ -5,9 +5,10 @@
     android:viewportWidth="155"
     android:viewportHeight="9">
     <group
+        android:pivotX="77.5"
+        android:pivotY="4.5"
         android:scaleX="1.02"
-        android:scaleY="1.02"
-        android:translateX="-1.55">
+        android:scaleY="1.02">
         <path
             android:pathData="M1.5,4.5c5.07,-4.67 10.13,-4.67 15.2,0s10.13,4.67 15.2,0 10.13,-4.67 15.2,0 10.13,4.67 15.2,0 10.13,-4.67 15.2,0 10.13,4.67 15.2,0 10.13,-4.67 15.2,0 10.13,4.67 15.2,0 10.13,-4.67 15.2,0 10.13,4.67 15.2,0"
             android:strokeWidth="1"

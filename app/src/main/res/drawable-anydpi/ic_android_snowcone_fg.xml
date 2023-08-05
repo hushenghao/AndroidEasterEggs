@@ -4,10 +4,10 @@
     android:viewportWidth="128"
     android:viewportHeight="128">
     <group
+        android:pivotX="64"
+        android:pivotY="64"
         android:scaleX="0.65"
-        android:scaleY="0.65"
-        android:translateX="22.4"
-        android:translateY="22.4">
+        android:scaleY="0.65">
 
         <path
             android:fillColor="#00000000"

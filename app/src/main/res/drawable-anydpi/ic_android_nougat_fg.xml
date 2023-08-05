@@ -19,10 +19,10 @@ Copyright (C) 2016 The Android Open Source Project
     android:viewportWidth="48.0"
     android:viewportHeight="48.0">
     <group
+        android:pivotX="24"
+        android:pivotY="24"
         android:scaleX="0.5"
-        android:scaleY="0.5"
-        android:translateX="12"
-        android:translateY="12">
+        android:scaleY="0.5">
         <path
             android:fillColor="#FF7E5BBF"
             android:pathData="M32.0,12.5l0.0,28.0l12.0,-5.0l0.0,-28.0z" />
