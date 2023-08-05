@@ -1,7 +1,7 @@
 package com.dede.android_eggs.ui
 
 /** Generated automatically via **subset_icons_font.py**, do not modify this file. */
-// 1690377302 
+// 1691211242 
 object Icons {
 
     object Outlined {

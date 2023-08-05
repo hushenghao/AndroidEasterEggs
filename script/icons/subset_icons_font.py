@@ -9,6 +9,7 @@ import time
 
 import fontTools.subset
 import fontTools.merge
+from download_material_fonts import download
 
 
 FORMAT_CLASS_ICONS = """package com.dede.android_eggs.ui
@@ -30,6 +31,8 @@ FORMAT_PROPERTY = """
         /** %s */
         const val %s = "\\u%s"
 """
+
+git_commit = "6745d95590b1a5593888b6c402401fc3db75fbdb"
 
 material_fonts = {
     'filled': {
@@ -118,6 +121,9 @@ def copy(src_file, dts_dir):
 icons_name_group = {}
 with open('unicodes.json', 'r', encoding='utf-8') as f:
     icons_name_group = json.loads(f.read())
+
+# download material source files
+download(git_commit)
 
 icons_group = {}
 subset_fonts = []

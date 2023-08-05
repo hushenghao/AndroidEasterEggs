@@ -1,2 +1,3 @@
-fontTools==4.38.0
+fonttools>=4.38.0
 zopfli==0.2.1
+requests==2.31.0

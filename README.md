@@ -94,8 +94,7 @@ Device type for emulators to be managed by the Android Gradle Plugin.
 
 ## Contributing
 
-See our [Contributing doc](CONTRIBUTING.md) for information on how to report
-issues, [translate](https://crowdin.com/project/easter-eggs) the app into your language or help with development.
+See our [Contributing doc](CONTRIBUTING.md) for information on how to report issues, [translate](https://crowdin.com/project/easter-eggs) the app into your language or help with development.
 
 ## Other
 
