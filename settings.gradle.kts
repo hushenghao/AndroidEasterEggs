@@ -15,12 +15,12 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { setUrl("https://jitpack.io") }
     }
-    versionCatalogs {
-        create("deps") {
-            // default path: gradle/libs.versions.toml
-            from(files("libs.versions.toml"))
-        }
-    }
+//    versionCatalogs {
+//        create("deps") {
+//            // default path: gradle/libs.versions.toml
+//            from(files("libs.versions.toml"))
+//        }
+//    }
 }
 
 include(

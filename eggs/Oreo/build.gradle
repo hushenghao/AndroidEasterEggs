@@ -40,8 +40,8 @@ android {
 }
 
 dependencies {
-    implementation(deps.androidx.appcompat)
-    implementation(deps.androidx.dynamicanimation)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.dynamicanimation)
     implementation project(path: ':basic')
 }
 

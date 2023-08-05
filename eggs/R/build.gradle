@@ -46,9 +46,9 @@ android {
 }
 
 dependencies {
-    implementation(deps.androidx.appcompat)
-    implementation(deps.androidx.core)
-    implementation(deps.androidx.recyclerview)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.recyclerview)
     implementation project(path: ':basic')
 }
 

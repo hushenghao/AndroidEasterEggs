@@ -45,9 +45,9 @@ android {
 }
 
 dependencies {
-    implementation(deps.androidx.appcompat)
-    implementation(deps.androidx.core)
-    implementation(deps.androidx.window)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.window)
     implementation(project(path = ":basic"))
 
 //    implementation("androidx.activity:activity-compose:1.7.0")

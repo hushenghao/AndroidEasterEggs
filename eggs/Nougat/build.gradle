@@ -40,9 +40,9 @@ android {
 }
 
 dependencies {
-    implementation(deps.androidx.recyclerview)
-    implementation(deps.androidx.dynamicanimation)
-    implementation(deps.androidx.annotation)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.dynamicanimation)
+    implementation(libs.androidx.annotation)
     implementation project(path: ':basic')
 }
 

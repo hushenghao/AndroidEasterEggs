@@ -32,11 +32,11 @@ android {
 }
 
 dependencies {
-    implementation(deps.kotlinx.coroutines.core)
-    implementation(deps.androidx.appcompat)
-    implementation(deps.androidx.core)
-    implementation(deps.androidx.lifecycle.runtime)
-    implementation(deps.androidx.lifecycle.viewmodel)
-    implementation(deps.androidx.startup)
-    implementation(deps.io.coil)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.startup)
+    implementation(libs.io.coil)
 }

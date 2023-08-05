@@ -32,6 +32,6 @@ android {
 }
 
 dependencies {
-    implementation(deps.androidx.annotation)
+    implementation(libs.androidx.annotation)
     implementation project(path: ':basic')
 }
