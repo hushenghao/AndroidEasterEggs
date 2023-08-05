@@ -92,15 +92,15 @@ gradlew.bat assembleRelease
 ./gradlew app:pixel4Api33DebugAndroidTest
 ```
 
+## 贡献
+
+请查看我们的[贡献文档](CONTRIBUTING.md)来报告问题，或参与应用程序和文档的[翻译](https://crowdin.com/project/easter-eggs)。
+
 ## 其他
 
 ### 一些问题
 
 * [应用卸载失败](uninstall/README.md)
-
-如果存在错误和问题，欢迎提交 [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues) 。如果你对本项目感兴趣，欢迎提交 [PR](https://github.com/hushenghao/AndroidEasterEggs/pulls) 参与。
-
-[翻译和国际化](https://crowdin.com/project/easter-eggs)
 
 [隐私协议](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)
 

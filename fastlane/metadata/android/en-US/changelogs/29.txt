@@ -1,9 +1,10 @@
 - Android 14 icons
 - Added the language region switching function
+- Added Russian translation
 - Added Egg search function
 - Added OLED night theme
 - Optimize Android Timeline
 - Optimize sideslip to add shortcuts
 - Optimize task stack management
 - Optimize APK file size
-- Fix Android Q Easter egg, on Android 5 devices
+- Fix Android Q Easter egg, on Android L devices

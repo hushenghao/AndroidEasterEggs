@@ -92,15 +92,16 @@ Device type for emulators to be managed by the Android Gradle Plugin.
 ./gradlew app:pixel4Api33DebugAndroidTest
 ```
 
+## Contributing
+
+See our [Contributing doc](CONTRIBUTING.md) for information on how to report
+issues, [translate](https://crowdin.com/project/easter-eggs) the app into your language or help with development.
+
 ## Other
 
 ### Some problems
 
 * [The application failed to uninstall](uninstall/README.md)
-
-If there are errors and problems, please submit [Issues](https://github.com/hushenghao/AndroidEasterEggs/issues). If you are interested in this project, please submit [PR](https://github.com/hushenghao/AndroidEasterEggs/pulls) to participate.
-
-[Translation and Localization](https://crowdin.com/project/easter-eggs)
 
 [Privacy Policy](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)
 
