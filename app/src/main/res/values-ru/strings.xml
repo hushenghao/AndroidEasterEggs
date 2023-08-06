@@ -17,7 +17,7 @@
     <string name="pref_title_language">Язык</string>
     <string name="pref_title_theme">Тема</string>
     <string name="pref_title_icon_visual_effects">Визуальные эффекты значков</string>
-    <string name="summary_system_default">Умолчание</string>
+    <string name="summary_system_default">По умолчанию</string>
     <string name="summary_theme_dark_mode">Тёмная</string>
     <string name="summary_theme_light_mode">Светлая</string>
     <string name="label_add_shortcut">Ярлык</string>
