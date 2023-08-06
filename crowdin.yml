@@ -1,0 +1,14 @@
+files:
+  - source: /app/**/res/values/*.xml
+    ignore:
+      - attrs.xml
+      - colors.xml
+      - ids.xml
+      - configs.xml
+      - dimens.xml
+      - hashs.xml
+      - themes.xml
+      - style.xml
+      - strings_eggs.xml
+      - resources.xml
+    translation: /app/src/main/res/values-%android_code%/strings.xml
