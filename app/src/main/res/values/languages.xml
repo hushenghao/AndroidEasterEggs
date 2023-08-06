@@ -5,6 +5,8 @@
     <!-- API>=24, zh-CN, zh-HK/zh-TW -->
     <string name="language_zh_sc" translatable="false">🇨🇳 简</string>
     <string name="language_zh_tc" translatable="false">🇭🇰 繁</string>
+
     <string name="language_en" translatable="false">EN</string>
     <string name="language_ru" translatable="false">🇷🇺 RU</string>
+    <string name="language_it" translatable="false">🇮🇹 IT</string>
 </resources>

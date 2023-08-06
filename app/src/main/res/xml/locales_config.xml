@@ -4,4 +4,5 @@
     <locale android:name="zh-HK" />
     <locale android:name="en" />
     <locale android:name="ru" />
+    <locale android:name="it" />
 </locale-config>
