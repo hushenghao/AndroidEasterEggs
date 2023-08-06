@@ -30,7 +30,6 @@
             <option value="$PROJECT_DIR$/eggs/S" />
             <option value="$PROJECT_DIR$/eggs/T" />
             <option value="$PROJECT_DIR$/eggs/U" />
-            <option value="$PROJECT_DIR$/uninstall" />
           </set>
         </option>
       </GradleProjectSettings>
