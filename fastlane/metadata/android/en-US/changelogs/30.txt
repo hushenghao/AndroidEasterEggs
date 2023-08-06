@@ -1,0 +1,2 @@
+- Add Italian translations
+- Feature optimization
