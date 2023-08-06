@@ -298,7 +298,7 @@ public class PlatLogoActivity extends Activity {
             // It cannot be decompiled,
             // and the kotlin version is not compatible as a jar package dependency.
             //  R. reference issue needs to be resolved
-            Toast.makeText(this, "Decompiled version does not support more features!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Decompiled version does not support more features!\nRelease coming soon...", Toast.LENGTH_LONG).show();
         } catch (ActivityNotFoundException e2) {
             Log.e(TAG, "No more eggs.", e2);
         }

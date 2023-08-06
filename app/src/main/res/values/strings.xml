@@ -8,7 +8,6 @@
 
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
     <string name="url_github_commit" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/commit/%s</string>
-    <string name="url_source" translatable="false">https://github.com/aosp-mirror/platform_frameworks_base</string>
     <string name="url_beta" translatable="false">https://www.pgyer.com/eggs</string>
     <string name="url_dino_3d" translatable="false">https://www.pgyer.com/dino3d</string>
     <string name="url_privacy" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE</string>
@@ -20,7 +19,6 @@
 
 
     <string name="label_github" translatable="false">GitHub</string>
-    <string name="label_frameworks" translatable="false">Frameworks</string>
     <string name="label_translation">Translation</string>
     <string name="label_beta">Get Beta</string>
     <string name="label_dino_3d" translatable="false">Dino 3D</string>

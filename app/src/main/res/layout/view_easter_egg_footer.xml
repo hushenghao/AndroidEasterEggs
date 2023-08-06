@@ -67,15 +67,6 @@
             android:textColor="?attr/colorSecondary" />
 
         <TextView
-            android:id="@+id/tv_frameworks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="@string/url_source"
-            android:text="@string/label_frameworks"
-            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-            android:textColor="?attr/colorSecondary" />
-
-        <TextView
             android:id="@+id/tv_translation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
