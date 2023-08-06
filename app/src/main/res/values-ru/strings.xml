@@ -1,29 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="summary_android_waiting">Подождите…</string>
-    <string name="summary_android_release_pushed">Финальная версия релиза выпущена</string>
-    <string name="title_open_with">Открыть с помощью</string>
-    <string name="label_translation">Перевод</string>
-    <string name="label_beta">Получить бета-версию</string>
-    <string name="label_privacy_policy">Конфиденциальность</string>
-    <string name="label_email">Обратная связь</string>
-    <string name="label_star">Пометить</string>
-    <string name="label_timeline_title">Хронология, вехи и обновления</string>
-    <string name="label_timeline_releases">Релизы</string>
-    <string name="message_trypophobia_warning">Это предупреждение для тех, у кого &lt;b&gt;трипофобия&lt;/b&gt; — некоторые изображения могут вызывать дискомфорт. Вы хотите продолжить?</string>
-    <string name="label_settings">Настройки</string>
-    <string name="label_project_desc">Проект содержит полный код системных пасхальных яиц, который направлен на организацию и совместимость с системными яйцами, чтобы гарантировать, что большинство устройств могут использовать разные версии пасхальных яиц и не будут вносить слишком много изменений в код системных яиц. В некоторых версиях используются новые функции системы, а в более ранних версиях можно использовать только некоторые функции.</string>
-    <string name="pref_title_icon_shape_override">Форма значков</string>
-    <string name="pref_title_language">Язык</string>
-    <string name="pref_title_theme">Тема</string>
-    <string name="pref_title_icon_visual_effects">Визуальные эффекты значков</string>
-    <string name="summary_system_default">По умолчанию</string>
-    <string name="summary_theme_dark_mode">Тёмная</string>
-    <string name="summary_theme_light_mode">Светлая</string>
-    <string name="label_add_shortcut">Ярлык</string>
-    <string name="label_donate">Пожертвовать</string>
-    <string name="preference_on">Вкл.</string>
-    <string name="preference_off">Выкл.</string>
-    <string name="toast_shortcut_added">Ярлык добавлен</string>
-    <string name="toast_github_sponsor">Вы можете сделать пожертвование через «Github Sponsor» проекта</string>
+    <!-- API<24, only zh -->
+    <!-- API>=24, zh-CN, zh-HK/zh-TW -->
 </resources>
