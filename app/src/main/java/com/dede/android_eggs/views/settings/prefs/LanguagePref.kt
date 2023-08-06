@@ -26,7 +26,7 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
 
         private val options = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             listOf(
-                Op(SYSTEM, titleRes = R.string.summary_follow_system, iconUnicode = language),
+                Op(SYSTEM, titleRes = R.string.summary_system_default, iconUnicode = language),
                 Op(SIMPLIFIED_CHINESE, titleRes = R.string.language_zh_sc),
                 Op(TRADITIONAL_CHINESE, titleRes = R.string.language_zh_tc),
                 Op(ENGLISH, titleRes = R.string.language_en),
@@ -36,7 +36,7 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
             // For API<24 the application does not have a localeList instead it has a single locale
             // Unsupported region
             listOf(
-                Op(SYSTEM, titleRes = R.string.summary_follow_system, iconUnicode = language),
+                Op(SYSTEM, titleRes = R.string.summary_system_default, iconUnicode = language),
                 Op(CHINESE, titleRes = R.string.language_ch),
                 Op(ENGLISH, titleRes = R.string.language_en),
                 Op(RUSSIAN, titleRes = R.string.language_ru),
