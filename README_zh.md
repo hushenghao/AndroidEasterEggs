@@ -98,10 +98,6 @@ gradlew.bat assembleRelease
 
 ## 其他
 
-### 一些问题
-
-* [应用卸载失败](uninstall/README.md)
-
 [隐私协议](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)
 
 [联系我 📧](mailto:dede.hu@qq.com)

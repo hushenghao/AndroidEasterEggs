@@ -98,10 +98,6 @@ See our [Contributing doc](CONTRIBUTING.md) for information on how to report iss
 
 ## Other
 
-### Some problems
-
-* [The application failed to uninstall](uninstall/README.md)
-
 [Privacy Policy](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)
 
 [Contact me 📧](mailto:dede.hu@qq.com)
