@@ -15,12 +15,6 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { setUrl("https://jitpack.io") }
     }
-//    versionCatalogs {
-//        create("deps") {
-//            // default path: gradle/libs.versions.toml
-//            from(files("libs.versions.toml"))
-//        }
-//    }
 }
 
 include(
@@ -41,7 +35,5 @@ include(
     ":eggs:S",
     ":eggs:T",
     ":eggs:U",
-    // help uninstall easter eggs
-    ":uninstall"
 )
 rootProject.name = "Easter Eggs"
