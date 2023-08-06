@@ -1,29 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="summary_android_waiting">In attesa…</string>
-    <string name="summary_android_release_pushed">La versione più recente è disponibile</string>
-    <string name="title_open_with">Apri con</string>
-    <string name="label_translation">Traduzione</string>
-    <string name="label_beta">Entra nel canale Beta</string>
-    <string name="label_privacy_policy">Privacy</string>
-    <string name="label_email">Feedback</string>
-    <string name="label_star">Vota l\'app</string>
-    <string name="label_timeline_title">Timeline, tappe e aggiornamenti</string>
-    <string name="label_timeline_releases">Rilasci</string>
-    <string name="message_trypophobia_warning">Questo è un avvertimento per coloro che hanno &lt;b&gt;Tripofobia&lt;/b&gt; che alcune immagini possono causare disagio. Vuoi continuare?</string>
-    <string name="label_settings">Impostazioni</string>
-    <string name="label_project_desc">Il progetto contiene l\'intero codice degli Easter Eggs di sistema, che mira a organizzare e a essere compatibile con diverse versioni del sistema. Ciò garantisce che la maggior parte dei dispositivi possa sperimentare gli Easter Eggs di sistemi diversi senza richiedere modifiche eccessive al codice del sistema. Alcune versioni utilizzano nuove funzionalità del sistema, mentre le versioni precedenti possono accedere solo a alcune funzioni specifiche.</string>
-    <string name="pref_title_icon_shape_override">Forma dell\'icona</string>
-    <string name="pref_title_language">Lingua</string>
-    <string name="pref_title_theme">Tema</string>
-    <string name="pref_title_icon_visual_effects">Effetti visivi dell\'icona</string>
-    <string name="summary_system_default">Predefinito</string>
-    <string name="summary_theme_dark_mode">Scuro</string>
-    <string name="summary_theme_light_mode">Chiaro</string>
-    <string name="label_add_shortcut">Scorciatoia</string>
-    <string name="label_donate">Dona</string>
-    <string name="preference_on">On</string>
-    <string name="preference_off">Off</string>
-    <string name="toast_shortcut_added">Scorciatoia aggiunta</string>
-    <string name="toast_github_sponsor">Puoi donare tramite il \"Github Sponsor\" del progetto</string>
+    <!-- API<24, only zh -->
+    <!-- API>=24, zh-CN, zh-HK/zh-TW -->
 </resources>
