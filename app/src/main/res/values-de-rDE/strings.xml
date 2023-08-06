@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- API<24, only zh -->
-    <!-- API>=24, zh-CN, zh-HK/zh-TW -->
+    <string name="summary_android_waiting">Waiting…</string>
+    <string name="summary_android_release_pushed">The final release version has pushed</string>
+    <string name="title_open_with">Open with</string>
+    <string name="label_translation">Translation</string>
+    <string name="label_beta">Get Beta</string>
+    <string name="label_privacy_policy">Privacy</string>
+    <string name="label_email">Feedback</string>
+    <string name="label_star">Star</string>
+    <string name="label_timeline_title">Timeline, milestones, and updates</string>
+    <string name="label_timeline_releases">Releases</string>
+    <string name="message_trypophobia_warning">This is a warning to those with &lt;b&gt;Trypophobia&lt;/b&gt; that some images may cause discomfort. Do you want to continue?</string>
+    <string name="label_settings">Settings</string>
+    <string name="label_project_desc">The project contains the complete code of the system Easter eggs, which aims to organize and compatible with the system eggs, so as to ensure that most devices can experience different versions of Easter eggs and will not make too many modifications to the system egg code. Some versions use new features of the system, and lower versions can only use some functions.</string>
+    <string name="pref_title_icon_shape_override">Icon Shape</string>
+    <string name="pref_title_language">Language</string>
+    <string name="pref_title_theme">Theme</string>
+    <string name="pref_title_icon_visual_effects">Icon Visual Effects</string>
+    <string name="summary_system_default">Default</string>
+    <string name="summary_theme_dark_mode">Dark</string>
+    <string name="summary_theme_light_mode">Light</string>
+    <string name="label_add_shortcut">Shortcut</string>
+    <string name="label_donate">Donate</string>
+    <string name="preference_on">On</string>
+    <string name="preference_off">Off</string>
+    <string name="toast_shortcut_added">Shortcut added</string>
+    <string name="toast_github_sponsor">You can donate through the project\'s \"Github Sponsor\"</string>
 </resources>
