@@ -20,10 +20,7 @@ rootProject.allprojects {
             this.extensions.configure<LibraryExtension>("android") {
                 defaultConfig {
                     vectorDrawables {
-                        if  (useSupportLibrary != true) {
-                            // support API<24 but only generate hdpi to trim apk size
-                            generatedDensities("hdpi")
-                        }
+                        useSupportLibrary = true
                     }
                 }
                 val s = project.name.substring(0, 1).lowercase()

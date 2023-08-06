@@ -2,16 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    compileSdkVersion Versions.COMPILE_SDK
-    buildToolsVersion Versions.BUILD_TOOLS
+    compileSdkVersion = Versions.COMPILE_SDK
+    buildToolsVersion = Versions.BUILD_TOOLS
 
     defaultConfig {
         minSdkVersion Versions.MIN_SDK
-        targetSdkVersion Versions.TARGET_SDK
-
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildFeatures {

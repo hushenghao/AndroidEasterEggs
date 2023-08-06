@@ -10,10 +10,6 @@ android {
         minSdk = Versions.MIN_SDK
 
         consumerProguardFiles("consumer-rules.pro")
-
-        vectorDrawables {
-            useSupportLibrary = false
-        }
     }
 
     buildTypes {
