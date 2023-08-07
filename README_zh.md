@@ -93,7 +93,7 @@ gradlew.bat assembleRelease
 
 ## 贡献
 
-请查看我们的[贡献文档](.github/CONTRIBUTING.md)来报告问题，或参与应用程序和文档的[翻译](https://crowdin.com/project/easter-eggs)。
+请查看我们的[贡献文档](.github/CONTRIBUTING.md)来报告问题，或参与应用程序和文档的[翻译](https://zh.crowdin.com/project/easter-eggs)。
 
 ## 其他
 
