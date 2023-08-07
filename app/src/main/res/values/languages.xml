@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- API<24, only zh -->
     <string name="language_ch" translatable="false">🇨🇳 中</string>
-    <!-- API>=24, zh-CN, zh-HK/zh-TW -->
     <string name="language_zh_sc" translatable="false">🇨🇳 简</string>
     <string name="language_zh_tc" translatable="false">🇭🇰 繁</string>
 
