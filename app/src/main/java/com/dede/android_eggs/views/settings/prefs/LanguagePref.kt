@@ -75,6 +75,15 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
                 else -> SYSTEM
             }
         }
+
+        fun getApplicationLocale(): Locale {
+            val locales = AppCompatDelegate.getApplicationLocales()
+            return if (locales.isEmpty) {
+                Locale.getDefault()
+            } else {
+                locales.get(0) ?: Locale.getDefault()
+            }
+        }
     }
 
     override val titleRes: Int

@@ -8,8 +8,9 @@ import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
 import androidx.annotation.DrawableRes
 import com.dede.android_eggs.R
+import com.dede.android_eggs.views.settings.prefs.LanguagePref
+import java.text.Format
 import java.util.Calendar
-import java.util.Locale
 import java.util.TimeZone
 
 data class TimelineEvent(
@@ -205,10 +206,11 @@ data class TimelineEvent(
                 calendar.set(Calendar.YEAR, yearNum)
             }
             calendar.set(Calendar.MONTH, m)
-            val format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                SimpleDateFormat("MMMM", Locale.getDefault(Locale.Category.FORMAT))
+            val locale = LanguagePref.getApplicationLocale()
+            val format: Format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                SimpleDateFormat("MMMM", locale)
             } else {
-                java.text.SimpleDateFormat("MMMM", Locale.getDefault())
+                java.text.SimpleDateFormat("MMMM", locale)
             }
             return format.format(calendar.time)
         }

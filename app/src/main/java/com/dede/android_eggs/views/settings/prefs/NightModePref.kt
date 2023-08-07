@@ -20,10 +20,10 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES as YES
 class NightModePref : SettingPref(
     "pref_key_night_mode",
     listOf(
-        Op(SYSTEM, titleRes = R.string.summary_system_default, iconUnicode = brightness_auto),
         Op(NO, titleRes = R.string.summary_theme_light_mode, iconUnicode = brightness_7),
         Op(YES, titleRes = R.string.summary_theme_dark_mode, iconUnicode = brightness_4),
-        Op(OLED, title = "OLED", iconUnicode = brightness_low)
+        Op(OLED, title = "OLED", iconUnicode = brightness_low),
+        Op(SYSTEM, titleRes = R.string.summary_system_default, iconUnicode = brightness_auto)
     ),
     SYSTEM
 ) {
