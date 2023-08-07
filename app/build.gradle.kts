@@ -70,6 +70,11 @@ android {
         fatal += listOf("NewApi", "InlineApi")
     }
 
+    packaging {
+        // testImplementation
+        resources.excludes += "okhttp3/**"
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
