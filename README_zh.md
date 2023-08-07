@@ -2,8 +2,7 @@
 
 整理了Android系统各正式版的彩蛋
 
-![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-E8DEF8?logo=android&labelColor=6750A4
-)
+![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-E8DEF8?logo=android&labelColor=6750A4)
 [![GitHub license](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache&logoColor=D22128)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
 [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
 [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml?logo=githubactions)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml)
@@ -94,7 +93,7 @@ gradlew.bat assembleRelease
 
 ## 贡献
 
-请查看我们的[贡献文档](CONTRIBUTING.md)来报告问题，或参与应用程序和文档的[翻译](https://crowdin.com/project/easter-eggs)。
+请查看我们的[贡献文档](.github/CONTRIBUTING.md)来报告问题，或参与应用程序和文档的[翻译](https://crowdin.com/project/easter-eggs)。
 
 ## 其他
 

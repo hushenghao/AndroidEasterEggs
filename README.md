@@ -2,8 +2,7 @@
 
 Organize the Android release Easter eggs
 
-![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-E8DEF8?logo=android&labelColor=6750A4
-)
+![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-E8DEF8?logo=android&labelColor=6750A4)
 [![GitHub license](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache&logoColor=D22128)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
 [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
 [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml?logo=githubactions)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml)
@@ -94,7 +93,7 @@ Device type for emulators to be managed by the Android Gradle Plugin.
 
 ## Contributing
 
-See our [Contributing doc](CONTRIBUTING.md) for information on how to report issues, [translate](https://crowdin.com/project/easter-eggs) the app into your language or help with development.
+See our [Contributing doc](.github/CONTRIBUTING.md) for information on how to report issues, [translate](https://crowdin.com/project/easter-eggs) the app into your language or help with development.
 
 ## Other
 
