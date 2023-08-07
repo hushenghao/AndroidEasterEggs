@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="summary_android_waiting">等待中…</string>
-    <string name="summary_android_release_pushed">最終版本已經發佈</string>
-    <string name="title_open_with">打開</string>
-    <string name="label_translation">翻譯與國際化</string>
-    <string name="label_beta">获取Beta版</string>
-    <string name="label_privacy_policy">隱私協定</string>
-    <string name="label_email">聯絡我</string>
+    <string name="summary_android_waiting">正在等候…</string>
+    <string name="summary_android_release_pushed">最終版本已推送</string>
+    <string name="title_open_with">開啟</string>
+    <string name="label_translation">翻譯</string>
+    <string name="label_beta">取得 Beta 版</string>
+    <string name="label_privacy_policy">隱私權</string>
+    <string name="label_email">意見回饋</string>
     <string name="label_star">給個好評</string>
     <string name="label_timeline_title">時間表、里程碑和更新</string>
     <string name="label_timeline_releases">版本</string>
-    <string name="message_trypophobia_warning">對有&lt;b&gt;密集恐懼症&lt;/b&gt;的提示，一些畫面可能會引起不適。是否繼續？</string>
+    <string name="message_trypophobia_warning">對有&lt;b&gt;密集恐懼症&lt;/b&gt;人士的警告，一些畫面可能會引起不適。要繼續嗎？</string>
     <string name="label_settings">設定</string>
-    <string name="label_project_desc">項目包含了系統彩蛋完整程式碼，旨在對系統彩蛋的整理和相容，以保證大多數設備可以體驗到不同版本的彩蛋，不會對系統彩蛋程式碼做過多修改。 部分版本使用了系統新特性，低版本只能使用部分功能。</string>
+    <string name="label_project_desc">此專案包含了系統彩蛋完整程式碼，旨在對系統彩蛋的整理和相容，以保證大多數裝置可以體驗到不同版本的彩蛋，不會對系統彩蛋程式碼做過多修改。部分版本使用了系統新特性，較低版本只能使用部分功能。</string>
     <string name="pref_title_icon_shape_override">圖示形狀</string>
     <string name="pref_title_language">語言</string>
     <string name="pref_title_theme">主題</string>
-    <string name="pref_title_icon_visual_effects">圖標視覺動效</string>
+    <string name="pref_title_icon_visual_effects">圖示視覺效果</string>
     <string name="summary_system_default">預設</string>
     <string name="summary_theme_dark_mode">深色</string>
     <string name="summary_theme_light_mode">淺色</string>
-    <string name="label_add_shortcut">快捷方式</string>
+    <string name="label_add_shortcut">捷徑</string>
+    <string name="label_donate">捐贈</string>
     <string name="preference_on">開啟</string>
     <string name="preference_off">關閉</string>
-    <string name="toast_shortcut_added">已添加快捷方式</string>
-    <string name="toast_github_sponsor">你可以通過項目的“Github Sponsor”進行捐贈</string>
-    <string name="label_donate">捐贈</string>
+    <string name="toast_shortcut_added">捷徑已新增</string>
+    <string name="toast_github_sponsor">你可以透過專案的「Github Sponsor」進行捐贈</string>
 </resources>
