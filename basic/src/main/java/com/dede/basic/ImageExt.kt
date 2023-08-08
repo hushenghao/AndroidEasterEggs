@@ -19,7 +19,39 @@ private const val TAG = "ImageExt"
 
 const val MIME_PNG = "image/png"
 const val MIME_JPG = "image/jpg"
+const val MIME_WEBP = "image/webp"
+
+@Suppress("PrivatePropertyName")
 private val ALBUM_DIR = Environment.DIRECTORY_PICTURES
+
+private fun getImageMime(fileName: String): String {
+    return when (File(fileName).extension.lowercase()) {
+        "webp" -> MIME_WEBP
+        "png" -> MIME_PNG
+        "jpg", "jpeg" -> MIME_JPG
+        else -> {
+            Log.w(TAG, "Unknown mime_type, fileName: $fileName")
+            MIME_JPG
+        }
+    }
+}
+
+private fun getImageFormat(fileName: String): Bitmap.CompressFormat {
+    return when (File(fileName).extension.lowercase()) {
+        "webp" -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Bitmap.CompressFormat.WEBP_LOSSY
+        } else {
+            Bitmap.CompressFormat.WEBP
+        }
+
+        "png" -> Bitmap.CompressFormat.PNG
+        "jpg", "jpeg" -> Bitmap.CompressFormat.JPEG
+        else -> {
+            Log.w(TAG, "Unknown image format, fileName: $fileName")
+            Bitmap.CompressFormat.JPEG
+        }
+    }
+}
 
 private class OutputFileTaker(var file: File? = null)
 
@@ -79,7 +111,7 @@ fun Bitmap.saveToAlbum(
     context: Context,
     fileName: String,
     relativePath: String? = null,
-    quality: Int = 75
+    quality: Int = 75,
 ): Uri? {
     // 插入图片信息
     val resolver = context.contentResolver
@@ -92,8 +124,7 @@ fun Bitmap.saveToAlbum(
 
     // 保存图片
     (imageUri.outputStream(resolver) ?: return null).use {
-        val format =
-            if (fileName.endsWith(".png")) Bitmap.CompressFormat.PNG else Bitmap.CompressFormat.JPEG
+        val format = getImageFormat(fileName)
         this@saveToAlbum.compress(format, quality, it)
         imageUri.finishPending(context, resolver, outputFile.file)
     }
@@ -112,7 +143,7 @@ private fun Uri.outputStream(resolver: ContentResolver): OutputStream? {
 private fun Uri.finishPending(
     context: Context,
     resolver: ContentResolver,
-    outputFile: File?
+    outputFile: File?,
 ) {
     val imageValues = ContentValues()
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
@@ -137,11 +168,11 @@ private fun Uri.finishPending(
 private fun ContentResolver.insertMediaImage(
     fileName: String,
     relativePath: String?,
-    outputFileTaker: OutputFileTaker? = null
+    outputFileTaker: OutputFileTaker? = null,
 ): Uri? {
     // 图片信息
     val imageValues = ContentValues().apply {
-        val mimeType = if (fileName.endsWith(".png")) MIME_PNG else MIME_JPG
+        val mimeType = getImageMime(fileName)
         put(MediaStore.Images.Media.MIME_TYPE, mimeType)
         val date = System.currentTimeMillis() / 1000
         put(MediaStore.Images.Media.DATE_ADDED, date)
