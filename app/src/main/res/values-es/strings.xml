@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">Esperando…</string>
+    <string name="summary_android_release_pushed">La versión final ha sido lanzada</string>
+    <string name="title_open_with">Abrir con</string>
+    <string name="label_translation">Traducción</string>
+    <string name="label_privacy_policy">Privacidad</string>
+    <string name="label_star">Estrella</string>
+    <string name="label_timeline_title">Cronología, hitos y actualizaciones</string>
+    <string name="label_timeline_releases">Versiones</string>
+    <string name="message_trypophobia_warning">Esta es una advertencia para personas con &lt;b&gt;Tripofobia&lt;/b&gt; de que algunas imágenes pueden causar molestias. ¿Quieres continuar?</string>
+    <string name="label_settings">Preferencias</string>
+    <string name="pref_title_icon_shape_override">Forma del Icono</string>
+    <string name="pref_title_language">Idioma</string>
+    <string name="pref_title_theme">Fondo</string>
+    <string name="pref_title_icon_visual_effects">Efectos Visuales de Iconos</string>
+    <string name="summary_system_default">Predeterminado</string>
+    <string name="summary_theme_dark_mode">Oscura</string>
+    <string name="summary_theme_light_mode">Claro</string>
+    <string name="label_add_shortcut">Acceso Directo</string>
+    <string name="label_donate">Donar</string>
+    <string name="preference_on">Activado</string>
+    <string name="preference_off">Desactivado</string>
+    <string name="toast_shortcut_added">Acceso Directo agregado</string>
+    <string name="toast_github_sponsor">Puedes donar a través del proyecto \"GitHub Sponsor\"</string>
+</resources>
