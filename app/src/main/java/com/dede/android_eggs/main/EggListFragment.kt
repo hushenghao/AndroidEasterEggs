@@ -3,7 +3,6 @@ package com.dede.android_eggs.main
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
-import android.widget.Filter
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,8 +13,10 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentEasterEggListBinding
 import com.dede.android_eggs.main.entity.Egg
-import com.dede.android_eggs.main.entity.EggDatas
+import com.dede.android_eggs.main.entity.EggFilter
+import com.dede.android_eggs.main.entity.EggGroup
 import com.dede.android_eggs.main.holders.EggHolder
+import com.dede.android_eggs.main.holders.GroupHolder
 import com.dede.android_eggs.main.holders.PreviewHolder
 import com.dede.android_eggs.main.holders.WavyHolder
 import com.dede.android_eggs.ui.adapter.VAdapter
@@ -40,20 +41,24 @@ import com.dede.basic.dp
 import java.util.*
 
 
-class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
-    SettingsPageController.OnSearchTextChangeListener {
+class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.OnFilterResults {
 
     private val binding: FragmentEasterEggListBinding by viewBinding(FragmentEasterEggListBinding::bind)
 
     private var isRecyclerViewIdle = true
     private var orientationAngleSensor: OrientationAngleSensor? = null
+    private lateinit var eggFilter: EggFilter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         handleOrientationAngleSensor(IconVisualEffectsPref.isEnable(requireContext()))
+
+        eggFilter = EggFilter(requireContext()).apply {
+            onFilterResults = this@EggListFragment
+        }
         SettingsPageController(requireActivity()).apply {
             onCreate(savedInstanceState)
-            onSearchTextChangeListener = this@EggListFragment
+            onSearchTextChangeListener = eggFilter
         }
 
         if (EasterUtils.isEaster()) {
@@ -74,53 +79,16 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
         }
     }
 
-    override fun onSearchTextChange(newText: String) {
-        eggFilter.filter(newText)
-    }
-
-    private val eggFilter = object : Filter() {
-
-        private val allEggList = EggDatas.eggList
-        val eggList = ArrayList(allEggList)
-
-        override fun performFiltering(constraint: CharSequence): FilterResults {
-            val resultList = ArrayList<VType>()
-            if (constraint.isEmpty()) {
-                resultList.addAll(allEggList)
-            } else {
-                val context = requireContext()
-                for (vType in allEggList) {
-                    if (vType !is Egg) continue
-                    val filter = constraint.toString().lowercase(Locale.ROOT)
-                    if (context.getString(vType.eggNameRes)
-                            .lowercase(Locale.ROOT)
-                            .contains(filter) ||
-                        context.getString(vType.androidRes)
-                            .lowercase(Locale.ROOT)
-                            .contains(filter)
-                    ) {
-                        resultList.add(vType)
-                    }
-                }
-            }
-            return FilterResults().apply { values = resultList }
+    override fun publishResults(constraint: CharSequence, newList: List<VType>) {
+        val vAdapter = binding.recyclerView.adapter as VAdapter
+        if (constraint.isEmpty()) {
+            vAdapter.addHeader(snapshotView)
+            vAdapter.addFooter(footerView)
+        } else {
+            vAdapter.removeHeader(snapshotView)
+            vAdapter.removeFooter(footerView)
         }
-
-        override fun publishResults(constraint: CharSequence, filterResults: FilterResults) {
-            @Suppress("UNCHECKED_CAST")
-            val newList = filterResults.values as Collection<VType>
-            eggList.clear()
-            eggList.addAll(newList)
-            val vAdapter = binding.recyclerView.adapter as VAdapter
-            if (constraint.isEmpty()) {
-                vAdapter.addHeader(snapshotView)
-                vAdapter.addFooter(footerView)
-            } else {
-                vAdapter.removeHeader(snapshotView)
-                vAdapter.removeFooter(footerView)
-            }
-            vAdapter.notifyDataSetChanged()
-        }
+        vAdapter.notifyDataSetChanged()
     }
 
     private val snapshotView by lazy { SnapshotGroupView(requireContext()) }
@@ -131,6 +99,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
         binding.recyclerView.adapter = VAdapter(eggFilter.eggList) {
             addHeader(snapshotView)
             addViewType<EggHolder>(R.layout.item_easter_egg_layout)
+            addViewType<GroupHolder>(R.layout.item_easter_egg_layout)
             addViewType<PreviewHolder>(R.layout.item_easter_egg_layout)
             addViewType<WavyHolder>(R.layout.item_easter_egg_wavy)
             addFooter(footerView)
@@ -174,7 +143,13 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
     }
 
     fun smoothScrollToEgg(eggKey: String) {
-        val fistOffset = EggDatas.eggList.indexOfFirst { it is Egg && it.key == eggKey }
+        val fistOffset = eggFilter.eggList.indexOfFirst {
+            if (it is Egg && it.key == eggKey) return@indexOfFirst true
+            if (it is EggGroup) {
+                return@indexOfFirst it.child.indexOfFirst { c -> c.key == eggKey } != -1
+            }
+            return@indexOfFirst false
+        }
         val position = fistOffset + 1// header offset
         binding.recyclerView.smoothScrollToPosition(position)
     }

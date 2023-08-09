@@ -119,31 +119,35 @@ object EggDatas {
             true,
             KEY_EGG_P
         ),
-        Egg(
-            R.drawable.ic_android_oreo,
-            R.string.title_android_o_1,
-            com.android_o.egg.R.string.o_app_name,
-            CharSequenceFormatter(
-                R.string.version_comment_range,
-                VERSION_CODES.O, VERSION_CODES.O_MR1,
-                "8.0", "8.1"
+        EggGroup(
+            R.menu.menu_eggs_o_group,
+            1,
+            Egg(
+                R.drawable.ic_android_oreo,
+                R.string.title_android_o_1,
+                com.android_o.egg.R.string.o_app_name,
+                CharSequenceFormatter(
+                    R.string.version_comment_range,
+                    VERSION_CODES.O, VERSION_CODES.O_MR1,
+                    "8.0", "8.1"
+                ),
+                com.android_o.egg.PlatLogoActivity.Point1::class.java,
+                true,
+                KEY_EGG_O_1,
             ),
-            com.android_o.egg.PlatLogoActivity.Point1::class.java,
-            true,
-            KEY_EGG_O_1,
-        ),
-        Egg(
-            R.drawable.ic_android_oreo,
-            R.string.title_android_o,
-            com.android_o.egg.R.string.o_app_name,
-            CharSequenceFormatter(
-                R.string.version_comment_range,
-                VERSION_CODES.O, VERSION_CODES.O_MR1,
-                "8.0", "8.1"
+            Egg(
+                R.drawable.ic_android_oreo,
+                R.string.title_android_o,
+                com.android_o.egg.R.string.o_app_name,
+                CharSequenceFormatter(
+                    R.string.version_comment_range,
+                    VERSION_CODES.O, VERSION_CODES.O_MR1,
+                    "8.0", "8.1"
+                ),
+                com.android_o.egg.PlatLogoActivity::class.java,
+                true,
+                KEY_EGG_O
             ),
-            com.android_o.egg.PlatLogoActivity::class.java,
-            true,
-            KEY_EGG_O
         ),
         Egg(
             R.drawable.ic_android_nougat,

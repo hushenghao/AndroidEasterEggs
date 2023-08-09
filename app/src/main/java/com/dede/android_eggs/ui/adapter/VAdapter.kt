@@ -42,6 +42,10 @@ class VAdapter(
         notifyDataSetChanged()
     }
 
+    fun getData(): List<Any> {
+        return this.list
+    }
+
     fun append(list: List<Any>) {
         val newList = ArrayList<Any>()
         val oldSize = this.list.size
@@ -133,6 +137,8 @@ abstract class VHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
     private val viewRef = SparseArray<View>()
 
     val context: Context get() = itemView.context
+
+    val vAdapter: VAdapter? get() = bindingAdapter as? VAdapter
 
     fun <T : View> findViewById(id: Int): T {
         @Suppress("UNCHECKED_CAST") var view = viewRef.get(id) as? T
