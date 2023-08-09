@@ -12,7 +12,7 @@
     <string name="label_timeline_releases">版本</string>
     <string name="message_trypophobia_warning">對有&lt;b&gt;密集恐懼症&lt;/b&gt;人士的警告，一些畫面可能會引起不適。要繼續嗎？</string>
     <string name="label_settings">設定</string>
-    <string name="label_project_desc">此專案包含了系統彩蛋完整程式碼，旨在對系統彩蛋的整理和相容，以保證大多數裝置可以體驗到不同版本的彩蛋，不會對系統彩蛋程式碼做過多修改。部分版本使用了系統新特性，較低版本只能使用部分功能。</string>
+    <string name="label_project_desc">此專案包含系統彩蛋的完整程式碼，旨在對系統彩蛋的整理和相容，以保證大多數裝置可以體驗到不同版本的彩蛋，不會對系統彩蛋程式碼做過多修改。部分版本使用了系統新特性，較低版本只能使用部分功能。</string>
     <string name="pref_title_icon_shape_override">圖示形狀</string>
     <string name="pref_title_language">語言</string>
     <string name="pref_title_theme">主題</string>
@@ -25,5 +25,5 @@
     <string name="preference_on">開啟</string>
     <string name="preference_off">關閉</string>
     <string name="toast_shortcut_added">捷徑已新增</string>
-    <string name="toast_github_sponsor">你可以透過專案的「Github Sponsor」進行捐贈</string>
+    <string name="toast_github_sponsor">您可以透過專案的「Github Sponsor」進行捐贈</string>
 </resources>

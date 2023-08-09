@@ -21,8 +21,6 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
         private const val RUSSIAN = 5               // ru
         private const val ITALIAN = 6               // it
 
-        // Locale.TRADITIONAL_CHINESE is zh-TW, expected is HongKong.
-        private const val HK = "zh-HK"
         private const val RU = "ru"
 
         private val options = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -50,7 +48,7 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
             return when (value) {
                 CHINESE -> LocaleListCompat.create(Locale.CHINESE)
                 SIMPLIFIED_CHINESE -> LocaleListCompat.create(Locale.SIMPLIFIED_CHINESE)
-                TRADITIONAL_CHINESE -> LocaleListCompat.forLanguageTags(HK)
+                TRADITIONAL_CHINESE -> LocaleListCompat.create(Locale.TRADITIONAL_CHINESE)
                 ENGLISH -> LocaleListCompat.create(Locale.ENGLISH)
                 RUSSIAN -> LocaleListCompat.forLanguageTags(RU)
                 ITALIAN -> LocaleListCompat.create(Locale.ITALIAN)
@@ -63,7 +61,6 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
                 return SYSTEM
             }
             when (localeList.toLanguageTags()) {
-                HK -> return TRADITIONAL_CHINESE
                 RU -> return RUSSIAN
             }
             return when (localeList.get(0)) {
