@@ -1,11 +1,12 @@
 project_id: "597587"
 api_token_env: "CROWDIN_PERSONAL_TOKEN"
-base_path: "."
 commit_message: "feat: New translations %original_file_name% from Crowdin"
+append_commit_message: false
 
 files:
   - source: app/**/res/values/strings.xml
     translation: app/**/res/values-%android_code%/strings.xml
+    skip_untranslated_strings: true
     languages_mapping:
       android_code:
         zh-rCN: "zh"
@@ -20,6 +21,7 @@ files:
 
   - source: app/**/res/values/languages.xml
     translation: app/**/res/values-%android_code%/languages.xml
+    skip_untranslated_files: true
     languages_mapping:
       android_code:
         zh-rCN: "zh"
