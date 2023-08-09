@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="summary_android_waiting">Подождите…</string>
+    <string name="summary_android_waiting">Ожидание…</string>
     <string name="summary_android_release_pushed">Финальная версия релиза выпущена</string>
     <string name="title_open_with">Открыть с помощью</string>
     <string name="label_translation">Перевод</string>
@@ -12,7 +12,7 @@
     <string name="label_timeline_releases">Релизы</string>
     <string name="message_trypophobia_warning">Это предупреждение для тех, у кого &lt;b&gt;трипофобия&lt;/b&gt; — некоторые изображения могут вызывать дискомфорт. Вы хотите продолжить?</string>
     <string name="label_settings">Настройки</string>
-    <string name="label_project_desc">Проект содержит полный код системных пасхальных яиц, который направлен на организацию и совместимость с системными яйцами, чтобы гарантировать, что большинство устройств могут использовать разные версии пасхальных яиц и не будут вносить слишком много изменений в код системных яиц. В некоторых версиях используются новые функции системы, а в более ранних версиях можно использовать только некоторые функции.</string>
+    <string name="label_project_desc">Проект содержит весь код системных пасхальных яиц, целью которого является организация и совместимость с различными версиями системы. Это гарантирует, что на большинстве устройств можно экспериментировать с пасхальными яйцами из разных систем, не требуя значительных изменений системного кода. В некоторых версиях используются новые системные функции, в то время как более старые версии могут иметь доступ только к некоторым определённым функциям.</string>
     <string name="pref_title_icon_shape_override">Форма значков</string>
     <string name="pref_title_language">Язык</string>
     <string name="pref_title_theme">Тема</string>
