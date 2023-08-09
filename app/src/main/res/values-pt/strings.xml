@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">Esperando…</string>
+    <string name="label_translation">Tradução</string>
+    <string name="label_privacy_policy">Privacidade</string>
+    <string name="label_timeline_releases">Versões</string>
+    <string name="label_settings">Configurações</string>
+    <string name="pref_title_theme">Tema</string>
+</resources>
