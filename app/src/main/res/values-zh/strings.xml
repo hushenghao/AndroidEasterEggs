@@ -26,4 +26,5 @@
     <string name="preference_off">关闭</string>
     <string name="toast_shortcut_added">已添加快捷方式</string>
     <string name="toast_github_sponsor">你可以通过项目的 “Github Sponsor” 进行捐赠</string>
+    <string name="app_widget_description">这是Easter Eggs模拟时钟</string>
 </resources>
