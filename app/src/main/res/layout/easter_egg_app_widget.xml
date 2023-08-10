@@ -1,0 +1,16 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.Material3.DynamicColors.DayNight">
+
+    <AnalogClock
+        android:id="@+id/analog_clock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:dial="@drawable/widget_clock_dial"
+        android:hand_hour="@drawable/clock_hand_hour"
+        android:hand_minute="@drawable/clock_hand_minute" />
+
+</RelativeLayout>

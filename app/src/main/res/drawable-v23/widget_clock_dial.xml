@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:autoMirrored="false">
+
+    <item
+        android:width="380dp"
+        android:height="380dp"
+        android:drawable="@drawable/clock_dial"
+        android:gravity="center" />
+
+    <item
+        android:width="260dp"
+        android:height="260dp"
+        android:drawable="@drawable/u_platlogo"
+        android:gravity="center" />
+
+    <item
+        android:width="44dp"
+        android:height="44dp"
+        android:drawable="@drawable/s_icon"
+        android:gravity="top|center_horizontal"
+        android:top="10dp" />
+
+    <item
+        android:width="44dp"
+        android:height="44dp"
+        android:drawable="@drawable/ic_android_classic"
+        android:gravity="top|right"
+        android:right="86dp"
+        android:top="28dp" />
+
+    <item
+        android:width="44dp"
+        android:height="44dp"
+        android:drawable="@drawable/ic_android_gingerbread"
+        android:gravity="top|right"
+        android:right="30dp"
+        android:top="88dp" />
+
+    <item
+        android:width="44dp"
+        android:height="44dp"
+        android:drawable="@drawable/ic_android_honeycomb"
+        android:gravity="center_vertical|right"
+        android:right="10dp" />
+
+    <item
+        android:width="44dp"
+        android:height="42dp"
+        android:bottom="90dp"
+        android:drawable="@drawable/ic_android_kitkat"
+        android:gravity="bottom|right"
+        android:right="28dp" />
+
+    <item
+        android:width="46dp"
+        android:height="46dp"
+        android:bottom="30dp"
+        android:drawable="@drawable/l_icon"
+        android:gravity="bottom|right"
+        android:right="88dp" />
+
+    <item
+        android:width="46dp"
+        android:height="46dp"
+        android:bottom="10dp"
+        android:drawable="@drawable/m_icon"
+        android:gravity="bottom|center_horizontal" />
+
+    <item
+        android:width="46dp"
+        android:height="46dp"
+        android:bottom="30dp"
+        android:drawable="@drawable/n_icon"
+        android:gravity="bottom|left"
+        android:left="90dp" />
+
+    <item
+        android:width="48dp"
+        android:height="48dp"
+        android:bottom="88dp"
+        android:drawable="@drawable/o_icon"
+        android:gravity="bottom|left"
+        android:left="30dp" />
+
+    <item
+        android:width="48dp"
+        android:height="48dp"
+        android:drawable="@drawable/ic_android_p_scale"
+        android:gravity="center_vertical|left"
+        android:left="6dp"
+        android:top="-4dp" />
+
+    <item
+        android:width="48dp"
+        android:height="48dp"
+        android:drawable="@drawable/q"
+        android:gravity="top|left"
+        android:left="26dp"
+        android:top="86dp" />
+
+    <item
+        android:width="32dp"
+        android:height="32dp"
+        android:drawable="@drawable/ic_number11"
+        android:gravity="top|left"
+        android:left="98dp"
+        android:top="36dp" />
+
+</layer-list>
