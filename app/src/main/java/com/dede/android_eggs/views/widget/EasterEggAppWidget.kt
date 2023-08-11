@@ -3,7 +3,6 @@ package com.dede.android_eggs.views.widget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
-import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.widget.RemoteViews
 import com.dede.android_eggs.R

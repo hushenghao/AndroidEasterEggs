@@ -5,16 +5,17 @@
     <item
         android:width="380dp"
         android:height="380dp"
-        android:drawable="@drawable/clock_dial"
+        android:drawable="@drawable/clock_analog_dial"
         android:gravity="center" />
 
     <item
-        android:width="260dp"
-        android:height="260dp"
+        android:width="220dp"
+        android:height="220dp"
         android:drawable="@drawable/u_platlogo"
         android:gravity="center" />
 
     <item
+        android:id="@+id/o_clock_12"
         android:width="44dp"
         android:height="44dp"
         android:drawable="@drawable/s_icon"
@@ -22,6 +23,7 @@
         android:top="10dp" />
 
     <item
+        android:id="@+id/o_clock_1"
         android:width="44dp"
         android:height="44dp"
         android:drawable="@drawable/ic_android_classic"
@@ -30,6 +32,7 @@
         android:top="28dp" />
 
     <item
+        android:id="@+id/o_clock_2"
         android:width="44dp"
         android:height="44dp"
         android:drawable="@drawable/ic_android_gingerbread"
@@ -38,6 +41,7 @@
         android:top="88dp" />
 
     <item
+        android:id="@+id/o_clock_3"
         android:width="44dp"
         android:height="44dp"
         android:drawable="@drawable/ic_android_honeycomb"
@@ -45,6 +49,7 @@
         android:right="10dp" />
 
     <item
+        android:id="@+id/o_clock_4"
         android:width="44dp"
         android:height="42dp"
         android:bottom="90dp"
@@ -53,6 +58,7 @@
         android:right="28dp" />
 
     <item
+        android:id="@+id/o_clock_5"
         android:width="46dp"
         android:height="46dp"
         android:bottom="30dp"
@@ -61,6 +67,7 @@
         android:right="88dp" />
 
     <item
+        android:id="@+id/o_clock_6"
         android:width="46dp"
         android:height="46dp"
         android:bottom="10dp"
@@ -68,6 +75,7 @@
         android:gravity="bottom|center_horizontal" />
 
     <item
+        android:id="@+id/o_clock_7"
         android:width="46dp"
         android:height="46dp"
         android:bottom="30dp"
@@ -76,6 +84,7 @@
         android:left="90dp" />
 
     <item
+        android:id="@+id/o_clock_8"
         android:width="48dp"
         android:height="48dp"
         android:bottom="88dp"
@@ -84,6 +93,7 @@
         android:left="30dp" />
 
     <item
+        android:id="@+id/o_clock_9"
         android:width="48dp"
         android:height="48dp"
         android:drawable="@drawable/ic_android_p_scale"
@@ -92,6 +102,7 @@
         android:top="-4dp" />
 
     <item
+        android:id="@+id/o_clock_10"
         android:width="48dp"
         android:height="48dp"
         android:drawable="@drawable/q"
@@ -100,6 +111,7 @@
         android:top="86dp" />
 
     <item
+        android:id="@+id/o_clock_11"
         android:width="32dp"
         android:height="32dp"
         android:drawable="@drawable/ic_number11"

@@ -15,8 +15,6 @@
         </item>
     </style>
 
-    <color name="splash_background_color">@color/md_theme_light_background</color>
-
     <style name="Theme.EasterEggs" parent="Base.EasterEggs">
         <item name="colorPrimary">@color/md_theme_light_primary</item>
         <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>

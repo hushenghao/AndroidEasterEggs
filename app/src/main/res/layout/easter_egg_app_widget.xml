@@ -9,8 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:dial="@drawable/widget_clock_dial"
-        android:hand_hour="@drawable/clock_hand_hour"
-        android:hand_minute="@drawable/clock_hand_minute" />
+        android:dial="@drawable/clock_analog_simple_dial"
+        android:hand_hour="@drawable/clock_analog_simple_hour"
+        android:hand_minute="@drawable/clock_analog_simple_minute"
+        android:hand_second="@drawable/clock_analog_simple_second" />
 
 </RelativeLayout>

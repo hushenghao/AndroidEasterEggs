@@ -4,10 +4,12 @@
     android:initialLayout="@layout/easter_egg_app_widget"
     android:minWidth="110dp"
     android:minHeight="110dp"
+    android:minResizeWidth="0dp"
+    android:minResizeHeight="0dp"
     android:previewImage="@drawable/img_app_widget_preview"
     android:previewLayout="@layout/easter_egg_app_widget"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="2"
     android:targetCellHeight="2"
-    android:updatePeriodMillis="60000"
+    android:updatePeriodMillis="0"
     android:widgetCategory="home_screen" />
