@@ -8,15 +8,14 @@ import android.widget.RemoteViews
 import com.dede.android_eggs.R
 
 /**
- * Implementation of App Widget functionality.
+ * Easter Eggs Analog clock widget.
  */
-class EasterEggAppWidget : AppWidgetProvider() {
+class AnalogClockAppWidget : AppWidgetProvider() {
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray,
     ) {
-        // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
@@ -39,8 +38,6 @@ private fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int,
 ) {
-    // Construct the RemoteViews object
-    val views = RemoteViews(context.packageName, R.layout.easter_egg_app_widget)
-    // Instruct the widget manager to update the widget
+    val views = RemoteViews(context.packageName, R.layout.widget_easter_egg_analog_clock)
     appWidgetManager.updateAppWidget(appWidgetId, views)
 }

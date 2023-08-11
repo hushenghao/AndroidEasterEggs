@@ -22,7 +22,7 @@
         android:theme="@style/Theme.EasterEggs"
         tools:targetApi="tiramisu">
         <receiver
-            android:name=".views.widget.EasterEggAppWidget"
+            android:name=".views.widget.AnalogClockAppWidget"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
