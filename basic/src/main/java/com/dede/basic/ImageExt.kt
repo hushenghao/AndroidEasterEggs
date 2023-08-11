@@ -41,6 +41,7 @@ private fun getImageFormat(fileName: String): Bitmap.CompressFormat {
         "webp" -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             Bitmap.CompressFormat.WEBP_LOSSY
         } else {
+            @Suppress("DEPRECATION")
             Bitmap.CompressFormat.WEBP
         }
 

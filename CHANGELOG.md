@@ -1,6 +1,7 @@
 ### v1.9.7
 
 - Add Italian translations
+- Add Analog clock widget
 - Feature optimization
 
 ### v1.9.6 (2023-08-05)
