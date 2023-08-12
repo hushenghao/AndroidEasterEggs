@@ -14,6 +14,7 @@ import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.util.updateCompoundDrawablesRelative
 import com.dede.basic.dp
+import kotlin.math.roundToInt
 
 @VHType(viewType = Egg.VIEW_TYPE_EGG_GROUP)
 class GroupHolder(view: View) : VHolder<EggGroup>(view) {
@@ -33,9 +34,14 @@ class GroupHolder(view: View) : VHolder<EggGroup>(view) {
             var order = eggGroup.child.size
             for (egg in eggGroup.child) {
                 popupMenu.menu.add(0, egg.androidRes, order--, egg.androidRes).apply {
+                    val drawable = egg.getIcon(context)
+                    val drawH = drawable.intrinsicHeight
+                    val drawW = drawable.intrinsicWidth
+                    val width: Int = 36.dp// Use the width as the basis to align the text
+                    val height: Int = (width / drawW.toFloat() * drawH).roundToInt()
                     icon = BitmapDrawable(
                         context.resources,
-                        egg.getIcon(context).toBitmap(36.dp, 36.dp)
+                        drawable.toBitmap(width, height)
                     )
                 }
             }

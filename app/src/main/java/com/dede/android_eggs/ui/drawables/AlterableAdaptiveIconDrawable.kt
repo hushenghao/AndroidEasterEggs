@@ -14,6 +14,8 @@ import androidx.core.graphics.PathParser
 import androidx.core.graphics.withSave
 import com.dede.android_eggs.R
 import com.dede.basic.requireDrawable
+import kotlin.math.max
+import kotlin.math.roundToInt
 
 
 class AlterableAdaptiveIconDrawable(
@@ -140,6 +142,22 @@ class AlterableAdaptiveIconDrawable(
         invalidateSelf()
     }
 
+    override fun getIntrinsicHeight(): Int {
+        var max = 0
+        for (child in childDrawables) {
+            max = max(max, child.getHeight())
+        }
+        return (max * DEFAULT_VIEW_PORT_SCALE).roundToInt()
+    }
+
+    override fun getIntrinsicWidth(): Int {
+        var max = 0
+        for (child in childDrawables) {
+            max = max(max, child.getWidth())
+        }
+        return (max * DEFAULT_VIEW_PORT_SCALE).roundToInt()
+    }
+
     private fun updateLayerBoundsInternal(bounds: Rect) {
         val outRect = tempRect
         if (isAdaptiveIconDrawable) {
@@ -187,6 +205,9 @@ class AlterableAdaptiveIconDrawable(
         fun draw(canvas: Canvas) {
             drawable.draw(canvas)
         }
+
+        fun getWidth(): Int = drawable.intrinsicWidth
+        fun getHeight(): Int = drawable.intrinsicHeight
     }
 
     override fun setAlpha(alpha: Int) {
