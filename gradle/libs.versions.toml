@@ -22,8 +22,6 @@ viewbinding-delegate = "com.github.kirich1409:viewbindingpropertydelegate-norefl
 io-coil = "io.coil-kt:coil:2.4.0"
 free-reflection = "com.github.tiann:FreeReflection:3.2.0"
 squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.12"
-squareup-okhttp = "com.squareup.okhttp3:okhttp:4.11.0"
-android-tools-sdk-common = "com.android.tools:sdk-common:31.1.0"
 nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
 
 junit = "junit:junit:4.13.2"

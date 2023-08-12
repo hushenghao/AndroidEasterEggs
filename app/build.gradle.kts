@@ -3,12 +3,15 @@
 import Versions.gitHash
 import Versions.keyprops
 import com.android.build.api.dsl.ManagedVirtualDevice
+import com.dede.easter_eggs.EmojiSvg2XmlTask
 import java.util.*
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
+
+apply(from = "../buildSrc/tasks.gradle.kts")
 
 android {
     compileSdk = Versions.COMPILE_SDK
@@ -68,11 +71,6 @@ android {
     lint {
         disable += listOf("NotifyDataSetChanged")
         fatal += listOf("NewApi", "InlineApi")
-    }
-
-    packaging {
-        // testImplementation
-        resources.excludes += "okhttp3/**"
     }
 
     compileOptions {
@@ -135,8 +133,6 @@ dependencies {
     implementation(project(":eggs:Gingerbread"))
 
     testImplementation(libs.junit)
-    testImplementation(libs.android.tools.sdk.common)
-    testImplementation(libs.squareup.okhttp)
     androidTestImplementation(libs.nanohttpd)
     androidTestImplementation(libs.bundles.android.test)
 }
