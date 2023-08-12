@@ -8,11 +8,8 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.browser.customtabs.CustomTabsIntent.ACTIVITY_HEIGHT_ADJUSTABLE
-import androidx.browser.customtabs.CustomTabsIntent.ACTIVITY_HEIGHT_FIXED
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
-import com.dede.android_eggs.R
 import com.google.android.material.R as M3R
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
@@ -67,8 +64,7 @@ object CustomTabsBrowser {
 
     fun launchUrlByBrowser(context: Context, uri: Uri) {
         val target = Intent(Intent.ACTION_VIEW, uri)
-        val intent = Intent.createChooser(target, context.getString(R.string.title_open_with))
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val intent = context.createChooser(target)
         try {
             ContextCompat.startActivity(context, intent, null)
         } catch (e: ActivityNotFoundException) {

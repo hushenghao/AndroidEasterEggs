@@ -101,6 +101,15 @@
             android:textColor="?attr/colorSecondary" />
 
         <TextView
+            android:id="@+id/tv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="@string/url_share"
+            android:text="@string/label_share"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="?attr/colorSecondary" />
+
+        <TextView
             android:id="@+id/tv_beta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

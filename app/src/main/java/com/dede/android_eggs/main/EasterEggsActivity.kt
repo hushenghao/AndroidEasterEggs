@@ -7,6 +7,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
 import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.ThemeUtils
+import com.dede.android_eggs.views.main.StartupPage
 
 /**
  * Easter Egg Collection
@@ -23,6 +24,11 @@ class EasterEggsActivity : AppCompatActivity(R.layout.activity_easter_eggs) {
         setSupportActionBar(binding.toolbar)
 
         BackPressedHandler(this).register()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        StartupPage.show(this)
     }
 
 }

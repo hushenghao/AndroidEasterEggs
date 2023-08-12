@@ -15,6 +15,7 @@
     <string name="url_translation" translatable="false">https://crowdin.com/project/easter-eggs</string>
     <string name="url_android_releases" translatable="false">https://developer.android.com/about/versions</string>
     <string name="url_market_detail" translatable="false">market://details?id=%s</string>
+    <string name="url_share" translatable="false">https://f-droid.org/packages/com.dede.android_eggs</string>
     <string name="url_mail" translatable="false">mailto:dede.hu@qq.com</string>
 
 
@@ -58,4 +59,8 @@
     <string name="toast_easter" translatable="false">🐰🥚🍫🌷🎉</string>
     <string name="toast_github_sponsor">You can donate through the project\'s \"Github Sponsor\"</string>
     <string name="app_widget_description">This is Easter Eggs analog clock</string>
+    <string name="action_agree">Agree</string>
+    <string name="summary_browse_privacy_policy">Read and agree to our Privacy Policy to continue.</string>
+    <string name="label_welcome">Welcome to Easter Egg Catalogs 🎉🎉🎉</string>
+    <string name="label_share">Share</string>
 </resources>

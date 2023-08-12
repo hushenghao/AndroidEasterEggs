@@ -1,6 +1,7 @@
 package com.dede.android_eggs.ui.views
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Paint
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -21,6 +22,7 @@ import com.dede.android_eggs.ui.views.text.ClickSpan
 import com.dede.android_eggs.ui.views.text.SpaceSpan.Companion.appendSpace
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.applyIf
+import com.dede.android_eggs.util.createChooser
 import com.dede.android_eggs.util.createRepeatWavyDrawable
 import com.dede.android_eggs.util.getActivity
 import com.dede.android_eggs.util.toast
@@ -107,6 +109,14 @@ class EasterEggFooterView @JvmOverloads constructor(
             R.id.tv_privacy, R.id.tv_license,
             -> {
                 CustomTabsBrowser.launchUrl(context, v.tagString.toUri())
+            }
+
+            R.id.tv_share -> {
+                val target = Intent(Intent.ACTION_SEND)
+                    .putExtra(Intent.EXTRA_TEXT, v.tagString)
+                    .setType("text/plain")
+                val intent = context.createChooser(target)
+                context.startActivity(intent)
             }
 
             R.id.tv_star -> {

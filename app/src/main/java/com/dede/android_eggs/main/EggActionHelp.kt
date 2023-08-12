@@ -10,6 +10,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.IntentSender
 import android.os.Build
+import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -135,13 +136,13 @@ object EggActionHelp {
 
             private var receiver: PinShortcutReceiver? = null
             private fun getPendingIntent(context: Context): PendingIntent {
-                val result = Intent(ACTION)
-                    .setPackage(context.packageName)
-                var flags = PendingIntent.FLAG_UPDATE_CURRENT
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    flags = flags or PendingIntent.FLAG_MUTABLE
-                }
-                return PendingIntent.getBroadcast(context.applicationContext, 0, result, flags)
+                return PendingIntentCompat.getBroadcast(
+                    context.applicationContext,
+                    0,
+                    Intent(ACTION).setPackage(context.packageName),
+                    PendingIntent.FLAG_UPDATE_CURRENT,
+                    false
+                )
             }
 
             fun registerCallbackWithTimeout(context: Context): IntentSender {
