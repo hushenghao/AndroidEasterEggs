@@ -73,6 +73,11 @@ android {
         fatal += listOf("NewApi", "InlineApi")
     }
 
+    packaging {
+        // only coil local image
+        resources.excludes += "okhttp3/**"
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
