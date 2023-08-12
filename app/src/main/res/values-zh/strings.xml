@@ -5,6 +5,7 @@
     <string name="title_open_with">打开</string>
     <string name="label_translation">翻译与国际化</string>
     <string name="label_beta">获取Beta版</string>
+    <string name="label_timeline">时间线</string>
     <string name="label_privacy_policy">隐私协议</string>
     <string name="label_email">联系我</string>
     <string name="label_star">给个好评</string>
@@ -27,5 +28,8 @@
     <string name="toast_shortcut_added">已添加快捷方式</string>
     <string name="toast_github_sponsor">你可以通过项目的 “Github Sponsor” 进行捐赠</string>
     <string name="app_widget_description">这是Easter Eggs模拟时钟</string>
-    <string name="url_share" translatable="false">https://www.coolapk.com/apk/com.dede.android_eggs</string>
+    <string name="action_agree">同意</string>
+    <string name="summary_browse_privacy_policy">请阅读并同意我们的隐私政策。</string>
+    <string name="label_welcome">欢迎使用 Easter Egg Catalogs 🎉🎉🎉</string>
+    <string name="label_share">分享</string>
 </resources>
