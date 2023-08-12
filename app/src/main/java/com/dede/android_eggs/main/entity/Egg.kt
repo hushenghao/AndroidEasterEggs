@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import androidx.annotation.DrawableRes
-import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
 import com.dede.android_eggs.ui.adapter.VType
 
@@ -39,13 +38,11 @@ data class Egg(
 }
 
 class EggGroup(
-    @MenuRes val groupMenu: Int,
     val child: List<Egg>,
-    var selectedIndex: Int = child.size - 1,
+    var selectedIndex: Int = 0,
 ) : VType {
 
-    constructor(@MenuRes menuRes: Int, selectedIndex: Int, vararg child: Egg) : this(
-        menuRes,
+    constructor(selectedIndex: Int, vararg child: Egg) : this(
         child.toList(),
         selectedIndex
     )

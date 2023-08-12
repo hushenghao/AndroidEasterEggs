@@ -25,12 +25,14 @@ class GroupHolder(view: View) : VHolder<EggGroup>(view) {
         binding.tvSummary.setOnClickListener {
             val vAdapter = this.vAdapter ?: return@setOnClickListener
             val popupMenu = PopupMenu(context, binding.tvSummary)
-            popupMenu.inflate(eggGroup.groupMenu)
+            var order = eggGroup.child.size
+            for (egg in eggGroup.child) {
+                popupMenu.menu.add(0, egg.androidRes, order--, egg.androidRes)
+            }
             popupMenu.setOnMenuItemClickListener {
-                val newEgg = eggGroup.child.find { egg ->
-                    context.getString(egg.androidRes) == it.title
+                val index = eggGroup.child.indexOfFirst { egg ->
+                    egg.androidRes == it.itemId
                 }
-                val index = eggGroup.child.indexOf(newEgg)
                 if (index != -1) {
                     if (index != eggGroup.selectedIndex) {
                         eggGroup.selectedIndex = index

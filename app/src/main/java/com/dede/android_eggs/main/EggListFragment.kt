@@ -48,6 +48,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.O
     private var isRecyclerViewIdle = true
     private var orientationAngleSensor: OrientationAngleSensor? = null
     private lateinit var eggFilter: EggFilter
+    private lateinit var vAdapter: VAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +81,6 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.O
     }
 
     override fun publishResults(constraint: CharSequence, newList: List<VType>) {
-        val vAdapter = binding.recyclerView.adapter as VAdapter
         if (constraint.isEmpty()) {
             vAdapter.addHeader(snapshotView)
             vAdapter.addFooter(footerView)
@@ -96,7 +96,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.O
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.adapter = VAdapter(eggFilter.eggList) {
+        vAdapter = VAdapter(eggFilter.eggList) {
             addHeader(snapshotView)
             addViewType<EggHolder>(R.layout.item_easter_egg_layout)
             addViewType<GroupHolder>(R.layout.item_easter_egg_layout)
@@ -105,6 +105,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.O
             addFooter(footerView)
         }
 
+        binding.recyclerView.adapter = vAdapter
         var last: ItemDecoration = EggListDivider(10.dp, 0, 0)
         binding.recyclerView.addItemDecoration(last)
         binding.recyclerView.onApplyWindowEdge(
@@ -150,7 +151,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.O
             }
             return@indexOfFirst false
         }
-        val position = fistOffset + 1// header offset
+        val position = fistOffset + vAdapter.headerFooterExt.headerCount
         binding.recyclerView.smoothScrollToPosition(position)
     }
 

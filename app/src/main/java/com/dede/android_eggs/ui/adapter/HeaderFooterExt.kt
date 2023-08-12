@@ -40,11 +40,17 @@ class HeaderFooterExt(private val vAdapter: VAdapter) {
     private lateinit var headerView: LinearLayout
     private lateinit var footerView: LinearLayout
 
+    val headerCount: Int
+        get() = if (::headerView.isInitialized) headerView.childCount else 0
+
+    val footerCount: Int
+        get() = if (::footerView.isInitialized) footerView.childCount else 0
+
     private val hasHeader: Boolean
-        get() = ::headerView.isInitialized && headerView.childCount > 0
+        get() = headerCount > 0
 
     private val hasFooter: Boolean
-        get() = ::footerView.isInitialized && footerView.childCount > 0
+        get() = footerCount > 0
 
     fun addHeader(view: View) {
         if (!::headerView.isInitialized) {

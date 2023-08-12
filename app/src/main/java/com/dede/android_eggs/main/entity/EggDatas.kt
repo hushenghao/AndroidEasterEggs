@@ -120,7 +120,6 @@ object EggDatas {
             KEY_EGG_P
         ),
         EggGroup(
-            R.menu.menu_eggs_o_group,
             1,
             Egg(
                 R.drawable.ic_android_oreo,
