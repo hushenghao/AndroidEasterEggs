@@ -26,7 +26,7 @@ public class BeanBagDream extends DreamService {
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        setInteractive(true);
+        setInteractive(false);// changed
         setFullscreen(true);
         mBoard = new BeanBag.Board(this, null);
         setContentView(mBoard);

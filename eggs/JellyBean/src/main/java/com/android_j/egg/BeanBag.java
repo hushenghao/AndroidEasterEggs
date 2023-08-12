@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
@@ -192,7 +193,7 @@ public class BeanBag extends Activity {
                 vy = randfrange(-40, 40) * z;
                 final float boardh = boardHeight;
                 final float boardw = boardWidth;
-                android.util.Log.d("BeanBag", "reset: w="+w+" h="+h);
+                android.util.Log.d("BeanBag", "reset: w=" + w + " h=" + h);
                 if (flip()) {
                     x = (vx < 0 ? boardw + 2 * r : -r * 4f);
                     y = (randfrange(0, boardh - 3 * r) * 0.5f + ((vy < 0) ? boardh * 0.5f : 0));
@@ -223,10 +224,30 @@ public class BeanBag extends Activity {
                 return mag(dx, dy) - r - other.r;
             }
 
+            // Changed
+            // filter touch events for transparent pixels.
+            private boolean isTouchedBean(MotionEvent e) {
+                BitmapDrawable drawable = (BitmapDrawable) getDrawable();
+                if (drawable == null) return false;
+                Bitmap bitmap = drawable.getBitmap();
+                float sx = bitmap.getWidth() * 1f / getWidth();
+                float sy = bitmap.getHeight() * 1f / getHeight();
+                int x = (int) (e.getX() * sx);
+                int y = (int) (e.getY() * sy);
+                if (x < 0 || y < 0 || x > bitmap.getWidth() || y > bitmap.getHeight()) {
+                    return false;
+                }
+                int color = bitmap.getPixel(x, y);
+                return Color.alpha(color) > 0;
+            }
+
             @Override
             public boolean onTouchEvent(MotionEvent e) {
                 switch (e.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        if (!isTouchedBean(e)) {
+                            return false;
+                        }
                         grabbed = true;
                         grabx_offset = e.getRawX() - x;
                         graby_offset = e.getRawY() - y;

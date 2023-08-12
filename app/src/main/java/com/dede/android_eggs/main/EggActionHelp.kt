@@ -22,7 +22,6 @@ import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.applyNotNull
-import com.dede.android_eggs.util.isEquals
 import com.dede.android_eggs.util.toast
 import com.dede.basic.cancel
 import com.dede.basic.delay
@@ -49,6 +48,8 @@ object EggActionHelp {
     fun launchEgg(context: Context, egg: Egg) {
         val targetClass = egg.targetClass ?: return
         val embedded = SplitUtils.isActivityEmbedded(context)
+        val intent = createIntent(context, egg, !embedded)
+            ?: throw IllegalArgumentException("Create Egg launcher intent == null")
         val task: AppTask? = findTaskWithTrim(context, targetClass)
         if (task != null) {
             if (embedded) {
@@ -56,19 +57,14 @@ object EggActionHelp {
                 task.finishAndRemoveTask()
             }
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                // relaunch
                 // android M Recent task list:
                 // Not following `android:documentLaunchMode="intoExisting"` behavior.
                 // ???
                 // https://developer.android.google.cn/guide/topics/manifest/activity-element?hl=zh-cn#dlmode
-                val eggIntent = task.taskInfo?.baseIntent
-                if (eggIntent != null && eggIntent.extras.isEquals(egg.extras)) {
-                    context.startActivity(eggIntent)
-                    return
-                }
+                // remove it
+                task.finishAndRemoveTask()
             }
         }
-        val intent = createIntent(context, egg, !embedded) ?: return
         context.startActivity(intent)
     }
 
