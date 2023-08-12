@@ -5,6 +5,7 @@
     <string name="title_open_with">開啟</string>
     <string name="label_translation">翻譯</string>
     <string name="label_beta">取得 Beta 版</string>
+    <string name="label_timeline">時間線</string>
     <string name="label_privacy_policy">隱私權</string>
     <string name="label_email">意見回饋</string>
     <string name="label_star">給個好評</string>
@@ -27,4 +28,8 @@
     <string name="toast_shortcut_added">捷徑已新增</string>
     <string name="toast_github_sponsor">您可以透過專案的「Github Sponsor」進行捐贈</string>
     <string name="app_widget_description">這是 Easter Eggs 的類比時鐘</string>
+    <string name="action_agree">同意</string>
+    <string name="summary_browse_privacy_policy">閱讀並同意我們的隱私政策以繼續。</string>
+    <string name="label_welcome">歡迎來到 Easter Egg Catalogs 🎉🎉🎉</string>
+    <string name="label_share">分享</string>
 </resources>
