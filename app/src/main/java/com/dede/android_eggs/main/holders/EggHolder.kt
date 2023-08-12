@@ -15,6 +15,7 @@ import coil.load
 import com.dede.android_eggs.databinding.ItemEasterEggLayoutBinding
 import com.dede.android_eggs.main.EggActionHelp
 import com.dede.android_eggs.main.entity.Egg
+import com.dede.android_eggs.main.entity.Egg.Companion.getIcon
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.ui.adapter.VHolder
@@ -24,7 +25,6 @@ import com.dede.android_eggs.ui.views.HorizontalSwipeLayout
 import com.dede.android_eggs.util.isRtl
 import com.dede.android_eggs.util.resolveColorStateList
 import com.dede.android_eggs.util.updateCompoundDrawablesRelative
-import com.dede.android_eggs.views.settings.prefs.IconShapePref
 import com.dede.basic.dp
 import com.dede.basic.dpf
 import kotlin.math.abs
@@ -99,13 +99,8 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         binding.ivIcon.dispose()
         binding.background.ivBgIcon.dispose()
         if (egg.supportAdaptiveIcon) {
-            val pathStr = IconShapePref.getMaskPath(context)
-            binding.ivIcon.setImageDrawable(
-                AlterableAdaptiveIconDrawable(context, egg.iconRes, pathStr)
-            )
-            binding.background.ivBgIcon.setImageDrawable(
-                AlterableAdaptiveIconDrawable(context, egg.iconRes, pathStr)
-            )
+            binding.ivIcon.setImageDrawable(egg.getIcon(context))
+            binding.background.ivBgIcon.setImageDrawable(egg.getIcon(context))
         } else {
             binding.ivIcon.load(egg.iconRes)
             binding.background.ivBgIcon.load(egg.iconRes)
