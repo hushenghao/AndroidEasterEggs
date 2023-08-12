@@ -15,7 +15,7 @@ jobs:
       - name: Synchronize with Crowdin
         uses: crowdin/github-action@v1
         with:
-          upload_sources: true
+          upload_sources: false
           upload_translations: false
           download_translations: true
           localization_branch_name: l10n_crowdin_translations
