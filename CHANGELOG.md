@@ -2,6 +2,8 @@
 
 - Add Italian translations
 - Add Analog clock widget
+- Add welcome page
+- Add App share
 - Feature optimization
 
 ### v1.9.6 (2023-08-05)

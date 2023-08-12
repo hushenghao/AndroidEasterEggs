@@ -1,3 +1,5 @@
 - Add Italian translations
 - Add Analog clock widget
+- Add welcome page
+- Add App share
 - Feature optimization
