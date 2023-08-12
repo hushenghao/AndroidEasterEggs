@@ -30,7 +30,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/easter_egg_app_widget_info" />
+                android:resource="@xml/analog_clock_widget_info" />
         </receiver>
 
         <property

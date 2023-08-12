@@ -6,7 +6,7 @@
     android:minHeight="110dp"
     android:minResizeWidth="0dp"
     android:minResizeHeight="0dp"
-    android:previewImage="@drawable/img_app_widget_preview"
+    android:previewImage="@drawable/clock_analog_simple_dial"
     android:previewLayout="@layout/widget_easter_egg_analog_clock"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="2"
