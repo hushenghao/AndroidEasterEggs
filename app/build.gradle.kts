@@ -3,8 +3,6 @@
 import Versions.gitHash
 import Versions.keyprops
 import com.android.build.api.dsl.ManagedVirtualDevice
-import com.dede.easter_eggs.EmojiSvg2XmlTask
-import java.util.*
 
 plugins {
     id("com.android.application")
