@@ -5,15 +5,18 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.R
+import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.Icons.Outlined.language
 import com.dede.android_eggs.views.settings.SettingPref
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Locale
 
 
-class LanguagePref : SettingPref(null, options, SYSTEM) {
+class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
     companion object {
 
         private const val SYSTEM = 0
+        private const val MORE = -1
         private const val CHINESE = 1               // zh, API<24
         private const val SIMPLIFIED_CHINESE = 2    // zh-CN
         private const val TRADITIONAL_CHINESE = 3   // zh-HK, zh-TW
@@ -24,7 +27,21 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
 
         private const val RU = "ru"
 
-        private val options = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        private fun getOptions(): List<Op> {
+            val options = mutableListOf(
+                Op(SYSTEM, iconUnicode = language, titleRes = R.string.summary_system_default),
+                Op(MORE, titleRes = R.string.pref_title_language_more),
+            )
+            val value = getValueByLocale(AppCompatDelegate.getApplicationLocales())
+            val languageOp = languageOptions.find { it.value == value }
+            if (languageOp != null) {
+                options.add(1, languageOp)
+            }
+            return options
+        }
+
+
+        private val languageOptions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             listOf(
                 Op(SIMPLIFIED_CHINESE, titleRes = R.string.language_zh_sc),
                 Op(TRADITIONAL_CHINESE, titleRes = R.string.language_zh_tc),
@@ -32,7 +49,6 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
                 Op(RUSSIAN, titleRes = R.string.language_ru),
                 Op(ITALIAN, titleRes = R.string.language_it),
                 Op(GERMANY, titleRes = R.string.language_de),
-                Op(SYSTEM, iconUnicode = language),
             )
         } else {
             // For API<24 the application does not have a localeList instead it has a single locale
@@ -43,7 +59,6 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
                 Op(RUSSIAN, titleRes = R.string.language_ru),
                 Op(ITALIAN, titleRes = R.string.language_it),
                 Op(GERMANY, titleRes = R.string.language_de),
-                Op(SYSTEM, iconUnicode = language),
             )
         }
 
@@ -97,6 +112,42 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
 
     override fun getValue(context: Context, default: Int): Int {
         return getValueByLocale(AppCompatDelegate.getApplicationLocales())
+    }
+
+    private fun restoreLastOption(lastValue: Int) {
+        val selectedOp = options.find { it.value == lastValue }
+        if (selectedOp != null) {
+            selectedOption(selectedOp)
+        }
+    }
+
+    override fun onPreOptionSelected(context: Context, option: Op): Boolean {
+        if (option.value != MORE) {
+            return false
+        }
+        var choiceIndex = languageOptions.indexOfFirst { it.value == selectedValue }
+        val lastChoiceIndex = choiceIndex
+        val languages = languageOptions.map { context.getString(it.titleRes) }.toTypedArray()
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.pref_title_language)
+            .setSingleChoiceItems(languages, choiceIndex) { _, newIndex ->
+                choiceIndex = newIndex
+            }
+            .setOnDismissListener {
+                if (lastChoiceIndex == choiceIndex) {
+                    restoreLastOption(selectedValue)
+                }
+            }
+            .setNegativeButton(android.R.string.cancel) { _, _ ->
+                restoreLastOption(selectedValue)
+            }
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                if (choiceIndex != lastChoiceIndex) {
+                    onOptionSelected(context, languageOptions[choiceIndex])
+                }
+            }
+            .show()
+        return true
     }
 
     override fun onOptionSelected(context: Context, option: Op) {

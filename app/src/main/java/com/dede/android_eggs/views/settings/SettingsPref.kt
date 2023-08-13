@@ -47,7 +47,7 @@ object SettingsPrefs {
  */
 abstract class SettingPref(
     private val key: String? = null,
-    private val options: List<Op>,
+    open val options: List<Op>,
     default: Int = 0,
 ) : MaterialButtonToggleGroup.OnButtonCheckedListener {
 
@@ -73,13 +73,15 @@ abstract class SettingPref(
         }
     }
 
-    private var selectedValue: Int = default
+    open var selectedValue: Int = default
 
     open val enable: Boolean = true
     open val title: CharSequence? = null
 
     @StringRes
     open val titleRes: Int = View.NO_ID
+
+    private lateinit var binding: ItemSettingPrefGroupBinding
 
     open fun getValue(context: Context, default: Int): Int {
         if (key == null) return default
@@ -103,7 +105,7 @@ abstract class SettingPref(
     }
 
     open fun onCreateView(context: Context): View {
-        val binding = ItemSettingPrefGroupBinding.inflate(LayoutInflater.from(context))
+        binding = ItemSettingPrefGroupBinding.inflate(LayoutInflater.from(context))
         selectedValue = getValue(context, selectedValue)
         if (titleRes != View.NO_ID) {
             binding.tvTitle.setText(titleRes)
@@ -178,10 +180,25 @@ abstract class SettingPref(
         if (newValue == selectedValue) {
             return
         }
+        if (onPreOptionSelected(context, option)) {
+            return
+        }
         setValue(context, newValue)
         selectedValue = newValue
         onOptionSelected(context, option)
     }
 
+    fun selectedOption(option: Op) {
+        if (::binding.isInitialized) {
+            binding.btGroup.check(option.id)
+        } else {
+            selectedValue = option.value
+        }
+    }
+
     open fun onOptionSelected(context: Context, option: Op) {}
+
+    open fun onPreOptionSelected(context: Context, option: Op): Boolean {
+        return false
+    }
 }

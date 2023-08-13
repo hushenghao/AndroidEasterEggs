@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="language_ch" translatable="false">🇨🇳 中</string>
-    <string name="language_zh_sc" translatable="false">🇨🇳 简</string>
-    <string name="language_zh_tc" translatable="false">🇨🇳 繁</string>
+    <string name="language_ch" translatable="false">🇨🇳 中文</string>
+    <string name="language_zh_sc" translatable="false">🇨🇳 简体中文</string>
+    <string name="language_zh_tc" translatable="false">🇨🇳 繁体中文</string>
 
-    <string name="language_en" translatable="false">EN</string>
-    <string name="language_ru" translatable="false">🇷🇺 RU</string>
-    <string name="language_it" translatable="false">🇮🇹 IT</string>
-    <string name="language_de" translatable="false">🇩🇪 DE</string>
+    <string name="language_en" translatable="false">English</string>
+    <string name="language_ru" translatable="false">🇷🇺 Russian</string>
+    <string name="language_it" translatable="false">🇮🇹 Italiano</string>
+    <string name="language_de" translatable="false">🇩🇪 Deutschland</string>
 </resources>
