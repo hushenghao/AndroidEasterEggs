@@ -1,9 +1,11 @@
 package com.dede.android_eggs.main.holders
 
 import android.graphics.drawable.BitmapDrawable
+import android.view.Gravity
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.graphics.drawable.toBitmap
+import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.ItemEasterEggLayoutBinding
 import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.main.entity.Egg.Companion.getIcon
@@ -29,7 +31,11 @@ class GroupHolder(view: View) : VHolder<EggGroup>(view) {
         )
         binding.tvSummary.setOnClickListener {
             val vAdapter = this.vAdapter ?: return@setOnClickListener
-            val popupMenu = PopupMenu(context, binding.tvSummary)
+            val popupMenu = PopupMenu(
+                context, binding.tvSummary, Gravity.NO_GRAVITY,
+                0,
+                R.style.Theme_EggGroup_PopupMenu_ListPopupWindow
+            )
             popupMenu.setForceShowIcon(true)
             var order = eggGroup.child.size
             for (egg in eggGroup.child) {
@@ -37,7 +43,7 @@ class GroupHolder(view: View) : VHolder<EggGroup>(view) {
                     val drawable = egg.getIcon(context)
                     val drawH = drawable.intrinsicHeight
                     val drawW = drawable.intrinsicWidth
-                    val width: Int = 36.dp// Use the width as the basis to align the text
+                    val width: Int = 32.dp// Use the width as the basis to align the text
                     val height: Int = (width / drawW.toFloat() * drawH).roundToInt()
                     icon = BitmapDrawable(
                         context.resources,

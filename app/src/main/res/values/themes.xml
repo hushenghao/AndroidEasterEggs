@@ -62,4 +62,8 @@
     <style name="Widget.BottomSheet.Modal.Scrollable" parent="Widget.Material3.BottomSheet.Modal">
         <item name="paddingBottomSystemWindowInsets">false</item>
     </style>
+
+    <style name="Theme.EggGroup.PopupMenu.ListPopupWindow" parent="Widget.Material3.PopupMenu.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/popupmenu_background_overlay</item>
+    </style>
 </resources>
