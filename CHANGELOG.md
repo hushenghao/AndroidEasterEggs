@@ -1,6 +1,7 @@
 ### v1.9.7
 
 - Add Italian translations
+- Add Germany translations
 - Add Analog clock widget
 - Add welcome page
 - Add App share

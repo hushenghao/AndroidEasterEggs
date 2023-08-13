@@ -20,27 +20,30 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
         private const val ENGLISH = 4               // en
         private const val RUSSIAN = 5               // ru
         private const val ITALIAN = 6               // it
+        private const val GERMANY = 7               // de
 
         private const val RU = "ru"
 
         private val options = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             listOf(
-                Op(SYSTEM, iconUnicode = language),
                 Op(SIMPLIFIED_CHINESE, titleRes = R.string.language_zh_sc),
                 Op(TRADITIONAL_CHINESE, titleRes = R.string.language_zh_tc),
                 Op(ENGLISH, titleRes = R.string.language_en),
                 Op(RUSSIAN, titleRes = R.string.language_ru),
                 Op(ITALIAN, titleRes = R.string.language_it),
+                Op(GERMANY, titleRes = R.string.language_de),
+                Op(SYSTEM, iconUnicode = language),
             )
         } else {
             // For API<24 the application does not have a localeList instead it has a single locale
             // Unsupported region
             listOf(
-                Op(SYSTEM, iconUnicode = language),
                 Op(CHINESE, titleRes = R.string.language_ch),
                 Op(ENGLISH, titleRes = R.string.language_en),
                 Op(RUSSIAN, titleRes = R.string.language_ru),
                 Op(ITALIAN, titleRes = R.string.language_it),
+                Op(GERMANY, titleRes = R.string.language_de),
+                Op(SYSTEM, iconUnicode = language),
             )
         }
 
@@ -52,6 +55,7 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
                 ENGLISH -> LocaleListCompat.create(Locale.ENGLISH)
                 RUSSIAN -> LocaleListCompat.forLanguageTags(RU)
                 ITALIAN -> LocaleListCompat.create(Locale.ITALIAN)
+                GERMANY -> LocaleListCompat.create(Locale.GERMANY)
                 else -> LocaleListCompat.getEmptyLocaleList()
             }
         }
@@ -69,6 +73,7 @@ class LanguagePref : SettingPref(null, options, SYSTEM) {
                 Locale.TRADITIONAL_CHINESE -> TRADITIONAL_CHINESE
                 Locale.ENGLISH -> ENGLISH
                 Locale.ITALIAN -> ITALIAN
+                Locale.GERMANY -> GERMANY
                 else -> SYSTEM
             }
         }

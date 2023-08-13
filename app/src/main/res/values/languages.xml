@@ -7,4 +7,5 @@
     <string name="language_en" translatable="false">EN</string>
     <string name="language_ru" translatable="false">🇷🇺 RU</string>
     <string name="language_it" translatable="false">🇮🇹 IT</string>
+    <string name="language_de" translatable="false">🇩🇪 DE</string>
 </resources>
