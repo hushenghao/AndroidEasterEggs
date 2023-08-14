@@ -2,6 +2,7 @@
 
 - Add Italian translations
 - Add Germany translations
+- Add Spanish translations
 - Add Analog clock widget
 - Add welcome page
 - Add App share

@@ -28,8 +28,10 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         private const val RUSSIAN = 5               // ru
         private const val ITALIAN = 6               // it
         private const val GERMANY = 7               // de
+        private const val PORTUGAL = 8              // es
 
         private const val RU = "ru"
+        private const val ES = "es"
 
         private fun getOptions(): List<Op> {
             val options = mutableListOf(
@@ -44,7 +46,6 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             return options
         }
 
-
         private val languageOptions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             listOf(
                 Op(SIMPLIFIED_CHINESE, titleRes = R.string.language_zh_sc),
@@ -53,6 +54,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
                 Op(RUSSIAN, titleRes = R.string.language_ru),
                 Op(ITALIAN, titleRes = R.string.language_it),
                 Op(GERMANY, titleRes = R.string.language_de),
+                Op(PORTUGAL, titleRes = R.string.language_es),
             )
         } else {
             // For API<24 the application does not have a localeList instead it has a single locale
@@ -63,6 +65,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
                 Op(RUSSIAN, titleRes = R.string.language_ru),
                 Op(ITALIAN, titleRes = R.string.language_it),
                 Op(GERMANY, titleRes = R.string.language_de),
+                Op(PORTUGAL, titleRes = R.string.language_es),
             )
         }
 
@@ -75,6 +78,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
                 RUSSIAN -> LocaleListCompat.forLanguageTags(RU)
                 ITALIAN -> LocaleListCompat.create(Locale.ITALIAN)
                 GERMANY -> LocaleListCompat.create(Locale.GERMANY)
+                PORTUGAL -> LocaleListCompat.forLanguageTags(ES)
                 else -> LocaleListCompat.getEmptyLocaleList()
             }
         }
@@ -85,6 +89,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             }
             when (localeList.toLanguageTags()) {
                 RU -> return RUSSIAN
+                ES -> return PORTUGAL
             }
             return when (localeList.get(0)) {
                 Locale.CHINESE -> CHINESE
