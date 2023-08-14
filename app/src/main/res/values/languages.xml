@@ -2,10 +2,12 @@
 <resources>
     <string name="language_ch" translatable="false">🇨🇳 中文</string>
     <string name="language_zh_sc" translatable="false">🇨🇳 简体中文</string>
-    <string name="language_zh_tc" translatable="false">🇨🇳 繁体中文</string>
+    <string name="language_zh_tc" translatable="false">🇨🇳 繁體中文</string>
 
     <string name="language_en" translatable="false">English</string>
-    <string name="language_ru" translatable="false">🇷🇺 Russian</string>
+    <string name="language_ru" translatable="false">🇷🇺 Русский язык</string>
     <string name="language_it" translatable="false">🇮🇹 Italiano</string>
-    <string name="language_de" translatable="false">🇩🇪 Deutschland</string>
+    <string name="language_de" translatable="false">🇩🇪 Deutsch</string>
+    <string name="language_es" translatable="false">Español</string>
+    <string name="language_pt" translatable="false">Português</string>
 </resources>
