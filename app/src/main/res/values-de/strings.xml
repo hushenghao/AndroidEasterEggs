@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="summary_android_waiting">Warten…</string>
-    <string name="summary_android_release_pushed">Die Finalversion wurde veröffentlicht</string>
+    <string name="summary_android_release_pushed">Die Finale Version wurde veröffentlicht</string>
     <string name="title_open_with">Öffnen mit</string>
     <string name="label_translation">Übersetzen</string>
     <string name="label_beta">Laden Sie die Beta-Version herunter</string>
-    <string name="label_timeline">Zeitleine</string>
+    <string name="label_timeline">Zeitleiste</string>
     <string name="label_privacy_policy">Privatsphäre &amp; Datenschutz</string>
     <string name="label_email">Feedback geben</string>
-    <string name="label_star">Stern</string>
-    <string name="label_timeline_title">Zeitleine, Meilensteine und die neusten Aktualisierungen</string>
+    <string name="label_star">Bewerten</string>
+    <string name="label_timeline_title">Zeitleiste, Meilensteine und die neusten Aktualisierungen</string>
     <string name="label_timeline_releases">Ausführungen</string>
     <string name="message_trypophobia_warning">Dies ist eine Warnung für Personen mit einer &lt;b&gt;Trypophobie&lt;/b&gt; , dass einige Bilder Unbehagen verursachen können. Möchtest du fortfahren?</string>
     <string name="label_settings">Einstellungen</string>
     <string name="label_project_desc">Das Projekt enthält den vollständigen Code der Android-Easter Eggs. Ziel ist eine Kompatibilität aller Easter Eggs herzustellen, um sicherzustellen, dass die meisten Geräte verschiedene Versionen von Easter Eggs ausführen können, Ziel ist es außerdem, nicht zu viele Änderungen am Easter Egg Code vornehmen. Einige Easter Eggs nutzen funktionen von neueren Android-Versionen und können daher evtl. nicht auf alllen Android-Versionen korrekt ausgeführt werden.</string>
     <string name="pref_title_icon_shape_override">Symbolform</string>
     <string name="pref_title_language">Sprache</string>
+    <string name="pref_title_language_more">Mehr</string>
     <string name="pref_title_theme">Thema und Aussehen</string>
     <string name="pref_title_icon_visual_effects">Visuelle Symboleffekte</string>
     <string name="summary_system_default">Systemstandard</string>

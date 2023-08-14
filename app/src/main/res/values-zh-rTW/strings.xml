@@ -16,7 +16,9 @@
     <string name="label_project_desc">此專案包含系統彩蛋的完整程式碼，旨在對系統彩蛋的整理和相容，以保證大多數裝置可以體驗到不同版本的彩蛋，不會對系統彩蛋程式碼做過多修改。部分版本使用了系統新特性，較低版本只能使用部分功能。</string>
     <string name="pref_title_icon_shape_override">圖示形狀</string>
     <string name="pref_title_language">語言</string>
+    <string name="pref_title_language_more">更多</string>
     <string name="pref_title_theme">主題</string>
+    <string name="pref_title_dynamic_color">動態色彩</string>
     <string name="pref_title_icon_visual_effects">圖示視覺效果</string>
     <string name="summary_system_default">預設</string>
     <string name="summary_theme_dark_mode">深色</string>
