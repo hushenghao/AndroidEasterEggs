@@ -7,6 +7,7 @@
     <string name="label_beta">Получить бета-версию</string>
     <string name="label_timeline">Хронология</string>
     <string name="label_privacy_policy">Конфиденциальность</string>
+    <string name="label_license">Лицензия</string>
     <string name="label_email">Обратная связь</string>
     <string name="label_star">Оценить приложение</string>
     <string name="label_timeline_title">Хронология, вехи и обновления</string>
@@ -14,12 +15,12 @@
     <string name="message_trypophobia_warning">Это предупреждение для тех, у кого &lt;b&gt;трипофобия&lt;/b&gt; — некоторые изображения могут вызывать дискомфорт. Вы хотите продолжить?</string>
     <string name="label_settings">Настройки</string>
     <string name="label_project_desc">Проект содержит весь код системных пасхальных яиц, целью которого является организация и совместимость с различными версиями системы. Это гарантирует, что на большинстве устройств можно экспериментировать с пасхальными яйцами из разных систем, не требуя значительных изменений системного кода. В некоторых версиях используются новые системные функции, в то время как более старые версии могут иметь доступ только к некоторым определённым функциям.</string>
-    <string name="pref_title_icon_shape_override">Форма иконок</string>
+    <string name="pref_title_icon_shape_override">Форма значков</string>
     <string name="pref_title_language">Язык</string>
     <string name="pref_title_language_more">Ещё</string>
     <string name="pref_title_theme">Тема</string>
     <string name="pref_title_dynamic_color">Динамические цвета</string>
-    <string name="pref_title_icon_visual_effects">Визуальные эффекты иконок</string>
+    <string name="pref_title_icon_visual_effects">Визуальные эффекты значков</string>
     <string name="summary_system_default">По умолчанию</string>
     <string name="summary_theme_dark_mode">Тёмная</string>
     <string name="summary_theme_light_mode">Светлая</string>
