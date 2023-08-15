@@ -131,7 +131,7 @@ object EggActionHelp {
             private val token = Any()
 
             private var receiver: PinShortcutReceiver? = null
-            private fun getPendingIntent(context: Context): PendingIntent {
+            private fun getPendingIntent(context: Context): PendingIntent? {
                 return PendingIntentCompat.getBroadcast(
                     context.applicationContext,
                     0,
@@ -141,7 +141,7 @@ object EggActionHelp {
                 )
             }
 
-            fun registerCallbackWithTimeout(context: Context): IntentSender {
+            fun registerCallbackWithTimeout(context: Context): IntentSender? {
                 var receiver = this.receiver
                 if (receiver == null) {
                     receiver = PinShortcutReceiver()
@@ -158,7 +158,7 @@ object EggActionHelp {
                 }
                 delay(3000, token) { unregister(context) }
 
-                return getPendingIntent(context).intentSender
+                return getPendingIntent(context)?.intentSender
             }
 
             private fun unregister(context: Context) {

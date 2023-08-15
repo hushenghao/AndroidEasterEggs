@@ -24,6 +24,7 @@ class GroupHolder(view: View) : VHolder<EggGroup>(view) {
     private val delegate = EggHolder(view)
     private val binding: ItemEasterEggLayoutBinding = delegate.binding
 
+    @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun onBindViewHolder(eggGroup: EggGroup) {
         delegate.onBindViewHolder(eggGroup.selectedEgg)
         binding.tvSummary.updateCompoundDrawablesRelative(

@@ -5,9 +5,14 @@ package com.dede.basic
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.view.ContextThemeWrapper
+import androidx.core.content.ContextCompat
+import androidx.core.os.ConfigurationCompat
+import androidx.core.os.LocaleListCompat
+import java.util.Locale
 
 
 val globalContext: Context get() = GlobalContext.globalContext
@@ -43,10 +48,40 @@ fun Context.createThemeWrapperContext(): Context {
         }
     }
     val config = Configuration()
+    val locales = ContextCompat.getContextForLanguage(this).getConfigurationLocales()
+    config.setLocales(locales)
     config.fontScale = 0f
     config.uiMode = mode or (config.uiMode and Configuration.UI_MODE_NIGHT_MASK.inv())
     themeWrapper.applyOverrideConfiguration(config)
     return themeWrapper
+}
+
+fun Context.createLocalesContext(locales: LocaleListCompat): Context {
+    val config = Configuration(resources.configuration)
+    config.setLocales(locales)
+    return this.createConfigurationContext(config)
+}
+
+fun Configuration.setLocales(locales: LocaleListCompat) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        ConfigurationCompat.setLocales(this, locales)
+    } else if (!locales.isEmpty) {
+        val locale = locales.get(0).tempFixLocaleForApi23()
+        setLocale(locale)
+    }
+}
+
+fun Context.getConfigurationLocales(): LocaleListCompat {
+    val localeConfig = ContextCompat.getContextForLanguage(this).resources.configuration
+    return ConfigurationCompat.getLocales(localeConfig)
+}
+
+// temp fix api 23
+private fun Locale?.tempFixLocaleForApi23(): Locale? {
+    if (this == Locale.CHINESE) {
+        return Locale.SIMPLIFIED_CHINESE
+    }
+    return this
 }
 
 fun Context.createScaleWrapper(scale: Float): Context {

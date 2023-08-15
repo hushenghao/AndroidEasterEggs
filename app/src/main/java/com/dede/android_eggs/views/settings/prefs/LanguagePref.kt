@@ -10,8 +10,8 @@ import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons.Outlined.language
 import com.dede.android_eggs.util.CustomTabsBrowser
-import com.dede.android_eggs.util.createLocaleContext
 import com.dede.android_eggs.views.settings.SettingPref
+import com.dede.basic.createLocalesContext
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Locale
 
@@ -143,15 +143,16 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
                 choiceIndex = index
                 // change to locale text
                 val dialog = dialogInterface as Dialog
-                val locales = getLocaleByValue(languageOptions[index].value)
-                val wrapper = context.createLocaleContext(locales)
-                dialog.setTitle(wrapper.getString(R.string.pref_title_language))
+                val value = languageOptions[index].value
+                val locales = getLocaleByValue(value)
+                val localesCtx = context.createLocalesContext(locales)
+                dialog.setTitle(localesCtx.getString(R.string.pref_title_language))
                 dialog.findViewById<TextView>(android.R.id.button1)?.text =
-                    wrapper.getString(android.R.string.ok)
+                    localesCtx.getString(android.R.string.ok)
                 dialog.findViewById<TextView>(android.R.id.button2)?.text =
-                    wrapper.getString(android.R.string.cancel)
+                    localesCtx.getString(android.R.string.cancel)
                 dialog.findViewById<TextView>(android.R.id.button3)?.text =
-                    wrapper.getString(R.string.label_translation)
+                    localesCtx.getString(R.string.label_translation)
             }
             .setOnDismissListener {
                 if (lastChoiceIndex == choiceIndex) {

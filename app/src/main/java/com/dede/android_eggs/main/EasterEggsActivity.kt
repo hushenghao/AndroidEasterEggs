@@ -24,10 +24,7 @@ class EasterEggsActivity : AppCompatActivity(R.layout.activity_easter_eggs) {
         setSupportActionBar(binding.toolbar)
 
         BackPressedHandler(this).register()
-    }
 
-    override fun onResume() {
-        super.onResume()
         StartupPage.show(this)
     }
 

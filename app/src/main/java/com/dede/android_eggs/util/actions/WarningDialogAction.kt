@@ -44,11 +44,11 @@ class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
         val agreed = activity.getBoolean(info.key, false)
         if (agreed) return
 
+        val wrapperContext = activity.createThemeWrapperContext()
         val spanned = HtmlCompat.fromHtml(
-            activity.getString(info.message),
+            wrapperContext.getString(info.message),
             HtmlCompat.FROM_HTML_MODE_COMPACT
         )
-        val wrapperContext = activity.createThemeWrapperContext()
         val icon = FontIconsDrawable(wrapperContext, Icons.Rounded.tips_and_updates, 48f)
         val color =
             MaterialColors.getColor(wrapperContext, M3R.attr.colorControlNormal, Color.BLACK)

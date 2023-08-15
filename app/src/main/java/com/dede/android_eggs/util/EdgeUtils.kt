@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package com.dede.android_eggs.util
 
 import android.annotation.SuppressLint
