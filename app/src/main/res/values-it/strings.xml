@@ -7,6 +7,7 @@
     <string name="label_beta">Ottieni versione Beta</string>
     <string name="label_timeline">Cronologia</string>
     <string name="label_privacy_policy">Privacy</string>
+    <string name="label_license">Licenza</string>
     <string name="label_email">Feedback</string>
     <string name="label_star">Vota l\'app</string>
     <string name="label_timeline_title">Cronologia, tappe e aggiornamenti</string>
@@ -18,6 +19,7 @@
     <string name="pref_title_language">Lingua</string>
     <string name="pref_title_language_more">Altro</string>
     <string name="pref_title_theme">Tema</string>
+    <string name="pref_title_dynamic_color">Colore dinamico</string>
     <string name="pref_title_icon_visual_effects">Effetti visivi dell\'icona</string>
     <string name="summary_system_default">Predefinito</string>
     <string name="summary_theme_dark_mode">Scuro</string>
