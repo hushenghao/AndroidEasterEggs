@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="summary_android_waiting">Esperando…</string>
+    <string name="summary_android_release_pushed">A versão de lançamento final foi empurrada</string>
+    <string name="title_open_with">Abrir com</string>
     <string name="label_translation">Tradução</string>
+    <string name="label_beta">Obter Beta</string>
+    <string name="label_timeline">Cronologia</string>
     <string name="label_privacy_policy">Privacidade</string>
+    <string name="label_license">Licença</string>
+    <string name="label_email">Opiniões</string>
+    <string name="label_star">Estrela</string>
+    <string name="label_timeline_title">Cronologia, marcos e atualizações</string>
     <string name="label_timeline_releases">Versões</string>
+    <string name="message_trypophobia_warning">Isto é um aviso para aqueles com &lt;b&gt;Tripofobia&lt;/b&gt; de que algumas imagens podem causar desconforto. Quer continuar?</string>
     <string name="label_settings">Configurações</string>
+    <string name="label_project_desc">O projeto contém o código completo do sistema de Easter eggs, que visa organizar e compatibilizar com os Easter eggs do sistema, de modo a garantir que a maioria dos dispositivos possa experimentar diferentes versões dos Easter eggs e não fará muitas modificações no código do Easter egg do sistema. Algumas versões usam novos recursos do sistema e as versões inferiores podem usar apenas algumas funções.</string>
+    <string name="pref_title_icon_shape_override">Forma do ícone</string>
+    <string name="pref_title_language">Idioma</string>
+    <string name="pref_title_language_more">Mais</string>
     <string name="pref_title_theme">Tema</string>
+    <string name="pref_title_dynamic_color">Cor Dinâmica</string>
+    <string name="pref_title_icon_visual_effects">Efeitos Visuais do Ícone</string>
+    <string name="summary_system_default">Padrão</string>
+    <string name="summary_theme_dark_mode">Escuro</string>
+    <string name="summary_theme_light_mode">Claro</string>
+    <string name="label_add_shortcut">Atalho</string>
+    <string name="label_donate">Doar</string>
+    <string name="preference_on">Ligado</string>
+    <string name="preference_off">Desligado</string>
+    <string name="toast_shortcut_added">Atalho adicionado</string>
+    <string name="toast_github_sponsor">Pode doar através do Github Sponsor do projeto</string>
+    <string name="app_widget_description">Este é o relógio analógico dos Easter eggs</string>
+    <string name="action_agree">Aceitar</string>
+    <string name="summary_browse_privacy_policy">Leia e concorde com os nossos Termos de Privacidade para continuar.</string>
+    <string name="label_welcome">Bem-vindo ao Catálogo de Easter eggs 🎉🎉🎉</string>
+    <string name="label_share">Partilhar</string>
 </resources>
