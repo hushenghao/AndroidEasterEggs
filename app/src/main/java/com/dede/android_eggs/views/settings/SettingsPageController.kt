@@ -55,6 +55,7 @@ class SettingsPageController(private val activity: FragmentActivity) : MenuProvi
         menu.findItem(R.id.menu_settings).icon = settingsIcon
 
         val searchView = menu.findItem(R.id.menu_search).actionView as SearchView
+        searchView.queryHint = activity.getText(R.string.label_search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return true

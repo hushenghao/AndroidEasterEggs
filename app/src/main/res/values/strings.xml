@@ -64,4 +64,5 @@
     <string name="summary_browse_privacy_policy">Read and agree to our Privacy Policy to continue.</string>
     <string name="label_welcome">Welcome to Easter Egg Catalogs 🎉🎉🎉</string>
     <string name="label_share">Share</string>
+    <string name="label_search_hint">Search…</string>
 </resources>

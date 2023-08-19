@@ -65,5 +65,6 @@
 
     <style name="Theme.EggGroup.PopupMenu.ListPopupWindow" parent="Widget.Material3.PopupMenu.ListPopupWindow">
         <item name="android:popupBackground">@drawable/popupmenu_background_overlay</item>
+        <item name="android:dropDownHorizontalOffset">-12dp</item>
     </style>
 </resources>

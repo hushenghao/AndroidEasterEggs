@@ -3,6 +3,7 @@ package com.dede.android_eggs.main.holders
 import android.graphics.drawable.BitmapDrawable
 import android.view.Gravity
 import android.view.View
+import androidx.appcompat.view.menu.MenuPopupAccessor
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.graphics.drawable.toBitmap
 import com.dede.android_eggs.R
@@ -44,7 +45,7 @@ class GroupHolder(view: View) : VHolder<EggGroup>(view) {
                     val drawable = egg.getIcon(context)
                     val drawH = drawable.intrinsicHeight
                     val drawW = drawable.intrinsicWidth
-                    val width: Int = 32.dp// Use the width as the basis to align the text
+                    val width: Int = 28.dp// Use the width as the basis to align the text
                     val height: Int = (width / drawW.toFloat() * drawH).roundToInt()
                     icon = BitmapDrawable(
                         context.resources,
@@ -52,6 +53,7 @@ class GroupHolder(view: View) : VHolder<EggGroup>(view) {
                     )
                 }
             }
+            MenuPopupAccessor.setTransitions(popupMenu)
             popupMenu.setOnMenuItemClickListener {
                 val index = eggGroup.child.indexOfFirst { egg ->
                     egg.androidRes == it.itemId
