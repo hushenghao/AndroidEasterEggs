@@ -15,7 +15,8 @@
     "brightness_low",
     "palette",
     "settings",
-    "swipe_left_alt",
+    "swipe_left",
+    "swipe_right",
     "tips_and_updates"
   ],
   "filled": []

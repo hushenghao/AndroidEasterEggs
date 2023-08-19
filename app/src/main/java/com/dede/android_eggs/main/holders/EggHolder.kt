@@ -114,12 +114,9 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
                 intArrayOf(android.R.attr.state_selected),
                 FontIconsDrawable(context, Icons.Rounded.app_shortcut, color)
             )
-            addState(
-                StateSet.NOTHING,
-                FontIconsDrawable(context, Icons.Rounded.swipe_left_alt, color)
-            )
+            val icon = if (isRtl) Icons.Rounded.swipe_right else Icons.Rounded.swipe_left
+            addState(StateSet.NOTHING, FontIconsDrawable(context, icon, color))
             setBounds(0, 0, 30.dp, 30.dp)
-            isAutoMirrored = true
         }
         binding.background.tvAddShortcut.updateCompoundDrawablesRelative(end = drawable)
         binding.root.swipeListener = SwipeAddShortcut(

@@ -13,6 +13,7 @@
         <item name="android:windowSplashScreenBackground" tools:targetApi="s">
             @color/splash_background_color
         </item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog.Centered</item>
     </style>
 
     <style name="Theme.EasterEggs" parent="Base.EasterEggs">
