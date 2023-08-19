@@ -548,6 +548,9 @@ public class MLand extends FrameLayout {
         }
 
         if (!mAnimating) {
+            if (mAnim == null) {
+                reset();
+            }
             mAnim.start();
             mAnimating = true;
         }
