@@ -38,5 +38,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.startup)
+    implementation(libs.google.material)
     implementation(libs.io.coil)
 }
