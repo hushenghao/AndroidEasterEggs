@@ -2,13 +2,16 @@ package com.dede.android_eggs.util.actions
 
 import android.app.Activity
 import android.graphics.Color
+import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.text.HtmlCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.util.ActivityActionDispatcher
+import com.dede.android_eggs.util.updateCompoundDrawablesRelative
 import com.dede.basic.createThemeWrapperContext
+import com.dede.basic.dp
 import com.dede.basic.getBoolean
 import com.dede.basic.putBoolean
 import com.google.android.material.color.MaterialColors
@@ -49,12 +52,11 @@ class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
             wrapperContext.getString(info.message),
             HtmlCompat.FROM_HTML_MODE_COMPACT
         )
-        val icon = FontIconsDrawable(wrapperContext, Icons.Rounded.tips_and_updates, 48f)
+        val icon = FontIconsDrawable(wrapperContext, Icons.Rounded.tips_and_updates, 24f)
         val color =
             MaterialColors.getColor(wrapperContext, M3R.attr.colorControlNormal, Color.BLACK)
         icon.setColor(color)
         MaterialAlertDialogBuilder(wrapperContext)
-            .setIcon(icon)
             .setTitle(info.title)
             .setMessage(spanned)
             .setCancelable(false)
@@ -65,6 +67,11 @@ class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
                 activity.finish()
             }
             .show()
+            .apply {
+                val titleView = findViewById<TextView>(androidx.appcompat.R.id.alertTitle)
+                titleView?.compoundDrawablePadding = 6.dp
+                titleView?.updateCompoundDrawablesRelative(start = icon)
+            }
     }
 
 }
