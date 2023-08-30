@@ -60,7 +60,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             // For API<24 the application does not have a localeList instead it has a single locale
             // Unsupported region
             listOf(
-                Op(CHINESE, titleRes = R.string.language_ch),
+                Op(CHINESE, titleRes = R.string.language_zh),
                 Op(ENGLISH, titleRes = R.string.language_en),
                 Op(RUSSIAN, titleRes = R.string.language_ru),
                 Op(ITALIAN, titleRes = R.string.language_it),
