@@ -21,7 +21,8 @@ jobs:
           curl --location 'https://api.crowdin.com/api/v2/projects/597587/languages/progress' \
             --header 'Authorization: Bearer ${{ secrets.CROWDIN_PERSONAL_TOKEN }}' \
             --output 'assets/json/crowdin_project_progress.json'
-          git commit -a -m "Update Crowdin project progress json"
+          git add 'assets/json/crowdin_project_progress.json'
+          git commit -m "Update Crowdin project progress json"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
