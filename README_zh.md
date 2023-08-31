@@ -64,6 +64,17 @@
 * <span id='id_android7'>在 Android 7 (API level 24) 中，扩展了 [快速设置](https://developer.android.google.cn/about/versions/nougat/android-7.0?hl=zh-cn#tile_api) 的范围，使其更加有用而且更方便。</span>
 * <span id='id_egg_name'>老版本的彩蛋没有具体命名，这里使用系统版本别名。</span>
 
+## 贡献
+
+请查看我们的[贡献文档](.github/CONTRIBUTING.md)来报告问题，或参与应用程序和文档的[翻译](https://zh.crowdin.com/project/easter-eggs)。
+
+<details>
+<summary>查看所有语言的翻译状态。</summary>
+
+[![](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhushenghao%2FAndroidEasterEggs%2Fmaster%2Fassets%2Fjson%2Fcrowdin_project_progress.json&query=%24.data%5B%3A%5D.data%5B'languageId'%2C'translationProgress'%5D&style=flat-square&label=Translation%20Progress(%25)&labelColor=273238&color=fff)](https://zh.crowdin.com/project/easter-eggs)
+
+</details>
+
 ## 编译
 
 前提是已安装了 `Java17` 和 `Android SDK`，并配置了对应环境变量。
@@ -90,10 +101,6 @@ gradlew.bat assembleRelease
 ```shell
 ./gradlew app:pixel4Api33DebugAndroidTest
 ```
-
-## 贡献
-
-请查看我们的[贡献文档](.github/CONTRIBUTING.md)来报告问题，或参与应用程序和文档的[翻译](https://zh.crowdin.com/project/easter-eggs)。
 
 ## 其他
 

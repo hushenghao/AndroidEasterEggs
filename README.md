@@ -64,6 +64,17 @@ The project contains the complete code of the system Easter eggs, which aims to 
 * <span id='id_android7'>In Android 7.0 (API level 24), expanded the scope of [Quick Settings](https://developer.android.com/about/versions/nougat/android-7.0#tile_api) to make it even more useful and convenient.</span>
 * <span id='id_egg_name'>There is no specific name for the old version of Easter eggs, and the system version alias are used here.</span>
 
+## Contributing
+
+See our [Contributing doc](.github/CONTRIBUTING.md) for information on how to report issues, [translate](https://crowdin.com/project/easter-eggs) the app into your language or help with development.
+
+<details>
+<summary>View translation status for all languages.</summary>
+
+[![](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhushenghao%2FAndroidEasterEggs%2Fmaster%2Fassets%2Fjson%2Fcrowdin_project_progress.json&query=%24.data%5B%3A%5D.data%5B'languageId'%2C'translationProgress'%5D&style=flat-square&label=Translation%20Progress(%25)&labelColor=273238&color=fff)](https://crowdin.com/project/easter-eggs)
+
+</details>
+
 ## Build
 
 Prerequisites The `Java17` and `Android SDK` have been installed, and environment variables have been configured.
@@ -90,10 +101,6 @@ Device type for emulators to be managed by the Android Gradle Plugin.
 ```shell
 ./gradlew app:pixel4Api33DebugAndroidTest
 ```
-
-## Contributing
-
-See our [Contributing doc](.github/CONTRIBUTING.md) for information on how to report issues, [translate](https://crowdin.com/project/easter-eggs) the app into your language or help with development.
 
 ## Other
 
