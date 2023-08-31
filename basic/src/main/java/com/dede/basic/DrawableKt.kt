@@ -7,6 +7,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.LruCache
 import android.util.Xml
 import androidx.annotation.DrawableRes
@@ -64,6 +65,11 @@ fun Context.requireDrawable(@DrawableRes id: Int): Drawable {
 }
 
 fun Context.createVectorDrawableCompat(@DrawableRes id: Int): VectorDrawableCompat {
+    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
+        // https://issuetracker.google.com/issues/37138664
+        @Suppress("ResourceType")
+        return createVectorDrawableCompatFromXml(id)
+    }
     return requireNotNull(VectorDrawableCompat.create(this.resources, id, this.theme))
 }
 

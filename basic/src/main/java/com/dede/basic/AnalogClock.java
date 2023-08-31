@@ -80,20 +80,20 @@ public class AnalogClock extends View {
 
         mDial = a.getDrawable(R.styleable.AnalogClock_dial);
         if (mDial == null) {
-            mDial = ContextCompat.getDrawable(context, R.drawable.clock_dial);
-            setDrawableTint((VectorDrawable) mDial, "system_neutral1_200");
+            mDial = DrawableKt.createVectorDrawableCompat(context, R.drawable.clock_dial);
+            setDrawableTint(mDial, "system_neutral1_200");
         }
 
         mHourHand = a.getDrawable(R.styleable.AnalogClock_hand_hour);
         if (mHourHand == null) {
-            mHourHand = ContextCompat.getDrawable(context, R.drawable.clock_hand_hour);
-            setDrawableTint((VectorDrawable) mHourHand, "system_accent1_700");
+            mHourHand = DrawableKt.createVectorDrawableCompat(context, R.drawable.clock_hand_hour);
+            setDrawableTint(mHourHand, "system_accent1_700");
         }
 
         mMinuteHand = a.getDrawable(R.styleable.AnalogClock_hand_minute);
         if (mMinuteHand == null) {
-            mMinuteHand = ContextCompat.getDrawable(context, R.drawable.clock_hand_minute);
-            setDrawableTint((VectorDrawable) mMinuteHand, "system_accent2_500");
+            mMinuteHand = DrawableKt.createVectorDrawableCompat(context, R.drawable.clock_hand_minute);
+            setDrawableTint(mMinuteHand, "system_accent2_500");
         }
         a.recycle();
 
@@ -103,7 +103,7 @@ public class AnalogClock extends View {
         mDialHeight = mDial.getIntrinsicHeight();
     }
 
-    private void setDrawableTint(VectorDrawable drawable, String tintColor) {
+    private void setDrawableTint(Drawable drawable, String tintColor) {
         if (drawable == null) return;
         try {
             int systemColor = DrawableKt.getSystemColor(getContext(), tintColor);
