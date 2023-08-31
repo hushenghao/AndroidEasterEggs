@@ -17,8 +17,6 @@ files:
         fr-rFR: "fr"
         pt-rPT: "pt"
         de-rDE: "de"
-        ja-rJP: "ja"
-        ko-rKR: "ko"
 
   - source: app/**/res/values/languages.xml
     translation: app/**/res/values-%android_code%/languages.xml
@@ -32,5 +30,3 @@ files:
         fr-rFR: "fr"
         pt-rPT: "pt"
         de-rDE: "de"
-        ja-rJP: "ja"
-        ko-rKR: "ko"
