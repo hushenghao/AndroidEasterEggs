@@ -32,9 +32,13 @@ jobs:
       # Reuse the crowdin environment
       - name: Get Crowdin Project Progress
         run: |
+          mkdir -p 'assets/json'
           curl --location 'https://api.crowdin.com/api/v2/projects/597587/languages/progress' \
             --header 'Authorization: Bearer ${{ secrets.CROWDIN_PERSONAL_TOKEN }}' \
             --output 'assets/json/crowdin_project_progress.json'
-      - name: Commit Crowdin project progress json
-        run: |
           git commit -a -m "Update Crowdin project progress json"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: l10n_crowdin_translations
