@@ -7,6 +7,7 @@
 - Add welcome page
 - Add App share
 - Feature optimization
+- Fix Vector drawable on Android 7.1 
 
 ### v1.9.6 (2023-08-05)
 
