@@ -28,3 +28,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      # Reuse the crowdin environment
+      - name: Get Crowdin Project Progress
+        run: |
+          curl --location 'https://api.crowdin.com/api/v2/projects/597587/languages/progress' \
+            --header 'Authorization: Bearer ${{ secrets.CROWDIN_PERSONAL_TOKEN }}' \
+            --output 'assets/json/crowdin_project_progress.json'
+      - name: Commit Crowdin project progress json
+        run: |
+          git commit -a -m "Update Crowdin project progress json"
