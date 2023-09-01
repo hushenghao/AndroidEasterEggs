@@ -17,7 +17,7 @@ body:
    id: version
    attributes:
     label: Easter Eggs version / Easter Eggs 版本
-    description: Please select the version you are using / 请选择正在使用的版本
+    description: Please select the version you are using / 请说明正在使用的版本
     placeholder: |
      e.g. v1.9.7
    validations:
