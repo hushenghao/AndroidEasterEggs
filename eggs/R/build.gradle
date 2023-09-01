@@ -10,15 +10,6 @@ android {
         consumerProguardFiles "consumer-rules.pro"
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-
-    buildFeatures {
-        buildConfig = false
-    }
-
 	sourceSets {
 		main {
 			res.srcDirs = ['res']
@@ -33,17 +24,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    kotlinOptions {
-        jvmTarget = '17'
-    }
-
 }
 
 dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)
     implementation(libs.androidx.recyclerview)
-    implementation project(path: ':basic')
 }
 

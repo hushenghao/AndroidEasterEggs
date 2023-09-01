@@ -24,7 +24,7 @@ android {
         versionName = "1.9.7"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        resourceConfigurations.addAll(listOf("zh", "zh-rTW", "en", "ru", "it", "de", "es", "pt"))
+        resourceConfigurations += listOf("zh", "zh-rTW", "en", "ru", "it", "de", "es", "pt")
 
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
         buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")
@@ -74,14 +74,6 @@ android {
     packaging {
         // only coil local image
         resources.excludes += "okhttp3/**"
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
     }
 
     testOptions {

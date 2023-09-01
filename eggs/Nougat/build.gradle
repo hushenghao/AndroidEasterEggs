@@ -6,16 +6,6 @@ android {
 
     defaultConfig {
         minSdkVersion Versions.MIN_SDK
-
-    }
-
-    buildFeatures {
-        buildConfig = false
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
     }
 
 	sourceSets {
@@ -32,13 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.dynamicanimation)
     implementation(libs.androidx.annotation)
-    implementation project(path: ':basic')
 }
-

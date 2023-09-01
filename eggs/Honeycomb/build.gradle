@@ -3,16 +3,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion Versions.COMPILE_SDK
-    buildToolsVersion Versions.BUILD_TOOLS
+    compileSdkVersion = Versions.COMPILE_SDK
+    buildToolsVersion = Versions.BUILD_TOOLS
 
     defaultConfig {
         minSdkVersion Versions.MIN_SDK
-        targetSdkVersion Versions.TARGET_SDK
-    }
-
-    buildFeatures {
-        buildConfig = false
     }
 
     buildTypes {
@@ -21,12 +16,4 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-}
-
-dependencies {
-    implementation project(path: ':basic')
 }

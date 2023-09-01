@@ -11,15 +11,6 @@ android {
         minSdkVersion Versions.MIN_SDK
     }
 
-    buildFeatures {
-        buildConfig = false
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-
     sourceSets {
         main {
             res.srcDirs = ['res']
@@ -36,7 +27,5 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)
     implementation(libs.androidx.recyclerview)
-    implementation project(path: ':basic')
-    implementation(libs.io.coil)
 }
 

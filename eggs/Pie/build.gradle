@@ -9,15 +9,6 @@ android {
         minSdkVersion Versions.MIN_SDK
     }
 
-    buildFeatures {
-        buildConfig = false
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-
 	sourceSets {
 		main {
 			res.srcDirs = ['res']
@@ -32,15 +23,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    kotlinOptions {
-        jvmTarget = '17'
-    }
-
 }
 
 dependencies {
     implementation(libs.androidx.appcompat)
-    implementation project(path: ':basic')
 }
 
