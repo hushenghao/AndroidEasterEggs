@@ -25,13 +25,13 @@ fun <T : BaseExtension> Project.android(configure: Action<T>? = null) {
             }
         }
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
+            sourceCompatibility = Versions.JAVA_VERSION
+            targetCompatibility = Versions.JAVA_VERSION
         }
         val kotlinOptions: KotlinJvmOptions? =
             (this as ExtensionAware).extensions.findByType()
         if (kotlinOptions != null) {
-            kotlinOptions.jvmTarget = "17"
+            kotlinOptions.jvmTarget = Versions.JAVA_VERSION.toString()
         }
         configure?.execute(this as T)
     }
