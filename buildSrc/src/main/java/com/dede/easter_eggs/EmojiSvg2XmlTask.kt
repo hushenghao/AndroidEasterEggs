@@ -1,13 +1,16 @@
 package com.dede.easter_eggs
 
 import com.android.ide.common.vectordrawable.Svg2Vector
-import okhttp3.OkHttpClient
-import okhttp3.Request
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import java.io.File
+import java.net.URI
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
+import java.net.http.HttpResponse.BodyHandlers
 
 /**
  * Download emoji svg and convert to android drawable xml.
@@ -60,7 +63,7 @@ open class EmojiSvg2XmlTask : DefaultTask() {
         "🐢", "✨", "🌟", "👑"//
     )
 
-    private lateinit var httpClient: OkHttpClient
+    private lateinit var httpClient: HttpClient
 
     init {
         if (!::svgOutputDir.isInitialized) {
@@ -69,7 +72,9 @@ open class EmojiSvg2XmlTask : DefaultTask() {
     }
 
     private fun prepare() {
-        httpClient = OkHttpClient.Builder().build()
+        httpClient = HttpClient.newBuilder()
+            .followRedirects(HttpClient.Redirect.NORMAL)
+            .build()
         if (!svgOutputDir.exists()) {
             svgOutputDir.mkdirs()
         }
@@ -118,27 +123,19 @@ open class EmojiSvg2XmlTask : DefaultTask() {
             postfix = ".svg"
         ).toString()
         val url = EMOJI_SVG_URL.format(svgFileName)
+        val svgFile = File(svgOutputDir, svgFileName)
         val request = createHttpRequest(url)
-        val response = httpClient.newCall(request).execute()
-        val responseBody = response.body
-        if (response.code != 200 || responseBody == null) {
-            println("Download emoji svg failure: ${response.code} -> $url")
+        val response = httpClient.send(request, BodyHandlers.ofFile(svgFile.toPath()))
+        if (response.statusCode() != 200) {
+            println("Download emoji svg failure: ${response.statusCode()} -> $url")
             return null
         }
-
-        val svgFile = File(svgOutputDir, svgFileName)
-        responseBody.byteStream().use { input ->
-            svgFile.outputStream().use {
-                input.copyTo(it)
-            }
-        }
-        return svgFile
+        return response.body().toFile()
     }
 
-    private fun createHttpRequest(url: String): Request {
-        return Request.Builder()
-            .url(url)
-            .get()
+    private fun createHttpRequest(url: String): HttpRequest {
+        return HttpRequest.newBuilder(URI.create(url))
+            .GET()
             .build()
     }
 

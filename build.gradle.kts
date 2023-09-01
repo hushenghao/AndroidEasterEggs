@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.BaseExtension
@@ -33,6 +31,7 @@ fun <T : BaseExtension> Project.android(configure: Action<T>? = null) {
         if (kotlinOptions != null) {
             kotlinOptions.jvmTarget = Versions.JAVA_VERSION.toString()
         }
+        @Suppress("UNCHECKED_CAST")
         configure?.execute(this as T)
     }
 }
