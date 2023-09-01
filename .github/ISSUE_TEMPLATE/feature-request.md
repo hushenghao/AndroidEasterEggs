@@ -1,7 +1,7 @@
 ---
 name: Feature request / 功能要求
 about: Suggest an idea for this project / 为这个项目提出一个想法
-title: "[FR]"
+title: "[FR] "
 labels: enhancement
 assignees: ''
 
