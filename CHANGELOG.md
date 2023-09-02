@@ -1,4 +1,4 @@
-### v1.9.7
+### v1.9.7 (2023-09-02)
 
 - Add Italian translations
 - Add Germany translations
