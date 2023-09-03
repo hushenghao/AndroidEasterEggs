@@ -53,7 +53,7 @@ class GroupHolder(view: View) : VHolder<EggGroup>(view) {
                     )
                 }
             }
-            MenuPopupAccessor.setTransitions(popupMenu)
+            MenuPopupAccessor.setApi23Transitions(popupMenu)
             popupMenu.setOnMenuItemClickListener {
                 val index = eggGroup.child.indexOfFirst { egg ->
                     egg.androidRes == it.itemId

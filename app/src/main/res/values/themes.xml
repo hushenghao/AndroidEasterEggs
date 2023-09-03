@@ -13,7 +13,9 @@
         <item name="android:windowSplashScreenBackground" tools:targetApi="s">
             @color/splash_background_color
         </item>
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog.Centered</item>
+        <item name="materialAlertDialogTheme">
+            @style/ThemeOverlay.Material3.MaterialAlertDialog.Centered
+        </item>
     </style>
 
     <style name="Theme.EasterEggs" parent="Base.EasterEggs">
@@ -67,5 +69,11 @@
     <style name="Theme.EggGroup.PopupMenu.ListPopupWindow" parent="Widget.Material3.PopupMenu.ListPopupWindow">
         <item name="android:popupBackground">@drawable/popupmenu_background_overlay</item>
         <item name="android:dropDownHorizontalOffset">-12dp</item>
+        <item name="android:popupAnimationStyle">@style/Animation.EggGroup.PopupMenu</item>
+    </style>
+
+    <style name="Animation.EggGroup.PopupMenu" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/egg_group_popup_menu_enter</item>
+        <item name="android:windowExitAnimation">@anim/egg_group_popup_menu_exit</item>
     </style>
 </resources>
