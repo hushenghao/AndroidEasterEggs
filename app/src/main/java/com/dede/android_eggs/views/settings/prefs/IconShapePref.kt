@@ -72,7 +72,7 @@ class IconShapePref : SettingPref(
         get() = R.string.pref_title_icon_shape_override
 
     override fun onOptionSelected(context: Context, option: Op) {
-        LocalEvent.get(context).apply {
+        LocalEvent.poster(context).apply {
             post(ACTION_CHANGED)
             post(SettingsPrefs.ACTION_CLOSE_SETTING)
         }

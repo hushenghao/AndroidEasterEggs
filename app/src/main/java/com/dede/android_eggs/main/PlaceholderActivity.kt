@@ -6,7 +6,6 @@ import android.view.Gravity
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.EdgeUtils
@@ -51,7 +50,7 @@ class PlaceholderActivity : AppCompatActivity() {
 
         window.setBackgroundDrawable(ColorDrawable(resolveColor(M3R.attr.colorSurface)))
 
-        LocalEvent.get(this as LifecycleOwner)
+        LocalEvent.receiver(this)
             .register(ACTION_NIGHT_MODE_CHANGED) {
                 recreate()
             }

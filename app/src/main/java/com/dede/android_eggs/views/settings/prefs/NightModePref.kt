@@ -50,11 +50,11 @@ class NightModePref : SettingPref(
         if (mode == AppCompatDelegate.getDefaultNightMode()) {
             if ((option.value == OLED) != ThemeUtils.isOLEDTheme(context)) {
                 context.getActivity<Activity>()?.recreate()
-                LocalEvent.get(context).post(ACTION_NIGHT_MODE_CHANGED)
+                LocalEvent.poster(context).post(ACTION_NIGHT_MODE_CHANGED)
             }
             return
         }
         AppCompatDelegate.setDefaultNightMode(mode)
-        LocalEvent.get(context).post(ACTION_NIGHT_MODE_CHANGED)
+        LocalEvent.poster(context).post(ACTION_NIGHT_MODE_CHANGED)
     }
 }

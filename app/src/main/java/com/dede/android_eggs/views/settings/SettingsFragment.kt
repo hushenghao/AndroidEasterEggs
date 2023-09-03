@@ -46,7 +46,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
         for (pref in SettingsPrefs.providerPrefs()) {
             binding.llSettings.addView(pref.onCreateView(requireContext()))
         }
-        LocalEvent.get(this).register(SettingsPrefs.ACTION_CLOSE_SETTING) {
+        LocalEvent.receiver(this).register(SettingsPrefs.ACTION_CLOSE_SETTING) {
             dismiss()
         }
     }

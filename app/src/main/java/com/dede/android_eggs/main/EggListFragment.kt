@@ -120,10 +120,10 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.O
                 isRecyclerViewIdle = newState == RecyclerView.SCROLL_STATE_IDLE
             }
         })
-        LocalEvent.get(this).register(IconShapePref.ACTION_CHANGED) {
+        LocalEvent.receiver(this).register(IconShapePref.ACTION_CHANGED) {
             binding.recyclerView.adapter?.notifyDataSetChanged()
         }
-        LocalEvent.get(this).register(IconVisualEffectsPref.ACTION_CHANGED) {
+        LocalEvent.receiver(this).register(IconVisualEffectsPref.ACTION_CHANGED) {
             val enable = it.getBooleanExtra(IconVisualEffectsPref.EXTRA_VALUE, false)
             handleOrientationAngleSensor(enable)
         }

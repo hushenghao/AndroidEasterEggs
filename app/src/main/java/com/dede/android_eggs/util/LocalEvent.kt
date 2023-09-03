@@ -15,11 +15,11 @@ typealias EventCallback = (intent: Intent) -> Unit
 
 object LocalEvent {
 
-    fun get(context: Context): Poster {
+    fun poster(context: Context): Poster {
         return Poster(context)
     }
 
-    fun get(owner: LifecycleOwner): Receiver {
+    fun receiver(owner: LifecycleOwner): Receiver {
         return Receiver(owner)
     }
 

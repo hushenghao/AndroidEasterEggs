@@ -31,7 +31,7 @@ class IconVisualEffectsPref : SettingPref(
         get() = R.string.pref_title_icon_visual_effects
 
     override fun onOptionSelected(context: Context, option: Op) {
-        LocalEvent.get(context).apply {
+        LocalEvent.poster(context).apply {
             post(SettingsPrefs.ACTION_CLOSE_SETTING)
             post(ACTION_CHANGED, bundleOf(EXTRA_VALUE to option.isEnable()))
         }
