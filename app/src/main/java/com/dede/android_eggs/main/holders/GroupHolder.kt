@@ -15,12 +15,14 @@ import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
+import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.updateCompoundDrawablesRelative
 import com.dede.basic.dp
 import kotlin.math.roundToInt
 
 @VHType(viewType = Egg.VIEW_TYPE_EGG_GROUP)
-class GroupHolder(view: View) : VHolder<EggGroup>(view) {
+class GroupHolder(view: View) : VHolder<EggGroup>(view),
+    OrientationAngleSensor.OnOrientationAnglesUpdate {
 
     private val delegate = EggHolder(view)
     private val binding: ItemEasterEggLayoutBinding = delegate.binding
@@ -70,6 +72,10 @@ class GroupHolder(view: View) : VHolder<EggGroup>(view) {
             }
             popupMenu.show()
         }
+    }
+
+    override fun updateOrientationAngles(zAngle: Float, xAngle: Float, yAngle: Float) {
+        delegate.updateOrientationAngles(zAngle, xAngle, yAngle)
     }
 
 }

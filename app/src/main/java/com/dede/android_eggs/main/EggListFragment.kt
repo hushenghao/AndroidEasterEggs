@@ -38,10 +38,10 @@ import com.dede.android_eggs.views.settings.SettingsPageController
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
 import com.dede.android_eggs.views.settings.prefs.IconVisualEffectsPref
 import com.dede.basic.dp
-import java.util.*
 
 
-class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.OnFilterResults {
+class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.OnFilterResults,
+    OrientationAngleSensor.OnOrientationAnglesUpdate {
 
     private val binding: FragmentEasterEggListBinding by viewBinding(FragmentEasterEggListBinding::bind)
 
@@ -71,10 +71,10 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.O
         val orientationAngleSensor = this.orientationAngleSensor
         if (enable && orientationAngleSensor == null) {
             this.orientationAngleSensor = OrientationAngleSensor(
-                requireContext(), this, ::onOrientationAnglesUpdate
+                requireContext(), this, this
             )
         } else if (!enable && orientationAngleSensor != null) {
-            onOrientationAnglesUpdate(0f, 0f, 0f)
+            updateOrientationAngles(0f, 0f, 0f)
             orientationAngleSensor.destroy()
             this.orientationAngleSensor = null
         }
@@ -129,16 +129,15 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.O
         }
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    private fun onOrientationAnglesUpdate(zAngle: Float, xAngle: Float, yAngle: Float) {
+    override fun updateOrientationAngles(zAngle: Float, xAngle: Float, yAngle: Float) {
         if (!isRecyclerViewIdle) return
         val manager = binding.recyclerView.layoutManager as LinearLayoutManager
         val first = manager.findFirstVisibleItemPosition()
         val last = manager.findLastVisibleItemPosition()
         for (i in first..last) {
             val holder = binding.recyclerView.findViewHolderForLayoutPosition(i) ?: continue
-            if (holder is EggHolder) {
-                holder.updateOrientationAngles(xAngle, yAngle)
+            if (holder is OrientationAngleSensor.OnOrientationAnglesUpdate) {
+                holder.updateOrientationAngles(zAngle, xAngle, yAngle)
             }
         }
     }

@@ -17,9 +17,13 @@ import androidx.lifecycle.LifecycleOwner
 @Suppress("MemberVisibilityCanBePrivate")
 class OrientationAngleSensor(
     private val context: Context, private val owner: LifecycleOwner?,
-    private val onOrientationAnglesUpdate: (zAngle: Float, xAngle: Float, yAngle: Float) -> Unit,
+    private val onOrientationAnglesUpdate: OnOrientationAnglesUpdate,
     private val handleDefaultOffset: Boolean = true
 ) : SensorEventListener, DefaultLifecycleObserver {
+
+    interface OnOrientationAnglesUpdate {
+        fun updateOrientationAngles(zAngle: Float, xAngle: Float, yAngle: Float)
+    }
 
     private val sensorManager: SensorManager = context.getSystemService()!!
     private val accelerometerReading = FloatArray(3)
@@ -175,7 +179,7 @@ class OrientationAngleSensor(
         val zAngle: Float = orientationAngles[0]
         val xAngle: Float = orientationAngles[1]
         val yAngle: Float = orientationAngles[2]
-        onOrientationAnglesUpdate(zAngle, xAngle, yAngle)
+        onOrientationAnglesUpdate.updateOrientationAngles(zAngle, xAngle, yAngle)
     }
 
     private fun Context.getRotation(): Int {

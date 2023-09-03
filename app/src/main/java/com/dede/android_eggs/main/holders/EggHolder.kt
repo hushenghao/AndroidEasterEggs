@@ -22,6 +22,7 @@ import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.ui.views.HorizontalSwipeLayout
+import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.isRtl
 import com.dede.android_eggs.util.resolveColorStateList
 import com.dede.android_eggs.util.updateCompoundDrawablesRelative
@@ -33,7 +34,8 @@ import kotlin.math.min
 import com.google.android.material.R as M3R
 
 @VHType(viewType = Egg.VIEW_TYPE_EGG)
-open class EggHolder(view: View) : VHolder<Egg>(view) {
+open class EggHolder(view: View) : VHolder<Egg>(view),
+    OrientationAngleSensor.OnOrientationAnglesUpdate {
 
     val binding: ItemEasterEggLayoutBinding = ItemEasterEggLayoutBinding.bind(view)
 
@@ -51,7 +53,7 @@ open class EggHolder(view: View) : VHolder<Egg>(view) {
         return old + (new - old) * fraction
     }
 
-    fun updateOrientationAngles(xAngle: Float, yAngle: Float) {
+    override fun updateOrientationAngles(zAngle: Float, xAngle: Float, yAngle: Float) {
         val iconDrawable = binding.ivIcon.drawable as? AlterableAdaptiveIconDrawable ?: return
         if (!iconDrawable.isAdaptiveIconDrawable) return
 
