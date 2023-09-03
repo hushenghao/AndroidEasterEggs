@@ -1,3 +1,6 @@
+### v1.9.8
+- Fix Egg Group Icon Visual Effects
+
 ### v1.9.7 (2023-09-02)
 
 - Add Italian translations
