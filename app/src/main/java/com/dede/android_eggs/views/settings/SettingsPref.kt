@@ -39,6 +39,7 @@ object SettingsPrefs {
     fun apply(context: Context) {
         NightModePref().apply(context)
         DynamicColorPref().apply(context)
+        LanguagePref.resetApi23Locale()
     }
 }
 

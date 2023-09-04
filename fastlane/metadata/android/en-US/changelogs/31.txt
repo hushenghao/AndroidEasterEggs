@@ -1,0 +1,2 @@
+- Add Indonesia translation
+- Fix Egg Group Icon Visual Effects

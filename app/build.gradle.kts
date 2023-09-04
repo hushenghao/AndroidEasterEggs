@@ -20,11 +20,20 @@ android {
         applicationId = "com.dede.android_eggs"
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
-        versionCode = 30
-        versionName = "1.9.7"
+        versionCode = 31
+        versionName = "1.9.8"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        resourceConfigurations += listOf("zh", "zh-rTW", "en", "ru", "it", "de", "es", "pt")
+        resourceConfigurations += listOf(
+            "zh", "zh-rTW",
+            "en",
+            "ru",
+            "it",
+            "de",
+            "es",
+            "pt",
+            "in-rID"
+        )
 
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
         buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")

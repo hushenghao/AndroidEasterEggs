@@ -1,4 +1,5 @@
 ### v1.9.8
+- Add Indonesia translation
 - Fix Egg Group Icon Visual Effects
 
 ### v1.9.7 (2023-09-02)
