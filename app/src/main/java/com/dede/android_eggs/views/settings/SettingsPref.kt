@@ -52,7 +52,7 @@ abstract class SettingPref(
     default: Int = 0,
 ) : MaterialButtonToggleGroup.OnButtonCheckedListener {
 
-    data class Op(
+    open class Op(
         val value: Int,
         val title: CharSequence? = null,
         @StringRes val titleRes: Int = View.NO_ID,
@@ -72,6 +72,22 @@ abstract class SettingPref(
                 return this?.value == ON
             }
         }
+
+        override fun hashCode(): Int {
+            return value
+        }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as Op
+
+            if (value != other.value) return false
+
+            return true
+        }
+
     }
 
     open var selectedValue: Int = default

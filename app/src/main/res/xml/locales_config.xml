@@ -9,4 +9,8 @@
     <locale android:name="es" />
     <locale android:name="pt" />
     <locale android:name="in-ID" />
+<!-- TODO -->
+<!--    <locale android:name="fr" />-->
+<!--    <locale android:name="ja-JP" />-->
+<!--    <locale android:name="ko" />-->
 </locale-config>

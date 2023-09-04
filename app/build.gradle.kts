@@ -26,13 +26,11 @@ android {
 
         resourceConfigurations += listOf(
             "zh", "zh-rTW",
-            "en",
             "ru",
-            "it",
-            "de",
-            "es",
-            "pt",
-            "in-rID"
+            "en", "it", "de", "fr",
+            "es", "pt",
+            "in-rID",
+            "ja-rJP", "ko"
         )
 
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")

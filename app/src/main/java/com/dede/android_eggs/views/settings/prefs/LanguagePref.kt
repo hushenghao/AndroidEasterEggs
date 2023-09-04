@@ -3,6 +3,7 @@ package com.dede.android_eggs.views.settings.prefs
 import android.app.Dialog
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.net.toUri
@@ -19,6 +20,8 @@ import java.util.Locale
 class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
     companion object {
 
+        private const val TAG = "LanguagePref"
+
         // For API<24 the application does not have a localeList instead it has a single locale
         // Unsupported region
         private val isEnabled = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
@@ -33,10 +36,9 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         private const val GERMANY = 7               // de
         private const val PORTUGAL = 8              // es
         private const val INDONESIA = 9             // in-ID
-
-        private val Locale_RUSSIAN = createLocale("ru", "")
-        private val Locale_PORTUGAL = createLocale("es", "")
-        private val Locale_INDONESIA = createLocale("in", "ID")
+        private const val JAPANESE = 10             // ja-JP
+        private const val KOREAN = 11               // ko
+        private const val FRENCH = 12               // fr
 
         private fun getOptions(): List<Op> {
             val options = mutableListOf(
@@ -51,46 +53,42 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             return options
         }
 
+        private class LangOp(value: Int, val locale: Locale, titleRes: Int) :
+            Op(value, titleRes = titleRes)
+
         private val languageOptions = listOf(
-            Op(SIMPLIFIED_CHINESE, titleRes = R.string.language_zh_sc),
-            Op(TRADITIONAL_CHINESE, titleRes = R.string.language_zh_tc),
-            Op(ENGLISH, titleRes = R.string.language_en),
-            Op(RUSSIAN, titleRes = R.string.language_ru),
-            Op(ITALIAN, titleRes = R.string.language_it),
-            Op(GERMANY, titleRes = R.string.language_de),
-            Op(PORTUGAL, titleRes = R.string.language_es),
-            Op(INDONESIA, titleRes = R.string.language_in_id),
+            LangOp(SIMPLIFIED_CHINESE, Locale.SIMPLIFIED_CHINESE, R.string.language_zh_SC),
+            LangOp(TRADITIONAL_CHINESE, Locale.TRADITIONAL_CHINESE, R.string.language_zh_TC),
+            LangOp(ENGLISH, Locale.ENGLISH, R.string.language_en),
+            LangOp(RUSSIAN, createLocale("ru"), R.string.language_ru),
+            LangOp(ITALIAN, Locale.ITALIAN, R.string.language_it),
+            LangOp(GERMANY, Locale.GERMANY, R.string.language_de),
+            LangOp(PORTUGAL, createLocale("es"), R.string.language_es),
+            LangOp(INDONESIA, createLocale("in", "ID"), R.string.language_in_ID),
+            LangOp(FRENCH, Locale.FRENCH, R.string.language_fr),
+            LangOp(JAPANESE, Locale.JAPAN, R.string.language_ja_JP),
+            LangOp(KOREAN, Locale.KOREAN, R.string.language_ko),
         )
 
         private fun getLocaleByValue(value: Int): LocaleListCompat {
-            return when (value) {
-                SIMPLIFIED_CHINESE -> LocaleListCompat.create(Locale.SIMPLIFIED_CHINESE)
-                TRADITIONAL_CHINESE -> LocaleListCompat.create(Locale.TRADITIONAL_CHINESE)
-                ENGLISH -> LocaleListCompat.create(Locale.ENGLISH)
-                RUSSIAN -> LocaleListCompat.create(Locale_RUSSIAN)
-                ITALIAN -> LocaleListCompat.create(Locale.ITALIAN)
-                GERMANY -> LocaleListCompat.create(Locale.GERMANY)
-                PORTUGAL -> LocaleListCompat.create(Locale_PORTUGAL)
-                INDONESIA -> LocaleListCompat.create(Locale_INDONESIA)
-                else -> LocaleListCompat.getEmptyLocaleList()
+            val op = languageOptions.find { it.value == value }
+            if (op != null) {
+                return LocaleListCompat.create(op.locale)
             }
+            return LocaleListCompat.getEmptyLocaleList()
         }
 
         private fun getValueByLocale(localeList: LocaleListCompat): Int {
             if (localeList.isEmpty) {
                 return SYSTEM
             }
-            return when (localeList.get(0)) {
-                Locale.SIMPLIFIED_CHINESE -> SIMPLIFIED_CHINESE
-                Locale.TRADITIONAL_CHINESE -> TRADITIONAL_CHINESE
-                Locale.ENGLISH -> ENGLISH
-                Locale_RUSSIAN -> RUSSIAN
-                Locale.ITALIAN -> ITALIAN
-                Locale.GERMANY -> GERMANY
-                Locale_PORTUGAL -> PORTUGAL
-                Locale_INDONESIA -> INDONESIA
-                else -> SYSTEM
+            val locale = localeList.get(0)
+            val op = languageOptions.find { it.locale == locale }
+            if (op != null) {
+                return op.value
             }
+            Log.w(TAG, "Not found language value by locale: $localeList, use default!")
+            return SYSTEM
         }
 
         fun getApplicationLocale(): Locale {
@@ -108,7 +106,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             }
         }
 
-        private fun createLocale(language: String, region: String): Locale {
+        private fun createLocale(language: String, region: String = ""): Locale {
             return Locale.Builder()
                 .setLanguage(language)
                 .setRegion(region)
