@@ -2,6 +2,7 @@
 - Add Portuguese translations
 - Add Indonesia translation
 - Add Arabic translation
+- Fix Spanish translations
 - Fix Egg Group Icon Visual Effects
 
 ### v1.9.7 (2023-09-02)
