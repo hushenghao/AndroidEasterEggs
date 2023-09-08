@@ -49,7 +49,7 @@ object EggDatas {
             com.android_u.egg.R.drawable.u_android14_patch_adaptive,
             R.string.title_android_u,
             R.string.u_egg_name_override,
-            CharSequenceFormatter(R.string.version_comment_once, 34, "14"),
+            CharSequenceFormatter(R.string.version_comment_once, VERSION_CODES.UPSIDE_DOWN_CAKE, "14"),
             com.android_u.egg.PlatLogoActivity::class.java,
             true,
             KEY_EGG_U

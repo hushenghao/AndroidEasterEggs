@@ -59,7 +59,7 @@ class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_andr
         ) { holder, timelineEvent ->
             with(holder.findViewById<TextView>(R.id.tv_year)) {
                 isVisible = timelineEvent.isNewGroup()
-                text = timelineEvent.year
+                text = timelineEvent.localYear
             }
             with(holder.findViewById<TextView>(R.id.tv_event)) {
                 val builder = ShapeAppearanceModel.builder(

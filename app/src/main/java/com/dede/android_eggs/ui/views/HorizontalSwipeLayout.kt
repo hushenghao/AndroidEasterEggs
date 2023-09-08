@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.customview.widget.ViewDragHelper
 import com.dede.android_eggs.R
+import com.dede.android_eggs.util.isRtl
 import kotlin.math.max
 import kotlin.math.min
 
@@ -32,8 +33,9 @@ class HorizontalSwipeLayout @JvmOverloads constructor(
     var swipeListener: OnSwipeListener? = null
     var swipeGravity: Int = 0
         set(value) {
-            swipeCallback.gravity =
-                GravityCompat.getAbsoluteGravity(value, ViewCompat.getLayoutDirection(this))
+            swipeCallback.gravity = GravityCompat.getAbsoluteGravity(
+                value, if (isRtl) LAYOUT_DIRECTION_RTL else LAYOUT_DIRECTION_LTR
+            )
         }
 
     override fun onFinishInflate() {

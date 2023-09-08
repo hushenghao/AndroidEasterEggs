@@ -183,6 +183,20 @@ data class TimelineEvent(
         }
     }
 
+    val localYear: String?
+        get() {
+            val yearNum = year?.toIntOrNull() ?: return year
+            val calendar = Calendar.getInstance(TimeZone.getDefault())
+            calendar.set(Calendar.YEAR, yearNum)
+            val locale = LanguagePref.getApplicationLocale()
+            val format: Format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                SimpleDateFormat("yyyy", locale)
+            } else {
+                java.text.SimpleDateFormat("yyyy", locale)
+            }
+            return format.format(calendar.time)
+        }
+
     val localMonth: String?
         get() {
             val m = when (month) {
@@ -201,10 +215,6 @@ data class TimelineEvent(
                 else -> return month
             }
             val calendar = Calendar.getInstance(TimeZone.getDefault())
-            val yearNum = year?.toIntOrNull()
-            if (yearNum != null) {
-                calendar.set(Calendar.YEAR, yearNum)
-            }
             calendar.set(Calendar.MONTH, m)
             val locale = LanguagePref.getApplicationLocale()
             val format: Format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
