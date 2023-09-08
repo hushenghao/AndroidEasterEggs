@@ -9,6 +9,7 @@ import android.text.method.LinkMovementMethod
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -66,23 +67,8 @@ class EasterEggFooterView @JvmOverloads constructor(
     private fun handleFlowLayoutChild() {
         if (appended) return
         for (i in 0 until binding.flowLayout.childCount) {
-            val textView = binding.flowLayout[i] as TextView
-            val unLast = i < binding.flowLayout.childCount - 1
-            val span = SpannableStringBuilder()
-//            if (textView.isRtl) {
-//                span.applyIf(unLast) {
-//                    append("/")
-//                    appendSpace(8.dp)
-//                }.append(textView.text, ClickSpan(this), Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
-//            } else {
-            span.append(textView.text, ClickSpan(this), Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
-                .applyIf(unLast) {
-                    appendSpace(8.dp)
-                    append("/")
-                }
-//            }
-            textView.movementMethod = LinkMovementMethod.getInstance()
-            textView.text = span
+            val textView = (binding.flowLayout[i] as ViewGroup)[0] as TextView
+            textView.setOnClickListener(this)
         }
         appended = true
     }
