@@ -18,7 +18,7 @@
     <string name="url_share" translatable="false">https://f-droid.org/packages/com.dede.android_eggs</string>
     <string name="url_mail" translatable="false">mailto:dede.hu@qq.com</string>
 
-    <string name="char_split" translatable="false">/</string>
+    <string name="char_flow_split" translatable="false">/</string>
     <string name="label_github" translatable="false">GitHub</string>
     <string name="label_translation">Translation</string>
     <string name="label_beta">Get Beta</string>

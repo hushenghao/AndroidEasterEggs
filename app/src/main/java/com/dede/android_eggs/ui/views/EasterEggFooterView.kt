@@ -3,26 +3,18 @@ package com.dede.android_eggs.ui.views
 import android.content.Context
 import android.content.Intent
 import android.graphics.Paint
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.method.LinkMovementMethod
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
-import androidx.core.view.get
 import androidx.fragment.app.FragmentActivity
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.ViewEasterEggFooterBinding
-import com.dede.android_eggs.ui.views.text.ClickSpan
-import com.dede.android_eggs.ui.views.text.SpaceSpan.Companion.appendSpace
 import com.dede.android_eggs.util.CustomTabsBrowser
-import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.createChooser
 import com.dede.android_eggs.util.createRepeatWavyDrawable
 import com.dede.android_eggs.util.getActivity
@@ -37,8 +29,6 @@ class EasterEggFooterView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr), View.OnClickListener {
 
     private val binding = ViewEasterEggFooterBinding.inflate(LayoutInflater.from(context), this)
-
-    private var appended = false
 
     init {
         setPadding(24.dp, 0, 24.dp, 30.dp)
@@ -65,12 +55,16 @@ class EasterEggFooterView @JvmOverloads constructor(
     }
 
     private fun handleFlowLayoutChild() {
-        if (appended) return
-        for (i in 0 until binding.flowLayout.childCount) {
-            val textView = (binding.flowLayout[i] as ViewGroup)[0] as TextView
-            textView.setOnClickListener(this)
+        FlowLayoutSplit.join(binding.flowLayout,
+            object : FlowLayoutSplit.FlowSplitViewProvider {
+                override fun createSplitView(context: Context, parent: ViewGroup): View {
+                    return LayoutInflater.from(context)
+                        .inflate(R.layout.layout_flow_split, parent, false)
+                }
+            })
+        FlowLayoutSplit.forEachUnwrapChild(binding.flowLayout) {
+            it.setOnClickListener(this)
         }
-        appended = true
     }
 
     override fun onClick(v: View) {
