@@ -34,11 +34,16 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         private const val RUSSIAN = 5               // ru
         private const val ITALIAN = 6               // it
         private const val GERMANY = 7               // de
-        private const val PORTUGAL = 8              // es
+        private const val PORTUGAL = 8              // pt
         private const val INDONESIA = 9             // in-ID
         private const val JAPANESE = 10             // ja-JP
         private const val KOREAN = 11               // ko
         private const val FRENCH = 12               // fr
+        private const val ARABIC = 13               // ar-SA, RTL
+        private const val POLISH = 14               // pl-PL
+        private const val TURKISH = 15              // tr-TR
+        private const val UKRAINIAN = 16            // uk-UA
+        private const val SPANISH = 17              // es
 
         private fun getOptions(): List<Op> {
             val options = mutableListOf(
@@ -53,21 +58,26 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             return options
         }
 
-        private class LangOp(value: Int, val locale: Locale, titleRes: Int) :
+        private class LangOp(value: Int, titleRes: Int, val locale: Locale) :
             Op(value, titleRes = titleRes)
 
         private val languageOptions = listOf(
-            LangOp(SIMPLIFIED_CHINESE, Locale.SIMPLIFIED_CHINESE, R.string.language_zh_SC),
-            LangOp(TRADITIONAL_CHINESE, Locale.TRADITIONAL_CHINESE, R.string.language_zh_TC),
-            LangOp(ENGLISH, Locale.ENGLISH, R.string.language_en),
-            LangOp(RUSSIAN, createLocale("ru"), R.string.language_ru),
-            LangOp(ITALIAN, Locale.ITALIAN, R.string.language_it),
-            LangOp(GERMANY, Locale.GERMANY, R.string.language_de),
-            LangOp(PORTUGAL, createLocale("es"), R.string.language_es),
-            LangOp(INDONESIA, createLocale("in", "ID"), R.string.language_in_ID),
-            LangOp(FRENCH, Locale.FRENCH, R.string.language_fr),
-            LangOp(JAPANESE, Locale.JAPAN, R.string.language_ja_JP),
-            LangOp(KOREAN, Locale.KOREAN, R.string.language_ko),
+            LangOp(SIMPLIFIED_CHINESE, R.string.language_zh_SC, Locale.SIMPLIFIED_CHINESE),
+            LangOp(TRADITIONAL_CHINESE, R.string.language_zh_TC, Locale.TRADITIONAL_CHINESE),
+            LangOp(ENGLISH, R.string.language_en, Locale.ENGLISH),
+            LangOp(RUSSIAN, R.string.language_ru, createLocale("ru")),
+            LangOp(ITALIAN, R.string.language_it, Locale.ITALIAN),
+            LangOp(GERMANY, R.string.language_de, Locale.GERMANY),
+            LangOp(SPANISH, R.string.language_es, createLocale("es")),
+            LangOp(PORTUGAL, R.string.language_pt, createLocale("pt")),
+            LangOp(INDONESIA, R.string.language_in_ID, createLocale("in", "ID")),
+            LangOp(ARABIC, R.string.language_ar_SA, createLocale("ar", "SA")),
+//            LangOp(FRENCH, R.string.language_fr, Locale.FRENCH),
+//            LangOp(POLISH, R.string.language_pl_PL, createLocale("pl", "PL")),
+//            LangOp(TURKISH, R.string.language_tr_TR, createLocale("tr", "TR")),
+//            LangOp(UKRAINIAN, R.string.language_uk_UA, createLocale("uk", "UA")),
+//            LangOp(JAPANESE, R.string.language_ja_JP, Locale.JAPAN),
+//            LangOp(KOREAN, R.string.language_ko, Locale.KOREAN),
         )
 
         private fun getLocaleByValue(value: Int): LocaleListCompat {
