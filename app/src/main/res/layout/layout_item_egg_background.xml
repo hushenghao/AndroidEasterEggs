@@ -23,6 +23,7 @@
         android:layout_marginStart="8dp"
         android:fontFamily="sans-serif"
         android:maxLines="2"
+        android:textAlignment="viewStart"
         android:textAppearance="?textAppearanceLabelLarge"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
