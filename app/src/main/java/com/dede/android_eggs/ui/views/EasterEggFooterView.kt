@@ -69,18 +69,18 @@ class EasterEggFooterView @JvmOverloads constructor(
             val textView = binding.flowLayout[i] as TextView
             val unLast = i < binding.flowLayout.childCount - 1
             val span = SpannableStringBuilder()
-            if (com.dede.android_eggs.util.isRtl) {
-                span.applyIf(unLast) {
-                    append("/")
+//            if (textView.isRtl) {
+//                span.applyIf(unLast) {
+//                    append("/")
+//                    appendSpace(8.dp)
+//                }.append(textView.text, ClickSpan(this), Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+//            } else {
+            span.append(textView.text, ClickSpan(this), Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+                .applyIf(unLast) {
                     appendSpace(8.dp)
-                }.append(textView.text, ClickSpan(this), Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
-            } else {
-                span.append(textView.text, ClickSpan(this), Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
-                    .applyIf(unLast) {
-                        appendSpace(8.dp)
-                        append("/")
-                    }
-            }
+                    append("/")
+                }
+//            }
             textView.movementMethod = LinkMovementMethod.getInstance()
             textView.text = span
         }

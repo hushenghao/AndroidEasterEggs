@@ -116,7 +116,8 @@ open class EggHolder(view: View) : VHolder<Egg>(view),
                 intArrayOf(android.R.attr.state_selected),
                 FontIconsDrawable(context, Icons.Rounded.app_shortcut, color)
             )
-            val icon = if (isRtl) Icons.Rounded.swipe_right else Icons.Rounded.swipe_left
+            val icon = if (binding.background.tvAddShortcut.isRtl)
+                Icons.Rounded.swipe_right else Icons.Rounded.swipe_left
             addState(StateSet.NOTHING, FontIconsDrawable(context, icon, color))
             setBounds(0, 0, 30.dp, 30.dp)
         }
@@ -154,7 +155,7 @@ open class EggHolder(view: View) : VHolder<Egg>(view),
 
         override fun onSwipePositionChanged(changedView: View, left: Int, dx: Int) {
             val halfWidth = changedView.width / 2
-            val rtl = isRtl
+            val rtl = changedView.isRtl
             val isSwipedStartHalf = if (!rtl) {
                 left <= -halfWidth
             } else {
