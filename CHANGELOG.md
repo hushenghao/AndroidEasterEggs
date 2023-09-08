@@ -4,6 +4,7 @@
 - Add Arabic translation
 - Fix Spanish translations
 - Fix Egg Group Icon Visual Effects
+- Feature optimization
 
 ### v1.9.7 (2023-09-02)
 

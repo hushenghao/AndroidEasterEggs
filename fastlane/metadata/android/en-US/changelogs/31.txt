@@ -3,3 +3,4 @@
 - Add Arabic translation
 - Fix Spanish translations
 - Fix Egg Group Icon Visual Effects
+- Feature optimization
