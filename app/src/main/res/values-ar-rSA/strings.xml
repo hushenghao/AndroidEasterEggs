@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">في انتظار…</string>
+    <string name="summary_android_release_pushed">لقد دفعت النسخة الإصدار النهائي</string>
+    <string name="title_open_with">مفتوحة مع</string>
+    <string name="label_translation">ترجمة</string>
+    <string name="label_beta">احصل على النسخة التجريبية</string>
+    <string name="label_timeline">الجدول الزمني</string>
+    <string name="label_privacy_policy">خصوصية</string>
+    <string name="label_license">رخصة</string>
+    <string name="label_email">تعليق</string>
+    <string name="label_star">نجمة</string>
+    <string name="label_timeline_title">الجدول الزمني والمعالم والتحديثات</string>
+    <string name="label_timeline_releases">إطلاق</string>
+    <string name="message_trypophobia_warning">وهذا تحذير لأولئك الذين يعانون من &lt;b&gt;رهاب النخاريب&lt;/b&gt; من أن بعض الصور قد تسبب عدم الراحة. هل تريد الاستمرار؟</string>
+    <string name="label_settings">إعدادات</string>
+    <string name="label_project_desc">يحتوي المشروع على الكود الكامل لنظام بيض عيد الفصح، والذي يهدف إلى تنظيم بيض النظام والتوافق معه، وذلك للتأكد من أن معظم الأجهزة يمكنها تجربة إصدارات مختلفة من بيض عيد الفصح ولن تقوم بإجراء الكثير من التعديلات على كود بيض النظام. تستخدم بعض الإصدارات ميزات جديدة للنظام، ويمكن للإصدارات الأقل استخدام بعض الوظائف فقط.</string>
+    <string name="pref_title_icon_shape_override">شكل الأيقونة</string>
+    <string name="pref_title_language">لغة</string>
+    <string name="pref_title_language_more">أكثر</string>
+    <string name="pref_title_theme">سمة</string>
+    <string name="pref_title_dynamic_color">اللون الديناميكي</string>
+    <string name="pref_title_icon_visual_effects">أيقونة المؤثرات البصرية</string>
+    <string name="summary_system_default">تقصير</string>
+    <string name="summary_theme_dark_mode">مظلم</string>
+    <string name="summary_theme_light_mode">ضوء</string>
+    <string name="label_add_shortcut">الاختصار</string>
+    <string name="label_donate">يتبرع</string>
+    <string name="preference_on">على</string>
+    <string name="preference_off">عن</string>
+    <string name="toast_shortcut_added">تمت إضافة الاختصار</string>
+    <string name="toast_github_sponsor">يمكنك التبرع من خلال \"Github Sponsor\" الخاص بالمشروع</string>
+    <string name="app_widget_description">هذه هي الساعة التناظرية لبيض عيد الفصح</string>
+    <string name="action_agree">يوافق</string>
+    <string name="summary_browse_privacy_policy">اقرأ ووافق على سياسة الخصوصية الخاصة بنا للمتابعة.</string>
+    <string name="label_welcome">مرحبًا بك في كتالوجات بيض عيد الفصح 🎉🎉🎉</string>
+    <string name="label_share">يشارك</string>
+    <string name="label_search_hint">بحث…</string>
+</resources>
