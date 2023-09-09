@@ -3,6 +3,8 @@
     <string name="summary_android_waiting">正在等候…</string>
     <string name="summary_android_release_pushed">最終版本已推送</string>
     <string name="title_open_with">開啟</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">~</string>
     <string name="label_translation">翻譯</string>
     <string name="label_beta">取得 Beta 版</string>
     <string name="label_timeline">時間線</string>
