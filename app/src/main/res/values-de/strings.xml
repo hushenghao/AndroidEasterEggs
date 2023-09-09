@@ -24,7 +24,7 @@
     <string name="summary_system_default">Systemstandard</string>
     <string name="summary_theme_dark_mode">Dunkel</string>
     <string name="summary_theme_light_mode">Hell</string>
-    <string name="label_add_shortcut">Verknüpfung zum Startbildschirm</string>
+    <string name="label_add_shortcut">Verknüpfung</string>
     <string name="label_donate">Spenden sie an das Projekt</string>
     <string name="preference_on">An</string>
     <string name="preference_off">Aus</string>

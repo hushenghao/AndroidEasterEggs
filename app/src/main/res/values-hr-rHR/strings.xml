@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">Čekanje…</string>
+    <string name="summary_android_release_pushed">Objavljeno je konačno izdanje</string>
+    <string name="title_open_with">Otvori s</string>
+    <string name="label_translation">Prijevod</string>
+    <string name="label_beta">Preuzmi betu</string>
+    <string name="label_timeline">Vremenska crta</string>
+    <string name="label_privacy_policy">Privatnost</string>
+    <string name="label_license">Licencija</string>
+    <string name="label_email">Povratne informacije</string>
+    <string name="label_star">Ocijeni</string>
+    <string name="label_timeline_title">Vremenska crta, dostignuća i ažuriranja</string>
+    <string name="label_timeline_releases">Izdanja</string>
+    <string name="message_trypophobia_warning">Neke slike mogu izazvati nelagodu u osobama koje pate od &lt;b&gt;tripofobije&lt;/b&gt;. Želite li nastaviti?</string>
+    <string name="label_settings">Postavke</string>
+    <string name="label_project_desc">Ovaj projekt sadrži kompletni programski kod uskršnjih jaja u Android operacijskom sustavu. Cilj projekta je organizirati uskršnja jaja i omogućiti njihovo vjerno pokretanje s minimalnim izmjenama u kodu na većini uređaja, bez obzira na verziju Androida. Na nekim verzijama Androida možda neće raditi neke funkcije na pojedinim uskršnjim jajima.</string>
+    <string name="pref_title_icon_shape_override">Oblik ikone</string>
+    <string name="pref_title_language">Jezik</string>
+    <string name="pref_title_language_more">Više</string>
+    <string name="pref_title_theme">Tema</string>
+    <string name="pref_title_dynamic_color">Dinamična boja</string>
+    <string name="pref_title_icon_visual_effects">Vizualni efekti ikone</string>
+    <string name="summary_system_default">Zadano</string>
+    <string name="summary_theme_dark_mode">Tamno</string>
+    <string name="summary_theme_light_mode">Svijetlo</string>
+    <string name="label_add_shortcut">Prečac</string>
+    <string name="label_donate">Donacije</string>
+    <string name="preference_on">Uključeno</string>
+    <string name="preference_off">Isključeno</string>
+    <string name="toast_shortcut_added">Prečac dodan</string>
+    <string name="toast_github_sponsor">Možete donirati pomoću servisa \"Github Sponsor\" za ovaj projekt</string>
+    <string name="app_widget_description">Easter Eggs analogni sat</string>
+    <string name="action_agree">Prihvati</string>
+    <string name="summary_browse_privacy_policy">Za nastavak pročitajte i prihvatite našu politiku privatnosti.</string>
+    <string name="label_welcome">Dobro došli u katalog uskršnjih jaja🎉🎉🎉</string>
+    <string name="label_share">Podijeli</string>
+    <string name="label_search_hint">Traži…</string>
+</resources>

@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="label_translation">翻訳</string>
+    <string name="label_beta">ベータ版を入手</string>
+    <string name="label_timeline">歴史</string>
+    <string name="label_license">ライセンス</string>
+</resources>
