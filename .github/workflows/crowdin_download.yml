@@ -32,6 +32,7 @@ jobs:
           commit_author: crowdin-bot <support+bot@crowdin.com>
           commit_message: "Update Crowdin translations progress"
           branch: l10n_crowdin_translations
+          push_options: '--force'
 
       - name: Synchronize with Crowdin
         uses: crowdin/github-action@v1
