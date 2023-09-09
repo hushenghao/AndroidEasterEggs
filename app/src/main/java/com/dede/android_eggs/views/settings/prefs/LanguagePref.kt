@@ -73,12 +73,12 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             LangOp(PORTUGAL, R.string.language_pt, createLocale("pt")),
             LangOp(INDONESIA, R.string.language_in_ID, createLocale("in", "ID")),
             LangOp(ARABIC, R.string.language_ar_SA, createLocale("ar", "SA")),
-//            LangOp(CROATIAN, R.string.language_hr_HR, createLocale("hr", "HR")),
+            LangOp(CROATIAN, R.string.language_hr_HR, createLocale("hr", "HR")),
 //            LangOp(FRENCH, R.string.language_fr, Locale.FRENCH),
 //            LangOp(POLISH, R.string.language_pl_PL, createLocale("pl", "PL")),
 //            LangOp(TURKISH, R.string.language_tr_TR, createLocale("tr", "TR")),
 //            LangOp(UKRAINIAN, R.string.language_uk_UA, createLocale("uk", "UA")),
-//            LangOp(JAPANESE, R.string.language_ja_JP, Locale.JAPAN),
+            LangOp(JAPANESE, R.string.language_ja_JP, Locale.JAPAN),
 //            LangOp(KOREAN, R.string.language_ko, Locale.KOREAN),
         )
 

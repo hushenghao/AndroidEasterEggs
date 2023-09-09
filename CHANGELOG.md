@@ -1,7 +1,8 @@
 ### v1.9.8
 - Add Portuguese translations
-- Add Indonesia translation
-- Add Arabic translation
+- Add Indonesia translations
+- Add Arabic translations
+- Add Croatian translations
 - Fix Spanish translations
 - Fix Egg Group Icon Visual Effects
 - Feature optimization
