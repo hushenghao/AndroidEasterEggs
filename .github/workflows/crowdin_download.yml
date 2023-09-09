@@ -31,14 +31,14 @@ jobs:
 
       - name: Get Crowdin Project Progress
         run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           mkdir -p 'assets/json'
           curl --location 'https://api.crowdin.com/api/v2/projects/597587/languages/progress' \
             --header 'Authorization: Bearer ${{ secrets.CROWDIN_PERSONAL_TOKEN }}' \
             --output 'assets/json/crowdin_project_progress.json'
-          if [ $(git diff --name-only) ]; then
-            git add 'assets/json/crowdin_project_progress.json'
-            git commit -m "Update Crowdin project progress json"
-          fi;
+          git add 'assets/json/crowdin_project_progress.json'
+          git commit -m "Update Crowdin project progress json"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
