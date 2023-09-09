@@ -19,6 +19,7 @@ jobs:
 
       - name: Get Crowdin translations progress json
         run: |
+          git checkout -b l10n_crowdin_translations
           mkdir -p 'assets/json'
           curl --location 'https://api.crowdin.com/api/v2/projects/597587/languages/progress' \
             --header 'Authorization: Bearer ${{ secrets.CROWDIN_PERSONAL_TOKEN }}' \
