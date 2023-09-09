@@ -34,13 +34,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
-      - name: Update Crowdin Translations Progress
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "Update Crowdin translations progress"
-          branch: l10n_crowdin_translations
+      - name: Download Crowdin translations progress json
         run: |
           mkdir -p 'assets/json'
           curl --location 'https://api.crowdin.com/api/v2/projects/597587/languages/progress' \
             --header 'Authorization: Bearer ${{ secrets.CROWDIN_PERSONAL_TOKEN }}' \
             --output 'assets/json/crowdin_project_progress.json'
+
+      - name: Update Crowdin translations progress
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update Crowdin translations progress"
+          branch: l10n_crowdin_translations
