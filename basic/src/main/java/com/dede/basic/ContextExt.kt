@@ -56,6 +56,10 @@ fun Context.createThemeWrapperContext(): Context {
     return themeWrapper
 }
 
+fun Context.getLayoutDirection(): Int {
+    return resources.configuration.layoutDirection
+}
+
 fun Context.createLocalesContext(locales: LocaleListCompat): Context {
     val config = Configuration(resources.configuration)
     config.setLocales(locales)

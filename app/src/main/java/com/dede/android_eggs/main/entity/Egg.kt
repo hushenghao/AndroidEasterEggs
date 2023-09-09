@@ -4,8 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.adapter.VType
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
@@ -15,7 +17,7 @@ data class Egg(
     @DrawableRes val iconRes: Int,
     @StringRes val androidRes: Int,
     @StringRes val eggNameRes: Int,
-    val versionCommentFormatter: CharSequenceFormatter,
+    val versionCommentFormatter: VersionCommentFormatter,
     val targetClass: Class<out Activity>? = null,
     val supportAdaptiveIcon: Boolean = false,
     val key: String? = null,
@@ -23,11 +25,32 @@ data class Egg(
     private val itemType: Int = VIEW_TYPE_EGG,
 ) : VType {
 
-    class CharSequenceFormatter(@StringRes val resId: Int, vararg formatArgs: Any) {
+    class VersionCommentFormatter(
+        private val versionCode1: Int,
+        private val versionCode2: Int,
+        private val versionName1: CharSequence,
+        private val versionName2: CharSequence
+    ) {
 
-        private val args: Array<out Any> = formatArgs
+        constructor(versionCode: Int, versionName: CharSequence) :
+                this(versionCode, versionCode, versionName, versionName)
+
         fun format(context: Context): CharSequence {
-            return context.getString(resId, *args)
+            val sb = StringBuilder("API ")
+                .append(versionCode1)
+            if (versionCode1 == versionCode2) {
+                sb.append("\nAndroid ")
+                    .append(versionName1)
+            } else {
+                val enDash = context.getString(R.string.char_en_dash)
+                sb.append(enDash)
+                    .append(versionCode2.toString())
+                    .append("\nAndroid ")
+                    .append(versionName1)
+                    .append(enDash)
+                    .append(versionName2)
+            }
+            return sb
         }
     }
 

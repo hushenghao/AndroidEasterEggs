@@ -59,7 +59,7 @@ class EasterEggFooterView @JvmOverloads constructor(
             object : FlowLayoutSplit.FlowSplitViewProvider {
                 override fun createSplitView(context: Context, parent: ViewGroup): View {
                     return LayoutInflater.from(context)
-                        .inflate(R.layout.layout_flow_split, parent, false)
+                        .inflate(R.layout.layout_flow_slash, parent, false)
                 }
             })
         FlowLayoutSplit.forEachUnwrapChild(binding.flowLayout) {

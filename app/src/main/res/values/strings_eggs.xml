@@ -30,8 +30,5 @@
     <string name="summary_android_petit_four" translatable="false">Petit Four</string>
     <string name="summary_android_base" translatable="false">Base</string>
 
-    <string name="version_comment_once" translatable="false">API %d\nAndroid %s</string>
-    <string name="version_comment_range" translatable="false">API %d~%d\nAndroid %s~%s</string>
-
     <string name="u_egg_name_override" translatable="false">Upside Down Cake</string>
 </resources>

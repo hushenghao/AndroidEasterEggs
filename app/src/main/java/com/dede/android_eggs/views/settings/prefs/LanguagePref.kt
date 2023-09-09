@@ -8,11 +8,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.net.toUri
 import androidx.core.os.LocaleListCompat
+import androidx.core.view.ViewCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons.Outlined.language
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.SettingPref
 import com.dede.basic.createLocalesContext
+import com.dede.basic.getLayoutDirection
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Locale
 
@@ -163,6 +165,10 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
                 val value = languageOptions[index].value
                 val locales = getLocaleByValue(value)
                 val localesCtx = context.createLocalesContext(locales)
+
+                ViewCompat.setLayoutDirection(
+                    requireNotNull(dialog.window).decorView, localesCtx.getLayoutDirection()
+                )
                 dialog.setTitle(localesCtx.getString(R.string.pref_title_language))
                 dialog.findViewById<TextView>(android.R.id.button1)?.text =
                     localesCtx.getString(android.R.string.ok)
