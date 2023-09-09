@@ -31,7 +31,7 @@ jobs:
         with:
           commit_user_name: Crowdin Bot
           commit_user_email: support+bot@crowdin.com
-          commit_author: crowdin-bot <support+bot@crowdin.com>
+          commit_author: Crowdin Bot <support+bot@crowdin.com>
           commit_message: "Update Crowdin translations progress"
           branch: l10n_crowdin_translations
           push_options: '--force'
