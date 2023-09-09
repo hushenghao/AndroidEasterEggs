@@ -24,6 +24,7 @@ jobs:
           curl --location 'https://api.crowdin.com/api/v2/projects/597587/languages/progress' \
             --header 'Authorization: Bearer ${{ secrets.CROWDIN_PERSONAL_TOKEN }}' \
             --output 'assets/json/crowdin_project_progress.json'
+          git diff
 
       - name: Update Crowdin translations progress
         uses: stefanzweifel/git-auto-commit-action@v4
