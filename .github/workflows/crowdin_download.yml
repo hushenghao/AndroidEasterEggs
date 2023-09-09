@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download Crowdin translations progress json
+      - name: Get Crowdin translations progress json
         run: |
           mkdir -p 'assets/json'
           curl --location 'https://api.crowdin.com/api/v2/projects/597587/languages/progress' \
@@ -27,6 +27,9 @@ jobs:
       - name: Update Crowdin translations progress
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
+          commit_user_name: Crowdin Bot
+          commit_user_email: support+bot@crowdin.com
+          commit_author: crowdin-bot <support+bot@crowdin.com>
           commit_message: "Update Crowdin translations progress"
           branch: l10n_crowdin_translations
 
