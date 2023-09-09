@@ -29,7 +29,7 @@ android {
             "ru", "uk-rUA",
             "en", "it", "de", "fr",
             "es", "pt", "pl-rPL", "tr-rTR",
-            "in-rID",
+            "in-rID", "hr-rHR",
             "ja-rJP", "ko",
             "ar-rSA",
         )

@@ -11,6 +11,7 @@
     <locale android:name="in-ID" />
     <locale android:name="ar-SA" />
 
+<!--    <locale android:name="hr-HR" />-->
 <!--    <locale android:name="fr" />-->
 <!--    <locale android:name="pl-PL" />-->
 <!--    <locale android:name="tr-TR" />-->

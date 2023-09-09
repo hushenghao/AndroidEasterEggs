@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="language_zh_SC" translatable="false">🇨🇳 简体中文</string>
-    <string name="language_zh_TC" translatable="false">🇨🇳 繁體中文</string>
-    <string name="language_de" translatable="false">🇩🇪 Deutsch</string>
-    <string name="language_en" translatable="false">🇬🇧 English</string>
-    <string name="language_es" translatable="false">🇪🇸 Español</string>
-    <string name="language_it" translatable="false">🇮🇹 Italiano</string>
-    <string name="language_pt" translatable="false">🇵🇹 Português</string>
-    <string name="language_ru" translatable="false">🇷🇺 Русский</string>
-    <string name="language_in_ID" translatable="false">🇮🇩 Indonesia</string>
+    <string name="language_zh_SC" translatable="false">简体中文</string>
+    <string name="language_zh_TC" translatable="false">繁體中文</string>
+    <string name="language_de" translatable="false">Deutsch</string>
+    <string name="language_en" translatable="false">English</string>
+    <string name="language_es" translatable="false">Español</string>
+    <string name="language_it" translatable="false">Italiano</string>
+    <string name="language_pt" translatable="false">Português</string>
+    <string name="language_ru" translatable="false">Русский</string>
+    <string name="language_in_ID" translatable="false">Indonesia</string>
     <string name="language_ar_SA" translatable="false">اللغة العربية</string>
 
-    <string name="language_fr" translatable="false">🇫🇷 Français</string>
-    <string name="language_uk_UA" translatable="false">🇺🇦 Українська</string>
-    <string name="language_pl_PL" translatable="false">🇵🇱 Polski</string>
-    <string name="language_tr_TR" translatable="false">🇹🇷 Türkçe</string>
-    <string name="language_ja_JP" translatable="false">🇯🇵 日本語</string>
-    <string name="language_ko" translatable="false">🇰🇷 한국어</string>
+    <string name="language_hr_HR" translatable="false">Hrvatski</string>
+    <string name="language_fr" translatable="false">Français</string>
+    <string name="language_uk_UA" translatable="false">Українська</string>
+    <string name="language_pl_PL" translatable="false">Polski</string>
+    <string name="language_tr_TR" translatable="false">Türkçe</string>
+    <string name="language_ja_JP" translatable="false">日本語</string>
+    <string name="language_ko" translatable="false">한국어</string>
 </resources>
