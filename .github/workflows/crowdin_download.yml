@@ -12,26 +12,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Get Crowdin Project Progress
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git checkout -b l10n_crowdin_translations
-          git pull origin l10n_crowdin_translations
-          mkdir -p 'assets/json'
-          curl --location 'https://api.crowdin.com/api/v2/projects/597587/languages/progress' \
-            --header 'Authorization: Bearer ${{ secrets.CROWDIN_PERSONAL_TOKEN }}' \
-            --output 'assets/json/crowdin_project_progress.json'
-          if [ $(git diff --name-only) ]; then
-            git add 'assets/json/crowdin_project_progress.json'
-            git commit -m "Update Crowdin project progress json"
-          fi;
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: l10n_crowdin_translations
-
       - name: Synchronize with Crowdin
         uses: crowdin/github-action@v1
         with:
@@ -49,3 +29,22 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
+      - name: Get Crowdin Project Progress
+        run: |
+#          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+#          git config --local user.name "github-actions[bot]"
+#          git checkout -b l10n_crowdin_translations
+#          git pull origin l10n_crowdin_translations
+          mkdir -p 'assets/json'
+          curl --location 'https://api.crowdin.com/api/v2/projects/597587/languages/progress' \
+            --header 'Authorization: Bearer ${{ secrets.CROWDIN_PERSONAL_TOKEN }}' \
+            --output 'assets/json/crowdin_project_progress.json'
+          if [ $(git diff --name-only) ]; then
+            git add 'assets/json/crowdin_project_progress.json'
+            git commit -m "Update Crowdin project progress json"
+          fi;
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: l10n_crowdin_translations
