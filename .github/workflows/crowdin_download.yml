@@ -31,10 +31,6 @@ jobs:
 
       - name: Get Crowdin Project Progress
         run: |
-#          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-#          git config --local user.name "github-actions[bot]"
-#          git checkout -b l10n_crowdin_translations
-#          git pull origin l10n_crowdin_translations
           mkdir -p 'assets/json'
           curl --location 'https://api.crowdin.com/api/v2/projects/597587/languages/progress' \
             --header 'Authorization: Bearer ${{ secrets.CROWDIN_PERSONAL_TOKEN }}' \
