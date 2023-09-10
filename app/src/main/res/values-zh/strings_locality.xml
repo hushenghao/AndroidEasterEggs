@@ -2,4 +2,5 @@
 <resources>
     <string name="url_share" translatable="false">https://www.coolapk.com/apk/com.dede.android_eggs</string>
     <string name="url_translation" translatable="false">https://zh.crowdin.com/project/easter-eggs</string>
+    <string name="url_privacy" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy-zh-CN</string>
 </resources>
