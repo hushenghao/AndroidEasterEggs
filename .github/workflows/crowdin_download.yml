@@ -9,32 +9,9 @@ jobs:
   crowdin:
     runs-on: ubuntu-latest
 
-    permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
-      contents: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Get Crowdin translations progress json
-        run: |
-          git checkout -b l10n_crowdin_translations
-          mkdir -p 'assets/json'
-          curl --location 'https://api.crowdin.com/api/v2/projects/597587/languages/progress' \
-            --header 'Authorization: Bearer ${{ secrets.CROWDIN_PERSONAL_TOKEN }}' \
-            --output 'assets/json/crowdin_project_progress.json'
-          git diff
-
-      - name: Update Crowdin translations progress
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_user_name: Crowdin Bot
-          commit_user_email: support+bot@crowdin.com
-          commit_author: Crowdin Bot <support+bot@crowdin.com>
-          commit_message: "Update Crowdin translations progress"
-          branch: l10n_crowdin_translations
-          push_options: '--force'
 
       - name: Synchronize with Crowdin
         uses: crowdin/github-action@v1
