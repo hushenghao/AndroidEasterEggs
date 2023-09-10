@@ -71,7 +71,8 @@ See our [Contributing doc](.github/CONTRIBUTING.md) for information on how to re
 <details>
 <summary>View translation status for all languages.</summary>
 
-[![](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhushenghao%2FAndroidEasterEggs%2Fmaster%2Fassets%2Fjson%2Fcrowdin_project_progress.json&query=%24.data%5B%3A%5D.data%5B'languageId'%2C'translationProgress'%5D&style=flat-square&label=Translation%20Progress(%25)&labelColor=273238&color=fff)](https://crowdin.com/project/easter-eggs)
+[![](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhushenghao%2FAndroidEasterEggs%2Fmaster%2Fassets%2Fjson%2Fcrowdin_project_progress.json&query=%24.data%5B%3A%5D.data%5B'languageId'%2C'translationProgress'%5D&style=flat-square&logo=crowdin&logoColor=FFF&label=Progress(%25)&labelColor=2E3340&color=FFF
+)](https://crowdin.com/project/easter-eggs)
 
 </details>
 
