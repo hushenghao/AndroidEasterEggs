@@ -1,5 +1,6 @@
 package com.dede.android_eggs.views.settings.prefs
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Build
@@ -12,8 +13,10 @@ import androidx.core.view.ViewCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons.Outlined.language
 import com.dede.android_eggs.util.CustomTabsBrowser
+import com.dede.android_eggs.util.getActivity
 import com.dede.android_eggs.views.settings.SettingPref
 import com.dede.basic.createLocalesContext
+import com.dede.basic.getConfigurationLocales
 import com.dede.basic.getLayoutDirection
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Locale
@@ -216,6 +219,15 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
     }
 
     override fun onOptionSelected(context: Context, option: Op) {
-        AppCompatDelegate.setApplicationLocales(getLocaleByValue(option.value))
+        val locales = getLocaleByValue(option.value)
+        AppCompatDelegate.setApplicationLocales(locales)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            // AppCompat wrap mode,
+            // When selected default language or Selected language is the same as the system
+            if (locales == LocaleListCompat.getEmptyLocaleList() ||
+                locales == context.getConfigurationLocales()) {
+                context.getActivity<Activity>()?.recreate()
+            }
+        }
     }
 }
