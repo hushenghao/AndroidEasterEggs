@@ -149,10 +149,38 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         }
     }
 
+    private fun sortLangOps(langOps: List<LangOp>, context: Context): List<LangOp> {
+        val copy = ArrayList(langOps)
+        copy.sortBy { context.getString(it.titleRes) }
+        var index = copy.indexOfFirst { it.value == SIMPLIFIED_CHINESE }
+        if (index != -1) {
+            copy.add(0, copy.removeAt(index))
+        }
+        index = copy.indexOfFirst { it.value == TRADITIONAL_CHINESE }
+        if (index != -1) {
+            copy.add(1, copy.removeAt(index))
+        }
+        return copy
+    }
+
+    private fun handleLocaleChoice(context: Context, dialog: Dialog, locales: LocaleListCompat) {
+        val localesCtx = context.createLocalesContext(locales)
+        val decorView = requireNotNull(dialog.window).decorView
+        ViewCompat.setLayoutDirection(decorView, localesCtx.getLayoutDirection())
+        dialog.setTitle(localesCtx.getString(R.string.pref_title_language))
+        decorView.findViewById<TextView>(android.R.id.button1).text =
+            localesCtx.getString(android.R.string.ok)
+        decorView.findViewById<TextView>(android.R.id.button2).text =
+            localesCtx.getString(android.R.string.cancel)
+        decorView.findViewById<TextView>(android.R.id.button3).text =
+            localesCtx.getString(R.string.label_translation)
+    }
+
     override fun onPreOptionSelected(context: Context, option: Op): Boolean {
         if (option.value != MORE) {
             return false
         }
+        val languageOptions = sortLangOps(languageOptions, context)
         var choiceIndex = languageOptions.indexOfFirst { it.value == selectedValue }
         val lastChoiceIndex = choiceIndex
         val languages = languageOptions.map { context.getString(it.titleRes) }.toTypedArray()
@@ -161,21 +189,8 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             .setSingleChoiceItems(languages, choiceIndex) { dialogInterface, index ->
                 choiceIndex = index
                 // change to locale text
-                val dialog = dialogInterface as Dialog
                 val value = languageOptions[index].value
-                val locales = getLocaleByValue(value)
-                val localesCtx = context.createLocalesContext(locales)
-
-                ViewCompat.setLayoutDirection(
-                    requireNotNull(dialog.window).decorView, localesCtx.getLayoutDirection()
-                )
-                dialog.setTitle(localesCtx.getString(R.string.pref_title_language))
-                dialog.findViewById<TextView>(android.R.id.button1)?.text =
-                    localesCtx.getString(android.R.string.ok)
-                dialog.findViewById<TextView>(android.R.id.button2)?.text =
-                    localesCtx.getString(android.R.string.cancel)
-                dialog.findViewById<TextView>(android.R.id.button3)?.text =
-                    localesCtx.getString(R.string.label_translation)
+                handleLocaleChoice(context, dialogInterface as Dialog, getLocaleByValue(value))
             }
             .setOnDismissListener {
                 if (lastChoiceIndex == choiceIndex) {
