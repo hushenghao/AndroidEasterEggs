@@ -88,6 +88,7 @@
         app:layout_constraintStart_toEndOf="@id/iv_logo"
         app:layout_constraintTop_toBottomOf="@id/tv_year"
         app:layout_constraintWidth="wrap_content_constrained"
+        tools:background="?attr/colorSecondaryContainer"
         tools:text="@tools:sample/lorem[10]" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

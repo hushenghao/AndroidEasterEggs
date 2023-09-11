@@ -9,12 +9,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
-import com.google.android.material.R as M3R
-import com.dede.android_eggs.ui.Icons
-import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
+import com.google.android.material.R as M3R
 
 /**
  * CustomTabs Help
@@ -37,18 +34,12 @@ object CustomTabsBrowser {
             .setToolbarColor(color)
             .build()
 
-        val closeIcon = FontIconsDrawable(
-            context, Icons.Rounded.arrow_back,
-            M3R.attr.colorSurfaceInverse, 24f
-        ).toBitmap()
         val builder = CustomTabsIntent.Builder()
             .setShowTitle(true)
             .setUrlBarHidingEnabled(true)
             .setColorScheme(colorScheme)
             .setShareState(CustomTabsIntent.SHARE_STATE_ON)
             .setDefaultColorSchemeParams(params)
-            .setCloseButtonIcon(closeIcon)
-            .setInitialActivityHeightPx((context.resources.displayMetrics.heightPixels * 0.75).toInt())
 
         val customTabsIntent = builder.build()
         customTabsIntent.intent.putExtra(

@@ -13,9 +13,8 @@
         <item name="android:windowSplashScreenBackground" tools:targetApi="s">
             @color/splash_background_color
         </item>
-        <item name="materialAlertDialogTheme">
-            @style/ThemeOverlay.Material3.MaterialAlertDialog.Centered
-        </item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialAlertDialog.BlurBehind</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.BottomSheetDialog.BlurBehind</item>
     </style>
 
     <style name="Theme.EasterEggs" parent="Base.EasterEggs">
@@ -58,7 +57,17 @@
         <item name="android:textSize" tools:ignore="SpUsage">16dp</item>
     </style>
 
-    <style name="ThemeOverlay.BottomSheetDialog.Scrollable" parent="ThemeOverlay.Material3.BottomSheetDialog">
+    <style name="ThemeOverlay.MaterialAlertDialog.BlurBehind" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
+        <item name="android:windowBlurBehindEnabled" tools:ignore="NewApi">true</item>
+        <item name="android:windowBlurBehindRadius" tools:ignore="NewApi">4dp</item>
+    </style>
+
+    <style name="ThemeOverlay.BottomSheetDialog.BlurBehind" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="android:windowBlurBehindEnabled" tools:ignore="NewApi">true</item>
+        <item name="android:windowBlurBehindRadius" tools:ignore="NewApi">4dp</item>
+    </style>
+
+    <style name="ThemeOverlay.BottomSheetDialog.Scrollable" parent="ThemeOverlay.BottomSheetDialog.BlurBehind">
         <item name="bottomSheetStyle">@style/Widget.BottomSheet.Modal.Scrollable</item>
     </style>
 

@@ -69,7 +69,7 @@ class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_andr
                 ).build()
                 background = MaterialShapeDrawable(builder).apply {
                     fillColor = ColorStateList.valueOf(
-                        MaterialColors.getColor(this@with, M3R.attr.colorPrimaryContainer)
+                        MaterialColors.getColor(this@with, M3R.attr.colorSecondaryContainer)
                     )
                 }
                 text = timelineEvent.eventSpan
@@ -78,7 +78,7 @@ class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_andr
                 FontIconsDrawable(
                     holder.itemView.context,
                     Icons.Outlined.arrow_left,
-                    M3R.attr.colorPrimaryContainer
+                    M3R.attr.colorSecondaryContainer
                 ).apply {
                     isAutoMirrored = true
                 }
