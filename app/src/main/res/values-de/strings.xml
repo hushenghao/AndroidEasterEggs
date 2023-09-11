@@ -3,6 +3,8 @@
     <string name="summary_android_waiting">Warten…</string>
     <string name="summary_android_release_pushed">Die Finale Version wurde veröffentlicht</string>
     <string name="title_open_with">Öffnen mit</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
     <string name="label_translation">Übersetzen</string>
     <string name="label_beta">Laden Sie die Beta-Version herunter</string>
     <string name="label_timeline">Zeitleiste</string>
