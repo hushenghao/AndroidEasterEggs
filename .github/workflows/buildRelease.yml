@@ -2,7 +2,6 @@ name: Android Build Release CI
 
 on:
   push:
-#    branches: [ release/1.9.4 ]
     tags:
       - 'v*'
 
@@ -51,11 +50,6 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        # tag: ${{ github.ref }}
-#        name: Release ${{ github.ref }}
-#        tag: v1.9.4-prerelease
-#        name: PreRelease v1.9.4
-#        commit: release/1.9.4
         draft: false
         prerelease: false
         bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get-change-logs.outputs.CHANGE_LOGS }}
