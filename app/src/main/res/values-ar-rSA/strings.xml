@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="summary_android_waiting">في انتظار…</string>
+    <string name="summary_android_waiting">في الانتظار…</string>
     <string name="summary_android_release_pushed">لقد دفعت النسخة الإصدار النهائي</string>
     <string name="title_open_with">مفتوحة مع</string>
     <string name="label_translation">ترجمة</string>
