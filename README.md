@@ -37,21 +37,21 @@ The project contains the complete code of the system Easter eggs, which aims to 
 |----------------------------------------|:---------:|-------------------------------|:--------------------------------------:|:--------------------------------------:|
 | Android 14 (Upside Down Cake)          |    34     | ⌛️                            |                                        |                                        |
 | Android 13 (Tiramisu)                  |    33     | Paint Chips                   |                   ✅                    |         31 [*](#id_android12)          |
-| Android 12 (Snow Cone)                 |   31~32   | Paint Chips                   |                   ✅                    |         31 [*](#id_android12)          |
+| Android 12 (Snow Cone)                 |   31-32   | Paint Chips                   |                   ✅                    |         31 [*](#id_android12)          |
 | Android 11 (Red Velvet Cake)           |    30     | Cat Controls(Collection)      |                   ✅                    |         30 [*](#id_android11)          |
 | Android 10 (Queen Cake)                |    29     | Icon Quiz                     |                   🚫                   |                   -                    |
 | Android 9 (Pie)                        |    28     | PAINT.APK                     |                   🚫                   |                   -                    |
-| Android 8.0~8.1 (Oreo)                 |   26~27   | Octopus                       |                   🚫                   |                   -                    |
-| Android 7.0~7.1 (Nougat)               |   24~25   | Neko                          |                   ✅                    |          24 [*](#id_android7)          |
+| Android 8.0-8.1 (Oreo)                 |   26-27   | Octopus                       |                   🚫                   |                   -                    |
+| Android 7.0-7.1 (Nougat)               |   24-25   | Neko                          |                   ✅                    |          24 [*](#id_android7)          |
 | Android 6.0 (Marshmallow)              |    23     | Marshmallow Land              |                   🚫                   |                   -                    |
-| Android 5.0~5.1 (Lollipop)             |   21~22   | L Land                        |                   🚫                   |                   -                    |
-| Android 4.4~4.4W (KitKat)              |   19~20   | Dessert Case                  |                   🚫                   |                   -                    |
-| Android 4.1~4.3 (Jelly Bean)           |   16~18   | BeanBag                       |                   🚫                   |                   -                    |
-| Android 4.0~4.0.3 (Ice Cream Sandwich) |   14~15   | Nyandroid                     |                   🚫                   |                   -                    |
-| Android 3.0~3.2 (Honeycomb)            |   11~13   | Honeycomb [*](#id_egg_name)   |                   🚫                   |                   -                    |
-| Android 2.3~2.3.3 (Gingerbread)        |   9~10    | Gingerbread [*](#id_egg_name) |                   🚫                   |                   -                    |
+| Android 5.0-5.1 (Lollipop)             |   21-22   | L Land                        |                   🚫                   |                   -                    |
+| Android 4.4-4.4W (KitKat)              |   19-20   | Dessert Case                  |                   🚫                   |                   -                    |
+| Android 4.1-4.3 (Jelly Bean)           |   16-18   | BeanBag                       |                   🚫                   |                   -                    |
+| Android 4.0-4.0.3 (Ice Cream Sandwich) |   14-15   | Nyandroid                     |                   🚫                   |                   -                    |
+| Android 3.0-3.2 (Honeycomb)            |   11-13   | Honeycomb [*](#id_egg_name)   |                   🚫                   |                   -                    |
+| Android 2.3-2.3.3 (Gingerbread)        |   9-10    | Gingerbread [*](#id_egg_name) |                   🚫                   |                   -                    |
 | Android 2.2 (Froyo)                    |     8     | -                             |                   -                    |                   -                    |
-| Android 2.0~2.1 (Eclair)               |    5~7    | -                             |                   -                    |                   -                    |
+| Android 2.0-2.1 (Eclair)               |    5-7    | -                             |                   -                    |                   -                    |
 | Android 1.6 (Donut)                    |     4     | -                             |                   -                    |                   -                    |
 | Android 1.5 (Cupcake)                  |     3     | -                             |                   -                    |                   -                    |
 | Android 1.1 (Petit Four)               |     2     | -                             |                   -                    |                   -                    |
