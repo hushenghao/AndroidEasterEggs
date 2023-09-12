@@ -104,7 +104,7 @@ Device type for emulators to be managed by the Android Gradle Plugin.
 
 ## Other
 
-[Privacy Policy](https://github.com/hushenghao/AndroidEasterEggs/wiki/%E9%9A%90%E7%A7%81%E5%8D%8F%E8%AE%AE)
+[Privacy Policy](https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy)
 
 [Contact me 📧](mailto:dede.hu@qq.com)
 
