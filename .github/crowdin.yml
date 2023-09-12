@@ -1,7 +1,5 @@
-project_id: "597587"
-api_token_env: "CROWDIN_PERSONAL_TOKEN"
-commit_message: 'feat: New translations %original_file_name% from Crowdin'
-append_commit_message: false
+project_id: CROWDIN_PROJECT_ID
+api_token_env: CROWDIN_PERSONAL_TOKEN
 
 files:
   - source: app/**/res/values/strings.xml
