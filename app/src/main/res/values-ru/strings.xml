@@ -3,6 +3,8 @@
     <string name="summary_android_waiting">Ожидание…</string>
     <string name="summary_android_release_pushed">Финальная версия релиза выпущена</string>
     <string name="title_open_with">Открыть с помощью</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">–</string>
     <string name="label_translation">Перевод</string>
     <string name="label_beta">Получить бета-версию</string>
     <string name="label_timeline">Хронология</string>
@@ -35,4 +37,5 @@
     <string name="summary_browse_privacy_policy">Прочитайте и согласитесь с нашей Политикой конфиденциальности, чтобы продолжить.</string>
     <string name="label_welcome">Добро пожаловать в каталоги пасхальных яиц 🎉🎉🎉</string>
     <string name="label_share">Поделиться</string>
+    <string name="label_search_hint">Поиск…</string>
 </resources>
