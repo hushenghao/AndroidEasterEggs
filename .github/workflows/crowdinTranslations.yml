@@ -23,7 +23,7 @@ jobs:
       - name: Synchronize with Crowdin
         uses: crowdin/github-action@v1
         with:
-          config: './github/crowdin.yml'
+          config: '.github/crowdin.yml'
 
           upload_sources: true
           upload_translations: false
