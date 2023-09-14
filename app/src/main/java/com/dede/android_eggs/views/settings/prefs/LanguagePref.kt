@@ -80,7 +80,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             LangOp(ARABIC, R.string.language_ar_SA, createLocale("ar", "SA")),
             LangOp(CROATIAN, R.string.language_hr_HR, createLocale("hr", "HR")),
 //            LangOp(FRENCH, R.string.language_fr, Locale.FRENCH),
-//            LangOp(POLISH, R.string.language_pl_PL, createLocale("pl", "PL")),
+            LangOp(POLISH, R.string.language_pl_PL, createLocale("pl", "PL")),
 //            LangOp(TURKISH, R.string.language_tr_TR, createLocale("tr", "TR")),
 //            LangOp(UKRAINIAN, R.string.language_uk_UA, createLocale("uk", "UA")),
             LangOp(JAPANESE, R.string.language_ja_JP, Locale.JAPAN),
@@ -225,7 +225,8 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             // AppCompat wrap mode,
             // When selected default language or Selected language is the same as the system
             if (locales == LocaleListCompat.getEmptyLocaleList() ||
-                locales == context.getConfigurationLocales()) {
+                locales == context.getConfigurationLocales()
+            ) {
                 context.getActivity<Activity>()?.recreate()
             }
         }

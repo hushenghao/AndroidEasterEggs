@@ -3,6 +3,7 @@
 - Add Indonesia translations
 - Add Arabic translations
 - Add Croatian translations
+- Add Polish translations
 - Fix Spanish translations
 - Fix Egg Group Icon Visual Effects
 - Feature optimization
