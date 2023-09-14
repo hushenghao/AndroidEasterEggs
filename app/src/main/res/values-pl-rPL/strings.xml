@@ -1,2 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="summary_android_waiting">Oczekiwanie…</string>
+    <string name="summary_android_release_pushed">Ostateczna wersja została wydana</string>
+    <string name="title_open_with">Otwórz za pomocą</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_translation">Tłumaczenie</string>
+    <string name="label_beta">Pobierz wersję beta</string>
+    <string name="label_timeline">Oś czasu</string>
+    <string name="label_privacy_policy">Polityka prywatności</string>
+    <string name="label_license">Licencja</string>
+    <string name="label_email">Informacja zwrotna</string>
+    <string name="label_star">Oceń</string>
+    <string name="label_timeline_title">Oś czasu, etapy i aktualizacje</string>
+    <string name="label_timeline_releases">Wersje</string>
+    <string name="message_trypophobia_warning">To jest ostrzeżenie dla osób z &lt;b&gt;Trypofobią&lt;/b&gt;. Niektóre obrazy mogą powodować dyskomfort. Czy chcesz kontynuować?</string>
+    <string name="label_settings">Ustawienia</string>
+    <string name="pref_title_icon_shape_override">Kształt ikony</string>
+    <string name="pref_title_language">Język</string>
+    <string name="pref_title_language_more">Więcej</string>
+    <string name="pref_title_theme">Motyw</string>
+    <string name="pref_title_dynamic_color">Dynamiczny kolor</string>
+    <string name="pref_title_icon_visual_effects">Efekty Wizualne Ikony</string>
+    <string name="summary_system_default">Domyślny</string>
+    <string name="summary_theme_dark_mode">Ciemny</string>
+    <string name="summary_theme_light_mode">Jasny</string>
+    <string name="label_add_shortcut">Skrót</string>
+    <string name="label_donate">Wesprzyj</string>
+    <string name="preference_on">Wł.</string>
+    <string name="preference_off">Wył.</string>
+    <string name="toast_shortcut_added">Dodano skrót</string>
+    <string name="toast_github_sponsor">Możesz przekazać darowiznę za pośrednictwem „Sponsora Github” projektu</string>
+    <string name="app_widget_description">To jest zegar analogowy Easter Eggs</string>
+    <string name="action_agree">Akceptuj</string>
+    <string name="summary_browse_privacy_policy">Przeczytaj i zaakceptuj naszą Politykę prywatności, aby kontynuować.</string>
+    <string name="label_welcome">Witamy w Katalogach Easter Egg 🎉🎉🎉</string>
+    <string name="label_share">Udostępnij</string>
+    <string name="label_search_hint">Wyszukiwanie…</string>
+</resources>
