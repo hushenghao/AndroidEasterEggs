@@ -27,24 +27,26 @@ def get_project_progress():
         if name == None:
             name = id
         language['data']['name'] = name
+    languages = list(map(lambda l: l['data'],languages))
+    languages = sorted(languages, key=lambda l: l['name'])
     return languages
 
 
 line_height = 26
 svg_width = 500
 
-def create_svg_group(dwg,language,index):
+def append_language_group(dwg,language,index):
     label_width = 200
     progress_width = 160
     insert = 10
 
-    g = dwg.g(transform = 'translate(0,{})'.format(index * line_height))
-    g.add(dwg.text(language['data']['name'],insert=(label_width,18),fill='#999',font_size='12',style='text-anchor:end;'))
+    g = dwg.add(dwg.g(class_="font12", transform = 'translate(0,{})'.format(index * line_height)))
+    g.add(dwg.text(language['name'],insert=(label_width,18),style='text-anchor:end;'))
 
-    translation_progress = language['data']['translationProgress'] / 100.0
-    approval_progress = language['data']['approvalProgress'] / 100.0
+    translation_progress = language['translationProgress'] / 100.0
+    approval_progress = language['approvalProgress'] / 100.0
 
-    progress_insert = (label_width + insert, 11.6)
+    progress_insert = (label_width + insert, 11.4)
     if translation_progress < 100:
         g.add(dwg.rect(insert=progress_insert,size=(progress_width, 6),rx=3,ry=3,fill='#F5F5F5'))
     if translation_progress > 0 and approval_progress < 100:
@@ -52,14 +54,23 @@ def create_svg_group(dwg,language,index):
     if approval_progress > 0:
         g.add(dwg.rect(insert=progress_insert,size=(progress_width * approval_progress, 6),rx=3,ry=3,fill='#71C277'))
 
-    g.add(dwg.text('{}%'.format(language['data']['translationProgress']),insert=(progress_insert[0] + progress_width + insert,18),fill='#999',font_size='10'))
+    g.add(dwg.text('{}%'.format(language['translationProgress']),insert=(progress_insert[0] + progress_width + insert,18)))
     return g
 
 languages = get_project_progress()
 print(languages)
 
 dwg = svgwrite.Drawing('crowdin_project_progress.svg',size=(svg_width,len(languages) * line_height))
+# load web font by CSS @import
+dwg.embed_stylesheet("""
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+.font12 {
+    font-family: "Noto Sans";
+    font-size: 12px;
+    fill: #999;
+}
+""")
 for i in range(0,len(languages)):
-    dwg.add(create_svg_group(dwg,languages[i],i))
+    append_language_group(dwg,languages[i],i)
 
 dwg.save(pretty=True)
