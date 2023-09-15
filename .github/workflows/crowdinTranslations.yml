@@ -20,6 +20,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip' # caching pip dependencies
+        run: pip install -r requirements.txt
+
+      - name: Get Crowdin project progress
+        run: |
+          cd script/crowdin
+          python start.py ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
       - name: Synchronize with Crowdin
         uses: crowdin/github-action@v1
         with:
