@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-import os
 import blurhash
+import os
 
 with open("images.txt", "r", encoding='utf-8') as f:
     paths = f.readlines()

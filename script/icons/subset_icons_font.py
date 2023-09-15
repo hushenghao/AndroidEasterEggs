@@ -1,16 +1,15 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+import fontTools.merge
+import fontTools.subset
 import json
 import os
 import shutil
 import sys
 import time
 
-import fontTools.subset
-import fontTools.merge
 from download_material_fonts import download
-
 
 FORMAT_CLASS_ICONS = """package com.dede.android_eggs.ui
 
@@ -103,7 +102,7 @@ def generate_icons_kt(icons_group, output):
             continue
         icons = sorted(icons, key=lambda icon: icon[0])
         icons = map(lambda icon: FORMAT_PROPERTY %
-                    (icon[0], icon[0], icon[1].upper()), icons)
+                                 (icon[0], icon[0], icon[1].upper()), icons)
         all_icons.append(
             FORMAT_TYPE_CLASS % (type.capitalize(), ''.join(icons))
         )

@@ -2,8 +2,8 @@
 # -*- coding: UTF-8 -*-
 
 import os
-import sys
 import requests
+import sys
 
 
 def download(git_commit):
