@@ -71,7 +71,7 @@ See our [Contributing doc](.github/CONTRIBUTING.md) for information on how to re
 <details>
 <summary>View translation status for all languages.</summary>
 
-[![](https://badges.awesome-crowdin.com/translation-15891207-597587-update.png)](https://crowdin.com/project/easter-eggs)
+[![](script/crowdin/crowdin_project_progress.svg)](https://crowdin.com/project/easter-eggs)
 
 </details>
 

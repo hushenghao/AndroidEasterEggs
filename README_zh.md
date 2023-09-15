@@ -71,7 +71,7 @@
 <details>
 <summary>查看所有语言的翻译状态。</summary>
 
-[![](https://badges.awesome-crowdin.com/translation-15891207-597587-update.png)](https://zh.crowdin.com/project/easter-eggs)
+[![](script/crowdin/crowdin_project_progress.svg)](https://zh.crowdin.com/project/easter-eggs)
 
 </details>
 

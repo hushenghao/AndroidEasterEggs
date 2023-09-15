@@ -30,8 +30,10 @@ def get_project_progress():
     return languages
 
 
+line_height = 26
+svg_width = 500
+
 def create_svg_group(dwg,language,index):
-    line_height = 26
     label_width = 200
     progress_width = 160
     insert = 10
@@ -56,7 +58,7 @@ def create_svg_group(dwg,language,index):
 languages = get_project_progress()
 print(languages)
 
-dwg = svgwrite.Drawing('crowdin_project_progress.svg')
+dwg = svgwrite.Drawing('crowdin_project_progress.svg',size=(svg_width,len(languages) * line_height))
 for i in range(0,len(languages)):
     dwg.add(create_svg_group(dwg,languages[i],i))
 

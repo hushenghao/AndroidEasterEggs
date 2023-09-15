@@ -34,3 +34,10 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "chore"
+      
+  - package-ecosystem: "pip"
+    directory: "/script/crowdin"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"
