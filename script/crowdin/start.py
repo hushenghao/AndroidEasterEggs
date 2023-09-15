@@ -48,7 +48,7 @@ def append_language_group(dwg,language,index):
 
     progress_insert = (label_width + insert, 11.4)
     if translation_progress < 100:
-        g.add(dwg.rect(insert=progress_insert,size=(progress_width, 6),rx=3,ry=3,fill='#F5F5F5'))
+        g.add(dwg.rect(insert=progress_insert,size=(progress_width, 6),rx=3,ry=3,fill='#999',style='filter:opacity(30%);'))
     if translation_progress > 0 and approval_progress < 100:
         g.add(dwg.rect(insert=progress_insert,size=(progress_width * translation_progress, 6),rx=3,ry=3,fill='#5D89C3'))
     if approval_progress > 0:
