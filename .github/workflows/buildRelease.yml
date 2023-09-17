@@ -10,9 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: set up JDK
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK
       uses: actions/setup-java@v3
       with:
         java-version: '17'
@@ -26,9 +27,6 @@ jobs:
       run: |
         echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
         echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
-
-    - name: Print root files
-      run: ls -l
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
