@@ -3,6 +3,8 @@
     <string name="summary_android_waiting">Čekanje…</string>
     <string name="summary_android_release_pushed">Objavljeno je konačno izdanje</string>
     <string name="title_open_with">Otvori s</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
     <string name="label_translation">Prijevod</string>
     <string name="label_beta">Preuzmi betu</string>
     <string name="label_timeline">Vremenska crta</string>
