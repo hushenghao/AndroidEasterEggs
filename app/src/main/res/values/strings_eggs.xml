@@ -12,7 +12,7 @@
     <string name="title_android_m" translatable="false">Android 6.0.* (Marshmallow)</string>
     <string name="title_android_l" translatable="false">Android 5.* (Lollipop)</string>
     <string name="title_android_k" translatable="false">Android 4.4.* (KitKat)</string>
-    <string name="title_android_j" translatable="false">Android 4.* (Jelly Bean)</string>
+    <string name="title_android_j" translatable="false">Android 4.1.*–4.3.* (Jelly Bean)</string>
     <string name="title_android_i" translatable="false">Android 4.0.* (Ice Cream Sandwich)</string>
     <string name="title_android_h" translatable="false">Android 3.* (Honeycomb)</string>
     <string name="title_android_g" translatable="false">Android 2.3.* (Gingerbread)</string>
