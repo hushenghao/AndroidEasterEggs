@@ -3,6 +3,8 @@
     <string name="summary_android_waiting">Esperando…</string>
     <string name="summary_android_release_pushed">A versão de lançamento final foi empurrada</string>
     <string name="title_open_with">Abrir com</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
     <string name="label_translation">Tradução</string>
     <string name="label_beta">Obter Beta</string>
     <string name="label_timeline">Cronologia</string>
@@ -35,4 +37,5 @@
     <string name="summary_browse_privacy_policy">Leia e concorde com os nossos Termos de Privacidade para continuar.</string>
     <string name="label_welcome">Bem-vindo ao Catálogo de Easter eggs 🎉🎉🎉</string>
     <string name="label_share">Partilhar</string>
+    <string name="label_search_hint">Pesquisar…</string>
 </resources>
