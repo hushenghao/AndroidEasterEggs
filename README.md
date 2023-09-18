@@ -89,19 +89,6 @@ Windows need to use `gradlew.bat`:
 gradlew.bat assembleRelease
 ```
 
-## Test
-
-Using Android devices or emulators.
-```shell
-./gradlew app:cAT
-```
-
-Device type for emulators to be managed by the Android Gradle Plugin.
-
-```shell
-./gradlew app:pixel4Api33DebugAndroidTest
-```
-
 ## Other
 
 [Privacy Policy](https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy)

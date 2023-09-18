@@ -89,19 +89,6 @@ Windows 需要使用 `gradlew.bat`：
 gradlew.bat assembleRelease
 ```
 
-## 测试
-
-使用Android设备或者模拟器.
-```shell
-./gradlew app:cAT
-```
-
-由Android Gradle插件管理的模拟器的设备类型。
-
-```shell
-./gradlew app:pixel4Api33DebugAndroidTest
-```
-
 ## 其他
 
 [隐私协议](https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy-zh-CN)
