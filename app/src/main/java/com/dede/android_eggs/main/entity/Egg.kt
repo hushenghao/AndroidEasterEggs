@@ -4,9 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.view.ViewCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.adapter.VType
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
@@ -15,8 +15,8 @@ import com.dede.basic.requireDrawable
 
 data class Egg(
     @DrawableRes val iconRes: Int,
-    @StringRes val androidRes: Int,
     @StringRes val eggNameRes: Int,
+    val versionFormatter: VersionFormatter,
     val versionCommentFormatter: VersionCommentFormatter,
     val targetClass: Class<out Activity>? = null,
     val supportAdaptiveIcon: Boolean = false,
@@ -25,11 +25,31 @@ data class Egg(
     private val itemType: Int = VIEW_TYPE_EGG,
 ) : VType {
 
+    val id = ViewCompat.generateViewId()
+
+    class VersionFormatter(
+        @StringRes val nicknameRes: Int,
+        vararg versionNames: CharSequence,
+    ) {
+
+        private val versionNames: Array<out CharSequence> = versionNames
+
+        fun format(context: Context): CharSequence {
+            val sb = StringBuilder()
+            val enDash = context.getString(R.string.char_en_dash)
+            val nickname = context.getString(nicknameRes)
+            versionNames.joinTo(sb, prefix = "Android ", separator = enDash, postfix = " (")
+            sb.append(nickname)
+                .append(")")
+            return sb
+        }
+    }
+
     class VersionCommentFormatter(
         private val versionCode1: Int,
         private val versionCode2: Int,
         private val versionName1: CharSequence,
-        private val versionName2: CharSequence
+        private val versionName2: CharSequence,
     ) {
 
         constructor(versionCode: Int, versionName: CharSequence) :

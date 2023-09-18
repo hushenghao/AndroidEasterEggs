@@ -1,34 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_android_u" translatable="false">Android 14 (Upside Down Cake)</string>
-    <string name="title_android_t" translatable="false">Android 13 (Tiramisu)</string>
-    <string name="title_android_s" translatable="false">Android 12 (Snow Cone)</string>
-    <string name="title_android_r" translatable="false">Android 11 (Red Velvet Cake)</string>
-    <string name="title_android_q" translatable="false">Android 10 (Queen Cake)</string>
-    <string name="title_android_p" translatable="false">Android 9 (Pie)</string>
-    <string name="title_android_o_1" translatable="false">Android 8.1 (Oreo)</string>
-    <string name="title_android_o" translatable="false">Android 8.0 (Oreo)</string>
-    <string name="title_android_n" translatable="false">Android 7.* (Nougat)</string>
-    <string name="title_android_m" translatable="false">Android 6.0.* (Marshmallow)</string>
-    <string name="title_android_l" translatable="false">Android 5.* (Lollipop)</string>
-    <string name="title_android_k" translatable="false">Android 4.4.* (KitKat)</string>
-    <string name="title_android_j" translatable="false">Android 4.* (Jelly Bean)</string>
-    <string name="title_android_i" translatable="false">Android 4.0.* (Ice Cream Sandwich)</string>
-    <string name="title_android_h" translatable="false">Android 3.* (Honeycomb)</string>
-    <string name="title_android_g" translatable="false">Android 2.3.* (Gingerbread)</string>
-    <string name="title_android_froyo" translatable="false">Android 2.2 (Froyo)</string>
-    <string name="title_android_eclair" translatable="false">Android 2.* (Eclair)</string>
-    <string name="title_android_donut" translatable="false">Android 1.6 (Donut)</string>
-    <string name="title_android_cupcake" translatable="false">Android 1.5 (Cupcake)</string>
-    <string name="title_android_petit_four" translatable="false">Android 1.1 (Petit Four)</string>
-    <string name="title_android_base" translatable="false">Android 1.0 (Base)</string>
-
-    <string name="summary_android_froyo" translatable="false">Froyo</string>
-    <string name="summary_android_eclair" translatable="false">Eclair</string>
-    <string name="summary_android_donut" translatable="false">Donut</string>
-    <string name="summary_android_cupcake" translatable="false">Cupcake</string>
-    <string name="summary_android_petit_four" translatable="false">Petit Four</string>
-    <string name="summary_android_base" translatable="false">Base</string>
-
-    <string name="u_egg_name_override" translatable="false">Upside Down Cake</string>
+    <string name="nickname_android_u" translatable="false">Upside Down Cake</string>
+    <string name="nickname_android_t" translatable="false">Tiramisu</string>
+    <string name="nickname_android_s" translatable="false">Snow Cone</string>
+    <string name="nickname_android_r" translatable="false">Red Velvet Cake</string>
+    <string name="nickname_android_q" translatable="false">Queen Cake</string>
+    <string name="nickname_android_p" translatable="false">Pie</string>
+    <string name="nickname_android_o" translatable="false">Oreo</string>
+    <string name="nickname_android_n" translatable="false">Nougat</string>
+    <string name="nickname_android_m" translatable="false">Marshmallow</string>
+    <string name="nickname_android_l" translatable="false">Lollipop</string>
+    <string name="nickname_android_k" translatable="false">KitKat</string>
+    <string name="nickname_android_j" translatable="false">Jelly Bean</string>
+    <string name="nickname_android_i" translatable="false">Ice Cream Sandwich</string>
+    <string name="nickname_android_h" translatable="false">Honeycomb</string>
+    <string name="nickname_android_g" translatable="false">Gingerbread</string>
+    <string name="nickname_android_froyo" translatable="false">Froyo</string>
+    <string name="nickname_android_eclair" translatable="false">Eclair</string>
+    <string name="nickname_android_donut" translatable="false">Donut</string>
+    <string name="nickname_android_cupcake" translatable="false">Cupcake</string>
+    <string name="nickname_android_petit_four" translatable="false">Petit Four</string>
+    <string name="nickname_android_base" translatable="false">Base</string>
 </resources>

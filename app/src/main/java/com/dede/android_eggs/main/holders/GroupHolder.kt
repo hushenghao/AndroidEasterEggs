@@ -43,7 +43,8 @@ class GroupHolder(view: View) : VHolder<EggGroup>(view),
             popupMenu.setForceShowIcon(true)
             var order = eggGroup.child.size
             for (egg in eggGroup.child) {
-                popupMenu.menu.add(0, egg.androidRes, order--, egg.androidRes).apply {
+                val menuTitle = egg.versionFormatter.format(context)
+                popupMenu.menu.add(0, egg.id, order--, menuTitle).apply {
                     val drawable = egg.getIcon(context)
                     val drawH = drawable.intrinsicHeight
                     val drawW = drawable.intrinsicWidth
@@ -58,7 +59,7 @@ class GroupHolder(view: View) : VHolder<EggGroup>(view),
             MenuPopupAccessor.setApi23Transitions(popupMenu)
             popupMenu.setOnMenuItemClickListener {
                 val index = eggGroup.child.indexOfFirst { egg ->
-                    egg.androidRes == it.itemId
+                    egg.id == it.itemId
                 }
                 if (index != -1) {
                     if (index != eggGroup.selectedIndex) {

@@ -19,18 +19,19 @@ import androidx.core.content.withStyledAttributes
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
+import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.DialogAndroidTimelineBinding
 import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.ui.adapter.VHType
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.resolveColorStateList
-import com.google.android.material.R
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.resources.MaterialAttributes
 import java.util.*
 import kotlin.math.roundToInt
+import com.google.android.material.R as M3R
 
 @VHType(viewType = Egg.VIEW_TYPE_PREVIEW)
 class PreviewHolder(view: View) : EggHolder(view) {
@@ -47,7 +48,7 @@ class PreviewHolder(view: View) : EggHolder(view) {
         val defaultColor = MaterialColors.harmonizeWithPrimary(context, color)
 
         var pressedColor = context.resolveColorStateList(
-            R.attr.materialCardViewFilledStyle, R.attr.cardBackgroundColor
+            M3R.attr.materialCardViewFilledStyle, M3R.attr.cardBackgroundColor
         )?.getColorForState(stateSet, defaultColor) ?: defaultColor
         pressedColor = MaterialColors.harmonize(color, pressedColor)
 
@@ -60,7 +61,7 @@ class PreviewHolder(view: View) : EggHolder(view) {
     @SuppressLint("RestrictedApi")
     private fun getLightTextColor(context: Context, @AttrRes textAppearanceAttrRes: Int): Int {
         // always use dark mode color
-        val wrapper = ContextThemeWrapper(context, R.style.Theme_Material3_DynamicColors_Dark)
+        val wrapper = ContextThemeWrapper(context, M3R.style.Theme_Material3_DynamicColors_Dark)
         val value = MaterialAttributes.resolve(wrapper, textAppearanceAttrRes)
         var color = Color.WHITE
         if (value != null) {
@@ -78,8 +79,8 @@ class PreviewHolder(view: View) : EggHolder(view) {
         super.onBindViewHolder(egg)
         val colorStateList =
             createHarmonizeWithPrimaryColorStateList(context, 0xFF073042.toInt())
-        val titleTextColor = getLightTextColor(context, R.attr.textAppearanceHeadlineSmall)
-        val summaryTextColor = getLightTextColor(context, R.attr.textAppearanceBodyMedium)
+        val titleTextColor = getLightTextColor(context, M3R.attr.textAppearanceHeadlineSmall)
+        val summaryTextColor = getLightTextColor(context, M3R.attr.textAppearanceBodyMedium)
         binding.tvTitle.setTextColor(titleTextColor)
         binding.tvSummary.setTextColor(summaryTextColor)
         binding.cardView.setCardBackgroundColor(colorStateList)
@@ -88,7 +89,7 @@ class PreviewHolder(view: View) : EggHolder(view) {
             showTimelineDialog(
                 context,
                 com.android_u.egg.R.drawable.u_android14_patch_adaptive,
-                com.dede.android_eggs.R.string.title_android_u
+                R.string.nickname_android_u
             )
         }
     }

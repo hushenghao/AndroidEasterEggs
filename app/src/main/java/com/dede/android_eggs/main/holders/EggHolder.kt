@@ -90,7 +90,7 @@ open class EggHolder(view: View) : VHolder<Egg>(view),
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun onBindViewHolder(egg: Egg) {
         binding.tvTitle.setText(egg.eggNameRes)
-        binding.tvSummary.setText(egg.androidRes)
+        binding.tvSummary.text = egg.versionFormatter.format(context)
         binding.cardView.setOnClickListener { EggActionHelp.launchEgg(context, egg) }
         binding.background.tvBgMessage.text = egg.versionCommentFormatter.format(context)
         val enableShortcut = EggActionHelp.isShortcutEnable(egg)

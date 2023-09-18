@@ -47,7 +47,7 @@ class EggFilter(val context: Context) : Filter(),
                 if (context.getString(vType.eggNameRes)
                         .lowercase(Locale.ROOT)
                         .contains(filter) ||
-                    context.getString(vType.androidRes)
+                    vType.versionFormatter.format(context).toString()
                         .lowercase(Locale.ROOT)
                         .contains(filter)
                 ) {
