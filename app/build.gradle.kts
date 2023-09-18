@@ -2,7 +2,6 @@
 
 import Versions.gitHash
 import Versions.keyprops
-import com.android.build.api.dsl.ManagedVirtualDevice
 
 plugins {
     id("com.android.application")
@@ -84,21 +83,6 @@ android {
         resources.excludes += "okhttp3/**"
     }
 
-    testOptions {
-        animationsDisabled = true
-
-        unitTests {
-            isIncludeAndroidResources = true
-        }
-
-        managedDevices {
-            devices.register<ManagedVirtualDevice>("pixel4Api33") {
-                apiLevel = 33
-                systemImageSource = "google"
-                device = "Pixel 4"
-            }
-        }
-    }
 }
 
 dependencies {
