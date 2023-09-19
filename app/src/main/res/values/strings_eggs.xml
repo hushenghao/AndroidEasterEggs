@@ -21,4 +21,8 @@
     <string name="nickname_android_cupcake" translatable="false">Cupcake</string>
     <string name="nickname_android_petit_four" translatable="false">Petit Four</string>
     <string name="nickname_android_base" translatable="false">Base</string>
+
+    <string name="android_version_nickname_format" translatable="false">Android %s (%s)</string>
+    <string name="android_version_format" translatable="false">Android %s</string>
+    <string name="api_version_format" translatable="false">API %s</string>
 </resources>

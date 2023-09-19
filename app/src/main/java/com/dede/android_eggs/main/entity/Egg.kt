@@ -35,13 +35,14 @@ data class Egg(
         private val versionNames: Array<out CharSequence> = versionNames
 
         fun format(context: Context): CharSequence {
-            val sb = StringBuilder()
             val enDash = context.getString(R.string.char_en_dash)
             val nickname = context.getString(nicknameRes)
-            versionNames.joinTo(sb, prefix = "Android ", separator = enDash, postfix = " (")
-            sb.append(nickname)
-                .append(")")
-            return sb
+            val sb = StringBuilder()
+            versionNames.joinTo(sb, separator = enDash)
+            return context.getString(
+                R.string.android_version_nickname_format,
+                sb.toString(), nickname
+            )
         }
     }
 
@@ -56,17 +57,17 @@ data class Egg(
                 this(versionCode, versionCode, versionName, versionName)
 
         fun format(context: Context): CharSequence {
-            val sb = StringBuilder("API ")
-                .append(versionCode1)
+            val sb = StringBuilder()
+                .append(context.getString(R.string.api_version_format, versionCode1.toString()))
             if (versionCode1 == versionCode2) {
-                sb.append("\nAndroid ")
-                    .append(versionName1)
+                sb.appendLine()
+                    .append(context.getString(R.string.android_version_format, versionName1))
             } else {
                 val enDash = context.getString(R.string.char_en_dash)
                 sb.append(enDash)
                     .append(versionCode2.toString())
-                    .append("\nAndroid ")
-                    .append(versionName1)
+                    .appendLine()
+                    .append(context.getString(R.string.android_version_format, versionName1))
                     .append(enDash)
                     .append(versionName2)
             }
