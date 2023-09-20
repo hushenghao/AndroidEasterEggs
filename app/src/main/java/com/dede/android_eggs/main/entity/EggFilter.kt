@@ -12,8 +12,7 @@ import java.util.Locale
  * @author shhu
  * @since 2023/8/9
  */
-class EggFilter(val context: Context) : Filter(),
-    SettingsPageController.OnSearchTextChangeListener {
+class EggFilter(val context: Context) : Filter() {
 
     private val allSearchEggList = EggDatas.eggList.let {
         val newList = ArrayList<VType>()
@@ -66,7 +65,4 @@ class EggFilter(val context: Context) : Filter(),
         onFilterResults?.publishResults(constraint, this.eggList)
     }
 
-    override fun onSearchTextChange(newText: String) {
-        this.filter(newText)
-    }
 }

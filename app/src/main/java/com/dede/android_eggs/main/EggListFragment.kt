@@ -12,54 +12,36 @@ import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentEasterEggListBinding
-import com.dede.android_eggs.main.entity.Egg
-import com.dede.android_eggs.main.entity.EggFilter
-import com.dede.android_eggs.main.entity.EggGroup
-import com.dede.android_eggs.main.holders.EggHolder
-import com.dede.android_eggs.main.holders.GroupHolder
-import com.dede.android_eggs.main.holders.PreviewHolder
-import com.dede.android_eggs.main.holders.WavyHolder
-import com.dede.android_eggs.ui.adapter.VAdapter
-import com.dede.android_eggs.ui.adapter.VType
-import com.dede.android_eggs.ui.adapter.addFooter
-import com.dede.android_eggs.ui.adapter.addHeader
-import com.dede.android_eggs.ui.adapter.addViewType
-import com.dede.android_eggs.ui.adapter.removeFooter
-import com.dede.android_eggs.ui.adapter.removeHeader
-import com.dede.android_eggs.ui.views.EasterEggFooterView
-import com.dede.android_eggs.ui.views.SnapshotGroupView
 import com.dede.android_eggs.util.EasterUtils
 import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.EdgeUtils.onApplyWindowEdge
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.toast
+import com.dede.android_eggs.views.main.EggAdapterProvider
 import com.dede.android_eggs.views.settings.SettingsPageController
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
 import com.dede.android_eggs.views.settings.prefs.IconVisualEffectsPref
 import com.dede.basic.dp
 
 
-class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.OnFilterResults,
+class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
     OrientationAngleSensor.OnOrientationAnglesUpdate {
 
     private val binding: FragmentEasterEggListBinding by viewBinding(FragmentEasterEggListBinding::bind)
 
     private var isRecyclerViewIdle = true
     private var orientationAngleSensor: OrientationAngleSensor? = null
-    private lateinit var eggFilter: EggFilter
-    private lateinit var vAdapter: VAdapter
+    private lateinit var eggAdapterProvider: EggAdapterProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         handleOrientationAngleSensor(IconVisualEffectsPref.isEnable(requireContext()))
 
-        eggFilter = EggFilter(requireContext()).apply {
-            onFilterResults = this@EggListFragment
-        }
+        eggAdapterProvider = EggAdapterProvider(requireContext())
         SettingsPageController(requireActivity()).apply {
             onCreate(savedInstanceState)
-            onSearchTextChangeListener = eggFilter
+            onSearchTextChangeListener = eggAdapterProvider
         }
 
         if (EasterUtils.isEaster()) {
@@ -80,32 +62,9 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.O
         }
     }
 
-    override fun publishResults(constraint: CharSequence, newList: List<VType>) {
-        if (constraint.isEmpty()) {
-            vAdapter.addHeader(snapshotView)
-            vAdapter.addFooter(footerView)
-        } else {
-            vAdapter.removeHeader(snapshotView)
-            vAdapter.removeFooter(footerView)
-        }
-        vAdapter.notifyDataSetChanged()
-    }
-
-    private val snapshotView by lazy { SnapshotGroupView(requireContext()) }
-    private val footerView by lazy { EasterEggFooterView(requireContext()) }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vAdapter = VAdapter(eggFilter.eggList) {
-            addHeader(snapshotView)
-            addViewType<EggHolder>(R.layout.item_easter_egg_layout)
-            addViewType<GroupHolder>(R.layout.item_easter_egg_layout)
-            addViewType<PreviewHolder>(R.layout.item_easter_egg_layout)
-            addViewType<WavyHolder>(R.layout.item_easter_egg_wavy)
-            addFooter(footerView)
-        }
-
-        binding.recyclerView.adapter = vAdapter
+        binding.recyclerView.adapter = eggAdapterProvider.adapter
         var last: ItemDecoration = EggListDivider(10.dp, 0, 0)
         binding.recyclerView.addItemDecoration(last)
         binding.recyclerView.onApplyWindowEdge(
@@ -143,15 +102,10 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list), EggFilter.O
     }
 
     fun smoothScrollToEgg(eggKey: String) {
-        val fistOffset = eggFilter.eggList.indexOfFirst {
-            if (it is Egg && it.key == eggKey) return@indexOfFirst true
-            if (it is EggGroup) {
-                return@indexOfFirst it.child.indexOfFirst { c -> c.key == eggKey } != -1
-            }
-            return@indexOfFirst false
+        val position = eggAdapterProvider.indexOfByEggKey(eggKey)
+        if (position != RecyclerView.NO_POSITION) {
+            binding.recyclerView.smoothScrollToPosition(position)
         }
-        val position = fistOffset + vAdapter.headerFooterExt.headerCount
-        binding.recyclerView.smoothScrollToPosition(position)
     }
 
     class EggListDivider(
