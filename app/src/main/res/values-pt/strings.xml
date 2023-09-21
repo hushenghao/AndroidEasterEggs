@@ -31,7 +31,6 @@
     <string name="preference_on">Ligado</string>
     <string name="preference_off">Desligado</string>
     <string name="toast_shortcut_added">Atalho adicionado</string>
-    <string name="toast_github_sponsor">Pode doar através do Github Sponsor do projeto</string>
     <string name="app_widget_description">Este é o relógio analógico dos Easter eggs</string>
     <string name="action_agree">Aceitar</string>
     <string name="summary_browse_privacy_policy">Leia e concorde com os nossos Termos de Privacidade para continuar.</string>

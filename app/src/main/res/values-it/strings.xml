@@ -31,7 +31,6 @@
     <string name="preference_on">Attivato</string>
     <string name="preference_off">Disattivato</string>
     <string name="toast_shortcut_added">Collegamento aggiunto</string>
-    <string name="toast_github_sponsor">Puoi donare tramite il \"Github Sponsor\" del progetto</string>
     <string name="app_widget_description">Questo è l\'orologio analogico di Easter Eggs</string>
     <string name="action_agree">Accetta</string>
     <string name="summary_browse_privacy_policy">Leggi e accetta la nostra Informativa sulla privacy per continuare.</string>
