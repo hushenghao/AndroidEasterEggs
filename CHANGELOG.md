@@ -4,6 +4,7 @@
 - Add Arabic translations
 - Add Croatian translations
 - Add Polish translations
+- Add Ukrainian translations
 - Fix Spanish translations
 - Fix Egg Group Icon Visual Effects
 - Feature optimization

@@ -16,7 +16,7 @@
 <!--    <locale android:name="fr" />-->
     <locale android:name="pl-PL" />
 <!--    <locale android:name="tr-TR" />-->
-<!--    <locale android:name="uk-UA" />-->
+    <locale android:name="uk-UA" />
     <locale android:name="ja-JP" />
 <!--    <locale android:name="ko" />-->
 </locale-config>
