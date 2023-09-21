@@ -31,7 +31,6 @@
     <string name="preference_on">Вкл.</string>
     <string name="preference_off">Выкл.</string>
     <string name="toast_shortcut_added">Ярлык добавлен</string>
-    <string name="toast_github_sponsor">Вы можете сделать пожертвование через «Github Sponsor» проекта</string>
     <string name="app_widget_description">Это аналоговые часы Easter Eggs</string>
     <string name="action_agree">Согласен</string>
     <string name="summary_browse_privacy_policy">Прочитайте и согласитесь с нашей Политикой конфиденциальности, чтобы продолжить.</string>

@@ -31,7 +31,6 @@
     <string name="preference_on">An</string>
     <string name="preference_off">Aus</string>
     <string name="toast_shortcut_added">Verknüpfung wurde zum Startbildschirm hinzugefügt</string>
-    <string name="toast_github_sponsor">Sie können über den Button „GitHub Sponsor“ auf der GitHub-Seite des Projekts spenden</string>
     <string name="app_widget_description">Eine analoge Easter Egg-Uhr</string>
     <string name="action_agree">Zustimmen</string>
     <string name="summary_browse_privacy_policy">Lesen Sie unsere Datenschutzrichtlinie und stimmen Sie ihr zu, um fortzufahren.</string>

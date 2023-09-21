@@ -31,7 +31,6 @@
     <string name="preference_on">Uključeno</string>
     <string name="preference_off">Isključeno</string>
     <string name="toast_shortcut_added">Prečac dodan</string>
-    <string name="toast_github_sponsor">Možete donirati pomoću servisa \"GitHub Sponsor\" za ovaj projekt</string>
     <string name="app_widget_description">Easter Eggs analogni sat</string>
     <string name="action_agree">Prihvati</string>
     <string name="summary_browse_privacy_policy">Za nastavak pročitajte i prihvatite našu politiku privatnosti.</string>

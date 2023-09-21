@@ -29,7 +29,6 @@
     <string name="preference_on">على</string>
     <string name="preference_off">عن</string>
     <string name="toast_shortcut_added">تمت إضافة الاختصار</string>
-    <string name="toast_github_sponsor">يمكنك التبرع من خلال \"Github Sponsor\" الخاص بالمشروع</string>
     <string name="app_widget_description">هذه هي الساعة التناظرية لبيض عيد الفصح</string>
     <string name="action_agree">يوافق</string>
     <string name="summary_browse_privacy_policy">اقرأ ووافق على سياسة الخصوصية الخاصة بنا للمتابعة.</string>
