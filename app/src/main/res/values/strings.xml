@@ -17,6 +17,7 @@
     <string name="url_market_detail" translatable="false">market://details?id=%s</string>
     <string name="url_share" translatable="false">https://f-droid.org/packages/com.dede.android_eggs</string>
     <string name="url_mail" translatable="false">mailto:dede.hu@qq.com</string>
+    <string name="url_sponsor">https://github.com/hushenghao/AndroidEasterEggs/wiki/Sponsor</string>
 
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -60,7 +61,6 @@
 
     <string name="toast_shortcut_added">Shortcut added</string>
     <string name="toast_easter" translatable="false">🐰🥚🍫🌷🎉</string>
-    <string name="toast_github_sponsor">You can donate through the project\'s \"Github Sponsor\"</string>
     <string name="app_widget_description">This is Easter Eggs analog clock</string>
     <string name="action_agree">Agree</string>
     <string name="summary_browse_privacy_policy">Read and agree to our Privacy Policy to continue.</string>

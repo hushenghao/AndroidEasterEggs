@@ -82,7 +82,6 @@ class EasterEggFooterView @JvmOverloads constructor(
 
             R.id.tv_donate -> {
                 CustomTabsBrowser.launchUrl(context, v.tagString.toUri())
-                context.toast(R.string.toast_github_sponsor, Toast.LENGTH_LONG)
             }
 
             R.id.tv_github, R.id.tv_translation, R.id.tv_beta, R.id.tv_dino_3d,
