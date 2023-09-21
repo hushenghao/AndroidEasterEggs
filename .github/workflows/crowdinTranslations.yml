@@ -12,8 +12,6 @@ on:
 
 jobs:
   crowdin:
-    strategy:
-      max-parallel: 1
     runs-on: ubuntu-latest
 
     steps:
