@@ -7,7 +7,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
@@ -18,7 +17,6 @@ import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.createChooser
 import com.dede.android_eggs.util.createRepeatWavyDrawable
 import com.dede.android_eggs.util.getActivity
-import com.dede.android_eggs.util.toast
 import com.dede.android_eggs.views.timeline.AndroidTimelineFragment
 import com.dede.basic.dp
 
@@ -80,11 +78,7 @@ class EasterEggFooterView @JvmOverloads constructor(
                 AndroidTimelineFragment.show(activity.supportFragmentManager)
             }
 
-            R.id.tv_donate -> {
-                CustomTabsBrowser.launchUrl(context, v.tagString.toUri())
-            }
-
-            R.id.tv_github, R.id.tv_translation, R.id.tv_beta, R.id.tv_dino_3d,
+            R.id.tv_github, R.id.tv_translation, R.id.tv_donate, R.id.tv_beta, R.id.tv_dino_3d,
             R.id.tv_privacy, R.id.tv_license,
             -> {
                 CustomTabsBrowser.launchUrl(context, v.tagString.toUri())

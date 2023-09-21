@@ -17,7 +17,7 @@
     <string name="url_market_detail" translatable="false">market://details?id=%s</string>
     <string name="url_share" translatable="false">https://f-droid.org/packages/com.dede.android_eggs</string>
     <string name="url_mail" translatable="false">mailto:dede.hu@qq.com</string>
-    <string name="url_sponsor">https://github.com/hushenghao/AndroidEasterEggs/wiki/Sponsor</string>
+    <string name="url_sponsor" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Sponsor</string>
 
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
