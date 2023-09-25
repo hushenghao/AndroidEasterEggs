@@ -16,7 +16,7 @@
     <string name="label_timeline_releases">Wersje</string>
     <string name="message_trypophobia_warning">To jest ostrzeżenie dla osób z &lt;b&gt;Trypofobią&lt;/b&gt;. Niektóre obrazy mogą powodować dyskomfort. Czy chcesz kontynuować?</string>
     <string name="label_settings">Ustawienia</string>
-    <string name="label_project_desc">Projekt zawiera kompletny kod systemu Easter Eggs, który ma na celu uporządkowanie i kompatybilność z systemem Easter Eggs tak, aby większość urządzeń mogła korzystać z różnych wersji Easter Eggów i nie wprowadzała zbyt wielu modyfikacji w systemie Egg Code. Niektóre wersje wykorzystują nowe funkcje systemu, a poprzednie wersje mają dostęp tylko do niektórych funkcji.</string>
+    <string name="label_project_desc">The project contains the complete code of the system Easter eggs, which aims to organize and compatible with the system eggs, so as to ensure that most devices can experience different versions of Easter eggs and will not make too many modifications to the system egg code. Some versions use new features of the system, and lower versions can only use some functions.</string>
     <string name="pref_title_icon_shape_override">Kształt ikony</string>
     <string name="pref_title_language">Język</string>
     <string name="pref_title_language_more">Więcej</string>
