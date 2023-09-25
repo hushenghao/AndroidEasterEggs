@@ -41,10 +41,9 @@ class GroupHolder(view: View) : VHolder<EggGroup>(view),
                 R.style.Theme_EggGroup_PopupMenu_ListPopupWindow
             )
             popupMenu.setForceShowIcon(true)
-            var order = eggGroup.child.size
-            for (egg in eggGroup.child) {
+            for ((index, egg) in eggGroup.child.withIndex()) {
                 val menuTitle = egg.versionFormatter.format(context)
-                popupMenu.menu.add(0, egg.id, order--, menuTitle).apply {
+                popupMenu.menu.add(0, egg.id, index, menuTitle).apply {
                     val drawable = egg.getIcon(context)
                     val drawH = drawable.intrinsicHeight
                     val drawW = drawable.intrinsicWidth

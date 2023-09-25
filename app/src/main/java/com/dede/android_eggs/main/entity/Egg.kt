@@ -98,10 +98,7 @@ class EggGroup(
     var selectedIndex: Int = 0,
 ) : VType {
 
-    constructor(selectedIndex: Int, vararg child: Egg) : this(
-        child.toList(),
-        selectedIndex
-    )
+    constructor(selectedIndex: Int, vararg child: Egg) : this(child.toList(), selectedIndex)
 
     val selectedEgg: Egg get() = child[selectedIndex]
 

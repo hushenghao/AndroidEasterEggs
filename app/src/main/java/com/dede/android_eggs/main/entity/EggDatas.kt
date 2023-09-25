@@ -101,16 +101,7 @@ object EggDatas {
             KEY_EGG_P
         ),
         EggGroup(
-            1,
-            Egg(
-                R.drawable.ic_android_oreo,
-                com.android_o.egg.R.string.o_app_name,
-                VersionFormatter(R.string.nickname_android_o, "8.0"),
-                VersionCommentFormatter(VERSION_CODES.O, VERSION_CODES.O_MR1, "8.0", "8.1"),
-                com.android_o.egg.PlatLogoActivity.Point1::class.java,
-                true,
-                KEY_EGG_O_1,
-            ),
+            0,
             Egg(
                 R.drawable.ic_android_oreo,
                 com.android_o.egg.R.string.o_app_name,
@@ -120,6 +111,15 @@ object EggDatas {
                 true,
                 KEY_EGG_O
             ),
+            Egg(
+                R.drawable.ic_android_oreo,
+                com.android_o.egg.R.string.o_app_name,
+                VersionFormatter(R.string.nickname_android_o, "8.0"),
+                VersionCommentFormatter(VERSION_CODES.O, VERSION_CODES.O_MR1, "8.0", "8.1"),
+                com.android_o.egg.PlatLogoActivity.Point1::class.java,
+                true,
+                KEY_EGG_O_1,
+            )
         ),
         Egg(
             R.drawable.ic_android_nougat,

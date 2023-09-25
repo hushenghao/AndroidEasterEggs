@@ -35,8 +35,6 @@ import com.google.android.material.R as M3R
 /**
  * Material Icons.
  *
- * // todo Add autoMirrored support
- *
  * @author shhu
  * @since 2023/1/17
  */
