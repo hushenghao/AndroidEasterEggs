@@ -29,12 +29,15 @@ import com.dede.blurhash_android.BlurHashDrawable
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.carousel.CarouselSnapHelper
 import com.google.android.material.carousel.HeroCarouselStrategy
+import kotlin.math.abs
 import kotlin.random.Random
 
 class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
-    ConstraintLayout(context, attrs) {
+    ConstraintLayout(context, attrs), Runnable {
 
     private val snapshotList: RecyclerView
+
+    private var scrollPosition: Int = RecyclerView.NO_POSITION
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_snapshot_group, this, true)
@@ -48,6 +51,28 @@ class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: Attri
             R.layout.item_snapshot_mask_layout,
             EggDatas.snapshotList, ::onBindSnapshot
         )
+    }
+
+    override fun run() {
+        if (scrollPosition > RecyclerView.NO_POSITION) {
+            snapshotList.scrollToPosition(scrollPosition)
+        }
+    }
+
+    override fun onDetachedFromWindow() {
+        val recyclerView = snapshotList
+        val adapter = recyclerView.adapter
+        if (adapter != null && recyclerView.computeHorizontalScrollRange() != 0) {
+            scrollPosition = (adapter.itemCount - 1) *
+                    abs(recyclerView.computeHorizontalScrollOffset()) /
+                    recyclerView.computeHorizontalScrollRange()// + 1
+        }
+        super.onDetachedFromWindow()
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        post(this)// post scroll to position
     }
 
     private fun onBindSnapshot(holder: VHolder<*>, snapshot: Snapshot) {

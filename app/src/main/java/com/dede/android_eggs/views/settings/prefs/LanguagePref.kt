@@ -191,7 +191,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         var choiceIndex = languageOptions.indexOfFirst { it.value == selectedValue }
         val lastChoiceIndex = choiceIndex
         val languages = languageOptions.map { context.getString(it.titleRes) }.toTypedArray()
-        MaterialAlertDialogBuilder(context)
+        MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_LanguagePref_MaterialAlertDialog)
             .setTitle(R.string.pref_title_language)
             .setSingleChoiceItems(languages, choiceIndex) { dialogInterface, index ->
                 choiceIndex = index
