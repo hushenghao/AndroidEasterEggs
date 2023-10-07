@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="summary_android_waiting">Oczekiwanie…</string>
+    <string name="summary_android_waiting">Oczekuję…</string>
     <string name="summary_android_release_pushed">Ostateczna wersja została wydana</string>
-    <string name="title_open_with">Otwórz za pomocą</string>
+    <string name="title_open_with">Otwórz z</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
     <string name="label_translation">Tłumaczenie</string>
@@ -16,14 +16,14 @@
     <string name="label_timeline_releases">Wersje</string>
     <string name="message_trypophobia_warning">To jest ostrzeżenie dla osób z &lt;b&gt;Trypofobią&lt;/b&gt;. Niektóre obrazy mogą powodować dyskomfort. Czy chcesz kontynuować?</string>
     <string name="label_settings">Ustawienia</string>
-    <string name="label_project_desc">The project contains the complete code of the system Easter eggs, which aims to organize and compatible with the system eggs, so as to ensure that most devices can experience different versions of Easter eggs and will not make too many modifications to the system egg code. Some versions use new features of the system, and lower versions can only use some functions.</string>
+    <string name="label_project_desc">Projekt zawiera pełny kod systemu Easter Eggs, który ma na celu uporządkowanie i kompatybilność z systemem Easter Eggs tak, aby większość urządzeń mogła doświadczyć różnych wersji Easter Eggów i nie wprowadzała zbyt wielu modyfikacji w systemie Egg Code. Niektóre wersje korzystają z nowych funkcji systemu, a wersje niższe mogą korzystać tylko z niektórych funkcji.</string>
     <string name="pref_title_icon_shape_override">Kształt ikony</string>
     <string name="pref_title_language">Język</string>
     <string name="pref_title_language_more">Więcej</string>
     <string name="pref_title_theme">Motyw</string>
     <string name="pref_title_dynamic_color">Dynamiczny kolor</string>
-    <string name="pref_title_icon_visual_effects">Efekty Wizualne Ikony</string>
-    <string name="summary_system_default">Domyślny</string>
+    <string name="pref_title_icon_visual_effects">Efekty Ikon</string>
+    <string name="summary_system_default">Systemowy</string>
     <string name="summary_theme_dark_mode">Ciemny</string>
     <string name="summary_theme_light_mode">Jasny</string>
     <string name="label_add_shortcut">Skrót</string>
@@ -32,7 +32,7 @@
     <string name="preference_off">Wył.</string>
     <string name="toast_shortcut_added">Dodano skrót</string>
     <string name="app_widget_description">To jest zegar analogowy Easter Eggs</string>
-    <string name="action_agree">Akceptuj</string>
+    <string name="action_agree">Zaakceptuj</string>
     <string name="summary_browse_privacy_policy">Przeczytaj i zaakceptuj naszą Politykę prywatności, aby kontynuować.</string>
     <string name="label_welcome">Witamy w Katalogach Easter Egg 🎉🎉🎉</string>
     <string name="label_share">Udostępnij</string>

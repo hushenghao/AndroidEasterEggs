@@ -1,2 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="summary_android_waiting">Bekleniyor…</string>
+    <string name="summary_android_release_pushed">Son sürüm sürümü yayınlandı</string>
+    <string name="title_open_with">Bununla aç</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_translation">Tercüme</string>
+    <string name="label_beta">Beta\'yı edinin</string>
+    <string name="label_timeline">Zaman çizelgesi</string>
+    <string name="label_privacy_policy">Mahremiyet</string>
+    <string name="label_license">Lisans</string>
+    <string name="label_email">Geri bildirim</string>
+    <string name="label_star">Yıldız</string>
+    <string name="label_timeline_title">Zaman çizelgesi, kilometre taşları ve güncellemeler</string>
+    <string name="label_timeline_releases">Salıverme</string>
+    <string name="message_trypophobia_warning">Bu, &lt;b&gt;Tripofobisi&lt;/b&gt; olanlara bazı görüntülerin rahatsızlık verebileceğine dair bir uyarıdır. Devam etmek istiyor musun?</string>
+    <string name="label_settings">Ayarlar</string>
+    <string name="label_project_desc">Proje, çoğu cihazın Paskalya yumurtalarının farklı sürümlerini deneyimleyebilmesini ve sistem yumurta kodunda çok fazla değişiklik yapmamasını sağlamak için sistem yumurtalarını düzenlemeyi ve sistem yumurtalarıyla uyumlu hale getirmeyi amaçlayan sistem Paskalya yumurtalarının tam kodunu içerir. Bazı sürümler sistemin yeni özelliklerini kullanır, daha düşük sürümler ise yalnızca bazı işlevleri kullanabilir.</string>
+    <string name="pref_title_icon_shape_override">Simge Şekli</string>
+    <string name="pref_title_language">Dil</string>
+    <string name="pref_title_language_more">Daha</string>
+    <string name="pref_title_theme">Tema</string>
+    <string name="pref_title_dynamic_color">Dinamik Renk</string>
+    <string name="pref_title_icon_visual_effects">Simge Görsel Efektleri</string>
+    <string name="summary_system_default">Varsayılan</string>
+    <string name="summary_theme_dark_mode">Karanlık</string>
+    <string name="summary_theme_light_mode">Işık</string>
+    <string name="label_add_shortcut">Kısayol</string>
+    <string name="label_donate">Bağış yapmak</string>
+    <string name="preference_on">Açık</string>
+    <string name="preference_off">Kapalı</string>
+    <string name="toast_shortcut_added">Kısayol eklendi</string>
+    <string name="app_widget_description">Bu Paskalya Yumurtalarının analog saati</string>
+    <string name="action_agree">Kabul etmek</string>
+    <string name="summary_browse_privacy_policy">Devam etmek için Gizlilik Politikamızı okuyup kabul edin.</string>
+    <string name="label_welcome">Paskalya Yumurtası Kataloglarına Hoş Geldiniz 🎉🎉🎉</string>
+    <string name="label_share">Paylaşmak</string>
+    <string name="label_search_hint">Ara…</string>
+</resources>
