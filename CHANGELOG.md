@@ -1,10 +1,12 @@
-### v1.9.8
+### v2.0.0
+- Add Android 14 Easter Eggs
 - Add Portuguese translations
 - Add Indonesia translations
 - Add Arabic translations
 - Add Croatian translations
 - Add Polish translations
 - Add Ukrainian translations
+- Add Turkish translations
 - Fix Spanish translations
 - Fix Egg Group Icon Visual Effects
 - Feature optimization

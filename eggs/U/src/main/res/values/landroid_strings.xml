@@ -1,6 +1,109 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+    Copyright (C) 2023 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
 <resources>
-    <array name="any_descriptors">
+    <string name="u_egg_name" translatable="false">Android 14 Easter Egg</string>
+
+    <string-array name="u_planet_descriptors" translatable="false">
+        <item>earthy</item>
+        <item>swamp</item>
+        <item>frozen</item>
+        <item>grassy</item>
+        <item>arid</item>
+        <item>crowded</item>
+        <item>ancient</item>
+        <item>lively</item>
+        <item>homey</item>
+        <item>modern</item>
+        <item>boring</item>
+        <item>compact</item>
+        <item>expensive</item>
+        <item>polluted</item>
+        <item>rusty</item>
+        <item>sandy</item>
+        <item>undulating</item>
+        <item>verdant</item>
+        <item>tessellated</item>
+        <item>hollow</item>
+        <item>scalding</item>
+        <item>hemispherical</item>
+        <item>oblong</item>
+        <item>oblate</item>
+        <item>vacuum</item>
+        <item>high-pressure</item>
+        <item>low-pressure</item>
+        <item>plastic</item>
+        <item>metallic</item>
+        <item>burned-out</item>
+        <item>bucolic</item>
+    </string-array>
+
+    <string-array name="u_life_descriptors" translatable="false">
+        <item>aggressive</item>
+        <item>passive-aggressive</item>
+        <item>shy</item>
+        <item>timid</item>
+        <item>nasty</item>
+        <item>brutish</item>
+        <item>short</item>
+        <item>absent</item>
+        <item>teen-aged</item>
+        <item>confused</item>
+        <item>transparent</item>
+        <item>cubic</item>
+        <item>quadratic</item>
+        <item>higher-order</item>
+        <item>huge</item>
+        <item>tall</item>
+        <item>wary</item>
+        <item>loud</item>
+        <item>yodeling</item>
+        <item>purring</item>
+        <item>slender</item>
+        <item>cats</item>
+        <item>adorable</item>
+        <item>eclectic</item>
+        <item>electric</item>
+        <item>microscopic</item>
+        <item>trunkless</item>
+        <item>myriad</item>
+        <item>cantankerous</item>
+        <item>gargantuan</item>
+        <item>contagious</item>
+        <item>fungal</item>
+        <item>cattywampus</item>
+        <item>spatchcocked</item>
+        <item>rotisserie</item>
+        <item>farm-to-table</item>
+        <item>organic</item>
+        <item>synthetic</item>
+        <item>unfocused</item>
+        <item>focused</item>
+        <item>capitalist</item>
+        <item>communal</item>
+        <item>bossy</item>
+        <item>malicious</item>
+        <item>compliant</item>
+        <item>psychic</item>
+        <item>oblivious</item>
+        <item>passive</item>
+        <item>bonsai</item>
+    </string-array>
+
+    <string-array name="u_any_descriptors" translatable="false">
         <item>silly</item>
         <item>dangerous</item>
         <item>vast</item>
@@ -77,36 +180,9 @@
         <item>overengineered</item>
         <item>bioengineered</item>
         <item>impossible</item>
-    </array>
-    <array name="atmo_descriptors">
-        <item>toxic</item>
-        <item>breathable</item>
-        <item>radioactive</item>
-        <item>clear</item>
-        <item>calm</item>
-        <item>peaceful</item>
-        <item>vacuum</item>
-        <item>stormy</item>
-        <item>freezing</item>
-        <item>burning</item>
-        <item>humid</item>
-        <item>tropical</item>
-        <item>cloudy</item>
-        <item>obscured</item>
-        <item>damp</item>
-        <item>dank</item>
-        <item>clammy</item>
-        <item>frozen</item>
-        <item>contaminated</item>
-        <item>temperate</item>
-        <item>moist</item>
-        <item>minty</item>
-        <item>relaxed</item>
-        <item>skunky</item>
-        <item>breezy</item>
-        <item>soup</item>
-    </array>
-    <array name="constellations">
+    </string-array>
+
+    <string-array name="u_constellations" translatable="false">
         <item>Aries</item>
         <item>Taurus</item>
         <item>Gemini</item>
@@ -155,8 +231,10 @@
         <item>Binder</item>
         <item>Campanile</item>
         <item>Dread</item>
-    </array>
-    <array name="constellations_rare">
+    </string-array>
+
+    <!-- prob: 5% -->
+    <string-array name="u_constellations_rare" translatable="false">
         <item>Jandycane</item>
         <item>Zombiegingerbread</item>
         <item>Astro</item>
@@ -176,114 +254,10 @@
         <item>Keylimepie</item>
         <item>Nat</item>
         <item>Nrp</item>
-    </array>
-    <array name="life_descriptors">
-        <item>aggressive</item>
-        <item>passive-aggressive</item>
-        <item>shy</item>
-        <item>timid</item>
-        <item>nasty</item>
-        <item>brutish</item>
-        <item>short</item>
-        <item>absent</item>
-        <item>teen-aged</item>
-        <item>confused</item>
-        <item>transparent</item>
-        <item>cubic</item>
-        <item>quadratic</item>
-        <item>higher-order</item>
-        <item>huge</item>
-        <item>tall</item>
-        <item>wary</item>
-        <item>loud</item>
-        <item>yodeling</item>
-        <item>purring</item>
-        <item>slender</item>
-        <item>cats</item>
-        <item>adorable</item>
-        <item>eclectic</item>
-        <item>electric</item>
-        <item>microscopic</item>
-        <item>trunkless</item>
-        <item>myriad</item>
-        <item>cantankerous</item>
-        <item>gargantuan</item>
-        <item>contagious</item>
-        <item>fungal</item>
-        <item>cattywampus</item>
-        <item>spatchcocked</item>
-        <item>rotisserie</item>
-        <item>farm-to-table</item>
-        <item>organic</item>
-        <item>synthetic</item>
-        <item>unfocused</item>
-        <item>focused</item>
-        <item>capitalist</item>
-        <item>communal</item>
-        <item>bossy</item>
-        <item>malicious</item>
-        <item>compliant</item>
-        <item>psychic</item>
-        <item>oblivious</item>
-        <item>passive</item>
-        <item>bonsai</item>
-    </array>
-    <array name="planet_descriptors">
-        <item>earthy</item>
-        <item>swamp</item>
-        <item>frozen</item>
-        <item>grassy</item>
-        <item>arid</item>
-        <item>crowded</item>
-        <item>ancient</item>
-        <item>lively</item>
-        <item>homey</item>
-        <item>modern</item>
-        <item>boring</item>
-        <item>compact</item>
-        <item>expensive</item>
-        <item>polluted</item>
-        <item>rusty</item>
-        <item>sandy</item>
-        <item>undulating</item>
-        <item>verdant</item>
-        <item>tessellated</item>
-        <item>hollow</item>
-        <item>scalding</item>
-        <item>hemispherical</item>
-        <item>oblong</item>
-        <item>oblate</item>
-        <item>vacuum</item>
-        <item>high-pressure</item>
-        <item>low-pressure</item>
-        <item>plastic</item>
-        <item>metallic</item>
-        <item>burned-out</item>
-        <item>bucolic</item>
-    </array>
-    <array name="planet_types">
-        <item>planet</item>
-        <item>planetoid</item>
-        <item>moon</item>
-        <item>moonlet</item>
-        <item>centaur</item>
-        <item>asteroid</item>
-        <item>space garbage</item>
-        <item>detritus</item>
-        <item>satellite</item>
-        <item>core</item>
-        <item>giant</item>
-        <item>body</item>
-        <item>slab</item>
-        <item>rock</item>
-        <item>husk</item>
-        <item>planemo</item>
-        <item>object</item>
-        <item>planetesimal</item>
-        <item>exoplanet</item>
-        <item>ploonet</item>
-    </array>
-    <array name="star_suffixes">
+    </string-array>
+
+    <!-- prob: 75% -->
+    <string-array name="u_star_suffixes" translatable="false">
         <item>Alpha</item>
         <item>Beta</item>
         <item>Gamma</item>
@@ -308,6 +282,7 @@
         <item>Chi</item>
         <item>Psi</item>
         <item>Omega</item>
+
         <item>Prime</item>
         <item>Secundo</item>
         <item>Major</item>
@@ -317,11 +292,16 @@
         <item>Ultima</item>
         <item>Penultima</item>
         <item>Mid</item>
+
         <item>Proxima</item>
         <item>Novis</item>
+
         <item>Plus</item>
-    </array>
-    <array name="star_suffixes_rare">
+    </string-array>
+
+    <!-- prob: 5% -->
+    <!-- more than one can be appended, with very low prob -->
+    <string-array name="u_star_suffixes_rare" translatable="false">
         <item>Serif</item>
         <item>Sans</item>
         <item>Oblique</item>
@@ -334,5 +314,58 @@
         <item>(Final (Final))</item>
         <item>(Draft)</item>
         <item>Con Carne</item>
-    </array>
+    </string-array>
+
+    <string-array name="u_planet_types" translatable="false">
+        <item>planet</item>
+        <item>planetoid</item>
+        <item>moon</item>
+        <item>moonlet</item>
+        <item>centaur</item>
+        <item>asteroid</item>
+        <item>space garbage</item>
+        <item>detritus</item>
+        <item>satellite</item>
+        <item>core</item>
+        <item>giant</item>
+        <item>body</item>
+        <item>slab</item>
+        <item>rock</item>
+        <item>husk</item>
+        <item>planemo</item>
+        <item>object</item>
+        <item>planetesimal</item>
+        <item>exoplanet</item>
+        <item>ploonet</item>
+    </string-array>
+
+    <string-array name="u_atmo_descriptors" translatable="false">
+        <item>toxic</item>
+        <item>breathable</item>
+        <item>radioactive</item>
+        <item>clear</item>
+        <item>calm</item>
+        <item>peaceful</item>
+        <item>vacuum</item>
+        <item>stormy</item>
+        <item>freezing</item>
+        <item>burning</item>
+        <item>humid</item>
+        <item>tropical</item>
+        <item>cloudy</item>
+        <item>obscured</item>
+        <item>damp</item>
+        <item>dank</item>
+        <item>clammy</item>
+        <item>frozen</item>
+        <item>contaminated</item>
+        <item>temperate</item>
+        <item>moist</item>
+        <item>minty</item>
+        <item>relaxed</item>
+        <item>skunky</item>
+        <item>breezy</item>
+        <item>soup </item>
+    </string-array>
+
 </resources>

@@ -33,30 +33,31 @@
 |----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
 
 ## Android 版本
-| 名称                                     | API level | 彩蛋                            | 使用了新特性 [*](#id_new_features) | 最低 API [*](#id_full_egg_mini_api) |
-|----------------------------------------|:---------:|-------------------------------|:----------------------------:|:---------------------------------:|
-| Android 14 (Upside Down Cake)          |    34     | ⌛️                            |                              |                                   |
-| Android 13 (Tiramisu)                  |    33     | Paint Chips                   |              ✅               |       31 [*](#id_android12)       |
-| Android 12 (Snow Cone)                 |   31-32   | Paint Chips                   |              ✅               |       31 [*](#id_android12)       |
-| Android 11 (Red Velvet Cake)           |    30     | Cat Controls(Collection)      |              ✅               |       30 [*](#id_android11)       |
-| Android 10 (Queen Cake)                |    29     | Icon Quiz                     |              🚫              |                 -                 |
-| Android 9 (Pie)                        |    28     | PAINT.APK                     |              🚫              |                 -                 |
-| Android 8.0-8.1 (Oreo)                 |   26-27   | Octopus                       |              🚫              |                 -                 |
-| Android 7.0-7.1 (Nougat)               |   24-25   | Neko                          |              ✅               |       24 [*](#id_android7)        |
-| Android 6.0 (Marshmallow)              |    23     | Marshmallow Land              |              🚫              |                 -                 |
-| Android 5.0-5.1 (Lollipop)             |   21-22   | L Land                        |              🚫              |                 -                 |
-| Android 4.4-4.4W (KitKat)              |   19-20   | Dessert Case                  |              🚫              |                 -                 |
-| Android 4.1-4.3 (Jelly Bean)           |   16-18   | BeanBag                       |              🚫              |                 -                 |
-| Android 4.0-4.0.3 (Ice Cream Sandwich) |   14-15   | Nyandroid                     |              🚫              |                 -                 |
-| Android 3.0-3.2 (Honeycomb)            |   11-13   | Honeycomb [*](#id_egg_name)   |              🚫              |                 -                 |
-| Android 2.3-2.3.3 (Gingerbread)        |   9-10    | Gingerbread [*](#id_egg_name) |              🚫              |                 -                 |
-| Android 2.2 (Froyo)                    |     8     | -                             |              -               |                 -                 |
-| Android 2.0-2.1 (Eclair)               |    5-7    | -                             |              -               |                 -                 |
-| Android 1.6 (Donut)                    |     4     | -                             |              -               |                 -                 |
-| Android 1.5 (Cupcake)                  |     3     | -                             |              -               |                 -                 |
-| Android 1.1 (Petit Four)               |     2     | -                             |              -               |                 -                 |
-| Android 1.0 (Base)                     |     1     | -                             |              -               |                 -                 |
+| 名称                                     | API level | 彩蛋                                         | 使用了新特性 [*](#id_new_features) | 最低 API [*](#id_full_egg_mini_api) |
+|----------------------------------------|:---------:|--------------------------------------------|:----------------------------:|:---------------------------------:|
+| Android 14 (Upside Down Cake)          |    34     | Android 14 Easter Egg [*](#id_14_egg_name) |              🚫              |                                   |
+| Android 13 (Tiramisu)                  |    33     | Paint Chips                                |              ✅               |       31 [*](#id_android12)       |
+| Android 12 (Snow Cone)                 |   31-32   | Paint Chips                                |              ✅               |       31 [*](#id_android12)       |
+| Android 11 (Red Velvet Cake)           |    30     | Cat Controls(Collection)                   |              ✅               |       30 [*](#id_android11)       |
+| Android 10 (Queen Cake)                |    29     | Icon Quiz                                  |              🚫              |                 -                 |
+| Android 9 (Pie)                        |    28     | PAINT.APK                                  |              🚫              |                 -                 |
+| Android 8.0-8.1 (Oreo)                 |   26-27   | Octopus                                    |              🚫              |                 -                 |
+| Android 7.0-7.1 (Nougat)               |   24-25   | Neko                                       |              ✅               |       24 [*](#id_android7)        |
+| Android 6.0 (Marshmallow)              |    23     | Marshmallow Land                           |              🚫              |                 -                 |
+| Android 5.0-5.1 (Lollipop)             |   21-22   | L Land                                     |              🚫              |                 -                 |
+| Android 4.4-4.4W (KitKat)              |   19-20   | Dessert Case                               |              🚫              |                 -                 |
+| Android 4.1-4.3 (Jelly Bean)           |   16-18   | BeanBag                                    |              🚫              |                 -                 |
+| Android 4.0-4.0.3 (Ice Cream Sandwich) |   14-15   | Nyandroid                                  |              🚫              |                 -                 |
+| Android 3.0-3.2 (Honeycomb)            |   11-13   | Honeycomb [*](#id_egg_name)                |              🚫              |                 -                 |
+| Android 2.3-2.3.3 (Gingerbread)        |   9-10    | Gingerbread [*](#id_egg_name)              |              🚫              |                 -                 |
+| Android 2.2 (Froyo)                    |     8     | -                                          |              -               |                 -                 |
+| Android 2.0-2.1 (Eclair)               |    5-7    | -                                          |              -               |                 -                 |
+| Android 1.6 (Donut)                    |     4     | -                                          |              -               |                 -                 |
+| Android 1.5 (Cupcake)                  |     3     | -                                          |              -               |                 -                 |
+| Android 1.1 (Petit Four)               |     2     | -                                          |              -               |                 -                 |
+| Android 1.0 (Base)                     |     1     | -                                          |              -               |                 -                 |
 
+* <span id='id_14_egg_name'>这里使用的是 Android 14 彩蛋代码中的名称，目前没有找到官方的彩蛋命名。</span>
 * <span id='id_new_features'>使用了系统新特性的彩蛋，老版本系统只能使用部分功能。</span>
 * <span id='id_full_egg_mini_api'>完整体验彩蛋所需要的最低API版本。</span>
 * <span id='id_android12'>Android 12 (API level 31) 改进了现有的 [Widgets API](https://developer.android.google.cn/about/versions/12/features/widgets?hl=zh-cn)，以改善平台和启动器中的用户和开发者体验。</span>

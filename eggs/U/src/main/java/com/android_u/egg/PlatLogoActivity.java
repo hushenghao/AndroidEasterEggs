@@ -1,11 +1,28 @@
+/*
+ * Copyright (C) 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.android_u.egg;
+
+import static android.os.VibrationEffect.Composition.PRIMITIVE_SPIN;
 
 import android.animation.ObjectAnimator;
 import android.animation.TimeAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -32,203 +49,222 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.annotation.Keep;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.os.HandlerCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
+import com.android_u.egg.landroid.MainActivity;
 import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
 
 import java.util.Random;
 
-/* loaded from: classes4.dex */
+/**
+ * @hide
+ */
 public class PlatLogoActivity extends Activity {
-    private static final float MAX_WARP = 10.0f;
     private static final String TAG = "PlatLogoActivity";
+
+    private static final long LAUNCH_TIME = 5000L;
+
     private static final String U_EGG_UNLOCK_SETTING = "egg_mode_u";
-    private TimeAnimator mAnim;
-    private float mDp;
-    private FrameLayout mLayout;
+
+    private static final float MIN_WARP = 1f;
+    private static final float MAX_WARP = 10f; // after all these years
+    private static final boolean FINISH_AFTER_NEXT_STAGE_LAUNCH = false;
+
     private ImageView mLogo;
-    private Random mRandom;
-    private RumblePack mRumble;
     private Starfield mStarfield;
+
+    private FrameLayout mLayout;
+
+    private TimeAnimator mAnim;
     private ObjectAnimator mWarpAnim;
+    private Random mRandom;
+    private float mDp;
+
+    private RumblePack mRumble;
+
     private boolean mAnimationsEnabled = true;
 
-    // from class: com.android.internal.app.PlatLogoActivity.1
     private final View.OnTouchListener mTouchListener = new View.OnTouchListener() {
-        @Override // android.view.View.OnTouchListener
+        @Override
         public boolean onTouch(View v, MotionEvent event) {
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_DOWN:
-                    PlatLogoActivity.this.startWarp();
-                    return true;
+//                    measureTouchPressure(event);
+                    startWarp();
+                    break;
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
-                    PlatLogoActivity.this.stopWarp();
-                    return true;
-                case MotionEvent.ACTION_MOVE:
-                default:
-                    return false;
+                    stopWarp();
+                    break;
             }
+            return true;
         }
-    };
-    private final Runnable mLaunchNextStage = new Runnable() { // from class: com.android.internal.app.PlatLogoActivity$$ExternalSyntheticLambda0
-        @Override // java.lang.Runnable
-        public void run() {
-            PlatLogoActivity.this.lambda$new$0();
-        }
-    };
-    private final TimeAnimator.TimeListener mTimeListener = new TimeAnimator.TimeListener() { // from class: com.android.internal.app.PlatLogoActivity.2
-        @Override // android.animation.TimeAnimator.TimeListener
-        public void onTimeUpdate(TimeAnimator animation, long totalTime, long deltaTime) {
-            PlatLogoActivity.this.mStarfield.update(deltaTime);
-            float warpFrac = (PlatLogoActivity.this.mStarfield.getWarp() - 1.0f) / 9.0f;
-            if (PlatLogoActivity.this.mAnimationsEnabled) {
-                PlatLogoActivity.this.mLogo.setTranslationX(PlatLogoActivity.this.mRandom.nextFloat() * warpFrac * 5.0f * PlatLogoActivity.this.mDp);
-                PlatLogoActivity.this.mLogo.setTranslationY(PlatLogoActivity.this.mRandom.nextFloat() * warpFrac * 5.0f * PlatLogoActivity.this.mDp);
-            }
-            if (warpFrac > 0.0f) {
-                PlatLogoActivity.this.mRumble.rumble(warpFrac);
-            }
-            PlatLogoActivity.this.mLayout.postInvalidate();
-        }
+
     };
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$new$0() {
+    private final Runnable mLaunchNextStage = () -> {
         stopWarp();
         launchNextStage(false);
-    }
+    };
 
-    /* loaded from: classes4.dex */
+    private final TimeAnimator.TimeListener mTimeListener = new TimeAnimator.TimeListener() {
+        @Override
+        public void onTimeUpdate(TimeAnimator animation, long totalTime, long deltaTime) {
+            mStarfield.update(deltaTime);
+            final float warpFrac = (mStarfield.getWarp() - MIN_WARP) / (MAX_WARP - MIN_WARP);
+            if (mAnimationsEnabled) {
+                mLogo.setTranslationX(mRandom.nextFloat() * warpFrac * 5 * mDp);
+                mLogo.setTranslationY(mRandom.nextFloat() * warpFrac * 5 * mDp);
+            }
+            if (warpFrac > 0f) {
+                mRumble.rumble(warpFrac);
+            }
+            mLayout.postInvalidate();
+        }
+    };
+
     private class RumblePack implements Handler.Callback {
         private static final int MSG = 6464;
-        private long mLastVibe = 0;
-        private boolean mSpinPrimitiveSupported = false;
-        private final Handler mVibeHandler;
+        private static final int INTERVAL = 50;
+
         @Nullable
         private final VibratorManager mVibeMan;
         private final HandlerThread mVibeThread;
+        private final Handler mVibeHandler;
+        private boolean mSpinPrimitiveSupported;
 
-        @Override // android.p009os.Handler.Callback
+        private long mLastVibe = 0;
+
+        //        @SuppressLint("MissingPermission")
+        @Override
         public boolean handleMessage(Message msg) {
-            float warpFrac = msg.arg1 / 100.0f;
-            if (this.mSpinPrimitiveSupported) {
-                if (msg.getWhen() > this.mLastVibe + 50) {
-                    this.mLastVibe = msg.getWhen();
+            final float warpFrac = msg.arg1 / 100f;
+            if (mSpinPrimitiveSupported) {
+                if (msg.getWhen() > mLastVibe + INTERVAL) {
+                    mLastVibe = msg.getWhen();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && mVibeMan != null) {
-                        VibrationEffect vibrationEffect = VibrationEffect.startComposition()
-                                .addPrimitive(VibrationEffect.Composition.PRIMITIVE_SPIN, (float) Math.pow(warpFrac, 3.0d))
-                                .compose();
-                        this.mVibeMan.vibrate(CombinedVibration.createParallel(vibrationEffect));
+                        mVibeMan.vibrate(CombinedVibration.createParallel(
+                                VibrationEffect.startComposition()
+                                        .addPrimitive(PRIMITIVE_SPIN, (float) Math.pow(warpFrac, 3.0))
+                                        .compose()
+                        ));
                     }
                 }
-            } else if (PlatLogoActivity.this.mRandom.nextFloat() < warpFrac) {
-                PlatLogoActivity.this.mLogo.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK);
+            } else {
+                if (mRandom.nextFloat() < warpFrac) {
+                    mLogo.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK);
+                }
             }
             return false;
         }
 
         RumblePack() {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-                VibratorManager vibratorManager = (VibratorManager) PlatLogoActivity.this.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
-                this.mVibeMan = vibratorManager;
-                this.mSpinPrimitiveSupported = vibratorManager.getDefaultVibrator()
-                        .areAllPrimitivesSupported(VibrationEffect.Composition.PRIMITIVE_SPIN);
+                mVibeMan = getSystemService(VibratorManager.class);
+                mSpinPrimitiveSupported = mVibeMan.getDefaultVibrator()
+                        .areAllPrimitivesSupported(PRIMITIVE_SPIN);
             } else {
-                this.mVibeMan = null;
+                mVibeMan = null;
+                mSpinPrimitiveSupported = false;
             }
-            HandlerThread handlerThread = new HandlerThread("VibratorThread");
-            this.mVibeThread = handlerThread;
-            handlerThread.start();
-            this.mVibeHandler = HandlerCompat.createAsync(handlerThread.getLooper(), this);
+
+            mVibeThread = new HandlerThread("VibratorThread");
+            mVibeThread.start();
+            mVibeHandler = HandlerCompat.createAsync(mVibeThread.getLooper(), this);
         }
 
         public void destroy() {
-            this.mVibeThread.quit();
+            mVibeThread.quit();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
-        public void rumble(float warpFrac) {
-            if (this.mVibeThread.isAlive()) {
-                Message msg = Message.obtain();
-                msg.what = MSG;
-                msg.arg1 = (int) (100.0f * warpFrac);
-                this.mVibeHandler.removeMessages(MSG);
-                this.mVibeHandler.sendMessage(msg);
-            }
+        private void rumble(float warpFrac) {
+            if (!mVibeThread.isAlive()) return;
+
+            final Message msg = Message.obtain();
+            msg.what = MSG;
+            msg.arg1 = (int) (warpFrac * 100);
+            mVibeHandler.removeMessages(MSG);
+            mVibeHandler.sendMessage(msg);
         }
+
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
-    @Override // android.app.Activity
-    public void onDestroy() {
-        this.mRumble.destroy();
+    @Override
+    protected void onDestroy() {
+        mRumble.destroy();
+
         super.onDestroy();
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
-    @Override // android.app.Activity
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().getDecorView().setFitsSystemWindows(false);
         getWindow().setNavigationBarColor(Color.TRANSPARENT);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars());
-        getWindow().getDecorView().setFitsSystemWindows(false);
-        ActionBar ab = getActionBar();
-        if (ab != null) {
-            ab.hide();
-        }
+        final ActionBar ab = getActionBar();
+        if (ab != null) ab.hide();
+
         try {
-            this.mAnimationsEnabled = Settings.Global.getFloat(getContentResolver(), "animator_duration_scale") > 0.0f;
+            mAnimationsEnabled = Settings.Global.getFloat(getContentResolver(),
+                    Settings.Global.ANIMATOR_DURATION_SCALE) > 0f;
         } catch (Settings.SettingNotFoundException e) {
-            this.mAnimationsEnabled = true;
+            mAnimationsEnabled = true;
         }
-        this.mRumble = new RumblePack();
-        this.mLayout = new FrameLayout(this);
-        this.mRandom = new Random();
-        this.mDp = getResources().getDisplayMetrics().density;
-        Starfield starfield = new Starfield(this.mRandom, this.mDp * 2.0f);
-        this.mStarfield = starfield;
-        starfield.setVelocity((this.mRandom.nextFloat() - 0.5f) * 200.0f, (this.mRandom.nextFloat() - 0.5f) * 200.0f);
-        this.mLayout.setBackground(this.mStarfield);
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        int minSide = Math.min(dm.widthPixels, dm.heightPixels);
-        int widgetSize = (int) (minSide * 0.75d);
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(widgetSize, widgetSize);
+
+        mRumble = new RumblePack();
+
+        mLayout = new FrameLayout(this);
+        mRandom = new Random();
+        mDp = getResources().getDisplayMetrics().density;
+        mStarfield = new Starfield(mRandom, mDp * 2f);
+        mStarfield.setVelocity(
+                200f * (mRandom.nextFloat() - 0.5f),
+                200f * (mRandom.nextFloat() - 0.5f));
+        mLayout.setBackground(mStarfield);
+
+        final DisplayMetrics dm = getResources().getDisplayMetrics();
+//        final float dp = dm.density;
+        final int minSide = Math.min(dm.widthPixels, dm.heightPixels);
+        final int widgetSize = (int) (minSide * 0.75);
+        final FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(widgetSize, widgetSize);
         lp.gravity = Gravity.CENTER;
-        ImageView imageView = new ImageView(this);
-        this.mLogo = imageView;
+
+        mLogo = new ImageView(this);
         Drawable drawable = DrawableKt.createVectorDrawableCompat(this, R.drawable.u_platlogo);
-        imageView.setImageDrawable(drawable);
-        this.mLogo.setOnTouchListener(this.mTouchListener);
-        this.mLogo.requestFocus();
-        this.mLayout.addView(this.mLogo, lp);
+        mLogo.setImageDrawable(drawable);
+//        mLogo.setImageResource(R.drawable.u_platlogo);
+        mLogo.setOnTouchListener(mTouchListener);
+        mLogo.requestFocus();
+        mLayout.addView(mLogo, lp);
+
         Log.v(TAG, "Hello");
-        setContentView(this.mLayout);
+
+        setContentView(mLayout);
     }
 
     private void startAnimating() {
-        TimeAnimator timeAnimator = new TimeAnimator();
-        this.mAnim = timeAnimator;
-        timeAnimator.setTimeListener(this.mTimeListener);
-        this.mAnim.start();
+        mAnim = new TimeAnimator();
+        mAnim.setTimeListener(mTimeListener);
+        mAnim.start();
     }
 
     private void stopAnimating() {
-        this.mAnim.cancel();
-        this.mAnim = null;
+        mAnim.cancel();
+        mAnim = null;
     }
 
-    @Override // android.app.Activity, android.view.KeyEvent.Callback
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_SPACE) {
             if (event.getRepeatCount() == 0) {
@@ -236,181 +272,249 @@ public class PlatLogoActivity extends Activity {
             }
             return true;
         }
+//        return false;
+        // call onBackPressed
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override // android.app.Activity, android.view.KeyEvent.Callback
+    @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_SPACE) {
             stopWarp();
             return true;
         }
+//        return false;
+        // call onBackPressed
         return super.onKeyUp(keyCode, event);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public void startWarp() {
+    private void startWarp() {
         stopWarp();
-        ObjectAnimator duration = ObjectAnimator.ofFloat(this.mStarfield, "warp", 1.0f, MAX_WARP)
-                .setDuration(5000L);
-        this.mWarpAnim = duration;
-        duration.start();
-        this.mLogo.postDelayed(this.mLaunchNextStage, 6000L);
+        mWarpAnim = ObjectAnimator.ofFloat(mStarfield, "warp", MIN_WARP, MAX_WARP)
+                .setDuration(LAUNCH_TIME);
+        mWarpAnim.start();
+
+        mLogo.postDelayed(mLaunchNextStage, LAUNCH_TIME + 1000L);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public void stopWarp() {
-        ObjectAnimator objectAnimator = this.mWarpAnim;
-        if (objectAnimator != null) {
-            objectAnimator.cancel();
-            this.mWarpAnim.removeAllListeners();
-            this.mWarpAnim = null;
+    private void stopWarp() {
+        if (mWarpAnim != null) {
+            mWarpAnim.cancel();
+            mWarpAnim.removeAllListeners();
+            mWarpAnim = null;
         }
-        this.mStarfield.setWarp(1.0f);
-        this.mLogo.removeCallbacks(this.mLaunchNextStage);
+        mStarfield.setWarp(1f);
+        mLogo.removeCallbacks(mLaunchNextStage);
     }
 
-    @Override // android.app.Activity
+    @Override
     public void onResume() {
         super.onResume();
         startAnimating();
     }
 
-    @Override // android.app.Activity
+    @Override
     public void onPause() {
         stopWarp();
         stopAnimating();
         super.onPause();
     }
 
+    private boolean shouldWriteSettings() {
+//        return getPackageName().equals("android");
+        return true;
+    }
 
     private void launchNextStage(boolean locked) {
-        Log.v(TAG, "Saving egg locked=" + locked);
-        SpUtils.putLong(this, U_EGG_UNLOCK_SETTING, locked ? 0L : System.currentTimeMillis());
+//        final ContentResolver cr = getContentResolver();
+
         try {
-            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                Intent eggActivity = new Intent(Intent.ACTION_MAIN)
-                        .addCategory("com.android.internal.category.PLATLOGO");
-                Log.v(TAG, "launching: " + eggActivity);
-                startActivity(eggActivity);
-                return;
+            if (shouldWriteSettings()) {
+                Log.v(TAG, "Saving egg locked=" + locked);
+//                syncTouchPressure();
+                SpUtils.putLong(this,
+                        U_EGG_UNLOCK_SETTING,
+                        locked ? 0 : System.currentTimeMillis());
             }
-            // It cannot be decompiled,
-            // and the kotlin version is not compatible as a jar package dependency.
-            //  R. reference issue needs to be resolved
-            Toast.makeText(this, "Decompiled version don't support more features! Release coming soon…", Toast.LENGTH_LONG).show();
-        } catch (ActivityNotFoundException e2) {
-            Log.e(TAG, "No more eggs.", e2);
+        } catch (RuntimeException e) {
+            Log.e(TAG, "Can't write settings", e);
+        }
+
+        try {
+            final Intent eggActivity = new Intent(this, MainActivity.class);
+//                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+//                            | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//                    .addCategory("com.android.internal.category.PLATLOGO");
+            Log.v(TAG, "launching: " + eggActivity);
+            startActivity(eggActivity);
+        } catch (ActivityNotFoundException ex) {
+            Log.e("com.android.internal.app.PlatLogoActivity", "No more eggs.");
+        }
+        if (FINISH_AFTER_NEXT_STAGE_LAUNCH) {
+            finish(); // we're done here.
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* loaded from: classes4.dex */
+//    static final String TOUCH_STATS = "touch.stats";
+//    double mPressureMin = 0, mPressureMax = -1;
+//
+//    private void measureTouchPressure(MotionEvent event) {
+//        final float pressure = event.getPressure();
+//        switch (event.getActionMasked()) {
+//            case MotionEvent.ACTION_DOWN:
+//                if (mPressureMax < 0) {
+//                    mPressureMin = mPressureMax = pressure;
+//                }
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                if (pressure < mPressureMin) mPressureMin = pressure;
+//                if (pressure > mPressureMax) mPressureMax = pressure;
+//                break;
+//        }
+//    }
+//
+//    private void syncTouchPressure() {
+//        try {
+//            final String touchDataJson = Settings.System.getString(
+//                    getContentResolver(), TOUCH_STATS);
+//            final JSONObject touchData = new JSONObject(
+//                    touchDataJson != null ? touchDataJson : "{}");
+//            if (touchData.has("min")) {
+//                mPressureMin = Math.min(mPressureMin, touchData.getDouble("min"));
+//            }
+//            if (touchData.has("max")) {
+//                mPressureMax = Math.max(mPressureMax, touchData.getDouble("max"));
+//            }
+//            if (mPressureMax >= 0) {
+//                touchData.put("min", mPressureMin);
+//                touchData.put("max", mPressureMax);
+//                if (shouldWriteSettings()) {
+//                    Settings.System.putString(getContentResolver(), TOUCH_STATS,
+//                            touchData.toString());
+//                }
+//            }
+//        } catch (Exception e) {
+//            Log.e("com.android.internal.app.PlatLogoActivity", "Can't write touch settings", e);
+//        }
+//    }
+//
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        syncTouchPressure();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        syncTouchPressure();
+//        super.onStop();
+//    }
+
     public static class Starfield extends Drawable {
-        private float mBuffer;
+        private static final int NUM_STARS = 34; // Build.VERSION_CODES.UPSIDE_DOWN_CAKE
+
+        private static final int NUM_PLANES = 2;
+        private final float[] mStars = new float[NUM_STARS * 4];
+        private float mVx, mVy;
+        private long mDt = 0;
+        private final Paint mStarPaint;
+
         private final Random mRng;
         private final float mSize;
-        private final Paint mStarPaint;
-        private float mVx;
-        private float mVy;
-        private final float[] mStars = new float[136];
-        private long mDt = 0;
-        private final Rect mSpace = new Rect();
-        private float mWarp = 1.0f;
 
-        @Keep
+        private final Rect mSpace = new Rect();
+        private float mWarp = 1f;
+
+        private float mBuffer;
+
         public void setWarp(float warp) {
-            this.mWarp = warp;
+            mWarp = warp;
         }
 
-        @Keep
         public float getWarp() {
-            return this.mWarp;
+            return mWarp;
         }
 
         Starfield(Random rng, float size) {
-            this.mRng = rng;
-            this.mSize = size;
-            Paint paint = new Paint();
-            this.mStarPaint = paint;
-            paint.setStyle(Paint.Style.STROKE);
-            paint.setColor(-1);
+            mRng = rng;
+            mSize = size;
+            mStarPaint = new Paint();
+            mStarPaint.setStyle(Paint.Style.STROKE);
+            mStarPaint.setColor(Color.WHITE);
         }
 
-        @Override // android.graphics.drawable.Drawable
+        @Override
         public void onBoundsChange(Rect bounds) {
-            this.mSpace.set(bounds);
-            float f = this.mSize * 2.0f * 2.0f * PlatLogoActivity.MAX_WARP;
-            this.mBuffer = f;
-            this.mSpace.inset(-((int) f), -((int) f));
-            float w = this.mSpace.width();
-            float h = this.mSpace.height();
-            for (int i = 0; i < 34; i++) {
-                this.mStars[i * 4] = this.mRng.nextFloat() * w;
-                this.mStars[(i * 4) + 1] = this.mRng.nextFloat() * h;
-                float[] fArr = this.mStars;
-                fArr[(i * 4) + 2] = fArr[i * 4];
-                fArr[(i * 4) + 3] = fArr[(i * 4) + 1];
+            mSpace.set(bounds);
+            mBuffer = mSize * NUM_PLANES * 2 * MAX_WARP;
+            mSpace.inset(-(int) mBuffer, -(int) mBuffer);
+            final float w = mSpace.width();
+            final float h = mSpace.height();
+            for (int i = 0; i < NUM_STARS; i++) {
+                mStars[4 * i] = mRng.nextFloat() * w;
+                mStars[4 * i + 1] = mRng.nextFloat() * h;
+                mStars[4 * i + 2] = mStars[4 * i];
+                mStars[4 * i + 3] = mStars[4 * i + 1];
             }
         }
 
         public void setVelocity(float x, float y) {
-            this.mVx = x;
-            this.mVy = y;
+            mVx = x;
+            mVy = y;
         }
 
-        @Override // android.graphics.drawable.Drawable
-        public void draw(Canvas canvas) {
-            float dtSec = ((float) this.mDt) / 1000.0f;
-            float f = this.mWarp;
-            float dx = this.mVx * dtSec * f;
-            float dy = this.mVy * dtSec * f;
-            int i = 0;
-            int i2 = 1;
-            boolean inWarp = f > 1.0f;
-            canvas.drawColor(-16777216);
-            long j = this.mDt;
-            if (j > 0 && j < 1000) {
-                canvas.translate((-this.mBuffer) + (this.mRng.nextFloat() * (this.mWarp - 1.0f)), (-this.mBuffer) + (this.mRng.nextFloat() * (this.mWarp - 1.0f)));
-                float w = this.mSpace.width();
-                float h = this.mSpace.height();
-                int i3 = 0;
-                while (i3 < 34) {
-                    int plane = ((int) ((i3 / 34.0f) * 2.0f)) + i2;
-                    float[] fArr = this.mStars;
-                    fArr[(i3 * 4) + 2] = ((fArr[(i3 * 4) + 2] + (plane * dx)) + w) % w;
-                    fArr[(i3 * 4) + 3] = ((fArr[(i3 * 4) + 3] + (plane * dy)) + h) % h;
-                    fArr[(i3 * 4) + i] = inWarp ? fArr[(i3 * 4) + 2] - (((this.mWarp * dx) * 2.0f) * plane) : -100.0f;
-                    fArr[(i3 * 4) + 1] = inWarp ? fArr[(i3 * 4) + 3] - (((this.mWarp * dy) * 2.0f) * plane) : -100.0f;
-                    i3++;
-                    i = 0;
+        @Override
+        public void draw(@NonNull Canvas canvas) {
+            final float dtSec = mDt / 1000f;
+            final float dx = (mVx * dtSec * mWarp);
+            final float dy = (mVy * dtSec * mWarp);
+
+            final boolean inWarp = mWarp > 1f;
+
+            canvas.drawColor(Color.BLACK); // 0xFF16161D);
+
+            if (mDt > 0 && mDt < 1000) {
+                canvas.translate(
+                        -(mBuffer) + mRng.nextFloat() * (mWarp - 1f),
+                        -(mBuffer) + mRng.nextFloat() * (mWarp - 1f)
+                );
+                final float w = mSpace.width();
+                final float h = mSpace.height();
+                for (int i = 0; i < NUM_STARS; i++) {
+                    final int plane = (int) ((((float) i) / NUM_STARS) * NUM_PLANES) + 1;
+                    mStars[4 * i + 2] = (mStars[4 * i + 2] + dx * plane + w) % w;
+                    mStars[4 * i + 3] = (mStars[4 * i + 3] + dy * plane + h) % h;
+                    mStars[4 * i + 0] = inWarp ? mStars[4 * i + 2] - dx * mWarp * 2 * plane : -100;
+                    mStars[4 * i + 1] = inWarp ? mStars[4 * i + 3] - dy * mWarp * 2 * plane : -100;
                 }
             }
-            int slice = ((this.mStars.length / 2) / 4) * 4;
-            for (int p = 0; p < 2; p++) {
-                this.mStarPaint.setStrokeWidth(this.mSize * (p + 1));
+            final int slice = (mStars.length / NUM_PLANES / 4) * 4;
+            for (int p = 0; p < NUM_PLANES; p++) {
+                mStarPaint.setStrokeWidth(mSize * (p + 1));
                 if (inWarp) {
-                    canvas.drawLines(this.mStars, p * slice, slice, this.mStarPaint);
+                    canvas.drawLines(mStars, p * slice, slice, mStarPaint);
                 }
-                canvas.drawPoints(this.mStars, p * slice, slice, this.mStarPaint);
+                canvas.drawPoints(mStars, p * slice, slice, mStarPaint);
             }
         }
 
-        @Override // android.graphics.drawable.Drawable
+        @Override
         public void setAlpha(int alpha) {
+
         }
 
-        @Override // android.graphics.drawable.Drawable
-        public void setColorFilter(ColorFilter colorFilter) {
+        @Override
+        public void setColorFilter(@Nullable ColorFilter colorFilter) {
+
         }
 
-        @Override // android.graphics.drawable.Drawable
+        @Override
         public int getOpacity() {
             return PixelFormat.OPAQUE;
         }
 
         public void update(long dt) {
-            this.mDt = dt;
+            mDt = dt;
         }
     }
 }
