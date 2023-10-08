@@ -1,4 +1,7 @@
-### v2.0.0
+### v2.0.1
+- Fix Android O
+
+### v2.0.0 (2023-10-08)
 - Add Android 14 Easter Eggs
 - Add Portuguese translations
 - Add Indonesia translations
