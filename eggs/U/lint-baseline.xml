@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 8.1.2" type="baseline" client="gradle" dependencies="false" name="AGP (8.1.2)" variant="all" version="8.1.2">
+
+    <issue
+        id="UnknownIssueId"
+        message="Unknown issue id &quot;InlineApi&quot;. Did you mean &apos;InlinedApi&apos; (Using inlined constants on older versions) ?">
+        <location
+            file="build.gradle.kts"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `capitalize(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`."
+        errorLine1="                                    &quot;  TYPE: ${it.description.capitalize()}\n&quot; +"
+        errorLine2="                                                              ~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/landroid/MainActivity.kt"
+            line="200"
+            column="63"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `capitalize(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`."
+        errorLine1="                                    &quot;  ATMO: ${it.atmosphere.capitalize()}\n&quot; +"
+        errorLine2="                                                             ~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/landroid/MainActivity.kt"
+            line="201"
+            column="62"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `capitalize(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`."
+        errorLine1="                                    &quot; FAUNA: ${it.fauna.capitalize()}\n&quot; +"
+        errorLine2="                                                        ~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/landroid/MainActivity.kt"
+            line="202"
+            column="57"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `capitalize(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`."
+        errorLine1="                                    &quot; FLORA: ${it.flora.capitalize()}\n&quot;"
+        errorLine2="                                                        ~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/landroid/MainActivity.kt"
+            line="203"
+            column="57"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `capitalize(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`."
+        errorLine1="                                    &quot;   TYPE:  ${it.description.capitalize()}\n&quot; +"
+        errorLine2="                                                                ~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/landroid/MainActivity.kt"
+            line="487"
+            column="65"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `capitalize(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`."
+        errorLine1="                                            &quot;   ATMO:  ${it.atmosphere.capitalize()}\n&quot; +"
+        errorLine2="                                                                       ~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/landroid/MainActivity.kt"
+            line="488"
+            column="72"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `capitalize(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`."
+        errorLine1="                                            &quot;   FAUNA: ${it.fauna.capitalize()}\n&quot; +"
+        errorLine2="                                                                  ~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/landroid/MainActivity.kt"
+            line="489"
+            column="67"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `capitalize(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`."
+        errorLine1="                                            &quot;   FLORA: ${it.flora.capitalize()}\n&quot;"
+        errorLine2="                                                                  ~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/landroid/MainActivity.kt"
+            line="490"
+            column="67"/>
+    </issue>
+
+    <issue
+        id="LongLogTag"
+        message="The logging tag can be at most 23 characters, was 41 (com.android.internal.app.PlatLogoActivity)"
+        errorLine1="            Log.e(&quot;com.android.internal.app.PlatLogoActivity&quot;, &quot;No more eggs.&quot;);"
+        errorLine2="                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/PlatLogoActivity.java"
+            line="351"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (1647 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="    &lt;path"
+        errorLine2="                           ~~~~">
+        <location
+            file="src/main/res/drawable-anydpi/u_platlogo.xml"
+            line="76"
+            column="28"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableFloatStateOf` instead of `mutableStateOf`"
+        errorLine1="    var cameraZoom by remember { mutableStateOf(1f) }"
+        errorLine2="                                 ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/landroid/MainActivity.kt"
+            line="408"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableLongStateOf` instead of `mutableStateOf`"
+        errorLine1="    val triggerDraw = mutableStateOf(0L)"
+        errorLine2="                      ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/landroid/VisibleUniverse.kt"
+            line="58"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="ClickableViewAccessibility"
+        message="`onTouch` should call `View#performClick` when a click is detected"
+        errorLine1="        public boolean onTouch(View v, MotionEvent event) {"
+        errorLine2="                       ~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/PlatLogoActivity.java"
+            line="96"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="ClickableViewAccessibility"
+        message="Custom view ``ImageView`` has `setOnTouchListener` called on it but does not override `performClick`"
+        errorLine1="        mLogo.setOnTouchListener(mTouchListener);"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/android_u/egg/PlatLogoActivity.java"
+            line="247"
+            column="9"/>
+    </issue>
+
+</issues>
