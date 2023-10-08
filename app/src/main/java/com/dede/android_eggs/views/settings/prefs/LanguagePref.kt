@@ -27,10 +27,6 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
 
         private const val TAG = "LanguagePref"
 
-        // For API<24 the application does not have a localeList instead it has a single locale
-        // Unsupported region
-        private val isEnabled = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
-
         private const val SYSTEM = 0
         private const val MORE = -1
         private const val SIMPLIFIED_CHINESE = 2    // zh-CN
@@ -91,6 +87,27 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
 //            LangOp(KOREAN, R.string.language_ko, Locale.KOREAN),
         )
 
+        private class LangOpComparator(val context: Context) : Comparator<LangOp> {
+
+            private val LangOp.compareValue: Int
+                get() = when (value) {
+                    SIMPLIFIED_CHINESE -> -2// first in list
+                    TRADITIONAL_CHINESE -> -1
+                    else -> 0
+                }
+
+            private val LangOp.compareName: String
+                get() = context.getString(titleRes)
+
+            override fun compare(o1: LangOp, o2: LangOp): Int {
+                var r = o1.compareValue.compareTo(o2.compareValue)
+                if (r == 0) {
+                    r = o1.compareName.compareTo(o2.compareName)
+                }
+                return r
+            }
+        }
+
         private fun getLocaleByValue(value: Int): LocaleListCompat {
             val op = languageOptions.find { it.value == value }
             if (op != null) {
@@ -139,7 +156,9 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         get() = R.string.pref_title_language
 
     override val enable: Boolean
-        get() = isEnabled
+        // For API<24 the application does not have a localeList instead it has a single locale
+        // Unsupported region
+        get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
 
     override fun setValue(context: Context, value: Int): Boolean {
         return false
@@ -154,20 +173,6 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         if (selectedOp != null) {
             selectedOption(selectedOp)
         }
-    }
-
-    private fun sortLangOps(langOps: List<LangOp>, context: Context): List<LangOp> {
-        val copy = ArrayList(langOps)
-        copy.sortBy { context.getString(it.titleRes) }
-        var index = copy.indexOfFirst { it.value == SIMPLIFIED_CHINESE }
-        if (index != -1) {
-            copy.add(0, copy.removeAt(index))
-        }
-        index = copy.indexOfFirst { it.value == TRADITIONAL_CHINESE }
-        if (index != -1) {
-            copy.add(1, copy.removeAt(index))
-        }
-        return copy
     }
 
     private fun handleLocaleChoice(context: Context, dialog: Dialog, locales: LocaleListCompat) {
@@ -187,7 +192,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         if (option.value != MORE) {
             return false
         }
-        val languageOptions = sortLangOps(languageOptions, context)
+        val languageOptions = languageOptions.sortedWith(LangOpComparator(context))
         var choiceIndex = languageOptions.indexOfFirst { it.value == selectedValue }
         val lastChoiceIndex = choiceIndex
         val languages = languageOptions.map { context.getString(it.titleRes) }.toTypedArray()
