@@ -35,7 +35,7 @@ The project contains the complete code of the system Easter eggs, which aims to 
 ## Android Versions
 | Name                                   | API level | Egg                                        | Use new features [*](#id_new_features) | Minimum API [*](#id_full_egg_mini_api) |
 |----------------------------------------|:---------:|--------------------------------------------|:--------------------------------------:|:--------------------------------------:|
-| Android 14 (Upside Down Cake)          |    34     | Android 14 Easter Egg [*](#id_14_egg_name) |                   🚫                   |                                        |
+| Android 14 (Upside Down Cake)          |    34     | Android 14 Easter Egg [*](#id_14_egg_name) |                   🚫                   |                   -                    |
 | Android 13 (Tiramisu)                  |    33     | Paint Chips                                |                   ✅                    |         31 [*](#id_android12)          |
 | Android 12 (Snow Cone)                 |   31-32   | Paint Chips                                |                   ✅                    |         31 [*](#id_android12)          |
 | Android 11 (Red Velvet Cake)           |    30     | Cat Controls(Collection)                   |                   ✅                    |         30 [*](#id_android11)          |
