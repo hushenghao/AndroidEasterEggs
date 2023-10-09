@@ -1,1 +1,2 @@
+- Android Q 使用内部命名
 - 修复Android O彩蛋

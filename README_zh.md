@@ -39,7 +39,7 @@
 | Android 13 (Tiramisu)                  |    33     | Paint Chips                                |              ✅               |       31 [*](#id_android12)       |
 | Android 12 (Snow Cone)                 |   31-32   | Paint Chips                                |              ✅               |       31 [*](#id_android12)       |
 | Android 11 (Red Velvet Cake)           |    30     | Cat Controls(Collection)                   |              ✅               |       30 [*](#id_android11)       |
-| Android 10 (Queen Cake)                |    29     | Icon Quiz                                  |              🚫              |                 -                 |
+| Android 10 (Quince Tart)               |    29     | Icon Quiz                                  |              🚫              |                 -                 |
 | Android 9 (Pie)                        |    28     | PAINT.APK                                  |              🚫              |                 -                 |
 | Android 8.0-8.1 (Oreo)                 |   26-27   | Octopus                                    |              🚫              |                 -                 |
 | Android 7.0-7.1 (Nougat)               |   24-25   | Neko                                       |              ✅               |       24 [*](#id_android7)        |

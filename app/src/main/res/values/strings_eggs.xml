@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- tasty treat name -->
     <string name="nickname_android_u" translatable="false">Upside Down Cake</string>
     <string name="nickname_android_t" translatable="false">Tiramisu</string>
     <string name="nickname_android_s" translatable="false">Snow Cone</string>
     <string name="nickname_android_r" translatable="false">Red Velvet Cake</string>
-    <string name="nickname_android_q" translatable="false">Queen Cake</string>
+    <string name="nickname_android_q" translatable="false">Quince Tart</string>
     <string name="nickname_android_p" translatable="false">Pie</string>
     <string name="nickname_android_o" translatable="false">Oreo</string>
     <string name="nickname_android_n" translatable="false">Nougat</string>
