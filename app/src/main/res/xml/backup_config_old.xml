@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <full-backup-conten>
-
-    <include domain="sharedpref" path="." />
-
+    <include
+        domain="sharedpref"
+        path="." />
+    <include
+        domain="file"
+        path="androidx.appcompat.app.AppCompatDelegate.application_locales_record_file" />
 </full-backup-conten>

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- https://developer.android.google.cn/guide/topics/data/backup?hl=zh-cn -->
 <data-extraction-rules>
     <cloud-backup disableIfNoEncryptionCapabilities="false">
         <include
             domain="sharedpref"
             path="." />
+        <!-- androidx.appcompat.app.AppLocalesStorageHelper.APPLICATION_LOCALES_RECORD_FILE -->
+        <include
+            domain="file"
+            path="androidx.appcompat.app.AppCompatDelegate.application_locales_record_file" />
     </cloud-backup>
     <device-transfer>
         <include
             domain="sharedpref"
             path="." />
+        <include
+            domain="file"
+            path="androidx.appcompat.app.AppCompatDelegate.application_locales_record_file" />
     </device-transfer>
 </data-extraction-rules>
