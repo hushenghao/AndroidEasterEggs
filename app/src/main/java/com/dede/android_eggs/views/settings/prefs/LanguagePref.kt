@@ -66,7 +66,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             Op(value, titleRes = titleRes)
 
         private val languageOptions = listOf(
-            LangOp(SIMPLIFIED_CHINESE, R.string.language_zh_SC, Locale.SIMPLIFIED_CHINESE),
+            LangOp(SIMPLIFIED_CHINESE, R.string.language_zh_SC, Locale.CHINESE),
             LangOp(TRADITIONAL_CHINESE, R.string.language_zh_TC, Locale.TRADITIONAL_CHINESE),
             LangOp(ENGLISH, R.string.language_en, Locale.ENGLISH),
             LangOp(RUSSIAN, R.string.language_ru, createLocale("ru")),
@@ -168,13 +168,6 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         return getValueByLocale(AppCompatDelegate.getApplicationLocales())
     }
 
-    private fun restoreLastOption(lastValue: Int) {
-        val selectedOp = options.find { it.value == lastValue }
-        if (selectedOp != null) {
-            selectedOption(selectedOp)
-        }
-    }
-
     private fun handleLocaleChoice(context: Context, dialog: Dialog, locales: LocaleListCompat) {
         val localesCtx = context.createLocalesContext(locales)
         val decorView = requireNotNull(dialog.window).decorView
@@ -193,7 +186,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             return false
         }
         val languageOptions = languageOptions.sortedWith(LangOpComparator(context))
-        var choiceIndex = languageOptions.indexOfFirst { it.value == selectedValue }
+        var choiceIndex = languageOptions.indexOfFirst { it.value == currentSelectedValue }
         val lastChoiceIndex = choiceIndex
         val languages = languageOptions.map { context.getString(it.titleRes) }.toTypedArray()
         MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_LanguagePref_MaterialAlertDialog)
@@ -206,7 +199,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             }
             .setOnDismissListener {
                 if (lastChoiceIndex == choiceIndex) {
-                    restoreLastOption(selectedValue)
+                    selectedOptionByValue(currentSelectedValue)
                 }
             }
             .setNeutralButton(R.string.label_translation) { _, _ ->
@@ -216,11 +209,12 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
                 )
             }
             .setNegativeButton(android.R.string.cancel) { _, _ ->
-                restoreLastOption(selectedValue)
+                selectedOptionByValue(currentSelectedValue)
             }
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 if (choiceIndex != lastChoiceIndex) {
-                    onOptionSelected(context, languageOptions[choiceIndex])
+                    val op = languageOptions[choiceIndex]
+                    onOptionSelected(context, op)
                 }
             }
             .show()
@@ -238,6 +232,10 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             ) {
                 context.getActivity<Activity>()?.recreate()
             }
+        } else {
+            // WTF, Some devices will not recreate the Activity
+            updateOptions(getOptions())
+            selectedOptionByValue(option.value)
         }
     }
 }

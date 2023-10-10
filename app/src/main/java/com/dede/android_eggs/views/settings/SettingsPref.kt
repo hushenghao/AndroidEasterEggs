@@ -48,7 +48,7 @@ object SettingsPrefs {
  */
 abstract class SettingPref(
     private val key: String? = null,
-    open val options: List<Op>,
+    options: List<Op>,
     default: Int = 0,
 ) : MaterialButtonToggleGroup.OnButtonCheckedListener {
 
@@ -90,7 +90,15 @@ abstract class SettingPref(
 
     }
 
-    open var selectedValue: Int = default
+    private var _options: MutableList<Op> = options.toMutableList()
+
+    private var selectedValue: Int = default
+
+    open val options: List<Op>
+        get() = _options
+
+    open val currentSelectedValue: Int
+        get() = selectedValue
 
     open val enable: Boolean = true
     open val title: CharSequence? = null
@@ -121,14 +129,12 @@ abstract class SettingPref(
         onOptionSelected(context, option)
     }
 
-    open fun onCreateView(context: Context): View {
-        binding = ItemSettingPrefGroupBinding.inflate(LayoutInflater.from(context))
-        selectedValue = getValue(context, selectedValue)
-        if (titleRes != View.NO_ID) {
-            binding.tvTitle.setText(titleRes)
-        } else if (title != null) {
-            binding.tvTitle.text = title
+    protected fun updateOptions(options: List<Op>) {
+        if (this._options !== options) {
+            this._options = options.toMutableList()
         }
+
+        val context = binding.btGroup.context
         binding.btGroup.removeAllViewsInLayout()
         for (op in options) {
             val button = MaterialButton(
@@ -169,6 +175,17 @@ abstract class SettingPref(
         if (op != null) {
             binding.btGroup.check(op.id)
         }
+    }
+
+    open fun onCreateView(context: Context): View {
+        binding = ItemSettingPrefGroupBinding.inflate(LayoutInflater.from(context))
+        selectedValue = getValue(context, selectedValue)
+        if (titleRes != View.NO_ID) {
+            binding.tvTitle.setText(titleRes)
+        } else if (title != null) {
+            binding.tvTitle.text = title
+        }
+        updateOptions(_options)
         binding.btGroup.addOnButtonCheckedListener(this)
         return binding.root
     }
@@ -205,11 +222,18 @@ abstract class SettingPref(
         onOptionSelected(context, option)
     }
 
-    fun selectedOption(option: Op) {
+    private fun selectedOption(option: Op) {
         if (::binding.isInitialized) {
             binding.btGroup.check(option.id)
         } else {
             selectedValue = option.value
+        }
+    }
+
+    fun selectedOptionByValue(value: Int) {
+        val selectedOp = options.find { it.value == value }
+        if (selectedOp != null) {
+            selectedOption(selectedOp)
         }
     }
 

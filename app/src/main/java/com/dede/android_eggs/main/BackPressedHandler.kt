@@ -65,7 +65,7 @@ class BackPressedHandler(private val host: AppCompatActivity) :
 
     @SuppressLint("RestrictedApi", "UnsafeOptInUsageError")
     fun register() {
-        host.onBackPressedDispatcher.addCallback(this)
+        host.onBackPressedDispatcher.addCallback(host, this)
         host.lifecycle.addObserver(this)
 
         scaledTouchSlop = ViewConfiguration.get(host).scaledTouchSlop
