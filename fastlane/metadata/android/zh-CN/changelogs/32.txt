@@ -1,2 +1,3 @@
 - Android Q 使用内部命名
+- 新增日语翻译
 - 修复Android O彩蛋

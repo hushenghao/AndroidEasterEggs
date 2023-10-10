@@ -1,2 +1,3 @@
 - Use Android Q internal code name
+- Added Japanese translation
 - Fix Android O
