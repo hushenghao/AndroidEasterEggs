@@ -5,10 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.provider.Browser
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import com.dede.basic.getConfigurationLocales
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.R as M3R
@@ -42,13 +45,23 @@ object CustomTabsBrowser {
             .setDefaultColorSchemeParams(params)
 
         val customTabsIntent = builder.build()
-        customTabsIntent.intent.putExtra(
-            Intent.EXTRA_REFERRER,
-            Uri.parse("android-app://%s".format(context.packageName))
-        )
+        with(customTabsIntent.intent) {
+            val applicationId = context.packageName
+            putExtra(
+                Intent.EXTRA_REFERRER,
+                Uri.parse("android-app://%s".format(applicationId))
+            )
+            val headers = bundleOf(
+                // https://developer.android.google.cn/guide/topics/resources/app-languages?hl=zh-cn#consider-header
+                // https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Accept-Language
+                "Accept-Language" to context.getConfigurationLocales().toLanguageTags()
+            )
+            putExtra(Browser.EXTRA_HEADERS, headers)
+            putExtra(Browser.EXTRA_APPLICATION_ID, applicationId)
+        }
         try {
             customTabsIntent.launchUrl(context, uri)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             launchUrlByBrowser(context, uri)
         }
     }
@@ -58,7 +71,7 @@ object CustomTabsBrowser {
         val intent = context.createChooser(target)
         try {
             ContextCompat.startActivity(context, intent, null)
-        } catch (e: ActivityNotFoundException) {
+        } catch (_: ActivityNotFoundException) {
         }
     }
 }
