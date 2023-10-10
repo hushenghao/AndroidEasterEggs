@@ -83,7 +83,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
 //            LangOp(LATIN, R.string.language_la_LA, createLocale("la", "LA")),
             LangOp(TURKISH, R.string.language_tr_TR, createLocale("tr", "TR")),
             LangOp(UKRAINIAN, R.string.language_uk_UA, createLocale("uk", "UA")),
-//            LangOp(JAPANESE, R.string.language_ja_JP, Locale.JAPAN),
+            LangOp(JAPANESE, R.string.language_ja_JP, Locale.JAPAN),
 //            LangOp(KOREAN, R.string.language_ko, Locale.KOREAN),
         )
 
