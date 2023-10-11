@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Easter Eggs</string>
     <string name="summary_android_waiting">正在等候…</string>
     <string name="summary_android_release_pushed">最終版本已推送</string>
     <string name="title_open_with">開啟</string>
