@@ -2,12 +2,11 @@
 
 整理了Android系统各正式版的彩蛋
 
-![Easter Eggs](https://img.shields.io/badge/Android-Easter%20Eggs-E8DEF8?logo=android&labelColor=6750A4)
 [![GitHub license](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
-[![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
-[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml?logo=githubactions&logoColor=white)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs?logo=github)](https://github.com/hushenghao/AndroidEasterEggs/releases)
 [![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs?logo=fdroid)](https://f-droid.org/packages/com.dede.android_eggs)
+[![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml?logo=githubactions&logoColor=white)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml)
 
 <div align="center">
 
@@ -84,12 +83,6 @@
 ./gradlew assembleRelease
 ```
 
-Windows 需要使用 `gradlew.bat`： 
-
-```shell
-gradlew.bat assembleRelease
-```
-
 ## 其他
 
 [隐私协议](https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy-zh-CN)
@@ -98,5 +91,7 @@ gradlew.bat assembleRelease
 
 ### 感谢
 [AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)
+
+[所有翻译贡献者](https://zh.crowdin.com/project/easter-eggs/members)
 
 [🦖 T-Rex Run 3D](https://github.com/Priler/dino3d)
