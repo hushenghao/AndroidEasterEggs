@@ -21,7 +21,7 @@ import java.util.WeakHashMap
  * @since 2023/2/10
  */
 
-private const val TAG = "COLREmojiCompat"
+internal const val TAG = "COLREmojiCompat"
 
 /**
  * Check if system emoji fonts support COLR

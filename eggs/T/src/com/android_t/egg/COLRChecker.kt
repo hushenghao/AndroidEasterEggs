@@ -1,5 +1,6 @@
 package com.android_t.egg
 
+import android.util.Log
 import java.io.EOFException
 import java.io.File
 import java.io.InputStream
@@ -14,10 +15,10 @@ import java.io.InputStream
 internal object COLRChecker {
 
     // OpenType fonts that contain TrueType outlines should use the value of 0x00010000 for the sfntVersion.
-    private const val SFNT_TRUE_TYPE = 0x00010000
+    private const val SFNT_TRUE_TYPE: Int = 0x00010000
 
     // OpenType fonts containing CFF data (version 1 or 2) should use 0x4F54544F ('OTTO', when re-interpreted as a Tag) for sfntVersion.
-    private const val SFNT_OPEN_TYPE = 0x74727565
+    private const val SFNT_OPEN_TYPE: Int = 0x4F54544F
 
     // https://learn.microsoft.com/zh-cn/typography/opentype/spec/colr
     private const val TABLE_TAG_COLR = "COLR"
@@ -26,7 +27,7 @@ internal object COLRChecker {
         return file.inputStream().use { input ->
             val sfntVersion = input.readInt()// uint32
             if (sfntVersion != SFNT_TRUE_TYPE && sfntVersion != SFNT_OPEN_TYPE) {
-                println("sfntVersion: 0x${sfntVersion.toString(16)}")
+                Log.i(TAG, "Unknown sfntV: 0x${sfntVersion.toString(16)}")
                 return@use false
             }
 
