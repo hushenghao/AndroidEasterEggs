@@ -43,8 +43,6 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import androidx.annotation.ChecksSdkIntAtLeast;
-
 import com.dede.basic.AnalogClock;
 import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
@@ -393,8 +391,7 @@ public class PlatLogoActivity extends Activity {
         public float padding = 0f;
         public float minR = 0f;
 
-        @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.TIRAMISU)
-        private final boolean supportCOLR = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU;
+        private final boolean supportCOLR = COLREmojiCompat.isSupportedCOLR();
         //private final boolean supportCOLR = false;
 
         BubblesDrawable() {

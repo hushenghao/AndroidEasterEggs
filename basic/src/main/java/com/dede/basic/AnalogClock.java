@@ -108,8 +108,7 @@ public class AnalogClock extends View {
         try {
             int systemColor = DrawableKt.getSystemColor(getContext(), tintColor);
             drawable.setTint(systemColor);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignore) {
         }
     }
 

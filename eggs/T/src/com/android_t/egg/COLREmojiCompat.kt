@@ -6,6 +6,9 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
+import android.graphics.fonts.SystemFonts
+import android.os.Build
+import android.util.Log
 import com.android_t.egg.PlatLogoActivity.Bubble
 import com.dede.basic.*
 import kotlinx.coroutines.*
@@ -17,6 +20,44 @@ import java.util.WeakHashMap
  * @author shhu
  * @since 2023/2/10
  */
+
+private const val TAG = "COLREmojiCompat"
+
+/**
+ * Check if system emoji fonts support COLR
+ */
+fun isSupportedCOLR(): Boolean {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+        // https://developer.android.google.cn/about/versions/13/features?hl=zh-cn#color-vector-fonts
+        // API 33, added COLR support.
+        return false
+    }
+
+    // Some OEMs have modified the Emoji implementation.
+    // Such as: MEIZU
+
+    // Emoji fonts:
+    // /system/fonts/NotoColorEmoji.ttf
+    // /system/fonts/NotoColorEmojiFlags.ttf
+    // /system/fonts/NotoColorEmojiLegacy.ttf
+    val emojiFontRegex = Regex("^\\S*Emoji\\S*.[to]tf$")
+    try {
+        val fonts = SystemFonts.getAvailableFonts()
+        for (font in fonts) {
+            val file = font.file ?: continue
+            if (emojiFontRegex.matches(file.name)) {
+                val hasCOLR = COLRChecker.hasCOLR(file)
+                if (hasCOLR) {
+                    Log.i(TAG, "isSupportedCOLR: $file")
+                    return true
+                }
+            }
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+    return false
+}
 
 fun Canvas.drawCOLREmoji(bubble: Bubble, p: Float) {
     val drawable = bubble.drawable ?: return
