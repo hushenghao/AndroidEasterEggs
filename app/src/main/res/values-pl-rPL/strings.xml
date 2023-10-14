@@ -18,11 +18,11 @@
     <string name="message_trypophobia_warning">To jest ostrzeżenie dla osób z &lt;b&gt;Trypofobią&lt;/b&gt;. Niektóre obrazy mogą powodować dyskomfort. Czy chcesz kontynuować?</string>
     <string name="label_settings">Ustawienia</string>
     <string name="label_project_desc">Projekt zawiera pełny kod systemu Easter Eggs, który ma na celu uporządkowanie i kompatybilność z systemem Easter Eggs tak, aby większość urządzeń mogła doświadczyć różnych wersji Easter Eggów i nie wprowadzała zbyt wielu modyfikacji w systemie Egg Code. Niektóre wersje korzystają z nowych funkcji systemu, a wersje niższe mogą korzystać tylko z niektórych funkcji.</string>
-    <string name="pref_title_icon_shape_override">Kształt ikony</string>
+    <string name="pref_title_icon_shape_override">Kształt</string>
     <string name="pref_title_language">Język</string>
     <string name="pref_title_language_more">Więcej</string>
     <string name="pref_title_theme">Motyw</string>
-    <string name="pref_title_dynamic_color">Dynamiczny kolor</string>
+    <string name="pref_title_dynamic_color">Dynamiczne kolory</string>
     <string name="pref_title_icon_visual_effects">Efekty Ikon</string>
     <string name="summary_system_default">Systemowy</string>
     <string name="summary_theme_dark_mode">Ciemny</string>
@@ -37,5 +37,5 @@
     <string name="summary_browse_privacy_policy">Przeczytaj i zaakceptuj naszą Politykę prywatności, aby kontynuować.</string>
     <string name="label_welcome">Witamy w Katalogach Easter Egg 🎉🎉🎉</string>
     <string name="label_share">Udostępnij</string>
-    <string name="label_search_hint">Wyszukiwanie…</string>
+    <string name="label_search_hint">Szukaj…</string>
 </resources>
