@@ -50,20 +50,13 @@ fun isSupportedCOLR(): Boolean {
     // /system/fonts/NotoColorEmojiFlags.ttf
     // /system/fonts/NotoColorEmojiLegacy.ttf
     val emojiFontRegex = Regex("^\\S*Emoji\\S*.[to]tf$")
-    try {
-        val fonts = SystemFonts.getAvailableFonts()
-        for (font in fonts) {
-            val file = font.file ?: continue
-            if (emojiFontRegex.matches(file.name)) {
-                val hasCOLR = COLRChecker.hasCOLR(file)
-                if (hasCOLR) {
-                    Log.i(TAG, "Find isSupportedCOLR: $file")
-                    return true
-                }
-            }
+    for (font in SystemFonts.getAvailableFonts()) {
+        val file = font.file ?: continue
+        if (!emojiFontRegex.matches(file.name)) continue
+        if (COLRChecker.hasCOLR(file)) {// End when find any one that supports
+            Log.i(TAG, "Find isSupportedCOLR: $file")
+            return true
         }
-    } catch (e: Exception) {
-        Log.w(TAG, e)
     }
     return false
 }
