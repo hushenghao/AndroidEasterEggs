@@ -1,64 +1,54 @@
 @file:JvmName("DynamicObjectUtils")
+@file:Suppress("MemberVisibilityCanBePrivate")
 
 package com.dede.basic
 
 import android.util.Log
+import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
+import kotlin.reflect.KClass
 
 
 object DynamicObjectUtils {
-
-    fun findClass(className: String): Class<*>? {
-        return try {
-            Class.forName(className)
-        } catch (e: Exception) {
-            null
-        }
-    }
 
     fun asDynamicObject(obj: Any): DynamicObject {
         return ReflectDynamicObject(obj, obj.javaClass)
     }
 
-    fun asDynamicObject(clazz: Class<*>): DynamicObject {
+    fun asDynamicObject(clazz: Class<out Any>): DynamicObject {
         return ReflectDynamicObject(null, clazz)
     }
 
-    fun asDynamicObject(obj: Any?, className: String): DynamicObject {
-        val clazz = findClass(className) ?: return NotFoundDynamicObject()
-        return ReflectDynamicObject(obj, clazz)
+    fun asDynamicObject(clazz: KClass<out Any>): DynamicObject {
+        return asDynamicObject(clazz.java)
     }
+
 }
 
-private class NotFoundDynamicObject : DynamicObject(null, NotFoundDynamicObject::class.java) {
-    override fun tryInvokeMethod(name: String, vararg arguments: Any?): DynamicInvokeResult {
-        return DynamicInvokeResult.notFound()
-    }
-
-    override fun tryGetProperty(name: String): DynamicInvokeResult {
-        return DynamicInvokeResult.notFound()
-    }
-
-    override fun trySetProperty(name: String, value: Any?): DynamicInvokeResult {
-        return DynamicInvokeResult.notFound()
-    }
-}
-
-private class ReflectDynamicObject(obj: Any?, clazz: Class<*>) : DynamicObject(obj, clazz) {
+private class ReflectDynamicObject(obj: Any?, clazz: Class<out Any>) : DynamicObject(obj, clazz) {
 
     companion object {
-        private val EMPTY_CLASS_ARRAY = emptyArray<Class<*>?>()
+        private val EMPTY_CLASS_ARRAY = emptyArray<Class<out Any>?>()
+
+        private val Method.isStatic: Boolean
+            get() = Modifier.isStatic(modifiers)
+
+        private val Field.isStatic: Boolean
+            get() = Modifier.isStatic(modifiers)
+
+        private val Field.isFinal: Boolean
+            get() = Modifier.isFinal(modifiers)
     }
 
-    private fun inferTypes(vararg arguments: Any?): Array<Class<*>?> {
+    private fun inferTypes(vararg arguments: Any?): Array<Class<out Any>?> {
         if (arguments.isNotEmpty()) {
             return arguments.map { it?.javaClass }.toTypedArray()
         }
         return EMPTY_CLASS_ARRAY
     }
 
-    override fun tryInvokeMethod(name: String, vararg arguments: Any?): DynamicInvokeResult {
+    private fun pickMethod(name: String, vararg arguments: Any?): Method? {
         val types = inferTypes(*arguments)
         var method: Method? = null
         try {
@@ -67,43 +57,99 @@ private class ReflectDynamicObject(obj: Any?, clazz: Class<*>) : DynamicObject(o
                 method = clazz.getDeclaredMethod(name, *types)
             }
         } catch (e: Exception) {
+            Log.w(TAG, e)
         }
-        if (method == null) {
-            return DynamicInvokeResult.notFound()
-        }
+        return method
+    }
+
+    override fun tryInvokeMethod(name: String, vararg arguments: Any?): DynamicInvokeResult {
+        val method = pickMethod(name, *arguments) ?: return DynamicInvokeResult.notFound()
         try {
-            method.isAccessible = true
-            val value = if (Modifier.isStatic(method.modifiers)) {
+            method.isAccessible = false
+            val value = if (method.isStatic) {
                 method.invoke(null, *arguments)
             } else {
                 method.invoke(obj, *arguments)
             }
-            return DynamicInvokeResult(value)
+            return DynamicInvokeResult.found(value)
         } catch (e: Exception) {
+            Log.w(TAG, e)
         }
-        return DynamicInvokeResult.nil()
+        return DynamicInvokeResult.found()
+    }
+
+    override fun hasMethod(name: String, vararg arguments: Any?): Boolean {
+        return pickMethod(name, *arguments) != null
+    }
+
+    private fun pickField(name: String): Field? {
+        var field: Field? = null
+        try {
+            field = clazz.getField(name)
+            if (field == null) {
+                field = clazz.getDeclaredField(name)
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, e)
+        }
+        return field
     }
 
     override fun tryGetProperty(name: String): DynamicInvokeResult {
-        throw UnsupportedOperationException()
+        val field = pickField(name) ?: return DynamicInvokeResult.notFound()
+        try {
+            field.isAccessible = true
+            val value = if (field.isStatic) {
+                field.get(null)
+            } else {
+                field.get(obj)
+            }
+            return DynamicInvokeResult.found(value)
+        } catch (e: Exception) {
+            Log.w(TAG, e)
+        }
+        return DynamicInvokeResult.found()
     }
 
     override fun trySetProperty(name: String, value: Any?): DynamicInvokeResult {
-        throw UnsupportedOperationException()
+        val field = pickField(name) ?: return DynamicInvokeResult.notFound()
+        if (field.isFinal) {
+            Log.w(TAG, "Property $name is final!")
+            return DynamicInvokeResult.notFound()
+        }
+        try {
+            field.isAccessible = true
+            if (field.isStatic) {
+                field.set(null, value)
+            } else {
+                field.set(obj, value)
+            }
+            return DynamicInvokeResult.found()
+        } catch (e: Exception) {
+            Log.w(TAG, e)
+        }
+        return DynamicInvokeResult.notFound()
+    }
+
+    override fun hasProperty(name: String): Boolean {
+        return pickField(name) != null
     }
 }
 
-abstract class DynamicObject(protected val obj: Any?, protected val clazz: Class<*>) : MethodAccess,
-    PropertyAccess
+abstract class DynamicObject(protected val obj: Any?, protected val clazz: Class<*>) :
+    MethodAccess, PropertyAccess {
+    companion object {
+        internal const val TAG = "DynamicObject"
+    }
+}
 
-
-class DynamicInvokeResult(private val value: Any? = null) {
+class DynamicInvokeResult private constructor(private val value: Any? = null) {
 
     fun getValue(): Any? {
         if (isFound()) {
             return value
         }
-        Log.w(TAG, IllegalStateException("Not Found!"))
+        Log.w(DynamicObject.TAG, IllegalStateException("Not Found!"))
         return null
     }
 
@@ -112,30 +158,31 @@ class DynamicInvokeResult(private val value: Any? = null) {
     }
 
     companion object {
-        internal const val TAG = "DynamicInvokeResult"
 
         private val NO_VALUE = Any()
 
         private val NOT_FOUND = DynamicInvokeResult(NO_VALUE)
         private val NULL = DynamicInvokeResult(null)
 
-        fun notFound(): DynamicInvokeResult {
-            return NOT_FOUND
+        fun notFound(): DynamicInvokeResult = NOT_FOUND
+
+        fun found(value: Any?): DynamicInvokeResult = DynamicInvokeResult(value)
+
+        fun found(): DynamicInvokeResult = NULL
+
+        fun <T : Any> DynamicInvokeResult.getTypeValue(kClass: KClass<out T>): T? {
+            return getTypeValue(kClass.java)
         }
 
-        fun nil(): DynamicInvokeResult {
-            return NULL
-        }
-
-        inline fun <reified T> DynamicInvokeResult.getValue(): T? {
-            val value = this.getValue() ?: return null
-            val tValue = value as? T
-            if (tValue == null) {
+        fun <T : Any> DynamicInvokeResult.getTypeValue(tClass: Class<out T>): T? {
+            val value = this.getValue()
+            val typeValue = value as? T
+            if (value != null && typeValue !== value) {
                 val name = value.javaClass.name
-                val tName = T::class.java.name
-                Log.w("DynamicInvokeResult", TypeCastException("Cannot cast $name to $tName"))
+                val tName = tClass.name
+                Log.w(DynamicObject.TAG, TypeCastException("Cannot cast $name to $tName"))
             }
-            return tValue
+            return typeValue
         }
     }
 }
@@ -143,8 +190,10 @@ class DynamicInvokeResult(private val value: Any? = null) {
 private interface PropertyAccess {
     fun tryGetProperty(name: String): DynamicInvokeResult
     fun trySetProperty(name: String, value: Any?): DynamicInvokeResult
+    fun hasProperty(name: String): Boolean
 }
 
 private interface MethodAccess {
     fun tryInvokeMethod(name: String, vararg arguments: Any?): DynamicInvokeResult
+    fun hasMethod(name: String, vararg arguments: Any?): Boolean
 }

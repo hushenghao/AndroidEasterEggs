@@ -8,8 +8,8 @@ import java.io.InputStream
 /**
  * Check if the OpenType font contains a [CORL](https://learn.microsoft.com/zh-cn/typography/opentype/spec/colr) table。
  *
- * * https://learn.microsoft.com/zh-cn/typography/opentype/spec/otff
- * * https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6.html
+ * * [Microsoft, The OpenType Font File](https://learn.microsoft.com/zh-cn/typography/opentype/spec/otff)
+ * * [Apple, TrueType Font Tables](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6.html)
  * * https://www.jianshu.com/p/21ae2dc5c50a
  */
 internal object COLRChecker {
