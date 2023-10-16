@@ -45,6 +45,8 @@ internal object COLRChecker {
                 if (tableTag == TABLE_TAG_COLR) {
                     return true
                 }
+                // checksum,offset and length  unit32 * 3
+                input.skip(4 * 3)
             }
             return@use false
         }

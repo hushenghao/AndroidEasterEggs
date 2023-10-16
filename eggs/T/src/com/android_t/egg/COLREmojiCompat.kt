@@ -36,7 +36,16 @@ fun isSupportedCOLR(): Boolean {
     // Some OEMs have modified the Emoji implementation.
     // Such as: MEIZU
 
-    // Emoji fonts:
+    // Find und-Zsye font from `/system/etc/fonts.xml`.
+    val undZsyeFontFile = UndZsyeFonts.findFirstUndZsyeFontFile()
+    if (undZsyeFontFile != null) {
+        val hasCOLR = COLRChecker.hasCOLR(undZsyeFontFile)
+        Log.i(TAG, "isSupportedCOLR: $hasCOLR, file: $undZsyeFontFile")
+        return hasCOLR
+    }
+
+    // Find Emoji font from all fonts.
+    // Such as:
     // /system/fonts/NotoColorEmoji.ttf
     // /system/fonts/NotoColorEmojiFlags.ttf
     // /system/fonts/NotoColorEmojiLegacy.ttf
@@ -48,7 +57,7 @@ fun isSupportedCOLR(): Boolean {
             if (emojiFontRegex.matches(file.name)) {
                 val hasCOLR = COLRChecker.hasCOLR(file)
                 if (hasCOLR) {
-                    Log.i(TAG, "isSupportedCOLR: $file")
+                    Log.i(TAG, "isSupportedCOLRFile: $file")
                     return true
                 }
             }

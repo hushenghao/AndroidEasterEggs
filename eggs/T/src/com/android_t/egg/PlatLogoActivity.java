@@ -29,7 +29,6 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.util.DisplayMetrics;
@@ -353,10 +352,13 @@ public class PlatLogoActivity extends Activity {
 
     class BubblesDrawable extends Drawable implements View.OnLongClickListener {
 
+        private final static boolean isSupportedCOLR = COLREmojiCompat.isSupportedCOLR();
+        //private final boolean supportCOLR = false;
+
 //        private static final int MAX_BUBBS = 2000;
 
         // Optimize memory usage
-        private final int MAX_BUBBS = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? 2000 : 1000;
+        private final int MAX_BUBBS = isSupportedCOLR ? 2000 : 1000;
 
 //        private final int[] mColorIds = {
 //                android.R.color.system_accent1_400,
@@ -391,9 +393,6 @@ public class PlatLogoActivity extends Activity {
         public float padding = 0f;
         public float minR = 0f;
 
-        private final boolean supportCOLR = COLREmojiCompat.isSupportedCOLR();
-        //private final boolean supportCOLR = false;
-
         BubblesDrawable() {
             try {
                 for (int i = 0; i < mColorIds.length; i++) {
@@ -415,7 +414,7 @@ public class PlatLogoActivity extends Activity {
             int drawn = 0;
             for (int j = 0; j < mNumBubbs; j++) {
                 if (mBubbs[j].color == 0 || mBubbs[j].r == 0) continue;
-                if (mBubbs[j].text != null && supportCOLR) {
+                if (mBubbs[j].text != null && isSupportedCOLR) {
                     mPaint.setTextSize(mBubbs[j].r * 1.75f);
                     canvas.drawText(mBubbs[j].text, mBubbs[j].x,
                             mBubbs[j].y + mBubbs[j].r * f * 0.6f, mPaint);
@@ -438,7 +437,7 @@ public class PlatLogoActivity extends Activity {
                 mBubbs[j].text = emojiSet[(int) (Math.random() * emojiSet.length)];
             }
             // support code
-            if (!supportCOLR) {
+            if (!isSupportedCOLR) {
                 COLREmojiCompat.identifierCOLREmoji(mBubbs, PlatLogoActivity.this);
             }
             invalidateSelf();
