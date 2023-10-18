@@ -28,6 +28,7 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.Time;
@@ -42,9 +43,13 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+
 import com.dede.basic.AnalogClock;
 import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
+
+import java.io.File;
 
 /**
  * @hide
@@ -352,13 +357,14 @@ public class PlatLogoActivity extends Activity {
 
     class BubblesDrawable extends Drawable implements View.OnLongClickListener {
 
-        private final static boolean isSupportedCOLR = COLREmojiCompat.isSupportedCOLR();
-        //private final boolean supportCOLR = false;
+        @Nullable
+        private final static File COLRfile = COLREmojiCompat.findCOLRFontFile();
+
+        private final boolean isSupportedCOLR = COLRfile != null;
 
 //        private static final int MAX_BUBBS = 2000;
 
-        // Optimize memory usage
-        private final int MAX_BUBBS = isSupportedCOLR ? 2000 : 1000;
+        private final int MAX_BUBBS = isSupportedCOLR ? 2000 : 1000;// Optimize memory usage
 
 //        private final int[] mColorIds = {
 //                android.R.color.system_accent1_400,
@@ -400,6 +406,13 @@ public class PlatLogoActivity extends Activity {
                 }
             } catch (Exception ignore) {
             }
+            if (COLRfile != null) {
+                try {
+                    mPaint.setTypeface(Typeface.createFromFile(COLRfile));
+                } catch (Throwable ignore) {
+                }
+            }
+
             for (int j = 0; j < mBubbs.length; j++) {
                 mBubbs[j] = new Bubble();
             }

@@ -24,6 +24,7 @@ internal object COLRChecker {
     private const val TABLE_TAG_COLR = "COLR"
 
     fun hasCOLR(file: File): Boolean {
+        if (!file.exists()) return false
         return file.inputStream().use { input ->
             val sfntVersion = input.readInt()// uint32
             if (sfntVersion != SFNT_TRUE_TYPE && sfntVersion != SFNT_OPEN_TYPE) {
@@ -37,7 +38,9 @@ internal object COLRChecker {
             }
 
             // searchRange,entrySelector and rangeShift uint16 * 3
-            input.skip(2 * 3)
+            if (!input.doSkip(2 * 3)) {
+                return false
+            }
 
             // Tables
             for (i in 0..<numTables) {
@@ -46,10 +49,17 @@ internal object COLRChecker {
                     return true
                 }
                 // checksum,offset and length  unit32 * 3
-                input.skip(4 * 3)
+                if (!input.doSkip(4 * 3)) {
+                    return false
+                }
             }
             return@use false
         }
+    }
+
+    private fun InputStream.doSkip(n: Long): Boolean {
+        val sl = skip(n)
+        return sl == n
     }
 
     private fun InputStream.readString(len: Int): String {

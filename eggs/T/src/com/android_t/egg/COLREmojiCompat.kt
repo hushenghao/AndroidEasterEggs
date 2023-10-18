@@ -12,6 +12,7 @@ import android.util.Log
 import com.android_t.egg.PlatLogoActivity.Bubble
 import com.dede.basic.*
 import kotlinx.coroutines.*
+import java.io.File
 import java.util.WeakHashMap
 
 /**
@@ -24,25 +25,17 @@ import java.util.WeakHashMap
 internal const val TAG = "COLREmojiCompat"
 
 /**
- * Check if system emoji fonts support COLR
+ * Find COLR font file from system fonts.
  */
-fun isSupportedCOLR(): Boolean {
+fun findCOLRFontFile(): File? {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-        // https://developer.android.google.cn/about/versions/13/features?hl=zh-cn#color-vector-fonts
+        // https://developer.android.google.cn/about/versions/13/features#color-vector-fonts
         // API 33, added COLR support.
-        return false
+        return null
     }
 
     // Some OEMs have modified the Emoji implementation.
     // Such as: MEIZU
-
-    // Find first und-Zsye font from `/system/etc/fonts.xml`.
-    val undZsyeFontFile = UndZsyeFonts.findFirstUndZsyeFontFile()
-    if (undZsyeFontFile != null) {
-        val hasCOLR = COLRChecker.hasCOLR(undZsyeFontFile)
-        Log.i(TAG, "isSupportedCOLR: $hasCOLR, file: $undZsyeFontFile")
-        return hasCOLR
-    }
 
     // Find emoji font from all fonts.
     // Such as:
@@ -54,11 +47,21 @@ fun isSupportedCOLR(): Boolean {
         val file = font.file ?: continue
         if (!emojiFontRegex.matches(file.name)) continue
         if (COLRChecker.hasCOLR(file)) {// End when find any one that supports
-            Log.i(TAG, "Find isSupportedCOLR: $file")
-            return true
+            Log.i(TAG, "Find emoji font isSupportedCOLR: $file")
+            return file
         }
     }
-    return false
+
+    // Find first und-Zsye font from `/system/etc/fonts.xml`.
+    val undZsyeFontFile = UndZsyeFonts.findFirstUndZsyeFontFile()
+    if (undZsyeFontFile != null) {
+        if (COLRChecker.hasCOLR(undZsyeFontFile)) {
+            Log.i(TAG, "Find und-Zsye font isSupportedCOLR: $undZsyeFontFile")
+            return undZsyeFontFile
+        }
+    }
+
+    return null
 }
 
 fun Canvas.drawCOLREmoji(bubble: Bubble, p: Float) {
