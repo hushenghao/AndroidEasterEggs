@@ -1,6 +1,5 @@
 package com.dede.android_eggs.views.settings.prefs
 
-import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import com.dede.android_eggs.R
@@ -10,7 +9,6 @@ import com.dede.android_eggs.ui.Icons.Rounded.brightness_auto
 import com.dede.android_eggs.ui.Icons.Rounded.brightness_low
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.ThemeUtils
-import com.dede.android_eggs.util.getActivity
 import com.dede.android_eggs.views.settings.SettingPref
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM as SYSTEM
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO as NO
@@ -45,11 +43,11 @@ class NightModePref : SettingPref(
         return value
     }
 
-    override fun onOptionSelected(context: Context, option: Op) {
+    override fun apply(context: Context, option: Op) {
         val mode = option.toAppCompatNightMode()
         if (mode == AppCompatDelegate.getDefaultNightMode()) {
             if ((option.value == OLED) != ThemeUtils.isOLEDTheme(context)) {
-                context.getActivity<Activity>()?.recreate()
+                recreateActivityIfPossible(context)
                 LocalEvent.poster(context).post(ACTION_NIGHT_MODE_CHANGED)
             }
             return

@@ -23,14 +23,14 @@ class IconVisualEffectsPref : SettingPref(
         const val EXTRA_VALUE = "extra_value"
 
         fun isEnable(context: Context): Boolean {
-            return IconVisualEffectsPref().getSelectedOp(context).isEnable()
+            return IconVisualEffectsPref().getSelectedOption(context).isEnable()
         }
     }
 
     override val titleRes: Int
         get() = R.string.pref_title_icon_visual_effects
 
-    override fun onOptionSelected(context: Context, option: Op) {
+    override fun apply(context: Context, option: Op) {
         LocalEvent.poster(context).apply {
             post(SettingsPrefs.ACTION_CLOSE_SETTING)
             post(ACTION_CHANGED, bundleOf(EXTRA_VALUE to option.isEnable()))

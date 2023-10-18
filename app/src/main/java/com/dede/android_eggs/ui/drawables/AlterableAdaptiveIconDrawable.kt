@@ -18,6 +18,7 @@ import kotlin.math.max
 import kotlin.math.roundToInt
 
 
+@SuppressLint("RestrictedApi")
 class AlterableAdaptiveIconDrawable(
     context: Context,
     @DrawableRes res: Int,

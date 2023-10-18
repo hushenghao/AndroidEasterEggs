@@ -6,7 +6,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons
-import com.dede.android_eggs.util.getActivity
 import com.dede.android_eggs.views.settings.SettingPref
 import com.dede.android_eggs.views.settings.SettingPref.Op.Companion.isEnable
 import com.google.android.material.color.DynamicColors
@@ -29,24 +28,27 @@ class DynamicColorPref : SettingPref(
     override val enable: Boolean
         get() = DynamicColors.isDynamicColorAvailable()
 
-    override fun apply(context: Context) {
-        DynamicColors.applyToActivitiesIfAvailable(
-            context.applicationContext as Application,
-            DynamicColorsOptions.Builder()
-                .setPrecondition(this)
-                .setOnAppliedCallback(this)
-                .build()
-        )
-        super.apply(context)
-    }
+    private var isApplied = false
+    private var isOptionOn = false
 
-    override fun onOptionSelected(context: Context, option: Op) {
-        context.getActivity<Activity>()?.recreate()
+    override fun apply(context: Context, option: Op) {
+        isOptionOn = option.isEnable()
+        if (isOptionOn && !isApplied) {
+            DynamicColors.applyToActivitiesIfAvailable(
+                context.applicationContext as Application,
+                DynamicColorsOptions.Builder()
+                    .setPrecondition(this)
+                    .setOnAppliedCallback(this)
+                    .build()
+            )
+            isApplied = true
+        }
+        recreateActivityIfPossible(context)
     }
 
     override fun shouldApplyDynamicColors(activity: Activity, theme: Int): Boolean {
         if (activity is AppCompatActivity) {
-            return getSelectedOp(activity).isEnable()
+            return isOptionOn
         }
         return false
     }

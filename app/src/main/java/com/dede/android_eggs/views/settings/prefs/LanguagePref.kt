@@ -1,6 +1,5 @@
 package com.dede.android_eggs.views.settings.prefs
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Build
@@ -13,10 +12,8 @@ import androidx.core.view.ViewCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons.Outlined.language
 import com.dede.android_eggs.util.CustomTabsBrowser
-import com.dede.android_eggs.util.getActivity
 import com.dede.android_eggs.views.settings.SettingPref
 import com.dede.basic.createLocalesContext
-import com.dede.basic.getConfigurationLocales
 import com.dede.basic.getLayoutDirection
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Locale
@@ -66,7 +63,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             Op(value, titleRes = titleRes)
 
         private val languageOptions = listOf(
-            LangOp(SIMPLIFIED_CHINESE, R.string.language_zh_SC, Locale.CHINESE),
+            LangOp(SIMPLIFIED_CHINESE, R.string.language_zh_SC, Locale.SIMPLIFIED_CHINESE),
             LangOp(TRADITIONAL_CHINESE, R.string.language_zh_TC, Locale.TRADITIONAL_CHINESE),
             LangOp(ENGLISH, R.string.language_en, Locale.ENGLISH),
             LangOp(RUSSIAN, R.string.language_ru, createLocale("ru")),
@@ -138,12 +135,6 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             }
         }
 
-        fun resetApi23Locale() {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList())
-            }
-        }
-
         private fun createLocale(language: String, region: String = ""): Locale {
             return Locale.Builder()
                 .setLanguage(language)
@@ -197,45 +188,28 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
                 val value = languageOptions[index].value
                 handleLocaleChoice(context, dialogInterface as Dialog, getLocaleByValue(value))
             }
-            .setOnDismissListener {
-                if (lastChoiceIndex == choiceIndex) {
-                    selectedOptionByValue(currentSelectedValue)
-                }
-            }
             .setNeutralButton(R.string.label_translation) { _, _ ->
                 CustomTabsBrowser.launchUrl(
                     context,
                     context.getString(R.string.url_translation).toUri()
                 )
             }
-            .setNegativeButton(android.R.string.cancel) { _, _ ->
-                selectedOptionByValue(currentSelectedValue)
-            }
+            .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 if (choiceIndex != lastChoiceIndex) {
                     val op = languageOptions[choiceIndex]
-                    onOptionSelected(context, op)
+                    apply(context, op)
                 }
             }
             .show()
+        // selected last value
+        setSelectedOptionByValue(context, currentSelectedValue)
         return true
     }
 
-    override fun onOptionSelected(context: Context, option: Op) {
+    override fun apply(context: Context, option: Op) {
         val locales = getLocaleByValue(option.value)
         AppCompatDelegate.setApplicationLocales(locales)
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-            // AppCompat wrap mode,
-            // When selected default language or Selected language is the same as the system
-            if (locales == LocaleListCompat.getEmptyLocaleList() ||
-                locales == context.getConfigurationLocales()
-            ) {
-                context.getActivity<Activity>()?.recreate()
-            }
-        } else {
-            // WTF, Some devices will not recreate the Activity
-            updateOptions(getOptions())
-            selectedOptionByValue(option.value)
-        }
+        updateOptions(getOptions())// update options
     }
 }

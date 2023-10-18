@@ -58,7 +58,7 @@ class IconShapePref : SettingPref(
         }
 
         fun getMaskPath(context: Context): String {
-            val index = IconShapePref().getSelectedOp(context)?.value ?: 0
+            val index = IconShapePref().getSelectedOption(context)?.value ?: 0
             return getMaskPathByIndex(context, index)
         }
 
@@ -71,7 +71,7 @@ class IconShapePref : SettingPref(
     override val titleRes: Int
         get() = R.string.pref_title_icon_shape_override
 
-    override fun onOptionSelected(context: Context, option: Op) {
+    override fun apply(context: Context, option: Op) {
         LocalEvent.poster(context).apply {
             post(ACTION_CHANGED)
             post(SettingsPrefs.ACTION_CLOSE_SETTING)
