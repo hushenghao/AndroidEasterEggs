@@ -18,7 +18,7 @@
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
-#-renamesourcefileattribute SourceFile
+-renamesourcefileattribute SourceFile
 
 -dontwarn org.bouncycastle.jsse.**
 -dontwarn org.conscrypt.**
@@ -27,9 +27,4 @@
 -keepnames class * extends com.dede.android_eggs.ui.adapter.VHolder
 -keepclassmembers class * extends com.dede.android_eggs.ui.adapter.VHolder {
     public <init>(android.view.View);
-}
-
-# temp fix
--keep class androidx.activity.OnBackPressedDispatcher {
-    private android.window.OnBackInvokedCallback onBackInvokedCallback;
 }

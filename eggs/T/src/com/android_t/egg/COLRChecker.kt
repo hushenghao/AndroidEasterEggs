@@ -45,6 +45,7 @@ internal object COLRChecker {
             // Tables
             for (i in 0..<numTables) {
                 val tableTag = input.readString(4)// uint32
+                    ?: return false
                 if (tableTag == TABLE_TAG_COLR) {
                     return true
                 }
@@ -62,10 +63,11 @@ internal object COLRChecker {
         return sl == n
     }
 
-    private fun InputStream.readString(len: Int): String {
+    private fun InputStream.readString(len: Int): String? {
         val array = ByteArray(len)
-        read(array)
-        return String(array)
+        val l = read(array)
+        if (l == -1) return null
+        return String(array, 0, l)
     }
 
     private fun InputStream.readShort(): Short {

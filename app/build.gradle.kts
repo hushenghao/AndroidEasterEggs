@@ -79,8 +79,10 @@ android {
     }
 
     packaging {
-        // only coil local image
-        resources.excludes += "okhttp3/**"
+        resources.excludes += listOf(
+            "okhttp3/**",// only coil local image
+            "META-INF/*.version"
+        )
     }
 
 }
