@@ -100,8 +100,9 @@ class FontIconsDrawable(
         paint.color = color
         if (size > 0) {
             dimension = size.dp
-            setBounds(0, 0, dimension, dimension)
-            computeIconSize()
+            val rect = Rect(0, 0, dimension, dimension)
+            bounds = rect
+            computeIconSize(rect)
         }
     }
 
@@ -173,13 +174,18 @@ class FontIconsDrawable(
         ) return
 
         this.padding.set(left, top, right, bottom)
-        computeIconSize()
+        computeIconSize(bounds)
         invalidateSelf()
     }
 
-    private fun computeIconSize() {
+    private fun updateBounds(bounds: Rect) {
         if (dimension > 0) {
-            tempBounds.set(0, 0, dimension, dimension)
+            tempBounds.set(
+                bounds.left,
+                bounds.top,
+                bounds.left + dimension,
+                bounds.top + dimension
+            )
         } else {
             tempBounds.set(bounds)
         }
@@ -195,6 +201,10 @@ class FontIconsDrawable(
                 bottom - padding.bottom
             )
         }
+    }
+
+    private fun computeIconSize(bounds: Rect) {
+        updateBounds(bounds)
 
         val size = min(tempBounds.width(), tempBounds.height())
         if (size <= 0) return
@@ -205,22 +215,25 @@ class FontIconsDrawable(
 
     override fun onBoundsChange(bounds: Rect) {
         if (dimension > 0) {
+            updateBounds(bounds)
             return
         }
-        computeIconSize()
+        computeIconSize(bounds)
     }
 
     override fun draw(canvas: Canvas) {
         if (unicode.isEmpty()) return
 
-        val x = tempBounds.exactCenterX()
+        val cx = tempBounds.exactCenterX()
+        val cy = tempBounds.exactCenterY()
         canvas.withSave {
-            rotate(degree, x, tempBounds.exactCenterY())
-            val y = (metrics.descent - metrics.ascent) / 2 - metrics.ascent / 2 + padding.top
+            canvas.translate(tempBounds.left.toFloat(), tempBounds.top.toFloat())
+            rotate(degree, cx, cy)
             if (needAutoMirrored()) {
-                scale(-1f, 1f, x, tempBounds.exactCenterY())
+                scale(-1f, 1f, cx, cy)
             }
-            canvas.drawText(unicode, x, y, paint)
+            val y = (metrics.descent - metrics.ascent) / 2 - metrics.ascent / 2 + padding.top
+            canvas.drawText(unicode, cx, y, paint)
         }
     }
 

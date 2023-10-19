@@ -5,21 +5,20 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.TooltipCompat
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentSettingsBinding
+import com.dede.android_eggs.databinding.ItemSettingPrefButtonBinding
 import com.dede.android_eggs.databinding.ItemSettingPrefGroupBinding
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.LocalEvent
-import com.dede.basic.dp
 import com.dede.basic.requireDrawable
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.color.MaterialColors
 import com.google.android.material.R as M3R
 
 class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
@@ -73,8 +72,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
         fun updateOptions() {
             binding.btGroup.removeAllViewsInLayout()
             for (op in pref.options) {
-                val button = createOptionView(context, op)
-                binding.btGroup.addView(button)
+                addOptionButton(context, binding.btGroup, op)
             }
 
             val op = pref.getSelectedOption(context)
@@ -108,36 +106,30 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
         return binding.root
     }
 
-    private fun createOptionView(context: Context, op: SettingPref.Op): View {
-        return MaterialButton(context, null, M3R.attr.materialButtonOutlinedStyle).apply {
+    private fun addOptionButton(context: Context, parent: ViewGroup, op: SettingPref.Op): View {
+        val binding = ItemSettingPrefButtonBinding
+            .inflate(LayoutInflater.from(context), parent, true)
+        return binding.root.apply {
             id = op.id
             if (op.titleRes != View.NO_ID) {
                 text = context.getString(op.titleRes)
             } else if (op.title != null) {
                 text = op.title
+            } else {
+                iconPadding = 0
+            }
+            if (text != null) {
+                TooltipCompat.setTooltipText(this, text)
             }
             val iconMaker = op.iconMaker
             if (iconMaker != null) {
                 icon = iconMaker.invoke(context, this)
+                iconSize = 0
             } else if (op.iconUnicode != null) {
-                icon = FontIconsDrawable(
-                    context, op.iconUnicode, M3R.attr.colorSecondary, 24f
-                )
+                icon = FontIconsDrawable(context, op.iconUnicode, M3R.attr.colorSecondary)
             } else if (op.iconRes != View.NO_ID) {
                 icon = context.requireDrawable(op.iconRes)
-                iconSize = 24.dp
             }
-            iconTint = MaterialColors.getColorStateListOrNull(context, M3R.attr.colorSecondary)
-            if (text.isNullOrEmpty()) {
-                iconPadding = 0
-            } else {
-                iconPadding = 4.dp
-                TooltipCompat.setTooltipText(this, text)
-            }
-            setPadding(12.dp, 0, 12.dp, 0)
-            minWidth = 0
-            minimumWidth = 0
-            isSaveEnabled = false
         }
     }
 
