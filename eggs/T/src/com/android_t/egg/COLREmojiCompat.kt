@@ -42,7 +42,7 @@ fun findCOLRFontFile(): File? {
     // /system/fonts/NotoColorEmoji.ttf
     // /system/fonts/NotoColorEmojiFlags.ttf
     // /system/fonts/NotoColorEmojiLegacy.ttf
-    val emojiFontRegex = Regex("^\\S*Emoji\\S*.[to]tf$")
+    val emojiFontRegex = Regex("^\\S*Emoji\\S*.[to]t[fc]$")
     for (font in SystemFonts.getAvailableFonts()) {
         val file = font.file ?: continue
         if (!emojiFontRegex.matches(file.name)) continue

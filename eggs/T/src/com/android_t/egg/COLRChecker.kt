@@ -1,9 +1,14 @@
 package com.android_t.egg
 
 import android.util.Log
-import java.io.EOFException
+import okio.BufferedSource
+import okio.FileHandle
+import okio.FileSystem
+import okio.Path.Companion.toOkioPath
+import okio.buffer
+import okio.use
 import java.io.File
-import java.io.InputStream
+import java.io.IOException
 
 /**
  * Check if the OpenType font contains a [CORL](https://learn.microsoft.com/zh-cn/typography/opentype/spec/colr) table。
@@ -11,84 +16,80 @@ import java.io.InputStream
  * * [Microsoft, The OpenType Font File](https://learn.microsoft.com/zh-cn/typography/opentype/spec/otff)
  * * [Apple, TrueType Font Tables](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6.html)
  * * https://www.jianshu.com/p/21ae2dc5c50a
+ * * [Microsoft, TTC Header](https://learn.microsoft.com/zh-cn/typography/opentype/spec/otff#ttc-header)
  */
 internal object COLRChecker {
 
+    // TTC Header `ttcf` bytes to int value
+    // https://learn.microsoft.com/zh-cn/typography/opentype/spec/otff#ttc-header
+    private const val TTC_TAG: Int = 0x74746366
+
     // OpenType fonts that contain TrueType outlines should use the value of 0x00010000 for the sfntVersion.
-    private const val SFNT_TRUE_TYPE: Int = 0x00010000
+    private const val SFNT_VERSION_1: Int = 0x00010000
 
     // OpenType fonts containing CFF data (version 1 or 2) should use 0x4F54544F ('OTTO', when re-interpreted as a Tag) for sfntVersion.
-    private const val SFNT_OPEN_TYPE: Int = 0x4F54544F
+    private const val SFNT_VERSION_OTTO: Int = 0x4F54544F
 
+    // Table `COLR` bytes to int value
     // https://learn.microsoft.com/zh-cn/typography/opentype/spec/colr
-    private const val TABLE_TAG_COLR = "COLR"
+    private const val COLR_TABLE_TAG = 0x434F4C52
+
+    @Throws(IOException::class)
+    private fun hasCOLR(fileHandle: FileHandle, source: BufferedSource, position: Long): Boolean {
+        fileHandle.reposition(source, position)
+
+        val sfntVersion = source.readInt()// uint32
+        if (sfntVersion != SFNT_VERSION_1 && sfntVersion != SFNT_VERSION_OTTO) {
+            Log.i(TAG, "Unknown sfntV: 0x${sfntVersion.toString(16)}")
+            return false
+        }
+
+        val numTables = source.readShort()// uint16
+        if (numTables <= 0) {
+            return false
+        }
+
+        // searchRange,entrySelector and rangeShift uint16 * 3
+        source.skip(2 * 3)
+
+        // Tables
+        for (i in 0..<numTables) {
+            val tableTag = source.readInt()// uint32
+            if (tableTag == COLR_TABLE_TAG) {
+                return true
+            }
+            // checksum,offset and length  unit32 * 3
+            source.skip(4 * 3)
+        }
+        return false
+    }
 
     fun hasCOLR(file: File): Boolean {
         if (!file.exists()) return false
-        return file.inputStream().use { input ->
-            val sfntVersion = input.readInt()// uint32
-            if (sfntVersion != SFNT_TRUE_TYPE && sfntVersion != SFNT_OPEN_TYPE) {
-                Log.i(TAG, "Unknown sfntV: 0x${sfntVersion.toString(16)}")
-                return@use false
+        // ByteOrder.BIG_ENDIAN
+        return FileSystem.SYSTEM.openReadOnly(file.toOkioPath()).use {
+            val source = it.source().buffer()
+
+            val magicNumber = source.readInt()
+            if (magicNumber != TTC_TAG) {
+                // TTF,OTF font
+                return@use hasCOLR(it, source, 0L)
             }
 
-            val numTables = input.readShort()// uint16
-            if (numTables <= 0) {
-                return@use false
-            }
-
-            // searchRange,entrySelector and rangeShift uint16 * 3
-            if (!input.doSkip(2 * 3)) {
-                return false
-            }
-
-            // Tables
-            for (i in 0..<numTables) {
-                val tableTag = input.readString(4)// uint32
-                    ?: return false
-                if (tableTag == TABLE_TAG_COLR) {
-                    return true
-                }
-                // checksum,offset and length  unit32 * 3
-                if (!input.doSkip(4 * 3)) {
-                    return false
+            // TTC,OTC font
+            source.skip(2 * 2)// ttc version uint16 * 2
+            val numFonts = source.readInt()// numFonts uint32
+            var fontFileOffset: Int
+            var hasCLOR: Boolean
+            for (i in 0..<numFonts) {
+                fontFileOffset = source.readInt()
+                hasCLOR = hasCOLR(it, source, fontFileOffset.toLong())
+                if (hasCLOR) {
+                    return@use true
                 }
             }
             return@use false
         }
     }
 
-    private fun InputStream.doSkip(n: Long): Boolean {
-        val sl = skip(n)
-        return sl == n
-    }
-
-    private fun InputStream.readString(len: Int): String? {
-        val array = ByteArray(len)
-        val l = read(array)
-        if (l == -1) return null
-        return String(array, 0, l)
-    }
-
-    private fun InputStream.readShort(): Short {
-        val ch1 = read()
-        val ch2 = read()
-        if ((ch1 or ch2) < 0) {
-            throw EOFException()
-        }
-        // big_endian
-        return ((ch1 shl 8) + ch2).toShort()
-    }
-
-    private fun InputStream.readInt(): Int {
-        val ch1 = read()
-        val ch2 = read()
-        val ch3 = read()
-        val ch4 = read()
-        if ((ch1 or ch2 or ch3 or ch4) < 0) {
-            throw EOFException()
-        }
-        // big_endian
-        return (ch1 shl 24) + (ch2 shl 16) + (ch3 shl 8) + ch4
-    }
 }
