@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Πασχαλινά Αυγά</string>
+    <string name="summary_android_waiting">Αναμονή…</string>
+    <string name="summary_android_release_pushed">Η τελική έκδοση έχει ωθήσει</string>
+    <string name="title_open_with">Άνοιγμα με</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_translation">Μετάφραση</string>
+    <string name="label_beta">Λήψη Βήτα</string>
+    <string name="label_timeline">Χρονοδιάγραμμα</string>
+    <string name="label_privacy_policy">Μυστικότητα</string>
+    <string name="label_license">Άδεια</string>
+    <string name="label_email">Ανατροφοδότηση</string>
+    <string name="label_star">Αστέρι</string>
+    <string name="label_timeline_title">Χρονοδιάγραμμα, ορόσημα και ενημερώσεις</string>
+    <string name="label_timeline_releases">Εκδόσεις</string>
+    <string name="message_trypophobia_warning">Αυτή είναι μια προειδοποίηση για όσους έχουν Πυροφοβία; ότι ορισμένες εικόνες μπορεί να προκαλέσουν δυσφορία. Θέλετε να συνεχίσετε;</string>
+    <string name="label_settings">Ρυθμίσεις</string>
+    <string name="label_project_desc">Το έργο περιέχει τον πλήρη κώδικα του συστήματος Easter eggs, το οποίο στοχεύει να οργανώσει και να είναι συμβατό με το σύστημα eggs, έτσι ώστε να διασφαλιστεί ότι οι περισσότερες συσκευές μπορούν να δοκιμάσουν διαφορετικές εκδόσεις Πασχαλινών αυγών και δεν θα κάνουν πάρα πολλές τροποποιήσεις στον κώδικα του συστήματος egg. Ορισμένες εκδόσεις χρησιμοποιούν νέες δυνατότητες του συστήματος και οι χαμηλότερες εκδόσεις μπορούν να χρησιμοποιούν μόνο ορισμένες λειτουργίες.</string>
+    <string name="pref_title_icon_shape_override">Σχήμα Εικονιδίου</string>
+    <string name="pref_title_language">Γλώσσα</string>
+    <string name="pref_title_language_more">Περισσότερο</string>
+    <string name="pref_title_theme">Θέμα</string>
+    <string name="pref_title_dynamic_color">Δυναμικό Χρώμα</string>
+    <string name="pref_title_icon_visual_effects">Εικονίδιο Οπτικά Εφέ</string>
+    <string name="summary_system_default">Προκαθορισμένο</string>
+    <string name="summary_theme_dark_mode">Σκοτάδι</string>
+    <string name="summary_theme_light_mode">Φως</string>
+    <string name="label_add_shortcut">Συντόμευση</string>
+    <string name="label_donate">Δωρεά</string>
+    <string name="preference_on">Επί</string>
+    <string name="preference_off">Ανενεργό</string>
+    <string name="toast_shortcut_added">Προστέθηκε η συντόμευση</string>
+    <string name="app_widget_description">Αυτό είναι το αναλογικό ρολόι Easter Eggs</string>
+    <string name="action_agree">Συμφωνώ</string>
+    <string name="summary_browse_privacy_policy">Διαβάστε και αποδεχτείτε την Πολιτική Απορρήτου μας για να συνεχίσετε.</string>
+    <string name="label_welcome">Καλωσορίσατε στους Καταλόγους Πασχαλινών Αυγών 🎉🎉🎉</string>
+    <string name="label_share">Μερίδιο</string>
+    <string name="label_search_hint">Αναζήτηση…</string>
+</resources>
