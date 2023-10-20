@@ -45,6 +45,10 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         private const val CROATIAN = 18             // hr-HR
         private const val DUTCH = 19                // nl-NL
         private const val LATIN = 20                // la-LA
+        private const val GREEK = 21                // el-GR
+        private const val FINNISH = 22              // fi-FI
+        private const val VIETNAMESE = 23           // vi-VN
+        private const val HUNGARIAN = 24            // hu-HU
 
         private fun getOptions(): List<Op> {
             val options = mutableListOf(
@@ -74,14 +78,18 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             LangOp(INDONESIA, R.string.language_in_ID, createLocale("in", "ID")),
             LangOp(ARABIC, R.string.language_ar_SA, createLocale("ar", "SA")),
             LangOp(CROATIAN, R.string.language_hr_HR, createLocale("hr", "HR")),
-//            LangOp(FRENCH, R.string.language_fr, Locale.FRENCH),
+            LangOp(FRENCH, R.string.language_fr, Locale.FRENCH),
             LangOp(POLISH, R.string.language_pl_PL, createLocale("pl", "PL")),
-//            LangOp(DUTCH, R.string.language_nl_NL, createLocale("nl", "NL")),
+            LangOp(DUTCH, R.string.language_nl_NL, createLocale("nl", "NL")),
 //            LangOp(LATIN, R.string.language_la_LA, createLocale("la", "LA")),
             LangOp(TURKISH, R.string.language_tr_TR, createLocale("tr", "TR")),
             LangOp(UKRAINIAN, R.string.language_uk_UA, createLocale("uk", "UA")),
             LangOp(JAPANESE, R.string.language_ja_JP, Locale.JAPAN),
-//            LangOp(KOREAN, R.string.language_ko, Locale.KOREAN),
+            LangOp(KOREAN, R.string.language_ko, Locale.KOREAN),
+            LangOp(GREEK, R.string.language_el_GR, createLocale("el", "GR")),
+//            LangOp(FINNISH, R.string.language_fi_FI, createLocale("fi", "FI")),
+            LangOp(VIETNAMESE, R.string.language_vi_VN, createLocale("vi", "VN")),
+            LangOp(HUNGARIAN, R.string.language_hu_HU, createLocale("hu", "HU")),
         )
 
         private class LangOpComparator(val context: Context) : Comparator<LangOp> {

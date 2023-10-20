@@ -174,6 +174,7 @@ class DynamicInvokeResult private constructor(private val value: Any? = null) {
             return getTypeValue(kClass.java)
         }
 
+        @Suppress("UNCHECKED_CAST")
         fun <T : Any> DynamicInvokeResult.getTypeValue(tClass: Class<out T>): T? {
             val value = this.getValue()
             val typeValue = value as? T

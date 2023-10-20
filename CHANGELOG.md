@@ -1,6 +1,12 @@
 ### v2.0.1
 - Use Android Q internal code name 
 - Added Japanese translation
+- Added French translation
+- Added Korean translation
+- Added Dutch translation
+- Added Greek translation
+- Added Vietnamese translation
+- Added Hungarian translation
 - Fix Android O
 
 ### v2.0.0 (2023-10-08)

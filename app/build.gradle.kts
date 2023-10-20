@@ -26,10 +26,10 @@ android {
         resourceConfigurations += listOf(
             "zh", "zh-rTW",
             "ru", "uk-rUA",
-            "en", "it", "de", "fr", "nl-rNL",
-            "es", "pt", "pl-rPL", "tr-rTR",
-            "in-rID", "hr-rHR", "la-rLA",
-            "ja-rJP", "ko",
+            "en", "it", "de", "fr", "nl-rNL", "hu-rHU",
+            "es", "pt", "pl-rPL", "tr-rTR", "fi-rFI",
+            "in-rID", "hr-rHR", "la-rLA", "el-rGR",
+            "ja-rJP", "ko", "vi-rVN",
             "ar-rSA",
         )
 
