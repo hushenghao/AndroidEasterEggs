@@ -1,9 +1,12 @@
+@file:Suppress("KDocUnresolvedReference")
+
 package com.android_t.egg
 
 import android.util.Log
 import okio.BufferedSource
 import okio.FileHandle
 import okio.FileSystem
+import okio.Path
 import okio.Path.Companion.toOkioPath
 import okio.buffer
 import okio.use
@@ -14,11 +17,13 @@ import java.io.IOException
  * Check if the OpenType font contains a [CORL](https://learn.microsoft.com/zh-cn/typography/opentype/spec/colr) table。
  *
  * * [Microsoft, The OpenType Font File](https://learn.microsoft.com/zh-cn/typography/opentype/spec/otff)
+ * * [Microsoft, TTC Header](https://learn.microsoft.com/zh-cn/typography/opentype/spec/otff#ttc-header)
  * * [Apple, TrueType Font Tables](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6.html)
  * * https://www.jianshu.com/p/21ae2dc5c50a
- * * [Microsoft, TTC Header](https://learn.microsoft.com/zh-cn/typography/opentype/spec/otff#ttc-header)
+ *
+ * @see [android.graphics.fonts.FontFileUtil]
  */
-internal object COLRChecker {
+internal object COLR {
 
     // TTC Header `ttcf` bytes to int value
     // https://learn.microsoft.com/zh-cn/typography/opentype/spec/otff#ttc-header
@@ -35,8 +40,12 @@ internal object COLRChecker {
     private const val COLR_TABLE_TAG = 0x434F4C52
 
     @Throws(IOException::class)
-    private fun hasCOLR(fileHandle: FileHandle, source: BufferedSource, position: Long): Boolean {
-        fileHandle.reposition(source, position)
+    private fun analyzeCOLR(
+        fileHandle: FileHandle,
+        source: BufferedSource,
+        position: Int,
+    ): Boolean {
+        fileHandle.reposition(source, position.toLong())
 
         val sfntVersion = source.readInt()// uint32
         if (sfntVersion != SFNT_VERSION_1 && sfntVersion != SFNT_VERSION_OTTO) {
@@ -64,27 +73,34 @@ internal object COLRChecker {
         return false
     }
 
-    fun hasCOLR(file: File): Boolean {
-        if (!file.exists()) return false
+    fun analyzeCOLR(file: File): Boolean {
+        val fontPath = file.toOkioPath()
+        try {
+            return analyzeCOLR(fontPath)
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
+        return false
+    }
+
+    @Throws(IOException::class)
+    private fun analyzeCOLR(fontPath: Path): Boolean {
         // ByteOrder.BIG_ENDIAN
-        return FileSystem.SYSTEM.openReadOnly(file.toOkioPath()).use {
+        return FileSystem.SYSTEM.openReadOnly(fontPath).use {
             val source = it.source().buffer()
 
             val magicNumber = source.readInt()
             if (magicNumber != TTC_TAG) {
                 // TTF,OTF font
-                return@use hasCOLR(it, source, 0L)
+                return@use analyzeCOLR(it, source, 0)
             }
 
             // TTC,OTC font
             source.skip(2 * 2)// ttc version uint16 * 2
             val numFonts = source.readInt()// numFonts uint32
-            var fontFileOffset: Int
-            var hasCLOR: Boolean
-            for (i in 0..<numFonts) {
-                fontFileOffset = source.readInt()
-                hasCLOR = hasCOLR(it, source, fontFileOffset.toLong())
-                if (hasCLOR) {
+            val tableDirectoryOffsets = (0..<numFonts).map { source.readInt() }// uint32 * numFonts
+            for (offset in tableDirectoryOffsets) {
+                if (analyzeCOLR(it, source, offset)) {
                     return@use true
                 }
             }
