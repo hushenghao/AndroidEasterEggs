@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Easter Eggs</string>
+    <string name="summary_android_waiting">Wachten…</string>
+    <string name="summary_android_release_pushed">De definitieve releaseversie is gepusht</string>
+    <string name="title_open_with">Openen met</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_translation">Vertaling</string>
+    <string name="label_beta">Ontvang bèta</string>
+    <string name="label_timeline">Tijdlijn</string>
+    <string name="label_privacy_policy">Privacy</string>
+    <string name="label_license">Licentie</string>
+    <string name="label_email">Terugkoppeling</string>
+    <string name="label_star">Ster</string>
+    <string name="label_timeline_title">Tijdlijnen, mijlpalen en updates</string>
+    <string name="label_timeline_releases">Publicaties</string>
+    <string name="message_trypophobia_warning">Dit is een waarschuwing voor mensen met &lt;b&gt;Trypofobie&lt;/b&gt; dat sommige beelden ongemak kunnen veroorzaken. Wil je doorgaan?</string>
+    <string name="label_settings">Instellingen</string>
+    <string name="label_project_desc">Het project bevat de volledige code van het systeem Easter Eggs, met als doel de systeemeieren te organiseren en compatibel te maken, om ervoor te zorgen dat de meeste apparaten verschillende versies van Easter Eggs kunnen ervaren en niet te veel wijzigingen in de systeemeiercode zullen aanbrengen. Sommige versies gebruiken nieuwe functies van het systeem, en lagere versies kunnen slechts enkele functies gebruiken.</string>
+    <string name="pref_title_icon_shape_override">Icoon Vorm</string>
+    <string name="pref_title_language">Taal</string>
+    <string name="pref_title_language_more">Meer</string>
+    <string name="pref_title_theme">Thema</string>
+    <string name="pref_title_dynamic_color">Dynamische Kleur</string>
+    <string name="pref_title_icon_visual_effects">Icoon Visual Effecten</string>
+    <string name="summary_system_default">Standaard</string>
+    <string name="summary_theme_dark_mode">Donker</string>
+    <string name="summary_theme_light_mode">Licht</string>
+    <string name="label_add_shortcut">Snelkoppeling</string>
+    <string name="label_donate">Doneren</string>
+    <string name="preference_on">Op</string>
+    <string name="preference_off">Uit</string>
+    <string name="toast_shortcut_added">Snelkoppeling toegevoegd</string>
+    <string name="app_widget_description">Dit is de analoge klok van Easter Eggs</string>
+    <string name="action_agree">Accepteer</string>
+    <string name="summary_browse_privacy_policy">Lees en ga akkoord met ons privacybeleid om door te gaan.</string>
+    <string name="label_welcome">Welkom bij Easter Egg Catalogi 🎉🎉🎉</string>
+    <string name="label_share">Deel</string>
+    <string name="label_search_hint">Zoek…</string>
+</resources>

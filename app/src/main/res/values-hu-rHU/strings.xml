@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Easter Eggs</string>
+    <string name="summary_android_waiting">Várakozás…</string>
+    <string name="summary_android_release_pushed">A végleges kiadási verziót eltolták</string>
+    <string name="title_open_with">Nyitott</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_translation">Fordítás</string>
+    <string name="label_beta">Szerezze be a Bétát</string>
+    <string name="label_timeline">Idővonal</string>
+    <string name="label_privacy_policy">Magánélet</string>
+    <string name="label_license">Engedély</string>
+    <string name="label_email">Visszacsatolás</string>
+    <string name="label_star">Csillag</string>
+    <string name="label_timeline_title">Idővonal, mérföldkövek és frissítések</string>
+    <string name="label_timeline_releases">Kiadások</string>
+    <string name="message_trypophobia_warning">Ez figyelmeztetés a &lt;b&gt;Trypophobiában&lt;/b&gt; szenvedők számára, hogy egyes képek kényelmetlenséget okozhatnak. Akarod folytatni?</string>
+    <string name="label_settings">Beállítások</string>
+    <string name="label_project_desc">A projekt tartalmazza az Easter eggs rendszer teljes kódját, melynek célja a rendszertojás rendszerezés és kompatibilitás, hogy a legtöbb eszköz megtapasztalhassa a húsvéti tojások különböző verzióit, és ne végezzen túl sok módosítást a rendszertojás kódon. Egyes verziók a rendszer új funkcióit használják, az alacsonyabb verziók pedig csak bizonyos funkciókat.</string>
+    <string name="pref_title_icon_shape_override">Ikon alakja</string>
+    <string name="pref_title_language">Nyelv</string>
+    <string name="pref_title_language_more">Több</string>
+    <string name="pref_title_theme">Téma</string>
+    <string name="pref_title_dynamic_color">Dinamikus szín</string>
+    <string name="pref_title_icon_visual_effects">Ikon Vizuális effektusok</string>
+    <string name="summary_system_default">Alapértelmezett</string>
+    <string name="summary_theme_dark_mode">Sötét</string>
+    <string name="summary_theme_light_mode">Fény</string>
+    <string name="label_add_shortcut">Parancsikon</string>
+    <string name="label_donate">Adományoz</string>
+    <string name="preference_on">Tovább</string>
+    <string name="preference_off">Ki</string>
+    <string name="toast_shortcut_added">Parancsikon hozzáadva</string>
+    <string name="app_widget_description">Ez az Easter Eggs analóg óra</string>
+    <string name="action_agree">Egyetért</string>
+    <string name="summary_browse_privacy_policy">A folytatáshoz olvassa el és fogadja el Adatvédelmi szabályzatunkat.</string>
+    <string name="label_welcome">Üdvözöljük a húsvéti tojás katalógusokban 🎉🎉🎉</string>
+    <string name="label_share">Ossza meg</string>
+    <string name="label_search_hint">Keresés…</string>
+</resources>

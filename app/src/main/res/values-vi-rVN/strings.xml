@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Easter Eggs</string>
+    <string name="summary_android_waiting">Đang chờ…</string>
+    <string name="summary_android_release_pushed">Phiên bản phát hành cuối cùng đã được đẩy</string>
+    <string name="title_open_with">Mở với</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_translation">Dịch</string>
+    <string name="label_beta">Nhận bản thử nghiệm</string>
+    <string name="label_timeline">Mốc thời gian</string>
+    <string name="label_privacy_policy">Sự riêng tư</string>
+    <string name="label_license">Giấy phép</string>
+    <string name="label_email">Nhận xét</string>
+    <string name="label_star">Ngôi sao</string>
+    <string name="label_timeline_title">Dòng thời gian, các mốc quan trọng và thông tin cập nhật</string>
+    <string name="label_timeline_releases">Phát hành</string>
+    <string name="message_trypophobia_warning">Đây là lời cảnh báo cho những người mắc &lt;b&gt;Trypophobia&lt;/b&gt; rằng một số hình ảnh có thể gây khó chịu. Bạn có muốn tiếp tục?</string>
+    <string name="label_settings">Cài đặt</string>
+    <string name="label_project_desc">Dự án chứa mã hoàn chỉnh của trứng Phục sinh của hệ thống, nhằm mục đích sắp xếp và tương thích với trứng hệ thống, để đảm bảo rằng hầu hết các thiết bị có thể trải nghiệm các phiên bản trứng Phục sinh khác nhau và sẽ không thực hiện quá nhiều sửa đổi đối với mã trứng hệ thống. Một số phiên bản sử dụng tính năng mới của hệ thống, phiên bản thấp hơn chỉ sử dụng được một số chức năng.</string>
+    <string name="pref_title_icon_shape_override">Hình dạng biểu tượng</string>
+    <string name="pref_title_language">Ngôn ngữ</string>
+    <string name="pref_title_language_more">Hơn</string>
+    <string name="pref_title_theme">Chủ đề</string>
+    <string name="pref_title_dynamic_color">Màu động</string>
+    <string name="pref_title_icon_visual_effects">Biểu tượng Hiệu ứng hình ảnh</string>
+    <string name="summary_system_default">Mặc định</string>
+    <string name="summary_theme_dark_mode">Tối tăm</string>
+    <string name="summary_theme_light_mode">Ánh sáng</string>
+    <string name="label_add_shortcut">Đường tắt</string>
+    <string name="label_donate">Quyên tặng</string>
+    <string name="preference_on">Bật</string>
+    <string name="preference_off">Tắt</string>
+    <string name="toast_shortcut_added">Đã thêm phím tắt</string>
+    <string name="app_widget_description">Đây là đồng hồ analog Trứng Phục Sinh</string>
+    <string name="action_agree">Đồng ý</string>
+    <string name="summary_browse_privacy_policy">Đọc và đồng ý với Chính sách quyền riêng tư của chúng tôi để tiếp tục.</string>
+    <string name="label_welcome">Chào mừng bạn đến với Danh mục trứng Phục sinh 🎉🎉🎉</string>
+    <string name="label_share">Chia sẻ</string>
+    <string name="label_search_hint">Tìm kiếm…</string>
+</resources>
