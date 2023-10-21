@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Pääsiäismunia</string>
+    <string name="summary_android_waiting">Odotetaan…</string>
+    <string name="summary_android_release_pushed">Lopullinen julkaisuversio on työnnetty</string>
+    <string name="title_open_with">Avaa sovelluksessa</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_translation">Käännös</string>
+    <string name="label_beta">Hanki Beta</string>
+    <string name="label_timeline">Aikajana</string>
+    <string name="label_privacy_policy">Yksityisyys</string>
+    <string name="label_license">Lisenssi</string>
+    <string name="label_email">Palaute</string>
+    <string name="label_star">Tähti</string>
+    <string name="label_timeline_title">Aikajana, virstanpylväät ja päivitykset</string>
+    <string name="label_timeline_releases">Julkaisut</string>
+    <string name="message_trypophobia_warning">Tämä on varoitus niille, joilla on &lt;b&gt;trypofobia&lt;/b&gt;, että jotkut kuvat voivat aiheuttaa epämukavuutta. Haluatko jatkaa?</string>
+    <string name="label_settings">Asetukset</string>
+    <string name="label_project_desc">Projekti sisältää pääsiäismunien järjestelmän täydellisen koodin, jonka tavoitteena on organisoida ja yhteensopiva järjestelmämunien kanssa niin, että useimmat laitteet voivat kokea pääsiäismunien eri versioita, eivätkä tee liikaa muutoksia järjestelmän munakoodiin. Jotkut versiot käyttävät järjestelmän uusia ominaisuuksia ja alemmissa versioissa vain joitain toimintoja.</string>
+    <string name="pref_title_icon_shape_override">Kuvakkeen Muoto</string>
+    <string name="pref_title_language">Kieli</string>
+    <string name="pref_title_language_more">Lisää</string>
+    <string name="pref_title_theme">Teema</string>
+    <string name="pref_title_dynamic_color">Dynaaminen Väri</string>
+    <string name="pref_title_icon_visual_effects">Kuvake Visuaaliset Tehosteet</string>
+    <string name="summary_system_default">Oletus</string>
+    <string name="summary_theme_dark_mode">Tumma</string>
+    <string name="summary_theme_light_mode">Vaalea</string>
+    <string name="label_add_shortcut">Pikakuvake</string>
+    <string name="label_donate">Lahjoita</string>
+    <string name="preference_on">Päällä</string>
+    <string name="preference_off">Pois</string>
+    <string name="toast_shortcut_added">Pikakuvake lisätty</string>
+    <string name="app_widget_description">Tämä on Easter Eggsin analoginen kello</string>
+    <string name="action_agree">Olla samaa mieltä</string>
+    <string name="summary_browse_privacy_policy">Lue ja hyväksy tietosuojakäytäntömme jatkaaksesi.</string>
+    <string name="label_welcome">Tervetuloa pääsiäismunaluetteloihin 🎉🎉🎉</string>
+    <string name="label_share">Jaa</string>
+    <string name="label_search_hint">Haku…</string>
+</resources>
