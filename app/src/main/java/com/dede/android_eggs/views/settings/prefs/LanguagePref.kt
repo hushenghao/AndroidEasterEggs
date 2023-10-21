@@ -49,6 +49,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         private const val FINNISH = 22              // fi-FI
         private const val VIETNAMESE = 23           // vi-VN
         private const val HUNGARIAN = 24            // hu-HU
+        private const val THAI = 25                 // th-TH
 
         private fun getOptions(): List<Op> {
             val options = mutableListOf(
@@ -87,9 +88,10 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             LangOp(JAPANESE, R.string.language_ja_JP, Locale.JAPAN),
             LangOp(KOREAN, R.string.language_ko, Locale.KOREAN),
             LangOp(GREEK, R.string.language_el_GR, createLocale("el", "GR")),
-//            LangOp(FINNISH, R.string.language_fi_FI, createLocale("fi", "FI")),
+            LangOp(FINNISH, R.string.language_fi_FI, createLocale("fi", "FI")),
             LangOp(VIETNAMESE, R.string.language_vi_VN, createLocale("vi", "VN")),
             LangOp(HUNGARIAN, R.string.language_hu_HU, createLocale("hu", "HU")),
+            LangOp(THAI, R.string.language_th_TH, createLocale("th", "TH")),
         )
 
         private class LangOpComparator(val context: Context) : Comparator<LangOp> {

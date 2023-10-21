@@ -7,6 +7,8 @@
 - Added Greek translation
 - Added Vietnamese translation
 - Added Hungarian translation
+- Added Finnish translation
+- Added Thai translation
 - Fix Android O
 
 ### v2.0.0 (2023-10-08)

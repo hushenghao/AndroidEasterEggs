@@ -23,4 +23,5 @@
     <string name="language_fi_FI" translatable="false">Suomi kieli</string>
     <string name="language_vi_VN" translatable="false">Tiếng Việt</string>
     <string name="language_hu_HU" translatable="false">Magyar</string>
+    <string name="language_th_TH" translatable="false">ภาษาไทย</string>
 </resources>

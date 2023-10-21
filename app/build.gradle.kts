@@ -29,7 +29,7 @@ android {
             "en", "it", "de", "fr", "nl-rNL", "hu-rHU",
             "es", "pt", "pl-rPL", "tr-rTR", "fi-rFI",
             "in-rID", "hr-rHR", "la-rLA", "el-rGR",
-            "ja-rJP", "ko", "vi-rVN",
+            "ja-rJP", "ko", "vi-rVN", "th-rTH",
             "ar-rSA",
         )
 
