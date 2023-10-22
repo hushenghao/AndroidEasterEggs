@@ -54,6 +54,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         private const val VIETNAMESE = 23           // vi-VN
         private const val HUNGARIAN = 24            // hu-HU
         private const val THAI = 25                 // th-TH
+        private const val NORWEGIAN = 26            // no-NO
 
         private fun getOptions(): List<Op> {
             val options = mutableListOf(
@@ -96,6 +97,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             LangOp(VIETNAMESE, R.string.language_vi_VN, createLocale("vi", "VN")),
             LangOp(HUNGARIAN, R.string.language_hu_HU, createLocale("hu", "HU")),
             LangOp(THAI, R.string.language_th_TH, createLocale("th", "TH")),
+            LangOp(NORWEGIAN, R.string.language_no_NO, createLocale("no", "NO")),
         )
 
         init {
@@ -116,7 +118,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             // check locale-config.xml locale count
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                 val localeConfig = LocaleConfig.fromContextIgnoringOverride(globalContext)
-                val actual = localeConfig.supportedLocales?.size() ?: -1
+                actual = localeConfig.supportedLocales?.size() ?: -1
                 jvmAssert(expected == actual) {
                     "locale-config.xml child node length, expected: %d, actual: %d."
                         .format(expected, actual)

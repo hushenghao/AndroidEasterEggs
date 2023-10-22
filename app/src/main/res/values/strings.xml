@@ -40,7 +40,7 @@
     <string name="message_trypophobia_warning">This is a warning to those with &lt;b&gt;Trypophobia&lt;/b&gt; that some images may cause discomfort. Do you want to continue?</string>
 
     <string name="label_settings">Settings</string>
-    <string name="label_project_desc">This project contains the complete code of the system Easter eggs, which aims to organize and be compatible with the system easter eggs, so as to ensure that most devices can experience different versions of Easter eggs without making too many modifications to the easter egg's code. Newer versions use new features of said system, but lower versions can only use some functions.</string>
+    <string name="label_project_desc">This project contains the complete code of the system Easter eggs, which aims to organize and be compatible with the system easter eggs, so as to ensure that most devices can experience different versions of Easter eggs without making too many modifications to the easter egg\'s code. Newer versions use new features of said system, but lower versions can only use some functions.</string>
 
     <string name="pref_title_icon_shape_override">Icon Shape</string>
     <string name="pref_title_language">Language</string>

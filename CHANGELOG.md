@@ -9,6 +9,7 @@
 - Added Hungarian translation
 - Added Finnish translation
 - Added Thai translation
+- Added Norwegian translation
 - Fix Android O
 
 ### v2.0.0 (2023-10-08)

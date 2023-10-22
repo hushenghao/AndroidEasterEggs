@@ -16,7 +16,7 @@ Organize the Android release Easter eggs
 
 </div>
 
-The project contains the complete code of the system Easter eggs, which aims to organize and compatible with the system eggs, so as to ensure that most devices can experience different versions of Easter eggs and will not make too many modifications to the system egg code. Some versions use new features of the system, and lower versions can only use some functions.
+This project contains the complete code of the system Easter eggs, which aims to organize and be compatible with the system easter eggs, so as to ensure that most devices can experience different versions of Easter eggs without making too many modifications to the easter egg's code. Newer versions use new features of said system, but lower versions can only use some functions.
 
 ## Download
 

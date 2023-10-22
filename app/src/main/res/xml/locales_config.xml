@@ -24,4 +24,5 @@
     <locale android:name="vi-VN" />
     <locale android:name="hu-HU" />
     <locale android:name="th-TH" />
+    <locale android:name="no-NO" />
 </locale-config>

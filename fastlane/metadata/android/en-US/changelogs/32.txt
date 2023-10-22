@@ -8,4 +8,5 @@
 - Added Hungarian translation
 - Added Finnish translation
 - Added Thai translation
+- Added Norwegian translation
 - Fix Android O
