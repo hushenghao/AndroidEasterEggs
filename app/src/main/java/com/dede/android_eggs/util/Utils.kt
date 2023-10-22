@@ -14,6 +14,13 @@ fun isXiaomi(): Boolean {
     return Build.MANUFACTURER.lowercase(Locale.ENGLISH) == "xiaomi"
 }
 
+inline fun jvmAssert(value: Boolean, lazyMessage: () -> Any) {
+    if (!value) {
+        val message = lazyMessage()
+        throw AssertionError(message)
+    }
+}
+
 @OptIn(ExperimentalContracts::class)
 inline fun <T> T.applyIf(condition: Boolean, block: T.() -> Unit): T {
     contract {

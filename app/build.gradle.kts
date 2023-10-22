@@ -34,7 +34,10 @@ android {
         )
 
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
+
         buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")
+        // Language configuration only
+        buildConfigField("int", "LANGUAGE_RES", resourceConfigurations.size.toString())
 
         vectorDrawables {
             useSupportLibrary = true

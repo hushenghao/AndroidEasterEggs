@@ -1,6 +1,7 @@
 package com.dede.android_eggs.views.settings.prefs
 
 import android.app.Dialog
+import android.app.LocaleConfig
 import android.content.Context
 import android.os.Build
 import android.util.Log
@@ -9,12 +10,15 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.net.toUri
 import androidx.core.os.LocaleListCompat
 import androidx.core.view.ViewCompat
+import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons.Outlined.language
 import com.dede.android_eggs.util.CustomTabsBrowser
+import com.dede.android_eggs.util.jvmAssert
 import com.dede.android_eggs.views.settings.SettingPref
 import com.dede.basic.createLocalesContext
 import com.dede.basic.getLayoutDirection
+import com.dede.basic.globalContext
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Locale
 
@@ -93,6 +97,39 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             LangOp(HUNGARIAN, R.string.language_hu_HU, createLocale("hu", "HU")),
             LangOp(THAI, R.string.language_th_TH, createLocale("th", "TH")),
         )
+
+        init {
+            if (BuildConfig.DEBUG) {
+                checkLocaleConfig()
+            }
+        }
+
+        private fun checkLocaleConfig() {
+            // check languageOptions count
+            val expected = languageOptions.size
+            var actual = HashSet(languageOptions).size
+            jvmAssert(expected == actual) {
+                "Language option length, expected: %d, actual: %d."
+                    .format(expected, actual)
+            }
+
+            // check locale-config.xml locale count
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                val localeConfig = LocaleConfig.fromContextIgnoringOverride(globalContext)
+                val actual = localeConfig.supportedLocales?.size() ?: -1
+                jvmAssert(expected == actual) {
+                    "locale-config.xml child node length, expected: %d, actual: %d."
+                        .format(expected, actual)
+                }
+            }
+
+            // check gradle resourceConfigurations count
+            actual = BuildConfig.LANGUAGE_RES
+            jvmAssert(expected <= actual) {
+                "android.defaultConfig.resourceConfigurations length, expected: %d, actual: %d."
+                    .format(expected, actual)
+            }
+        }
 
         private class LangOpComparator(val context: Context) : Comparator<LangOp> {
 
