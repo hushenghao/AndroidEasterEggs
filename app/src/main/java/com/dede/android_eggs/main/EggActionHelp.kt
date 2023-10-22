@@ -45,6 +45,10 @@ object EggActionHelp {
             .applyNotNull(egg.extras, Intent::putExtras)
     }
 
+    fun isSupportedLaunch(egg: Egg): Boolean {
+        return egg.targetClass != null
+    }
+
     fun launchEgg(context: Context, egg: Egg) {
         val targetClass = egg.targetClass ?: return
         val embedded = SplitUtils.isActivityEmbedded(context)

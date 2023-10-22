@@ -23,6 +23,12 @@ fun Context.resolveColor(@AttrRes colorAttr: Int): Int {
     return MaterialColors.getColor(this, colorAttr, "")
 }
 
+fun Context.resolveColorStateList(@AttrRes colorAttr: Int): ColorStateList {
+    return MaterialColors.getColorStateList(
+        this, colorAttr, ColorStateList.valueOf(Color.TRANSPARENT)
+    )
+}
+
 @SuppressLint("RestrictedApi")
 fun Context.resolveColorStateList(
     @AttrRes styleAttr: Int,
