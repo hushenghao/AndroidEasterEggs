@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Påske Egg</string>
+    <string name="summary_android_waiting">Venter…</string>
+    <string name="summary_android_release_pushed">Den endelige utgivelsesversjonen har presset</string>
+    <string name="title_open_with">Åpne med</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_translation">Oversettelse</string>
+    <string name="label_beta">Få Beta</string>
+    <string name="label_timeline">Tidslinje</string>
+    <string name="label_privacy_policy">Personvern</string>
+    <string name="label_license">Lisens</string>
+    <string name="label_email">Tilbakemelding</string>
+    <string name="label_star">Stjerne</string>
+    <string name="label_timeline_title">Timeline, milepæler og oppdateringer</string>
+    <string name="label_timeline_releases">Utgivelser</string>
+    <string name="message_trypophobia_warning">Dette er en advarsel til de med &lt;b&gt;Trypofobi&lt;/b&gt; om at noen bilder kan forårsake ubehag. Vil du fortsette?</string>
+    <string name="label_settings">Innstillinger</string>
+    <string name="label_project_desc">Prosjektet inneholder den komplette koden til systemet påskeegg, som tar sikte på å organisere og kompatible med systemeggene, for å sikre at de fleste enheter kan oppleve forskjellige versjoner av påskeegg og ikke vil gjøre for mange endringer i systemets eggkode. Noen versjoner bruker nye funksjoner i systemet, og lavere versjoner kan bare bruke enkelte funksjoner.</string>
+    <string name="pref_title_icon_shape_override">Ikonets form</string>
+    <string name="pref_title_language">Språk</string>
+    <string name="pref_title_language_more">Mer</string>
+    <string name="pref_title_theme">Tema</string>
+    <string name="pref_title_dynamic_color">Dynamisk farge</string>
+    <string name="pref_title_icon_visual_effects">Ikon visuelle effekter</string>
+    <string name="summary_system_default">Standard</string>
+    <string name="summary_theme_dark_mode">Mørk</string>
+    <string name="summary_theme_light_mode">Lys</string>
+    <string name="label_add_shortcut">Snarvei</string>
+    <string name="label_donate">Donere</string>
+    <string name="preference_on">På</string>
+    <string name="preference_off">Av</string>
+    <string name="toast_shortcut_added">Snarvei lagt til</string>
+    <string name="app_widget_description">Dette er Easter Eggs analoge klokke</string>
+    <string name="action_agree">Bli enige</string>
+    <string name="summary_browse_privacy_policy">Les og godta våre retningslinjer for personvern for å fortsette.</string>
+    <string name="label_welcome">Velkommen til påskeeggkataloger 🎉🎉🎉</string>
+    <string name="label_share">Del</string>
+    <string name="label_search_hint">Søk…</string>
+</resources>

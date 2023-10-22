@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Easter Eggs</string>
     <string name="summary_android_waiting">Attendere…</string>
-    <string name="summary_android_release_pushed">La versione più recente è disponibile</string>
+    <string name="summary_android_release_pushed">La versione finale è stata rilasciata</string>
     <string name="title_open_with">Apri con</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
