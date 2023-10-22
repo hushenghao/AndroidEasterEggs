@@ -2,7 +2,7 @@
     <string name="app_name">Easter Eggs</string>
 
     <string name="summary_android_waiting">Waiting…</string>
-    <string name="summary_android_release_pushed">The final release version has pushed</string>
+    <string name="summary_android_release_pushed">The final release version has been released</string>
 
     <string name="title_open_with">Open with</string>
 
@@ -40,7 +40,7 @@
     <string name="message_trypophobia_warning">This is a warning to those with &lt;b&gt;Trypophobia&lt;/b&gt; that some images may cause discomfort. Do you want to continue?</string>
 
     <string name="label_settings">Settings</string>
-    <string name="label_project_desc">The project contains the complete code of the system Easter eggs, which aims to organize and compatible with the system eggs, so as to ensure that most devices can experience different versions of Easter eggs and will not make too many modifications to the system egg code. Some versions use new features of the system, and lower versions can only use some functions.</string>
+    <string name="label_project_desc">This project contains the complete code of the system Easter eggs, which aims to organize and be compatible with the system easter eggs, so as to ensure that most devices can experience different versions of Easter eggs without making too many modification to the easter egg's code. Newer versions use new features of said system, but lower versions can only use some functions.</string>
 
     <string name="pref_title_icon_shape_override">Icon Shape</string>
     <string name="pref_title_language">Language</string>
@@ -61,7 +61,7 @@
 
     <string name="toast_shortcut_added">Shortcut added</string>
     <string name="toast_easter" translatable="false">🐰🥚🍫🌷🎉</string>
-    <string name="app_widget_description">This is Easter Eggs analog clock</string>
+    <string name="app_widget_description">This is the Easter Eggs analog clock</string>
     <string name="action_agree">Agree</string>
     <string name="summary_browse_privacy_policy">Read and agree to our Privacy Policy to continue.</string>
     <string name="label_welcome">Welcome to Easter Egg Catalogs 🎉🎉🎉</string>
