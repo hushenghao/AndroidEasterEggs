@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mga Itlog ng Pasko ng Pagkabuhay</string>
+    <string name="summary_android_waiting">Naghihintay…</string>
+    <string name="summary_android_release_pushed">Ang huling bersyon ng paglabas ay inilabas na</string>
+    <string name="title_open_with">Buksan sa</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_translation">Pagsasalin</string>
+    <string name="label_beta">Kumuha ng Beta</string>
+    <string name="label_timeline">Timeline</string>
+    <string name="label_privacy_policy">Pagkapribado</string>
+    <string name="label_license">Lisensya</string>
+    <string name="label_email">Feedback</string>
+    <string name="label_star">Bituin</string>
+    <string name="label_timeline_title">Timeline, milestone, at update</string>
+    <string name="label_timeline_releases">Mga release</string>
+    <string name="message_trypophobia_warning">Ito ay isang babala sa mga may &lt;b&gt;Trypophobia&lt;/b&gt; na maaaring magdulot ng kakulangan sa ginhawa ang ilang larawan. Gusto mo bang magpatuloy?</string>
+    <string name="label_settings">Mga setting</string>
+    <string name="label_project_desc">Ang proyektong ito ay naglalaman ng kumpletong code ng system Easter egg, na naglalayong ayusin at maging tugma sa system easter egg, upang matiyak na karamihan sa mga device ay makakaranas ng iba\'t ibang bersyon ng Easter egg nang hindi gumagawa ng masyadong maraming pagbabago sa code ng easter egg. Gumagamit ang mga mas bagong bersyon ng mga bagong feature ng nasabing system, ngunit ang mga mas mababang bersyon ay maaari lamang gumamit ng ilang function.</string>
+    <string name="pref_title_icon_shape_override">Hugis ng Icon</string>
+    <string name="pref_title_language">Wika</string>
+    <string name="pref_title_language_more">Higit pa</string>
+    <string name="pref_title_theme">Tema</string>
+    <string name="pref_title_dynamic_color">Dynamic na Kulay</string>
+    <string name="pref_title_icon_visual_effects">Mga Visual Effect ng Icon</string>
+    <string name="summary_system_default">Default</string>
+    <string name="summary_theme_dark_mode">Madilim</string>
+    <string name="summary_theme_light_mode">Liwanag</string>
+    <string name="label_add_shortcut">Shortcut</string>
+    <string name="label_donate">Mag-donate</string>
+    <string name="preference_on">Naka-on</string>
+    <string name="preference_off">Patayin</string>
+    <string name="toast_shortcut_added">Idinagdag ang shortcut</string>
+    <string name="app_widget_description">Ito ang analog na orasan ng Easter Egg</string>
+    <string name="action_agree">Sumang-ayon</string>
+    <string name="summary_browse_privacy_policy">Basahin at sumang-ayon sa aming Patakaran sa Privacy upang magpatuloy.</string>
+    <string name="label_welcome">Maligayang pagdating sa Easter Egg Catalogs 🎉🎉🎉</string>
+    <string name="label_share">Ibahagi</string>
+    <string name="label_search_hint">Maghanap…</string>
+</resources>
