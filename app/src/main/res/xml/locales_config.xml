@@ -25,4 +25,5 @@
     <locale android:name="hu-HU" />
     <locale android:name="th-TH" />
     <locale android:name="no-NO" />
+    <locale android:name="fil-PH" />
 </locale-config>

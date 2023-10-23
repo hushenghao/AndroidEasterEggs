@@ -55,6 +55,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         private const val HUNGARIAN = 24            // hu-HU
         private const val THAI = 25                 // th-TH
         private const val NORWEGIAN = 26            // no-NO
+        private const val FILIPINO = 27            // fil-PH
 
         private fun getOptions(): List<Op> {
             val options = mutableListOf(
@@ -98,6 +99,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             LangOp(HUNGARIAN, R.string.language_hu_HU, createLocale("hu", "HU")),
             LangOp(THAI, R.string.language_th_TH, createLocale("th", "TH")),
             LangOp(NORWEGIAN, R.string.language_no_NO, createLocale("no", "NO")),
+            LangOp(FILIPINO, R.string.language_fil_PH, createLocale("fil", "PH")),
         )
 
         init {
@@ -127,7 +129,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
 
             // check gradle resourceConfigurations count
             actual = BuildConfig.LANGUAGE_RES
-            jvmAssert(expected <= actual) {
+            jvmAssert(expected == actual) {
                 "android.defaultConfig.resourceConfigurations length, expected: %d, actual: %d."
                     .format(expected, actual)
             }

@@ -25,4 +25,5 @@
     <string name="language_hu_HU" translatable="false">Magyar</string>
     <string name="language_th_TH" translatable="false">ภาษาไทย</string>
     <string name="language_no_NO" translatable="false">Norsk</string>
+    <string name="language_fil_PH" translatable="false">Filipino</string>
 </resources>
