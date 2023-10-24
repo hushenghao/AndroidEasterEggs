@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">ໄຂ່ Easter</string>
+    <string name="summary_android_waiting">ລໍຖ້າ…</string>
+    <string name="summary_android_release_pushed">ສະບັບສຸດທ້າຍໄດ້ຖືກປ່ອຍອອກມາ</string>
+    <string name="title_open_with">ເປີດດ້ວຍ</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_translation">ການແປ</string>
+    <string name="label_beta">ຮັບເບຕ້າ</string>
+    <string name="label_timeline">ທາມລາຍ</string>
+    <string name="label_privacy_policy">ຄວາມເປັນສ່ວນຕົວ</string>
+    <string name="label_license">ໃບອະນຸຍາດ</string>
+    <string name="label_email">ຄໍາຕິຊົມ</string>
+    <string name="label_star">ດາວ</string>
+    <string name="label_timeline_title">ທາມລາຍ, ຈຸດສຳຄັນ ແລະອັບເດດ</string>
+    <string name="label_timeline_releases">ການປ່ອຍ</string>
+    <string name="message_trypophobia_warning">ນີ້ແມ່ນການເຕືອນໄພໃຫ້ກັບຜູ້ທີ່ມີ &lt;b&gt;Trypophobia&lt;/b&gt; ວ່າບາງຮູບພາບອາດຈະເຮັດໃຫ້ເກີດຄວາມບໍ່ສະບາຍ. ທ່ານຕ້ອງການສືບຕໍ່ບໍ?</string>
+    <string name="label_settings">ການຕັ້ງຄ່າ</string>
+    <string name="label_project_desc">ໂຄງ​ການ​ນີ້​ປະ​ກອບ​ດ້ວຍ​ລະ​ຫັດ​ທີ່​ສົມ​ບູນ​ຂອງ​ໄຂ່ Easter ຂອງ​ລະ​ບົບ​, ທີ່​ມີ​ຈຸດ​ປະ​ສົງ​ເພື່ອ​ຈັດ​ຕັ້ງ​ແລະ​ເຂົ້າ​ກັນ​ໄດ້​ກັບ​ການ​ໄຂ່ Easter ຂອງ​ລະ​ບົບ​, ເພື່ອ​ໃຫ້​ແນ່​ໃຈວ່​າ​ອຸ​ປະ​ກອນ​ສ່ວນ​ໃຫຍ່​ສາ​ມາດ​ໄດ້​ຮັບ​ປະ​ສົບ​ການ​ສະ​ບັບ​ທີ່​ແຕກ​ຕ່າງ​ກັນ​ຂອງ​ໄຂ່ Easter ໂດຍ​ບໍ່​ມີ​ການ​ປັບ​ປຸງ​ຈໍາ​ນວນ​ຫຼາຍ​ເກີນ​ໄປ​ກັບ​ລະ​ຫັດ easter egg ຂອງ​. ຮຸ່ນໃຫມ່ໃຊ້ຄຸນສົມບັດໃຫມ່ຂອງລະບົບດັ່ງກ່າວ, ແຕ່ຮຸ່ນຕ່ໍາກວ່າສາມາດນໍາໃຊ້ບາງຫນ້າທີ່ເທົ່ານັ້ນ.</string>
+    <string name="pref_title_icon_shape_override">ຮູບສັນຍາລັກ</string>
+    <string name="pref_title_language">ພາສາ</string>
+    <string name="pref_title_language_more">ເພີ່ມເຕີມ</string>
+    <string name="pref_title_theme">ຫົວຂໍ້</string>
+    <string name="pref_title_dynamic_color">ສີແບບໄດນາມິກ</string>
+    <string name="pref_title_icon_visual_effects">Icon Visual Effects</string>
+    <string name="summary_system_default">ຄ່າເລີ່ມຕົ້ນ</string>
+    <string name="summary_theme_dark_mode">ມືດ</string>
+    <string name="summary_theme_light_mode">ແສງສະຫວ່າງ</string>
+    <string name="label_add_shortcut">ທາງລັດ</string>
+    <string name="label_donate">ບໍ​ລິ​ຈາກ</string>
+    <string name="preference_on">ສຸດ</string>
+    <string name="preference_off">ປິດ</string>
+    <string name="toast_shortcut_added">ເພີ່ມທາງລັດແລ້ວ</string>
+    <string name="app_widget_description">ນີ້ແມ່ນໂມງການປຽບທຽບຂອງໄຂ່ Easter</string>
+    <string name="action_agree">ເຫັນດີ</string>
+    <string name="summary_browse_privacy_policy">ອ່ານແລະຕົກລົງເຫັນດີກັບນະໂຍບາຍຄວາມເປັນສ່ວນຕົວຂອງພວກເຮົາເພື່ອສືບຕໍ່.</string>
+    <string name="label_welcome">ຍິນດີຕ້ອນຮັບສູ່ລາຍການໄຂ່ Easter 🎉🎉🎉</string>
+    <string name="label_share">ແບ່ງປັນ</string>
+    <string name="label_search_hint">ຊອກຫາ…</string>
+</resources>
