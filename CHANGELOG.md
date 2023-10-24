@@ -11,6 +11,7 @@
 - Added Thai translation
 - Added Norwegian translation
 - Added Filipino translation
+- Added Lao translation
 - Fix Android O
 
 ### v2.0.0 (2023-10-08)

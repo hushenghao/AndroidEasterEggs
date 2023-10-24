@@ -12,7 +12,7 @@
     <locale android:name="ar-SA" />
     <locale android:name="hr-HR" />
     <locale android:name="nl-NL" />
-<!--    <locale android:name="la-LA" />-->
+    <!--    <locale android:name="la-LA" />-->
     <locale android:name="fr" />
     <locale android:name="pl-PL" />
     <locale android:name="tr-TR" />
@@ -26,4 +26,5 @@
     <locale android:name="th-TH" />
     <locale android:name="no-NO" />
     <locale android:name="fil-PH" />
+    <locale android:name="lo-LA" />
 </locale-config>
