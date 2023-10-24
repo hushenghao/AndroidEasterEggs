@@ -14,7 +14,6 @@ import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons.Outlined.language
 import com.dede.android_eggs.util.CustomTabsBrowser
-import com.dede.android_eggs.util.jvmAssert
 import com.dede.android_eggs.views.settings.SettingPref
 import com.dede.basic.createLocalesContext
 import com.dede.basic.getLayoutDirection
@@ -55,7 +54,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         private const val HUNGARIAN = 24            // hu-HU
         private const val THAI = 25                 // th-TH
         private const val NORWEGIAN = 26            // no-NO
-        private const val FILIPINO = 27            // fil-PH
+        private const val FILIPINO = 27             // fil-PH
 
         private fun getOptions(): List<Op> {
             val options = mutableListOf(
@@ -112,7 +111,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             // check languageOptions count
             val expected = languageOptions.size
             var actual = HashSet(languageOptions).size
-            jvmAssert(expected == actual) {
+            check(expected == actual) {
                 "Language option length, expected: %d, actual: %d."
                     .format(expected, actual)
             }
@@ -121,7 +120,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                 val localeConfig = LocaleConfig.fromContextIgnoringOverride(globalContext)
                 actual = localeConfig.supportedLocales?.size() ?: -1
-                jvmAssert(expected == actual) {
+                check(expected == actual) {
                     "locale-config.xml child node length, expected: %d, actual: %d."
                         .format(expected, actual)
                 }
@@ -129,7 +128,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
 
             // check gradle resourceConfigurations count
             actual = BuildConfig.LANGUAGE_RES
-            jvmAssert(expected == actual) {
+            check(expected == actual) {
                 "android.defaultConfig.resourceConfigurations length, expected: %d, actual: %d."
                     .format(expected, actual)
             }
