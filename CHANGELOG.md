@@ -1,4 +1,4 @@
-### v2.0.1
+### v2.1.0 (2023-10-25)
 - Use Android Q internal code name 
 - Added Japanese translation
 - Added French translation
