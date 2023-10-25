@@ -28,7 +28,6 @@ class StartupPage(private val context: Context) : MaterialAlertDialogBuilder(con
 
     init {
         setTitle(R.string.label_welcome)
-        setIcon(R.mipmap.ic_launcher_round)
         setMessage(R.string.summary_browse_privacy_policy)
         val view = ImageView(context).apply {
             adjustViewBounds = true

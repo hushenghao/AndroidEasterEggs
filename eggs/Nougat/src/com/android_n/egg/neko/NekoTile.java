@@ -14,6 +14,7 @@
 
 package com.android_n.egg.neko;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.service.quicksettings.Tile;
@@ -96,7 +97,12 @@ public class NekoTile extends TileService implements PrefsListener {
                     Log.d(TAG, "startActivityAndCollapse");
                     Intent intent = new Intent(this, NekoLockedActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivityAndCollapse(intent);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE);
+                        startActivityAndCollapse(pendingIntent);
+                    } else {
+                        startActivityAndCollapse(intent);
+                    }
                 } else {
                     unlockAndRun(new Runnable() {
                         @Override
