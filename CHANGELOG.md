@@ -1,3 +1,6 @@
+### v2.1.0
+- Known issue fixes
+
 ### v2.1.0 (2023-10-25)
 - Use Android Q internal code name 
 - Added Japanese translation

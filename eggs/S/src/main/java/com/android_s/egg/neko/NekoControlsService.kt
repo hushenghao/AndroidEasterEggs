@@ -40,6 +40,7 @@ import java.util.concurrent.Flow
 import java.util.function.Consumer
 
 import com.android_s.egg.R
+import com.dede.basic.singleExecutor
 
 const val CONTROL_ID_WATER = "water"
 const val CONTROL_ID_FOOD = "food"
@@ -230,9 +231,9 @@ public class NekoControlsService : ControlsProviderService(), PrefState.PrefsLis
     }
 
     private fun pushControlChanges() {
-        Thread() {
+        singleExecutor.execute {
             publishers.forEach { it.refresh() }
-        }.start()
+        }
     }
 
     private fun makeStateless(c: Control?): Control? {

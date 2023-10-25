@@ -54,18 +54,20 @@ class SettingsPageController(private val activity: FragmentActivity) : MenuProvi
             FontIconsDrawable(activity, Icons.Rounded.settings, M3R.attr.colorControlNormal, 24f)
         menu.findItem(R.id.menu_settings).icon = settingsIcon
 
-        val searchView = menu.findItem(R.id.menu_search).actionView as SearchView
-        searchView.queryHint = activity.getText(R.string.label_search_hint)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return true
-            }
+        val searchView = menu.findItem(R.id.menu_search).actionView as? SearchView
+        if (searchView != null) {// NPE ???
+            searchView.queryHint = activity.getText(R.string.label_search_hint)
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    return true
+                }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                onSearchTextChangeListener?.onSearchTextChange(newText)
-                return true
-            }
-        })
+                override fun onQueryTextChange(newText: String): Boolean {
+                    onSearchTextChangeListener?.onSearchTextChange(newText)
+                    return true
+                }
+            })
+        }
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {

@@ -1,9 +1,13 @@
+@file:JvmName("ExecutorUtils")
+
 package com.dede.basic
 
 import android.os.Handler
 import android.os.Looper
 import androidx.core.os.ExecutorCompat
 import androidx.core.os.HandlerCompat
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 
 
 val uiHandler = Handler(Looper.getMainLooper())
@@ -20,4 +24,6 @@ fun cancel(token: Any) {
     uiHandler.removeCallbacksAndMessages(token)
 }
 
-val uiExecutor = ExecutorCompat.create(uiHandler)
+val uiExecutor: Executor = ExecutorCompat.create(uiHandler)
+
+val singleExecutor: Executor = Executors.newSingleThreadExecutor()
