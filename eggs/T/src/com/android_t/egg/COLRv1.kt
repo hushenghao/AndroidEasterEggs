@@ -23,7 +23,7 @@ import java.io.IOException
  *
  * @see [android.graphics.fonts.FontFileUtil]
  */
-internal object COLR {
+internal object COLRv1 {
 
     // TTC Header `ttcf` bytes to int value
     // https://learn.microsoft.com/zh-cn/typography/opentype/spec/otff#ttc-header
@@ -37,7 +37,11 @@ internal object COLR {
 
     // Table `COLR` bytes to int value
     // https://learn.microsoft.com/zh-cn/typography/opentype/spec/colr
-    private const val COLR_TABLE_TAG = 0x434F4C52
+    private const val COLR_TABLE_TAG: Int = 0x434F4C52
+
+    // COLRv1
+    // https://developer.android.google.cn/about/versions/13/features?hl=zh-cn#color-vector-fonts
+    private const val COLR_VERSION_1: Short = 1
 
     @Throws(IOException::class)
     private fun analyzeCOLR(
@@ -65,7 +69,12 @@ internal object COLR {
         for (i in 0..<numTables) {
             val tableTag = source.readInt()// uint32
             if (tableTag == COLR_TABLE_TAG) {
-                return true
+                source.skip(4)// checksum
+                val offset = source.readInt()
+                fileHandle.reposition(source, offset.toLong())
+                val version = source.readShort()
+                Log.i(TAG, "COLRv$version")
+                return version == COLR_VERSION_1
             }
             // checksum,offset and length  unit32 * 3
             source.skip(4 * 3)

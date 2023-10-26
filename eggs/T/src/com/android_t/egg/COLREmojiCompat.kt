@@ -46,7 +46,7 @@ fun findCOLRFontFile(): File? {
     for (font in SystemFonts.getAvailableFonts()) {
         val file = font.file ?: continue
         if (!emojiFontRegex.matches(file.name)) continue
-        if (COLR.analyzeCOLR(file)) {// End when find any one that supports
+        if (COLRv1.analyzeCOLR(file)) {// End when find any one that supports
             Log.i(TAG, "Find emoji font isSupportedCOLR: $file")
             return file
         }
@@ -55,7 +55,7 @@ fun findCOLRFontFile(): File? {
     // Find first und-Zsye font from `/system/etc/fonts.xml`.
     val undZsyeFontFile = UndZsyeFonts.findFirstUndZsyeFontFile()
     if (undZsyeFontFile != null) {
-        if (COLR.analyzeCOLR(undZsyeFontFile)) {
+        if (COLRv1.analyzeCOLR(undZsyeFontFile)) {
             Log.i(TAG, "Find und-Zsye font isSupportedCOLR: $undZsyeFontFile")
             return undZsyeFontFile
         }
