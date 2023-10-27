@@ -19,10 +19,10 @@ import com.dede.android_eggs.ui.adapter.removeFooter
 import com.dede.android_eggs.ui.adapter.removeHeader
 import com.dede.android_eggs.ui.views.EasterEggFooterView
 import com.dede.android_eggs.ui.views.SnapshotGroupView
-import com.dede.android_eggs.views.settings.SettingsPageController
+import com.dede.android_eggs.views.settings.ActionBarMenuController
 
 class EggAdapterProvider(val context: Context) : EggFilter.OnFilterResults,
-    SettingsPageController.OnSearchTextChangeListener {
+    ActionBarMenuController.OnSearchTextChangeListener {
 
     val adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
         get() = vAdapter

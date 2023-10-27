@@ -12,11 +12,12 @@ import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.ContextCompat
 import androidx.core.os.ConfigurationCompat
 import androidx.core.os.LocaleListCompat
-import java.util.Locale
 
 
-val globalContext: Context get() = GlobalContext.globalContext
-val globalThemeContext: Context get() = GlobalContext.globalThemeContext
+val globalContext: Context
+    get() = GlobalContext.globalContext
+val globalThemeContext: Context
+    get() = GlobalContext.globalThemeContext
 
 @SuppressLint("StaticFieldLeak")
 object GlobalContext {
@@ -70,7 +71,7 @@ fun Configuration.setLocales(locales: LocaleListCompat) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         ConfigurationCompat.setLocales(this, locales)
     } else if (!locales.isEmpty) {
-        val locale = locales.get(0).tempFixLocaleForApi23()
+        val locale = locales.get(0)
         setLocale(locale)
     }
 }
@@ -78,14 +79,6 @@ fun Configuration.setLocales(locales: LocaleListCompat) {
 fun Context.getConfigurationLocales(): LocaleListCompat {
     val localeConfig = ContextCompat.getContextForLanguage(this).resources.configuration
     return ConfigurationCompat.getLocales(localeConfig)
-}
-
-// temp fix api 23
-private fun Locale?.tempFixLocaleForApi23(): Locale? {
-    if (this == Locale.CHINESE) {
-        return Locale.SIMPLIFIED_CHINESE
-    }
-    return this
 }
 
 fun Context.createScaleWrapper(scale: Float): Context {

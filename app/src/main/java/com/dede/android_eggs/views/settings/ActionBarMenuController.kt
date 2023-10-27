@@ -14,7 +14,7 @@ import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.google.android.material.R as M3R
 
 
-class SettingsPageController(private val activity: FragmentActivity) : MenuProvider {
+class ActionBarMenuController(private val activity: FragmentActivity) : MenuProvider {
 
     companion object {
         private const val FRAGMENT_TAG = "Settings"
@@ -74,7 +74,7 @@ class SettingsPageController(private val activity: FragmentActivity) : MenuProvi
         when (menuItem.itemId) {
             R.id.menu_settings -> {
                 SettingsFragment().apply {
-                    onSlide = this@SettingsPageController::onSlide
+                    onSlide = this@ActionBarMenuController::onSlide
                 }.show(activity.supportFragmentManager, FRAGMENT_TAG)
                 ObjectAnimator.ofFloat(settingsIcon, "rotate", 0f, 360f)
                     .setDuration(500)

@@ -19,7 +19,7 @@ import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.toast
 import com.dede.android_eggs.views.main.EggAdapterProvider
-import com.dede.android_eggs.views.settings.SettingsPageController
+import com.dede.android_eggs.views.settings.ActionBarMenuController
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
 import com.dede.android_eggs.views.settings.prefs.IconVisualEffectsPref
 import com.dede.basic.dp
@@ -39,7 +39,7 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
         handleOrientationAngleSensor(IconVisualEffectsPref.isEnable(requireContext()))
 
         eggAdapterProvider = EggAdapterProvider(requireContext())
-        SettingsPageController(requireActivity()).apply {
+        ActionBarMenuController(requireActivity()).apply {
             onCreate(savedInstanceState)
             onSearchTextChangeListener = eggAdapterProvider
         }

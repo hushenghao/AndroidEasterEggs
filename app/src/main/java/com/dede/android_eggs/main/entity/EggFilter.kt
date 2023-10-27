@@ -3,7 +3,6 @@ package com.dede.android_eggs.main.entity
 import android.content.Context
 import android.widget.Filter
 import com.dede.android_eggs.ui.adapter.VType
-import com.dede.android_eggs.views.settings.SettingsPageController
 import java.util.Locale
 
 /**
