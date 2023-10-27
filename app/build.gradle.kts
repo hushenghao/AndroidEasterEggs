@@ -4,8 +4,8 @@ import Versions.gitHash
 import Versions.keyprops
 
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 apply(from = "../buildSrc/tasks.gradle.kts")
