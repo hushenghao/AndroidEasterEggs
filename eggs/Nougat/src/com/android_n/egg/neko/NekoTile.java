@@ -52,17 +52,17 @@ public class NekoTile extends TileService implements PrefsListener {
         mPrefs.setListener(null);
     }
 
-    @Override
-    public void onTileAdded() {
-        super.onTileAdded();
+//    @Override
+//    public void onTileAdded() {
+//        super.onTileAdded();
 //        MetricsLogger.count(this, "egg_neko_tile_added", 1);
-    }
+//    }
 
-    @Override
-    public void onTileRemoved() {
-        super.onTileRemoved();
+//    @Override
+//    public void onTileRemoved() {
+//        super.onTileRemoved();
 //        MetricsLogger.count(this, "egg_neko_tile_removed", 1);
-    }
+//    }
 
     @Override
     public void onPrefsChanged() {
