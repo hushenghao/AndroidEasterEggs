@@ -12,7 +12,7 @@ plugins {
 }
 
 task<Delete>("clean") {
-    delete(rootProject.buildDir)
+    delete(rootProject.layout.buildDirectory)
 }
 
 fun <T : BaseExtension> Project.android(configure: Action<T>? = null) {
