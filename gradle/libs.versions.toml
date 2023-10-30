@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.9.10"
+kotlin = "1.9.20"
 # https://androidx.dev/storage/compose-compiler/repository
 compose-kotlin-compiler = "1.5.3"
 agp = "8.1.1"
