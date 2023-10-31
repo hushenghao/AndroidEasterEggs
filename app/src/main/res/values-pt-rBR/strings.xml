@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Easter Eggs</string>
+    <string name="summary_android_waiting">Aguardando…</string>
+    <string name="summary_android_release_pushed">A versão final de lançamento foi lançada</string>
+    <string name="title_open_with">Abrir com</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_translation">Tradução</string>
+    <string name="label_beta">Obter versão Beta</string>
+    <string name="label_timeline">Linha do tempo</string>
+    <string name="label_privacy_policy">Privacidade</string>
+    <string name="label_license">Licença</string>
+    <string name="label_email">Comentários</string>
+    <string name="label_star">Estrela</string>
+    <string name="label_timeline_title">Linha do tempo, marcos e atualizações</string>
+    <string name="label_timeline_releases">Lançamentos</string>
+    <string name="message_trypophobia_warning">Este é um alerta para quem tem &lt;/b&gt;Tripofobia&lt;b&gt; de que algumas imagens podem causar desconforto. Você quer continuar?</string>
+    <string name="label_settings">Configurações</string>
+    <string name="label_project_desc">Este projeto contém o código completo do sistema Easter Eggs, que visa organizar e ser compatível com o sistema Easter Eggs, de forma a garantir que a maioria dos dispositivos possa experimentar diferentes versões de Easter Eggs sem fazer muitas modificações no código do Easter Egg. As versões mais recentes usam novos recursos do referido sistema, mas as versões inferiores só podem usar algumas funções.</string>
+    <string name="pref_title_icon_shape_override">Formato do ícone</string>
+    <string name="pref_title_language">Idioma</string>
+    <string name="pref_title_language_more">Mais</string>
+    <string name="pref_title_theme">Tema</string>
+    <string name="pref_title_dynamic_color">Cor Dinâmica</string>
+    <string name="pref_title_icon_visual_effects">Efeitos Visuais de Ícone</string>
+    <string name="summary_system_default">Padrão</string>
+    <string name="summary_theme_dark_mode">Escuro</string>
+    <string name="summary_theme_light_mode">Claro</string>
+    <string name="label_add_shortcut">Atalho</string>
+    <string name="label_donate">Doar</string>
+    <string name="preference_on">Ligado</string>
+    <string name="preference_off">Desligado</string>
+    <string name="toast_shortcut_added">Atalho adicionado</string>
+    <string name="app_widget_description">Este é o relógio analógico do Easter Eggs</string>
+    <string name="action_agree">Aceitar</string>
+    <string name="summary_browse_privacy_policy">Leia e aceite a nossa Política de Privacidade para continuar.</string>
+    <string name="label_welcome">Bem-vindo aos Catálogos do Easter Eggs 🎉🎉🎉</string>
+    <string name="label_share">Compartilhar</string>
+    <string name="label_search_hint">Pesquisar…</string>
+</resources>

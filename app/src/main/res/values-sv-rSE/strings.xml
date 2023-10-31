@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Påskägg</string>
+    <string name="summary_android_waiting">Väntar…</string>
+    <string name="summary_android_release_pushed">Den slutliga versionen har släppts</string>
+    <string name="title_open_with">Öppna med</string>
+</resources>
