@@ -65,7 +65,8 @@ fun Context.requireDrawable(@DrawableRes id: Int): Drawable {
 }
 
 fun Context.createVectorDrawableCompat(@DrawableRes id: Int): VectorDrawableCompat {
-    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
+    if (Build.VERSION.SDK_INT in Build.VERSION_CODES.N..Build.VERSION_CODES.N_MR1) {
+        // Fix Android N VectorDrawable
         // https://issuetracker.google.com/issues/37138664
         @Suppress("ResourceType")
         return createVectorDrawableCompatFromXml(id)
@@ -74,11 +75,9 @@ fun Context.createVectorDrawableCompat(@DrawableRes id: Int): VectorDrawableComp
 }
 
 /**
- * Some Egg can't enable `useSupportLibrary = true`
+ * Force use support Library
  */
-fun Context.createVectorDrawableCompatFromXml(
-    @XmlRes id: Int,
-): VectorDrawableCompat {
+private fun Context.createVectorDrawableCompatFromXml(@XmlRes id: Int): VectorDrawableCompat {
     val parser = resources.getXml(id)
     val attrs = Xml.asAttributeSet(parser)
     var type: Int
