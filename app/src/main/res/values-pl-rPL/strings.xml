@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Oczekuję…</string>
+    <string name="summary_android_waiting">Czekam…</string>
     <string name="summary_android_release_pushed">Ostateczna wersja została wydana</string>
     <string name="title_open_with">Otwórz z</string>
     <string name="char_separator">/</string>
