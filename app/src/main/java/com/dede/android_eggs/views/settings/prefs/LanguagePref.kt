@@ -36,6 +36,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         private const val ITALIAN = 6               // it
         private const val GERMANY = 7               // de
         private const val PORTUGAL = 8              // pt
+        private const val PORTUGAL_BRAZIL = 29      // pt-BR
         private const val INDONESIA = 9             // in-ID
         private const val JAPANESE = 10             // ja-JP
         private const val KOREAN = 11               // ko
@@ -82,6 +83,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             LangOp(GERMANY, R.string.language_de, Locale.GERMANY),
             LangOp(SPANISH, R.string.language_es, createLocale("es")),
             LangOp(PORTUGAL, R.string.language_pt, createLocale("pt")),
+            LangOp(PORTUGAL_BRAZIL, R.string.language_pt_BR, createLocale("pt", "BR")),
             LangOp(INDONESIA, R.string.language_in_ID, createLocale("in", "ID")),
             LangOp(ARABIC, R.string.language_ar_SA, createLocale("ar", "SA")),
             LangOp(CROATIAN, R.string.language_hr_HR, createLocale("hr", "HR")),

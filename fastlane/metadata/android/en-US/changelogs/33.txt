@@ -1,1 +1,2 @@
+- Added Portuguese (Brazilian) translation
 - Known issue fixes
