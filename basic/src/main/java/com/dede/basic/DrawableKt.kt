@@ -17,7 +17,6 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 
-@SuppressLint("DiscouragedApi")
 @Throws(Resources.NotFoundException::class)
 fun Context.getSystemColor(resName: String): Int {
     val id = getIdentifier(resName, DefType.COLOR, "android")
@@ -28,7 +27,7 @@ enum class DefType {
     DRAWABLE,
     COLOR,
     RAW,
-    XML
+    XML,
     ;
 
     override fun toString(): String {
@@ -68,7 +67,6 @@ fun Context.createVectorDrawableCompat(@DrawableRes id: Int): VectorDrawableComp
     if (Build.VERSION.SDK_INT in Build.VERSION_CODES.N..Build.VERSION_CODES.N_MR1) {
         // Fix Android N VectorDrawable
         // https://issuetracker.google.com/issues/37138664
-        @Suppress("ResourceType")
         return createVectorDrawableCompatFromXml(id)
     }
     return requireNotNull(VectorDrawableCompat.create(this.resources, id, this.theme))
