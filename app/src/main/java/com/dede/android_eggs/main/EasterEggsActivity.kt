@@ -1,5 +1,6 @@
 package com.dede.android_eggs.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -26,6 +27,13 @@ class EasterEggsActivity : AppCompatActivity(R.layout.activity_easter_eggs) {
         BackPressedHandler(this).register()
 
         StartupPage.show(this)
+
+        SchemeHandler.handleIntent(this, intent)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        SchemeHandler.handleIntent(this, intent)
     }
 
 }

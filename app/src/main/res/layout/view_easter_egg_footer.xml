@@ -118,14 +118,6 @@
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="?attr/colorSecondary" />
 
-        <TextView
-            android:id="@+id/tv_dino_3d"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="@string/url_dino_3d"
-            android:text="@string/label_dino_3d"
-            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-            android:textColor="?attr/colorSecondary" />
     </view>
 
     <ImageView

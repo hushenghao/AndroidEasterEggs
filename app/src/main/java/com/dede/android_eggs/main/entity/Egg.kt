@@ -53,6 +53,10 @@ data class Egg(
         private val versionName2: CharSequence,
     ) {
 
+        fun getApiLevelRange(): IntRange {
+            return versionCode1..versionCode2
+        }
+
         constructor(versionCode: Int, versionName: CharSequence) :
                 this(versionCode, versionCode, versionName, versionName)
 
