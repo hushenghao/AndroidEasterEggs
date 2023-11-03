@@ -6,9 +6,15 @@ import Versions.keyprops
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    kotlin("kapt")
+    alias(libs.plugins.hilt.android)
 }
 
 apply(from = "../buildSrc/tasks.gradle.kts")
+
+kapt {
+    correctErrorTypes = true
+}
 
 android {
     compileSdk = Versions.COMPILE_SDK
@@ -106,6 +112,8 @@ dependencies {
     implementation(libs.free.reflection)
     implementation(libs.viewbinding.delegate)
     implementation(libs.blurhash.android)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
     debugImplementation(libs.squareup.leakcanary)
     implementation(project(":basic"))
     implementation(project(":eggs:U"))
