@@ -127,7 +127,7 @@ object EggDatas {
                 R.drawable.ic_android_oreo,
                 com.android_o.egg.R.string.o_app_name,
                 VersionFormatter(R.string.nickname_android_o, "8.0"),
-                VersionCommentFormatter(VERSION_CODES.O, "8.1"),
+                VersionCommentFormatter(VERSION_CODES.O, "8.0"),
                 com.android_o.egg.PlatLogoActivity::class.java,
                 true,
                 KEY_EGG_O,

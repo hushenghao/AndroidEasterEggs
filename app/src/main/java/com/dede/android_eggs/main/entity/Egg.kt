@@ -2,14 +2,18 @@ package com.dede.android_eggs.main.entity
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.SpannableStringBuilder
+import android.text.style.StyleSpan
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.view.ViewCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.adapter.VType
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
+import com.dede.android_eggs.util.append
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
 import com.dede.basic.requireDrawable
 
@@ -61,21 +65,28 @@ data class Egg(
                 this(versionCode, versionCode, versionName, versionName)
 
         fun format(context: Context): CharSequence {
-            val sb = StringBuilder()
-                .append(context.getString(R.string.api_version_format, versionCode1.toString()))
+            val span = SpannableStringBuilder()
+                .append(context.getString(R.string.android_version_format, versionName1))
+            val italic = StyleSpan(Typeface.ITALIC)
             if (versionCode1 == versionCode2) {
-                sb.appendLine()
-                    .append(context.getString(R.string.android_version_format, versionName1))
+                span.append("\n")
+                    .append(
+                        context.getString(R.string.api_version_format, versionCode1.toString()),
+                        italic
+                    )
             } else {
                 val enDash = context.getString(R.string.char_en_dash)
-                sb.append(enDash)
-                    .append(versionCode2.toString())
-                    .appendLine()
-                    .append(context.getString(R.string.android_version_format, versionName1))
-                    .append(enDash)
+                span.append(enDash)
                     .append(versionName2)
+                    .append("\n")
+                    .append(
+                        context.getString(R.string.api_version_format, versionCode1.toString()),
+                        italic,
+                    )
+                    .append(enDash, italic)
+                    .append(versionCode2.toString(), italic)
             }
-            return sb
+            return span
         }
     }
 
