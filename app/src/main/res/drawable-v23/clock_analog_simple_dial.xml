@@ -35,7 +35,7 @@
         android:id="@+id/o_clock_2"
         android:width="44dp"
         android:height="44dp"
-        android:drawable="@drawable/ic_android_gingerbread"
+        android:drawable="@drawable/g_android_logo"
         android:gravity="top|right"
         android:right="30dp"
         android:top="88dp" />
@@ -44,7 +44,7 @@
         android:id="@+id/o_clock_3"
         android:width="44dp"
         android:height="44dp"
-        android:drawable="@drawable/ic_android_honeycomb"
+        android:drawable="@drawable/h_android_logo"
         android:gravity="center_vertical|right"
         android:right="10dp" />
 
@@ -53,7 +53,7 @@
         android:width="44dp"
         android:height="42dp"
         android:bottom="90dp"
-        android:drawable="@drawable/ic_android_kitkat"
+        android:drawable="@drawable/k_android_logo"
         android:gravity="bottom|right"
         android:right="28dp" />
 

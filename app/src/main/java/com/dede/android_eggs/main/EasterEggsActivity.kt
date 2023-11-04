@@ -9,13 +9,21 @@ import com.dede.android_eggs.databinding.ActivityEasterEggsBinding
 import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.views.main.StartupPage
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.ActivityScoped
+import javax.inject.Inject
 
 /**
  * Easter Egg Collection
  */
+@AndroidEntryPoint
 class EasterEggsActivity : AppCompatActivity(R.layout.activity_easter_eggs) {
 
     private val binding: ActivityEasterEggsBinding by viewBinding(ActivityEasterEggsBinding::bind)
+
+    @Inject
+    @ActivityScoped
+    lateinit var schemeHandler: SchemeHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.tryApplyOLEDTheme(this)
@@ -28,12 +36,12 @@ class EasterEggsActivity : AppCompatActivity(R.layout.activity_easter_eggs) {
 
         StartupPage.show(this)
 
-        SchemeHandler.handleIntent(this, intent)
+        schemeHandler.handleIntent(intent)
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        SchemeHandler.handleIntent(this, intent)
+        schemeHandler.handleIntent(intent)
     }
 
 }

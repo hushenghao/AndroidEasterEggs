@@ -3,4 +3,6 @@
     <!-- Name of the Jelly Bean platlogo screensaver -->
     <string name="j_jelly_bean_dream_name">BeanFlinger</string>
     <string name="j_egg_name">BeanBag</string>
+
+    <string name="j_android_nickname" translatable="false">Jelly Bean</string>
 </resources>

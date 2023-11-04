@@ -23,8 +23,12 @@ import com.dede.android_eggs.views.settings.ActionBarMenuController
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
 import com.dede.android_eggs.views.settings.prefs.IconVisualEffectsPref
 import com.dede.basic.dp
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.FragmentScoped
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
     OrientationAngleSensor.OnOrientationAnglesUpdate {
 
@@ -32,13 +36,15 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
 
     private var isRecyclerViewIdle = true
     private var orientationAngleSensor: OrientationAngleSensor? = null
-    private lateinit var eggAdapterProvider: EggAdapterProvider
+
+    @Inject
+    @FragmentScoped
+    lateinit var eggAdapterProvider: EggAdapterProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         handleOrientationAngleSensor(IconVisualEffectsPref.isEnable(requireContext()))
 
-        eggAdapterProvider = EggAdapterProvider(requireContext())
         ActionBarMenuController(requireActivity()).apply {
             onCreate(savedInstanceState)
             onSearchTextChangeListener = eggAdapterProvider
@@ -101,8 +107,8 @@ class EggListFragment : Fragment(R.layout.fragment_easter_egg_list),
         }
     }
 
-    fun smoothScrollToEgg(eggKey: String) {
-        val position = eggAdapterProvider.indexOfByEggKey(eggKey)
+    fun smoothScrollToEgg(eggId: Int) {
+        val position = eggAdapterProvider.indexOfByEggId(eggId)
         if (position != RecyclerView.NO_POSITION) {
             binding.recyclerView.smoothScrollToPosition(position)
         }

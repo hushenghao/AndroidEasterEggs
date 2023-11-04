@@ -17,4 +17,6 @@ Copyright (C) 2018 The Android Open Source Project
     <string name="r_app_name" translatable="false">Android R Easter Egg</string>
 
     <string name="r_egg_name" translatable="false">Cat Controls (Collection)</string>
+
+    <string name="r_android_nickname" translatable="false">Red Velvet Cake</string>
 </resources>

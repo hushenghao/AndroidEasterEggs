@@ -1,0 +1,8 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/n_android_logo_bg" />
+    <item>
+        <inset
+            android:drawable="@drawable/n_android_logo_fg"
+            android:inset="-14dp" />
+    </item>
+</layer-list>

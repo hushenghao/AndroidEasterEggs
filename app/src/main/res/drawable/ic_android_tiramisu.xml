@@ -1,8 +1,0 @@
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/system_accent3_800" />
-    <item>
-        <inset
-            android:drawable="@drawable/ic_android_tiramisu_fg"
-            android:inset="-12dp" />
-    </item>
-</layer-list>

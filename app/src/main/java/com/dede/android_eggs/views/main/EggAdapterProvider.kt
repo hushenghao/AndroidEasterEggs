@@ -20,15 +20,18 @@ import com.dede.android_eggs.ui.adapter.removeHeader
 import com.dede.android_eggs.ui.views.EasterEggFooterView
 import com.dede.android_eggs.ui.views.SnapshotGroupView
 import com.dede.android_eggs.views.settings.ActionBarMenuController
+import dagger.hilt.android.qualifiers.ActivityContext
+import javax.inject.Inject
 
-class EggAdapterProvider(val context: Context) : EggFilter.OnFilterResults,
-    ActionBarMenuController.OnSearchTextChangeListener {
+class EggAdapterProvider @Inject constructor(
+    @ActivityContext private val context: Context,
+    private val eggFilter: EggFilter
+) : EggFilter.OnFilterResults, ActionBarMenuController.OnSearchTextChangeListener {
 
     val adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
         get() = vAdapter
 
     private val vAdapter: VAdapter
-    private val eggFilter: EggFilter = EggFilter(context)
 
     private val snapshotView = SnapshotGroupView(context)
     private val footerView = EasterEggFooterView(context)
@@ -45,11 +48,11 @@ class EggAdapterProvider(val context: Context) : EggFilter.OnFilterResults,
         }
     }
 
-    fun indexOfByEggKey(eggKey: String): Int {
+    fun indexOfByEggId(eggId: Int): Int {
         val position = eggFilter.eggList.indexOfFirst {
             when (it) {
-                is Egg -> it.key == eggKey
-                is EggGroup -> it.child.find { c -> c.key == eggKey } != null
+                is Egg -> it.id == eggId
+                is EggGroup -> it.child.find { c -> c.id == eggId } != null
                 else -> false
             }
         }

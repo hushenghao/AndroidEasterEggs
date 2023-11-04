@@ -37,17 +37,25 @@ data class TimelineEvent(
 
         val timelines = listOf(
             TimelineEvent(
-                "2023",
-                "September",
+                "2023", "September",
                 com.android_u.egg.R.drawable.u_android14_patch_adaptive,
                 "Upside Down Cake."
             ),
-            TimelineEvent("2022", "September", R.drawable.ic_android_tiramisu, "Tiramisu."),
             TimelineEvent(
-                "2021", "December", R.drawable.ic_android_s,
+                "2022", "September",
+                com.android_t.egg.R.drawable.t_android_logo,
+                "Tiramisu."
+            ),
+            TimelineEvent(
+                "2021", "December",
+                com.android_s.egg.R.drawable.s_android_logo,
                 "S V2.\nOnce more unto the breach, dear friends, once more."
             ),
-            TimelineEvent("2021", "September", R.drawable.ic_android_s, "S."),
+            TimelineEvent(
+                "2021", "September",
+                com.android_s.egg.R.drawable.s_android_logo,
+                "S."
+            ),
             timelineEvent(
                 com.android_r.egg.R.drawable.r_icon,
                 "R.\nReleased publicly as Android 11 in September 2020."
@@ -61,79 +69,79 @@ data class TimelineEvent(
                 "P.\nReleased publicly as Android 9 in August 2018."
             ),
             timelineEvent(
-                R.drawable.ic_android_oreo,
+                com.android_o.egg.R.drawable.o_android_logo,
                 "O MR1.\nReleased publicly as Android 8.1 in December 2017."
             ),
             timelineEvent(
-                R.drawable.ic_android_oreo,
+                com.android_o.egg.R.drawable.o_android_logo,
                 "O.\nReleased publicly as Android 8.0 in August 2017."
             ),
             timelineEvent(
-                R.drawable.ic_android_nougat,
+                com.android_n.egg.R.drawable.n_android_logo,
                 "N MR1.\nReleased publicly as Android 7.1 in October 2016."
             ),
             timelineEvent(
-                R.drawable.ic_android_nougat,
+                com.android_n.egg.R.drawable.n_android_logo,
                 "N.\nReleased publicly as Android 7.0 in August 2016."
             ),
             timelineEvent(
-                R.drawable.ic_android_marshmallow,
+                com.android_m.egg.R.drawable.m_android_logo,
                 "M.\nReleased publicly as Android 6.0 in October 2015."
             ),
             timelineEvent(
-                R.drawable.ic_android_lollipop,
+                com.android_l.egg.R.drawable.l_android_logo,
                 "L MR1.\nReleased publicly as Android 5.1 in March 2015."
             ),
             timelineEvent(
-                R.drawable.ic_android_lollipop,
+                com.android_l.egg.R.drawable.l_android_logo,
                 "L.\nReleased publicly as Android 5.0 in November 2014."
             ),
             timelineEvent(
-                R.drawable.ic_android_kitkat,
+                com.android_k.egg.R.drawable.k_android_logo,
                 "K for watches.\nReleased publicly as Android 4.4W in June 2014."
             ),
             timelineEvent(
-                R.drawable.ic_android_kitkat,
+                com.android_k.egg.R.drawable.k_android_logo,
                 "K.\nReleased publicly as Android 4.4 in October 2013."
             ),
             timelineEvent(
-                R.drawable.ic_android_jelly_bean,
+                com.android_j.egg.R.drawable.j_android_logo,
                 "J MR2.\nReleased publicly as Android 4.3 in July 2013."
             ),
             timelineEvent(
-                R.drawable.ic_android_jelly_bean,
+                com.android_j.egg.R.drawable.j_android_logo,
                 "J MR1.\nReleased publicly as Android 4.2 in November 2012."
             ),
             timelineEvent(
-                R.drawable.ic_android_jelly_bean,
+                com.android_j.egg.R.drawable.j_android_logo,
                 "J.\nReleased publicly as Android 4.1 in July 2012."
             ),
             timelineEvent(
-                R.drawable.ic_android_ics,
+                com.android_i.egg.R.drawable.i_platlogo,
                 "I MR1.\nReleased publicly as Android 4.03 in December 2011."
             ),
             timelineEvent(
-                R.drawable.ic_android_ics,
+                com.android_i.egg.R.drawable.i_platlogo,
                 "I.\nReleased publicly as Android 4.0 in October 2011."
             ),
             timelineEvent(
-                R.drawable.ic_android_honeycomb,
+                com.android_h.egg.R.drawable.h_android_logo,
                 "H MR2.\nReleased publicly as Android 3.2 in July 2011."
             ),
             timelineEvent(
-                R.drawable.ic_android_honeycomb,
+                com.android_h.egg.R.drawable.h_android_logo,
                 "H MR1.\nReleased publicly as Android 3.1 in May 2011."
             ),
             timelineEvent(
-                R.drawable.ic_android_honeycomb,
+                com.android_h.egg.R.drawable.h_android_logo,
                 "H.\nReleased publicly as Android 3.0 in February 2011."
             ),
             timelineEvent(
-                R.drawable.ic_android_gingerbread,
+                com.android_g.egg.R.drawable.g_android_logo,
                 "G MR1.\nReleased publicly as Android 2.3.3 in February 2011."
             ),
             timelineEvent(
-                R.drawable.ic_android_gingerbread,
+                com.android_g.egg.R.drawable.g_android_logo,
                 "G.\nReleased publicly as Android 2.3 in December 2010."
             ),
             timelineEvent(

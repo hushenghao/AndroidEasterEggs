@@ -4,18 +4,27 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
-import com.dede.android_eggs.main.entity.EggDatas
+import com.dede.android_eggs.main.entity.toEgg
+import com.dede.basic.provider.EasterEgg
+import dagger.hilt.android.qualifiers.ActivityContext
+import javax.inject.Inject
 
-object SchemeHandler {
+class SchemeHandler @Inject constructor(@ActivityContext val context: Context) {
 
-    private const val TAG = "SchemeHandler"
+    companion object {
 
-    private const val SCHEME = "egg"
-    private const val HOST = "easter_egg"
+        private const val TAG = "SchemeHandler"
 
-    private const val PATH_API_LEVEL = "api"
+        private const val SCHEME = "egg"
+        private const val HOST = "easter_egg"
 
-    fun handleIntent(context: Context, intent: Intent?): Boolean {
+        private const val PATH_API_LEVEL = "api"
+    }
+
+    @Inject
+    lateinit var easterEggs: List<@JvmSuppressWildcards EasterEgg>
+
+    fun handleIntent(intent: Intent?): Boolean {
         val uri = filterUri(intent) ?: return false
         Log.i(TAG, "handleScheme: $uri")
         when (uri.pathSegments.firstOrNull()) {
@@ -38,12 +47,9 @@ object SchemeHandler {
         // egg://easter_egg/api/34
         val levelStr = uri.pathSegments.getOrNull(1) ?: return false
         val level = levelStr.toIntOrNull() ?: return false
-        val egg = EggDatas.getPureEggList().find {
-            val levelRange = it.versionCommentFormatter.getApiLevelRange()
-            level in levelRange
-        }
+        val egg = easterEggs.find { level in it.apiLevel }
         if (egg != null) {
-            EggActionHelp.launchEgg(context, egg)
+            EggActionHelp.launchEgg(context, egg.toEgg())
         }
         return egg != null
     }

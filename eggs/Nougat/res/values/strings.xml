@@ -50,4 +50,7 @@ Copyright (C) 2016 The Android Open Source Project
         <item>65</item>
         <item>90</item>
     </integer-array>
+
+    <string name="n_android_nickname" translatable="false">Nougat</string>
+    <color name="n_android_logo_bg">#B5DDEF</color>
 </resources>

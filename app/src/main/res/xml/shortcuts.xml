@@ -18,7 +18,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_android_tiramisu"
+        android:icon="@drawable/t_android_logo"
         android:shortcutDisabledMessage="@string/t_egg_name"
         android:shortcutId="android_t"
         android:shortcutLongLabel="@string/t_egg_name"
@@ -31,7 +31,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_android_s"
+        android:icon="@drawable/s_android_logo"
         android:shortcutDisabledMessage="@string/s_egg_name"
         android:shortcutId="android_s"
         android:shortcutLongLabel="@string/s_egg_name"

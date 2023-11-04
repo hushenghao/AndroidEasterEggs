@@ -43,6 +43,13 @@ allprojects {
             android<AppExtension>()
         } else if (plugins.hasPlugin(LibraryPlugin::class)) {
             val isEgg = path.contains("eggs")
+            val hasKotlin = plugins.hasPlugin(libs.plugins.kotlin.android.get().pluginId)
+            if (isEgg) {
+                plugins.apply(libs.plugins.hilt.android.get().pluginId)
+                if (hasKotlin) {
+                    plugins.apply("kotlin-kapt")
+                }
+            }
             android<LibraryExtension> {
                 buildFeatures {
                     buildConfig = false
@@ -59,6 +66,12 @@ allprojects {
             }
             dependencies {
                 if (isEgg) {
+                    add("implementation", libs.hilt.android)
+                    if (hasKotlin) {
+                        add("kapt", libs.hilt.compiler)
+                    } else {
+                        add("annotationProcessor", libs.hilt.compiler)
+                    }
                     add("implementation", project(path = ":basic"))
                 }
             }

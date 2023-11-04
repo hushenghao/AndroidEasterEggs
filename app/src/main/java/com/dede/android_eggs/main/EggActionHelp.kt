@@ -21,7 +21,6 @@ import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
-import com.dede.android_eggs.util.applyNotNull
 import com.dede.android_eggs.util.toast
 import com.dede.basic.cancel
 import com.dede.basic.delay
@@ -42,7 +41,6 @@ object EggActionHelp {
             .applyIf(retainInRecents) {
                 addFlags(DOCUMENT_LAUNCH_MODE_INTO_EXISTING)
             }
-            .applyNotNull(egg.extras, Intent::putExtras)
     }
 
     fun isSupportedLaunch(egg: Egg): Boolean {
@@ -104,11 +102,11 @@ object EggActionHelp {
     }
 
     fun isShortcutEnable(egg: Egg): Boolean {
-        return egg.key != null && egg.targetClass != null
+        return egg.targetClass != null
     }
 
     fun addShortcut(context: Context, egg: Egg) {
-        if (egg.key == null || !isShortcutEnable(egg)) return
+        if (!isShortcutEnable(egg)) return
         val intent = createIntent(context, egg) ?: return
 
         val icon = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
@@ -118,7 +116,8 @@ object EggActionHelp {
         } else {
             IconCompat.createWithResource(context, egg.iconRes)
         }
-        val shortcut = ShortcutInfoCompat.Builder(context, egg.key)
+        val key = "android_%d".format(egg.id)
+        val shortcut = ShortcutInfoCompat.Builder(context, key)
             .setIcon(icon)
             .setIntent(intent)
             .setShortLabel(context.getString(egg.eggNameRes))

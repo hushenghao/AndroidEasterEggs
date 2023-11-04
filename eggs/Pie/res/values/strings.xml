@@ -16,4 +16,6 @@ Copyright (C) 2018 The Android Open Source Project
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="p_app_name" translatable="false">PAINT.APK</string>
+
+    <string name="p_android_nickname" translatable="false">Pie</string>
 </resources>

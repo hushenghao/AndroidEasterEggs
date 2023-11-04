@@ -19,4 +19,7 @@
 <resources>
     <!-- Name of the L Land easter egg. DO NOT TRANSLATE -->
     <string name="l_lland">L Land</string>
+
+    <string name="l_android_nickname" translatable="false">Lollipop</string>
+    <color name="l_android_logo_bg">#9B27AF</color>
 </resources>

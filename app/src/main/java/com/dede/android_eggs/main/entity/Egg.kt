@@ -4,18 +4,59 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
+import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.core.view.ViewCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.adapter.VType
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.append
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
+import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.EasterEggGroup
 import com.dede.basic.requireDrawable
+
+
+fun EasterEggGroup.toEggGroup(): EggGroup {
+    return EggGroup(eggs.map { it.toEgg() })
+}
+
+fun EasterEgg.toEgg(): Egg {
+    val versionFormatter: Egg.VersionFormatter
+    val versionCommentFormatter: Egg.VersionCommentFormatter
+    val versionName1 = EasterEgg.getVersionNameByApiLevel(apiLevel.first)
+    if (apiLevel.first == apiLevel.last) {
+        versionFormatter = Egg.VersionFormatter(
+            nicknameRes,
+            versionName1
+        )
+        versionCommentFormatter = Egg.VersionCommentFormatter(
+            apiLevel.first,
+            versionName1
+        )
+    } else {
+        val versionName2 = EasterEgg.getVersionNameByApiLevel(apiLevel.last)
+        versionFormatter = Egg.VersionFormatter(
+            nicknameRes,
+            versionName1, versionName2,
+        )
+        versionCommentFormatter = Egg.VersionCommentFormatter(
+            apiLevel.first, apiLevel.last,
+            versionName1, versionName2
+        )
+    }
+    return Egg(
+        iconRes = iconRes,
+        eggNameRes = nameRes,
+        versionFormatter = versionFormatter,
+        versionCommentFormatter = versionCommentFormatter,
+        targetClass = provideEasterEgg(),
+        supportAdaptiveIcon = supportAdaptiveIcon,
+        id = id
+    )
+}
 
 data class Egg(
     @DrawableRes val iconRes: Int,
@@ -24,12 +65,9 @@ data class Egg(
     val versionCommentFormatter: VersionCommentFormatter,
     val targetClass: Class<out Activity>? = null,
     val supportAdaptiveIcon: Boolean = false,
-    val key: String? = null,
-    val extras: Bundle? = null,
+    val id: Int = View.NO_ID,
     private val itemType: Int = VIEW_TYPE_EGG,
 ) : VType {
-
-    val id = ViewCompat.generateViewId()
 
     class VersionFormatter(
         @StringRes val nicknameRes: Int,

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="i_egg_name">Nyandroid</string>
+
+    <string name="i_android_nickname" translatable="false">Ice Cream Sandwich</string>
 </resources>

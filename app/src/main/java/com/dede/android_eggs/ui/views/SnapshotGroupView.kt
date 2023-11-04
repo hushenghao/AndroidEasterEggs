@@ -17,27 +17,32 @@ import coil.dispose
 import coil.load
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.EggListFragment
-import com.dede.android_eggs.main.entity.EggDatas
-import com.dede.android_eggs.main.entity.Snapshot
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.findFragmentById
 import com.dede.android_eggs.util.getActivity
-import com.dede.basic.PlatLogoSnapshotProvider
+import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.SnapshotProvider
 import com.dede.blurhash_android.BlurHashDrawable
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.carousel.CarouselSnapHelper
 import com.google.android.material.carousel.HeroCarouselStrategy
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.math.abs
 import kotlin.random.Random
 
+@AndroidEntryPoint
 class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
     ConstraintLayout(context, attrs), Runnable {
 
     private val snapshotList: RecyclerView
 
     private var scrollPosition: Int = RecyclerView.NO_POSITION
+
+    @Inject
+    lateinit var easterEggs: List<@JvmSuppressWildcards EasterEgg>
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_snapshot_group, this, true)
@@ -49,8 +54,25 @@ class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: Attri
         CarouselSnapHelper(true).attachToRecyclerView(snapshotList)
         snapshotList.adapter = VAdapter(
             R.layout.item_snapshot_mask_layout,
-            EggDatas.snapshotList, ::onBindSnapshot
+            getSnapshotList(), ::onBindSnapshot
         )
+    }
+
+    private class Snapshot(
+        val provider: SnapshotProvider,
+        val id: Int
+    )
+
+    private fun getSnapshotList(): List<Snapshot> {
+        val list = ArrayList<Snapshot>()
+        var provider: SnapshotProvider?
+        for (easterEgg in easterEggs) {
+            provider = easterEgg.provideSnapshotProvider()
+            if (provider != null) {
+                list.add(Snapshot(provider, easterEgg.id))
+            }
+        }
+        return list
     }
 
     override fun run() {
@@ -79,7 +101,7 @@ class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: Attri
         holder.setIsRecyclable(false)
         val group: ViewGroup = holder.findViewById(R.id.fl_content)
         val background: ImageView = holder.findViewById(R.id.iv_background)
-        val provider: PlatLogoSnapshotProvider = snapshot.provider
+        val provider: SnapshotProvider = snapshot.provider
         background.isVisible = !provider.includeBackground
         background.dispose()
         if (!provider.includeBackground && background.drawable == null) {
@@ -102,7 +124,7 @@ class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: Attri
             val fragment = it.context.getActivity<FragmentActivity>()
                 ?.findFragmentById<EggListFragment>(R.id.fl_eggs)
                 ?: return@setOnClickListener
-            fragment.smoothScrollToEgg(snapshot.key)
+            fragment.smoothScrollToEgg(snapshot.id)
         }
     }
 

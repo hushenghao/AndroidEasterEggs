@@ -14,6 +14,8 @@ import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.resolveColor
 import com.dede.android_eggs.views.settings.prefs.NightModePref.Companion.ACTION_NIGHT_MODE_CHANGED
 import com.dede.basic.dp
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.random.Random
 import com.google.android.material.R as M3R
 
@@ -23,7 +25,11 @@ import com.google.android.material.R as M3R
  * @author shhu
  * @since 2023/5/22
  */
+@AndroidEntryPoint
 class PlaceholderActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var iconRes: IntArray
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.tryApplyOLEDTheme(this)
@@ -57,18 +63,7 @@ class PlaceholderActivity : AppCompatActivity() {
     }
 
     private fun randomRes(): Int {
-        val array = intArrayOf(
-            com.android_u.egg.R.drawable.u_android14_patch_adaptive,
-            R.drawable.ic_android_tiramisu,
-            R.drawable.ic_android_s,
-            com.android_r.egg.R.drawable.r_icon,
-            com.android_q.egg.R.drawable.q_icon,
-            com.android_p.egg.R.drawable.p_icon,
-            R.drawable.ic_android_oreo,
-            R.drawable.ic_android_nougat,
-            R.drawable.ic_android_marshmallow,
-            R.drawable.ic_android_lollipop,
-        )
+        val array = iconRes
         val index = Random.nextInt(array.size)
         return array[index]
     }

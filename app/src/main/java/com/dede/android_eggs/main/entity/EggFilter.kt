@@ -2,8 +2,14 @@ package com.dede.android_eggs.main.entity
 
 import android.content.Context
 import android.widget.Filter
+import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.adapter.VType
+import com.dede.basic.provider.BaseEasterEgg
+import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.EasterEggGroup
+import dagger.hilt.android.qualifiers.ActivityContext
 import java.util.Locale
+import javax.inject.Inject
 
 /**
  * Egg Search Filter
@@ -11,9 +17,28 @@ import java.util.Locale
  * @author shhu
  * @since 2023/8/9
  */
-class EggFilter(val context: Context) : Filter() {
+class EggFilter @Inject constructor(
+    @ActivityContext private val context: Context,
+    easterEggs: List<@JvmSuppressWildcards BaseEasterEgg>
+) : Filter() {
 
-    private val allSearchEggList = EggDatas.eggList.let {
+    private fun convertEggList(easterEggs: List<BaseEasterEgg>): List<VType> {
+        val list = ArrayList<VType>()
+        list.add(Wavy(R.drawable.ic_wavy_line))
+        for (easterEgg in easterEggs) {
+            if (easterEgg is EasterEgg) {
+                list.add(easterEgg.toEgg())
+            } else if (easterEgg is EasterEggGroup) {
+                list.add(easterEgg.toEggGroup())
+            }
+        }
+        list.add(Wavy(R.drawable.ic_wavy_line))
+        return list
+    }
+
+    private val allEggList: List<VType> = convertEggList(easterEggs)
+
+    private val allSearchEggList: List<VType> = allEggList.let {
         val newList = ArrayList<VType>()
         for (vType in it) {
             if (vType is EggGroup) {
@@ -24,9 +49,8 @@ class EggFilter(val context: Context) : Filter() {
         }
         return@let newList
     }
-    private val allEggList = EggDatas.eggList
 
-    val eggList = ArrayList(allEggList)
+    val eggList: MutableList<VType> = ArrayList(allEggList)
 
     var onFilterResults: OnFilterResults? = null
 
