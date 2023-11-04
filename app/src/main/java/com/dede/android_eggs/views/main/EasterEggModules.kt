@@ -49,27 +49,29 @@ object EasterEggModules {
 
     @Provides
     @Singleton
-    fun provideEasterEggList(easterEggs: Map<Int, @JvmSuppressWildcards BaseEasterEgg>): List<@JvmSuppressWildcards BaseEasterEgg> {
-        return easterEggs.toSortList()
+    fun provideEasterEggList(easterEggMap: Map<Int, @JvmSuppressWildcards BaseEasterEgg>): List<@JvmSuppressWildcards BaseEasterEgg> {
+        return with(easterEggMap.keys.toMutableList()) {
+            sortDescending()
+            map(easterEggMap::getValue)
+        }
     }
 
     @Provides
     @Singleton
-    fun providePureEasterEggList(easterEggs: Map<Int, @JvmSuppressWildcards BaseEasterEgg>): List<@JvmSuppressWildcards EasterEgg> {
+    fun providePureEasterEggList(easterEggs: List<@JvmSuppressWildcards BaseEasterEgg>): List<@JvmSuppressWildcards EasterEgg> {
         return easterEggs.toPureList()
     }
 
     @Provides
     @Singleton
-    fun provideEasterEggAdaptiveIconRes(easterEggs: Map<Int, @JvmSuppressWildcards BaseEasterEgg>): IntArray {
-        return providePureEasterEggList(easterEggs)
-            .filter { it.supportAdaptiveIcon }
+    fun provideEasterEggAdaptiveIconRes(easterEggs: List<@JvmSuppressWildcards EasterEgg>): IntArray {
+        return easterEggs.filter { it.supportAdaptiveIcon }
             .map { it.iconRes }.toIntArray()
     }
 
-    private fun Map<Int, BaseEasterEgg>.toPureList(): List<EasterEgg> {
+    private fun List<BaseEasterEgg>.toPureList(): List<EasterEgg> {
         val list = ArrayList<EasterEgg>()
-        for (easterEgg in toSortList()) {
+        for (easterEgg in this) {
             if (easterEgg is EasterEggGroup) {
                 list.addAll(easterEgg.eggs)
             } else if (easterEgg is EasterEgg) {
@@ -77,12 +79,6 @@ object EasterEggModules {
             }
         }
         return list
-    }
-
-    private fun Map<Int, BaseEasterEgg>.toSortList(): List<BaseEasterEgg> {
-        val keys = ArrayList(keys)
-        keys.sortDescending()
-        return keys.map { getValue(it) }
     }
 
 }
