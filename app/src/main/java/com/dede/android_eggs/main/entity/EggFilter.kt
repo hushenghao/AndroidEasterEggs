@@ -3,9 +3,9 @@ package com.dede.android_eggs.main.entity
 import android.content.Context
 import android.widget.Filter
 import com.dede.android_eggs.R
+import com.dede.android_eggs.main.entity.Egg.Companion.toVTypeEgg
 import com.dede.android_eggs.ui.adapter.VType
 import com.dede.basic.provider.BaseEasterEgg
-import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
 import dagger.hilt.android.qualifiers.ActivityContext
 import java.util.Locale
@@ -26,11 +26,7 @@ class EggFilter @Inject constructor(
         val list = ArrayList<VType>()
         list.add(Wavy(R.drawable.ic_wavy_line))
         for (easterEgg in easterEggs) {
-            if (easterEgg is EasterEgg) {
-                list.add(easterEgg.toEgg())
-            } else if (easterEgg is EasterEggGroup) {
-                list.add(easterEgg.toEggGroup())
-            }
+            list.add(easterEgg.toVTypeEgg())
         }
         list.add(Wavy(R.drawable.ic_wavy_line))
         return list

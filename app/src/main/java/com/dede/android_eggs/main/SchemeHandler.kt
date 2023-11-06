@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
-import com.dede.android_eggs.main.entity.toEgg
+import com.dede.android_eggs.main.entity.Egg.Companion.toEgg
 import com.dede.basic.provider.EasterEgg
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject

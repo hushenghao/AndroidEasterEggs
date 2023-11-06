@@ -7,20 +7,21 @@ import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
-import dagger.multibindings.IntKey;
-import dagger.multibindings.IntoMap;
+import dagger.multibindings.IntoSet;
 
 @Module
 @InstallIn(SingletonComponent.class)
 public class AndroidMarshmallowEasterEgg implements EasterEggProvider {
 
-    @IntoMap
+    @IntoSet
     @Provides
-    @IntKey(Build.VERSION_CODES.M)
+    @Singleton
     @Override
     public BaseEasterEgg provideEasterEgg() {
         return new EasterEgg(

@@ -7,7 +7,7 @@
         android:enabled="true"
         android:icon="@drawable/u_android14_patch_adaptive"
         android:shortcutDisabledMessage="@string/nickname_android_u"
-        android:shortcutId="android_u"
+        android:shortcutId="android_34"
         android:shortcutLongLabel="@string/nickname_android_u"
         android:shortcutShortLabel="@string/nickname_android_u">
         <intent
@@ -20,7 +20,7 @@
         android:enabled="true"
         android:icon="@drawable/t_android_logo"
         android:shortcutDisabledMessage="@string/t_egg_name"
-        android:shortcutId="android_t"
+        android:shortcutId="android_33"
         android:shortcutLongLabel="@string/t_egg_name"
         android:shortcutShortLabel="@string/t_egg_name">
         <intent
@@ -33,7 +33,7 @@
         android:enabled="true"
         android:icon="@drawable/s_android_logo"
         android:shortcutDisabledMessage="@string/s_egg_name"
-        android:shortcutId="android_s"
+        android:shortcutId="android_32"
         android:shortcutLongLabel="@string/s_egg_name"
         android:shortcutShortLabel="@string/s_egg_name">
         <intent

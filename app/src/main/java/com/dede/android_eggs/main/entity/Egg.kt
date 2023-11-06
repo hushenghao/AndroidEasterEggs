@@ -6,7 +6,6 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
-import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.dede.android_eggs.R
@@ -14,60 +13,13 @@ import com.dede.android_eggs.ui.adapter.VType
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.append
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
+import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
 import com.dede.basic.requireDrawable
 
 
-fun EasterEggGroup.toEggGroup(): EggGroup {
-    return EggGroup(eggs.map { it.toEgg() })
-}
-
-fun EasterEgg.toEgg(): Egg {
-    val versionFormatter: Egg.VersionFormatter
-    val versionCommentFormatter: Egg.VersionCommentFormatter
-    val versionName1 = EasterEgg.getVersionNameByApiLevel(apiLevel.first)
-    if (apiLevel.first == apiLevel.last) {
-        versionFormatter = Egg.VersionFormatter(
-            nicknameRes,
-            versionName1
-        )
-        versionCommentFormatter = Egg.VersionCommentFormatter(
-            apiLevel.first,
-            versionName1
-        )
-    } else {
-        val versionName2 = EasterEgg.getVersionNameByApiLevel(apiLevel.last)
-        versionFormatter = Egg.VersionFormatter(
-            nicknameRes,
-            versionName1, versionName2,
-        )
-        versionCommentFormatter = Egg.VersionCommentFormatter(
-            apiLevel.first, apiLevel.last,
-            versionName1, versionName2
-        )
-    }
-    return Egg(
-        iconRes = iconRes,
-        eggNameRes = nameRes,
-        versionFormatter = versionFormatter,
-        versionCommentFormatter = versionCommentFormatter,
-        targetClass = provideEasterEgg(),
-        supportAdaptiveIcon = supportAdaptiveIcon,
-        id = id
-    )
-}
-
-data class Egg(
-    @DrawableRes val iconRes: Int,
-    @StringRes val eggNameRes: Int,
-    val versionFormatter: VersionFormatter,
-    val versionCommentFormatter: VersionCommentFormatter,
-    val targetClass: Class<out Activity>? = null,
-    val supportAdaptiveIcon: Boolean = false,
-    val id: Int = View.NO_ID,
-    private val itemType: Int = VIEW_TYPE_EGG,
-) : VType {
+data class Egg(val easterEgg: EasterEgg) : VType {
 
     class VersionFormatter(
         @StringRes val nicknameRes: Int,
@@ -88,41 +40,33 @@ data class Egg(
         }
     }
 
-    class VersionCommentFormatter(
-        private val versionCode1: Int,
-        private val versionCode2: Int,
-        private val versionName1: CharSequence,
-        private val versionName2: CharSequence,
+    class ApiVersionFormatter(
+        private val apiRange: IntRange,
+        private val versionNameStart: CharSequence,
+        private val versionNameLast: CharSequence,
     ) {
-
-        fun getApiLevelRange(): IntRange {
-            return versionCode1..versionCode2
-        }
-
-        constructor(versionCode: Int, versionName: CharSequence) :
-                this(versionCode, versionCode, versionName, versionName)
 
         fun format(context: Context): CharSequence {
             val span = SpannableStringBuilder()
-                .append(context.getString(R.string.android_version_format, versionName1))
+                .append(context.getString(R.string.android_version_format, versionNameStart))
             val italic = StyleSpan(Typeface.ITALIC)
-            if (versionCode1 == versionCode2) {
+            if (apiRange.first == apiRange.last) {
                 span.append("\n")
                     .append(
-                        context.getString(R.string.api_version_format, versionCode1.toString()),
+                        context.getString(R.string.api_version_format, apiRange.first.toString()),
                         italic
                     )
             } else {
                 val enDash = context.getString(R.string.char_en_dash)
                 span.append(enDash)
-                    .append(versionName2)
+                    .append(versionNameLast)
                     .append("\n")
                     .append(
-                        context.getString(R.string.api_version_format, versionCode1.toString()),
+                        context.getString(R.string.api_version_format, apiRange.first.toString()),
                         italic,
                     )
                     .append(enDash, italic)
-                    .append(versionCode2.toString(), italic)
+                    .append(apiRange.last.toString(), italic)
             }
             return span
         }
@@ -141,22 +85,61 @@ data class Egg(
             }
             return context.requireDrawable(iconRes)
         }
+
+        fun EasterEgg.toEgg(): Egg {
+            return Egg(this)
+        }
+
+        fun BaseEasterEgg.toVTypeEgg(): VType {
+            return when (this) {
+                is EasterEgg -> toEgg()
+                is EasterEggGroup -> EggGroup(eggs.map { it.toEgg() })
+                else -> throw UnsupportedOperationException()
+            }
+        }
     }
 
-    override val viewType: Int = itemType
+    val id: Int get() = easterEgg.id
+    val iconRes: Int @DrawableRes get() = easterEgg.iconRes
+    val eggNameRes: Int @StringRes get() = easterEgg.nameRes
+    val supportAdaptiveIcon: Boolean get() = easterEgg.supportAdaptiveIcon
+    val targetClass: Class<out Activity>? get() = easterEgg.provideEasterEgg()
+
+    val versionFormatter: VersionFormatter
+        get() {
+            val apiLevel = easterEgg.apiLevel
+            return if (apiLevel.first == apiLevel.last) {
+                VersionFormatter(
+                    easterEgg.nicknameRes,
+                    EasterEgg.getVersionNameByApiLevel(apiLevel.first)
+                )
+            } else {
+                VersionFormatter(
+                    easterEgg.nicknameRes,
+                    EasterEgg.getVersionNameByApiLevel(apiLevel.first),
+                    EasterEgg.getVersionNameByApiLevel(apiLevel.last),
+                )
+            }
+        }
+
+    val apiVersionFormatter: ApiVersionFormatter
+        get() {
+            val apiLevel = easterEgg.apiLevel
+            return ApiVersionFormatter(
+                apiLevel,
+                EasterEgg.getVersionNameByApiLevel(apiLevel.first),
+                EasterEgg.getVersionNameByApiLevel(apiLevel.last),
+            )
+        }
+
+    override val viewType: Int = VIEW_TYPE_EGG
 }
 
-class EggGroup(
-    val child: List<Egg>,
-    var selectedIndex: Int = 0,
-) : VType {
-
-    constructor(selectedIndex: Int, vararg child: Egg) : this(child.toList(), selectedIndex)
+class EggGroup(val child: List<Egg>, var selectedIndex: Int = 0) : VType {
 
     val selectedEgg: Egg get() = child[selectedIndex]
 
-    override val viewType: Int
-        get() = Egg.VIEW_TYPE_EGG_GROUP
+    override val viewType: Int = Egg.VIEW_TYPE_EGG_GROUP
 }
 
 class Wavy(val wavyRes: Int, val repeat: Boolean = false) : VType {

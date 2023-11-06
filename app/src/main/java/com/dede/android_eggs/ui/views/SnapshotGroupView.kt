@@ -17,12 +17,12 @@ import coil.dispose
 import coil.load
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.EggListFragment
+import com.dede.android_eggs.main.entity.Snapshot
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.adapter.VHolder
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.findFragmentById
 import com.dede.android_eggs.util.getActivity
-import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.SnapshotProvider
 import com.dede.blurhash_android.BlurHashDrawable
 import com.google.android.material.carousel.CarouselLayoutManager
@@ -42,7 +42,7 @@ class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: Attri
     private var scrollPosition: Int = RecyclerView.NO_POSITION
 
     @Inject
-    lateinit var easterEggs: List<@JvmSuppressWildcards EasterEgg>
+    lateinit var easterEggs: List<@JvmSuppressWildcards Snapshot>
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_snapshot_group, this, true)
@@ -54,25 +54,8 @@ class SnapshotGroupView @JvmOverloads constructor(context: Context, attrs: Attri
         CarouselSnapHelper(true).attachToRecyclerView(snapshotList)
         snapshotList.adapter = VAdapter(
             R.layout.item_snapshot_mask_layout,
-            getSnapshotList(), ::onBindSnapshot
+            easterEggs, ::onBindSnapshot
         )
-    }
-
-    private class Snapshot(
-        val provider: SnapshotProvider,
-        val id: Int
-    )
-
-    private fun getSnapshotList(): List<Snapshot> {
-        val list = ArrayList<Snapshot>()
-        var provider: SnapshotProvider?
-        for (easterEgg in easterEggs) {
-            provider = easterEgg.provideSnapshotProvider()
-            if (provider != null) {
-                list.add(Snapshot(provider, easterEgg.id))
-            }
-        }
-        return list
     }
 
     override fun run() {

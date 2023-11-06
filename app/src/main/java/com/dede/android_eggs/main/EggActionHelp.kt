@@ -35,9 +35,9 @@ object EggActionHelp {
         Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
 
     private fun createIntent(context: Context, egg: Egg, retainInRecents: Boolean = true): Intent? {
-        if (egg.targetClass == null) return null
+        val targetClass = egg.targetClass ?: return null
         return Intent(Intent.ACTION_VIEW)
-            .setClass(context, egg.targetClass)
+            .setClass(context, targetClass)
             .applyIf(retainInRecents) {
                 addFlags(DOCUMENT_LAUNCH_MODE_INTO_EXISTING)
             }

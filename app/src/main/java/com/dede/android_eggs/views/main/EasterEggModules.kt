@@ -15,9 +15,11 @@ import com.android_r.egg.AndroidREasterEgg
 import com.android_s.egg.AndroidSEasterEgg
 import com.android_t.egg.AndroidTEasterEgg
 import com.android_u.egg.AndroidUEasterEgg
+import com.dede.android_eggs.main.entity.Snapshot
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
+import com.dede.basic.provider.SnapshotProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,29 +51,15 @@ object EasterEggModules {
 
     @Provides
     @Singleton
-    fun provideEasterEggList(easterEggMap: Map<Int, @JvmSuppressWildcards BaseEasterEgg>): List<@JvmSuppressWildcards BaseEasterEgg> {
-        return with(easterEggMap.keys.toMutableList()) {
-            sortDescending()
-            map(easterEggMap::getValue)
-        }
+    fun provideEasterEggList(easterEggSet: Set<@JvmSuppressWildcards BaseEasterEgg>): List<@JvmSuppressWildcards BaseEasterEgg> {
+        return easterEggSet.sortedByDescending { it.getSortValue() }
     }
 
     @Provides
     @Singleton
     fun providePureEasterEggList(easterEggs: List<@JvmSuppressWildcards BaseEasterEgg>): List<@JvmSuppressWildcards EasterEgg> {
-        return easterEggs.toPureList()
-    }
-
-    @Provides
-    @Singleton
-    fun provideEasterEggAdaptiveIconRes(easterEggs: List<@JvmSuppressWildcards EasterEgg>): IntArray {
-        return easterEggs.filter { it.supportAdaptiveIcon }
-            .map { it.iconRes }.toIntArray()
-    }
-
-    private fun List<BaseEasterEgg>.toPureList(): List<EasterEgg> {
         val list = ArrayList<EasterEgg>()
-        for (easterEgg in this) {
+        for (easterEgg in easterEggs) {
             if (easterEgg is EasterEggGroup) {
                 list.addAll(easterEgg.eggs)
             } else if (easterEgg is EasterEgg) {
@@ -79,6 +67,27 @@ object EasterEggModules {
             }
         }
         return list
+    }
+
+    @Provides
+    @Singleton
+    fun provideSnapshotList(easterEggs: List<@JvmSuppressWildcards EasterEgg>): List<@JvmSuppressWildcards Snapshot> {
+        val list = ArrayList<Snapshot>()
+        var provider: SnapshotProvider?
+        for (easterEgg in easterEggs) {
+            provider = easterEgg.provideSnapshotProvider()
+            if (provider != null) {
+                list.add(Snapshot(provider, easterEgg.id))
+            }
+        }
+        return list
+    }
+
+    @Provides
+    @Singleton
+    fun provideEasterEggAdaptiveIconRes(easterEggs: List<@JvmSuppressWildcards EasterEgg>): IntArray {
+        return easterEggs.filter { it.supportAdaptiveIcon }
+            .map { it.iconRes }.toIntArray()
     }
 
 }

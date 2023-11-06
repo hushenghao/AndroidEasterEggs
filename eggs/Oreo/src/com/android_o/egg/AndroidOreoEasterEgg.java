@@ -8,24 +8,24 @@ import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggGroup;
 import com.dede.basic.provider.EasterEggProvider;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
-import dagger.multibindings.IntKey;
-import dagger.multibindings.IntoMap;
+import dagger.multibindings.IntoSet;
 
 @Module
 @InstallIn(SingletonComponent.class)
 public class AndroidOreoEasterEgg implements EasterEggProvider {
 
+    @IntoSet
     @Provides
-    @IntoMap
-    @IntKey(Build.VERSION_CODES.O)
+    @Singleton
     @Override
     public BaseEasterEgg provideEasterEgg() {
         return new EasterEggGroup(
-                0,
                 new EasterEgg(
                         R.drawable.o_android_logo,
                         R.string.o_app_name,

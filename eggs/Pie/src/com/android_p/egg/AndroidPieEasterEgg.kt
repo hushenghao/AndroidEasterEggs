@@ -9,16 +9,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dagger.multibindings.IntKey
-import dagger.multibindings.IntoMap
+import dagger.multibindings.IntoSet
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class AndroidPieEasterEgg : EasterEggProvider {
 
     @Provides
-    @IntoMap
-    @IntKey(Build.VERSION_CODES.P)
+    @IntoSet
+    @Singleton
     override fun provideEasterEgg(): BaseEasterEgg {
         return object : EasterEgg(
             iconRes = R.drawable.p_icon,
@@ -26,7 +26,7 @@ class AndroidPieEasterEgg : EasterEggProvider {
             nicknameRes = R.string.p_android_nickname,
             apiLevel = Build.VERSION_CODES.P
         ) {
-            override fun provideEasterEgg(): Class<out Activity>? {
+            override fun provideEasterEgg(): Class<out Activity> {
                 return PlatLogoActivity::class.java
             }
 
