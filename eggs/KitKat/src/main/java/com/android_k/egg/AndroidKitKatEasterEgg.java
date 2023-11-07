@@ -1,9 +1,14 @@
 package com.android_k.egg;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
+
 import com.dede.basic.provider.BaseEasterEgg;
+import com.dede.basic.provider.ComponentProvider;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
 
@@ -18,7 +23,7 @@ import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
-public class AndroidKitKatEasterEgg implements EasterEggProvider {
+public class AndroidKitKatEasterEgg implements EasterEggProvider, ComponentProvider {
 
     @IntoSet
     @Provides
@@ -40,6 +45,35 @@ public class AndroidKitKatEasterEgg implements EasterEggProvider {
             @Override
             public SnapshotProvider provideSnapshotProvider() {
                 return new SnapshotProvider();
+            }
+        };
+    }
+
+    @IntoSet
+    @Provides
+    @Singleton
+    @Override
+    public Component provideComponent() {
+        return new Component(
+                R.string.k_dessert_case,
+                R.string.k_android_nickname,
+                new IntRange(Build.VERSION_CODES.KITKAT, Build.VERSION_CODES.KITKAT_WATCH)
+        ) {
+            @Override
+            public boolean isSupported() {
+                return true;
+            }
+
+            @Override
+            public boolean isEnabled(@NonNull Context context) {
+                ComponentName cn = new ComponentName(context, DessertCaseDream.class);
+                return Component.isEnabled(cn, context);
+            }
+
+            @Override
+            public void setEnabled(@NonNull Context context, boolean enable) {
+                ComponentName cn = new ComponentName(context, DessertCaseDream.class);
+                Component.setEnable(cn, context, enable);
             }
         };
     }
