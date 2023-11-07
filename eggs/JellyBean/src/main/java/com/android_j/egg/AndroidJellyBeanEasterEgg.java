@@ -55,8 +55,8 @@ public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentPr
     @Override
     public Component provideComponent() {
         return new Component(
-                R.drawable.j_android_logo,
-                R.string.j_egg_name,
+                R.drawable.j_redbean2,
+                R.string.j_jelly_bean_dream_name,
                 R.string.j_android_nickname,
                 new IntRange(Build.VERSION_CODES.JELLY_BEAN, Build.VERSION_CODES.JELLY_BEAN_MR2)
         ) {

@@ -55,7 +55,7 @@ public class AndroidKitKatEasterEgg implements EasterEggProvider, ComponentProvi
     @Override
     public Component provideComponent() {
         return new Component(
-                R.drawable.k_android_logo,
+                R.drawable.k_platlogo,
                 R.string.k_dessert_case,
                 R.string.k_android_nickname,
                 new IntRange(Build.VERSION_CODES.KITKAT, Build.VERSION_CODES.KITKAT_WATCH)

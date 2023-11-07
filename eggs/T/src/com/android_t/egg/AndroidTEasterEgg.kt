@@ -48,7 +48,7 @@ class AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
     @Singleton
     override fun provideComponent(): ComponentProvider.Component {
         return object : ComponentProvider.Component(
-            iconRes = R.drawable.t_android_logo,
+            iconRes = R.drawable.t_ic_fullcat_icon,
             nameRes = R.string.t_egg_name,
             nicknameRes = R.string.t_android_nickname,
             apiLevel = Build.VERSION_CODES.TIRAMISU
