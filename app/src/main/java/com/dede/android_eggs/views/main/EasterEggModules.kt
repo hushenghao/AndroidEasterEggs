@@ -17,6 +17,7 @@ import com.android_t.egg.AndroidTEasterEgg
 import com.android_u.egg.AndroidUEasterEgg
 import com.dede.android_eggs.main.entity.Snapshot
 import com.dede.basic.provider.BaseEasterEgg
+import com.dede.basic.provider.ComponentProvider.Component
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
 import com.dede.basic.provider.SnapshotProvider
@@ -88,6 +89,12 @@ object EasterEggModules {
     fun provideEasterEggAdaptiveIconRes(easterEggs: List<@JvmSuppressWildcards EasterEgg>): IntArray {
         return easterEggs.filter { it.supportAdaptiveIcon }
             .map { it.iconRes }.toIntArray()
+    }
+
+    @Provides
+    @Singleton
+    fun provideEasterEggComponents(componentSet: Set<@JvmSuppressWildcards Component>): List<@JvmSuppressWildcards Component> {
+        return componentSet.sortedByDescending { it.getSortValue() }
     }
 
 }

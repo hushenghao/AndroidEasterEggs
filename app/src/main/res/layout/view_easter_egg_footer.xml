@@ -84,6 +84,14 @@
             android:textColor="?attr/colorSecondary" />
 
         <TextView
+            android:id="@+id/tv_component_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_component_manager"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="?attr/colorSecondary" />
+
+        <TextView
             android:id="@+id/tv_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

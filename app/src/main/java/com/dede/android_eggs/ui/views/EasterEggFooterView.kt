@@ -17,6 +17,7 @@ import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.createChooser
 import com.dede.android_eggs.util.createRepeatWavyDrawable
 import com.dede.android_eggs.util.getActivity
+import com.dede.android_eggs.views.settings.component.ComponentManagerFragment
 import com.dede.android_eggs.views.timeline.AndroidTimelineFragment
 import com.dede.basic.dp
 
@@ -39,7 +40,7 @@ class EasterEggFooterView @JvmOverloads constructor(
         binding.tvGitHash.text = BuildConfig.GIT_HASH
         binding.tvGitHash.paintFlags = binding.tvGitHash.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         val views = arrayOf(
-            binding.tvGitHash,
+            binding.tvGitHash, binding.tvComponentManager,
             binding.tvPrivacy, binding.tvLicense, binding.tvFeedback,
         )
         for (view in views) {
@@ -76,6 +77,11 @@ class EasterEggFooterView @JvmOverloads constructor(
             R.id.tv_timeline -> {
                 val activity = context.getActivity<FragmentActivity>() ?: return
                 AndroidTimelineFragment.show(activity.supportFragmentManager)
+            }
+
+            R.id.tv_component_manager -> {
+                val activity = context.getActivity<FragmentActivity>() ?: return
+                ComponentManagerFragment.show(activity.supportFragmentManager)
             }
 
             R.id.tv_github, R.id.tv_translation, R.id.tv_donate, R.id.tv_beta,

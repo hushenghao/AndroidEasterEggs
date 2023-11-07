@@ -1,8 +1,13 @@
 package com.android_r.egg
 
 import android.app.Activity
+import android.content.ComponentName
+import android.content.Context
 import android.os.Build
+import androidx.annotation.RequiresApi
+import com.android_r.egg.neko.NekoControlsService
 import com.dede.basic.provider.BaseEasterEgg
+import com.dede.basic.provider.ComponentProvider
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
 import dagger.Module
@@ -14,7 +19,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AndroidREasterEgg : EasterEggProvider {
+class AndroidREasterEgg : EasterEggProvider, ComponentProvider {
 
     @Provides
     @IntoSet
@@ -33,6 +38,33 @@ class AndroidREasterEgg : EasterEggProvider {
 
             override fun provideSnapshotProvider(): SnapshotProvider {
                 return SnapshotProvider()
+            }
+        }
+    }
+
+    @Provides
+    @IntoSet
+    @Singleton
+    override fun provideComponent(): ComponentProvider.Component {
+        return object : ComponentProvider.Component(
+            nameRes = R.string.r_egg_name,
+            nicknameRes = R.string.r_android_nickname,
+            apiLevel = Build.VERSION_CODES.R
+        ) {
+            override fun isSupported(): Boolean {
+                return Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+            }
+
+            @RequiresApi(Build.VERSION_CODES.R)
+            override fun isEnabled(context: Context): Boolean {
+                val cn = ComponentName(context, NekoControlsService::class.java)
+                return cn.isEnabled(context)
+            }
+
+            @RequiresApi(Build.VERSION_CODES.R)
+            override fun setEnabled(context: Context, enable: Boolean) {
+                val cn = ComponentName(context, NekoControlsService::class.java)
+                cn.setEnable(context, enable)
             }
         }
     }

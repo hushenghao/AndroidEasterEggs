@@ -1,4 +1,5 @@
 ### v2.1.1
+- Added Component Manager Settings
 - Added Portuguese (Brazilian) translation 
 - Known issue fixes
 

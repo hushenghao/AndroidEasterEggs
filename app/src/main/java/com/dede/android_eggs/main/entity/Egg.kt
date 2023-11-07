@@ -26,6 +26,23 @@ data class Egg(val easterEgg: EasterEgg) : VType {
         vararg versionNames: CharSequence,
     ) {
 
+        companion object {
+            fun create(@StringRes nicknameRes: Int, apiLevel: IntRange): VersionFormatter {
+                return if (apiLevel.first == apiLevel.last) {
+                    VersionFormatter(
+                        nicknameRes,
+                        EasterEgg.getVersionNameByApiLevel(apiLevel.first)
+                    )
+                } else {
+                    VersionFormatter(
+                        nicknameRes,
+                        EasterEgg.getVersionNameByApiLevel(apiLevel.first),
+                        EasterEgg.getVersionNameByApiLevel(apiLevel.last),
+                    )
+                }
+            }
+        }
+
         private val versionNames: Array<out CharSequence> = versionNames
 
         fun format(context: Context): CharSequence {
@@ -45,6 +62,16 @@ data class Egg(val easterEgg: EasterEgg) : VType {
         private val versionNameStart: CharSequence,
         private val versionNameLast: CharSequence,
     ) {
+
+        companion object {
+            fun create(apiLevel: IntRange): ApiVersionFormatter {
+                return ApiVersionFormatter(
+                    apiLevel,
+                    EasterEgg.getVersionNameByApiLevel(apiLevel.first),
+                    EasterEgg.getVersionNameByApiLevel(apiLevel.last),
+                )
+            }
+        }
 
         fun format(context: Context): CharSequence {
             val span = SpannableStringBuilder()
@@ -105,32 +132,9 @@ data class Egg(val easterEgg: EasterEgg) : VType {
     val supportAdaptiveIcon: Boolean get() = easterEgg.supportAdaptiveIcon
     val targetClass: Class<out Activity>? get() = easterEgg.provideEasterEgg()
 
-    val versionFormatter: VersionFormatter
-        get() {
-            val apiLevel = easterEgg.apiLevel
-            return if (apiLevel.first == apiLevel.last) {
-                VersionFormatter(
-                    easterEgg.nicknameRes,
-                    EasterEgg.getVersionNameByApiLevel(apiLevel.first)
-                )
-            } else {
-                VersionFormatter(
-                    easterEgg.nicknameRes,
-                    EasterEgg.getVersionNameByApiLevel(apiLevel.first),
-                    EasterEgg.getVersionNameByApiLevel(apiLevel.last),
-                )
-            }
-        }
+    val versionFormatter = VersionFormatter.create(easterEgg.nicknameRes, easterEgg.apiLevel)
 
-    val apiVersionFormatter: ApiVersionFormatter
-        get() {
-            val apiLevel = easterEgg.apiLevel
-            return ApiVersionFormatter(
-                apiLevel,
-                EasterEgg.getVersionNameByApiLevel(apiLevel.first),
-                EasterEgg.getVersionNameByApiLevel(apiLevel.last),
-            )
-        }
+    val apiVersionFormatter = ApiVersionFormatter.create(easterEgg.apiLevel)
 
     override val viewType: Int = VIEW_TYPE_EGG
 }
