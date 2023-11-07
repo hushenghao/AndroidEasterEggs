@@ -43,7 +43,7 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
 viewbinding-delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9"
 squareup-okio = "com.squareup.okio:okio:3.6.0"
-io-coil = "io.coil-kt:coil:2.4.0"
+io-coil = "io.coil-kt:coil:2.5.0"
 free-reflection = "com.github.tiann:FreeReflection:3.2.0"
 squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.12"
 nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
