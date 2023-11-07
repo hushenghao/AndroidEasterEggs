@@ -38,4 +38,5 @@
     <string name="label_welcome">歡迎使用 Easter Egg Catalogs 🎉🎉🎉</string>
     <string name="label_share">分享</string>
     <string name="label_search_hint">搜尋…</string>
+    <string name="label_component_manager">組件管理器</string>
 </resources>
