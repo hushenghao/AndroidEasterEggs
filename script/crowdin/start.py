@@ -19,7 +19,7 @@ def get_project_progress():
         name = language['data']['name']
         language_pairs[id] = name
 
-    languages = client.translation_status.get_project_progress(project_id)['data']
+    languages = client.translation_status.get_project_progress(project_id, limit=100)['data']
     for language in languages:
         id = language['data']['languageId']
         name = language_pairs.get(id)
