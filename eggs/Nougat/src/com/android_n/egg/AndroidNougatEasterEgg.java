@@ -57,6 +57,7 @@ public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvi
     @Override
     public Component provideComponent() {
         return new ComponentProvider.Component(
+                R.drawable.n_android_logo,
                 R.string.n_app_name,
                 R.string.n_android_nickname,
                 new IntRange(Build.VERSION_CODES.N, Build.VERSION_CODES.N_MR1)

@@ -3,6 +3,7 @@ package com.dede.basic.provider
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
 
@@ -11,6 +12,7 @@ interface ComponentProvider {
     fun provideComponent(): Component
 
     abstract class Component constructor(
+        @DrawableRes val iconRes: Int,
         @StringRes val nameRes: Int,
         @StringRes val nicknameRes: Int,
         val apiLevel: IntRange,
@@ -49,10 +51,11 @@ interface ComponentProvider {
         }
 
         constructor(
+            @DrawableRes iconRes: Int,
             @StringRes nameRes: Int,
             @StringRes nicknameRes: Int,
             apiLevel: Int,
-        ) : this(nameRes, nicknameRes, apiLevel..apiLevel)
+        ) : this(iconRes, nameRes, nicknameRes, apiLevel..apiLevel)
 
         abstract fun isSupported(): Boolean
 

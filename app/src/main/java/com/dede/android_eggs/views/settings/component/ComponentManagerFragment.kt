@@ -8,8 +8,13 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.entity.Egg.VersionFormatter
+import com.dede.android_eggs.ui.Icons
+import com.dede.android_eggs.ui.drawables.FontIconsDrawable
+import com.dede.android_eggs.util.inset
 import com.dede.android_eggs.util.requirePreference
+import com.dede.basic.dp
 import com.dede.basic.provider.ComponentProvider
+import com.dede.basic.requireDrawable
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -33,6 +38,9 @@ class ComponentManagerFragment : BottomSheetDialogFragment(R.layout.fragment_com
             addPreferencesFromResource(R.xml.pref_component_settings)
 
             val preferenceCategory = requirePreference<PreferenceCategory>("key_component_manager")
+            preferenceCategory.icon =
+                FontIconsDrawable(requireContext(), Icons.Rounded.grid_view, 24f)
+                    .inset(start = 6.dp, end = 6.dp)
             for (component in componentList) {
                 val preference = createPreference(component)
                 preferenceCategory.addPreference(preference)
@@ -42,7 +50,7 @@ class ComponentManagerFragment : BottomSheetDialogFragment(R.layout.fragment_com
         private fun createPreference(component: ComponentProvider.Component): Preference {
             val context = requireContext()
             return SwitchPreferenceCompat(context).apply {
-                isIconSpaceReserved = false
+                setIcon(component.iconRes)
                 setTitle(component.nameRes)
                 val formatter = VersionFormatter.create(component.nicknameRes, component.apiLevel)
                 summary = formatter.format(context)
