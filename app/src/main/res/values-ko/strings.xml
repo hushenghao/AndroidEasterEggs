@@ -38,4 +38,5 @@
     <string name="label_welcome">Easter Egg 카탈로그에 오신 것을 환영합니다 🎉🎉🎉</string>
     <string name="label_share">공유</string>
     <string name="label_search_hint">검색…</string>
+    <string name="label_component_manager">구성 요소 관리자</string>
 </resources>
