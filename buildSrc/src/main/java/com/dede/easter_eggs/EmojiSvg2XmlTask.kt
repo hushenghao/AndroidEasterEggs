@@ -67,7 +67,7 @@ open class EmojiSvg2XmlTask : DefaultTask() {
 
     init {
         if (!::svgOutputDir.isInitialized) {
-            svgOutputDir = File(project.buildDir, "xml")
+            svgOutputDir = File(project.file(project.layout.buildDirectory), "xml")
         }
     }
 
