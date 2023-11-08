@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 package com.dede.android_eggs.ui.drawables
 
 import android.graphics.Canvas
@@ -7,7 +13,7 @@ import android.graphics.Rect
 import android.graphics.drawable.Drawable
 
 /**
- * Created by shhu on 2023/2/3 16:52.
+ * ScaleType Drawable Wrapper, like [android.widget.ImageView.ScaleType]
  *
  * @author shhu
  * @since 2023/2/3
@@ -99,5 +105,7 @@ class ScaleTypeDrawable(private val delegate: Drawable, private val scaleType: S
         throw UnsupportedOperationException()
     }
 
+    @Deprecated("Deprecated in Java")
+    @Suppress("DEPRECATION")
     override fun getOpacity(): Int = delegate.opacity
 }

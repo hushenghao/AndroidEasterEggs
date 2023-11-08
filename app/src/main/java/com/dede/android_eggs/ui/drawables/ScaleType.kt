@@ -4,6 +4,8 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+@file:Suppress("unused")
+
 package com.dede.android_eggs.ui.drawables
 
 import android.graphics.Matrix
@@ -107,6 +109,7 @@ interface ScaleType {
  * A convenience base class that has some common logic.
  */
 abstract class AbstractScaleType : ScaleType {
+    @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun getTransform(
         outTransform: Matrix,
         parentRect: Rect,
