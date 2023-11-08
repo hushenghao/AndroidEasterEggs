@@ -19,7 +19,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AndroidBaseEasterEgg : EasterEggProvider {
+object AndroidBaseEasterEgg : EasterEggProvider {
 
     private class EmptyEasterEgg constructor(
         @DrawableRes iconRes: Int,

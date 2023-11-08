@@ -21,7 +21,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
+object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
 
     @Provides
     @IntoSet
