@@ -55,12 +55,13 @@
         android:layout_marginTop="24dp"
         app:itemSpacing="@dimen/flow_item_spacing"
         app:layout_constraintTop_toBottomOf="@id/tv_summary"
-        app:lineSpacing="10dp">
+        app:lineSpacing="8dp">
 
         <TextView
             android:id="@+id/tv_github"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/ripple_footer_flow_child_bg"
             android:tag="@string/url_github"
             android:text="@string/label_github"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
@@ -70,6 +71,7 @@
             android:id="@+id/tv_translation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/ripple_footer_flow_child_bg"
             android:tag="@string/url_translation"
             android:text="@string/label_translation"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
@@ -79,6 +81,7 @@
             android:id="@+id/tv_timeline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/ripple_footer_flow_child_bg"
             android:text="@string/label_timeline"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="?attr/colorSecondary" />
@@ -87,6 +90,7 @@
             android:id="@+id/tv_component_manager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/ripple_footer_flow_child_bg"
             android:text="@string/label_component_manager"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="?attr/colorSecondary" />
@@ -95,6 +99,7 @@
             android:id="@+id/tv_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/ripple_footer_flow_child_bg"
             android:text="@string/label_star"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="?attr/colorSecondary" />
@@ -103,6 +108,7 @@
             android:id="@+id/tv_donate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/ripple_footer_flow_child_bg"
             android:tag="@string/url_sponsor"
             android:text="@string/label_donate"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
@@ -112,6 +118,7 @@
             android:id="@+id/tv_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/ripple_footer_flow_child_bg"
             android:tag="@string/url_share"
             android:text="@string/label_share"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
@@ -121,6 +128,7 @@
             android:id="@+id/tv_beta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/ripple_footer_flow_child_bg"
             android:tag="@string/url_beta"
             android:text="@string/label_beta"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
@@ -143,9 +151,9 @@
         class="com.google.android.material.internal.FlowLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemSpacing="20dp"
+        app:itemSpacing="18dp"
         app:layout_constraintTop_toBottomOf="@id/iv_line"
-        app:lineSpacing="20dp">
+        app:lineSpacing="18dp">
 
         <TextView
             android:id="@+id/tv_app_name"
@@ -158,7 +166,7 @@
             android:id="@+id/tv_privacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
+            android:background="@drawable/ripple_footer_flow_child_bg"
             android:tag="@string/url_privacy"
             android:text="@string/label_privacy_policy"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
@@ -168,7 +176,7 @@
             android:id="@+id/tv_license"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
+            android:background="@drawable/ripple_footer_flow_child_bg"
             android:tag="@string/url_license"
             android:text="@string/label_license"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
@@ -178,7 +186,7 @@
             android:id="@+id/tv_feedback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
+            android:background="@drawable/ripple_footer_flow_child_bg"
             android:tag="@string/url_mail"
             android:text="@string/label_email"
             android:textAppearance="@style/TextAppearance.Material3.TitleSmall"

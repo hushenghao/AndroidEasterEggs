@@ -60,10 +60,14 @@ fun createOvalWrapper(drawable: Drawable, @ColorInt color: Int): Drawable {
     return createLayer(createGradient(GradientDrawable.OVAL, color), drawable)
 }
 
-fun createOvalRipple(context: Context, content: Drawable): RippleDrawable {
+fun createOvalRipple(context: Context, content: Drawable?): RippleDrawable {
+    return createRipple(
+        context, content, createGradient(GradientDrawable.OVAL, Color.WHITE)
+    )
+}
+
+fun createRipple(context: Context, content: Drawable?, mask: Drawable?): RippleDrawable {
     return RippleDrawable(
-        context.resolveColorStateList(R.attr.colorControlHighlight),
-        content,
-        createGradient(GradientDrawable.OVAL, Color.WHITE)
+        context.resolveColorStateList(R.attr.colorAccent), content, mask
     )
 }
