@@ -68,6 +68,6 @@ fun createOvalRipple(context: Context, content: Drawable?): RippleDrawable {
 
 fun createRipple(context: Context, content: Drawable?, mask: Drawable?): RippleDrawable {
     return RippleDrawable(
-        context.resolveColorStateList(R.attr.colorAccent), content, mask
+        context.resolveColorStateList(R.attr.colorControlHighlight), content, mask
     )
 }

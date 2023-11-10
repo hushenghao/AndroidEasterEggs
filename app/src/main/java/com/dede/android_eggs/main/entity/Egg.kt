@@ -91,13 +91,18 @@ data class Egg(val easterEgg: EasterEgg) : VType {
                     .append(versionNameLast)
                     .append("\n")
                     .append(
-                        context.getString(R.string.api_version_format, apiRange.first.toString()),
+                        context.getString(R.string.api_version_format, apiRange.join(enDash)),
                         italic,
                     )
-                    .append(enDash, italic)
-                    .append(apiRange.last.toString(), italic)
             }
             return span
+        }
+
+        private fun IntRange.join(s: CharSequence): CharSequence {
+            return StringBuilder()
+                .append(first)
+                .append(s)
+                .append(last)
         }
     }
 
