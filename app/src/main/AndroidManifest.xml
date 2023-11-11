@@ -63,7 +63,7 @@
         </provider>
 
         <activity
-            android:name=".main.EasterEggsActivity"
+            android:name=".views.main.EasterEggsActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize">
