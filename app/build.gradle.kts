@@ -50,6 +50,14 @@ android {
         }
     }
 
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.kotlin.compiler.get()
+    }
+
     signingConfigs {
         if (keyprops.isEmpty) return@signingConfigs
         create("release") {
@@ -108,13 +116,22 @@ dependencies {
     implementation(libs.androidx.window)
     implementation(libs.google.material)
     implementation(libs.androidx.startup)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.util)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+
     implementation(libs.io.coil)
     implementation(libs.free.reflection)
     implementation(libs.viewbinding.delegate)
     implementation(libs.blurhash.android)
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
     debugImplementation(libs.squareup.leakcanary)
+
     implementation(project(":basic"))
     implementation(project(":eggs:U"))
     implementation(project(":eggs:T"))

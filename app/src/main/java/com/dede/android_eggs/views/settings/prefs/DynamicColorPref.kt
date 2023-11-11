@@ -3,9 +3,11 @@ package com.dede.android_eggs.views.settings.prefs
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons
+import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.settings.SettingPref
 import com.dede.android_eggs.views.settings.SettingPref.Op.Companion.isEnable
 import com.google.android.material.color.DynamicColors
@@ -20,8 +22,18 @@ class DynamicColorPref : SettingPref(
         Op(Op.ON, titleRes = R.string.preference_on, iconUnicode = Icons.Rounded.palette),
         Op(Op.OFF, titleRes = R.string.preference_off)
     ),
-    if (DynamicColors.isDynamicColorAvailable()) Op.ON else Op.OFF
+    DEFAULT
 ), DynamicColors.Precondition, DynamicColors.OnAppliedCallback {
+
+    companion object {
+
+        const val ACTION_DYNAMIC_COLOR_CHANGED = "ACTION_DYNAMIC_COLOR_CHANGED"
+
+        private val DEFAULT = if (DynamicColors.isDynamicColorAvailable()) Op.ON else Op.OFF
+        fun isDynamicEnable(context: Context): Boolean {
+            return DynamicColorPref().getValue(context, DEFAULT) == Op.ON
+        }
+    }
 
     override val titleRes: Int
         get() = R.string.pref_title_dynamic_color
@@ -32,6 +44,7 @@ class DynamicColorPref : SettingPref(
     private var isOptionOn = false
 
     override fun apply(context: Context, option: Op) {
+        val old = isOptionOn
         isOptionOn = option.isEnable()
         if (isOptionOn && !isApplied) {
             DynamicColors.applyToActivitiesIfAvailable(
@@ -44,6 +57,9 @@ class DynamicColorPref : SettingPref(
             isApplied = true
         }
         recreateActivityIfPossible(context)
+        if (old != isOptionOn) {
+            LocalEvent.poster(context).post(ACTION_DYNAMIC_COLOR_CHANGED)
+        }
     }
 
     override fun shouldApplyDynamicColors(activity: Activity, theme: Int): Boolean {

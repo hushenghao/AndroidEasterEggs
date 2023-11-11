@@ -27,11 +27,15 @@ class NightModePref : SettingPref(
 ) {
 
     companion object {
-        private const val OLED = -2
+        const val OLED = -2
         const val ACTION_NIGHT_MODE_CHANGED = "action_night_mode_changed"
 
         fun isOLEDMode(context: Context): Boolean {
             return NightModePref().getValue(context, SYSTEM) == OLED
+        }
+
+        fun getNightModeValue(context: Context): Int {
+            return NightModePref().getValue(context, SYSTEM)
         }
     }
 

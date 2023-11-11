@@ -89,7 +89,7 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-        <activity android:name=".main.PlaceholderActivity" />
+        <activity android:name=".views.placeholder.PlaceholderActivity" />
     </application>
 
 </manifest>
