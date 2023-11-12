@@ -98,6 +98,7 @@ import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlin.math.abs
 import kotlin.math.roundToInt
 import com.dede.android_eggs.ui.Icons as FontIcons
 
@@ -209,9 +210,9 @@ fun EasterEggItem(base: BaseEasterEgg) {
     var released by remember { mutableStateOf(false) }
     var offsetX by remember { mutableFloatStateOf(0f) }
     var triggerOffsetX by remember { mutableFloatStateOf(0f) }
-    var trigged by remember { mutableStateOf(false) }
-    if (trigged) {
-        LocalView.current.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+    var needTrigger by remember { mutableStateOf(false) }
+    if (needTrigger) {
+        LocalView.current.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
     }
 
     LaunchedEffect(released) {
@@ -242,28 +243,20 @@ fun EasterEggItem(base: BaseEasterEgg) {
                     reverseDirection = isRtl,
                     orientation = Orientation.Horizontal,
                     state = rememberDraggableState { delta ->
-                        if (isRtl) {
-                            // right drag
-                            if (offsetX >= triggerOffsetX) {
-                                trigged = true
-                            }
-                        } else {
-                            // left drag
-                            if (-offsetX >= triggerOffsetX) {
-                                trigged = true
-                            }
-                        }
                         offsetX += delta
+                        if (-offsetX >= triggerOffsetX) {
+                            needTrigger = true
+                        }
                     },
                     onDragStarted = {
-                        trigged = false
                         released = false
                     },
                     onDragStopped = {
-                        if (trigged) {
+                        if (needTrigger && abs(offsetX) >= triggerOffsetX) {
                             EggActionHelp.addShortcut(context, wrapperEgg)
                         }
                         released = true
+                        needTrigger = false
                     }
                 ),
         ) {
@@ -282,7 +275,8 @@ fun EasterEggItem(base: BaseEasterEgg) {
                 }
                 Row(
                     modifier = if (isGroup) {
-                        Modifier.clickable {
+                        Modifier
+                            .clickable {
                                 // DropdownMenu style error, use native popup
                                 val activity = context as Activity
                                 val parent =
