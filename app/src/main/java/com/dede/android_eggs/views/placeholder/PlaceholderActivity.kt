@@ -1,5 +1,6 @@
 package com.dede.android_eggs.views.placeholder
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,10 +10,9 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -41,6 +41,7 @@ class PlaceholderActivity : AppCompatActivity() {
     @Inject
     lateinit var iconRes: IntArray
 
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.tryApplyOLEDTheme(this)
         EdgeUtils.applyEdge(window)
@@ -48,7 +49,9 @@ class PlaceholderActivity : AppCompatActivity() {
 
         setContent {
             AppTheme {
-                Placeholder(randomRes(), randomPath())
+                Scaffold {
+                    Placeholder(randomRes(), randomPath())
+                }
             }
         }
 
@@ -84,9 +87,7 @@ fun Placeholder(res: Int, mask: String? = null) {
     val bitmap = drawable.toBitmap(56.dp, 56.dp)
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(colorScheme.surface)
+        modifier = Modifier.fillMaxSize()
     ) {
         AnimatedVisibility(
             visibleState = remember { MutableTransitionState(false) }
