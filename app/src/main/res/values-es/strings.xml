@@ -38,4 +38,5 @@
     <string name="label_welcome">Bienvenido al Catálogo de Easter Eggs de Android 🎉🎉🎉</string>
     <string name="label_share">Compartir</string>
     <string name="label_search_hint">Buscar…</string>
+    <string name="label_component_manager">Administrador de Componentes</string>
 </resources>
