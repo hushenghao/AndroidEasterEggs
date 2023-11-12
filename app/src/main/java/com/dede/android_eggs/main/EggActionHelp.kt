@@ -9,7 +9,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.IntentSender
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
+import android.view.Gravity
+import android.view.View
+import androidx.appcompat.view.menu.MenuPopupAccessor
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.app.PendingIntentCompat
 import androidx.core.content.getSystemService
 import androidx.core.content.pm.ShortcutInfoCompat
@@ -18,6 +23,8 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.entity.Egg
+import com.dede.android_eggs.main.entity.Egg.Companion.getIcon
+import com.dede.android_eggs.main.entity.Egg.Companion.toEgg
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
@@ -25,6 +32,8 @@ import com.dede.android_eggs.util.toast
 import com.dede.basic.cancel
 import com.dede.basic.delay
 import com.dede.basic.dp
+import com.dede.basic.provider.EasterEggGroup
+import kotlin.math.roundToInt
 
 
 object EggActionHelp {
@@ -177,5 +186,51 @@ object EggActionHelp {
             unregister(context)
             cancel(token)
         }
+    }
+
+    fun showEggGroupMenu(
+        context: Context,
+        anchor: View,
+        eggGroup: EasterEggGroup,
+        onSelected: (index: Int) -> Unit,
+        onDismiss: (() -> Unit)? = null,
+    ) {
+        val popupMenu = PopupMenu(
+            context, anchor, Gravity.NO_GRAVITY,
+            0,
+            R.style.Theme_EggGroup_PopupMenu_ListPopupWindow
+        )
+        popupMenu.setForceShowIcon(true)
+        for ((index, egg) in eggGroup.eggs.withIndex()) {
+            val egg = egg.toEgg()
+            val menuTitle = egg.versionFormatter.format(context)
+            popupMenu.menu.add(0, egg.id, index, menuTitle).apply {
+                val drawable = egg.getIcon(context)
+                val drawH = drawable.intrinsicHeight
+                val drawW = drawable.intrinsicWidth
+                val width: Int = 28.dp// Use the width as the basis to align the text
+                val height: Int = (width / drawW.toFloat() * drawH).roundToInt()
+                icon = BitmapDrawable(
+                    context.resources,
+                    drawable.toBitmap(width, height)
+                )
+            }
+        }
+        popupMenu.setOnDismissListener {
+            onDismiss?.invoke()
+        }
+        MenuPopupAccessor.setApi23Transitions(popupMenu)
+        popupMenu.setOnMenuItemClickListener {
+            val index = eggGroup.eggs.indexOfFirst { egg ->
+                egg.id == it.itemId
+            }
+            if (index != -1) {
+                onSelected.invoke(index)
+            } else {
+                throw IllegalArgumentException("Menu id: ${it.itemId}, title: ${it.title}, child: ${eggGroup.eggs.joinToString()}")
+            }
+            return@setOnMenuItemClickListener true
+        }
+        popupMenu.show()
     }
 }

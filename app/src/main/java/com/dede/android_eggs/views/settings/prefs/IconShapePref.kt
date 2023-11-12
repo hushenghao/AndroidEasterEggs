@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
+import androidx.core.os.bundleOf
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.LocalEvent
@@ -32,6 +33,7 @@ class IconShapePref : SettingPref(
 ) {
     companion object {
         const val ACTION_CHANGED = "com.dede.easter_eggs.IconShapeChanged"
+        const val EXTRA_ICON_SHAPE_PATH = "extra_icon_shape_path"
 
         private fun iconShapeOp(index: Int): Op {
             return Op(index).apply {
@@ -72,8 +74,9 @@ class IconShapePref : SettingPref(
         get() = R.string.pref_title_icon_shape_override
 
     override fun apply(context: Context, option: Op) {
+        val extras = bundleOf(EXTRA_ICON_SHAPE_PATH to getMaskPathByIndex(context, option.value))
         LocalEvent.poster(context).apply {
-            post(ACTION_CHANGED)
+            post(ACTION_CHANGED, extras)
             post(SettingsPrefs.ACTION_CLOSE_SETTING)
         }
     }
