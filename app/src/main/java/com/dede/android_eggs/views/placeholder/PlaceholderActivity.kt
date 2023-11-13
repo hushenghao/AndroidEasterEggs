@@ -93,7 +93,7 @@ fun Placeholder(res: Int, mask: String? = null) {
             visibleState = remember { MutableTransitionState(false) }
                 .apply { targetState = true },
             enter = scaleIn(
-                initialScale = 0.0f,
+                initialScale = 0.3f,
                 animationSpec = tween(500, delayMillis = 100)
             ) + fadeIn(animationSpec = tween(500, delayMillis = 100)),
         ) {

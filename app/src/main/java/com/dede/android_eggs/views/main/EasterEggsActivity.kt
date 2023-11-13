@@ -35,6 +35,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -71,6 +72,10 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
@@ -204,7 +209,8 @@ fun EasterEggItem(base: BaseEasterEgg) {
         is EasterEggGroup -> base.eggs[groupIndex]
         else -> throw UnsupportedOperationException("Unsupported type: ${base.javaClass}")
     }
-    val wrapperEgg = egg.toEgg()
+    val wrapperEgg = remember { egg.toEgg() }
+    val supportShortcut = remember { EggActionHelp.isShortcutEnable(wrapperEgg) }
     var popupAnchorBounds by remember { mutableStateOf(Rect.Zero) }
 
     var released by remember { mutableStateOf(false) }
@@ -228,7 +234,7 @@ fun EasterEggItem(base: BaseEasterEgg) {
         contentAlignment = Alignment.Center,
         modifier = Modifier.padding(top = 12.dp)
     ) {
-        EasterEggItemSub(egg, EggActionHelp.isShortcutEnable(wrapperEgg))
+        EasterEggItemSub(egg, supportShortcut)
         Card(
             onClick = {
                 EggActionHelp.launchEgg(context, wrapperEgg)
@@ -244,7 +250,7 @@ fun EasterEggItem(base: BaseEasterEgg) {
                     orientation = Orientation.Horizontal,
                     state = rememberDraggableState { delta ->
                         offsetX += delta
-                        if (-offsetX >= triggerOffsetX) {
+                        if (supportShortcut && -offsetX >= triggerOffsetX) {
                             needTrigger = true
                         }
                     },
@@ -252,7 +258,7 @@ fun EasterEggItem(base: BaseEasterEgg) {
                         released = false
                     },
                     onDragStopped = {
-                        if (needTrigger && abs(offsetX) >= triggerOffsetX) {
+                        if (supportShortcut && needTrigger && abs(offsetX) >= triggerOffsetX) {
                             EggActionHelp.addShortcut(context, wrapperEgg)
                         }
                         released = true
@@ -311,7 +317,8 @@ fun EasterEggItem(base: BaseEasterEgg) {
                                     position.y + bounds.height
                                 )
                             }
-                    } else Modifier
+                    } else Modifier,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         text = Egg.VersionFormatter.create(egg.nicknameRes, egg.apiLevel)
@@ -319,14 +326,11 @@ fun EasterEggItem(base: BaseEasterEgg) {
                         style = typography.bodyMedium
                     )
                     if (isGroup) {
-                        val bitmap = FontIconsDrawable(
-                            context,
-                            FontIcons.Rounded.expand_more,
-                            24f
-                        ).toBitmap()
-                        Image(
-                            modifier = Modifier.padding(start = 6.dp),
-                            bitmap = bitmap.asImageBitmap(),
+                        Icon(
+                            modifier = Modifier
+                                .padding(start = 4.dp)
+                                .size(22.dp),
+                            imageVector = Icons.Rounded.KeyboardArrowDown,
                             contentDescription = stringResource(R.string.pref_title_language_more)
                         )
                     }
@@ -348,9 +352,16 @@ private fun EasterEggItemSub(egg: EasterEgg, enableShortcut: Boolean = true) {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             EasterEggIcon(egg = egg, 36.dp)
+            val apiVersion = Egg.ApiVersionFormatter.create(egg.apiLevel)
+                .format(content).toString().split("\n")
             Text(
-                text = Egg.ApiVersionFormatter.create(egg.apiLevel)
-                    .format(content).toString(),
+                text = buildAnnotatedString {
+                    append(apiVersion[0])
+                    append("\n")
+                    withStyle(SpanStyle(fontStyle = FontStyle.Italic)) {
+                        append(apiVersion[1])
+                    }
+                },
                 modifier = Modifier.padding(start = 8.dp),
                 maxLines = 2,
                 style = typography.bodyMedium
