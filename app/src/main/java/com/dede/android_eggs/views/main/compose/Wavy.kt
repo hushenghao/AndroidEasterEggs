@@ -2,8 +2,6 @@ package com.dede.android_eggs.views.main.compose
 
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -18,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
@@ -28,14 +27,16 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.util.createRepeatWavyDrawable
 import kotlin.math.roundToInt
 
-@Preview
+@Preview(showBackground = true)
+@Composable
+fun PreviewWavyRepeat() {
+    Wavy(R.drawable.ic_wavy_line_1, true)
+}
+
+@Preview(showBackground = true)
 @Composable
 fun PreviewWavy() {
-    Box(
-        modifier = Modifier.background(Color.White)
-    ) {
-        Wavy(R.drawable.ic_wavy_line_1, true)
-    }
+    Wavy(R.drawable.ic_wavy_line)
 }
 
 
@@ -56,12 +57,16 @@ class DrawablePainter(private val drawable: Drawable, private val bounds: Rect) 
 }
 
 @Composable
-fun Wavy(res: Int, repeat: Boolean = false) {
+fun Wavy(res: Int, repeat: Boolean = false, tint: Color? = null) {
     if (repeat) {
         val context = LocalContext.current
         var bounds by remember { mutableStateOf(Rect.Zero) }
-        val bitmap = remember(res, context.theme, bounds) {
-            createRepeatWavyDrawable(context, res)
+        val bitmap = remember(res, context.theme) {
+            createRepeatWavyDrawable(context, res).apply {
+                if (tint != null) {
+                    setTint(tint.toArgb())
+                }
+            }
         }
         Image(
             painter = DrawablePainter(bitmap, bounds),

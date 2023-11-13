@@ -82,8 +82,8 @@ import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.ThemeUtils
-import com.dede.android_eggs.views.main.compose.AndroidFooterView
 import com.dede.android_eggs.views.main.compose.AndroidSnapshotView
+import com.dede.android_eggs.views.main.compose.ProjectDescription
 import com.dede.android_eggs.views.main.compose.LocalFragmentManager
 import com.dede.android_eggs.views.main.compose.MainTitleBar
 import com.dede.android_eggs.views.main.compose.Wavy
@@ -125,7 +125,7 @@ class EasterEggsActivity : AppCompatActivity() {
                                     EasterEggItem(easterEgg)
                                 }
                                 Wavy(res = R.drawable.ic_wavy_line)
-                                AndroidFooterView()
+                                ProjectDescription()
                             }
                         }
                     }
@@ -336,9 +336,13 @@ private fun EasterEggIcon(egg: EasterEgg, size: Dp = 44.dp) {
                 maskPath = it.getStringExtra(IconShapePref.EXTRA_ICON_SHAPE_PATH)
             }
 
-        val bitmap = AlterableAdaptiveIconDrawable(context, egg.iconRes, maskPath).toBitmap(px, px)
+        val bitmap = remember(maskPath, egg, context.theme) {
+            AlterableAdaptiveIconDrawable(context, egg.iconRes, maskPath)
+                .toBitmap(px, px)
+                .asImageBitmap()
+        }
         Image(
-            bitmap = bitmap.asImageBitmap(),
+            bitmap = bitmap,
             contentDescription = stringResource(egg.nicknameRes),
             modifier = Modifier.size(size)
         )

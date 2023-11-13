@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.dede.android_eggs.ui.views.EasterEggFooterView
 import com.dede.android_eggs.ui.views.SnapshotGroupView
 
 @Composable
@@ -16,13 +15,5 @@ fun AndroidSnapshotView() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 12.dp)
-    )
-}
-
-@Composable
-fun AndroidFooterView() {
-    AndroidView(
-        factory = { EasterEggFooterView(it) },
-        modifier = Modifier.fillMaxWidth()
     )
 }
