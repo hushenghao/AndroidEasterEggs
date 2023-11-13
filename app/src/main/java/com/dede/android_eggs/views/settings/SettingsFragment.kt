@@ -2,7 +2,9 @@ package com.dede.android_eggs.views.settings
 
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +27,14 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
     var onSlide: ((offset: Float) -> Unit)? = null
 
+    var onPreDismiss: (() -> Unit)? = null
+
     private var lastSlideOffset: Float = -1f
     private val callback = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onStateChanged(bottomSheet: View, newState: Int) {
+            if (newState == BottomSheetBehavior.STATE_SETTLING) {
+                onPreDismiss?.invoke()
+            }
         }
 
         override fun onSlide(bottomSheet: View, slideOffset: Float) {

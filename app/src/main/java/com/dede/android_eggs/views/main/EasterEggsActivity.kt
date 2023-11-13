@@ -13,10 +13,8 @@ import android.widget.FrameLayout
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
@@ -24,11 +22,8 @@ import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -36,18 +31,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
-import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.Card
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -58,7 +50,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.boundsInParent
@@ -80,9 +71,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.graphics.drawable.toBitmap
-import androidx.fragment.app.FragmentActivity
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.BackPressedHandler
 import com.dede.android_eggs.main.EggActionHelp
@@ -90,12 +79,14 @@ import com.dede.android_eggs.main.entity.Egg
 import com.dede.android_eggs.main.entity.Egg.Companion.toEgg
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
-import com.dede.android_eggs.ui.views.EasterEggFooterView
-import com.dede.android_eggs.ui.views.SnapshotGroupView
 import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.ThemeUtils
-import com.dede.android_eggs.views.settings.SettingsFragment
+import com.dede.android_eggs.views.main.compose.AndroidFooterView
+import com.dede.android_eggs.views.main.compose.AndroidSnapshotView
+import com.dede.android_eggs.views.main.compose.LocalFragmentManager
+import com.dede.android_eggs.views.main.compose.MainTitleBar
+import com.dede.android_eggs.views.main.compose.Wavy
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
 import com.dede.android_eggs.views.theme.AppTheme
 import com.dede.basic.provider.BaseEasterEgg
@@ -119,19 +110,14 @@ class EasterEggsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            AppTheme {
-                Scaffold(
-                    topBar = { TitleBar() }
-                ) { contentPadding ->
-                    val delegate = object : PaddingValues by contentPadding {
-                        override fun calculateBottomPadding() = Dp.Hairline
-                    }
-                    Box(
-                        modifier = Modifier
-                            .padding(delegate)
-                            .background(colorScheme.surface)
-                    ) {
-                        LazyColumn {
+            CompositionLocalProvider(
+                LocalFragmentManager provides supportFragmentManager
+            ) {
+                AppTheme {
+                    Scaffold(
+                        topBar = { MainTitleBar() }
+                    ) { contentPadding ->
+                        LazyColumn(contentPadding = contentPadding) {
                             item {
                                 AndroidSnapshotView()
                                 Wavy(res = R.drawable.ic_wavy_line)
@@ -140,7 +126,6 @@ class EasterEggsActivity : AppCompatActivity() {
                                 }
                                 Wavy(res = R.drawable.ic_wavy_line)
                                 AndroidFooterView()
-                                Spacer(Modifier.height(contentPadding.calculateBottomPadding()))
                             }
                         }
                     }
@@ -150,52 +135,6 @@ class EasterEggsActivity : AppCompatActivity() {
 
         BackPressedHandler(this).register()
     }
-}
-
-@Composable
-fun TitleBar() {
-    val activity = LocalContext.current as FragmentActivity
-
-    var startRotate by remember { mutableStateOf(false) }
-    val rotateAnim by animateFloatAsState(
-        targetValue = if (startRotate) 360f else 0f,
-        animationSpec = tween(500),
-        label = "SettingIconRotate"
-    )
-
-    CenterAlignedTopAppBar(
-        title = {
-            Text(text = stringResource(R.string.app_name))
-        },
-        actions = {
-//            IconButton(
-//                onClick = {
-//                },
-//            ) {
-//                Icon(
-//                    imageVector = Icons.Rounded.Search,
-//                    contentDescription = stringResource(android.R.string.search_go)
-//                )
-//            }
-            IconButton(
-                onClick = {
-                    SettingsFragment().apply {
-                        onSlide = {
-                            this.onSlide = null
-                            startRotate = false
-                        }
-                    }.show(activity.supportFragmentManager, "Settings")
-                    startRotate = true
-                },
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Settings,
-                    contentDescription = stringResource(R.string.label_settings),
-                    modifier = Modifier.rotate(rotateAnim)
-                )
-            }
-        }
-    )
 }
 
 @Composable
@@ -411,33 +350,4 @@ private fun EasterEggIcon(egg: EasterEgg, size: Dp = 44.dp) {
         )
     }
 
-}
-
-@Composable
-fun AndroidSnapshotView() {
-    AndroidView(
-        factory = { SnapshotGroupView(it) },
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 12.dp)
-    )
-}
-
-@Composable
-fun AndroidFooterView() {
-    AndroidView(
-        factory = { EasterEggFooterView(it) },
-        modifier = Modifier.fillMaxWidth()
-    )
-}
-
-@Composable
-fun Wavy(res: Int) {
-    Image(
-        painter = painterResource(id = res),
-        contentDescription = null,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 30.dp)
-    )
 }
