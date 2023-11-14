@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -56,6 +57,38 @@ import kotlin.math.min
 import kotlin.math.roundToInt
 import com.dede.android_eggs.ui.Icons as FontIcons
 
+
+@Composable
+fun EasterEggItem(base: BaseEasterEgg) {
+    val context = LocalContext.current
+
+    var groupIndex by remember { mutableIntStateOf(0) }
+    val egg = when (base) {
+        is EasterEgg -> base
+        is EasterEggGroup -> base.eggs[groupIndex]
+        else -> throw UnsupportedOperationException("Unsupported type: ${base.javaClass}")
+    }
+    val supportShortcut = remember(egg) { EggActionHelp.isSupportShortcut(egg) }
+    var swipeProgress by remember { mutableFloatStateOf(0f) }
+
+    EasterEggItemSwipe(
+        floor = {
+            EasterEggItemFloor(egg, supportShortcut, swipeProgress)
+        },
+        content = {
+            EasterEggItemContent(egg, base) {
+                groupIndex = it
+            }
+        },
+        supportShortcut = supportShortcut,
+        onSwipe = {
+            swipeProgress = it
+        },
+        addShortcut = {
+            EggActionHelp.addShortcut(context, egg)
+        },
+    )
+}
 
 @Composable
 fun EasterEggItemSwipe(

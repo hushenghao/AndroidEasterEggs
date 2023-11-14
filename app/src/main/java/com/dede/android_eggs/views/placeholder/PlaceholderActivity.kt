@@ -19,8 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
@@ -30,9 +32,9 @@ import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.views.settings.prefs.DynamicColorPref
 import com.dede.android_eggs.views.settings.prefs.NightModePref
 import com.dede.android_eggs.views.theme.AppTheme
-import com.dede.basic.dp
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlin.math.roundToInt
 import kotlin.random.Random
 
 @AndroidEntryPoint
@@ -84,7 +86,8 @@ class PlaceholderActivity : AppCompatActivity() {
 @Composable
 fun Placeholder(res: Int, mask: String? = null) {
     val drawable = AlterableAdaptiveIconDrawable(LocalContext.current, res, mask)
-    val bitmap = drawable.toBitmap(56.dp, 56.dp)
+    val px = with(LocalDensity.current) { 56.dp.toPx().roundToInt() }
+    val bitmap = remember { drawable.toBitmap(px, px).asImageBitmap() }
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
@@ -98,7 +101,7 @@ fun Placeholder(res: Int, mask: String? = null) {
             ) + fadeIn(animationSpec = tween(500, delayMillis = 100)),
         ) {
             Image(
-                bitmap = bitmap.asImageBitmap(),
+                bitmap = bitmap,
                 contentDescription = stringResource(R.string.app_name),
             )
         }

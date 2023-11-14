@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.dede.android_eggs.views.main.compose
 
 import androidx.compose.animation.core.animateFloatAsState
@@ -27,7 +29,6 @@ private const val TAG_SETTINGS = "Settings"
 
 @Composable
 @Preview
-@ExperimentalMaterial3Api
 fun MainTitleBar() {
     val fm = LocalFragmentManager.current
 
