@@ -91,7 +91,7 @@ android {
     }
 
     lint {
-        disable += listOf("NotifyDataSetChanged")
+        disable += listOf("NotifyDataSetChanged", "UsingMaterialAndMaterial3Libraries")
         fatal += listOf("NewApi", "InlineApi")
     }
 
@@ -129,6 +129,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.io.coil)
+    implementation(libs.io.coil.compose)
     implementation(libs.free.reflection)
     implementation(libs.viewbinding.delegate)
     implementation(libs.blurhash.android)

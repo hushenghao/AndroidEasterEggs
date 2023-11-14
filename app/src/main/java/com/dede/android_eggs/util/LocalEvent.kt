@@ -60,7 +60,7 @@ private val LifecycleOwner.context: Context
     get() = when (this) {
         is ComponentActivity -> this
         is Fragment -> requireContext()
-        else -> throw IllegalArgumentException()
+        else -> throw IllegalArgumentException(this.toString())
     }
 
 private val Context.localBroadcastManager: LocalBroadcastManager

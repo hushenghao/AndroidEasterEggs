@@ -61,6 +61,8 @@ private fun ChipItem(
         if (separator) {
             Text(
                 text = stringResource(id = R.string.char_separator),
+                style = typography.bodyMedium,
+                color = colorScheme.secondary,
                 modifier = Modifier.padding(horizontal = 6.dp)
             )
         }
@@ -147,6 +149,7 @@ fun ProjectDescription() {
         )
         FlowRow(
             modifier = Modifier.padding(top = 20.dp)
+                .fillMaxWidth()
         ) {
             ChipItem(R.string.label_github) {
                 openCustomTab(R.string.url_github)
@@ -179,7 +182,9 @@ fun ProjectDescription() {
             }
         }
         Wavy(res = R.drawable.ic_wavy_line_1, true, colorScheme.secondaryContainer)
-        FlowRow {
+        FlowRow(
+            modifier = Modifier.fillMaxWidth()
+        ) {
             Text(
                 text = stringResource(R.string.app_name),
                 style = typography.titleSmall,

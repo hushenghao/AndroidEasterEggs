@@ -1,4 +1,4 @@
-package com.dede.android_eggs.main
+package com.dede.android_eggs.views.main
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint

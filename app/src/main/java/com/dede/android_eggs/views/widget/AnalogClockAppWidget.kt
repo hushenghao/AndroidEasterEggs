@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.core.app.PendingIntentCompat
 import com.dede.android_eggs.R
-import com.dede.android_eggs.main.EasterEggsActivity
+import com.dede.android_eggs.views.main.EasterEggsActivity
 
 /**
  * Easter Eggs Analog clock widget.

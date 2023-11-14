@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- tasty treat name -->
-    <string name="nickname_android_u" translatable="false">Upside Down Cake</string>
-    <string name="nickname_android_t" translatable="false">Tiramisu</string>
-    <string name="nickname_android_s" translatable="false">Snow Cone</string>
-    <string name="nickname_android_r" translatable="false">Red Velvet Cake</string>
-    <string name="nickname_android_q" translatable="false">Quince Tart</string>
-    <string name="nickname_android_p" translatable="false">Pie</string>
-    <string name="nickname_android_o" translatable="false">Oreo</string>
-    <string name="nickname_android_n" translatable="false">Nougat</string>
-    <string name="nickname_android_m" translatable="false">Marshmallow</string>
-    <string name="nickname_android_l" translatable="false">Lollipop</string>
-    <string name="nickname_android_k" translatable="false">KitKat</string>
-    <string name="nickname_android_j" translatable="false">Jelly Bean</string>
-    <string name="nickname_android_i" translatable="false">Ice Cream Sandwich</string>
-    <string name="nickname_android_h" translatable="false">Honeycomb</string>
-    <string name="nickname_android_g" translatable="false">Gingerbread</string>
     <string name="nickname_android_froyo" translatable="false">Froyo</string>
     <string name="nickname_android_eclair" translatable="false">Eclair</string>
     <string name="nickname_android_donut" translatable="false">Donut</string>

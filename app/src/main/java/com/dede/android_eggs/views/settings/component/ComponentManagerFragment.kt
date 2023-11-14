@@ -10,7 +10,7 @@ import androidx.preference.SwitchPreferenceCompat
 import coil.imageLoader
 import coil.request.ImageRequest
 import com.dede.android_eggs.R
-import com.dede.android_eggs.main.entity.Egg.VersionFormatter
+import com.dede.android_eggs.main.EasterEggHelp.VersionFormatter
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.util.EdgeUtils
@@ -68,7 +68,7 @@ class ComponentManagerFragment : BottomSheetDialogFragment(R.layout.fragment_com
                     .build()
                 context.imageLoader.enqueue(request)
                 setTitle(component.nameRes)
-                val formatter = VersionFormatter.create(component.nicknameRes, component.apiLevel)
+                val formatter = VersionFormatter.create(component.apiLevel, component.nicknameRes)
                 summary = formatter.format(context)
                 isEnabled = component.isSupported()
                 if (isEnabled) {

@@ -22,16 +22,16 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.dede.android_eggs.R
-import com.dede.android_eggs.main.entity.Egg
-import com.dede.android_eggs.main.entity.Egg.Companion.getIcon
-import com.dede.android_eggs.main.entity.Egg.Companion.toEgg
+import com.dede.android_eggs.main.EasterEggHelp.getIcon
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.toast
+import com.dede.android_eggs.views.main.EasterEggsActivity
 import com.dede.basic.cancel
 import com.dede.basic.delay
 import com.dede.basic.dp
+import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
 import kotlin.math.roundToInt
 
@@ -43,8 +43,14 @@ object EggActionHelp {
     private const val DOCUMENT_LAUNCH_MODE_INTO_EXISTING =
         Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
 
-    private fun createIntent(context: Context, egg: Egg, retainInRecents: Boolean = true): Intent? {
-        val targetClass = egg.targetClass ?: return null
+    private fun createIntent(
+        context: Context,
+        targetClass: Class<out Activity>?,
+        retainInRecents: Boolean = true,
+    ): Intent? {
+        if (targetClass == null) {
+            return null
+        }
         return Intent(Intent.ACTION_VIEW)
             .setClass(context, targetClass)
             .applyIf(retainInRecents) {
@@ -52,14 +58,10 @@ object EggActionHelp {
             }
     }
 
-    fun isSupportedLaunch(egg: Egg): Boolean {
-        return egg.targetClass != null
-    }
-
-    fun launchEgg(context: Context, egg: Egg) {
-        val targetClass = egg.targetClass ?: return
+    fun launchEgg(context: Context, egg: EasterEgg) {
+        val targetClass = egg.provideEasterEgg() ?: return
         val embedded = SplitUtils.isActivityEmbedded(context)
-        val intent = createIntent(context, egg, !embedded)
+        val intent = createIntent(context, targetClass, !embedded)
             ?: throw IllegalArgumentException("Create Egg launcher intent == null")
         val task: AppTask? = findTaskWithTrim(context, targetClass)
         if (task != null) {
@@ -110,13 +112,13 @@ object EggActionHelp {
         return targetTask
     }
 
-    fun isShortcutEnable(egg: Egg): Boolean {
-        return egg.targetClass != null
+    fun isSupportShortcut(egg: EasterEgg): Boolean {
+        return egg.provideEasterEgg() != null
     }
 
-    fun addShortcut(context: Context, egg: Egg) {
-        if (!isShortcutEnable(egg)) return
-        val intent = createIntent(context, egg) ?: return
+    fun addShortcut(context: Context, egg: EasterEgg) {
+        if (!isSupportShortcut(egg)) return
+        val intent = createIntent(context, egg.provideEasterEgg()) ?: return
 
         val icon = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             val bitmap = AlterableAdaptiveIconDrawable(context, egg.iconRes)
@@ -129,7 +131,7 @@ object EggActionHelp {
         val shortcut = ShortcutInfoCompat.Builder(context, key)
             .setIcon(icon)
             .setIntent(intent)
-            .setShortLabel(context.getString(egg.eggNameRes))
+            .setShortLabel(context.getString(egg.nameRes))
             .build()
 
         val callback = PinShortcutReceiver.registerCallbackWithTimeout(context)
@@ -202,8 +204,8 @@ object EggActionHelp {
         )
         popupMenu.setForceShowIcon(true)
         for ((index, egg) in eggGroup.eggs.withIndex()) {
-            val egg = egg.toEgg()
-            val menuTitle = egg.versionFormatter.format(context)
+            val menuTitle = EasterEggHelp.VersionFormatter.create(egg.apiLevel, egg.nicknameRes)
+                .format(context)
             popupMenu.menu.add(0, egg.id, index, menuTitle).apply {
                 val drawable = egg.getIcon(context)
                 val drawH = drawable.intrinsicHeight
