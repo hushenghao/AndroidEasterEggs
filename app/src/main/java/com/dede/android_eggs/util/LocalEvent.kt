@@ -6,6 +6,10 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -23,6 +27,31 @@ object LocalEvent {
         return Receiver(owner)
     }
 
+    @Composable
+    fun receiver(): ComposeReceiver {
+        val context = LocalContext.current
+        return remember { ComposeReceiver(context) }
+    }
+
+    class ComposeReceiver(private val context: Context) {
+
+        private class DisposedReceiver(val callback: EventCallback) : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                callback.invoke(intent)
+            }
+        }
+
+        @Composable
+        fun register(action: String, eventCallback: EventCallback) {
+            DisposableEffect(key1 = action) {
+                val receiver = DisposedReceiver(eventCallback)
+                context.localBroadcastManager.registerReceiver(receiver, IntentFilter(action))
+                onDispose {
+                    context.localBroadcastManager.unregisterReceiver(receiver)
+                }
+            }
+        }
+    }
 
     class Receiver(private val owner: LifecycleOwner) {
 

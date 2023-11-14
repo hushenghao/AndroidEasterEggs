@@ -3,7 +3,6 @@ package com.dede.android_eggs.views.main.compose
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
@@ -15,11 +14,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.AppShortcut
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
+import androidx.compose.material.icons.rounded.SwipeLeft
+import androidx.compose.material.icons.rounded.SwipeRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,7 +35,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -44,18 +47,15 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.drawable.toBitmap
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.EasterEggHelp
 import com.dede.android_eggs.main.EggActionHelp
-import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
 import kotlin.math.abs
 import kotlin.math.min
 import kotlin.math.roundToInt
-import com.dede.android_eggs.ui.Icons as FontIcons
 
 
 @Composable
@@ -180,7 +180,7 @@ fun EasterEggItemContent(egg: EasterEgg, base: BaseEasterEgg, onSelected: (index
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = stringResource(egg.nameRes),
-                    style = MaterialTheme.typography.headlineSmall,
+                    style = typography.headlineSmall,
                     modifier = Modifier
                         .padding(end = 10.dp, bottom = 6.dp)
                         .weight(1f, true)
@@ -193,14 +193,14 @@ fun EasterEggItemContent(egg: EasterEgg, base: BaseEasterEgg, onSelected: (index
             ) {
                 Text(
                     text = androidVersion,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = typography.bodyMedium
                 )
                 if (isGroup) {
                     Icon(
                         modifier = Modifier
                             .padding(start = 4.dp)
                             .size(22.dp),
-                        imageVector = androidx.compose.material.icons.Icons.Rounded.KeyboardArrowDown,
+                        imageVector = Icons.Rounded.KeyboardArrowDown,
                         contentDescription = stringResource(R.string.pref_title_language_more)
                     )
                 }
@@ -224,17 +224,6 @@ fun EasterEggItemFloor(
         EasterEggHelp.ApiLevelFormatter.create(egg.apiLevel)
             .format(content)
     }
-    val iconUnicode = if (swipeProgress >= 1f) {
-        FontIcons.Rounded.app_shortcut
-    } else if (LocalLayoutDirection.current == LayoutDirection.Rtl) {
-        FontIcons.Rounded.swipe_right
-    } else {
-        FontIcons.Rounded.swipe_left
-    }
-    val shortcutBitmap = remember(iconUnicode) {
-        FontIconsDrawable(content, iconUnicode, 30f)
-            .toBitmap().asImageBitmap()
-    }
     Row(
         modifier = Modifier
             .padding(horizontal = 28.dp)
@@ -254,10 +243,17 @@ fun EasterEggItemFloor(
                 },
                 modifier = Modifier.padding(start = 8.dp),
                 maxLines = 2,
-                style = MaterialTheme.typography.bodyMedium
+                style = typography.bodyMedium
             )
         }
         if (enableShortcut) {
+            val icon = if (swipeProgress >= 1f) {
+                Icons.Rounded.AppShortcut
+            } else if (LocalLayoutDirection.current == LayoutDirection.Rtl) {
+                Icons.Rounded.SwipeRight
+            } else {
+                Icons.Rounded.SwipeLeft
+            }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.offset(x = (swipeProgress * -12).dp)
@@ -266,10 +262,11 @@ fun EasterEggItemFloor(
                     text = stringResource(R.string.label_add_shortcut),
                     modifier = Modifier.padding(end = 4.dp),
                     maxLines = 3,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = typography.bodyMedium
                 )
-                Image(
-                    bitmap = shortcutBitmap,
+                Icon(
+                    modifier = Modifier.size(28.dp),
+                    imageVector = icon,
                     contentDescription = stringResource(R.string.label_add_shortcut)
                 )
             }
