@@ -7,10 +7,12 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
 import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AppCompatDelegate
 import com.dede.android_eggs.R
 import com.dede.android_eggs.views.settings.prefs.LanguagePref
 import java.text.Format
 import java.util.Calendar
+import java.util.Locale
 import java.util.TimeZone
 
 data class TimelineEvent(
@@ -21,6 +23,15 @@ data class TimelineEvent(
 ) {
 
     companion object {
+
+        private fun getApplicationLocale(): Locale {
+            val locales = AppCompatDelegate.getApplicationLocales()
+            return if (locales.isEmpty) {
+                Locale.getDefault()
+            } else {
+                locales.get(0) ?: Locale.getDefault()
+            }
+        }
 
         private fun timelineEvent(@DrawableRes logoRes: Int, event: CharSequence): TimelineEvent {
             val regex =
@@ -196,7 +207,7 @@ data class TimelineEvent(
             val yearNum = year?.toIntOrNull() ?: return year
             val calendar = Calendar.getInstance(TimeZone.getDefault())
             calendar.set(Calendar.YEAR, yearNum)
-            val locale = LanguagePref.getApplicationLocale()
+            val locale = getApplicationLocale()
             val format: Format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 SimpleDateFormat("yyyy", locale)
             } else {
@@ -224,7 +235,7 @@ data class TimelineEvent(
             }
             val calendar = Calendar.getInstance(TimeZone.getDefault())
             calendar.set(Calendar.MONTH, m)
-            val locale = LanguagePref.getApplicationLocale()
+            val locale = getApplicationLocale()
             val format: Format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 SimpleDateFormat("MMMM", locale)
             } else {

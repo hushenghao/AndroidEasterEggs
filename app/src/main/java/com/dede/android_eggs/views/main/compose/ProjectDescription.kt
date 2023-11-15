@@ -46,7 +46,7 @@ import kotlin.math.roundToInt
 private fun ChipItem(
     @StringRes textRes: Int,
     separator: Boolean = true,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -72,7 +72,7 @@ private fun ChipItem(
 @Composable
 private fun ChipItem2(
     @StringRes textRes: Int,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Text(
         text = stringResource(textRes),
@@ -148,7 +148,8 @@ fun ProjectDescription() {
             style = typography.bodyMedium
         )
         FlowRow(
-            modifier = Modifier.padding(top = 20.dp)
+            modifier = Modifier
+                .padding(top = 20.dp)
                 .fillMaxWidth()
         ) {
             ChipItem(R.string.label_github) {

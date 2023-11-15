@@ -47,7 +47,9 @@ class EasterEggsActivity : AppCompatActivity() {
             ) {
                 AppTheme {
                     Scaffold(
-                        topBar = { MainTitleBar() }
+                        topBar = {
+                            MainTitleBar()
+                        }
                     ) { contentPadding ->
                         Welcome()
 
