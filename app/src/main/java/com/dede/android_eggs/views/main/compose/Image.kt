@@ -9,34 +9,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.geometry.toRect
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.toAndroidRectF
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.toRect
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.basic.requireDrawable
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 @Composable
 @Preview
-fun PreviewDrawableImage() {
+fun PreviewImage() {
     val context = LocalContext.current
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        DrawableImage(res = R.mipmap.ic_launcher_round, contentDescription = null)
+        Image(res = R.mipmap.ic_launcher_round, contentDescription = null)
 
         val maskPath = stringArrayResource(id = R.array.icon_shape_override_paths).last()
         val drawable = remember(context.theme, maskPath) {
             AlterableAdaptiveIconDrawable(context, R.mipmap.ic_launcher, maskPath)
         }
-        DrawableImage(
+        Image(
             drawable = drawable, contentDescription = null,
             modifier = Modifier.size(56.dp)
         )
@@ -44,7 +38,7 @@ fun PreviewDrawableImage() {
 }
 
 @Composable
-fun DrawableImage(
+fun Image(
     @DrawableRes res: Int,
     contentDescription: String?,
     modifier: Modifier = Modifier,
@@ -55,7 +49,7 @@ fun DrawableImage(
     val drawable = remember(res, context.theme) {
         context.requireDrawable(res)
     }
-    DrawableImage(
+    Image(
         drawable = drawable,
         contentDescription = contentDescription,
         modifier = modifier,
@@ -65,15 +59,16 @@ fun DrawableImage(
 }
 
 @Composable
-fun DrawableImage(
+fun Image(
     drawable: Drawable,
     contentDescription: String?,
     modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
 ) {
+    val drawablePainter = rememberDrawablePainter(drawable = drawable)
     Image(
-        painter = DrawablePainter(drawable),
+        painter = drawablePainter,
         contentDescription = contentDescription,
         modifier = modifier,
         alignment = alignment,
@@ -81,17 +76,17 @@ fun DrawableImage(
     )
 }
 
-private class DrawablePainter(private val drawable: Drawable) : Painter() {
-
-    override val intrinsicSize: Size
-        get() = Size(
-            drawable.intrinsicWidth.toFloat(),
-            drawable.intrinsicHeight.toFloat()
-        )
-
-    override fun DrawScope.onDraw() {
-        val rect = size.toRect().toAndroidRectF().toRect()
-        drawable.bounds = rect
-        drawable.draw(drawContext.canvas.nativeCanvas)
-    }
-}
+//private class DrawablePainter(private val drawable: Drawable) : Painter() {
+//
+//    override val intrinsicSize: Size
+//        get() = Size(
+//            drawable.intrinsicWidth.toFloat(),
+//            drawable.intrinsicHeight.toFloat()
+//        )
+//
+//    override fun DrawScope.onDraw() {
+//        val rect = size.toRect().toAndroidRectF().toRect()
+//        drawable.bounds = rect
+//        drawable.draw(drawContext.canvas.nativeCanvas)
+//    }
+//}

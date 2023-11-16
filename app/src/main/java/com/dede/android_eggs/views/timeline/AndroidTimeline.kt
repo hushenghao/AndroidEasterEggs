@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.dede.android_eggs.main.entity.TimelineEvent
-import com.dede.android_eggs.views.main.compose.DrawableImage
+import com.dede.android_eggs.views.main.compose.Image
 
 @Preview
 @Composable
@@ -117,7 +117,7 @@ fun AndroidTimelineItem(
                     bottom.linkTo(logo.top, 4.dp)
                 }
         ) {}
-        DrawableImage(
+        Image(
             res = timeline.logoRes, contentDescription = null,
             modifier = Modifier
                 .size(24.dp)

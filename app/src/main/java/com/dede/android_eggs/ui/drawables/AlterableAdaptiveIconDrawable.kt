@@ -22,7 +22,7 @@ import kotlin.math.roundToInt
 class AlterableAdaptiveIconDrawable(
     context: Context,
     @DrawableRes res: Int,
-    maskPathStr: String? = null
+    maskPathStr: String? = null,
 ) : Drawable() {
 
     companion object {
@@ -51,6 +51,7 @@ class AlterableAdaptiveIconDrawable(
 
     private val childDrawables: Array<ChildDrawable>
     private val mask: Path = Path()
+    private val savedMask: Path = Path()
 
     private val layerCanvas = Canvas()
     private var layerBitmap: Bitmap? = null
@@ -70,7 +71,8 @@ class AlterableAdaptiveIconDrawable(
         if (TextUtils.isEmpty(pathStr)) {
             pathStr = context.resources.getString(R.string.icon_shape_circle_path)
         }
-        mask.set(PathParser.createPathFromPathData(pathStr))
+        savedMask.set(PathParser.createPathFromPathData(pathStr))
+        mask.set(savedMask)
 
         val drawable = context.requireDrawable(res)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && drawable is AdaptiveIconDrawable) {
@@ -94,15 +96,20 @@ class AlterableAdaptiveIconDrawable(
     fun setMaskPath(pathStr: String) {
         if (TextUtils.isEmpty(pathStr)) return
 
-        mask.set(PathParser.createPathFromPathData(pathStr))
+        savedMask.set(PathParser.createPathFromPathData(pathStr))
+        updateMaskBoundsInternal(bounds)
         invalidateSelf()
     }
 
     fun setForegroundMatrix(matrix: Matrix) {
         if (!isAdaptiveIconDrawable) return
         foregroundMatrix.set(matrix)
-        layerShader = null
         invalidateSelf()
+    }
+
+    override fun invalidateSelf() {
+        layerShader = null
+        super.invalidateSelf()
     }
 
     override fun draw(canvas: Canvas) {
@@ -164,10 +171,8 @@ class AlterableAdaptiveIconDrawable(
         if (isAdaptiveIconDrawable) {
             val cX: Int = bounds.width() / 2
             val cY: Int = bounds.height() / 2
-            val insetWidth: Int =
-                (bounds.width() / (DEFAULT_VIEW_PORT_SCALE * 2)).toInt()
-            val insetHeight: Int =
-                (bounds.height() / (DEFAULT_VIEW_PORT_SCALE * 2)).toInt()
+            val insetWidth: Int = (bounds.width() / (DEFAULT_VIEW_PORT_SCALE * 2)).toInt()
+            val insetHeight: Int = (bounds.height() / (DEFAULT_VIEW_PORT_SCALE * 2)).toInt()
             outRect.set(cX - insetWidth, cY - insetHeight, cX + insetWidth, cY + insetHeight)
         } else {
             outRect.set(bounds)
@@ -179,13 +184,15 @@ class AlterableAdaptiveIconDrawable(
     }
 
     private fun updateMaskBoundsInternal(bounds: Rect) {
+        maskMatrix.reset()
         maskMatrix.setScale(bounds.width() / MASK_SIZE, bounds.height() / MASK_SIZE)
-        mask.transform(maskMatrix)
+        savedMask.transform(maskMatrix, mask)
 
 //        maskMatrix.postTranslate(bounds.left.toFloat(), bounds.top.toFloat())
 //        mask.transform(maskMatrix)
 
-        if (layerBitmap == null) {
+        val bitmap = layerBitmap
+        if (bitmap == null || bounds.width() != bitmap.width || bounds.height() != bitmap.height) {
             layerBitmap = Bitmap.createBitmap(
                 bounds.width(), bounds.height(), Bitmap.Config.ARGB_8888
             )
@@ -219,5 +226,14 @@ class AlterableAdaptiveIconDrawable(
 
     override fun getOpacity(): Int {
         return PixelFormat.TRANSLUCENT
+    }
+
+    override fun applyTheme(t: Resources.Theme) {
+        for (drawable in childDrawables) {
+            val d = drawable.drawable
+            if (d.canApplyTheme()) {
+                d.applyTheme(t)
+            }
+        }
     }
 }

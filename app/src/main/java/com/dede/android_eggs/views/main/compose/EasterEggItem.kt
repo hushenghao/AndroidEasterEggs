@@ -1,5 +1,6 @@
 package com.dede.android_eggs.views.main.compose
 
+import android.graphics.Matrix
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -185,7 +186,7 @@ fun EasterEggItemContent(egg: EasterEgg, base: BaseEasterEgg, onSelected: (index
                         .padding(end = 10.dp, bottom = 6.dp)
                         .weight(1f, true)
                 )
-                EasterEggLogo(egg)
+                EasterEggLogo(egg, sensor = true)
             }
             Row(
                 modifier = Modifier.withEasterEggGroupSelector(base, onSelected),

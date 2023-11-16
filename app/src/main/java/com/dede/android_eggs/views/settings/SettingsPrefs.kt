@@ -22,7 +22,7 @@ object SettingsPrefs {
             nightModePref,
             LanguagePref(),
             IconShapePref(),
-//            IconVisualEffectsPref(),
+            IconVisualEffectsPref(),
             dynamicColorPref,
         )
     }

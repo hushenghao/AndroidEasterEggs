@@ -129,6 +129,7 @@ dependencies {
     implementation(libs.androidx.compose.constraintlayout)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation("com.google.accompanist:accompanist-drawablepainter:0.32.0")
 
     implementation(libs.io.coil)
     implementation(libs.io.coil.compose)
