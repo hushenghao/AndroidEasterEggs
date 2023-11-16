@@ -62,13 +62,11 @@ fun EasterEggLogo(egg: EasterEgg, size: Dp = 44.dp) {
             maskPath = it.getStringExtra(IconShapePref.EXTRA_ICON_SHAPE_PATH)
         }
 
-        val bitmap = remember(maskPath, egg, context.theme, px) {
+        val drawable = remember(maskPath, egg, context.theme) {
             AlterableAdaptiveIconDrawable(context, egg.iconRes, maskPath)
-                .toBitmap(px, px)
-                .asImageBitmap()
         }
-        Image(
-            bitmap = bitmap,
+        DrawableImage(
+            drawable = drawable,
             contentDescription = stringResource(egg.nicknameRes),
             modifier = Modifier.size(size)
         )

@@ -2,7 +2,6 @@
 
 package com.dede.android_eggs.views.timeline
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
@@ -32,23 +31,21 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import androidx.core.graphics.drawable.toBitmap
 import com.dede.android_eggs.main.entity.TimelineEvent
-import com.dede.basic.requireDrawable
+import com.dede.android_eggs.views.main.compose.DrawableImage
 
 @Preview
 @Composable
-fun AndroidTimelineSheet(visible: MutableState<Boolean>) {
+fun AndroidTimelineSheet(visible: MutableState<Boolean> = mutableStateOf(true)) {
     var show by visible
     if (!show) return
     val sheetState = rememberModalBottomSheetState()
@@ -81,11 +78,6 @@ fun AndroidTimelineItem(
     timeline: TimelineEvent,
     isNewYearGroup: (current: TimelineEvent) -> Boolean,
 ) {
-    val context = LocalContext.current
-    val bitmap = remember(context.theme) {
-        context.requireDrawable(timeline.logoRes)
-            .toBitmap().asImageBitmap()
-    }
     val isNewGroup = remember(timeline) { isNewYearGroup.invoke(timeline) }
 
     ConstraintLayout(
@@ -125,8 +117,8 @@ fun AndroidTimelineItem(
                     bottom.linkTo(logo.top, 4.dp)
                 }
         ) {}
-        Image(
-            bitmap = bitmap, contentDescription = null,
+        DrawableImage(
+            res = timeline.logoRes, contentDescription = null,
             modifier = Modifier
                 .size(24.dp)
                 .constrainAs(logo) {
