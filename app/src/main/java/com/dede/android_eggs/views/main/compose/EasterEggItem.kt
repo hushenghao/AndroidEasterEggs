@@ -1,6 +1,5 @@
 package com.dede.android_eggs.views.main.compose
 
-import android.graphics.Matrix
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -51,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.EasterEggHelp
 import com.dede.android_eggs.main.EggActionHelp
+import com.dede.android_eggs.ui.views.ViscousFluidInterpolator
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
@@ -104,6 +104,8 @@ fun EasterEggItemSwipe(
     var triggerOffsetX by remember { mutableFloatStateOf(0f) }
     var needTrigger by remember { mutableStateOf(false) }
 
+    val intercept = ViscousFluidInterpolator.getInstance()
+
     LaunchedEffect(released) {
         if (released) {
             val releaseAnim = Animatable(offsetX)
@@ -127,7 +129,10 @@ fun EasterEggItemSwipe(
                     reverseDirection = LocalLayoutDirection.current == LayoutDirection.Rtl,
                     orientation = Orientation.Horizontal,
                     state = rememberDraggableState { delta ->
-                        offsetX += delta
+                        val r = intercept.getInterpolation(
+                            1f - abs(offsetX / (triggerOffsetX * 1.24f))
+                        )
+                        offsetX += delta * min(r, 1f)
                         if (supportShortcut) {
                             if (!needTrigger && (-offsetX) >= triggerOffsetX) {
                                 needTrigger = true

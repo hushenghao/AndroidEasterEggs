@@ -19,12 +19,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.views.main.EasterEggLogoSensorMatrixConvert
 import com.dede.android_eggs.views.main.EasterEggModules
-import com.dede.android_eggs.views.main.EasterEggsActivity
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
@@ -73,11 +72,9 @@ fun EasterEggLogo(egg: EasterEgg, size: Dp = 44.dp, sensor: Boolean = false) {
         }
         val drawablePainter = rememberDrawablePainter(drawable = drawable)
         if (sensor) {
-            val listener = remember(drawable) {
-                object : EasterEggsActivity.Sensor.Update(
-                    IntSize(drawable.bounds.width(), drawable.bounds.height())
-                ) {
-                    override fun onUpdate(matrix: Matrix) {
+            val listener = remember(drawable.bounds) {
+                object : EasterEggLogoSensorMatrixConvert.Listener(drawable.bounds) {
+                    override fun onUpdateMatrix(matrix: Matrix) {
                         drawable.setForegroundMatrix(matrix)
                     }
                 }

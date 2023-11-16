@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -50,7 +51,6 @@ private fun ChipItem(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(vertical = 4.dp)
     ) {
         Text(
             text = stringResource(textRes),
@@ -63,7 +63,7 @@ private fun ChipItem(
                 text = stringResource(id = R.string.char_separator),
                 style = typography.bodyMedium,
                 color = colorScheme.secondary,
-                modifier = Modifier.padding(horizontal = 6.dp)
+                modifier = Modifier.padding(start = 6.dp)
             )
         }
     }
@@ -78,9 +78,7 @@ private fun ChipItem2(
         text = stringResource(textRes),
         style = typography.titleSmall,
         color = colorScheme.secondary,
-        modifier = Modifier
-            .padding(vertical = 4.dp, horizontal = 8.dp)
-            .clickable(onClick = onClick)
+        modifier = Modifier.clickable(onClick = onClick)
     )
 }
 
@@ -150,7 +148,9 @@ fun ProjectDescription() {
         FlowRow(
             modifier = Modifier
                 .padding(top = 20.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             ChipItem(R.string.label_github) {
                 openCustomTab(R.string.url_github)
@@ -184,14 +184,13 @@ fun ProjectDescription() {
         }
         Wavy(res = R.drawable.ic_wavy_line_1, true, colorScheme.secondaryContainer)
         FlowRow(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
                 text = stringResource(R.string.app_name),
                 style = typography.titleSmall,
-                modifier = Modifier
-                    .padding(vertical = 4.dp)
-                    .then(Modifier.padding(end = 8.dp))
             )
             ChipItem2(R.string.label_privacy_policy) {
                 openCustomTab(R.string.url_privacy)
