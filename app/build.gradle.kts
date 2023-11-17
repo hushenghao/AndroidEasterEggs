@@ -131,6 +131,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.accompanist.drawablepainter)
 
+    implementation(libs.dionsegijn.konfetti)
     implementation(libs.io.coil)
     implementation(libs.io.coil.compose)
     implementation(libs.free.reflection)

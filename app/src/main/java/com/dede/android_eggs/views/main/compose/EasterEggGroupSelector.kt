@@ -14,7 +14,9 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
+import androidx.compose.ui.platform.LocalContext
 import com.dede.android_eggs.main.EggActionHelp
+import com.dede.android_eggs.util.getActivity
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEggGroup
 import kotlin.math.roundToInt
@@ -29,11 +31,11 @@ fun Modifier.withEasterEggGroupSelector(
         return this
     }
 
-    val activity: Activity? = LocalHost.currentOutInspectionMode
+    val activity: Activity? = LocalContext.current.getActivity()
     var popupAnchorBounds by remember { mutableStateOf(Rect.Zero) }
     return clickable {
         // DropdownMenu style error, use native popup
-        if (activity == null) return@clickable
+        if (activity == null || popupAnchorBounds.isEmpty) return@clickable
         val parent = activity.findViewById<FrameLayout>(android.R.id.content)
         val fakeView = View(activity).apply {
             x = popupAnchorBounds.left

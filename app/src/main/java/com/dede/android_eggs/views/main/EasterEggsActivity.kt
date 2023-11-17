@@ -12,11 +12,13 @@ import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.views.main.compose.EasterEggScreen
+import com.dede.android_eggs.views.main.compose.Konfetti
 import com.dede.android_eggs.views.main.compose.LocalEasterEggLogoSensor
 import com.dede.android_eggs.views.main.compose.LocalFragmentManager
-import com.dede.android_eggs.views.main.compose.LocalHost
+import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.MainTitleBar
 import com.dede.android_eggs.views.main.compose.Welcome
+import com.dede.android_eggs.views.main.compose.rememberKonfettiState
 import com.dede.android_eggs.views.settings.prefs.IconVisualEffectsPref
 import com.dede.android_eggs.views.theme.AppTheme
 import com.dede.basic.provider.BaseEasterEgg
@@ -45,10 +47,11 @@ class EasterEggsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            val konfettiState = rememberKonfettiState()
             CompositionLocalProvider(
                 LocalFragmentManager provides supportFragmentManager,
-                LocalHost provides this,
                 LocalEasterEggLogoSensor provides sensor,
+                LocalKonfettiState provides konfettiState
             ) {
                 AppTheme {
                     Scaffold(
@@ -56,10 +59,10 @@ class EasterEggsActivity : AppCompatActivity() {
                             MainTitleBar()
                         }
                     ) { contentPadding ->
-                        Welcome()
-
                         EasterEggScreen(easterEggs, contentPadding)
                     }
+                    Welcome()
+                    Konfetti(konfettiState)
                 }
             }
         }

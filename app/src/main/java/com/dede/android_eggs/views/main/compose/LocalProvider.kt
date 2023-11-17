@@ -1,7 +1,7 @@
 package com.dede.android_eggs.views.main.compose
 
-import android.app.Activity
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -22,11 +22,11 @@ val LocalFragmentManager = staticCompositionLocalOf<FragmentManager> {
     noLocalProvidedFor("LocalFragmentManager")
 }
 
-val LocalHost = staticCompositionLocalOf<Activity> {
-    noLocalProvidedFor("LocalHost")
-}
-
 val LocalEasterEggLogoSensor = staticCompositionLocalOf<EasterEggLogoSensorMatrixConvert> {
     noLocalProvidedFor("LocalEasterEggLogoSensor")
+}
+
+val LocalKonfettiState = staticCompositionLocalOf<MutableState<Boolean>> {
+    noLocalProvidedFor("LocalKonfettiState")
 }
 

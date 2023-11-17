@@ -10,5 +10,5 @@ repositories {
 
 dependencies {
     implementation(gradleApi())
-    implementation("com.android.tools:sdk-common:31.1.3")
+    implementation("com.android.tools:sdk-common:31.1.4")
 }

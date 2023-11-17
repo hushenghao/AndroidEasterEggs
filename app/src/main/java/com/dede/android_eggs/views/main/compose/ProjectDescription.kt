@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -81,6 +82,7 @@ private fun ChipItem2(
 fun ProjectDescription() {
     val context = LocalContext.current
     val fm: FragmentManager? = LocalFragmentManager.currentOutInspectionMode
+    val konfettiState = LocalKonfettiState.currentOutInspectionMode
 
     fun openCustomTab(@StringRes uri: Int) {
         CustomTabsBrowser.launchUrl(context, context.getString(uri).toUri())
@@ -102,7 +104,11 @@ fun ProjectDescription() {
         ) {
             Image(
                 res = R.mipmap.ic_launcher_round,
-                modifier = Modifier.size(50.dp),
+                modifier = Modifier
+                    .size(50.dp)
+                    .clickable(role = Role.Image) {
+                        konfettiState?.value = true
+                    },
                 contentDescription = stringResource(id = R.string.app_name)
             )
             Column(modifier = Modifier.padding(start = 12.dp)) {

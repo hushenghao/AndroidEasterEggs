@@ -3,7 +3,7 @@ kotlin = "1.9.20"
 # https://androidx.dev/storage/compose-compiler/repository
 # https://maven.google.com/web/index.html?q=compose#androidx.compose.compiler:compiler
 compose-kotlin-compiler = "1.5.4"
-agp = "8.1.3"
+agp = "8.1.4"
 hilt = "2.48.1"
 # https://google.github.io/accompanist
 accompanist = "0.33.2-alpha"
@@ -48,6 +48,7 @@ accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-dra
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
+dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.3"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
 viewbinding-delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9"
 squareup-okio = "com.squareup.okio:okio:3.6.0"
