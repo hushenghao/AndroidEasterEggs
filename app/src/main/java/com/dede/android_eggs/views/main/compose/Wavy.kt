@@ -31,6 +31,9 @@ fun PreviewWavy() {
 
 @Composable
 fun Wavy(res: Int, repeat: Boolean = false, tint: Color? = null) {
+    val modifier = Modifier
+        .fillMaxWidth()
+        .padding(vertical = 26.dp)
     if (repeat) {
         val context = LocalContext.current
         val drawable = remember(res, context.theme) {
@@ -44,17 +47,13 @@ fun Wavy(res: Int, repeat: Boolean = false, tint: Color? = null) {
             drawable = drawable,
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 30.dp)
+            modifier = modifier
         )
     } else {
         Image(
             painter = painterResource(id = res),
             contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 30.dp)
+            modifier = modifier
         )
     }
 }

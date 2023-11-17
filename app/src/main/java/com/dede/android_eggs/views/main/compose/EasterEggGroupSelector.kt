@@ -1,5 +1,6 @@
 package com.dede.android_eggs.views.main.compose
 
+import android.app.Activity
 import android.view.View
 import android.widget.FrameLayout
 import androidx.compose.foundation.clickable
@@ -28,7 +29,7 @@ fun Modifier.withEasterEggGroupSelector(
         return this
     }
 
-    val activity = LocalHost.current
+    val activity: Activity? = LocalHost.currentOutInspectionMode
     var popupAnchorBounds by remember { mutableStateOf(Rect.Zero) }
     return clickable {
         // DropdownMenu style error, use native popup

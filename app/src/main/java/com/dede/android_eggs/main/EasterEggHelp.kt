@@ -5,14 +5,37 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.SparseArray
 import androidx.annotation.StringRes
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalInspectionMode
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
+import com.dede.android_eggs.views.main.EasterEggModules
 import com.dede.android_eggs.views.settings.prefs.IconShapePref
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.requireDrawable
+import dagger.Module
 
 
 object EasterEggHelp {
+
+    @Composable
+    fun previewEasterEggs(): List<EasterEgg> {
+        if (!LocalInspectionMode.current) {
+            throw IllegalStateException("Only call from Inspection Mode")
+        }
+        val module = EasterEggModules::class.java.getAnnotation(Module::class.java)
+        val baseEasterEggs = module.includes.map {
+            val instance = try {
+                it.java.getField("INSTANCE").get(null)
+            } catch (e: Exception) {
+                it.java.getConstructor().newInstance()
+            }
+            val provider = instance as EasterEggProvider
+            provider.provideEasterEgg()
+        }
+        return EasterEggModules.providePureEasterEggList(baseEasterEggs)
+    }
 
     class VersionFormatter private constructor(
         @StringRes val nicknameRes: Int,

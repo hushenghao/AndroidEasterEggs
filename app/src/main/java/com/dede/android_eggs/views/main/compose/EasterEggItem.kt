@@ -1,8 +1,15 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.dede.android_eggs.views.main.compose
 
 import android.view.HapticFeedbackConstants
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
@@ -44,6 +51,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -60,7 +68,8 @@ import kotlin.math.roundToInt
 
 
 @Composable
-fun EasterEggItem(base: BaseEasterEgg) {
+@Preview(showBackground = true)
+fun EasterEggItem(base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first()) {
     val context = LocalContext.current
 
     var groupIndex by remember { mutableIntStateOf(0) }
@@ -106,11 +115,19 @@ fun EasterEggItemSwipe(
 
     val intercept = ViscousFluidInterpolator.getInstance()
 
+    fun callbackSwipeProgress(offsetX: Float) {
+        if (!supportShortcut) return
+        val p = if (triggerOffsetX == 0f) 0f else
+            min(abs(offsetX) / triggerOffsetX, 1f)
+        onSwipe.invoke(p)
+    }
+
     LaunchedEffect(released) {
         if (released) {
             val releaseAnim = Animatable(offsetX)
             releaseAnim.animateTo(0f, animationSpec = tween(200)) {
                 offsetX = value
+                callbackSwipeProgress(offsetX)
             }
         }
     }
@@ -118,7 +135,7 @@ fun EasterEggItemSwipe(
     val view = LocalView.current
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.padding(top = 12.dp)
+        modifier = Modifier
     ) {
         floor()
         Box(
@@ -138,11 +155,7 @@ fun EasterEggItemSwipe(
                                 needTrigger = true
                                 view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
                             }
-                            val p = if (triggerOffsetX == 0f)
-                                0f
-                            else
-                                min(abs(offsetX) / triggerOffsetX, 1f)
-                            onSwipe.invoke(p)
+                            callbackSwipeProgress(offsetX)
                         }
                     },
                     onDragStarted = {
@@ -162,9 +175,13 @@ fun EasterEggItemSwipe(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EasterEggItemContent(egg: EasterEgg, base: BaseEasterEgg, onSelected: (index: Int) -> Unit) {
+@Preview
+fun EasterEggItemContent(
+    egg: EasterEgg = EasterEggHelp.previewEasterEggs().first(),
+    base: BaseEasterEgg = egg,
+    onSelected: ((index: Int) -> Unit)? = null,
+) {
     val context = LocalContext.current
     val isGroup = base is EasterEggGroup
     val androidVersion = remember(egg) {
@@ -194,7 +211,9 @@ fun EasterEggItemContent(egg: EasterEgg, base: BaseEasterEgg, onSelected: (index
                 EasterEggLogo(egg, sensor = true)
             }
             Row(
-                modifier = Modifier.withEasterEggGroupSelector(base, onSelected),
+                modifier = Modifier.withEasterEggGroupSelector(base) {
+                    onSelected?.invoke(it)
+                },
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -216,8 +235,9 @@ fun EasterEggItemContent(egg: EasterEgg, base: BaseEasterEgg, onSelected: (index
 }
 
 @Composable
+@Preview(showBackground = true)
 fun EasterEggItemFloor(
-    egg: EasterEgg,
+    egg: EasterEgg = EasterEggHelp.previewEasterEggs().first(),
     enableShortcut: Boolean = true,
     swipeProgress: Float = 0f,
 ) {
@@ -253,29 +273,51 @@ fun EasterEggItemFloor(
             )
         }
         if (enableShortcut) {
-            val icon = if (swipeProgress >= 1f) {
-                Icons.Rounded.AppShortcut
-            } else if (LocalLayoutDirection.current == LayoutDirection.Rtl) {
-                Icons.Rounded.SwipeRight
-            } else {
-                Icons.Rounded.SwipeLeft
-            }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.offset(x = (swipeProgress * -12).dp)
+                modifier = Modifier.offset(x = (swipeProgress * -14).dp)
             ) {
                 Text(
                     text = stringResource(R.string.label_add_shortcut),
                     modifier = Modifier.padding(end = 4.dp),
-                    maxLines = 3,
+                    maxLines = 2,
                     style = typography.bodyMedium
                 )
-                Icon(
-                    modifier = Modifier.size(28.dp),
-                    imageVector = icon,
-                    contentDescription = stringResource(R.string.label_add_shortcut)
-                )
+                ShortcutIcon(swipeProgress >= 1f)
             }
+        }
+    }
+}
+
+@Composable
+private fun ShortcutIcon(showShortcut: Boolean = false) {
+    Box(contentAlignment = Alignment.Center) {
+        val swipeIcon = if (LocalLayoutDirection.current == LayoutDirection.Rtl) {
+            Icons.Rounded.SwipeRight
+        } else {
+            Icons.Rounded.SwipeLeft
+        }
+        AnimatedVisibility(
+            visible = !showShortcut,
+            enter = scaleIn() + fadeIn(),
+            exit = scaleOut() + fadeOut(),
+        ) {
+            Icon(
+                modifier = Modifier.size(28.dp),
+                imageVector = swipeIcon,
+                contentDescription = stringResource(R.string.label_add_shortcut)
+            )
+        }
+        AnimatedVisibility(
+            visible = showShortcut,
+            enter = scaleIn() + fadeIn(),
+            exit = scaleOut() + fadeOut(),
+        ) {
+            Icon(
+                modifier = Modifier.size(28.dp),
+                imageVector = Icons.Rounded.AppShortcut,
+                contentDescription = stringResource(R.string.label_add_shortcut)
+            )
         }
     }
 }

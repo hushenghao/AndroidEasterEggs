@@ -1,20 +1,32 @@
 package com.dede.android_eggs.views.main.compose
 
 import android.app.Activity
-import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.fragment.app.FragmentManager
 import com.dede.android_eggs.views.main.EasterEggLogoSensorMatrixConvert
 
-
-val LocalFragmentManager = staticCompositionLocalOf<FragmentManager?> {
-    Log.w("LocalFragmentManager", "CompositionLocal LocalFragmentManager not present")
-    null
+private inline fun noLocalProvidedFor(name: String): Nothing {
+    throw IllegalStateException("CompositionLocal %s not present".format(name))
 }
 
-val LocalHost = staticCompositionLocalOf<Activity?> { null }
+val <T> ProvidableCompositionLocal<T>.currentOutInspectionMode: T?
+    @ReadOnlyComposable
+    @Composable
+    get() = if (LocalInspectionMode.current) null else current
+
+val LocalFragmentManager = staticCompositionLocalOf<FragmentManager> {
+    noLocalProvidedFor("LocalFragmentManager")
+}
+
+val LocalHost = staticCompositionLocalOf<Activity> {
+    noLocalProvidedFor("LocalHost")
+}
 
 val LocalEasterEggLogoSensor = staticCompositionLocalOf<EasterEggLogoSensorMatrixConvert> {
-    throw IllegalStateException("CompositionLocal LocalEasterEggLogoSensor not present")
+    noLocalProvidedFor("LocalEasterEggLogoSensor")
 }
 

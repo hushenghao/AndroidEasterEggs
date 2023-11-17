@@ -14,6 +14,6 @@ fun AndroidSnapshotView() {
         factory = { SnapshotGroupView(it) },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 12.dp)
+            .padding(top = 12.dp)
     )
 }

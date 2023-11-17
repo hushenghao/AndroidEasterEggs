@@ -12,7 +12,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -21,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.fragment.app.FragmentManager
 import com.dede.android_eggs.R
 import com.dede.android_eggs.views.settings.SettingsFragment
 
@@ -30,7 +30,7 @@ private const val TAG_SETTINGS = "Settings"
 @Composable
 @Preview
 fun MainTitleBar() {
-    val fm = LocalFragmentManager.current
+    val fm: FragmentManager? = LocalFragmentManager.currentOutInspectionMode
 
     var startRotate by rememberSaveable { mutableStateOf(false) }
     val rotateAnim by animateFloatAsState(

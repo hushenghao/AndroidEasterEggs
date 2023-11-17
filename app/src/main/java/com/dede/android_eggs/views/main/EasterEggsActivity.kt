@@ -4,30 +4,18 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.R
-import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.ThemeUtils
-import com.dede.android_eggs.views.main.compose.AndroidSnapshotView
-import com.dede.android_eggs.views.main.compose.EasterEggItem
+import com.dede.android_eggs.views.main.compose.EasterEggScreen
 import com.dede.android_eggs.views.main.compose.LocalEasterEggLogoSensor
 import com.dede.android_eggs.views.main.compose.LocalFragmentManager
 import com.dede.android_eggs.views.main.compose.LocalHost
 import com.dede.android_eggs.views.main.compose.MainTitleBar
-import com.dede.android_eggs.views.main.compose.ProjectDescription
-import com.dede.android_eggs.views.main.compose.Wavy
 import com.dede.android_eggs.views.main.compose.Welcome
 import com.dede.android_eggs.views.settings.prefs.IconVisualEffectsPref
 import com.dede.android_eggs.views.theme.AppTheme
@@ -53,7 +41,7 @@ class EasterEggsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.tryApplyOLEDTheme(this)
-        EdgeUtils.applyEdge(window)
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         setContent {
@@ -70,25 +58,7 @@ class EasterEggsActivity : AppCompatActivity() {
                     ) { contentPadding ->
                         Welcome()
 
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            LazyColumn(
-                                contentPadding = contentPadding,
-                                modifier = Modifier.sizeIn(maxWidth = 560.dp),
-                            ) {
-                                item {
-                                    AndroidSnapshotView()
-                                    Wavy(res = R.drawable.ic_wavy_line)
-                                    for (easterEgg in easterEggs) {
-                                        EasterEggItem(easterEgg)
-                                    }
-                                    Wavy(res = R.drawable.ic_wavy_line)
-                                    ProjectDescription()
-                                }
-                            }
-                        }
+                        EasterEggScreen(easterEggs, contentPadding)
                     }
                 }
             }

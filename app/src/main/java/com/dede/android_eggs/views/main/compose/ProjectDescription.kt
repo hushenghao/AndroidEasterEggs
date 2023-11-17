@@ -4,7 +4,6 @@ package com.dede.android_eggs.views.main.compose
 
 import android.content.Intent
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,27 +19,22 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.net.toUri
+import androidx.fragment.app.FragmentManager
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.createChooser
 import com.dede.android_eggs.views.settings.component.ComponentManagerFragment
 import com.dede.android_eggs.views.timeline.AndroidTimelineFragment
-import com.dede.basic.requireDrawable
-import kotlin.math.roundToInt
 
 
 @Composable
@@ -86,7 +80,7 @@ private fun ChipItem2(
 @Composable
 fun ProjectDescription() {
     val context = LocalContext.current
-    val fm = LocalFragmentManager.current
+    val fm: FragmentManager? = LocalFragmentManager.currentOutInspectionMode
 
     fun openCustomTab(@StringRes uri: Int) {
         CustomTabsBrowser.launchUrl(context, context.getString(uri).toUri())
@@ -96,26 +90,20 @@ fun ProjectDescription() {
         CustomTabsBrowser.launchUrlByBrowser(context, uri.toUri())
     }
 
-    val px = with(LocalDensity.current) {
-        50.dp.toPx().roundToInt()
-    }
-    val bitmap = remember(context.theme) {
-        context.requireDrawable(R.mipmap.ic_launcher_round)
-            .toBitmap(px, px).asImageBitmap()
-    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 24.dp)
+            .padding(horizontal = 16.dp)
             .then(Modifier.padding(bottom = 30.dp))
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(horizontal = 4.dp)
         ) {
             Image(
+                res = R.mipmap.ic_launcher_round,
                 modifier = Modifier.size(50.dp),
-                bitmap = bitmap,
-                contentDescription = null
+                contentDescription = stringResource(id = R.string.app_name)
             )
             Column(modifier = Modifier.padding(start = 12.dp)) {
                 Text(
