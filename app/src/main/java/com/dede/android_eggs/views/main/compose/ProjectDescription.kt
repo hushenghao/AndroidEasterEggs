@@ -5,6 +5,7 @@ package com.dede.android_eggs.views.main.compose
 import android.content.Intent
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -15,15 +16,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -82,7 +86,8 @@ private fun ChipItem2(
 fun ProjectDescription() {
     val context = LocalContext.current
     val fm: FragmentManager? = LocalFragmentManager.currentOutInspectionMode
-    val konfettiState = LocalKonfettiState.currentOutInspectionMode
+    var konfettiState by LocalKonfettiState.current
+//    var timelineVisible = remember { mutableStateOf(false) }
 
     fun openCustomTab(@StringRes uri: Int) {
         CustomTabsBrowser.launchUrl(context, context.getString(uri).toUri())
@@ -91,6 +96,9 @@ fun ProjectDescription() {
     fun openBrowser(uri: String) {
         CustomTabsBrowser.launchUrlByBrowser(context, uri.toUri())
     }
+
+    // https://issuetracker.google.com/issues/308510945
+//    AndroidTimelineSheet(timelineVisible)
 
     Column(
         modifier = Modifier
@@ -106,8 +114,11 @@ fun ProjectDescription() {
                 res = R.mipmap.ic_launcher_round,
                 modifier = Modifier
                     .size(50.dp)
-                    .clickable(role = Role.Image) {
-                        konfettiState?.value = true
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(bounded = false),
+                    ) {
+                        konfettiState = true
                     },
                 contentDescription = stringResource(id = R.string.app_name)
             )
@@ -154,6 +165,7 @@ fun ProjectDescription() {
             }
             ChipItem(R.string.label_timeline) {
                 AndroidTimelineFragment.show(fm ?: return@ChipItem)
+//                timelineVisible.value = true
             }
             ChipItem(R.string.label_component_manager) {
                 ComponentManagerFragment.show(fm ?: return@ChipItem)

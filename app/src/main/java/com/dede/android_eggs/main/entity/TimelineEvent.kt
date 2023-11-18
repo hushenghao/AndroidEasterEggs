@@ -19,7 +19,7 @@ data class TimelineEvent(
     val year: String?,
     val month: String?,
     @DrawableRes val logoRes: Int,
-    private val event: CharSequence,
+    val event: CharSequence,
 ) {
 
     companion object {

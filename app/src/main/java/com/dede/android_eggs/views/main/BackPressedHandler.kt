@@ -12,8 +12,8 @@ import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import android.window.BackEvent
 import androidx.activity.BackEventCompat
+import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.content.withStyledAttributes
@@ -31,7 +31,7 @@ import kotlin.math.abs
 import kotlin.math.max
 import com.google.android.material.R as M3R
 
-class BackPressedHandler(private val host: AppCompatActivity) :
+class BackPressedHandler(private val host: ComponentActivity) :
     OnBackPressedCallback(enabled = true), DefaultLifecycleObserver {
 
     companion object {

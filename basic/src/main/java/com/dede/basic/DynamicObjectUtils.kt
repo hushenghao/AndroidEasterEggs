@@ -51,13 +51,22 @@ private class ReflectDynamicObject(obj: Any?, clazz: Class<out Any>) : DynamicOb
     private fun pickMethod(name: String, vararg arguments: Any?): Method? {
         val types = inferTypes(*arguments)
         var method: Method? = null
+        var error: Exception? = null
         try {
             method = clazz.getMethod(name, *types)
-            if (method == null) {
-                method = clazz.getDeclaredMethod(name, *types)
-            }
         } catch (e: Exception) {
-            Log.w(TAG, e)
+            error = e
+        }
+        if (method == null) {
+            error = null
+            try {
+                method = clazz.getDeclaredMethod(name, *types)
+            } catch (e: Exception) {
+                error = e
+            }
+        }
+        if (error != null) {
+            Log.w(TAG, error)
         }
         return method
     }
@@ -84,13 +93,22 @@ private class ReflectDynamicObject(obj: Any?, clazz: Class<out Any>) : DynamicOb
 
     private fun pickField(name: String): Field? {
         var field: Field? = null
+        var error: Exception? = null
         try {
             field = clazz.getField(name)
-            if (field == null) {
-                field = clazz.getDeclaredField(name)
-            }
         } catch (e: Exception) {
-            Log.w(TAG, e)
+            error = e
+        }
+        if (field == null) {
+            error = null
+            try {
+                field = clazz.getDeclaredField(name)
+            } catch (e: Exception) {
+                error = e
+            }
+        }
+        if (error != null) {
+            Log.w(TAG, error)
         }
         return field
     }
