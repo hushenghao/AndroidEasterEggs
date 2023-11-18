@@ -193,7 +193,7 @@ fun AndroidTimelineItem(
                 modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp)
             )
         }
-        // https://issuetracker.google.com/issues/311627066
+        // todo fix leak https://issuetracker.google.com/issues/311627066
         Icon(
             imageVector = Icons.Outlined.ArrowLeft,
             tint = colorScheme.secondaryContainer,

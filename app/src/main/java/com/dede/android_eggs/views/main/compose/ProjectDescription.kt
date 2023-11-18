@@ -97,7 +97,7 @@ fun ProjectDescription() {
         CustomTabsBrowser.launchUrlByBrowser(context, uri.toUri())
     }
 
-    // https://issuetracker.google.com/issues/308510945
+    // todo support BackHandler https://issuetracker.google.com/issues/308510945
 //    AndroidTimelineSheet(timelineVisible)
 
     Column(
