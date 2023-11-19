@@ -6,11 +6,18 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.ThemeUtils
+import com.dede.android_eggs.views.main.compose.BottomSearchBar
 import com.dede.android_eggs.views.main.compose.EasterEggScreen
 import com.dede.android_eggs.views.main.compose.Konfetti
 import com.dede.android_eggs.views.main.compose.LocalEasterEggLogoSensor
@@ -48,6 +55,8 @@ class EasterEggsActivity : AppCompatActivity() {
 
         setContent {
             val konfettiState = rememberKonfettiState()
+            val searchBarVisibleState = rememberSaveable { mutableStateOf(false) }
+            var searchText by rememberSaveable { mutableStateOf("") }
             CompositionLocalProvider(
                 LocalFragmentManager provides supportFragmentManager,
                 LocalEasterEggLogoSensor provides sensor,
@@ -56,10 +65,15 @@ class EasterEggsActivity : AppCompatActivity() {
                 AppTheme {
                     Scaffold(
                         topBar = {
-                            MainTitleBar()
+                            MainTitleBar(searchBarVisibleState = searchBarVisibleState)
+                        },
+                        bottomBar = {
+                            BottomSearchBar(searchBarVisibleState, onSearch = {
+                                searchText = it
+                            })
                         }
                     ) { contentPadding ->
-                        EasterEggScreen(easterEggs, contentPadding)
+                        EasterEggScreen(easterEggs, searchText, contentPadding)
                     }
                     Welcome()
                     Konfetti(konfettiState)

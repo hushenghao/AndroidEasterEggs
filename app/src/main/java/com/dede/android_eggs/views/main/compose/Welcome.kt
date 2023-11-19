@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.TextButton
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,7 +31,8 @@ private const val KEY = "key_welcome_status"
 fun Welcome() {
     val context = LocalContext.current
     var visible by remember {
-        mutableStateOf(!context.pref.getBoolean(KEY, false))
+        val showed = context.pref.getBoolean(KEY, false)
+        mutableStateOf(!showed)
 //        mutableStateOf(true)
     }
     if (!visible) {

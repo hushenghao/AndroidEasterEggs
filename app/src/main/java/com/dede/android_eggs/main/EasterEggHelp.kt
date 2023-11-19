@@ -110,7 +110,7 @@ object EasterEggHelp {
         return context.requireDrawable(iconRes)
     }
 
-    private fun getVersionNameByApiLevel(level: Int): String {
+    fun getVersionNameByApiLevel(level: Int): String {
         return apiLevelArrays[level]
             ?: throw IllegalArgumentException("Illegal Api level: $level")
     }
