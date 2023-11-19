@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Cuerdafuente
+Llave: HuevosdepascuaContextopedirLlave: nombre_de_la_aplicaciónArchivo: cuerdas. xml</string>
+    <string name="summary_android_waiting">C ó d i g o f u e n t e
+C o n t e x t o p e d i r
+L l a v e…</string>
+</resources>

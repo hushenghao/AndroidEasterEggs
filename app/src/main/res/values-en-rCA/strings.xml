@@ -1,2 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Código fuente
+Huevos de pascua
+Contexto pedor
+Llave: nombre_de_la_aplicación
+Nombre_de_la_aplicación</string>
+    <string name="title_open_with">Cuerdas. xml huevos de pascua
+Código fuente 
+Contexto
+Inglés, traducciones de canada guardar</string>
+    <string name="char_separator">CÓDIGO FUENTE
+
+CORTAR
+
+CONTEXTO PEDIR 
+
+LLAVE SEPARADOR DE CANALIZACIÓN
+CANALIZADOR_SEPARAR</string>
+</resources>
