@@ -3,13 +3,15 @@
 package com.dede.android_eggs.views.main.compose
 
 import android.view.HapticFeedbackConstants
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.Orientation
@@ -128,7 +130,7 @@ fun EasterEggItemSwipe(
     LaunchedEffect(released) {
         if (released) {
             val releaseAnim = Animatable(offsetX)
-            releaseAnim.animateTo(0f, animationSpec = tween(200)) {
+            releaseAnim.animateTo(0f, animationSpec = tween(300)) {
                 offsetX = value
                 callbackSwipeProgress(offsetX)
             }
@@ -213,13 +215,17 @@ fun EasterEggItemContent(
             modifier = Modifier.padding(start = 22.dp, top = 18.dp, end = 22.dp, bottom = 18.dp)
         ) {
             Row(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = stringResource(egg.nameRes),
-                    style = typography.headlineSmall,
+                Box(
                     modifier = Modifier
                         .padding(end = 10.dp, bottom = 6.dp)
                         .weight(1f, true)
-                )
+                ) {
+                    Text(
+                        text = stringResource(egg.nameRes),
+                        style = typography.headlineSmall,
+                        modifier = Modifier.animateContentSize()
+                    )
+                }
                 EasterEggLogo(egg, sensor = true)
             }
             Row(
@@ -230,7 +236,8 @@ fun EasterEggItemContent(
             ) {
                 Text(
                     text = androidVersion,
-                    style = typography.bodyMedium
+                    style = typography.bodyMedium,
+                    modifier = Modifier.animateContentSize(),
                 )
                 if (isGroup) {
                     Icon(
@@ -303,31 +310,28 @@ fun EasterEggItemFloor(
 
 @Composable
 private fun ShortcutIcon(showShortcut: Boolean = false) {
-    Box(contentAlignment = Alignment.Center) {
-        val swipeIcon = if (LocalLayoutDirection.current == LayoutDirection.Rtl) {
-            Icons.Rounded.SwipeRight
-        } else {
-            Icons.Rounded.SwipeLeft
-        }
-        AnimatedVisibility(
-            visible = !showShortcut,
-            enter = scaleIn() + fadeIn(),
-            exit = scaleOut() + fadeOut(),
-        ) {
+    AnimatedContent(
+        targetState = showShortcut,
+        transitionSpec = {
+            scaleIn() + fadeIn() togetherWith scaleOut() + fadeOut()
+        },
+        label = "ShortcutIcon"
+    ) {
+        if (it) {
             Icon(
-                modifier = Modifier.size(28.dp),
-                imageVector = swipeIcon,
+                modifier = Modifier.size(30.dp),
+                imageVector = Icons.Rounded.AppShortcut,
                 contentDescription = stringResource(R.string.label_add_shortcut)
             )
-        }
-        AnimatedVisibility(
-            visible = showShortcut,
-            enter = scaleIn() + fadeIn(),
-            exit = scaleOut() + fadeOut(),
-        ) {
+        } else {
+            val swipeIcon = if (LocalLayoutDirection.current == LayoutDirection.Rtl) {
+                Icons.Rounded.SwipeRight
+            } else {
+                Icons.Rounded.SwipeLeft
+            }
             Icon(
-                modifier = Modifier.size(28.dp),
-                imageVector = Icons.Rounded.AppShortcut,
+                modifier = Modifier.size(30.dp),
+                imageVector = swipeIcon,
                 contentDescription = stringResource(R.string.label_add_shortcut)
             )
         }

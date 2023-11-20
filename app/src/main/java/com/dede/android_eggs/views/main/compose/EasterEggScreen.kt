@@ -1,10 +1,15 @@
 package com.dede.android_eggs.views.main.compose
 
 import android.content.Context
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
@@ -34,6 +39,7 @@ fun EasterEggScreen(
     searchFilter: String = "",
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
+    val context = LocalContext.current
     val pureEasterEggs = remember(easterEggs) {
         EasterEggModules.providePureEasterEggList(easterEggs)
     }
@@ -41,53 +47,78 @@ fun EasterEggScreen(
         searchFilter.trim().uppercase()
     }
     val searchMode = searchText.isNotBlank()
-
-    val context = LocalContext.current
+    val currentList = remember(searchText, searchMode, easterEggs, pureEasterEggs) {
+        if (searchMode) {
+            filterEasterEggs(context, pureEasterEggs, searchText)
+        } else {
+            easterEggs
+        }
+    }
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter,
     ) {
-        LazyColumn(
-            contentPadding = contentPadding,
+        AnimatedContent(
+            targetState = currentList.isEmpty(),
+            transitionSpec = {
+                fadeIn() togetherWith fadeOut()
+            },
             modifier = Modifier.sizeIn(maxWidth = 560.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            if (searchMode) {
-                val result = filterEasterEggs(context, pureEasterEggs, searchText)
-                if (result.isEmpty()) {
-                    item("empty") {
-                        SearchEmpty()
-                    }
-                } else {
-                    items(items = result) {
-                        EasterEggItem(it)
-                    }
+            contentAlignment = Alignment.TopCenter,
+            label = "EasterEggList"
+        ) { isEmpty ->
+            if (isEmpty) {
+                Box(
+                    contentAlignment = Alignment.TopCenter,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(contentPadding)
+                        .padding(top = 32.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.SearchOff,
+                        contentDescription = null,
+                        tint = colorScheme.onBackground,
+                        modifier = Modifier.size(108.dp)
+                    )
                 }
             } else {
-                item("snapshot") {
-                    AndroidSnapshotView()
-                }
-                item("wavy1") {
-                    Wavy(res = R.drawable.ic_wavy_line)
-                }
-                items(items = easterEggs) {
-                    EasterEggItem(it)
-                }
-                item("wavy2") {
-                    Wavy(res = R.drawable.ic_wavy_line)
-                }
-                item("footer") {
-                    ProjectDescription()
+                LazyColumn(
+                    contentPadding = contentPadding,
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    if (searchMode) {
+                        items(items = currentList) {
+                            EasterEggItem(it)
+                        }
+                    } else {
+                        item("snapshot") {
+                            AndroidSnapshotView()
+                        }
+                        item("wavy1") {
+                            Wavy(res = R.drawable.ic_wavy_line)
+                        }
+                        items(items = currentList) {
+                            EasterEggItem(it)
+                        }
+                        item("wavy2") {
+                            Wavy(res = R.drawable.ic_wavy_line)
+                        }
+                        item("footer") {
+                            ProjectDescription()
+                        }
+                    }
                 }
             }
         }
+
     }
 }
 
 private fun filterEasterEggs(
     context: Context,
     pureEasterEggs: List<EasterEgg>,
-    searchText: String
+    searchText: String,
 ): List<EasterEgg> {
     val isApiLevel = Regex("^\\d{1,2}$").matches(searchText)
 
@@ -106,23 +137,5 @@ private fun filterEasterEggs(
                 context.getString(it.nicknameRes).contains(searchText, true) ||
                 it.matchVersionName(searchText) ||
                 (isApiLevel && it.apiLevel.contains(searchText.toIntOrNull() ?: -1))
-    }
-}
-
-@Composable
-@Preview(widthDp = 200, heightDp = 200, showBackground = true)
-private fun SearchEmpty() {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 20.dp)
-    ) {
-        Icon(
-            imageVector = Icons.Rounded.SearchOff,
-            contentDescription = null,
-            tint = colorScheme.onBackground,
-            modifier = Modifier.size(128.dp)
-        )
     }
 }

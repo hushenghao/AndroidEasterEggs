@@ -4,6 +4,8 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.clickable
@@ -49,7 +51,7 @@ import com.dede.android_eggs.R
 @Preview
 fun BottomSearchBar(
     visibleState: MutableState<Boolean> = mutableStateOf(true),
-    onSearch: ((text: String) -> Unit)? = null
+    onSearch: ((text: String) -> Unit)? = null,
 ) {
     var visible by visibleState
 
@@ -61,17 +63,11 @@ fun BottomSearchBar(
         enter = slideInVertically(initialOffsetY = {
             it
         }) + fadeIn(),
-        exit = slideOutVertically(
-            targetOffsetY = { it }
-        ) + fadeOut(),
+        exit = slideOutVertically(targetOffsetY = { it }) + fadeOut(),
     ) {
-        BottomSearchBar(
-            visible,
-            onClose = {
-                visible = false
-            },
-            onSearch = { onSearch?.invoke(it) }
-        )
+        BottomSearchBar(visible, onClose = {
+            visible = false
+        }, onSearch = { onSearch?.invoke(it) })
     }
 }
 
@@ -99,26 +95,25 @@ private fun BottomSearchBar(
         tonalElevation = 4.dp,
         shadowElevation = 4.dp,
     ) {
-        TextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .focusRequester(focusRequester)
-                .navigationBarsPadding()
-                .padding(horizontal = 16.dp, vertical = 10.dp),
+        TextField(modifier = Modifier
+            .fillMaxWidth()
+            .focusRequester(focusRequester)
+            .navigationBarsPadding()
+            .padding(horizontal = 16.dp, vertical = 10.dp),
             value = searchText,
-            onValueChange = { searchText = it },
+            onValueChange = {
+                searchText = it
+                onSearch.invoke(searchText)
+            },
             placeholder = {
                 Text(text = stringResource(R.string.label_search_hint))
             },
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Ascii,
-                imeAction = ImeAction.Search
+                keyboardType = KeyboardType.Ascii, imeAction = ImeAction.Search
             ),
-            keyboardActions = KeyboardActions(
-                onSearch = {
-                    onSearch.invoke(searchText)
-                }
-            ),
+            keyboardActions = KeyboardActions(onSearch = {
+                onSearch.invoke(searchText)
+            }),
             singleLine = true,
             shape = RoundedCornerShape(50),
             colors = TextFieldDefaults.colors(
@@ -127,8 +122,7 @@ private fun BottomSearchBar(
                 unfocusedIndicatorColor = Color.Transparent,
             ),
             leadingIcon = {
-                Icon(
-                    imageVector = Icons.Rounded.ArrowBack,
+                Icon(imageVector = Icons.Rounded.ArrowBack,
                     contentDescription = null,
                     modifier = Modifier.clickable(
                         interactionSource = remember { MutableInteractionSource() },
@@ -137,24 +131,24 @@ private fun BottomSearchBar(
                         onSearch.invoke("")
                         onClose.invoke()
                         keyboardController?.hide()
-                    }
-                )
+                    })
             },
             trailingIcon = {
-                if (searchText.isNotBlank()) {
-                    Icon(
-                        imageVector = Icons.Rounded.Clear,
+                AnimatedVisibility(
+                    visible = searchText.isNotBlank(),
+                    enter = fadeIn() + scaleIn(),
+                    exit = fadeOut() + scaleOut(),
+                ) {
+                    Icon(imageVector = Icons.Rounded.Clear,
                         contentDescription = null,
                         modifier = Modifier.clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = rememberRipple(bounded = false)
                         ) {
                             searchText = ""
-                            onSearch.invoke("")
-                        }
-                    )
+                            onSearch.invoke(searchText)
+                        })
                 }
-            }
-        )
+            })
     }
 }
