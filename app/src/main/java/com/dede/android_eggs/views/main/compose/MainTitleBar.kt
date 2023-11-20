@@ -17,6 +17,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults.pinnedScrollBehavior
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -41,6 +43,7 @@ private const val TAG_SETTINGS = "Settings"
 @Composable
 @Preview
 fun MainTitleBar(
+    scrollBehavior: TopAppBarScrollBehavior = pinnedScrollBehavior(),
     searchBarVisibleState: MutableState<Boolean> = mutableStateOf(false)
 ) {
     val fm: FragmentManager? = LocalFragmentManager.currentOutInspectionMode
@@ -74,11 +77,12 @@ fun MainTitleBar(
     }
 
     CenterAlignedTopAppBar(
+        scrollBehavior = scrollBehavior,
         title = {
             Text(
                 text = stringResource(R.string.app_name),
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
         },
         actions = {

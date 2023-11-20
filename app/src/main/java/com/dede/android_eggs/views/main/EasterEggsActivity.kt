@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.dede.android_eggs.views.main
 
 import android.annotation.SuppressLint
@@ -6,14 +8,16 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.ThemeUtils
@@ -57,6 +61,8 @@ class EasterEggsActivity : AppCompatActivity() {
             val konfettiState = rememberKonfettiState()
             val searchBarVisibleState = rememberSaveable { mutableStateOf(false) }
             var searchText by rememberSaveable { mutableStateOf("") }
+
+            val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
             CompositionLocalProvider(
                 LocalFragmentManager provides supportFragmentManager,
                 LocalEasterEggLogoSensor provides sensor,
@@ -65,8 +71,13 @@ class EasterEggsActivity : AppCompatActivity() {
                 AppTheme {
                     Scaffold(
                         topBar = {
-                            MainTitleBar(searchBarVisibleState = searchBarVisibleState)
+                            MainTitleBar(
+                                scrollBehavior = scrollBehavior,
+                                searchBarVisibleState = searchBarVisibleState
+                            )
                         },
+                        modifier = Modifier
+                            .nestedScroll(scrollBehavior.nestedScrollConnection),
                         bottomBar = {
                             BottomSearchBar(searchBarVisibleState, onSearch = {
                                 searchText = it

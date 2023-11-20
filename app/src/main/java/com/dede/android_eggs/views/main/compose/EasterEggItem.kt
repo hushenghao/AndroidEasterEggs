@@ -74,7 +74,10 @@ import kotlin.math.roundToInt
 
 @Composable
 @Preview(showBackground = true)
-fun EasterEggItem(base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first()) {
+fun EasterEggItem(
+    base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first(),
+    enableItemAnim: Boolean = false,
+) {
     val context = LocalContext.current
 
     var groupIndex by remember { mutableIntStateOf(0) }
@@ -91,7 +94,7 @@ fun EasterEggItem(base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first(
             EasterEggItemFloor(egg, supportShortcut, swipeProgress)
         },
         content = {
-            EasterEggItemContent(egg, base, supportShortcut) {
+            EasterEggItemContent(egg, base, supportShortcut, enableItemAnim) {
                 groupIndex = it
             }
         },
@@ -140,7 +143,7 @@ fun EasterEggItemSwipe(
     val view = LocalView.current
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier
+//        modifier = Modifier.padding(4.dp)
     ) {
         floor()
         Box(
@@ -186,6 +189,7 @@ fun EasterEggItemContent(
     egg: EasterEgg = EasterEggHelp.previewEasterEggs().first(),
     base: BaseEasterEgg = egg,
     supportShortcut: Boolean = true,
+    enableItemAnim: Boolean = false,
     onSelected: ((index: Int) -> Unit)? = null,
 ) {
     val context = LocalContext.current
@@ -199,56 +203,60 @@ fun EasterEggItemContent(
         modifier = Modifier
             .padding(horizontal = 12.dp)
             .fillMaxWidth()
-            .clip(shapes.extraLarge)
-            .combinedClickable(
-                onClick = {
-                    EggActionHelp.launchEgg(context, egg)
-                },
-                onLongClick = {
-                    if (supportShortcut) {
-                        EggActionHelp.addShortcut(context, egg)
-                    }
-                }
-            )
     ) {
-        Column(
-            modifier = Modifier.padding(start = 22.dp, top = 18.dp, end = 22.dp, bottom = 18.dp)
+        Box(
+            modifier = Modifier
+                .clip(shapes.extraLarge)
+                .combinedClickable(
+                    onClick = {
+                        EggActionHelp.launchEgg(context, egg)
+                    },
+                    onLongClick = {
+                        if (supportShortcut) {
+                            EggActionHelp.addShortcut(context, egg)
+                        }
+                    }
+                )
         ) {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Box(
+            Column(
+                modifier = Modifier.padding(horizontal = 22.dp, vertical = 18.dp)
+            ) {
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    Box(
+                        modifier = Modifier
+                            .padding(end = 10.dp, bottom = 6.dp)
+                            .weight(1f, true)
+                    ) {
+                        Text(
+                            text = stringResource(egg.nameRes),
+                            style = typography.headlineSmall,
+                            modifier = if (enableItemAnim) Modifier.animateContentSize() else Modifier,
+                        )
+                    }
+                    EasterEggLogo(egg, sensor = true)
+                }
+                Row(
                     modifier = Modifier
-                        .padding(end = 10.dp, bottom = 6.dp)
-                        .weight(1f, true)
+                        .clip(shapes.extraSmall)
+                        .withEasterEggGroupSelector(base) {
+                            onSelected?.invoke(it)
+                        },
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = stringResource(egg.nameRes),
-                        style = typography.headlineSmall,
-                        modifier = Modifier.animateContentSize()
+                        text = androidVersion,
+                        style = typography.bodyMedium,
+                        modifier = if (enableItemAnim) Modifier.animateContentSize() else Modifier,
                     )
-                }
-                EasterEggLogo(egg, sensor = true)
-            }
-            Row(
-                modifier = Modifier
-                    .clip(shapes.extraSmall)
-                    .withEasterEggGroupSelector(base) {
-                        onSelected?.invoke(it)
-                    },
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = androidVersion,
-                    style = typography.bodyMedium,
-                    modifier = Modifier.animateContentSize(),
-                )
-                if (isGroup) {
-                    Icon(
-                        modifier = Modifier
-                            .padding(start = 4.dp)
-                            .size(22.dp),
-                        imageVector = Icons.Rounded.KeyboardArrowDown,
-                        contentDescription = stringResource(R.string.pref_title_language_more)
-                    )
+                    if (isGroup) {
+                        Icon(
+                            modifier = Modifier
+                                .padding(start = 4.dp)
+                                .size(22.dp),
+                            imageVector = Icons.Rounded.KeyboardArrowDown,
+                            contentDescription = stringResource(R.string.pref_title_language_more)
+                        )
+                    }
                 }
             }
         }

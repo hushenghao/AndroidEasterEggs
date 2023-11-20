@@ -1,13 +1,11 @@
 package com.dede.android_eggs.views.main.compose
 
 import android.content.Context
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.togetherWith
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.SearchOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -54,64 +53,64 @@ fun EasterEggScreen(
             easterEggs
         }
     }
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.TopCenter,
-    ) {
-        AnimatedContent(
-            targetState = currentList.isEmpty(),
-            transitionSpec = {
-                fadeIn() togetherWith fadeOut()
-            },
-            modifier = Modifier.sizeIn(maxWidth = 560.dp),
+    Surface(color = colorScheme.surface) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.TopCenter,
-            label = "EasterEggList"
-        ) { isEmpty ->
-            if (isEmpty) {
-                Box(
-                    contentAlignment = Alignment.TopCenter,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(contentPadding)
-                        .padding(top = 32.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.SearchOff,
-                        contentDescription = null,
-                        tint = colorScheme.onBackground,
-                        modifier = Modifier.size(108.dp)
-                    )
-                }
-            } else {
-                LazyColumn(
-                    contentPadding = contentPadding,
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    if (searchMode) {
-                        items(items = currentList) {
-                            EasterEggItem(it)
-                        }
-                    } else {
-                        item("snapshot") {
-                            AndroidSnapshotView()
-                        }
-                        item("wavy1") {
-                            Wavy(res = R.drawable.ic_wavy_line)
-                        }
-                        items(items = currentList) {
-                            EasterEggItem(it)
-                        }
-                        item("wavy2") {
-                            Wavy(res = R.drawable.ic_wavy_line)
-                        }
-                        item("footer") {
-                            ProjectDescription()
+        ) {
+            Crossfade(
+                targetState = currentList.isEmpty(),
+                modifier = Modifier.sizeIn(maxWidth = 560.dp),
+                label = "EasterEggList",
+            ) { isEmpty ->
+                if (isEmpty) {
+                    Box(
+                        contentAlignment = Alignment.TopCenter,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .consumeWindowInsets(contentPadding)
+                            .padding(contentPadding)
+                            .padding(top = 32.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.SearchOff,
+                            contentDescription = null,
+                            tint = colorScheme.onBackground,
+                            modifier = Modifier.size(108.dp)
+                        )
+                    }
+                } else {
+                    LazyColumn(
+                        // consume insets as scaffold doesn't do it by default
+                        modifier = Modifier.consumeWindowInsets(contentPadding),
+                        contentPadding = contentPadding,
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        if (searchMode) {
+                            items(items = currentList) {
+                                EasterEggItem(it, enableItemAnim = true)
+                            }
+                        } else {
+                            item("snapshot") {
+                                AndroidSnapshotView()
+                            }
+                            item("wavy1") {
+                                Wavy(res = R.drawable.ic_wavy_line)
+                            }
+                            items(items = currentList) {
+                                EasterEggItem(it, enableItemAnim = false)
+                            }
+                            item("wavy2") {
+                                Wavy(res = R.drawable.ic_wavy_line)
+                            }
+                            item("footer") {
+                                ProjectDescription()
+                            }
                         }
                     }
                 }
             }
         }
-
     }
 }
 
