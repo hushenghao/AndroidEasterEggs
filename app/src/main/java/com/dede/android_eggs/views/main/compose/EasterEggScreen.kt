@@ -5,7 +5,6 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -68,7 +67,6 @@ fun EasterEggScreen(
                         contentAlignment = Alignment.TopCenter,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .consumeWindowInsets(contentPadding)
                             .padding(contentPadding)
                             .padding(top = 32.dp)
                     ) {
@@ -81,8 +79,6 @@ fun EasterEggScreen(
                     }
                 } else {
                     LazyColumn(
-                        // consume insets as scaffold doesn't do it by default
-                        modifier = Modifier.consumeWindowInsets(contentPadding),
                         contentPadding = contentPadding,
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
