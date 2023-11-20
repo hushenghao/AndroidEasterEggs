@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
@@ -55,7 +57,9 @@ private fun ChipItem(
             text = stringResource(textRes),
             style = typography.bodyMedium,
             color = colorScheme.secondary,
-            modifier = Modifier.clickable(onClick = onClick)
+            modifier = Modifier
+                .clip(shapes.extraSmall)
+                .clickable(onClick = onClick)
         )
         if (separator) {
             Text(
@@ -77,7 +81,9 @@ private fun ChipItem2(
         text = stringResource(textRes),
         style = typography.titleSmall,
         color = colorScheme.secondary,
-        modifier = Modifier.clickable(onClick = onClick)
+        modifier = Modifier
+            .clip(shapes.extraSmall)
+            .clickable(onClick = onClick)
     )
 }
 
@@ -137,11 +143,13 @@ fun ProjectDescription() {
                     style = typography.bodySmall,
                     fontStyle = FontStyle.Italic,
                     textDecoration = TextDecoration.Underline,
-                    modifier = Modifier.clickable {
-                        val commitId =
-                            context.getString(R.string.url_github_commit, BuildConfig.GIT_HASH)
-                        CustomTabsBrowser.launchUrl(context, commitId.toUri())
-                    }
+                    modifier = Modifier
+                        .clip(shapes.extraSmall)
+                        .clickable {
+                            val commitId =
+                                context.getString(R.string.url_github_commit, BuildConfig.GIT_HASH)
+                            CustomTabsBrowser.launchUrl(context, commitId.toUri())
+                        }
                 )
             }
         }

@@ -229,9 +229,11 @@ fun EasterEggItemContent(
                 EasterEggLogo(egg, sensor = true)
             }
             Row(
-                modifier = Modifier.withEasterEggGroupSelector(base) {
-                    onSelected?.invoke(it)
-                },
+                modifier = Modifier
+                    .clip(shapes.extraSmall)
+                    .withEasterEggGroupSelector(base) {
+                        onSelected?.invoke(it)
+                    },
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
