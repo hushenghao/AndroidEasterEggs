@@ -2,7 +2,6 @@
 
 package com.dede.android_eggs.views.main.compose
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.tween
@@ -28,7 +27,6 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -53,8 +51,8 @@ fun MainTitleBar(
     val fm: FragmentManager? = LocalFragmentManager.currentOutInspectionMode
     var searchBarVisible by searchBarVisibleState
 
-    val scope = rememberCoroutineScope()
-    var showSettings by rememberSaveable { mutableStateOf(false) }
+    val fragment = fm?.findFragmentByTag(TAG_SETTINGS) as? SettingsFragment
+    var showSettings by remember { mutableStateOf(fragment != null) }
     var settingRotate by remember { mutableFloatStateOf(0f) }
 
     val onSlideCallback = remember {
@@ -63,14 +61,9 @@ fun MainTitleBar(
     val onDismissCallback = remember {
         { showSettings = false }
     }
-
-    fun showSettings() {
-        if (fm == null) return
-        showSettings = true
-        SettingsFragment().apply {
-            onSlide = onSlideCallback
-            onDismiss = onDismissCallback
-        }.show(fm, TAG_SETTINGS)
+    if (fragment != null) {
+        fragment.onSlide = onSlideCallback
+        fragment.onDismiss = onDismissCallback
     }
 
     LaunchedEffect(showSettings) {
@@ -81,10 +74,23 @@ fun MainTitleBar(
         }
     }
 
-    val fragment = fm?.findFragmentByTag(TAG_SETTINGS) as? SettingsFragment
-    if (fragment != null) {
-        fragment.onSlide = onSlideCallback
-        fragment.onDismiss = onDismissCallback
+    val scope = rememberCoroutineScope()
+
+    fun showSettings() {
+        scope.launch {
+            if (searchBarVisible) {
+                // hide searchBar
+                searchBarVisible = false
+                // await searchBar dismiss
+                delay(200)
+            }
+            if (fm == null) return@launch
+            SettingsFragment().apply {
+                onSlide = onSlideCallback
+                onDismiss = onDismissCallback
+            }.show(fm, TAG_SETTINGS)
+            showSettings = true
+        }
     }
 
     CenterAlignedTopAppBar(
@@ -117,15 +123,7 @@ fun MainTitleBar(
 
             IconButton(
                 onClick = {
-                    scope.launch {
-                        if (searchBarVisible) {
-                            // hide searchBar
-                            searchBarVisible = false
-                            // await searchBar dismiss
-                            delay(200)
-                        }
-                        showSettings()
-                    }
+                    showSettings()
                 },
             ) {
                 Icon(
