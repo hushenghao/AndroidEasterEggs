@@ -1,7 +1,12 @@
+@file:OptIn(ExperimentalAnimationApi::class)
+
 package com.dede.android_eggs.views.main.compose
 
-import androidx.activity.compose.BackHandler
+import android.util.Log
+import androidx.activity.compose.PredictiveBackHandler
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.animate
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
@@ -32,6 +37,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -39,6 +45,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -46,6 +55,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
+import kotlinx.coroutines.flow.catch
 
 @Composable
 @Preview
@@ -54,26 +64,51 @@ fun BottomSearchBar(
     onSearch: ((text: String) -> Unit)? = null,
 ) {
     var visible by visibleState
-
-    BackHandler(visible) {
+    var backProgress by remember { mutableFloatStateOf(0f) }
+    PredictiveBackHandler(enabled = visible) { flow ->
+        flow.catch {
+            Log.d("BottomSearchBar", "onCancel", it)
+            animate(backProgress, 0f) { value, _ ->
+                backProgress = value
+            }
+        }.collect { event ->
+            backProgress = event.progress
+        }
         visible = false
+    }
+    LaunchedEffect(visible) {
+        if (visible) {
+            backProgress = 0f
+        }
     }
     AnimatedVisibility(
         visible = visible,
-        enter = slideInVertically(initialOffsetY = {
-            it
-        }) + fadeIn(),
+        enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
         exit = slideOutVertically(targetOffsetY = { it }) + fadeOut(),
     ) {
-        BottomSearchBar(visible, onClose = {
-            visible = false
-        }, onSearch = { onSearch?.invoke(it) })
+        BottomSearchBar(
+            visible,
+            modifier = Modifier
+                .graphicsLayer(
+                    scaleX = 1F - (0.1F * backProgress),
+                    scaleY = 1F - (0.1F * backProgress),
+                    transformOrigin = remember { TransformOrigin(0.5f, 1f) },
+                ),
+            shape = RoundedCornerShape(
+                topStart = (28 * backProgress).dp,
+                topEnd = (28 * backProgress).dp
+            ),
+            onClose = { visible = false },
+            onSearch = { onSearch?.invoke(it) }
+        )
     }
 }
 
 @Composable
 private fun BottomSearchBar(
     visible: Boolean,
+    modifier: Modifier,
+    shape: Shape,
     onSearch: (text: String) -> Unit,
     onClose: () -> Unit,
 ) {
@@ -89,7 +124,10 @@ private fun BottomSearchBar(
         }
     }
     Surface(
-        modifier = Modifier.imePadding(),
+        modifier = Modifier
+            .then(modifier)
+            .imePadding(),
+        shape = shape,
         color = colorScheme.surfaceColorAtElevation(4.dp),
         contentColor = colorScheme.onSurface,
         tonalElevation = 4.dp,

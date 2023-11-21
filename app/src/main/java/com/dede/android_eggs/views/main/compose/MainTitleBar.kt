@@ -2,8 +2,9 @@
 
 package com.dede.android_eggs.views.main.compose
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -20,9 +21,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults.pinnedScrollBehavior
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -44,36 +48,43 @@ private const val TAG_SETTINGS = "Settings"
 @Preview
 fun MainTitleBar(
     scrollBehavior: TopAppBarScrollBehavior = pinnedScrollBehavior(),
-    searchBarVisibleState: MutableState<Boolean> = mutableStateOf(false)
+    searchBarVisibleState: MutableState<Boolean> = mutableStateOf(false),
 ) {
     val fm: FragmentManager? = LocalFragmentManager.currentOutInspectionMode
     var searchBarVisible by searchBarVisibleState
 
     val scope = rememberCoroutineScope()
-    var startRotate by rememberSaveable { mutableStateOf(false) }
-    val rotateAnim by animateFloatAsState(
-        targetValue = if (startRotate) 360f else 0f,
-        animationSpec = tween(500),
-        label = "setting_icon_rotate",
-    )
+    var showSettings by rememberSaveable { mutableStateOf(false) }
+    var settingRotate by remember { mutableFloatStateOf(0f) }
+
+    val onSlideCallback = remember {
+        { p: Float -> settingRotate = p * 360f }
+    }
+    val onDismissCallback = remember {
+        { showSettings = false }
+    }
 
     fun showSettings() {
         if (fm == null) return
+        showSettings = true
         SettingsFragment().apply {
-            onPreDismiss = {
-                startRotate = false
-            }
+            onSlide = onSlideCallback
+            onDismiss = onDismissCallback
         }.show(fm, TAG_SETTINGS)
-        startRotate = true
     }
 
-    if (startRotate) {
-        val restored = fm?.findFragmentByTag(TAG_SETTINGS) as? SettingsFragment
-        if (restored != null) {
-            restored.onPreDismiss = {
-                startRotate = false
+    LaunchedEffect(showSettings) {
+        if (showSettings) {
+            animate(0f, 360f, animationSpec = tween(500)) { value, _ ->
+                settingRotate = value
             }
         }
+    }
+
+    val fragment = fm?.findFragmentByTag(TAG_SETTINGS) as? SettingsFragment
+    if (fragment != null) {
+        fragment.onSlide = onSlideCallback
+        fragment.onDismiss = onDismissCallback
     }
 
     CenterAlignedTopAppBar(
@@ -120,7 +131,7 @@ fun MainTitleBar(
                 Icon(
                     imageVector = Icons.Rounded.Settings,
                     contentDescription = stringResource(R.string.label_settings),
-                    modifier = Modifier.rotate(rotateAnim)
+                    modifier = Modifier.rotate(settingRotate)
                 )
             }
         }

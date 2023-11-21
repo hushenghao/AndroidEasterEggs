@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +28,8 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
     var onPreDismiss: (() -> Unit)? = null
 
+    var onDismiss: (() -> Unit)? = null
+
     private var lastSlideOffset: Float = -1f
     private val callback = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -45,6 +46,11 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
     }
 
     private val binding by viewBinding(FragmentSettingsBinding::bind)
+
+    override fun onDismiss(dialog: DialogInterface) {
+        onDismiss?.invoke()
+        super.onDismiss(dialog)
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog

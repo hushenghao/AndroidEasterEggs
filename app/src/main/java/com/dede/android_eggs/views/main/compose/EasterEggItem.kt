@@ -5,7 +5,7 @@ package com.dede.android_eggs.views.main.compose
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -31,11 +31,14 @@ import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.SwipeLeft
 import androidx.compose.material.icons.rounded.SwipeRight
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -132,10 +135,9 @@ fun EasterEggItemSwipe(
 
     LaunchedEffect(released) {
         if (released) {
-            val releaseAnim = Animatable(offsetX)
-            releaseAnim.animateTo(0f, animationSpec = tween(300)) {
+            animate(offsetX, 0f, animationSpec = tween(300)) { value, _ ->
                 offsetX = value
-                callbackSwipeProgress(offsetX)
+                callbackSwipeProgress(value)
             }
         }
     }
@@ -199,6 +201,7 @@ fun EasterEggItemContent(
             .format(context)
     }
     Card(
+        colors = CardDefaults.cardColors(containerColor = colorScheme.surfaceColorAtElevation(2.dp)),
         shape = shapes.extraLarge,
         modifier = Modifier
             .padding(horizontal = 12.dp)
