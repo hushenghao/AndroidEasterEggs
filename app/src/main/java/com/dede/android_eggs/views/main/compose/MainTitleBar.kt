@@ -47,9 +47,11 @@ private const val TAG_SETTINGS = "Settings"
 fun MainTitleBar(
     scrollBehavior: TopAppBarScrollBehavior = pinnedScrollBehavior(),
     searchBarVisibleState: MutableState<Boolean> = mutableStateOf(false),
+    searchFieldState: MutableState<String> = mutableStateOf(""),
 ) {
     val fm: FragmentManager? = LocalFragmentManager.currentOutInspectionMode
     var searchBarVisible by searchBarVisibleState
+    var searchText by searchFieldState
 
     val fragment = fm?.findFragmentByTag(TAG_SETTINGS) as? SettingsFragment
     var showSettings by remember { mutableStateOf(fragment != null) }
@@ -80,6 +82,7 @@ fun MainTitleBar(
         scope.launch {
             if (searchBarVisible) {
                 // hide searchBar
+                searchText = ""
                 searchBarVisible = false
                 // await searchBar dismiss
                 delay(200)

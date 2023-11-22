@@ -2,7 +2,6 @@
 
 package com.dede.android_eggs.views.main.compose
 
-import android.util.Log
 import androidx.activity.compose.PredictiveBackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -20,7 +19,6 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
@@ -61,13 +59,12 @@ import kotlinx.coroutines.flow.catch
 @Preview
 fun BottomSearchBar(
     visibleState: MutableState<Boolean> = mutableStateOf(true),
-    onSearch: ((text: String) -> Unit)? = null,
+    searchFieldState: MutableState<String> = mutableStateOf(""),
 ) {
     var visible by visibleState
     var backProgress by remember { mutableFloatStateOf(0f) }
     PredictiveBackHandler(enabled = visible) { flow ->
         flow.catch {
-            Log.d("BottomSearchBar", "onCancel", it)
             animate(backProgress, 0f) { value, _ ->
                 backProgress = value
             }
@@ -88,6 +85,7 @@ fun BottomSearchBar(
     ) {
         BottomSearchBar(
             visible,
+            searchFieldState,
             modifier = Modifier
                 .graphicsLayer(
                     scaleX = 1F - (0.1F * backProgress),
@@ -99,7 +97,6 @@ fun BottomSearchBar(
                 topEnd = (28 * backProgress).dp
             ),
             onClose = { visible = false },
-            onSearch = { onSearch?.invoke(it) }
         )
     }
 }
@@ -107,12 +104,12 @@ fun BottomSearchBar(
 @Composable
 private fun BottomSearchBar(
     visible: Boolean,
+    searchField: MutableState<String>,
     modifier: Modifier,
     shape: Shape,
-    onSearch: (text: String) -> Unit,
     onClose: () -> Unit,
 ) {
-    var searchText by remember { mutableStateOf("") }
+    var searchText by searchField
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = remember { FocusRequester() }
     LaunchedEffect(visible) {
@@ -141,7 +138,6 @@ private fun BottomSearchBar(
             value = searchText,
             onValueChange = {
                 searchText = it
-                onSearch.invoke(searchText)
             },
             placeholder = {
                 Text(text = stringResource(R.string.label_search_hint))
@@ -149,9 +145,6 @@ private fun BottomSearchBar(
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Ascii, imeAction = ImeAction.Search
             ),
-            keyboardActions = KeyboardActions(onSearch = {
-                onSearch.invoke(searchText)
-            }),
             singleLine = true,
             shape = RoundedCornerShape(50),
             colors = TextFieldDefaults.colors(
@@ -166,7 +159,7 @@ private fun BottomSearchBar(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = rememberRipple(bounded = false)
                     ) {
-                        onSearch.invoke("")
+                        searchText = ""
                         onClose.invoke()
                         keyboardController?.hide()
                     })
@@ -184,7 +177,6 @@ private fun BottomSearchBar(
                             indication = rememberRipple(bounded = false)
                         ) {
                             searchText = ""
-                            onSearch.invoke(searchText)
                         })
                 }
             })
