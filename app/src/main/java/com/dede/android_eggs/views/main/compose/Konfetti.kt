@@ -67,8 +67,8 @@ private fun particles(primary: Int) = listOf(
         position = Position.Relative(0.0, 0.0).between(Position.Relative(1.0, 0.0)),
     ),
     Party(
-        speed = 20f,
-        maxSpeed = 60f,
+        speed = 10f,
+        maxSpeed = 40f,
         damping = 0.9f,
         angle = Angle.RIGHT - 55,
         spread = 60,
@@ -77,8 +77,8 @@ private fun particles(primary: Int) = listOf(
         position = Position.Relative(0.0, 1.0)
     ),
     Party(
-        speed = 20f,
-        maxSpeed = 60f,
+        speed = 10f,
+        maxSpeed = 40f,
         damping = 0.9f,
         angle = Angle.RIGHT - 125,
         spread = 60,

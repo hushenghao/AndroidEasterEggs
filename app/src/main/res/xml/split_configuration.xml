@@ -65,8 +65,7 @@
     <!-- Define activities that should never be part of a split. Note: Takes
          precedence over other split rules. -->
     <ActivityRule window:alwaysExpand="true">
-        <!--            <ActivityFilter-->
-        <!--                window:activityName=".ExpandedActivity"/>-->
+        <ActivityFilter window:activityName=".views.crash.CrashActivity" />
     </ActivityRule>
 
 </resources>
