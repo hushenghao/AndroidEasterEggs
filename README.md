@@ -94,5 +94,3 @@ Prerequisites The `Java17` and `Android SDK` have been installed, and environmen
 [AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)
 
 [All translation contributors](https://crowdin.com/project/easter-eggs/members)
-
-[🦖 T-Rex Run 3D](https://github.com/Priler/dino3d)

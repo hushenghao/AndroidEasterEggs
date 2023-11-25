@@ -11,7 +11,8 @@
         <item name="android:windowSplashScreenBackground" tools:targetApi="s">
             @color/splash_background_color
         </item>
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialAlertDialog.BlurBehind</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialAlertDialog.BlurBehind
+        </item>
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.BottomSheetDialog.BlurBehind</item>
     </style>
 
@@ -58,14 +59,25 @@
     <style name="ThemeOverlay.MaterialAlertDialog.BlurBehind" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
         <item name="android:windowBlurBehindEnabled" tools:ignore="NewApi">true</item>
         <item name="android:windowBlurBehindRadius" tools:ignore="NewApi">4dp</item>
+        <item name="alertDialogStyle">@style/Theme.MaterialAlertDialog.Style</item>
+    </style>
+
+    <style name="Theme.MaterialAlertDialog.Style" parent="MaterialAlertDialog.Material3">
+        <item name="backgroundTint">?attr/colorSurface</item>
     </style>
 
     <style name="ThemeOverlay.LanguagePref.MaterialAlertDialog" parent="ThemeOverlay.MaterialAlertDialog.BlurBehind">
         <!-- Mark spacer as gone when showing full width buttons -->
         <item name="materialAlertDialogButtonSpacerVisibility">@integer/mtrl_view_gone</item>
-        <item name="buttonBarPositiveButtonStyle">@style/Widget.LanguagePref.Button.TextButton.Dialog.FullWidth</item>
-        <item name="buttonBarNegativeButtonStyle">@style/Widget.LanguagePref.Button.TextButton.Dialog.FullWidth</item>
-        <item name="buttonBarNeutralButtonStyle">@style/Widget.LanguagePref.Button.TextButton.Dialog.FullWidth</item>
+        <item name="buttonBarPositiveButtonStyle">
+            @style/Widget.LanguagePref.Button.TextButton.Dialog.FullWidth
+        </item>
+        <item name="buttonBarNegativeButtonStyle">
+            @style/Widget.LanguagePref.Button.TextButton.Dialog.FullWidth
+        </item>
+        <item name="buttonBarNeutralButtonStyle">
+            @style/Widget.LanguagePref.Button.TextButton.Dialog.FullWidth
+        </item>
     </style>
 
     <style name="Widget.LanguagePref.Button.TextButton.Dialog.FullWidth" parent="Widget.Material3.Button.TextButton.Dialog">
@@ -79,14 +91,19 @@
     <style name="ThemeOverlay.BottomSheetDialog.BlurBehind" parent="ThemeOverlay.Material3.BottomSheetDialog">
         <item name="android:windowBlurBehindEnabled" tools:ignore="NewApi">true</item>
         <item name="android:windowBlurBehindRadius" tools:ignore="NewApi">4dp</item>
+        <item name="bottomSheetStyle">@style/Theme.BottomSheet.Modal</item>
     </style>
 
     <style name="ThemeOverlay.BottomSheetDialog.Scrollable" parent="ThemeOverlay.BottomSheetDialog.BlurBehind">
-        <item name="bottomSheetStyle">@style/Widget.BottomSheet.Modal.Scrollable</item>
+        <item name="bottomSheetStyle">@style/Theme.BottomSheet.Modal.Scrollable</item>
     </style>
 
-    <style name="Widget.BottomSheet.Modal.Scrollable" parent="Widget.Material3.BottomSheet.Modal">
+    <style name="Theme.BottomSheet.Modal.Scrollable" parent="Theme.BottomSheet.Modal">
         <item name="paddingBottomSystemWindowInsets">false</item>
+    </style>
+
+    <style name="Theme.BottomSheet.Modal" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">?attr/colorSurface</item>
     </style>
 
     <style name="Theme.EggGroup.PopupMenu.ListPopupWindow" parent="Widget.Material3.PopupMenu.ListPopupWindow">

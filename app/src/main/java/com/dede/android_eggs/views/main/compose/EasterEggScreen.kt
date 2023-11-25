@@ -52,7 +52,7 @@ fun EasterEggScreen(
             easterEggs
         }
     }
-    Surface(color = colorScheme.surface) {
+    Surface(color = colorScheme.background) {
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.TopCenter,

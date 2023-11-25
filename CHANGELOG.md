@@ -1,13 +1,17 @@
+### v2.2.1 (2023-11-25)
+- Fix F-Droid Reproducible Builds
+- Fix Surface color [#112](https://github.com/hushenghao/AndroidEasterEggs/issues/112)
+
 ### v2.2.0 (2023-11-25)
 - Added crash report
 - Refactored with Compose
 - Added Component Manager Settings
-- Added Portuguese (Brazilian) translation 
+- Added Portuguese (Brazilian) translation
 - Optimized easter egg search
 - Known issue fixes
 
 ### v2.1.0 (2023-10-25)
-- Use Android Q internal code name 
+- Use Android Q internal code name
 - Added Japanese translation
 - Added French translation
 - Added Korean translation

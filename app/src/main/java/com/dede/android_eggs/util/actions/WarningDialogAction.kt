@@ -9,6 +9,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.util.ActivityActionDispatcher
+import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.updateCompoundDrawablesRelative
 import com.dede.basic.createThemeWrapperContext
 import com.dede.basic.dp
@@ -48,6 +49,7 @@ class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
         if (agreed) return
 
         val wrapperContext = activity.createThemeWrapperContext()
+        ThemeUtils.tryApplyOLEDTheme(wrapperContext)
         val spanned = HtmlCompat.fromHtml(
             wrapperContext.getString(info.message),
             HtmlCompat.FROM_HTML_MODE_COMPACT
