@@ -1,0 +1,8 @@
+- Fix F-Droid Reproducible Builds
+- Fix Surface color
+- Added crash report
+- Refactored with Compose
+- Added Component Manager Settings
+- Added Portuguese (Brazilian) translation
+- Optimized easter egg search
+- Known issue fixes

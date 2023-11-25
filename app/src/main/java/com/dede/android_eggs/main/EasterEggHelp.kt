@@ -25,6 +25,7 @@ object EasterEggHelp {
             throw IllegalStateException("Only call from Inspection Mode")
         }
         val module = EasterEggModules::class.java.getAnnotation(Module::class.java)
+            ?: throw IllegalStateException("EasterEggModules is empty")
         val baseEasterEggs = module.includes.map {
             val instance = try {
                 it.java.getField("INSTANCE").get(null)

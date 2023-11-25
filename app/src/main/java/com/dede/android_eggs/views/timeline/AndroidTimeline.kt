@@ -97,11 +97,11 @@ fun AndroidTimeline(items: List<TimelineEvent> = TimelineEvent.timelines) {
 @Composable
 fun AndroidTimelineItem(
     timeline: TimelineEvent,
-    isLast: (current: TimelineEvent) -> Boolean,
+    isLastInvoke: (current: TimelineEvent) -> Boolean,
     isNewYearGroup: (current: TimelineEvent) -> Boolean,
 ) {
     val isNewGroup = remember(timeline) { isNewYearGroup.invoke(timeline) }
-    val isLast = remember(timeline) { isLast.invoke(timeline) }
+    val isLast = remember(timeline) { isLastInvoke.invoke(timeline) }
 
     ConstraintLayout(
         modifier = Modifier
