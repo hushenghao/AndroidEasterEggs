@@ -38,4 +38,5 @@
     <string name="label_welcome">Bem-vindo ao Catálogo de Easter eggs 🎉🎉🎉</string>
     <string name="label_share">Partilhar</string>
     <string name="label_search_hint">Pesquisar…</string>
+    <string name="label_component_manager">Gestor de Componentes</string>
 </resources>
