@@ -181,7 +181,10 @@ private fun CrashScreen(
         ) {
             FloatingActionButton(
                 onClick = {
-                    context.startActivity(Intent(context, EasterEggsActivity::class.java))
+                    context.startActivity(
+                        Intent(context, EasterEggsActivity::class.java)
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    )
                 },
                 shape = FloatingActionButtonDefaults.largeShape
             ) {
