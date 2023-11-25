@@ -1,3 +1,5 @@
+- Added crash report
+- Refactored with Compose
 - Added Component Manager Settings
 - Added Portuguese (Brazilian) translation
 - Known issue fixes

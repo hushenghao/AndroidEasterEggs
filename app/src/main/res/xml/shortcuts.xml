@@ -6,10 +6,10 @@
     <shortcut
         android:enabled="true"
         android:icon="@drawable/u_android14_patch_adaptive"
-        android:shortcutDisabledMessage="@string/nickname_android_u"
+        android:shortcutDisabledMessage="@string/u_android_nickname"
         android:shortcutId="android_34"
-        android:shortcutLongLabel="@string/nickname_android_u"
-        android:shortcutShortLabel="@string/nickname_android_u">
+        android:shortcutLongLabel="@string/u_android_nickname"
+        android:shortcutShortLabel="@string/u_android_nickname">
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="com.android_u.egg.PlatLogoActivity"

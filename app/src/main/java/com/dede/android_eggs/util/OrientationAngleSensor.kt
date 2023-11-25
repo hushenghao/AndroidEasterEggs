@@ -95,6 +95,8 @@ class OrientationAngleSensor(
     }
 
     fun destroy() {
+        // reset default angles
+        onOrientationAnglesUpdate.updateOrientationAngles(0f, 0f, 0f)
         stop()
         owner?.lifecycle?.removeObserver(this)
     }

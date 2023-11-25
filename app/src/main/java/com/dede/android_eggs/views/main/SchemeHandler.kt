@@ -1,10 +1,10 @@
-package com.dede.android_eggs.main
+package com.dede.android_eggs.views.main
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
-import com.dede.android_eggs.main.entity.Egg.Companion.toEgg
+import com.dede.android_eggs.main.EggActionHelp
 import com.dede.basic.provider.EasterEgg
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
@@ -49,7 +49,7 @@ class SchemeHandler @Inject constructor(@ActivityContext val context: Context) {
         val level = levelStr.toIntOrNull() ?: return false
         val egg = easterEggs.find { level in it.apiLevel }
         if (egg != null) {
-            EggActionHelp.launchEgg(context, egg.toEgg())
+            EggActionHelp.launchEgg(context, egg)
         }
         return egg != null
     }

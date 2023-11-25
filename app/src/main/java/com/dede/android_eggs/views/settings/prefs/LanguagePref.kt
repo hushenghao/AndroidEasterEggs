@@ -180,15 +180,6 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             return SYSTEM
         }
 
-        fun getApplicationLocale(): Locale {
-            val locales = AppCompatDelegate.getApplicationLocales()
-            return if (locales.isEmpty) {
-                Locale.getDefault()
-            } else {
-                locales.get(0) ?: Locale.getDefault()
-            }
-        }
-
         private fun createLocale(language: String, region: String = ""): Locale {
             return Locale.Builder()
                 .setLanguage(language)

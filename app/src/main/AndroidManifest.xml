@@ -63,7 +63,7 @@
         </provider>
 
         <activity
-            android:name=".main.EasterEggsActivity"
+            android:name=".views.main.EasterEggsActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize">
@@ -89,7 +89,8 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-        <activity android:name=".main.PlaceholderActivity" />
+        <activity android:name=".views.placeholder.PlaceholderActivity" />
+        <activity android:name=".views.crash.CrashActivity" />
     </application>
 
 </manifest>

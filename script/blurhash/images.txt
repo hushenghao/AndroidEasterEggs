@@ -1,5 +1,5 @@
-image/hash_snapshot_bg.jpg
 image/hash_back_pressed_bg.jpg
 
-image/night/hash_snapshot_bg.jpg
 image/night/hash_back_pressed_bg.jpg
+
+image/gallery

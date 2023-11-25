@@ -1,4 +1,6 @@
 ### v2.1.1
+- Added crash report
+- Refactored with Compose
 - Added Component Manager Settings
 - Added Portuguese (Brazilian) translation 
 - Known issue fixes
