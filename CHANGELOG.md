@@ -1,8 +1,9 @@
-### v2.1.1
+### v2.2.0 (2023-11-25)
 - Added crash report
 - Refactored with Compose
 - Added Component Manager Settings
 - Added Portuguese (Brazilian) translation 
+- Optimized easter egg search
 - Known issue fixes
 
 ### v2.1.0 (2023-10-25)

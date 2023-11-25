@@ -2,4 +2,5 @@
 - Refactored with Compose
 - Added Component Manager Settings
 - Added Portuguese (Brazilian) translation
+- Optimized easter egg search
 - Known issue fixes
