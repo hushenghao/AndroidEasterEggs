@@ -1,4 +1,4 @@
-package com.dede.easter_eggs
+package com.dede.easter.eggs
 
 import com.android.ide.common.vectordrawable.Svg2Vector
 import org.gradle.api.DefaultTask
@@ -9,7 +9,6 @@ import java.io.File
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
-import java.net.http.HttpResponse
 import java.net.http.HttpResponse.BodyHandlers
 
 /**

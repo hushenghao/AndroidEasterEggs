@@ -1,30 +1,15 @@
-@file:Suppress("UnstableApiUsage")
-
 import Versions.gitHash
 import Versions.keyprops
 
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    kotlin("kapt")
-    alias(libs.plugins.hilt.android)
-}
-
-apply(from = "../buildSrc/tasks.gradle.kts")
-
-kapt {
-    correctErrorTypes = true
+    id("easter.egg.app")
 }
 
 android {
-    compileSdk = Versions.COMPILE_SDK
-    buildToolsVersion = Versions.BUILD_TOOLS
     namespace = "com.dede.android_eggs"
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
-        minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
         versionCode = 35
         versionName = "2.2.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -44,10 +29,6 @@ android {
         buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")
         // Language configuration only
         buildConfigField("int", "LANGUAGE_RES", resourceConfigurations.size.toString())
-
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildFeatures {
@@ -72,10 +53,10 @@ android {
 
     buildTypes {
         val config = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
-        getByName("debug") {
+        debug {
             signingConfig = config
         }
-        getByName("release") {
+        release {
             isShrinkResources = true
             isMinifyEnabled = true
             proguardFiles(
@@ -92,7 +73,6 @@ android {
 
     lint {
         disable += listOf("NotifyDataSetChanged", "UsingMaterialAndMaterial3Libraries")
-        fatal += listOf("NewApi", "InlineApi")
     }
 
     packaging {
@@ -116,8 +96,6 @@ dependencies {
     implementation(libs.androidx.window)
     implementation(libs.google.material)
     implementation(libs.androidx.startup)
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -138,7 +116,6 @@ dependencies {
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
 
-    implementation(project(":basic"))
     implementation(project(":eggs:U"))
     implementation(project(":eggs:T"))
     implementation(project(":eggs:S"))

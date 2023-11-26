@@ -1,15 +1,8 @@
-apply plugin: 'com.android.library'
-apply plugin: 'org.jetbrains.kotlin.android'
+plugins {
+    id("easter.egg.library")
+}
 
 android {
-    compileSdk Versions.COMPILE_SDK
-    buildToolsVersion = Versions.BUILD_TOOLS
-
-    defaultConfig {
-        minSdkVersion Versions.MIN_SDK
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
 	sourceSets {
 		main {
 			res.srcDirs = ['res']
@@ -17,13 +10,6 @@ android {
 			manifest.srcFile 'AndroidManifest.xml'
 		}
 	}
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
 }
 
 dependencies {
@@ -31,4 +17,3 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.recyclerview)
 }
-

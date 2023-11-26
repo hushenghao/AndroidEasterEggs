@@ -30,8 +30,8 @@ class ViscousFluidInterpolator : Interpolator {
         // account for very small floating-point error
         private var VISCOUS_FLUID_OFFSET = 1.0f - VISCOUS_FLUID_NORMALIZE * viscousFluid(1.0f)
 
-        private fun viscousFluid(x: Float): Float {
-            var x = x
+        private fun viscousFluid(ix: Float): Float {
+            var x = ix
             x *= VISCOUS_FLUID_SCALE
             if (x < 1.0f) {
                 x -= 1.0f - exp(-x.toDouble()).toFloat()
