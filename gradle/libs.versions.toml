@@ -1,9 +1,9 @@
 [versions]
-kotlin = "1.9.10"
+kotlin = "1.9.20"
 # https://androidx.dev/storage/compose-compiler/repository
 # https://maven.google.com/web/index.html?q=compose#androidx.compose.compiler:compiler
-compose-kotlin-compiler = "1.5.3"
-agp = "8.1.1"
+compose-kotlin-compiler = "1.5.4"
+agp = "8.1.4"
 hilt = "2.48.1"
 # https://google.github.io/accompanist
 accompanist = "0.32.0"
