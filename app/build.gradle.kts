@@ -96,6 +96,7 @@ dependencies {
     implementation(libs.androidx.window)
     implementation(libs.google.material)
     implementation(libs.androidx.startup)
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.compose)
     implementation(platform(libs.androidx.compose.bom))

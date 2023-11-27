@@ -102,6 +102,7 @@ fun AndroidTimelineItem(
 ) {
     val isNewGroup = remember(timeline) { isNewYearGroup.invoke(timeline) }
     val isLast = remember(timeline) { isLastInvoke.invoke(timeline) }
+    val logoMatcher = remember { AndroidLogoMatcher() }
 
     ConstraintLayout(
         modifier = Modifier
@@ -141,7 +142,8 @@ fun AndroidTimelineItem(
                 }
         ) {}
         Image(
-            res = timeline.logoRes, contentDescription = null,
+            res = logoMatcher.findAndroidLogoComposable(timeline.apiLevel),
+            contentDescription = null,
             modifier = Modifier
                 .size(24.dp)
                 .constrainAs(logo) {

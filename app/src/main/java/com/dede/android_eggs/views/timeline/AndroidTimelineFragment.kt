@@ -28,8 +28,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import com.google.android.material.R as M3R
 
+@AndroidEntryPoint
 class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_android_timeline) {
 
     companion object {
@@ -41,6 +44,9 @@ class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_andr
     }
 
     private val binding by viewBinding(FragmentAndroidTimelineBinding::bind)
+
+    @Inject
+    lateinit var logoMatcher: AndroidLogoMatcher
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog =
@@ -85,7 +91,8 @@ class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_andr
                 }
             )
             holder.findViewById<TextView>(R.id.tv_month).text = timelineEvent.localMonth
-            holder.findViewById<ImageView>(R.id.iv_logo).load(timelineEvent.logoRes)
+            holder.findViewById<ImageView>(R.id.iv_logo)
+                .load(logoMatcher.findAndroidLogo(timelineEvent.apiLevel))
             holder.findViewById<View>(R.id.line_bottom).isGone = timelineEvent.isLast()
         }
         var last = EggListDivider(0, 0, 0)
