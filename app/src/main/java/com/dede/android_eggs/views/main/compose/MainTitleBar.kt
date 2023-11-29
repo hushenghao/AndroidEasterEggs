@@ -21,7 +21,6 @@ import androidx.compose.material3.TopAppBarDefaults.pinnedScrollBehavior
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -46,12 +45,9 @@ private const val TAG_SETTINGS = "Settings"
 @Preview
 fun MainTitleBar(
     scrollBehavior: TopAppBarScrollBehavior = pinnedScrollBehavior(),
-    searchBarVisibleState: MutableState<Boolean> = mutableStateOf(false),
-    searchFieldState: MutableState<String> = mutableStateOf(""),
+    searchBarState: BottomSearchBarState = rememberBottomSearchBarState(),
 ) {
     val fm: FragmentManager? = LocalFragmentManager.currentOutInspectionMode
-    var searchBarVisible by searchBarVisibleState
-    var searchText by searchFieldState
 
     val fragment = fm?.findFragmentByTag(TAG_SETTINGS) as? SettingsFragment
     var showSettings by remember { mutableStateOf(fragment != null) }
@@ -80,10 +76,10 @@ fun MainTitleBar(
 
     fun showSettings() {
         scope.launch {
-            if (searchBarVisible) {
+            if (searchBarState.visible) {
                 // hide searchBar
-                searchText = ""
-                searchBarVisible = false
+                searchBarState.searchText = ""
+                searchBarState.visible = false
                 // await searchBar dismiss
                 delay(200)
             }
@@ -107,14 +103,14 @@ fun MainTitleBar(
         },
         actions = {
             AnimatedVisibility(
-                visible = !searchBarVisible,
+                visible = !searchBarState.visible,
                 enter = fadeIn() + scaleIn(),
                 exit = fadeOut() + scaleOut(),
             ) {
                 IconButton(
                     onClick = {
                         // show searchBar
-                        searchBarVisible = true
+                        searchBarState.visible = true
                     },
                 ) {
                     Icon(

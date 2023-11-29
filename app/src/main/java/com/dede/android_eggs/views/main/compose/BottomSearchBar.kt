@@ -2,6 +2,7 @@
 
 package com.dede.android_eggs.views.main.compose
 
+import android.os.Bundle
 import androidx.activity.compose.PredictiveBackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -33,11 +34,14 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.SaverScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -53,18 +57,70 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.os.bundleOf
 import com.dede.android_eggs.R
 import kotlinx.coroutines.flow.catch
+
+@Stable
+class BottomSearchBarState(initVisible: Boolean, initSearchText: String) {
+
+    var visible: Boolean by mutableStateOf(initVisible)
+    var searchText: String by mutableStateOf(initSearchText)
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is BottomSearchBarState) return false
+
+        if (visible != other.visible) return false
+        if (searchText != other.searchText) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = visible.hashCode()
+        result = 31 * result + searchText.hashCode()
+        return result
+    }
+
+    object BundleSaver : Saver<BottomSearchBarState, Bundle> {
+
+        private const val KEY_VISIBLE = "key_visible"
+        private const val KEY_SEARCH_TEXT = "key_search_text"
+
+        override fun restore(value: Bundle): BottomSearchBarState {
+            return BottomSearchBarState(
+                value.getBoolean(KEY_VISIBLE, false),
+                value.getString(KEY_SEARCH_TEXT, "")
+            )
+        }
+
+        override fun SaverScope.save(value: BottomSearchBarState): Bundle {
+            return bundleOf(
+                KEY_VISIBLE to value.visible,
+                KEY_SEARCH_TEXT to value.searchText
+            )
+        }
+    }
+}
+
+@Composable
+fun rememberBottomSearchBarState(
+    initVisible: Boolean = false,
+    initSearchText: String = "",
+): BottomSearchBarState {
+    return rememberSaveable(saver = BottomSearchBarState.BundleSaver) {
+        BottomSearchBarState(initVisible, initSearchText)
+    }
+}
 
 @Composable
 @Preview
 fun BottomSearchBar(
-    visibleState: MutableState<Boolean> = mutableStateOf(true),
-    searchFieldState: MutableState<String> = mutableStateOf(""),
+    state: BottomSearchBarState = rememberBottomSearchBarState(true),
 ) {
-    var visible by visibleState
     var backProgress by remember { mutableFloatStateOf(0f) }
-    PredictiveBackHandler(enabled = visible) { flow ->
+    PredictiveBackHandler(enabled = state.visible) { flow ->
         flow.catch {
             animate(backProgress, 0f) { value, _ ->
                 backProgress = value
@@ -72,21 +128,20 @@ fun BottomSearchBar(
         }.collect { event ->
             backProgress = event.progress
         }
-        visible = false
+        state.visible = false
     }
-    LaunchedEffect(visible) {
-        if (visible) {
+    LaunchedEffect(state.visible) {
+        if (state.visible) {
             backProgress = 0f
         }
     }
     AnimatedVisibility(
-        visible = visible,
+        visible = state.visible,
         enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
         exit = slideOutVertically(targetOffsetY = { it }) + fadeOut(),
     ) {
-        BottomSearchBar(
-            visible,
-            searchFieldState,
+        BottomSearchBarView(
+            state = state,
             modifier = Modifier
                 .graphicsLayer(
                     scaleX = 1F - (0.1F * backProgress),
@@ -97,24 +152,22 @@ fun BottomSearchBar(
                 topStart = (28 * backProgress).dp,
                 topEnd = (28 * backProgress).dp
             ),
-            onClose = { visible = false },
+            onClose = { state.visible = false },
         )
     }
 }
 
 @Composable
-private fun BottomSearchBar(
-    visible: Boolean,
-    searchField: MutableState<String>,
+private fun BottomSearchBarView(
+    state: BottomSearchBarState,
     modifier: Modifier,
     shape: Shape,
     onClose: () -> Unit,
 ) {
-    var searchText by searchField
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = remember { FocusRequester() }
-    LaunchedEffect(visible) {
-        if (visible) {
+    LaunchedEffect(state.visible) {
+        if (state.visible) {
             focusRequester.requestFocus()
             keyboardController?.show()
         } else {
@@ -136,9 +189,9 @@ private fun BottomSearchBar(
             .focusRequester(focusRequester)
             .navigationBarsPadding()
             .padding(horizontal = 16.dp, vertical = 10.dp),
-            value = searchText,
+            value = state.searchText,
             onValueChange = {
-                searchText = it
+                state.searchText = it
             },
             placeholder = {
                 Text(text = stringResource(R.string.label_search_hint))
@@ -160,14 +213,14 @@ private fun BottomSearchBar(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = rememberRipple(bounded = false)
                     ) {
-                        searchText = ""
+                        state.searchText = ""
                         onClose.invoke()
                         keyboardController?.hide()
                     })
             },
             trailingIcon = {
                 AnimatedVisibility(
-                    visible = searchText.isNotBlank(),
+                    visible = state.searchText.isNotBlank(),
                     enter = fadeIn() + scaleIn(),
                     exit = fadeOut() + scaleOut(),
                 ) {
@@ -177,7 +230,7 @@ private fun BottomSearchBar(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = rememberRipple(bounded = false)
                         ) {
-                            searchText = ""
+                            state.searchText = ""
                         })
                 }
             })

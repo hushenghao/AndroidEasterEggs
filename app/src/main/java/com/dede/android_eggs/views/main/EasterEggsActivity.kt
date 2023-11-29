@@ -12,8 +12,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.dede.android_eggs.util.LocalEvent
@@ -27,6 +25,7 @@ import com.dede.android_eggs.views.main.compose.LocalFragmentManager
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.MainTitleBar
 import com.dede.android_eggs.views.main.compose.Welcome
+import com.dede.android_eggs.views.main.compose.rememberBottomSearchBarState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiState
 import com.dede.android_eggs.views.settings.prefs.IconVisualEffectsPref
 import com.dede.android_eggs.views.theme.AppTheme
@@ -57,8 +56,7 @@ class EasterEggsActivity : AppCompatActivity() {
 
         setContent {
             val konfettiState = rememberKonfettiState()
-            val searchBarVisibleState = rememberSaveable { mutableStateOf(false) }
-            val searchFieldState = rememberSaveable { mutableStateOf("") }
+            val searchBarState = rememberBottomSearchBarState()
 
             val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
             CompositionLocalProvider(
@@ -71,17 +69,16 @@ class EasterEggsActivity : AppCompatActivity() {
                         topBar = {
                             MainTitleBar(
                                 scrollBehavior = scrollBehavior,
-                                searchBarVisibleState = searchBarVisibleState,
-                                searchFieldState = searchFieldState,
+                                searchBarState = searchBarState,
                             )
                         },
                         modifier = Modifier
                             .nestedScroll(scrollBehavior.nestedScrollConnection),
                         bottomBar = {
-                            BottomSearchBar(searchBarVisibleState, searchFieldState)
+                            BottomSearchBar(searchBarState)
                         }
                     ) { contentPadding ->
-                        EasterEggScreen(easterEggs, searchFieldState.value, contentPadding)
+                        EasterEggScreen(easterEggs, searchBarState.searchText, contentPadding)
                     }
                     Welcome()
                     Konfetti(konfettiState)
