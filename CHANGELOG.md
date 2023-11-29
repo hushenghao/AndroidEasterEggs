@@ -1,5 +1,6 @@
 ### v2.2.2 (2023-11-26)
 - Fix F-Droid Reproducible Builds
+- Fix Guide page layout [#116](https://github.com/hushenghao/AndroidEasterEggs/issues/116)
 
 ### v2.2.1 (2023-11-25)
 - Fix F-Droid Reproducible Builds
