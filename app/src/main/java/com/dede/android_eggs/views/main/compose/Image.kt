@@ -75,18 +75,3 @@ fun Image(
         contentScale = contentScale,
     )
 }
-
-//private class DrawablePainter(private val drawable: Drawable) : Painter() {
-//
-//    override val intrinsicSize: Size
-//        get() = Size(
-//            drawable.intrinsicWidth.toFloat(),
-//            drawable.intrinsicHeight.toFloat()
-//        )
-//
-//    override fun DrawScope.onDraw() {
-//        val rect = size.toRect().toAndroidRectF().toRect()
-//        drawable.bounds = rect
-//        drawable.draw(drawContext.canvas.nativeCanvas)
-//    }
-//}

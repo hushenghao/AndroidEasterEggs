@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.EasterEggHelp
+import com.dede.android_eggs.util.compose.plus
 import com.dede.android_eggs.views.main.EasterEggModules
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
@@ -79,8 +80,8 @@ fun EasterEggScreen(
                     }
                 } else {
                     LazyColumn(
-                        contentPadding = contentPadding,
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                        contentPadding = contentPadding + PaddingValues(vertical = 10.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
                     ) {
                         if (searchMode) {
                             items(items = currentList) {
@@ -90,13 +91,13 @@ fun EasterEggScreen(
                             item("snapshot") {
                                 AndroidSnapshotView()
                             }
-                            item("wavy1") {
+                            item("wavy") {
                                 Wavy(res = R.drawable.ic_wavy_line)
                             }
                             items(items = currentList) {
                                 EasterEggItem(it, enableItemAnim = false)
                             }
-                            item("wavy2") {
+                            item("wavy") {
                                 Wavy(res = R.drawable.ic_wavy_line)
                             }
                             item("footer") {

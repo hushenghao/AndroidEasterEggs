@@ -32,7 +32,7 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 @Composable
 fun PreviewEasterEggLogo() {
     val easterEggs = EasterEggHelp.previewEasterEggs()
-    LazyVerticalGrid(columns = GridCells.Fixed(3)) {
+    LazyVerticalGrid(columns = GridCells.Adaptive(44.dp)) {
         items(easterEggs) {
             EasterEggLogo(egg = it)
         }

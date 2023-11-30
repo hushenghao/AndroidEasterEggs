@@ -110,7 +110,7 @@ fun ProjectDescription() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .then(Modifier.padding(bottom = 30.dp))
+            .then(Modifier.padding(bottom = 20.dp))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
