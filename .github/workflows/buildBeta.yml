@@ -31,13 +31,13 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
+        ruby-version: '3.2'
         bundler-cache: true
 
     - name: Set up Fastlane
       run: |
         gem install bundler
-        export LC_ALL=en_US.UTF-8
-        export LANG=en_US.UTF-8
+        bundle update
 
     - name: Build with Fastlane
       env:
