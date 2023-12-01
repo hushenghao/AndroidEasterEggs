@@ -37,6 +37,7 @@ jobs:
     - name: Set up Fastlane
       run: |
         bundle update
+        bundle install
 
     - name: Build with Fastlane
       env:
