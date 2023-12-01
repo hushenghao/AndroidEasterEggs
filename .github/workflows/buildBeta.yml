@@ -36,7 +36,6 @@ jobs:
 
     - name: Set up Fastlane
       run: |
-        gem install bundler
         bundle update
 
     - name: Build with Fastlane
