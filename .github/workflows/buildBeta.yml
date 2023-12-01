@@ -28,8 +28,10 @@ jobs:
         echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
         echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
 
-    - name: Build with Fastlane
+    - name: Set up Fastlane
       uses: fastlane/github-actions/fastlane-env-reminder@latest
+
+    - name: Build with Fastlane
       env:
         PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
       run: fastlane beta
