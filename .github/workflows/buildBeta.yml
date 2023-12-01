@@ -28,12 +28,6 @@ jobs:
         echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
         echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
 
-#    - name: Set up Ruby
-#      uses: ruby/setup-ruby@v1
-#      with:
-#        ruby-version: '3.2'
-#        bundler-cache: true
-
     - name: Set up Fastlane
       run: |
         sudo gem install fastlane
@@ -41,4 +35,4 @@ jobs:
     - name: Build with Fastlane
       env:
         PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
-      run: bundle exec fastlane beta
+      run: fastlane beta
