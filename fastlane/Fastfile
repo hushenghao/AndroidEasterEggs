@@ -16,10 +16,6 @@
 default_platform(:android)
 
 platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "app:cAT")
-  end
 
   desc "Submit a new Beta Build to Pgyer"
   lane :beta do

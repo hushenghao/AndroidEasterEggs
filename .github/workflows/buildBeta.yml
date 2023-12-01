@@ -1,0 +1,35 @@
+name: Android Build Beta CI
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+        cache: gradle
+
+    - name: Retrieve the secret and decode it to a file
+      env:
+        KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        KEY_PROPERTIES_BASE64: ${{ secrets.KEY_PROPERTIES_BASE64 }}
+      run: |
+        echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
+        echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
+
+    - name: Build with Fastlane
+      uses: fastlane/github-actions/fastlane-env-reminder@latest
+      env:
+        PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
+      run: fastlane beta
