@@ -30,6 +30,8 @@ jobs:
 
     - name: Set up Fastlane
       uses: fastlane/github-actions/fastlane-env-reminder@latest
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build with Fastlane
       env:
