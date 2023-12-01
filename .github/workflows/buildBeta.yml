@@ -31,6 +31,7 @@ jobs:
     - name: Set up Fastlane
       run: |
         sudo gem install fastlane
+        fastlane install_plugins
 
     - name: Build with Fastlane
       env:
