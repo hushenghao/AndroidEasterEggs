@@ -28,16 +28,15 @@ jobs:
         echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
         echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.2'
-        bundler-cache: true
+#    - name: Set up Ruby
+#      uses: ruby/setup-ruby@v1
+#      with:
+#        ruby-version: '3.2'
+#        bundler-cache: true
 
     - name: Set up Fastlane
       run: |
-        bundle update
-        bundle install
+        sudo gem install fastlane
 
     - name: Build with Fastlane
       env:
