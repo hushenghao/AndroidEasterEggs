@@ -1,7 +1,7 @@
 package com.dede.android_eggs.ui
 
 /** Generated automatically via **subset_icons_font.py**, do not modify this file. */
-// 1699951651 
+// 1701411875 
 object Icons {
 
     object Outlined {
@@ -36,9 +36,6 @@ object Icons {
 
         /** palette */
         const val palette = "\uE40A"
-
-        /** settings */
-        const val settings = "\uE8B8"
 
         /** tips_and_updates */
         const val tips_and_updates = "\uE79A"

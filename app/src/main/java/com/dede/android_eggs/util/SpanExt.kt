@@ -4,25 +4,15 @@ package com.dede.android_eggs.util
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Build
 import android.text.Spannable
 import android.text.SpannableStringBuilder
-import android.text.TextPaint
-import android.text.method.LinkMovementMethod
-import android.text.style.ForegroundColorSpan
 import android.text.style.ImageSpan
-import android.text.style.URLSpan
-import android.view.View
-import android.widget.TextView
-import androidx.annotation.AttrRes
 import androidx.annotation.DrawableRes
 import androidx.core.graphics.withTranslation
 import com.dede.basic.requireDrawable
-import com.google.android.material.color.MaterialColors
 
 fun SpannableStringBuilder.append(
     text: CharSequence?,
@@ -39,9 +29,6 @@ fun SpannableStringBuilder.append(
     return this
 }
 
-fun foregroundColorSpan(context: Context, @AttrRes colorAttributeResId: Int): ForegroundColorSpan =
-    ForegroundColorSpan(MaterialColors.getColor(context, colorAttributeResId, Color.WHITE))
-
 fun centerImageSpan(context: Context, @DrawableRes resourceId: Int): ImageSpan =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         ImageSpan(context, resourceId, ImageSpan.ALIGN_CENTER)
@@ -49,20 +36,6 @@ fun centerImageSpan(context: Context, @DrawableRes resourceId: Int): ImageSpan =
         // apply tint
         API28CenterImageSpan(context.requireDrawable(resourceId))
     }
-
-fun customTabURLSpan(url: String): URLSpan = object : URLSpan(url) {
-    override fun updateDrawState(ds: TextPaint) {
-    }
-
-    override fun onClick(widget: View) {
-        CustomTabsBrowser.launchUrl(widget.context, Uri.parse(url))
-    }
-}
-
-fun TextView.enableClickSpan() {
-    movementMethod = LinkMovementMethod.getInstance()
-    highlightColor = Color.TRANSPARENT
-}
 
 private class API28CenterImageSpan : ImageSpan {
 
