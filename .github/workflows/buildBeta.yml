@@ -28,12 +28,18 @@ jobs:
         echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
         echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
 
-    - name: Set up Fastlane
-      uses: fastlane/github-actions/fastlane-env-reminder@latest
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        bundler-cache: true
+
+    - name: Set up Fastlane
+      run: |
+        gem install bundler
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
 
     - name: Build with Fastlane
       env:
         PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
-      run: fastlane beta
+      run: bundle exec fastlane beta
