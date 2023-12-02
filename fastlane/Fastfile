@@ -18,11 +18,11 @@ default_platform(:android)
 platform :android do
 
   desc "Submit a new Beta Build to Pgyer"
-  lane :beta do
+  lane :beta do |options|
     gradle(
         tasks: ["clean", "app:assembleRelease"],
         # Fucking stupid.
-        print_command_output: ((/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) == nil),
+        print_command_output: options[:gradle_output] == nil,
     )
     # https://www.pgyer.com/doc/view/fastlane
     pgyer(

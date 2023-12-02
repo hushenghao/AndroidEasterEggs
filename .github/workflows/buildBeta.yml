@@ -2,6 +2,14 @@ name: Android Build Beta CI
 
 on:
   push:
+    paths:
+      - 'app'
+      - 'eggs'
+      - 'basic'
+      - 'build-logic'
+      - 'gradle'
+      - '*.kts'
+      - 'gradle.properties'
     branches: [ main ]
   workflow_dispatch:
 
