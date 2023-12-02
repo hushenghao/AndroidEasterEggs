@@ -6,7 +6,7 @@ compose-kotlin-compiler = "1.5.5"
 agp = "8.2.0"
 hilt = "2.48.1"
 # https://google.github.io/accompanist
-accompanist = "0.32.0"
+accompanist = "0.33.2-alpha"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
