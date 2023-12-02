@@ -31,6 +31,13 @@ android {
         buildConfigField("int", "LANGUAGE_RES", resourceConfigurations.size.toString())
     }
 
+    kotlinOptions {
+        freeCompilerArgs += listOf(
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+        )
+    }
+
     buildFeatures {
         compose = true
     }
