@@ -3,7 +3,7 @@ kotlin = "1.9.20"
 # https://androidx.dev/storage/compose-compiler/repository
 # https://maven.google.com/web/index.html?q=compose#androidx.compose.compiler:compiler
 compose-kotlin-compiler = "1.5.4"
-agp = "8.1.4"
+agp = "8.2.0"
 hilt = "2.48.1"
 # https://google.github.io/accompanist
 accompanist = "0.32.0"
@@ -13,7 +13,6 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-#kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 
 [libraries]
 kotlinx-coroutines-android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
@@ -61,7 +60,7 @@ nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
 # Dependencies of the included build-logic
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-android-tools-sdk-common = "com.android.tools:sdk-common:31.1.4"
+android-tools-sdk-common = "com.android.tools:sdk-common:31.2.0"
 
 junit = "junit:junit:4.13.2"
 androidx-test-core = "androidx.test:core-ktx:1.5.0"

@@ -26,6 +26,10 @@ class EasterEggApp : Plugin<Project> {
                     targetSdk = Versions.TARGET_SDK
                 }
 
+                buildFeatures {
+                    buildConfig = true
+                }
+
                 lint {
                     fatal += listOf("NewApi", "InlineApi")
                 }
