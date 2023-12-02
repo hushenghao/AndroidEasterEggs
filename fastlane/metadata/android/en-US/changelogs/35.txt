@@ -1,2 +1,2 @@
-- Fix F-Droid Reproducible Builds
 - Fix Guide page layout
+- Migrate kapt to KSP

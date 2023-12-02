@@ -1,6 +1,6 @@
-### v2.2.2 (2023-11-26)
-- Fix F-Droid Reproducible Builds
+### v2.2.2
 - Fix Guide page layout [#116](https://github.com/hushenghao/AndroidEasterEggs/issues/116)
+- Migrate kapt to KSP
 
 ### v2.2.1 (2023-11-25)
 - Fix F-Droid Reproducible Builds

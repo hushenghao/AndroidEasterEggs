@@ -10,13 +10,13 @@ class EasterEggLibrary : EasterEggBasicLibrary() {
         with(target) {
             pluginManager.apply {
                 apply("com.google.dagger.hilt.android")
-                apply("kotlin-kapt")
+                apply("com.google.devtools.ksp")
             }
 
             dependencies {
                 "implementation"(project(path = ":basic"))
                 "implementation"(catalog.findLibrary("hilt.android").get())
-                "kapt"(catalog.findLibrary("hilt.compiler").get())
+                "ksp"(catalog.findLibrary("hilt.compiler").get())
             }
 
             configureAndroid<LibraryExtension> {
