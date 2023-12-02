@@ -3,7 +3,7 @@ name: Crowdin Synchronize Action
 on:
   push:
     paths:
-      - 'app/src/main/res/values/strings.xml'
+      - 'app/src/main/res/values*/strings.xml'
       - 'app/src/main/res/values/languages.xml'
     branches: [ main ]
   schedule:
