@@ -22,7 +22,6 @@ fun AndroidSnapshotView() {
         Box(
             modifier = Modifier
                 .padding(horizontal = 12.dp)
-                .padding(top = 12.dp)
         ) {
             Card(
                 shape = shapes.extraLarge,
@@ -37,7 +36,6 @@ fun AndroidSnapshotView() {
             factory = { SnapshotGroupView(it) },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 12.dp)
         )
     }
 }

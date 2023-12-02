@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalLayoutApi::class)
+@file:OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 
 package com.dede.android_eggs.views.main.compose
 
@@ -17,9 +17,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.MaterialTheme.typography
+import androidx.compose.material3.PlainTooltipBox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -110,24 +112,29 @@ fun ProjectDescription() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .then(Modifier.padding(bottom = 30.dp))
+            .then(Modifier.padding(bottom = 20.dp))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(horizontal = 4.dp)
         ) {
-            Image(
-                res = R.mipmap.ic_launcher_round,
-                modifier = Modifier
-                    .size(50.dp)
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = rememberRipple(bounded = false),
-                    ) {
-                        konfettiState = true
-                    },
-                contentDescription = stringResource(id = R.string.app_name)
-            )
+            PlainTooltipBox(
+                tooltip = { Text(text = stringResource(R.string.app_name)) }
+            ) {
+                Image(
+                    res = R.mipmap.ic_launcher_round,
+                    modifier = Modifier
+                        .size(50.dp)
+                        .tooltipAnchor()
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = rememberRipple(bounded = false),
+                        ) {
+                            konfettiState = true
+                        },
+                    contentDescription = stringResource(id = R.string.app_name)
+                )
+            }
             Column(modifier = Modifier.padding(start = 12.dp)) {
                 Text(
                     text = stringResource(

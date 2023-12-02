@@ -20,10 +20,6 @@ open class EasterEggBasicLibrary : Plugin<Project> {
                     fatal += listOf("NewApi", "InlineApi")
                 }
 
-                buildFeatures {
-                    buildConfig = false
-                }
-
                 buildTypes {
                     release {
                         isMinifyEnabled = false

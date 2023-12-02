@@ -194,7 +194,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
-    unf_ext (0.0.8.2-x64-mingw-ucrt)
+    unf_ext (0.0.8.2-x64-unknown)
     unicode-display_width (1.8.0)
     webrick (1.7.0)
     word_wrap (1.0.0)
@@ -212,7 +212,9 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
-  x64-mingw-ucrt
+  arm64-darwin-23
+  x64-unknown
+  x86_64-linux
 
 DEPENDENCIES
   fastlane

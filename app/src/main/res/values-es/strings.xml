@@ -21,7 +21,7 @@
     <string name="pref_title_icon_shape_override">Forma del Icono</string>
     <string name="pref_title_language">Idioma</string>
     <string name="pref_title_language_more">Más</string>
-    <string name="pref_title_theme">Tema</string>
+    <string name="pref_title_theme">Fondo</string>
     <string name="pref_title_dynamic_color">Color Dinámico</string>
     <string name="pref_title_icon_visual_effects">Efectos Visuales de Iconos</string>
     <string name="summary_system_default">Predeterminado</string>
@@ -35,7 +35,7 @@
     <string name="app_widget_description">Este es el reloj analógico de Huevos de Pascua</string>
     <string name="action_agree">De acuerdo</string>
     <string name="summary_browse_privacy_policy">Lea y acepte nuestra Política de privacidad para continuar.</string>
-    <string name="label_welcome">Bienvenido al Catálogo de Easter Eggs de Android 🎉🎉🎉</string>
+    <string name="label_welcome">Bienvenido al Catálogo de Easter Eggs 🎉🎉🎉</string>
     <string name="label_share">Compartir</string>
     <string name="label_search_hint">Buscar…</string>
     <string name="label_component_manager">Administrador de Componentes</string>

@@ -3,7 +3,7 @@ name: Crowdin Synchronize Action
 on:
   push:
     paths:
-      - 'app/src/main/res/values/strings.xml'
+      - 'app/src/main/res/values*/strings.xml'
       - 'app/src/main/res/values/languages.xml'
     branches: [ main ]
   schedule:
@@ -37,7 +37,7 @@ jobs:
         uses: crowdin/github-action@v1
         with:
           upload_sources: true
-          upload_translations: false
+          upload_translations: true
           download_translations: true
 
           create_pull_request: true

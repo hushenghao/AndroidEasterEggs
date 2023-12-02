@@ -27,6 +27,8 @@ def get_project_progress():
             name = id
         language['data']['name'] = name
     languages = list(map(lambda l: l['data'], languages))
+        # add default language
+    languages.append({"name": "English (Original)", "translationProgress": 100, "approvalProgress": 100})
     languages = sorted(languages, key=lambda l: l['name'])
     return languages
 
