@@ -1,2 +1,3 @@
 - 修复引导页布局
 - 迁移kapt到KSP
+- 修复Android ICS彩蛋异常关闭
