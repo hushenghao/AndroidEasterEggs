@@ -38,4 +38,5 @@
     <string name="label_welcome">مرحبًا بك في كتالوجات بيض عيد الفصح 🎉🎉🎉</string>
     <string name="label_share">يشارك</string>
     <string name="label_search_hint">بحث…</string>
+    <string name="label_component_manager">مدير المكونات</string>
 </resources>
