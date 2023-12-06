@@ -20,14 +20,14 @@
     <string name="label_project_desc">Dự án chứa mã hoàn chỉnh của trứng Phục sinh của hệ thống, nhằm mục đích sắp xếp và tương thích với trứng hệ thống, để đảm bảo rằng hầu hết các thiết bị có thể trải nghiệm các phiên bản trứng Phục sinh khác nhau và sẽ không thực hiện quá nhiều sửa đổi đối với mã trứng hệ thống. Một số phiên bản sử dụng tính năng mới của hệ thống, phiên bản thấp hơn chỉ sử dụng được một số chức năng.</string>
     <string name="pref_title_icon_shape_override">Hình dạng biểu tượng</string>
     <string name="pref_title_language">Ngôn ngữ</string>
-    <string name="pref_title_language_more">Hơn</string>
+    <string name="pref_title_language_more">Thêm</string>
     <string name="pref_title_theme">Chủ đề</string>
     <string name="pref_title_dynamic_color">Màu động</string>
-    <string name="pref_title_icon_visual_effects">Biểu tượng Hiệu ứng hình ảnh</string>
+    <string name="pref_title_icon_visual_effects">Hiệu ứng biểu tượng</string>
     <string name="summary_system_default">Mặc định</string>
-    <string name="summary_theme_dark_mode">Tối tăm</string>
-    <string name="summary_theme_light_mode">Ánh sáng</string>
-    <string name="label_add_shortcut">Đường tắt</string>
+    <string name="summary_theme_dark_mode">Tối</string>
+    <string name="summary_theme_light_mode">Sáng</string>
+    <string name="label_add_shortcut">Lối tắt</string>
     <string name="label_donate">Quyên tặng</string>
     <string name="preference_on">Bật</string>
     <string name="preference_off">Tắt</string>
@@ -38,4 +38,5 @@
     <string name="label_welcome">Chào mừng bạn đến với Danh mục trứng Phục sinh 🎉🎉🎉</string>
     <string name="label_share">Chia sẻ</string>
     <string name="label_search_hint">Tìm kiếm…</string>
+    <string name="label_component_manager">Quản lý thành phần</string>
 </resources>
