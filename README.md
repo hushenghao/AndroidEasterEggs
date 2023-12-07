@@ -75,22 +75,24 @@ See our [Contributing doc](.github/CONTRIBUTING.md) for information on how to re
 
 </details>
 
-## Build
+## Thanks
 
-Prerequisites The `Java17` and `Android SDK` have been installed, and environment variables have been configured.
+* [AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)
+* [All translation contributors](https://crowdin.com/project/easter-eggs/members)
 
-```shell
-./gradlew assembleRelease
+## License
+```text
+Copyright 2023 Hu Shenghao
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```
-
-## Other
-
-[Privacy Policy](https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy)
-
-[Contact me 📧](mailto:dede.hu@qq.com)
-
-### Thanks
-
-[AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)
-
-[All translation contributors](https://crowdin.com/project/easter-eggs/members)
