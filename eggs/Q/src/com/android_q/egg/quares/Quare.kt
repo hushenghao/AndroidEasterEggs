@@ -22,8 +22,6 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
-import java.util.ArrayList
-import kotlin.math.abs
 import kotlin.math.round
 
 class Quare(val width: Int, val height: Int, val depth: Int) : Parcelable {
@@ -95,11 +93,11 @@ class Quare(val width: Int, val height: Int, val depth: Int) : Parcelable {
         return true
     }
 
-    fun errors(): IntArray {
-        return IntArray(width * height) {
-            abs(data[it] - user[it])
-        }
-    }
+//    fun errors(): IntArray {
+//        return IntArray(width * height) {
+//            abs(data[it] - user[it])
+//        }
+//    }
 
     fun getRowClue(y: Int): IntArray {
         return getClue(-1, y)
@@ -138,13 +136,11 @@ class Quare(val width: Int, val height: Int, val depth: Int) : Parcelable {
     }
 
     override fun writeToParcel(p: Parcel, flags: Int) {
-        p?.let {
-            p.writeInt(width)
-            p.writeInt(height)
-            p.writeInt(depth)
-            p.writeIntArray(data)
-            p.writeIntArray(user)
-        }
+        p.writeInt(width)
+        p.writeInt(height)
+        p.writeInt(depth)
+        p.writeIntArray(data)
+        p.writeIntArray(user)
     }
 
     companion object CREATOR : Parcelable.Creator<Quare> {

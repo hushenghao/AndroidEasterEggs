@@ -28,4 +28,5 @@ dependencies {
     implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material)
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }

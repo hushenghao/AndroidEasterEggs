@@ -46,28 +46,6 @@
     </issue>
 
     <issue
-        id="InlinedApi"
-        message="Field requires API level 26 (current min is 21): `android.view.View#SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR`"
-        errorLine1="                            decorSUIV &amp; ~View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);"
-        errorLine2="                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/com/android_p/egg/paint/PaintActivity.java"
-            line="303"
-            column="42"/>
-    </issue>
-
-    <issue
-        id="InlinedApi"
-        message="Field requires API level 26 (current min is 21): `android.view.View#SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR`"
-        errorLine1="                            decorSUIV | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);"
-        errorLine2="                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/com/android_p/egg/paint/PaintActivity.java"
-            line="306"
-            column="41"/>
-    </issue>
-
-    <issue
         id="NewApi"
         message="`android:windowLayoutInDisplayCutoutMode` requires API level 27 (current min is 21)"
         errorLine1="        &lt;item name=&quot;android:windowLayoutInDisplayCutoutMode&quot;>shortEdges&lt;/item>"

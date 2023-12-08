@@ -38,7 +38,7 @@ import android.widget.CompoundButton
 import android.widget.GridLayout
 import androidx.core.content.ContextCompat
 import com.android_q.egg.R
-import java.util.*
+import java.util.Random
 
 
 const val TAG = "Quares"
@@ -322,30 +322,28 @@ class ClueView(context: Context) : View(context) {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (!showText) return
-        canvas?.let {
-            val x = canvas.width / 2f
-            val y = canvas.height / 2f
-            var textWidth = canvas.width
-            if (textRotation != 0f) {
-                canvas.rotate(textRotation, x, y)
-                textWidth = canvas.height
-            }
-            val textLayout =
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                    StaticLayout.Builder.obtain(
-                        text, 0, text.length, paint, textWidth
-                    ).build()
-                } else {
-                    StaticLayout(
-                        text, 0, text.length, paint, textWidth,
-                        Layout.Alignment.ALIGN_NORMAL,
-                        1f,
-                        0f,
-                        true
-                    )
-                }
-            canvas.translate(x, y - textLayout.height / 2)
-            textLayout.draw(canvas)
+        val x = width / 2f
+        val y = height / 2f
+        var textWidth = width
+        if (textRotation != 0f) {
+            canvas.rotate(textRotation, x, y)
+            textWidth = height
         }
+        val textLayout =
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                StaticLayout.Builder.obtain(
+                    text, 0, text.length, paint, textWidth
+                ).build()
+            } else {
+                StaticLayout(
+                    text, 0, text.length, paint, textWidth,
+                    Layout.Alignment.ALIGN_NORMAL,
+                    1f,
+                    0f,
+                    true
+                )
+            }
+        canvas.translate(x, y - textLayout.height / 2)
+        textLayout.draw(canvas)
     }
 }

@@ -63,19 +63,17 @@ class BrushPropertyDrawable : Drawable {
     }
 
     override fun draw(c: Canvas) {
-        c?.let {
-            val w = bounds.width().toFloat()
-            val h = bounds.height().toFloat()
-            val inset = _size / 12 // 2dp in a 24x24 icon
-            val r = Math.min(w, h) / 2
+        val w = bounds.width().toFloat()
+        val h = bounds.height().toFloat()
+        val inset = _size / 12 // 2dp in a 24x24 icon
+        val r = Math.min(w, h) / 2
 
-            c.drawCircle(w/2, h/2, (r - inset) * _scale + 1 , wellPaint)
+        c.drawCircle(w / 2, h / 2, (r - inset) * _scale + 1, wellPaint)
 
-            val p = Path()
-            p.addCircle(w/2, h/2, r, Path.Direction.CCW)
-            p.addCircle(w/2, h/2, r - inset, Path.Direction.CW)
-            c.drawPath(p, framePaint)
-        }
+        val p = Path()
+        p.addCircle(w / 2, h / 2, r, Path.Direction.CCW)
+        p.addCircle(w / 2, h / 2, r - inset, Path.Direction.CW)
+        c.drawPath(p, framePaint)
     }
 
     override fun setAlpha(p0: Int) {

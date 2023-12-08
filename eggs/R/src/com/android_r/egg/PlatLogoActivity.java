@@ -47,6 +47,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.view.HapticFeedbackConstantsCompat;
 import androidx.core.view.animation.PathInterpolatorCompat;
 
 import com.android_r.egg.neko.NekoActivationActivity;
@@ -173,7 +174,7 @@ public class PlatLogoActivity extends Activity {
                     final int newLevel = mDialDrawable.getUserLevel();
                     if (oldLevel != newLevel) {
                         performHapticFeedback(newLevel == STEPS
-                                ? HapticFeedbackConstants.CONFIRM
+                                ? HapticFeedbackConstantsCompat.CONFIRM
                                 : HapticFeedbackConstants.CLOCK_TICK);
                     }
                     return true;

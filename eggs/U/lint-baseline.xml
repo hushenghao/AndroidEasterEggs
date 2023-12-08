@@ -2,13 +2,6 @@
 <issues format="6" by="lint 8.1.2" type="baseline" client="gradle" dependencies="false" name="AGP (8.1.2)" variant="all" version="8.1.2">
 
     <issue
-        id="UnknownIssueId"
-        message="Unknown issue id &quot;InlineApi&quot;. Did you mean &apos;InlinedApi&apos; (Using inlined constants on older versions) ?">
-        <location
-            file="build.gradle.kts"/>
-    </issue>
-
-    <issue
         id="DefaultLocale"
         message="Implicitly using the default locale is a common source of bugs: Use `capitalize(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`."
         errorLine1="                                    &quot;  TYPE: ${it.description.capitalize()}\n&quot; +"

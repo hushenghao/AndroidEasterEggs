@@ -57,17 +57,6 @@
     </issue>
 
     <issue
-        id="InlinedApi"
-        message="Field requires API level 30 (current min is 21): `android.view.HapticFeedbackConstants#CONFIRM`"
-        errorLine1="                                ? HapticFeedbackConstants.CONFIRM"
-        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/com/android_r/egg/PlatLogoActivity.java"
-            line="177"
-            column="35"/>
-    </issue>
-
-    <issue
         id="LongLogTag"
         message="The logging tag can be at most 23 characters, was 41 (com.android.internal.app.PlatLogoActivity)"
         errorLine1="            Log.e(&quot;com.android.internal.app.PlatLogoActivity&quot;, &quot;No more eggs.&quot;);"

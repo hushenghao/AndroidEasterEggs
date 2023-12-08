@@ -29,8 +29,8 @@ import androidx.compose.animation.core.withInfiniteAnimationFrameNanos
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.gestures.forEachGesture
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.Box
@@ -71,17 +71,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.window.layout.FoldingFeature
 import androidx.window.layout.WindowInfoTracker
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.lang.Float.max
 import java.lang.Float.min
 import java.util.Calendar
 import java.util.GregorianCalendar
+import java.util.Locale
 import kotlin.math.absoluteValue
 import kotlin.math.floor
 import kotlin.math.sqrt
 import kotlin.random.Random
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 enum class RandomSeedType {
     Fixed,
@@ -104,8 +105,8 @@ const val DYNAMIC_ZOOM = false // @@@ FIXME
 fun dailySeed(): Long {
     val today = GregorianCalendar()
     return today.get(Calendar.YEAR) * 10_000L +
-        today.get(Calendar.MONTH) * 100L +
-        today.get(Calendar.DAY_OF_MONTH)
+            today.get(Calendar.MONTH) * 100L +
+            today.get(Calendar.DAY_OF_MONTH)
 }
 
 fun randomSeed(): Long {
@@ -123,7 +124,10 @@ const val SHOW_DEBUG_TEXT = false
 fun DebugText(text: MutableState<String>) {
     if (SHOW_DEBUG_TEXT) {
         Text(
-            modifier = Modifier.fillMaxWidth().border(0.5.dp, color = Color.Yellow).padding(2.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(0.5.dp, color = Color.Yellow)
+                .padding(2.dp),
             fontFamily = FontFamily.Monospace,
             fontWeight = FontWeight.Medium,
             fontSize = 9.sp,
@@ -144,13 +148,13 @@ fun ColumnScope.ConsoleText(
         modifier = modifier,
         visible = visible,
         enter =
-            fadeIn(
-                animationSpec =
-                    tween(
-                        durationMillis = 1000,
-                        easing = flickerFadeEasing(random) * CubicBezierEasing(0f, 1f, 1f, 0f)
-                    )
+        fadeIn(
+            animationSpec =
+            tween(
+                durationMillis = 1000,
+                easing = flickerFadeEasing(random) * CubicBezierEasing(0f, 1f, 1f, 0f)
             )
+        )
     ) {
         Text(
             fontFamily = FontFamily.Monospace,
@@ -160,6 +164,13 @@ fun ColumnScope.ConsoleText(
             text = text
         )
     }
+}
+
+private fun String.localCapitalize() = replaceFirstChar {
+    if (it.isLowerCase())
+        it.titlecase(Locale.getDefault())
+    else
+        it.toString()
 }
 
 @Composable
@@ -174,7 +185,11 @@ fun Telemetry(universe: VisibleUniverse) {
         topVisible = true
     }
 
-    Column(modifier = Modifier.fillMaxSize().padding(6.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(6.dp)
+    ) {
         universe.triggerDraw.value // recompose on every frame
         val explored = universe.planets.filter { it.explored }
 
@@ -185,27 +200,23 @@ fun Telemetry(universe: VisibleUniverse) {
                 fontSize = 12.sp,
                 color = Colors.Console,
                 modifier = Modifier.align(Left),
-                text =
-                    with(universe.star) {
-                        "  STAR: $name (UDC-${universe.randomSeed % 100_000})\n" +
+                text = with(universe.star) {
+                    "  STAR: $name (UDC-${universe.randomSeed % 100_000})\n" +
                             " CLASS: ${cls.name}\n" +
                             "RADIUS: ${radius.toInt()}\n" +
                             "  MASS: %.3g\n".format(mass) +
                             "BODIES: ${explored.size} / ${universe.planets.size}\n" +
                             "\n"
-                    } +
-                        explored
-                            .map {
-                                "  BODY: ${it.name}\n" +
-                                    "  TYPE: ${it.description.capitalize()}\n" +
-                                    "  ATMO: ${it.atmosphere.capitalize()}\n" +
-                                    " FAUNA: ${it.fauna.capitalize()}\n" +
-                                    " FLORA: ${it.flora.capitalize()}\n"
-                            }
-                            .joinToString("\n")
+                } + explored.joinToString("\n") {
+                    "  BODY: ${it.name}\n" +
+                            "  TYPE: ${it.description.localCapitalize()}\n" +
+                            "  ATMO: ${it.atmosphere.localCapitalize()}\n" +
+                            " FAUNA: ${it.fauna.localCapitalize()}\n" +
+                            " FLORA: ${it.flora.localCapitalize()}\n"
+                }
 
                 // TODO: different colors, highlight latest discovery
-                )
+            )
         }
 
         Spacer(modifier = Modifier.weight(1f))
@@ -218,21 +229,21 @@ fun Telemetry(universe: VisibleUniverse) {
                 color = Colors.Console,
                 modifier = Modifier.align(Left),
                 text =
-                    with(universe.ship) {
-                        val closest = universe.closestPlanet()
-                        val distToClosest = (closest.pos - pos).mag().toInt()
-                        listOfNotNull(
-                                landing?.let { "LND: ${it.planet.name}" }
-                                    ?: if (distToClosest < 10_000) {
-                                        "ALT: $distToClosest"
-                                    } else null,
-                                if (thrust != Vec2.Zero) "THR: %.0f%%".format(thrust.mag() * 100f)
-                                else null,
-                                "POS: %s".format(pos.str("%+7.0f")),
-                                "VEL: %.0f".format(velocity.mag())
-                            )
-                            .joinToString("\n")
-                    }
+                with(universe.ship) {
+                    val closest = universe.closestPlanet()
+                    val distToClosest = (closest.pos - pos).mag().toInt()
+                    listOfNotNull(
+                        landing?.let { "LND: ${it.planet.name}" }
+                            ?: if (distToClosest < 10_000) {
+                                "ALT: $distToClosest"
+                            } else null,
+                        if (thrust != Vec2.Zero) "THR: %.0f%%".format(thrust.mag() * 100f)
+                        else null,
+                        "POS: %s".format(pos.str("%+7.0f")),
+                        "VEL: %.0f".format(velocity.mag())
+                    )
+                        .joinToString("\n")
+                }
             )
         }
     }
@@ -333,63 +344,61 @@ fun FlightStick(
 
     Box(
         modifier =
-            modifier
-                .pointerInput(Unit) {
-                    forEachGesture {
-                        awaitPointerEventScope {
-                            // ACTION_DOWN
-                            val down = awaitFirstDown(requireUnconsumed = false)
-                            origin.value = down.position
-                            target.value = down.position
+        modifier
+            .pointerInput(Unit) {
+                awaitEachGesture {
+                    // ACTION_DOWN
+                    val down = awaitFirstDown(requireUnconsumed = false)
+                    origin.value = down.position
+                    target.value = down.position
 
-                            do {
-                                // ACTION_MOVE
-                                val event: PointerEvent = awaitPointerEvent()
-                                target.value = event.changes[0].position
+                    do {
+                        // ACTION_MOVE
+                        val event: PointerEvent = awaitPointerEvent()
+                        target.value = event.changes[0].position
 
-                                onStickChanged(target.value - origin.value)
-                            } while (
-                                !event.changes.any { it.isConsumed } &&
-                                    event.changes.count { it.pressed } == 1
-                            )
+                        onStickChanged(target.value - origin.value)
+                    } while (
+                        !event.changes.any { it.isConsumed } &&
+                        event.changes.count { it.pressed } == 1
+                    )
 
-                            // ACTION_UP / CANCEL
-                            target.value = Vec2.Zero
-                            origin.value = Vec2.Zero
+                    // ACTION_UP / CANCEL
+                    target.value = Vec2.Zero
+                    origin.value = Vec2.Zero
 
-                            onStickChanged(Vec2.Zero)
-                        }
-                    }
+                    onStickChanged(Vec2.Zero)
                 }
-                .drawBehind {
-                    if (origin.value != Vec2.Zero) {
-                        val delta = target.value - origin.value
-                        val mag = min(maxRadius, delta.mag())
-                        val r = max(minRadius, mag)
-                        val a = delta.angle()
-                        drawCircle(
-                            color = color,
-                            center = origin.value,
-                            radius = r,
-                            style =
-                                Stroke(
-                                    width = 2f,
-                                    pathEffect =
-                                        if (mag < minRadius)
-                                            PathEffect.dashPathEffect(
-                                                floatArrayOf(this.density * 1f, this.density * 2f)
-                                            )
-                                        else null
+            }
+            .drawBehind {
+                if (origin.value != Vec2.Zero) {
+                    val delta = target.value - origin.value
+                    val mag = min(maxRadius, delta.mag())
+                    val r = max(minRadius, mag)
+                    val a = delta.angle()
+                    drawCircle(
+                        color = color,
+                        center = origin.value,
+                        radius = r,
+                        style =
+                        Stroke(
+                            width = 2f,
+                            pathEffect =
+                            if (mag < minRadius)
+                                PathEffect.dashPathEffect(
+                                    floatArrayOf(this.density * 1f, this.density * 2f)
                                 )
+                            else null
                         )
-                        drawLine(
-                            color = color,
-                            start = origin.value,
-                            end = origin.value + Vec2.makeWithAngleMag(a, mag),
-                            strokeWidth = 2f
-                        )
-                    }
+                    )
+                    drawLine(
+                        color = color,
+                        start = origin.value,
+                        end = origin.value + Vec2.makeWithAngleMag(a, mag),
+                        strokeWidth = 2f
+                    )
                 }
+            }
     )
 }
 
@@ -426,9 +435,9 @@ fun Spaaaace(
         foldState.value?.let { it.orientation == FoldingFeature.Orientation.HORIZONTAL } ?: false
 
     val centerFracX: Float by
-        animateFloatAsState(if (halfFolded && !horizontalFold) 0.25f else 0.5f, label = "centerX")
+    animateFloatAsState(if (halfFolded && !horizontalFold) 0.25f else 0.5f, label = "centerX")
     val centerFracY: Float by
-        animateFloatAsState(if (halfFolded && horizontalFold) 0.25f else 0.5f, label = "centerY")
+    animateFloatAsState(if (halfFolded && horizontalFold) 0.25f else 0.5f, label = "centerY")
 
     Canvas(modifier = canvasModifier) {
         drawRect(Colors.Eigengrau, Offset.Zero, size)
@@ -449,10 +458,10 @@ fun Spaaaace(
         val visibleSpaceRectMeters =
             Rect(
                 -cameraOffset -
-                    Offset(
-                        visibleSpaceSizeMeters.width * centerFracX,
-                        visibleSpaceSizeMeters.height * centerFracY
-                    ),
+                        Offset(
+                            visibleSpaceSizeMeters.width * centerFracX,
+                            visibleSpaceSizeMeters.height * centerFracY
+                        ),
                 visibleSpaceSizeMeters
             )
 
@@ -461,33 +470,33 @@ fun Spaaaace(
 
         DEBUG_TEXT.value =
             ("SIMULATION //\n" +
-                // "normalizedDist=${normalizedDist} \n" +
-                "entities: ${u.entities.size} // " +
-                "zoom: ${"%.4f".format(cameraZoom)}x // " +
-                "fps: ${"%3.0f".format(1f / u.dt)} " +
-                "dt: ${u.dt}\n" +
-                ((u.follow as? Spacecraft)?.let {
-                    "ship: p=%s v=%7.2f a=%6.3f t=%s\n".format(
-                        it.pos.str("%+7.1f"),
-                        it.velocity.mag(),
-                        it.angle,
-                        it.thrust.str("%+5.2f")
-                    )
-                }
-                    ?: "") +
-                "star: '${u.star.name}' designation=UDC-${u.randomSeed % 100_000} " +
-                "class=${u.star.cls.name} r=${u.star.radius.toInt()} m=${u.star.mass}\n" +
-                "planets: ${u.planets.size}\n" +
+                    // "normalizedDist=${normalizedDist} \n" +
+                    "entities: ${u.entities.size} // " +
+                    "zoom: ${"%.4f".format(cameraZoom)}x // " +
+                    "fps: ${"%3.0f".format(1f / u.dt)} " +
+                    "dt: ${u.dt}\n" +
+                    ((u.follow as? Spacecraft)?.let {
+                        "ship: p=%s v=%7.2f a=%6.3f t=%s\n".format(
+                            it.pos.str("%+7.1f"),
+                            it.velocity.mag(),
+                            it.angle,
+                            it.thrust.str("%+5.2f")
+                        )
+                    }
+                        ?: "") +
+                    "star: '${u.star.name}' designation=UDC-${u.randomSeed % 100_000} " +
+                    "class=${u.star.cls.name} r=${u.star.radius.toInt()} m=${u.star.mass}\n" +
+                    "planets: ${u.planets.size}\n" +
                     u.planets.joinToString("\n") {
                         val range = (u.ship.pos - it.pos).mag()
                         val vorbit = sqrt(GRAVITATION * it.mass / range)
                         val vescape = sqrt(2 * GRAVITATION * it.mass / it.radius)
                         " * ${it.name}:\n" +
                                 if (it.explored) {
-                                    "   TYPE:  ${it.description.capitalize()}\n" +
-                                            "   ATMO:  ${it.atmosphere.capitalize()}\n" +
-                                            "   FAUNA: ${it.fauna.capitalize()}\n" +
-                                            "   FLORA: ${it.flora.capitalize()}\n"
+                                    "   TYPE:  ${it.description.localCapitalize()}\n" +
+                                            "   ATMO:  ${it.atmosphere.localCapitalize()}\n" +
+                                            "   FAUNA: ${it.fauna.localCapitalize()}\n" +
+                                            "   FLORA: ${it.flora.localCapitalize()}\n"
                                 } else {
                                     "   (Unexplored)\n"
                                 } +

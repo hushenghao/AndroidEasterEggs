@@ -295,15 +295,17 @@ public class PaintActivity extends Activity {
                 ((ViewGroup) painting.getParent()).removeView(painting);
                 setupViews(painting);
 
-                final View decorView = getWindow().getDecorView();
-                int decorSUIV = decorView.getSystemUiVisibility();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    final View decorView = getWindow().getDecorView();
+                    int decorSUIV = decorView.getSystemUiVisibility();
 
-                if (newNightMode == Configuration.UI_MODE_NIGHT_YES) {
-                    decorView.setSystemUiVisibility(
-                            decorSUIV & ~View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-                } else {
-                    decorView.setSystemUiVisibility(
-                            decorSUIV | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+                    if (newNightMode == Configuration.UI_MODE_NIGHT_YES) {
+                        decorView.setSystemUiVisibility(
+                                decorSUIV & ~View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+                    } else {
+                        decorView.setSystemUiVisibility(
+                                decorSUIV | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+                    }
                 }
             }
             nightMode = newNightMode;

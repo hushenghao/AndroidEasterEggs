@@ -35,11 +35,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.core.view.HapticFeedbackConstantsCompat;
 
 import com.android_q.egg.quares.QuaresActivity;
 import com.dede.basic.SpUtils;
@@ -125,7 +126,7 @@ public class PlatLogoActivity extends Activity {
                     case MotionEvent.ACTION_MOVE:
                         v.setX(event.getRawX() - mOffsetX);
                         v.setY(event.getRawY() - mOffsetY);
-                        v.performHapticFeedback(HapticFeedbackConstants.TEXT_HANDLE_MOVE);
+                        v.performHapticFeedback(HapticFeedbackConstantsCompat.TEXT_HANDLE_MOVE);
                         break;
                     case MotionEvent.ACTION_UP:
                         v.performClick();
@@ -155,7 +156,7 @@ public class PlatLogoActivity extends Activity {
             mOneView.animate().y(mZeroView.getY() + width * .3f);
             mOneView.setRotation(mOneView.getRotation() % 360);
             mOneView.animate().rotation(315);
-            mOneView.performHapticFeedback(HapticFeedbackConstants.CONFIRM);
+            mOneView.performHapticFeedback(HapticFeedbackConstantsCompat.CONFIRM);
 
             mBackslash.startAnimating();
 
@@ -196,7 +197,7 @@ public class PlatLogoActivity extends Activity {
             sPaint.setColor(mTintColor | 0xFF000000);
 
             canvas.save();
-            canvas.scale(canvas.getWidth() / 24f, canvas.getHeight() / 24f);
+            canvas.scale(getBounds().width() / 24f, getBounds().height() / 24f);
 
             canvas.drawCircle(12f, 12f, 10f, sPaint);
             canvas.restore();
@@ -229,7 +230,7 @@ public class PlatLogoActivity extends Activity {
             sPaint.setColor(mTintColor | 0xFF000000);
 
             canvas.save();
-            canvas.scale(canvas.getWidth() / 24f, canvas.getHeight() / 24f);
+            canvas.scale(getBounds().width() / 24f, getBounds().height() / 24f);
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
                 canvas.drawLine(12f, 21.83f, 12f, 2.16f, sPaint);

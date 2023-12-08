@@ -1,114 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="6" by="lint 7.4.0" type="baseline" client="gradle" dependencies="false" name="AGP (7.4.0)" variant="all" version="7.4.0">
+<issues format="6" by="lint 8.2.0" type="baseline" client="gradle" dependencies="false" name="AGP (8.2.0)" variant="all" version="8.2.0">
 
     <issue
-        id="CanvasSize"
-        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getBounds().getHeight()` instead"
-        errorLine1="            canvas.scale(canvas.getWidth() / 24f, canvas.getHeight() / 24f);"
-        errorLine2="                                                  ~~~~~~~~~~~~~~~~~~">
+        id="InflateParams"
+        message="Avoid passing `null` as the view root (needed to resolve layout parameters on the inflated layout&apos;s root element)"
+        errorLine1="        View view = LayoutInflater.from(context).inflate(R.layout.q_platlogo_snapshot_layout, null, false);"
+        errorLine2="                                                                                              ~~~~">
         <location
-            file="src/com/android_q/egg/PlatLogoActivity.java"
-            line="197"
-            column="51"/>
-    </issue>
-
-    <issue
-        id="CanvasSize"
-        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getBounds().getWidth()` instead"
-        errorLine1="            canvas.scale(canvas.getWidth() / 24f, canvas.getHeight() / 24f);"
-        errorLine2="                         ~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/com/android_q/egg/PlatLogoActivity.java"
-            line="197"
-            column="26"/>
-    </issue>
-
-    <issue
-        id="CanvasSize"
-        message="Calling `Canvas.getHeight()` is usually wrong; you should be calling `getBounds().getHeight()` instead"
-        errorLine1="            canvas.scale(canvas.getWidth() / 24f, canvas.getHeight() / 24f);"
-        errorLine2="                                                  ~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/com/android_q/egg/PlatLogoActivity.java"
-            line="230"
-            column="51"/>
-    </issue>
-
-    <issue
-        id="CanvasSize"
-        message="Calling `Canvas.getWidth()` is usually wrong; you should be calling `getBounds().getWidth()` instead"
-        errorLine1="            canvas.scale(canvas.getWidth() / 24f, canvas.getHeight() / 24f);"
-        errorLine2="                         ~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/com/android_q/egg/PlatLogoActivity.java"
-            line="230"
-            column="26"/>
-    </issue>
-
-    <issue
-        id="CanvasSize"
-        message="Referencing `Canvas.width` is usually wrong; you should be referencing `width` instead"
-        errorLine1="            val x = canvas.width / 2f"
-        errorLine2="                    ~~~~~~~~~~~~">
-        <location
-            file="src/com/android_q/egg/quares/QuaresActivity.kt"
-            line="328"
-            column="21"/>
-    </issue>
-
-    <issue
-        id="CanvasSize"
-        message="Referencing `Canvas.height` is usually wrong; you should be referencing `height` instead"
-        errorLine1="            val y = canvas.height / 2f"
-        errorLine2="                    ~~~~~~~~~~~~~">
-        <location
-            file="src/com/android_q/egg/quares/QuaresActivity.kt"
-            line="329"
-            column="21"/>
-    </issue>
-
-    <issue
-        id="CanvasSize"
-        message="Referencing `Canvas.width` is usually wrong; you should be referencing `width` instead"
-        errorLine1="            var textWidth = canvas.width"
-        errorLine2="                            ~~~~~~~~~~~~">
-        <location
-            file="src/com/android_q/egg/quares/QuaresActivity.kt"
-            line="330"
-            column="29"/>
-    </issue>
-
-    <issue
-        id="CanvasSize"
-        message="Referencing `Canvas.height` is usually wrong; you should be referencing `height` instead"
-        errorLine1="                textWidth = canvas.height"
-        errorLine2="                            ~~~~~~~~~~~~~">
-        <location
-            file="src/com/android_q/egg/quares/QuaresActivity.kt"
-            line="333"
-            column="29"/>
-    </issue>
-
-    <issue
-        id="InlinedApi"
-        message="Field requires API level 27 (current min is 21): `android.view.HapticFeedbackConstants#TEXT_HANDLE_MOVE`"
-        errorLine1="                        v.performHapticFeedback(HapticFeedbackConstants.TEXT_HANDLE_MOVE);"
-        errorLine2="                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/com/android_q/egg/PlatLogoActivity.java"
-            line="128"
-            column="49"/>
-    </issue>
-
-    <issue
-        id="InlinedApi"
-        message="Field requires API level 30 (current min is 21): `android.view.HapticFeedbackConstants#CONFIRM`"
-        errorLine1="            mOneView.performHapticFeedback(HapticFeedbackConstants.CONFIRM);"
-        errorLine2="                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/com/android_q/egg/PlatLogoActivity.java"
-            line="158"
-            column="44"/>
+            file="src/com/android_q/egg/SnapshotProvider.java"
+            line="26"
+            column="95"/>
     </issue>
 
     <issue
@@ -235,23 +136,12 @@
     <issue
         id="DrawAllocation"
         message="Avoid object allocations during draw/layout operations (preallocate and reuse instead)"
-        errorLine1="                    StaticLayout("
-        errorLine2="                    ^">
+        errorLine1="                StaticLayout("
+        errorLine2="                ^">
         <location
             file="src/com/android_q/egg/quares/QuaresActivity.kt"
-            line="341"
-            column="21"/>
-    </issue>
-
-    <issue
-        id="Recycle"
-        message="This `TypedArray` should be recycled after use with `#recycle()`"
-        errorLine1="                val ar = resources.obtainTypedArray(R.array.q_puzzles)"
-        errorLine2="                                   ~~~~~~~~~~~~~~~~">
-        <location
-            file="src/com/android_q/egg/quares/QuaresActivity.kt"
-            line="105"
-            column="36"/>
+            line="338"
+            column="17"/>
     </issue>
 
     <issue
@@ -274,17 +164,6 @@
             file="res/layout/q_activity_quares.xml"
             line="16"
             column="1"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.color.q_vapor` appears to be unused"
-        errorLine1="    &lt;color name=&quot;q_vapor&quot;>#d7effe&lt;/color>"
-        errorLine2="           ~~~~~~~~~~~~~~">
-        <location
-            file="res/values/q_colors.xml"
-            line="20"
-            column="12"/>
     </issue>
 
     <issue
@@ -317,6 +196,39 @@
         <location
             file="res/layout/q_platlogo_layout.xml"
             line="41"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_snapshot_layout.xml"
+            line="9"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_snapshot_layout.xml"
+            line="20"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_snapshot_layout.xml"
+            line="29"
             column="6"/>
     </issue>
 
@@ -361,6 +273,50 @@
         <location
             file="res/layout/q_platlogo_layout.xml"
             line="47"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_alignLeft` with `android:layout_alignStart=&quot;@id/text&quot;` to better support right-to-left layouts"
+        errorLine1="        android:layout_alignLeft=&quot;@id/text&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_snapshot_layout.xml"
+            line="25"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_marginLeft` with `android:layout_marginStart=&quot;24dp&quot;` to better support right-to-left layouts"
+        errorLine1="        android:layout_marginLeft=&quot;24dp&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_snapshot_layout.xml"
+            line="26"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_alignRight` with `android:layout_alignEnd=&quot;@id/text&quot;` to better support right-to-left layouts"
+        errorLine1="        android:layout_alignRight=&quot;@id/text&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_snapshot_layout.xml"
+            line="34"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:layout_marginRight` with `android:layout_marginEnd=&quot;34dp&quot;` to better support right-to-left layouts"
+        errorLine1="        android:layout_marginRight=&quot;34dp&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/q_platlogo_snapshot_layout.xml"
+            line="35"
             column="9"/>
     </issue>
 

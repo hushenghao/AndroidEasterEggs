@@ -66,6 +66,7 @@
          precedence over other split rules. -->
     <ActivityRule window:alwaysExpand="true">
         <ActivityFilter window:activityName=".views.crash.CrashActivity" />
+        <ActivityFilter window:activityName="com.android_u.egg.landroid.MainActivity" />
     </ActivityRule>
 
 </resources>
