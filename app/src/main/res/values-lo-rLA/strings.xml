@@ -38,4 +38,5 @@
     <string name="label_welcome">ຍິນດີຕ້ອນຮັບສູ່ລາຍການໄຂ່ Easter 🎉🎉🎉</string>
     <string name="label_share">ແບ່ງປັນ</string>
     <string name="label_search_hint">ຊອກຫາ…</string>
+    <string name="label_component_manager">ຜູ້ຈັດການອົງປະກອບ</string>
 </resources>
