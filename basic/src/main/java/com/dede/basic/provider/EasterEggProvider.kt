@@ -12,9 +12,7 @@ interface BaseEasterEgg {
     fun getSortValue(): Int
 }
 
-class EasterEggGroup(vararg eggs: EasterEgg) : BaseEasterEgg {
-
-    val eggs: Array<out EasterEgg> = eggs
+class EasterEggGroup(vararg val eggs: EasterEgg) : BaseEasterEgg {
 
     private val apiLevel = eggs.first().apiLevel.first..eggs.last().apiLevel.last
 

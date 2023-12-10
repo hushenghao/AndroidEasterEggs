@@ -20,7 +20,6 @@ import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.ComponentProvider.Component
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
-import com.dede.basic.provider.SnapshotProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,29 +58,28 @@ object EasterEggModules {
     @Provides
     @Singleton
     fun providePureEasterEggList(easterEggs: List<@JvmSuppressWildcards BaseEasterEgg>): List<@JvmSuppressWildcards EasterEgg> {
-        val list = ArrayList<EasterEgg>()
-        for (easterEgg in easterEggs) {
-            if (easterEgg is EasterEggGroup) {
-                list.addAll(easterEgg.eggs)
-            } else if (easterEgg is EasterEgg) {
-                list.add(easterEgg)
+        return buildList {
+            for (easterEgg in easterEggs) {
+                if (easterEgg is EasterEggGroup) {
+                    addAll(easterEgg.eggs)
+                } else if (easterEgg is EasterEgg) {
+                    add(easterEgg)
+                }
             }
         }
-        return list
     }
 
     @Provides
     @Singleton
     fun provideSnapshotList(easterEggs: List<@JvmSuppressWildcards EasterEgg>): List<@JvmSuppressWildcards Snapshot> {
-        val list = ArrayList<Snapshot>()
-        var provider: SnapshotProvider?
-        for (easterEgg in easterEggs) {
-            provider = easterEgg.provideSnapshotProvider()
-            if (provider != null) {
-                list.add(Snapshot(provider, easterEgg.id))
+        return buildList {
+            for (easterEgg in easterEggs) {
+                val provider = easterEgg.provideSnapshotProvider()
+                if (provider != null) {
+                    add(Snapshot(provider, easterEgg.id))
+                }
             }
         }
-        return list
     }
 
     @Provides
