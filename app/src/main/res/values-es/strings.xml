@@ -21,7 +21,7 @@
     <string name="pref_title_icon_shape_override">Forma del Icono</string>
     <string name="pref_title_language">Idioma</string>
     <string name="pref_title_language_more">Más</string>
-    <string name="pref_title_theme">Fondo</string>
+    <string name="pref_title_theme">Tema</string>
     <string name="pref_title_dynamic_color">Color Dinámico</string>
     <string name="pref_title_icon_visual_effects">Efectos Visuales de Iconos</string>
     <string name="summary_system_default">Predeterminado</string>
