@@ -91,13 +91,13 @@ fun EasterEggScreen(
                             item("snapshot") {
                                 AndroidSnapshotView()
                             }
-                            item("wavy") {
+                            item("wavy1") {
                                 Wavy(res = R.drawable.ic_wavy_line)
                             }
                             items(items = currentList) {
                                 EasterEggItem(it, enableItemAnim = false)
                             }
-                            item("wavy") {
+                            item("wavy2") {
                                 Wavy(res = R.drawable.ic_wavy_line)
                             }
                             item("footer") {

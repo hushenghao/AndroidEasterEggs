@@ -145,7 +145,6 @@ fun EasterEggItemSwipe(
     val view = LocalView.current
     Box(
         contentAlignment = Alignment.Center,
-//        modifier = Modifier.padding(4.dp)
     ) {
         floor()
         Box(
@@ -156,10 +155,14 @@ fun EasterEggItemSwipe(
                     reverseDirection = LocalLayoutDirection.current == LayoutDirection.Rtl,
                     orientation = Orientation.Horizontal,
                     state = rememberDraggableState { delta ->
-                        val r = intercept.getInterpolation(
-                            1f - abs(offsetX / (triggerOffsetX * 1.24f))
-                        )
-                        offsetX += delta * min(r, 1f)
+                        val p = if (triggerOffsetX == 0f) {
+                            1f
+                        } else {
+                            intercept.getInterpolation(
+                                1f - abs(offsetX) / (triggerOffsetX * 1.24f)
+                            )
+                        }
+                        offsetX += delta * min(p, 1f)
                         if (supportShortcut) {
                             if (!needTrigger && (-offsetX) >= triggerOffsetX) {
                                 needTrigger = true
