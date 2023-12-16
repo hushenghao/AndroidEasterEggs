@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalAnimationApi::class, ExperimentalComposeUiApi::class)
+@file:OptIn(ExperimentalAnimationApi::class)
 
 package com.dede.android_eggs.views.main.compose
 
@@ -43,7 +43,6 @@ import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.SaverScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
