@@ -146,7 +146,9 @@ fun EasterEggItemSwipe(
     Box(
         contentAlignment = Alignment.Center,
     ) {
-        floor()
+        if (offsetX != 0f) {
+            floor()
+        }
         Box(
             modifier = Modifier
                 .onSizeChanged { triggerOffsetX = it.width / 5f * 2 }

@@ -16,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.SearchOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -53,56 +52,54 @@ fun EasterEggScreen(
             easterEggs
         }
     }
-    Surface(color = colorScheme.background) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.TopCenter,
-        ) {
-            Crossfade(
-                targetState = currentList.isEmpty(),
-                modifier = Modifier.sizeIn(maxWidth = 560.dp),
-                label = "EasterEggList",
-            ) { isEmpty ->
-                if (isEmpty) {
-                    Box(
-                        contentAlignment = Alignment.TopCenter,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(contentPadding)
-                            .padding(top = 32.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Rounded.SearchOff,
-                            contentDescription = null,
-                            tint = colorScheme.onBackground,
-                            modifier = Modifier.size(108.dp)
-                        )
-                    }
-                } else {
-                    LazyColumn(
-                        contentPadding = contentPadding + PaddingValues(vertical = 10.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                    ) {
-                        if (searchMode) {
-                            items(items = currentList) {
-                                EasterEggItem(it, enableItemAnim = true)
-                            }
-                        } else {
-                            item("snapshot") {
-                                AndroidSnapshotView()
-                            }
-                            item("wavy1") {
-                                Wavy(res = R.drawable.ic_wavy_line)
-                            }
-                            items(items = currentList) {
-                                EasterEggItem(it, enableItemAnim = false)
-                            }
-                            item("wavy2") {
-                                Wavy(res = R.drawable.ic_wavy_line)
-                            }
-                            item("footer") {
-                                ProjectDescription()
-                            }
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.TopCenter,
+    ) {
+        Crossfade(
+            targetState = currentList.isEmpty(),
+            modifier = Modifier.sizeIn(maxWidth = 560.dp),
+            label = "EasterEggList",
+        ) { isEmpty ->
+            if (isEmpty) {
+                Box(
+                    contentAlignment = Alignment.TopCenter,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(contentPadding)
+                        .padding(top = 32.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.SearchOff,
+                        contentDescription = null,
+                        tint = colorScheme.onBackground,
+                        modifier = Modifier.size(108.dp)
+                    )
+                }
+            } else {
+                LazyColumn(
+                    contentPadding = contentPadding + PaddingValues(vertical = 10.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    if (searchMode) {
+                        items(items = currentList) {
+                            EasterEggItem(it, enableItemAnim = true)
+                        }
+                    } else {
+                        item("snapshot") {
+                            AndroidSnapshotView()
+                        }
+                        item("wavy1") {
+                            Wavy(res = R.drawable.ic_wavy_line)
+                        }
+                        items(items = currentList) {
+                            EasterEggItem(it, enableItemAnim = false)
+                        }
+                        item("wavy2") {
+                            Wavy(res = R.drawable.ic_wavy_line)
+                        }
+                        item("footer") {
+                            ProjectDescription()
                         }
                     }
                 }
