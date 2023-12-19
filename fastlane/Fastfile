@@ -19,6 +19,11 @@ platform :android do
 
   desc "Submit a new Beta Build to Pgyer"
   lane :beta do |options|
+    api_key = ENV["PGYER_API_KEY"]
+    puts "Apikey :#{api_key != nil}"
+    if api_key != nil
+        puts "len: #{api_key.length}"
+    end
     gradle(
         tasks: ["clean", "app:assembleRelease"],
         # Fucking stupid.
