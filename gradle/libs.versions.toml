@@ -53,7 +53,7 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.4"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
 viewbinding-delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9"
-squareup-okio = "com.squareup.okio:okio:3.6.0"
+squareup-okio = "com.squareup.okio:okio:3.7.0"
 io-coil = "io.coil-kt:coil:2.5.0"
 io-coil-compose = "io.coil-kt:coil-compose:2.5.0"
 free-reflection = "com.github.tiann:FreeReflection:3.2.0"
