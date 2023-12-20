@@ -1,6 +1,6 @@
-# Android Easter Eggs
+# Android Easter Egg Collections
 
-整理了Android系统各正式版的彩蛋
+收集了Android系统各正式版的彩蛋
 
 [![GitHub license](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs?logo=github)](https://github.com/hushenghao/AndroidEasterEggs/releases)
@@ -8,7 +8,7 @@
 [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
 [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml?logo=githubactions&logoColor=white)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml)
 
-<div align="center">
+<div style="text-align:center;">
 
 ![logo](assets/image/ic_launcher_round.png)
 
