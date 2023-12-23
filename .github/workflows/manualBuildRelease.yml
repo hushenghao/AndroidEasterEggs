@@ -2,6 +2,10 @@ name: Android Build Release CI (Manual)
 
 on:
   workflow_dispatch:
+    inputs:
+      release_name:
+        description: 'Release name ref. eg: v2.2.2'
+        required: true
 
 jobs:
   build:
@@ -41,6 +45,7 @@ jobs:
       id: create_release
       uses: ncipollo/release-action@v1
       with:
+        name: release_name
         token: ${{ secrets.GITHUB_TOKEN }}
         draft: false
         prerelease: false
@@ -49,3 +54,4 @@ jobs:
         artifactContentType: application/vnd.android.package-archive
         allowUpdates: true
         updateOnlyUnreleased: true
+        replacesArtifacts: true
