@@ -1,0 +1,51 @@
+name: Android Build Release CI (Manual)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+        cache: gradle
+
+    - name: Retrieve the secret and decode it to a file
+      env:
+        KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        KEY_PROPERTIES_BASE64: ${{ secrets.KEY_PROPERTIES_BASE64 }}
+      run: |
+        echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
+        echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
+
+    - name: Build with Gradle
+      run: |
+        chmod +x gradlew
+        ./gradlew clean app:assembleRelease
+
+    - name: Get Change logs
+      id: get-change-logs
+      run: |
+        CHANGE_LOGS=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
+        echo "CHANGE_LOGS=$CHANGE_LOGS" >> "$GITHUB_OUTPUT"
+
+    - name: Create Github Release
+      id: create_release
+      uses: ncipollo/release-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        draft: false
+        prerelease: false
+        bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get-change-logs.outputs.CHANGE_LOGS }}
+        artifacts: ./app/build/outputs/apk/release/*.apk
+        artifactContentType: application/vnd.android.package-archive
+        allowUpdates: true
+        updateOnlyUnreleased: true
