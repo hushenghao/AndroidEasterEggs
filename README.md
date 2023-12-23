@@ -8,7 +8,7 @@ Collections the Android release Easter Egg
 [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
 [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml?logo=githubactions&logoColor=white)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml)
 
-<div style="text-align:center;">
+<div align="center">
 
 ![logo](assets/image/ic_launcher_round.png)
 
