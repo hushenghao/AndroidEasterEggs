@@ -51,7 +51,8 @@ jobs:
       id: create_release
       uses: ncipollo/release-action@v1
       with:
-        name: ${{ inputs.release_name }}
+        name: Release ${{ inputs.release_name }}
+        tag: ${{ inputs.release_name }}
         token: ${{ secrets.GITHUB_TOKEN }}
         draft: false
         prerelease: false
