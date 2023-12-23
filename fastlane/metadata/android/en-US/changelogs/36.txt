@@ -1,0 +1,4 @@
+- Fix Guide page layout
+- Migrate kapt to KSP
+- Fix Android ICS egg abnormal finish
+- Fix F-Droid Reproducible Builds
