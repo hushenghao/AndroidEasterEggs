@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Print input release_name
+      env:
+        RELEASE_NAME: ${{ inputs.release_name }}
+      run:
+        echo "$RELEASE_NAME"
+
     - name: Checkout repository
       uses: actions/checkout@v4
 
@@ -45,7 +51,7 @@ jobs:
       id: create_release
       uses: ncipollo/release-action@v1
       with:
-        name: release_name
+        name: ${{ inputs.release_name }}
         token: ${{ secrets.GITHUB_TOKEN }}
         draft: false
         prerelease: false
