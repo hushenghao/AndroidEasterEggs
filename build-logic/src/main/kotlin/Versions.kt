@@ -14,7 +14,7 @@ object Versions {
     val Project.gitHash: String
         get() {
             return providers.exec {
-                commandLine("git", "rev-parse", "--short", "HEAD")
+                commandLine("git", "rev-parse", "--short=7", "HEAD")
             }.standardOutput.asText.get().trim()
         }
 
