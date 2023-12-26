@@ -50,4 +50,4 @@ jobs:
     - name: Build with Fastlane
       env:
         PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
-      run: bundle exec fastlane beta
+      run: fastlane beta
