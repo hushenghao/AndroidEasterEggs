@@ -22,6 +22,7 @@ platform :android do
     api_key = options[:PGYER_API_KEY]
     if api_key == nil
         api_key = ENV["PGYER_API_KEY"]
+    end
     puts "Apikey :#{api_key != nil}"
     if api_key != nil
         puts "len: #{api_key.length}"
