@@ -19,7 +19,9 @@ platform :android do
 
   desc "Submit a new Beta Build to Pgyer"
   lane :beta do |options|
-    api_key = ENV["PGYER_API_KEY"]
+    api_key = options[:PGYER_API_KEY]
+    if api_key == nil
+        api_key = ENV["PGYER_API_KEY"]
     puts "Apikey :#{api_key != nil}"
     if api_key != nil
         puts "len: #{api_key.length}"
@@ -31,7 +33,7 @@ platform :android do
     )
     # https://www.pgyer.com/doc/view/fastlane
     pgyer(
-      api_key: ENV["PGYER_API_KEY"],
+      api_key: api_key,
       update_description: File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1])
     )
   end
