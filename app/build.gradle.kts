@@ -115,7 +115,9 @@ dependencies {
     implementation(libs.androidx.compose.constraintlayout)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
-    implementation(libs.accompanist.drawablepainter)
+    implementation(libs.accompanist.drawablepainter) {
+        exclude(group = "androidx.compose.ui", module = "ui")
+    }
 
     implementation(libs.dionsegijn.konfetti)
     implementation(libs.io.coil)
