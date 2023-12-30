@@ -4,7 +4,8 @@ on:
   push:
     paths:
       - 'app/src/main/res/values*/strings.xml'
-      - 'app/src/main/res/values/languages.xml'
+      - 'app/src/main/res/values*/languages.xml'
+      - 'app/src/main/res/values*/strings*.xml'
     branches: [ main ]
   schedule:
     - cron: '0 1 * * 0'

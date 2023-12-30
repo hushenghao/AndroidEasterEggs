@@ -10,8 +10,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
-        versionCode = 36
-        versionName = "2.2.2"
+        versionCode = 37
+        versionName = "2.2.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(
@@ -31,12 +31,12 @@ android {
         buildConfigField("int", "LANGUAGE_RES", resourceConfigurations.size.toString())
     }
 
-    kotlinOptions {
+//    kotlinOptions {
 //        freeCompilerArgs += listOf(
 //            "-P",
 //            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
 //        )
-    }
+//    }
 
     buildFeatures {
         compose = true

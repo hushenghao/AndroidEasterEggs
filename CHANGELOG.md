@@ -1,4 +1,7 @@
-### v2.2.2
+### v2.2.3
+- Optimize the language selection dialog
+
+### v2.2.2 (2023-12-23)
 - Fix Guide page layout [#116](https://github.com/hushenghao/AndroidEasterEggs/issues/116)
 - Migrate kapt to KSP
 - Fix Android ICS egg abnormal finish

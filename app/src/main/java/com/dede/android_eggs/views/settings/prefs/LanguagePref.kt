@@ -4,8 +4,12 @@ import android.app.Dialog
 import android.app.LocaleConfig
 import android.content.Context
 import android.os.Build
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.AbsoluteSizeSpan
 import android.util.Log
 import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.net.toUri
 import androidx.core.os.LocaleListCompat
@@ -71,39 +75,46 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             return options
         }
 
-        private class LangOp(value: Int, titleRes: Int, val locale: Locale) :
+        private class LangOp(
+            value: Int,
+            @StringRes titleRes: Int,
+            @StringRes val localeTitleRes: Int,
+            val locale: Locale
+        ) :
             Op(value, titleRes = titleRes)
 
+        // @formatter:off
         private val languageOptions = listOf(
-            LangOp(SIMPLIFIED_CHINESE, R.string.language_zh_SC, Locale.SIMPLIFIED_CHINESE),
-            LangOp(TRADITIONAL_CHINESE, R.string.language_zh_TC, Locale.TRADITIONAL_CHINESE),
-            LangOp(ENGLISH, R.string.language_en, Locale.ENGLISH),
-            LangOp(RUSSIAN, R.string.language_ru, createLocale("ru")),
-            LangOp(ITALIAN, R.string.language_it, Locale.ITALIAN),
-            LangOp(GERMANY, R.string.language_de, Locale.GERMANY),
-            LangOp(SPANISH, R.string.language_es, createLocale("es")),
-            LangOp(PORTUGAL, R.string.language_pt, createLocale("pt")),
-            LangOp(PORTUGAL_BRAZIL, R.string.language_pt_BR, createLocale("pt", "BR")),
-            LangOp(INDONESIA, R.string.language_in_ID, createLocale("in", "ID")),
-            LangOp(ARABIC, R.string.language_ar_SA, createLocale("ar", "SA")),
-            LangOp(CROATIAN, R.string.language_hr_HR, createLocale("hr", "HR")),
-            LangOp(FRENCH, R.string.language_fr, Locale.FRENCH),
-            LangOp(POLISH, R.string.language_pl_PL, createLocale("pl", "PL")),
-            LangOp(DUTCH, R.string.language_nl_NL, createLocale("nl", "NL")),
-//            LangOp(LATIN, R.string.language_la_LA, createLocale("la", "LA")),
-            LangOp(TURKISH, R.string.language_tr_TR, createLocale("tr", "TR")),
-            LangOp(UKRAINIAN, R.string.language_uk_UA, createLocale("uk", "UA")),
-            LangOp(JAPANESE, R.string.language_ja_JP, Locale.JAPAN),
-            LangOp(KOREAN, R.string.language_ko, Locale.KOREAN),
-            LangOp(GREEK, R.string.language_el_GR, createLocale("el", "GR")),
-            LangOp(FINNISH, R.string.language_fi_FI, createLocale("fi", "FI")),
-            LangOp(VIETNAMESE, R.string.language_vi_VN, createLocale("vi", "VN")),
-            LangOp(HUNGARIAN, R.string.language_hu_HU, createLocale("hu", "HU")),
-            LangOp(THAI, R.string.language_th_TH, createLocale("th", "TH")),
-            LangOp(NORWEGIAN, R.string.language_no_NO, createLocale("no", "NO")),
-            LangOp(FILIPINO, R.string.language_fil_PH, createLocale("fil", "PH")),
-            LangOp(LAO, R.string.language_lo_LA, createLocale("lo", "LA")),
+            LangOp(SIMPLIFIED_CHINESE,  R.string.language_zh_SC,  R.string.locale_lang_zh_SC,  Locale.SIMPLIFIED_CHINESE),
+            LangOp(TRADITIONAL_CHINESE, R.string.language_zh_TC,  R.string.locale_lang_zh_TC,  Locale.TRADITIONAL_CHINESE),
+            LangOp(ENGLISH,             R.string.language_en,     R.string.locale_lang_en,     Locale.ENGLISH),
+            LangOp(RUSSIAN,             R.string.language_ru,     R.string.locale_lang_ru,     createLocale("ru")),
+            LangOp(ITALIAN,             R.string.language_it,     R.string.locale_lang_it,     Locale.ITALIAN),
+            LangOp(GERMANY,             R.string.language_de,     R.string.locale_lang_de,     Locale.GERMANY),
+            LangOp(SPANISH,             R.string.language_es,     R.string.locale_lang_es,     createLocale("es")),
+            LangOp(PORTUGAL,            R.string.language_pt,     R.string.locale_lang_pt,     createLocale("pt")),
+            LangOp(PORTUGAL_BRAZIL,     R.string.language_pt_BR,  R.string.locale_lang_pt_BR,  createLocale("pt", "BR")),
+            LangOp(INDONESIA,           R.string.language_in_ID,  R.string.locale_lang_in_ID,  createLocale("in", "ID")),
+            LangOp(ARABIC,              R.string.language_ar_SA,  R.string.locale_lang_ar_SA,  createLocale("ar", "SA")),
+            LangOp(CROATIAN,            R.string.language_hr_HR,  R.string.locale_lang_hr_HR,  createLocale("hr", "HR")),
+            LangOp(FRENCH,              R.string.language_fr,     R.string.locale_lang_fr,     Locale.FRENCH),
+            LangOp(POLISH,              R.string.language_pl_PL,  R.string.locale_lang_pl_PL,  createLocale("pl", "PL")),
+            LangOp(DUTCH,               R.string.language_nl_NL,  R.string.locale_lang_nl_NL,  createLocale("nl", "NL")),
+//            LangOp(LATIN,               R.string.language_la_LA,  R.string.locale_lang_la_LA,  createLocale("la", "LA")),
+            LangOp(TURKISH,             R.string.language_tr_TR,  R.string.locale_lang_tr_TR,  createLocale("tr", "TR")),
+            LangOp(UKRAINIAN,           R.string.language_uk_UA,  R.string.locale_lang_uk_UA,  createLocale("uk", "UA")),
+            LangOp(JAPANESE,            R.string.language_ja_JP,  R.string.locale_lang_ja_JP,  Locale.JAPAN),
+            LangOp(KOREAN,              R.string.language_ko,     R.string.locale_lang_ko,     Locale.KOREAN),
+            LangOp(GREEK,               R.string.language_el_GR,  R.string.locale_lang_el_GR,  createLocale("el", "GR")),
+            LangOp(FINNISH,             R.string.language_fi_FI,  R.string.locale_lang_fi_FI,  createLocale("fi", "FI")),
+            LangOp(VIETNAMESE,          R.string.language_vi_VN,  R.string.locale_lang_vi_VN,  createLocale("vi", "VN")),
+            LangOp(HUNGARIAN,           R.string.language_hu_HU,  R.string.locale_lang_hu_HU,  createLocale("hu", "HU")),
+            LangOp(THAI,                R.string.language_th_TH,  R.string.locale_lang_th_TH,  createLocale("th", "TH")),
+            LangOp(NORWEGIAN,           R.string.language_no_NO,  R.string.locale_lang_no_NO,  createLocale("no", "NO")),
+            LangOp(FILIPINO,            R.string.language_fil_PH, R.string.locale_lang_fil_PH, createLocale("fil", "PH")),
+            LangOp(LAO,                 R.string.language_lo_LA,  R.string.locale_lang_lo_LA,  createLocale("lo", "LA")),
         )
+        // @formatter:on
 
         init {
             if (BuildConfig.DEBUG) {
@@ -224,7 +235,13 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         val languageOptions = languageOptions.sortedWith(LangOpComparator(context))
         var choiceIndex = languageOptions.indexOfFirst { it.value == currentSelectedValue }
         val lastChoiceIndex = choiceIndex
-        val languages = languageOptions.map { context.getString(it.titleRes) }.toTypedArray()
+        val languages: Array<CharSequence> = languageOptions.map {
+            val localeTitle = context.getString(it.localeTitleRes)
+            SpannableStringBuilder(context.getString(it.titleRes)).apply {
+                appendLine()
+                append(localeTitle, AbsoluteSizeSpan(12, true), Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+            }
+        }.toTypedArray()
         MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_LanguagePref_MaterialAlertDialog)
             .setTitle(R.string.pref_title_language)
             .setSingleChoiceItems(languages, choiceIndex) { dialogInterface, index ->
