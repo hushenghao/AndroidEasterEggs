@@ -36,9 +36,9 @@
   <g class="font12" transform="translate(0,104)">
     <text style="text-anchor:end;" x="200" y="18">Chinese Traditional</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="132.79999999999998" x="210" y="11.4"/>
-    <rect fill="#71C277" height="6" rx="3" ry="3" width="132.79999999999998" x="210" y="11.4"/>
-    <text x="380" y="18">83%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
+    <rect fill="#71C277" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
+    <text x="380" y="18">100%</text>
   </g>
   <g class="font12" transform="translate(0,130)">
     <text style="text-anchor:end;" x="200" y="18">Croatian</text>
