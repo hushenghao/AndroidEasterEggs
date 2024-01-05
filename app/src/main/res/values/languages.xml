@@ -28,6 +28,7 @@
     <string name="language_no_NO" translatable="false">Norsk</string>
     <string name="language_fil_PH" translatable="false">Filipino</string>
     <string name="language_lo_LA" translatable="false">ພາສາລາວ</string>
+    <string name="language_cs_CZ" translatable="false">Čeština</string>
 
     <!-- locality language -->
     <string name="locale_lang_zh_SC">Chinese Simplified</string>
@@ -58,4 +59,5 @@
     <string name="locale_lang_no_NO">Norwegian</string>
     <string name="locale_lang_fil_PH">Filipino</string>
     <string name="locale_lang_lo_LA">Lao</string>
+    <string name="locale_lang_cs_CZ">Czech</string>
 </resources>
