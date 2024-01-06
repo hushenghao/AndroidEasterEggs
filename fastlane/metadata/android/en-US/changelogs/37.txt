@@ -1,1 +1,2 @@
+- Added Czech translation
 - Optimize the language selection dialog

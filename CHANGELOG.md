@@ -1,4 +1,5 @@
 ### v2.2.3
+- Added Czech translation
 - Optimize the language selection dialog
 
 ### v2.2.2 (2023-12-23)

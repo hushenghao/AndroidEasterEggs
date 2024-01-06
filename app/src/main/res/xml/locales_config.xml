@@ -28,4 +28,5 @@
     <locale android:name="no-NO" />
     <locale android:name="fil-PH" />
     <locale android:name="lo-LA" />
+    <locale android:name="cs-CZ" />
 </locale-config>
