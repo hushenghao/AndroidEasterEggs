@@ -1,13 +1,21 @@
+@file:SuppressLint("RestrictedApi")
+
 package com.dede.android_eggs.views.settings
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Outline
+import android.graphics.Path
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewOutlineProvider
 import androidx.appcompat.widget.TooltipCompat
+import androidx.core.content.withStyledAttributes
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dede.android_eggs.R
 import com.dede.android_eggs.databinding.FragmentSettingsBinding
@@ -16,10 +24,14 @@ import com.dede.android_eggs.databinding.ItemSettingPrefGroupBinding
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.basic.dpf
 import com.dede.basic.requireDrawable
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehaviorMaterialShapeDrawableAccessor
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import me.everything.android.ui.overscroll.VerticalOverScrollBounceEffectDecorator
+import me.everything.android.ui.overscroll.adapters.IOverScrollDecoratorAdapter
 import com.google.android.material.R as M3R
 
 class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
@@ -69,8 +81,72 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
             if (!pref.enable) continue
             binding.llSettings.addView(createPrefView(pref, requireContext()))
         }
+
+        requireContext().withStyledAttributes(
+            M3R.style.Widget_Material3_BottomSheet,
+            intArrayOf(M3R.attr.shapeAppearance)
+        ) {
+            val shapeAppearanceId = getResourceId(0, -1)
+            if (shapeAppearanceId == -1) {
+                return@withStyledAttributes
+            }
+            requireContext().withStyledAttributes(
+                shapeAppearanceId,
+                intArrayOf(M3R.attr.cornerSize)
+            ) {
+                val radius = getDimension(0, 32.dpf)
+                binding.root.clipToOutline = true
+                binding.root.outlineProvider = createTopRoundOutline(radius)
+            }
+        }
+        VerticalOverScrollBounceEffectDecorator(object : IOverScrollDecoratorAdapter {
+            override fun getView(): View {
+                return binding.scrollView
+            }
+
+            override fun isInAbsoluteStart(): Boolean {
+                return false
+            }
+
+            override fun isInAbsoluteEnd(): Boolean {
+                val bottomSheetBehavior = (requireDialog() as BottomSheetDialog).behavior
+                if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
+                    return false
+                }
+                return !binding.scrollView.canScrollVertically(1)
+            }
+        })
         LocalEvent.receiver(this).register(SettingsPrefs.ACTION_CLOSE_SETTING) {
             dismiss()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val bottomSheetBehavior = (requireDialog() as BottomSheetDialog).behavior
+        val shapeDrawable =
+            BottomSheetBehaviorMaterialShapeDrawableAccessor.getMaterialShapeDrawable(
+                bottomSheetBehavior
+            )
+        binding.scrollView.background = shapeDrawable
+    }
+
+    private fun createTopRoundOutline(radius: Float): ViewOutlineProvider {
+        return object : ViewOutlineProvider() {
+            override fun getOutline(view: View, outline: Outline) {
+                val path = Path().apply {
+                    addRoundRect(
+                        0f, 0f, view.width.toFloat(), view.height.toFloat(),
+                        floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f),
+                        Path.Direction.CW
+                    )
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    outline.setPath(path)
+                } else {
+                    outline.setConvexPath(path)
+                }
+            }
         }
     }
 
