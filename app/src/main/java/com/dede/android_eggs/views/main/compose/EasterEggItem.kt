@@ -13,7 +13,7 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
@@ -97,7 +97,7 @@ fun EasterEggItem(
             EasterEggItemFloor(egg, supportShortcut, swipeProgress)
         },
         content = {
-            EasterEggItemContent(egg, base, supportShortcut, enableItemAnim) {
+            EasterEggItemContent(egg, base, enableItemAnim) {
                 groupIndex = it
             }
         },
@@ -195,7 +195,6 @@ fun EasterEggItemSwipe(
 fun EasterEggItemContent(
     egg: EasterEgg = EasterEggHelp.previewEasterEggs().first(),
     base: BaseEasterEgg = egg,
-    supportShortcut: Boolean = true,
     enableItemAnim: Boolean = false,
     onSelected: ((index: Int) -> Unit)? = null,
 ) {
@@ -215,16 +214,9 @@ fun EasterEggItemContent(
         Box(
             modifier = Modifier
                 .clip(shapes.extraLarge)
-                .combinedClickable(
-                    onClick = {
-                        EggActionHelp.launchEgg(context, egg)
-                    },
-                    onLongClick = {
-                        if (supportShortcut) {
-                            EggActionHelp.addShortcut(context, egg)
-                        }
-                    }
-                )
+                .clickable {
+                    EggActionHelp.launchEgg(context, egg)
+                }
         ) {
             Column(
                 modifier = Modifier.padding(horizontal = 22.dp, vertical = 18.dp)

@@ -67,4 +67,5 @@
     <string name="label_share">Share</string>
     <string name="label_search_hint">Search…</string>
     <string name="label_component_manager">Components Manager</string>
+    <string name="pref_more_settings">More Settings</string>
 </resources>

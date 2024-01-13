@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/label_settings">
+
+    <PreferenceCategory
+        android:title="@string/pref_more_settings"
+        app:allowDividerAbove="false"
+        app:allowDividerBelow="false"
+        app:iconSpaceReserved="false">
+
+        <Preference
+            android:key="key_component_manager"
+            android:title="@string/label_component_manager" />
+
+        <Preference
+            android:key="key_timeline"
+            android:title="@string/label_timeline" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_title_language_more"
+        app:allowDividerAbove="false"
+        app:allowDividerBelow="false"
+        app:iconSpaceReserved="false">
+
+        <Preference
+            android:key="key_about"
+            android:title="@string/app_name" />
+
+        <com.dede.android_eggs.ui.preferences.ChromeTabPreference
+            android:key="key_get_beta"
+            android:title="@string/label_beta"
+            app:customUrl="@string/url_beta" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

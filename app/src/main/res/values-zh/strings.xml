@@ -39,4 +39,5 @@
     <string name="label_share">分享</string>
     <string name="label_search_hint">搜索…</string>
     <string name="label_component_manager">组件管理器</string>
+    <string name="pref_more_settings">更多设置</string>
 </resources>
