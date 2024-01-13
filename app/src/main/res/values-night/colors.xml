@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="splash_background_color">@color/md_theme_dark_background</color>
-
-    <color name="appwidget_background_color">@color/md_theme_dark_surfaceVariant</color>
-</resources>

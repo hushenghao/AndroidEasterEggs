@@ -205,7 +205,7 @@ fun ProjectDescription() {
                 openCustomTab(R.string.url_license)
             }
             ChipItem2(R.string.label_email) {
-                openBrowser(context.getString(R.string.url_mail))
+                openCustomTab(R.string.url_github_issues)
             }
         }
     }

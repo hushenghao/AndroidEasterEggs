@@ -3,6 +3,7 @@
 package com.dede.android_eggs.views.settings
 
 import android.annotation.SuppressLint
+import android.app.ActivityOptions
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
@@ -27,6 +28,7 @@ import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
 import com.dede.android_eggs.util.EdgeUtils
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.views.settings.more.MoreSettingsActivity
 import com.dede.basic.dpf
 import com.dede.basic.requireDrawable
@@ -34,6 +36,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehaviorMaterialShapeDrawableAccessor
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.transition.platform.MaterialSharedAxis
 import me.everything.android.ui.overscroll.IOverScrollDecor
 import me.everything.android.ui.overscroll.IOverScrollState
 import me.everything.android.ui.overscroll.IOverScrollStateListener
@@ -68,9 +71,30 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
 
     private val binding by viewBinding(FragmentSettingsBinding::bind)
 
+    private var launchMoreSettings = false
+
     override fun onDismiss(dialog: DialogInterface) {
         onDismiss?.invoke()
+        val keepAct = requireActivity()
         super.onDismiss(dialog)
+
+        if (!launchMoreSettings) {
+            return
+        }
+        val intent = Intent(keepAct, MoreSettingsActivity::class.java)
+        if (!SplitUtils.isActivityEmbedded(keepAct)) {
+            with(keepAct.window) {
+                exitTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true)
+                    .addTarget(android.R.id.content)
+                reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
+                    .addTarget(android.R.id.content)
+            }
+            val options = ActivityOptions.makeSceneTransitionAnimation(keepAct).toBundle()
+            keepAct.startActivity(intent, options)
+        } else {
+            keepAct.startActivity(intent)
+        }
+        launchMoreSettings = false
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -129,7 +153,8 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
     }
 
     private fun openMoreSettings() {
-        startActivity(Intent(requireContext(), MoreSettingsActivity::class.java))
+        launchMoreSettings = true
+        dismiss()
     }
 
     private inner class OpenSettingsOverScrollListeners : IOverScrollDecoratorAdapter,

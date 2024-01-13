@@ -2,15 +2,18 @@
   "outlined": [
     "animation",
     "arrow_left",
-    "language"
+    "feedback",
+    "language",
+    "privacy_tip"
   ],
   "rounded": [
-    "adb",
     "app_registration",
+    "balance",
     "brightness_auto",
     "brightness_4",
     "brightness_7",
     "brightness_low",
+    "g_translate",
     "keyboard_double_arrow_up",
     "palette",
     "timeline",

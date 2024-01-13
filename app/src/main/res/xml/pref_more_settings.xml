@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/label_settings">
 
-    <PreferenceCategory
+    <com.dede.android_eggs.ui.preferences.SimplifyPreferenceCategory
         android:title="@string/pref_more_settings"
         app:allowDividerAbove="false"
         app:allowDividerBelow="false"
@@ -15,10 +15,11 @@
 
         <Preference
             android:key="key_timeline"
+            android:summary="@string/label_timeline_title"
             android:title="@string/label_timeline" />
-    </PreferenceCategory>
+    </com.dede.android_eggs.ui.preferences.SimplifyPreferenceCategory>
 
-    <PreferenceCategory
+    <com.dede.android_eggs.ui.preferences.SimplifyPreferenceCategory
         android:title="@string/pref_title_language_more"
         app:allowDividerAbove="false"
         app:allowDividerBelow="false"
@@ -26,13 +27,51 @@
 
         <Preference
             android:key="key_about"
-            android:title="@string/app_name" />
+            android:title="@string/label_version"
+            app:enableCopying="true" />
 
         <com.dede.android_eggs.ui.preferences.ChromeTabPreference
-            android:key="key_get_beta"
+            android:summary="@string/url_beta"
             android:title="@string/label_beta"
-            app:customUrl="@string/url_beta" />
+            app:customUrl="@string/url_beta"
+            app:enableCopying="true"
+            app:icon="@drawable/ic_pgyer_logo" />
 
-    </PreferenceCategory>
+        <com.dede.android_eggs.ui.preferences.ChromeTabPreference
+            android:summary="@string/url_github"
+            android:title="@string/label_github"
+            app:customUrl="@string/url_github"
+            app:enableCopying="true"
+            app:icon="@drawable/ic_github_logo" />
+
+        <com.dede.android_eggs.ui.preferences.ChromeTabPreference
+            android:key="key_translation"
+            android:summary="@string/url_translation"
+            android:title="@string/label_translation"
+            app:customUrl="@string/url_translation"
+            app:enableCopying="true" />
+
+        <com.dede.android_eggs.ui.preferences.ChromeTabPreference
+            android:key="key_license"
+            android:summary="@string/url_license"
+            android:title="@string/label_license"
+            app:customUrl="@string/url_license"
+            app:enableCopying="true" />
+
+        <com.dede.android_eggs.ui.preferences.ChromeTabPreference
+            android:key="key_privacy"
+            android:summary="@string/url_privacy"
+            android:title="@string/label_privacy_policy"
+            app:customUrl="@string/url_privacy"
+            app:enableCopying="true" />
+
+        <com.dede.android_eggs.ui.preferences.ChromeTabPreference
+            android:key="key_feedback"
+            android:summary="@string/url_github_issues"
+            android:title="@string/label_email"
+            app:customUrl="@string/url_github_issues"
+            app:enableCopying="true" />
+
+    </com.dede.android_eggs.ui.preferences.SimplifyPreferenceCategory>
 
 </PreferenceScreen>

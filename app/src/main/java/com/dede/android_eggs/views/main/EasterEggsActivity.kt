@@ -5,6 +5,7 @@ package com.dede.android_eggs.views.main
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -52,7 +53,9 @@ class EasterEggsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.tryApplyOLEDTheme(this)
         enableEdgeToEdge()
+        window.allowReturnTransitionOverlap = true
         super.onCreate(savedInstanceState)
+        findViewById<ViewGroup>(android.R.id.content).isTransitionGroup = true
 
         setContent {
             val konfettiState = rememberKonfettiState()
