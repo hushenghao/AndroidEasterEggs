@@ -34,8 +34,7 @@
 
         <Preference
             android:key="key_about"
-            android:title="@string/label_version"
-            app:enableCopying="true" />
+            android:title="@string/label_version" />
 
         <com.dede.android_eggs.ui.preferences.ChromeTabPreference
             android:summary="@string/url_beta"

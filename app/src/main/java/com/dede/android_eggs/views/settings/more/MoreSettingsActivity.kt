@@ -6,7 +6,6 @@ import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.style.AbsoluteSizeSpan
 import android.text.style.StyleSpan
 import android.view.MenuItem
 import android.view.View
@@ -99,7 +98,6 @@ class MoreSettingsActivity : AppCompatActivity(R.layout.activity_more_settings) 
             )
             prefAbout.summary = SpannableString(BuildConfig.GIT_HASH).apply {
                 setSpan(StyleSpan(Typeface.ITALIC), 0, length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
-                setSpan(AbsoluteSizeSpan(14, true), 0, length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
             }
             prefAbout.icon = InsetDrawable(
                 requireContext().requireDrawable(R.mipmap.ic_launcher_round),
@@ -112,6 +110,9 @@ class MoreSettingsActivity : AppCompatActivity(R.layout.activity_more_settings) 
             setPreferenceIcon(KEY_LICENSE, Icons.Rounded.balance)
             setPreferenceIcon(KEY_PRIVACY, Icons.Outlined.privacy_tip)
             setPreferenceIcon(KEY_FEEDBACK, Icons.Outlined.feedback)
+
+            requirePreference<Preference>(KEY_RETAIN_IN_RECENTS).isEnabled =
+                !SplitUtils.isActivityEmbedded(requireContext())
         }
 
         private fun setPreferenceIcon(key: String, unicode: String) {
