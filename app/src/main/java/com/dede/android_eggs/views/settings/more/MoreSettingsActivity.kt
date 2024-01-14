@@ -1,5 +1,6 @@
 package com.dede.android_eggs.views.settings.more
 
+import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
@@ -22,6 +23,7 @@ import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.ThemeUtils
+import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.util.requirePreference
 import com.dede.android_eggs.views.settings.component.ComponentManagerFragment
 import com.dede.android_eggs.views.settings.prefs.DynamicColorPref
@@ -82,6 +84,11 @@ class MoreSettingsActivity : AppCompatActivity(R.layout.activity_more_settings) 
             private const val KEY_LICENSE = "key_license"
             private const val KEY_PRIVACY = "key_privacy"
             private const val KEY_FEEDBACK = "key_feedback"
+            private const val KEY_RETAIN_IN_RECENTS = "key_retain_in_recents"
+
+            fun isRetainInRecentsEnabled(context: Context): Boolean {
+                return context.pref.getBoolean(KEY_RETAIN_IN_RECENTS, false)
+            }
         }
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -100,6 +107,7 @@ class MoreSettingsActivity : AppCompatActivity(R.layout.activity_more_settings) 
             )
             setPreferenceIcon(KEY_COMPONENT_MANAGER, Icons.Rounded.app_registration)
             setPreferenceIcon(KEY_TIMELINE, Icons.Rounded.timeline)
+            setPreferenceIcon(KEY_RETAIN_IN_RECENTS, Icons.Rounded.view_carousel)
             setPreferenceIcon(KEY_TRANSLATION, Icons.Rounded.g_translate)
             setPreferenceIcon(KEY_LICENSE, Icons.Rounded.balance)
             setPreferenceIcon(KEY_PRIVACY, Icons.Outlined.privacy_tip)

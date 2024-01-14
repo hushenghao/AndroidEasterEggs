@@ -1,4 +1,5 @@
 ### v2.2.3
+- Added Retain recent Egg tasks Switch
 - Added Czech translation
 - Optimize Setting prefs
 - Optimize the language selection dialog
