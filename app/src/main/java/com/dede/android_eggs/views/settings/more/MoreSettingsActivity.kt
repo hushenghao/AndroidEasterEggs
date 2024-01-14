@@ -18,6 +18,7 @@ import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
+import com.dede.android_eggs.ui.views.applyVerticalWindowInsetsPadding
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.SplitUtils
@@ -108,8 +109,8 @@ class MoreSettingsActivity : AppCompatActivity(R.layout.activity_more_settings) 
             setPreferenceIcon(KEY_RETAIN_IN_RECENTS, Icons.Rounded.view_carousel)
             setPreferenceIcon(KEY_TRANSLATION, Icons.Rounded.g_translate)
             setPreferenceIcon(KEY_LICENSE, Icons.Rounded.balance)
-            setPreferenceIcon(KEY_PRIVACY, Icons.Outlined.privacy_tip)
-            setPreferenceIcon(KEY_FEEDBACK, Icons.Outlined.feedback)
+            setPreferenceIcon(KEY_PRIVACY, Icons.Rounded.policy)
+            setPreferenceIcon(KEY_FEEDBACK, Icons.Rounded.feedback)
 
             requirePreference<Preference>(KEY_RETAIN_IN_RECENTS).isEnabled =
                 !SplitUtils.isActivityEmbedded(requireContext())
@@ -124,6 +125,7 @@ class MoreSettingsActivity : AppCompatActivity(R.layout.activity_more_settings) 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             (requireActivity() as AppCompatActivity).title = preferenceScreen.title
+            listView.applyVerticalWindowInsetsPadding(applyBottom = true)
         }
 
         override fun onPreferenceTreeClick(preference: Preference): Boolean {
