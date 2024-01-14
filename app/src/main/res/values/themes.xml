@@ -37,6 +37,11 @@
         <item name="android:colorBackground">@color/md_theme_light_background</item>
         <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
         <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorSurfaceContainerLowest">#ffffff</item>
+        <item name="colorSurfaceContainerLow">#eef6ec</item>
+        <item name="colorSurfaceContainer">#e8f0e6</item>
+        <item name="colorSurfaceContainerHigh">#e2eae1</item>
+        <item name="colorSurfaceContainerHighest">#dde5db</item>
         <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
         <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
