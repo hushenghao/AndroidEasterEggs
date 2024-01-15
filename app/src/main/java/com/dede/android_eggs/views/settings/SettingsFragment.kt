@@ -104,6 +104,7 @@ class SettingsFragment : BottomSheetDialogFragment(R.layout.fragment_settings) {
         bottomSheetBehavior.addBottomSheetCallback(callback)
         bottomSheetBehavior.isFitToContents = true
         bottomSheetBehavior.skipCollapsed = true
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         dialog.dismissWithAnimation = true
         return dialog
     }

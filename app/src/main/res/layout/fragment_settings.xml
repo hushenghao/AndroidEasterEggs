@@ -9,9 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:paddingVertical="16dp"
+        android:paddingVertical="14dp"
         android:text="@string/pref_more_settings"
-        android:textAppearance="?textAppearanceBody2" />
+        android:textAppearance="?textAppearanceCaption" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"
@@ -40,7 +40,6 @@
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:layout_gravity="center_horizontal|bottom"
-                android:layout_marginTop="2dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/pref_more_settings"
                 android:tooltipText="@string/pref_more_settings"
