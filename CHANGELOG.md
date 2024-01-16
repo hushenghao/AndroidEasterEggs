@@ -1,8 +1,10 @@
 ### v2.2.3
 - Added Retain recent Egg tasks Switch
 - Added Czech translation
-- Optimize Setting prefs
+- Optimize Setting prefs [#142](https://github.com/hushenghao/AndroidEasterEggs/issues/142)
 - Optimize the language selection dialog
+- Fix Search IME action crash [#135](https://github.com/hushenghao/AndroidEasterEggs/issues/135)
+- Fix Neko cats index OOB [#150](https://github.com/hushenghao/AndroidEasterEggs/issues/150)
 
 ### v2.2.2 (2023-12-23)
 - Fix Guide page layout [#116](https://github.com/hushenghao/AndroidEasterEggs/issues/116)

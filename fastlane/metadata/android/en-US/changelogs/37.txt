@@ -2,3 +2,5 @@
 - Added Czech translation
 - Optimize Setting prefs
 - Optimize the language selection dialog
+- Fix Search IME action crash
+- Fix Neko cats index OOB
