@@ -3,6 +3,7 @@ package com.dede.basic.provider
 import android.app.Activity
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import java.util.Date
 
 interface EasterEggProvider {
     fun provideEasterEgg(): BaseEasterEgg
@@ -53,6 +54,8 @@ abstract class EasterEgg constructor(
     abstract fun provideEasterEgg(): Class<out Activity>?
 
     abstract fun provideSnapshotProvider(): SnapshotProvider?
+
+    open fun getReleaseDate(): Date = Date()
 
     override fun getSortValue(): Int {
         return apiLevel.first

@@ -15,7 +15,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.SearchOff
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -72,7 +71,6 @@ fun EasterEggScreen(
                     Icon(
                         imageVector = Icons.Rounded.SearchOff,
                         contentDescription = null,
-                        tint = colorScheme.onBackground,
                         modifier = Modifier.size(108.dp)
                     )
                 }
@@ -86,16 +84,15 @@ fun EasterEggScreen(
                             EasterEggItem(it, enableItemAnim = true)
                         }
                     } else {
-//                        item("snapshot") {
-//                            AndroidSnapshotView()
-//                        }
-                        item {
-                            EasterEggHighestItem()
+                        val highestList = currentList.subList(0, 3)
+                        val normalList = currentList.subList(3, currentList.size)
+                        items(items = highestList) {
+                            EasterEggHighestItem(it)
                         }
                         item("wavy1") {
                             Wavy(res = R.drawable.ic_wavy_line)
                         }
-                        items(items = currentList) {
+                        items(items = normalList) {
                             EasterEggItem(it, enableItemAnim = false)
                         }
                         item("wavy2") {

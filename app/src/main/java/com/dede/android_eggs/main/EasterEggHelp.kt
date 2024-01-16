@@ -2,9 +2,11 @@ package com.dede.android_eggs.main
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.util.SparseArray
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalInspectionMode
 import com.dede.android_eggs.R
@@ -15,6 +17,9 @@ import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.requireDrawable
 import dagger.Module
+import java.text.Format
+import java.util.Date
+import java.util.Locale
 
 
 object EasterEggHelp {
@@ -38,9 +43,37 @@ object EasterEggHelp {
         return EasterEggModules.providePureEasterEggList(baseEasterEggs)
     }
 
+    class DateFormatter private constructor(pattern: String, locale: Locale) {
+
+        companion object {
+            fun getInstance(pattern: String): DateFormatter {
+                return DateFormatter(pattern, getApplicationLocale())
+            }
+
+            private fun getApplicationLocale(): Locale {
+                val locales = AppCompatDelegate.getApplicationLocales()
+                return if (locales.isEmpty) {
+                    Locale.getDefault()
+                } else {
+                    locales.get(0) ?: Locale.getDefault()
+                }
+            }
+        }
+
+        private val format: Format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            SimpleDateFormat(pattern, locale)
+        } else {
+            java.text.SimpleDateFormat(pattern, locale)
+        }
+
+        fun format(date: Date): String {
+            return format.format(date)
+        }
+    }
+
     class VersionFormatter private constructor(
         @StringRes val nicknameRes: Int,
-        vararg versionNames: CharSequence,
+        private vararg val versionNames: CharSequence,
     ) {
 
         companion object {
@@ -60,8 +93,6 @@ object EasterEggHelp {
             }
         }
 
-        private val versionNames: Array<out CharSequence> = versionNames
-
         fun format(context: Context): String {
             val enDash = context.getString(R.string.char_en_dash)
             val sb = StringBuilder()
@@ -78,7 +109,7 @@ object EasterEggHelp {
         }
     }
 
-    class ApiLevelFormatter constructor(private val apiLevel: IntRange) {
+    class ApiLevelFormatter private constructor(private val apiLevel: IntRange) {
 
         companion object {
             fun create(apiLevel: IntRange): ApiLevelFormatter {
