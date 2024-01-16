@@ -36,6 +36,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -175,6 +176,7 @@ public class NekoLand extends Activity implements PrefsListener {
             notifyDataSetChanged();
         }
 
+        @NonNull
         @Override
         public CatHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             return new CatHolder(LayoutInflater.from(parent.getContext())
@@ -215,7 +217,7 @@ public class NekoLand extends Activity implements PrefsListener {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onCatClick(mCats[holder.getAdapterPosition()]);
+                    onCatClick(mCats[holder.getBindingAdapterPosition()]);
                 }
             });
             holder.itemView.setOnLongClickListener(new OnLongClickListener() {
@@ -228,14 +230,20 @@ public class NekoLand extends Activity implements PrefsListener {
             holder.delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    v.setClickable(false);
                     setContextGroupVisible(holder, false);
                     new AlertDialog.Builder(NekoLand.this)
                             .setTitle(getString(R.string.n_confirm_delete, mCats[position].getName()))
+                            .setOnDismissListener((d) -> v.setClickable(true))
                             .setNegativeButton(android.R.string.cancel, null)
                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    onCatRemove(mCats[holder.getAdapterPosition()]);
+                                    int i = holder.getBindingAdapterPosition();
+                                    if (i < 0 || i > mCats.length - 1) {
+                                        return;
+                                    }
+                                    onCatRemove(mCats[i]);
                                 }
                             })
                             .show();
@@ -245,7 +253,7 @@ public class NekoLand extends Activity implements PrefsListener {
                 @Override
                 public void onClick(View v) {
                     setContextGroupVisible(holder, false);
-                    Cat cat = mCats[holder.getAdapterPosition()];
+                    Cat cat = mCats[holder.getBindingAdapterPosition()];
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                         shareCat(cat);
                         return;
