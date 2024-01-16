@@ -86,8 +86,11 @@ fun EasterEggScreen(
                             EasterEggItem(it, enableItemAnim = true)
                         }
                     } else {
-                        item("snapshot") {
-                            AndroidSnapshotView()
+//                        item("snapshot") {
+//                            AndroidSnapshotView()
+//                        }
+                        item {
+                            EasterEggHighestItem()
                         }
                         item("wavy1") {
                             Wavy(res = R.drawable.ic_wavy_line)
