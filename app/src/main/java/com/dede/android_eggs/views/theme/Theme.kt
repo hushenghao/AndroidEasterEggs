@@ -122,6 +122,38 @@ private val DarkColorScheme = darkColorScheme(
     onSurfaceVariant = md_theme_dark_onSurfaceVariant,
 )
 
+private fun ColorScheme.toXml() {
+    fun Color.toHexColor(): String {
+        return toArgb().toUInt().toString(16)
+    }
+
+    fun item(name: String, color: Color): String {
+        return "<item name=\"$name\">#${color.toHexColor()}</item>"
+    }
+
+    val methods = ColorScheme::class.java.methods
+    for (method in methods) {
+        var methodName = method.name
+        if (!methodName.startsWith("get") || methodName == "getClass") {
+            continue
+        }
+        // getOnPrimary-0d7_KjU(): long
+        methodName = "color" + methodName.split("-")[0].replace("get", "")
+        if (methodName == "colorScrim" || methodName == "colorSurfaceTint") {
+            continue
+        }
+        if (methodName.contains("Inverse")) {
+            methodName = methodName.replace("Inverse", "") + "Inverse"
+        }
+        if (methodName == "colorBackground") {
+            methodName = "android:$methodName"
+        }
+        val color = Color((method.invoke(this) as Long).toULong())
+        println(item(methodName, color))
+        println()
+    }
+}
+
 @Composable
 fun AppTheme(content: @Composable () -> Unit) {
     val context: Context = LocalContext.current

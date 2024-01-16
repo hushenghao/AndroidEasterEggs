@@ -37,13 +37,10 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
-import androidx.fragment.app.FragmentManager
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.createChooser
-import com.dede.android_eggs.views.settings.component.ComponentManagerFragment
-import com.dede.android_eggs.views.timeline.AndroidTimelineFragment
 
 
 @Composable
@@ -93,9 +90,7 @@ private fun ChipItem2(
 @Composable
 fun ProjectDescription() {
     val context = LocalContext.current
-    val fm: FragmentManager? = LocalFragmentManager.currentOutInspectionMode
     var konfettiState by LocalKonfettiState.current
-//    var timelineVisible = remember { mutableStateOf(false) }
 
     fun openCustomTab(@StringRes uri: Int) {
         CustomTabsBrowser.launchUrl(context, context.getString(uri).toUri())
@@ -104,9 +99,6 @@ fun ProjectDescription() {
     fun openBrowser(uri: String) {
         CustomTabsBrowser.launchUrlByBrowser(context, uri.toUri())
     }
-
-    // todo support BackHandler https://issuetracker.google.com/issues/308510945
-//    AndroidTimelineSheet(timelineVisible)
 
     Column(
         modifier = Modifier
@@ -178,13 +170,6 @@ fun ProjectDescription() {
             ChipItem(R.string.label_translation) {
                 openCustomTab(R.string.url_translation)
             }
-            ChipItem(R.string.label_timeline) {
-                AndroidTimelineFragment.show(fm ?: return@ChipItem)
-//                timelineVisible.value = true
-            }
-            ChipItem(R.string.label_component_manager) {
-                ComponentManagerFragment.show(fm ?: return@ChipItem)
-            }
             ChipItem(R.string.label_star) {
                 val uri = context.getString(R.string.url_market_detail, context.packageName)
                 openBrowser(uri)
@@ -220,7 +205,7 @@ fun ProjectDescription() {
                 openCustomTab(R.string.url_license)
             }
             ChipItem2(R.string.label_email) {
-                openBrowser(context.getString(R.string.url_mail))
+                openCustomTab(R.string.url_github_issues)
             }
         }
     }

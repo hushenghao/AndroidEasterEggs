@@ -98,14 +98,7 @@ fun MainTitleBar(
 
     CenterAlignedTopAppBar(
         scrollBehavior = scrollBehavior,
-        title = {
-            Text(
-                text = stringResource(R.string.app_name),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-        },
-        actions = {
+        navigationIcon = {
             AnimatedVisibility(
                 visible = !searchBarState.visible,
                 enter = fadeIn() + scaleIn(),
@@ -131,7 +124,15 @@ fun MainTitleBar(
                     }
                 }
             }
-
+        },
+        title = {
+            Text(
+                text = stringResource(R.string.app_name),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        },
+        actions = {
             PlainTooltipBox(
                 tooltip = {
                     Text(text = stringResource(R.string.label_settings))

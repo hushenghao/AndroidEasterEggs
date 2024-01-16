@@ -126,6 +126,7 @@ dependencies {
     implementation(libs.viewbinding.delegate)
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
+    implementation(libs.overscroll.decor.android)
 
     implementation(project(":eggs:U"))
     implementation(project(":eggs:T"))

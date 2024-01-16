@@ -3,8 +3,11 @@
 package com.dede.android_eggs.views.main
 
 import android.annotation.SuppressLint
+import android.app.assist.AssistContent
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +17,8 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.core.net.toUri
+import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.ThemeUtils
@@ -52,7 +57,9 @@ class EasterEggsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.tryApplyOLEDTheme(this)
         enableEdgeToEdge()
+        window.allowReturnTransitionOverlap = true
         super.onCreate(savedInstanceState)
+        findViewById<ViewGroup>(android.R.id.content).isTransitionGroup = true
 
         setContent {
             val konfettiState = rememberKonfettiState()
@@ -112,5 +119,12 @@ class EasterEggsActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         schemeHandler.handleIntent(intent)
+    }
+
+    override fun onProvideAssistContent(outContent: AssistContent?) {
+        super.onProvideAssistContent(outContent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && outContent != null) {
+            outContent.webUri = getString(R.string.url_github).toUri()
+        }
     }
 }

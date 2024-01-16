@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PrivacyTip
@@ -58,6 +59,7 @@ fun Welcome() {
                     modifier = Modifier.fillMaxWidth()
                 )
                 Text(text = stringResource(R.string.summary_browse_privacy_policy))
+                Spacer(modifier = Modifier.height(10.dp))
                 FilledTonalButton(
                     modifier = Modifier.align(Alignment.End),
                     contentPadding = PaddingValues(horizontal = 14.dp),

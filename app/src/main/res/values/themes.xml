@@ -37,6 +37,11 @@
         <item name="android:colorBackground">@color/md_theme_light_background</item>
         <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
         <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorSurfaceContainerLowest">#ffffff</item>
+        <item name="colorSurfaceContainerLow">#eef6ec</item>
+        <item name="colorSurfaceContainer">#e8f0e6</item>
+        <item name="colorSurfaceContainerHigh">#e2eae1</item>
+        <item name="colorSurfaceContainerHighest">#dde5db</item>
         <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
         <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
@@ -46,8 +51,34 @@
     </style>
 
     <style name="ThemeOverlay.EasterEggs.OLED" parent="">
-        <item name="colorSurface">@android:color/black</item>
-        <item name="colorSurfaceVariant">@color/md_theme_dark_surface</item>
+        <item name="android:colorBackground">#ff000000</item>
+        <item name="colorError">#ffffb4ab</item>
+        <item name="colorErrorContainer">#ff93000a</item>
+        <item name="colorOnSurfaceInverse">#ff141614</item>
+        <item name="colorPrimaryInverse">#ff004c2a</item>
+        <item name="colorSurfaceInverse">#ff70716f</item>
+        <item name="colorOnBackground">#ffbfc0bc</item>
+        <item name="colorOnError">#ff690005</item>
+        <item name="colorOnErrorContainer">#ffffdad6</item>
+        <item name="colorOnPrimary">#ff002714</item>
+        <item name="colorOnPrimaryContainer">#ff4db174</item>
+        <item name="colorOnSecondary">#ff17251b</item>
+        <item name="colorOnSecondaryContainer">#ff93a294</item>
+        <item name="colorOnSurface">#ffa7a9a4</item>
+        <item name="colorOnSurfaceVariant">#ffc0c9bf</item>
+        <item name="colorOnTertiary">#ff01252c</item>
+        <item name="colorOnTertiaryContainer">#ff98bbc5</item>
+        <item name="colorOutline">#ff6f756e</item>
+        <item name="colorOutlineVariant">#ff343a34</item>
+        <item name="colorPrimary">#ff369c62</item>
+        <item name="colorPrimaryContainer">#ff00391e</item>
+        <item name="colorSecondary">#ff7f8e81</item>
+        <item name="colorSecondaryContainer">#ff27342a</item>
+        <item name="colorSurface">#ff000000</item>
+        <item name="colorSurfaceVariant">#ff414942</item>
+        <item name="colorTertiary">#ff718f98</item>
+        <item name="colorTertiaryContainer">#ff17353c</item>
+
         <item name="isOLEDTheme">true</item>
     </style>
 

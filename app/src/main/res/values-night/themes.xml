@@ -23,6 +23,11 @@
         <item name="colorSurface">@color/md_theme_dark_surface</item>
         <item name="colorOnSurface">@color/md_theme_dark_onSurface</item>
         <item name="colorSurfaceVariant">@color/md_theme_dark_surfaceVariant</item>
+        <item name="colorSurfaceContainerLowest">#09100b</item>
+        <item name="colorSurfaceContainerLow">#161d18</item>
+        <item name="colorSurfaceContainer">#1a211b</item>
+        <item name="colorSurfaceContainerHigh">#242c26</item>
+        <item name="colorSurfaceContainerHighest">#2f3730</item>
         <item name="colorOnSurfaceVariant">@color/md_theme_dark_onSurfaceVariant</item>
         <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface</item>
         <item name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface</item>

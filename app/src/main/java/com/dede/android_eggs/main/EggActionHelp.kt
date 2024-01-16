@@ -28,6 +28,7 @@ import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.toast
 import com.dede.android_eggs.views.main.EasterEggsActivity
+import com.dede.android_eggs.views.settings.more.MoreSettingsActivity.MoreSettings
 import com.dede.basic.cancel
 import com.dede.basic.delay
 import com.dede.basic.dp
@@ -40,8 +41,17 @@ object EggActionHelp {
 
     private const val MAX_APP_TASK_COUNT = 5
 
-    private const val DOCUMENT_LAUNCH_MODE_INTO_EXISTING =
-        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
+    /**
+     * android:documentLaunchMode="intoExisting" and Retain in recents.
+     * * [Retain finished tasks](https://developer.android.google.cn/guide/components/activities/recents#retain-finished)
+     * * [documentLaunchMode intoExisting](https://developer.android.google.cn/guide/components/activities/recents#attr-doclaunch)
+     *
+     * @see [Intent.FLAG_ACTIVITY_NEW_DOCUMENT](https://developer.android.google.cn/reference/android/content/Intent#FLAG_ACTIVITY_NEW_DOCUMENT)
+     * @see [Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS](https://developer.android.google.cn/reference/android/content/Intent#FLAG_ACTIVITY_RETAIN_IN_RECENTS)
+     */
+    private const val RETAIN_TASK_AND_LAUNCH_MODE_INTO_EXISTING =
+        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
 
     private fun createIntent(
         context: Context,
@@ -54,18 +64,19 @@ object EggActionHelp {
         return Intent(Intent.ACTION_VIEW)
             .setClass(context, targetClass)
             .applyIf(retainInRecents) {
-                addFlags(DOCUMENT_LAUNCH_MODE_INTO_EXISTING)
+                addFlags(RETAIN_TASK_AND_LAUNCH_MODE_INTO_EXISTING)
             }
     }
 
     fun launchEgg(context: Context, egg: EasterEgg) {
         val targetClass = egg.provideEasterEgg() ?: return
-        val embedded = SplitUtils.isActivityEmbedded(context)
-        val intent = createIntent(context, targetClass, !embedded)
+        val retainInRecents = !SplitUtils.isActivityEmbedded(context) &&
+                MoreSettings.isRetainInRecentsEnabled(context)
+        val intent = createIntent(context, targetClass, retainInRecents)
             ?: throw IllegalArgumentException("Create Egg launcher intent == null")
         val task: AppTask? = findTaskWithTrim(context, targetClass)
         if (task != null) {
-            if (embedded) {
+            if (!retainInRecents) {
                 // finish retained task
                 task.finishAndRemoveTask()
             }
@@ -73,7 +84,6 @@ object EggActionHelp {
                 // android M Recent task list:
                 // Not following `android:documentLaunchMode="intoExisting"` behavior.
                 // ???
-                // https://developer.android.google.cn/guide/topics/manifest/activity-element?hl=zh-cn#dlmode
                 // remove it
                 task.finishAndRemoveTask()
             }

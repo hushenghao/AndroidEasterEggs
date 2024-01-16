@@ -2,7 +2,6 @@ package com.dede.android_eggs.views.timeline
 
 import android.app.Dialog
 import android.content.res.ColorStateList
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -10,7 +9,6 @@ import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
-import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import com.dede.android_eggs.R
@@ -21,8 +19,8 @@ import com.dede.android_eggs.main.entity.TimelineEvent.Companion.isNewGroup
 import com.dede.android_eggs.ui.Icons
 import com.dede.android_eggs.ui.adapter.VAdapter
 import com.dede.android_eggs.ui.drawables.FontIconsDrawable
+import com.dede.android_eggs.ui.views.applyVerticalWindowInsetsPadding
 import com.dede.android_eggs.util.EdgeUtils
-import com.dede.android_eggs.util.EdgeUtils.onApplyWindowEdge
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.color.MaterialColors
@@ -95,38 +93,7 @@ class AndroidTimelineFragment : BottomSheetDialogFragment(R.layout.fragment_andr
                 .load(logoMatcher.findAndroidLogo(timelineEvent.apiLevel))
             holder.findViewById<View>(R.id.line_bottom).isGone = timelineEvent.isLast()
         }
-        var last = EggListDivider(0, 0, 0)
-        binding.recyclerView.addItemDecoration(last)
-        binding.recyclerView.onApplyWindowEdge {
-            removeItemDecoration(last)
-            last = EggListDivider(0, 0, it.bottom)
-            addItemDecoration(last)
-        }
+        binding.recyclerView.applyVerticalWindowInsetsPadding(applyBottom = true)
     }
 
-    class EggListDivider(
-        private val divider: Int,
-        private val topInset: Int,
-        private val bottomInset: Int,
-    ) : RecyclerView.ItemDecoration() {
-
-        override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: RecyclerView.State,
-        ) {
-            val position = parent.getChildAdapterPosition(view)
-            if (position == 0) {
-                outRect.top = divider + topInset
-            }
-            outRect.bottom = divider
-
-            val adapter = parent.adapter ?: return
-            if (position == adapter.itemCount - 1) {
-                outRect.bottom = divider + bottomInset
-            }
-        }
-
-    }
 }

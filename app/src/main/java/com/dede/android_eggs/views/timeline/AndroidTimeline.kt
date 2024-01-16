@@ -61,6 +61,8 @@ fun AndroidTimelineSheet(visible: MutableState<Boolean> = mutableStateOf(true)) 
         WindowInsets.systemBars.getTop(this).toDp()
     }
 
+    // todo support BackHandler https://issuetracker.google.com/issues/308510945
+
     ModalBottomSheet(
         windowInsets = MutableWindowInsets(),
         modifier = Modifier
