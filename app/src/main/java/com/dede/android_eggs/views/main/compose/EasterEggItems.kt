@@ -51,7 +51,6 @@ import com.dede.android_eggs.main.EggActionHelp
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
-import com.wajahatiqbal.blurhash.BlurHashPainter
 import com.wolt.blurhashkt.BlurHashDecoder
 import kotlin.random.Random
 
