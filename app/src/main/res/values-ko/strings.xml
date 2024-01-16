@@ -39,4 +39,6 @@
     <string name="label_share">공유</string>
     <string name="label_search_hint">검색…</string>
     <string name="label_component_manager">구성 요소 관리자</string>
+    <string name="pref_more_settings">더 많은 설정</string>
+    <string name="label_about">정보</string>
 </resources>
