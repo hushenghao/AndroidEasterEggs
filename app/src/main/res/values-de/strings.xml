@@ -39,4 +39,8 @@
     <string name="label_share">Teilen und Versenden</string>
     <string name="label_search_hint">Suchen…</string>
     <string name="label_component_manager">Easter-Egg-Komponentenmanager</string>
+    <string name="pref_more_settings">Mehr Einstellungen</string>
+    <string name="pref_retain_recent_egg_tasks">Behalten Sie aktuelle Easter Egg-Aufgaben bei</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Behalten Sie Easter Egg-Aufgaben auf dem Bildschirm „Letzte“ bei, maximal 5 (ungültig für den eingebetteten Aktivitätsmodus)</string>
+    <string name="label_about">Über</string>
 </resources>
