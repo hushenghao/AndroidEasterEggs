@@ -11,16 +11,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.BookmarkBorder
-import androidx.compose.material.icons.rounded.CalendarMonth
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -76,10 +76,10 @@ fun EasterEggHighestItem(
         EasterEggHelp.ApiLevelFormatter.create(egg.apiLevel).format(context)
     }
     val dateFormat = remember(egg, context.resources.configuration) {
-        EasterEggHelp.DateFormatter.getInstance("MMMM yyyy")
+        EasterEggHelp.DateFormatter.getInstance("MMM yyyy")
     }
 
-    val snapshotProvider = remember(egg) {
+    val snapshot = remember(egg) {
         egg.provideSnapshotProvider()
     }
     val hashBitmap = remember(egg, ThemeUtils.isSystemNightMode(context)) {
@@ -118,7 +118,7 @@ fun EasterEggHighestItem(
                 .aspectRatio(1.6f)
                 .clipToBounds()
         ) {
-            if (snapshotProvider == null || !snapshotProvider.includeBackground) {
+            if (snapshot == null || !snapshot.includeBackground) {
                 if (hashBitmap != null) {
                     Image(
                         bitmap = hashBitmap.asImageBitmap(),
@@ -128,59 +128,76 @@ fun EasterEggHighestItem(
                     )
                 }
             }
-            if (snapshotProvider != null) {
+            if (snapshot != null) {
                 AndroidView(
                     factory = {
-                        snapshotProvider.create(it)
+                        snapshot.create(it)
                     },
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(if (snapshot.includeBackground) 0.dp else 12.dp)
+                )
+            }
+            IconButton(
+                onClick = {
+                    EggActionHelp.addShortcut(context, egg)
+                },
+                modifier = Modifier
+                    .padding(6.dp)
+                    .align(Alignment.TopEnd)
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.BookmarkBorder,
+                    tint = colorScheme.onPrimary,
+                    contentDescription = stringResource(id = R.string.label_add_shortcut)
                 )
             }
         }
         Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
+                .padding(start = 16.dp, top = 14.dp, end = 18.dp)
                 .fillMaxWidth()
         ) {
-            Box(modifier = Modifier.weight(1f, true)) {
+            Column(
+                modifier = Modifier
+                    .padding(end = 8.dp)
+                    .weight(1f, true)
+            ) {
                 Text(
                     text = stringResource(id = egg.nameRes),
                     style = typography.headlineSmall,
-                    modifier = Modifier
-                        .padding(top = 8.dp, start = 16.dp, end = 6.dp),
+                )
+                Text(
+                    text = androidVersion,
+                    style = typography.bodyMedium,
+                    modifier = Modifier.padding(top = 8.dp)
                 )
             }
-            IconButton(onClick = {
-                EggActionHelp.addShortcut(context, egg)
-            }) {
-                Icon(
-                    imageVector = Icons.Rounded.BookmarkBorder,
-                    contentDescription = null
-                )
-            }
+            EasterEggLogo(egg = egg, sensor = true)
         }
-        Text(
-            text = "$androidVersion $apiLevel",
-            style = typography.bodyMedium,
-            modifier = Modifier.padding(horizontal = 16.dp),
-        )
-        Row(
+        FlowRow(
             modifier = Modifier
-                .padding(horizontal = 18.dp)
-                .padding(top = 12.dp, bottom = 16.dp),
-            verticalAlignment = Alignment.CenterVertically,
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .padding(top = 12.dp, bottom = 18.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Icon(
-                imageVector = Icons.Rounded.CalendarMonth,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(18.dp)
-            )
-            Text(
-                text = dateFormat.format(egg.getReleaseDate()),
-                style = typography.labelMedium,
-                modifier = Modifier.padding(horizontal = 6.dp),
-            )
+            Chip(text = apiLevel)
+            Chip(text = dateFormat.format(egg.getReleaseDate()))
         }
+    }
+}
+
+@Composable
+private fun Chip(text: String) {
+    Card(
+        shape = shapes.large
+    ) {
+        Text(
+            text = text,
+            style = typography.labelMedium,
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+        )
     }
 }
