@@ -29,4 +29,5 @@
     <string name="locale_lang_no_NO">노르웨이어</string>
     <string name="locale_lang_fil_PH">필리핀어</string>
     <string name="locale_lang_lo_LA">라오어</string>
+    <string name="locale_lang_cs_CZ">체코어</string>
 </resources>

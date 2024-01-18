@@ -50,8 +50,8 @@
   <g class="font12" transform="translate(0,156)">
     <text style="text-anchor:end;" x="200" y="18">Czech</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="44.800000000000004" x="210" y="11.4"/>
-    <text x="380" y="18">28%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
+    <text x="380" y="18">100%</text>
   </g>
   <g class="font12" transform="translate(0,182)">
     <text style="text-anchor:end;" x="200" y="18">Dutch</text>
@@ -145,8 +145,8 @@
   <g class="font12" transform="translate(0,572)">
     <text style="text-anchor:end;" x="200" y="18">Korean</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="142.4" x="210" y="11.4"/>
-    <text x="380" y="18">89%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
+    <text x="380" y="18">100%</text>
   </g>
   <g class="font12" transform="translate(0,598)">
     <text style="text-anchor:end;" x="200" y="18">Lao</text>
