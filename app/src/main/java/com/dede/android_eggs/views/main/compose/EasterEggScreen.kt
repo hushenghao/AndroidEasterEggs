@@ -29,6 +29,8 @@ import com.dede.android_eggs.views.main.EasterEggModules
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 
+private const val HIGHEST_COUNT = 1
+
 @Composable
 @Preview(showBackground = true)
 fun EasterEggScreen(
@@ -84,13 +86,10 @@ fun EasterEggScreen(
                             EasterEggItem(it, enableItemAnim = true)
                         }
                     } else {
-                        val highestList = currentList.subList(0, 3)
-                        val normalList = currentList.subList(3, currentList.size)
+                        val highestList = currentList.subList(0, HIGHEST_COUNT)
+                        val normalList = currentList.subList(HIGHEST_COUNT, currentList.size)
                         items(items = highestList) {
                             EasterEggHighestItem(it)
-                        }
-                        item("wavy1") {
-                            Wavy(res = R.drawable.ic_wavy_line)
                         }
                         items(items = normalList) {
                             EasterEggItem(it, enableItemAnim = false)
