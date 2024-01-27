@@ -125,6 +125,7 @@ dependencies {
     implementation(libs.free.reflection)
     implementation(libs.viewbinding.delegate)
     implementation(libs.blurhash.android)
+//    implementation(libs.blurhash.painter)
     debugImplementation(libs.squareup.leakcanary)
     implementation(libs.overscroll.decor.android)
 
