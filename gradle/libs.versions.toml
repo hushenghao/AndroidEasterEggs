@@ -1,13 +1,13 @@
 [versions]
 kotlin = "1.9.22"
-ksp = "1.9.22-1.0.16"
+ksp = "1.9.22-1.0.17"
 # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
 # https://maven.google.com/web/index.html?q=compose#androidx.compose.compiler:compiler
 compose-kotlin-compiler = "1.5.8"
-agp = "8.2.1"
+agp = "8.2.2"
 hilt = "2.50"
 # https://google.github.io/accompanist
-accompanist = "0.33.2-alpha"
+accompanist = "0.34.0"
 lifecycle = "2.7.0"
 
 [plugins]
@@ -37,7 +37,7 @@ androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 androidx-activity-compose = "androidx.activity:activity-compose:1.8.2"
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
-androidx-compose-bom = "androidx.compose:compose-bom:2023.10.01"
+androidx-compose-bom = "androidx.compose:compose-bom:2024.01.00"
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-util = { module = "androidx.compose.ui:ui-util" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
@@ -66,7 +66,7 @@ nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
 # Dependencies of the included build-logic
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-android-tools-sdk-common = "com.android.tools:sdk-common:31.2.1"
+android-tools-sdk-common = "com.android.tools:sdk-common:31.2.2"
 
 junit = "junit:junit:4.13.2"
 androidx-test-core = "androidx.test:core-ktx:1.5.0"
