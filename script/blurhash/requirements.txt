@@ -1,1 +1,1 @@
-blurhash-python==1.2.1
+blurhash-python==1.2.2
