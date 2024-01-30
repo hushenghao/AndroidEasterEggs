@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- locality language -->
+    <string name="locale_lang_zh_SC">சீனம் எளிமைப்படுத்தப்பட்டது</string>
+    <string name="locale_lang_zh_TC">சீனம் மரபார்ந்த</string>
+    <string name="locale_lang_de">ஜெர்மனி</string>
+    <string name="locale_lang_en">ஆங்கிலம்</string>
+    <string name="locale_lang_es">ஸ்பானிஷ்</string>
+    <string name="locale_lang_hr_HR">குரோஷியன்</string>
+    <string name="locale_lang_in_ID">இந்தோனேசியா</string>
+    <string name="locale_lang_it">இத்தாலிய</string>
+    <string name="locale_lang_pt">போர்ச்சுகல்</string>
+    <string name="locale_lang_pt_BR">போர்ச்சுகல் (பிரேசில்)</string>
+    <string name="locale_lang_ru">ரஷ்யன்</string>
+    <string name="locale_lang_ar_SA">அரபு</string>
+    <string name="locale_lang_ja_JP">ஜப்பானிய</string>
+    <string name="locale_lang_pl_PL">போலிஷ்</string>
+    <string name="locale_lang_nl_NL">டச்சு</string>
+    <string name="locale_lang_la_LA">லத்தீன்</string>
+    <string name="locale_lang_fr">பிரெஞ்சு</string>
+    <string name="locale_lang_uk_UA">உக்ரைனியன்</string>
+    <string name="locale_lang_tr_TR">துருக்கி</string>
+    <string name="locale_lang_ko">கொரியம்</string>
+    <string name="locale_lang_el_GR">கிரேக்கம்</string>
+    <string name="locale_lang_fi_FI">ஃபின்னிஷ்</string>
+    <string name="locale_lang_vi_VN">வியட்நாமியம்</string>
+    <string name="locale_lang_hu_HU">ஹங்கேரியம்</string>
+    <string name="locale_lang_th_TH">தாய்</string>
+    <string name="locale_lang_no_NO">நார்வேஜியம்</string>
+    <string name="locale_lang_fil_PH">பிலிப்பினம்</string>
+    <string name="locale_lang_lo_LA">லாவோ</string>
+    <string name="locale_lang_cs_CZ">செக்</string>
+    <string name="locale_lang_ta">தமிழ்</string>
+</resources>
