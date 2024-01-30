@@ -38,4 +38,9 @@
     <string name="label_welcome">Benvenuto nei Cataloghi di Easter Egg🎉🎉🎉</string>
     <string name="label_share">Condividi</string>
     <string name="label_search_hint">Cerca…</string>
+    <string name="label_component_manager">Gestione Componenti</string>
+    <string name="pref_more_settings">Maggiori Impostazioni</string>
+    <string name="pref_retain_recent_egg_tasks">Conserva le attività recenti degli Eggs</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Conserva le attività Egg nella schermata Recenti, massimo 5 (non valido per la modalità incorporata di attività)</string>
+    <string name="label_about">Informazioni</string>
 </resources>
