@@ -1,4 +1,5 @@
-### v2.2.3
+### v2.3.0 (2024-01-30)
+- New Card UI
 - Added Retain recent Egg tasks Switch
 - Added Czech translation
 - Optimize Setting prefs [#142](https://github.com/hushenghao/AndroidEasterEggs/issues/142)

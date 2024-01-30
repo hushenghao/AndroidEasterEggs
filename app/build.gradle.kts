@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.dede.android_eggs"
         versionCode = 37
-        versionName = "2.2.3"
+        versionName = "2.3.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(

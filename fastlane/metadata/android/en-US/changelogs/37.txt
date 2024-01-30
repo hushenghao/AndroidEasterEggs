@@ -1,3 +1,4 @@
+- New Card UI
 - Added Retain recent Egg tasks Switch
 - Added Czech translation
 - Optimize Setting prefs
