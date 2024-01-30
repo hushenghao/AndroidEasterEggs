@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- locality language -->
+    <string name="locale_lang_zh_SC">Cinese semplificato</string>
+    <string name="locale_lang_zh_TC">Cinese tradizionale</string>
+    <string name="locale_lang_de">Germania</string>
+    <string name="locale_lang_en">Inglese</string>
+    <string name="locale_lang_es">Spagnolo</string>
+    <string name="locale_lang_hr_HR">Croato</string>
+    <string name="locale_lang_in_ID">Indonesia</string>
+    <string name="locale_lang_it">Italiano</string>
+    <string name="locale_lang_pt">Portogallo</string>
+    <string name="locale_lang_pt_BR">Portogallo (Brasile)</string>
+    <string name="locale_lang_ru">Russo</string>
+    <string name="locale_lang_ar_SA">Arabo</string>
+    <string name="locale_lang_ja_JP">Giapponese</string>
+    <string name="locale_lang_pl_PL">Polacco</string>
+    <string name="locale_lang_nl_NL">Olandese</string>
+    <string name="locale_lang_la_LA">Latino</string>
+    <string name="locale_lang_fr">Francese</string>
+    <string name="locale_lang_uk_UA">Ucraino</string>
+    <string name="locale_lang_tr_TR">Turco</string>
+    <string name="locale_lang_ko">Coreano</string>
+    <string name="locale_lang_el_GR">Greco</string>
+    <string name="locale_lang_fi_FI">Finlandese</string>
+    <string name="locale_lang_vi_VN">Vietnamita</string>
+    <string name="locale_lang_hu_HU">Ungherese</string>
+    <string name="locale_lang_th_TH">Tailandese</string>
+    <string name="locale_lang_no_NO">Norvegese</string>
+    <string name="locale_lang_fil_PH">Filippino</string>
+    <string name="locale_lang_lo_LA">Laotiano</string>
+    <string name="locale_lang_cs_CZ">Ceco</string>
+    <string name="locale_lang_ta">Tamil</string>
+</resources>
