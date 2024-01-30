@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="962" version="1.1" width="500">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="988" version="1.1" width="500">
   <defs>
     <style type="text/css"><![CDATA[
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans);
@@ -13,8 +13,8 @@
   <g class="font12" transform="translate(0,0)">
     <text style="text-anchor:end;" x="200" y="18">Arabic</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="118.4" x="210" y="11.4"/>
-    <text x="380" y="18">74%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
+    <text x="380" y="18">73%</text>
   </g>
   <g class="font12" transform="translate(0,26)">
     <text style="text-anchor:end;" x="200" y="18">Azerbaijani</text>
@@ -30,7 +30,7 @@
     <text style="text-anchor:end;" x="200" y="18">Chinese Simplified</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
     <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
-    <rect fill="#71C277" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
+    <rect fill="#71C277" height="6" rx="3" ry="3" width="158.4" x="210" y="11.4"/>
     <text x="380" y="18">100%</text>
   </g>
   <g class="font12" transform="translate(0,104)">
@@ -43,21 +43,21 @@
   <g class="font12" transform="translate(0,130)">
     <text style="text-anchor:end;" x="200" y="18">Croatian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
     <rect fill="#71C277" height="6" rx="3" ry="3" width="56.0" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,156)">
     <text style="text-anchor:end;" x="200" y="18">Czech</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
-    <text x="380" y="18">100%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="158.4" x="210" y="11.4"/>
+    <text x="380" y="18">99%</text>
   </g>
   <g class="font12" transform="translate(0,182)">
     <text style="text-anchor:end;" x="200" y="18">Dutch</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,208)">
     <text style="text-anchor:end;" x="200" y="18">English (Original)</text>
@@ -84,45 +84,45 @@
   <g class="font12" transform="translate(0,312)">
     <text style="text-anchor:end;" x="200" y="18">Filipino</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,338)">
     <text style="text-anchor:end;" x="200" y="18">Finnish</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,364)">
     <text style="text-anchor:end;" x="200" y="18">French</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,390)">
     <text style="text-anchor:end;" x="200" y="18">German</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
     <rect fill="#5D89C3" height="6" rx="3" ry="3" width="139.2" x="210" y="11.4"/>
-    <rect fill="#71C277" height="6" rx="3" ry="3" width="118.4" x="210" y="11.4"/>
+    <rect fill="#71C277" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
     <text x="380" y="18">87%</text>
   </g>
   <g class="font12" transform="translate(0,416)">
     <text style="text-anchor:end;" x="200" y="18">Greek</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,442)">
     <text style="text-anchor:end;" x="200" y="18">Hungarian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,468)">
     <text style="text-anchor:end;" x="200" y="18">Indonesian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,494)">
     <text style="text-anchor:end;" x="200" y="18">Irish</text>
@@ -132,27 +132,27 @@
   <g class="font12" transform="translate(0,520)">
     <text style="text-anchor:end;" x="200" y="18">Italian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
     <rect fill="#71C277" height="6" rx="3" ry="3" width="56.0" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,546)">
     <text style="text-anchor:end;" x="200" y="18">Japanese</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,572)">
     <text style="text-anchor:end;" x="200" y="18">Korean</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
-    <text x="380" y="18">100%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="158.4" x="210" y="11.4"/>
+    <text x="380" y="18">99%</text>
   </g>
   <g class="font12" transform="translate(0,598)">
     <text style="text-anchor:end;" x="200" y="18">Lao</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="118.4" x="210" y="11.4"/>
-    <text x="380" y="18">74%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
+    <text x="380" y="18">73%</text>
   </g>
   <g class="font12" transform="translate(0,624)">
     <text style="text-anchor:end;" x="200" y="18">Latin</text>
@@ -168,26 +168,26 @@
   <g class="font12" transform="translate(0,676)">
     <text style="text-anchor:end;" x="200" y="18">Norwegian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,702)">
     <text style="text-anchor:end;" x="200" y="18">Polish</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,728)">
     <text style="text-anchor:end;" x="200" y="18">Portuguese</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="118.4" x="210" y="11.4"/>
-    <text x="380" y="18">74%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
+    <text x="380" y="18">73%</text>
   </g>
   <g class="font12" transform="translate(0,754)">
     <text style="text-anchor:end;" x="200" y="18">Portuguese, Brazilian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="118.4" x="210" y="11.4"/>
-    <text x="380" y="18">74%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
+    <text x="380" y="18">73%</text>
   </g>
   <g class="font12" transform="translate(0,780)">
     <text style="text-anchor:end;" x="200" y="18">Russian</text>
@@ -210,27 +210,32 @@
     <text x="380" y="18">5%</text>
   </g>
   <g class="font12" transform="translate(0,858)">
-    <text style="text-anchor:end;" x="200" y="18">Thai</text>
+    <text style="text-anchor:end;" x="200" y="18">Tamil</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <text x="380" y="18">0%</text>
   </g>
   <g class="font12" transform="translate(0,884)">
-    <text style="text-anchor:end;" x="200" y="18">Turkish</text>
+    <text style="text-anchor:end;" x="200" y="18">Thai</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,910)">
-    <text style="text-anchor:end;" x="200" y="18">Ukrainian</text>
+    <text style="text-anchor:end;" x="200" y="18">Turkish</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="116.8" x="210" y="11.4"/>
-    <text x="380" y="18">73%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
   </g>
   <g class="font12" transform="translate(0,936)">
+    <text style="text-anchor:end;" x="200" y="18">Ukrainian</text>
+    <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="115.19999999999999" x="210" y="11.4"/>
+    <text x="380" y="18">72%</text>
+  </g>
+  <g class="font12" transform="translate(0,962)">
     <text style="text-anchor:end;" x="200" y="18">Vietnamese</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="120.0" x="210" y="11.4"/>
-    <text x="380" y="18">75%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="118.4" x="210" y="11.4"/>
+    <text x="380" y="18">74%</text>
   </g>
 </svg>
