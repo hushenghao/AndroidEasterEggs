@@ -10,8 +10,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
-        versionCode = 37
-        versionName = "2.3.0"
+        versionCode = 38
+        versionName = "2.3.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(
@@ -21,7 +21,7 @@ android {
             "es", "pt", "pt-rBR", "pl-rPL", "tr-rTR", "fi-rFI",
             "in-rID", "hr-rHR", /*"la-rLA", */"el-rGR", "no-rNO",
             "ja-rJP", "ko", "vi-rVN", "th-rTH", "fil-rPH", "lo-rLA",
-            "ar-rSA", "cs-rCZ",
+            "ar-rSA", "cs-rCZ", /*"ta",*/
         )
 
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")

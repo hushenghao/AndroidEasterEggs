@@ -62,6 +62,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
         private const val FILIPINO = 27             // fil-PH
         private const val LAO = 28                  // lo-LA
         private const val CZECH = 30                // cs-CZ
+        private const val TAMIL = 31                // ta
 
         private fun getOptions(): List<Op> {
             val options = mutableListOf(
@@ -114,6 +115,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             LangOp(FILIPINO,            R.string.language_fil_PH, R.string.locale_lang_fil_PH, createLocale("fil", "PH")),
             LangOp(LAO,                 R.string.language_lo_LA,  R.string.locale_lang_lo_LA,  createLocale("lo", "LA")),
             LangOp(CZECH,               R.string.language_cs_CZ,  R.string.locale_lang_cs_CZ,  createLocale("cs", "CZ")),
+//            LangOp(TAMIL,               R.string.language_ta,  R.string.locale_lang_ta,  createLocale("ta")),
         )
         // @formatter:on
 

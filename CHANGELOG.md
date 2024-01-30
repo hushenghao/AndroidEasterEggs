@@ -1,3 +1,6 @@
+### v2.3.1
+- Added Tamil translation
+
 ### v2.3.0 (2024-01-30)
 - New Card UI
 - Added Retain recent Egg tasks Switch

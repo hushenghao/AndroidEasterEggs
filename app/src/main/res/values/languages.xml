@@ -29,6 +29,7 @@
     <string name="language_fil_PH" translatable="false">Filipino</string>
     <string name="language_lo_LA" translatable="false">ພາສາລາວ</string>
     <string name="language_cs_CZ" translatable="false">Čeština</string>
+    <string name="language_ta" translatable="false">தமிழ்</string>
 
     <!-- locality language -->
     <string name="locale_lang_zh_SC">Chinese Simplified</string>
@@ -60,4 +61,5 @@
     <string name="locale_lang_fil_PH">Filipino</string>
     <string name="locale_lang_lo_LA">Lao</string>
     <string name="locale_lang_cs_CZ">Czech</string>
+    <string name="locale_lang_ta">Tamil</string>
 </resources>
