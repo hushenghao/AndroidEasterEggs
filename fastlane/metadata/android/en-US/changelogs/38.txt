@@ -1,1 +1,2 @@
 - Added Tamil translation
+- Optimizing Android M Egg performance issues

@@ -743,6 +743,11 @@ public class MLand extends FrameLayout {
 
         // 4. Handle edge of screen
         // Walk backwards to make sure removal is safe
+        // Fix:
+        //  The variable `i` is incorrectly override by player count.
+        //  The result is that off-screen subviews (Obstacle) can't be removed, which can cause performance issues,
+        //  although it is highly unlikely to happen.
+        i = getChildCount() - 1;
         while (i-- > 0) {
             final View v = getChildAt(i);
             if (v instanceof Obstacle) {
