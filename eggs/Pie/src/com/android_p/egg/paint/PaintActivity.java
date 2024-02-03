@@ -167,6 +167,7 @@ public class PaintActivity extends Activity {
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                                         magnifier.dismiss();
                                     }
+                                    return true;// intercept
                                 }
                                 break;
                             case ACTION_UP:
@@ -179,6 +180,7 @@ public class PaintActivity extends Activity {
                                     painting.setPaintColor(
                                             painting.sampleAt(event.getX(), event.getY()));
                                     refreshBrushAndColor();
+                                    return true;// intercept
                                 }
                                 break;
                         }
@@ -312,9 +314,9 @@ public class PaintActivity extends Activity {
         }
     }
 
-    public PaintActivity() {
-
-    }
+//    public PaintActivity() {
+//
+//    }
 
     @Override
     public void onTrimMemory(int level) {
@@ -335,9 +337,13 @@ public class PaintActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.flags = lp.flags
-                | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
-                | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER;
+        }
+        // add safely space
+//        lp.flags = lp.flags
+//                | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+//                | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
         getWindow().setAttributes(lp);
 
         maxBrushWidth = MAX_BRUSH_WIDTH_DP * getResources().getDisplayMetrics().density;
@@ -347,9 +353,9 @@ public class PaintActivity extends Activity {
         refreshNightMode(getResources().getConfiguration());
     }
 
-    @Override
-    public void onPostResume() {
-        super.onPostResume();
-    }
+//    @Override
+//    public void onPostResume() {
+//        super.onPostResume();
+//    }
 
 }

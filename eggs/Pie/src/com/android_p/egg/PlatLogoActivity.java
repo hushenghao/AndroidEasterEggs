@@ -17,6 +17,7 @@
 package com.android_p.egg;
 
 import android.animation.TimeAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -28,7 +29,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -38,8 +38,6 @@ import android.widget.FrameLayout;
 
 import com.android_p.egg.paint.PaintActivity;
 import com.dede.basic.SpUtils;
-
-import org.json.JSONObject;
 
 public class PlatLogoActivity extends Activity {
     FrameLayout layout;
@@ -178,17 +176,10 @@ public class PlatLogoActivity extends Activity {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // custom
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setNavigationBarColor(0);
-            getWindow().setStatusBarColor(0);
-        }
 
         layout = new FrameLayout(this);
         setContentView(layout);
@@ -197,25 +188,25 @@ public class PlatLogoActivity extends Activity {
         layout.setBackground(bg);
 
         layout.setOnTouchListener(new View.OnTouchListener() {
-            final String TOUCH_STATS = "touch.stats";
+//            final String TOUCH_STATS = "touch.stats";
 
             final PointerCoords pc0 = new PointerCoords();
             final PointerCoords pc1 = new PointerCoords();
 
-            double pressure_min, pressure_max;
+            //            double pressure_min, pressure_max;
             int maxPointers;
             int tapCount;
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                final float pressure = event.getPressure();
+//                final float pressure = event.getPressure();
                 switch (event.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN:
-                        pressure_min = pressure_max = pressure;
+//                        pressure_min = pressure_max = pressure;
                         // fall through
                     case MotionEvent.ACTION_MOVE:
-                        if (pressure < pressure_min) pressure_min = pressure;
-                        if (pressure > pressure_max) pressure_max = pressure;
+//                        if (pressure < pressure_min) pressure_min = pressure;
+//                        if (pressure > pressure_max) pressure_max = pressure;
                         final int pc = event.getPointerCount();
                         if (pc > maxPointers) maxPointers = pc;
                         if (pc > 1) {
@@ -226,22 +217,22 @@ public class PlatLogoActivity extends Activity {
                         break;
                     case MotionEvent.ACTION_CANCEL:
                     case MotionEvent.ACTION_UP:
-                        try {
-                            final String touchDataJson = SpUtils.getString(PlatLogoActivity.this, TOUCH_STATS);
-                            final JSONObject touchData = new JSONObject(
-                                    touchDataJson != null ? touchDataJson : "{}");
-                            if (touchData.has("min")) {
-                                pressure_min = Math.min(pressure_min, touchData.getDouble("min"));
-                            }
-                            if (touchData.has("max")) {
-                                pressure_max = Math.max(pressure_max, touchData.getDouble("max"));
-                            }
-                            touchData.put("min", pressure_min);
-                            touchData.put("max", pressure_max);
-                            SpUtils.putString(PlatLogoActivity.this, TOUCH_STATS, touchData.toString());
-                        } catch (Exception e) {
-                            Log.e("PlatLogoActivity", "Can't write touch settings", e);
-                        }
+//                        try {
+//                            final String touchDataJson = SpUtils.getString(PlatLogoActivity.this, TOUCH_STATS);
+//                            final JSONObject touchData = new JSONObject(
+//                                    touchDataJson != null ? touchDataJson : "{}");
+//                            if (touchData.has("min")) {
+//                                pressure_min = Math.min(pressure_min, touchData.getDouble("min"));
+//                            }
+//                            if (touchData.has("max")) {
+//                                pressure_max = Math.max(pressure_max, touchData.getDouble("max"));
+//                            }
+//                            touchData.put("min", pressure_min);
+//                            touchData.put("max", pressure_max);
+//                            SpUtils.putString(PlatLogoActivity.this, TOUCH_STATS, touchData.toString());
+//                        } catch (Exception e) {
+//                            Log.e("PlatLogoActivity", "Can't write touch settings", e);
+//                        }
 
                         if (maxPointers == 1) {
                             tapCount++;

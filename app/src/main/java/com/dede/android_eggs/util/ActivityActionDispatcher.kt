@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.dede.android_eggs.util.actions.PermissionRequestAction
+import com.dede.android_eggs.util.actions.PlatLogoEdge2EdgeAction
 import com.dede.android_eggs.util.actions.WarningDialogAction
 
 class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
@@ -30,6 +31,7 @@ class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
     private val actions = arrayListOf(
         PermissionRequestAction(),
         WarningDialogAction(),
+        PlatLogoEdge2EdgeAction()
     )
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {

@@ -50,8 +50,8 @@ public class PlatLogoActivity extends Activity {
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
                 ));
-        final int p = (int) (8 * metrics.density);
-        view.setPadding(p, p, p, p);
+//        final int p = (int) (8 * metrics.density);
+//        view.setPadding(p, p, p, p);
 
         Typeface light = Typeface.create("sans-serif-light", Typeface.NORMAL);
         Typeface normal = Typeface.create("sans-serif", Typeface.BOLD);
