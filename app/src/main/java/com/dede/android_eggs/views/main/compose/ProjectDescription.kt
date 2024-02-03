@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,7 +22,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.MaterialTheme.typography
-import androidx.compose.material3.PlainTooltipBox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,17 +44,18 @@ import com.dede.android_eggs.util.createChooser
 
 
 @Composable
-private fun ChipItem(
+private fun RowScope.ChipItem(
     @StringRes textRes: Int,
     separator: Boolean = true,
     onClick: () -> Unit,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.align(Alignment.Bottom)
     ) {
         Text(
             text = stringResource(textRes),
-            style = typography.bodyMedium,
+            style = typography.titleSmall,
             color = colorScheme.secondary,
             modifier = Modifier
                 .clip(shapes.extraSmall)
@@ -63,7 +64,7 @@ private fun ChipItem(
         if (separator) {
             Text(
                 text = stringResource(id = R.string.char_separator),
-                style = typography.bodyMedium,
+                style = typography.titleSmall,
                 color = colorScheme.secondary,
                 modifier = Modifier.padding(start = 6.dp)
             )
@@ -72,7 +73,7 @@ private fun ChipItem(
 }
 
 @Composable
-private fun ChipItem2(
+private fun RowScope.ChipItem2(
     @StringRes textRes: Int,
     onClick: () -> Unit,
 ) {
@@ -83,6 +84,7 @@ private fun ChipItem2(
         modifier = Modifier
             .clip(shapes.extraSmall)
             .clickable(onClick = onClick)
+            .align(Alignment.Bottom)
     )
 }
 
@@ -103,31 +105,26 @@ fun ProjectDescription() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 18.dp)
             .then(Modifier.padding(bottom = 20.dp))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(horizontal = 4.dp)
         ) {
-            PlainTooltipBox(
-                tooltip = { Text(text = stringResource(R.string.app_name)) }
-            ) {
-                Image(
-                    res = R.mipmap.ic_launcher_round,
-                    modifier = Modifier
-                        .size(50.dp)
-                        .tooltipAnchor()
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple(bounded = false),
-                        ) {
-                            konfettiState = true
-                        },
-                    contentDescription = stringResource(id = R.string.app_name)
-                )
-            }
-            Column(modifier = Modifier.padding(start = 12.dp)) {
+            Image(
+                res = R.mipmap.ic_launcher_round,
+                modifier = Modifier
+                    .size(50.dp)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(bounded = false),
+                    ) {
+                        konfettiState = true
+                    },
+                contentDescription = stringResource(id = R.string.app_name)
+            )
+            Column(modifier = Modifier.padding(horizontal = 12.dp)) {
                 Text(
                     text = stringResource(
                         R.string.label_version,
@@ -159,10 +156,10 @@ fun ProjectDescription() {
         )
         FlowRow(
             modifier = Modifier
-                .padding(top = 20.dp)
+                .padding(top = 24.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(6.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             ChipItem(R.string.label_github) {
                 openCustomTab(R.string.url_github)
@@ -196,7 +193,7 @@ fun ProjectDescription() {
         ) {
             Text(
                 text = stringResource(R.string.app_name),
-                style = typography.titleSmall,
+                style = typography.titleMedium,
             )
             ChipItem2(R.string.label_privacy_policy) {
                 openCustomTab(R.string.url_privacy)

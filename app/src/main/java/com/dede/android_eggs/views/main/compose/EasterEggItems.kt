@@ -115,7 +115,7 @@ fun EasterEggHighestItem(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1.6f)
+                .aspectRatio(1.8f)
                 .clipToBounds()
         ) {
             if (snapshot == null || !snapshot.includeBackground) {
@@ -136,6 +136,7 @@ fun EasterEggHighestItem(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(if (snapshot.includeBackground) 0.dp else 12.dp)
+                        .clip(shapes.extraLarge)
                 )
             }
             IconButton(
@@ -155,7 +156,7 @@ fun EasterEggHighestItem(
         }
         Row(
             modifier = Modifier
-                .padding(start = 16.dp, top = 14.dp, end = 18.dp)
+                .padding(start = 18.dp, top = 14.dp, end = 18.dp)
                 .fillMaxWidth()
         ) {
             Column(
@@ -178,7 +179,7 @@ fun EasterEggHighestItem(
         FlowRow(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 18.dp)
                 .padding(top = 12.dp, bottom = 18.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)

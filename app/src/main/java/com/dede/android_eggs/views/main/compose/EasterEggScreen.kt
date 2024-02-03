@@ -91,6 +91,9 @@ fun EasterEggScreen(
                         items(items = highestList) {
                             EasterEggHighestItem(it)
                         }
+                        item {
+                            Wavy(res = R.drawable.ic_wavy_line)
+                        }
                         items(items = normalList) {
                             EasterEggItem(it, enableItemAnim = false)
                         }
