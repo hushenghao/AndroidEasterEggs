@@ -64,10 +64,10 @@ public class PlatLogoActivity extends Activity {
                 mHandler.postDelayed(mSuperLongPress, ViewConfiguration.getLongPressTimeout());
             } else {
                 try {
-                    startActivity(new Intent(PlatLogoActivity.this, Nyandroid.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
+                    startActivity(new Intent(PlatLogoActivity.this, Nyandroid.class));
+//                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+//                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                    | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
                 } catch (ActivityNotFoundException ex) {
                     android.util.Log.e("PlatLogoActivity", "Couldn't find platlogo screensaver.");
                 }

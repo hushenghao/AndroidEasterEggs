@@ -12,9 +12,11 @@
 
         <activity
             android:name=".quares.QuaresActivity"
-            android:icon="@drawable/q_icon"
+            android:excludeFromRecents="true"
             android:exported="false"
+            android:icon="@drawable/q_icon"
             android:label="@string/q_egg_name"
+            android:launchMode="singleInstance"
             android:theme="@style/QuaresTheme" />
     </application>
 

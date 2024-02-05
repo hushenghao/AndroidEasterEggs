@@ -112,10 +112,10 @@ public class PlatLogoActivity extends Activity {
             @Override
             public boolean onLongClick(View v) {
                 try {
-                    startActivity(new Intent(PlatLogoActivity.this, BeanBag.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
+                    startActivity(new Intent(PlatLogoActivity.this, BeanBag.class));
+//                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+//                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                    | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
                     //.setClassName("com.android.systemui","com.android.systemui.BeanBag"));
                 } catch (ActivityNotFoundException ex) {
                     android.util.Log.e("PlatLogoActivity", "Couldn't find a bag of beans.");

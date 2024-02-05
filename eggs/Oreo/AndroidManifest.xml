@@ -36,8 +36,11 @@ Copyright (C) 2016 The Android Open Source Project
 
         <activity
             android:name=".octo.Ocquarium"
-            android:exported="false"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:icon="@drawable/o_icon"
             android:label="@string/o_app_name"
+            android:launchMode="singleInstance"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />
     </application>
 </manifest>

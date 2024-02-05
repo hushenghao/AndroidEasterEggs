@@ -184,10 +184,10 @@ public class PlatLogoActivity extends Activity {
                                 @Override
                                 public void run() {
                                     try {
-                                        startActivity(new Intent(PlatLogoActivity.this, LLandActivity.class)
-                                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                                        | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                                        | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
+                                        startActivity(new Intent(PlatLogoActivity.this, LLandActivity.class));
+//                                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+//                                                        | Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                                        | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
                                     } catch (ActivityNotFoundException ex) {
                                         Log.e("PlatLogoActivity", "No more eggs.");
                                     }

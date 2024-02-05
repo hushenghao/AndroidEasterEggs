@@ -157,10 +157,10 @@ public class PlatLogoActivity extends Activity {
                             System.currentTimeMillis());
                 }
                 try {
-                    startActivity(new Intent(PlatLogoActivity.this, DessertCase.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
+                    startActivity(new Intent(PlatLogoActivity.this, DessertCase.class));
+//                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+//                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                    | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
                 } catch (ActivityNotFoundException ex) {
                     android.util.Log.e("PlatLogoActivity", "Couldn't catch a break.");
                 }
