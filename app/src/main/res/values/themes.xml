@@ -144,7 +144,7 @@
     </style>
 
     <style name="Widget.Preference.Switch" parent="@style/Preference.SwitchPreferenceCompat.Material">
-        <item name="widgetLayout">@layout/item_setting_pref_switch</item>
+        <item name="android:widgetLayout">@layout/item_setting_pref_switch</item>
     </style>
 
     <style name="Theme.EggGroup.PopupMenu.ListPopupWindow" parent="Widget.Material3.PopupMenu.ListPopupWindow">

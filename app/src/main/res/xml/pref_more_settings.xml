@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:title="@string/label_settings">
 
     <com.dede.android_eggs.ui.preferences.SimplifyPreferenceCategory
@@ -22,7 +23,8 @@
             android:defaultValue="false"
             android:key="key_retain_in_recents"
             android:summary="@string/pref_summary_retain_recent_egg_tasks"
-            android:title="@string/pref_retain_recent_egg_tasks" />
+            android:title="@string/pref_retain_recent_egg_tasks"
+            tools:widgetLayout="@layout/item_setting_pref_switch" />
 
     </com.dede.android_eggs.ui.preferences.SimplifyPreferenceCategory>
 
