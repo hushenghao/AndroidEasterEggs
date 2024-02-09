@@ -39,4 +39,8 @@
     <string name="label_share">يشارك</string>
     <string name="label_search_hint">بحث…</string>
     <string name="label_component_manager">مدير المكونات</string>
+    <string name="pref_more_settings">المزيد من الإعدادات</string>
+    <string name="pref_retain_recent_egg_tasks">احتفظ بمهام البيض الأخيرة</string>
+    <string name="pref_summary_retain_recent_egg_tasks">الاحتفاظ بمهام البيض على شاشة العناصر الأخيرة، بحد أقصى للاحتفاظ بـ 5 (غير صالح لوضع النشاط المضمن)</string>
+    <string name="label_about">حول</string>
 </resources>
