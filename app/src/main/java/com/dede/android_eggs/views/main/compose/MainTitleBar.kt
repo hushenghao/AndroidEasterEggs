@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.dede.android_eggs.views.main.compose
 
@@ -9,8 +9,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Settings
@@ -18,7 +16,6 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.PlainTooltipBox
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults.pinnedScrollBehavior
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -35,7 +32,6 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.FragmentManager
 import com.dede.android_eggs.R
 import com.dede.android_eggs.views.settings.SettingsFragment
@@ -104,24 +100,16 @@ fun MainTitleBar(
                 enter = fadeIn() + scaleIn(),
                 exit = fadeOut() + scaleOut(),
             ) {
-                PlainTooltipBox(
-                    tooltip = {
-                        Text(text = stringResource(android.R.string.search_go))
+                IconButton(
+                    onClick = {
+                        // show searchBar
+                        searchBarState.visible = true
                     },
-                    modifier = Modifier.padding(bottom = 50.dp)// > anchor top offset
                 ) {
-                    IconButton(
-                        onClick = {
-                            // show searchBar
-                            searchBarState.visible = true
-                        },
-                        modifier = Modifier.tooltipAnchor()
-                    ) {
-                        Icon(
-                            imageVector = Icons.Rounded.Search,
-                            contentDescription = stringResource(android.R.string.search_go),
-                        )
-                    }
+                    Icon(
+                        imageVector = Icons.Rounded.Search,
+                        contentDescription = stringResource(android.R.string.search_go),
+                    )
                 }
             }
         },
@@ -133,24 +121,16 @@ fun MainTitleBar(
             )
         },
         actions = {
-            PlainTooltipBox(
-                tooltip = {
-                    Text(text = stringResource(R.string.label_settings))
+            IconButton(
+                onClick = {
+                    showSettings()
                 },
-                modifier = Modifier.padding(bottom = 50.dp)// > anchor top offset
             ) {
-                IconButton(
-                    onClick = {
-                        showSettings()
-                    },
-                    modifier = Modifier.tooltipAnchor()
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.Settings,
-                        contentDescription = stringResource(R.string.label_settings),
-                        modifier = Modifier.rotate(settingRotate)
-                    )
-                }
+                Icon(
+                    imageVector = Icons.Rounded.Settings,
+                    contentDescription = stringResource(R.string.label_settings),
+                    modifier = Modifier.rotate(settingRotate)
+                )
             }
         }
     )
