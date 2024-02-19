@@ -4,7 +4,7 @@
     android:viewportWidth="512"
     android:viewportHeight="512">
     <path
-        android:fillColor="@color/android_15_logo_background"
+        android:fillColor="@color/android_preview_logo_background"
         android:pathData="M0,0 L560,0 L560,560 L0,560z" />
     <group
         android:pivotX="256"

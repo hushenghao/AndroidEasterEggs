@@ -56,7 +56,7 @@ object AndroidPreviewHelp {
                 override fun easterEggAction(context: Context): Boolean {
                     showTimelineDialog(
                         context,
-                        R.drawable.android_15_platlogo,
+                        R.drawable.android_15_logo,
                         R.string.nickname_android_vanilla_ice_cream
                     )
                     return true
