@@ -23,7 +23,9 @@
 | [![下载应用，请到 F-Droid](https://fdroid.gitlab.io/artwork/badge/get-it-on-zh-cn.svg)](https://f-droid.org/packages/com.dede.android_eggs) | [![下载应用，请到 Google Play](assets/image/badge_playstore_fixpadding-zh.png)](https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) | [![Beta](assets/image/badge_pgyer.svg)](https://www.pgyer.com/eggs) |
 |--------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
 
-* **Google Play** 使用 [Play 应用签名功能](https://support.google.com/googleplay/android-developer/answer/9842756)，可能出现无法和其他下载渠道互相升级的问题。
+* **Google Play**
+  使用 [Play 应用签名功能](https://support.google.com/googleplay/android-developer/answer/9842756)
+  ，可能出现无法和其他下载渠道互相升级的问题。
 * **蒲公英** 下载的是Beta版本，可能包含了一些尚未稳定的新功能。
 
 ## 截图
@@ -32,8 +34,10 @@
 |----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
 
 ## Android 版本
+
 | 名称                                     | API level | 彩蛋                                                      | 使用了新特性 [<sup>[1]</sup>](#id_new_features) | 最低 API [<sup>[2]</sup>](#id_full_egg_mini_api) | 发布时间 [<sup>[8]</sup>](#first_release_date) |
 |----------------------------------------|:---------:|---------------------------------------------------------|:-----------------------------------------:|:----------------------------------------------:|:------------------------------------------:|
+| Android 15 (Vanilla Ice Cream)         |    35     | 等待中...                                                  |                     -                     |                       -                        |                  2024-09                   |
 | Android 14 (Upside Down Cake)          |    34     | Android 14 Easter Egg [<sup>[3]</sup>](#id_14_egg_name) |                    🚫                     |                       -                        |                  2023-09                   |
 | Android 13 (Tiramisu)                  |    33     | Paint Chips                                             |                     ✅                     |       31 [<sup>[4]</sup>](#id_android12)       |                  2022-09                   |
 | Android 12-12L (Snow Cone)             |   31-32   | Paint Chips                                             |                     ✅                     |       31 [<sup>[4]</sup>](#id_android12)       |                  2021-09                   |
@@ -58,16 +62,25 @@
 
 1. <span id='id_new_features'>使用了系统新特性的彩蛋，老版本系统只能使用部分功能。</span>
 2. <span id='id_full_egg_mini_api'>完整体验彩蛋所需要的最低API版本。</span>
-3. <span id='id_14_egg_name'>这里使用的是 Android 14 彩蛋代码中的名称，目前没有找到官方的彩蛋命名。</span>
-4. <span id='id_android12'>Android 12 (API level 31) 改进了现有的 [Widgets API](https://developer.android.google.cn/about/versions/12/features/widgets?hl=zh-cn)，以改善平台和启动器中的用户和开发者体验。</span>
-5. <span id='id_android11'>在 Android 11 (API level 30) 及更高版本中，[快速访问设备控制器](https://developer.android.google.cn/guide/topics/ui/device-control?hl=zh-cn) 功能可让用户通过 Android 电源菜单快速查看和控制外部设备。</span>
-6. <span id='id_android7'>在 Android 7 (API level 24) 中，扩展了 [快速设置](https://developer.android.google.cn/about/versions/nougat/android-7.0?hl=zh-cn#tile_api) 的范围，使其更加有用而且更方便。</span>
+3. <span id='id_14_egg_name'>这里使用的是 Android 14
+   彩蛋代码中的名称，目前没有找到官方的彩蛋命名。</span>
+4. <span id='id_android12'>Android 12 (API level 31)
+   改进了现有的 [Widgets API](https://developer.android.google.cn/about/versions/12/features/widgets?hl=zh-cn)
+   ，以改善平台和启动器中的用户和开发者体验。</span>
+5. <span id='id_android11'>在 Android 11 (API level 30)
+   及更高版本中，[快速访问设备控制器](https://developer.android.google.cn/guide/topics/ui/device-control?hl=zh-cn)
+   功能可让用户通过 Android 电源菜单快速查看和控制外部设备。</span>
+6. <span id='id_android7'>在 Android 7 (API level 24)
+   中，扩展了 [快速设置](https://developer.android.google.cn/about/versions/nougat/android-7.0?hl=zh-cn#tile_api)
+   的范围，使其更加有用而且更方便。</span>
 7. <span id='id_egg_name'>老版本的彩蛋没有具体命名，这里使用系统版本别名。</span>
-8. <span id='first_release_date'>发布时间为第一个正式版本发布的月份，正式版之后发布的MR小版本没有列出。**目前Android正式版发布时间为每年的9月。**</span>
+8. <span id='first_release_date'>发布时间为第一个正式版本发布的月份，正式版之后发布的MR小版本没有列出。
+   **目前Android正式版发布时间为每年的9月。**</span>
 
 ## 贡献
 
-请查看我们的[贡献文档](.github/CONTRIBUTING.md)来报告问题，或参与应用程序和文档的[翻译](https://zh.crowdin.com/project/easter-eggs)。
+请查看我们的[贡献文档](.github/CONTRIBUTING.md)
+来报告问题，或参与应用程序和文档的[翻译](https://zh.crowdin.com/project/easter-eggs)。
 
 <details>
 <summary>查看所有语言的翻译状态。</summary>
@@ -77,10 +90,12 @@
 </details>
 
 ## 感谢
+
 * [AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)
 * [所有翻译贡献者](https://zh.crowdin.com/project/easter-eggs/members)
 
 ## 协议
+
 ```text
 Copyright 2023 Hu Shenghao
 

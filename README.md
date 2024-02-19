@@ -16,15 +16,21 @@ Collections the Android release Easter Egg
 
 </div>
 
-This project contains the complete code of the system Easter eggs, which aims to organize and be compatible with the system easter eggs, so as to ensure that most devices can experience different versions of Easter eggs without making too many modifications to the easter egg's code. Newer versions use new features of said system, but lower versions can only use some functions.
+This project contains the complete code of the system Easter eggs, which aims to organize and be
+compatible with the system easter eggs, so as to ensure that most devices can experience different
+versions of Easter eggs without making too many modifications to the easter egg's code. Newer
+versions use new features of said system, but lower versions can only use some functions.
 
 ## Download
 
 | [![Get it on F-Droid](https://fdroid.gitlab.io/artwork/badge/get-it-on.svg)](https://f-droid.org/packages/com.dede.android_eggs) | [![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) | [![Beta](assets/image/badge_pgyer.svg)](https://www.pgyer.com/eggs) |
 |----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
 
-* **Google Play** use [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756), which may not be able to upgrade with other download channels.
-* **Pgyer** downloaded the Beta version, which may contain some new features that are not yet stable.
+* **Google Play**
+  use [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756),
+  which may not be able to upgrade with other download channels.
+* **Pgyer** downloaded the Beta version, which may contain some new features that are not yet
+  stable.
 
 ## Screenshots
 
@@ -32,8 +38,10 @@ This project contains the complete code of the system Easter eggs, which aims to
 |----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
 
 ## Android Versions
+
 | Name                                   | API level | Egg                                                     | Use new features [<sup>[1]</sup>](#id_new_features) | Minimum API [<sup>[2]</sup>](#id_full_egg_mini_api) | Release date [<sup>[8]</sup>](#first_release_date) |
 |----------------------------------------|:---------:|---------------------------------------------------------|:---------------------------------------------------:|:---------------------------------------------------:|:--------------------------------------------------:|
+| Android 15 (Vanilla Ice Cream)         |    35     | Waiting...                                              |                          -                          |                          -                          |                      2024-09                       |
 | Android 14 (Upside Down Cake)          |    34     | Android 14 Easter Egg [<sup>[3]</sup>](#id_14_egg_name) |                         🚫                          |                          -                          |                      2023-09                       |
 | Android 13 (Tiramisu)                  |    33     | Paint Chips                                             |                          ✅                          |         31 [<sup>[4]</sup>](#id_android12)          |                      2022-09                       |
 | Android 12-12L (Snow Cone)             |   31-32   | Paint Chips                                             |                          ✅                          |         31 [<sup>[4]</sup>](#id_android12)          |                      2021-09                       |
@@ -56,18 +64,32 @@ This project contains the complete code of the system Easter eggs, which aims to
 | Android 1.1 (Petit Four)               |     2     | -                                                       |                          -                          |                          -                          |                      2009-02                       |
 | Android 1.0 (Base)                     |     1     | -                                                       |                          -                          |                          -                          |                      2008-09                       |
 
-1. <span id='id_new_features'>Easter eggs with new features of the system are used, and the old version of the system can only use some functions.</span>
-2. <span id='id_full_egg_mini_api'>The minimum API level required to fully experience Easter Egg.</span>
-3. <span id='id_14_egg_name'>The name in the Android 14 easter egg code is used here, and no official easter egg naming has been found yet.</span>
-4. <span id='id_android12'>Android 12 (API level 31) revamps the existing [Widgets API](https://developer.android.com/about/versions/12/features/widgets) to improve the user and developer experience in the platform and launchers.</span>
-5. <span id='id_android11'>In Android 11 (API level 30) and later, the [Quick Access Device Controls](https://developer.android.com/develop/ui/views/device-control) feature lets the user quickly view and control external devices.</span>
-6. <span id='id_android7'>In Android 7.0 (API level 24), expanded the scope of [Quick Settings](https://developer.android.com/about/versions/nougat/android-7.0#tile_api) to make it even more useful and convenient.</span>
-7. <span id='id_egg_name'>There is no specific name for the old version of Easter eggs, and the system version alias are used here.</span>
-8. <span id='first_release_date'>The release date is the month in which the first official version was released, and minor versions of MR Released after the official version are not listed. **The official version of Android is released in September every year.**</span>
+1. <span id='id_new_features'>Easter eggs with new features of the system are used, and the old
+   version of the system can only use some functions.</span>
+2. <span id='id_full_egg_mini_api'>The minimum API level required to fully experience Easter
+   Egg.</span>
+3. <span id='id_14_egg_name'>The name in the Android 14 easter egg code is used here, and no
+   official easter egg naming has been found yet.</span>
+4. <span id='id_android12'>Android 12 (API level 31) revamps the
+   existing [Widgets API](https://developer.android.com/about/versions/12/features/widgets) to
+   improve the user and developer experience in the platform and launchers.</span>
+5. <span id='id_android11'>In Android 11 (API level 30) and later,
+   the [Quick Access Device Controls](https://developer.android.com/develop/ui/views/device-control)
+   feature lets the user quickly view and control external devices.</span>
+6. <span id='id_android7'>In Android 7.0 (API level 24), expanded the scope
+   of [Quick Settings](https://developer.android.com/about/versions/nougat/android-7.0#tile_api) to
+   make it even more useful and convenient.</span>
+7. <span id='id_egg_name'>There is no specific name for the old version of Easter eggs, and the
+   system version alias are used here.</span>
+8. <span id='first_release_date'>The release date is the month in which the first official version
+   was released, and minor versions of MR Released after the official version are not listed. **The
+   official version of Android is released in September every year.**</span>
 
 ## Contributing
 
-See our [Contributing doc](.github/CONTRIBUTING.md) for information on how to report issues, [translate](https://crowdin.com/project/easter-eggs) the app into your language or help with development.
+See our [Contributing doc](.github/CONTRIBUTING.md) for information on how to report
+issues, [translate](https://crowdin.com/project/easter-eggs) the app into your language or help with
+development.
 
 <details>
 <summary>View translation status for all languages.</summary>
@@ -82,6 +104,7 @@ See our [Contributing doc](.github/CONTRIBUTING.md) for information on how to re
 * [All translation contributors](https://crowdin.com/project/easter-eggs/members)
 
 ## License
+
 ```text
 Copyright 2023 Hu Shenghao
 
