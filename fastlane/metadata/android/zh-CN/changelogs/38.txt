@@ -1,4 +1,5 @@
 - 等待 Android Vanilla Ice Cream
+- 新增 Android U 彩蛋 随机显示 Platlogo
 - 新增泰米尔语翻译
 - 统一 PlatLogo 页面主题样式
 - 优化了 Android M 彩蛋的性能问题

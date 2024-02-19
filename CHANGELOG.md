@@ -1,5 +1,6 @@
 ### v2.3.1
 - Waiting Android Vanilla Ice Cream
+- Added Random Platlogo on Android U Egg
 - Added Tamil translation
 - Uniform PlatLogo pages theme style
 - Optimizing Android M Egg performance issues [#164](https://github.com/hushenghao/AndroidEasterEggs/issues/164)
