@@ -127,8 +127,8 @@ dependencies {
     debugImplementation(libs.squareup.leakcanary)
     implementation(libs.overscroll.decor.android)
 
-    implementation(project(":eggs:U"))
-    implementation(project(":eggs:T"))
+    implementation(project(":eggs:UpsideDownCake"))
+    implementation(project(":eggs:Tiramisu"))
     implementation(project(":eggs:S"))
     implementation(project(":eggs:R"))
     implementation(project(":eggs:Q"))
