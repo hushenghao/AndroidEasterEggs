@@ -241,7 +241,7 @@ public class PlatLogoActivity extends Activity {
         lp.gravity = Gravity.CENTER;
 
         mLogo = new ImageView(this);
-        Drawable drawable = DrawableKt.createVectorDrawableCompat(this, R.drawable.u_platlogo);
+        Drawable drawable = DrawableKt.createVectorDrawableCompat(this, randomPlatlogo());
         mLogo.setImageDrawable(drawable);
 //        mLogo.setImageResource(R.drawable.u_platlogo);
         mLogo.setOnTouchListener(mTouchListener);
@@ -251,6 +251,15 @@ public class PlatLogoActivity extends Activity {
         Log.v(TAG, "Hello");
 
         setContentView(mLayout);
+    }
+
+    private int randomPlatlogo() {
+        int[] arr = {
+                R.drawable.u_platlogo,// release platlogo
+                R.drawable.u_platlogo_1,// preview release platlogo
+        };
+        int i = new Random().nextInt(arr.length);
+        return arr[i];
     }
 
     private void startAnimating() {
