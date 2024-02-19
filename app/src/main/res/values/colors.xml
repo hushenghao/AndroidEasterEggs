@@ -65,4 +65,6 @@
     <color name="splash_background_color">?android:attr/colorBackground</color>
 
     <color name="appwidget_background_color">?attr/colorSurfaceVariant</color>
+
+    <color name="android_15_logo_background">#1D1E21</color>
 </resources>

@@ -79,6 +79,9 @@ fun EasterEggHighestItem(
         EasterEggHelp.DateFormatter.getInstance("MMM yyyy")
     }
 
+    val isSupportShortcut = remember(egg) {
+        EggActionHelp.isSupportShortcut(egg)
+    }
     val snapshot = remember(egg) {
         egg.provideSnapshotProvider()
     }
@@ -139,19 +142,21 @@ fun EasterEggHighestItem(
                         .clip(shapes.extraLarge)
                 )
             }
-            IconButton(
-                onClick = {
-                    EggActionHelp.addShortcut(context, egg)
-                },
-                modifier = Modifier
-                    .padding(6.dp)
-                    .align(Alignment.TopEnd)
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.BookmarkBorder,
-                    tint = colorScheme.onPrimary,
-                    contentDescription = stringResource(id = R.string.label_add_shortcut)
-                )
+            if (isSupportShortcut) {
+                IconButton(
+                    onClick = {
+                        EggActionHelp.addShortcut(context, egg)
+                    },
+                    modifier = Modifier
+                        .padding(6.dp)
+                        .align(Alignment.TopEnd)
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.BookmarkBorder,
+                        tint = colorScheme.onPrimary,
+                        contentDescription = stringResource(id = R.string.label_add_shortcut)
+                    )
+                }
             }
         }
         Row(

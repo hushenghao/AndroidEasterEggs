@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- tasty treat name -->
+    <string name="nickname_android_vanilla_ice_cream" translatable="false">Vanilla Ice Cream</string>
     <string name="nickname_android_froyo" translatable="false">Froyo</string>
     <string name="nickname_android_eclair" translatable="false">Eclair</string>
     <string name="nickname_android_donut" translatable="false">Donut</string>

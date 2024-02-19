@@ -1,6 +1,7 @@
 package com.dede.basic.provider
 
 import android.app.Activity
+import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import java.util.Date
@@ -52,6 +53,10 @@ abstract class EasterEgg constructor(
     val id = apiLevel.first
 
     abstract fun provideEasterEgg(): Class<out Activity>?
+
+    open fun easterEggAction(context: Context): Boolean {
+        return false
+    }
 
     abstract fun provideSnapshotProvider(): SnapshotProvider?
 

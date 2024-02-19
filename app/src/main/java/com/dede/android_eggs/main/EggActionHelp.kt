@@ -69,7 +69,13 @@ object EggActionHelp {
     }
 
     fun launchEgg(context: Context, egg: EasterEgg) {
-        val targetClass = egg.provideEasterEgg() ?: return
+        val targetClass = egg.provideEasterEgg()
+        if (targetClass == null) {
+            if (!egg.easterEggAction(context)) {
+                context.toast(R.string.toast_no_egg)
+            }
+            return
+        }
         val retainInRecents = !SplitUtils.isActivityEmbedded(context) &&
                 MoreSettings.isRetainInRecentsEnabled(context)
         val intent = createIntent(context, targetClass, retainInRecents)

@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material.ripple.rememberRipple
@@ -128,6 +129,7 @@ fun BottomSearchBar(
         }.collect { event ->
             backProgress = event.progress
         }
+        state.searchText = ""
         state.visible = false
     }
     LaunchedEffect(state.visible) {
@@ -207,7 +209,7 @@ private fun BottomSearchBarView(
                 unfocusedIndicatorColor = Color.Transparent,
             ),
             leadingIcon = {
-                Icon(imageVector = Icons.Rounded.ArrowBack,
+                Icon(imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
                     contentDescription = null,
                     modifier = Modifier.clickable(
                         interactionSource = remember { MutableInteractionSource() },

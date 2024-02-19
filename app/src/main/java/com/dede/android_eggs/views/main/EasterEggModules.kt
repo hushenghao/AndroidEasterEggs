@@ -15,6 +15,7 @@ import com.android_r.egg.AndroidREasterEgg
 import com.android_s.egg.AndroidSEasterEgg
 import com.android_t.egg.AndroidTEasterEgg
 import com.android_u.egg.AndroidUEasterEgg
+import com.dede.android_eggs.main.AndroidPreviewHelp
 import com.dede.android_eggs.main.entity.Snapshot
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.ComponentProvider.Component
@@ -28,6 +29,7 @@ import javax.inject.Singleton
 
 @Module(
     includes = [
+        AndroidPreviewHelp.PreviewEasterEgg::class,
         AndroidUEasterEgg::class,
         AndroidTEasterEgg::class,
         AndroidSEasterEgg::class,

@@ -1,10 +1,11 @@
 package com.dede.android_eggs.views.timeline
 
 import android.os.Build
-import android.util.SparseArray
+import android.util.SparseIntArray
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.core.util.set
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.EasterEggHelp
 import com.dede.basic.provider.EasterEgg
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 class AndroidLogoMatcher @Inject constructor() {
 
-    private val cache = SparseArray<Int>()
+    private val cache = SparseIntArray()
 
     @Inject
     lateinit var easterEggs: List<@JvmSuppressWildcards EasterEgg>

@@ -63,19 +63,7 @@ fun EasterEggScreen(
             label = "EasterEggList",
         ) { isEmpty ->
             if (isEmpty) {
-                Box(
-                    contentAlignment = Alignment.TopCenter,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(contentPadding)
-                        .padding(top = 32.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.SearchOff,
-                        contentDescription = null,
-                        modifier = Modifier.size(108.dp)
-                    )
-                }
+                SearchEmpty(contentPadding)
             } else {
                 LazyColumn(
                     contentPadding = contentPadding + PaddingValues(vertical = 10.dp),
@@ -107,6 +95,23 @@ fun EasterEggScreen(
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun SearchEmpty(contentPadding: PaddingValues) {
+    Box(
+        contentAlignment = Alignment.TopCenter,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(contentPadding)
+            .padding(top = 32.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Rounded.SearchOff,
+            contentDescription = null,
+            modifier = Modifier.size(108.dp)
+        )
     }
 }
 
