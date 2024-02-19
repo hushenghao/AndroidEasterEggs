@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalLayoutApi::class)
 
 package com.dede.android_eggs.views.main.compose
 

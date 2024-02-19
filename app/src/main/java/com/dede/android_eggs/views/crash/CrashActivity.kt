@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.dede.android_eggs.views.crash
 
 import android.content.ActivityNotFoundException

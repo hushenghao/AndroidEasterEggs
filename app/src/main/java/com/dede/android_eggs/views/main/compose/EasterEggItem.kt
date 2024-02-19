@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
-
 package com.dede.android_eggs.views.main.compose
 
 import android.view.HapticFeedbackConstants

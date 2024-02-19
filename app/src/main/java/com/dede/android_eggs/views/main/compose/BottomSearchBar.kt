@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalAnimationApi::class, ExperimentalComposeUiApi::class)
+@file:OptIn(ExperimentalAnimationApi::class)
 
 package com.dede.android_eggs.views.main.compose
 
@@ -68,6 +68,7 @@ class BottomSearchBarState(initVisible: Boolean, initSearchText: String) {
     var visible: Boolean by mutableStateOf(initVisible)
     var searchText: String by mutableStateOf(initSearchText)
 
+    @Suppress("RedundantIf")
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is BottomSearchBarState) return false
