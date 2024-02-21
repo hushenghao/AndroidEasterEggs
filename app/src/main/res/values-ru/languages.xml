@@ -30,4 +30,6 @@
     <string name="locale_lang_fil_PH">Филиппинский</string>
     <string name="locale_lang_lo_LA">Лаосский</string>
     <string name="locale_lang_cs_CZ">Чешский</string>
+    <string name="locale_lang_ta">Тамильский</string>
+    <string name="locale_lang_ro">Румынский</string>
 </resources>
