@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Easter Eggs</string>
     <string name="summary_android_waiting">Ожидание…</string>
-    <string name="summary_android_release_pushed">Финальная версия релиза выпущена</string>
+    <string name="summary_android_release_pushed">Выпущен финальный релиз версии</string>
     <string name="title_open_with">Открыть с помощью</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">–</string>
@@ -28,7 +28,7 @@
     <string name="summary_theme_dark_mode">Тёмная</string>
     <string name="summary_theme_light_mode">Светлая</string>
     <string name="label_add_shortcut">Ярлык</string>
-    <string name="label_donate">Пожертвовать</string>
+    <string name="label_donate">Пожертвование</string>
     <string name="preference_on">Вкл.</string>
     <string name="preference_off">Выкл.</string>
     <string name="toast_shortcut_added">Ярлык добавлен</string>
@@ -39,4 +39,8 @@
     <string name="label_share">Поделиться</string>
     <string name="label_search_hint">Поиск…</string>
     <string name="label_component_manager">Менеджер компонентов</string>
+    <string name="pref_more_settings">Другие настройки</string>
+    <string name="pref_retain_recent_egg_tasks">Сохранять недавние задачи запуска пасхальных яиц</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Сохранять недавние задачи запуска пасхальных яиц на экране «Недавние», максимум 5 (недопустимо для режима встроенной активности (Acitivity Embedded Mode))</string>
+    <string name="label_about">О приложении</string>
 </resources>
