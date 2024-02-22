@@ -56,7 +56,7 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           new_branch: l10n_crowdin_translations
-          pull: ''
+          pull: '--rebase'
           message: "feat: Update Crowdin project progress"
           add: '*.svg'
 
