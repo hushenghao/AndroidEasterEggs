@@ -21,6 +21,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip' # caching pip dependencies
+
       - name: Synchronize with Crowdin
         uses: crowdin/github-action@v1
         id: crowdin
@@ -40,22 +46,16 @@ jobs:
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
-      - name: Set up python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-          cache: 'pip' # caching pip dependencies
-
       - name: Update Crowdin project progress
         run: |
           cd script/crowdin
           pip install -r requirements.txt
           python start.py ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Commit Crowdin project progress svg
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "feat: Update Crowdin project progress"
-          commit_options: '--no-verify --signoff'
           branch: l10n_crowdin_translations
           create_branch: true
           file_pattern: '*.svg'
