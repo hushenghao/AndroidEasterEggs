@@ -53,12 +53,11 @@ jobs:
           python start.py ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
       - name: Commit Crowdin project progress svg
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: EndBug/add-and-commit@v9
         with:
+          new_branch: l10n_crowdin_translations
           commit_message: "feat: Update Crowdin project progress"
-          branch: l10n_crowdin_translations
-          create_branch: true
-          file_pattern: '*.svg'
+          add: '*.svg'
 
       - name: Enable auto-merge for the PR
         if: steps.crowdin.outputs.pull_request_url
