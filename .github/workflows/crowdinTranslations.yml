@@ -14,6 +14,8 @@ on:
 jobs:
   crowdin:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -54,10 +56,9 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           new_branch: l10n_crowdin_translations
+          pull: ''
           message: "feat: Update Crowdin project progress"
           add: '*.svg'
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Enable auto-merge for the PR
         if: steps.crowdin.outputs.pull_request_url
