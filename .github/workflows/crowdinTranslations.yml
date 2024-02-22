@@ -27,12 +27,28 @@ jobs:
           python-version: '3.10'
           cache: 'pip' # caching pip dependencies
 
-      - name: Synchronize with Crowdin
+      - name: Crowdin push
         uses: crowdin/github-action@v1
-        id: crowdin
         with:
           upload_sources: true
           upload_translations: true
+          download_translations: false
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Update Crowdin progress
+        run: |
+          cd script/crowdin
+          pip install -r requirements.txt
+          python start.py ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Crowdin pull
+        uses: crowdin/github-action@v1
+        id: crowdin
+        with:
+          upload_sources: false
+          upload_translations: false
           download_translations: true
 
           create_pull_request: true
@@ -45,21 +61,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-
-      - name: Update Crowdin project progress
-        run: |
-          cd script/crowdin
-          pip install -r requirements.txt
-          python start.py ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-          cd ../..
-          git status
-
-      - name: Commit Crowdin project progress svg
-        uses: EndBug/add-and-commit@v9
-        with:
-          new_branch: l10n_crowdin_translations
-          message: "feat: Update Crowdin project progress"
-          add: '*.svg'
 
       - name: Enable auto-merge for the PR
         if: steps.crowdin.outputs.pull_request_url
