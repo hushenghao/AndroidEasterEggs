@@ -56,14 +56,7 @@ jobs:
           pull_request_base_branch_name: 'main'
           pull_request_labels: 'translations, enhancement'
           pull_request_assignees: 'crowdin-bot'
-          pull_request_reviewers: 'hushenghao'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-
-      - name: Enable auto-merge for the PR
-        if: steps.crowdin.outputs.pull_request_url
-        run: gh pr merge ${{ steps.crowdin.outputs.pull_request_url }} --auto --merge --delete-branch
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
