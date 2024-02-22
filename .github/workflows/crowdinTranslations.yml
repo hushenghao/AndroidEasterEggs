@@ -51,12 +51,13 @@ jobs:
           cd script/crowdin
           pip install -r requirements.txt
           python start.py ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+          cd ../..
+          git status
 
       - name: Commit Crowdin project progress svg
         uses: EndBug/add-and-commit@v9
         with:
           new_branch: l10n_crowdin_translations
-          pull: '--rebase'
           message: "feat: Update Crowdin project progress"
           add: '*.svg'
 
