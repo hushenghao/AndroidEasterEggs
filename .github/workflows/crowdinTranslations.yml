@@ -64,6 +64,6 @@ jobs:
 
       - name: Enable auto-merge for the PR
         if: steps.crowdin.outputs.pull_request_url
-        run: gh pr merge ${{ steps.crowdin.outputs.pull_request_url }} --auto --delete-branch
+        run: gh pr merge ${{ steps.crowdin.outputs.pull_request_url }} --auto --merge --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
