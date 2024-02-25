@@ -30,5 +30,5 @@
     <locale android:name="lo-LA" />
     <locale android:name="cs-CZ" />
     <locale android:name="ta-IN" />
-    <!--    <locale android:name="ro-RO" />-->
+    <locale android:name="ro-RO" />
 </locale-config>
