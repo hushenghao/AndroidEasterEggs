@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- locality language -->
+    <string name="locale_lang_zh_SC">Απλοποιημένα Κινέζικα</string>
+    <string name="locale_lang_zh_TC">Παραδοσιακά κινέζικα</string>
+    <string name="locale_lang_de">Γερμανία</string>
+    <string name="locale_lang_en">Αγγλικά</string>
+    <string name="locale_lang_es">Ισπανικά</string>
+    <string name="locale_lang_hr_HR">Κροατία</string>
+    <string name="locale_lang_in_ID">Ινδονησία</string>
+    <string name="locale_lang_it">Ιταλικά</string>
+    <string name="locale_lang_pt">Πορτογαλία</string>
+    <string name="locale_lang_pt_BR">Πορτογαλία (Βραζιλία)</string>
+    <string name="locale_lang_ru">Ρωσική</string>
+    <string name="locale_lang_ar_SA">Αραβικά</string>
+    <string name="locale_lang_ja_JP">Ιαπωνικά</string>
+    <string name="locale_lang_pl_PL">Πολωνικά</string>
+    <string name="locale_lang_nl_NL">Ολλανδικά</string>
+    <string name="locale_lang_la_LA">Λατινικά</string>
+    <string name="locale_lang_fr">Γαλλικά</string>
+    <string name="locale_lang_uk_UA">Ουκρανικά</string>
+    <string name="locale_lang_tr_TR">Τουρκικά</string>
+    <string name="locale_lang_ko">Κορεάτικα</string>
+    <string name="locale_lang_el_GR">Ελληνικά</string>
+    <string name="locale_lang_fi_FI">Φινλανδικά</string>
+    <string name="locale_lang_vi_VN">Βιετναμέζικο</string>
+    <string name="locale_lang_hu_HU">Ουγγρικά</string>
+    <string name="locale_lang_th_TH">Ταϊλανδικά</string>
+    <string name="locale_lang_no_NO">Νορβηγικά</string>
+    <string name="locale_lang_fil_PH">Φιλιππινέζικα</string>
+    <string name="locale_lang_lo_LA">Λάος</string>
+    <string name="locale_lang_cs_CZ">Τσέχος</string>
+    <string name="locale_lang_ta">Ταμίλ</string>
+    <string name="locale_lang_ro">Ρουμανικά</string>
+</resources>
