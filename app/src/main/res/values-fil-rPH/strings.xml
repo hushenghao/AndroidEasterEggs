@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mga Itlog ng Pasko ng Pagkabuhay</string>
+    <string name="app_name">Easter Eggs</string>
     <string name="summary_android_waiting">Naghihintay…</string>
     <string name="summary_android_release_pushed">Ang huling bersyon ng paglabas ay inilabas na</string>
     <string name="title_open_with">Buksan sa</string>

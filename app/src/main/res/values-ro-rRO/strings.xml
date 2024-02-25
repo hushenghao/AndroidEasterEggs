@@ -1,2 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Ouă de Paște</string>
+    <string name="summary_android_waiting">În așteptare…</string>
+    <string name="summary_android_release_pushed">Versiunea finală a fost lansată</string>
+    <string name="title_open_with">Deschis cu</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_translation">Traducere</string>
+    <string name="label_beta">Obțineți Beta</string>
+    <string name="label_timeline">Cronologie</string>
+    <string name="label_privacy_policy">Confidențialitate</string>
+    <string name="label_license">Licență</string>
+    <string name="label_email">Părere</string>
+    <string name="label_star">Stea</string>
+    <string name="label_timeline_title">Cronologie, etape și actualizări</string>
+    <string name="label_timeline_releases">Lansări</string>
+    <string name="message_trypophobia_warning">Acesta este un avertisment pentru cei cu &lt;b&gt;Tripofobie&lt;/b&gt; că unele imagini pot provoca disconfort. Doriți să continuați?</string>
+    <string name="label_settings">Setări</string>
+    <string name="label_project_desc">Acest proiect conține codul complet al sistemului Easter eggs, care își propune să organizeze și să fie compatibil cu sistemul easter eggs, astfel încât să se asigure că majoritatea dispozitivelor pot experimenta diferite versiuni ale ouălor de Paște fără a face prea multe modificări codului easter egg. Versiunile mai noi folosesc caracteristici noi ale sistemului respectiv, dar versiunile inferioare pot folosi doar unele funcții.</string>
+    <string name="pref_title_icon_shape_override">Forma pictogramei</string>
+    <string name="pref_title_language">Limba</string>
+    <string name="pref_title_language_more">Mai mult</string>
+    <string name="pref_title_theme">Temă</string>
+    <string name="pref_title_dynamic_color">Culoare dinamică</string>
+    <string name="pref_title_icon_visual_effects">Efecte vizuale pictograme</string>
+    <string name="summary_system_default">Mod implicit</string>
+    <string name="summary_theme_dark_mode">Întuneric</string>
+    <string name="summary_theme_light_mode">Ușoară</string>
+    <string name="label_add_shortcut">Comandă rapidă</string>
+    <string name="label_donate">Donează</string>
+    <string name="preference_on">Pe</string>
+    <string name="preference_off">Oprit</string>
+    <string name="toast_shortcut_added">Scurtătură adăugată</string>
+    <string name="app_widget_description">Acesta este ceasul analogic Easter Eggs</string>
+    <string name="action_agree">De acord</string>
+    <string name="summary_browse_privacy_policy">Citiți și sunteți de acord cu Politica noastră de confidențialitate pentru a continua.</string>
+    <string name="label_welcome">Bine ați venit la Cataloagele Ouălor de Paște 🎉🎉🎉</string>
+    <string name="label_share">Acțiune</string>
+    <string name="label_search_hint">Căutați…</string>
+    <string name="label_component_manager">Manager de componente</string>
+    <string name="pref_more_settings">Mai multe setări</string>
+    <string name="pref_retain_recent_egg_tasks">Păstrați sarcinile recente Egg</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Sarcini de păstrare a ouălor pe ecranul Recente, maxim de păstrare 5 (invalid pentru modul încorporat activitate)</string>
+    <string name="label_about">Despre</string>
+</resources>
