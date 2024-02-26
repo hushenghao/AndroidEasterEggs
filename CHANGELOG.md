@@ -3,6 +3,7 @@
 - Added Random Platlogo on Android U Egg
 - Added Tamil translation
 - Added Romania translation
+- Added Swedish translation
 - Uniform PlatLogo pages theme style
 - Optimizing Android M Egg performance issues [#164](https://github.com/hushenghao/AndroidEasterEggs/issues/164)
 
