@@ -19,7 +19,7 @@
     <string name="url_mail" translatable="false">mailto:dede.hu@qq.com</string>
     <string name="url_sponsor" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Sponsor</string>
 
-    <string name="char_separator" translatable="false">/</string>
+    <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
 
     <string name="label_github">Source code</string>
@@ -37,8 +37,6 @@
     <string name="label_timeline_releases">Releases</string>
 
     <string name="message_trypophobia_warning">This is a trigger warning to those with &lt;b&gt;Trypophobia&lt;/b&gt; that some images may cause discomfort. Do you want to continue anyway?</string>
-
-    <string name="error">Something has somehow gone wrong. Please try again. If this keeps happening then please report this issue to me.</string>
 
     <string name="label_settings">Settings</string>
     <string name="label_project_desc">This project contains the complete code of all system Easter eggs, which aims to organize and be compatible with all system easter eggs, so as to ensure that most devices can experience different versions of Easter eggs without making too many modifications to the easter egg\'s code. Newer versions use new features of said system, but lower versions can only use some functions.</string>
@@ -58,7 +56,7 @@
     <string name="preference_on">On</string>
     <string name="preference_off">Off</string>
 
-    <string name="tag_swipe_view">swipe</string>
+    <string name="tag_swipe_view" translatable="false">swipe</string>
 
     <string name="toast_shortcut_added">Shortcut added to home screen.</string>
     <string name="toast_easter" translatable="false">🐰🥚🍫🌷🎉</string>
@@ -68,8 +66,8 @@
     <string name="summary_browse_privacy_policy">Read and agree to our Privacy Policy to continue.</string>
     <string name="label_welcome">Welcome to Easter Eggs! 🎉🎉🎉</string>
     <string name="label_share">Share</string>
-    <string name="label_search_hint">Search for easter eggs and more</string>
-    <string name="label_component_manager">Manage Components</string>
+    <string name="label_search_hint">Search…</string>
+    <string name="label_component_manager">Components Manager</string>
     <string name="pref_more_settings">More Settings</string>
     <string name="pref_retain_recent_egg_tasks">Retain recent Easter Egg tasks</string>
     <string name="pref_summary_retain_recent_egg_tasks">Retain Easter Egg tasks on Recents screen, maximum of 5 retained tasks (Not available for Activity Embedded Mode.)</string>
