@@ -6,8 +6,8 @@
     <string name="title_open_with">開啟</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-    <string name="label_translation">翻譯</string>
-    <string name="label_beta">取得 Beta 版</string>
+    <string name="label_translation">Translation</string>
+    <string name="label_beta">Get Beta</string>
     <string name="label_timeline">時間線</string>
     <string name="label_privacy_policy">隱私權</string>
     <string name="label_license">授權</string>
@@ -17,7 +17,7 @@
     <string name="label_timeline_releases">版本</string>
     <string name="message_trypophobia_warning">對有&lt;b&gt;密集恐懼症&lt;/b&gt;人士的警告，一些畫面可能會引起不適。要繼續嗎？</string>
     <string name="label_settings">設定</string>
-    <string name="label_project_desc">此專案包含系統彩蛋的完整程式碼，旨在對系統彩蛋的整理和相容，以保證大多數裝置可以體驗到不同版本的彩蛋，不會對系統彩蛋程式碼做過多修改。部分版本使用了系統新特性，較低版本只能使用部分功能。</string>
+    <string name="label_project_desc">This project contains the complete code of the system Easter eggs, which aims to organize and be compatible with the system easter eggs, so as to ensure that most devices can experience different versions of Easter eggs without making too many modifications to the easter egg\'s code. Newer versions use new features of said system, but lower versions can only use some functions.</string>
     <string name="pref_title_icon_shape_override">圖示形狀</string>
     <string name="pref_title_language">語言</string>
     <string name="pref_title_language_more">更多</string>
