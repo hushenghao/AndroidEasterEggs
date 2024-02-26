@@ -37,7 +37,7 @@
 
 | 名称                                     | API level | 彩蛋                                                      | 使用了新特性 [<sup>[1]</sup>](#id_new_features) | 最低 API [<sup>[2]</sup>](#id_full_egg_mini_api) | 发布时间 [<sup>[8]</sup>](#first_release_date) |
 |----------------------------------------|:---------:|---------------------------------------------------------|:-----------------------------------------:|:----------------------------------------------:|:------------------------------------------:|
-| Android 15 (Vanilla Ice Cream)         |    35     | 等待中...                                                  |                     -                     |                       -                        |                  2024-09                   |
+| Android 15 (Vanilla Ice Cream)         |    35     | 暂未发布                                                    |                     -                     |                       -                        |                  2024-09                   |
 | Android 14 (Upside Down Cake)          |    34     | Android 14 Easter Egg [<sup>[3]</sup>](#id_14_egg_name) |                    🚫                     |                       -                        |                  2023-09                   |
 | Android 13 (Tiramisu)                  |    33     | Paint Chips                                             |                     ✅                     |       31 [<sup>[4]</sup>](#id_android12)       |                  2022-09                   |
 | Android 12-12L (Snow Cone)             |   31-32   | Paint Chips                                             |                     ✅                     |       31 [<sup>[4]</sup>](#id_android12)       |                  2021-09                   |
@@ -97,7 +97,7 @@
 ## 协议
 
 ```text
-Copyright 2023 Hu Shenghao
+Copyright 2024 Hu Shenghao
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
