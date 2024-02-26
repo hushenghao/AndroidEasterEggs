@@ -6,6 +6,7 @@
     <string name="title_open_with">Abrir con</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">GitHub</string>
     <string name="label_translation">Traducción</string>
     <string name="label_beta">Obtener Beta</string>
     <string name="label_timeline">Cronología</string>
@@ -15,7 +16,7 @@
     <string name="label_star">Estrella</string>
     <string name="label_timeline_title">Cronología, hitos y actualizaciones</string>
     <string name="label_timeline_releases">Versiones</string>
-    <string name="message_trypophobia_warning">Esta es una advertencia para personas con &lt;b&gt;Tripofobia&lt;/b&gt; de que algunas imágenes pueden causar molestia e incomodidad. ¿Quieres continuar?</string>
+    <string name="message_trypophobia_warning">Esta es una advertencia para personas con &lt;b&gt;Tripofobia&lt;/b&gt; de que algunas imágenes pueden causar molestias. ¿Quieres continuar?</string>
     <string name="label_settings">Configuración</string>
     <string name="label_project_desc">El proyecto contiene el código completo de los Easter Eggs del sistema, que tiene como objetivo organizar y ser compatible con los Easter Eggs del sistema, para asegurar que la mayoría de los dispositivos puedan experimentar diferentes versiones de Easter Eggs y que no se hagan demasiadas modificaciones en el código de los Easter Eggs. Algunas versiones usan nuevas características del sistema, y las versiones inferiores solo pueden usar algunas funciones.</string>
     <string name="pref_title_icon_shape_override">Forma del Icono</string>
@@ -35,7 +36,7 @@
     <string name="app_widget_description">Este es el reloj analógico de Huevos de Pascua</string>
     <string name="action_agree">De acuerdo</string>
     <string name="summary_browse_privacy_policy">Lea y acepte nuestra Política de Privacidad para continuar.</string>
-    <string name="label_welcome">Bienvenido al Catálogo de Easter Eggs 🎉🎉🎉</string>
+    <string name="label_welcome">Bienvenido al Catálogo de Easter Eggs de Android 🎉🎉🎉</string>
     <string name="label_share">Compartir</string>
     <string name="label_search_hint">Buscar…</string>
     <string name="label_component_manager">Administrador de Componentes</string>
