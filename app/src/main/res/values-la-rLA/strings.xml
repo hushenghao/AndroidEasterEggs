@@ -4,4 +4,6 @@
     <string name="summary_android_waiting">Exspectat…</string>
     <string name="summary_android_release_pushed">Finalis release versio protrusit</string>
     <string name="title_open_with">Aperire cum</string>
+    <string name="char_separator">/</string>
+    <string name="char_en_dash">-</string>
 </resources>
