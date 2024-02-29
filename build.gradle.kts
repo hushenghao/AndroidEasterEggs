@@ -9,3 +9,8 @@ plugins {
 task<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
+
+task<Exec>("changelogs") {
+    workingDir("script/changelogs")
+    commandLine("python", "changelogs.py")
+}

@@ -1,4 +1,5 @@
 ### v2.3.1
+
 - Waiting Android Vanilla Ice Cream
 - Added Random Platlogo on Android U Egg
 - Added Tamil translation
@@ -8,6 +9,7 @@
 - Optimizing Android M Egg performance issues [#164](https://github.com/hushenghao/AndroidEasterEggs/issues/164)
 
 ### v2.3.0 (2024-01-30)
+
 - New Card UI
 - Added Retain recent Egg tasks Switch
 - Added Czech translation
@@ -17,16 +19,19 @@
 - Fix Neko cats index OOB [#150](https://github.com/hushenghao/AndroidEasterEggs/issues/150)
 
 ### v2.2.2 (2023-12-23)
+
 - Fix Guide page layout [#116](https://github.com/hushenghao/AndroidEasterEggs/issues/116)
 - Migrate kapt to KSP
 - Fix Android ICS egg abnormal finish
 - Fix F-Droid Reproducible Builds
 
 ### v2.2.1 (2023-11-25)
+
 - Fix F-Droid Reproducible Builds
 - Fix Surface color [#112](https://github.com/hushenghao/AndroidEasterEggs/issues/112)
 
 ### v2.2.0 (2023-11-25)
+
 - Added crash report
 - Refactored with Compose
 - Added Component Manager Settings
@@ -35,6 +40,7 @@
 - Known issue fixes
 
 ### v2.1.0 (2023-10-25)
+
 - Use Android Q internal code name
 - Added Japanese translation
 - Added French translation
@@ -51,6 +57,7 @@
 - Fix Android O
 
 ### v2.0.0 (2023-10-08)
+
 - Add Android 14 Easter Eggs
 - Add Portuguese translations
 - Add Indonesia translations
@@ -72,7 +79,7 @@
 - Add welcome page
 - Add App share
 - Feature optimization
-- Fix Vector drawable on Android 7.1 
+- Fix Vector drawable on Android 7.1
 
 ### v1.9.6 (2023-08-05)
 
