@@ -1,6 +1,6 @@
 # Subset Icons font
 
-FontTools Subset [Material Design Icons](https://fonts.google.com/icons) font
+FontTools Subset [Material Design Icons](https://fonts.google.com/icons) font.
 
 ## Material Icons
 
