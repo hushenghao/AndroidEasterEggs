@@ -9,7 +9,7 @@
 
 ## Usage
 
-1. 确保 `app/build.gradle.kts` 的 `versionName` 和 `versionCode` 字段是否正确
+1. 确保 `app/build.gradle.kts` 的 `versionName` 和 `versionCode` 字段的正确
 
     ```kotlin
     versionCode = 38

@@ -12,7 +12,7 @@ https://github.com/google/material-design-icons#material-icons
 * font/MaterialIconsOutlined-Regular.otf
 * font/MaterialIconsOutlined-Regular.codepoints
 
-Git md5: **6745d95590b1a5593888b6c402401fc3db75fbdb**
+Git hash: **6745d95590b1a5593888b6c402401fc3db75fbdb**
 
 # Usage
 
