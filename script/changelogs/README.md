@@ -1,6 +1,6 @@
 # Changelogs
 
-解析 `CHANGELOG.md` 和 `app/build.gradle.kts` 文件，生成最新版本 `fastlane changelogs/*.txt` 文件
+Parse `CHANGELOG.md` and `app/build.gradle.kts` files, generate the latest version `fastlane changelogs/*.txt` files
 
 | Code      | Markdown                                 | fastlane changelogs/*.txt                                                            |
 |-----------|------------------------------------------|--------------------------------------------------------------------------------------|
@@ -9,30 +9,30 @@
 
 ## Usage
 
-1. 确保 `app/build.gradle.kts` 的 `versionName` 和 `versionCode` 字段的正确
+1. Make sure the `versionName` and `versionCode` fields of `app/build.gradle.kts` are correct.
 
     ```kotlin
     versionCode = 38
     versionName = "2.3.1"
     ```
 
-2. 编辑 `CHANGLOG*.md` 文件的最新更新日志为 versionName 对应版本名
+2. Edit the latest changelog of the `CHANGLOG*.md` files to `versionName`.
 
     ```markdown
     ### v2.3.1
 
-    - 更新日志1
-    - 更新日志2
+    - Feat: xxx
+    - Fix: xxx
     - ...
     ```
 
-3. 运行脚本
+3. Run script.
 
     ```sh
     python3 ./changelogs.py
     ```
 
-4. 检查生成对应 versionCode.txt 文件的更新日志是否正确
+4. Check whether the generated changelog files `versionCode.txt` is correct.
 
     * fastlane/metadata/android/**en-US**/changelogs/38.txt
     * fastlane/metadata/android/**zh-CN**/changelogs/38.txt
