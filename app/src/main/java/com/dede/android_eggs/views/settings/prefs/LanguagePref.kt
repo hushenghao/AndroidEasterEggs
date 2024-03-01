@@ -103,7 +103,7 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
             LangOp(FRENCH,              R.string.language_fr,     R.string.locale_lang_fr,     Locale.FRENCH),
             LangOp(POLISH,              R.string.language_pl_PL,  R.string.locale_lang_pl_PL,  createLocale("pl", "PL")),
             LangOp(DUTCH,               R.string.language_nl_NL,  R.string.locale_lang_nl_NL,  createLocale("nl", "NL")),
-            LangOp(LATIN,               R.string.language_la_LA,  R.string.locale_lang_la_LA,  createLocale("la", "LA")),
+            //(LATIN,               R.string.language_la_LA,  R.string.locale_lang_la_LA,  createLocale("la", "LA")),
             LangOp(TURKISH,             R.string.language_tr_TR,  R.string.locale_lang_tr_TR,  createLocale("tr", "TR")),
             LangOp(UKRAINIAN,           R.string.language_uk_UA,  R.string.locale_lang_uk_UA,  createLocale("uk", "UA")),
             LangOp(JAPANESE,            R.string.language_ja_JP,  R.string.locale_lang_ja_JP,  Locale.JAPAN),
@@ -146,6 +146,13 @@ class LanguagePref : SettingPref(null, getOptions(), SYSTEM) {
                     "locale-config.xml child node length, expected: %d, actual: %d."
                         .format(expected, actual)
                 }
+            }
+
+            // check gradle resourceConfigurations count
+            actual = BuildConfig.LANGUAGE_RES
+            check(expected == actual) {
+                "android.defaultConfig.resourceConfigurations length, expected: %d, actual: %d."
+                    .format(expected, actual)
             }
         }
 

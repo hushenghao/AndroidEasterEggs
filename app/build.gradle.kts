@@ -14,13 +14,21 @@ android {
         versionName = "2.3.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        resourceConfigurations += listOf(
+            "zh", "zh-rTW",
+            "ru", "uk-rUA",
+            "en", "it", "de", "fr", "nl-rNL", "hu-rHU",
+            "es", "pt", "pt-rBR", "pl-rPL", "tr-rTR", "fi-rFI",
+            "in-rID", "hr-rHR", /*"la-rLA", */"el-rGR", "no-rNO",
+            "ja-rJP", "ko", "vi-rVN", "th-rTH", "fil-rPH", "lo-rLA",
+            "ar-rSA", "cs-rCZ", "ta-rIN", "ro-rRO", "sv-rSE",
+        )
+
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
 
         buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")
-    }
-
-    androidResources {
-        generateLocaleConfig = true
+        // Language configuration only
+        buildConfigField("int", "LANGUAGE_RES", resourceConfigurations.size.toString())
     }
 
     buildFeatures {
