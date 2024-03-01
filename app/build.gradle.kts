@@ -14,29 +14,14 @@ android {
         versionName = "2.3.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        resourceConfigurations += listOf(
-            "zh", "zh-rTW",
-            "ru", "uk-rUA",
-            "en", "it", "de", "fr", "nl-rNL", "hu-rHU",
-            "es", "pt", "pt-rBR", "pl-rPL", "tr-rTR", "fi-rFI",
-            "in-rID", "hr-rHR", /*"la-rLA", */"el-rGR", "no-rNO",
-            "ja-rJP", "ko", "vi-rVN", "th-rTH", "fil-rPH", "lo-rLA",
-            "ar-rSA", "cs-rCZ", "ta-rIN", "ro-rRO", "sv-rSE",
-        )
-
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
 
         buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")
-        // Language configuration only
-        buildConfigField("int", "LANGUAGE_RES", resourceConfigurations.size.toString())
     }
 
-//    kotlinOptions {
-//        freeCompilerArgs += listOf(
-//            "-P",
-//            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
-//        )
-//    }
+    androidResources {
+        generateLocaleConfig = true
+    }
 
     buildFeatures {
         compose = true
@@ -79,13 +64,13 @@ android {
     }
 
     lint {
-        disable += listOf("NotifyDataSetChanged", "UsingMaterialAndMaterial3Libraries")
+        disable += listOf("NotifyDataSetChanged")
     }
 
     packaging {
         resources.excludes += listOf(
             "okhttp3/**",// only coil local image
-            "META-INF/*.version"
+            "META-INF/*.version",
         )
     }
 
@@ -112,18 +97,18 @@ dependencies {
     implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons)
-//    implementation(libs.androidx.compose.constraintlayout)
+    // implementation(libs.androidx.compose.constraintlayout)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.accompanist.drawablepainter)
 
     implementation(libs.dionsegijn.konfetti)
     implementation(libs.io.coil)
-//    implementation(libs.io.coil.compose)
+    // implementation(libs.io.coil.compose)
     implementation(libs.free.reflection)
     implementation(libs.viewbinding.delegate)
     implementation(libs.blurhash.android)
-//    implementation(libs.blurhash.painter)
+    // implementation(libs.blurhash.painter)
     debugImplementation(libs.squareup.leakcanary)
     implementation(libs.overscroll.decor.android)
 

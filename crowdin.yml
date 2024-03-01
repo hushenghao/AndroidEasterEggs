@@ -5,7 +5,7 @@ files:
   - source: "/app/src/main/res/values/strings.xml"
     translation: "/app/src/main/res/values-%android_code%/strings.xml"
     update_option: update_as_unapproved
-    skip_untranslated_strings: true
+    skip_untranslated_files: true
     languages_mapping:
       android_code:
         zh-rCN: "zh"
