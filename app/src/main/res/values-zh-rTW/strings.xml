@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">正在等候…</string>
+    <string name="summary_android_waiting">尚未公佈</string>
     <string name="summary_android_release_pushed">最終版本已推送</string>
     <string name="title_open_with">開啟</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-    <string name="label_translation">Translation</string>
-    <string name="label_beta">Get Beta</string>
+    <string name="label_github">源代碼</string>
+    <string name="label_translation">翻譯與國際化</string>
+    <string name="label_beta">下载Beta版</string>
     <string name="label_timeline">時間線</string>
     <string name="label_privacy_policy">隱私權</string>
     <string name="label_license">授權</string>
@@ -17,7 +18,7 @@
     <string name="label_timeline_releases">版本</string>
     <string name="message_trypophobia_warning">對有&lt;b&gt;密集恐懼症&lt;/b&gt;人士的警告，一些畫面可能會引起不適。要繼續嗎？</string>
     <string name="label_settings">設定</string>
-    <string name="label_project_desc">This project contains the complete code of the system Easter eggs, which aims to organize and be compatible with the system easter eggs, so as to ensure that most devices can experience different versions of Easter eggs without making too many modifications to the easter egg\'s code. Newer versions use new features of said system, but lower versions can only use some functions.</string>
+    <string name="label_project_desc">項目包含了系統彩蛋完整程式碼，旨在對系統彩蛋的整理和相容，以保證大多數設備可以體驗到不同版本的彩蛋，不會對系統彩蛋程式碼做過多修改。 部分版本使用了系統新特性，低版本只能使用部分功能。</string>
     <string name="pref_title_icon_shape_override">圖示形狀</string>
     <string name="pref_title_language">語言</string>
     <string name="pref_title_language_more">更多</string>
@@ -35,7 +36,7 @@
     <string name="app_widget_description">這是 Easter Eggs 的類比時鐘</string>
     <string name="action_agree">同意</string>
     <string name="summary_browse_privacy_policy">閱讀並同意我們的隱私權政策以繼續進行。</string>
-    <string name="label_welcome">歡迎使用 Easter Egg Catalogs 🎉🎉🎉</string>
+    <string name="label_welcome">歡迎使用 Easter Eggs! 🎉🎉🎉</string>
     <string name="label_share">分享</string>
     <string name="label_search_hint">搜尋…</string>
     <string name="label_component_manager">元件管理員</string>

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">等待中…</string>
+    <string name="summary_android_waiting">尚未发布</string>
     <string name="summary_android_release_pushed">最终版本已经发布</string>
     <string name="title_open_with">打开</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">源码</string>
     <string name="label_translation">翻译与国际化</string>
-    <string name="label_beta">获取Beta版</string>
+    <string name="label_beta">下载Beta版</string>
     <string name="label_timeline">时间线</string>
     <string name="label_privacy_policy">隐私协议</string>
     <string name="label_license">授权协议</string>
