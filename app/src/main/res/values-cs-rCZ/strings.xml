@@ -6,6 +6,7 @@
     <string name="title_open_with">Otevřít pomocí</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Source code</string>
     <string name="label_translation">Překlad</string>
     <string name="label_beta">Získat Beta verzi</string>
     <string name="label_timeline">Časová osa</string>

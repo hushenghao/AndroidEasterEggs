@@ -6,6 +6,7 @@
     <string name="title_open_with">다음으로 열기</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Source code</string>
     <string name="label_translation">번역</string>
     <string name="label_beta">베타 받기</string>
     <string name="label_timeline">타임라인</string>

@@ -6,6 +6,7 @@
     <string name="title_open_with">Öppna med</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Source code</string>
     <string name="label_translation">Översättning</string>
     <string name="label_beta">Skaffa Beta</string>
     <string name="label_timeline">Tidslinje</string>

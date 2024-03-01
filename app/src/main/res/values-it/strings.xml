@@ -6,6 +6,7 @@
     <string name="title_open_with">Apri con</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Source code</string>
     <string name="label_translation">Traduzione</string>
     <string name="label_beta">Ottieni versione Beta</string>
     <string name="label_timeline">Cronologia</string>

@@ -6,6 +6,7 @@
     <string name="title_open_with">இதனுடன் திறக்கவும்</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Source code</string>
     <string name="label_translation">மொழிபெயர்ப்பு</string>
     <string name="label_beta">பீட்டா பதிப்பு பெறுங்கள்</string>
     <string name="label_timeline">காலவரிசை</string>
