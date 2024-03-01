@@ -6,11 +6,16 @@ plugins {
     alias(libs.plugins.ksp) apply false
 }
 
+tasks.wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+}
+
 task<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
 
 task<Exec>("changelogs") {
+    // requirement python3
     workingDir("script/changelogs")
-    commandLine("python", "changelogs.py")
+    commandLine("python3", "changelogs.py")
 }
