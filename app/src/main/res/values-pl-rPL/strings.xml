@@ -6,6 +6,7 @@
     <string name="title_open_with">Otwórz z</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Source code</string>
     <string name="label_translation">Tłumaczenie</string>
     <string name="label_beta">Pobierz wersję beta</string>
     <string name="label_timeline">Oś czasu</string>
@@ -38,4 +39,9 @@
     <string name="label_welcome">Witamy w Katalogach Easter Egg 🎉🎉🎉</string>
     <string name="label_share">Udostępnij</string>
     <string name="label_search_hint">Szukaj…</string>
+    <string name="label_component_manager">Menedżer Komponentów</string>
+    <string name="pref_more_settings">Więcej Ustawień</string>
+    <string name="pref_retain_recent_egg_tasks">Zachowaj ostatnie zadania Easter Egg\'ów</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Zachowaj zadania Easter Egg\'ów na ekranie Ostatnie, maksymalnie 5 zachowanych zadań (niedostępne w trybie osadzonej aktywności).</string>
+    <string name="label_about">O aplikacji</string>
 </resources>
