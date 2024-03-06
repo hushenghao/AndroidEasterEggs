@@ -14,12 +14,18 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.graphics.ColorUtils
-import com.dede.android_eggs.views.settings.prefs.DynamicColorPref
+import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil
+import com.dede.android_eggs.views.settings.compose.ThemePrefUtil
 import com.dede.android_eggs.views.settings.prefs.NightModePref
+import com.dede.basic.globalContext
 
 
 fun ColorScheme.toAmoled(): ColorScheme {
@@ -154,18 +160,19 @@ private fun ColorScheme.toXml() {
     }
 }
 
+var themeMode by mutableIntStateOf(ThemePrefUtil.getThemeModeValue(globalContext))
+var isDynamicEnable by mutableStateOf(DynamicColorPrefUtil.isDynamicEnable(globalContext))
+
 @Composable
 fun AppTheme(content: @Composable () -> Unit) {
     val context: Context = LocalContext.current
-    var nightModeValue = NightModePref.getNightModeValue(context)
+    var nightModeValue = themeMode
     if (nightModeValue == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) {
         nightModeValue = if (isSystemInDarkTheme())
             AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
     }
 
-    val colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
-        DynamicColorPref.isDynamicEnable(context)
-    ) {
+    val colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && isDynamicEnable) {
         when (nightModeValue) {
             NightModePref.OLED -> dynamicDarkColorScheme(context).toAmoled()
             AppCompatDelegate.MODE_NIGHT_YES -> dynamicDarkColorScheme(context)
