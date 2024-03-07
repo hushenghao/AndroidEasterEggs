@@ -5,7 +5,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -28,8 +27,8 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.ThemeUtils
-import com.dede.android_eggs.views.settings.prefs.DynamicColorPref
-import com.dede.android_eggs.views.settings.prefs.NightModePref
+import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil
+import com.dede.android_eggs.views.settings.compose.ThemePrefUtil
 import com.dede.android_eggs.views.theme.AppTheme
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,10 +56,10 @@ class PlaceholderActivity : AppCompatActivity() {
         }
 
         with(LocalEvent.receiver(this)) {
-            register(NightModePref.ACTION_NIGHT_MODE_CHANGED) {
+            register(ThemePrefUtil.ACTION_NIGHT_MODE_CHANGED) {
                 recreate()
             }
-            register(DynamicColorPref.ACTION_DYNAMIC_COLOR_CHANGED) {
+            register(DynamicColorPrefUtil.ACTION_DYNAMIC_COLOR_CHANGED) {
                 recreate()
             }
         }

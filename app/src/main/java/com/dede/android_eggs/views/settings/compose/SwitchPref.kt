@@ -1,45 +1,39 @@
 package com.dede.android_eggs.views.settings.compose
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun SwitchPref(
-    leadingIcon: @Composable () -> Unit,
+    key: String,
+    leadingIcon: ImageVector,
     title: String,
-    value: Int = SettingPref.ON,
+    desc: String? = null,
+    default: Boolean = false,
     onCheckedChange: (checked: Boolean) -> Unit
 ) {
-    Card(
-        shape = MaterialTheme.shapes.large,
-    ) {
-        Column(
-            modifier = Modifier.animateContentSize()
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp)
-            ) {
-                leadingIcon()
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(horizontal = 12.dp)
-                )
-                Switch(checked = value == SettingPref.ON, onCheckedChange = onCheckedChange)
+    var intValue by rememberPrefIntState(
+        key,
+        if (default) SettingPref.ON else SettingPref.OFF
+    )
+    SettingPref(
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        trailingContent = {
+            Box(modifier = Modifier.padding(end = 10.dp)) {
+                Switch(checked = intValue == SettingPref.ON, onCheckedChange = {
+                    intValue = if (it) SettingPref.ON else SettingPref.OFF
+                    onCheckedChange(it)
+                })
             }
-        }
-    }
+        },
+    )
 }

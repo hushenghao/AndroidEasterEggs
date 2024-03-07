@@ -14,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -25,7 +26,7 @@ import com.dede.android_eggs.util.compose.top
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.ACTION_NIGHT_MODE_CHANGED
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.DARK
-import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.DEFAULT
+import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.FOLLOW_SYSTEM
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.KEY_NIGHT_MODE
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.LIGHT
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.OLED
@@ -50,24 +51,32 @@ object ThemePrefUtil {
     const val OLED = -2
     const val LIGHT = AppCompatDelegate.MODE_NIGHT_NO
     const val DARK = AppCompatDelegate.MODE_NIGHT_YES
-    const val DEFAULT = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+    const val FOLLOW_SYSTEM = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 
     const val KEY_NIGHT_MODE = "pref_key_night_mode"
 
     const val ACTION_NIGHT_MODE_CHANGED = "action_night_mode_changed"
     fun isOLEDMode(context: Context): Boolean {
-        return context.pref.getInt(KEY_NIGHT_MODE, DEFAULT) == OLED
+        return context.pref.getInt(KEY_NIGHT_MODE, FOLLOW_SYSTEM) == OLED
     }
 
     fun getThemeModeValue(context: Context): Int {
-        return context.pref.getInt(KEY_NIGHT_MODE, DEFAULT)
+        return context.pref.getInt(KEY_NIGHT_MODE, FOLLOW_SYSTEM)
+    }
+
+    fun apply(context: Context) {
+        var mode = getThemeModeValue(context)
+        if (mode == OLED) {
+            mode = DARK
+        }
+        AppCompatDelegate.setDefaultNightMode(mode)
     }
 }
 
 @Composable
 fun ThemePref() {
     val context = LocalContext.current
-    var themeModeValue by rememberPrefIntState(KEY_NIGHT_MODE, DEFAULT)
+    var themeModeValue by rememberPrefIntState(KEY_NIGHT_MODE, FOLLOW_SYSTEM)
     val onOptionClick = click@{ mode: Int ->
         themeModeValue = mode
         themeMode = themeModeValue
@@ -88,11 +97,8 @@ fun ThemePref() {
 
 
 
-    OptionsPref(
-        leadingIcon = imageVectorIcon(
-            imageVector = Icons.Rounded.BrightnessAuto,
-            contentDescription = stringResource(R.string.pref_title_theme)
-        ),
+    ExpandOptionsPref(
+        leadingIcon = Icons.Rounded.BrightnessAuto,
         title = stringResource(R.string.pref_title_theme),
     ) {
         ValueOption(
@@ -133,9 +139,19 @@ fun ThemePref() {
                 contentDescription = stringResource(R.string.summary_system_default)
             ),
             title = stringResource(R.string.summary_system_default),
-            trailingContent = imageRadioButton(themeModeValue == DEFAULT),
-            value = DEFAULT,
+            trailingContent = imageRadioButton(themeModeValue == FOLLOW_SYSTEM),
+            value = FOLLOW_SYSTEM,
             onOptionClick = onOptionClick,
         )
+    }
+}
+
+@Composable
+private fun imageVectorIcon(
+    imageVector: ImageVector,
+    contentDescription: String? = null
+): @Composable () -> Unit {
+    return {
+        Icon(imageVector = imageVector, contentDescription = contentDescription)
     }
 }

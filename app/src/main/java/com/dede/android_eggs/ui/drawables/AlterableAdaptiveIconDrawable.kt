@@ -3,7 +3,17 @@ package com.dede.android_eggs.ui.drawables
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapShader
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.Matrix
+import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.PixelFormat
+import android.graphics.Rect
+import android.graphics.Shader
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -20,7 +30,7 @@ import kotlin.math.roundToInt
 
 @SuppressLint("RestrictedApi")
 class AlterableAdaptiveIconDrawable(
-    context: Context,
+    private val context: Context,
     @DrawableRes res: Int,
     maskPathStr: String? = null,
 ) : Drawable() {
@@ -62,14 +72,8 @@ class AlterableAdaptiveIconDrawable(
 
     init {
         var pathStr = maskPathStr
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && TextUtils.isEmpty(pathStr)) {
-            val resId = getConfigResId(context.resources)
-            if (resId != Resources.ID_NULL) {
-                pathStr = context.resources.getString(resId)
-            }
-        }
         if (TextUtils.isEmpty(pathStr)) {
-            pathStr = context.resources.getString(R.string.icon_shape_circle_path)
+            pathStr = getDefaultPath(context)
         }
         savedMask.set(PathParser.createPathFromPathData(pathStr))
         mask.set(savedMask)
@@ -87,6 +91,20 @@ class AlterableAdaptiveIconDrawable(
         }
     }
 
+    private fun getDefaultPath(context: Context): String {
+        var pathStr = ""
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val resId = getConfigResId(context.resources)
+            if (resId != Resources.ID_NULL) {
+                pathStr = context.resources.getString(resId)
+            }
+        }
+        if (TextUtils.isEmpty(pathStr)) {
+            pathStr = context.resources.getString(R.string.icon_shape_circle_path)
+        }
+        return pathStr
+    }
+
     @SuppressLint("DiscouragedApi")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getConfigResId(resources: Resources): Int {
@@ -94,9 +112,11 @@ class AlterableAdaptiveIconDrawable(
     }
 
     fun setMaskPath(pathStr: String) {
-        if (TextUtils.isEmpty(pathStr)) return
-
-        savedMask.set(PathParser.createPathFromPathData(pathStr))
+        var path = pathStr
+        if (TextUtils.isEmpty(path)) {
+            path = getDefaultPath(context)
+        }
+        savedMask.set(PathParser.createPathFromPathData(path))
         updateMaskBoundsInternal(bounds)
         invalidateSelf()
     }

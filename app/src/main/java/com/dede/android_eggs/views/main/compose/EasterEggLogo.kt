@@ -23,7 +23,7 @@ import com.dede.android_eggs.main.EasterEggHelp
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.main.EasterEggLogoSensorMatrixConvert
-import com.dede.android_eggs.views.settings.prefs.IconShapePref
+import com.dede.android_eggs.views.settings.compose.IconShapePrefUtil
 import com.dede.basic.provider.EasterEgg
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
@@ -45,12 +45,12 @@ fun EasterEggLogo(egg: EasterEgg, size: Dp = 44.dp, sensor: Boolean = false) {
     if (egg.supportAdaptiveIcon) {
         val context = LocalContext.current
 
-        val maskPath: String? by remember { mutableStateOf(IconShapePref.getMaskPath(context)) }
+        val maskPath: String? by remember { mutableStateOf(IconShapePrefUtil.getMaskPath(context)) }
         val drawable = remember(maskPath, egg.iconRes, context.theme) {
             AlterableAdaptiveIconDrawable(context, egg.iconRes, maskPath)
         }
-        LocalEvent.receiver().register(IconShapePref.ACTION_CHANGED) {
-            val newMaskPath = it.getStringExtra(IconShapePref.EXTRA_ICON_SHAPE_PATH)
+        LocalEvent.receiver().register(IconShapePrefUtil.ACTION_CHANGED) {
+            val newMaskPath = it.getStringExtra(IconShapePrefUtil.EXTRA_ICON_SHAPE_PATH)
             if (newMaskPath != null) {
                 drawable.setMaskPath(newMaskPath)
             }

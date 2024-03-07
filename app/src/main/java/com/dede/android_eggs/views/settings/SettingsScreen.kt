@@ -54,7 +54,7 @@ fun SettingsScreen(drawerState: DrawerState) {
             modifier = Modifier
                 .padding(horizontal = 12.dp)
                 .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             ThemePref()
 

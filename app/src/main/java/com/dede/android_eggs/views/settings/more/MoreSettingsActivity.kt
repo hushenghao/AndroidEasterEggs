@@ -26,8 +26,8 @@ import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.util.requirePreference
 import com.dede.android_eggs.views.settings.component.ComponentManagerFragment
-import com.dede.android_eggs.views.settings.prefs.DynamicColorPref
-import com.dede.android_eggs.views.settings.prefs.NightModePref
+import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil
+import com.dede.android_eggs.views.settings.compose.ThemePrefUtil
 import com.dede.android_eggs.views.timeline.AndroidTimelineFragment
 import com.dede.basic.dp
 import com.dede.basic.requireDrawable
@@ -56,10 +56,10 @@ class MoreSettingsActivity : AppCompatActivity(R.layout.activity_more_settings) 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         with(LocalEvent.receiver(this)) {
-            register(NightModePref.ACTION_NIGHT_MODE_CHANGED) {
+            register(ThemePrefUtil.ACTION_NIGHT_MODE_CHANGED) {
                 recreate()
             }
-            register(DynamicColorPref.ACTION_DYNAMIC_COLOR_CHANGED) {
+            register(DynamicColorPrefUtil.ACTION_DYNAMIC_COLOR_CHANGED) {
                 recreate()
             }
         }

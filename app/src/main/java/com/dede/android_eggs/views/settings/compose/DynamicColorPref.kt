@@ -1,19 +1,24 @@
 package com.dede.android_eggs.views.settings.compose
 
+import android.app.Activity
+import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.R
 import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil.DEFAULT
 import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil.KEY_DYNAMIC_COLOR
 import com.dede.android_eggs.views.theme.isDynamicEnable
 import com.google.android.material.color.DynamicColors
+import com.google.android.material.color.DynamicColorsOptions
+import com.google.android.material.color.HarmonizedColors
+import com.google.android.material.color.HarmonizedColorsOptions
 
 object DynamicColorPrefUtil {
+
     val DEFAULT =
         if (DynamicColors.isDynamicColorAvailable()) SettingPref.ON else SettingPref.OFF
     const val KEY_DYNAMIC_COLOR = "pref_key_dynamic_color"
@@ -22,21 +27,44 @@ object DynamicColorPrefUtil {
     fun isDynamicEnable(context: Context): Boolean {
         return SettingPref.getValue(context, KEY_DYNAMIC_COLOR, DEFAULT) == SettingPref.ON
     }
+
+    fun apply(context: Context) {
+        val callback = Callback()
+        DynamicColors.applyToActivitiesIfAvailable(
+            context.applicationContext as Application,
+            DynamicColorsOptions.Builder()
+                .setPrecondition(callback)
+                .setOnAppliedCallback(callback)
+                .build()
+        )
+    }
+
+    private class Callback : DynamicColors.Precondition, DynamicColors.OnAppliedCallback {
+        override fun shouldApplyDynamicColors(activity: Activity, theme: Int): Boolean {
+            if (activity is AppCompatActivity) {
+                return isDynamicEnable(activity)
+            }
+            return false
+        }
+
+        override fun onApplied(activity: Activity) {
+            HarmonizedColors.applyToContextIfAvailable(
+                activity, HarmonizedColorsOptions.createMaterialDefaults()
+            )
+        }
+
+    }
 }
 
 @Composable
 fun DynamicColorPref() {
-    var dynamicColorValue by rememberPrefIntState(KEY_DYNAMIC_COLOR, DEFAULT)
     SwitchPref(
-        leadingIcon = imageVectorIcon(
-            imageVector = Icons.Rounded.Palette,
-            contentDescription = stringResource(R.string.pref_title_dynamic_color)
-        ),
+        key = KEY_DYNAMIC_COLOR,
+        default = DEFAULT == SettingPref.ON,
+        leadingIcon = Icons.Rounded.Palette,
         title = stringResource(R.string.pref_title_dynamic_color),
-        value = dynamicColorValue,
         onCheckedChange = {
-            dynamicColorValue = if (it) SettingPref.ON else SettingPref.OFF
-            isDynamicEnable = dynamicColorValue == SettingPref.ON
+            isDynamicEnable = it
         }
     )
 }
