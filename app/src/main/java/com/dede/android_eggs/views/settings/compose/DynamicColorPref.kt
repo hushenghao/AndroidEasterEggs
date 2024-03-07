@@ -58,13 +58,13 @@ object DynamicColorPrefUtil {
 
 @Composable
 fun DynamicColorPref() {
-    SwitchPref(
+    SwitchIntPref(
         key = KEY_DYNAMIC_COLOR,
-        default = DEFAULT == SettingPref.ON,
+        default = DEFAULT,
         leadingIcon = Icons.Rounded.Palette,
         title = stringResource(R.string.pref_title_dynamic_color),
         onCheckedChange = {
-            isDynamicEnable = it
+            isDynamicEnable = it == SettingPref.ON
         }
     )
 }

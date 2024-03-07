@@ -22,11 +22,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.views.settings.compose.AboutGroup
+import com.dede.android_eggs.views.settings.compose.ComponentManagerPref
 import com.dede.android_eggs.views.settings.compose.DynamicColorPref
 import com.dede.android_eggs.views.settings.compose.IconShapePref
 import com.dede.android_eggs.views.settings.compose.IconVisualEffectsPref
+import com.dede.android_eggs.views.settings.compose.LanguagePref
+import com.dede.android_eggs.views.settings.compose.RetainInRecentsPref
 import com.dede.android_eggs.views.settings.compose.SettingPref
 import com.dede.android_eggs.views.settings.compose.ThemePref
+import com.dede.android_eggs.views.settings.compose.TimelinePref
 import kotlinx.coroutines.launch
 
 @Composable
@@ -60,9 +65,19 @@ fun SettingsScreen(drawerState: DrawerState) {
 
             IconShapePref()
 
+            LanguagePref()
+
             DynamicColorPref()
 
             IconVisualEffectsPref()
+
+            TimelinePref()
+
+            ComponentManagerPref()
+
+            RetainInRecentsPref()
+
+            AboutGroup()
 
             Spacer(modifier = Modifier.height(0.dp))
         }

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -18,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.util.pref
 
@@ -83,13 +85,16 @@ fun SettingPref(
         Column(
             modifier = Modifier.animateContentSize()
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.defaultMinSize(minHeight = 50.dp)
+            ) {
                 leadingIcon()
                 Column(
                     modifier = Modifier
                         .weight(1f)
-                        .padding(12.dp)
-                        .animateContentSize()
+                        .padding(horizontal = 10.dp, vertical = 10.dp)
+                        .animateContentSize(),
                 ) {
                     Text(
                         text = title,
@@ -99,7 +104,9 @@ fun SettingPref(
                         Text(
                             text = desc,
                             style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.padding(top = 4.dp)
+                            modifier = Modifier.padding(top = 4.dp),
+                            maxLines = 5,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
                 }

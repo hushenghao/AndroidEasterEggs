@@ -19,19 +19,41 @@ fun SwitchPref(
     default: Boolean = false,
     onCheckedChange: (checked: Boolean) -> Unit
 ) {
-    var intValue by rememberPrefIntState(
-        key,
-        if (default) SettingPref.ON else SettingPref.OFF
-    )
+    var state by rememberPrefBoolState(key, default)
     SettingPref(
         leadingIcon = leadingIcon,
         title = title,
         desc = desc,
         trailingContent = {
             Box(modifier = Modifier.padding(end = 10.dp)) {
-                Switch(checked = intValue == SettingPref.ON, onCheckedChange = {
-                    intValue = if (it) SettingPref.ON else SettingPref.OFF
+                Switch(checked = state, onCheckedChange = {
+                    state = it
                     onCheckedChange(it)
+                })
+            }
+        },
+    )
+}
+
+@Composable
+fun SwitchIntPref(
+    key: String,
+    leadingIcon: ImageVector,
+    title: String,
+    desc: String? = null,
+    default: Int = SettingPref.OFF,
+    onCheckedChange: (value: Int) -> Unit
+) {
+    var intState by rememberPrefIntState(key, default)
+    SettingPref(
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        trailingContent = {
+            Box(modifier = Modifier.padding(end = 10.dp)) {
+                Switch(checked = intState == SettingPref.ON, onCheckedChange = {
+                    intState = if (it) SettingPref.ON else SettingPref.OFF
+                    onCheckedChange(intState)
                 })
             }
         },

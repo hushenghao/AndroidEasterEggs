@@ -25,19 +25,19 @@ object IconVisualEffectsPrefUtil {
 @Composable
 fun IconVisualEffectsPref() {
     val context = LocalContext.current
-    SwitchPref(
+    SwitchIntPref(
         key = IconVisualEffectsPrefUtil.KEY_ICON_VISUAL_EFFECTS,
         leadingIcon = Icons.Rounded.Animation,
         title = stringResource(R.string.pref_title_icon_visual_effects),
-        default = false,
+        default = SettingPref.OFF,
         onCheckedChange = {
             with(LocalEvent.poster(context)) {
-                if (it) {
+                if (it == SettingPref.ON) {
                     post(SettingPref.ACTION_CLOSE_SETTING)
                 }
                 post(
                     IconVisualEffectsPrefUtil.ACTION_CHANGED,
-                    bundleOf(SettingPref.EXTRA_VALUE to it)
+                    bundleOf(SettingPref.EXTRA_VALUE to (it == SettingPref.ON))
                 )
             }
         }

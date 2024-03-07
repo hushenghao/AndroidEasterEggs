@@ -99,28 +99,6 @@
         <item name="backgroundTint">?attr/colorSurface</item>
     </style>
 
-    <style name="ThemeOverlay.LanguagePref.MaterialAlertDialog" parent="ThemeOverlay.MaterialAlertDialog.BlurBehind">
-        <!-- Mark spacer as gone when showing full width buttons -->
-        <item name="materialAlertDialogButtonSpacerVisibility">@integer/mtrl_view_gone</item>
-        <item name="buttonBarPositiveButtonStyle">
-            @style/Widget.LanguagePref.Button.TextButton.Dialog.FullWidth
-        </item>
-        <item name="buttonBarNegativeButtonStyle">
-            @style/Widget.LanguagePref.Button.TextButton.Dialog.FullWidth
-        </item>
-        <item name="buttonBarNeutralButtonStyle">
-            @style/Widget.LanguagePref.Button.TextButton.Dialog.FullWidth
-        </item>
-    </style>
-
-    <style name="Widget.LanguagePref.Button.TextButton.Dialog.FullWidth" parent="Widget.Material3.Button.TextButton.Dialog">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:maxWidth">@null</item>
-        <item name="android:layout_marginStart">0dp</item>
-        <item name="android:layout_marginEnd">0dp</item>
-    </style>
-
     <style name="ThemeOverlay.BottomSheetDialog.BlurBehind" parent="ThemeOverlay.Material3.BottomSheetDialog">
         <item name="android:windowBlurBehindEnabled" tools:ignore="NewApi">true</item>
         <item name="android:windowBlurBehindRadius" tools:ignore="NewApi">4dp</item>

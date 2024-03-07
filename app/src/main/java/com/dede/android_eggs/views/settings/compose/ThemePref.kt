@@ -7,14 +7,10 @@ import androidx.compose.material.icons.rounded.Brightness4
 import androidx.compose.material.icons.rounded.Brightness7
 import androidx.compose.material.icons.rounded.BrightnessAuto
 import androidx.compose.material.icons.rounded.BrightnessLow
-import androidx.compose.material.icons.rounded.RadioButtonChecked
-import androidx.compose.material.icons.rounded.RadioButtonUnchecked
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -31,20 +27,6 @@ import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.KEY_NIGHT_MODE
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.LIGHT
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.OLED
 import com.dede.android_eggs.views.theme.themeMode
-
-
-@Composable
-private fun imageRadioButton(selected: Boolean): @Composable () -> Unit {
-    return {
-        Icon(
-            imageVector = if (selected)
-                Icons.Rounded.RadioButtonChecked
-            else
-                Icons.Rounded.RadioButtonUnchecked,
-            contentDescription = null,
-        )
-    }
-}
 
 object ThemePrefUtil {
 
@@ -103,55 +85,45 @@ fun ThemePref() {
     ) {
         ValueOption(
             shape = MaterialTheme.shapes.small.top(16.dp),
-            leadingIcon = imageVectorIcon(
+            leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Brightness7,
                 contentDescription = stringResource(R.string.summary_theme_light_mode)
             ),
             title = stringResource(R.string.summary_theme_light_mode),
-            trailingContent = imageRadioButton(themeModeValue == LIGHT),
+            trailingContent = radioButtonBlock(themeModeValue == LIGHT),
             value = LIGHT,
             onOptionClick = onOptionClick,
         )
         ValueOption(
-            leadingIcon = imageVectorIcon(
+            leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Brightness4,
                 contentDescription = stringResource(R.string.summary_theme_dark_mode)
             ),
             title = stringResource(R.string.summary_theme_dark_mode),
-            trailingContent = imageRadioButton(themeModeValue == DARK),
+            trailingContent = radioButtonBlock(themeModeValue == DARK),
             value = DARK,
             onOptionClick = onOptionClick,
         )
         ValueOption(
-            leadingIcon = imageVectorIcon(
+            leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.BrightnessLow,
                 contentDescription = "OLED"
             ),
             title = "OLED",
-            trailingContent = imageRadioButton(themeModeValue == OLED),
+            trailingContent = radioButtonBlock(themeModeValue == OLED),
             value = OLED,
             onOptionClick = onOptionClick,
         )
         ValueOption(
             shape = MaterialTheme.shapes.small.bottom(16.dp),
-            leadingIcon = imageVectorIcon(
+            leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.BrightnessAuto,
                 contentDescription = stringResource(R.string.summary_system_default)
             ),
             title = stringResource(R.string.summary_system_default),
-            trailingContent = imageRadioButton(themeModeValue == FOLLOW_SYSTEM),
+            trailingContent = radioButtonBlock(themeModeValue == FOLLOW_SYSTEM),
             value = FOLLOW_SYSTEM,
             onOptionClick = onOptionClick,
         )
-    }
-}
-
-@Composable
-private fun imageVectorIcon(
-    imageVector: ImageVector,
-    contentDescription: String? = null
-): @Composable () -> Unit {
-    return {
-        Icon(imageVector = imageVector, contentDescription = contentDescription)
     }
 }

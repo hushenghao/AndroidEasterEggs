@@ -8,11 +8,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 
@@ -56,7 +60,7 @@ fun ExpandOptionsPref(
     ) {
         if (expanded) {
             Column(
-                modifier = Modifier.padding(12.dp),
+                modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 options()
@@ -65,13 +69,30 @@ fun ExpandOptionsPref(
     }
 }
 
+
+@Composable
+fun imageVectorIconBlock(
+    imageVector: ImageVector,
+    contentDescription: String? = null
+): @Composable () -> Unit {
+    return {
+        Icon(imageVector = imageVector, contentDescription = contentDescription)
+    }
+}
+
+@Composable
+fun radioButtonBlock(selected: Boolean): @Composable () -> Unit {
+    return {
+        RadioButton(selected = selected, onClick = null)
+    }
+}
+
 @Composable
 fun <T : Any> ValueOption(
-    modifier: Modifier = Modifier,
-    leadingIcon: @Composable () -> Unit,
+    leadingIcon: (@Composable () -> Unit)?,
     title: String,
     desc: String? = null,
-    trailingContent: @Composable () -> Unit,
+    trailingContent: (@Composable () -> Unit)?,
     shape: Shape = MaterialTheme.shapes.small,
     onOptionClick: (value: T) -> Unit,
     value: T,
@@ -79,7 +100,6 @@ fun <T : Any> ValueOption(
     Option(
         leadingIcon = leadingIcon,
         title = title,
-        modifier = modifier,
         desc = desc,
         trailingContent = trailingContent,
         shape = shape,
@@ -91,11 +111,12 @@ fun <T : Any> ValueOption(
 
 @Composable
 fun Option(
-    modifier: Modifier = Modifier,
-    leadingIcon: @Composable () -> Unit,
+    leadingIcon: (@Composable () -> Unit)?,
     title: String,
     desc: String? = null,
-    trailingContent: @Composable () -> Unit,
+    trailingContent: (@Composable () -> Unit)? = {
+        Icon(imageVector = Icons.AutoMirrored.Rounded.NavigateNext, contentDescription = title)
+    },
     shape: Shape = MaterialTheme.shapes.small,
     onClick: () -> Unit = {},
 ) {
@@ -106,14 +127,17 @@ fun Option(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .padding(horizontal = 14.dp, vertical = 12.dp)
-                .then(modifier)
+                .padding(start = 12.dp, top = 10.dp, end = 10.dp, bottom = 10.dp)
         ) {
-            leadingIcon()
+            if (leadingIcon != null) {
+                Box(modifier = Modifier.widthIn(0.dp, 30.dp)) {
+                    leadingIcon()
+                }
+            }
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(horizontal = 14.dp)
+                    .padding(horizontal = 10.dp)
                     .animateContentSize()
             ) {
                 Text(
@@ -124,11 +148,17 @@ fun Option(
                     Text(
                         text = desc,
                         style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(top = 4.dp)
+                        modifier = Modifier.padding(top = 2.dp),
+                        maxLines = 3,
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
             }
-            trailingContent()
+            if (trailingContent != null) {
+                Box(modifier = Modifier.widthIn(0.dp, 30.dp)) {
+                    trailingContent()
+                }
+            }
         }
     }
 }
