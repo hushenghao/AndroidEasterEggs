@@ -2,11 +2,13 @@ package com.dede.android_eggs.views.settings.compose
 
 import android.content.Context
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -19,8 +21,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.R
 import com.dede.android_eggs.util.pref
 
 object SettingPref {
@@ -37,6 +41,21 @@ object SettingPref {
 
     fun setValue(context: Context, key: String, value: Int) {
         context.pref.edit().putInt(key, value).apply()
+    }
+}
+
+@Composable
+fun SettingDivider() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_wavy_line),
+            contentDescription = null
+        )
     }
 }
 
@@ -87,14 +106,13 @@ fun SettingPref(
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.defaultMinSize(minHeight = 50.dp)
+                modifier = Modifier.defaultMinSize(minHeight = 54.dp)
             ) {
                 leadingIcon()
                 Column(
                     modifier = Modifier
                         .weight(1f)
-                        .padding(horizontal = 10.dp, vertical = 10.dp)
-                        .animateContentSize(),
+                        .padding(horizontal = 10.dp, vertical = 10.dp),
                 ) {
                     Text(
                         text = title,
@@ -103,7 +121,7 @@ fun SettingPref(
                     if (desc != null) {
                         Text(
                             text = desc,
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.bodySmall,
                             modifier = Modifier.padding(top = 4.dp),
                             maxLines = 5,
                             overflow = TextOverflow.Ellipsis
@@ -112,9 +130,8 @@ fun SettingPref(
                 }
                 trailingContent()
             }
-            Column {
-                content()
-            }
+
+            content()
         }
     }
 }

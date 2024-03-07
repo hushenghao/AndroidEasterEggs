@@ -21,7 +21,6 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.R
@@ -62,7 +61,6 @@ fun MainTitleBar(
                 text = stringResource(R.string.app_name),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                fontWeight = FontWeight.Medium
             )
         },
         actions = {

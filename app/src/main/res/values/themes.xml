@@ -14,8 +14,6 @@
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialAlertDialog.BlurBehind
         </item>
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.BottomSheetDialog.BlurBehind</item>
-        <!-- Make SwitchPreferenceCompat use Material 3 switch -->
-        <item name="preferenceTheme">@style/ThemeOverlay.Preference</item>
     </style>
 
     <style name="Theme.EasterEggs" parent="Base.EasterEggs">
@@ -84,11 +82,6 @@
         <item name="isOLEDTheme">true</item>
     </style>
 
-    <style name="TextAppearance.FontIconSwitch" parent="">
-        <item name="android:textColor">?attr/colorControlNormal</item>
-        <item name="android:textSize" tools:ignore="SpUsage">16dp</item>
-    </style>
-
     <style name="ThemeOverlay.MaterialAlertDialog.BlurBehind" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
         <item name="android:windowBlurBehindEnabled" tools:ignore="NewApi">true</item>
         <item name="android:windowBlurBehindRadius" tools:ignore="NewApi">4dp</item>
@@ -115,14 +108,6 @@
 
     <style name="Theme.BottomSheet.Modal" parent="Widget.Material3.BottomSheet.Modal">
         <item name="backgroundTint">?attr/colorSurface</item>
-    </style>
-
-    <style name="ThemeOverlay.Preference" parent="@style/PreferenceThemeOverlay">
-        <item name="switchPreferenceCompatStyle">@style/Widget.Preference.Switch</item>
-    </style>
-
-    <style name="Widget.Preference.Switch" parent="@style/Preference.SwitchPreferenceCompat.Material">
-        <item name="android:widgetLayout">@layout/item_setting_pref_switch</item>
     </style>
 
     <style name="Theme.EggGroup.PopupMenu.ListPopupWindow" parent="Widget.Material3.PopupMenu.ListPopupWindow">

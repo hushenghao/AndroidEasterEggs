@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.R
 import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil.DEFAULT
 import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil.KEY_DYNAMIC_COLOR
@@ -56,6 +57,7 @@ object DynamicColorPrefUtil {
     }
 }
 
+@Preview
 @Composable
 fun DynamicColorPref() {
     SwitchIntPref(

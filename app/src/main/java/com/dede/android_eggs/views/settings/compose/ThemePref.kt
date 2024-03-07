@@ -3,6 +3,7 @@ package com.dede.android_eggs.views.settings.compose
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Android
 import androidx.compose.material.icons.rounded.Brightness4
 import androidx.compose.material.icons.rounded.Brightness7
 import androidx.compose.material.icons.rounded.BrightnessAuto
@@ -13,7 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.ThemeUtils
@@ -55,6 +56,7 @@ object ThemePrefUtil {
     }
 }
 
+@Preview
 @Composable
 fun ThemePref() {
     val context = LocalContext.current
@@ -84,7 +86,17 @@ fun ThemePref() {
         title = stringResource(R.string.pref_title_theme),
     ) {
         ValueOption(
-            shape = MaterialTheme.shapes.small.top(16.dp),
+            shape = MaterialTheme.shapes.small.top(MaterialTheme.shapes.medium),
+            leadingIcon = imageVectorIconBlock(
+                imageVector = Icons.Rounded.Android,
+                contentDescription = stringResource(R.string.summary_system_default)
+            ),
+            title = stringResource(R.string.summary_system_default),
+            trailingContent = radioButtonBlock(themeModeValue == FOLLOW_SYSTEM),
+            value = FOLLOW_SYSTEM,
+            onOptionClick = onOptionClick,
+        )
+        ValueOption(
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Brightness7,
                 contentDescription = stringResource(R.string.summary_theme_light_mode)
@@ -105,6 +117,7 @@ fun ThemePref() {
             onOptionClick = onOptionClick,
         )
         ValueOption(
+            shape = MaterialTheme.shapes.small.bottom(MaterialTheme.shapes.medium),
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.BrightnessLow,
                 contentDescription = "OLED"
@@ -114,16 +127,6 @@ fun ThemePref() {
             value = OLED,
             onOptionClick = onOptionClick,
         )
-        ValueOption(
-            shape = MaterialTheme.shapes.small.bottom(16.dp),
-            leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.BrightnessAuto,
-                contentDescription = stringResource(R.string.summary_system_default)
-            ),
-            title = stringResource(R.string.summary_system_default),
-            trailingContent = radioButtonBlock(themeModeValue == FOLLOW_SYSTEM),
-            value = FOLLOW_SYSTEM,
-            onOptionClick = onOptionClick,
-        )
+
     }
 }

@@ -14,11 +14,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.FormatListBulleted
+import androidx.compose.material.icons.rounded.Android
 import androidx.compose.material.icons.rounded.Language
+import androidx.compose.material.icons.rounded.Spellcheck
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -37,11 +41,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
-import com.dede.basic.globalContext
+import com.dede.android_eggs.util.compose.bottom
+import com.dede.android_eggs.util.compose.top
 import java.util.Locale
 
 object LanguagePrefUtil {
@@ -127,13 +134,7 @@ object LanguagePrefUtil {
     )
     // @formatter:on
 
-    init {
-        if (BuildConfig.DEBUG) {
-            checkLocaleConfig()
-        }
-    }
-
-    private fun checkLocaleConfig() {
+    fun checkLocaleConfig(context: Context) {
         // check languageOptions count
         val expected = languageOptions.size
         var actual = HashSet(languageOptions).size
@@ -144,7 +145,7 @@ object LanguagePrefUtil {
 
         // check locale-config.xml locale count
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            val localeConfig = LocaleConfig.fromContextIgnoringOverride(globalContext)
+            val localeConfig = LocaleConfig.fromContextIgnoringOverride(context)
             actual = localeConfig.supportedLocales?.size() ?: -1
             check(expected == actual) {
                 "locale-config.xml child node length, expected: %d, actual: %d."
@@ -224,6 +225,7 @@ object LanguagePrefUtil {
     }
 }
 
+@Preview
 @Composable
 fun LanguagePref() {
     val applicationLocales = AppCompatDelegate.getApplicationLocales()
@@ -241,10 +243,11 @@ fun LanguagePref() {
         AppCompatDelegate.setApplicationLocales(locales)
     }
 
+    val context = LocalContext.current
+
     var moreDialogVisible by remember { mutableStateOf(false) }
 
     if (moreDialogVisible) {
-        val context = LocalContext.current
         LanguageSelectedDialog(
             languageOptions = LanguagePrefUtil.getLanguages(context),
             currentLang = langOp,
@@ -263,7 +266,8 @@ fun LanguagePref() {
         title = stringResource(R.string.pref_title_language),
     ) {
         ValueOption(
-            leadingIcon = {},
+            leadingIcon = imageVectorIconBlock(imageVector = Icons.Rounded.Android),
+            shape = MaterialTheme.shapes.small.top(MaterialTheme.shapes.medium),
             title = stringResource(id = R.string.summary_system_default),
             trailingContent = radioButtonBlock(languageOptionValue == LanguagePrefUtil.SYSTEM),
             onOptionClick = onOptionClick,
@@ -271,7 +275,7 @@ fun LanguagePref() {
         )
         if (langOp != null) {
             ValueOption(
-                leadingIcon = {},
+                leadingIcon = imageVectorIconBlock(imageVector = Icons.Rounded.Spellcheck),
                 title = stringResource(id = langOp.titleRes),
                 trailingContent = radioButtonBlock(languageOptionValue == langOp.value),
                 onOptionClick = onOptionClick,
@@ -279,10 +283,14 @@ fun LanguagePref() {
             )
         }
         Option(
-            leadingIcon = {},
+            shape = MaterialTheme.shapes.small.bottom(MaterialTheme.shapes.medium),
+            leadingIcon = imageVectorIconBlock(imageVector = Icons.AutoMirrored.Rounded.FormatListBulleted),
             title = stringResource(id = R.string.pref_title_language_more),
             onClick = {
                 moreDialogVisible = true
+                if (BuildConfig.DEBUG) {
+                    LanguagePrefUtil.checkLocaleConfig(context)
+                }
             }
         )
     }
@@ -327,7 +335,11 @@ private fun LanguageSelectedDialog(
         AlertDialog(
             onDismissRequest = onDismissRequest,
             title = {
-                Text(text = stringResource(R.string.pref_title_language))
+                Text(
+                    text = stringResource(R.string.pref_title_language),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
             },
             text = {
                 LazyColumn(
@@ -350,7 +362,7 @@ private fun LanguageSelectedDialog(
                             ) {
                                 Text(
                                     text = stringResource(it.titleRes),
-                                    style = MaterialTheme.typography.titleMedium
+                                    style = MaterialTheme.typography.bodyMedium
                                 )
                                 val localConfiguration = remember(it) {
                                     it.toConfiguration(basicConfiguration)
@@ -361,6 +373,7 @@ private fun LanguageSelectedDialog(
                                     Text(
                                         text = stringResource(it.localeTitleRes),
                                         style = MaterialTheme.typography.bodySmall,
+                                        modifier = Modifier.padding(top = 2.dp)
                                     )
                                 }
                             }

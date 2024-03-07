@@ -8,8 +8,16 @@ fun CornerBasedShape.top(size: Dp): CornerBasedShape {
     return this.copy(topStart = CornerSize(size), topEnd = CornerSize(size))
 }
 
+fun CornerBasedShape.top(shape: CornerBasedShape): CornerBasedShape {
+    return this.copy(topStart = shape.topStart, topEnd = shape.topEnd)
+}
+
 fun CornerBasedShape.bottom(size: Dp): CornerBasedShape {
     return this.copy(bottomStart = CornerSize(size), bottomEnd = CornerSize(size))
+}
+
+fun CornerBasedShape.bottom(shape: CornerBasedShape): CornerBasedShape {
+    return this.copy(bottomStart = shape.bottomStart, bottomEnd = shape.bottomEnd)
 }
 
 fun CornerBasedShape.start(size: Dp): CornerBasedShape {

@@ -1,12 +1,18 @@
 package com.dede.android_eggs.views.settings.compose
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
@@ -58,13 +64,18 @@ fun ExpandOptionsPref(
             expanded = !expanded
         },
     ) {
-        if (expanded) {
+        AnimatedVisibility(
+            visible = expanded,
+            enter = slideInVertically() + fadeIn(),
+            exit = shrinkVertically() + fadeOut()
+        ) {
             Column(
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                options()
-            }
+                modifier = Modifier
+                    .padding(horizontal = 12.dp)
+                    .padding(bottom = 10.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+                content = options
+            )
         }
     }
 }
@@ -127,6 +138,7 @@ fun Option(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
+                .defaultMinSize(minHeight = 48.dp)
                 .padding(start = 12.dp, top = 10.dp, end = 10.dp, bottom = 10.dp)
         ) {
             if (leadingIcon != null) {
@@ -147,7 +159,7 @@ fun Option(
                 if (desc != null) {
                     Text(
                         text = desc,
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.padding(top = 2.dp),
                         maxLines = 3,
                         overflow = TextOverflow.Ellipsis
@@ -155,9 +167,7 @@ fun Option(
                 }
             }
             if (trailingContent != null) {
-                Box(modifier = Modifier.widthIn(0.dp, 30.dp)) {
-                    trailingContent()
-                }
+                trailingContent()
             }
         }
     }

@@ -1,24 +1,9 @@
 {
   "outlined": [
-    "animation",
-    "arrow_left",
-    "language"
+    "arrow_left"
   ],
   "rounded": [
-    "app_registration",
-    "balance",
-    "brightness_auto",
-    "brightness_4",
-    "brightness_7",
-    "brightness_low",
-    "feedback",
-    "g_translate",
-    "keyboard_double_arrow_up",
-    "palette",
-    "policy",
-    "timeline",
-    "tips_and_updates",
-    "view_carousel"
+    "tips_and_updates"
   ],
   "filled": []
 }
