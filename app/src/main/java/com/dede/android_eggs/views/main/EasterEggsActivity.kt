@@ -43,7 +43,7 @@ import com.dede.android_eggs.views.main.compose.rememberBottomSearchBarState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiState
 import com.dede.android_eggs.views.settings.SettingsScreen
 import com.dede.android_eggs.views.settings.compose.IconVisualEffectsPrefUtil
-import com.dede.android_eggs.views.settings.compose.SettingPref
+import com.dede.android_eggs.views.settings.compose.SettingPrefUtil
 import com.dede.android_eggs.views.theme.AppTheme
 import com.dede.basic.provider.BaseEasterEgg
 import dagger.hilt.android.AndroidEntryPoint
@@ -88,7 +88,7 @@ class EasterEggsActivity : AppCompatActivity() {
                         drawerContent = {
                             ModalDrawerSheet(
                                 drawerShape = shapes.extraLarge.end(0.dp),
-                                modifier = Modifier.fillMaxWidth(0.8f),
+                                modifier = Modifier.fillMaxWidth(0.85f),
                                 windowInsets = WindowInsets(0, 0, 0, 0)
                             ) {
                                 SettingsScreen(drawerState)
@@ -121,7 +121,7 @@ class EasterEggsActivity : AppCompatActivity() {
 
         handleOrientationAngleSensor(IconVisualEffectsPrefUtil.isEnable(this))
         LocalEvent.receiver(this).register(IconVisualEffectsPrefUtil.ACTION_CHANGED) {
-            val enable = it.getBooleanExtra(SettingPref.EXTRA_VALUE, false)
+            val enable = it.getBooleanExtra(SettingPrefUtil.EXTRA_VALUE, false)
             handleOrientationAngleSensor(enable)
         }
 

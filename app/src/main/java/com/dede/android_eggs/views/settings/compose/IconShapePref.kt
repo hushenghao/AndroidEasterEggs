@@ -1,14 +1,7 @@
-@file:OptIn(ExperimentalFoundationApi::class)
-
 package com.dede.android_eggs.views.settings.compose
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Paint
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -51,24 +44,18 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.PathParser
-import androidx.core.graphics.applyCanvas
-import androidx.core.graphics.createBitmap
 import androidx.core.os.bundleOf
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.LocalEvent
-import com.dede.android_eggs.util.resolveColor
-import com.dede.basic.dp as dip
 
 object IconShapePrefUtil {
 
     const val KEY_ICON_SHAPE = "pref_key_override_icon_shape"
 
     const val ACTION_CHANGED = "com.dede.easter_eggs.IconShapeChanged"
-    const val EXTRA_ICON_SHAPE_PATH = "extra_icon_shape_path"
 
     fun getMaskPath(context: Context): String {
-        val index = SettingPref.getValue(context, KEY_ICON_SHAPE, 0)
+        val index = SettingPrefUtil.getValue(context, KEY_ICON_SHAPE, 0)
         return getMaskPathByIndex(context, index)
     }
 
@@ -77,30 +64,9 @@ object IconShapePrefUtil {
         return paths[index % paths.size]
     }
 
-    fun createShapeIcon(context: Context, pathStr: String): Drawable {
-        val bitmap = createBitmap(56.dip, 56.dip, Bitmap.Config.ARGB_8888)
-        val shapePath = AlterableAdaptiveIconDrawable.getMaskPath(
-            pathStr, bitmap.width, bitmap.height
-        )
-        val color = context.resolveColor(com.google.android.material.R.attr.colorSecondary)
-        bitmap.applyCanvas {
-            val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-            paint.color = color
-            drawPath(shapePath, paint)
-
-            setBitmap(null)
-        }
-        return BitmapDrawable(context.resources, bitmap)
-    }
-
-    @SuppressLint("RestrictedApi")
-    fun getCloverPath(context: Context): android.graphics.Path {
-        val pathStr = context.getString(R.string.icon_shape_clover_path)
-        return PathParser.createPathFromPathData(pathStr)
-    }
 }
 
-class PathShape(pathData: String, private val pathSize: Float = 100f) : Shape {
+private class PathShape(pathData: String, private val pathSize: Float = 100f) : Shape {
 
     @SuppressLint("RestrictedApi")
     private val shapePath = PathParser.createPathFromPathData(pathData).asComposePath()
@@ -160,11 +126,10 @@ fun IconShapePref() {
                         onClick = onClick@{
                             if (currentIndex == index) return@onClick
                             currentIndex = index
-                            val extras =
-                                bundleOf(IconShapePrefUtil.EXTRA_ICON_SHAPE_PATH to path)
+                            val extras = bundleOf(SettingPrefUtil.EXTRA_VALUE to path)
                             with(LocalEvent.poster(context)) {
                                 post(IconShapePrefUtil.ACTION_CHANGED, extras)
-                                post(SettingPref.ACTION_CLOSE_SETTING)
+                                post(SettingPrefUtil.ACTION_CLOSE_SETTING)
                             }
                         }
                     )

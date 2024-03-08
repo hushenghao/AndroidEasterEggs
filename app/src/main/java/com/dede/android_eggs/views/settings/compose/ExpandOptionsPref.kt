@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
@@ -22,10 +23,12 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -35,6 +38,8 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.util.compose.bottom
+import com.dede.android_eggs.util.compose.top
 
 
 @Composable
@@ -71,12 +76,46 @@ fun ExpandOptionsPref(
         ) {
             Column(
                 modifier = Modifier
-                    .padding(horizontal = 12.dp)
+                    .padding(horizontal = 10.dp)
                     .padding(bottom = 10.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp),
                 content = options
             )
         }
+    }
+}
+
+object OptionShapes {
+
+    val defaultShape: CornerBasedShape
+        @Composable
+        get() = MaterialTheme.shapes.small
+
+    private val borderShape: CornerBasedShape
+        @Composable
+        get() = MaterialTheme.shapes.medium
+
+    @Composable
+    fun indexOfShape(index: Int, optionsCount: Int): Shape {
+        return if (optionsCount == 1) {
+            borderShape
+        } else if (index == 0 && optionsCount > 1) {
+            firstShape()
+        } else if (index == optionsCount - 1 && optionsCount > 1) {
+            lastShape()
+        } else {
+            defaultShape
+        }
+    }
+
+    @Composable
+    fun lastShape(): Shape {
+        return defaultShape.bottom(borderShape)
+    }
+
+    @Composable
+    fun firstShape(): Shape {
+        return defaultShape.top(borderShape)
     }
 }
 
@@ -104,7 +143,7 @@ fun <T : Any> ValueOption(
     title: String,
     desc: String? = null,
     trailingContent: (@Composable () -> Unit)?,
-    shape: Shape = MaterialTheme.shapes.small,
+    shape: Shape = OptionShapes.defaultShape,
     onOptionClick: (value: T) -> Unit,
     value: T,
 ) {
@@ -121,6 +160,39 @@ fun <T : Any> ValueOption(
 }
 
 @Composable
+fun SwitchOption(
+    leadingIcon: (@Composable () -> Unit)?,
+    title: String,
+    desc: String? = null,
+    shape: Shape = OptionShapes.defaultShape,
+    value: Boolean = false,
+    onCheckedChange: (checked: Boolean) -> Unit
+) {
+    var isChecked by remember { mutableStateOf(value) }
+    Option(
+        shape = shape,
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        trailingContent = {
+            Box(modifier = Modifier.padding(end = 2.dp)) {
+                Switch(
+                    checked = isChecked,
+                    onCheckedChange = {
+                        isChecked = it
+                        onCheckedChange(it)
+                    },
+                )
+            }
+        },
+        onClick = {
+            isChecked = !isChecked
+            onCheckedChange(isChecked)
+        }
+    )
+}
+
+@Composable
 fun Option(
     leadingIcon: (@Composable () -> Unit)?,
     title: String,
@@ -128,7 +200,7 @@ fun Option(
     trailingContent: (@Composable () -> Unit)? = {
         Icon(imageVector = Icons.AutoMirrored.Rounded.NavigateNext, contentDescription = title)
     },
-    shape: Shape = MaterialTheme.shapes.small,
+    shape: Shape = OptionShapes.defaultShape,
     onClick: () -> Unit = {},
 ) {
     Card(
@@ -139,7 +211,7 @@ fun Option(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .defaultMinSize(minHeight = 48.dp)
-                .padding(start = 12.dp, top = 10.dp, end = 10.dp, bottom = 10.dp)
+                .padding(start = 12.dp, top = 10.dp, end = 12.dp, bottom = 10.dp)
         ) {
             if (leadingIcon != null) {
                 Box(modifier = Modifier.widthIn(0.dp, 30.dp)) {

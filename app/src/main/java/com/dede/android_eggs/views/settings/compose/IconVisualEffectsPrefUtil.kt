@@ -16,9 +16,9 @@ object IconVisualEffectsPrefUtil {
     const val KEY_ICON_VISUAL_EFFECTS = "pref_key_icon_visual_effects"
 
     fun isEnable(context: Context): Boolean {
-        return SettingPref.getValue(
-            context, KEY_ICON_VISUAL_EFFECTS, SettingPref.OFF
-        ) == SettingPref.ON
+        return SettingPrefUtil.getValue(
+            context, KEY_ICON_VISUAL_EFFECTS, SettingPrefUtil.OFF
+        ) == SettingPrefUtil.ON
     }
 }
 
@@ -29,15 +29,15 @@ fun IconVisualEffectsPref() {
         key = IconVisualEffectsPrefUtil.KEY_ICON_VISUAL_EFFECTS,
         leadingIcon = Icons.Rounded.Animation,
         title = stringResource(R.string.pref_title_icon_visual_effects),
-        default = SettingPref.OFF,
+        default = SettingPrefUtil.OFF,
         onCheckedChange = {
             with(LocalEvent.poster(context)) {
-                if (it == SettingPref.ON) {
-                    post(SettingPref.ACTION_CLOSE_SETTING)
+                if (it == SettingPrefUtil.ON) {
+                    post(SettingPrefUtil.ACTION_CLOSE_SETTING)
                 }
                 post(
                     IconVisualEffectsPrefUtil.ACTION_CHANGED,
-                    bundleOf(SettingPref.EXTRA_VALUE to (it == SettingPref.ON))
+                    bundleOf(SettingPrefUtil.EXTRA_VALUE to (it == SettingPrefUtil.ON))
                 )
             }
         }

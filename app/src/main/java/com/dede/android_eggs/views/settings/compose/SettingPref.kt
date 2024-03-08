@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.pref
 
-object SettingPref {
+object SettingPrefUtil {
     const val ON = 1
     const val OFF = 0
 
@@ -116,13 +116,13 @@ fun SettingPref(
                 ) {
                     Text(
                         text = title,
-                        style = MaterialTheme.typography.titleMedium,
+                        style = MaterialTheme.typography.titleSmall,
                     )
                     if (desc != null) {
                         Text(
                             text = desc,
                             style = MaterialTheme.typography.bodySmall,
-                            modifier = Modifier.padding(top = 4.dp),
+                            modifier = Modifier.padding(top = 2.dp),
                             maxLines = 5,
                             overflow = TextOverflow.Ellipsis
                         )

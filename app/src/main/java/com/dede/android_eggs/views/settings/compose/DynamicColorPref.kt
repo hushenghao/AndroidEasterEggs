@@ -21,12 +21,12 @@ import com.google.android.material.color.HarmonizedColorsOptions
 object DynamicColorPrefUtil {
 
     val DEFAULT =
-        if (DynamicColors.isDynamicColorAvailable()) SettingPref.ON else SettingPref.OFF
+        if (DynamicColors.isDynamicColorAvailable()) SettingPrefUtil.ON else SettingPrefUtil.OFF
     const val KEY_DYNAMIC_COLOR = "pref_key_dynamic_color"
     const val ACTION_DYNAMIC_COLOR_CHANGED = "ACTION_DYNAMIC_COLOR_CHANGED"
 
     fun isDynamicEnable(context: Context): Boolean {
-        return SettingPref.getValue(context, KEY_DYNAMIC_COLOR, DEFAULT) == SettingPref.ON
+        return SettingPrefUtil.getValue(context, KEY_DYNAMIC_COLOR, DEFAULT) == SettingPrefUtil.ON
     }
 
     fun apply(context: Context) {
@@ -66,7 +66,7 @@ fun DynamicColorPref() {
         leadingIcon = Icons.Rounded.Palette,
         title = stringResource(R.string.pref_title_dynamic_color),
         onCheckedChange = {
-            isDynamicEnable = it == SettingPref.ON
+            isDynamicEnable = it == SettingPrefUtil.ON
         }
     )
 }

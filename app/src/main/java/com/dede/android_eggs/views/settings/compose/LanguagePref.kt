@@ -47,8 +47,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
-import com.dede.android_eggs.util.compose.bottom
-import com.dede.android_eggs.util.compose.top
 import java.util.Locale
 
 object LanguagePrefUtil {
@@ -267,7 +265,7 @@ fun LanguagePref() {
     ) {
         ValueOption(
             leadingIcon = imageVectorIconBlock(imageVector = Icons.Rounded.Android),
-            shape = MaterialTheme.shapes.small.top(MaterialTheme.shapes.medium),
+            shape = OptionShapes.firstShape(),
             title = stringResource(id = R.string.summary_system_default),
             trailingContent = radioButtonBlock(languageOptionValue == LanguagePrefUtil.SYSTEM),
             onOptionClick = onOptionClick,
@@ -283,7 +281,7 @@ fun LanguagePref() {
             )
         }
         Option(
-            shape = MaterialTheme.shapes.small.bottom(MaterialTheme.shapes.medium),
+            shape = OptionShapes.lastShape(),
             leadingIcon = imageVectorIconBlock(imageVector = Icons.AutoMirrored.Rounded.FormatListBulleted),
             title = stringResource(id = R.string.pref_title_language_more),
             onClick = {
@@ -362,7 +360,7 @@ private fun LanguageSelectedDialog(
                             ) {
                                 Text(
                                     text = stringResource(it.titleRes),
-                                    style = MaterialTheme.typography.bodyMedium
+                                    style = MaterialTheme.typography.titleSmall
                                 )
                                 val localConfiguration = remember(it) {
                                     it.toConfiguration(basicConfiguration)

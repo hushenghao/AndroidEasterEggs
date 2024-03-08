@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Android
-import androidx.compose.material.icons.rounded.Brightness4
+import androidx.compose.material.icons.rounded.Brightness1
 import androidx.compose.material.icons.rounded.Brightness7
 import androidx.compose.material.icons.rounded.BrightnessAuto
 import androidx.compose.material.icons.rounded.BrightnessLow
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.icons.rounded.Contrast
+import androidx.compose.material.icons.rounded.DarkMode
+import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -18,8 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.ThemeUtils
-import com.dede.android_eggs.util.compose.bottom
-import com.dede.android_eggs.util.compose.top
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.ACTION_NIGHT_MODE_CHANGED
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.DARK
@@ -79,14 +79,12 @@ fun ThemePref() {
         LocalEvent.poster(context).post(ACTION_NIGHT_MODE_CHANGED)
     }
 
-
-
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.BrightnessAuto,
         title = stringResource(R.string.pref_title_theme),
     ) {
         ValueOption(
-            shape = MaterialTheme.shapes.small.top(MaterialTheme.shapes.medium),
+            shape = OptionShapes.firstShape(),
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Android,
                 contentDescription = stringResource(R.string.summary_system_default)
@@ -98,7 +96,7 @@ fun ThemePref() {
         )
         ValueOption(
             leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Brightness7,
+                imageVector = Icons.Rounded.LightMode,
                 contentDescription = stringResource(R.string.summary_theme_light_mode)
             ),
             title = stringResource(R.string.summary_theme_light_mode),
@@ -108,7 +106,7 @@ fun ThemePref() {
         )
         ValueOption(
             leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Brightness4,
+                imageVector = Icons.Rounded.DarkMode,
                 contentDescription = stringResource(R.string.summary_theme_dark_mode)
             ),
             title = stringResource(R.string.summary_theme_dark_mode),
@@ -117,9 +115,9 @@ fun ThemePref() {
             onOptionClick = onOptionClick,
         )
         ValueOption(
-            shape = MaterialTheme.shapes.small.bottom(MaterialTheme.shapes.medium),
+            shape = OptionShapes.lastShape(),
             leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.BrightnessLow,
+                imageVector = Icons.Rounded.Contrast,
                 contentDescription = "OLED"
             ),
             title = "OLED",

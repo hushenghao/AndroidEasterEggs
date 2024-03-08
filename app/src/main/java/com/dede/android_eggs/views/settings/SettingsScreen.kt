@@ -39,7 +39,7 @@ import com.dede.android_eggs.views.settings.compose.IconVisualEffectsPref
 import com.dede.android_eggs.views.settings.compose.LanguagePref
 import com.dede.android_eggs.views.settings.compose.RetainInRecentsPref
 import com.dede.android_eggs.views.settings.compose.SettingDivider
-import com.dede.android_eggs.views.settings.compose.SettingPref
+import com.dede.android_eggs.views.settings.compose.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.ThemePref
 import com.dede.android_eggs.views.settings.compose.TimelinePref
 import kotlinx.coroutines.launch
@@ -59,7 +59,7 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
         closeDrawer()
     }
 
-    LocalEvent.receiver().register(action = SettingPref.ACTION_CLOSE_SETTING) {
+    LocalEvent.receiver().register(action = SettingPrefUtil.ACTION_CLOSE_SETTING) {
         closeDrawer()
     }
 

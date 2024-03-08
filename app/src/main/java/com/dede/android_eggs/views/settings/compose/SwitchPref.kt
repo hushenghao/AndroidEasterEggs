@@ -19,19 +19,23 @@ fun SwitchPref(
     default: Boolean = false,
     onCheckedChange: (checked: Boolean) -> Unit
 ) {
-    var state by rememberPrefBoolState(key, default)
+    var boolState by rememberPrefBoolState(key, default)
     SettingPref(
         leadingIcon = leadingIcon,
         title = title,
         desc = desc,
         trailingContent = {
-            Box(modifier = Modifier.padding(end = 10.dp)) {
-                Switch(checked = state, onCheckedChange = {
-                    state = it
+            Box(modifier = Modifier.padding(end = 14.dp)) {
+                Switch(checked = boolState, onCheckedChange = {
+                    boolState = it
                     onCheckedChange(it)
                 })
             }
         },
+        onClick = {
+            boolState = !boolState
+            onCheckedChange(boolState)
+        }
     )
 }
 
@@ -41,7 +45,7 @@ fun SwitchIntPref(
     leadingIcon: ImageVector,
     title: String,
     desc: String? = null,
-    default: Int = SettingPref.OFF,
+    default: Int = SettingPrefUtil.OFF,
     onCheckedChange: (value: Int) -> Unit
 ) {
     var intState by rememberPrefIntState(key, default)
@@ -50,12 +54,20 @@ fun SwitchIntPref(
         title = title,
         desc = desc,
         trailingContent = {
-            Box(modifier = Modifier.padding(end = 10.dp)) {
-                Switch(checked = intState == SettingPref.ON, onCheckedChange = {
-                    intState = if (it) SettingPref.ON else SettingPref.OFF
+            Box(modifier = Modifier.padding(end = 14.dp)) {
+                Switch(checked = intState == SettingPrefUtil.ON, onCheckedChange = {
+                    intState = if (it) SettingPrefUtil.ON else SettingPrefUtil.OFF
                     onCheckedChange(intState)
                 })
             }
         },
+        onClick = {
+            intState = if (intState == SettingPrefUtil.ON) {
+                SettingPrefUtil.OFF
+            } else {
+                SettingPrefUtil.ON
+            }
+            onCheckedChange(intState)
+        }
     )
 }

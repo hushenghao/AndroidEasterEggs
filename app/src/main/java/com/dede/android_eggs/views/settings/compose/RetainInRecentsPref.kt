@@ -23,7 +23,8 @@ fun RetainInRecentsPref() {
         key = KEY_RETAIN_IN_RECENTS,
         leadingIcon = Icons.Rounded.ViewCarousel,
         title = stringResource(id = R.string.pref_retain_recent_egg_tasks),
-        desc = stringResource(id = R.string.pref_summary_retain_recent_egg_tasks)
+        desc = stringResource(id = R.string.pref_summary_retain_recent_egg_tasks),
+        default = state
     ) {
         state = it
     }
