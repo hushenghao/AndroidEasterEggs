@@ -371,7 +371,7 @@ private fun LanguageSelectedDialog(
                                     Text(
                                         text = stringResource(it.localeTitleRes),
                                         style = MaterialTheme.typography.bodySmall,
-                                        modifier = Modifier.padding(top = 2.dp)
+                                        modifier = Modifier.padding(top = 2.dp),
                                     )
                                 }
                             }

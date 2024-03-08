@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.R
@@ -60,13 +62,18 @@ object DynamicColorPrefUtil {
 @Preview
 @Composable
 fun DynamicColorPref() {
-    SwitchIntPref(
-        key = KEY_DYNAMIC_COLOR,
-        default = DEFAULT,
-        leadingIcon = Icons.Rounded.Palette,
+    var intState by rememberPrefIntState(key = KEY_DYNAMIC_COLOR, default = DEFAULT)
+    SwitchOption(
+        leadingIcon = imageVectorIconBlock(
+            imageVector = Icons.Rounded.Palette,
+            contentDescription = stringResource(R.string.pref_title_dynamic_color),
+        ),
         title = stringResource(R.string.pref_title_dynamic_color),
+        value = intState == SettingPrefUtil.ON,
+        shape = OptionShapes.borderShape,
         onCheckedChange = {
-            isDynamicEnable = it == SettingPrefUtil.ON
+            intState = if (it) SettingPrefUtil.ON else SettingPrefUtil.OFF
+            isDynamicEnable = intState == SettingPrefUtil.ON
         }
     )
 }

@@ -2,7 +2,6 @@
 
 package com.dede.android_eggs.views.main.compose
 
-import android.content.Intent
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -18,7 +17,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.MaterialTheme.typography
@@ -40,7 +38,6 @@ import androidx.core.net.toUri
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.CustomTabsBrowser
-import com.dede.android_eggs.util.createChooser
 
 
 @Composable
@@ -94,14 +91,6 @@ fun ProjectDescription() {
     val context = LocalContext.current
     var konfettiState by LocalKonfettiState.current
 
-    fun openCustomTab(@StringRes uri: Int) {
-        CustomTabsBrowser.launchUrl(context, context.getString(uri).toUri())
-    }
-
-    fun openBrowser(uri: String) {
-        CustomTabsBrowser.launchUrlByBrowser(context, uri.toUri())
-    }
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -115,7 +104,7 @@ fun ProjectDescription() {
             Image(
                 res = R.mipmap.ic_launcher_round,
                 modifier = Modifier
-                    .size(50.dp)
+                    .size(48.dp)
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = rememberRipple(bounded = false),
@@ -133,7 +122,7 @@ fun ProjectDescription() {
                     ),
                     style = typography.titleSmall
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(2.dp))
                 Text(
                     text = BuildConfig.GIT_HASH,
                     style = typography.bodySmall,
@@ -154,37 +143,6 @@ fun ProjectDescription() {
             modifier = Modifier.padding(top = 20.dp),
             style = typography.bodyMedium
         )
-        FlowRow(
-            modifier = Modifier
-                .padding(top = 24.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
-            verticalArrangement = Arrangement.spacedBy(6.dp)
-        ) {
-            ChipItem(R.string.label_github) {
-                openCustomTab(R.string.url_github)
-            }
-            ChipItem(R.string.label_translation) {
-                openCustomTab(R.string.url_translation)
-            }
-            ChipItem(R.string.label_star) {
-                val uri = context.getString(R.string.url_market_detail, context.packageName)
-                openBrowser(uri)
-            }
-            ChipItem(R.string.label_donate) {
-                openCustomTab(R.string.url_sponsor)
-            }
-            ChipItem(R.string.label_share) {
-                val target = Intent(Intent.ACTION_SEND)
-                    .putExtra(Intent.EXTRA_TEXT, context.getString(R.string.url_share))
-                    .setType("text/plain")
-                val intent = context.createChooser(target)
-                context.startActivity(intent)
-            }
-            ChipItem(R.string.label_beta, false) {
-                openCustomTab(R.string.url_beta)
-            }
-        }
         Wavy(res = R.drawable.ic_wavy_line_1, true, colorScheme.secondaryContainer)
         FlowRow(
             modifier = Modifier.fillMaxWidth(),
@@ -196,13 +154,13 @@ fun ProjectDescription() {
                 style = typography.titleMedium,
             )
             ChipItem2(R.string.label_privacy_policy) {
-                openCustomTab(R.string.url_privacy)
+                CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
             }
             ChipItem2(R.string.label_license) {
-                openCustomTab(R.string.url_license)
+                CustomTabsBrowser.launchUrl(context, R.string.url_license)
             }
             ChipItem2(R.string.label_email) {
-                openCustomTab(R.string.url_github_issues)
+                CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
             }
         }
     }

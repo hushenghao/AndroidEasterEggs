@@ -4,7 +4,6 @@ package com.dede.android_eggs.views.theme
 
 import android.content.Context
 import android.os.Build
-import androidx.annotation.FloatRange
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
@@ -20,7 +19,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.core.graphics.ColorUtils
 import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil
 import com.dede.basic.globalContext
@@ -56,11 +54,6 @@ fun ColorScheme.toAmoled(): ColorScheme {
         outlineVariant = outlineVariant.darken(0.2f)
     )
 }
-
-fun Int.blend(
-    color: Int,
-    @FloatRange(from = 0.0, to = 1.0) fraction: Float = 0.5f,
-): Int = ColorUtils.blendARGB(this, color, fraction)
 
 private val LightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
@@ -171,13 +164,13 @@ fun AppTheme(content: @Composable () -> Unit) {
 
     val colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && isDynamicEnable) {
         when (nightModeValue) {
-            ThemePrefUtil.OLED -> dynamicDarkColorScheme(context).toAmoled()
+            ThemePrefUtil.AMOLED -> dynamicDarkColorScheme(context).toAmoled()
             ThemePrefUtil.DARK -> dynamicDarkColorScheme(context)
             else -> dynamicLightColorScheme(context)
         }
     } else {
         when (nightModeValue) {
-            ThemePrefUtil.OLED -> DarkColorScheme.toAmoled()
+            ThemePrefUtil.AMOLED -> DarkColorScheme.toAmoled()
             ThemePrefUtil.DARK -> DarkColorScheme
             else -> LightColorScheme
         }

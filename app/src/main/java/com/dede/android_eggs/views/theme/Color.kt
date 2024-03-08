@@ -1,5 +1,7 @@
 package com.dede.android_eggs.views.theme
+import androidx.annotation.FloatRange
 import androidx.compose.ui.graphics.Color
+import androidx.core.graphics.ColorUtils
 
 val md_theme_light_primary = Color(0xFF006D3C)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
@@ -61,5 +63,9 @@ val md_theme_dark_onSurface = Color(0xFFC5C7C2)
 val md_theme_dark_surfaceVariant = Color(0xFF414942)
 val md_theme_dark_onSurfaceVariant = Color(0xFFC0C9BF)
 
+fun Int.blend(
+    color: Int,
+    @FloatRange(from = 0.0, to = 1.0) fraction: Float = 0.5f,
+): Int = ColorUtils.blendARGB(this, color, fraction)
 
 val seed = Color(0xFF4ADC8A)

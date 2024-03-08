@@ -3,6 +3,7 @@ package com.dede.android_eggs.views.settings.compose
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +19,7 @@ import androidx.compose.material.icons.rounded.RoundedCorner
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Matrix
 import androidx.compose.ui.graphics.Outline
@@ -61,7 +64,10 @@ object IconShapePrefUtil {
 
     private fun getMaskPathByIndex(context: Context, index: Int): String {
         val paths = context.resources.getStringArray(R.array.icon_shape_override_paths)
-        return paths[index % paths.size]
+        if (index < 0 || index > paths.size - 1) {
+            return ""
+        }
+        return paths[index]
     }
 
 }
@@ -149,7 +155,8 @@ private fun ShapeItem(
     Card(
         shape = PathShape(stringResource(R.string.icon_shape_clover_path)),
         onClick = onClick,
-        modifier = modifier
+        modifier = modifier,
+        colors = CardDefaults.cardColors(containerColor = colorScheme.surfaceContainer)
     ) {
         Box {
             Box(modifier = Modifier.padding(10.dp)) {
@@ -161,11 +168,12 @@ private fun ShapeItem(
                         modifier = Modifier.fillMaxSize(),
                     )
                 } else {
-                    Card(
-                        modifier = Modifier.fillMaxSize(),
-                        shape = PathShape(path),
-                        colors = CardDefaults.cardColors(containerColor = colorScheme.primary)
-                    ) {}
+                    Box(
+                        modifier = Modifier
+                            .clip(PathShape(path))
+                            .background(colorScheme.primary)
+                            .fillMaxSize()
+                    )
                 }
             }
             if (isChecked) {

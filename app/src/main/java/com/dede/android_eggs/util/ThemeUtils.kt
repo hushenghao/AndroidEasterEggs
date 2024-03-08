@@ -29,7 +29,7 @@ object ThemeUtils {
     }
 
     fun tryApplyOLEDTheme(context: Context) {
-        if (ThemePrefUtil.isOLEDMode(context)) {
+        if (ThemePrefUtil.isAmoledMode(context)) {
             applyThemeOverlay(context, R.style.ThemeOverlay_EasterEggs_OLED)
         }
     }

@@ -20,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
@@ -91,7 +92,7 @@ object OptionShapes {
         @Composable
         get() = MaterialTheme.shapes.small
 
-    private val borderShape: CornerBasedShape
+    val borderShape: CornerBasedShape
         @Composable
         get() = MaterialTheme.shapes.medium
 
@@ -175,15 +176,13 @@ fun SwitchOption(
         title = title,
         desc = desc,
         trailingContent = {
-            Box(modifier = Modifier.padding(end = 2.dp)) {
-                Switch(
-                    checked = isChecked,
-                    onCheckedChange = {
-                        isChecked = it
-                        onCheckedChange(it)
-                    },
-                )
-            }
+            Switch(
+                checked = isChecked,
+                onCheckedChange = {
+                    isChecked = it
+                    onCheckedChange(it)
+                },
+            )
         },
         onClick = {
             isChecked = !isChecked
@@ -206,12 +205,13 @@ fun Option(
     Card(
         onClick = onClick,
         shape = shape,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .defaultMinSize(minHeight = 48.dp)
-                .padding(start = 12.dp, top = 10.dp, end = 12.dp, bottom = 10.dp)
+                .padding(start = 12.dp, top = 8.dp, end = 12.dp, bottom = 8.dp)
         ) {
             if (leadingIcon != null) {
                 Box(modifier = Modifier.widthIn(0.dp, 30.dp)) {
@@ -233,7 +233,7 @@ fun Option(
                         text = desc,
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.padding(top = 2.dp),
-                        maxLines = 3,
+                        maxLines = 5,
                         overflow = TextOverflow.Ellipsis
                     )
                 }

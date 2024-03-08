@@ -24,7 +24,7 @@ fun TimelinePref() {
         leadingIcon = Icons.Rounded.Timeline,
         title = stringResource(id = R.string.label_timeline),
         trailingContent = {
-            Box(modifier = Modifier.padding(end = 10.dp)) {
+            Box(modifier = Modifier.padding(end = 12.dp)) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Rounded.NavigateNext,
                     contentDescription = null,

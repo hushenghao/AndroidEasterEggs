@@ -2,36 +2,37 @@ package com.dede.android_eggs.views.settings.compose
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Android
-import androidx.compose.material.icons.rounded.Brightness1
-import androidx.compose.material.icons.rounded.Brightness7
 import androidx.compose.material.icons.rounded.BrightnessAuto
-import androidx.compose.material.icons.rounded.BrightnessLow
 import androidx.compose.material.icons.rounded.Contrast
 import androidx.compose.material.icons.rounded.DarkMode
 import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.ACTION_NIGHT_MODE_CHANGED
+import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.AMOLED
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.DARK
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.FOLLOW_SYSTEM
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.KEY_NIGHT_MODE
 import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.LIGHT
-import com.dede.android_eggs.views.settings.compose.ThemePrefUtil.OLED
 import com.dede.android_eggs.views.theme.themeMode
 
 object ThemePrefUtil {
 
-    const val OLED = -2
+    const val AMOLED = -2
     const val LIGHT = AppCompatDelegate.MODE_NIGHT_NO
     const val DARK = AppCompatDelegate.MODE_NIGHT_YES
     const val FOLLOW_SYSTEM = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
@@ -39,8 +40,8 @@ object ThemePrefUtil {
     const val KEY_NIGHT_MODE = "pref_key_night_mode"
 
     const val ACTION_NIGHT_MODE_CHANGED = "action_night_mode_changed"
-    fun isOLEDMode(context: Context): Boolean {
-        return context.pref.getInt(KEY_NIGHT_MODE, FOLLOW_SYSTEM) == OLED
+    fun isAmoledMode(context: Context): Boolean {
+        return context.pref.getInt(KEY_NIGHT_MODE, FOLLOW_SYSTEM) == AMOLED
     }
 
     fun getThemeModeValue(context: Context): Int {
@@ -49,7 +50,7 @@ object ThemePrefUtil {
 
     fun apply(context: Context) {
         var mode = getThemeModeValue(context)
-        if (mode == OLED) {
+        if (mode == AMOLED) {
             mode = DARK
         }
         AppCompatDelegate.setDefaultNightMode(mode)
@@ -65,11 +66,11 @@ fun ThemePref() {
         themeModeValue = mode
         themeMode = themeModeValue
         var appCompatMode = mode
-        if (appCompatMode == OLED) {
+        if (appCompatMode == AMOLED) {
             appCompatMode = DARK
         }
         if (appCompatMode == AppCompatDelegate.getDefaultNightMode()) {
-            if ((mode == OLED) != ThemeUtils.isOLEDTheme(context)) {
+            if ((mode == AMOLED) != ThemeUtils.isOLEDTheme(context)) {
                 ThemeUtils.recreateActivityIfPossible(context)
                 LocalEvent.poster(context).post(ACTION_NIGHT_MODE_CHANGED)
             }
@@ -118,13 +119,17 @@ fun ThemePref() {
             shape = OptionShapes.lastShape(),
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Contrast,
-                contentDescription = "OLED"
+                contentDescription = stringResource(id = R.string.summary_theme_amoled_mode)
             ),
-            title = "OLED",
-            trailingContent = radioButtonBlock(themeModeValue == OLED),
-            value = OLED,
+            title = stringResource(id = R.string.summary_theme_amoled_mode),
+            trailingContent = radioButtonBlock(themeModeValue == AMOLED),
+            value = AMOLED,
             onOptionClick = onOptionClick,
         )
+
+        Spacer(modifier = Modifier.height(1.dp))
+
+        DynamicColorPref()
 
     }
 }

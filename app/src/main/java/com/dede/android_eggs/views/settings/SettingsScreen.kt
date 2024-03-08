@@ -33,6 +33,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.settings.compose.AboutGroup
 import com.dede.android_eggs.views.settings.compose.ComponentManagerPref
+import com.dede.android_eggs.views.settings.compose.ContactMeGroup
 import com.dede.android_eggs.views.settings.compose.DynamicColorPref
 import com.dede.android_eggs.views.settings.compose.IconShapePref
 import com.dede.android_eggs.views.settings.compose.IconVisualEffectsPref
@@ -99,7 +100,7 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                     .animateContentSize()
                     .padding(
                         top = contentPadding.calculateTopPadding() + 8.dp,
-                        bottom = contentPadding.calculateBottomPadding() + 8.dp
+                        bottom = contentPadding.calculateBottomPadding() + 12.dp
                     ),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
@@ -108,8 +109,6 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                 IconShapePref()
 
                 LanguagePref()
-
-                DynamicColorPref()
 
                 IconVisualEffectsPref()
 
@@ -122,6 +121,8 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                 RetainInRecentsPref()
 
                 SettingDivider()
+
+                ContactMeGroup()
 
                 AboutGroup()
 

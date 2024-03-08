@@ -6,10 +6,12 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.provider.Browser
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import com.dede.basic.getConfigurationLocales
 import com.google.android.material.color.DynamicColors
@@ -23,6 +25,10 @@ import com.google.android.material.R as M3R
  * @since 2021/11/19 2:14 下午
  */
 object CustomTabsBrowser {
+
+    fun launchUrl(context: Context, @StringRes urlId: Int) {
+        launchUrl(context, context.getString(urlId).toUri())
+    }
 
     fun launchUrl(context: Context, uri: Uri) {
         val colorScheme = when (AppCompatDelegate.getDefaultNightMode()) {
