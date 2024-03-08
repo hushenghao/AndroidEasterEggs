@@ -26,6 +26,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
+import com.dede.android_eggs.main.AndroidPreviewHelp
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
@@ -115,6 +116,7 @@ class EasterEggsActivity : AppCompatActivity() {
                     }
                     Welcome()
                     Konfetti(konfettiState)
+                    AndroidPreviewHelp.AndroidTimelineDialog()
                 }
             }
         }

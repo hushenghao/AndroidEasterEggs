@@ -156,7 +156,7 @@ private fun ShapeItem(
         shape = PathShape(stringResource(R.string.icon_shape_clover_path)),
         onClick = onClick,
         modifier = modifier,
-        colors = CardDefaults.cardColors(containerColor = colorScheme.surfaceContainer)
+        colors = CardDefaults.cardColors(containerColor = colorScheme.surface)
     ) {
         Box {
             Box(modifier = Modifier.padding(10.dp)) {
