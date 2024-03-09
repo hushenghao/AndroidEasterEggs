@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
@@ -86,10 +87,10 @@ fun SettingPref(
 
 @Composable
 fun SettingPref(
-    leadingIcon: @Composable () -> Unit,
+    leadingIcon: (@Composable () -> Unit)? = null,
     title: String,
     desc: String? = null,
-    trailingContent: @Composable () -> Unit = {},
+    trailingContent: (@Composable () -> Unit)? = null,
     onClick: () -> Unit = {},
     shape: Shape = MaterialTheme.shapes.medium,
     content: @Composable ColumnScope.() -> Unit = {},
@@ -108,7 +109,9 @@ fun SettingPref(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.defaultMinSize(minHeight = 54.dp)
             ) {
-                leadingIcon()
+                if (leadingIcon != null) {
+                    leadingIcon()
+                }
                 Column(
                     modifier = Modifier
                         .weight(1f)
@@ -117,6 +120,7 @@ fun SettingPref(
                     Text(
                         text = title,
                         style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.Medium
                     )
                     if (desc != null) {
                         Text(
@@ -128,7 +132,9 @@ fun SettingPref(
                         )
                     }
                 }
-                trailingContent()
+                if (trailingContent != null) {
+                    trailingContent()
+                }
             }
 
             content()

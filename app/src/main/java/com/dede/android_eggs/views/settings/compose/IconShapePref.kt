@@ -5,26 +5,18 @@ import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.RoundedCorner
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,13 +28,13 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onPlaced
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -99,92 +91,116 @@ private const val SPAN_COUNT = 5
 @Preview
 @Composable
 fun IconShapePref() {
-    var currentIndex by rememberPrefIntState(IconShapePrefUtil.KEY_ICON_SHAPE, 0)
+    var selectedIndex by rememberPrefIntState(IconShapePrefUtil.KEY_ICON_SHAPE, 0)
     val context = LocalContext.current
-    val density = LocalDensity.current
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.RoundedCorner,
         title = stringResource(R.string.pref_title_icon_shape_override),
     ) {
-        val items = stringArrayResource(R.array.icon_shape_override_paths)
-        val lines = items.size / SPAN_COUNT + (if ((items.size % SPAN_COUNT) > 0) 1 else 0)
-        var itemSize by remember { mutableStateOf(0.dp) }
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(SPAN_COUNT),
-            modifier = Modifier
-                .fillMaxWidth()
-                .onPlaced {
-                    itemSize = with(density) {
-                        (it.size.width.toFloat() / SPAN_COUNT).toDp()
-                    }
-                }
-                .height((itemSize * lines))
-        ) {
-            itemsIndexed(items) { index, path ->
-                Box(
-                    modifier = Modifier
-                        .size(itemSize)
-                        .padding(4.dp)
-                ) {
-                    ShapeItem(
-                        isChecked = index == currentIndex,
-                        path = path,
-                        onClick = onClick@{
-                            if (currentIndex == index) return@onClick
-                            currentIndex = index
-                            val extras = bundleOf(SettingPrefUtil.EXTRA_VALUE to path)
-                            with(LocalEvent.poster(context)) {
-                                post(IconShapePrefUtil.ACTION_CHANGED, extras)
-                                post(SettingPrefUtil.ACTION_CLOSE_SETTING)
-                            }
-                        }
-                    )
-                }
+        IconShapeGroup(selectedIndex) { index, path ->
+            selectedIndex = index
+            val extras = bundleOf(SettingPrefUtil.EXTRA_VALUE to path)
+            with(LocalEvent.poster(context)) {
+                post(IconShapePrefUtil.ACTION_CHANGED, extras)
+                post(SettingPrefUtil.ACTION_CLOSE_SETTING)
             }
         }
     }
 }
 
+@Preview
+@Composable
+private fun IconShapeGroup(
+    selectedIndex: Int = 0,
+    onShapeClick: ((index: Int, path: String) -> Unit)? = null
+) {
+    val items = stringArrayResource(R.array.icon_shape_override_paths)
+    Layout(
+        content = {
+            items.forEachIndexed { index, path ->
+                Box(modifier = Modifier.padding(4.dp)) {
+                    ShapeItem(
+                        isChecked = index == selectedIndex,
+                        path = path,
+                        onClick = onClick@{
+                            if (selectedIndex == index) return@onClick
+                            onShapeClick?.invoke(index, path)
+                        }
+                    )
+                }
+            }
+        },
+        measurePolicy = { measurables, constraints ->
+            val childConstraints = Constraints.fixedWidth(constraints.maxWidth / SPAN_COUNT)
+            var height = 0
+            val placeables = measurables.mapIndexed { index, measurable ->
+                measurable.measure(childConstraints).also { placeable ->
+                    if (index % SPAN_COUNT == 0) {
+                        height += placeable.height
+                    }
+                }
+            }
+            layout(constraints.maxWidth, height) {
+                var x: Int
+                var y: Int
+                placeables.forEachIndexed { index, placeable ->
+                    x = index % SPAN_COUNT * placeable.width
+                    y = index / SPAN_COUNT * placeable.height
+                    placeable.placeRelative(x, y)
+                }
+            }
+        }
+    )
+}
+
+@Preview(widthDp = 56)
 @Composable
 private fun ShapeItem(
     modifier: Modifier = Modifier,
-    isChecked: Boolean,
-    path: String,
-    onClick: () -> Unit
+    isChecked: Boolean = false,
+    path: String = stringResource(id = R.string.icon_shape_clover_path),
+    onClick: () -> Unit = {}
 ) {
     Card(
         shape = PathShape(stringResource(R.string.icon_shape_clover_path)),
         onClick = onClick,
-        modifier = modifier,
+        modifier = Modifier
+            .aspectRatio(1f)
+            .then(modifier),
         colors = CardDefaults.cardColors(containerColor = colorScheme.surface)
     ) {
-        Box {
-            Box(modifier = Modifier.padding(10.dp)) {
-                if (path.isEmpty()) {
-                    Image(
-                        painter = painterResource(R.drawable.ic_android_classic),
-                        contentDescription = null,
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier.fillMaxSize(),
-                    )
-                } else {
-                    Box(
-                        modifier = Modifier
-                            .clip(PathShape(path))
-                            .background(colorScheme.primary)
-                            .fillMaxSize()
-                    )
-                }
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            if (path.isEmpty()) {
+                Image(
+                    painter = painterResource(R.drawable.ic_android_classic),
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .fillMaxSize(0.56f),
+                )
+            } else {
+                Box(
+                    modifier = Modifier
+                        .clip(PathShape(path))
+                        .background(colorScheme.primary)
+                        .fillMaxSize(0.56f)
+                )
             }
             if (isChecked) {
-                Icon(
-                    imageVector = Icons.Rounded.CheckCircle,
-                    contentDescription = null,
+                Box(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
-                        .size(22.dp)
-                        .padding(2.dp)
-                )
+                        .padding(4.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.CheckCircle,
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxSize(0.36f)
+                    )
+                }
             }
         }
     }

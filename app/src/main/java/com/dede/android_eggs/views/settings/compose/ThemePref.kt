@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Android
 import androidx.compose.material.icons.rounded.BrightnessAuto
+import androidx.compose.material.icons.rounded.Brush
 import androidx.compose.material.icons.rounded.Contrast
 import androidx.compose.material.icons.rounded.DarkMode
 import androidx.compose.material.icons.rounded.LightMode
@@ -81,7 +82,7 @@ fun ThemePref() {
     }
 
     ExpandOptionsPref(
-        leadingIcon = Icons.Rounded.BrightnessAuto,
+        leadingIcon = Icons.Rounded.Brush,
         title = stringResource(R.string.pref_title_theme),
     ) {
         ValueOption(
