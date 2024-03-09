@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -41,36 +40,7 @@ import com.dede.android_eggs.util.CustomTabsBrowser
 
 
 @Composable
-private fun RowScope.ChipItem(
-    @StringRes textRes: Int,
-    separator: Boolean = true,
-    onClick: () -> Unit,
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.align(Alignment.Bottom)
-    ) {
-        Text(
-            text = stringResource(textRes),
-            style = typography.titleSmall,
-            color = colorScheme.secondary,
-            modifier = Modifier
-                .clip(shapes.extraSmall)
-                .clickable(onClick = onClick)
-        )
-        if (separator) {
-            Text(
-                text = stringResource(id = R.string.char_separator),
-                style = typography.titleSmall,
-                color = colorScheme.secondary,
-                modifier = Modifier.padding(start = 6.dp)
-            )
-        }
-    }
-}
-
-@Composable
-private fun RowScope.ChipItem2(
+private fun ChipItem2(
     @StringRes textRes: Int,
     onClick: () -> Unit,
 ) {
@@ -81,7 +51,6 @@ private fun RowScope.ChipItem2(
         modifier = Modifier
             .clip(shapes.extraSmall)
             .clickable(onClick = onClick)
-            .align(Alignment.Bottom)
     )
 }
 
@@ -151,7 +120,7 @@ fun ProjectDescription() {
         ) {
             Text(
                 text = stringResource(R.string.app_name),
-                style = typography.titleMedium,
+                style = typography.titleSmall,
             )
             ChipItem2(R.string.label_privacy_policy) {
                 CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
