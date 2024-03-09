@@ -31,7 +31,7 @@
     <string name="label_timeline">OS Timeline</string>
     <string name="label_privacy_policy">Privacy</string>
     <string name="label_license">License</string>
-    <string name="label_email">Send Feedback</string>
+    <string name="label_feedback">Send Feedback</string>
     <string name="label_star">Rate the App</string>
     <string name="label_contact_me">Contact Me</string>
     <string name="label_email_title">Email</string>
@@ -78,4 +78,5 @@
     <string name="pref_retain_recent_egg_tasks">Retain recent Easter Egg tasks</string>
     <string name="pref_summary_retain_recent_egg_tasks">Retain Easter Egg tasks on Recents screen, maximum of 5 retained tasks (Not available for Activity Embedded Mode.)</string>
     <string name="label_about">About</string>
+    <string name="label_contribute">Contribute</string>
 </resources>

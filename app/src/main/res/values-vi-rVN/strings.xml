@@ -11,7 +11,7 @@
     <string name="label_timeline">Mốc thời gian</string>
     <string name="label_privacy_policy">Riêng tư</string>
     <string name="label_license">Giấy phép</string>
-    <string name="label_email">Nhận xét</string>
+    <string name="label_feedback">Nhận xét</string>
     <string name="label_star">Xếp hạng</string>
     <string name="label_timeline_title">Dòng thời gian, các mốc quan trọng và thông tin cập nhật</string>
     <string name="label_timeline_releases">Các bản phát hành</string>

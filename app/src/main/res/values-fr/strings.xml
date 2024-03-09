@@ -11,7 +11,7 @@
     <string name="label_timeline">Chronologie</string>
     <string name="label_privacy_policy">Confidentialité</string>
     <string name="label_license">Licence</string>
-    <string name="label_email">Commentaires</string>
+    <string name="label_feedback">Commentaires</string>
     <string name="label_star">Étoile</string>
     <string name="label_timeline_title">Chronologie, jalons et mises à jour</string>
     <string name="label_timeline_releases">Sorties</string>

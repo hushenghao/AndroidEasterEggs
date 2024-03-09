@@ -25,6 +25,7 @@ fun ContactMeGroup() {
         title = stringResource(R.string.label_contact_me)
     ) {
         Option(
+            shape = OptionShapes.firstShape(),
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.AlternateEmail,
                 contentDescription = stringResource(id = R.string.label_email_title)
@@ -36,6 +37,7 @@ fun ContactMeGroup() {
             }
         )
         Option(
+            shape = OptionShapes.lastShape(),
             leadingIcon = {
                 Image(
                     painter = painterResource(R.drawable.ic_github_logo),
@@ -47,16 +49,6 @@ fun ContactMeGroup() {
             desc = stringResource(id = R.string.label_github_me),
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_github_me)
-            }
-        )
-        Option(
-            leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Coffee,
-                contentDescription = stringResource(R.string.label_donate),
-            ),
-            title = stringResource(R.string.label_donate),
-            onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_sponsor)
             }
         )
     }

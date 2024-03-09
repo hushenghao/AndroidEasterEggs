@@ -12,7 +12,7 @@
     <string name="label_timeline">Oś czasu</string>
     <string name="label_privacy_policy">Polityka prywatności</string>
     <string name="label_license">Licencja</string>
-    <string name="label_email">Informacja zwrotna</string>
+    <string name="label_feedback">Informacja zwrotna</string>
     <string name="label_star">Oceń</string>
     <string name="label_timeline_title">Oś czasu, etapy i aktualizacje</string>
     <string name="label_timeline_releases">Wersje</string>

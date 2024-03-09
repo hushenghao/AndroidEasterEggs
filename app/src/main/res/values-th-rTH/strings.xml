@@ -11,7 +11,7 @@
     <string name="label_timeline">เส้นเวลา</string>
     <string name="label_privacy_policy">ความเป็นส่วนตัว</string>
     <string name="label_license">ใบอนุญาต</string>
-    <string name="label_email">ข้อเสนอแนะ</string>
+    <string name="label_feedback">ข้อเสนอแนะ</string>
     <string name="label_star">ดาว</string>
     <string name="label_timeline_title">ไทม์ไลน์ เหตุการณ์สำคัญ และการอัปเดต</string>
     <string name="label_timeline_releases">ข่าวประชาสัมพันธ์</string>

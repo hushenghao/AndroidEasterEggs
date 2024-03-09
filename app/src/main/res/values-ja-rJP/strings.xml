@@ -11,7 +11,7 @@
     <string name="label_timeline">歴史</string>
     <string name="label_privacy_policy">プライバシー</string>
     <string name="label_license">ライセンス</string>
-    <string name="label_email">評価･提案</string>
+    <string name="label_feedback">評価･提案</string>
     <string name="label_star">評価する</string>
     <string name="label_timeline_title">歴史、目標、更新情報</string>
     <string name="label_timeline_releases">リリース</string>

@@ -128,7 +128,7 @@ fun ProjectDescription() {
             ChipItem2(R.string.label_license) {
                 CustomTabsBrowser.launchUrl(context, R.string.url_license)
             }
-            ChipItem2(R.string.label_email) {
+            ChipItem2(R.string.label_feedback) {
                 CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
             }
         }

@@ -12,7 +12,7 @@
     <string name="label_timeline">타임라인</string>
     <string name="label_privacy_policy">개인정보</string>
     <string name="label_license">라이선스</string>
-    <string name="label_email">피드백</string>
+    <string name="label_feedback">피드백</string>
     <string name="label_star">별점</string>
     <string name="label_timeline_title">타임라인, 마일스톤 및 업데이트</string>
     <string name="label_timeline_releases">릴리스</string>

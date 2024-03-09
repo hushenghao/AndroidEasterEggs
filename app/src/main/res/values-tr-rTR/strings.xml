@@ -11,7 +11,7 @@
     <string name="label_timeline">Zaman çizelgesi</string>
     <string name="label_privacy_policy">Mahremiyet</string>
     <string name="label_license">Lisans</string>
-    <string name="label_email">Geri bildirim</string>
+    <string name="label_feedback">Geri bildirim</string>
     <string name="label_star">Yıldız</string>
     <string name="label_timeline_title">Zaman çizelgesi, kilometre taşları ve güncellemeler</string>
     <string name="label_timeline_releases">Salıverme</string>

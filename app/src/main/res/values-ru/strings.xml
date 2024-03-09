@@ -12,7 +12,7 @@
     <string name="label_timeline">Хронология ОС</string>
     <string name="label_privacy_policy">Конфиденциальность</string>
     <string name="label_license">Лицензия</string>
-    <string name="label_email">Отправить отзыв</string>
+    <string name="label_feedback">Отправить отзыв</string>
     <string name="label_star">Оценить приложение</string>
     <string name="label_timeline_title">Хронология, вехи и обновления</string>
     <string name="label_timeline_releases">Релизы</string>

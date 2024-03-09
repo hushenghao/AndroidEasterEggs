@@ -11,7 +11,7 @@
     <string name="label_timeline">Tijdlijn</string>
     <string name="label_privacy_policy">Privacy</string>
     <string name="label_license">Licentie</string>
-    <string name="label_email">Terugkoppeling</string>
+    <string name="label_feedback">Terugkoppeling</string>
     <string name="label_star">Ster</string>
     <string name="label_timeline_title">Tijdlijnen, mijlpalen en updates</string>
     <string name="label_timeline_releases">Publicaties</string>

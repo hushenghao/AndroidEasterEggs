@@ -12,7 +12,7 @@
     <string name="label_timeline">Zeitleiste</string>
     <string name="label_privacy_policy">Privatsphäre &amp; Datenschutz</string>
     <string name="label_license">Lizenz</string>
-    <string name="label_email">Feedback geben</string>
+    <string name="label_feedback">Feedback geben</string>
     <string name="label_star">Bewerten</string>
     <string name="label_timeline_title">Zeitleiste, Meilensteine und die neusten Aktualisierungen</string>
     <string name="label_timeline_releases">Ausführungen</string>

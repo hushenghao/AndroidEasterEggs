@@ -35,7 +35,7 @@ import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.settings.compose.AboutGroup
 import com.dede.android_eggs.views.settings.compose.ComponentManagerPref
 import com.dede.android_eggs.views.settings.compose.ContactMeGroup
-import com.dede.android_eggs.views.settings.compose.DynamicColorPref
+import com.dede.android_eggs.views.settings.compose.ContributeGroup
 import com.dede.android_eggs.views.settings.compose.IconShapePref
 import com.dede.android_eggs.views.settings.compose.IconVisualEffectsPref
 import com.dede.android_eggs.views.settings.compose.LanguagePref
@@ -124,10 +124,11 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
 
                 SettingDivider()
 
-                ContactMeGroup()
+                ContributeGroup()
 
                 AboutGroup()
 
+                ContactMeGroup()
             }
         }
     }

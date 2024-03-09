@@ -11,7 +11,7 @@
     <string name="label_timeline">Aikajana</string>
     <string name="label_privacy_policy">Yksityisyys</string>
     <string name="label_license">Lisenssi</string>
-    <string name="label_email">Palaute</string>
+    <string name="label_feedback">Palaute</string>
     <string name="label_star">Tähti</string>
     <string name="label_timeline_title">Aikajana, virstanpylväät ja päivitykset</string>
     <string name="label_timeline_releases">Julkaisut</string>

@@ -11,7 +11,7 @@
     <string name="label_timeline">Tidslinje</string>
     <string name="label_privacy_policy">Personvern</string>
     <string name="label_license">Lisens</string>
-    <string name="label_email">Tilbakemelding</string>
+    <string name="label_feedback">Tilbakemelding</string>
     <string name="label_star">Stjerne</string>
     <string name="label_timeline_title">Timeline, milepæler og oppdateringer</string>
     <string name="label_timeline_releases">Utgivelser</string>

@@ -11,7 +11,7 @@
     <string name="label_timeline">Idővonal</string>
     <string name="label_privacy_policy">Magánélet</string>
     <string name="label_license">Engedély</string>
-    <string name="label_email">Visszacsatolás</string>
+    <string name="label_feedback">Visszacsatolás</string>
     <string name="label_star">Csillag</string>
     <string name="label_timeline_title">Idővonal, mérföldkövek és frissítések</string>
     <string name="label_timeline_releases">Kiadások</string>

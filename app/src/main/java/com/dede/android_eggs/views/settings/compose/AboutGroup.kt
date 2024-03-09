@@ -6,14 +6,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.NewReleases
 import androidx.compose.material.icons.rounded.Balance
-import androidx.compose.material.icons.rounded.Feedback
 import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.NewReleases
 import androidx.compose.material.icons.rounded.Policy
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material.icons.rounded.StarRate
-import androidx.compose.material.icons.rounded.Translate
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -38,7 +36,7 @@ fun AboutGroup() {
     ) {
         Option(
             shape = OptionShapes.firstShape(),
-            leadingIcon = imageVectorIconBlock(imageVector = Icons.Rounded.NewReleases),
+            leadingIcon = imageVectorIconBlock(imageVector = Icons.Outlined.NewReleases),
             title = stringResource(
                 R.string.label_version,
                 BuildConfig.VERSION_NAME,
@@ -70,31 +68,7 @@ fun AboutGroup() {
                 CustomTabsBrowser.launchUrl(context, R.string.url_beta)
             }
         )
-        Option(
-            leadingIcon = {
-                Image(
-                    painter = painterResource(R.drawable.ic_github_logo),
-                    contentDescription = stringResource(R.string.label_github),
-                    modifier = Modifier.size(24.dp)
-                )
-            },
-            title = stringResource(R.string.label_github),
-            desc = stringResource(R.string.url_github),
-            onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_github)
-            }
-        )
-        Option(
-            leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Translate,
-                contentDescription = stringResource(R.string.label_translation),
-            ),
-            title = stringResource(R.string.label_translation),
-            desc = stringResource(R.string.url_translation),
-            onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_translation)
-            }
-        )
+
         Option(
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Share,
@@ -135,6 +109,21 @@ fun AboutGroup() {
             }
         )
         Option(
+            leadingIcon = {
+                Image(
+                    painter = painterResource(R.drawable.ic_github_logo),
+                    contentDescription = stringResource(R.string.label_github),
+                    modifier = Modifier.size(24.dp)
+                )
+            },
+            title = stringResource(R.string.label_github),
+            desc = stringResource(R.string.url_github),
+            onClick = {
+                CustomTabsBrowser.launchUrl(context, R.string.url_github)
+            }
+        )
+        Option(
+            shape = OptionShapes.lastShape(),
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Balance,
                 contentDescription = stringResource(R.string.label_license),
@@ -143,18 +132,6 @@ fun AboutGroup() {
             desc = "Apache-2.0 license",
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_license)
-            }
-        )
-        Option(
-            shape = OptionShapes.lastShape(),
-            leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Feedback,
-                contentDescription = stringResource(R.string.label_email),
-            ),
-            title = stringResource(R.string.label_email),
-            desc = stringResource(R.string.url_github_issues),
-            onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
             }
         )
     }
