@@ -14,6 +14,8 @@
     <string name="label_license">授权协议</string>
     <string name="label_email">联系我</string>
     <string name="label_star">给个好评</string>
+    <string name="label_contact_me">联系我</string>
+    <string name="label_email_title">邮箱</string>
     <string name="label_timeline_title">时间表、里程碑和更新</string>
     <string name="label_timeline_releases">版本</string>
     <string name="message_trypophobia_warning">对有&lt;b&gt;密集恐惧症&lt;/b&gt;的提示，一些画面可能会引起不适。是否继续？</string>
@@ -28,6 +30,7 @@
     <string name="summary_system_default">默认</string>
     <string name="summary_theme_dark_mode">深色</string>
     <string name="summary_theme_light_mode">浅色</string>
+    <string name="summary_theme_amoled_mode">Amoled</string>
     <string name="label_add_shortcut">快捷方式</string>
     <string name="label_donate">捐赠</string>
     <string name="preference_on">开启</string>
@@ -44,7 +47,4 @@
     <string name="pref_retain_recent_egg_tasks">保留最近的彩蛋任务</string>
     <string name="pref_summary_retain_recent_egg_tasks">在最近任务中保留最近的彩蛋任务，最多保留5个（在活动嵌入模式下无效）</string>
     <string name="label_about">关于</string>
-    <string name="summary_theme_amoled_mode">Amoled</string>
-    <string name="label_contact_me">联系我</string>
-    <string name="label_email_title">邮箱</string>
 </resources>
