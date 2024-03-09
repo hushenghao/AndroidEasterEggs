@@ -6,14 +6,16 @@ import androidx.startup.Initializer
 import com.dede.android_eggs.util.ActivityActionDispatcher
 import com.dede.android_eggs.views.crash.CrashActivity
 import com.dede.android_eggs.views.crash.GlobalExceptionHandler
-import com.dede.android_eggs.views.settings.SettingsPrefs
+import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil
+import com.dede.android_eggs.views.settings.compose.ThemePrefUtil
 import com.dede.basic.GlobalContext
 
 class ApplicationInitializer : Initializer<Unit> {
 
     override fun create(context: Context) {
         val application = context.applicationContext as Application
-        SettingsPrefs.apply(application)
+        DynamicColorPrefUtil.apply(application)
+        ThemePrefUtil.apply(application)
         ActivityActionDispatcher.register(application)
         GlobalExceptionHandler.initialize(application, CrashActivity::class.java)
     }

@@ -11,17 +11,27 @@ import android.view.ViewGroup
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme.shapes
+import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
+import com.dede.android_eggs.main.AndroidPreviewHelp
+import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.ThemeUtils
+import com.dede.android_eggs.util.compose.end
 import com.dede.android_eggs.views.main.compose.BottomSearchBar
 import com.dede.android_eggs.views.main.compose.EasterEggScreen
 import com.dede.android_eggs.views.main.compose.Konfetti
@@ -32,7 +42,9 @@ import com.dede.android_eggs.views.main.compose.MainTitleBar
 import com.dede.android_eggs.views.main.compose.Welcome
 import com.dede.android_eggs.views.main.compose.rememberBottomSearchBarState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiState
-import com.dede.android_eggs.views.settings.prefs.IconVisualEffectsPref
+import com.dede.android_eggs.views.settings.SettingsScreen
+import com.dede.android_eggs.views.settings.compose.IconVisualEffectsPrefUtil
+import com.dede.android_eggs.views.settings.compose.SettingPrefUtil
 import com.dede.android_eggs.views.theme.AppTheme
 import com.dede.basic.provider.BaseEasterEgg
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,6 +76,7 @@ class EasterEggsActivity : AppCompatActivity() {
         setContent {
             val konfettiState = rememberKonfettiState()
             val searchBarState = rememberBottomSearchBarState()
+            val drawerState = rememberDrawerState(DrawerValue.Closed)
 
             val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
             CompositionLocalProvider(
@@ -72,30 +85,45 @@ class EasterEggsActivity : AppCompatActivity() {
                 LocalKonfettiState provides konfettiState
             ) {
                 AppTheme {
-                    Scaffold(
-                        topBar = {
-                            MainTitleBar(
-                                scrollBehavior = scrollBehavior,
-                                searchBarState = searchBarState,
-                            )
+                    ReverseModalNavigationDrawer(
+                        drawerContent = {
+                            ModalDrawerSheet(
+                                drawerShape = shapes.extraLarge.end(0.dp),
+                                modifier = Modifier.fillMaxWidth(0.85f),
+                                windowInsets = WindowInsets(0, 0, 0, 0)
+                            ) {
+                                SettingsScreen(drawerState)
+                            }
                         },
-                        modifier = Modifier
-                            .nestedScroll(scrollBehavior.nestedScrollConnection),
-                        bottomBar = {
-                            BottomSearchBar(searchBarState)
+                        drawerState = drawerState
+                    ) {
+                        Scaffold(
+                            topBar = {
+                                MainTitleBar(
+                                    scrollBehavior = scrollBehavior,
+                                    searchBarState = searchBarState,
+                                    drawerState = drawerState,
+                                )
+                            },
+                            modifier = Modifier
+                                .nestedScroll(scrollBehavior.nestedScrollConnection),
+                            bottomBar = {
+                                BottomSearchBar(searchBarState)
+                            }
+                        ) { contentPadding ->
+                            EasterEggScreen(easterEggs, searchBarState.searchText, contentPadding)
                         }
-                    ) { contentPadding ->
-                        EasterEggScreen(easterEggs, searchBarState.searchText, contentPadding)
                     }
                     Welcome()
                     Konfetti(konfettiState)
+                    AndroidPreviewHelp.AndroidTimelineDialog()
                 }
             }
         }
 
-        handleOrientationAngleSensor(IconVisualEffectsPref.isEnable(this))
-        LocalEvent.receiver(this).register(IconVisualEffectsPref.ACTION_CHANGED) {
-            val enable = it.getBooleanExtra(IconVisualEffectsPref.EXTRA_VALUE, false)
+        handleOrientationAngleSensor(IconVisualEffectsPrefUtil.isEnable(this))
+        LocalEvent.receiver(this).register(IconVisualEffectsPrefUtil.ACTION_CHANGED) {
+            val enable = it.getBooleanExtra(SettingPrefUtil.EXTRA_VALUE, false)
             handleOrientationAngleSensor(enable)
         }
 

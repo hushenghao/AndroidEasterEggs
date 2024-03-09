@@ -7,6 +7,8 @@
     <string name="title_open_with">Open with</string>
 
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
+    <string name="url_github_me" translatable="false">https://github.com/hushenghao</string>
+    <string name="label_github_me" translatable="false">hushenghao</string>
     <string name="url_github_commit" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/commit/%s</string>
     <string name="url_github_issues" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/issues</string>
     <string name="url_beta" translatable="false">https://www.pgyer.com/eggs</string>
@@ -17,6 +19,7 @@
     <string name="url_market_detail" translatable="false">market://details?id=%s</string>
     <string name="url_share" translatable="false">https://f-droid.org/packages/com.dede.android_eggs</string>
     <string name="url_mail" translatable="false">mailto:dede.hu@qq.com</string>
+    <string name="label_mail_me" translatable="false">dede.hu@qq.com</string>
     <string name="url_sponsor" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Sponsor</string>
 
     <string name="char_separator">/</string>
@@ -30,6 +33,8 @@
     <string name="label_license">License</string>
     <string name="label_email">Send Feedback</string>
     <string name="label_star">Rate the App</string>
+    <string name="label_contact_me">Contact Me</string>
+    <string name="label_email_title">Email</string>
 
     <string name="label_version" translatable="false">v%s (%d)</string>
 
@@ -50,6 +55,7 @@
     <string name="summary_system_default">Default</string>
     <string name="summary_theme_dark_mode">Dark</string>
     <string name="summary_theme_light_mode">Light</string>
+    <string name="summary_theme_amoled_mode">Amoled</string>
     <string name="label_add_shortcut">Shortcut</string>
     <string name="label_donate">Donate</string>
 

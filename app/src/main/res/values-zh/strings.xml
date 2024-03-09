@@ -44,4 +44,7 @@
     <string name="pref_retain_recent_egg_tasks">保留最近的彩蛋任务</string>
     <string name="pref_summary_retain_recent_egg_tasks">在最近任务中保留最近的彩蛋任务，最多保留5个（在活动嵌入模式下无效）</string>
     <string name="label_about">关于</string>
+    <string name="summary_theme_amoled_mode">Amoled</string>
+    <string name="label_contact_me">联系我</string>
+    <string name="label_email_title">邮箱</string>
 </resources>

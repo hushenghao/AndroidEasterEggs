@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <com.dede.android_eggs.ui.preferences.SimplifyPreferenceCategory
-        android:key="key_component_manager"
-        android:title="@string/label_component_manager" />
-
-</PreferenceScreen>

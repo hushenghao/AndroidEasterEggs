@@ -90,7 +90,6 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity android:name=".views.placeholder.PlaceholderActivity" />
-        <activity android:name=".views.settings.more.MoreSettingsActivity" />
         <activity android:name=".views.crash.CrashActivity" />
     </application>
 

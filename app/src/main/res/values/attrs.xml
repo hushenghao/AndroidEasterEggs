@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="ChromeTabPreference">
-        <attr name="customUrl" format="string" />
-        <attr name="useChromeTab" format="boolean" />
-    </declare-styleable>
-
     <declare-styleable name="Manifest">
         <attr name="once" format="string" />
     </declare-styleable>

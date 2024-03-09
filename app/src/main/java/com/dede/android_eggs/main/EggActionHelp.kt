@@ -28,7 +28,7 @@ import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.toast
 import com.dede.android_eggs.views.main.EasterEggsActivity
-import com.dede.android_eggs.views.settings.more.MoreSettingsActivity.MoreSettings
+import com.dede.android_eggs.views.settings.compose.isRetainInRecentsEnabled
 import com.dede.basic.cancel
 import com.dede.basic.delay
 import com.dede.basic.dp
@@ -77,7 +77,7 @@ object EggActionHelp {
             return
         }
         val retainInRecents = !SplitUtils.isActivityEmbedded(context) &&
-                MoreSettings.isRetainInRecentsEnabled(context)
+                isRetainInRecentsEnabled(context)
         val intent = createIntent(context, targetClass, retainInRecents)
             ?: throw IllegalArgumentException("Create Egg launcher intent == null")
         val task: AppTask? = findTaskWithTrim(context, targetClass)

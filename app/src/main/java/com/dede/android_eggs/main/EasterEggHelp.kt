@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.views.main.EasterEggModules
-import com.dede.android_eggs.views.settings.prefs.IconShapePref
+import com.dede.android_eggs.views.settings.compose.IconShapePrefUtil
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.requireDrawable
@@ -136,7 +136,7 @@ object EasterEggHelp {
 
     fun EasterEgg.getIcon(context: Context): Drawable {
         if (supportAdaptiveIcon) {
-            val pathStr = IconShapePref.getMaskPath(context)
+            val pathStr = IconShapePrefUtil.getMaskPath(context)
             return AlterableAdaptiveIconDrawable(context, iconRes, pathStr)
         }
         return context.requireDrawable(iconRes)

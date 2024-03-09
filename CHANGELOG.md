@@ -1,5 +1,6 @@
 ### v2.3.1
 
+- New Settings UI 🎉
 - Waiting Android Vanilla Ice Cream
 - Added Random Platlogo on Android U Egg
 - Added Tamil translation

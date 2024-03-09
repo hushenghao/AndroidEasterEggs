@@ -5,8 +5,9 @@ import android.content.Context
 import android.content.res.Configuration
 import androidx.annotation.StyleRes
 import com.dede.android_eggs.R
-import com.dede.android_eggs.views.settings.prefs.NightModePref
+import com.dede.android_eggs.views.settings.compose.ThemePrefUtil
 import com.google.android.material.color.ThemeUtils
+import com.google.android.material.internal.ContextUtils
 import com.google.android.material.resources.MaterialAttributes
 
 
@@ -28,8 +29,14 @@ object ThemeUtils {
     }
 
     fun tryApplyOLEDTheme(context: Context) {
-        if (NightModePref.isOLEDMode(context)) {
+        if (ThemePrefUtil.isAmoledMode(context)) {
             applyThemeOverlay(context, R.style.ThemeOverlay_EasterEggs_OLED)
         }
+    }
+
+    @SuppressLint("RestrictedApi")
+    fun recreateActivityIfPossible(context: Context) {
+        val activity = ContextUtils.getActivity(context)
+        activity?.recreate()
     }
 }

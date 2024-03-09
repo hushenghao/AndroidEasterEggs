@@ -90,7 +90,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.preference)
+    compileOnly(libs.androidx.preference)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.browser)
     implementation(libs.androidx.window)
