@@ -6,14 +6,16 @@
     <string name="title_open_with">開啟</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-    <string name="label_github">源代碼</string>
+    <string name="label_github">原始碼</string>
     <string name="label_translation">翻譯與國際化</string>
-    <string name="label_beta">下载Beta版</string>
+    <string name="label_beta">下載 Beta 版</string>
     <string name="label_timeline">時間線</string>
     <string name="label_privacy_policy">隱私權</string>
     <string name="label_license">授權</string>
     <string name="label_email">意見回饋</string>
     <string name="label_star">給個好評</string>
+    <string name="label_contact_me">聯絡我們</string>
+    <string name="label_email_title">電子郵件</string>
     <string name="label_timeline_title">時間表、里程碑和更新</string>
     <string name="label_timeline_releases">版本</string>
     <string name="message_trypophobia_warning">對有&lt;b&gt;密集恐懼症&lt;/b&gt;人士的警告，一些畫面可能會引起不適。要繼續嗎？</string>
@@ -28,6 +30,7 @@
     <string name="summary_system_default">預設</string>
     <string name="summary_theme_dark_mode">深色</string>
     <string name="summary_theme_light_mode">淺色</string>
+    <string name="summary_theme_amoled_mode">黑色</string>
     <string name="label_add_shortcut">捷徑</string>
     <string name="label_donate">捐贈</string>
     <string name="preference_on">開啟</string>
