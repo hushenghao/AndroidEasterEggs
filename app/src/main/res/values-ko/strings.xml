@@ -6,7 +6,7 @@
     <string name="title_open_with">다음으로 열기</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-    <string name="label_github">Source code</string>
+    <string name="label_github">소스 코드</string>
     <string name="label_translation">번역</string>
     <string name="label_beta">베타 받기</string>
     <string name="label_timeline">타임라인</string>
@@ -14,6 +14,8 @@
     <string name="label_license">라이선스</string>
     <string name="label_feedback">피드백</string>
     <string name="label_star">별점</string>
+    <string name="label_contact_me">연락하기</string>
+    <string name="label_email_title">이메일</string>
     <string name="label_timeline_title">타임라인, 마일스톤 및 업데이트</string>
     <string name="label_timeline_releases">릴리스</string>
     <string name="message_trypophobia_warning">이는 &lt;b&gt;Trypophobia&lt;/b&gt;가 있다면 일부 이미지가 불편함을 유발할 수 있다는 경고입니다. 계속하시겠습니까?</string>
@@ -28,6 +30,7 @@
     <string name="summary_system_default">기본</string>
     <string name="summary_theme_dark_mode">다크</string>
     <string name="summary_theme_light_mode">라이트</string>
+    <string name="summary_theme_amoled_mode">Amoled</string>
     <string name="label_add_shortcut">바로가기</string>
     <string name="label_donate">기부</string>
     <string name="preference_on">켜기</string>
@@ -44,4 +47,5 @@
     <string name="pref_retain_recent_egg_tasks">최근 Egg 작업 유지</string>
     <string name="pref_summary_retain_recent_egg_tasks">최근 화면에 Egg 작업 유지, 최대 5개 유지 (활동 포함 모드에는 유효하지 않음)</string>
     <string name="label_about">정보</string>
+    <string name="label_contribute">기여하기</string>
 </resources>
