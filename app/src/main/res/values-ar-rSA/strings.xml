@@ -6,7 +6,7 @@
     <string name="title_open_with">مفتوحة مع</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-    <string name="label_github">Source code</string>
+    <string name="label_github">شفرة المصدر</string>
     <string name="label_translation">ترجمة</string>
     <string name="label_beta">احصل على النسخة التجريبية</string>
     <string name="label_timeline">الجدول الزمني</string>
@@ -14,6 +14,8 @@
     <string name="label_license">رخصة</string>
     <string name="label_feedback">تعليق</string>
     <string name="label_star">نجمة</string>
+    <string name="label_contact_me">تواصل معي</string>
+    <string name="label_email_title">البريد الإلكتروني</string>
     <string name="label_timeline_title">الجدول الزمني والمعالم والتحديثات</string>
     <string name="label_timeline_releases">إطلاق</string>
     <string name="message_trypophobia_warning">وهذا تحذير لأولئك الذين يعانون من &lt;b&gt;رهاب النخاريب&lt;/b&gt; من أن بعض الصور قد تسبب عدم الراحة. هل تريد الاستمرار؟</string>
@@ -28,6 +30,7 @@
     <string name="summary_system_default">تقصير</string>
     <string name="summary_theme_dark_mode">مظلم</string>
     <string name="summary_theme_light_mode">ضوء</string>
+    <string name="summary_theme_amoled_mode">أموليد</string>
     <string name="label_add_shortcut">الاختصار</string>
     <string name="label_donate">يتبرع</string>
     <string name="preference_on">على</string>
@@ -44,4 +47,5 @@
     <string name="pref_retain_recent_egg_tasks">احتفظ بمهام البيض الأخيرة</string>
     <string name="pref_summary_retain_recent_egg_tasks">الاحتفاظ بمهام البيض على شاشة العناصر الأخيرة، بحد أقصى للاحتفاظ بـ 5 (غير صالح لوضع النشاط المضمن)</string>
     <string name="label_about">حول</string>
+    <string name="label_contribute">ساهم</string>
 </resources>
