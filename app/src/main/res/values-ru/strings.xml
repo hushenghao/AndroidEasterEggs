@@ -14,6 +14,8 @@
     <string name="label_license">Лицензия</string>
     <string name="label_feedback">Отправить отзыв</string>
     <string name="label_star">Оценить приложение</string>
+    <string name="label_contact_me">Связаться со мной</string>
+    <string name="label_email_title">Email</string>
     <string name="label_timeline_title">Хронология, вехи и обновления</string>
     <string name="label_timeline_releases">Релизы</string>
     <string name="message_trypophobia_warning">Это предупреждение для людей с &lt;b&gt;трипофобией&lt;/b&gt; о том, что некоторые изображения могут вызывать дискомфорт. Вы всё равно хотите продолжить?</string>
@@ -28,6 +30,7 @@
     <string name="summary_system_default">По умолчанию</string>
     <string name="summary_theme_dark_mode">Тёмная</string>
     <string name="summary_theme_light_mode">Светлая</string>
+    <string name="summary_theme_amoled_mode">Amoled</string>
     <string name="label_add_shortcut">Ярлык</string>
     <string name="label_donate">Пожертвование</string>
     <string name="preference_on">Вкл.</string>
@@ -44,4 +47,5 @@
     <string name="pref_retain_recent_egg_tasks">Сохранять недавние задачи запуска пасхальных яиц</string>
     <string name="pref_summary_retain_recent_egg_tasks">Сохранять недавние задачи запуска пасхальных яиц на экране «Недавние», максимум 5 (Недопустимо для режима встроенной активности (Acitivity Embedded Mode).)</string>
     <string name="label_about">О приложении</string>
+    <string name="label_contribute">Внести вклад</string>
 </resources>
