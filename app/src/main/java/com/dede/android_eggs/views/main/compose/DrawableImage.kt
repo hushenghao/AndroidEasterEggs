@@ -21,16 +21,16 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 @Composable
 @Preview
-fun PreviewImage() {
+private fun PreviewImage() {
     val context = LocalContext.current
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(res = R.mipmap.ic_launcher_round, contentDescription = null)
+        DrawableImage(res = R.mipmap.ic_launcher_round, contentDescription = null)
 
         val maskPath = stringArrayResource(id = R.array.icon_shape_override_paths).last()
         val drawable = remember(context.theme, maskPath) {
             AlterableAdaptiveIconDrawable(context, R.mipmap.ic_launcher, maskPath)
         }
-        Image(
+        DrawableImage(
             drawable = drawable, contentDescription = null,
             modifier = Modifier.size(56.dp)
         )
@@ -38,7 +38,7 @@ fun PreviewImage() {
 }
 
 @Composable
-fun Image(
+fun DrawableImage(
     @DrawableRes res: Int,
     contentDescription: String?,
     modifier: Modifier = Modifier,
@@ -49,7 +49,7 @@ fun Image(
     val drawable = remember(res, context.theme) {
         context.requireDrawable(res)
     }
-    Image(
+    DrawableImage(
         drawable = drawable,
         contentDescription = contentDescription,
         modifier = modifier,
@@ -59,7 +59,7 @@ fun Image(
 }
 
 @Composable
-fun Image(
+fun DrawableImage(
     drawable: Drawable,
     contentDescription: String?,
     modifier: Modifier = Modifier,

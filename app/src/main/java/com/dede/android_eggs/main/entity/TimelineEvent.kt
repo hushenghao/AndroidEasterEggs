@@ -1,10 +1,11 @@
 package com.dede.android_eggs.main.entity
 
-import android.graphics.Typeface
 import android.os.Build
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.style.StyleSpan
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import com.dede.android_eggs.main.EasterEggHelp
 import java.util.Calendar
 import java.util.TimeZone
@@ -222,22 +223,18 @@ data class TimelineEvent(
             return EasterEggHelp.DateFormatter.getInstance("MMMM").format(calendar.time)
         }
 
-    val eventSpan: CharSequence by lazy(LazyThreadSafetyMode.NONE) {
+    val eventAnnotatedString: AnnotatedString = buildAnnotatedString {
         val split = event.split("\n")
-        val span = SpannableStringBuilder()
         if (split.isNotEmpty()) {
-            span.append(
-                split[0],
-                StyleSpan(Typeface.BOLD),
-                Spannable.SPAN_INCLUSIVE_EXCLUSIVE
-            )
-        }
-        if (split.size > 1) {
-            span.appendLine()
-            for (i in 1 until split.size) {
-                span.append(split[i])
+            withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                append(split[0])
             }
         }
-        span
+        if (split.size > 1) {
+            appendLine()
+            for (i in 1 until split.size) {
+                append(split[i])
+            }
+        }
     }
 }

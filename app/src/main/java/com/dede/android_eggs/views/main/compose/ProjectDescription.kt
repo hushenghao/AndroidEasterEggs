@@ -70,7 +70,7 @@ fun ProjectDescription() {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(horizontal = 4.dp)
         ) {
-            Image(
+            DrawableImage(
                 res = R.mipmap.ic_launcher_round,
                 modifier = Modifier
                     .size(48.dp)

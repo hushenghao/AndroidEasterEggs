@@ -43,7 +43,7 @@ fun Wavy(res: Int, repeat: Boolean = false, tint: Color? = null) {
                 }
             }
         }
-        Image(
+        DrawableImage(
             drawable = drawable,
             contentDescription = null,
             contentScale = ContentScale.FillBounds,

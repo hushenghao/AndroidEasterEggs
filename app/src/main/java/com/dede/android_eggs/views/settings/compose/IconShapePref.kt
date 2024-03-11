@@ -1,6 +1,5 @@
 package com.dede.android_eggs.views.settings.compose
 
-import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -21,12 +20,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Matrix
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalContext
@@ -35,13 +28,11 @@ import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.PathParser
 import androidx.core.os.bundleOf
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.util.compose.PathShape
 
 object IconShapePrefUtil {
 
@@ -62,28 +53,6 @@ object IconShapePrefUtil {
         return paths[index]
     }
 
-}
-
-private class PathShape(pathData: String, private val pathSize: Float = 100f) : Shape {
-
-    @SuppressLint("RestrictedApi")
-    private val shapePath = PathParser.createPathFromPathData(pathData).asComposePath()
-    private val matrix = Matrix()
-
-    override fun createOutline(
-        size: Size,
-        layoutDirection: LayoutDirection,
-        density: Density
-    ): Outline {
-        val path = Path().apply {
-            addPath(shapePath)
-            matrix.reset()
-            matrix.scale(size.width / pathSize, size.height / pathSize)
-            transform(matrix)
-            close()
-        }
-        return Outline.Generic(path)
-    }
 }
 
 private const val SPAN_COUNT = 5

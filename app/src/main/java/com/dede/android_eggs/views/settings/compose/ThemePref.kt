@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Android
 import androidx.compose.material.icons.rounded.BrightnessAuto
 import androidx.compose.material.icons.rounded.Brush
 import androidx.compose.material.icons.rounded.Contrast
@@ -88,7 +87,7 @@ fun ThemePref() {
         ValueOption(
             shape = OptionShapes.firstShape(),
             leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Android,
+                imageVector = Icons.Rounded.BrightnessAuto,
                 contentDescription = stringResource(R.string.summary_system_default)
             ),
             title = stringResource(R.string.summary_system_default),
