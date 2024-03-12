@@ -23,10 +23,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -44,7 +44,6 @@ import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.SaverScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -210,16 +209,18 @@ private fun BottomSearchBarView(
                 unfocusedIndicatorColor = Color.Transparent,
             ),
             leadingIcon = {
-                Icon(imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                    contentDescription = null,
-                    modifier = Modifier.clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = rememberRipple(bounded = false)
-                    ) {
+                IconButton(
+                    onClick = {
                         state.searchText = ""
                         onClose.invoke()
                         keyboardController?.hide()
-                    })
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                        contentDescription = null,
+                    )
+                }
             },
             trailingIcon = {
                 AnimatedVisibility(
@@ -227,14 +228,13 @@ private fun BottomSearchBarView(
                     enter = fadeIn() + scaleIn(),
                     exit = fadeOut() + scaleOut(),
                 ) {
-                    Icon(imageVector = Icons.Rounded.Clear,
-                        contentDescription = null,
-                        modifier = Modifier.clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple(bounded = false)
-                        ) {
-                            state.searchText = ""
-                        })
+                    IconButton(onClick = { state.searchText = "" }) {
+                        Icon(
+                            imageVector = Icons.Rounded.Clear,
+                            contentDescription = null,
+                        )
+                    }
+
                 }
             })
     }
