@@ -1,8 +1,11 @@
-### v2.4.1
+### v2.4.2
+- 修复设置抽屉安全距离 [#212](https://github.com/hushenghao/AndroidEasterEggs/issues/212)
+
+### v2.4.1 (2024-03-14)
 
 - 新的设置页面样式 🎉
 - 等待 Android Vanilla Ice Cream
-- 修复设置抽屉宽度 [#211](https://github.com/hushenghao/AndroidEasterEggs/issues/211) [#212](https://github.com/hushenghao/AndroidEasterEggs/issues/212)
+- 修复设置抽屉宽度 [#211](https://github.com/hushenghao/AndroidEasterEggs/issues/211)
 
 ### v2.4.0 (2024-03-14)
 

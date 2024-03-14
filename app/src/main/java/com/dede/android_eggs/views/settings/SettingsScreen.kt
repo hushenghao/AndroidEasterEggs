@@ -6,7 +6,12 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -25,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -68,9 +74,13 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     Scaffold(
+        contentWindowInsets = WindowInsets.systemBars
+            .only(WindowInsetsSides.End + WindowInsetsSides.Vertical),
         topBar = {
             CenterAlignedTopAppBar(
                 scrollBehavior = scrollBehavior,
+                windowInsets = WindowInsets.systemBars
+                    .only(WindowInsetsSides.End + WindowInsetsSides.Top),
                 title = {
                     Text(
                         text = stringResource(R.string.label_settings),
@@ -92,9 +102,13 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
             )
         }
     ) { contentPadding ->
+        val layoutDirection = LocalLayoutDirection.current
         Column(
             modifier = Modifier
-                .padding(horizontal = 12.dp)
+                .padding(
+                    start = 12.dp,
+                    end = 12.dp + contentPadding.calculateEndPadding(layoutDirection)
+                )
                 .nestedScroll(scrollBehavior.nestedScrollConnection)
                 .verticalScroll(rememberScrollState()),
         ) {
