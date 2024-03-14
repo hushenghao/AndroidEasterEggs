@@ -39,6 +39,7 @@ import com.dede.android_eggs.views.settings.compose.ContributeGroup
 import com.dede.android_eggs.views.settings.compose.IconShapePref
 import com.dede.android_eggs.views.settings.compose.IconVisualEffectsPref
 import com.dede.android_eggs.views.settings.compose.LanguagePref
+import com.dede.android_eggs.views.settings.compose.LanguagePrefUtil
 import com.dede.android_eggs.views.settings.compose.RetainInRecentsPref
 import com.dede.android_eggs.views.settings.compose.SettingDivider
 import com.dede.android_eggs.views.settings.compose.SettingPrefUtil
@@ -46,7 +47,7 @@ import com.dede.android_eggs.views.settings.compose.ThemePref
 import com.dede.android_eggs.views.settings.compose.TimelinePref
 import kotlinx.coroutines.launch
 
-@Preview
+@Preview(widthDp = 360)
 @Composable
 fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed)) {
     val scope = rememberCoroutineScope()
@@ -110,7 +111,9 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
 
                 IconShapePref()
 
-                LanguagePref()
+                if (LanguagePrefUtil.isSupported()) {
+                    LanguagePref()
+                }
 
                 IconVisualEffectsPref()
 

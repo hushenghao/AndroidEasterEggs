@@ -1,4 +1,10 @@
-### v2.4.0
+### v2.4.1
+
+- New Settings UI 🎉
+- Waiting Android Vanilla Ice Cream
+- Fix Settings ModalDrawerSheet width [#211](https://github.com/hushenghao/AndroidEasterEggs/issues/211) [#212](https://github.com/hushenghao/AndroidEasterEggs/issues/212)
+
+### v2.4.0 (2024-03-14)
 
 - New Settings UI 🎉
 - Waiting Android Vanilla Ice Cream

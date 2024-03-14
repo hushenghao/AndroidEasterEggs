@@ -127,9 +127,11 @@ fun ThemePref() {
             onOptionClick = onOptionClick,
         )
 
-        Spacer(modifier = Modifier.height(1.dp))
+        if (DynamicColorPrefUtil.isSupported()) {
+            Spacer(modifier = Modifier.height(1.dp))
 
-        DynamicColorPref()
+            DynamicColorPref()
+        }
 
     }
 }

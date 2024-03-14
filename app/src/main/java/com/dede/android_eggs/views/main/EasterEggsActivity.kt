@@ -10,6 +10,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DrawerValue
@@ -86,10 +87,11 @@ class EasterEggsActivity : AppCompatActivity() {
                         drawerContent = {
                             ModalDrawerSheet(
                                 drawerShape = shapes.extraLarge.end(0.dp),
-                                modifier = Modifier.fillMaxWidth(0.85f),
                                 windowInsets = WindowInsets(0, 0, 0, 0)
                             ) {
-                                SettingsScreen(drawerState)
+                                Box(modifier = Modifier.fillMaxWidth(0.85f)) {
+                                    SettingsScreen(drawerState)
+                                }
                             }
                         },
                         drawerState = drawerState

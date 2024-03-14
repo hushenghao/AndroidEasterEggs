@@ -27,11 +27,17 @@ object DynamicColorPrefUtil {
     const val KEY_DYNAMIC_COLOR = "pref_key_dynamic_color"
     const val ACTION_DYNAMIC_COLOR_CHANGED = "ACTION_DYNAMIC_COLOR_CHANGED"
 
+    fun isSupported(): Boolean {
+        return DynamicColors.isDynamicColorAvailable()
+    }
+
     fun isDynamicEnable(context: Context): Boolean {
         return SettingPrefUtil.getValue(context, KEY_DYNAMIC_COLOR, DEFAULT) == SettingPrefUtil.ON
     }
 
     fun apply(context: Context) {
+        if (!isSupported()) return
+
         val callback = Callback()
         DynamicColors.applyToActivitiesIfAvailable(
             context.applicationContext as Application,

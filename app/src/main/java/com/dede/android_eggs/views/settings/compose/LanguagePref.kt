@@ -132,6 +132,12 @@ object LanguagePrefUtil {
     )
     // @formatter:on
 
+    fun isSupported(): Boolean {
+        // For API<24 the application does not have a localeList instead it has a single locale
+        // Unsupported region
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
+    }
+
     fun checkLocaleConfig(context: Context) {
         // check languageOptions count
         val expected = languageOptions.size

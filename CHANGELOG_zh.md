@@ -1,4 +1,10 @@
-### v2.4.0
+### v2.4.1
+
+- 新的设置页面样式 🎉
+- 等待 Android Vanilla Ice Cream
+- 修复设置抽屉宽度 [#211](https://github.com/hushenghao/AndroidEasterEggs/issues/211) [#212](https://github.com/hushenghao/AndroidEasterEggs/issues/212)
+
+### v2.4.0 (2024-03-14)
 
 - 新的设置页面样式 🎉
 - 等待 Android Vanilla Ice Cream
