@@ -1,4 +1,4 @@
-### v2.3.1
+### v2.4.0
 
 - New Settings UI 🎉
 - Waiting Android Vanilla Ice Cream
