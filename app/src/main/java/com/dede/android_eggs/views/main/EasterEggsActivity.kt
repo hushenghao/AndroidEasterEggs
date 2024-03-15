@@ -12,7 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.shapes
@@ -89,7 +89,7 @@ class EasterEggsActivity : AppCompatActivity() {
                                 drawerShape = shapes.extraLarge.end(0.dp),
                                 windowInsets = WindowInsets(0, 0, 0, 0)
                             ) {
-                                Box(modifier = Modifier.fillMaxWidth(0.85f)) {
+                                Box(modifier = Modifier.widthIn(min = 280.dp, max = 300.dp)) {
                                     SettingsScreen(drawerState)
                                 }
                             }
