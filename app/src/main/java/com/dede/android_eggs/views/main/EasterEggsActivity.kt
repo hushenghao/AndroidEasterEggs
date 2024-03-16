@@ -12,7 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.shapes
@@ -23,6 +23,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
@@ -89,7 +90,9 @@ class EasterEggsActivity : AppCompatActivity() {
                                 drawerShape = shapes.extraLarge.end(0.dp),
                                 windowInsets = WindowInsets(0, 0, 0, 0)
                             ) {
-                                Box(modifier = Modifier.widthIn(min = 280.dp, max = 300.dp)) {
+                                val maxWidth =
+                                    LocalConfiguration.current.smallestScreenWidthDp * 0.8f
+                                Box(modifier = Modifier.width(maxWidth.dp)) {
                                     SettingsScreen(drawerState)
                                 }
                             }
