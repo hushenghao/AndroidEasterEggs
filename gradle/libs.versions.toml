@@ -57,7 +57,7 @@ blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
 blurhash-painter = "com.github.wajahat-iqbal:BlurHashPainter:1.2"
 overscroll-decor-android = "io.github.everythingme:overscroll-decor-android:1.1.1"
 viewbinding-delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9"
-squareup-okio = "com.squareup.okio:okio:3.8.0"
+squareup-okio = "com.squareup.okio:okio:3.9.0"
 io-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 io-coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
 io-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
