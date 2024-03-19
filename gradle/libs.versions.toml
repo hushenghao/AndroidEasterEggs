@@ -4,7 +4,7 @@ ksp = "1.9.22-1.0.18"
 # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
 # https://maven.google.com/web/index.html?q=compose#androidx.compose.compiler:compiler
 compose-kotlin-compiler = "1.5.10"
-agp = "8.3.0"
+agp = "8.3.1"
 hilt = "2.51"
 # https://google.github.io/accompanist
 accompanist = "0.34.0"
@@ -57,7 +57,7 @@ blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
 blurhash-painter = "com.github.wajahat-iqbal:BlurHashPainter:1.2"
 overscroll-decor-android = "io.github.everythingme:overscroll-decor-android:1.1.1"
 viewbinding-delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9"
-squareup-okio = "com.squareup.okio:okio:3.8.0"
+squareup-okio = "com.squareup.okio:okio:3.9.0"
 io-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 io-coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
 io-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
@@ -68,7 +68,7 @@ nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
 # Dependencies of the included build-logic
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-android-tools-sdk-common = "com.android.tools:sdk-common:31.3.0"
+android-tools-sdk-common = "com.android.tools:sdk-common:31.3.1"
 
 junit = "junit:junit:4.13.2"
 androidx-test-core = "androidx.test:core-ktx:1.5.0"
