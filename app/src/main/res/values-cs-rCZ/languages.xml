@@ -31,4 +31,6 @@
     <string name="locale_lang_lo_LA">Lao</string>
     <string name="locale_lang_cs_CZ">Čeština</string>
     <string name="locale_lang_ta">Tamilština</string>
+    <string name="locale_lang_ro">Rumunština</string>
+    <string name="locale_lang_sv_SE">Švédština</string>
 </resources>
