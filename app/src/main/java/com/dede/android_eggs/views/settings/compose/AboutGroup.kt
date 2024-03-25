@@ -7,13 +7,16 @@ import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.NewReleases
+import androidx.compose.material.icons.rounded.Android
 import androidx.compose.material.icons.rounded.Balance
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Policy
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material.icons.rounded.StarRate
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -123,7 +126,6 @@ fun AboutGroup() {
             }
         )
         Option(
-            shape = OptionShapes.lastShape(),
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Balance,
                 contentDescription = stringResource(R.string.label_license),
@@ -132,6 +134,21 @@ fun AboutGroup() {
             desc = "Apache-2.0 license",
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_license)
+            }
+        )
+        Option(
+            shape = OptionShapes.lastShape(),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Rounded.Android,
+                    tint = Color(0xFF35D67A),
+                    contentDescription = stringResource(id = R.string.label_aosp)
+                )
+            },
+            title = stringResource(id = R.string.label_aosp),
+            desc = stringResource(id = R.string.url_aosp),
+            onClick = {
+                CustomTabsBrowser.launchUrl(context, R.string.url_aosp)
             }
         )
     }

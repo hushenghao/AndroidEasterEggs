@@ -119,7 +119,6 @@ dependencies {
     implementation(libs.blurhash.android)
     // implementation(libs.blurhash.painter)
     debugImplementation(libs.squareup.leakcanary)
-    implementation(libs.overscroll.decor.android)
 
     implementation(project(":eggs:UpsideDownCake"))
     implementation(project(":eggs:Tiramisu"))
