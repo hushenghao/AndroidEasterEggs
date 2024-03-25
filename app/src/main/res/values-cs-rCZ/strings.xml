@@ -6,7 +6,7 @@
     <string name="title_open_with">Otevřít pomocí</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-    <string name="label_github">Source code</string>
+    <string name="label_github">Kód</string>
     <string name="label_translation">Překlad</string>
     <string name="label_beta">Získat Beta verzi</string>
     <string name="label_timeline">Časová osa</string>
@@ -14,6 +14,8 @@
     <string name="label_license">Licence</string>
     <string name="label_feedback">Zpětná vazba</string>
     <string name="label_star">Hvězda</string>
+    <string name="label_contact_me">Moje kontakty</string>
+    <string name="label_email_title">E-mail</string>
     <string name="label_timeline_title">Časová osa, milníky a aktualizace</string>
     <string name="label_timeline_releases">Vydání</string>
     <string name="message_trypophobia_warning">Toto je varování pro ty s &lt;b&gt;Trypofobií&lt;/b&gt;. Některé obrázky mohou vyvolat nepohodlí. Chcete pokračovat?</string>
@@ -28,6 +30,7 @@
     <string name="summary_system_default">Výchozí</string>
     <string name="summary_theme_dark_mode">Tmavý</string>
     <string name="summary_theme_light_mode">Světlý</string>
+    <string name="summary_theme_amoled_mode">AMOLED</string>
     <string name="label_add_shortcut">Zkratka</string>
     <string name="label_donate">Přispět</string>
     <string name="preference_on">Zapnuto</string>
@@ -44,4 +47,5 @@
     <string name="pref_retain_recent_egg_tasks">Zachovejte nedávné úkoly vajec</string>
     <string name="pref_summary_retain_recent_egg_tasks">Zachovat úkoly vejce na obrazovce nedávných aplikací, maximálně zachování 5 (neplatné pro Vložený režim aktivity)</string>
     <string name="label_about">O aplikaci</string>
+    <string name="label_contribute">Pomozet autorovi</string>
 </resources>

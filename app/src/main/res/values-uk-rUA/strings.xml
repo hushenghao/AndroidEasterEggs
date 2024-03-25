@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Очікування…</string>
-    <string name="summary_android_release_pushed">Фінальна версія релізу випущена</string>
-    <string name="title_open_with">Відкрити за допомогою</string>
+    <string name="app_name">Пасхальні яйця</string>
+    <string name="summary_android_waiting">Ще не зроблено</string>
+    <string name="summary_android_release_pushed">Фінальна версія випущена</string>
+    <string name="title_open_with">Відкрити завдяки</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Код проєкту</string>
     <string name="label_translation">Переклад</string>
     <string name="label_beta">Отримати бета-версію</string>
     <string name="label_timeline">Хронологія</string>
@@ -13,6 +14,8 @@
     <string name="label_license">Ліцензія</string>
     <string name="label_feedback">Зворотній зв\'язок</string>
     <string name="label_star">Оцінити додаток</string>
+    <string name="label_contact_me">Мої контакти</string>
+    <string name="label_email_title">Електронна пошта</string>
     <string name="label_timeline_title">Хронологія, віхи та оновлення</string>
     <string name="label_timeline_releases">Релізи</string>
     <string name="message_trypophobia_warning">Це попередження для тих, хто має &lt;b&gt;трипофобію&lt;/b&gt; - деякі зображення можуть викликати дискомфорт. Ви хочете продовжити?</string>
@@ -27,6 +30,7 @@
     <string name="summary_system_default">За замовчуванням</string>
     <string name="summary_theme_dark_mode">Темний</string>
     <string name="summary_theme_light_mode">Світлий</string>
+    <string name="summary_theme_amoled_mode">AMOLED (Насичена)</string>
     <string name="label_add_shortcut">Ярлик</string>
     <string name="label_donate">Пожертвувати</string>
     <string name="preference_on">Увімкнено</string>
@@ -38,4 +42,10 @@
     <string name="label_welcome">Ласкаво просимо до каталогів Пасхальних Яєць 🎉🎉🎉</string>
     <string name="label_share">Поділитись</string>
     <string name="label_search_hint">Пошук…</string>
+    <string name="label_component_manager">Менеджер віджетів</string>
+    <string name="pref_more_settings">Додаткові налаштування</string>
+    <string name="pref_retain_recent_egg_tasks">Відкриття пасхальних яєць в окремих вікнах</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Відкривати окремі вікна з пасхальними яйцями, максимумом до 5 вікон (Не доступно у режимі вбудованої активності)</string>
+    <string name="label_about">Про додаток</string>
+    <string name="label_contribute">Допомогти автору</string>
 </resources>
