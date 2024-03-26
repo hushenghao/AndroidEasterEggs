@@ -2,11 +2,12 @@
 
 收集了Android系统各正式版的彩蛋
 
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/hushenghao/AndroidEasterEggs/total?logo=github&label=Downloads)
 [![GitHub license](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs?logo=github)](https://github.com/hushenghao/AndroidEasterEggs/releases)
 [![F-Droid (including pre-releases)](https://img.shields.io/f-droid/v/com.dede.android_eggs?logo=fdroid)](https://f-droid.org/packages/com.dede.android_eggs)
 [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
-[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildRelease.yml?logo=githubactions&logoColor=white)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildRelease.yml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildBeta.yml?logo=github&label=Beta%20CI)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildBeta.yml)
 
 <div align="center">
 
@@ -30,7 +31,7 @@
 
 ## 截图
 
-| ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![](./fastlane/metadata/android/en-US/images/phoneScreenshots/4.png) |
+| ![Screenshot](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Screenshot](./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![Screenshot](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![Screenshot](./fastlane/metadata/android/en-US/images/phoneScreenshots/4.png) |
 |----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
 
 ## Android 版本
@@ -85,13 +86,13 @@
 <details>
 <summary>查看所有语言的翻译状态。</summary>
 
-[![](script/crowdin/crowdin_project_progress.svg)](https://zh.crowdin.com/project/easter-eggs)
+[![Crowdin](script/crowdin/crowdin_project_progress.svg)](https://zh.crowdin.com/project/easter-eggs)
 
 </details>
 
 ## 感谢
 
-* [AOSP Frameworks](https://github.com/aosp-mirror/platform_frameworks_base)
+* [AOSP](https://cs.android.com/android/platform/superproject/main)
 * [所有翻译贡献者](https://zh.crowdin.com/project/easter-eggs/members)
 
 ## 协议
