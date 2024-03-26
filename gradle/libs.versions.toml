@@ -6,6 +6,7 @@ ksp = "1.9.23-1.0.19"
 compose-kotlin-compiler = "1.5.11"
 agp = "8.3.1"
 hilt = "2.51"
+compose-bom = "2024.03.00"
 # https://google.github.io/accompanist
 accompanist = "0.34.0"
 lifecycle = "2.7.0"
@@ -38,7 +39,7 @@ androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 androidx-activity-compose = "androidx.activity:activity-compose:1.8.2"
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
-androidx-compose-bom = "androidx.compose:compose-bom:2024.02.02"
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-util = { module = "androidx.compose.ui:ui-util" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
