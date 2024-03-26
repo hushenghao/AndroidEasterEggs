@@ -21,8 +21,8 @@ val Icons.Github: ImageVector
                 viewportWidth = 16f,
             ) {
                 group(
-                    scaleX = 0.92f,
-                    scaleY = 0.92f,
+                    scaleX = 0.94f,
+                    scaleY = 0.94f,
                     pivotX = 8f,
                     pivotY = 8f
                 ) {

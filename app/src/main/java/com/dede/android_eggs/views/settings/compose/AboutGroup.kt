@@ -96,7 +96,7 @@ fun AboutGroup() {
             onClick = {
                 CustomTabsBrowser.launchUrlByBrowser(
                     context,
-                    context.getString(R.string.url_market_detail).toUri()
+                    context.getString(R.string.url_market_detail, context.packageName).toUri()
                 )
             }
         )
