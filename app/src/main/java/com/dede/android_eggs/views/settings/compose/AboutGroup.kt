@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
+import com.dede.android_eggs.ui.composes.icons.Github
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.createChooser
 
@@ -112,13 +113,10 @@ fun AboutGroup() {
             }
         )
         Option(
-            leadingIcon = {
-                Image(
-                    painter = painterResource(R.drawable.ic_github_logo),
-                    contentDescription = stringResource(R.string.label_github),
-                    modifier = Modifier.size(24.dp)
-                )
-            },
+            leadingIcon = imageVectorIconBlock(
+                imageVector = Icons.Github,
+                contentDescription = stringResource(R.string.label_github)
+            ),
             title = stringResource(R.string.label_github),
             desc = stringResource(R.string.url_github),
             onClick = {

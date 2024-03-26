@@ -1,18 +1,13 @@
 package com.dede.android_eggs.views.settings.compose
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AlternateEmail
-import androidx.compose.material.icons.rounded.Coffee
 import androidx.compose.material.icons.rounded.PersonSearch
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
+import com.dede.android_eggs.ui.composes.icons.Github
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.copy
 
@@ -38,13 +33,10 @@ fun ContactMeGroup() {
         )
         Option(
             shape = OptionShapes.lastShape(),
-            leadingIcon = {
-                Image(
-                    painter = painterResource(R.drawable.ic_github_logo),
-                    contentDescription = "GitHub",
-                    modifier = Modifier.size(24.dp)
-                )
-            },
+            leadingIcon = imageVectorIconBlock(
+                imageVector = Icons.Github,
+                contentDescription = stringResource(R.string.label_github)
+            ),
             title = "GitHub",
             desc = stringResource(id = R.string.label_github_me),
             onClick = {
