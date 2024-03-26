@@ -54,15 +54,14 @@ pyftmerge "icons_rounded.otf" "icons_outlined.otf" \
 
 ## About
 
-[fontTools.subset](https://fonttools.readthedocs.io/en/latest/subset/index.html)
-
-[fontTools.megre](https://fonttools.readthedocs.io/en/latest/merge.html)
+* [fontTools.subset](https://fonttools.readthedocs.io/en/latest/subset/index.html)
+* [fontTools.megre](https://fonttools.readthedocs.io/en/latest/merge.html)
 
 ----
 
 ## Vector path data convert
 
-Convert svg path data to materialIcon block
+Converts vector path data into **Compose** `materialIcon` block.
 
 ### Run convert
 
