@@ -59,11 +59,13 @@ pyftmerge "icons_rounded.otf" "icons_outlined.otf" \
 
 ----
 
-## Vector path data convert
+## Vector path data converter
 
 Converts vector path data into **Compose** `materialIcon` block.
 
-### Run convert
+> [Compose Icon Generation](https://android.googlesource.com/platform/frameworks/support/+/refs/heads/androidx-main/compose/material/material/icons/)
+
+### Run converter
 
 ```shell
 python icon_pathdata_convert.py "pathData"
