@@ -36,7 +36,7 @@ versions use new features of said system, but lower versions can only use some f
 ## Screenshots
 
 | ![Screenshot](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Screenshot](./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![Screenshot](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![Screenshot](./fastlane/metadata/android/en-US/images/phoneScreenshots/4.png) |
-|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
+|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
 
 ## Android Versions
 

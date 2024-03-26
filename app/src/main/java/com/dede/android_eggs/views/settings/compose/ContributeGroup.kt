@@ -1,14 +1,19 @@
 package com.dede.android_eggs.views.settings.compose
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Coffee
 import androidx.compose.material.icons.rounded.Feedback
 import androidx.compose.material.icons.rounded.Hive
-import androidx.compose.material.icons.rounded.Translate
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
+import com.dede.android_eggs.ui.composes.icons.crowdin
 import com.dede.android_eggs.util.CustomTabsBrowser
 
 @Composable
@@ -20,10 +25,15 @@ fun ContributeGroup() {
     ) {
         Option(
             shape = OptionShapes.firstShape(),
-            leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Translate,
-                contentDescription = stringResource(R.string.label_translation),
-            ),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.crowdin,
+                    contentDescription = stringResource(id = R.string.label_contribute),
+                    modifier = Modifier
+                        .size(24.dp)
+                        .padding(1.dp)
+                )
+            },
             title = stringResource(R.string.label_translation),
             desc = stringResource(R.string.url_translation),
             onClick = {
