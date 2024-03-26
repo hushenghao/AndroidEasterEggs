@@ -6,7 +6,7 @@
     <string name="title_open_with">Öffnen mit</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-    <string name="label_github">Source code</string>
+    <string name="label_github">Quellcode</string>
     <string name="label_translation">Übersetzen</string>
     <string name="label_beta">Laden Sie die Beta-Version herunter</string>
     <string name="label_timeline">Zeitleiste</string>
@@ -14,6 +14,8 @@
     <string name="label_license">Lizenz</string>
     <string name="label_feedback">Feedback geben</string>
     <string name="label_star">Bewerten</string>
+    <string name="label_contact_me">Kontakt aufnehmen</string>
+    <string name="label_email_title">E-Mail</string>
     <string name="label_timeline_title">Zeitleiste, Meilensteine und die neusten Aktualisierungen</string>
     <string name="label_timeline_releases">Ausführungen</string>
     <string name="message_trypophobia_warning">Dies ist eine Warnung für Personen mit einer &lt;b&gt;Trypophobie&lt;/b&gt; , dass einige Bilder Unbehagen verursachen können. Möchtest du fortfahren?</string>
@@ -28,6 +30,7 @@
     <string name="summary_system_default">Systemstandard</string>
     <string name="summary_theme_dark_mode">Dunkel</string>
     <string name="summary_theme_light_mode">Hell</string>
+    <string name="summary_theme_amoled_mode">Amoled</string>
     <string name="label_add_shortcut">Verknüpfung</string>
     <string name="label_donate">Spenden sie an das Projekt</string>
     <string name="preference_on">An</string>
@@ -44,4 +47,5 @@
     <string name="pref_retain_recent_egg_tasks">Behalten Sie aktuelle Easter Egg-Aufgaben bei</string>
     <string name="pref_summary_retain_recent_egg_tasks">Behalten Sie Easter Egg-Aufgaben auf dem Bildschirm „Letzte“ bei, maximal 5 (ungültig für den eingebetteten Aktivitätsmodus)</string>
     <string name="label_about">Über</string>
+    <string name="label_contribute">Mithelfen</string>
 </resources>
