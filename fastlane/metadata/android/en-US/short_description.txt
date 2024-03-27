@@ -1,1 +1,1 @@
-Built in eggs in official versions of Android system.
+Collections the Android release Easter Egg.

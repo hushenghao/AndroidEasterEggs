@@ -4,17 +4,19 @@ package com.dede.android_eggs.views.settings.compose
 
 import android.app.LocaleConfig
 import android.content.Context
-import android.content.res.Configuration
 import android.os.Build
 import android.util.Log
+import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -38,15 +40,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
+import com.dede.basic.createLocalesContext
+import com.dede.basic.getLayoutDirection
 import java.util.Locale
 
 object LanguagePrefUtil {
@@ -300,13 +305,11 @@ fun LanguagePref() {
     }
 }
 
-private fun LanguagePrefUtil.LangOp?.toConfiguration(basic: Configuration): Configuration {
+private fun LanguagePrefUtil.LangOp?.toLocalContext(base: Context): Context {
     if (this == null) {
-        return Configuration(basic)
+        return base
     }
-    return Configuration(basic).apply {
-        setLocale(this@toConfiguration.locale)
-    }
+    return base.createLocalesContext(LocaleListCompat.create(this.locale))
 }
 
 @Composable
@@ -316,31 +319,25 @@ private fun LanguageSelectedDialog(
     onDismissRequest: () -> Unit,
     onLanguageSelected: (LanguagePrefUtil.LangOp) -> Unit
 ) {
-    val basicConfiguration = LocalConfiguration.current
-//    val basicContext = LocalContext.current
+    val basicContext = LocalContext.current
 
     var selectedLangOp by remember { mutableStateOf(currentLang) }
-    val localeConfiguration = remember(selectedLangOp) {
-        selectedLangOp.toConfiguration(basicConfiguration)
+    val localeContext = remember(selectedLangOp) {
+        selectedLangOp.toLocalContext(basicContext)
     }
-//    val localeCtx = remember(selectedLangOp) {
-//        val op = selectedLangOp
-//        if (op != null) {
-//            basicContext.createLocalesContext(LocaleListCompat.create(op.locale))
-//        } else {
-//            basicContext
-//        }
-//    }
+    val localLayoutDirection = remember(localeContext) {
+        if (localeContext.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) LayoutDirection.Rtl else LayoutDirection.Ltr
+    }
     // todo https://issuetracker.google.com/issues/204914500
     CompositionLocalProvider(
-//        LocalContext provides localeCtx,
-        LocalConfiguration provides localeConfiguration,
+        LocalContext provides localeContext,
+        LocalLayoutDirection provides localLayoutDirection
     ) {
         AlertDialog(
             onDismissRequest = onDismissRequest,
             title = {
                 Text(
-                    text = stringResource(R.string.pref_title_language),
+                    text = localeContext.getString(R.string.pref_title_language),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -356,7 +353,7 @@ private fun LanguageSelectedDialog(
                             },
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Box(modifier = Modifier.padding(start = 10.dp, end = 16.dp)) {
+                            Box(modifier = Modifier.padding(start = 14.dp, end = 16.dp)) {
                                 RadioButton(selected = selectedLangOp == it, onClick = null)
                             }
                             Column(
@@ -365,21 +362,13 @@ private fun LanguageSelectedDialog(
                                     .padding(vertical = 4.dp)
                             ) {
                                 Text(
-                                    text = stringResource(it.titleRes),
-                                    style = MaterialTheme.typography.titleSmall
+                                    text = localeContext.getString(it.titleRes),
+                                    style = MaterialTheme.typography.titleMedium
                                 )
-                                val localConfiguration = remember(it) {
-                                    it.toConfiguration(basicConfiguration)
-                                }
-                                CompositionLocalProvider(
-                                    LocalConfiguration provides localConfiguration
-                                ) {
-                                    Text(
-                                        text = stringResource(it.localeTitleRes),
-                                        style = MaterialTheme.typography.bodySmall,
-                                        modifier = Modifier.padding(top = 2.dp),
-                                    )
-                                }
+                                Text(
+                                    text = localeContext.getString(it.localeTitleRes),
+                                    style = MaterialTheme.typography.bodySmall,
+                                )
                             }
                         }
                     }
@@ -387,7 +376,7 @@ private fun LanguageSelectedDialog(
             },
             dismissButton = {
                 TextButton(onClick = onDismissRequest) {
-                    Text(text = stringResource(android.R.string.cancel))
+                    Text(text = localeContext.getString(android.R.string.cancel))
                 }
             },
             confirmButton = {
@@ -397,7 +386,7 @@ private fun LanguageSelectedDialog(
                         onLanguageSelected(op)
                     }
                 }) {
-                    Text(text = stringResource(android.R.string.ok))
+                    Text(text = localeContext.getString(android.R.string.ok))
                 }
             }
         )

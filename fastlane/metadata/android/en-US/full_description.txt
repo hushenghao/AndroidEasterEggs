@@ -1,4 +1,4 @@
-Sorted out the official versions of Android system built-in eggs
+Collections the Android release Easter Egg.
 
 Except for Android 13, 12, 11 and 7, which use new features of the system, the lower version can only use some functions, and other versions are full of egg functions.
 
@@ -7,4 +7,4 @@ The project contains the system egg complete code, only do part of the API compa
 GitHub：
 https://github.com/hushenghao/AndroidEasterEggs
 System source code:
-https://github.com/aosp-mirror/platform_frameworks_base
+https://cs.android.com/android/platform/superproject/main

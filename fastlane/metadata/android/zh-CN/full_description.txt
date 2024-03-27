@@ -1,4 +1,4 @@
-整理了Android系统各正式版内置彩蛋
+收集了Android系统各正式版的彩蛋
 
 除了 Android 13、12、11 和 7 使用了系统新特性，低版本只能使用部分功能，其他版本都是完整彩蛋功能。
 
@@ -7,4 +7,4 @@
 GitHub：
 https://github.com/hushenghao/AndroidEasterEggs
 系统源码：
-https://github.com/aosp-mirror/platform_frameworks_base
+https://cs.android.com/android/platform/superproject/main
