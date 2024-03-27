@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CheckCircle
-import androidx.compose.material.icons.rounded.RoundedCorner
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -31,6 +30,7 @@ import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
 import com.dede.android_eggs.R
+import com.dede.android_eggs.ui.composes.icons.rounded.Shapes
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.compose.PathShape
 
@@ -63,7 +63,7 @@ fun IconShapePref() {
     var selectedIndex by rememberPrefIntState(IconShapePrefUtil.KEY_ICON_SHAPE, 0)
     val context = LocalContext.current
     ExpandOptionsPref(
-        leadingIcon = Icons.Rounded.RoundedCorner,
+        leadingIcon = Icons.Rounded.Shapes,
         title = stringResource(R.string.pref_title_icon_shape_override),
     ) {
         IconShapeGroup(selectedIndex) { index, path ->

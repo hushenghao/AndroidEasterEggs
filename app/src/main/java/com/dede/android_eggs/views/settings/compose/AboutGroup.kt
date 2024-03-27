@@ -12,7 +12,6 @@ import androidx.compose.material.icons.rounded.Balance
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Policy
 import androidx.compose.material.icons.rounded.Share
-import androidx.compose.material.icons.rounded.StarRate
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,6 +25,7 @@ import androidx.core.net.toUri
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.composes.icons.Github
+import com.dede.android_eggs.ui.composes.icons.rounded.FamilyStar
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.createChooser
 
@@ -89,7 +89,7 @@ fun AboutGroup() {
         )
         Option(
             leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.StarRate,
+                imageVector = Icons.Rounded.FamilyStar,
                 contentDescription = stringResource(R.string.label_star),
             ),
             title = stringResource(R.string.label_star),

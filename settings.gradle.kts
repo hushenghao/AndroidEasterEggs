@@ -37,4 +37,5 @@ include(
     ":eggs:Tiramisu",
     ":eggs:UpsideDownCake",
 )
+include(":script:compose-material-icons-generator")
 rootProject.name = "Easter Eggs"

@@ -21,9 +21,11 @@ cmd_arc = "arcTo"
 cmd_arc_r = "arcToRelative"
 cmd_curve = "curveTo"
 cmd_curve_r = "curveToRelative"
+cmd_quad = "quadTo"
+cmd_quad_r = "quadToRelative"
 cmd_format = "{}({})"
 
-cmds = ["m", "M", "l", "L", "z", "Z", "a", "A", "c", "C"]
+cmds = ["m", "M", "l", "L", "z", "Z", "a", "A", "c", "C", "q", "Q", "t", "T"]
 
 float_re = r"[, ]"
 
@@ -46,6 +48,9 @@ def float_groups(floats: list, group: int) -> list[list]:
 
 
 def float_map(cmd: str, floats: list) -> list[str]:
+    if cmd == "t" or cmd == "T":
+        floats.append(floats[0])
+        floats.append(floats[1])
     for i in range(0, len(floats)):
         if (cmd == "a" or cmd == "A") and (i == 3 or i == 4):
             floats[i] = "true" if floats[i] == "1" else "false"
@@ -84,8 +89,20 @@ def cmd_map(c: str, floats: list) -> list[str]:
     elif c == "c":
         cmd = cmd_curve_r
         cmd_float_count = 6
+    elif c == "Q":
+        cmd = cmd_quad
+        cmd_float_count = 4
+    elif c == "q":
+        cmd = cmd_quad_r
+        cmd_float_count = 4
+    elif c == "T":
+        cmd = cmd_quad
+        cmd_float_count = 2
+    elif c == "t":
+        cmd = cmd_quad_r
+        cmd_float_count = 2
     elif c == "z" or c == "Z":
-        return cmd_close
+        return [cmd_close]
     else:
         print("Unsupported cmd: {}".format(c))
 
