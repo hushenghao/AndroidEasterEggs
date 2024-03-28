@@ -1,9 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="646" height="250">
+    <defs>
+        <style type="text/css"><![CDATA[
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@700&display=swap');
+.noto-sans-mono {
+  font-family: "Noto Sans Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+]]></style>
+    </defs>
     <g transform="translate(-289 -312.362)">
         <rect style="color:#000;display:inline;fill:#000;fill-opacity:1;fill-rule:nonzero;stroke:#a6a6a6;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" width="560" height="164" x="332" y="355.362" rx="20" ry="20"/>
-        <text x="508" y="402" style="font-weight:400;font-size:32px;font-family:'Google Sans';fill:#fff">GET IT ON</text>
-        <text x="504" y="480" style="font-weight:500;font-size:80px;font-family:'Google Sans';fill:#fff">Pgyer</text>
-        <text y="482" x="746" style="font-weight:400;font-size:38px;font-family:'Google Sans';fill:#fff">.com</text>
+        <text x="508" y="402" style="font-weight:400;font-size:32px;font-family:'DejaVu Sans';fill:#fff">GET IT ON</text>
+        <text x="504" y="480" class="noto-sans-mono" style="font-size:80px;fill:#fff">Pgyer</text>
+        <text y="482" x="746" class="noto-sans-mono" style="font-size:40px;fill:#fff">.com</text>
     </g>
     <g transform="translate(90 49) scale(1.3 1.3)">
         <path d="M61.4977 51.4897C61.3167 51.7364 55.0284 52.705 55.0284 52.705C55.0284 52.705 52.075 58.4316 51.7175 58.4683C51.3599 58.5044 48.6978 52.6764 48.6978 52.6764C48.6978 52.6764 42.3438 52.0455 42.2914 51.4023C42.2402 50.7598 46.8952 46.6082 46.8952 46.6082C46.8952 46.6082 45.9754 40.3821 46.2473 40.0581C46.519 39.7335 52.1112 42.8864 52.1112 42.8864C52.1112 42.8864 57.8397 39.8829 58.1169 40.1121C58.3942 40.3413 57.1383 46.6548 57.1383 46.6548L61.4977 51.4897Z" fill="#FFF"/>
