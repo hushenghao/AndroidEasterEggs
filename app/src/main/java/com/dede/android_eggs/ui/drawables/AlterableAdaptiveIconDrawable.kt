@@ -19,10 +19,9 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.TextUtils
 import androidx.annotation.DrawableRes
-import androidx.annotation.RequiresApi
 import androidx.core.graphics.PathParser
 import androidx.core.graphics.withSave
-import com.dede.android_eggs.R
+import com.dede.android_eggs.views.settings.compose.IconShapePrefUtil
 import com.dede.basic.requireDrawable
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -43,16 +42,6 @@ class AlterableAdaptiveIconDrawable(
 
         private const val BACKGROUND_ID = 0
         private const val FOREGROUND_ID = 1
-
-        fun getMaskPath(pathStr: String?, width: Int, height: Int): Path {
-            if (TextUtils.isEmpty(pathStr)) return Path()
-
-            val path = PathParser.createPathFromPathData(pathStr)
-            val matrix = Matrix()
-            matrix.setScale(width / MASK_SIZE, height / MASK_SIZE)
-            path.transform(matrix)
-            return path
-        }
     }
 
     private val tempRect = Rect()
@@ -73,7 +62,7 @@ class AlterableAdaptiveIconDrawable(
     init {
         var pathStr = maskPathStr
         if (TextUtils.isEmpty(pathStr)) {
-            pathStr = getDefaultPath(context)
+            pathStr = IconShapePrefUtil.getSystemMaskPath(context)
         }
         savedMask.set(PathParser.createPathFromPathData(pathStr))
         mask.set(savedMask)
@@ -91,30 +80,10 @@ class AlterableAdaptiveIconDrawable(
         }
     }
 
-    private fun getDefaultPath(context: Context): String {
-        var pathStr = ""
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val resId = getConfigResId(context.resources)
-            if (resId != Resources.ID_NULL) {
-                pathStr = context.resources.getString(resId)
-            }
-        }
-        if (TextUtils.isEmpty(pathStr)) {
-            pathStr = context.resources.getString(R.string.icon_shape_circle_path)
-        }
-        return pathStr
-    }
-
-    @SuppressLint("DiscouragedApi")
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun getConfigResId(resources: Resources): Int {
-        return resources.getIdentifier("config_icon_mask", "string", "android")
-    }
-
     fun setMaskPath(pathStr: String) {
         var path = pathStr
         if (TextUtils.isEmpty(path)) {
-            path = getDefaultPath(context)
+            path = IconShapePrefUtil.getSystemMaskPath(context)
         }
         savedMask.set(PathParser.createPathFromPathData(path))
         updateMaskBoundsInternal(bounds)

@@ -26,6 +26,10 @@ class AndroidLogoMatcher @Inject constructor() {
         return findAndroidLogo(apiLevel)
     }
 
+    fun findEasterEgg(apiLevel: Int): EasterEgg? {
+        return easterEggs.find { apiLevel in it.apiLevel }
+    }
+
     @DrawableRes
     fun findAndroidLogo(apiLevel: Int): Int {
         return when (apiLevel) {

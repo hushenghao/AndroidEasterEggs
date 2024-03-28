@@ -49,6 +49,7 @@ import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.compose.PathShape
 import com.dede.android_eggs.views.main.compose.DrawableImage
 import com.dede.android_eggs.views.timeline.AndroidLogoMatcher
+import com.dede.basic.provider.EasterEgg
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -109,7 +110,11 @@ private fun TimelineList(
                 TimelineHeader()
             }
             items(viewModel.timelines) {
-                TimelineItem(it, viewModel.logoMatcher.findAndroidLogo(it.apiLevel))
+                TimelineItem(
+                    it,
+                    viewModel.logoMatcher.findAndroidLogo(it.apiLevel),
+                    viewModel.logoMatcher.findEasterEgg(it.apiLevel),
+                )
             }
         }
     }
@@ -150,7 +155,8 @@ private fun TimelineHeader() {
 @Preview(showBackground = true)
 private fun TimelineItem(
     event: TimelineEvent = TimelineEvent.timelines.first(),
-    @DrawableRes logo: Int = R.mipmap.ic_launcher
+    @DrawableRes logo: Int = R.mipmap.ic_launcher,
+    egg: EasterEgg? = null,
 ) {
     val context = LocalContext.current
     ConstraintLayout(
@@ -180,18 +186,23 @@ private fun TimelineItem(
                 top.linkTo(parent.top, 16.dp)
                 centerHorizontallyTo(parent, 0.3f)
             }
+        val eggNickName = if (egg != null) {
+            stringResource(id = egg.nicknameRes)
+        } else {
+            null
+        }
         if (drawable.isAdaptiveIconDrawable) {
             DrawableImage(
                 drawable = drawable,
-                contentDescription = null,
+                contentDescription = eggNickName,
                 modifier = imageModifier
             )
         } else {
             DrawableImage(
                 res = logo,
-                contentDescription = null,
+                contentDescription = eggNickName,
                 modifier = Modifier
-                    .background(MaterialTheme.colorScheme.background, PathShape(iconShape))
+                    .background(MaterialTheme.colorScheme.secondaryContainer, PathShape(iconShape))
                     .then(imageModifier)
                     .padding(6.dp)
             )

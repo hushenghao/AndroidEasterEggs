@@ -1,6 +1,11 @@
 package com.dede.android_eggs.views.settings.compose
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
+import android.os.Build
+import android.text.TextUtils
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -40,9 +45,33 @@ object IconShapePrefUtil {
 
     const val ACTION_CHANGED = "com.dede.easter_eggs.IconShapeChanged"
 
+    fun getSystemMaskPath(context: Context): String {
+        var pathStr = ""
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val resId = getConfigResId(context.resources)
+            if (resId != Resources.ID_NULL) {
+                pathStr = context.resources.getString(resId)
+            }
+        }
+        if (TextUtils.isEmpty(pathStr)) {
+            pathStr = context.resources.getString(R.string.icon_shape_circle_path)
+        }
+        return pathStr
+    }
+
+    @SuppressLint("DiscouragedApi")
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getConfigResId(resources: Resources): Int {
+        return resources.getIdentifier("config_icon_mask", "string", "android")
+    }
+
     fun getMaskPath(context: Context): String {
         val index = SettingPrefUtil.getValue(context, KEY_ICON_SHAPE, 0)
-        return getMaskPathByIndex(context, index)
+        var path =  getMaskPathByIndex(context, index)
+        if (path.isEmpty()) {
+            path = getSystemMaskPath(context)
+        }
+        return path
     }
 
     private fun getMaskPathByIndex(context: Context, index: Int): String {
