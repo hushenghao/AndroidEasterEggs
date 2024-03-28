@@ -308,7 +308,7 @@ fun EasterEggItemFloor(
                     text = stringResource(R.string.label_add_shortcut),
                     modifier = Modifier.padding(end = 4.dp),
                     maxLines = 2,
-                    style = typography.bodyMedium
+                    style = typography.labelLarge
                 )
                 ShortcutIcon(swipeProgress >= 1f)
             }

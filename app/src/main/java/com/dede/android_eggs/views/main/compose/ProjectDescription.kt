@@ -48,6 +48,7 @@ private fun ChipItem2(
         modifier = Modifier
             .clip(shapes.extraSmall)
             .clickable(onClick = onClick)
+            .padding(horizontal = 2.dp)
     )
 }
 
@@ -103,7 +104,7 @@ fun ProjectDescription() {
         Wavy(res = R.drawable.ic_wavy_line_1, true, colorScheme.secondaryContainer)
         FlowRow(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
