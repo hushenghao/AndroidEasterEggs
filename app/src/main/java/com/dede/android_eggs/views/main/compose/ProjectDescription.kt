@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.FlowRowScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,7 +38,7 @@ import com.dede.android_eggs.util.CustomTabsBrowser
 
 
 @Composable
-private fun ChipItem2(
+private fun FlowRowScope.ChipItem2(
     @StringRes textRes: Int,
     onClick: () -> Unit,
 ) {
@@ -46,6 +47,7 @@ private fun ChipItem2(
         style = typography.titleSmall,
         color = colorScheme.secondary,
         modifier = Modifier
+            .align(Alignment.CenterVertically)
             .clip(shapes.extraSmall)
             .clickable(onClick = onClick)
             .padding(horizontal = 2.dp)
@@ -110,6 +112,7 @@ fun ProjectDescription() {
             Text(
                 text = stringResource(R.string.app_name),
                 style = typography.titleSmall,
+                modifier = Modifier.align(Alignment.CenterVertically)
             )
             ChipItem2(R.string.label_privacy_policy) {
                 CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
