@@ -24,7 +24,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Clear
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -40,6 +39,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.SaverScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -166,6 +166,7 @@ private fun BottomSearchBarView(
     shape: Shape,
     onClose: () -> Unit,
 ) {
+    val currentOnClose by rememberUpdatedState(newValue = onClose)
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = remember { FocusRequester() }
     LaunchedEffect(state.visible) {
@@ -212,7 +213,7 @@ private fun BottomSearchBarView(
                 IconButton(
                     onClick = {
                         state.searchText = ""
-                        onClose.invoke()
+                        currentOnClose()
                         keyboardController?.hide()
                     }
                 ) {

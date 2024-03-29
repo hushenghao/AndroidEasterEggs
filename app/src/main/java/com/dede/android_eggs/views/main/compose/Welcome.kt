@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,26 +27,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.content.edit
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.CustomTabsBrowser
-import com.dede.android_eggs.util.pref
+import com.dede.android_eggs.views.settings.compose.rememberPrefBoolState
 
 private const val KEY = "key_welcome_status"
 
 @Composable
 @Preview
 fun Welcome() {
-    val context = LocalContext.current
-    var visible by remember {
-        val showed = context.pref.getBoolean(KEY, false)
-        mutableStateOf(!showed)
-//        mutableStateOf(true)
-    }
+    var visible by rememberSaveable { mutableStateOf(true) }
     if (!visible) {
         return
     }
+    var prefShowed by rememberPrefBoolState(KEY, false)
+    if (prefShowed) {
+        return
+    }
+    val context = LocalContext.current
     var konfettiState by LocalKonfettiState.current
     AlertDialog(
         title = {
@@ -89,7 +89,7 @@ fun Welcome() {
         confirmButton = {
             TextButton(onClick = {
                 visible = false
-                context.pref.edit { putBoolean(KEY, true) }
+                prefShowed = true
                 konfettiState = true
             }) {
                 Text(text = stringResource(R.string.action_agree))

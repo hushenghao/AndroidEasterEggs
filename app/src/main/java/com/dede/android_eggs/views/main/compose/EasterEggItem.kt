@@ -10,7 +10,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
@@ -30,7 +29,6 @@ import androidx.compose.material.icons.rounded.SwipeLeft
 import androidx.compose.material.icons.rounded.SwipeRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.shapes
@@ -44,6 +42,7 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -117,18 +116,21 @@ fun EasterEggItemSwipe(
     addShortcut: () -> Unit,
     onSwipe: (p: Float) -> Unit,
 ) {
+    val currentAddShortcut by rememberUpdatedState(newValue = addShortcut)
+    val currentOnSwipe by rememberUpdatedState(newValue = onSwipe)
+
     var released by remember { mutableStateOf(false) }
     var offsetX by remember { mutableFloatStateOf(0f) }
-    var triggerOffsetX by remember { mutableFloatStateOf(0f) }
+    var triggerOffsetX = remember { 0f }
     var needTrigger by remember { mutableStateOf(false) }
 
-    val intercept = ViscousFluidInterpolator.getInstance()
+    val intercept = remember { ViscousFluidInterpolator.getInstance() }
 
     fun callbackSwipeProgress(offsetX: Float) {
         if (!supportShortcut) return
         val p = if (triggerOffsetX == 0f) 0f else
             min(abs(offsetX) / triggerOffsetX, 1f)
-        onSwipe.invoke(p)
+        currentOnSwipe(p)
     }
 
     LaunchedEffect(released) {
@@ -176,7 +178,7 @@ fun EasterEggItemSwipe(
                     },
                     onDragStopped = {
                         if (supportShortcut && needTrigger && abs(offsetX) >= triggerOffsetX) {
-                            addShortcut.invoke()
+                            currentAddShortcut()
                         }
                         released = true
                         needTrigger = false
@@ -269,11 +271,11 @@ fun EasterEggItemFloor(
     swipeProgress: Float = 0f,
 ) {
     val content = LocalContext.current
-    val androidVersion = remember(egg) {
+    val androidVersion = remember(egg.apiLevel, content) {
         EasterEggHelp.VersionFormatter.create(egg.apiLevel)
             .format(content)
     }
-    val apiVersion = remember(egg) {
+    val apiVersion = remember(egg.apiLevel, content) {
         EasterEggHelp.ApiLevelFormatter.create(egg.apiLevel)
             .format(content)
     }

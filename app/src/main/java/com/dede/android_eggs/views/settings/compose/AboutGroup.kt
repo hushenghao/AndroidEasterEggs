@@ -2,7 +2,6 @@ package com.dede.android_eggs.views.settings.compose
 
 import android.content.Intent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -56,15 +55,13 @@ fun AboutGroup() {
         )
         Option(
             leadingIcon = {
-                Box(
-                    modifier = Modifier.size(24.dp),
-                ) {
-                    Image(
-                        painter = painterResource(R.drawable.ic_pgyer_logo),
-                        contentDescription = stringResource(R.string.label_beta),
-                        modifier = Modifier.requiredSize(33.dp)
-                    )
-                }
+                Image(
+                    painter = painterResource(R.drawable.ic_pgyer_logo),
+                    contentDescription = stringResource(R.string.label_beta),
+                    modifier = Modifier
+                        .size(24.dp)
+                        .requiredSize(33.dp)
+                )
             },
             title = stringResource(R.string.label_beta),
             desc = stringResource(R.string.url_beta),
