@@ -1,18 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="646"
     height="250">
-    <defs>
-        <style type="text/css"><![CDATA[
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@700&display=swap');
-.noto-sans-mono {
-  font-family: "Noto Sans Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-}
-]]></style>
-    </defs>
     <g transform="translate(-289 -312.362)">
         <rect
             style="color:#000;display:inline;fill:#000;fill-opacity:1;fill-rule:nonzero;stroke:#a6a6a6;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -20,8 +7,8 @@
         <text x="528" y="402"
             style="font-weight:400;font-size:32px;font-family:'DejaVu Sans';fill:#fff">GET IT ON
         </text>
-        <text x="524" y="486" class="noto-sans-mono"
-            style="font-size:86px;fill:#fff">GitHub
+        <text x="524" y="486"
+            style="font-weight:600;font-size:86px;font-family:'Droid Sans',sans-serif;fill:#fff">GitHub
         </text>
     </g>
     <g transform="translate(90 66) scale(4.6 4.6)">
