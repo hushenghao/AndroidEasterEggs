@@ -5,7 +5,7 @@ ksp = "1.9.23-1.0.19"
 # https://maven.google.com/web/index.html?q=compose#androidx.compose.compiler:compiler
 compose-kotlin-compiler = "1.5.11"
 agp = "8.3.1"
-hilt = "2.51"
+hilt = "2.51.1"
 compose-bom = "2024.03.00"
 # https://google.github.io/accompanist
 accompanist = "0.34.0"
