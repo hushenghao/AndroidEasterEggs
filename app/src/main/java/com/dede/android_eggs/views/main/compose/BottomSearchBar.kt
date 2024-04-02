@@ -65,7 +65,17 @@ import kotlinx.coroutines.flow.catch
 class BottomSearchBarState(initVisible: Boolean, initSearchText: String) {
 
     var visible: Boolean by mutableStateOf(initVisible)
+        private set
     var searchText: String by mutableStateOf(initSearchText)
+
+    fun close() {
+        visible = false
+        searchText = ""
+    }
+
+    fun open() {
+        visible = true
+    }
 
     @Suppress("RedundantIf")
     override fun equals(other: Any?): Boolean {
@@ -119,6 +129,7 @@ fun rememberBottomSearchBarState(
 @Preview
 fun BottomSearchBar(
     state: BottomSearchBarState = rememberBottomSearchBarState(true),
+    onClose: (() -> Unit)? = null
 ) {
     var backProgress by remember { mutableFloatStateOf(0f) }
     PredictiveBackHandler(enabled = state.visible) { flow ->
@@ -129,8 +140,7 @@ fun BottomSearchBar(
         }.collect { event ->
             backProgress = event.progress
         }
-        state.searchText = ""
-        state.visible = false
+        state.close()
     }
     LaunchedEffect(state.visible) {
         if (state.visible) {
@@ -154,7 +164,7 @@ fun BottomSearchBar(
                 topStart = (28 * backProgress).dp,
                 topEnd = (28 * backProgress).dp
             ),
-            onClose = { state.visible = false },
+            onClose = onClose,
         )
     }
 }
@@ -164,7 +174,7 @@ private fun BottomSearchBarView(
     state: BottomSearchBarState,
     modifier: Modifier,
     shape: Shape,
-    onClose: () -> Unit,
+    onClose: (() -> Unit)?,
 ) {
     val currentOnClose by rememberUpdatedState(newValue = onClose)
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -212,9 +222,9 @@ private fun BottomSearchBarView(
             leadingIcon = {
                 IconButton(
                     onClick = {
-                        state.searchText = ""
-                        currentOnClose()
+                        state.close()
                         keyboardController?.hide()
+                        currentOnClose?.invoke()
                     }
                 ) {
                     Icon(

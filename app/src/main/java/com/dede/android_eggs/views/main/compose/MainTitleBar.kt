@@ -48,7 +48,7 @@ fun MainTitleBar(
                 IconButton(
                     onClick = {
                         // show searchBar
-                        searchBarState.visible = true
+                        searchBarState.open()
                     },
                 ) {
                     Icon(
@@ -69,6 +69,7 @@ fun MainTitleBar(
         actions = {
             IconButton(
                 onClick = {
+                    searchBarState.close()
                     scope.launch {
                         drawerState?.open()
                     }
