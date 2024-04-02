@@ -33,6 +33,16 @@ fun ContributeGroup() {
         )
         Option(
             leadingIcon = imageVectorIconBlock(
+                imageVector = Icons.Rounded.Coffee,
+                contentDescription = stringResource(R.string.label_donate),
+            ),
+            title = stringResource(R.string.label_donate),
+            onClick = {
+                CustomTabsBrowser.launchUrl(context, R.string.url_sponsor)
+            }
+        )
+        Option(
+            leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Feedback,
                 contentDescription = stringResource(R.string.label_feedback),
             ),
@@ -43,6 +53,7 @@ fun ContributeGroup() {
             }
         )
         Option(
+            shape = OptionShapes.lastShape(),
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Forum,
                 contentDescription = stringResource(R.string.label_discussions),
@@ -51,17 +62,6 @@ fun ContributeGroup() {
             desc = stringResource(R.string.url_github_discussions),
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_github_discussions)
-            }
-        )
-        Option(
-            shape = OptionShapes.lastShape(),
-            leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Coffee,
-                contentDescription = stringResource(R.string.label_donate),
-            ),
-            title = stringResource(R.string.label_donate),
-            onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_sponsor)
             }
         )
     }
