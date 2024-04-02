@@ -23,7 +23,6 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/basic" />
             <option value="$PROJECT_DIR$/build-logic" />
-            <option value="$PROJECT_DIR$/script/compose-material-icons-generator" />
             <option value="$PROJECT_DIR$/eggs" />
             <option value="$PROJECT_DIR$/eggs/Gingerbread" />
             <option value="$PROJECT_DIR$/eggs/Honeycomb" />
@@ -40,6 +39,8 @@
             <option value="$PROJECT_DIR$/eggs/S" />
             <option value="$PROJECT_DIR$/eggs/Tiramisu" />
             <option value="$PROJECT_DIR$/eggs/UpsideDownCake" />
+            <option value="$PROJECT_DIR$/script" />
+            <option value="$PROJECT_DIR$/script/compose-material-icons-generator" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

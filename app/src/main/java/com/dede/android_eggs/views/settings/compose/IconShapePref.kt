@@ -67,7 +67,7 @@ object IconShapePrefUtil {
 
     fun getMaskPath(context: Context): String {
         val index = SettingPrefUtil.getValue(context, KEY_ICON_SHAPE, 0)
-        var path =  getMaskPathByIndex(context, index)
+        var path = getMaskPathByIndex(context, index)
         if (path.isEmpty()) {
             path = getSystemMaskPath(context)
         }
@@ -162,9 +162,7 @@ private fun ShapeItem(
     Card(
         shape = PathShape(stringResource(R.string.icon_shape_clover_path)),
         onClick = onClick,
-        modifier = Modifier
-            .aspectRatio(1f)
-            .then(modifier),
+        modifier = modifier then Modifier.aspectRatio(1f),
         colors = CardDefaults.cardColors(containerColor = colorScheme.surface)
     ) {
         Box(

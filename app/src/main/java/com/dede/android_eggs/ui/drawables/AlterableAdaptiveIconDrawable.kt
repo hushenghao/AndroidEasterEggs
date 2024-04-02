@@ -1,6 +1,5 @@
 package com.dede.android_eggs.ui.drawables
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
@@ -19,15 +18,14 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.TextUtils
 import androidx.annotation.DrawableRes
-import androidx.core.graphics.PathParser
 import androidx.core.graphics.withSave
+import com.dede.android_eggs.util.PathInflater
 import com.dede.android_eggs.views.settings.compose.IconShapePrefUtil
 import com.dede.basic.requireDrawable
 import kotlin.math.max
 import kotlin.math.roundToInt
 
 
-@SuppressLint("RestrictedApi")
 class AlterableAdaptiveIconDrawable(
     private val context: Context,
     @DrawableRes res: Int,
@@ -61,10 +59,10 @@ class AlterableAdaptiveIconDrawable(
 
     init {
         var pathStr = maskPathStr
-        if (TextUtils.isEmpty(pathStr)) {
+        if (pathStr == null || TextUtils.isEmpty(pathStr)) {
             pathStr = IconShapePrefUtil.getSystemMaskPath(context)
         }
-        savedMask.set(PathParser.createPathFromPathData(pathStr))
+        savedMask.set(PathInflater.inflate(pathStr))
         mask.set(savedMask)
 
         val drawable = context.requireDrawable(res)
@@ -85,7 +83,7 @@ class AlterableAdaptiveIconDrawable(
         if (TextUtils.isEmpty(path)) {
             path = IconShapePrefUtil.getSystemMaskPath(context)
         }
-        savedMask.set(PathParser.createPathFromPathData(path))
+        savedMask.set(PathInflater.inflate(path))
         updateMaskBoundsInternal(bounds)
         invalidateSelf()
     }
