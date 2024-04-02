@@ -13,6 +13,7 @@
     <string name="label_privacy_policy">隐私协议</string>
     <string name="label_license">授权协议</string>
     <string name="label_feedback">问题反馈</string>
+    <string name="label_discussions">讨论</string>
     <string name="label_star">给个好评</string>
     <string name="label_contact_me">联系我</string>
     <string name="label_email_title">邮箱</string>
@@ -48,5 +49,4 @@
     <string name="pref_summary_retain_recent_egg_tasks">在最近任务中保留最近的彩蛋任务，最多保留5个（在活动嵌入模式下无效）</string>
     <string name="label_about">关于</string>
     <string name="label_contribute">参与贡献</string>
-    <string name="label_discussions">讨论</string>
 </resources>

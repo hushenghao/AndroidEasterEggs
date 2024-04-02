@@ -13,6 +13,7 @@
     <string name="label_privacy_policy">隱私權</string>
     <string name="label_license">授權</string>
     <string name="label_feedback">意見回饋</string>
+    <string name="label_discussions">討論</string>
     <string name="label_star">給個好評</string>
     <string name="label_contact_me">聯絡我們</string>
     <string name="label_email_title">電子郵件</string>
@@ -47,4 +48,5 @@
     <string name="pref_retain_recent_egg_tasks">保留最近的彩蛋工作</string>
     <string name="pref_summary_retain_recent_egg_tasks">在最近工作畫面保留彩蛋工作，最多保留 5 个 (在活動嵌入模式中無效)</string>
     <string name="label_about">關於</string>
+    <string name="label_contribute">參與</string>
 </resources>
