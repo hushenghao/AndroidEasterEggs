@@ -11,6 +11,7 @@
     <string name="label_github_me" translatable="false">hushenghao</string>
     <string name="url_github_commit" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/commit/%s</string>
     <string name="url_github_issues" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/issues</string>
+    <string name="url_github_discussions" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/discussions</string>
     <string name="url_beta" translatable="false">https://www.pgyer.com/eggs</string>
     <string name="url_privacy" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy</string>
     <string name="url_license" translatable="false">https://www.apache.org/licenses/LICENSE-2.0.txt</string>
@@ -34,6 +35,7 @@
     <string name="label_privacy_policy">Privacy</string>
     <string name="label_license">License</string>
     <string name="label_feedback">Feedback</string>
+    <string name="label_discussions">Discussions</string>
     <string name="label_star">Rate the App</string>
     <string name="label_contact_me">Contact Me</string>
     <string name="label_email_title">Email</string>

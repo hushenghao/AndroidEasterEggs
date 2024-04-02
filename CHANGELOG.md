@@ -1,4 +1,6 @@
 ### v2.4.2
+
+- Add Github Discussions entrance
 - Fix Settings ModalDrawerSheet inserts [#212](https://github.com/hushenghao/AndroidEasterEggs/issues/212)
 
 ### v2.4.1 (2024-03-14)

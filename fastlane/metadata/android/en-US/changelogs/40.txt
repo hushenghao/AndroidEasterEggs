@@ -1,1 +1,2 @@
+- Add Github Discussions entrance
 - Fix Settings ModalDrawerSheet inserts
