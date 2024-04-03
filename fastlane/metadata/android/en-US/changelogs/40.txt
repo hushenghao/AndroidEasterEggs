@@ -1,2 +1,3 @@
 - Add Github Discussions entrance
+- Fix Vector drawable on Android 5
 - Fix Settings ModalDrawerSheet inserts

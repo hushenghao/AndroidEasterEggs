@@ -1,6 +1,7 @@
 ### v2.4.2
 
 - 新增 Github 讨论入口
+- 修复 Android 5 矢量图显示
 - 修复设置抽屉安全距离 [#212](https://github.com/hushenghao/AndroidEasterEggs/issues/212)
 
 ### v2.4.1 (2024-03-14)
