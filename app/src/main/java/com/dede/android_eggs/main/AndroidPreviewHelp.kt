@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.ThemeUtils
+import com.dede.basic.createVectorDrawableCompat
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
@@ -96,7 +97,9 @@ object AndroidPreviewHelp {
                     return object : SnapshotProvider() {
                         override fun create(context: Context): View {
                             return ImageView(context).apply {
-                                setImageResource(R.drawable.android_15_platlogo)
+                                val drawable =
+                                    context.createVectorDrawableCompat(R.drawable.android_15_platlogo)
+                                setImageDrawable(drawable)
                             }
                         }
                     }
