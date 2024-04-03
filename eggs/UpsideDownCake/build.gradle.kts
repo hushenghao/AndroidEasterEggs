@@ -3,18 +3,7 @@ plugins {
 }
 
 android {
-//    kotlinOptions {
-//        freeCompilerArgs += listOf(
-//            "-P",
-//            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
-//        )
-//    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.kotlin.compiler.get()
-    }
+    configureCompose()
 }
 
 dependencies {

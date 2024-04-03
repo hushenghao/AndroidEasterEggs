@@ -31,13 +31,7 @@ android {
         buildConfigField("int", "LANGUAGE_RES", resourceConfigurations.size.toString())
     }
 
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.kotlin.compiler.get()
-    }
+    configureCompose()
 
     signingConfigs {
         if (keyprops.isEmpty) return@signingConfigs
