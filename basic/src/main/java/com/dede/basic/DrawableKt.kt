@@ -7,6 +7,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.VectorDrawable
 import android.os.Build
 import android.util.LruCache
 import android.util.Xml
@@ -60,7 +61,11 @@ fun Context.getIdentifier(name: String, defType: DefType, defPackage: String = p
 }
 
 fun Context.requireDrawable(@DrawableRes id: Int): Drawable {
-    return requireNotNull(ContextCompat.getDrawable(this, id))
+    val drawable = requireNotNull(ContextCompat.getDrawable(this, id))
+    if (drawable is VectorDrawable && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+        return createVectorDrawableCompat(id)
+    }
+    return drawable
 }
 
 fun Context.createVectorDrawableCompat(@DrawableRes id: Int): VectorDrawableCompat {

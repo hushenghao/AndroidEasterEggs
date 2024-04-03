@@ -2,6 +2,7 @@
 
 package com.dede.android_eggs.views.settings.compose
 
+import android.os.Build
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -43,6 +44,7 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dede.android_eggs.R
+import com.dede.android_eggs.main.EasterEggHelp
 import com.dede.android_eggs.main.entity.TimelineEvent
 import com.dede.android_eggs.main.entity.TimelineEvent.Companion.isNewGroup
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
@@ -156,7 +158,7 @@ private fun TimelineHeader() {
 private fun TimelineItem(
     event: TimelineEvent = TimelineEvent.timelines.first(),
     @DrawableRes logo: Int = R.mipmap.ic_launcher,
-    egg: EasterEgg? = null,
+    egg: EasterEgg? = EasterEggHelp.previewEasterEggs().first(),
 ) {
     val context = LocalContext.current
     ConstraintLayout(
@@ -191,7 +193,7 @@ private fun TimelineItem(
         } else {
             null
         }
-        if (drawable.isAdaptiveIconDrawable) {
+        if (event.apiLevel >= Build.VERSION_CODES.LOLLIPOP) {
             DrawableImage(
                 drawable = drawable,
                 contentDescription = eggNickName,
