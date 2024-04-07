@@ -1,0 +1,3 @@
+[submodule "wiki"]
+	path = wiki
+	url = git@github.com:hushenghao/AndroidEasterEggs.wiki.git
