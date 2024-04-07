@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">대기중…</string>
+    <string name="summary_android_waiting">아직 출시하지 않음</string>
     <string name="summary_android_release_pushed">최종 릴리스 버전이 출시되었습니다.</string>
     <string name="title_open_with">다음으로 열기</string>
     <string name="char_separator">/</string>
@@ -13,6 +13,7 @@
     <string name="label_privacy_policy">개인정보</string>
     <string name="label_license">라이선스</string>
     <string name="label_feedback">피드백</string>
+    <string name="label_discussions">토론</string>
     <string name="label_star">별점</string>
     <string name="label_contact_me">연락하기</string>
     <string name="label_email_title">이메일</string>
