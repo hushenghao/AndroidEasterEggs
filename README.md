@@ -57,7 +57,13 @@ development.
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=hushenghao/AndroidEasterEggs&type=Date)](https://star-history.com/#hushenghao/AndroidEasterEggs&Date)
+<a href="https://star-history.com/#hushenghao/AndroidEasterEggs&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=hushenghao/AndroidEasterEggs&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=hushenghao/AndroidEasterEggs&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=hushenghao/AndroidEasterEggs&type=Date" />
+ </picture>
+</a>
 
 ## License
 
