@@ -51,6 +51,10 @@
 * [AOSP](https://cs.android.com/android/platform/superproject/main)
 * [所有翻译贡献者](https://zh.crowdin.com/project/easter-eggs/members)
 
+## Star 历史
+
+[![星史图](https://api.star-history.com/svg?repos=hushenghao/AndroidEasterEggs&type=Date)](https://star-history.com/#hushenghao/AndroidEasterEggs&Date)
+
 ## 协议
 
 ```text

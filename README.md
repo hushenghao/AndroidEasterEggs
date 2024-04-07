@@ -55,6 +55,10 @@ development.
 * [AOSP](https://cs.android.com/android/platform/superproject/main)
 * [All translation contributors](https://crowdin.com/project/easter-eggs/members)
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=hushenghao/AndroidEasterEggs&type=Date)](https://star-history.com/#hushenghao/AndroidEasterEggs&Date)
+
 ## License
 
 ```text
