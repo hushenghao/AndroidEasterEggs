@@ -3,6 +3,7 @@
 package com.dede.android_eggs.views.settings.compose
 
 import android.os.Build
+import androidx.activity.compose.BackHandler
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -28,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -52,6 +54,7 @@ import com.dede.android_eggs.util.compose.PathShape
 import com.dede.android_eggs.views.main.compose.DrawableImage
 import com.dede.android_eggs.views.timeline.AndroidLogoMatcher
 import com.dede.basic.provider.EasterEgg
+import com.t8rin.modalsheet.ModalSheet
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -59,15 +62,9 @@ import javax.inject.Inject
 @Preview
 @Composable
 fun TimelinePref() {
-    var visible by remember { mutableStateOf(false) }
+    val showSheetState = remember { mutableStateOf(false) }
 
-    if (visible) {
-        TimelineList(
-            onDismissRequest = {
-                visible = false
-            }
-        )
-    }
+    TimelineListSupport(showSheetState)
 
     SettingPref(
         leadingIcon = Icons.Rounded.Timeline,
@@ -81,16 +78,55 @@ fun TimelinePref() {
             }
         },
         onClick = {
-            visible = true
+            showSheetState.value = true
         }
     )
 }
 
 @Composable
-private fun TimelineList(
-    onDismissRequest: () -> Unit,
+private fun TimelineListSupport(
+    showSheetState: MutableState<Boolean>,
     viewModel: TimelineViewModel = viewModel()
 ) {
+    var showSheet by showSheetState
+    BackHandler(showSheet) {
+        showSheet = false
+    }
+    val paddingValues = WindowInsets.systemBars.asPaddingValues()
+    ModalSheet(
+        visible = showSheet,
+        onVisibleChange = { showSheet = it },
+        skipHalfExpanded = false,
+        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+        sheetModifier = Modifier.padding(top = paddingValues.calculateTopPadding())
+    ) {
+        LazyColumn(
+            contentPadding = PaddingValues(bottom = paddingValues.calculateBottomPadding())
+        ) {
+            item {
+                TimelineHeader()
+            }
+            items(viewModel.timelines) {
+                TimelineItem(
+                    it,
+                    viewModel.logoMatcher.findAndroidLogo(it.apiLevel),
+                    viewModel.logoMatcher.findEasterEgg(it.apiLevel),
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun TimelineList(
+    showSheetState: MutableState<Boolean>,
+    viewModel: TimelineViewModel = viewModel()
+) {
+    var showSheet by showSheetState
+    if (!showSheet) {
+        return
+    }
+
     val sheetState = rememberModalBottomSheetState()
     LaunchedEffect(Unit) {
         launch {
@@ -101,7 +137,7 @@ private fun TimelineList(
     // todo https://issuetracker.google.com/issues/307160202
     val paddingValues = WindowInsets.systemBars.asPaddingValues()
     ModalBottomSheet(
-        onDismissRequest = onDismissRequest,
+        onDismissRequest = { showSheet = false },
         sheetState = sheetState,
         windowInsets = WindowInsets(0.dp, paddingValues.calculateTopPadding(), 0.dp, 0.dp)
     ) {

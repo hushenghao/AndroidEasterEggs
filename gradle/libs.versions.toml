@@ -53,6 +53,7 @@ accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-dra
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
+t8rin-modalsheet = "com.github.T8RIN:ModalSheet:1.0.0"
 dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.4"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
 blurhash-painter = "com.github.wajahat-iqbal:BlurHashPainter:1.2"
