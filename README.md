@@ -19,8 +19,7 @@ Collections the Android release Easter Egg
 
 This project contains the complete code of the system Easter eggs, which aims to organize and be
 compatible with all system easter eggs, so as to ensure that most devices can experience different
-versions of Easter eggs without making too many modifications to the easter egg's code. Newer
-versions use new features of said system, but lower versions can only use some functions.
+versions of Easter eggs without making too many modifications to the easter egg's code.
 
 ## Download
 
