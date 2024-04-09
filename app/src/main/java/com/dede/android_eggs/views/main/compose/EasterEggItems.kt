@@ -2,12 +2,6 @@
 
 package com.dede.android_eggs.views.main.compose
 
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
-import android.graphics.Paint
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,15 +9,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.BookmarkBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -36,30 +27,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.graphics.applyCanvas
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.EasterEggHelp
 import com.dede.android_eggs.main.EggActionHelp
-import com.dede.android_eggs.util.ThemeUtils
+import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
-import com.wolt.blurhashkt.BlurHashDecoder
-import kotlin.random.Random
-
-
-private fun randomHash(context: Context): String {
-    val strings = context.resources.getStringArray(R.array.hash_gallery)
-    val index = Random.nextInt(strings.size)
-    return strings[index]
-}
 
 @Composable
 @Preview
@@ -79,31 +56,6 @@ fun EasterEggHighestItem(
         EasterEggHelp.DateFormatter.getInstance("MMM yyyy")
     }
 
-    val isSupportShortcut = remember(egg) {
-        EggActionHelp.isSupportShortcut(egg)
-    }
-    val snapshot = remember(egg) {
-        egg.provideSnapshotProvider()
-    }
-    val hashBitmap = remember(egg, ThemeUtils.isSystemNightMode(context)) {
-        var bitmap = BlurHashDecoder.decode(randomHash(context), 54, 32)// 5:3
-        if (bitmap != null && ThemeUtils.isSystemNightMode(context)) {
-            val nightMode =
-                Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888)
-            val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-            val matrix = ColorMatrix()
-            matrix.setScale(0.8f, 0.8f, 0.8f, 0.8f)
-            paint.colorFilter = ColorMatrixColorFilter(matrix)
-            nightMode.applyCanvas {
-                drawBitmap(bitmap!!, 0f, 0f, paint)
-                setBitmap(null)
-            }
-            bitmap.recycle()
-            bitmap = nightMode
-        }
-        bitmap
-    }
-
     Card(
         colors = CardDefaults.cardColors(containerColor = colorScheme.surfaceColorAtElevation(2.dp)),
         shape = shapes.extraLarge,
@@ -115,33 +67,16 @@ fun EasterEggHighestItem(
                 EggActionHelp.launchEgg(context, egg)
             }
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1.8f)
-                .clipToBounds()
-        ) {
-            if (snapshot == null || !snapshot.includeBackground) {
-                if (hashBitmap != null) {
-                    Image(
-                        bitmap = hashBitmap.asImageBitmap(),
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.FillBounds
-                    )
-                }
+        Box {
+            val isSupportShortcut = remember(egg) {
+                EggActionHelp.isSupportShortcut(egg)
             }
-            if (snapshot != null) {
-                AndroidView(
-                    factory = {
-                        snapshot.create(it)
-                    },
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(if (snapshot.includeBackground) 0.dp else 12.dp)
-                        .clip(shapes.extraLarge)
-                )
+            val snapshot = remember(egg) {
+                egg.provideSnapshotProvider()
             }
+
+            SnapshotView(snapshot)
+
             if (isSupportShortcut) {
                 IconButton(
                     onClick = {
