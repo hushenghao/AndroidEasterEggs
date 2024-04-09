@@ -87,6 +87,7 @@ class EasterEggsActivity : AppCompatActivity() {
                     ReverseModalNavigationDrawer(
                         drawerContent = {
                             ModalDrawerSheet(
+                                drawerState = drawerState,
                                 drawerShape = shapes.extraLarge.end(0.dp),
                                 windowInsets = WindowInsets(0, 0, 0, 0)
                             ) {
