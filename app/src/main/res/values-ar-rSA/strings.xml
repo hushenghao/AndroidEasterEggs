@@ -6,11 +6,11 @@
     <string name="title_open_with">مفتوحة مع</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-    <string name="label_github">شفرة المصدر</string>
+    <string name="label_github">كود المصدر</string>
     <string name="label_translation">ترجمة</string>
     <string name="label_beta">احصل على النسخة التجريبية</string>
     <string name="label_timeline">الجدول الزمني</string>
-    <string name="label_privacy_policy">خصوصية</string>
+    <string name="label_privacy_policy">الخصوصية</string>
     <string name="label_license">رخصة</string>
     <string name="label_feedback">تعليق</string>
     <string name="label_discussions">مناقشات</string>
@@ -38,7 +38,7 @@
     <string name="preference_off">عن</string>
     <string name="toast_shortcut_added">تمت إضافة الاختصار</string>
     <string name="app_widget_description">هذه هي الساعة التناظرية لبيض عيد الفصح</string>
-    <string name="action_agree">يوافق</string>
+    <string name="action_agree">موافق</string>
     <string name="summary_browse_privacy_policy">اقرأ ووافق على سياسة الخصوصية الخاصة بنا للمتابعة.</string>
     <string name="label_welcome">مرحبًا بك في كتالوجات بيض عيد الفصح 🎉🎉🎉</string>
     <string name="label_share">يشارك</string>
