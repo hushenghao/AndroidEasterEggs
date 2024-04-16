@@ -1,0 +1,7 @@
+# Integration with Issue Tracker
+#
+# (note that '\' need to be escaped).
+
+[issuetracker "GitHub Issuetracker"]
+  regex = "#(\\d+)"
+  url = "https://github.com/hushenghao/AndroidEasterEggs/issues/$1"
