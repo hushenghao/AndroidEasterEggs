@@ -50,9 +50,9 @@
   <g class="font12" transform="translate(0,156)">
     <text style="text-anchor:end;" x="200" y="18">Croatian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="110.39999999999999" x="210" y="11.4"/>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
     <rect fill="#71C277" height="6" rx="3" ry="3" width="25.6" x="210" y="11.4"/>
-    <text x="380" y="18">69%</text>
+    <text x="380" y="18">100%</text>
   </g>
   <g class="font12" transform="translate(0,182)">
     <text style="text-anchor:end;" x="200" y="18">Czech</text>

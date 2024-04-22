@@ -6,13 +6,17 @@
     <string name="title_open_with">Otvori s</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Izvorni kod</string>
     <string name="label_translation">Prijevod</string>
     <string name="label_beta">Preuzmi betu</string>
     <string name="label_timeline">Vremenska crta</string>
     <string name="label_privacy_policy">Privatnost</string>
     <string name="label_license">Licencija</string>
     <string name="label_feedback">Povratne informacije</string>
+    <string name="label_discussions">Rasprave</string>
     <string name="label_star">Ocijeni</string>
+    <string name="label_contact_me">Kontaktiraj me</string>
+    <string name="label_email_title">E-pošta</string>
     <string name="label_timeline_title">Vremenska crta, dostignuća i ažuriranja</string>
     <string name="label_timeline_releases">Izdanja</string>
     <string name="message_trypophobia_warning">Neke slike mogu izazvati nelagodu u osobama koje pate od &lt;b&gt;tripofobije&lt;/b&gt;. Želite li nastaviti?</string>
@@ -27,6 +31,7 @@
     <string name="summary_system_default">Zadano</string>
     <string name="summary_theme_dark_mode">Tamno</string>
     <string name="summary_theme_light_mode">Svijetlo</string>
+    <string name="summary_theme_amoled_mode">Amoled</string>
     <string name="label_add_shortcut">Prečac</string>
     <string name="label_donate">Doniraj</string>
     <string name="preference_on">Uključeno</string>
@@ -38,4 +43,10 @@
     <string name="label_welcome">Dobro došli u katalog uskršnjih jaja🎉🎉🎉</string>
     <string name="label_share">Podijeli</string>
     <string name="label_search_hint">Traži…</string>
+    <string name="label_component_manager">Upravitelj komponenti</string>
+    <string name="pref_more_settings">Više postavki</string>
+    <string name="pref_retain_recent_egg_tasks">Zadrži nedavne zadatke za Easter Eggs</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Zadrži zadatke za Easter Eggs na zaslonu nedavnih aplikacija. Maksimalno 5 zadržanih zadataka (nije dostupno za Activity Embedded Mode)</string>
+    <string name="label_about">O aplikaciji</string>
+    <string name="label_contribute">Doprinesi</string>
 </resources>
