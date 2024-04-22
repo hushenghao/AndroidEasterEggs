@@ -63,7 +63,7 @@ io-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 io-coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
 io-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 free-reflection = "com.github.tiann:FreeReflection:3.2.0"
-squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.13"
+squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.14"
 nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
 
 # Script dependencies
