@@ -36,7 +36,7 @@ androidx-window = "androidx.window:window:1.2.0"
 google-material = "com.google.android.material:material:1.11.0"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 
-androidx-activity-compose = "androidx.activity:activity-compose:1.8.2"
+androidx-activity-compose = "androidx.activity:activity-compose:1.9.0"
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
