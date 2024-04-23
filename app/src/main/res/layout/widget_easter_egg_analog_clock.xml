@@ -14,6 +14,7 @@
         android:dial="@drawable/clock_analog_simple_dial"
         android:hand_hour="@drawable/clock_analog_simple_hour"
         android:hand_minute="@drawable/clock_analog_simple_minute"
-        android:hand_second="@drawable/clock_analog_simple_second" />
+        android:hand_second="@drawable/clock_analog_simple_second"
+        tools:targetApi="s" />
 
 </RelativeLayout>

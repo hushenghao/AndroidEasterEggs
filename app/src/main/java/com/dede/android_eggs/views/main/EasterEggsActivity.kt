@@ -2,7 +2,6 @@
 
 package com.dede.android_eggs.views.main
 
-import android.annotation.SuppressLint
 import android.app.assist.AssistContent
 import android.content.Intent
 import android.os.Build
@@ -146,8 +145,7 @@ class EasterEggsActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("MissingSuperCall")
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         schemeHandler.handleIntent(intent)
     }

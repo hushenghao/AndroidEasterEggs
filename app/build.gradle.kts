@@ -85,7 +85,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel)
     compileOnly(libs.androidx.preference)
-    implementation(libs.androidx.constraintlayout)
+    // implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.browser)
     implementation(libs.androidx.window)
     implementation(libs.google.material)

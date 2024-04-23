@@ -22,6 +22,11 @@ object PathInflater {
 
     @SuppressLint("RestrictedApi")
     private fun inflateInternal(pathStr: String): Path {
-        return PathParser.createPathFromPathData(pathStr) ?: blankPath
+        return try {
+            PathParser.createPathFromPathData(pathStr)
+        } catch (e: RuntimeException) {
+            e.printStackTrace()
+            blankPath
+        }
     }
 }
