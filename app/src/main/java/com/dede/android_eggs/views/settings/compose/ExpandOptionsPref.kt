@@ -73,12 +73,12 @@ fun ExpandOptionsPref(
         AnimatedVisibility(
             visible = expanded,
             enter = slideInVertically() + fadeIn(),
-            exit = shrinkVertically() + fadeOut()
+            exit = shrinkVertically() + fadeOut(),
         ) {
             Column(
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
-                    .padding(bottom = 10.dp),
+                    .padding(top = 4.dp, bottom = 10.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp),
                 content = options
             )

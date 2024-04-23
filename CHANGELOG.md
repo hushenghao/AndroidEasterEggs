@@ -3,6 +3,7 @@
 - Add Github Discussions entrance
 - Fix Vector drawable on Android 5
 - Fix Settings ModalDrawerSheet inserts [#212](https://github.com/hushenghao/AndroidEasterEggs/issues/212)
+- Fix ripple animation when Settings item is pressed
 
 ### v2.4.1 (2024-03-14)
 

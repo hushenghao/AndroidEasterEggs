@@ -95,15 +95,18 @@ fun SettingPref(
     shape: Shape = MaterialTheme.shapes.medium,
     content: @Composable ColumnScope.() -> Unit = {},
 ) {
+    val cardColors = CardDefaults.cardColors(
+        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp)
+    )
     Card(
-        onClick = onClick,
         shape = shape,
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp)
-        ),
+        colors = cardColors,
+        modifier = Modifier.animateContentSize(),
     ) {
-        Column(
-            modifier = Modifier.animateContentSize()
+        Card(
+            onClick = onClick,
+            shape = shape,
+            colors = cardColors,
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -136,9 +139,9 @@ fun SettingPref(
                     trailingContent()
                 }
             }
-
-            content()
         }
+
+        content()
     }
 }
 
