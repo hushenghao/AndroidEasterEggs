@@ -2,12 +2,14 @@ package com.dede.android_eggs.views.settings.compose
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AlternateEmail
+import androidx.compose.material.icons.rounded.Feedback
+import androidx.compose.material.icons.rounded.Forum
 import androidx.compose.material.icons.rounded.PersonSearch
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.composes.icons.Github
+import com.dede.android_eggs.ui.composes.icons.Telegram
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.copy
 
@@ -32,15 +34,36 @@ fun ContactMeGroup() {
             }
         )
         Option(
+            leadingIcon = imageVectorIconBlock(
+                imageVector = Icons.Rounded.Feedback,
+                contentDescription = stringResource(R.string.label_feedback),
+            ),
+            title = stringResource(R.string.label_feedback),
+            //desc = stringResource(R.string.url_github_issues),
+            onClick = {
+                CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
+            }
+        )
+        Option(
+            leadingIcon = imageVectorIconBlock(
+                imageVector = Icons.Telegram,
+                contentDescription = "Telegram"
+            ),
+            title = "Telegram",
+            onClick = {
+                CustomTabsBrowser.launchUrl(context, R.string.url_telegram_group)
+            }
+        )
+        Option(
             shape = OptionShapes.lastShape(),
             leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Github,
-                contentDescription = stringResource(R.string.label_github)
+                imageVector = Icons.Rounded.Forum,
+                contentDescription = stringResource(R.string.label_discussions),
             ),
-            title = "GitHub",
-            desc = stringResource(id = R.string.label_github_me),
+            title = stringResource(R.string.label_discussions),
+            //desc = stringResource(R.string.url_github_discussions),
             onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_github_me)
+                CustomTabsBrowser.launchUrl(context, R.string.url_github_discussions)
             }
         )
     }

@@ -1,6 +1,7 @@
 ### v2.4.2
 
 - 新增 Github 讨论入口
+- 新增 Telegram 群聊入口
 - 修复 Android 5 矢量图显示
 - 修复设置抽屉安全距离 [#212](https://github.com/hushenghao/AndroidEasterEggs/issues/212)
 - 修复按下设置项时的水波纹动画

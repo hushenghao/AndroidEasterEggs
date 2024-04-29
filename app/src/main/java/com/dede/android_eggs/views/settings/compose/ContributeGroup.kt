@@ -2,8 +2,6 @@ package com.dede.android_eggs.views.settings.compose
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Coffee
-import androidx.compose.material.icons.rounded.Feedback
-import androidx.compose.material.icons.rounded.Forum
 import androidx.compose.material.icons.rounded.Hive
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -36,32 +34,10 @@ fun ContributeGroup() {
                 imageVector = Icons.Rounded.Coffee,
                 contentDescription = stringResource(R.string.label_donate),
             ),
+            shape = OptionShapes.lastShape(),
             title = stringResource(R.string.label_donate),
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_sponsor)
-            }
-        )
-        Option(
-            leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Feedback,
-                contentDescription = stringResource(R.string.label_feedback),
-            ),
-            title = stringResource(R.string.label_feedback),
-            desc = stringResource(R.string.url_github_issues),
-            onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
-            }
-        )
-        Option(
-            shape = OptionShapes.lastShape(),
-            leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Forum,
-                contentDescription = stringResource(R.string.label_discussions),
-            ),
-            title = stringResource(R.string.label_discussions),
-            desc = stringResource(R.string.url_github_discussions),
-            onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_github_discussions)
             }
         )
     }

@@ -7,8 +7,6 @@
     <string name="title_open_with">Open with</string>
 
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
-    <string name="url_github_me" translatable="false">https://github.com/hushenghao</string>
-    <string name="label_github_me" translatable="false">hushenghao</string>
     <string name="url_github_commit" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/commit/%s</string>
     <string name="url_github_issues" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/issues</string>
     <string name="url_github_discussions" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/discussions</string>
@@ -23,6 +21,7 @@
     <string name="label_mail_me" translatable="false">dede.hu@qq.com</string>
     <string name="url_sponsor" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Sponsor</string>
     <string name="url_aosp" translatable="false">https://source.android.com</string>
+    <string name="url_telegram_group" translatable="false">https://t.me/+AD_rLq66XERkMDNl</string>
 
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>

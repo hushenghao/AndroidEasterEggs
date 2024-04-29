@@ -1,4 +1,5 @@
 - Add Github Discussions entrance
+- Add Telegram group entrance
 - Fix Vector drawable on Android 5
 - Fix Settings ModalDrawerSheet inserts
 - Fix ripple animation when Settings item is pressed

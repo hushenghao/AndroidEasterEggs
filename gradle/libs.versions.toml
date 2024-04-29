@@ -6,7 +6,7 @@ ksp = "1.9.23-1.0.20"
 compose-kotlin-compiler = "1.5.11"
 agp = "8.3.2"
 hilt = "2.51.1"
-compose-bom = "2024.04.00"
+compose-bom = "2024.04.01"
 # https://google.github.io/accompanist
 accompanist = "0.34.0"
 lifecycle = "2.7.0"
