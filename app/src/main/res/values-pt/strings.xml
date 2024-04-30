@@ -6,13 +6,17 @@
     <string name="title_open_with">Abrir com</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Código-fonte</string>
     <string name="label_translation">Tradução</string>
     <string name="label_beta">Obter Beta</string>
     <string name="label_timeline">Cronologia</string>
     <string name="label_privacy_policy">Privacidade</string>
     <string name="label_license">Licença</string>
     <string name="label_feedback">Opiniões</string>
+    <string name="label_discussions">Discussões</string>
     <string name="label_star">Estrela</string>
+    <string name="label_contact_me">Contactar-me</string>
+    <string name="label_email_title">E-mail</string>
     <string name="label_timeline_title">Cronologia, marcos e atualizações</string>
     <string name="label_timeline_releases">Versões</string>
     <string name="message_trypophobia_warning">Isto é um aviso para aqueles com &lt;b&gt;Tripofobia&lt;/b&gt; de que algumas imagens podem causar desconforto. Quer continuar?</string>
@@ -27,6 +31,7 @@
     <string name="summary_system_default">Padrão</string>
     <string name="summary_theme_dark_mode">Escuro</string>
     <string name="summary_theme_light_mode">Claro</string>
+    <string name="summary_theme_amoled_mode">Amoled</string>
     <string name="label_add_shortcut">Atalho</string>
     <string name="label_donate">Doar</string>
     <string name="preference_on">Ligado</string>
@@ -39,4 +44,9 @@
     <string name="label_share">Partilhar</string>
     <string name="label_search_hint">Pesquisar…</string>
     <string name="label_component_manager">Gestor de Componentes</string>
+    <string name="pref_more_settings">Mais Configurações</string>
+    <string name="pref_retain_recent_egg_tasks">Tarefas recentes de Easter Egg</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Reter tarefas de Easter Egg na tela Recentes, máximo de 5 tarefas retidas (não disponível para o modo incorporado de atividade.)</string>
+    <string name="label_about">Sobre</string>
+    <string name="label_contribute">Contribuir</string>
 </resources>
