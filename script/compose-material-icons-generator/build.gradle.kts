@@ -15,19 +15,16 @@
  */
 
 plugins {
-    id("kotlin")
     id("java")
+    alias(libs.plugins.kotlin.jvm)
 }
 
 dependencies {
-    implementation(gradleApi())
-
     implementation(libs.guava)
     implementation(libs.kotlinpoet)
     implementation(libs.xmlpull)
     implementation(libs.xpp3)
 }
-
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17

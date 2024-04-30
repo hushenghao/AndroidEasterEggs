@@ -1,4 +1,7 @@
-### v2.4.2
+### v2.5.1
+- Known issue fixes
+
+### v2.5.0 (2024-04-30)
 
 - Add Github Discussions entrance
 - Add Telegram group entrance

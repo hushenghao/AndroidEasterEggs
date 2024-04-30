@@ -21,6 +21,8 @@ dependencyResolutionManagement {
 include(
     ":app",
     ":basic",
+    ":jvm-basic",
+
     ":eggs:Gingerbread",
     ":eggs:Honeycomb",
     ":eggs:IceCreamSandwich",
@@ -38,4 +40,5 @@ include(
     ":eggs:UpsideDownCake",
 )
 include(":script:compose-material-icons-generator")
+include(":script:emoji-svg-xml-convertor")
 rootProject.name = "Easter Eggs"

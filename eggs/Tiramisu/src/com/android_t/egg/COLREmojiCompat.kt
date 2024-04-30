@@ -10,8 +10,10 @@ import android.graphics.fonts.SystemFonts
 import android.os.Build
 import android.util.Log
 import com.android_t.egg.PlatLogoActivity.Bubble
-import com.dede.basic.*
-import kotlinx.coroutines.*
+import com.dede.basic.DefType
+import com.dede.basic.createVectorDrawableCompat
+import com.dede.basic.getIdentifier
+import com.dede.eggs.jvm_basic.EmojiUtils
 import java.io.File
 import java.util.WeakHashMap
 
@@ -86,7 +88,7 @@ fun Context.identifierEmojiDrawable(
     val cache = cachedDrawable[emoji]
     if (cache != null) return cache
 
-    val drawableName = getEmojiUnicode(
+    val drawableName = EmojiUtils.getEmojiUnicode(
         emoji,
         separator = "_",
         prefix = "t_emoji_u",

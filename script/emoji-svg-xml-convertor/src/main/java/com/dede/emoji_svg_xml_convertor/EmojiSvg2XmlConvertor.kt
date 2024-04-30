@@ -1,44 +1,18 @@
-package com.dede.easter.eggs
+package com.dede.emoji_svg_xml_convertor
 
 import com.android.ide.common.vectordrawable.Svg2Vector
-import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.OutputDirectory
-import org.gradle.api.tasks.TaskAction
+import com.dede.eggs.jvm_basic.EmojiUtils
 import java.io.File
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
-import java.net.http.HttpResponse.BodyHandlers
+import java.net.http.HttpResponse
+import java.nio.file.Files
+import java.nio.file.Path
 
-/**
- * Download emoji svg and convert to android drawable xml.
- * For Android T Easter Egg.
- *
- * 🤫    \u1f92b    emoji_u1f92b.xml
- * 🐟    \u1f41f    emoji_u1f41f.xml
- *
- * @author shhu
- * @since 2023/8/12
- */
-open class EmojiSvg2XmlTask : DefaultTask() {
-
-    companion object {
-        private const val EMOJI_SVG_URL =
-            "https://github.com/googlefonts/noto-emoji/raw/main/svg/%s"
-    }
-
-    @OutputDirectory
-    lateinit var xmlOutputDir: File
-
-    @OutputDirectory
-    lateinit var svgOutputDir: File
-
-    @Input
-    var xmlFileNamePrefix: String? = null
-
-    @Input
-    var emojis: List<String> = listOf(
+fun main() {
+    val xmlOutputDir = File("eggs/Tiramisu/res/drawable-anydpi")
+    val emojis: Array<String> = arrayOf(
         "🍇", "🍈", "🍉", "🍊", "🍋", "🍌", "🍍", "🥭", "🍎", "🍏", "🍐", "🍑",//
         "🍒", "🍓", "🫐", "🥝",//
         "😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾",//
@@ -62,41 +36,39 @@ open class EmojiSvg2XmlTask : DefaultTask() {
         "🐢", "✨", "🌟", "👑"//
     )
 
-    private lateinit var httpClient: HttpClient
+    val convertor = EmojiSvg2XmlConvertor(emojis, xmlOutputDir, "t_")
+    convertor.convert()
+}
 
-    init {
-        if (!::svgOutputDir.isInitialized) {
-            svgOutputDir = File(project.file(project.layout.buildDirectory), "xml")
-        }
+class EmojiSvg2XmlConvertor(
+    private val emojis: Array<String>,
+    private val xmlOutputDir: File,
+    private val xmlFileNamePrefix: String? = null
+) {
+
+    companion object {
+        private const val EMOJI_SVG_URL =
+            "https://github.com/googlefonts/noto-emoji/raw/main/svg/%s"
     }
 
-    private fun prepare() {
-        httpClient = HttpClient.newBuilder()
-            .followRedirects(HttpClient.Redirect.NORMAL)
-            .build()
-        if (!svgOutputDir.exists()) {
-            svgOutputDir.mkdirs()
-        }
-        if (!xmlOutputDir.exists()) {
-            xmlOutputDir.mkdirs()
-        }
-    }
+    private val httpClient = HttpClient.newBuilder()
+        .followRedirects(HttpClient.Redirect.NORMAL)
+        .build()
 
-    @TaskAction
-    fun action() {
-        prepare()
+    private val svgOutputDir: Path = Files.createTempDirectory("emoji_svg_xml_convertor_")
 
+    fun convert() {
         var c = 0
         val size = emojis.size
         for (emoji in emojis) {
-            println("Start process emoji: $emoji")
+            println("Start convert emoji: $emoji")
             val svgFile = downloadSvg(emoji) ?: continue
             println("Download emoji svg success: $svgFile")
 
             println("Convert svg 2 xml: $emoji")
             val xmlFile = svg2xml(svgFile)
             println("Convert svg 2 xml success: $xmlFile")
-            println("Finish process emoji: $emoji, [${++c} : $size]")
+            println("Finish convert emoji: $emoji, [${++c} : $size]")
         }
     }
 
@@ -115,16 +87,16 @@ open class EmojiSvg2XmlTask : DefaultTask() {
     }
 
     private fun downloadSvg(emoji: CharSequence): File? {
-        val svgFileName = getEmojiUnicode(
+        val svgFileName = EmojiUtils.getEmojiUnicode(
             emoji,
             separator = "_",
             prefix = "emoji_u",
             postfix = ".svg"
         ).toString()
         val url = EMOJI_SVG_URL.format(svgFileName)
-        val svgFile = File(svgOutputDir, svgFileName)
+        val svgFile = File(svgOutputDir.toFile(), svgFileName)
         val request = createHttpRequest(url)
-        val response = httpClient.send(request, BodyHandlers.ofFile(svgFile.toPath()))
+        val response = httpClient.send(request, HttpResponse.BodyHandlers.ofFile(svgFile.toPath()))
         if (response.statusCode() != 200) {
             println("Download emoji svg failure: ${response.statusCode()} -> $url")
             return null
@@ -136,32 +108,6 @@ open class EmojiSvg2XmlTask : DefaultTask() {
         return HttpRequest.newBuilder(URI.create(url))
             .GET()
             .build()
-    }
-
-    /**
-     * 计算Emoji的Unicode
-     */
-    private fun getEmojiUnicode(
-        emoji: CharSequence,
-        separator: CharSequence = "\\u",
-        prefix: CharSequence = "",
-        postfix: CharSequence = "",
-        temp: MutableList<CharSequence>? = null,
-    ): CharSequence {
-        val list: MutableList<CharSequence> = if (temp != null) {
-            temp.clear();temp
-        } else ArrayList()
-        var offset = 0
-        while (offset < emoji.length) {
-            val codePoint = Character.codePointAt(emoji, offset)
-            offset += Character.charCount(codePoint)
-            if (codePoint == 0xFE0F) {
-                // the codepoint is a emoji style standardized variation selector
-                continue
-            }
-            list.add("%04x".format(codePoint))
-        }
-        return list.joinToString(separator = separator, prefix = prefix, postfix = postfix)
     }
 
 }

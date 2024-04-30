@@ -1,5 +1,3 @@
-import com.dede.easter.eggs.EmojiSvg2XmlTask
-
 plugins {
     id("easter.egg.library")
 }
@@ -21,10 +19,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)
     implementation(libs.androidx.recyclerview)
-    implementation(libs.squareup.okio)
-}
 
-tasks.register("emojiSvg2Xml", EmojiSvg2XmlTask.class) {
-    xmlOutputDir = file("res/drawable-anydpi")
-    xmlFileNamePrefix = "t_"
+    implementation(project(":jvm-basic"))
+    implementation(libs.squareup.okio)
 }
