@@ -39,8 +39,10 @@
             <option value="$PROJECT_DIR$/eggs/S" />
             <option value="$PROJECT_DIR$/eggs/Tiramisu" />
             <option value="$PROJECT_DIR$/eggs/UpsideDownCake" />
+            <option value="$PROJECT_DIR$/jvm-basic" />
             <option value="$PROJECT_DIR$/script" />
             <option value="$PROJECT_DIR$/script/compose-material-icons-generator" />
+            <option value="$PROJECT_DIR$/script/emoji-svg-xml-convertor" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
