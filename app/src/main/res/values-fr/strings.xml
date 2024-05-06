@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Easter Eggs</string>
+    <string name="app_name">Œufs de Pâques</string>
     <string name="summary_android_waiting">En attente…</string>
-    <string name="summary_android_release_pushed">La version finale a poussé</string>
+    <string name="summary_android_release_pushed">La version finale a été publiée</string>
     <string name="title_open_with">Ouvrir avec</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
     <string name="label_github">Code source</string>
-    <string name="label_translation">Traduction</string>
-    <string name="label_beta">Obtenez la version bêta</string>
-    <string name="label_timeline">Chronologie</string>
+    <string name="label_translation">Traductions</string>
+    <string name="label_beta">Télécharger la bêta</string>
+    <string name="label_timeline">Chronologie de l\'OS</string>
     <string name="label_privacy_policy">Confidentialité</string>
     <string name="label_license">Licence</string>
-    <string name="label_feedback">Commentaires</string>
+    <string name="label_feedback">Retour d\'expérience</string>
     <string name="label_discussions">Discussions</string>
-    <string name="label_star">Étoile</string>
+    <string name="label_star">Évaluer l\'application</string>
     <string name="label_contact_me">Contactez-moi</string>
     <string name="label_email_title">E-mail</string>
     <string name="label_timeline_title">Chronologie, jalons et mises à jour</string>
     <string name="label_timeline_releases">Sorties</string>
-    <string name="message_trypophobia_warning">Ceci est un avertissement pour les personnes avec &lt;b&gt;Trypophobia&lt;/b&gt; que certaines images peuvent causer un malaise. Voulez-vous continuer ?</string>
+    <string name="message_trypophobia_warning">Ceci est un avertissement pour les personnes avec  &lt;b&gt;Trypophobie&lt;/b&gt; que certaines images peuvent causer un malaise. Voulez-vous continuer ?</string>
     <string name="label_settings">Paramètres</string>
     <string name="label_project_desc">Le projet contient le code complet du système Easter Eggs, qui vise à organiser et à être compatible avec les œufs du système, afin de garantir que la plupart des appareils peuvent expérimenter différentes versions des œufs de Pâques et n\'apporteront pas trop de modifications au code des œufs du système. Certaines versions utilisent de nouvelles fonctionnalités du système et les versions inférieures ne peuvent utiliser que certaines fonctions.</string>
     <string name="pref_title_icon_shape_override">Forme d\'icône</string>
@@ -36,9 +36,9 @@
     <string name="label_donate">Faire un don</string>
     <string name="preference_on">Activé</string>
     <string name="preference_off">Désactivé</string>
-    <string name="toast_shortcut_added">Raccourci ajouté</string>
+    <string name="toast_shortcut_added">Raccourci ajouté à l\'écran d\'accueil.</string>
     <string name="app_widget_description">C\'est l\'horloge analogique des Easter Eggs</string>
-    <string name="action_agree">Accepter</string>
+    <string name="action_agree">J\'accepte</string>
     <string name="summary_browse_privacy_policy">Lisez et acceptez notre politique de confidentialité pour continuer.</string>
     <string name="label_welcome">Bienvenue dans les catalogues de Easter Egg 🎉🎉🎉</string>
     <string name="label_share">Partager</string>
