@@ -139,7 +139,14 @@ private fun TimelineList(
     ModalBottomSheet(
         onDismissRequest = { showSheet = false },
         sheetState = sheetState,
-        windowInsets = WindowInsets(0.dp, paddingValues.calculateTopPadding(), 0.dp, 0.dp)
+        contentWindowInsets = {
+            WindowInsets(
+                0.dp,
+                paddingValues.calculateTopPadding(),
+                0.dp,
+                0.dp
+            )
+        }
     ) {
         LazyColumn(
             contentPadding = PaddingValues(bottom = paddingValues.calculateBottomPadding())
