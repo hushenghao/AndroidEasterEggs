@@ -105,7 +105,6 @@ dependencies {
     implementation(libs.accompanist.drawablepainter)
 
     implementation(libs.dionsegijn.konfetti)
-    implementation(libs.t8rin.modalsheet)
     implementation(libs.io.coil)
     // implementation(libs.io.coil.compose)
     // implementation(libs.io.coil.svg)

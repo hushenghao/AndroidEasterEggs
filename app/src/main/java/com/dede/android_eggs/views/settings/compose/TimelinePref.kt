@@ -3,8 +3,10 @@
 package com.dede.android_eggs.views.settings.compose
 
 import android.os.Build
-import androidx.activity.compose.BackHandler
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,10 +27,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,6 +43,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.ViewModel
@@ -54,9 +57,7 @@ import com.dede.android_eggs.util.compose.PathShape
 import com.dede.android_eggs.views.main.compose.DrawableImage
 import com.dede.android_eggs.views.timeline.AndroidLogoMatcher
 import com.dede.basic.provider.EasterEgg
-import com.t8rin.modalsheet.ModalSheet
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @Preview
@@ -64,7 +65,7 @@ import javax.inject.Inject
 fun TimelinePref() {
     val showSheetState = remember { mutableStateOf(false) }
 
-    TimelineListSupport(showSheetState)
+    TimelineList(showSheetState)
 
     SettingPref(
         leadingIcon = Icons.Rounded.Timeline,
@@ -84,40 +85,6 @@ fun TimelinePref() {
 }
 
 @Composable
-private fun TimelineListSupport(
-    showSheetState: MutableState<Boolean>,
-    viewModel: TimelineViewModel = viewModel()
-) {
-    var showSheet by showSheetState
-    BackHandler(showSheet) {
-        showSheet = false
-    }
-    val paddingValues = WindowInsets.systemBars.asPaddingValues()
-    ModalSheet(
-        visible = showSheet,
-        onVisibleChange = { showSheet = it },
-        skipHalfExpanded = false,
-        containerColor = MaterialTheme.colorScheme.surfaceContainer,
-        sheetModifier = Modifier.padding(top = paddingValues.calculateTopPadding())
-    ) {
-        LazyColumn(
-            contentPadding = PaddingValues(bottom = paddingValues.calculateBottomPadding())
-        ) {
-            item {
-                TimelineHeader()
-            }
-            items(viewModel.timelines) {
-                TimelineItem(
-                    it,
-                    viewModel.logoMatcher.findAndroidLogo(it.apiLevel),
-                    viewModel.logoMatcher.findEasterEgg(it.apiLevel),
-                )
-            }
-        }
-    }
-}
-
-@Composable
 private fun TimelineList(
     showSheetState: MutableState<Boolean>,
     viewModel: TimelineViewModel = viewModel()
@@ -127,25 +94,27 @@ private fun TimelineList(
         return
     }
 
-    val sheetState = rememberModalBottomSheetState()
-    LaunchedEffect(Unit) {
-        launch {
-            // todo https://issuetracker.google.com/issues/304199054
-            sheetState.expand()
+    var sheetExpanded by remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState(
+        confirmValueChange = {
+            sheetExpanded = it == SheetValue.Expanded
+            true
         }
-    }
-    // todo https://issuetracker.google.com/issues/307160202
+    )
     val paddingValues = WindowInsets.systemBars.asPaddingValues()
+    val topPadding by animateDpAsState(
+        targetValue = if (sheetExpanded)
+            max(0.dp, (paddingValues.calculateTopPadding() - 16.dp))
+        else
+            0.dp,
+        label = "ModalBottomSheet contentWindowInsetTop",
+        animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
+    )
     ModalBottomSheet(
         onDismissRequest = { showSheet = false },
         sheetState = sheetState,
         contentWindowInsets = {
-            WindowInsets(
-                0.dp,
-                paddingValues.calculateTopPadding(),
-                0.dp,
-                0.dp
-            )
+            WindowInsets(0.dp, topPadding, 0.dp, 0.dp)
         }
     ) {
         LazyColumn(
