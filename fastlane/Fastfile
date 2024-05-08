@@ -42,18 +42,18 @@ platform :android do
     if ENV["TELEGRAM_TOKEN"] != nil && ENV["TELEGRAM_TO"] != nil
       url = URI("https://api.telegram.org/bot#{ENV["TELEGRAM_TOKEN"]}/sendPhoto")
       message = <<-EOF
-        *Easter Eggs*
+      *Easter Eggs*
 
-        🚀 New Beta Version ! 🎉
+      🚀 New Beta Version ! 🎉
 
-        *❇️ Change logs:*
+      *❇️ Change logs:*
 
-        #{File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1])}
+      #{File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1])}
 
-        *🔗 Links:*
+      *🔗 Links:*
 
-        - ⬇️ [Download](https://www.pgyer.com/eggs)
-        - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
+      - ⬇️ [Download](https://www.pgyer.com/eggs)
+      - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
       EOF
       https = Net::HTTP.new(url.host, url.port)
       https.use_ssl = true
