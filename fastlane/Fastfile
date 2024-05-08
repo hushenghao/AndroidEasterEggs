@@ -40,6 +40,7 @@ platform :android do
     )
 
     if ENV["TELEGRAM_TOKEN"] != nil && ENV["TELEGRAM_TO"] != nil
+      # https://core.telegram.org/bots/api#sendphoto
       url = URI("https://api.telegram.org/bot#{ENV["TELEGRAM_TOKEN"]}/sendPhoto")
       message = <<-EOF
       *Easter Eggs*
@@ -60,10 +61,11 @@ platform :android do
 
       request = Net::HTTP::Post.new(url)
       form_data = [
-          ['chat_id', '-100' + ENV["TELEGRAM_TO"]],
-          ['parse_mode', 'Markdown'],
-          ['caption', message],
-          ['photo', 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg']]
+        ['chat_id', "-100#{ENV["TELEGRAM_TO"]}"],
+        ['parse_mode', 'Markdown'],
+        ['caption', message],
+        ['photo', 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg'],
+      ]
       request.set_form form_data, 'multipart/form-data'
       response = https.request(request)
       puts response.read_body
