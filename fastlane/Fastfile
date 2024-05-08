@@ -12,6 +12,8 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
+require "uri"
+require "net/http"
 
 default_platform(:android)
 
@@ -19,48 +21,52 @@ platform :android do
 
   desc "Submit a new Beta Build to Pgyer"
   lane :beta do |options|
-#     api_key = options[:PGYER_API_KEY]
-#     if api_key == nil
-#       api_key = ENV["PGYER_API_KEY"]
-#     end
-#     puts "Apikey :#{api_key != nil}"
-#
-#     gradle(
-#       tasks: ["clean", "app:assembleRelease"],
-#       # Fucking stupid.
-#       print_command_output: options[:gradle_output] == nil,
-#     )
-#
-#     # https://www.pgyer.com/doc/view/fastlane
-#     pgyer(
-#       api_key: api_key,
-#       update_description: File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1])
-#     )
+    api_key = options[:PGYER_API_KEY]
+    if api_key == nil
+      api_key = ENV["PGYER_API_KEY"]
+    end
+    puts "Apikey :#{api_key != nil}"
+
+    gradle(
+      tasks: ["clean", "app:assembleRelease"],
+      # Fucking stupid.
+      print_command_output: options[:gradle_output] == nil,
+    )
+
+    # https://www.pgyer.com/doc/view/fastlane
+    pgyer(
+      api_key: api_key,
+      update_description: File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1])
+    )
 
     if ENV["TELEGRAM_TOKEN"] != nil && ENV["TELEGRAM_TO"] != nil
+      url = URI("https://api.telegram.org/bot#{ENV["TELEGRAM_TOKEN"]}/sendPhoto")
       message = <<-EOF
-        ![graphic](https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg)
-
-        *Easter Eggs
+        *Easter Eggs*
 
         🚀 New Beta Version ! 🎉
 
-        *❇️ Change logs:
+        *❇️ Change logs:*
 
         #{File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1])}
 
-        *🔗 Links:
+        *🔗 Links:*
 
         - ⬇️ [Download](https://www.pgyer.com/eggs)
         - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
       EOF
-      # https://github.com/sergpetrov/fastlane-plugin-telegram
-      telegram(
-        token: ENV['TELEGRAM_TOKEN'], # get token from @BotFather
-        chat_id: '-100' + ENV['TELEGRAM_TO'], # https://stackoverflow.com/questions/33858927/how-to-obtain-the-chat-id-of-a-private-telegram-channel
-        text: message,
-        parse_mode: "MarkdownV2", # https://core.telegram.org/bots/api#markdownv2-style
-      )
+      https = Net::HTTP.new(url.host, url.port)
+      https.use_ssl = true
+
+      request = Net::HTTP::Post.new(url)
+      form_data = [
+          ['chat_id', '-100' + ENV["TELEGRAM_TO"]],
+          ['parse_mode', 'Markdown'],
+          ['caption', message],
+          ['photo', 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg']]
+      request.set_form form_data, 'multipart/form-data'
+      response = https.request(request)
+      puts response.read_body
     end
   end
 
