@@ -42,12 +42,12 @@ jobs:
         ruby-version: '3.2'
         bundler-cache: true
 
-    - name: Set up Fastlane
-      run: |
-        bundle install 
-        bundle exec fastlane install_plugins
-
     - name: Build with Fastlane
       env:
         PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
-      run: bundle exec fastlane beta PGYER_API_KEY:${{ secrets.PGYER_API_KEY }}
+        TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      run: |
+        bundle install
+        bundle exec fastlane install_plugins
+        bundle exec fastlane beta PGYER_API_KEY:${{ secrets.PGYER_API_KEY }}
