@@ -19,11 +19,11 @@ require "net/http"
 def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_TO"], photo, caption)
   if token == nil
     puts "⚠️ token is nil, skip!"
-    next
+    return
   end
   if chat_id == nil
     puts "⚠️ chat_id is nil, skip!"
-    next
+    return
   end
 
   # https://core.telegram.org/bots/api#sendphoto
