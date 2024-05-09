@@ -82,12 +82,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check secrets
-      env:
-        JSON_KEY_FILE_BASE64: ${{ secrets.JSON_KEY_FILE_BASE64 }}
-      if: ${{ env.JSON_KEY_FILE_BASE64 == '' }}
-      run: exit 0
-
     - name: Checkout repository
       uses: actions/checkout@v4
 
@@ -117,6 +111,8 @@ jobs:
     - name: Deploy to the Google Play
       env:
         JSON_KEY_FILE: 'json_key_file.json'
+        JSON_KEY_FILE_BASE64: ${{ secrets.JSON_KEY_FILE_BASE64 }}
+      if: ${{ env.JSON_KEY_FILE_BASE64 != '' }}
       run: |
         bundle install 
         bundle exec fastlane install_plugins
