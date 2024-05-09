@@ -18,12 +18,12 @@ require "net/http"
 
 def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_TO"], photo, caption)
   if token == nil
-    puts "⚠️token is nil, skip!"
-    return
+    puts "⚠️ token is nil, skip!"
+    next
   end
   if chat_id == nil
-    puts "⚠️chat_id is nil, skip!"
-    return
+    puts "⚠️ chat_id is nil, skip!"
+    next
   end
 
   # https://core.telegram.org/bots/api#sendphoto
@@ -50,7 +50,7 @@ platform :android do
   desc "Submit a new Beta Build to Pgyer"
   lane :beta do
     if ENV["PGYER_API_KEY"] == nil
-      puts "⚠️PGYER_API_KEY env not found, skip!"
+      puts "⚠️ PGYER_API_KEY env not found, skip!"
       next
     end
 
@@ -84,9 +84,10 @@ platform :android do
   desc "Deploy a new version to the Google Play"
   lane :deploy do |options|
     if ENV["JSON_KEY_FILE"] == nil
-      puts "⚠️JSON_KEY_FILE env not found, skip!"
+      puts "⚠️ JSON_KEY_FILE env not found, skip!"
       next
     end
+
     # https://docs.fastlane.tools/actions/upload_to_play_store/
     # skip_upload_aab           Whether to skip uploading AAB	                                false
     # skip_upload_metadata      Whether to skip uploading metadata, changelogs not included	    false
