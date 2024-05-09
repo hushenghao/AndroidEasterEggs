@@ -12,8 +12,32 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
+
 require "uri"
 require "net/http"
+
+def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_TO"], photo, caption)
+  if token == nil || chat_id == nil
+    puts "token or chat_id is nil, token: #{token}, chat_id: #{chat_id}"
+    return
+  end
+
+  # https://core.telegram.org/bots/api#sendphoto
+  url = URI("https://api.telegram.org/bot#{ENV["TELEGRAM_TOKEN"]}/sendPhoto")
+  https = Net::HTTP.new(url.host, url.port)
+  https.use_ssl = true
+
+  request = Net::HTTP::Post.new(url)
+  form_data = [
+    ['chat_id', "-100#{ENV["TELEGRAM_TO"]}"],
+    ['parse_mode', 'Markdown'],
+    ['caption', caption],
+    ['photo', photo],
+  ]
+  request.set_form form_data, 'multipart/form-data'
+  response = https.request(request)
+  puts response.read_body
+end
 
 default_platform(:android)
 
@@ -39,37 +63,25 @@ platform :android do
       update_description: File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1])
     )
 
-    if ENV["TELEGRAM_TOKEN"] != nil && ENV["TELEGRAM_TO"] != nil
-      # https://core.telegram.org/bots/api#sendphoto
-      url = URI("https://api.telegram.org/bot#{ENV["TELEGRAM_TOKEN"]}/sendPhoto")
-      message = <<-EOF
-      *Easter Eggs*
+    # Send to Telegram
+    message = <<-EOF
+    *Easter Eggs*
 
-      🚀 New Beta Version ! 🎉
+    🚀 New Beta Version ! 🎉
 
-      *❇️ Change logs:*
+    *❇️ Change logs:*
 
-      #{File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1])}
+    #{File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1])}
 
-      *🔗 Links:*
+    *🔗 Links:*
 
-      - ⬇️ [Download](https://www.pgyer.com/eggs)
-      - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
-      EOF
-      https = Net::HTTP.new(url.host, url.port)
-      https.use_ssl = true
-
-      request = Net::HTTP::Post.new(url)
-      form_data = [
-        ['chat_id', "-100#{ENV["TELEGRAM_TO"]}"],
-        ['parse_mode', 'Markdown'],
-        ['caption', message],
-        ['photo', 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg'],
-      ]
-      request.set_form form_data, 'multipart/form-data'
-      response = https.request(request)
-      puts response.read_body
-    end
+    - ⬇️ [Download](https://www.pgyer.com/eggs)
+    - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
+    EOF
+    send_telegram_photo(
+      photo: 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg'
+      caption: message,
+    )
   end
 
   desc "Deploy a new version to the Google Play"
