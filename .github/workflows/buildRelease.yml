@@ -54,7 +54,7 @@ jobs:
           replacesArtifacts: true
 
       - name: Send Telegram message
-        if: ${{ secrets.TELEGRAM_TO != null }} && ${{ secrets.TELEGRAM_TOKEN != null }}
+        if: secrets.TELEGRAM_TO != null && secrets.TELEGRAM_TOKEN != null
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
@@ -76,7 +76,7 @@ jobs:
             - 🐙 [Source Code](${{ github.repository }})
 
   play-store:
-    if: ${{ secrets.JSON_KEY_FILE_BASE64 != null }}
+    if: secrets.JSON_KEY_FILE_BASE64 != null
     runs-on: ubuntu-latest
 
     steps:
