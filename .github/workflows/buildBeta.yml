@@ -19,7 +19,9 @@ jobs:
 
     steps:
     - name: Check secrets
-      if: ${{ secrets.PGYER_API_KEY == '' }}
+      env:
+        PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
+      if: ${{ env.PGYER_API_KEY == '' }}
       run: exit 0
 
     - name: Checkout repository

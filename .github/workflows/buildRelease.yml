@@ -54,7 +54,10 @@ jobs:
           replacesArtifacts: true
 
       - name: Send Telegram message
-        if: ${{ secrets.TELEGRAM_TO != '' }} && ${{ secrets.TELEGRAM_TOKEN != '' }}
+        env:
+          TELEGRAM_TO: ${{ secrets.TELEGRAM_TO}}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        if: ${{ env.TELEGRAM_TO != '' && env.TELEGRAM_TOKEN != ''}}
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
@@ -80,7 +83,9 @@ jobs:
 
     steps:
     - name: Check secrets
-      if: ${{ secrets.JSON_KEY_FILE_BASE64 == '' }}
+      env:
+        JSON_KEY_FILE_BASE64: ${{ secrets.JSON_KEY_FILE_BASE64 }}
+      if: ${{ env.JSON_KEY_FILE_BASE64 == '' }}
       run: exit 0
 
     - name: Checkout repository
