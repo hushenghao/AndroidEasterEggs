@@ -15,12 +15,13 @@ on:
 
 jobs:
   build:
-    env:
-      PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
-    if: ${{ env.PGYER_API_KEY != '' }}
     runs-on: ubuntu-latest
 
     steps:
+    - name: Check secrets
+      if: ${{ secrets.PGYER_API_KEY == '' }}
+      run: exit 0
+
     - name: Checkout repository
       uses: actions/checkout@v4
 
@@ -46,6 +47,7 @@ jobs:
         bundler-cache: true
 
     - name: Build with Fastlane
+      if: ${{ secrets.TELEGRAM_TO != '' }} && ${{ secrets.TELEGRAM_TOKEN != '' }}
       env:
         TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
