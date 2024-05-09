@@ -23,13 +23,13 @@ def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_T
   end
 
   # https://core.telegram.org/bots/api#sendphoto
-  url = URI("https://api.telegram.org/bot#{ENV["TELEGRAM_TOKEN"]}/sendPhoto")
+  url = URI("https://api.telegram.org/bot#{token}/sendPhoto")
   https = Net::HTTP.new(url.host, url.port)
   https.use_ssl = true
 
   request = Net::HTTP::Post.new(url)
   form_data = [
-    ['chat_id', "-100#{ENV["TELEGRAM_TO"]}"],
+    ['chat_id', "-100#{chat_id}"],
     ['parse_mode', 'Markdown'],
     ['caption', caption],
     ['photo', photo],
@@ -79,8 +79,8 @@ platform :android do
     - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
     EOF
     send_telegram_photo(
-      photo: 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg'
-      caption: message,
+      'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg',
+      message
     )
   end
 
