@@ -49,10 +49,10 @@ jobs:
         bundler-cache: true
 
     - name: Build with Fastlane
-      if: ${{ secrets.TELEGRAM_TO != '' }} && ${{ secrets.TELEGRAM_TOKEN != '' }}
       env:
         TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      if: ${{ env.TELEGRAM_TO != '' && env.TELEGRAM_TOKEN != ''}}
       run: |
         bundle install
         bundle exec fastlane install_plugins
