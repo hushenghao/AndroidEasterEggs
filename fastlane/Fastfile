@@ -64,24 +64,22 @@ platform :android do
     )
 
     # Send to Telegram
-    message = <<-EOF
-    *Easter Eggs*
+    message = <<~EOF
+      *Easter Eggs*
 
-    🚀 New Beta Version ! 🎉
+      🚀 New Beta Version ! 🎉
 
-    *❇️ Change logs:*
+      *❇️ Change logs:*
 
-    #{File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1])}
+      #{File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1])}
 
-    *🔗 Links:*
+      *🔗 Links:*
 
-    - ⬇️ [Download](https://www.pgyer.com/eggs)
-    - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
+      - ⬇️ [Download](https://www.pgyer.com/eggs)
+      - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
     EOF
-    send_telegram_photo(
-      'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg',
-      message
-    )
+    photo = 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg'
+    send_telegram_photo(photo, message)
   end
 
   desc "Deploy a new version to the Google Play"
