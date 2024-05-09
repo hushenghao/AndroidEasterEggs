@@ -51,7 +51,7 @@ platform :android do
   lane :beta do
     if ENV["PGYER_API_KEY"] == nil
       puts "⚠️PGYER_API_KEY env not found, skip!"
-      return
+      next
     end
 
     gradle(tasks: ["clean", "app:assembleRelease"])
@@ -85,7 +85,7 @@ platform :android do
   lane :deploy do |options|
     if ENV["JSON_KEY_FILE"] == nil
       puts "⚠️JSON_KEY_FILE env not found, skip!"
-      return
+      next
     end
     # https://docs.fastlane.tools/actions/upload_to_play_store/
     # skip_upload_aab           Whether to skip uploading AAB	                                false

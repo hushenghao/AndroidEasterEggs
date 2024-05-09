@@ -19,7 +19,7 @@ jobs:
       - name: Check secrets
         env:
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
-          CROWDIN_PERSONAL_TOKEN:  ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
         if: ${{ env.CROWDIN_PROJECT_ID  == '' || env.CROWDIN_PERSONAL_TOKEN  == '' }}
         run: exit 0
 
