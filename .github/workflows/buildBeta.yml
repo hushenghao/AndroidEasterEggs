@@ -46,8 +46,8 @@ jobs:
       env:
         TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-        PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
-      if: ${{ env.PGYER_API_KEY != ''}}
+        PGYER_API_KEY1: ${{ secrets.PGYER_API_KEY }}
+      if: ${{ env.PGYER_API_KEY1 != ''}}
       run: |
         bundle install
         bundle exec fastlane install_plugins
