@@ -54,11 +54,14 @@ jobs:
           replacesArtifacts: true
 
       - name: Send Telegram message
-        if: secrets.TELEGRAM_TO != null && secrets.TELEGRAM_TOKEN != null
+        env:
+          TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        if: ${{ env.TELEGRAM_TO != '' }} && ${{ env.TELEGRAM_TOKEN != '' }}
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
+          to: ${{ env.TELEGRAM_TO }}
+          token: ${{ env.TELEGRAM_TOKEN }}
           format: 'markdown'
           photo: 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg'
           message: |
@@ -76,7 +79,9 @@ jobs:
             - 🐙 [Source Code](${{ github.repository }})
 
   play-store:
-    if: secrets.JSON_KEY_FILE_BASE64 != null
+    env:
+      JSON_KEY_FILE_BASE64: ${{ secrets.JSON_KEY_FILE_BASE64 }}
+    if: ${{ env.JSON_KEY_FILE_BASE64 != '' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -100,7 +105,6 @@ jobs:
       env:
         KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         KEY_PROPERTIES_BASE64: ${{ secrets.KEY_PROPERTIES_BASE64 }}
-        JSON_KEY_FILE_BASE64: ${{ secrets.JSON_KEY_FILE_BASE64 }}
       run: |
         echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
         echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks

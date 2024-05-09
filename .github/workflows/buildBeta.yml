@@ -15,7 +15,9 @@ on:
 
 jobs:
   build:
-    if: secrets.PGYER_API_KEY != null
+    env:
+      PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
+    if: ${{ env.PGYER_API_KEY != '' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -45,7 +47,6 @@ jobs:
 
     - name: Build with Fastlane
       env:
-        PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
         TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
       run: |

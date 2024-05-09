@@ -13,7 +13,10 @@ on:
 
 jobs:
   crowdin:
-    if: secrets.CROWDIN_PERSONAL_TOKEN != null && secrets.CROWDIN_PROJECT_ID != null
+    env:
+      CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+      CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+    if: ${{ env.CROWDIN_PROJECT_ID  != '' }} && ${{ env.CROWDIN_PERSONAL_TOKEN  != '' }}
     runs-on: ubuntu-latest
 
     steps:
