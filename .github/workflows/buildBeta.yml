@@ -15,6 +15,7 @@ on:
 
 jobs:
   build:
+    if: ${{ secrets.PGYER_API_KEY != null }}
     runs-on: ubuntu-latest
 
     steps:
@@ -50,4 +51,4 @@ jobs:
       run: |
         bundle install
         bundle exec fastlane install_plugins
-        bundle exec fastlane beta PGYER_API_KEY:${{ secrets.PGYER_API_KEY }}
+        bundle exec fastlane beta

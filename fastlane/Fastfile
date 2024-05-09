@@ -17,8 +17,12 @@ require "uri"
 require "net/http"
 
 def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_TO"], photo, caption)
-  if token == nil || chat_id == nil
-    puts "token or chat_id is nil, token: #{token}, chat_id: #{chat_id}"
+  if token == nil
+    puts "⚠️token is nil, skip!"
+    return
+  end
+  if chat_id == nil
+    puts "⚠️chat_id is nil, skip!"
     return
   end
 
@@ -44,22 +48,17 @@ default_platform(:android)
 platform :android do
 
   desc "Submit a new Beta Build to Pgyer"
-  lane :beta do |options|
-    api_key = options[:PGYER_API_KEY]
-    if api_key == nil
-      api_key = ENV["PGYER_API_KEY"]
+  lane :beta do
+    if ENV["PGYER_API_KEY"] == nil
+      puts "⚠️PGYER_API_KEY env not found, skip!"
+      return
     end
-    puts "Apikey :#{api_key != nil}"
 
-    gradle(
-      tasks: ["clean", "app:assembleRelease"],
-      # Fucking stupid.
-      print_command_output: options[:gradle_output] == nil,
-    )
+    gradle(tasks: ["clean", "app:assembleRelease"])
 
     # https://www.pgyer.com/doc/view/fastlane
-    pgyer(
-      api_key: api_key,
+    pgyer_answer = pgyer(
+      api_key: ENV["PGYER_API_KEY"],
       update_description: File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1])
     )
 
@@ -75,7 +74,7 @@ platform :android do
 
       *🔗 Links:*
 
-      - ⬇️ [Download](https://www.pgyer.com/eggs)
+      - ⬇️ [Download](https://www.pgyer.com/#{pgyer_answer["buildKey"]})
       - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
     EOF
     photo = 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg'
@@ -84,6 +83,10 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do |options|
+    if ENV["JSON_KEY_FILE"] == nil
+      puts "⚠️JSON_KEY_FILE env not found, skip!"
+      return
+    end
     # https://docs.fastlane.tools/actions/upload_to_play_store/
     # skip_upload_aab           Whether to skip uploading AAB	                                false
     # skip_upload_metadata      Whether to skip uploading metadata, changelogs not included	    false
@@ -127,4 +130,5 @@ platform :android do
         )
     end
   end
+
 end

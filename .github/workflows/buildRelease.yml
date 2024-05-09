@@ -6,7 +6,77 @@ on:
       - 'v*'
 
 jobs:
-  build:
+  github-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Retrieve the secret and decode it to a file
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEY_PROPERTIES_BASE64: ${{ secrets.KEY_PROPERTIES_BASE64 }}
+        run: |
+          echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
+          echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
+
+      - name: Build with Gradle
+        run: |
+          chmod +x gradlew
+          ./gradlew clean app:assembleRelease
+
+      - name: Get Change logs
+        id: get_changelogs
+        run: |
+          CHANGE_LOGS=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
+          echo "CHANGE_LOGS=$CHANGE_LOGS" >> "$GITHUB_OUTPUT"
+
+      - name: Create Github Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get_changelogs.outputs.CHANGE_LOGS }}
+          artifacts: ./app/build/outputs/apk/*/*.apk
+          artifactContentType: application/vnd.android.package-archive
+          draft: false
+          prerelease: false
+          allowUpdates: true
+          updateOnlyUnreleased: true
+          replacesArtifacts: true
+
+      - name: Send Telegram message
+        if: ${{ secrets.TELEGRAM_TO != null }} && ${{ secrets.TELEGRAM_TOKEN != null }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: 'markdown'
+          photo: 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg'
+          message: |
+            *Easter Eggs*
+            
+            🚀 New Release Version ! 🎉
+            
+            *❇️ Change logs:*
+            
+            ${{ steps.get_changelogs.outputs.CHANGE_LOGS }}
+            
+            *🔗 Links:*
+            
+            - ⬇️ [Download](${{ steps.create_release.outputs.html_url }})
+            - 🐙 [Source Code](${{ github.repository }})
+
+  play-store:
+    if: ${{ secrets.JSON_KEY_FILE_BASE64 != null }}
     runs-on: ubuntu-latest
 
     steps:
@@ -26,11 +96,6 @@ jobs:
         ruby-version: '3.2'
         bundler-cache: true
 
-    - name: Set up Fastlane
-      run: |
-        bundle install 
-        bundle exec fastlane install_plugins
-
     - name: Retrieve the secret and decode it to a file
       env:
         KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
@@ -44,28 +109,7 @@ jobs:
     - name: Deploy to the Google Play
       env:
         JSON_KEY_FILE: 'json_key_file.json'
-      run: bundle exec fastlane deploy
-
-    - name: Build with Gradle
       run: |
-        chmod +x gradlew
-        ./gradlew clean app:assembleRelease
-
-    - name: Get Change logs
-      id: get-change-logs
-      run: |
-        CHANGE_LOGS=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
-        echo "CHANGE_LOGS=$CHANGE_LOGS" >> "$GITHUB_OUTPUT"
-
-    - name: Create Github Release
-      id: create_release
-      uses: ncipollo/release-action@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        draft: false
-        prerelease: false
-        bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get-change-logs.outputs.CHANGE_LOGS }}
-        artifacts: ./app/build/outputs/apk/release/*.apk
-        artifactContentType: application/vnd.android.package-archive
-        allowUpdates: true
-        updateOnlyUnreleased: true
+        bundle install 
+        bundle exec fastlane install_plugins
+        bundle exec fastlane deploy
