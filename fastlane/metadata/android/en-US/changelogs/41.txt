@@ -1,1 +1,2 @@
+- Fix Timeline BottomModalSheet crash
 - Known issue fixes
