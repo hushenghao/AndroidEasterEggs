@@ -63,19 +63,26 @@ platform :android do
     )
 
     # Send to Telegram
+    pgyer_build_key = pgyer_answer["buildKey"]
+    commit_hash = last_git_commit[":commit_hash"]
     message = <<~EOF
       *Easter Eggs*
 
       🚀 New Beta Version ! 🎉
 
-      *❇️ Change logs:*
+      *❇️ Changelogs:*
 
       #{File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1])}
 
       *🔗 Links:*
 
-      - ⬇️ [Download](https://www.pgyer.com/#{pgyer_answer["buildKey"]})
+      - ⬇️ [Download](https://www.pgyer.com/#{pgyer_build_key})
       - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
+
+      *🧑‍💻 Build:*
+
+      - Commit: [#{commit_hash}](https://github.com/hushenghao/AndroidEasterEggs/commit/#{commit_hash})
+      - Build Key: [#{pgyer_build_key}](https://www.pgyer.com/#{pgyer_build_key})
     EOF
     photo = 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg'
     send_telegram_photo(photo, message)

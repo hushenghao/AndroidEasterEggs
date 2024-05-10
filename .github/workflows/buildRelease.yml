@@ -69,7 +69,7 @@ jobs:
             
             🚀 New Release Version ! 🎉
             
-            *❇️ Change logs:*
+            *❇️ Changelogs:*
             
             ${{ steps.get_changelogs.outputs.CHANGE_LOGS }}
             
