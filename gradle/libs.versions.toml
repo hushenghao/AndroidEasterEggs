@@ -35,7 +35,7 @@ androidx-preference = "androidx.preference:preference-ktx:1.2.1"
 # androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-browser = "androidx.browser:browser:1.8.0"
 androidx-window = "androidx.window:window:1.2.0"
-google-material = "com.google.android.material:material:1.11.0"
+google-material = "com.google.android.material:material:1.12.0"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
