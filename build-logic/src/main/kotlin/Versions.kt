@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage", "SpellCheckingInspection")
+
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import java.util.Properties
