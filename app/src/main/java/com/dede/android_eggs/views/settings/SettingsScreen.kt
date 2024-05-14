@@ -3,7 +3,6 @@
 package com.dede.android_eggs.views.settings
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
@@ -114,7 +113,6 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
         ) {
             Column(
                 modifier = Modifier
-                    .animateContentSize()
                     .padding(
                         top = contentPadding.calculateTopPadding() + 8.dp,
                         bottom = contentPadding.calculateBottomPadding() + 12.dp
