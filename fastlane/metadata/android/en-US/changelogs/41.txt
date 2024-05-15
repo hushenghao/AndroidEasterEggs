@@ -1,2 +1,3 @@
 - Fix Timeline BottomModalSheet crash
+- Fix JellyBean text wrapped not being center
 - Known issue fixes

@@ -1,2 +1,3 @@
 - 修复时间线 BottomModalSheet 崩溃
+- 修复 JellyBean 文本换行不居中问题
 - 修复其他已知问题

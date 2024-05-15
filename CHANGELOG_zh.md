@@ -1,6 +1,7 @@
 ### v2.5.1
 
 - 修复时间线 BottomModalSheet 崩溃 [#250](https://github.com/hushenghao/AndroidEasterEggs/issues/250)
+- 修复 JellyBean 文本换行不居中问题 [#256](https://github.com/hushenghao/AndroidEasterEggs/issues/256)
 - 修复其他已知问题
 
 ### v2.5.0 (2024-04-30)

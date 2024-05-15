@@ -70,6 +70,7 @@ public class PlatLogoActivity extends Activity {
         tv.setShadowLayer(4 * metrics.density, 0, 2 * metrics.density, 0x66000000);
 //        tv.setText("Android " + Build.VERSION.RELEASE);
         tv.setText("Android 4." + (new Random().nextInt(3) + 1));
+        tv.setGravity(Gravity.CENTER);
         view.addView(tv, lp);
 
         tv = new TextView(this);
