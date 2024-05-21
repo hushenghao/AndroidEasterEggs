@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Android Easter Eggs</string>
-    <string name="summary_android_waiting">Aguardando…</string>
-    <string name="summary_android_release_pushed">A versão final de lançamento foi lançada</string>
+    <string name="app_name">Easter Eggs do Android</string>
+    <string name="summary_android_waiting">Ainda não lançado</string>
+    <string name="summary_android_release_pushed">A versão final foi lançada</string>
     <string name="title_open_with">Abrir com</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-    <string name="label_translation">Tradução</string>
-    <string name="label_beta">Obter versão Beta</string>
+    <string name="label_github">Código-fonte</string>
+    <string name="label_translation">Traduções</string>
+    <string name="label_beta">Baixar versão beta</string>
     <string name="label_timeline">Linha do tempo</string>
     <string name="label_privacy_policy">Privacidade</string>
     <string name="label_license">Licença</string>
     <string name="label_feedback">Comentários</string>
+    <string name="label_discussions">Fóruns</string>
     <string name="label_star">Estrela</string>
+    <string name="label_contact_me">Entrar em contato</string>
+    <string name="label_email_title">E-Mail</string>
     <string name="label_timeline_title">Linha do tempo, marcos e atualizações</string>
     <string name="label_timeline_releases">Lançamentos</string>
     <string name="message_trypophobia_warning">Este é um alerta para quem tem &lt;/b&gt;Tripofobia&lt;b&gt; de que algumas imagens podem causar desconforto. Você quer continuar?</string>
@@ -27,6 +31,7 @@
     <string name="summary_system_default">Padrão</string>
     <string name="summary_theme_dark_mode">Escuro</string>
     <string name="summary_theme_light_mode">Claro</string>
+    <string name="summary_theme_amoled_mode">Amoled</string>
     <string name="label_add_shortcut">Atalho</string>
     <string name="label_donate">Doar</string>
     <string name="preference_on">Ligado</string>
@@ -39,4 +44,9 @@
     <string name="label_share">Compartilhar</string>
     <string name="label_search_hint">Pesquisar…</string>
     <string name="label_component_manager">Gerenciador de Componentes</string>
+    <string name="pref_more_settings">Mais Configurações</string>
+    <string name="pref_retain_recent_egg_tasks">Manter tarefas recentes do Android Easter Eggs</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Reter tarefas do Easter Egg na tela Recentes, máximo de 5 tarefas retidas (não disponível para o modo incorporado de atividade.)</string>
+    <string name="label_about">Sobre</string>
+    <string name="label_contribute">Contribuir</string>
 </resources>
