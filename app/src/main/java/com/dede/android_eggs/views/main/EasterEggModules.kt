@@ -16,7 +16,6 @@ import com.android_s.egg.AndroidSEasterEgg
 import com.android_t.egg.AndroidTEasterEgg
 import com.android_u.egg.AndroidUEasterEgg
 import com.dede.android_eggs.main.AndroidPreviewHelp
-import com.dede.android_eggs.main.entity.Snapshot
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.ComponentProvider.Component
 import com.dede.basic.provider.EasterEgg
@@ -66,19 +65,6 @@ object EasterEggModules {
                     addAll(easterEgg.eggs)
                 } else if (easterEgg is EasterEgg) {
                     add(easterEgg)
-                }
-            }
-        }
-    }
-
-    @Provides
-    @Singleton
-    fun provideSnapshotList(easterEggs: List<@JvmSuppressWildcards EasterEgg>): List<@JvmSuppressWildcards Snapshot> {
-        return buildList {
-            for (easterEgg in easterEggs) {
-                val provider = easterEgg.provideSnapshotProvider()
-                if (provider != null) {
-                    add(Snapshot(provider, easterEgg.id))
                 }
             }
         }
