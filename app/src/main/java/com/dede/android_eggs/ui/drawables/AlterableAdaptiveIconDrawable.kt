@@ -211,6 +211,9 @@ class AlterableAdaptiveIconDrawable(
     override fun setColorFilter(colorFilter: ColorFilter?) {
     }
 
+    @Deprecated("Deprecated in Java",
+        ReplaceWith("PixelFormat.TRANSLUCENT", "android.graphics.PixelFormat")
+    )
     override fun getOpacity(): Int {
         return PixelFormat.TRANSLUCENT
     }

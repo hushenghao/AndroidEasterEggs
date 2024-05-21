@@ -1,9 +1,6 @@
 [versions]
-kotlin = "1.9.24"
-ksp = "1.9.24-1.0.20"
-# https://developer.android.com/jetpack/androidx/releases/compose-kotlin
-# https://maven.google.com/web/index.html?q=compose#androidx.compose.compiler:compiler
-compose-kotlin-compiler = "1.5.14"
+kotlin = "2.0.0"
+ksp = "2.0.0-RC3-1.0.20"
 agp = "8.4.1"
 hilt = "2.51.1"
 compose-bom = "2024.05.00"
@@ -18,7 +15,6 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-# https://developer.android.com/develop/ui/compose/compiler
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

@@ -2,6 +2,7 @@
 
 package com.dede.basic
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.FragmentManager
 import android.os.Bundle
@@ -58,6 +59,8 @@ fun Lifecycle.launch(
     block: suspend CoroutineScope.() -> Unit,
 ) = coroutineScope.launch(context, start, block)
 
+@Suppress("OVERRIDE_DEPRECATION")
+@SuppressLint("ValidFragment")
 internal class LifecycleFragment : android.app.Fragment(), LifecycleOwner {
 
     private val lifecycleRegistry = LifecycleRegistry(this)

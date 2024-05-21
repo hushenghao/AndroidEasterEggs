@@ -17,7 +17,7 @@ fun isXiaomi(): Boolean {
 @OptIn(ExperimentalContracts::class)
 inline fun <T> T.applyIf(condition: Boolean, block: T.() -> Unit): T {
     contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
     }
     if (condition) block()
     return this
@@ -26,7 +26,7 @@ inline fun <T> T.applyIf(condition: Boolean, block: T.() -> Unit): T {
 @OptIn(ExperimentalContracts::class)
 inline fun <T, I> T.applyNotNull(input: I?, block: T.(input: I) -> Unit): T {
     contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
     }
     if (input != null) block(input)
     return this

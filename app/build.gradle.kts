@@ -31,8 +31,6 @@ android {
         buildConfigField("int", "LANGUAGE_RES", resourceConfigurations.size.toString())
     }
 
-    configureCompose()
-
     signingConfigs {
         if (keyprops.isEmpty) return@signingConfigs
         create("release") {

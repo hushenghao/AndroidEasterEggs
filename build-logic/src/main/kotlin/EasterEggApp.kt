@@ -12,6 +12,7 @@ class EasterEggApp : Plugin<Project> {
                 apply("com.android.application")
                 apply("com.google.dagger.hilt.android")
                 apply("org.jetbrains.kotlin.android")
+                apply("org.jetbrains.kotlin.plugin.compose")
                 apply("com.google.devtools.ksp")
             }
 
@@ -28,6 +29,7 @@ class EasterEggApp : Plugin<Project> {
 
                 buildFeatures {
                     buildConfig = true
+                    compose = true
                 }
 
                 lint {

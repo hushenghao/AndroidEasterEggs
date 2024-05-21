@@ -22,7 +22,6 @@ import javax.inject.Inject
 
 @Composable
 fun ComponentManagerPref(viewModel: ComponentManagerViewModel = viewModel()) {
-    @Composable
     if (LocalInspectionMode.current) {
         viewModel.componentList = emptyList()
     }
