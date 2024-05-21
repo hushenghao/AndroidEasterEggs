@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.9.24"
+kotlin = "2.0.0"
 ksp = "1.9.24-1.0.20"
 # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
 # https://maven.google.com/web/index.html?q=compose#androidx.compose.compiler:compiler
