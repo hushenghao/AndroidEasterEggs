@@ -2,6 +2,7 @@
 
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
 object Versions {
@@ -12,6 +13,7 @@ object Versions {
     const val MIN_SDK = 21
 
     val JAVA_VERSION = JavaVersion.VERSION_17
+    val KTOLIN_JVM_VERSION = JvmTarget.JVM_17
 
     val Project.gitHash: String
         get() {
