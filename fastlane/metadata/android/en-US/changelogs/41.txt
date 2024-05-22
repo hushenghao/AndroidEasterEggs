@@ -1,3 +1,4 @@
 - Fix Timeline BottomModalSheet crash
-- Fix JellyBean text wrapped not being center
+- Fix JellyBean and IceCreamSandwich image density
+- Upgrade project dependencies
 - Known issue fixes

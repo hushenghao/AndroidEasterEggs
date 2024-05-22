@@ -153,6 +153,7 @@ public class BeanBag extends Activity {
                     beanId = R.drawable.j_jandycane;
                 }
                 BitmapDrawable bean = (BitmapDrawable) getContext().getResources().getDrawable(beanId);
+                bean.setTargetDensity(480);// fix Bean size
                 Bitmap beanBits = bean.getBitmap();
                 h = beanBits.getHeight();
                 w = beanBits.getWidth();

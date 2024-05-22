@@ -1,7 +1,8 @@
 ### v2.5.1
 
 - Fix Timeline BottomModalSheet crash [#250](https://github.com/hushenghao/AndroidEasterEggs/issues/250)
-- Fix JellyBean text wrapped not being center [#256](https://github.com/hushenghao/AndroidEasterEggs/issues/256)
+- Fix JellyBean and IceCreamSandwich image density [#256](https://github.com/hushenghao/AndroidEasterEggs/issues/256)
+- Upgrade project dependencies
 - Known issue fixes
 
 ### v2.5.0 (2024-04-30)

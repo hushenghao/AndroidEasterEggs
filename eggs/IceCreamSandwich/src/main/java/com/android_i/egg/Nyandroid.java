@@ -21,6 +21,8 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,6 +131,12 @@ public class Nyandroid extends Activity {
                     fixedStar.setX(randfrange(0, getWidth()));
                     fixedStar.setY(randfrange(0, getHeight()));
                     final AnimationDrawable anim = (AnimationDrawable) fixedStar.getDrawable();
+                    for (int n = 0; n < anim.getNumberOfFrames(); n++) {
+                        Drawable drawable = anim.getFrame(n);
+                        if (drawable instanceof BitmapDrawable) {
+                            ((BitmapDrawable) drawable).setTargetDensity(480);
+                        }
+                    }
                     postDelayed(new Runnable() {
                         public void run() {
                             anim.start();
@@ -145,6 +153,12 @@ public class Nyandroid extends Activity {
                 nv.reset();
                 nv.setX(randfrange(0, Board.this.getWidth()));
                 final AnimationDrawable anim = (AnimationDrawable) nv.getDrawable();
+                for (int n = 0; n < anim.getNumberOfFrames(); n++) {
+                    Drawable drawable = anim.getFrame(n);
+                    if (drawable instanceof BitmapDrawable) {
+                        ((BitmapDrawable) drawable).setTargetDensity(480);
+                    }
+                }
                 postDelayed(new Runnable() {
                     public void run() {
                         anim.start();
