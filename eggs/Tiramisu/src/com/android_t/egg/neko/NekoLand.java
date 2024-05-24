@@ -45,7 +45,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android_t.egg.R;
-import com.dede.basic.ShareCatUtils;
+import com.dede.basic.utils.ShareCatUtils;
 
 import java.util.Collections;
 import java.util.Comparator;

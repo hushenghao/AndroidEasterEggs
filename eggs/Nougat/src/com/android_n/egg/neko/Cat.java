@@ -34,7 +34,7 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 
 import com.android_n.egg.R;
-import com.dede.basic.CatRandom;
+import com.dede.basic.utils.CatRandom;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Method;

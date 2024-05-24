@@ -32,7 +32,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dede.basic.SpUtils;
-import com.dede.basic.TransformationMethodUtils;
+import com.dede.basic.utils.TransformationMethodUtils;
 
 public class PlatLogoActivity extends Activity {
     FrameLayout mContent;

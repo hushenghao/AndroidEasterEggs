@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.dede.basic;
+package com.dede.basic.views;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,13 +23,13 @@ import android.content.IntentFilter;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
 import android.text.format.DateUtils;
 import android.text.format.Time;
 import android.util.AttributeSet;
 import android.view.View;
 
-import androidx.core.content.ContextCompat;
+import com.dede.basic.DrawableKt;
+import com.dede.basic.R;
 
 import java.util.TimeZone;
 

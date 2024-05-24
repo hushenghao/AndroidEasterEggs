@@ -1,4 +1,4 @@
-package com.dede.basic
+package com.dede.basic.utils
 
 /**
  * Cat Eggs Random impl

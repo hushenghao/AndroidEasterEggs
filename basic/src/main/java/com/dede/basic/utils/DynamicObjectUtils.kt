@@ -1,7 +1,7 @@
 @file:JvmName("DynamicObjectUtils")
 @file:Suppress("MemberVisibilityCanBePrivate")
 
-package com.dede.basic
+package com.dede.basic.utils
 
 import android.util.Log
 import java.lang.reflect.Field

@@ -46,7 +46,7 @@ import java.util.Random;
 import static com.android_r.egg.neko.NekoLand.CHAN_ID;
 
 //import com.android.internal.logging.MetricsLogger;
-import com.dede.basic.CatRandom;
+import com.dede.basic.utils.CatRandom;
 
 /**
  * It's a cat.

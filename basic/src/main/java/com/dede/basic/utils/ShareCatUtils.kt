@@ -1,6 +1,6 @@
 @file:JvmName("ShareCatUtils")
 
-package com.dede.basic
+package com.dede.basic.utils
 
 import android.app.Activity
 import android.content.Context
@@ -8,6 +8,10 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
+import com.dede.basic.MIME_PNG
+import com.dede.basic.androidLifecycle
+import com.dede.basic.launch
+import com.dede.basic.saveToAlbum
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

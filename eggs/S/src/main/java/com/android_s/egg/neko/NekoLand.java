@@ -46,7 +46,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android_s.egg.R;
 import com.android_s.egg.neko.PrefState.PrefsListener;
-import com.dede.basic.ShareCatUtils;
+import com.dede.basic.utils.ShareCatUtils;
 //import com.android.internal.logging.MetricsLogger;
 
 import java.util.Collections;

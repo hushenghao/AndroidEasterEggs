@@ -6,8 +6,8 @@ import android.graphics.fonts.SystemFonts
 import android.os.Build
 import android.os.LocaleList
 import androidx.annotation.RequiresApi
-import com.dede.basic.DynamicInvokeResult.Companion.getTypeValue
-import com.dede.basic.DynamicObjectUtils
+import com.dede.basic.utils.DynamicInvokeResult.Companion.getTypeValue
+import com.dede.basic.utils.DynamicObjectUtils
 import java.io.File
 
 /**

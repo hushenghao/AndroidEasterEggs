@@ -39,14 +39,13 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 
 import com.android_s.egg.R;
-import com.dede.basic.CatRandom;
+import com.dede.basic.utils.CatRandom;
 //import com.android.internal.logging.MetricsLogger;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 /** It's a cat. */
 @RequiresApi(Build.VERSION_CODES.R)

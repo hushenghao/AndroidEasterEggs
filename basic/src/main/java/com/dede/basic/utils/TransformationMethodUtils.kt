@@ -1,4 +1,4 @@
-package com.dede.basic
+package com.dede.basic.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
