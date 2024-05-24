@@ -26,7 +26,7 @@ public class AndroidIceCreamSandwichEasterEgg implements EasterEggProvider {
     @Override
     public BaseEasterEgg provideEasterEgg() {
         return new EasterEgg(
-                R.drawable.i_platlogo,
+                R.drawable.i_platlogo_scale,
                 R.string.i_egg_name,
                 R.string.i_android_nickname,
                 new IntRange(Build.VERSION_CODES.ICE_CREAM_SANDWICH, Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1),
