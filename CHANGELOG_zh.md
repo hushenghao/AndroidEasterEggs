@@ -1,4 +1,4 @@
-### v2.5.1
+### v2.5.1 (2024-05-27)
 
 - 修复时间线 BottomModalSheet 崩溃 [#250](https://github.com/hushenghao/AndroidEasterEggs/issues/250)
 - 修复 JellyBean 和 IceCreamSandwich 图像显示密度 [#256](https://github.com/hushenghao/AndroidEasterEggs/issues/256)
