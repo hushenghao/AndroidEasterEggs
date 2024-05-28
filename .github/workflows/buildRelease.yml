@@ -45,7 +45,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get_changelogs.outputs.CHANGE_LOGS }}
-          artifacts: ./app/build/outputs/apk/*/*.apk
+          artifacts: ./app/build/outputs/apk/*/*.apk,./app/build/outputs/mapping/*/mapping.txt
           artifactContentType: application/vnd.android.package-archive
           draft: false
           prerelease: false
