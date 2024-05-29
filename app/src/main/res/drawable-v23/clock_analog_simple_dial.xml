@@ -25,8 +25,8 @@
     <item
         android:id="@+id/o_clock_1"
         android:width="44dp"
-        android:height="44dp"
-        android:drawable="@drawable/ic_android_classic"
+        android:height="48.8889dp"
+        android:drawable="@drawable/ic_android_cupcake"
         android:gravity="top|right"
         android:right="86dp"
         android:top="28dp" />

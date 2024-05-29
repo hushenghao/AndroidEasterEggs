@@ -1,3 +1,6 @@
+### v2.5.2
+- Update the Analog clock widget dial
+
 ### v2.5.1 (2024-05-27)
 
 - Fix Timeline BottomModalSheet crash [#250](https://github.com/hushenghao/AndroidEasterEggs/issues/250)

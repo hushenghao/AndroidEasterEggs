@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.BuildConfig
@@ -112,7 +113,8 @@ fun ProjectDescription() {
             Text(
                 text = stringResource(R.string.app_name),
                 style = typography.titleSmall,
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                fontWeight = FontWeight.SemiBold
             )
             ChipItem2(R.string.label_privacy_policy) {
                 CustomTabsBrowser.launchUrl(context, R.string.url_privacy)

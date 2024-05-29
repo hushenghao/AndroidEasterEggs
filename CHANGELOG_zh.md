@@ -1,3 +1,6 @@
+### v2.5.2
+- 更新模拟时钟小组件表盘
+
 ### v2.5.1 (2024-05-27)
 
 - 修复时间线 BottomModalSheet 崩溃 [#250](https://github.com/hushenghao/AndroidEasterEggs/issues/250)
