@@ -33,7 +33,7 @@ jobs:
           cache: 'pip' # caching pip dependencies
 
       - name: Crowdin push
-        uses: crowdin/github-action@v1
+        uses: crowdin/github-action@v2
         with:
           upload_sources: true
           upload_translations: true
@@ -49,7 +49,7 @@ jobs:
           python start.py ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
       - name: Crowdin pull
-        uses: crowdin/github-action@v1
+        uses: crowdin/github-action@v2
         id: crowdin
         with:
           upload_sources: false
