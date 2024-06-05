@@ -1,5 +1,6 @@
 ### v2.5.2
 - Update the Analog clock widget dial
+- Upgrade project dependencies
 
 ### v2.5.1 (2024-05-27)
 

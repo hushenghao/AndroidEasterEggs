@@ -50,7 +50,7 @@ fun Context.createThemeWrapperContext(): Context {
     }
     val config = Configuration()
     val locales = ContextCompat.getContextForLanguage(this).getConfigurationLocales()
-    config.setLocales(locales)
+    ConfigurationCompat.setLocales(config, locales)
     config.fontScale = 0f
     config.uiMode = mode or (config.uiMode and Configuration.UI_MODE_NIGHT_MASK.inv())
     themeWrapper.applyOverrideConfiguration(config)
@@ -63,17 +63,8 @@ fun Context.getLayoutDirection(): Int {
 
 fun Context.createLocalesContext(locales: LocaleListCompat): Context {
     val config = Configuration(resources.configuration)
-    config.setLocales(locales)
+    ConfigurationCompat.setLocales(config, locales)
     return this.createConfigurationContext(config)
-}
-
-fun Configuration.setLocales(locales: LocaleListCompat) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        ConfigurationCompat.setLocales(this, locales)
-    } else if (!locales.isEmpty) {
-        val locale = locales.get(0)
-        setLocale(locale)
-    }
 }
 
 fun Context.getConfigurationLocales(): LocaleListCompat {
