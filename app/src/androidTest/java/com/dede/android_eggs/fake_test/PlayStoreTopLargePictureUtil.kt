@@ -5,13 +5,12 @@ import android.graphics.Canvas
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.dede.android_eggs.R
+import com.dede.android_eggs.fake_test.utils.EasterEggsServer
+import com.dede.android_eggs.fake_test.utils.ResponseUtils.toResponse
 import com.dede.basic.requireDrawable
-import fi.iki.elonen.NanoHTTPD
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
 import kotlin.math.roundToInt
 
 /**
@@ -48,18 +47,10 @@ class PlayStoreTopLargePictureUtil {
             (PICTURE_HEIGHT / 2f + ICON_SIZE / 2f).roundToInt(),
         )
         drawable.draw(canvas)
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
         canvas.setBitmap(null)
-        bitmap.recycle()
-        val byteArray = stream.toByteArray()
 
         EasterEggsServer.disposable(context, "/featureGraphic.jpeg") {
-            NanoHTTPD.newFixedLengthResponse(
-                NanoHTTPD.Response.Status.OK, "image/jpeg",
-                ByteArrayInputStream(byteArray),
-                byteArray.size.toLong()
-            )
+            bitmap.toResponse(Bitmap.CompressFormat.JPEG, 100)
         }
     }
 }

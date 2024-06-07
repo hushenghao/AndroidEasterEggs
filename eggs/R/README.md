@@ -1,6 +1,6 @@
 # Red Velvet Cake
 
-<img alt="Plat Logo" height="56" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Android_11_logo.svg"/>
+<img alt="Plat Logo" height="128" src="../../assets/image/platlogo_android_r.webp"/>
 
 Android 11 , API 30
 

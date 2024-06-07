@@ -11,16 +11,14 @@ import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.dede.android_eggs.fake_test.EasterEggsServer.Companion.registerHandler
+import com.dede.android_eggs.fake_test.utils.EasterEggsServer
+import com.dede.android_eggs.fake_test.utils.EasterEggsServer.Companion.registerHandler
+import com.dede.android_eggs.fake_test.utils.ResponseUtils.toResponse
 import com.dede.android_eggs.ui.drawables.ScaleType
 import com.dede.android_eggs.ui.drawables.ScaleTypeDrawable
 import com.dede.basic.dpf
-import fi.iki.elonen.NanoHTTPD
-import fi.iki.elonen.NanoHTTPD.Response
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
 import kotlin.math.min
 
 /**
@@ -243,24 +241,14 @@ class GridScreenshotUtil {
         EasterEggsServer.start(context) {
             for (screenshot in screenshots) {
                 registerHandler("/$screenshot") {
-                    cropScreenshot(context, screenshot).toResponse()
+                    cropScreenshot(context, screenshot)
+                        .toResponse(Bitmap.CompressFormat.JPEG, 100)
                 }
             }
             registerHandler("/ic_grid_screenshot.jpeg") {
-                createGridScreenshot(context, screenshots).toResponse()
+                createGridScreenshot(context, screenshots)
+                    .toResponse(Bitmap.CompressFormat.JPEG, 100)
             }
         }
-    }
-
-    private fun Bitmap.toResponse(): Response {
-        val stream = ByteArrayOutputStream()
-        compress(Bitmap.CompressFormat.JPEG, 100, stream)
-        recycle()
-        val byteArray = stream.toByteArray()
-        return NanoHTTPD.newFixedLengthResponse(
-            Response.Status.OK, "image/jpeg",
-            ByteArrayInputStream(byteArray),
-            byteArray.size.toLong()
-        )
     }
 }

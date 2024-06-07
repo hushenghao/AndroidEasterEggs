@@ -1,4 +1,4 @@
-package com.dede.android_eggs.fake_test
+package com.dede.android_eggs.fake_test.utils
 
 import android.Manifest
 import android.content.Context

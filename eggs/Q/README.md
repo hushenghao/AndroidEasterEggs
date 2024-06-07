@@ -1,6 +1,6 @@
 # Quince Tart
 
-<img alt="Plat Logo" height="56" src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Android_10_logo.svg"/>
+<img alt="Plat Logo" height="128" src="../../assets/image/platlogo_android_q.webp"/>
 
 Android 10 , API 29
 

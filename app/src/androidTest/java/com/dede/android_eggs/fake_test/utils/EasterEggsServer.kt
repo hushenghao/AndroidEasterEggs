@@ -1,15 +1,10 @@
-package com.dede.android_eggs.fake_test
+package com.dede.android_eggs.fake_test.utils
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.util.Log
 import androidx.collection.ArrayMap
-import androidx.core.graphics.drawable.toBitmap
 import com.dede.android_eggs.R
-import com.dede.basic.requireDrawable
 import fi.iki.elonen.NanoHTTPD
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
 import java.io.IOException
 
 /**
@@ -168,23 +163,14 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
         registerHandler(null, homepage, false)
         registerHandler("/", homepage, false)
         registerHandler("/favicon.ico", object : Handler() {
-            override fun onHandler(session: IHTTPSession): Response? {
-                val drawable = context.requireDrawable(R.mipmap.ic_launcher_round)
-                val bitmap = drawable.toBitmap(64, 64)
-                val output = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.WEBP_LOSSY, 100, output)
-                val byte = output.toByteArray()
-                val input = ByteArrayInputStream(byte)
-                return newFixedLengthResponse(
-                    Response.Status.OK,
-                    "image/webp",
-                    input,
-                    input.available().toLong()
+            override fun onHandler(session: IHTTPSession): Response {
+                return ResponseUtils.createDrawableResponse(
+                    context, R.mipmap.ic_launcher_round, 64, 64
                 )
             }
         }, true)
         registerHandler("/shutdown", object : Handler() {
-            override fun onHandler(session: IHTTPSession): Response? {
+            override fun onHandler(session: IHTTPSession): Response {
                 return newFixedLengthResponse("Shutting Down...")
             }
 
