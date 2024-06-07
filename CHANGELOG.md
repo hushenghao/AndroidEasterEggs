@@ -1,4 +1,6 @@
 ### v2.5.2
+
+- Fix DateFormatter pattern
 - Update the Analog clock widget dial
 - Upgrade project dependencies
 

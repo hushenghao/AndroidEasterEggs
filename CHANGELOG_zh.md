@@ -1,4 +1,6 @@
 ### v2.5.2
+
+- 修复 DateFormatter pattern
 - 更新模拟时钟小组件表盘
 - 升级项目依赖项
 

@@ -53,7 +53,7 @@ fun EasterEggHighestItem(
         EasterEggHelp.ApiLevelFormatter.create(egg.apiLevel).format(context)
     }
     val dateFormat = remember(egg, context.resources.configuration) {
-        EasterEggHelp.DateFormatter.getInstance("MMM yyyy")
+        EasterEggHelp.DateFormatter.getInstance("MM yyyy")
     }
 
     Card(
