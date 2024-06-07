@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PrivacyTip
@@ -17,7 +17,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -54,12 +53,14 @@ fun Welcome() {
         text = {
             Column {
                 Image(
-                    painter = painterResource(R.drawable.img_welcome_poster),
+                    painter = painterResource(R.drawable.better_together_hero),
                     contentDescription = null,
                     modifier = Modifier.fillMaxWidth()
                 )
-                Text(text = stringResource(R.string.summary_browse_privacy_policy))
-                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = stringResource(R.string.summary_browse_privacy_policy),
+                    modifier = Modifier.padding(vertical = 12.dp)
+                )
                 FilledTonalButton(
                     modifier = Modifier.align(Alignment.End),
                     contentPadding = PaddingValues(horizontal = 14.dp),

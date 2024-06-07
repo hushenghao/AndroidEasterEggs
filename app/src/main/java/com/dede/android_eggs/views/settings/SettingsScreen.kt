@@ -186,7 +186,7 @@ fun PoweredByCompose() {
         }
         Spacer(modifier = Modifier.width(2.dp))
         DrawableImage(
-            res = R.drawable.compose_logo,
+            res = R.drawable.ic_compose_logo,
             contentDescription = "Compose Logo",
             modifier = Modifier
                 .width(24.dp)
