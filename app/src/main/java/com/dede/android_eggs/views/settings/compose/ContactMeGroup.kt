@@ -2,6 +2,7 @@ package com.dede.android_eggs.views.settings.compose
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AlternateEmail
+import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.Feedback
 import androidx.compose.material.icons.rounded.Forum
 import androidx.compose.material.icons.rounded.PersonSearch
@@ -35,7 +36,7 @@ fun ContactMeGroup() {
         )
         Option(
             leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Feedback,
+                imageVector = Icons.Rounded.BugReport,
                 contentDescription = stringResource(R.string.label_feedback),
             ),
             title = stringResource(R.string.label_feedback),
