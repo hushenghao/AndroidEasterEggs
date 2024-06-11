@@ -7,6 +7,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Settings
@@ -26,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.R
+import com.dede.android_eggs.ui.composes.BuildTypeBubble
 import kotlinx.coroutines.launch
 
 
@@ -59,12 +61,15 @@ fun MainTitleBar(
             }
         },
         title = {
-            Text(
-                text = stringResource(R.string.app_name),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                fontWeight = FontWeight.Medium
-            )
+            Row {
+                Text(
+                    text = stringResource(R.string.app_name),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    fontWeight = FontWeight.Medium
+                )
+                BuildTypeBubble()
+            }
         },
         actions = {
             IconButton(

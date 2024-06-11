@@ -54,7 +54,7 @@ platform :android do
       next
     end
 
-    gradle(tasks: ["clean", "app:assembleRelease"])
+    gradle(tasks: ["clean", "app:assembleBeta"])
 
     # https://www.pgyer.com/doc/view/fastlane
     pgyer_answer = pgyer(

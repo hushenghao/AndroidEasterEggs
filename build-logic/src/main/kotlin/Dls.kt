@@ -1,5 +1,7 @@
+import com.android.build.api.dsl.ApplicationBuildType
 import com.android.build.gradle.BaseExtension
 import org.gradle.api.Action
+import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
@@ -10,6 +12,19 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 val Project.catalog: VersionCatalog
     get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
+
+fun NamedDomainObjectContainer<ApplicationBuildType>.createWith(
+    name: String,
+    with: String? = null,
+    configureAction: Action<ApplicationBuildType>
+) {
+    create(name) {
+        if (with != null) {
+            initWith(getByName(with))
+        }
+        configureAction.execute(this)
+    }
+}
 
 fun <T : BaseExtension> Project.configureAndroid(configure: Action<T>? = null) {
 

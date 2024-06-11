@@ -57,6 +57,9 @@ android {
             )
             signingConfig = config
         }
+        createWith("beta", "release") {
+            matchingFallbacks += listOf("release", "debug")
+        }
     }
 
     viewBinding {
