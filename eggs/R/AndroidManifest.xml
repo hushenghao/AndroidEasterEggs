@@ -8,6 +8,8 @@
     <!-- controls -->
     <uses-permission android:name="android.permission.BIND_CONTROLS" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application>
 
         <activity

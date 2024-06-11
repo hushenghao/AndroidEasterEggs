@@ -23,6 +23,8 @@ Copyright (C) 2016 The Android Open Source Project
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application>
         <activity
             android:name=".PlatLogoActivity"
