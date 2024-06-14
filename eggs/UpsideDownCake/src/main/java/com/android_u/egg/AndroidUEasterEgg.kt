@@ -5,6 +5,7 @@ import android.os.Build
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
+import com.dede.basic.provider.TimelineEvent
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,5 +45,18 @@ object AndroidUEasterEgg : EasterEggProvider {
                 return calendar.time
             }
         }
+    }
+
+    @Provides
+    @IntoSet
+    @Singleton
+    override fun provideTimelineEvents(): List<TimelineEvent> {
+        return listOf(
+            TimelineEvent(
+                "2023", "September",
+                Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+                "Upside Down Cake."
+            )
+        )
     }
 }

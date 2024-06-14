@@ -53,6 +53,7 @@ import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.SnapshotProvider
+import com.dede.basic.provider.TimelineEvent
 import com.dede.basic.requireDrawable
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dagger.Module
@@ -112,6 +113,19 @@ object AndroidPreviewHelp {
                     return calendar.time
                 }
             }
+        }
+
+        @Provides
+        @IntoSet
+        @Singleton
+        override fun provideTimelineEvents(): List<TimelineEvent> {
+            return listOf(
+                TimelineEvent(
+                    "2024", "September",
+                    35,
+                    "Vanilla Ice Cream."
+                )
+            )
         }
 
     }

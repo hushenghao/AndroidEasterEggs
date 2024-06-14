@@ -10,6 +10,8 @@ import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.SnapshotProvider
+import com.dede.basic.provider.TimelineEvent
+import com.dede.basic.provider.TimelineEvent.Companion.timelineEvent
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,7 +23,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AndroidBaseEasterEgg : EasterEggProvider {
 
-    private class EmptyEasterEgg constructor(
+    private class EmptyEasterEgg(
         @DrawableRes iconRes: Int,
         @StringRes nameRes: Int,
         @StringRes nicknameRes: Int,
@@ -42,6 +44,46 @@ object AndroidBaseEasterEgg : EasterEggProvider {
         override fun provideSnapshotProvider(): SnapshotProvider? {
             return null
         }
+    }
+
+    @Provides
+    @IntoSet
+    @Singleton
+    override fun provideTimelineEvents(): List<TimelineEvent> {
+        return listOf(
+            timelineEvent(
+                Build.VERSION_CODES.FROYO,
+                "F.\nReleased publicly as Android 2.2 in May 2010."
+            ),
+            timelineEvent(
+                Build.VERSION_CODES.ECLAIR_MR1,
+                "E MR1.\nReleased publicly as Android 2.1 in January 2010."
+            ),
+            timelineEvent(
+                Build.VERSION_CODES.ECLAIR_0_1,
+                "E incremental update.\nReleased publicly as Android 2.0.1 in December 2009."
+            ),
+            timelineEvent(
+                Build.VERSION_CODES.ECLAIR,
+                "E.\nReleased publicly as Android 2.0 in October 2009."
+            ),
+            timelineEvent(
+                Build.VERSION_CODES.DONUT,
+                "D.\nReleased publicly as Android 1.6 in September 2009."
+            ),
+            timelineEvent(
+                Build.VERSION_CODES.CUPCAKE,
+                "C.\nReleased publicly as Android 1.5 in April 2009."
+            ),
+            timelineEvent(
+                Build.VERSION_CODES.BASE_1_1,
+                "First Android update.\nReleased publicly as Android 1.1 in February 2009."
+            ),
+            timelineEvent(
+                Build.VERSION_CODES.BASE,
+                "The original, first, version of Android. Yay!\nReleased publicly as Android 1.0 in September 2008."
+            )
+        )
     }
 
     @Provides

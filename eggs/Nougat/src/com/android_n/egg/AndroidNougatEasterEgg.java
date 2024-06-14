@@ -1,10 +1,13 @@
 package com.android_n.egg;
 
+import static com.dede.basic.provider.TimelineEvent.timelineEvent;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Build;
 
+import androidx.annotation.ChecksSdkIntAtLeast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
@@ -13,6 +16,10 @@ import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.ComponentProvider;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
+import com.dede.basic.provider.TimelineEvent;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Singleton;
 
@@ -27,6 +34,7 @@ import kotlin.ranges.IntRange;
 @InstallIn(SingletonComponent.class)
 public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvider {
 
+    @NonNull
     @IntoSet
     @Provides
     @Singleton
@@ -51,6 +59,7 @@ public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvi
         };
     }
 
+    @NonNull
     @IntoSet
     @Provides
     @Singleton
@@ -77,10 +86,29 @@ public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvi
                 return Component.isEnabled(cn, context);
             }
 
+            @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.N)
             @Override
             public boolean isSupported() {
                 return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
             }
         };
+    }
+
+    @NonNull
+    @IntoSet
+    @Provides
+    @Singleton
+    @Override
+    public List<TimelineEvent> provideTimelineEvents() {
+        return Arrays.asList(
+                timelineEvent(
+                        Build.VERSION_CODES.N_MR1,
+                        "N MR1.\nReleased publicly as Android 7.1 in October 2016."
+                ),
+                timelineEvent(
+                        Build.VERSION_CODES.N,
+                        "N.\nReleased publicly as Android 7.0 in August 2016."
+                )
+        );
     }
 }

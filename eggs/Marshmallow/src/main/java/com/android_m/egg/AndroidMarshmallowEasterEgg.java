@@ -1,11 +1,19 @@
 package com.android_m.egg;
 
+import static com.dede.basic.provider.TimelineEvent.timelineEvent;
+
 import android.app.Activity;
 import android.os.Build;
+
+import androidx.annotation.NonNull;
 
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
+import com.dede.basic.provider.TimelineEvent;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Singleton;
 
@@ -19,6 +27,7 @@ import dagger.multibindings.IntoSet;
 @InstallIn(SingletonComponent.class)
 public class AndroidMarshmallowEasterEgg implements EasterEggProvider {
 
+    @NonNull
     @IntoSet
     @Provides
     @Singleton
@@ -41,5 +50,19 @@ public class AndroidMarshmallowEasterEgg implements EasterEggProvider {
                 return new SnapshotProvider();
             }
         };
+    }
+
+    @IntoSet
+    @Provides
+    @Singleton
+    @NonNull
+    @Override
+    public List<TimelineEvent> provideTimelineEvents() {
+        return List.of(
+                timelineEvent(
+                        Build.VERSION_CODES.M,
+                        "M.\nReleased publicly as Android 6.0 in October 2015."
+                )
+        );
     }
 }

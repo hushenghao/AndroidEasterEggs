@@ -20,6 +20,7 @@ import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.ComponentProvider.Component
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
+import com.dede.basic.provider.TimelineEvent
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,6 +50,16 @@ import javax.inject.Singleton
 )
 @InstallIn(SingletonComponent::class)
 object EasterEggModules {
+
+    @Provides
+    @Singleton
+    fun provideTimelineEventList(timelineGroupSet: Set<@JvmSuppressWildcards List<@JvmSuppressWildcards TimelineEvent>>): List<@JvmSuppressWildcards TimelineEvent> {
+        return buildList {
+            for (events in timelineGroupSet) {
+                addAll(events)
+            }
+        }.sortedByDescending { it.apiLevel }// todo Sort by time
+    }
 
     @Provides
     @Singleton

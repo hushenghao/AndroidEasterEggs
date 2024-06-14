@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.os.Build
+import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.annotation.RequiresApi
 import com.android_s.egg.neko.NekoControlsService
 import com.android_s.egg.widget.PaintChipsActivity
@@ -12,6 +13,7 @@ import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.ComponentProvider
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
+import com.dede.basic.provider.TimelineEvent
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -56,6 +58,24 @@ object AndroidSEasterEgg : EasterEggProvider, ComponentProvider {
     @Provides
     @IntoSet
     @Singleton
+    override fun provideTimelineEvents(): List<TimelineEvent> {
+        return listOf(
+            TimelineEvent(
+                "2021", "December",
+                Build.VERSION_CODES.S_V2,
+                "S V2.\nOnce more unto the breach, dear friends, once more."
+            ),
+            TimelineEvent(
+                "2021", "September",
+                Build.VERSION_CODES.S,
+                "S."
+            )
+        )
+    }
+
+    @Provides
+    @IntoSet
+    @Singleton
     override fun provideComponent(): ComponentProvider.Component {
         return object : ComponentProvider.Component(
             iconRes = R.drawable.s_ic_fullcat_icon,
@@ -63,6 +83,7 @@ object AndroidSEasterEgg : EasterEggProvider, ComponentProvider {
             nicknameRes = R.string.s_android_nickname,
             apiLevel = Build.VERSION_CODES.S..Build.VERSION_CODES.S_V2
         ) {
+            @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.R)
             override fun isSupported(): Boolean {
                 return Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
             }

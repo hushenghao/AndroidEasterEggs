@@ -1,5 +1,7 @@
 package com.android_j.egg;
 
+import static com.dede.basic.provider.TimelineEvent.timelineEvent;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,6 +13,10 @@ import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.ComponentProvider;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
+import com.dede.basic.provider.TimelineEvent;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Singleton;
 
@@ -25,6 +31,7 @@ import kotlin.ranges.IntRange;
 @InstallIn(SingletonComponent.class)
 public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentProvider {
 
+    @NonNull
     @IntoSet
     @Provides
     @Singleton
@@ -49,6 +56,7 @@ public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentPr
         };
     }
 
+    @NonNull
     @IntoSet
     @Provides
     @Singleton
@@ -77,5 +85,24 @@ public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentPr
                 Component.setEnable(cn, context, enable);
             }
         };
+    }
+
+    @NonNull
+    @Override
+    public List<TimelineEvent> provideTimelineEvents() {
+        return Arrays.asList(
+                timelineEvent(
+                        Build.VERSION_CODES.JELLY_BEAN_MR2,
+                        "J MR2.\nReleased publicly as Android 4.3 in July 2013."
+                ),
+                timelineEvent(
+                        Build.VERSION_CODES.JELLY_BEAN_MR1,
+                        "J MR1.\nReleased publicly as Android 4.2 in November 2012."
+                ),
+                timelineEvent(
+                        Build.VERSION_CODES.JELLY_BEAN,
+                        "J.\nReleased publicly as Android 4.1 in July 2012."
+                )
+        );
     }
 }

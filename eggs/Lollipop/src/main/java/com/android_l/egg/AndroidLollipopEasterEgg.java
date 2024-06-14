@@ -1,11 +1,19 @@
 package com.android_l.egg;
 
+import static com.dede.basic.provider.TimelineEvent.timelineEvent;
+
 import android.app.Activity;
 import android.os.Build;
+
+import androidx.annotation.NonNull;
 
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
+import com.dede.basic.provider.TimelineEvent;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Singleton;
 
@@ -20,6 +28,7 @@ import kotlin.ranges.IntRange;
 @InstallIn(SingletonComponent.class)
 public class AndroidLollipopEasterEgg implements EasterEggProvider {
 
+    @NonNull
     @IntoSet
     @Provides
     @Singleton
@@ -42,5 +51,23 @@ public class AndroidLollipopEasterEgg implements EasterEggProvider {
                 return new SnapshotProvider();
             }
         };
+    }
+
+    @IntoSet
+    @Provides
+    @Singleton
+    @NonNull
+    @Override
+    public List<TimelineEvent> provideTimelineEvents() {
+        return Arrays.asList(
+                timelineEvent(
+                        Build.VERSION_CODES.LOLLIPOP_MR1,
+                        "L MR1.\nReleased publicly as Android 5.1 in March 2015."
+                ),
+                timelineEvent(
+                        Build.VERSION_CODES.LOLLIPOP,
+                        "L.\nReleased publicly as Android 5.0 in November 2014."
+                )
+        );
     }
 }

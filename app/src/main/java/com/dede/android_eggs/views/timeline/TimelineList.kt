@@ -47,14 +47,15 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dede.android_eggs.R
-import com.dede.android_eggs.main.EasterEggHelp
-import com.dede.android_eggs.main.entity.TimelineEvent
-import com.dede.android_eggs.main.entity.TimelineEvent.Companion.isNewGroup
+import com.dede.android_eggs.main.TimelineEventHelp.eventAnnotatedString
+import com.dede.android_eggs.main.TimelineEventHelp.isNewGroup
+import com.dede.android_eggs.main.TimelineEventHelp.localMonth
+import com.dede.android_eggs.main.TimelineEventHelp.localYear
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.compose.PathShape
 import com.dede.android_eggs.views.main.compose.DrawableImage
 import com.dede.android_eggs.views.settings.compose.IconShapePrefUtil
-import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.TimelineEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -99,9 +100,9 @@ fun TimelineList(
             }
             items(viewModel.timelines) {
                 TimelineItem(
-                    it,
-                    viewModel.logoMatcher.findAndroidLogo(it.apiLevel),
-                    viewModel.logoMatcher.findEasterEgg(it.apiLevel),
+                    event = it,
+                    logoRes = viewModel.logoMatcher.findAndroidLogo(it.apiLevel),
+                    isNewGroup = it.isNewGroup(viewModel.timelines)
                 )
             }
         }
@@ -142,9 +143,9 @@ private fun TimelineHeader() {
 @Composable
 @Preview(showBackground = true)
 private fun TimelineItem(
-    event: TimelineEvent = TimelineEvent.timelines.first(),
-    @DrawableRes logo: Int = R.mipmap.ic_launcher,
-    egg: EasterEgg? = EasterEggHelp.previewEasterEggs().first(),
+    event: TimelineEvent = TimelineEvent("2025", "January", 99, "Demo event name"),
+    @DrawableRes logoRes: Int = R.mipmap.ic_launcher,
+    isNewGroup: Boolean = true
 ) {
     val context = LocalContext.current
     ConstraintLayout(
@@ -165,8 +166,8 @@ private fun TimelineItem(
         )
 
         val iconShape = remember { IconShapePrefUtil.getMaskPath(context) }
-        val drawable = remember(logo, context.theme) {
-            AlterableAdaptiveIconDrawable(context, logo, iconShape)
+        val drawable = remember(logoRes, context.theme) {
+            AlterableAdaptiveIconDrawable(context, logoRes, iconShape)
         }
         val imageModifier = Modifier
             .size(40.dp)
@@ -174,28 +175,23 @@ private fun TimelineItem(
                 top.linkTo(parent.top, 16.dp)
                 centerHorizontallyTo(parent, 0.3f)
             }
-        val eggNickName = if (egg != null) {
-            stringResource(id = egg.nicknameRes)
-        } else {
-            null
-        }
         if (event.apiLevel >= Build.VERSION_CODES.LOLLIPOP) {
             DrawableImage(
                 drawable = drawable,
-                contentDescription = eggNickName,
+                contentDescription = null,
                 modifier = imageModifier
             )
         } else {
             DrawableImage(
-                res = logo,
-                contentDescription = eggNickName,
+                res = logoRes,
+                contentDescription = null,
                 modifier = Modifier
                     .background(MaterialTheme.colorScheme.secondaryContainer, PathShape(iconShape))
                     .then(imageModifier)
                     .padding(6.dp)
             )
         }
-        if (event.isNewGroup()) {
+        if (isNewGroup) {
             Text(
                 text = event.localYear ?: "",
                 style = MaterialTheme.typography.titleLarge,
@@ -236,7 +232,9 @@ private fun TimelineItem(
 
 @HiltViewModel
 class TimelineViewModel @Inject constructor() : ViewModel() {
-    val timelines: List<TimelineEvent> = TimelineEvent.timelines
+
+    @Inject
+    lateinit var timelines: List<TimelineEvent>
 
     @Inject
     lateinit var logoMatcher: AndroidLogoMatcher

@@ -8,10 +8,37 @@ import java.util.Date
 
 interface EasterEggProvider {
     fun provideEasterEgg(): BaseEasterEgg
+
+    fun provideTimelineEvents(): List<TimelineEvent>
 }
 
 interface BaseEasterEgg {
     fun getSortValue(): Int
+}
+
+data class TimelineEvent(
+    val year: String?,
+    val month: String?,// todo Convert to Int type
+    val apiLevel: Int,
+    val event: CharSequence,
+) {
+
+    companion object {
+
+        @JvmStatic
+        fun timelineEvent(apiLevel: Int, event: CharSequence): TimelineEvent {
+            val regex =
+                Regex("(January|February|March|April|May|June|July|August|September|October|November|December) +(\\d{4,})")
+            val result = regex.find(event)
+            var year: String? = null
+            var month: String? = null
+            if (result != null) {
+                month = result.groups[1]?.value
+                year = result.groups[2]?.value
+            }
+            return TimelineEvent(year, month, apiLevel, event)
+        }
+    }
 }
 
 class EasterEggGroup(vararg val eggs: EasterEgg) : BaseEasterEgg {

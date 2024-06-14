@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.os.Build
+import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.annotation.RequiresApi
 import com.android_t.egg.neko.NekoControlsService
 import com.android_t.egg.widget.PaintChipsActivity
@@ -12,6 +13,7 @@ import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.ComponentProvider
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
+import com.dede.basic.provider.TimelineEvent
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -56,6 +58,19 @@ object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
     @Provides
     @IntoSet
     @Singleton
+    override fun provideTimelineEvents(): List<TimelineEvent> {
+        return listOf(
+            TimelineEvent(
+                "2022", "September",
+                Build.VERSION_CODES.TIRAMISU,
+                "Tiramisu."
+            )
+        )
+    }
+
+    @Provides
+    @IntoSet
+    @Singleton
     override fun provideComponent(): ComponentProvider.Component {
         return object : ComponentProvider.Component(
             iconRes = R.drawable.t_ic_fullcat_icon,
@@ -63,6 +78,7 @@ object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
             nicknameRes = R.string.t_android_nickname,
             apiLevel = Build.VERSION_CODES.TIRAMISU
         ) {
+            @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.R)
             override fun isSupported(): Boolean {
                 return Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
             }

@@ -1,12 +1,20 @@
 package com.android_o.egg;
 
+import static com.dede.basic.provider.TimelineEvent.timelineEvent;
+
 import android.app.Activity;
 import android.os.Build;
+
+import androidx.annotation.NonNull;
 
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggGroup;
 import com.dede.basic.provider.EasterEggProvider;
+import com.dede.basic.provider.TimelineEvent;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Singleton;
 
@@ -20,6 +28,7 @@ import dagger.multibindings.IntoSet;
 @InstallIn(SingletonComponent.class)
 public class AndroidOreoEasterEgg implements EasterEggProvider {
 
+    @NonNull
     @IntoSet
     @Provides
     @Singleton
@@ -60,6 +69,24 @@ public class AndroidOreoEasterEgg implements EasterEggProvider {
                         return new SnapshotProvider(true);
                     }
                 }
+        );
+    }
+
+    @IntoSet
+    @Provides
+    @Singleton
+    @NonNull
+    @Override
+    public List<TimelineEvent> provideTimelineEvents() {
+        return Arrays.asList(
+                timelineEvent(
+                        Build.VERSION_CODES.O_MR1,
+                        "O MR1.\nReleased publicly as Android 8.1 in December 2017."
+                ),
+                timelineEvent(
+                        Build.VERSION_CODES.O,
+                        "O.\nReleased publicly as Android 8.0 in August 2017."
+                )
         );
     }
 }

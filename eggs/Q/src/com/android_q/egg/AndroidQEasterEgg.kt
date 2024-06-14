@@ -5,6 +5,8 @@ import android.os.Build
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
+import com.dede.basic.provider.TimelineEvent
+import com.dede.basic.provider.TimelineEvent.Companion.timelineEvent
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,5 +36,17 @@ object AndroidQEasterEgg : EasterEggProvider {
                 return SnapshotProvider()
             }
         }
+    }
+
+    @Provides
+    @IntoSet
+    @Singleton
+    override fun provideTimelineEvents(): List<TimelineEvent> {
+        return listOf(
+            timelineEvent(
+                Build.VERSION_CODES.Q,
+                "Q.\nReleased publicly as Android 10 in September 2019."
+            )
+        )
     }
 }

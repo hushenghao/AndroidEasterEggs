@@ -5,6 +5,8 @@ import android.os.Build
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
+import com.dede.basic.provider.TimelineEvent
+import com.dede.basic.provider.TimelineEvent.Companion.timelineEvent
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,5 +36,17 @@ object AndroidPieEasterEgg : EasterEggProvider {
                 return SnapshotProvider()
             }
         }
+    }
+
+    @Provides
+    @IntoSet
+    @Singleton
+    override fun provideTimelineEvents(): List<TimelineEvent> {
+        return listOf(
+            timelineEvent(
+                Build.VERSION_CODES.P,
+                "P.\nReleased publicly as Android 9 in August 2018."
+            )
+        )
     }
 }

@@ -1,5 +1,7 @@
 package com.android_k.egg;
 
+import static com.dede.basic.provider.TimelineEvent.timelineEvent;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,6 +13,10 @@ import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.ComponentProvider;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
+import com.dede.basic.provider.TimelineEvent;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Singleton;
 
@@ -25,6 +31,7 @@ import kotlin.ranges.IntRange;
 @InstallIn(SingletonComponent.class)
 public class AndroidKitKatEasterEgg implements EasterEggProvider, ComponentProvider {
 
+    @NonNull
     @IntoSet
     @Provides
     @Singleton
@@ -49,6 +56,7 @@ public class AndroidKitKatEasterEgg implements EasterEggProvider, ComponentProvi
         };
     }
 
+    @NonNull
     @IntoSet
     @Provides
     @Singleton
@@ -77,5 +85,23 @@ public class AndroidKitKatEasterEgg implements EasterEggProvider, ComponentProvi
                 Component.setEnable(cn, context, enable);
             }
         };
+    }
+
+    @IntoSet
+    @Provides
+    @Singleton
+    @NonNull
+    @Override
+    public List<TimelineEvent> provideTimelineEvents() {
+        return Arrays.asList(
+                timelineEvent(
+                        Build.VERSION_CODES.KITKAT_WATCH,
+                        "K for watches.\nReleased publicly as Android 4.4W in June 2014."
+                ),
+                timelineEvent(
+                        Build.VERSION_CODES.KITKAT,
+                        "K.\nReleased publicly as Android 4.4 in October 2013."
+                )
+        );
     }
 }
