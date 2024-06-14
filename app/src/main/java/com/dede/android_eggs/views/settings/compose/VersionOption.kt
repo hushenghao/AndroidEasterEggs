@@ -7,13 +7,17 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.outlined.NewReleases
 import androidx.compose.material.icons.rounded.Upgrade
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
@@ -21,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -42,10 +47,7 @@ fun VersionOption(
     viewModel: VersionViewModel = viewModel()
 ) {
     val context = LocalContext.current
-    val latestVersion by viewModel.latestVersion.observeAsState(null)
-    LaunchedEffect(viewModel) {
-        viewModel.loadLatestVersion()
-    }
+    val latestVersion by viewModel.latestVersion.observeAsState()
     val haveUpgrade = remember(viewModel.upgradeChecker, latestVersion) {
         viewModel.upgradeChecker.haveUpgrade(latestVersion)
     }
@@ -80,10 +82,23 @@ fun VersionOption(
                 targetState = haveUpgrade,
                 label = "VersionNavigateCrossfade"
             ) {
-                Icon(
-                    imageVector = if (it) Icons.Rounded.Upgrade else Icons.AutoMirrored.Rounded.NavigateNext,
-                    contentDescription = null
-                )
+                if (it) {
+                    Icon(
+                        imageVector = Icons.Rounded.Upgrade,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .background(
+                                MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp),
+                                RoundedCornerShape(50)
+                            )
+                            .padding(4.dp)
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Rounded.NavigateNext,
+                        contentDescription = null,
+                    )
+                }
             }
         },
         onClick = {
@@ -111,10 +126,13 @@ class VersionViewModel @Inject constructor() : ViewModel() {
     @Github
     lateinit var upgradeChecker: UpgradeChecker
 
-    fun loadLatestVersion() {
+    init {
+        getLatestVersion()
+    }
+
+    private fun getLatestVersion() {
         viewModelScope.launchCatchable {
             _latestVersion.value = upgradeChecker.getLatestVersion()
         }
     }
-
 }
