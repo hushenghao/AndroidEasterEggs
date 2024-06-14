@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.NewReleases
 import androidx.compose.material.icons.rounded.Android
 import androidx.compose.material.icons.rounded.Balance
 import androidx.compose.material.icons.rounded.Info
@@ -21,7 +20,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
-import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.composes.icons.Github
 import com.dede.android_eggs.ui.composes.icons.rounded.FamilyStar
@@ -37,22 +35,7 @@ fun AboutGroup() {
         leadingIcon = Icons.Rounded.Info,
         title = stringResource(R.string.label_about)
     ) {
-        Option(
-            shape = OptionShapes.firstShape(),
-            leadingIcon = imageVectorIconBlock(imageVector = Icons.Outlined.NewReleases),
-            title = stringResource(
-                R.string.label_version,
-                BuildConfig.VERSION_NAME,
-                BuildConfig.VERSION_CODE
-            ),
-            desc = BuildConfig.GIT_HASH,
-            onClick = {
-                CustomTabsBrowser.launchUrl(
-                    context,
-                    context.getString(R.string.url_github_commit, BuildConfig.GIT_HASH).toUri()
-                )
-            }
-        )
+        VersionOption()
         Option(
             leadingIcon = {
                 Image(

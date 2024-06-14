@@ -17,7 +17,7 @@ open class EasterEggBasicLibrary : Plugin<Project> {
                 }
 
                 lint {
-                    fatal += listOf("NewApi", "InlinedApi")
+                    fatal += listOf("NewApi", "InlinedApi", "NotifyDataSetChanged")
                 }
 
                 buildTypes {

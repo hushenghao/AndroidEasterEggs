@@ -66,15 +66,8 @@ android {
         enable = true
     }
 
-    lint {
-        disable += listOf("NotifyDataSetChanged")
-    }
-
     packaging {
-        resources.excludes += listOf(
-            "okhttp3/**",// only coil local image
-            "META-INF/*.version",
-        )
+        resources.excludes += listOf("META-INF/*.version")
     }
 
 }
@@ -100,6 +93,7 @@ dependencies {
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.constraintlayout)
     implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.livedata)
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.accompanist.drawablepainter)
 
@@ -111,6 +105,12 @@ dependencies {
     implementation(libs.viewbinding.delegate)
     implementation(libs.blurhash.android)
     // implementation(libs.blurhash.painter)
+    implementation(platform(libs.squareup.okhttp.bom))
+    implementation(libs.squareup.okhttp)
+    implementation(libs.squareup.okhttp.logging)
+    implementation(libs.squareup.retrofit)
+    implementation(libs.squareup.retrofit.converter.moshi)
+    ksp(libs.squareup.moshi.codegen)
     debugImplementation(libs.squareup.leakcanary)
 
     implementation(project(":eggs:UpsideDownCake"))

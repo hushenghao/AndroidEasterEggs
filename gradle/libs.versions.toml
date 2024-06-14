@@ -9,6 +9,7 @@ accompanist = "0.34.0"
 lifecycle = "2.8.1"
 activity = "1.9.0"
 coil = "2.6.0"
+retrofit = "2.11.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -38,6 +39,7 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+androidx-compose-livedata = { module = "androidx.compose.runtime:runtime-livedata" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-util = { module = "androidx.compose.ui:ui-util" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
@@ -55,11 +57,17 @@ dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.4"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
 # blurhash-painter = "com.github.wajahat-iqbal:BlurHashPainter:1.2"
 viewbinding-delegate = "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9"
-squareup-okio = "com.squareup.okio:okio:3.9.0"
 io-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 # io-coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
 # io-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 free-reflection = "com.github.tiann:FreeReflection:3.2.0"
+squareup-okhttp-bom = "com.squareup.okhttp3:okhttp-bom:4.12.0"
+squareup-okhttp = { module = "com.squareup.okhttp3:okhttp" }
+squareup-okio = { module = "com.squareup.okio:okio" }
+squareup-okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor" }
+squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+squareup-retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+squareup-moshi-codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.15.1"
 squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.14"
 nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
 

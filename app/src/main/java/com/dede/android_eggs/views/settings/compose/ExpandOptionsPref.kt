@@ -195,6 +195,7 @@ fun SwitchOption(
 
 @Composable
 fun Option(
+    modifier: Modifier = Modifier,
     leadingIcon: (@Composable () -> Unit)?,
     title: String,
     desc: String? = null,
@@ -207,7 +208,8 @@ fun Option(
     Card(
         onClick = onClick,
         shape = shape,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        modifier = modifier
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
