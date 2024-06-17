@@ -65,6 +65,34 @@ fun SettingPref(
     leadingIcon: ImageVector,
     title: String,
     desc: String? = null,
+    trailingContent: ImageVector,
+    onClick: () -> Unit = {},
+    shape: Shape = MaterialTheme.shapes.medium,
+    content: @Composable ColumnScope.() -> Unit = {},
+) {
+    SettingPref(
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        trailingContent = {
+            Box(modifier = Modifier.padding(end = 12.dp)) {
+                Icon(
+                    imageVector = trailingContent,
+                    contentDescription = null,
+                )
+            }
+        },
+        onClick = onClick,
+        shape = shape,
+        content = content,
+    )
+}
+
+@Composable
+fun SettingPref(
+    leadingIcon: ImageVector,
+    title: String,
+    desc: String? = null,
     trailingContent: @Composable () -> Unit = {},
     onClick: () -> Unit = {},
     shape: Shape = MaterialTheme.shapes.medium,
