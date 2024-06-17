@@ -61,7 +61,7 @@ object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
     override fun provideTimelineEvents(): List<TimelineEvent> {
         return listOf(
             TimelineEvent(
-                "2022", "September",
+                2022, Calendar.SEPTEMBER,
                 Build.VERSION_CODES.TIRAMISU,
                 "Tiramisu."
             )

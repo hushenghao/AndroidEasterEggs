@@ -57,6 +57,7 @@ import com.dede.android_eggs.views.main.compose.DrawableImage
 import com.dede.android_eggs.views.settings.compose.IconShapePrefUtil
 import com.dede.basic.provider.TimelineEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.Calendar
 import javax.inject.Inject
 
 @Composable
@@ -143,7 +144,7 @@ private fun TimelineHeader() {
 @Composable
 @Preview(showBackground = true)
 private fun TimelineItem(
-    event: TimelineEvent = TimelineEvent("2025", "January", 99, "Demo event name"),
+    event: TimelineEvent = TimelineEvent(2025, Calendar.SEPTEMBER, 99, "Demo event name"),
     @DrawableRes logoRes: Int = R.mipmap.ic_launcher,
     isNewGroup: Boolean = true
 ) {

@@ -61,12 +61,12 @@ object AndroidSEasterEgg : EasterEggProvider, ComponentProvider {
     override fun provideTimelineEvents(): List<TimelineEvent> {
         return listOf(
             TimelineEvent(
-                "2021", "December",
+                2021, Calendar.SEPTEMBER,
                 Build.VERSION_CODES.S_V2,
                 "S V2.\nOnce more unto the breach, dear friends, once more."
             ),
             TimelineEvent(
-                "2021", "September",
+                2021, Calendar.SEPTEMBER,
                 Build.VERSION_CODES.S,
                 "S."
             )

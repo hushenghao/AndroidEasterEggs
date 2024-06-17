@@ -121,7 +121,8 @@ object AndroidPreviewHelp {
         override fun provideTimelineEvents(): List<TimelineEvent> {
             return listOf(
                 TimelineEvent(
-                    "2024", "September",
+                    2024,
+                    Calendar.SEPTEMBER,
                     35,
                     "Vanilla Ice Cream."
                 )

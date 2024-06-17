@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import java.util.Calendar
 import java.util.Date
 
 interface EasterEggProvider {
@@ -17,8 +18,16 @@ interface BaseEasterEgg {
 }
 
 data class TimelineEvent(
-    val year: String?,
-    val month: String?,// todo Convert to Int type
+    /**
+     * Event year
+     * @see Calendar.YEAR
+     */
+    val year: Int,
+    /**
+     * Event month
+     * @see Calendar.MONTH
+     */
+    val month: Int,
     val apiLevel: Int,
     val event: CharSequence,
 ) {
@@ -30,11 +39,31 @@ data class TimelineEvent(
             val regex =
                 Regex("(January|February|March|April|May|June|July|August|September|October|November|December) +(\\d{4,})")
             val result = regex.find(event)
-            var year: String? = null
-            var month: String? = null
-            if (result != null) {
-                month = result.groups[1]?.value
-                year = result.groups[2]?.value
+            if (result == null || result.groups.size < 2) {
+                throw IllegalArgumentException("Event mismatch month and year, event: $event")
+            }
+            val yearStr = result.groups[2]!!.value
+            val monthStr = result.groups[1]?.value
+            val year: Int
+            try {
+                year = yearStr.toInt()
+            } catch (e: NumberFormatException) {
+                throw IllegalArgumentException("Illegal event year, year: $yearStr", e)
+            }
+            val month = when (monthStr) {
+                "January" -> Calendar.JANUARY
+                "February" -> Calendar.FEBRUARY
+                "March" -> Calendar.MARCH
+                "April" -> Calendar.APRIL
+                "May" -> Calendar.MAY
+                "June" -> Calendar.JUNE
+                "July" -> Calendar.JULY
+                "August" -> Calendar.AUGUST
+                "September" -> Calendar.SEPTEMBER
+                "October" -> Calendar.OCTOBER
+                "November" -> Calendar.NOVEMBER
+                "December" -> Calendar.DECEMBER
+                else -> throw IllegalArgumentException("Illegal event month: $monthStr")
             }
             return TimelineEvent(year, month, apiLevel, event)
         }

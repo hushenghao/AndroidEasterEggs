@@ -11,6 +11,16 @@ import java.util.TimeZone
 
 object TimelineEventHelp {
 
+    object EventComparator : Comparator<TimelineEvent> {
+        override fun compare(o1: TimelineEvent, o2: TimelineEvent): Int {
+            var compareYear = o2.year.compareTo(o1.year)
+            if (compareYear == 0) {
+                compareYear = o2.month.compareTo(o1.month)
+            }
+            return compareYear
+        }
+    }
+
     fun TimelineEvent.isNewGroup(timelines: List<TimelineEvent>): Boolean {
         val index = timelines.indexOf(this)
         if (index == -1) return true
@@ -19,33 +29,17 @@ object TimelineEventHelp {
         return last.year != this.year
     }
 
-    val TimelineEvent.localYear: String?
+    val TimelineEvent.localYear: String
         get() {
-            val yearNum = year?.toIntOrNull() ?: return year
             val calendar = Calendar.getInstance(TimeZone.getDefault())
-            calendar.set(Calendar.YEAR, yearNum)
+            calendar.set(Calendar.YEAR, year)
             return EasterEggHelp.DateFormatter.getInstance("yyyy").format(calendar.time)
         }
 
-    val TimelineEvent.localMonth: String?
+    val TimelineEvent.localMonth: String
         get() {
-            val m = when (month) {
-                "January" -> Calendar.JANUARY
-                "February" -> Calendar.FEBRUARY
-                "March" -> Calendar.MARCH
-                "April" -> Calendar.APRIL
-                "May" -> Calendar.MAY
-                "June" -> Calendar.JUNE
-                "July" -> Calendar.JULY
-                "August" -> Calendar.AUGUST
-                "September" -> Calendar.SEPTEMBER
-                "October" -> Calendar.OCTOBER
-                "November" -> Calendar.NOVEMBER
-                "December" -> Calendar.DECEMBER
-                else -> return month
-            }
             val calendar = Calendar.getInstance(TimeZone.getDefault())
-            calendar.set(Calendar.MONTH, m)
+            calendar.set(Calendar.MONTH, month)
             return EasterEggHelp.DateFormatter.getInstance("MMMM").format(calendar.time)
         }
 

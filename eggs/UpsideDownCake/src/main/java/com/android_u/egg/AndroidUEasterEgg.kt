@@ -53,7 +53,7 @@ object AndroidUEasterEgg : EasterEggProvider {
     override fun provideTimelineEvents(): List<TimelineEvent> {
         return listOf(
             TimelineEvent(
-                "2023", "September",
+                2023, Calendar.SEPTEMBER,
                 Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
                 "Upside Down Cake."
             )
