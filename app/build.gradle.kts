@@ -150,6 +150,7 @@ dependencies {
     implementation(project(":feature:crash"))
     implementation(project(":feature:embedding-splits"))
 
+    implementation(project(":eggs:RockedLauncher"))
     implementation(project(":eggs:AndroidNext"))
     implementation(project(":eggs:VanillaIceCream"))
     implementation(project(":eggs:UpsideDownCake"))

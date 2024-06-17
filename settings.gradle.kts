@@ -54,6 +54,7 @@ include(
     ":eggs:UpsideDownCake",
     ":eggs:VanillaIceCream",
     ":eggs:AndroidNext",
+    ":eggs:RockedLauncher",
 
     ":script:compose-material-icons-generator",
     ":script:emoji-svg-xml-convertor",

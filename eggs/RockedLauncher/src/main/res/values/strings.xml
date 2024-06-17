@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Title of the Android Dreams (screensaver) module -->
+    <string name="dream_name">Rocket Launcher</string>
+</resources>
