@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- locality language -->
+    <string name="locale_lang_zh_SC">Egyszerűsített Kínai</string>
+    <string name="locale_lang_zh_TC">Hagyományos Kínai</string>
+    <string name="locale_lang_de">Német</string>
+    <string name="locale_lang_en">Angol</string>
+    <string name="locale_lang_es">Spanyol</string>
+    <string name="locale_lang_hr_HR">Horvát</string>
+    <string name="locale_lang_in_ID">Indonéz</string>
+    <string name="locale_lang_it">Olasz</string>
+    <string name="locale_lang_pt">Portugál</string>
+    <string name="locale_lang_pt_BR">Portugál (Brazil)</string>
+    <string name="locale_lang_ru">Orosz</string>
+    <string name="locale_lang_ar_SA">Arab</string>
+    <string name="locale_lang_ja_JP">Japán</string>
+    <string name="locale_lang_pl_PL">Lengyel</string>
+    <string name="locale_lang_nl_NL">Holland</string>
+    <string name="locale_lang_la_LA">Latin</string>
+    <string name="locale_lang_fr">Francia</string>
+    <string name="locale_lang_uk_UA">Ukrán</string>
+    <string name="locale_lang_tr_TR">Török</string>
+    <string name="locale_lang_ko">Kóreai</string>
+    <string name="locale_lang_el_GR">Görög</string>
+    <string name="locale_lang_fi_FI">Finn</string>
+    <string name="locale_lang_vi_VN">Vietnámi</string>
+    <string name="locale_lang_hu_HU">Magyar</string>
+    <string name="locale_lang_th_TH">Thai</string>
+    <string name="locale_lang_no_NO">Norvég</string>
+    <string name="locale_lang_fil_PH">Filippínó</string>
+    <string name="locale_lang_lo_LA">Laoszi</string>
+    <string name="locale_lang_cs_CZ">Cseh</string>
+    <string name="locale_lang_ta">Tamil</string>
+    <string name="locale_lang_ro">Román</string>
+    <string name="locale_lang_sv_SE">Svéd</string>
+</resources>
