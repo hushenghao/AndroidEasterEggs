@@ -107,8 +107,8 @@
   <g class="font12" transform="translate(0,390)">
     <text style="text-anchor:end;" x="200" y="18">Hungarian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="110.39999999999999" x="210" y="11.4"/>
-    <text x="380" y="18">69%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="142.4" x="210" y="11.4"/>
+    <text x="380" y="18">89%</text>
   </g>
   <g class="font12" transform="translate(0,416)">
     <text style="text-anchor:end;" x="200" y="18">Indonesian</text>
