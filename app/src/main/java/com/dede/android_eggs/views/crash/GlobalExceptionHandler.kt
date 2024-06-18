@@ -4,47 +4,43 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import androidx.core.content.IntentCompat
 import kotlin.system.exitProcess
 
 class GlobalExceptionHandler<T : Activity> private constructor(
     private val applicationContext: Context,
-    private val defaultHandler: Thread.UncaughtExceptionHandler,
-    private val activityToBeLaunched: Class<T>
+    private val activityToBeLaunched: Class<T>,
+    private val defaultHandler: Thread.UncaughtExceptionHandler?,
 ) : Thread.UncaughtExceptionHandler {
 
-    override fun uncaughtException(p0: Thread, p1: Throwable) {
-        kotlin.runCatching {
-            Log.e(this.toString(), p1.stackTraceToString())
-            applicationContext.launchActivity(activityToBeLaunched, p1)
+    override fun uncaughtException(t: Thread, e: Throwable) {
+        runCatching {
+            Log.e(this.toString(), e.stackTraceToString())
+            applicationContext.launchActivity(activityToBeLaunched, e)
             exitProcess(0)
         }.getOrElse {
-            defaultHandler.uncaughtException(p0, p1)
+            defaultHandler?.uncaughtException(t, e)
         }
     }
 
-    private fun <T : Activity> Context.launchActivity(
-        activity: Class<T>,
-        exception: Throwable
-    ) {
-        val crashedIntent = Intent(applicationContext, activity).apply {
-            putExtra(
-                INTENT_DATA_NAME,
-                "${exception::class.java.simpleName}\n\n${Log.getStackTraceString(exception)}"
-            )
-            addFlags(defFlags)
-        }
+    private fun <T : Activity> Context.launchActivity(activity: Class<T>, e: Throwable) {
+        val crashedIntent = Intent(applicationContext, activity)
+            .putExtra(INTENT_DATA_NAME, e)
+            .addFlags(DEF_INTENT_FLAGS)
         applicationContext.startActivity(crashedIntent)
     }
 
     companion object {
 
-        private const val INTENT_DATA_NAME = "GlobalExceptionHandler"
-        private const val defFlags = Intent.FLAG_ACTIVITY_CLEAR_TOP or
+        private const val INTENT_DATA_NAME = "extra_throwable"
+        private const val DEF_INTENT_FLAGS = Intent.FLAG_ACTIVITY_CLEAR_TOP or
                 Intent.FLAG_ACTIVITY_NEW_TASK or
                 Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-        fun getCrashReason(intent: Intent): String {
-            return intent.getStringExtra(INTENT_DATA_NAME) ?: ""
+        fun getUncaughtException(intent: Intent): Throwable? {
+            return IntentCompat.getSerializableExtra(
+                intent, INTENT_DATA_NAME, Throwable::class.java
+            )
         }
 
         fun <T : Activity> initialize(
@@ -52,9 +48,8 @@ class GlobalExceptionHandler<T : Activity> private constructor(
             activityToBeLaunched: Class<T>,
         ) = Thread.setDefaultUncaughtExceptionHandler(
             GlobalExceptionHandler(
-                applicationContext = applicationContext,
-                Thread.getDefaultUncaughtExceptionHandler() as Thread.UncaughtExceptionHandler,
-                activityToBeLaunched
+                applicationContext, activityToBeLaunched,
+                Thread.getDefaultUncaughtExceptionHandler(),
             )
         )
     }

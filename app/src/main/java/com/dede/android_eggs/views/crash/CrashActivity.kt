@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -32,7 +33,6 @@ import androidx.compose.material.icons.rounded.PowerSettingsNew
 import androidx.compose.material.icons.rounded.RestartAlt
 import androidx.compose.material.icons.rounded.SmartToy
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
@@ -51,15 +51,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.copy
-import com.dede.android_eggs.views.crash.GlobalExceptionHandler.Companion.getCrashReason
+import com.dede.android_eggs.views.crash.GlobalExceptionHandler.Companion.getUncaughtException
 import com.dede.android_eggs.views.main.EasterEggsActivity
 import com.dede.android_eggs.views.theme.AppTheme
 import kotlin.system.exitProcess
@@ -71,16 +75,26 @@ class CrashActivity : AppCompatActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        val crashReason = getCrashReason(intent)
-        val split = crashReason.split("\n\n")
-        val exName = split[0].trim()
-        val ex = split.drop(1).joinToString("\n\n")
+        val tr = getUncaughtException(intent)
+        if (tr == null) {
+            finish()
+            return
+        }
 
-        val title = "[Bug] App Crash: $exName"
-        val deviceInfo =
-            "Device: ${Build.MODEL} (${Build.BRAND} - ${Build.DEVICE}), SDK: ${Build.VERSION.SDK_INT} (${Build.VERSION.RELEASE}), App: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n\n"
-        val body = "$deviceInfo$ex"
-
+        val title = "[Bug] App Crash: %s".format(tr::class.java.simpleName)
+        val body = buildAnnotatedString {
+            withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                append(
+                    "Device: %s (%s - %s), SDK: %s (%d), App: %s (%d)".format(
+                        Build.MODEL, Build.BRAND, Build.DEVICE,
+                        Build.VERSION.RELEASE, Build.VERSION.SDK_INT,
+                        BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,
+                    )
+                )
+            }
+            append("\n\n")
+            append(Log.getStackTraceString(tr))
+        }
         setContent {
             AppTheme {
                 Surface {
@@ -95,7 +109,7 @@ class CrashActivity : AppCompatActivity() {
 @Preview(showSystemUi = true)
 private fun CrashScreen(
     title: String = "[Bug] App Crash: java.lang.IllegalStateException: xxx",
-    body: String = "",
+    body: AnnotatedString? = null,
 ) {
     var expanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
@@ -134,16 +148,26 @@ private fun CrashScreen(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = if (expanded) body else title,
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(16.dp),
-                        maxLines = if (expanded) Int.MAX_VALUE else 1,
-                        style = typography.bodySmall,
-                        fontWeight = if (expanded) FontWeight.Normal else FontWeight.Bold,
-                        overflow = TextOverflow.Ellipsis,
-                    )
+                    if (expanded) {
+                        Text(
+                            text = body as AnnotatedString,
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(16.dp),
+                            style = typography.bodySmall,
+                        )
+                    } else {
+                        Text(
+                            text = title,
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(16.dp),
+                            maxLines = 1,
+                            style = typography.bodySmall,
+                            fontWeight = FontWeight.Bold,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    }
                     if (!expanded) {
                         Icon(
                             imageVector = Icons.Rounded.KeyboardArrowDown,
