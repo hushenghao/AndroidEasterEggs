@@ -51,7 +51,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -81,24 +80,10 @@ class CrashActivity : AppCompatActivity() {
             return
         }
 
-        val title = "[Bug] App Crash: %s".format(tr::class.java.simpleName)
-        val body = buildAnnotatedString {
-            withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
-                append(
-                    "Device: %s (%s - %s), SDK: %s (%d), App: %s (%d)".format(
-                        Build.MODEL, Build.BRAND, Build.DEVICE,
-                        Build.VERSION.RELEASE, Build.VERSION.SDK_INT,
-                        BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,
-                    )
-                )
-            }
-            append("\n\n")
-            append(Log.getStackTraceString(tr))
-        }
         setContent {
             AppTheme {
                 Surface {
-                    CrashScreen(title, body)
+                    CrashScreen(tr)
                 }
             }
         }
@@ -107,12 +92,36 @@ class CrashActivity : AppCompatActivity() {
 
 @Composable
 @Preview(showSystemUi = true)
-private fun CrashScreen(
-    title: String = "[Bug] App Crash: java.lang.IllegalStateException: xxx",
-    body: AnnotatedString? = null,
-) {
+private fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
     var expanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
+
+    val titleSpan = remember(tr) {
+        buildAnnotatedString {
+            withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                append("[Bug] App Crash: %s".format(tr.toString()))
+            }
+        }
+    }
+    val bodySpan = remember(tr) {
+        buildAnnotatedString {
+            withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                val devicesInfo = "Device: %s (%s - %s), SDK: %s (%d), App: %s (%d)".format(
+                    Build.MODEL, Build.BRAND, Build.DEVICE,
+                    Build.VERSION.RELEASE, Build.VERSION.SDK_INT,
+                    BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,
+                )
+                append(devicesInfo)
+            }
+            append("\n\n")
+            append(Log.getStackTraceString(tr))
+        }
+    }
+
+    fun copyCrashPlainText() {
+        context.copy("%s\n\n%s".format(titleSpan.text, bodySpan.text))
+    }
+
     Box {
         Column(
             modifier = Modifier
@@ -148,26 +157,15 @@ private fun CrashScreen(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    if (expanded) {
-                        Text(
-                            text = body as AnnotatedString,
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(16.dp),
-                            style = typography.bodySmall,
-                        )
-                    } else {
-                        Text(
-                            text = title,
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(16.dp),
-                            maxLines = 1,
-                            style = typography.bodySmall,
-                            fontWeight = FontWeight.Bold,
-                            overflow = TextOverflow.Ellipsis,
-                        )
-                    }
+                    Text(
+                        text = if (expanded) bodySpan else titleSpan,
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(16.dp),
+                        maxLines = if (expanded) Int.MAX_VALUE else 1,
+                        style = typography.bodySmall,
+                        overflow = TextOverflow.Ellipsis,
+                    )
                     if (!expanded) {
                         Icon(
                             imageVector = Icons.Rounded.KeyboardArrowDown,
@@ -217,7 +215,7 @@ private fun CrashScreen(
             }
             FloatingActionButton(
                 onClick = {
-                    context.copy(title + "\n\n" + body)
+                    copyCrashPlainText()
                 },
                 shape = FloatingActionButtonDefaults.largeShape
             ) {
@@ -231,14 +229,14 @@ private fun CrashScreen(
                     val uri = Uri.parse(context.getString(R.string.url_github_issues))
                         .buildUpon()
                         .appendPath("new")
-                        .appendQueryParameter("title", title)
-                        .appendQueryParameter("body", "```\n$body\n```")
+                        .appendQueryParameter("title", titleSpan.text)
+                        .appendQueryParameter("body", "```\n%s\n```".format(bodySpan.text))
                         .build()
                     try {
                         context.startActivity(Intent(Intent.ACTION_VIEW, uri))
                     } catch (_: ActivityNotFoundException) {
                     }
-                    context.copy(title + "\n\n" + body)
+                    copyCrashPlainText()
                 },
                 shape = FloatingActionButtonDefaults.largeShape
             ) {

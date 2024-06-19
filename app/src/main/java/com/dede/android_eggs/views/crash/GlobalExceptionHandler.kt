@@ -16,14 +16,14 @@ class GlobalExceptionHandler<T : Activity> private constructor(
     override fun uncaughtException(t: Thread, e: Throwable) {
         runCatching {
             Log.e(this.toString(), e.stackTraceToString())
-            applicationContext.launchActivity(activityToBeLaunched, e)
+            applicationContext.launchCrashActivity(activityToBeLaunched, e)
             exitProcess(0)
         }.getOrElse {
             defaultHandler?.uncaughtException(t, e)
         }
     }
 
-    private fun <T : Activity> Context.launchActivity(activity: Class<T>, e: Throwable) {
+    private fun <T : Activity> Context.launchCrashActivity(activity: Class<T>, e: Throwable) {
         val crashedIntent = Intent(applicationContext, activity)
             .putExtra(INTENT_DATA_NAME, e)
             .addFlags(DEF_INTENT_FLAGS)
