@@ -39,6 +39,7 @@ include(
     ":eggs:Tiramisu",
     ":eggs:UpsideDownCake",
 )
+include(":eggs:RockedLauncher")
 include(":script:compose-material-icons-generator")
 include(":script:emoji-svg-xml-convertor")
 rootProject.name = "Easter Eggs"

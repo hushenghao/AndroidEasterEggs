@@ -2,8 +2,10 @@
 
 package com.dede.android_eggs.views.settings
 
+import android.content.Intent
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +21,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.NavigateNext
+import androidx.compose.material.icons.rounded.RocketLaunch
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -34,6 +38,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -43,6 +48,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import com.android.launcher2.RocketLauncher
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.main.compose.DrawableImage
@@ -56,6 +62,7 @@ import com.dede.android_eggs.views.settings.compose.LanguagePref
 import com.dede.android_eggs.views.settings.compose.LanguagePrefUtil
 import com.dede.android_eggs.views.settings.compose.RetainInRecentsPref
 import com.dede.android_eggs.views.settings.compose.SettingDivider
+import com.dede.android_eggs.views.settings.compose.SettingPref
 import com.dede.android_eggs.views.settings.compose.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.ThemePref
 import com.dede.android_eggs.views.settings.compose.TimelinePref
@@ -141,6 +148,16 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                 SettingDivider()
 
                 TimelinePref()
+
+                val context = LocalContext.current
+                SettingPref(
+                    leadingIcon = Icons.Rounded.RocketLaunch,
+                    title = stringResource(id = com.android.launcher2.R.string.dream_name),
+                    trailingContent = Icons.AutoMirrored.Rounded.NavigateNext,
+                    onClick = {
+                        context.startActivity(Intent(context, RocketLauncher::class.java))
+                    }
+                )
 
                 ComponentManagerPref()
 
