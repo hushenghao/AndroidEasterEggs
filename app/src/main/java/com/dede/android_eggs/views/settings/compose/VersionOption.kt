@@ -116,15 +116,14 @@ fun VersionOption(
 }
 
 @HiltViewModel
-class VersionViewModel @Inject constructor() : ViewModel() {
+class VersionViewModel @Inject constructor(
+    @Github
+    val upgradeChecker: UpgradeChecker
+) : ViewModel() {
 
     private val _latestVersion: MutableLiveData<UpgradeChecker.Version> = MutableLiveData(null)
 
     val latestVersion: LiveData<UpgradeChecker.Version> = _latestVersion
-
-    @Inject
-    @Github
-    lateinit var upgradeChecker: UpgradeChecker
 
     init {
         getLatestVersion()

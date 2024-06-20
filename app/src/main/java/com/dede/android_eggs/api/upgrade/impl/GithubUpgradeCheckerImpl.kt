@@ -4,10 +4,8 @@ import com.dede.android_eggs.api.request.GithubRequests
 import com.dede.android_eggs.api.upgrade.UpgradeChecker
 import javax.inject.Inject
 
-class GithubUpgradeCheckerImpl @Inject constructor() : UpgradeChecker {
-
-    @Inject
-    lateinit var githubRequests: GithubRequests
+class GithubUpgradeCheckerImpl @Inject constructor(val githubRequests: GithubRequests) :
+    UpgradeChecker {
 
     override suspend fun getLatestVersion(): UpgradeChecker.Version? {
         return githubRequests.getLatestRelease()?.convertToVersion()

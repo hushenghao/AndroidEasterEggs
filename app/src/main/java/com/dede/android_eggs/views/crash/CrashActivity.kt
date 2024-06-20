@@ -74,7 +74,7 @@ class CrashActivity : AppCompatActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        val tr = getUncaughtException(intent)
+        val tr: Throwable? = getUncaughtException(intent)
         if (tr == null) {
             finish()
             return
@@ -113,8 +113,15 @@ private fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
                 )
                 append(devicesInfo)
             }
-            append("\n\n")
-            append(Log.getStackTraceString(tr))
+            val stackTraceString: String? = try {
+                Log.getStackTraceString(tr)
+            } catch (ignore: Throwable) {
+                tr.toString()// NPE ???
+            }
+            if (stackTraceString != null) {
+                append("\n\n")
+                append(stackTraceString)
+            }
         }
     }
 

@@ -18,7 +18,8 @@ interface GithubRequests {
         private const val GITHUB_OWNER = "hushenghao"
         private const val GITHUB_REPO = "AndroidEasterEggs"
 
-        private const val GITHUB_RELEASE_URL = "https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/releases"
+        private const val GITHUB_RELEASE_URL =
+            "https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/releases"
     }
 
     @Module
@@ -30,6 +31,25 @@ interface GithubRequests {
             return ApiManager.create<GithubRequests>()
         }
     }
+
+    @Headers("Accept: application/vnd.github+json")
+    @GET("repos/{owner}/{repo}")
+    suspend fun getRepositoryInfo(
+        @Path(value = "owner") owner: String = GITHUB_OWNER,
+        @Path(value = "repo") repo: String = GITHUB_REPO,
+    ): RepositoryInfo?
+
+    @JsonClass(generateAdapter = true)
+    data class RepositoryInfo(
+        val id: Long,
+        val name: String,
+        @Json(name = "full_name")
+        val fullName: String,
+        val private: Boolean,
+        @Json(name = "stargazers_count")
+        val stargazersCount: Int,
+        val forks: Int,
+    )
 
     @Headers("Accept: application/vnd.github+json")
     @GET("repos/{owner}/{repo}/releases/latest")

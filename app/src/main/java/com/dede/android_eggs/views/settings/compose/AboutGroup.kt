@@ -7,9 +7,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Android
 import androidx.compose.material.icons.rounded.Balance
+import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Policy
 import androidx.compose.material.icons.rounded.Share
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -48,6 +50,7 @@ fun AboutGroup() {
             },
             title = stringResource(R.string.label_beta),
             desc = stringResource(R.string.url_beta),
+            trailingContent = imageVectorIconBlock(imageVector = Icons.Rounded.Download),
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_beta)
             }
@@ -83,22 +86,12 @@ fun AboutGroup() {
 
         Option(
             leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Policy,
-                contentDescription = stringResource(R.string.label_privacy_policy),
-            ),
-            title = stringResource(R.string.label_privacy_policy),
-            desc = stringResource(R.string.url_privacy),
-            onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
-            }
-        )
-        Option(
-            leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Github,
                 contentDescription = stringResource(R.string.label_github)
             ),
             title = stringResource(R.string.label_github),
             desc = stringResource(R.string.url_github),
+            trailingContent = imageVectorIconBlock(imageVector = Icons.Rounded.Star),
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_github)
             }
@@ -112,6 +105,17 @@ fun AboutGroup() {
             desc = "Apache-2.0 license",
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_license)
+            }
+        )
+        Option(
+            leadingIcon = imageVectorIconBlock(
+                imageVector = Icons.Rounded.Policy,
+                contentDescription = stringResource(R.string.label_privacy_policy),
+            ),
+            title = stringResource(R.string.label_privacy_policy),
+            desc = stringResource(R.string.url_privacy),
+            onClick = {
+                CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
             }
         )
         Option(

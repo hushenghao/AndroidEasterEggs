@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.content.IntentCompat
+import java.io.Serializable
 import kotlin.system.exitProcess
 
 class GlobalExceptionHandler<T : Activity> private constructor(
@@ -25,7 +26,7 @@ class GlobalExceptionHandler<T : Activity> private constructor(
 
     private fun <T : Activity> Context.launchCrashActivity(activity: Class<T>, e: Throwable) {
         val crashedIntent = Intent(applicationContext, activity)
-            .putExtra(INTENT_DATA_NAME, e)
+            .putExtra(INTENT_DATA_NAME, e as Serializable)
             .addFlags(DEF_INTENT_FLAGS)
         applicationContext.startActivity(crashedIntent)
     }
