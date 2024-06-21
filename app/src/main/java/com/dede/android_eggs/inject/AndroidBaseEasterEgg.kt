@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.main
+package com.dede.android_eggs.inject
 
 import android.app.Activity
 import android.os.Build

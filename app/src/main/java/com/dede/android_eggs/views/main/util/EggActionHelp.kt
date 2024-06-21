@@ -1,4 +1,4 @@
-package com.dede.android_eggs.main
+package com.dede.android_eggs.views.main.util
 
 import android.app.Activity
 import android.app.ActivityManager
@@ -11,6 +11,7 @@ import android.content.IntentFilter
 import android.content.IntentSender
 import android.os.Build
 import androidx.core.app.PendingIntentCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -164,17 +165,15 @@ object EggActionHelp {
             }
 
             fun registerCallbackWithTimeout(context: Context): IntentSender? {
-                var receiver = this.receiver
+                var receiver = receiver
                 if (receiver == null) {
                     receiver = PinShortcutReceiver()
                     val intentFilter = IntentFilter(ACTION)
                     val appCtx = context.applicationContext
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        appCtx.registerReceiver(receiver, intentFilter, Context.RECEIVER_EXPORTED)
-                    } else {
-                        appCtx.registerReceiver(receiver, intentFilter)
-                    }
-                    this.receiver = receiver
+                    ContextCompat.registerReceiver(
+                        appCtx, receiver, intentFilter, ContextCompat.RECEIVER_EXPORTED
+                    )
+                    Companion.receiver = receiver
                 } else {
                     cancel(token)
                 }

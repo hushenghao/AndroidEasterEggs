@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.timeline
+package com.dede.android_eggs.views.main.util
 
 import android.os.Build
 import android.util.SparseIntArray
@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.core.util.set
 import com.dede.android_eggs.R
-import com.dede.android_eggs.main.EasterEggHelp
 import com.dede.basic.provider.EasterEgg
 import javax.inject.Inject
 

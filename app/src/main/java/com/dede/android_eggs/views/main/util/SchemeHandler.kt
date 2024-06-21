@@ -1,10 +1,9 @@
-package com.dede.android_eggs.views.main
+package com.dede.android_eggs.views.main.util
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
-import com.dede.android_eggs.main.EggActionHelp
 import com.dede.basic.provider.EasterEgg
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject

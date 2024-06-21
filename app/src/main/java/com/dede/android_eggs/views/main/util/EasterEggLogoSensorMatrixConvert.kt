@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.main
+package com.dede.android_eggs.views.main.util
 
 import android.animation.Animator
 import android.animation.ValueAnimator

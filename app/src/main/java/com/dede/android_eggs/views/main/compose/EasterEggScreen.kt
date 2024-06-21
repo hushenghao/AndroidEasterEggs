@@ -23,9 +23,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
-import com.dede.android_eggs.main.EasterEggHelp
+import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.util.compose.plus
-import com.dede.android_eggs.views.main.EasterEggModules
+import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 

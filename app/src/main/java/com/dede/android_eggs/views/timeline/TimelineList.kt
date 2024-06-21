@@ -47,12 +47,13 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dede.android_eggs.R
-import com.dede.android_eggs.main.TimelineEventHelp.eventAnnotatedString
-import com.dede.android_eggs.main.TimelineEventHelp.isNewGroup
-import com.dede.android_eggs.main.TimelineEventHelp.localMonth
-import com.dede.android_eggs.main.TimelineEventHelp.localYear
+import com.dede.android_eggs.views.timeline.TimelineEventHelp.eventAnnotatedString
+import com.dede.android_eggs.views.timeline.TimelineEventHelp.isNewGroup
+import com.dede.android_eggs.views.timeline.TimelineEventHelp.localMonth
+import com.dede.android_eggs.views.timeline.TimelineEventHelp.localYear
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.compose.PathShape
+import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
 import com.dede.android_eggs.views.main.compose.DrawableImage
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.provider.TimelineEvent

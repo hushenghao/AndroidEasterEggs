@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.main
+package com.dede.android_eggs.inject
 
 import com.android_g.egg.AndroidGingerbreadEasterEgg
 import com.android_h.egg.AndroidHoneycombEasterEgg
@@ -15,8 +15,7 @@ import com.android_r.egg.AndroidREasterEgg
 import com.android_s.egg.AndroidSEasterEgg
 import com.android_t.egg.AndroidTEasterEgg
 import com.android_u.egg.AndroidUEasterEgg
-import com.dede.android_eggs.main.AndroidPreviewHelp
-import com.dede.android_eggs.main.TimelineEventHelp
+import com.dede.android_eggs.views.timeline.TimelineEventHelp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.ComponentProvider.Component
 import com.dede.basic.provider.EasterEgg
@@ -30,7 +29,7 @@ import javax.inject.Singleton
 
 @Module(
     includes = [
-        AndroidPreviewHelp.PreviewEasterEgg::class,
+        AndroidNextReleaseEasterEgg::class,
         AndroidUEasterEgg::class,
         AndroidTEasterEgg::class,
         AndroidSEasterEgg::class,

@@ -1,10 +1,11 @@
-package com.dede.android_eggs.main
+package com.dede.android_eggs.views.timeline
 
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.basic.provider.TimelineEvent
 import java.util.Calendar
 import java.util.TimeZone

@@ -61,8 +61,8 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
-import com.dede.android_eggs.main.EasterEggHelp
-import com.dede.android_eggs.main.EggActionHelp
+import com.dede.android_eggs.views.main.util.EasterEggHelp
+import com.dede.android_eggs.views.main.util.EggActionHelp
 import com.dede.android_eggs.ui.views.ViscousFluidInterpolator
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg

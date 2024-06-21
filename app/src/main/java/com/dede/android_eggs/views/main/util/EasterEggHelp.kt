@@ -1,7 +1,6 @@
-package com.dede.android_eggs.main
+package com.dede.android_eggs.views.main.util
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.util.SparseArray
@@ -10,12 +9,10 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalInspectionMode
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
-import com.dede.android_eggs.views.main.EasterEggModules
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
+import com.dede.android_eggs.inject.AndroidNextReleaseEasterEgg
+import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
-import com.dede.basic.requireDrawable
 import dagger.Module
 import java.text.Format
 import java.util.Date
@@ -134,14 +131,6 @@ object EasterEggHelp {
             .append(last)
     }
 
-    fun EasterEgg.getIcon(context: Context): Drawable {
-        if (supportAdaptiveIcon) {
-            val pathStr = IconShapePrefUtil.getMaskPath(context)
-            return AlterableAdaptiveIconDrawable(context, iconRes, pathStr)
-        }
-        return context.requireDrawable(iconRes)
-    }
-
     fun getVersionNameByApiLevel(level: Int): String {
         return apiLevelArrays[level]
             ?: throw IllegalArgumentException("Illegal Api level: $level")
@@ -150,7 +139,8 @@ object EasterEggHelp {
     private val apiLevelArrays = SparseArray<String>()
 
     init {
-        apiLevelArrays[AndroidPreviewHelp.API] = AndroidPreviewHelp.API_VERSION_NAME
+        apiLevelArrays[AndroidNextReleaseEasterEgg.NEXT_API] =
+            AndroidNextReleaseEasterEgg.NEXT_API_VERSION_NAME
         apiLevelArrays[Build.VERSION_CODES.UPSIDE_DOWN_CAKE] = "14"
         apiLevelArrays[Build.VERSION_CODES.TIRAMISU] = "13"
         apiLevelArrays[Build.VERSION_CODES.S_V2] = "12L"

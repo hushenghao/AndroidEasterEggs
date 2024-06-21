@@ -10,7 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.fragment.app.FragmentManager
-import com.dede.android_eggs.views.main.EasterEggLogoSensorMatrixConvert
+import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
 
 private inline fun noLocalProvidedFor(name: String): Nothing {
     throw IllegalStateException("CompositionLocal %s not present".format(name))

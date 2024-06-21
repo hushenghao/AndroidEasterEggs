@@ -26,7 +26,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
-import com.dede.android_eggs.main.AndroidPreviewHelp
+import com.dede.android_eggs.views.main.compose.AndroidReleaseTimelineDialog
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
@@ -42,9 +42,11 @@ import com.dede.android_eggs.views.main.compose.MainTitleBar
 import com.dede.android_eggs.views.main.compose.Welcome
 import com.dede.android_eggs.views.main.compose.rememberBottomSearchBarState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiState
+import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
+import com.dede.android_eggs.views.main.util.SchemeHandler
 import com.dede.android_eggs.views.settings.SettingsScreen
-import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
 import com.dede.android_eggs.views.theme.AppTheme
 import com.dede.basic.provider.BaseEasterEgg
 import dagger.hilt.android.AndroidEntryPoint
@@ -118,7 +120,7 @@ class EasterEggsActivity : AppCompatActivity() {
                     }
                     Welcome()
                     Konfetti(konfettiState)
-                    AndroidPreviewHelp.AndroidTimelineDialog()
+                    AndroidReleaseTimelineDialog()
                 }
             }
         }

@@ -1,8 +1,5 @@
 package com.dede.android_eggs.views.main.compose
 
-import android.app.Activity
-import android.view.View
-import android.widget.FrameLayout
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -15,20 +12,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.layout.boundsInParent
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.main.EasterEggHelp
-import com.dede.android_eggs.main.EggActionHelp
-import com.dede.android_eggs.util.getActivity
+import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEggGroup
-import kotlin.math.roundToInt
 
 
 @Composable
