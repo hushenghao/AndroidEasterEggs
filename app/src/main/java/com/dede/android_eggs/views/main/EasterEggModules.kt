@@ -85,14 +85,18 @@ object EasterEggModules {
     @Provides
     @Singleton
     fun provideEasterEggAdaptiveIconRes(easterEggs: List<@JvmSuppressWildcards EasterEgg>): IntArray {
-        return easterEggs.filter { it.supportAdaptiveIcon }
-            .map { it.iconRes }.toIntArray()
+        return easterEggs
+            .filter { it.supportAdaptiveIcon }
+            .map { it.iconRes }
+            .toIntArray()
     }
 
     @Provides
     @Singleton
     fun provideEasterEggComponents(componentSet: Set<@JvmSuppressWildcards Component>): List<@JvmSuppressWildcards Component> {
-        return componentSet.sortedByDescending { it.getSortValue() }
+        return componentSet
+            .filter { it.isSupported() }
+            .sortedByDescending { it.getSortValue() }
     }
 
 }

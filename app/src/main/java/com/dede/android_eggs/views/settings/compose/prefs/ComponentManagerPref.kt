@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AppRegistration
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
@@ -25,19 +24,18 @@ import javax.inject.Inject
 
 @Composable
 fun ComponentManagerPref(viewModel: ComponentManagerViewModel = viewModel()) {
-    if (LocalInspectionMode.current) {
-        viewModel.componentList = emptyList()
-    }
-    val supportedComponentList = remember(viewModel.componentList) {
-        viewModel.componentList.filter { it.isSupported() }
+    val componentList = if (LocalInspectionMode.current) {
+        emptyList()
+    } else {
+        viewModel.componentList
     }
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.AppRegistration,
         title = stringResource(id = R.string.label_component_manager),
     ) {
-        val componentCount = supportedComponentList.size
+        val componentCount = componentList.size
         val context = LocalContext.current
-        supportedComponentList.forEachIndexed { index, component ->
+        componentList.forEachIndexed { index, component ->
             val formatter = VersionFormatter.create(component.apiLevel, component.nicknameRes)
             SwitchOption(
                 shape = OptionShapes.indexOfShape(index = index, optionsCount = componentCount),
@@ -64,7 +62,6 @@ fun ComponentManagerPref(viewModel: ComponentManagerViewModel = viewModel()) {
 }
 
 @HiltViewModel
-class ComponentManagerViewModel @Inject constructor() : ViewModel() {
-    @Inject
-    lateinit var componentList: List<@JvmSuppressWildcards ComponentProvider.Component>
-}
+class ComponentManagerViewModel @Inject constructor(
+    val componentList: List<@JvmSuppressWildcards ComponentProvider.Component>
+) : ViewModel()

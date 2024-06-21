@@ -22,18 +22,18 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.pref
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.ACTION_NIGHT_MODE_CHANGED
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.AMOLED
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.DARK
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.FOLLOW_SYSTEM
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.KEY_NIGHT_MODE
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.LIGHT
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
 import com.dede.android_eggs.views.settings.compose.basic.ValueOption
 import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
 import com.dede.android_eggs.views.settings.compose.basic.radioButtonBlock
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
+import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.ACTION_NIGHT_MODE_CHANGED
+import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.AMOLED
+import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.DARK
+import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.FOLLOW_SYSTEM
+import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.KEY_NIGHT_MODE
+import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.LIGHT
 import com.dede.android_eggs.views.theme.themeMode
 
 object ThemePrefUtil {
@@ -46,6 +46,7 @@ object ThemePrefUtil {
     const val KEY_NIGHT_MODE = "pref_key_night_mode"
 
     const val ACTION_NIGHT_MODE_CHANGED = "action_night_mode_changed"
+
     fun isAmoledMode(context: Context): Boolean {
         return context.pref.getInt(KEY_NIGHT_MODE, FOLLOW_SYSTEM) == AMOLED
     }

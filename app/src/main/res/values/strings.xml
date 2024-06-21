@@ -9,24 +9,18 @@
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
     <string name="url_github_commit" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/commit/%s</string>
     <string name="url_github_issues" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/issues</string>
-    <string name="url_github_discussions" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/discussions</string>
     <string name="url_beta" translatable="false">https://www.pgyer.com/eggs</string>
     <string name="url_privacy" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy</string>
     <string name="url_license" translatable="false">https://www.apache.org/licenses/LICENSE-2.0.txt</string>
     <string name="url_translation" translatable="false">https://crowdin.com/project/easter-eggs</string>
     <string name="url_android_releases" translatable="false">https://developer.android.com/about/versions</string>
-    <string name="url_market_detail" translatable="false">market://details?id=%s</string>
-    <string name="url_share" translatable="false">https://f-droid.org/packages/com.dede.android_eggs</string>
-    <string name="url_mail" translatable="false">mailto:dede.hu@qq.com</string>
     <string name="label_mail_me" translatable="false">dede.hu@qq.com</string>
     <string name="url_sponsor" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Sponsor</string>
-    <string name="url_aosp" translatable="false">https://source.android.com</string>
     <string name="url_telegram_group" translatable="false">https://t.me/+AD_rLq66XERkMDNl</string>
 
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
 
-    <string name="label_aosp" translatable="false">AOSP</string>
     <string name="label_github">Source code</string>
     <string name="label_translation">Translations</string>
     <string name="label_beta">Download Beta</string>
@@ -34,7 +28,6 @@
     <string name="label_privacy_policy">Privacy</string>
     <string name="label_license">License</string>
     <string name="label_feedback">Feedback</string>
-    <string name="label_discussions">Discussions</string>
     <string name="label_star">Rate the App</string>
     <string name="label_contact_me">Contact Me</string>
     <string name="label_email_title">Email</string>
@@ -68,7 +61,6 @@
     <string name="tag_swipe_view" translatable="false">swipe</string>
 
     <string name="toast_shortcut_added">Shortcut added to home screen.</string>
-    <string name="toast_easter" translatable="false">🐰🥚🍫🌷🎉</string>
     <string name="toast_no_egg" translatable="false">🤖🚫🥚</string>
     <string name="app_widget_description">This is the Easter Eggs analog clock</string>
     <string name="action_agree">I agree</string>
