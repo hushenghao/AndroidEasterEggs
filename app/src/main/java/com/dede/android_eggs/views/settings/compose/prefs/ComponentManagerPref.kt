@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.settings.compose
+package com.dede.android_eggs.views.settings.compose.prefs
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
@@ -16,6 +16,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dede.android_eggs.R
 import com.dede.android_eggs.main.EasterEggHelp.VersionFormatter
+import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
+import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
+import com.dede.android_eggs.views.settings.compose.basic.SwitchOption
 import com.dede.basic.provider.ComponentProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

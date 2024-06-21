@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.settings.compose
+package com.dede.android_eggs.views.settings.compose.groups
 
 import android.content.Intent
 import androidx.compose.foundation.Image
@@ -11,7 +11,6 @@ import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Policy
 import androidx.compose.material.icons.rounded.Share
-import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,10 +22,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.composes.icons.Github
 import com.dede.android_eggs.ui.composes.icons.rounded.FamilyStar
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.createChooser
+import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
+import com.dede.android_eggs.views.settings.compose.basic.Option
+import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
+import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
+import com.dede.android_eggs.views.settings.compose.options.GithubOption
+import com.dede.android_eggs.views.settings.compose.options.VersionOption
 
 @Preview
 @Composable
@@ -84,18 +88,7 @@ fun AboutGroup() {
             }
         )
 
-        Option(
-            leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Github,
-                contentDescription = stringResource(R.string.label_github)
-            ),
-            title = stringResource(R.string.label_github),
-            desc = stringResource(R.string.url_github),
-            trailingContent = imageVectorIconBlock(imageVector = Icons.Rounded.Star),
-            onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_github)
-            }
-        )
+        GithubOption()
         Option(
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Balance,

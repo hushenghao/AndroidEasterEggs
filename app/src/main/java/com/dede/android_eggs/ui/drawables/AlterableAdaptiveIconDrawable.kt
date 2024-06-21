@@ -20,7 +20,7 @@ import android.text.TextUtils
 import androidx.annotation.DrawableRes
 import androidx.core.graphics.withSave
 import com.dede.android_eggs.util.PathInflater
-import com.dede.android_eggs.views.settings.compose.IconShapePrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.requireDrawable
 import kotlin.math.max
 import kotlin.math.roundToInt

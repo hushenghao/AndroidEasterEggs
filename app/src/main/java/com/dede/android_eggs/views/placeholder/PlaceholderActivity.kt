@@ -27,8 +27,8 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.ThemeUtils
-import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil
-import com.dede.android_eggs.views.settings.compose.ThemePrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 import com.dede.android_eggs.views.theme.AppTheme
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dagger.hilt.android.AndroidEntryPoint

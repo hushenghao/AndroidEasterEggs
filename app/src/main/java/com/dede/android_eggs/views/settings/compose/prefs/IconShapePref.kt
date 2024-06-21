@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.settings.compose
+package com.dede.android_eggs.views.settings.compose.prefs
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -38,6 +38,9 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.composes.icons.rounded.Shapes
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.compose.PathShape
+import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
+import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
+import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
 
 object IconShapePrefUtil {
 

@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.settings.compose
+package com.dede.android_eggs.views.settings.compose.prefs
 
 import android.content.Context
 import androidx.compose.material.icons.Icons
@@ -9,6 +9,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.pref
+import com.dede.android_eggs.views.settings.compose.basic.SwitchPref
+import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
 
 private const val KEY_RETAIN_IN_RECENTS = "key_retain_in_recents"
 

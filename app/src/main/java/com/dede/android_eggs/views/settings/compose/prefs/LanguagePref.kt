@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.dede.android_eggs.views.settings.compose
+package com.dede.android_eggs.views.settings.compose.prefs
 
 import android.app.LocaleConfig
 import android.content.Context
@@ -48,6 +48,12 @@ import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
+import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
+import com.dede.android_eggs.views.settings.compose.basic.Option
+import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
+import com.dede.android_eggs.views.settings.compose.basic.ValueOption
+import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
+import com.dede.android_eggs.views.settings.compose.basic.radioButtonBlock
 import com.dede.basic.createLocalesContext
 import com.dede.basic.getLayoutDirection
 import java.util.Locale

@@ -43,8 +43,8 @@ import com.dede.android_eggs.views.main.compose.Welcome
 import com.dede.android_eggs.views.main.compose.rememberBottomSearchBarState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiState
 import com.dede.android_eggs.views.settings.SettingsScreen
-import com.dede.android_eggs.views.settings.compose.IconVisualEffectsPrefUtil
-import com.dede.android_eggs.views.settings.compose.SettingPrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
+import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.theme.AppTheme
 import com.dede.basic.provider.BaseEasterEgg
 import dagger.hilt.android.AndroidEntryPoint

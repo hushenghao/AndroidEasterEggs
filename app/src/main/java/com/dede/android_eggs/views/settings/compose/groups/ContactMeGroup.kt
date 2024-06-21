@@ -1,9 +1,8 @@
-package com.dede.android_eggs.views.settings.compose
+package com.dede.android_eggs.views.settings.compose.groups
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AlternateEmail
 import androidx.compose.material.icons.rounded.BugReport
-import androidx.compose.material.icons.rounded.Feedback
 import androidx.compose.material.icons.rounded.Forum
 import androidx.compose.material.icons.rounded.PersonSearch
 import androidx.compose.runtime.Composable
@@ -13,6 +12,10 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.composes.icons.Telegram
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.copy
+import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
+import com.dede.android_eggs.views.settings.compose.basic.Option
+import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
+import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
 
 @Composable
 fun ContactMeGroup() {

@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.settings.compose
+package com.dede.android_eggs.views.settings.compose.options
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -38,6 +38,9 @@ import com.dede.android_eggs.api.upgrade.Github
 import com.dede.android_eggs.api.upgrade.UpgradeChecker
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.launchCatchable
+import com.dede.android_eggs.views.settings.compose.basic.Option
+import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
+import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

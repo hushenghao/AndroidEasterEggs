@@ -6,8 +6,8 @@ import androidx.startup.Initializer
 import com.dede.android_eggs.util.ActivityActionDispatcher
 import com.dede.android_eggs.views.crash.CrashActivity
 import com.dede.android_eggs.views.crash.GlobalExceptionHandler
-import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil
-import com.dede.android_eggs.views.settings.compose.ThemePrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 import com.dede.basic.GlobalContext
 
 class ApplicationInitializer : Initializer<Unit> {

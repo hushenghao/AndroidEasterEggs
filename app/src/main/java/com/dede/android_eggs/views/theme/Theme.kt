@@ -19,8 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil
-import com.dede.android_eggs.views.settings.compose.ThemePrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 import com.dede.basic.globalContext
 
 

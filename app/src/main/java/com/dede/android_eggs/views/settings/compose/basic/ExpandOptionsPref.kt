@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.settings.compose
+package com.dede.android_eggs.views.settings.compose.basic
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize

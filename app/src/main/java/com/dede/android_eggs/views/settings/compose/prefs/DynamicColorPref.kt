@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.settings.compose
+package com.dede.android_eggs.views.settings.compose.prefs
 
 import android.app.Activity
 import android.app.Application
@@ -12,8 +12,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.R
-import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil.DEFAULT
-import com.dede.android_eggs.views.settings.compose.DynamicColorPrefUtil.KEY_DYNAMIC_COLOR
+import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil.DEFAULT
+import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil.KEY_DYNAMIC_COLOR
+import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
+import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
+import com.dede.android_eggs.views.settings.compose.basic.SwitchOption
+import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
+import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
 import com.dede.android_eggs.views.theme.isDynamicEnable
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.DynamicColorsOptions

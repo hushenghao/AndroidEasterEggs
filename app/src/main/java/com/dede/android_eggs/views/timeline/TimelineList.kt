@@ -54,7 +54,7 @@ import com.dede.android_eggs.main.TimelineEventHelp.localYear
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.compose.PathShape
 import com.dede.android_eggs.views.main.compose.DrawableImage
-import com.dede.android_eggs.views.settings.compose.IconShapePrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.provider.TimelineEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Calendar

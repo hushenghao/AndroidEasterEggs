@@ -23,8 +23,8 @@ import com.dede.android_eggs.main.EasterEggHelp
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.main.EasterEggLogoSensorMatrixConvert
-import com.dede.android_eggs.views.settings.compose.IconShapePrefUtil
-import com.dede.android_eggs.views.settings.compose.SettingPrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
+import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.basic.provider.EasterEgg
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 

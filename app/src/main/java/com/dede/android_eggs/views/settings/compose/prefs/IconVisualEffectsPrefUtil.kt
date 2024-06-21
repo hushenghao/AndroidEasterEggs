@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.settings.compose
+package com.dede.android_eggs.views.settings.compose.prefs
 
 import android.content.Context
 import androidx.compose.material.icons.Icons
@@ -9,6 +9,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.core.os.bundleOf
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
+import com.dede.android_eggs.views.settings.compose.basic.SwitchIntPref
 
 
 object IconVisualEffectsPrefUtil {

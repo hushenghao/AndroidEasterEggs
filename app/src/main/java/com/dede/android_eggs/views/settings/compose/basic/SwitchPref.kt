@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.settings.compose
+package com.dede.android_eggs.views.settings.compose.basic
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding

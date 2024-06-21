@@ -22,7 +22,7 @@ import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.toast
 import com.dede.android_eggs.views.main.EasterEggsActivity
-import com.dede.android_eggs.views.settings.compose.isRetainInRecentsEnabled
+import com.dede.android_eggs.views.settings.compose.prefs.isRetainInRecentsEnabled
 import com.dede.basic.cancel
 import com.dede.basic.delay
 import com.dede.basic.dp

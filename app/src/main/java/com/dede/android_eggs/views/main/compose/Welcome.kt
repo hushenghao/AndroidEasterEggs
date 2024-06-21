@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.CustomTabsBrowser
-import com.dede.android_eggs.views.settings.compose.rememberPrefBoolState
+import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
 
 private const val KEY = "key_welcome_status"
 
