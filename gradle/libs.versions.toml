@@ -87,7 +87,7 @@ androidx-test-core = "androidx.test:core-ktx:1.5.0"
 androidx-test-ext = "androidx.test.ext:junit-ktx:1.1.5"
 androidx-expresso-core = "androidx.test.espresso:espresso-core:3.5.1"
 androidx-expresso-contrib = "androidx.test.espresso:espresso-contrib:3.5.1"
-androidx-expresso-intents = "androidx.test.espresso:espresso-intents:3.5.1"
+androidx-expresso-intents = "androidx.test.espresso:espresso-intents:3.6.0"
 
 [bundles]
 android-test = ["androidx-test-core", "androidx-test-ext", "androidx-expresso-core",
