@@ -1,5 +1,6 @@
 package com.dede.android_eggs.views.main.compose
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -40,7 +41,8 @@ fun Konfetti(
     val listener = remember(state) {
         object : OnParticleSystemUpdateListener {
             override fun onParticleSystemEnded(system: PartySystem, activeSystems: Int) {
-                visible = false
+                if (activeSystems == 0)
+                    visible = false
             }
         }
     }
@@ -53,36 +55,47 @@ fun Konfetti(
     )
 }
 
-private val defaultColors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def)
+private val defaultColors = listOf(
+    0xfce18a,
+    0x009688,
+    0xff726d,
+    0xf4306d,
+    0xb48def,
+    0x95FF82,
+    0x82ECFF,
+    0xFF9800,
+    0x0E008A,
+)
+private const val colorBlendFraction = 0.3f
 
 private fun particles(primary: Int) = listOf(
     Party(
-        speed = 5f,
-        maxSpeed = 15f,
+        speed = 0f,
+        maxSpeed = 12f,
         damping = 0.9f,
         angle = Angle.BOTTOM,
         spread = Spread.ROUND,
-        colors = defaultColors.map { it.blend(primary) },
+        colors = defaultColors.map { it.blend(primary, colorBlendFraction) },
         emitter = Emitter(duration = 2, TimeUnit.SECONDS).perSecond(100),
         position = Position.Relative(0.0, 0.0).between(Position.Relative(1.0, 0.0)),
     ),
     Party(
         speed = 10f,
-        maxSpeed = 40f,
+        maxSpeed = 30f,
         damping = 0.9f,
         angle = Angle.RIGHT - 55,
         spread = 60,
-        colors = defaultColors.map { it.blend(primary) },
+        colors = defaultColors.map { it.blend(primary, colorBlendFraction) },
         emitter = Emitter(duration = 2, TimeUnit.SECONDS).perSecond(100),
         position = Position.Relative(0.0, 1.0)
     ),
     Party(
         speed = 10f,
-        maxSpeed = 40f,
+        maxSpeed = 30f,
         damping = 0.9f,
         angle = Angle.RIGHT - 125,
         spread = 60,
-        colors = defaultColors.map { it.blend(primary) },
+        colors = defaultColors.map { it.blend(primary, colorBlendFraction) },
         emitter = Emitter(duration = 2, TimeUnit.SECONDS).perSecond(100),
         position = Position.Relative(1.0, 1.0)
     )
