@@ -36,11 +36,11 @@ class GridScreenshotUtil {
         private val TARGET_SIZE = Size(1080, 2340)
 
         private val GROUPS = listOf<Group>(
-            Split(520, 1),                // 1
+            Split(540, 1),                // 1
             Triple(520, true, 4),  // 3
             Split(260, 4),                // 4
-            Pentad(520, false),            // 5
-            Triple(520, true, 4),   // 3
+            Pentad(510, false),            // 5
+            Triple(510, true, 4),   // 3
         )
 
         private const val ASSET_DIR = "screenshots"

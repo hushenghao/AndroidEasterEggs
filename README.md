@@ -49,6 +49,7 @@ development.
 
 * [AOSP](https://cs.android.com/android/platform/superproject/main)
 * [All translation contributors](https://crowdin.com/project/easter-eggs/members)
+* [Hotpot, Google Play Feature Graphics](https://hotpot.ai/templates/google-play-feature-graphic)
 
 ## Star History
 
