@@ -32,15 +32,15 @@ import kotlin.math.min
 class GridScreenshotUtil {
 
     companion object {
-        // Pixel 6
-        private val TARGET_SIZE = Size(1080, 2400)
+        // Pixel 5
+        private val TARGET_SIZE = Size(1080, 2340)
 
         private val GROUPS = listOf<Group>(
-            Split(510, 1),                // 1
-            Triple(540, true, 4),  // 3
-            Split(270, 4),                // 4
-            Pentad(540, false),            // 5
-            Triple(540, true, 4),   // 3
+            Split(520, 1),                // 1
+            Triple(520, true, 4),  // 3
+            Split(260, 4),                // 4
+            Pentad(520, false),            // 5
+            Triple(520, true, 4),   // 3
         )
 
         private const val ASSET_DIR = "screenshots"

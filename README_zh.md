@@ -9,9 +9,9 @@
 [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildBeta.yml?logo=github&label=Beta%20CI)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildBeta.yml)
 
-<div align="center">
+![featureGraphic](fastlane/metadata/android/en-US/images/featureGraphic.png)
 
-![logo](assets/image/ic_launcher_round.png)
+<div align="center">
 
 **[English](./README.md) • [中文](./README_zh.md)**
 
@@ -28,11 +28,6 @@
   使用 [Play 应用签名功能](https://support.google.com/googleplay/android-developer/answer/9842756)
   ，可能出现无法和其他下载渠道互相升级的问题。
 * **蒲公英** 下载的是Beta版本，可能包含了一些尚未稳定的新功能。
-
-## 截图
-
-| ![Screenshot](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Screenshot](./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![Screenshot](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![Screenshot](./fastlane/metadata/android/en-US/images/phoneScreenshots/4.png) |
-|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
 
 ## 贡献
 
