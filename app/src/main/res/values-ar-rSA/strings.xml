@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">في الانتظار…</string>
+    <string name="summary_android_waiting">لم يتم الاطلاق بعد</string>
     <string name="summary_android_release_pushed">لقد دفعت النسخة الإصدار النهائي</string>
     <string name="title_open_with">مفتوحة مع</string>
     <string name="char_separator">/</string>
