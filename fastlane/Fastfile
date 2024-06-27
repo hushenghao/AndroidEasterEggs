@@ -84,7 +84,7 @@ platform :android do
       - Commit: [#{commit_hash}](https://github.com/hushenghao/AndroidEasterEggs/commit/#{commit_hash})
       - Build Key: [#{pgyer_build_key}](https://www.pgyer.com/#{pgyer_build_key})
     EOF
-    photo = 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg'
+    photo = 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.png'
     send_telegram_photo(photo, message)
   end
 
