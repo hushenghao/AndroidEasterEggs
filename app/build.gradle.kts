@@ -70,6 +70,12 @@ android {
         resources.excludes += listOf("META-INF/*.version")
     }
 
+    dependenciesInfo {
+        // https://developer.android.com/build/dependencies#dependency-info-play
+        // Disables dependency metadata when building APKs.
+        includeInApk = false
+    }
+
 }
 
 dependencies {
