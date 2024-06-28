@@ -67,7 +67,10 @@ android {
     }
 
     packaging {
-        resources.excludes += listOf("META-INF/*.version")
+        resources.excludes += listOf(
+            "META-INF/*.version",
+            "DebugProbesKt.bin"
+        )
     }
 
     dependenciesInfo {
