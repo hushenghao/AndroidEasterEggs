@@ -11,7 +11,7 @@ activity = "1.9.0"
 coil = "2.6.0"
 retrofit = "2.11.0"
 # test
-espresso = "3.6.0"
+espresso = "3.6.1"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
