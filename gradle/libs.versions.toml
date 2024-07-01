@@ -86,7 +86,7 @@ kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", v
 
 junit = "junit:junit:4.13.2"
 androidx-test-core = "androidx.test:core-ktx:1.6.0"
-androidx-test-ext = "androidx.test.ext:junit-ktx:1.2.0"
+androidx-test-ext = "androidx.test.ext:junit-ktx:1.2.1"
 androidx-expresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 androidx-expresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espresso" }
 androidx-expresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espresso" }
