@@ -2,10 +2,10 @@
 
 Collections the Android release Easter Egg
 
-[![GitHub license](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache&label=License&style=flat-square)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
-[![GitHub Beta CI Status](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildBeta.yml?logo=github&label=Beta%20CI&style=flat-square)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildBeta.yml)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/hushenghao/AndroidEasterEggs/total?logo=github&label=Downloads&style=flat-square)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs?style=flat-square&label=Code%20Size)
+[![GitHub license](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache&label=License&style=flat)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
+[![GitHub Beta CI Status](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/buildBeta.yml?logo=github&label=Beta%20CI&style=flat)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/buildBeta.yml)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/hushenghao/AndroidEasterEggs/total?logo=github&label=Downloads&style=flat)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs?style=flat&label=Code%20Size)
 [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
 
 ![featureGraphic](fastlane/metadata/android/en-US/images/featureGraphic.png)
