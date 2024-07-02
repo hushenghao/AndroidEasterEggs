@@ -20,10 +20,6 @@
 # hide the original source file name.
 -renamesourcefileattribute SourceFile
 
--dontwarn org.bouncycastle.jsse.**
--dontwarn org.conscrypt.**
--dontwarn org.openjsse.**
-
 -keepnames class * extends com.dede.android_eggs.ui.adapter.VHolder
 -keepclassmembers class * extends com.dede.android_eggs.ui.adapter.VHolder {
     public <init>(android.view.View);
