@@ -15,13 +15,6 @@ object Versions {
     val JAVA_VERSION = JavaVersion.VERSION_17
     val KTOLIN_JVM_VERSION = JvmTarget.JVM_17
 
-    val Project.gitHash: String
-        get() {
-            return providers.exec {
-                commandLine("git", "rev-parse", "--short=7", "HEAD")
-            }.standardOutput.asText.get().trim()
-        }
-
     private lateinit var _keyprops: Properties
 
     val Project.keyprops: Properties

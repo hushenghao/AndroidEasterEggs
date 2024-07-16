@@ -37,6 +37,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.api.upgrade.Github
 import com.dede.android_eggs.api.upgrade.UpgradeChecker
 import com.dede.android_eggs.util.CustomTabsBrowser
+import com.dede.android_eggs.util.AGPUtils
 import com.dede.android_eggs.util.launchCatchable
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
@@ -79,7 +80,7 @@ fun VersionOption(
             BuildConfig.VERSION_NAME,
             BuildConfig.VERSION_CODE
         ),
-        desc = BuildConfig.GIT_HASH,
+        desc = AGPUtils.getVcsRevision(7),
         trailingContent = {
             Crossfade(
                 targetState = haveUpgrade,
@@ -109,10 +110,13 @@ fun VersionOption(
             if (haveUpgrade && version != null) {
                 CustomTabsBrowser.launchUrl(context, version.upgradeUrl!!.toUri())
             } else {
-                CustomTabsBrowser.launchUrl(
-                    context,
-                    context.getString(R.string.url_github_commit, BuildConfig.GIT_HASH).toUri()
-                )
+                val revision = AGPUtils.getVcsRevision()
+                val uri = if (revision == null) {
+                    context.getString(R.string.url_github)
+                } else {
+                    context.getString(R.string.url_github_commit, revision)
+                }
+                CustomTabsBrowser.launchUrl(context, uri.toUri())
             }
         }
     )

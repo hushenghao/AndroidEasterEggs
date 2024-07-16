@@ -1,4 +1,3 @@
-import Versions.gitHash
 import Versions.keyprops
 
 plugins {
@@ -26,7 +25,6 @@ android {
 
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
 
-        buildConfigField("String", "GIT_HASH", "\"${gitHash}\"")
         // Language configuration only
         buildConfigField("int", "LANGUAGE_RES", resourceConfigurations.size.toString())
     }
@@ -47,6 +45,7 @@ android {
         val config = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
         debug {
             signingConfig = config
+            //vcsInfo.include = true
         }
         release {
             isShrinkResources = true
