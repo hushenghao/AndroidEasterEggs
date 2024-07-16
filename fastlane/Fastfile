@@ -33,7 +33,7 @@ def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_T
 
   request = Net::HTTP::Post.new(url)
   form_data = [
-    ['chat_id', "-100#{chat_id}"],
+    ['chat_id', chat_id],
     ['parse_mode', 'Markdown'],
     ['caption', caption],
     ['photo', photo],
