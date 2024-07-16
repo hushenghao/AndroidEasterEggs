@@ -7,9 +7,9 @@ import java.util.Properties
 
 object Versions {
 
-    const val COMPILE_SDK = 34
-    const val BUILD_TOOLS = "34.0.0"
-    const val TARGET_SDK = 34
+    const val COMPILE_SDK = 35
+    const val BUILD_TOOLS = "35.0.0"
+    const val TARGET_SDK = 35
     const val MIN_SDK = 21
 
     val JAVA_VERSION = JavaVersion.VERSION_17
