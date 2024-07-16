@@ -1,4 +1,4 @@
-### v2.5.2
+### v2.6.0 (2024-07-16)
 
 - Add App upgrade check
 - Add BuildType bubble display
