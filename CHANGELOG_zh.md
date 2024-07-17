@@ -1,4 +1,4 @@
-### v2.6.1
+### v2.6.1 (2024-07-17)
 
 - 删除 App 更新检查 [#317](https://github.com/hushenghao/AndroidEasterEggs/issues/317)
 - 修复已知问题

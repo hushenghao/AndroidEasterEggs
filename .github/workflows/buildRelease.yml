@@ -36,16 +36,18 @@ jobs:
       - name: Get Change logs
         id: get_changelogs
         run: |
-          CHANGE_LOGS=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
-          echo "CHANGE_LOGS=$CHANGE_LOGS" >> "$GITHUB_OUTPUT"
+          CHANGE_LOG_FILE=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
+          CHANGE_LOG_CONTENT=`cat fastlane/metadata/android/en-US/changelogs/$CHANGE_LOG_FILE`
+          echo "CHANGE_LOG_FILE=$CHANGE_LOG_FILE" >> "$GITHUB_OUTPUT"
+          echo "CHANGE_LOG_CONTENT=$CHANGE_LOG_CONTENT" >> "$GITHUB_OUTPUT"
 
       - name: Create Github Release
         id: create_release
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get_changelogs.outputs.CHANGE_LOGS }}
-          artifacts: ./app/build/outputs/apk/*/*.apk,./app/build/outputs/mapping/*/mapping.txt
+          bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get_changelogs.outputs.CHANGE_LOG_FILE }}
+          artifacts: app/build/outputs/apk/*/*.apk,app/build/outputs/mapping/*/mapping.txt
           artifactContentType: application/vnd.android.package-archive
           draft: false
           prerelease: false
@@ -63,7 +65,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: 'markdown'
-          photo: 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.jpeg'
+          photo: 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.png'
           message: |
             *Easter Eggs*
             
@@ -71,12 +73,12 @@ jobs:
             
             *❇️ Changelogs:*
             
-            ${{ steps.get_changelogs.outputs.CHANGE_LOGS }}
+            ${{ steps.get_changelogs.outputs.CHANGE_LOG_CONTENT }}
             
             *🔗 Links:*
             
             - ⬇️ [Download](${{ steps.create_release.outputs.html_url }})
-            - 🐙 [Source Code](${{ github.repository }})
+            - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
 
   play-store:
     runs-on: ubuntu-latest

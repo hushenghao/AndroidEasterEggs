@@ -1,4 +1,4 @@
-### v2.6.1
+### v2.6.1 (2024-07-17)
 
 - Remove App upgrade check [#317](https://github.com/hushenghao/AndroidEasterEggs/issues/317)
 - Known issue fixes
