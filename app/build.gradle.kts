@@ -113,12 +113,6 @@ dependencies {
     implementation(libs.viewbinding.delegate)
     implementation(libs.blurhash.android)
     // implementation(libs.blurhash.painter)
-    implementation(platform(libs.squareup.okhttp.bom))
-    implementation(libs.squareup.okhttp)
-    implementation(libs.squareup.okhttp.logging)
-    implementation(libs.squareup.retrofit)
-    implementation(libs.squareup.retrofit.converter.moshi)
-    ksp(libs.squareup.moshi.codegen)
     debugImplementation(libs.squareup.leakcanary)
 
     implementation(project(":eggs:UpsideDownCake"))

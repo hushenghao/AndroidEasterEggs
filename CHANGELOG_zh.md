@@ -1,5 +1,6 @@
 ### v2.6.1
 
+- 删除 App 更新检查 [#317](https://github.com/hushenghao/AndroidEasterEggs/issues/317)
 - 修复已知问题
 
 ### v2.6.0 (2024-07-16)

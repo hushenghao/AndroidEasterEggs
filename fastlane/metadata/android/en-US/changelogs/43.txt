@@ -1,1 +1,2 @@
+- Remove App upgrade check
 - Known issue fixes

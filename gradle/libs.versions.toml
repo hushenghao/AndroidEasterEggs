@@ -9,7 +9,6 @@ accompanist = "0.34.0"
 lifecycle = "2.8.3"
 activity = "1.9.0"
 coil = "2.6.0"
-retrofit = "2.11.0"
 # test
 espresso = "3.6.1"
 
@@ -63,13 +62,7 @@ io-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 # io-coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
 # io-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 free-reflection = "com.github.tiann:FreeReflection:3.2.0"
-squareup-okhttp-bom = "com.squareup.okhttp3:okhttp-bom:4.12.0"
-squareup-okhttp = { module = "com.squareup.okhttp3:okhttp" }
-squareup-okio = { module = "com.squareup.okio:okio" }
-squareup-okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor" }
-squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-squareup-retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
-squareup-moshi-codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.15.1"
+squareup-okio = { module = "com.squareup.okio:okio", version = "3.8.0" }
 squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.14"
 nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
 
