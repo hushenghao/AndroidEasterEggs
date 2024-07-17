@@ -36,7 +36,7 @@ import android.text.style.ForegroundColorSpan
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.android_r.egg.R
-import com.dede.basic.singleExecutor
+import com.dede.basic.cachedExecutor
 import java.util.*
 import java.util.concurrent.Flow
 import java.util.function.Consumer
@@ -236,7 +236,7 @@ public class NekoControlsService : ControlsProviderService(), PrefState.PrefsLis
     }
 
     private fun pushControlChanges() {
-        singleExecutor.execute {
+        cachedExecutor.execute {
             publishers.forEach { it.refresh() }
         }
     }

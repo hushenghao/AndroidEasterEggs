@@ -26,4 +26,6 @@ fun cancel(token: Any) {
 
 val uiExecutor: Executor = ExecutorCompat.create(uiHandler)
 
-val singleExecutor: Executor = Executors.newSingleThreadExecutor()
+//val singleExecutor: Executor = Executors.newSingleThreadExecutor()
+
+val cachedExecutor: Executor = Executors.newCachedThreadPool()

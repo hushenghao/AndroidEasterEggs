@@ -10,6 +10,7 @@ import android.widget.RemoteViews
 import androidx.core.app.PendingIntentCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.views.main.EasterEggsActivity
+import com.dede.basic.cachedExecutor
 
 /**
  * Easter Eggs Analog clock widget.
@@ -31,7 +32,6 @@ class AnalogClockAppWidget : AppWidgetProvider() {
         appWidgetId: Int,
         newOptions: Bundle?,
     ) {
-        super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions)
         updateAppWidget(context, appWidgetManager, appWidgetId)
     }
 
@@ -51,5 +51,8 @@ private fun updateAppWidget(
         false
     )
     views.setOnClickPendingIntent(R.id.analog_clock, intent)
-    appWidgetManager.updateAppWidget(appWidgetId, views)
+    cachedExecutor.execute {
+        // Binder call
+        appWidgetManager.updateAppWidget(appWidgetId, views)
+    }
 }

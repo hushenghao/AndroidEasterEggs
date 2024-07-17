@@ -1,3 +1,7 @@
+### v2.6.1
+
+- Known issue fixes
+
 ### v2.6.0 (2024-07-16)
 
 - Add App upgrade check

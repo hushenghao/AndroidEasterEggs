@@ -40,7 +40,7 @@ import java.util.concurrent.Flow
 import java.util.function.Consumer
 
 import com.android_s.egg.R
-import com.dede.basic.singleExecutor
+import com.dede.basic.cachedExecutor
 
 const val CONTROL_ID_WATER = "water"
 const val CONTROL_ID_FOOD = "food"
@@ -231,7 +231,7 @@ public class NekoControlsService : ControlsProviderService(), PrefState.PrefsLis
     }
 
     private fun pushControlChanges() {
-        singleExecutor.execute {
+        cachedExecutor.execute {
             publishers.forEach { it.refresh() }
         }
     }
