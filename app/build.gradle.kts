@@ -45,7 +45,7 @@ android {
         val config = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
         debug {
             signingConfig = config
-            //vcsInfo.include = true
+            // vcsInfo.include = true
         }
         release {
             isShrinkResources = true
