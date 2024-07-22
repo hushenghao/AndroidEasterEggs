@@ -19,11 +19,11 @@ jobs:
           echo "CHANGELOG_FILE=$CHANGELOG_FILE" >> "$GITHUB_OUTPUT"
 
           CHANGELOG_CONTENT=`cat fastlane/metadata/android/en-US/changelogs/${CHANGELOG_FILE}`
-          echo "CHANGELOG_CONTENT<<EOF" >> "$GITHUB_OUTPUT"
-          cat fastlane/metadata/android/en-US/changelogs/${CHANGELOG_FILE} >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "CHANGELOG_CONTENT<<EOF" >> "GITHUB_ENV"
+          cat fastlane/metadata/android/en-US/changelogs/${CHANGELOG_FILE} >> "GITHUB_ENV"
+          echo "EOF" >> "GITHUB_ENV"
 
       - name: Check output
         run: |
           echo ${{ steps.get_changelog.outputs.CHANGELOG_FILE }}
-          echo ${{ steps.get_changelog.outputs.CHANGELOG_CONTENT }}
+          echo $CHANGELOG_CONTENT
