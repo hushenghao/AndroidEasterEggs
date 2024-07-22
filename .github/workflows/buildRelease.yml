@@ -44,7 +44,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get_changelogs.outputs.CHANGELOG_FILE }}
+          bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get_changelog.outputs.CHANGELOG_FILE }}
           artifacts: app/build/outputs/apk/*/*.apk,app/build/outputs/mapping/*/mapping.txt
           artifactContentType: application/vnd.android.package-archive
           draft: false
@@ -110,6 +110,6 @@ jobs:
         JSON_KEY_FILE_BASE64: ${{ secrets.JSON_KEY_FILE_BASE64 }}
       if: ${{ env.JSON_KEY_FILE_BASE64 != '' }}
       run: |
-        bundle install 
+        bundle install
         bundle exec fastlane install_plugins
         bundle exec fastlane deploy
