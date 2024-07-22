@@ -13,15 +13,17 @@ jobs:
 
       - name: Get Changelog
         id: get_changelog
-        shell: bash
         run: |
           CHANGELOG_FILE="$(ls -r fastlane/metadata/android/en-US/changelogs | head -1)"
           echo "CHANGELOG_FILE=${CHANGELOG_FILE}" >> "${GITHUB_OUTPUT}"
 
-          delimiter="$(openssl rand -hex 8)"
-          echo "CHANGELOG_CONTENT<<${delimiter}" >> "${GITHUB_OUTPUT}"
-          echo "$(cat fastlane/metadata/android/en-US/changelogs/${CHANGELOG_FILE})" >> "${GITHUB_OUTPUT}"
-          echo "${delimiter}" >> "${GITHUB_OUTPUT}"
+          content=$(cat fastlane/metadata/android/en-US/changelogs/${CHANGELOG_FILE})
+          echo $content
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo $content
+          echo "CHANGELOG_CONTENT=$content" >> "${GITHUB_OUTPUT}"
 
       - name: Check output
         run: |
