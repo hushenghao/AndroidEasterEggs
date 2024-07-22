@@ -1,0 +1,2 @@
+- Fix large screen device crash [349857231](https://issuetracker.google.com/issues/349857231)
+- Update Turkish translation

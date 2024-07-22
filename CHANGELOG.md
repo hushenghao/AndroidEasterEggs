@@ -1,6 +1,6 @@
-### v2.6.2
+### v2.6.2 (2024-07-22)
 
-- Fix foldable screen device crash [349857231](https://issuetracker.google.com/issues/349857231)
+- Fix large screen device crash [349857231](https://issuetracker.google.com/issues/349857231)
 - Update Turkish translation
 
 ### v2.6.1 (2024-07-17)

@@ -1,6 +1,6 @@
-### v2.6.2
+### v2.6.2 (2024-07-22)
 
-- 修复折叠屏设备崩溃 [349857231](https://issuetracker.google.com/issues/349857231)
+- 修复平板大屏设备崩溃 [349857231](https://issuetracker.google.com/issues/349857231)
 - 更新土耳其语翻译
 
 ### v2.6.1 (2024-07-17)

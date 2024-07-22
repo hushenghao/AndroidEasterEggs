@@ -33,20 +33,18 @@ jobs:
           chmod +x gradlew
           ./gradlew clean app:assembleRelease
 
-      - name: Get Change logs
-        id: get_changelogs
+      - name: Get Changelog
+        id: get_changelog
         run: |
-          CHANGE_LOG_FILE=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
-          CHANGE_LOG_CONTENT=`cat fastlane/metadata/android/en-US/changelogs/$CHANGE_LOG_FILE`
-          echo "CHANGE_LOG_FILE=$CHANGE_LOG_FILE" >> "$GITHUB_OUTPUT"
-          echo "CHANGE_LOG_CONTENT=$CHANGE_LOG_CONTENT" >> "$GITHUB_OUTPUT"
+          CHANGELOG_FILE=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
+          echo "CHANGELOG_FILE=$CHANGELOG_FILE" >> "$GITHUB_OUTPUT"
 
       - name: Create Github Release
         id: create_release
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get_changelogs.outputs.CHANGE_LOG_FILE }}
+          bodyFile: fastlane/metadata/android/en-US/changelogs/${{ steps.get_changelogs.outputs.CHANGELOG_FILE }}
           artifacts: app/build/outputs/apk/*/*.apk,app/build/outputs/mapping/*/mapping.txt
           artifactContentType: application/vnd.android.package-archive
           draft: false
@@ -71,14 +69,10 @@ jobs:
             
             🚀 New Release Version ! 🎉
             
-            *❇️ Changelogs:*
-            
-            ${{ steps.get_changelogs.outputs.CHANGE_LOG_CONTENT }}
-            
             *🔗 Links:*
             
             - ⬇️ [Download](${{ steps.create_release.outputs.html_url }})
-            - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
+            - 🐙 [Source Code](https://github.com/${{ github.repository }})
 
   play-store:
     runs-on: ubuntu-latest
