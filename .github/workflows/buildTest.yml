@@ -15,15 +15,15 @@ jobs:
         id: get_changelog
         shell: bash
         run: |
-          CHANGELOG_FILE=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
-          echo "CHANGELOG_FILE=$CHANGELOG_FILE" >> "$GITHUB_OUTPUT"
+          CHANGELOG_FILE="$(ls -r fastlane/metadata/android/en-US/changelogs | head -1)"
+          echo "CHANGELOG_FILE=${CHANGELOG_FILE}" >> "${GITHUB_OUTPUT}"
 
-          CHANGELOG_CONTENT=`cat fastlane/metadata/android/en-US/changelogs/${CHANGELOG_FILE}`
-          echo "CHANGELOG_CONTENT<<EOF" >> "GITHUB_ENV"
-          cat fastlane/metadata/android/en-US/changelogs/${CHANGELOG_FILE} >> "GITHUB_ENV"
-          echo "EOF" >> "GITHUB_ENV"
+          delimiter="$(openssl rand -hex 8)"
+          echo "CHANGELOG_CONTENT<<${delimiter}" >> "${GITHUB_OUTPUT}"
+          echo "$(cat fastlane/metadata/android/en-US/changelogs/${CHANGELOG_FILE})" >> "${GITHUB_OUTPUT}"
+          echo "${delimiter}" >> "${GITHUB_OUTPUT}"
 
       - name: Check output
         run: |
           echo ${{ steps.get_changelog.outputs.CHANGELOG_FILE }}
-          echo $CHANGELOG_CONTENT
+          echo ${{ steps.get_changelog.outputs.CHANGELOG_CONTENT }}
