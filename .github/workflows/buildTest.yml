@@ -17,9 +17,10 @@ jobs:
           CHANGELOG_FILE=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
           echo "CHANGELOG_FILE=$CHANGELOG_FILE" >> "$GITHUB_OUTPUT"
 
+          CHANGELOG_CONTENT=`cat fastlane/metadata/android/en-US/changelogs/$CHANGELOG_FILE`
           echo "CHANGELOG_CONTENT<<EOF" >> "$GITHUB_OUTPUT"
-          cat fastlane/metadata/android/en-US/changelogs/$CHANGELOG_FILE >> "$GITHUB_OUTPUT"
-          echo EOF >> "$GITHUB_OUTPUT"
+          echo "$CHANGELOG_CONTENT" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
 
       - name: Check output
         run: |
