@@ -1,0 +1,25 @@
+name: Test Act CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  act-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get Changelog
+        id: get_changelog
+        run: |
+          CHANGELOG_FILE=`ls -r fastlane/metadata/android/en-US/changelogs | head -1`
+          CHANGELOG_CONTENT=`cat fastlane/metadata/android/en-US/changelogs/$CHANGELOG_FILE`
+          echo "CHANGELOG_FILE=$CHANGE_LOG_FILE" >> "$GITHUB_OUTPUT"
+          echo "CHANGELOG_CONTENT=${{ CHANGE_LOG_CONTENT }}" >> "$GITHUB_OUTPUT"
+
+      - name: Check output
+        run: |
+          echo ${{ steps.get_changelog.outputs.CHANGELOG_FILE }}
+          echo ${{ steps.get_changelog.outputs.CHANGELOG_CONTENT }}
