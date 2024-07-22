@@ -63,7 +63,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: 'markdown'
-          photo: 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.png'
+          photo: fastlane/metadata/android/en-US/images/featureGraphic.png
           message: |
             *Easter Eggs*
             
