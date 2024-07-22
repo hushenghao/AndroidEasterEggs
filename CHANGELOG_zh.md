@@ -1,3 +1,8 @@
+### v2.6.2
+
+- 修复折叠屏设备崩溃 [349857231](https://issuetracker.google.com/issues/349857231)
+- 更新土耳其语翻译
+
 ### v2.6.1 (2024-07-17)
 
 - 删除 App 更新检查 [#317](https://github.com/hushenghao/AndroidEasterEggs/issues/317)

@@ -1,3 +1,8 @@
+### v2.6.2
+
+- Fix foldable screen device crash [349857231](https://issuetracker.google.com/issues/349857231)
+- Update Turkish translation
+
 ### v2.6.1 (2024-07-17)
 
 - Remove App upgrade check [#317](https://github.com/hushenghao/AndroidEasterEggs/issues/317)

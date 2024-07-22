@@ -34,6 +34,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -45,6 +46,7 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.views.main.compose.DrawableImage
 import com.dede.android_eggs.views.settings.compose.groups.AboutGroup
 import com.dede.android_eggs.views.settings.compose.prefs.ComponentManagerPref
@@ -128,6 +130,7 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                     ),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+                val context = LocalContext.current
                 ThemePref()
 
                 IconShapePref()
@@ -144,7 +147,9 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
 
                 ComponentManagerPref()
 
-                RetainInRecentsPref()
+                if (!SplitUtils.isActivityEmbedded(context)) {
+                    RetainInRecentsPref()
+                }
 
                 SettingDivider()
 
