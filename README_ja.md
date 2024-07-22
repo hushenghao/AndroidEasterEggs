@@ -1,6 +1,6 @@
 # Android Easter Egg Collections
 
-收集了Android系统各正式版的彩蛋
+Androidリリースのイースターエッグを収集
 
 [![GitHub license](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache&label=License&style=flat)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/hushenghao/AndroidEasterEggs/total?logo=github&label=Downloads&style=flat)
@@ -17,9 +17,9 @@
 
 </div>
 
-项目包含了系统彩蛋完整代码，旨在对系统彩蛋的整理和兼容，以保证大多数设备可以体验到不同版本的彩蛋，不会对系统彩蛋代码做过多修改。
+このプロジェクトには、システムのイースターエッグの完全なコードが含まれており、すべてのシステムのイースターエッグと互換性を持たせることを目的としています。これにより、ほとんどのデバイスで異なるバージョンのイースターエッグを体験できるようにし、イースターエッグのコードにあまり多くの変更を加えないようにします。
 
-## 下载
+## ダウンロード
 
 <div align="center">
 
@@ -33,29 +33,27 @@
 </div>
 
 * **Google Play**
-  使用 [Play 应用签名功能](https://support.google.com/googleplay/android-developer/answer/9842756)
-  ，可能出现无法和其他下载渠道互相升级的问题。
-* **蒲公英** 下载的是Beta版本，可能包含了一些尚未稳定的新功能。
+  は [Play アプリ署名機能](https://support.google.com/googleplay/android-developer/answer/9842756) を使用しており、他のダウンロードチャネルからのアップグレードができない場合があります。
+* **Pgyer** にはベータ版があり、まだ安定していない新機能が含まれている場合があります。
 
-## 贡献
+## 貢献
 
-请查看我们的[贡献文档](.github/CONTRIBUTING.md)
-来报告问题，或参与应用程序和文档的[翻译](https://zh.crowdin.com/project/easter-eggs)。
+問題を報告したり、アプリを翻訳したり、開発を支援したりする方法については、[貢献ドキュメント](.github/CONTRIBUTING.md) を参照してください。
 
 <details>
-<summary>查看所有语言的翻译状态。</summary>
+<summary>すべての言語の翻訳状況を表示します。</summary>
 
-[![Crowdin](script/crowdin/crowdin_project_progress.svg)](https://zh.crowdin.com/project/easter-eggs)
+[![Crowdin](script/crowdin/crowdin_project_progress.svg)](https://crowdin.com/project/easter-eggs)
 
 </details>
 
-## 感谢
+## 感謝
 
 * [AOSP](https://cs.android.com/android/platform/superproject/main)
-* [所有翻译贡献者](https://zh.crowdin.com/project/easter-eggs/members)
+* [すべての翻訳貢献者](https://crowdin.com/project/easter-eggs/members)
 * [Hotpot, Google Play Feature Graphics](https://hotpot.ai/templates/google-play-feature-graphic)
 
-## Star 历史
+## スター履歴
 
 <a href="https://star-history.com/#hushenghao/AndroidEasterEggs&Date">
  <picture>
@@ -65,7 +63,7 @@
  </picture>
 </a>
 
-## 协议
+## ライセンス
 
 ```text
 Copyright 2024 Hu Shenghao
