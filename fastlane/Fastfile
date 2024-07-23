@@ -111,12 +111,12 @@ platform :android do
     # Lane Variables
     apk_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
     mapping_path = lane_context[SharedValues::GRADLE_MAPPING_TXT_OUTPUT_PATH]
-    if !File.exist?(apk_path) || !File.file?(apk_path)
+    if apk_path.nil? || !File.exist?(apk_path) || !File.file?(apk_path)
       puts "⚠️ GRADLE_APK_OUTPUT_PATH not found, skip!"
       next
     end
 
-    changelogs = (File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1]) rescue "No changelog provided")
+    changelogs = (File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1]) rescue "No changelog provided")
     # https://docs.fastlane.tools/actions/set_github_release/
     github_release = set_github_release(
       repository_name: "hushenghao/AndroidEasterEggs",
