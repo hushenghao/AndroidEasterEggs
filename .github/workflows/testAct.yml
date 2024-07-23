@@ -1,0 +1,57 @@
+name: Test Act
+
+on:
+  workflow_dispatch:
+
+jobs:
+  github-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get Changelog
+        id: get_changelog
+        run: |
+          changelog_file=$(ls -r fastlane/metadata/android/en-US/changelogs | head -1)
+          changelog_file=fastlane/metadata/android/en-US/changelogs/$changelog_file
+          echo "changelog_file=$changelog_file" >> "$GITHUB_OUTPUT"
+
+      - name: Output Telegram message
+        id: output_message_file
+        env:
+          CHANGELOG_FILE: ${{ steps.get_changelog.outputs.changelog_file }}
+          RELEASE_URL: "https://github.com/hushenghao/AndroidEasterEggs/releases/tag/v2.6.2"
+        run: |
+          changelog_content=$(cat $CHANGELOG_FILE)
+          message=$(cat << EOF
+          *Easter Eggs*
+
+          🚀 New Release Version ! 🎉
+
+          $changelog_content
+
+          *🔗 Links:*
+
+          - ⬇️ [Download]($RELEASE_URL)
+          - 🐙 [Source Code](https://github.com/\${{ github.repository }})
+          EOF
+          )
+          message_file=temp_message_file.md
+          echo $message > $message_file
+          echo "message_file=$message_file" >> "$GITHUB_OUTPUT"
+
+      - name: Send Telegram message
+        env:
+          TELEGRAM_TO: ${{ secrets.TELEGRAM_TO}}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          MESSAGE_FILE: ${{ steps.output_message_file.outputs.message_file }}
+        if: ${{ env.TELEGRAM_TO != '' && env.TELEGRAM_TOKEN != ''}}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: 'markdown'
+          photo: fastlane/metadata/android/en-US/images/featureGraphic.png
+          message_file: $MESSAGE_FILE
