@@ -16,7 +16,7 @@
 require "uri"
 require "net/http"
 
-def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_TO"], photo, caption)
+def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_TO"], photo = nil, caption)
   if token == nil
     puts "⚠️ token is nil, skip!"
     return
@@ -24,6 +24,10 @@ def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_T
   if chat_id == nil
     puts "⚠️ chat_id is nil, skip!"
     return
+  end
+
+  if photo == nil
+    photo = 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.png'
   end
 
   # https://core.telegram.org/bots/api#sendphoto
@@ -49,17 +53,18 @@ platform :android do
 
   desc "Submit a new Beta Build to Pgyer"
   lane :beta do
-    if ENV["PGYER_API_KEY"] == nil
+    if ENV["PGYER_API_KEY"].nil?
       puts "⚠️ PGYER_API_KEY env not found, skip!"
       next
     end
 
     gradle(tasks: ["clean", "app:assembleBeta"])
 
+    changelogs = (File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1]) rescue "No changelog provided")
     # https://www.pgyer.com/doc/view/fastlane
     pgyer_answer = pgyer(
       api_key: ENV["PGYER_API_KEY"],
-      update_description: File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1])
+      update_description: changelogs
     )
 
     # Send to Telegram
@@ -72,7 +77,7 @@ platform :android do
 
       *❇️ Changelogs:*
 
-      #{File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1])}
+      #{changelogs}
 
       *🔗 Links:*
 
@@ -84,13 +89,65 @@ platform :android do
       - Commit: [#{commit_hash}](https://github.com/hushenghao/AndroidEasterEggs/commit/#{commit_hash})
       - Build Key: [#{pgyer_build_key}](https://www.pgyer.com/#{pgyer_build_key})
     EOF
-    photo = 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.png'
-    send_telegram_photo(photo, message)
+    send_telegram_photo(message)
   end
 
-  desc "Deploy a new version to the Google Play"
+  desc "Deploy to Github release"
+  lane :release do |options|
+    if ENV["GITHUB_TOKEN"].nil? && ENV["GITHUB_API_TOKEN"].nil?
+      puts "⚠️ GITHUB_TOKEN env and GITHUB_API_TOKEN env not found, skip!"
+      next
+    end
+
+    gradle(tasks: ["clean", "app:assembleRelease"])
+
+    ref_name = options[:ref_name]
+    if ref_name.nil?
+      puts "⚠️ github.ref_name not found, skip!"
+      next
+    end
+
+    # https://docs.fastlane.tools/actions/gradle/
+    # Lane Variables
+    apk_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+    mapping_path = lane_context[SharedValues::GRADLE_MAPPING_TXT_OUTPUT_PATH]
+    if !File.exist?(apk_path) || !File.file?(apk_path)
+      puts "⚠️ GRADLE_APK_OUTPUT_PATH not found, skip!"
+      next
+    end
+
+    changelogs = (File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1]) rescue "No changelog provided")
+    # https://docs.fastlane.tools/actions/set_github_release/
+    github_release = set_github_release(
+      repository_name: "hushenghao/AndroidEasterEggs",
+      api_bearer: ENV["GITHUB_TOKEN"],
+      name: ref_name,
+      tag_name: ref_name,
+      description: changelogs,
+      upload_assets: [apk_path, mapping_path]
+    )
+
+    # Send to Telegram
+    message = <<~EOF
+      *Easter Eggs*
+
+      🚀 New Release Version ! 🎉
+
+      *❇️ Changelogs:*
+
+      #{changelogs}
+
+      *🔗 Links:*
+
+      - ⬇️ [Download](#{github_release["html_url"]})
+      - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
+    EOF
+    send_telegram_photo(message)
+  end
+
+  desc "Deploy to Google Play"
   lane :deploy do |options|
-    if ENV["JSON_KEY_FILE"] == nil
+    if ENV["JSON_KEY_FILE"].nil?
       puts "⚠️ JSON_KEY_FILE env not found, skip!"
       next
     end

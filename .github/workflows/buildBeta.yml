@@ -18,37 +18,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up JDK
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'adopt'
-        cache: gradle
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: gradle
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.2'
-        bundler-cache: true
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
 
-    - name: Retrieve the secret and decode it to a file
-      env:
-        KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-        KEY_PROPERTIES_BASE64: ${{ secrets.KEY_PROPERTIES_BASE64 }}
-      run: |
-        echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
-        echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
+      - name: Retrieve the secret and decode it to a file
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEY_PROPERTIES_BASE64: ${{ secrets.KEY_PROPERTIES_BASE64 }}
+        run: |
+          echo "$KEY_PROPERTIES_BASE64" | base64 --decode > key.properties
+          echo "$KEYSTORE_BASE64" | base64 --decode > keystore.jks
 
-    - name: Build with Fastlane
-      env:
-        TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
-        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-        PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
-      if: ${{ env.PGYER_API_KEY != ''}}
-      run: |
-        bundle install
-        bundle exec fastlane install_plugins
-        bundle exec fastlane beta
+      - name: Build with Fastlane
+        env:
+          TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          PGYER_API_KEY: ${{ secrets.PGYER_API_KEY }}
+        if: ${{ env.PGYER_API_KEY != ''}}
+        run: |
+          bundle install
+          bundle exec fastlane install_plugins
+          bundle exec fastlane beta

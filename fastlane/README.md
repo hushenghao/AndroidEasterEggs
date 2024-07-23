@@ -23,6 +23,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Submit a new Beta Build to Pgyer
 
+### android release
+
+```sh
+[bundle exec] fastlane android release
+```
+
+Deploy a new version to the Github release
+
 ### android deploy
 
 ```sh
