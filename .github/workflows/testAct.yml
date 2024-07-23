@@ -40,6 +40,7 @@ jobs:
           )
           message_file=temp_message_file.md
           echo $message > $message_file
+          cat $message_file
           echo "message_file=$message_file" >> "$GITHUB_OUTPUT"
 
       - name: Send Telegram message
