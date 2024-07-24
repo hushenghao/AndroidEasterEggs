@@ -26,9 +26,17 @@ val Number.dpf: Float
         globalContext.resources.displayMetrics
     )
 
+@Suppress("DEPRECATION")
 fun Activity.platLogoEdge2Edge(): Unit = with(window) {
+    addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+
     navigationBarColor = Color.TRANSPARENT
     statusBarColor = Color.TRANSPARENT
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        isNavigationBarContrastEnforced = false
+        isStatusBarContrastEnforced = false
+    }
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
         attributes = attributes.apply {

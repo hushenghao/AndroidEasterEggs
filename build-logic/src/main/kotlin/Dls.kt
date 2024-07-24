@@ -8,7 +8,6 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.plugins.JavaPluginExtension
-import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
@@ -43,14 +42,17 @@ fun NamedDomainObjectContainer<ApplicationBuildType>.createWith(
     }
 }
 
+val Project.javaExtension: JavaPluginExtension
+    get() = extensions.getByName<JavaPluginExtension>("java")
+
 fun <T : BaseExtension> Project.configureAndroid(configure: Action<T>? = null) {
 
-    kotlinExtension.jvmToolchain {
-        version = 17
+    javaExtension.toolchain {
+        languageVersion.set(Versions.JAVA_VERSION)
     }
 
-    extensions.getByName<JavaPluginExtension>("java").toolchain {
-        version = JavaLanguageVersion.of(17)
+    kotlinExtension.jvmToolchain {
+        languageVersion.set(Versions.JAVA_VERSION)
     }
 
     extensions.configure<BaseExtension>("android") {
