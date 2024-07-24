@@ -1,5 +1,3 @@
-import Versions.keyprops
-
 plugins {
     id("easter.egg.app")
 }
