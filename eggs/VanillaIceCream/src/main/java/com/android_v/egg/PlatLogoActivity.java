@@ -50,6 +50,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -269,8 +270,6 @@ public class PlatLogoActivity extends Activity {
             }
             return true;
         }
-//        return false;
-        // call onBackPressed
         return super.onKeyDown(keyCode, event);
     }
 
@@ -280,8 +279,6 @@ public class PlatLogoActivity extends Activity {
             stopWarp();
             return true;
         }
-//        return false;
-        // call onBackPressed
         return super.onKeyUp(keyCode, event);
     }
 
@@ -340,6 +337,7 @@ public class PlatLogoActivity extends Activity {
                     .setComponent(component);
             Log.v(TAG, "launching: " + eggActivity);
             startActivity(eggActivity);
+            Toast.makeText(this, "Temporarily launch Android 14 Easter Egg", Toast.LENGTH_SHORT).show();
         } catch (Exception ex) {
             Log.e("PlatLogoActivity", "No more eggs.");
         }
