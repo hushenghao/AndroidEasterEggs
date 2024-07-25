@@ -60,11 +60,12 @@ platform :android do
 
     gradle(tasks: ["clean", "app:assembleBeta"])
 
-    changelogs = (File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1]) rescue "No changelog provided")
+    changelogs_zh = (File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1]) rescue "No changelog provided")
+    changelogs_en = (File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1]) rescue "No changelog provided")
     # https://www.pgyer.com/doc/view/fastlane
     pgyer_answer = pgyer(
       api_key: ENV["PGYER_API_KEY"],
-      update_description: changelogs
+      update_description: changelogs_zh
     )
 
     # Send to Telegram
@@ -77,7 +78,7 @@ platform :android do
 
       *❇️ Changelogs:*
 
-      #{changelogs}
+      #{changelogs_en}
 
       *🔗 Links:*
 
