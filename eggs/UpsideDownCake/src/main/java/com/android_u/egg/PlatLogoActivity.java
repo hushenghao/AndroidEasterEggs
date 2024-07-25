@@ -138,11 +138,10 @@ public class PlatLogoActivity extends Activity {
         private final VibratorManager mVibeMan;
         private final HandlerThread mVibeThread;
         private final Handler mVibeHandler;
-        private boolean mSpinPrimitiveSupported;
+        private final boolean mSpinPrimitiveSupported;
 
         private long mLastVibe = 0;
 
-        //        @SuppressLint("MissingPermission")
         @Override
         public boolean handleMessage(Message msg) {
             final float warpFrac = msg.arg1 / 100f;

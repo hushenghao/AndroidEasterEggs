@@ -20,6 +20,7 @@ import static android.os.VibrationEffect.Composition.PRIMITIVE_SPIN;
 
 import android.animation.ObjectAnimator;
 import android.animation.TimeAnimator;
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ComponentName;
@@ -63,7 +64,8 @@ import com.dede.basic.SpUtils;
 import java.util.Random;
 
 /**
- * @hide
+ * Preview android 15 easter egg,
+ * Modified by android 14 easter egg
  */
 public class PlatLogoActivity extends Activity {
     private static final String TAG = "PlatLogoActivity";
@@ -91,6 +93,7 @@ public class PlatLogoActivity extends Activity {
     private boolean mAnimationsEnabled = true;
 
     private final View.OnTouchListener mTouchListener = new View.OnTouchListener() {
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             switch (event.getActionMasked()) {
@@ -136,7 +139,7 @@ public class PlatLogoActivity extends Activity {
         private final VibratorManager mVibeMan;
         private final HandlerThread mVibeThread;
         private final Handler mVibeHandler;
-        private boolean mSpinPrimitiveSupported;
+        private final boolean mSpinPrimitiveSupported;
 
         private long mLastVibe = 0;
 
@@ -335,13 +338,10 @@ public class PlatLogoActivity extends Activity {
                     "com.android_v.egg.landroid.MainActivityAlias");
             final Intent eggActivity = new Intent()
                     .setComponent(component);
-//                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-//                            | Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//                    .addCategory("com.android.internal.category.PLATLOGO");
             Log.v(TAG, "launching: " + eggActivity);
             startActivity(eggActivity);
         } catch (Exception ex) {
-            Log.e("com.android.internal.app.PlatLogoActivity", "No more eggs.");
+            Log.e("PlatLogoActivity", "No more eggs.");
         }
         if (FINISH_AFTER_NEXT_STAGE_LAUNCH) {
             finish(); // we're done here.
