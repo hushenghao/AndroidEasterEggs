@@ -24,8 +24,8 @@ import java.util.Date
 import java.util.TimeZone
 import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
+//@Module
+//@InstallIn(SingletonComponent::class)
 object AndroidNextReleaseEasterEgg : EasterEggProvider {
 
     const val RELEASE_YEAR = 2024
@@ -37,13 +37,13 @@ object AndroidNextReleaseEasterEgg : EasterEggProvider {
     private const val TIMELINE_EVENT = "Vanilla Ice Cream."
 
     @StringRes
-    val NICKNAME_RES = R.string.nickname_android_vanilla_ice_cream
+    val NICKNAME_RES = R.string.app_name
 
     @DrawableRes
-    val LOGO_RES = R.drawable.android_15_logo
+    val LOGO_RES = R.mipmap.ic_launcher
 
     @DrawableRes
-    val PLATLOGO_RES = R.drawable.android_15_platlogo
+    val PLATLOGO_RES = R.mipmap.ic_launcher
 
     fun getTimelineMessage(context: Context): String {
         val calendar = Calendar.getInstance()
@@ -55,9 +55,9 @@ object AndroidNextReleaseEasterEgg : EasterEggProvider {
         }
     }
 
-    @Provides
-    @IntoSet
-    @Singleton
+//    @Provides
+//    @IntoSet
+//    @Singleton
     override fun provideEasterEgg(): BaseEasterEgg {
         return object : EasterEgg(
             iconRes = LOGO_RES,
@@ -92,9 +92,9 @@ object AndroidNextReleaseEasterEgg : EasterEggProvider {
         }
     }
 
-    @Provides
-    @IntoSet
-    @Singleton
+//    @Provides
+//    @IntoSet
+//    @Singleton
     override fun provideTimelineEvents(): List<TimelineEvent> {
         return listOf(
             TimelineEvent(

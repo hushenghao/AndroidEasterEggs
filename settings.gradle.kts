@@ -51,6 +51,7 @@ include(
     ":eggs:S",
     ":eggs:Tiramisu",
     ":eggs:UpsideDownCake",
+    ":eggs:VanillaIceCream",
 )
 include(":script:compose-material-icons-generator")
 include(":script:emoji-svg-xml-convertor")

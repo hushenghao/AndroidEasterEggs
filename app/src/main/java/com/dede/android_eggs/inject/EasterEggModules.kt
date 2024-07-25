@@ -15,6 +15,7 @@ import com.android_r.egg.AndroidREasterEgg
 import com.android_s.egg.AndroidSEasterEgg
 import com.android_t.egg.AndroidTEasterEgg
 import com.android_u.egg.AndroidUEasterEgg
+import com.android_v.egg.AndroidVEasterEgg
 import com.dede.android_eggs.views.timeline.TimelineEventHelp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.ComponentProvider.Component
@@ -29,7 +30,7 @@ import javax.inject.Singleton
 
 @Module(
     includes = [
-        AndroidNextReleaseEasterEgg::class,
+        AndroidVEasterEgg::class,
         AndroidUEasterEgg::class,
         AndroidTEasterEgg::class,
         AndroidSEasterEgg::class,
@@ -46,7 +47,7 @@ import javax.inject.Singleton
         AndroidHoneycombEasterEgg::class,
         AndroidGingerbreadEasterEgg::class,
         AndroidBaseEasterEgg::class,
-    ]
+    ],
 )
 @InstallIn(SingletonComponent::class)
 object EasterEggModules {

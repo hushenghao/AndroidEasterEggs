@@ -66,5 +66,4 @@
 
     <color name="appwidget_background_color">?attr/colorSurfaceVariant</color>
 
-    <color name="android_preview_logo_background">#FFF</color>
 </resources>

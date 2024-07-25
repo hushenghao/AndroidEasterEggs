@@ -7,8 +7,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
-        versionCode = 45
-        versionName = "2.6.2"
+        versionCode = 46
+        versionName = "2.6.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(
@@ -113,6 +113,7 @@ dependencies {
     // implementation(libs.blurhash.painter)
     debugImplementation(libs.squareup.leakcanary)
 
+    implementation(project(":eggs:VanillaIceCream"))
     implementation(project(":eggs:UpsideDownCake"))
     implementation(project(":eggs:Tiramisu"))
     implementation(project(":eggs:S"))

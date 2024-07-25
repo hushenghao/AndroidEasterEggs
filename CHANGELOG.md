@@ -1,3 +1,7 @@
+### v2.6.3
+
+- Add Android 15 Easter Egg Preview (Internally called Android 14 Easter egg)
+
 ### v2.6.2 (2024-07-22)
 
 - Fix large screen device crash [349857231](https://issuetracker.google.com/issues/349857231)

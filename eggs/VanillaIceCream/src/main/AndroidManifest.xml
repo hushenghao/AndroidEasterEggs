@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application>
+        <activity
+            android:name=".PlatLogoActivity"
+            android:configChanges="screenSize|screenLayout|orientation|keyboardHidden"
+            android:exported="true"
+            android:icon="@drawable/v_android_15_platlogo"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+
+        <!-- Android U easter egg -->
+
+        <activity-alias
+            android:name=".landroid.MainActivityAlias"
+            android:exported="true"
+            android:icon="@drawable/v_android15_patch_adaptive"
+            android:label="@string/v_egg_name"
+            android:targetActivity="com.android_u.egg.landroid.MainActivity"/>
+
+    </application>
+</manifest>

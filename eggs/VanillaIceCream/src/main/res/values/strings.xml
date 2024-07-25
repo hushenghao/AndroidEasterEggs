@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="v_android_nickname" translatable="false">Vanilla Ice Cream</string>
+    <string name="v_egg_name" translatable="false">Android 15 Easter Egg</string>
+</resources>

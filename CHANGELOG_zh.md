@@ -1,3 +1,7 @@
+### v2.6.3
+
+- 新增 Android 15 预览彩蛋 (内部调用了 Android 14 彩蛋)
+
 ### v2.6.2 (2024-07-22)
 
 - 修复平板大屏设备崩溃 [349857231](https://issuetracker.google.com/issues/349857231)

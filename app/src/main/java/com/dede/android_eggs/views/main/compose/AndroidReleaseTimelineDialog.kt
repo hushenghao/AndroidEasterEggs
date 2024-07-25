@@ -53,7 +53,7 @@ var androidReleaseDialogVisible by mutableStateOf(false)
 
 @Composable
 fun AndroidReleaseTimelineDialog(
-    @DrawableRes logoRes: Int = R.drawable.android_15_platlogo,
+    @DrawableRes logoRes: Int = R.mipmap.ic_launcher,
     @StringRes titleRes: Int = R.string.nickname_android_vanilla_ice_cream
 ) {
     if (!androidReleaseDialogVisible) {

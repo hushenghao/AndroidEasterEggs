@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalInspectionMode
 import com.dede.android_eggs.R
-import com.dede.android_eggs.inject.AndroidNextReleaseEasterEgg
 import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
@@ -139,8 +138,7 @@ object EasterEggHelp {
     private val apiLevelArrays = SparseArray<String>()
 
     init {
-        apiLevelArrays[AndroidNextReleaseEasterEgg.NEXT_API] =
-            AndroidNextReleaseEasterEgg.NEXT_API_VERSION_NAME
+        apiLevelArrays[Build.VERSION_CODES.VANILLA_ICE_CREAM] = "15"
         apiLevelArrays[Build.VERSION_CODES.UPSIDE_DOWN_CAKE] = "14"
         apiLevelArrays[Build.VERSION_CODES.TIRAMISU] = "13"
         apiLevelArrays[Build.VERSION_CODES.S_V2] = "12L"
