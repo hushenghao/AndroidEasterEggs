@@ -74,7 +74,7 @@ object LanguagePrefUtil {
     private const val PORTUGAL_BRAZIL = 29      // pt-BR
     private const val INDONESIA = 9             // in-ID
     private const val JAPANESE = 10             // ja-JP
-    private const val KOREAN = 11               // ko
+    private const val KOREAN_KOREA = 11         // ko-KR
     private const val FRENCH = 12               // fr
     private const val ARABIC = 13               // ar-SA, RTL
     private const val POLISH = 14               // pl-PL
@@ -125,7 +125,7 @@ object LanguagePrefUtil {
         LangOp(TURKISH,             R.string.language_tr_TR,  R.string.locale_lang_tr_TR,  createLocale("tr", "TR")),
         LangOp(UKRAINIAN,           R.string.language_uk_UA,  R.string.locale_lang_uk_UA,  createLocale("uk", "UA")),
         LangOp(JAPANESE,            R.string.language_ja_JP,  R.string.locale_lang_ja_JP,  Locale.JAPAN),
-        LangOp(KOREAN,              R.string.language_ko,     R.string.locale_lang_ko,     Locale.KOREAN),
+        LangOp(KOREAN_KOREA,        R.string.language_ko_KR,     R.string.locale_lang_ko_KR,     createLocale("ko","KR")),
         LangOp(GREEK,               R.string.language_el_GR,  R.string.locale_lang_el_GR,  createLocale("el", "GR")),
         LangOp(FINNISH,             R.string.language_fi_FI,  R.string.locale_lang_fi_FI,  createLocale("fi", "FI")),
         LangOp(VIETNAMESE,          R.string.language_vi_VN,  R.string.locale_lang_vi_VN,  createLocale("vi", "VN")),

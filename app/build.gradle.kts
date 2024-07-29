@@ -17,7 +17,7 @@ android {
             "en", "it", "de", "fr", "nl-rNL", "hu-rHU",
             "es", "pt", "pt-rBR", "pl-rPL", "tr-rTR", "fi-rFI",
             "in-rID", "hr-rHR", /*"la-rLA", */"el-rGR", "no-rNO",
-            "ja-rJP", "ko", "vi-rVN", "th-rTH", "fil-rPH", "lo-rLA",
+            "ja-rJP", "ko-rKR", "vi-rVN", "th-rTH", "fil-rPH", "lo-rLA",
             "ar-rSA", "cs-rCZ", "ta-rIN", "ro-rRO", "sv-rSE",
         )
 

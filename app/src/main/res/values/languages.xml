@@ -19,7 +19,7 @@
     <string name="language_fr" translatable="false">Français</string>
     <string name="language_uk_UA" translatable="false">Українська</string>
     <string name="language_tr_TR" translatable="false">Türkçe</string>
-    <string name="language_ko" translatable="false">한국어</string>
+    <string name="language_ko_KR" translatable="false">한국어</string>
     <string name="language_el_GR" translatable="false">Ελληνικά</string>
     <string name="language_fi_FI" translatable="false">Suomi kieli</string>
     <string name="language_vi_VN" translatable="false">Tiếng Việt</string>
@@ -53,7 +53,7 @@
     <string name="locale_lang_fr">French</string>
     <string name="locale_lang_uk_UA">Ukrainian</string>
     <string name="locale_lang_tr_TR">Turkish</string>
-    <string name="locale_lang_ko">Korean</string>
+    <string name="locale_lang_ko_KR">Korean</string>
     <string name="locale_lang_el_GR">Greek</string>
     <string name="locale_lang_fi_FI">Finnish</string>
     <string name="locale_lang_vi_VN">Vietnamese</string>
