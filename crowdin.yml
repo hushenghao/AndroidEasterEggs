@@ -8,15 +8,15 @@ files:
     skip_untranslated_files: true
     languages_mapping:
       android_code:
-        zh-rCN: "zh"
-        es-rES: "es"
-        pt-rPT: "pt"
+        zh-CN: "zh"
+        es-ES: "es"
+        pt-PT: "pt"
 
   - source: "/app/src/main/res/values/languages.xml"
     translation: "/app/src/main/res/values-%android_code%/%original_file_name%"
     skip_untranslated_files: true
     languages_mapping:
       android_code:
-        zh-rCN: "zh"
-        es-rES: "es"
-        pt-rPT: "pt"
+        zh-CN: "zh"
+        es-ES: "es"
+        pt-PT: "pt"
