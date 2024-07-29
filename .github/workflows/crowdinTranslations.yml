@@ -26,12 +26,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-          cache: 'pip' # caching pip dependencies
-
       - name: Crowdin push
         uses: crowdin/github-action@v2
         with:
@@ -42,6 +36,12 @@ jobs:
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
+      - name: Set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip' # caching pip dependencies
+
       - name: Update Crowdin progress
         run: |
           cd script/crowdin
@@ -50,7 +50,6 @@ jobs:
 
       - name: Crowdin pull
         uses: crowdin/github-action@v2
-        id: crowdin
         with:
           upload_sources: false
           upload_translations: false

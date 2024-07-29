@@ -1,9 +1,9 @@
-"project_id_env": "CROWDIN_PROJECT_ID"
+project_id_env: "CROWDIN_PROJECT_ID"
 api_token_env: "CROWDIN_PERSONAL_TOKEN"
 
 files:
   - source: "/app/src/main/res/values/strings.xml"
-    translation: "/app/src/main/res/values-%android_code%/strings.xml"
+    translation: "/app/src/main/res/values-%android_code%/%original_file_name%"
     update_option: update_as_unapproved
     skip_untranslated_files: true
     languages_mapping:
@@ -17,7 +17,7 @@ files:
         de-rDE: "de"
 
   - source: "/app/src/main/res/values/languages.xml"
-    translation: "/app/src/main/res/values-%android_code%/languages.xml"
+    translation: "/app/src/main/res/values-%android_code%/%original_file_name%"
     skip_untranslated_files: true
     languages_mapping:
       android_code:
