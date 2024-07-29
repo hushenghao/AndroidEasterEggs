@@ -6,6 +6,7 @@ files:
     translation: "/app/src/main/res/values-%android_code%/%original_file_name%"
     update_option: update_as_unapproved
     skip_untranslated_files: true
+    # https://developer.crowdin.com/language-codes/
     languages_mapping:
       android_code:
         zh-CN: "zh"
