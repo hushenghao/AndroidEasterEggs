@@ -18,7 +18,7 @@ android {
             "es", "pt", "pt-rBR", "pl-rPL", "tr-rTR", "fi-rFI",
             "in-rID", "hr-rHR", /*"la-rLA", */"el-rGR", "no-rNO",
             "ja-rJP", "ko-rKR", "vi-rVN", "th-rTH", "fil-rPH", "lo-rLA",
-            "ar-rSA", "cs-rCZ", "ta-rIN", "ro-rRO", "sv-rSE",
+            "ar-rSA", "cs-rCZ", "ta-rIN", "ro-rRO", "sv-rSE", "my-rMM",
         )
 
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")

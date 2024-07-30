@@ -96,6 +96,7 @@ object LanguagePrefUtil {
     private const val TAMIL = 31                // ta
     private const val ROMANIAN = 32             // ro-RO
     private const val SWEDISH = 33              // sv-SE
+    private const val BURMESE = 34              // my-MM
 
     class LangOp(
         val value: Int,
@@ -138,6 +139,7 @@ object LanguagePrefUtil {
         LangOp(TAMIL,               R.string.language_ta,     R.string.locale_lang_ta,     createLocale("ta","IN")),
         LangOp(ROMANIAN,            R.string.language_ro,     R.string.locale_lang_ro,     createLocale("ro","RO")),
         LangOp(SWEDISH,             R.string.language_sv_SE,  R.string.locale_lang_sv_SE,  createLocale("sv","SE")),
+        LangOp(BURMESE,             R.string.language_my_MM,  R.string.locale_lang_my_MM,  createLocale("my","MM")),
     )
     // @formatter:on
 

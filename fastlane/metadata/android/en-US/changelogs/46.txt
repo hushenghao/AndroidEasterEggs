@@ -1,1 +1,2 @@
 - Add Android 15 Easter Egg Preview (Internally called Android 14 Easter egg)
+- Add Burmese translation

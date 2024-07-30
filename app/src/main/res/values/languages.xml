@@ -32,6 +32,7 @@
     <string name="language_ta" translatable="false">தமிழ்</string>
     <string name="language_ro" translatable="false">Română</string>
     <string name="language_sv_SE" translatable="false">Svenska</string>
+    <string name="language_my_MM" translatable="false">မြန်မာ</string>
 
     <!-- locality language -->
     <string name="locale_lang_zh_SC">Chinese Simplified</string>
@@ -66,4 +67,5 @@
     <string name="locale_lang_ta">Tamil</string>
     <string name="locale_lang_ro">Romanian</string>
     <string name="locale_lang_sv_SE">Swedish</string>
+    <string name="locale_lang_my_MM">Burmese</string>
 </resources>
