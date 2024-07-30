@@ -10,12 +10,8 @@ files:
     languages_mapping:
       android_code:
         zh-CN: "zh"
-        ru-RU: "ru"
-        it-IT: "it"
         es-ES: "es"
-        fr-FR: "fr"
         pt-PT: "pt"
-        de-DE: "de"
 
   - source: "/app/src/main/res/values/languages.xml"
     translation: "/app/src/main/res/values-%android_code%/%original_file_name%"
@@ -23,9 +19,5 @@ files:
     languages_mapping:
       android_code:
         zh-CN: "zh"
-        ru-RU: "ru"
-        it-IT: "it"
         es-ES: "es"
-        fr-FR: "fr"
         pt-PT: "pt"
-        de-DE: "de"
