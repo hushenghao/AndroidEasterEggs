@@ -31,4 +31,7 @@
     <string name="locale_lang_lo_LA">லாவோ</string>
     <string name="locale_lang_cs_CZ">செக்</string>
     <string name="locale_lang_ta">தமிழ்</string>
+    <string name="locale_lang_ro">ரோமானியன்</string>
+    <string name="locale_lang_sv_SE">ஸ்வீடிஷ்</string>
+    <string name="locale_lang_my_MM">பர்மியம்</string>
 </resources>
