@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ஈஸ்டர் முட்டைகள்</string>
-    <string name="summary_android_waiting">காத்திருக்கிறது…</string>
+    <string name="summary_android_waiting">இன்னும் வெளியாகவில்லை</string>
     <string name="summary_android_release_pushed">இறுதி வெளியீட்டு பதிப்பு வெளியிடப்பட்டது</string>
     <string name="title_open_with">இதனுடன் திறக்கவும்</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-    <string name="label_github">Source code</string>
+    <string name="label_github">மூல குறியீடு</string>
     <string name="label_translation">மொழிபெயர்ப்பு</string>
     <string name="label_beta">பீட்டா பதிப்பு பெறுங்கள்</string>
-    <string name="label_timeline">காலவரிசை</string>
+    <string name="label_timeline">ஓஎஸ் காலவரிசை</string>
     <string name="label_privacy_policy">தனியுரிமை</string>
     <string name="label_license">உரிமம்</string>
     <string name="label_feedback">உங்களின் கருத்து</string>
-    <string name="label_star">விண்மீன்</string>
+    <string name="label_star">செயலியை மதிப்பிடவும்</string>
+    <string name="label_contact_me">என்னை தொடர்பு கொள்க</string>
+    <string name="label_email_title">மின்னஞ்சல்</string>
     <string name="label_timeline_title">காலவரிசை, மைல்கற்கள் மற்றும் புதுப்பிப்புகள்</string>
     <string name="label_timeline_releases">வெளியீடுகள்</string>
     <string name="message_trypophobia_warning">&lt;b&gt;டிரைபோபோபியா&lt;/b&gt; உள்ளவர்களுக்கு இது ஒரு எச்சரிக்கையாகும், சில படங்கள் மனநலிவு ஏற்படுத்தலாம். தொடர வேண்டுமா?</string>
@@ -28,20 +30,22 @@
     <string name="summary_system_default">இயல்புநிலை</string>
     <string name="summary_theme_dark_mode">இருள்</string>
     <string name="summary_theme_light_mode">வெளிர்</string>
+    <string name="summary_theme_amoled_mode">அமொலெட்</string>
     <string name="label_add_shortcut">குறுக்குவழி</string>
     <string name="label_donate">நன்கொடையளி</string>
     <string name="preference_on">ஆன்</string>
     <string name="preference_off">ஆஃப்</string>
-    <string name="toast_shortcut_added">குறுக்குவழி சேர்க்கப்பட்டது</string>
+    <string name="toast_shortcut_added">குறுக்குவழி முகப்பு திரையில் சேர்க்கப்பட்டது.</string>
     <string name="app_widget_description">இது ஈஸ்டர் முட்டைகள் அனலாக் கடிகாரம்</string>
     <string name="action_agree">ஒப்புகொள்</string>
     <string name="summary_browse_privacy_policy">தொடர, எங்கள் தனியுரிமைக் கொள்கையைப் படித்து ஏற்கவும்.</string>
-    <string name="label_welcome">ஈஸ்டர் முட்டை பட்டியல்களுக்கு வரவேற்கிறோம் 🎉🎉🎉</string>
+    <string name="label_welcome">ஈஸ்டர் முட்டை செயலிக்கு வரவேற்கிறோம் 🎉🎉🎉</string>
     <string name="label_share">பகிர்</string>
     <string name="label_search_hint">தேடு...</string>
     <string name="label_component_manager">கூறுகளின் நிர்வாகம்</string>
     <string name="pref_more_settings">மேலும் அமைப்புகள்</string>
-    <string name="pref_retain_recent_egg_tasks">சமீபத்திய முட்டை பணிகளை வைத்திருங்கள்</string>
-    <string name="pref_summary_retain_recent_egg_tasks">சமீபத்திய திரையில் முட்டைப் பணிகளைத் தக்கவைத்தல், அதிகபட்சம் 5 (செயல்பாடு உட்பொதிக்கப்பட்ட பயன்முறைக்கு தவறானது)</string>
+    <string name="pref_retain_recent_egg_tasks">சமீபத்திய ஈஸ்டர் முட்டை பணிகளைத் தக்கவைக்கவும்</string>
+    <string name="pref_summary_retain_recent_egg_tasks">சமீபத்திய திரையில் முட்டைப் பணிகளைத் தக்கவைக்கவும், அதிகபட்சம் 5 பணிகள் (உட்பொதிக்கப்பட்ட செயல்பாட்டில் பயன்பாட்டிற்கு இல்லை)</string>
     <string name="label_about">செயலிபற்றி</string>
+    <string name="label_contribute">பங்களி</string>
 </resources>
