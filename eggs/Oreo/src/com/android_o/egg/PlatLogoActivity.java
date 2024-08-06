@@ -91,7 +91,7 @@ public class PlatLogoActivity extends Activity {
         } else {
             im.setBackground(new RippleDrawable(
                     ColorStateList.valueOf(0xFF776677),
-                    DrawableKt.createVectorDrawableCompat(this, R.drawable.o_point_platlogo),
+                    DrawableKt.requireDrawable(this, R.drawable.o_point_platlogo),
                     null));
             im.setOutlineProvider(new ViewOutlineProvider() {
                 @Override

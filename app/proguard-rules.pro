@@ -19,8 +19,3 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 -renamesourcefileattribute SourceFile
-
--keepnames class * extends com.dede.android_eggs.ui.adapter.VHolder
--keepclassmembers class * extends com.dede.android_eggs.ui.adapter.VHolder {
-    public <init>(android.view.View);
-}

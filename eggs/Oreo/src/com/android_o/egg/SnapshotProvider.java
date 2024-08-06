@@ -47,7 +47,7 @@ public class SnapshotProvider extends com.dede.basic.provider.SnapshotProvider {
             im.setImageResource(R.drawable.o_platlogo);
         } else {
 //            im.setImageResource(R.drawable.o_point_platlogo);
-            im.setImageDrawable(DrawableKt.createVectorDrawableCompat(context, R.drawable.o_point_platlogo));
+            im.setImageDrawable(DrawableKt.requireDrawable(context, R.drawable.o_point_platlogo));
             im.setOutlineProvider(new ViewOutlineProvider() {
                 @Override
                 public void getOutline(View view, Outline outline) {

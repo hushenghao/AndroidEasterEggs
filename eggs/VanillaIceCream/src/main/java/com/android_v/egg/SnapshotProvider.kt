@@ -7,7 +7,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import com.android_v.egg.PlatLogoActivity.Starfield
 import com.dede.basic.provider.SnapshotProvider
-import com.dede.basic.createVectorDrawableCompat
+import com.dede.basic.requireDrawable
 import java.util.Random
 
 class SnapshotProvider : SnapshotProvider() {
@@ -27,7 +27,7 @@ class SnapshotProvider : SnapshotProvider() {
         layout.background = starfield
 
         val logo = ImageView(context)
-        logo.setImageDrawable(context.createVectorDrawableCompat(R.drawable.v_android_15_platlogo))
+        logo.setImageDrawable(context.requireDrawable(R.drawable.v_android_15_platlogo))
         val lp: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
             FrameLayout.LayoutParams.MATCH_PARENT

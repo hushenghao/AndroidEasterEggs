@@ -1,0 +1,3 @@
+-keep class androidx.appcompat.widget.ResourceManagerInternal { *; }
+-keep class androidx.appcompat.widget.ResourceManagerInternal$InflateDelegate { *; }
+-keep class * extends androidx.appcompat.widget.ResourceManagerInternal$InflateDelegate { *; }

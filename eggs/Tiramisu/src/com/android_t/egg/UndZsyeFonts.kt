@@ -6,8 +6,8 @@ import android.graphics.fonts.SystemFonts
 import android.os.Build
 import android.os.LocaleList
 import androidx.annotation.RequiresApi
-import com.dede.basic.utils.DynamicInvokeResult.Companion.getTypeValue
 import com.dede.basic.utils.DynamicObjectUtils
+import com.dede.basic.utils.dynamic.DynamicResult.Companion.getTypeValue
 import java.io.File
 
 /**
@@ -29,7 +29,7 @@ internal object UndZsyeFonts {
      */
     private fun getSystemPreinstalledFontConfig(): Any? {
         return DynamicObjectUtils.asDynamicObject(SystemFonts::class)
-            .tryInvokeMethod("getSystemPreinstalledFontConfig")
+            .invokeMethod("getSystemPreinstalledFontConfig")
             .getValue()// android.text.FontConfig
     }
 
@@ -40,7 +40,7 @@ internal object UndZsyeFonts {
     private fun getFontFamilies(fontConfig: Any): List<*>? {
         // android.text.FontConfig
         return DynamicObjectUtils.asDynamicObject(fontConfig)
-            .tryInvokeMethod("getFontFamilies")
+            .invokeMethod("getFontFamilies")
             .getTypeValue(List::class)// List<android.text.FontConfig$FontFamily>
     }
 
@@ -56,13 +56,13 @@ internal object UndZsyeFonts {
             // android.text.FontConfig$FontFamily
             if (fontFamily == null) continue
             val localeList: LocaleList = DynamicObjectUtils.asDynamicObject(fontFamily)
-                .tryInvokeMethod("getLocaleList")
+                .invokeMethod("getLocaleList")
                 .getTypeValue(LocaleList::class) ?: continue
             if (localeList.toLanguageTags() != LANGUAGE_TAGS) {
                 continue
             }
             val fonts = DynamicObjectUtils.asDynamicObject(fontFamily)
-                .tryInvokeMethod("getFontList")
+                .invokeMethod("getFontList")
                 .getTypeValue(List::class)// List<android.text.FontConfig$Font>
             if (!fonts.isNullOrEmpty()) {
                 return fonts[0]// android.text.FontConfig$Font
@@ -78,7 +78,7 @@ internal object UndZsyeFonts {
     private fun getFontFile(font: Any): File? {
         // android.text.FontConfig$Font
         return DynamicObjectUtils.asDynamicObject(font)
-            .tryInvokeMethod("getFile")
+            .invokeMethod("getFile")
             .getTypeValue(File::class)
     }
 

@@ -11,8 +11,8 @@ import android.os.Build
 import android.util.Log
 import com.android_t.egg.PlatLogoActivity.Bubble
 import com.dede.basic.DefType
-import com.dede.basic.createVectorDrawableCompat
 import com.dede.basic.getIdentifier
+import com.dede.basic.requireDrawable
 import com.dede.eggs.jvm_basic.EmojiUtils
 import java.io.File
 import java.util.WeakHashMap
@@ -98,7 +98,7 @@ fun Context.identifierEmojiDrawable(
     if (id == 0) {
         throw IllegalStateException("Emoji xml not found, name: %s".format(drawableName))
     }
-    return createVectorDrawableCompat(id).apply {
+    return requireDrawable(id).apply {
         cachedDrawable[emoji] = this
     }
 }

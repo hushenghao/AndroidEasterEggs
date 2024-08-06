@@ -240,7 +240,7 @@ public class PlatLogoActivity extends Activity {
         lp.gravity = Gravity.CENTER;
 
         mLogo = new ImageView(this);
-        Drawable drawable = DrawableKt.createVectorDrawableCompat(this, R.drawable.v_android_15_platlogo);
+        Drawable drawable = DrawableKt.requireDrawable(this, R.drawable.v_android_15_platlogo);
         mLogo.setImageDrawable(drawable);
         mLogo.setOnTouchListener(mTouchListener);
         mLogo.requestFocus();
