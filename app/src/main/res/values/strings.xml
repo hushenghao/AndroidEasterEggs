@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Easter Eggs</string>
 
-    <string name="summary_android_waiting">Not released yet</string>
+    <string name="summary_android_waiting">Currently unavailable</string>
     <string name="summary_android_release_pushed">The final release version has been released</string>
 
     <string name="title_open_with">Open with</string>
@@ -24,11 +24,11 @@
     <string name="label_github">Source code</string>
     <string name="label_translation">Translations</string>
     <string name="label_beta">Download Beta</string>
-    <string name="label_timeline">OS Timeline</string>
-    <string name="label_privacy_policy">Privacy</string>
+    <string name="label_timeline">Timeline</string>
+    <string name="label_privacy_policy">Privacy Policy</string>
     <string name="label_license">License</string>
-    <string name="label_feedback">Feedback</string>
-    <string name="label_star">Rate the App</string>
+    <string name="label_feedback">Give Feedback</string>
+    <string name="label_star">Rate App</string>
     <string name="label_contact_me">Contact Me</string>
     <string name="label_email_title">Email</string>
 
@@ -51,7 +51,7 @@
     <string name="summary_system_default">Default</string>
     <string name="summary_theme_dark_mode">Dark</string>
     <string name="summary_theme_light_mode">Light</string>
-    <string name="summary_theme_amoled_mode">Amoled</string>
+    <string name="summary_theme_amoled_mode">AMOLED</string>
     <string name="label_add_shortcut">Shortcut</string>
     <string name="label_donate">Donate</string>
 
@@ -70,8 +70,8 @@
     <string name="label_search_hint">Search…</string>
     <string name="label_component_manager">Components Manager</string>
     <string name="pref_more_settings">More Settings</string>
-    <string name="pref_retain_recent_egg_tasks">Retain recent Easter Egg tasks</string>
-    <string name="pref_summary_retain_recent_egg_tasks">Retain Easter Egg tasks on Recents screen, maximum of 5 retained tasks (Not available for Activity Embedded Mode.)</string>
+    <string name="pref_retain_recent_egg_tasks">Retain Easter Egg tasks</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Retain Easter Egg tasks on Recents screen. Up to 5 can be retained. (Not available for Activity Embedded Mode.)</string>
     <string name="label_about">About</string>
     <string name="label_contribute">Contribute</string>
 </resources>
