@@ -35,19 +35,18 @@ versions of Easter eggs without making too many modifications to the easter egg'
 </div>
 
 * **Google Play**
-  uses [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756),
-  which may prevent updating from other sources.
-* **Pgyer** has the Beta version, which may contain some new features that are not yet
-  stable.
+  uses [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756).
+  This may cause app updates from other sources to fail.
+  * **Pgyer** has the Beta version. Beta versions contain unfinished features that are not final and could be removed or reworked without notice and may contain bugs.
 
 ## Contributing
 
 See our [Contributing doc](.github/CONTRIBUTING.md) for information on how to report
 issues, [translate](https://crowdin.com/project/easter-eggs) the app into your language or help with
-development.
+development here.
 
 <details>
-<summary>View the translation status for all languages.</summary>
+<summary>View translation status for all languages.</summary>
 
 [![Crowdin](script/crowdin/crowdin_project_progress.svg)](https://crowdin.com/project/easter-eggs)
 
