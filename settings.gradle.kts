@@ -7,19 +7,6 @@ pluginManagement {
         google()
         mavenCentral()
     }
-
-    buildscript {
-        repositories {
-            mavenCentral()
-            maven { setUrl("https://storage.googleapis.com/r8-releases/raw") }
-        }
-
-        dependencies {
-            // https://issuetracker.google.com/issues/349857231
-            // AGP8.5.1 r8:8.5.27
-            classpath("com.android.tools:r8:8.5.33")
-        }
-    }
 }
 
 dependencyResolutionManagement {
