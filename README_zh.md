@@ -32,9 +32,7 @@
 
 </div>
 
-* **Google Play**
-  使用 [Play 应用签名功能](https://support.google.com/googleplay/android-developer/answer/9842756)
-  ，可能出现无法和其他下载渠道互相升级的问题。
+* **Play Store** 使用 [Play 应用签名功能](https://support.google.com/googleplay/android-developer/answer/9842756)，可能出现无法和其他下载渠道互相升级的问题。
 * **蒲公英** 下载的是Beta版本，可能包含了一些尚未稳定的新功能。
 
 ## 贡献

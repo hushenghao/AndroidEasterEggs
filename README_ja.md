@@ -32,8 +32,7 @@ Androidリリースのイースターエッグを収集
 
 </div>
 
-* **Google Play**
-  は [Play アプリ署名機能](https://support.google.com/googleplay/android-developer/answer/9842756) を使用しており、他のダウンロードチャネルからのアップグレードができない場合があります。
+* **Play Store** は [Play アプリ署名機能](https://support.google.com/googleplay/android-developer/answer/9842756) を使用しており、他のダウンロードチャネルからのアップグレードができない場合があります。
 * **Pgyer** にはベータ版があり、まだ安定していない新機能が含まれている場合があります。
 
 ## 貢献

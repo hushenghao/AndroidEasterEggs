@@ -34,10 +34,8 @@ versions of Easter eggs without making too many modifications to the easter egg'
 
 </div>
 
-* **Google Play**
-  uses [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756).
-  This may cause app updates from other sources to fail.
-  * **Pgyer** has the Beta version. Beta versions contain unfinished features that are not final and could be removed or reworked without notice and may contain bugs.
+* **Play Store** uses [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756). This may cause app updates from other sources to fail.
+* **Pgyer** has the Beta version. Beta versions contain unfinished features that are not final and could be removed or reworked without notice and may contain bugs.
 
 ## Contributing
 
