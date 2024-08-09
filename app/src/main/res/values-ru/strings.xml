@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Ещё не выпущено</string>
+    <string name="summary_android_waiting">Ожидание…</string>
     <string name="summary_android_release_pushed">Выпущен финальный релиз версии</string>
     <string name="title_open_with">Открыть с помощью</string>
     <string name="char_separator">/</string>
@@ -9,11 +9,11 @@
     <string name="label_github">Исходный код</string>
     <string name="label_translation">Переводы</string>
     <string name="label_beta">Скачать бета-версию</string>
-    <string name="label_timeline">Хронология ОС</string>
+    <string name="label_timeline">Хронология</string>
     <string name="label_privacy_policy">Конфиденциальность</string>
     <string name="label_license">Лицензия</string>
     <string name="label_feedback">Отправить отзыв</string>
-    <string name="label_star">Оценить приложение</string>
+    <string name="label_star">Оценить</string>
     <string name="label_contact_me">Связаться со мной</string>
     <string name="label_email_title">Эл. почта</string>
     <string name="label_timeline_title">Хронология, вехи и обновления</string>
