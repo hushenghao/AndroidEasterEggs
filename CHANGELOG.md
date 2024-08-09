@@ -1,4 +1,4 @@
-### v2.6.3
+### v2.6.3 (2024-08-09)
 
 - Add Android 15 Easter Egg Preview (Internally called Android 14 Easter egg)
 - Add Burmese translation
