@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs do Android</string>
-    <string name="summary_android_waiting">Ainda não lançado</string>
+    <string name="summary_android_waiting">Atualmente indisponível</string>
     <string name="summary_android_release_pushed">A versão final foi lançada</string>
     <string name="title_open_with">Abrir com</string>
     <string name="char_separator">/</string>

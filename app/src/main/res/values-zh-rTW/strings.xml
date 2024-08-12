@@ -30,7 +30,7 @@
     <string name="summary_system_default">預設</string>
     <string name="summary_theme_dark_mode">深色</string>
     <string name="summary_theme_light_mode">淺色</string>
-    <string name="summary_theme_amoled_mode">黑色</string>
+    <string name="summary_theme_amoled_mode">AMOLED</string>
     <string name="label_add_shortcut">捷徑</string>
     <string name="label_donate">捐贈</string>
     <string name="preference_on">開啟</string>
