@@ -59,6 +59,7 @@ jobs:
           localization_branch_name: l10n_crowdin_translations
           pull_request_title: 'feat: New Crowdin translations'
           pull_request_body: 'New Crowdin pull request with translations 🚀'
+          commit_message: 'feat: New Crowdin translations'
           pull_request_base_branch_name: 'main'
           pull_request_labels: 'translations, enhancement'
           pull_request_assignees: 'crowdin-bot'
