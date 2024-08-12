@@ -71,7 +71,7 @@ guava = { module = "com.google.guava:guava", version = "33.2.1-jre" }
 kotlinpoet = { module = "com.squareup:kotlinpoet", version = "1.18.1" }
 xmlpull = { module = "xmlpull:xmlpull", version = "1.1.3.1" }
 xpp3 = { module = "xpp3:xpp3", version = "1.1.4c" }
-android-tools-sdk-common = "com.android.tools:sdk-common:31.5.1"
+android-tools-sdk-common = "com.android.tools:sdk-common:31.5.2"
 
 # Dependencies of the included build-logic
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
