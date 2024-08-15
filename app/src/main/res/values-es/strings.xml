@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Esperando…</string>
+    <string name="summary_android_waiting">Actualmente no disponible</string>
     <string name="summary_android_release_pushed">La versión final ha sido lanzada</string>
     <string name="title_open_with">Abrir con</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-    <string name="label_github">Código fuente en GitHub</string>
+    <string name="label_github">Código fuente</string>
     <string name="label_translation">Traducción</string>
     <string name="label_beta">Obtener Beta</string>
     <string name="label_timeline">Cronología</string>
@@ -15,10 +15,10 @@
     <string name="label_feedback">Comentarios</string>
     <string name="label_star">Califica esta aplicación</string>
     <string name="label_contact_me">Contactame</string>
-    <string name="label_email_title">Correo</string>
+    <string name="label_email_title">Correo electrónico</string>
     <string name="label_timeline_title">Cronología, hitos y actualizaciones</string>
     <string name="label_timeline_releases">Versiones</string>
-    <string name="message_trypophobia_warning">Esta es una advertencia para personas con &lt;b&gt;Tripofobia&lt;/b&gt; de que algunas imágenes pueden causar molestias. ¿Quieres continuar?</string>
+    <string name="message_trypophobia_warning">Esta es una advertencia para personas con &lt;b&gt;Tripofobia&lt;/b&gt; de que algunas imágenes pueden causar incomodidad. ¿Quieres continuar?</string>
     <string name="label_settings">Configuración</string>
     <string name="label_project_desc">Este proyecto contiene el código fuente completo de todos los Easter Eggs de Android, lo que apunta a organizar y ser compatible con todos ellos, y a asegurarse de que la mayor cantidad de dispositivos posible pueda tener una experiencia de dichos Easter Eggs sin modificar mucho el código original. Las versiones más nuevas usan nuevas caracteristicas de dichos sistemas, pero versiones anteriores solo pueden usar ciertas funciones.</string>
     <string name="pref_title_icon_shape_override">Forma del Icono</string>
@@ -26,11 +26,11 @@
     <string name="pref_title_language_more">Más</string>
     <string name="pref_title_theme">Tema</string>
     <string name="pref_title_dynamic_color">Color Dinámico</string>
-    <string name="pref_title_icon_visual_effects">Efectos Visuales de Iconos</string>
+    <string name="pref_title_icon_visual_effects">Efectos Visuales del Icono</string>
     <string name="summary_system_default">Predeterminado</string>
     <string name="summary_theme_dark_mode">Oscuro</string>
     <string name="summary_theme_light_mode">Claro</string>
-    <string name="summary_theme_amoled_mode">Amolado</string>
+    <string name="summary_theme_amoled_mode">AMOLED</string>
     <string name="label_add_shortcut">Acceso Directo</string>
     <string name="label_donate">Donar</string>
     <string name="preference_on">Activado</string>
@@ -47,5 +47,5 @@
     <string name="pref_retain_recent_egg_tasks">Guardar tareas de Easter Eggs recientes</string>
     <string name="pref_summary_retain_recent_egg_tasks">Guardar tareas de Easter Eggs en la pantalla Recientes, máximo 5 tareas guardadas (No disponible para el modo de Actividad Incorporada)</string>
     <string name="label_about">Acerca de</string>
-    <string name="label_contribute">Contribuir al proyecto</string>
+    <string name="label_contribute">Contribuir</string>
 </resources>
