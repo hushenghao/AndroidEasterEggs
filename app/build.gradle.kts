@@ -59,10 +59,6 @@ android {
         }
     }
 
-    viewBinding {
-        enable = true
-    }
-
     packaging {
         resources.excludes += listOf(
             "META-INF/*.version",
@@ -106,7 +102,6 @@ dependencies {
     implementation(libs.dionsegijn.konfetti)
     implementation(libs.io.coil)
     implementation(libs.free.reflection)
-    implementation(libs.viewbinding.delegate)
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
 
