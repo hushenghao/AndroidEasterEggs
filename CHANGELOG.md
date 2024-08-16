@@ -1,3 +1,10 @@
+# Changelog
+
+### v2.6.4
+
+- Update translations
+- Upgrade project dependencies
+
 ### v2.6.3 (2024-08-09)
 
 - Add Android 15 Easter Egg Preview (Internally called Android 14 Easter egg)
@@ -6,7 +13,7 @@
 
 ### v2.6.2 (2024-07-22)
 
-- Fix large screen device crash [349857231](https://issuetracker.google.com/issues/349857231)
+- Fix large screen device crash [#349857231](https://issuetracker.google.com/issues/349857231)
 - Update Turkish translation
 
 ### v2.6.1 (2024-07-17)

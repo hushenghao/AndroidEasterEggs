@@ -13,10 +13,8 @@ class PermissionRequestAction : ActivityActionDispatcher.ActivityAction {
 
     companion object {
 
-        private val EMPTY = emptyArray<String>()
-
         private val NOTIFICATION = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-            arrayOf(Manifest.permission.POST_NOTIFICATIONS) else EMPTY
+            arrayOf(Manifest.permission.POST_NOTIFICATIONS) else emptyArray()
 
         private val mapping = mapOf(
             com.android_t.egg.ComponentActivationActivity::class to NOTIFICATION,
