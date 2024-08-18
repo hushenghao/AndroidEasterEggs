@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- locality language -->
-    <string name="locale_lang_zh_SC">Čínština Zjednodušená</string>
-    <string name="locale_lang_zh_TC">Čínština Tradiční</string>
-    <string name="locale_lang_de">Německo</string>
+    <string name="locale_lang_zh_SC">Zjednodušená čínština</string>
+    <string name="locale_lang_zh_TC">Tradiční čínština</string>
+    <string name="locale_lang_de">德文</string>
     <string name="locale_lang_en">Angličtina</string>
     <string name="locale_lang_es">Španělština</string>
     <string name="locale_lang_hr_HR">Chorvatština</string>
@@ -33,4 +33,5 @@
     <string name="locale_lang_ta">Tamilština</string>
     <string name="locale_lang_ro">Rumunština</string>
     <string name="locale_lang_sv_SE">Švédština</string>
+    <string name="locale_lang_my_MM"></string>
 </resources>
