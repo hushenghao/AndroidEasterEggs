@@ -26,12 +26,12 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
-import com.dede.android_eggs.views.main.compose.AndroidReleaseTimelineDialog
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.compose.end
+import com.dede.android_eggs.views.main.compose.AndroidReleaseTimelineDialog
 import com.dede.android_eggs.views.main.compose.BottomSearchBar
 import com.dede.android_eggs.views.main.compose.EasterEggScreen
 import com.dede.android_eggs.views.main.compose.Konfetti
@@ -43,12 +43,14 @@ import com.dede.android_eggs.views.main.compose.Welcome
 import com.dede.android_eggs.views.main.compose.rememberBottomSearchBarState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiState
 import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
+import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.SchemeHandler
 import com.dede.android_eggs.views.settings.SettingsScreen
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
 import com.dede.android_eggs.views.theme.AppTheme
 import com.dede.basic.provider.BaseEasterEgg
+import com.dede.basic.provider.EasterEgg
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
@@ -58,6 +60,8 @@ class EasterEggsActivity : AppCompatActivity() {
 
     @Inject
     lateinit var easterEggs: List<@JvmSuppressWildcards BaseEasterEgg>
+    @Inject
+    lateinit var pureEasterEggs: List<@JvmSuppressWildcards EasterEgg>
 
     @Inject
     @ActivityScoped
@@ -132,6 +136,7 @@ class EasterEggsActivity : AppCompatActivity() {
         }
 
         schemeHandler.handleIntent(intent)
+        EasterEggShortcutsHelp.updateShortcuts(this, pureEasterEggs)
     }
 
 
