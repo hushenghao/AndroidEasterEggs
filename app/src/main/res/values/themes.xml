@@ -6,8 +6,7 @@
         <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">
             @drawable/avd_anim_v_platlogo
         </item>
-        <!-- Required for animated icons -->
-        <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">500</item>
+        <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">400</item>
         <item name="android:windowSplashScreenBackground" tools:targetApi="s">
             @color/splash_background_color
         </item>
