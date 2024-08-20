@@ -2,6 +2,7 @@
 
 ### v2.6.4
 
+- Update SplashScreen Icon
 - Update translations
 - Upgrade project dependencies
 

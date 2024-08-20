@@ -1,2 +1,3 @@
+- Update SplashScreen Icon
 - Update translations
 - Upgrade project dependencies
