@@ -147,10 +147,10 @@
     <target android:name="launch">
         <aapt:attr name="android:animation">
             <objectAnimator
-                android:duration="325"
+                android:duration="450"
                 android:interpolator="@android:interpolator/fast_out_slow_in"
                 android:propertyName="translateY"
-                android:startOffset="50"
+                android:startOffset="25"
                 android:valueFrom="296"
                 android:valueTo="0"
                 android:valueType="floatType" />
@@ -159,10 +159,10 @@
     <target android:name="android_logo">
         <aapt:attr name="android:animation">
             <objectAnimator
-                android:duration="200"
-                android:interpolator="@android:interpolator/linear_out_slow_in"
+                android:duration="300"
+                android:interpolator="@android:interpolator/fast_out_slow_in"
                 android:propertyName="translateY"
-                android:startOffset="175"
+                android:startOffset="200"
                 android:valueFrom="190"
                 android:valueTo="0"
                 android:valueType="floatType" />
@@ -180,10 +180,10 @@
                     android:valueTo="55"
                     android:valueType="floatType" />
                 <objectAnimator
-                    android:duration="125"
-                    android:interpolator="@android:interpolator/linear_out_slow_in"
+                    android:duration="300"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"
                     android:propertyName="strokeWidth"
-                    android:startOffset="250"
+                    android:startOffset="200"
                     android:valueFrom="0"
                     android:valueTo="55"
                     android:valueType="floatType" />
@@ -193,10 +193,10 @@
     <target android:name="android_15">
         <aapt:attr name="android:animation">
             <objectAnimator
-                android:duration="100"
-                android:interpolator="@android:interpolator/linear_out_slow_in"
+                android:duration="275"
+                android:interpolator="@android:anim/linear_interpolator"
                 android:propertyName="fillAlpha"
-                android:startOffset="300"
+                android:startOffset="325"
                 android:valueFrom="0"
                 android:valueTo="1"
                 android:valueType="floatType" />
@@ -205,10 +205,10 @@
     <target android:name="android_text">
         <aapt:attr name="android:animation">
             <objectAnimator
-                android:duration="100"
+                android:duration="275"
                 android:interpolator="@android:interpolator/linear_out_slow_in"
                 android:propertyName="fillAlpha"
-                android:startOffset="300"
+                android:startOffset="325"
                 android:valueFrom="0"
                 android:valueTo="1"
                 android:valueType="floatType" />
