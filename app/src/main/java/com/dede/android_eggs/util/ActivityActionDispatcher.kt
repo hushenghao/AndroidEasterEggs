@@ -4,12 +4,14 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.dede.android_eggs.util.actions.PermissionRequestAction
-import com.dede.android_eggs.util.actions.PlatLogoEdge2EdgeAction
+import com.dede.android_eggs.util.actions.PlatLogoActivityAction
 import com.dede.android_eggs.util.actions.WarningDialogAction
 
 class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
 
     interface ActivityAction {
+
+        fun onPreCreate(activity: Activity) {}
 
         fun onCreate(activity: Activity) {}
 
@@ -31,8 +33,14 @@ class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
     private val actions = arrayListOf(
         PermissionRequestAction(),
         WarningDialogAction(),
-        PlatLogoEdge2EdgeAction()
+        PlatLogoActivityAction()
     )
+
+    override fun onActivityPreCreated(activity: Activity, savedInstanceState: Bundle?) {
+        for (action in actions) {
+            action.onPreCreate(activity)
+        }
+    }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         for (action in actions) {

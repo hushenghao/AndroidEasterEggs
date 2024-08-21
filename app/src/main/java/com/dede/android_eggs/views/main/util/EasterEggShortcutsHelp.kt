@@ -1,20 +1,39 @@
 package com.dede.android_eggs.views.main.util
 
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.content.IntentSender
+import android.os.Build
+import androidx.core.app.PendingIntentCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
+import androidx.core.graphics.drawable.toBitmap
+import com.dede.android_eggs.R
+import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
+import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.applyNotNull
+import com.dede.android_eggs.util.toast
+import com.dede.android_eggs.views.main.EasterEggsActivity
 import com.dede.basic.cachedExecutor
+import com.dede.basic.cancel
+import com.dede.basic.delay
+import com.dede.basic.dp
 import com.dede.basic.provider.EasterEgg
 import kotlin.math.min
 
 object EasterEggShortcutsHelp {
 
+    private const val EXTRA_SHORTCUT_ID = "extra_shortcut_id"
+
     private const val DEFAULT_SHORTCUT_COUNT = 3
-    // 'android_%id' already occupied.
-    private const val FORMAT_SHORTCUT_ID = "dynamic_shortcut_android_%d"
+
+    private const val FORMAT_DYNAMIC_SHORTCUT_ID = "dynamic_shortcut_android_%d"
+    private const val FORMAT_PIN_SHORTCUT_ID = "android_%d"
 
     private class UpdateShortcutsRunnable(
         private val context: Context,
@@ -34,15 +53,17 @@ object EasterEggShortcutsHelp {
             val dynamicShortcuts = ShortcutManagerCompat.getDynamicShortcuts(context)
             val removeShortcutIds = dynamicShortcuts.map { it.id }.toMutableList()
             for (egg in subEggs) {
-                val shortcutId = FORMAT_SHORTCUT_ID.format(egg.id)
+                val shortcutId = FORMAT_DYNAMIC_SHORTCUT_ID.format(egg.id)
                 for (shortcut in dynamicShortcuts) {
                     if (shortcutId == shortcut.id) {
                         removeShortcutIds.remove(shortcut.id)
                         break
                     }
                 }
-
-                val shortcutInfo = createShortcutInfo(context, egg)
+                if (!isSupportShortcut(egg)) {
+                    continue
+                }
+                val shortcutInfo = createShortcutInfo(context, shortcutId, egg, false)
                 ShortcutManagerCompat.pushDynamicShortcut(context, shortcutInfo)
             }
             if (removeShortcutIds.size > 0) {
@@ -57,21 +78,109 @@ object EasterEggShortcutsHelp {
         cachedExecutor.execute(UpdateShortcutsRunnable(appCtx, providedEggs))
     }
 
-    private fun createShortcutInfo(context: Context, egg: EasterEgg): ShortcutInfoCompat {
+    private fun createShortcutInfo(
+        context: Context,
+        shortcutId: String,
+        egg: EasterEgg,
+        isPinShortcut: Boolean = true
+    ): ShortcutInfoCompat {
         val clazz = requireNotNull(egg.provideEasterEgg()) {
-            "Unsupported easter egg, provide class == null!"
+            "EasterEgg unsupported shortcut, provide class == null!"
         }
         val label = context.getString(egg.nicknameRes)
-        return ShortcutInfoCompat.Builder(context, FORMAT_SHORTCUT_ID.format(egg.id))
-            .setRank(egg.id)
-            .setIcon(IconCompat.createWithResource(context, egg.iconRes))
+
+        val icon = if (isPinShortcut && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            val bitmap = AlterableAdaptiveIconDrawable(context, egg.iconRes)
+                .toBitmap(48.dp, 48.dp)
+            IconCompat.createWithBitmap(bitmap)
+        } else {
+            IconCompat.createWithResource(context, egg.iconRes)
+        }
+        return ShortcutInfoCompat.Builder(context, shortcutId)
+            .setIcon(icon)
             .setShortLabel(label)
             .setLongLabel(label)
+            .applyIf(!isPinShortcut) {
+                setRank(egg.id)
+            }
             .applyNotNull(clazz) {
-                val intent = Intent(context, it)
+                val mainIntent = Intent(context, EasterEggsActivity::class.java)
                     .setAction(Intent.ACTION_VIEW)
-                setIntent(intent)
+
+                val intent = EggActionHelp.createIntent(context, clazz, false)
+                    .putExtra(EXTRA_SHORTCUT_ID, shortcutId)
+                setIntents(arrayOf(mainIntent, intent))
             }
             .build()
     }
+
+    fun isSupportShortcut(egg: EasterEgg): Boolean {
+        return egg.provideEasterEgg() != null
+    }
+
+    fun pinShortcut(context: Context, egg: EasterEgg) {
+        if (!isSupportShortcut(egg)) return
+
+        val shortcutId = FORMAT_PIN_SHORTCUT_ID.format(egg.id)
+        val shortcut = createShortcutInfo(context, shortcutId, egg, true)
+        val callback = PinShortcutReceiver.registerCallbackWithTimeout(context)
+        ShortcutManagerCompat.requestPinShortcut(context, shortcut, callback)
+    }
+
+    fun reportShortcutUsed(context: Context, intent: Intent) {
+        val shortcutId = intent.getStringExtra(EXTRA_SHORTCUT_ID) ?: return
+        ShortcutManagerCompat.reportShortcutUsed(context, shortcutId)
+    }
+
+    private class PinShortcutReceiver : BroadcastReceiver() {
+
+        companion object {
+            private const val ACTION = "com.dede.android_eggs.PIN_SHORTCUT"
+
+            private val token = Any()
+            private var receiver: PinShortcutReceiver? = null
+
+            private fun getPendingIntent(context: Context): PendingIntent? {
+                return PendingIntentCompat.getBroadcast(
+                    context.applicationContext,
+                    0,
+                    Intent(ACTION).setPackage(context.packageName),
+                    PendingIntent.FLAG_UPDATE_CURRENT,
+                    false
+                )
+            }
+
+            fun registerCallbackWithTimeout(context: Context): IntentSender? {
+                var receiver = receiver
+                if (receiver == null) {
+                    receiver = PinShortcutReceiver()
+                    val intentFilter = IntentFilter(ACTION)
+                    val appCtx = context.applicationContext
+                    ContextCompat.registerReceiver(
+                        appCtx, receiver, intentFilter, ContextCompat.RECEIVER_EXPORTED
+                    )
+                    Companion.receiver = receiver
+                } else {
+                    cancel(token)
+                }
+                delay(3000, token) { unregister(context) }
+
+                return getPendingIntent(context)?.intentSender
+            }
+
+            private fun unregister(context: Context) {
+                if (receiver != null) {
+                    context.applicationContext.unregisterReceiver(receiver)
+                }
+                receiver = null
+            }
+        }
+
+        override fun onReceive(context: Context, intent: Intent) {
+            context.toast(R.string.toast_shortcut_added)
+            unregister(context)
+            cancel(token)
+        }
+    }
+
 }

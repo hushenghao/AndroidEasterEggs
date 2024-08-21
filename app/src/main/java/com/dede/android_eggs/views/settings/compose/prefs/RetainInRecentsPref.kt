@@ -12,17 +12,22 @@ import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.basic.SwitchPref
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
 
-private const val KEY_RETAIN_IN_RECENTS = "key_retain_in_recents"
+object RetainInRecentsPrefUtil {
+    const val KEY_RETAIN_IN_RECENTS = "key_retain_in_recents"
 
-fun isRetainInRecentsEnabled(context: Context): Boolean {
-    return context.pref.getBoolean(KEY_RETAIN_IN_RECENTS, false)
+    fun isRetainInRecentsEnabled(context: Context): Boolean {
+        return context.pref.getBoolean(KEY_RETAIN_IN_RECENTS, false)
+    }
 }
 
 @Composable
 fun RetainInRecentsPref() {
-    var state by rememberPrefBoolState(key = KEY_RETAIN_IN_RECENTS, default = false)
+    var state by rememberPrefBoolState(
+        key = RetainInRecentsPrefUtil.KEY_RETAIN_IN_RECENTS,
+        default = false
+    )
     SwitchPref(
-        key = KEY_RETAIN_IN_RECENTS,
+        key = RetainInRecentsPrefUtil.KEY_RETAIN_IN_RECENTS,
         leadingIcon = Icons.Rounded.ViewCarousel,
         title = stringResource(id = R.string.pref_retain_recent_egg_tasks),
         desc = stringResource(id = R.string.pref_summary_retain_recent_egg_tasks),

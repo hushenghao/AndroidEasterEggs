@@ -61,9 +61,10 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
-import com.dede.android_eggs.views.main.util.EasterEggHelp
-import com.dede.android_eggs.views.main.util.EggActionHelp
 import com.dede.android_eggs.ui.views.ViscousFluidInterpolator
+import com.dede.android_eggs.views.main.util.EasterEggHelp
+import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
+import com.dede.android_eggs.views.main.util.EggActionHelp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
@@ -86,7 +87,7 @@ fun EasterEggItem(
         is EasterEggGroup -> base.eggs[groupIndex]
         else -> throw UnsupportedOperationException("Unsupported type: ${base.javaClass}")
     }
-    val supportShortcut = remember(egg) { EggActionHelp.isSupportShortcut(egg) }
+    val supportShortcut = remember(egg) { EasterEggShortcutsHelp.isSupportShortcut(egg) }
     var swipeProgress by remember { mutableFloatStateOf(0f) }
 
     EasterEggItemSwipe(
@@ -103,7 +104,7 @@ fun EasterEggItem(
             swipeProgress = it
         },
         addShortcut = {
-            EggActionHelp.addShortcut(context, egg)
+            EasterEggShortcutsHelp.pinShortcut(context, egg)
         },
     )
 }

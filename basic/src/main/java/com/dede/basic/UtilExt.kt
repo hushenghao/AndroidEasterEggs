@@ -7,6 +7,8 @@ import android.graphics.Color
 import android.os.Build
 import android.util.TypedValue
 import android.view.WindowManager
+import androidx.activity.ComponentActivity
+import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -26,28 +28,38 @@ val Number.dpf: Float
         globalContext.resources.displayMetrics
     )
 
-@Suppress("DEPRECATION")
-fun Activity.platLogoEdge2Edge(): Unit = with(window) {
-    addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-    addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+val Activity.isPlatLogoActivity: Boolean
+    get() = javaClass.simpleName == "PlatLogoActivity"
 
-    navigationBarColor = Color.TRANSPARENT
-    statusBarColor = Color.TRANSPARENT
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        isNavigationBarContrastEnforced = false
-        isStatusBarContrastEnforced = false
+fun Activity.platLogoEdge2Edge() {
+    if (this is ComponentActivity) {
+        this.enableEdgeToEdge()
+        return
     }
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-        attributes = attributes.apply {
-            layoutInDisplayCutoutMode =
-                WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+    @Suppress("DEPRECATION")
+    with(window) {
+        addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+
+        navigationBarColor = Color.TRANSPARENT
+        statusBarColor = Color.TRANSPARENT
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            isNavigationBarContrastEnforced = false
+            isStatusBarContrastEnforced = false
         }
-    }
 
-    WindowCompat.setDecorFitsSystemWindows(this, false)
-    val windowInsetsController = WindowCompat.getInsetsController(this, this.decorView)
-    windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
-    windowInsetsController.systemBarsBehavior =
-        WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            attributes = attributes.apply {
+                layoutInDisplayCutoutMode =
+                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+            }
+        }
+
+        WindowCompat.setDecorFitsSystemWindows(this, false)
+        val windowInsetsController = WindowCompat.getInsetsController(this, this.decorView)
+        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+        windowInsetsController.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    }
 }

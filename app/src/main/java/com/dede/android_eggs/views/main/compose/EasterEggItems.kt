@@ -35,6 +35,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EggActionHelp
 import com.dede.android_eggs.ui.composes.SnapshotView
+import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 
@@ -69,7 +70,7 @@ fun EasterEggHighestItem(
     ) {
         Box {
             val isSupportShortcut = remember(egg) {
-                EggActionHelp.isSupportShortcut(egg)
+                EasterEggShortcutsHelp.isSupportShortcut(egg)
             }
             val snapshot = remember(egg) {
                 egg.provideSnapshotProvider()
@@ -80,7 +81,7 @@ fun EasterEggHighestItem(
             if (isSupportShortcut) {
                 IconButton(
                     onClick = {
-                        EggActionHelp.addShortcut(context, egg)
+                        EasterEggShortcutsHelp.pinShortcut(context, egg)
                     },
                     modifier = Modifier
                         .padding(6.dp)
