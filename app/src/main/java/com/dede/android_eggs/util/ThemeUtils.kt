@@ -9,6 +9,7 @@ import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 import com.google.android.material.color.ThemeUtils
 import com.google.android.material.internal.ContextUtils
 import com.google.android.material.resources.MaterialAttributes
+import com.google.android.material.R as M3R
 
 
 object ThemeUtils {
@@ -26,6 +27,11 @@ object ThemeUtils {
     @SuppressLint("RestrictedApi")
     fun isOLEDTheme(context: Context): Boolean {
         return MaterialAttributes.resolveBoolean(context, R.attr.isOLEDTheme, false)
+    }
+
+    @SuppressLint("RestrictedApi", "PrivateResource")
+    fun isMaterial3Theme(context: Context): Boolean {
+        return MaterialAttributes.resolveBoolean(context, M3R.attr.isMaterial3Theme, false)
     }
 
     fun tryApplyOLEDTheme(context: Context) {

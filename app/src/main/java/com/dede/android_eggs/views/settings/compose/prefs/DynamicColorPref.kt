@@ -3,7 +3,6 @@ package com.dede.android_eggs.views.settings.compose.prefs
 import android.app.Activity
 import android.app.Application
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.runtime.Composable
@@ -12,8 +11,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.R
-import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil.DEFAULT
-import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil.KEY_DYNAMIC_COLOR
+import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.basic.SwitchOption
@@ -57,10 +55,7 @@ object DynamicColorPrefUtil {
 
     private class Callback : DynamicColors.Precondition, DynamicColors.OnAppliedCallback {
         override fun shouldApplyDynamicColors(activity: Activity, theme: Int): Boolean {
-            if (activity is AppCompatActivity) {
-                return isDynamicEnable(activity)
-            }
-            return false
+            return ThemeUtils.isMaterial3Theme(activity) && isDynamicColorEnable(activity)
         }
 
         override fun onApplied(activity: Activity) {
