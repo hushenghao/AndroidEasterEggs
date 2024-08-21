@@ -7,9 +7,6 @@
             @drawable/avd_anim_v_platlogo
         </item>
         <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">600</item>
-        <item name="android:windowSplashScreenBackground" tools:targetApi="s">
-            @color/splash_background_color
-        </item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialAlertDialog.BlurBehind
         </item>
     </style>
