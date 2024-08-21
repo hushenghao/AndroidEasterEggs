@@ -13,7 +13,8 @@ import kotlin.math.min
 object EasterEggShortcutsHelp {
 
     private const val DEFAULT_SHORTCUT_COUNT = 3
-    private const val FORMAT_SHORTCUT_ID = "android_%d"
+    // 'android_%id' already occupied.
+    private const val FORMAT_SHORTCUT_ID = "dynamic_shortcut_android_%d"
 
     private class UpdateShortcutsRunnable(
         private val context: Context,
