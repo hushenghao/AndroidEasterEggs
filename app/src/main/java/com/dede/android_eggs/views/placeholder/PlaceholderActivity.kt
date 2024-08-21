@@ -116,4 +116,3 @@ fun Placeholder(res: Int, mask: String? = null) {
 fun PreviewPlaceholder() {
     Placeholder(R.mipmap.ic_launcher_round)
 }
-

@@ -14,6 +14,7 @@ class ApplicationInitializer : Initializer<Unit> {
 
     override fun create(context: Context) {
         val application = context.applicationContext as Application
+        // apply compat style
         DynamicColorPrefUtil.apply(application)
         ThemePrefUtil.apply(application)
         ActivityActionDispatcher.register(application)

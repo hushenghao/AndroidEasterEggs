@@ -60,6 +60,7 @@ class EasterEggsActivity : AppCompatActivity() {
 
     @Inject
     lateinit var easterEggs: List<@JvmSuppressWildcards BaseEasterEgg>
+
     @Inject
     lateinit var pureEasterEggs: List<@JvmSuppressWildcards EasterEgg>
 

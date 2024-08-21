@@ -152,7 +152,7 @@ private fun ColorScheme.toXml() {
 }
 
 var themeMode by mutableIntStateOf(ThemePrefUtil.getThemeModeValue(globalContext))
-var isDynamicEnable by mutableStateOf(DynamicColorPrefUtil.isDynamicEnable(globalContext))
+var isDynamicColorEnable by mutableStateOf(DynamicColorPrefUtil.isDynamicColorEnable(globalContext))
 
 @Composable
 fun AppTheme(content: @Composable () -> Unit) {
@@ -162,7 +162,7 @@ fun AppTheme(content: @Composable () -> Unit) {
         nightModeValue = if (isSystemInDarkTheme()) ThemePrefUtil.DARK else ThemePrefUtil.LIGHT
     }
 
-    val colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && isDynamicEnable) {
+    val colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && isDynamicColorEnable) {
         when (nightModeValue) {
             ThemePrefUtil.AMOLED -> dynamicDarkColorScheme(context).toAmoled()
             ThemePrefUtil.DARK -> dynamicDarkColorScheme(context)
