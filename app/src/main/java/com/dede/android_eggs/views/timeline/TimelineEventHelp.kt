@@ -14,11 +14,14 @@ object TimelineEventHelp {
 
     object EventComparator : Comparator<TimelineEvent> {
         override fun compare(o1: TimelineEvent, o2: TimelineEvent): Int {
-            var compareYear = o2.year.compareTo(o1.year)
-            if (compareYear == 0) {
-                compareYear = o2.month.compareTo(o1.month)
+            var order = o2.year.compareTo(o1.year)
+            if (order == 0) {
+                order = o2.month.compareTo(o1.month)
             }
-            return compareYear
+            if (order == 0) {
+                order = o2.apiLevel.compareTo(o1.apiLevel)
+            }
+            return order
         }
     }
 
