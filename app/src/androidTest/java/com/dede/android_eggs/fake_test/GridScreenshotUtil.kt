@@ -33,14 +33,15 @@ class GridScreenshotUtil {
 
     companion object {
         // Pixel 5
-        private val TARGET_SIZE = Size(1080, 2340)
+        private val TARGET_SIZE = Size(1080, 2400)
 
-        private val GROUPS = listOf<Group>(
-            Split(540, 1),                // 1
-            Triple(520, true, 4),  // 3
-            Split(260, 4),                // 4
-            Pentad(510, false),            // 5
-            Triple(510, true, 4),   // 3
+        // 17 cells
+        private val GROUPS: List<Group> = listOf(
+            Split(560, 2),                // 2
+            Triple(530, false, 4),  // 3
+            Split(270, 4),                // 4
+            Pentad(520, false),            // 5
+            Triple(520, true, 4),   // 3
         )
 
         private const val ASSET_DIR = "screenshots"
@@ -240,9 +241,9 @@ class GridScreenshotUtil {
         screenshots.add(screenshots.size - 2, g)
         EasterEggsServer.start(context) {
             for (screenshot in screenshots) {
-                registerHandler("/$screenshot") {
+                registerHandler("/$screenshot.webp") {
                     cropScreenshot(context, screenshot)
-                        .toResponse(Bitmap.CompressFormat.JPEG, 100)
+                        .toResponse(Bitmap.CompressFormat.WEBP_LOSSLESS, 100)
                 }
             }
             registerHandler("/ic_grid_screenshot.jpeg") {
