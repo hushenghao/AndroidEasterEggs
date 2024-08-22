@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.util.SparseIntArray
 import com.dede.basic.provider.EasterEgg
 import dagger.hilt.android.qualifiers.ActivityContext
 import java.util.Calendar
@@ -41,20 +40,22 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
     private class FromWidgetHandler : EggHandler {
 
         companion object {
-            private val hourApiLevelArray: SparseIntArray = SparseIntArray().apply {
-                put(1, Build.VERSION_CODES.CUPCAKE)
-                put(2, Build.VERSION_CODES.GINGERBREAD)
-                put(3, Build.VERSION_CODES.HONEYCOMB)
-                put(4, Build.VERSION_CODES.KITKAT)
-                put(5, Build.VERSION_CODES.LOLLIPOP)
-                put(6, Build.VERSION_CODES.M)
-                put(7, Build.VERSION_CODES.N)
-                put(8, Build.VERSION_CODES.O)
-                put(9, Build.VERSION_CODES.P)
-                put(10, Build.VERSION_CODES.Q)
-                put(11, Build.VERSION_CODES.R)
-                put(12, Build.VERSION_CODES.S)
-            }
+            private val hourApiLevelArray: IntArray = intArrayOf(
+                // Calendar.HOUR [0-11]
+                Build.VERSION_CODES.S,// 0:00
+                // [1-11]
+                Build.VERSION_CODES.CUPCAKE,
+                Build.VERSION_CODES.GINGERBREAD,
+                Build.VERSION_CODES.HONEYCOMB,
+                Build.VERSION_CODES.KITKAT,
+                Build.VERSION_CODES.LOLLIPOP,
+                Build.VERSION_CODES.M,
+                Build.VERSION_CODES.N,
+                Build.VERSION_CODES.O,
+                Build.VERSION_CODES.P,
+                Build.VERSION_CODES.Q,
+                Build.VERSION_CODES.R
+            )
         }
 
         override fun handleEggIntent(eggIntent: EggIntent): Boolean {
@@ -63,8 +64,8 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
                 return false
             }
 
-            val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) % 12
-            val apiLevel = hourApiLevelArray.get(hour)
+            val hour = Calendar.getInstance().get(Calendar.HOUR)
+            val apiLevel = hourApiLevelArray[hour]
             val egg = eggIntent.easterEggs.find { apiLevel in it.apiLevel }
             if (egg != null) {
                 EggActionHelp.launchEgg(eggIntent.context, egg)
