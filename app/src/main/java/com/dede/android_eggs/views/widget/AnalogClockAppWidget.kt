@@ -10,6 +10,7 @@ import android.widget.RemoteViews
 import androidx.core.app.PendingIntentCompat
 import com.dede.android_eggs.R
 import com.dede.android_eggs.views.main.EasterEggsActivity
+import com.dede.android_eggs.views.main.util.IntentHandler
 import com.dede.basic.cachedExecutor
 
 /**
@@ -46,7 +47,8 @@ private fun updateAppWidget(
     val intent = PendingIntentCompat.getActivity(
         context,
         0,
-        Intent(context, EasterEggsActivity::class.java),
+        Intent(context, EasterEggsActivity::class.java)
+            .putExtra(IntentHandler.EXTRA_FROM_WIDGET, appWidgetId),
         PendingIntent.FLAG_UPDATE_CURRENT,
         false
     )

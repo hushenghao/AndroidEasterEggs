@@ -44,7 +44,7 @@ import com.dede.android_eggs.views.main.compose.rememberBottomSearchBarState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiState
 import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
-import com.dede.android_eggs.views.main.util.SchemeHandler
+import com.dede.android_eggs.views.main.util.IntentHandler
 import com.dede.android_eggs.views.settings.SettingsScreen
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
@@ -66,7 +66,7 @@ class EasterEggsActivity : AppCompatActivity() {
 
     @Inject
     @ActivityScoped
-    lateinit var schemeHandler: SchemeHandler
+    lateinit var intentHandler: IntentHandler
 
     private var orientationAngleSensor: OrientationAngleSensor? = null
 
@@ -136,7 +136,7 @@ class EasterEggsActivity : AppCompatActivity() {
             handleOrientationAngleSensor(enable)
         }
 
-        schemeHandler.handleIntent(intent)
+        intentHandler.handleIntent(intent)
         EasterEggShortcutsHelp.updateShortcuts(this, pureEasterEggs)
     }
 
@@ -155,7 +155,7 @@ class EasterEggsActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        schemeHandler.handleIntent(intent)
+        intentHandler.handleIntent(intent)
     }
 
     override fun onProvideAssistContent(outContent: AssistContent?) {

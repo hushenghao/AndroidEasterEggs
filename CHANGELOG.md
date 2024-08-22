@@ -2,6 +2,7 @@
 
 ### v2.6.4
 
+- Update EasterEggs analog clock widget click behavior [#348](https://github.com/hushenghao/AndroidEasterEggs/issues/348)
 - Update SplashScreen Icon
 - Fix missing Android JellyBean in the timeline
 - Update translations
