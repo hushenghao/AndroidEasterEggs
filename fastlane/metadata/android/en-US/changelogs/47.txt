@@ -1,3 +1,4 @@
 - Update SplashScreen Icon
+- Fix missing Android JellyBean in the timeline
 - Update translations
 - Upgrade project dependencies

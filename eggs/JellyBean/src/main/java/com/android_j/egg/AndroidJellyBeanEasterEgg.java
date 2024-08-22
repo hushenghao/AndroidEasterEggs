@@ -87,6 +87,9 @@ public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentPr
         };
     }
 
+    @IntoSet
+    @Provides
+    @Singleton
     @NonNull
     @Override
     public List<TimelineEvent> provideTimelineEvents() {
