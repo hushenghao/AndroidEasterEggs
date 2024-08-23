@@ -9,9 +9,9 @@
         android:gravity="center" />
 
     <item
-        android:width="220dp"
-        android:height="220dp"
-        android:drawable="@drawable/u_platlogo"
+        android:width="200dp"
+        android:height="200dp"
+        android:drawable="@drawable/v_android_15_platlogo"
         android:gravity="center" />
 
     <item
