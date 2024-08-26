@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.0.10"
+kotlin = "2.0.20"
 ksp = "2.0.10-1.0.24"
 agp = "8.5.2"
 hilt = "2.52"
