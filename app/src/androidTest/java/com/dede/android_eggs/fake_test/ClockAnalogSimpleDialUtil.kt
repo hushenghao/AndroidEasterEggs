@@ -1,7 +1,6 @@
 package com.dede.android_eggs.fake_test
 
 import androidx.core.graphics.drawable.toBitmap
-import androidx.core.graphics.scale
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.dede.android_eggs.R
@@ -29,8 +28,12 @@ class ClockAnalogSimpleDialUtil {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val wrapperContext = context.createThemeWrapperContext()
         val drawable = wrapperContext.requireDrawable(R.drawable.clock_analog_simple_dial)
-        var bitmap = drawable.toBitmap()
-        bitmap = bitmap.scale(IMAGE_SIZE, IMAGE_SIZE)
+        val bitmap = drawable.toBitmap()
+
+        //bitmap = bitmap.scale(IMAGE_SIZE, IMAGE_SIZE)
+        // https://stackoverflow.com/questions/24745147/java-resize-image-without-losing-quality
+        // replace to ffmpeg scale image
+        // ffmpeg -i clock_analog_simple_dial.webp -s 380x380 -sws_flags lanczos lanczos.webp
 
         EasterEggsServer.disposable(context, "/clock_analog_simple_dial.webp") {
             bitmap.toResponse()
