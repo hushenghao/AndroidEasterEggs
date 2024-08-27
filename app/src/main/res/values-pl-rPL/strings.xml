@@ -6,7 +6,7 @@
     <string name="title_open_with">Otwórz z</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-    <string name="label_github">Source code</string>
+    <string name="label_github">Kod źródłowy</string>
     <string name="label_translation">Tłumaczenie</string>
     <string name="label_beta">Pobierz wersję beta</string>
     <string name="label_timeline">Oś czasu</string>
@@ -14,20 +14,23 @@
     <string name="label_license">Licencja</string>
     <string name="label_feedback">Informacja zwrotna</string>
     <string name="label_star">Oceń</string>
+    <string name="label_contact_me">Skontaktuj się ze mną</string>
+    <string name="label_email_title">Email</string>
     <string name="label_timeline_title">Oś czasu, etapy i aktualizacje</string>
     <string name="label_timeline_releases">Wersje</string>
     <string name="message_trypophobia_warning">To jest ostrzeżenie dla osób z &lt;b&gt;Trypofobią&lt;/b&gt;. Niektóre obrazy mogą powodować dyskomfort. Czy chcesz kontynuować?</string>
     <string name="label_settings">Ustawienia</string>
-    <string name="label_project_desc">Projekt zawiera pełny kod systemu Easter Eggs, który ma na celu uporządkowanie i kompatybilność z systemem Easter Eggs tak, aby większość urządzeń mogła doświadczyć różnych wersji Easter Eggów i nie wprowadzała zbyt wielu modyfikacji w systemie Egg Code. Niektóre wersje korzystają z nowych funkcji systemu, a wersje niższe mogą korzystać tylko z niektórych funkcji.</string>
-    <string name="pref_title_icon_shape_override">Kształt</string>
+    <string name="label_project_desc">Projekt zawiera pełny kod wszystkich systemowych Easter Eggów, który ma na celu zapewnić uporządkowanie i kompatybilność z systemowymi Easter Eggami tak, aby większość urządzeń mogła doświadczyć różnych wersji Easter eggów i nie wprowadzała zbyt wielu modyfikacji w kodzie easter egga. Niektóre wersje korzystają z nowych funkcji systemu, a wersje niższe mogą korzystać tylko z niektórych funkcji.</string>
+    <string name="pref_title_icon_shape_override">Kształt ikony</string>
     <string name="pref_title_language">Język</string>
     <string name="pref_title_language_more">Więcej</string>
     <string name="pref_title_theme">Motyw</string>
-    <string name="pref_title_dynamic_color">Dynamiczne kolory</string>
+    <string name="pref_title_dynamic_color">Dynamiczny kolor</string>
     <string name="pref_title_icon_visual_effects">Efekty Ikon</string>
-    <string name="summary_system_default">Systemowy</string>
+    <string name="summary_system_default">Domyślny</string>
     <string name="summary_theme_dark_mode">Ciemny</string>
     <string name="summary_theme_light_mode">Jasny</string>
+    <string name="summary_theme_amoled_mode">AMOLED</string>
     <string name="label_add_shortcut">Skrót</string>
     <string name="label_donate">Wesprzyj</string>
     <string name="preference_on">Wł.</string>
@@ -44,4 +47,5 @@
     <string name="pref_retain_recent_egg_tasks">Zachowaj ostatnie zadania Easter Egg\'ów</string>
     <string name="pref_summary_retain_recent_egg_tasks">Zachowaj zadania Easter Egg\'ów na ekranie Ostatnie, maksymalnie 5 zachowanych zadań (niedostępne w trybie osadzonej aktywności).</string>
     <string name="label_about">O aplikacji</string>
+    <string name="label_contribute">Wspomóż</string>
 </resources>
