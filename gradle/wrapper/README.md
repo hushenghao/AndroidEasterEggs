@@ -3,13 +3,13 @@
 ## [Adding the Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:adding_wrapper)
 
 ```shell
-gradle wrapper --gradle-version 8.8 --distribution-type all --gradle-distribution-sha256-sum f8b4f4772d302c8ff580bc40d0f56e715de69b163546944f787c87abf209c961
+gradle wrapper --gradle-version 8.10 --distribution-type all --gradle-distribution-sha256-sum 682b4df7fe5accdca84a4d1ef6a3a6ab096b3efd5edf7de2bd8c758d95a93703
 ```
 
 ## [Upgrading the Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:upgrading_wrapper)
 
 ```shell
-./gradlew wrapper --gradle-version 8.8
+./gradlew wrapper --gradle-version 8.10 --gradle-distribution-sha256-sum 682b4df7fe5accdca84a4d1ef6a3a6ab096b3efd5edf7de2bd8c758d95a93703
 ```
 
 ## Docs

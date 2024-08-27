@@ -10,14 +10,14 @@ updates:
     schedule:
       interval: "weekly"
     commit-message:
-      prefix: "chore"
+      prefix: "build"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
     commit-message:
-      prefix: "chore"
+      prefix: "ci"
 
   - package-ecosystem: "pip"
     directories:
