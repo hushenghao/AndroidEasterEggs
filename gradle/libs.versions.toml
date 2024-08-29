@@ -57,10 +57,7 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 
 dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.4"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
-# blurhash-painter = "com.github.wajahat-iqbal:BlurHashPainter:1.2"
 io-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
-# io-coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
-# io-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 free-reflection = "com.github.tiann:FreeReflection:3.2.0"
 squareup-okio = { module = "com.squareup.okio:okio", version = "3.8.0" }
 squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.14"
