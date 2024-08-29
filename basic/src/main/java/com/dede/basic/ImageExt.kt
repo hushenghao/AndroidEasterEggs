@@ -21,7 +21,6 @@ const val MIME_PNG = "image/png"
 const val MIME_JPG = "image/jpg"
 const val MIME_WEBP = "image/webp"
 
-@Suppress("PrivatePropertyName")
 private val ALBUM_DIR = Environment.DIRECTORY_PICTURES
 
 private fun getImageMime(fileName: String): String {

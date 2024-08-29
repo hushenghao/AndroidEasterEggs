@@ -19,7 +19,6 @@ package com.android_u.egg.landroid
 import androidx.collection.ArraySet
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.util.lerp
-import com.android_u.egg.landroid.Colors
 import kotlin.math.absoluteValue
 import kotlin.math.pow
 import kotlin.math.sqrt
