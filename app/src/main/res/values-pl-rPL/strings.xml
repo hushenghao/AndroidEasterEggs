@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Czekam…</string>
+    <string name="summary_android_waiting">Obecnie niedostępny</string>
     <string name="summary_android_release_pushed">Ostateczna wersja została wydana</string>
     <string name="title_open_with">Otwórz z</string>
     <string name="char_separator">/</string>
@@ -12,7 +12,7 @@
     <string name="label_timeline">Oś czasu</string>
     <string name="label_privacy_policy">Polityka prywatności</string>
     <string name="label_license">Licencja</string>
-    <string name="label_feedback">Informacja zwrotna</string>
+    <string name="label_feedback">Przekaż opinię</string>
     <string name="label_star">Oceń</string>
     <string name="label_contact_me">Skontaktuj się ze mną</string>
     <string name="label_email_title">Email</string>
@@ -26,7 +26,7 @@
     <string name="pref_title_language_more">Więcej</string>
     <string name="pref_title_theme">Motyw</string>
     <string name="pref_title_dynamic_color">Dynamiczny kolor</string>
-    <string name="pref_title_icon_visual_effects">Efekty Ikon</string>
+    <string name="pref_title_icon_visual_effects">Efekty wizualne ikon</string>
     <string name="summary_system_default">Domyślny</string>
     <string name="summary_theme_dark_mode">Ciemny</string>
     <string name="summary_theme_light_mode">Jasny</string>
@@ -35,11 +35,11 @@
     <string name="label_donate">Wesprzyj</string>
     <string name="preference_on">Wł.</string>
     <string name="preference_off">Wył.</string>
-    <string name="toast_shortcut_added">Dodano skrót</string>
+    <string name="toast_shortcut_added">Dodano skrót do ekranu głównego.</string>
     <string name="app_widget_description">To jest zegar analogowy Easter Eggs</string>
     <string name="action_agree">Zaakceptuj</string>
     <string name="summary_browse_privacy_policy">Przeczytaj i zaakceptuj naszą Politykę prywatności, aby kontynuować.</string>
-    <string name="label_welcome">Witamy w Katalogach Easter Egg 🎉🎉🎉</string>
+    <string name="label_welcome">Witaj w Easter Eggs! 🎉🎉🎉</string>
     <string name="label_share">Udostępnij</string>
     <string name="label_search_hint">Szukaj…</string>
     <string name="label_component_manager">Menedżer Komponentów</string>
