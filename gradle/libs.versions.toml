@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.0.20"
 ksp = "2.0.20-1.0.24"
-agp = "8.5.2"
+agp = "8.6.0"
 hilt = "2.52"
 compose-bom = "2024.08.00"
 # https://google.github.io/accompanist
