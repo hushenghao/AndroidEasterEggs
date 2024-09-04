@@ -195,7 +195,7 @@ private fun TimelineItem(
         }
         if (isNewGroup) {
             Text(
-                text = event.localYear ?: "",
+                text = event.localYear,
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Medium,
                 modifier = Modifier.constrainAs(year) {
@@ -205,7 +205,7 @@ private fun TimelineItem(
             )
         }
         Text(
-            text = event.localMonth ?: "",
+            text = event.localMonth,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Medium,
             modifier = Modifier.constrainAs(month) {
