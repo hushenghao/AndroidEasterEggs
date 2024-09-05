@@ -1,7 +1,8 @@
 # Changelog
 
-### v2.6.4
+### v3.0.0
 
+- Add Android 15 Easter Egg Landroid
 - Update EasterEggs analog clock widget click behavior [#348](https://github.com/hushenghao/AndroidEasterEggs/issues/348)
 - Update SplashScreen Icon
 - Fix missing Android JellyBean in the timeline

@@ -91,6 +91,21 @@ object EasterEggModules {
             .toIntArray()
     }
 
+}
+
+@Module(
+    includes = [
+        AndroidVEasterEgg::class,
+        AndroidTEasterEgg::class,
+        AndroidSEasterEgg::class,
+        AndroidREasterEgg::class,
+        AndroidNougatEasterEgg::class,
+        AndroidKitKatEasterEgg::class,
+        AndroidJellyBeanEasterEgg::class,
+    ],
+)
+@InstallIn(SingletonComponent::class)
+object EasterEggComponentModules {
     @Provides
     @Singleton
     fun provideEasterEggComponents(componentSet: Set<@JvmSuppressWildcards Component>): List<@JvmSuppressWildcards Component> {

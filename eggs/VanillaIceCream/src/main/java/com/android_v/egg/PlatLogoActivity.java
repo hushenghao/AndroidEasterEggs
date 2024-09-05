@@ -23,7 +23,6 @@ import android.animation.TimeAnimator;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -50,7 +49,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -59,14 +57,14 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
+import com.android_v.egg.landroid.MainActivity;
 import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
 
 import java.util.Random;
 
 /**
- * Preview android 15 easter egg,
- * Modified by android 14 easter egg
+ * @hide
  */
 public class PlatLogoActivity extends Activity {
     private static final String TAG = "PlatLogoActivity";
@@ -200,6 +198,7 @@ public class PlatLogoActivity extends Activity {
     @Override
     protected void onDestroy() {
         mRumble.destroy();
+
         super.onDestroy();
     }
 
@@ -240,7 +239,7 @@ public class PlatLogoActivity extends Activity {
         lp.gravity = Gravity.CENTER;
 
         mLogo = new ImageView(this);
-        Drawable drawable = DrawableKt.requireDrawable(this, R.drawable.v_android_15_platlogo);
+        Drawable drawable = DrawableKt.requireDrawable(this, R.drawable.v_platlogo);
         mLogo.setImageDrawable(drawable);
         mLogo.setOnTouchListener(mTouchListener);
         mLogo.requestFocus();
@@ -315,10 +314,13 @@ public class PlatLogoActivity extends Activity {
     }
 
     private boolean shouldWriteSettings() {
+//        return getPackageName().equals("android");
         return true;
     }
 
     private void launchNextStage(boolean locked) {
+//        final ContentResolver cr = getContentResolver();
+
         try {
             if (shouldWriteSettings()) {
                 Log.v(TAG, "Saving egg locked=" + locked);
@@ -331,13 +333,12 @@ public class PlatLogoActivity extends Activity {
         }
 
         try {
-            ComponentName component = new ComponentName(this.getPackageName(),
-                    "com.android_v.egg.landroid.MainActivityAlias");
-            final Intent eggActivity = new Intent()
-                    .setComponent(component);
+            final Intent eggActivity = new Intent(this, MainActivity.class);
+//                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+//                            | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//                    .addCategory("com.android.internal.category.PLATLOGO");
             Log.v(TAG, "launching: " + eggActivity);
             startActivity(eggActivity);
-            Toast.makeText(this, "Temporarily launch Android 14 Easter Egg", Toast.LENGTH_SHORT).show();
         } catch (Exception ex) {
             Log.e("PlatLogoActivity", "No more eggs.");
         }
@@ -345,6 +346,62 @@ public class PlatLogoActivity extends Activity {
             finish(); // we're done here.
         }
     }
+
+//    static final String TOUCH_STATS = "touch.stats";
+//    double mPressureMin = 0, mPressureMax = -1;
+//
+//    private void measureTouchPressure(MotionEvent event) {
+//        final float pressure = event.getPressure();
+//        switch (event.getActionMasked()) {
+//            case MotionEvent.ACTION_DOWN:
+//                if (mPressureMax < 0) {
+//                    mPressureMin = mPressureMax = pressure;
+//                }
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                if (pressure < mPressureMin) mPressureMin = pressure;
+//                if (pressure > mPressureMax) mPressureMax = pressure;
+//                break;
+//        }
+//    }
+//
+//    private void syncTouchPressure() {
+//        try {
+//            final String touchDataJson = Settings.System.getString(
+//                    getContentResolver(), TOUCH_STATS);
+//            final JSONObject touchData = new JSONObject(
+//                    touchDataJson != null ? touchDataJson : "{}");
+//            if (touchData.has("min")) {
+//                mPressureMin = Math.min(mPressureMin, touchData.getDouble("min"));
+//            }
+//            if (touchData.has("max")) {
+//                mPressureMax = Math.max(mPressureMax, touchData.getDouble("max"));
+//            }
+//            if (mPressureMax >= 0) {
+//                touchData.put("min", mPressureMin);
+//                touchData.put("max", mPressureMax);
+//                if (shouldWriteSettings()) {
+//                    Settings.System.putString(getContentResolver(), TOUCH_STATS,
+//                            touchData.toString());
+//                }
+//            }
+//        } catch (Exception e) {
+//            Log.e("com.android.internal.app.PlatLogoActivity", "Can't write touch settings", e);
+//        }
+//    }
+//
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        syncTouchPressure();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        syncTouchPressure();
+//        super.onStop();
+//    }
+
 
     public static class Starfield extends Drawable {
         private static final int NUM_STARS = 34; // Build.VERSION_CODES.UPSIDE_DOWN_CAKE

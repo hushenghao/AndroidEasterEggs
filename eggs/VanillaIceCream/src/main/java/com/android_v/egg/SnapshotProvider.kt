@@ -27,7 +27,7 @@ class SnapshotProvider : SnapshotProvider() {
         layout.background = starfield
 
         val logo = ImageView(context)
-        logo.setImageDrawable(context.requireDrawable(R.drawable.v_android_15_platlogo))
+        logo.setImageDrawable(context.requireDrawable(R.drawable.v_platlogo))
         val lp: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
             FrameLayout.LayoutParams.MATCH_PARENT

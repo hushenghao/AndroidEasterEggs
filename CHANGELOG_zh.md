@@ -1,7 +1,8 @@
 # 更新日志
 
-### v2.6.4
+### v3.0.0
 
+- 新增 Android 15 彩蛋 Landroid
 - 更新 EasterEggs 模拟时钟小部件点击行为 [#348](https://github.com/hushenghao/AndroidEasterEggs/issues/348)
 - 更新 SplashScreen 图标
 - 修复了时间线缺失 Android JellyBean 

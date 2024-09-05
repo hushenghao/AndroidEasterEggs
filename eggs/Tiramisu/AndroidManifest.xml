@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--    <uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
-
     <!-- used for cat notifications -->
     <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />
 
@@ -30,14 +28,7 @@
             android:name=".neko.NekoLand"
             android:exported="true"
             android:label="@string/t_app_name"
-            android:theme="@android:style/Theme.Material.NoActionBar">
-            <intent-filter>
-<!--                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />-->
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:theme="@android:style/Theme.Material.NoActionBar" />
 
         <!-- This is where the magic happens -->
         <service
@@ -50,14 +41,7 @@
             android:name=".ComponentActivationActivity"
             android:excludeFromRecents="true"
             android:exported="true"
-            android:theme="@android:style/Theme.NoDisplay">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-<!--                <category android:name="com.android.internal.category.PLATLOGO" />-->
-            </intent-filter>
-        </activity>
+            android:theme="@android:style/Theme.NoDisplay" />
 
         <service
             android:name=".neko.NekoControlsService"
@@ -80,11 +64,7 @@
             android:enabled="false"
             android:exported="true"
             android:label="@string/t_egg_name"
-            android:theme="@android:style/Theme.Material.Wallpaper.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+            android:theme="@android:style/Theme.Material.Wallpaper.NoTitleBar" />
 
         <!-- Homescreen widget also showing paint chips (may be affected by the exact position in
              the workspace) -->

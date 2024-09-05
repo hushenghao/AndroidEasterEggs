@@ -6,7 +6,7 @@ Android 15 , API 35
 
 ## Egg
 
-Waiting...
+Landroid
 
 ## [Timeline, milestones, and updates](https://developer.android.com/about/versions/15/overview#timeline)
 

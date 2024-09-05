@@ -1,8 +1,12 @@
 package com.android_v.egg
 
 import android.app.Activity
+import android.content.ComponentName
+import android.content.Context
 import android.os.Build
+import android.service.dreams.DreamService
 import com.dede.basic.provider.BaseEasterEgg
+import com.dede.basic.provider.ComponentProvider
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.TimelineEvent
@@ -18,7 +22,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AndroidVEasterEgg : EasterEggProvider {
+object AndroidVEasterEgg : EasterEggProvider, ComponentProvider {
 
     @Provides
     @IntoSet
@@ -58,5 +62,29 @@ object AndroidVEasterEgg : EasterEggProvider {
                 "Vanilla Ice Cream."
             )
         )
+    }
+
+    @Provides
+    @IntoSet
+    @Singleton
+    override fun provideComponent(): ComponentProvider.Component {
+        return object : ComponentProvider.Component(
+            R.drawable.v_android15_patch_adaptive,
+            R.string.v_egg_name,
+            R.string.v_android_nickname,
+            Build.VERSION_CODES.VANILLA_ICE_CREAM
+        ) {
+            override fun isSupported(): Boolean = true
+
+            override fun isEnabled(context: Context): Boolean {
+                val cn = ComponentName(context, DreamService::class.java)
+                return cn.isEnabled(context)
+            }
+
+            override fun setEnabled(context: Context, enable: Boolean) {
+                val cn = ComponentName(context, DreamService::class.java)
+                cn.setEnable(context, enable)
+            }
+        }
     }
 }

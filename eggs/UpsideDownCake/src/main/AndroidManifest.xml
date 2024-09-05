@@ -9,7 +9,7 @@
             android:configChanges="screenSize|screenLayout|orientation|keyboardHidden"
             android:exported="true"
             android:icon="@drawable/u_platlogo"
-            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
         <!-- Android U easter egg -->
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -7,18 +8,47 @@
         <activity
             android:name=".PlatLogoActivity"
             android:configChanges="screenSize|screenLayout|orientation|keyboardHidden"
+            android:enableOnBackInvokedCallback="true"
             android:exported="true"
-            android:icon="@drawable/v_android_15_platlogo"
-            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+            android:icon="@drawable/v_android15_patch_adaptive"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            tools:targetApi="tiramisu" />
 
-        <!-- Android U easter egg -->
-
-        <activity-alias
-            android:name=".landroid.MainActivityAlias"
+        <!-- Android V easter egg: Daydream version of Landroid
+            (must be enabled by unlocking the egg) -->
+        <service
+            android:name=".landroid.DreamUniverse"
+            android:description="@string/v_dream_description"
+            android:enabled="false"
             android:exported="true"
             android:icon="@drawable/v_android15_patch_adaptive"
             android:label="@string/v_egg_name"
-            android:targetActivity="com.android_u.egg.landroid.MainActivity"/>
+            android:permission="android.permission.BIND_DREAM_SERVICE">
+
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.dream"
+                android:resource="@xml/v_landroid_dream" />
+        </service>
+
+        <!-- Android U easter egg -->
+        <activity
+            android:name=".landroid.MainActivity"
+            android:configChanges="orientation|screenLayout|screenSize|density"
+            android:exported="true"
+            android:icon="@drawable/v_android15_patch_adaptive"
+            android:label="@string/v_egg_name"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />
+
+        <!-- Used to enable easter egg components for earlier easter eggs. -->
+        <activity
+            android:name=".ComponentActivationActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoDisplay" />
 
     </application>
 </manifest>

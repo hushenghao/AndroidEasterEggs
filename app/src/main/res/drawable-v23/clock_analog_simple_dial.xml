@@ -11,7 +11,7 @@
     <item
         android:width="200dp"
         android:height="200dp"
-        android:drawable="@drawable/v_android_15_platlogo"
+        android:drawable="@drawable/v_platlogo"
         android:gravity="center" />
 
     <item
