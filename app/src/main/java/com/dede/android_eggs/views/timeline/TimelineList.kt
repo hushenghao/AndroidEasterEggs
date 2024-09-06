@@ -13,17 +13,21 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Android
+import androidx.compose.material.icons.outlined.RocketLaunch
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
@@ -35,9 +39,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,19 +50,21 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dede.android_eggs.R
+import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
+import com.dede.android_eggs.util.compose.PathShape
+import com.dede.android_eggs.views.main.compose.DrawableImage
+import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.eventAnnotatedString
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.isNewGroup
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localMonth
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localYear
-import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
-import com.dede.android_eggs.util.compose.PathShape
-import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
-import com.dede.android_eggs.views.main.compose.DrawableImage
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.provider.TimelineEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Calendar
 import javax.inject.Inject
+
+private const val TIMELINE_HORIZONTAL_BIAS = 0.3f
 
 @Composable
 fun TimelineList(
@@ -107,7 +112,40 @@ fun TimelineList(
                     isNewGroup = it.isNewGroup(viewModel.timelines)
                 )
             }
+            item {
+                TimelineFooter()
+            }
         }
+    }
+}
+
+@Composable
+private fun TimelineFooter() {
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp)
+    ) {
+        val (lineStart, line) = createRefs()
+        Box(
+            modifier = Modifier
+                .size(2.dp)
+                .background(colorScheme.secondary)
+                .constrainAs(line) {
+                    top.linkTo(parent.top)
+                    centerHorizontallyTo(parent, TIMELINE_HORIZONTAL_BIAS)
+                }
+        )
+        Box(
+            modifier = Modifier
+                .width(8.dp)
+                .height(8.dp)
+                .background(colorScheme.secondary, CircleShape)
+                .constrainAs(lineStart) {
+                    top.linkTo(parent.top)
+                    centerHorizontallyTo(line)
+                }
+        )
     }
 }
 
@@ -117,27 +155,29 @@ private fun TimelineHeader() {
     ConstraintLayout(
         modifier = Modifier.fillMaxWidth()
     ) {
-        val (logo, title) = createRefs()
+        val (arrow, line) = createRefs()
+        Box(
+            modifier = Modifier
+                .width(2.dp)
+                .height(2.dp)
+                .background(colorScheme.secondary, RoundedCornerShape(50, 50, 0, 0))
+                .constrainAs(line) {
+                    bottom.linkTo(parent.bottom)
+                    centerHorizontallyTo(parent, TIMELINE_HORIZONTAL_BIAS)
+                }
+        )
         Icon(
-            imageVector = Icons.Rounded.Android,
+            imageVector = Icons.Outlined.RocketLaunch,
             contentDescription = null,
             modifier = Modifier
-                .background(Color(0xFF1D1E21), CircleShape)
-                .size(40.dp)
+                .size(36.dp)
                 .padding(6.dp)
-                .constrainAs(logo) {
-                    centerHorizontallyTo(parent, 0.3f)
+                .rotate(-45f)
+                .constrainAs(arrow) {
+                    bottom.linkTo(parent.bottom)
+                    centerHorizontallyTo(line)
                 },
-            tint = Color(0xFF35D779)
-        )
-        Text(
-            text = stringResource(id = R.string.label_timeline),
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Medium,
-            modifier = Modifier.constrainAs(title) {
-                linkTo(start = logo.end, end = parent.end, bias = 0f, startMargin = 10.dp)
-                centerVerticallyTo(logo)
-            }
+            tint = colorScheme.secondary
         )
     }
 }
@@ -157,13 +197,13 @@ private fun TimelineItem(
 
         Box(
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.primary)
+                .width(2.dp)
+                .background(colorScheme.secondary)
                 .constrainAs(line) {
                     height = Dimension.fillToConstraints
-                    width = Dimension.value(2.dp)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
-                    centerHorizontallyTo(img)
+                    centerHorizontallyTo(parent, TIMELINE_HORIZONTAL_BIAS)
                 }
         )
 
@@ -175,7 +215,7 @@ private fun TimelineItem(
             .size(40.dp)
             .constrainAs(img) {
                 top.linkTo(parent.top, 16.dp)
-                centerHorizontallyTo(parent, 0.3f)
+                centerHorizontallyTo(line)
             }
         if (event.apiLevel >= Build.VERSION_CODES.LOLLIPOP) {
             DrawableImage(
@@ -188,7 +228,7 @@ private fun TimelineItem(
                 res = logoRes,
                 contentDescription = null,
                 modifier = Modifier
-                    .background(MaterialTheme.colorScheme.secondaryContainer, PathShape(iconShape))
+                    .background(colorScheme.secondaryContainer, PathShape(iconShape))
                     .then(imageModifier)
                     .padding(6.dp)
             )
@@ -196,7 +236,7 @@ private fun TimelineItem(
         if (isNewGroup) {
             Text(
                 text = event.localYear,
-                style = MaterialTheme.typography.titleLarge,
+                style = typography.titleLarge,
                 fontWeight = FontWeight.Medium,
                 modifier = Modifier.constrainAs(year) {
                     end.linkTo(img.start, 12.dp)
@@ -206,7 +246,7 @@ private fun TimelineItem(
         }
         Text(
             text = event.localMonth,
-            style = MaterialTheme.typography.titleMedium,
+            style = typography.titleMedium,
             fontWeight = FontWeight.Medium,
             modifier = Modifier.constrainAs(month) {
                 start.linkTo(img.end, 12.dp)
@@ -215,7 +255,7 @@ private fun TimelineItem(
         )
         Text(
             text = event.eventAnnotatedString,
-            style = MaterialTheme.typography.bodySmall,
+            style = typography.bodySmall,
             modifier = Modifier
                 .padding(bottom = 12.dp)
                 .constrainAs(desc) {
