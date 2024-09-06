@@ -3,8 +3,8 @@ package com.android_v.egg.flags;
 /**
  * Generate by <a href="https://cs.android.com/android/platform/superproject/+/android15-release:frameworks/base/packages/EasterEgg/easter_egg_flags.aconfig">easter_egg_flags.aconfig</a>
  *
- * <li><a href="https://android.googlesource.com/platform/build/+/refs/heads/main/tools/aconfig/">Project aconfig</a></li>
- * <li><a href="https://android.googlesource.com/platform/build/+/refs/heads/main/tools/aconfig/aconfig/templates/Flags.java.template">Flags.java.template</a></li>
+ * <li><a href="https://cs.android.com/android/platform/superproject/+/android15-release:build/make/tools/aconfig/aconfig/">Project aconfig</a></li>
+ * <li><a href="https://cs.android.com/android/platform/superproject/+/android15-release:build/make/tools/aconfig/aconfig/templates/Flags.java.template">Flags.java.template</a></li>
  *
  * <pre>
  * package: "com.android.egg.flags"

@@ -3,6 +3,7 @@
 ### v3.0.0
 
 - Add Android 15 Easter Egg Landroid
+- Update App logo, use Android 15 Easter Egg logo
 - Update Android 14 Easter Egg name
 - Update EasterEggs analog clock widget click behavior [#348](https://github.com/hushenghao/AndroidEasterEggs/issues/348)
 - Update SplashScreen Icon
