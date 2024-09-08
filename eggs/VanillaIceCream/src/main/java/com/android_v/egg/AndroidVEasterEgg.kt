@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.os.Build
-import android.service.dreams.DreamService
+import com.android_v.egg.landroid.DreamUniverse
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.ComponentProvider
 import com.dede.basic.provider.EasterEgg
@@ -77,12 +77,12 @@ object AndroidVEasterEgg : EasterEggProvider, ComponentProvider {
             override fun isSupported(): Boolean = true
 
             override fun isEnabled(context: Context): Boolean {
-                val cn = ComponentName(context, DreamService::class.java)
+                val cn = ComponentName(context, DreamUniverse::class.java)
                 return cn.isEnabled(context)
             }
 
             override fun setEnabled(context: Context, enable: Boolean) {
-                val cn = ComponentName(context, DreamService::class.java)
+                val cn = ComponentName(context, DreamUniverse::class.java)
                 cn.setEnable(context, enable)
             }
         }
