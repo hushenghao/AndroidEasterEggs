@@ -1,6 +1,5 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AppRegistration
@@ -8,12 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dede.android_eggs.R
+import com.dede.android_eggs.views.main.compose.DrawableImage
 import com.dede.android_eggs.views.main.util.EasterEggHelp.VersionFormatter
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
@@ -40,10 +39,10 @@ fun ComponentManagerPref(viewModel: ComponentManagerViewModel = viewModel()) {
             SwitchOption(
                 shape = OptionShapes.indexOfShape(index = index, optionsCount = componentCount),
                 leadingIcon = {
-                    Image(
+                    DrawableImage(
+                        res = component.iconRes,
                         modifier = Modifier.size(28.dp),
-                        painter = painterResource(component.iconRes),
-                        contentDescription = null,
+                        contentDescription = stringResource(id = component.nameRes),
                     )
                 },
                 title = stringResource(id = component.nameRes),

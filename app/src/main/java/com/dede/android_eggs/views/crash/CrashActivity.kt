@@ -60,6 +60,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
+import com.dede.android_eggs.util.AGPUtils
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.copy
 import com.dede.android_eggs.views.crash.GlobalExceptionHandler.Companion.getUncaughtException
@@ -106,10 +107,11 @@ private fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
     val bodySpan = remember(tr) {
         buildAnnotatedString {
             withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
-                val devicesInfo = "Device: %s (%s - %s), SDK: %s (%d), App: %s (%d)".format(
+                val devicesInfo = "Device: %s (%s - %s), SDK: %s (%d), App: %s (%d), VcsRevision: %s".format(
                     Build.MODEL, Build.BRAND, Build.DEVICE,
                     Build.VERSION.RELEASE, Build.VERSION.SDK_INT,
                     BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,
+                    AGPUtils.getVcsRevision(7)
                 )
                 append(devicesInfo)
             }
