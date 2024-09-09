@@ -7,7 +7,7 @@ compose-bom = "2024.08.00"
 # https://google.github.io/accompanist
 accompanist = "0.34.0"
 lifecycle = "2.8.4"
-activity = "1.9.1"
+activity = "1.9.2"
 coil = "2.7.0"
 # test
 espresso = "3.6.1"
