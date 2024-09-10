@@ -29,7 +29,7 @@ Submit a new Beta Build to Pgyer
 [bundle exec] fastlane android release
 ```
 
-Deploy a new version to the Github release
+Deploy to Github release
 
 ### android deploy
 
@@ -37,7 +37,7 @@ Deploy a new version to the Github release
 [bundle exec] fastlane android deploy
 ```
 
-Deploy a new version to the Google Play
+Deploy to Google Play
 
 ----
 
