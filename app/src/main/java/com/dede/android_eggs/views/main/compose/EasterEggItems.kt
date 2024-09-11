@@ -32,10 +32,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
-import com.dede.android_eggs.views.main.util.EasterEggHelp
-import com.dede.android_eggs.views.main.util.EggActionHelp
 import com.dede.android_eggs.ui.composes.SnapshotView
+import com.dede.android_eggs.views.main.util.AndroidReleaseDateMatcher
+import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
+import com.dede.android_eggs.views.main.util.EggActionHelp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 
@@ -47,11 +48,11 @@ fun EasterEggHighestItem(
     val context = LocalContext.current
     val egg = base as EasterEgg
     val androidVersion = remember(egg) {
-        EasterEggHelp.VersionFormatter.create(egg.apiLevel, egg.nicknameRes)
+        EasterEggHelp.VersionFormatter.create(egg.apiLevelRange, egg.nicknameRes)
             .format(context)
     }
     val apiLevel = remember(egg) {
-        EasterEggHelp.ApiLevelFormatter.create(egg.apiLevel).format(context)
+        EasterEggHelp.ApiLevelFormatter.create(egg.apiLevelRange).format(context)
     }
     val dateFormat = remember(egg, context.resources.configuration) {
         EasterEggHelp.DateFormatter.getInstance("MM yyyy")
@@ -126,7 +127,7 @@ fun EasterEggHighestItem(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Chip(text = apiLevel)
-            Chip(text = dateFormat.format(egg.getReleaseDate()))
+            Chip(text = dateFormat.format(AndroidReleaseDateMatcher.findReleaseDateByApiLevel(egg.apiLevel)))
         }
     }
 }

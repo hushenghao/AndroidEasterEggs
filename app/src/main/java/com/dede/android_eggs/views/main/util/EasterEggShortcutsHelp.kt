@@ -53,7 +53,7 @@ object EasterEggShortcutsHelp {
             val dynamicShortcuts = ShortcutManagerCompat.getDynamicShortcuts(context)
             val removeShortcutIds = dynamicShortcuts.map { it.id }.toMutableList()
             for (egg in subEggs) {
-                val shortcutId = FORMAT_DYNAMIC_SHORTCUT_ID.format(egg.id)
+                val shortcutId = FORMAT_DYNAMIC_SHORTCUT_ID.format(egg.apiLevel)
                 for (shortcut in dynamicShortcuts) {
                     if (shortcutId == shortcut.id) {
                         removeShortcutIds.remove(shortcut.id)
@@ -101,7 +101,7 @@ object EasterEggShortcutsHelp {
             .setShortLabel(label)
             .setLongLabel(label)
             .applyIf(!isPinShortcut) {
-                setRank(egg.id)
+                setRank(egg.apiLevel)
             }
             .applyNotNull(clazz) {
                 val mainIntent = Intent(context, EasterEggsActivity::class.java)
@@ -121,7 +121,7 @@ object EasterEggShortcutsHelp {
     fun pinShortcut(context: Context, egg: EasterEgg) {
         if (!isSupportShortcut(egg)) return
 
-        val shortcutId = FORMAT_PIN_SHORTCUT_ID.format(egg.id)
+        val shortcutId = FORMAT_PIN_SHORTCUT_ID.format(egg.apiLevel)
         val shortcut = createShortcutInfo(context, shortcutId, egg, true)
         val callback = PinShortcutReceiver.registerCallbackWithTimeout(context)
         ShortcutManagerCompat.requestPinShortcut(context, shortcut, callback)

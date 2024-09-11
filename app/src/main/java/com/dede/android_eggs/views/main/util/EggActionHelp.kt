@@ -47,7 +47,7 @@ object EggActionHelp {
     fun launchEgg(context: Context, egg: EasterEgg) {
         val targetClass = egg.provideEasterEgg()
         if (targetClass == null) {
-            if (!egg.easterEggAction(context)) {
+            if (!egg.onEasterEggAction(context)) {
                 context.toast(R.string.toast_no_egg)
             }
             return

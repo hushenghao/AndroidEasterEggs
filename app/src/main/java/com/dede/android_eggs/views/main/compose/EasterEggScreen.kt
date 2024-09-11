@@ -123,12 +123,12 @@ private fun filterEasterEggs(
     val isApiLevel = Regex("^\\d{1,2}$").matches(searchText)
 
     fun EasterEgg.matchVersionName(version: String): Boolean {
-        val containsStart = EasterEggHelp.getVersionNameByApiLevel(apiLevel.first)
+        val containsStart = EasterEggHelp.getVersionNameByApiLevel(apiLevelRange.first)
             .contains(version, true)
-        return if (apiLevel.first == apiLevel.last) {
+        return if (apiLevelRange.first == apiLevelRange.last) {
             containsStart
         } else {
-            containsStart || EasterEggHelp.getVersionNameByApiLevel(apiLevel.last)
+            containsStart || EasterEggHelp.getVersionNameByApiLevel(apiLevelRange.last)
                 .contains(version, true)
         }
     }
@@ -136,6 +136,6 @@ private fun filterEasterEggs(
         context.getString(it.nameRes).contains(searchText, true) ||
                 context.getString(it.nicknameRes).contains(searchText, true) ||
                 it.matchVersionName(searchText) ||
-                (isApiLevel && it.apiLevel.contains(searchText.toIntOrNull() ?: -1))
+                (isApiLevel && it.apiLevelRange.contains(searchText.toIntOrNull() ?: -1))
     }
 }

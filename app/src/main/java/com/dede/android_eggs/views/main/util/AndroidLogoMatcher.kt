@@ -3,30 +3,35 @@ package com.dede.android_eggs.views.main.util
 import android.os.Build
 import android.util.SparseIntArray
 import androidx.annotation.DrawableRes
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.core.util.set
 import com.dede.android_eggs.R
+import com.dede.basic.globalContext
 import com.dede.basic.provider.EasterEgg
-import javax.inject.Inject
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 
-class AndroidLogoMatcher @Inject constructor() {
+object AndroidLogoMatcher {
+
+    @EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface PureEasterEggListEntryPoint {
+        fun pureEasterEggList(): List<@JvmSuppressWildcards EasterEgg>
+    }
 
     private val cache = SparseIntArray()
 
-    @Inject
-    lateinit var easterEggs: List<@JvmSuppressWildcards EasterEgg>
+    private val easterEggs: List<EasterEgg>
 
-    @Composable
-    fun findAndroidLogoComposable(apiLevel: Int): Int {
-        if (LocalInspectionMode.current && !::easterEggs.isInitialized) {
-            easterEggs = EasterEggHelp.previewEasterEggs()
-        }
-        return findAndroidLogo(apiLevel)
+    init {
+        val entryPoint = EntryPointAccessors
+            .fromApplication(globalContext, PureEasterEggListEntryPoint::class.java)
+        easterEggs = entryPoint.pureEasterEggList()
     }
 
     fun findEasterEgg(apiLevel: Int): EasterEgg? {
-        return easterEggs.find { apiLevel in it.apiLevel }
+        return easterEggs.find { apiLevel in it.apiLevelRange }
     }
 
     @DrawableRes
@@ -46,7 +51,7 @@ class AndroidLogoMatcher @Inject constructor() {
                 if (cache.indexOfKey(apiLevel) >= 0) {
                     return cache[apiLevel]
                 }
-                val easterEgg = easterEggs.find { apiLevel in it.apiLevel }
+                val easterEgg = findEasterEgg(apiLevel)
                     ?: throw IllegalArgumentException("Not found Android logo res, level: $apiLevel")
                 cache[apiLevel] = easterEgg.iconRes
                 return easterEgg.iconRes

@@ -40,7 +40,7 @@ fun Modifier.withEasterEggGroupSelector(
         offset = DpOffset(x = (-12).dp, y = 12.dp),
     ) {
         base.eggs.forEachIndexed { index, egg ->
-            val menuTitle = EasterEggHelp.VersionFormatter.create(egg.apiLevel, egg.nicknameRes)
+            val menuTitle = EasterEggHelp.VersionFormatter.create(egg.apiLevelRange, egg.nicknameRes)
                 .format(context)
             DropdownMenuItem(
                 leadingIcon = {

@@ -20,8 +20,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import java.util.Calendar
-import java.util.Date
-import java.util.TimeZone
 import javax.inject.Singleton
 
 //@Module
@@ -68,7 +66,7 @@ object AndroidNextReleaseEasterEgg : EasterEggProvider {
         ) {
             override fun provideEasterEgg(): Class<out Activity>? = null
 
-            override fun easterEggAction(context: Context): Boolean {
+            override fun onEasterEggAction(context: Context): Boolean {
                 androidReleaseDialogVisible = true
                 return true
             }
@@ -83,12 +81,6 @@ object AndroidNextReleaseEasterEgg : EasterEggProvider {
                 }
             }
 
-            override fun getReleaseDate(): Date {
-                val calendar = Calendar.getInstance(TimeZone.getDefault())
-                calendar.set(Calendar.YEAR, RELEASE_YEAR)
-                calendar.set(Calendar.MONTH, RELEASE_MONTH)
-                return calendar.time
-            }
         }
     }
 

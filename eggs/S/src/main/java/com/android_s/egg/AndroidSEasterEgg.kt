@@ -20,8 +20,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import java.util.Calendar
-import java.util.Date
-import java.util.TimeZone
 import javax.inject.Singleton
 
 @Module
@@ -36,7 +34,7 @@ object AndroidSEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.s_android_logo,
             nameRes = R.string.s_egg_name,
             nicknameRes = R.string.s_android_nickname,
-            apiLevel = Build.VERSION_CODES.S..Build.VERSION_CODES.S_V2
+            apiLevelRange = Build.VERSION_CODES.S..Build.VERSION_CODES.S_V2
         ) {
             override fun provideEasterEgg(): Class<out Activity> {
                 return PlatLogoActivity::class.java
@@ -44,13 +42,6 @@ object AndroidSEasterEgg : EasterEggProvider, ComponentProvider {
 
             override fun provideSnapshotProvider(): SnapshotProvider {
                 return SnapshotProvider()
-            }
-
-            override fun getReleaseDate(): Date {
-                val calendar = Calendar.getInstance(TimeZone.getDefault())
-                calendar.set(Calendar.YEAR, 2021)
-                calendar.set(Calendar.MONTH, Calendar.SEPTEMBER)
-                return calendar.time
             }
         }
     }
@@ -81,7 +72,7 @@ object AndroidSEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.s_ic_fullcat_icon,
             nameRes = R.string.s_egg_name,
             nicknameRes = R.string.s_android_nickname,
-            apiLevel = Build.VERSION_CODES.S..Build.VERSION_CODES.S_V2
+            apiLevelRange = Build.VERSION_CODES.S..Build.VERSION_CODES.S_V2
         ) {
             @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.R)
             override fun isSupported(): Boolean {

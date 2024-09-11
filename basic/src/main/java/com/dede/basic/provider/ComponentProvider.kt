@@ -11,26 +11,25 @@ interface ComponentProvider {
 
     fun provideComponent(): Component
 
-    abstract class Component constructor(
+    abstract class Component(
         @DrawableRes val iconRes: Int,
         @StringRes val nameRes: Int,
         @StringRes val nicknameRes: Int,
-        val apiLevel: IntRange,
+        val apiLevelRange: IntRange,
     ) {
 
-        fun getSortValue(): Int {
-            return apiLevel.first
-        }
+        val apiLevel: Int
+            get() = apiLevelRange.first
 
         override fun hashCode(): Int {
-            return apiLevel.hashCode()
+            return apiLevelRange.hashCode()
         }
 
         override fun equals(other: Any?): Boolean {
             if (other !is Component) {
                 return false
             }
-            return apiLevel == other.apiLevel
+            return apiLevelRange == other.apiLevelRange
         }
 
         companion object {

@@ -35,7 +35,7 @@ fun ComponentManagerPref(viewModel: ComponentManagerViewModel = viewModel()) {
         val componentCount = componentList.size
         val context = LocalContext.current
         componentList.forEachIndexed { index, component ->
-            val formatter = VersionFormatter.create(component.apiLevel, component.nicknameRes)
+            val formatter = VersionFormatter.create(component.apiLevelRange, component.nicknameRes)
             SwitchOption(
                 shape = OptionShapes.indexOfShape(index = index, optionsCount = componentCount),
                 leadingIcon = {

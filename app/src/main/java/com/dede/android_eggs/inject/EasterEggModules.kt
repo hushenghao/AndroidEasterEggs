@@ -65,7 +65,7 @@ object EasterEggModules {
     @Provides
     @Singleton
     fun provideEasterEggList(easterEggSet: Set<@JvmSuppressWildcards BaseEasterEgg>): List<@JvmSuppressWildcards BaseEasterEgg> {
-        return easterEggSet.sortedByDescending { it.getSortValue() }
+        return easterEggSet.sortedByDescending { it.apiLevel }
     }
 
     @Provides
@@ -111,7 +111,7 @@ object EasterEggComponentModules {
     fun provideEasterEggComponents(componentSet: Set<@JvmSuppressWildcards Component>): List<@JvmSuppressWildcards Component> {
         return componentSet
             .filter { it.isSupported() }
-            .sortedByDescending { it.getSortValue() }
+            .sortedByDescending { it.apiLevel }
     }
 
 }

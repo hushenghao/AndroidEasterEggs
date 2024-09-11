@@ -66,7 +66,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
 
             val hour = Calendar.getInstance().get(Calendar.HOUR)
             val apiLevel = hourApiLevelArray[hour]
-            val egg = eggIntent.easterEggs.find { apiLevel in it.apiLevel }
+            val egg = eggIntent.easterEggs.find { apiLevel in it.apiLevelRange }
             if (egg != null) {
                 EggActionHelp.launchEgg(eggIntent.context, egg)
             }
@@ -91,7 +91,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
             // egg://easter_egg/api/34
             val levelStr = uri.pathSegments.getOrNull(1) ?: return false
             val level = levelStr.toIntOrNull() ?: return false
-            val egg = eggIntent.easterEggs.find { level in it.apiLevel }
+            val egg = eggIntent.easterEggs.find { level in it.apiLevelRange }
             if (egg != null) {
                 EggActionHelp.launchEgg(eggIntent.context, egg)
             }

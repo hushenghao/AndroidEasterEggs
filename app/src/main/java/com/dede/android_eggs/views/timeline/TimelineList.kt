@@ -108,7 +108,7 @@ fun TimelineList(
             items(viewModel.timelines) {
                 TimelineItem(
                     event = it,
-                    logoRes = viewModel.logoMatcher.findAndroidLogo(it.apiLevel),
+                    logoRes = AndroidLogoMatcher.findAndroidLogo(it.apiLevel),
                     isNewGroup = it.isNewGroup(viewModel.timelines)
                 )
             }
@@ -277,7 +277,4 @@ class TimelineViewModel @Inject constructor() : ViewModel() {
 
     @Inject
     lateinit var timelines: List<TimelineEvent>
-
-    @Inject
-    lateinit var logoMatcher: AndroidLogoMatcher
 }

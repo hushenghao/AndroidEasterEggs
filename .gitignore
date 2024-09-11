@@ -1,6 +1,7 @@
 *.iml
 .gradle
 .kotlin/sessions
+.kotlin/errors
 .DS_Store
 /build
 /captures

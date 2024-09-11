@@ -20,7 +20,7 @@ import com.dede.basic.requireDrawable
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 private fun PreviewImage() {
     val context = LocalContext.current
     Column(horizontalAlignment = Alignment.CenterHorizontally) {

@@ -16,8 +16,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import java.util.Calendar
-import java.util.Date
-import java.util.TimeZone
 import javax.inject.Singleton
 
 @Module
@@ -40,13 +38,6 @@ object AndroidVEasterEgg : EasterEggProvider, ComponentProvider {
 
             override fun provideSnapshotProvider(): SnapshotProvider {
                 return SnapshotProvider()
-            }
-
-            override fun getReleaseDate(): Date {
-                val calendar = Calendar.getInstance(TimeZone.getDefault())
-                calendar.set(Calendar.YEAR, 2024)
-                calendar.set(Calendar.MONTH, Calendar.SEPTEMBER)
-                return calendar.time
             }
         }
     }
