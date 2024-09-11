@@ -44,7 +44,7 @@
     <string name="label_search_hint">Buscar…</string>
     <string name="label_component_manager">Administrador de Componentes</string>
     <string name="pref_more_settings">Más ajustes</string>
-    <string name="pref_retain_recent_egg_tasks">Guardar tareas de Easter Eggs recientes</string>
+    <string name="pref_retain_recent_egg_tasks">Guardar tareas de Easter Egg tasks recientes</string>
     <string name="pref_summary_retain_recent_egg_tasks">Guardar tareas de Easter Eggs en la pantalla Recientes, máximo 5 tareas guardadas (No disponible para el modo de Actividad Incorporada)</string>
     <string name="label_about">Acerca de</string>
     <string name="label_contribute">Contribuir</string>
