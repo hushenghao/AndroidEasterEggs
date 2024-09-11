@@ -100,7 +100,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.dionsegijn.konfetti)
-    implementation(libs.io.coil)
+    implementation(libs.squareup.okio)
     implementation(libs.free.reflection)
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
