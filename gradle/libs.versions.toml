@@ -75,6 +75,7 @@ kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", v
 # Test
 junit = "junit:junit:4.13.2"
 androidx-test-core = "androidx.test:core-ktx:1.6.1"
+androidx-junit = "androidx.test.ext:junit:1.1.5"
 androidx-test-ext = "androidx.test.ext:junit-ktx:1.2.1"
 androidx-expresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 androidx-expresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espresso" }
@@ -83,5 +84,5 @@ androidx-compose-ui-test-junit = { module = "androidx.compose.ui:ui-test-junit4"
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 
 [bundles]
-android-test = ["androidx-test-core", "androidx-test-ext", "androidx-expresso-core",
+android-test = ["androidx-test-core", "androidx-junit", "androidx-test-ext", "androidx-expresso-core",
     "androidx-expresso-contrib", "androidx-expresso-intents", "androidx-compose-ui-test-junit"]

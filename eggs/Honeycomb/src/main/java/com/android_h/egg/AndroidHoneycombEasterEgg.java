@@ -2,7 +2,6 @@ package com.android_h.egg;
 
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
-import android.app.Activity;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.TimelineEvent;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Singleton;
@@ -39,13 +37,8 @@ public class AndroidHoneycombEasterEgg implements EasterEggProvider {
                 R.string.h_egg_name,
                 R.string.h_egg_name,
                 new IntRange(Build.VERSION_CODES.HONEYCOMB, Build.VERSION_CODES.HONEYCOMB_MR2),
-                false
+                PlatLogoActivity.class
         ) {
-            @Override
-            public Class<? extends Activity> provideEasterEgg() {
-                return PlatLogoActivity.class;
-            }
-
             @Override
             public SnapshotProvider provideSnapshotProvider() {
                 return new SnapshotProvider();
@@ -59,7 +52,7 @@ public class AndroidHoneycombEasterEgg implements EasterEggProvider {
     @NonNull
     @Override
     public List<TimelineEvent> provideTimelineEvents() {
-        return Arrays.asList(
+        return List.of(
                 timelineEvent(
                         Build.VERSION_CODES.HONEYCOMB_MR2,
                         "H MR2.\nReleased publicly as Android 3.2 in July 2011."

@@ -2,7 +2,6 @@ package com.android_m.egg;
 
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
-import android.app.Activity;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.TimelineEvent;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Singleton;
@@ -38,13 +36,8 @@ public class AndroidMarshmallowEasterEgg implements EasterEggProvider {
                 R.string.m_mland,
                 R.string.m_android_nickname,
                 Build.VERSION_CODES.M,
-                true
+                PlatLogoActivity.class
         ) {
-            @Override
-            public Class<? extends Activity> provideEasterEgg() {
-                return PlatLogoActivity.class;
-            }
-
             @Override
             public SnapshotProvider provideSnapshotProvider() {
                 return new SnapshotProvider();

@@ -2,7 +2,6 @@ package com.android_n.egg;
 
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Build;
@@ -18,7 +17,6 @@ import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.TimelineEvent;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Singleton;
@@ -45,13 +43,8 @@ public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvi
                 R.string.n_app_name,
                 R.string.n_android_nickname,
                 new IntRange(Build.VERSION_CODES.N, Build.VERSION_CODES.N_MR1),
-                true
+                PlatLogoActivity.class
         ) {
-            @Override
-            public Class<? extends Activity> provideEasterEgg() {
-                return PlatLogoActivity.class;
-            }
-
             @Override
             public SnapshotProvider provideSnapshotProvider() {
                 return new SnapshotProvider();
@@ -100,7 +93,7 @@ public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvi
     @Singleton
     @Override
     public List<TimelineEvent> provideTimelineEvents() {
-        return Arrays.asList(
+        return List.of(
                 timelineEvent(
                         Build.VERSION_CODES.N_MR1,
                         "N MR1.\nReleased publicly as Android 7.1 in October 2016."

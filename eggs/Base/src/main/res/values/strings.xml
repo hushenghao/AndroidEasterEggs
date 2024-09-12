@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="b_nickname_android_froyo" translatable="false">Froyo</string>
+    <string name="b_nickname_android_eclair" translatable="false">Eclair</string>
+    <string name="b_nickname_android_donut" translatable="false">Donut</string>
+    <string name="b_nickname_android_cupcake" translatable="false">Cupcake</string>
+    <string name="b_nickname_android_petit_four" translatable="false">Petit Four</string>
+    <string name="b_nickname_android_base" translatable="false">Base</string>
+</resources>

@@ -2,7 +2,6 @@ package com.android_g.egg;
 
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
-import android.app.Activity;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.TimelineEvent;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Singleton;
@@ -39,13 +37,8 @@ public class AndroidGingerbreadEasterEgg implements EasterEggProvider {
                 R.string.g_egg_name,
                 R.string.g_egg_name,
                 new IntRange(Build.VERSION_CODES.GINGERBREAD, Build.VERSION_CODES.GINGERBREAD_MR1),
-                false
+                PlatLogoActivity.class
         ) {
-            @Override
-            public Class<? extends Activity> provideEasterEgg() {
-                return PlatLogoActivity.class;
-            }
-
             @Override
             public SnapshotProvider provideSnapshotProvider() {
                 return new SnapshotProvider();
@@ -59,7 +52,7 @@ public class AndroidGingerbreadEasterEgg implements EasterEggProvider {
     @Singleton
     @Override
     public List<TimelineEvent> provideTimelineEvents() {
-        return Arrays.asList(
+        return List.of(
                 timelineEvent(
                         Build.VERSION_CODES.GINGERBREAD_MR1,
                         "G MR1.\nReleased publicly as Android 2.3.3 in February 2011."

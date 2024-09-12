@@ -1,6 +1,5 @@
 package com.android_s.egg
 
-import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.os.Build
@@ -34,12 +33,9 @@ object AndroidSEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.s_android_logo,
             nameRes = R.string.s_egg_name,
             nicknameRes = R.string.s_android_nickname,
-            apiLevelRange = Build.VERSION_CODES.S..Build.VERSION_CODES.S_V2
+            apiLevelRange = Build.VERSION_CODES.S..Build.VERSION_CODES.S_V2,
+            actionClass = PlatLogoActivity::class.java
         ) {
-            override fun provideEasterEgg(): Class<out Activity> {
-                return PlatLogoActivity::class.java
-            }
-
             override fun provideSnapshotProvider(): SnapshotProvider {
                 return SnapshotProvider()
             }

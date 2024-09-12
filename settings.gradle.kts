@@ -23,6 +23,7 @@ include(
     ":basic",
     ":jvm-basic",
 
+    ":eggs:Base",
     ":eggs:Gingerbread",
     ":eggs:Honeycomb",
     ":eggs:IceCreamSandwich",

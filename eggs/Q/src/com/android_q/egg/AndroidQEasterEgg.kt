@@ -1,6 +1,5 @@
 package com.android_q.egg
 
-import android.app.Activity
 import android.os.Build
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
@@ -26,12 +25,9 @@ object AndroidQEasterEgg : EasterEggProvider {
             iconRes = R.drawable.q_icon,
             nameRes = R.string.q_egg_name,
             nicknameRes = R.string.q_android_nickname,
-            apiLevel = Build.VERSION_CODES.Q
+            apiLevel = Build.VERSION_CODES.Q,
+            actionClass = PlatLogoActivity::class.java
         ) {
-            override fun provideEasterEgg(): Class<out Activity> {
-                return PlatLogoActivity::class.java
-            }
-
             override fun provideSnapshotProvider(): SnapshotProvider {
                 return SnapshotProvider()
             }

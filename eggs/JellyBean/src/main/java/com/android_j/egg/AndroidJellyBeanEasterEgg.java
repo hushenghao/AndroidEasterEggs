@@ -2,7 +2,6 @@ package com.android_j.egg;
 
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Build;
@@ -15,7 +14,6 @@ import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.TimelineEvent;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Singleton;
@@ -42,13 +40,8 @@ public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentPr
                 R.string.j_egg_name,
                 R.string.j_android_nickname,
                 new IntRange(Build.VERSION_CODES.JELLY_BEAN, Build.VERSION_CODES.JELLY_BEAN_MR2),
-                false
+                PlatLogoActivity.class
         ) {
-            @Override
-            public Class<? extends Activity> provideEasterEgg() {
-                return PlatLogoActivity.class;
-            }
-
             @Override
             public SnapshotProvider provideSnapshotProvider() {
                 return new SnapshotProvider();
@@ -93,7 +86,7 @@ public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentPr
     @NonNull
     @Override
     public List<TimelineEvent> provideTimelineEvents() {
-        return Arrays.asList(
+        return List.of(
                 timelineEvent(
                         Build.VERSION_CODES.JELLY_BEAN_MR2,
                         "J MR2.\nReleased publicly as Android 4.3 in July 2013."

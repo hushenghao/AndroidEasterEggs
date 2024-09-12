@@ -73,7 +73,7 @@ object EasterEggShortcutsHelp {
     }
 
     fun updateShortcuts(context: Context, eggs: List<EasterEgg>) {
-        val providedEggs = eggs.filter { it.provideEasterEgg() != null }
+        val providedEggs = eggs.filter { it.actionClass != null }
         val appCtx = context.applicationContext
         cachedExecutor.execute(UpdateShortcutsRunnable(appCtx, providedEggs))
     }
@@ -84,7 +84,7 @@ object EasterEggShortcutsHelp {
         egg: EasterEgg,
         isPinShortcut: Boolean = true
     ): ShortcutInfoCompat {
-        val clazz = requireNotNull(egg.provideEasterEgg()) {
+        val clazz = requireNotNull(egg.actionClass) {
             "EasterEgg unsupported shortcut, provide class == null!"
         }
         val label = context.getString(egg.nicknameRes)
@@ -115,7 +115,7 @@ object EasterEggShortcutsHelp {
     }
 
     fun isSupportShortcut(egg: EasterEgg): Boolean {
-        return egg.provideEasterEgg() != null
+        return egg.actionClass != null
     }
 
     fun pinShortcut(context: Context, egg: EasterEgg) {

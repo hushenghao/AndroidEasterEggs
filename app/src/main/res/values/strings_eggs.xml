@@ -2,12 +2,6 @@
 <resources>
     <!-- tasty treat name -->
     <string name="nickname_android_vanilla_ice_cream" translatable="false">Vanilla Ice Cream</string>
-    <string name="nickname_android_froyo" translatable="false">Froyo</string>
-    <string name="nickname_android_eclair" translatable="false">Eclair</string>
-    <string name="nickname_android_donut" translatable="false">Donut</string>
-    <string name="nickname_android_cupcake" translatable="false">Cupcake</string>
-    <string name="nickname_android_petit_four" translatable="false">Petit Four</string>
-    <string name="nickname_android_base" translatable="false">Base</string>
 
     <string name="android_version_nickname_format" translatable="false">Android %s (%s)</string>
     <string name="android_version_format" translatable="false">Android %s</string>

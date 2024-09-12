@@ -1,5 +1,6 @@
 package com.dede.android_eggs.inject
 
+import com.android_b.egg.AndroidBaseEasterEgg
 import com.android_g.egg.AndroidGingerbreadEasterEgg
 import com.android_h.egg.AndroidHoneycombEasterEgg
 import com.android_i.egg.AndroidIceCreamSandwichEasterEgg

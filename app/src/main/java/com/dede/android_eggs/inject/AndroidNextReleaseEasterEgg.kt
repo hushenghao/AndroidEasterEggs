@@ -1,6 +1,5 @@
 package com.dede.android_eggs.inject
 
-import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
@@ -62,10 +61,7 @@ object AndroidNextReleaseEasterEgg : EasterEggProvider {
             nameRes = NICKNAME_RES,
             nicknameRes = NICKNAME_RES,
             apiLevel = NEXT_API,
-            true
         ) {
-            override fun provideEasterEgg(): Class<out Activity>? = null
-
             override fun onEasterEggAction(context: Context): Boolean {
                 androidReleaseDialogVisible = true
                 return true

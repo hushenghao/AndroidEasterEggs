@@ -2,7 +2,6 @@ package com.android_k.egg;
 
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Build;
@@ -15,7 +14,6 @@ import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.TimelineEvent;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Singleton;
@@ -42,13 +40,8 @@ public class AndroidKitKatEasterEgg implements EasterEggProvider, ComponentProvi
                 R.string.k_dessert_case,
                 R.string.k_android_nickname,
                 new IntRange(Build.VERSION_CODES.KITKAT, Build.VERSION_CODES.KITKAT_WATCH),
-                false
+                PlatLogoActivity.class
         ) {
-            @Override
-            public Class<? extends Activity> provideEasterEgg() {
-                return PlatLogoActivity.class;
-            }
-
             @Override
             public SnapshotProvider provideSnapshotProvider() {
                 return new SnapshotProvider();
@@ -93,7 +86,7 @@ public class AndroidKitKatEasterEgg implements EasterEggProvider, ComponentProvi
     @NonNull
     @Override
     public List<TimelineEvent> provideTimelineEvents() {
-        return Arrays.asList(
+        return List.of(
                 timelineEvent(
                         Build.VERSION_CODES.KITKAT_WATCH,
                         "K for watches.\nReleased publicly as Android 4.4W in June 2014."

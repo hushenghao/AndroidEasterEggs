@@ -121,6 +121,7 @@ dependencies {
     implementation(project(":eggs:IceCreamSandwich"))
     implementation(project(":eggs:Honeycomb"))
     implementation(project(":eggs:Gingerbread"))
+    implementation(project(":eggs:Base"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.nanohttpd)
