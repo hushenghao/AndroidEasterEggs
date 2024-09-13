@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">尚未发布</string>
+    <string name="summary_android_release_pushed">最终版本已经发布</string>
+    <string name="label_timeline_title">时间表、里程碑和更新</string>
+    <string name="label_timeline_releases">版本</string>
+</resources>

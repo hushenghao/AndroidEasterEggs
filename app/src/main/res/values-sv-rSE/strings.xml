@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Påskägg</string>
-    <string name="summary_android_waiting">Väntar…</string>
-    <string name="summary_android_release_pushed">Den slutliga versionen har släppts</string>
     <string name="title_open_with">Öppna med</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -14,8 +12,6 @@
     <string name="label_license">Licens</string>
     <string name="label_feedback">Återkoppling</string>
     <string name="label_star">Stjärna</string>
-    <string name="label_timeline_title">Tidslinje, milstolpar och uppdateringar</string>
-    <string name="label_timeline_releases">Släpps</string>
     <string name="message_trypophobia_warning">Detta är en varning till dem med &lt;b&gt;Trypophobia&lt;/b&gt; att vissa bilder kan orsaka obehag. Vill du fortsätta?</string>
     <string name="label_settings">Inställningar</string>
     <string name="label_project_desc">Detta projekt innehåller den fullständiga koden för systemets påskägg, som syftar till att organisera och vara kompatibel med systemets påskägg, för att säkerställa att de flesta enheter kan uppleva olika versioner av påskägg utan att göra för många modifieringar av påskäggets kod. Nyare versioner använder nya funktioner i nämnda system, men lägre versioner kan bara använda vissa funktioner.</string>

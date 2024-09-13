@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">まだリリースされていません</string>
-    <string name="summary_android_release_pushed">新しいバージョンがリリースされました</string>
     <string name="title_open_with">アプリで開く</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">~</string>
@@ -16,8 +14,6 @@
     <string name="label_star">アプリを評価</string>
     <string name="label_contact_me">問い合わせ</string>
     <string name="label_email_title">メール</string>
-    <string name="label_timeline_title">タイムライン</string>
-    <string name="label_timeline_releases">リリース</string>
     <string name="message_trypophobia_warning">一部のシーンで &lt;b&gt;集合体恐怖症&lt;/b&gt; をお持ちの方に不快感を与える可能性があります。続行してもよろしいですか？</string>
     <string name="label_settings">設定</string>
     <string name="label_project_desc">このプロジェクトでは、Androidの完全なイースターエッグのソースコードが含まれています。

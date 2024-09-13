@@ -105,6 +105,7 @@ dependencies {
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
 
+    implementation(project(":eggs:AndroidNext"))
     implementation(project(":eggs:VanillaIceCream"))
     implementation(project(":eggs:UpsideDownCake"))
     implementation(project(":eggs:Tiramisu"))

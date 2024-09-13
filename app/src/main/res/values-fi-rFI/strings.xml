@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pääsiäismunia</string>
-    <string name="summary_android_waiting">Odotetaan…</string>
-    <string name="summary_android_release_pushed">Lopullinen julkaisuversio on työnnetty</string>
     <string name="title_open_with">Avaa sovelluksessa</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -13,8 +11,6 @@
     <string name="label_license">Lisenssi</string>
     <string name="label_feedback">Palaute</string>
     <string name="label_star">Tähti</string>
-    <string name="label_timeline_title">Aikajana, virstanpylväät ja päivitykset</string>
-    <string name="label_timeline_releases">Julkaisut</string>
     <string name="message_trypophobia_warning">Tämä on varoitus niille, joilla on &lt;b&gt;trypofobia&lt;/b&gt;, että jotkut kuvat voivat aiheuttaa epämukavuutta. Haluatko jatkaa?</string>
     <string name="label_settings">Asetukset</string>
     <string name="label_project_desc">Projekti sisältää pääsiäismunien järjestelmän täydellisen koodin, jonka tavoitteena on organisoida ja yhteensopiva järjestelmämunien kanssa niin, että useimmat laitteet voivat kokea pääsiäismunien eri versioita, eivätkä tee liikaa muutoksia järjestelmän munakoodiin. Jotkut versiot käyttävät järjestelmän uusia ominaisuuksia ja alemmissa versioissa vain joitain toimintoja.</string>

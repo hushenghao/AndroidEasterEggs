@@ -1,5 +1,7 @@
-package com.dede.android_eggs.views.main.compose
+package com.android_next.egg
 
+import android.content.Context
+import android.content.res.Configuration
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
@@ -38,31 +40,28 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.R
-import com.dede.android_eggs.inject.AndroidNextReleaseEasterEgg
-import com.dede.android_eggs.util.CustomTabsBrowser
-import com.dede.android_eggs.util.ThemeUtils
 import com.dede.basic.requireDrawable
+import com.dede.basic.utils.DynamicObjectUtils
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import kotlin.math.max
 import kotlin.math.min
 
-var androidReleaseDialogVisible by mutableStateOf(false)
+internal var androidNextDialogVisible by mutableStateOf(false)
 
 @Composable
-fun AndroidReleaseTimelineDialog(
-    @DrawableRes logoRes: Int = R.mipmap.ic_launcher,
-    @StringRes titleRes: Int = R.string.nickname_android_vanilla_ice_cream
+fun AndroidNextTimelineDialog(
+    @DrawableRes logoRes: Int = R.drawable.ic_droid_logo,
+    @StringRes titleRes: Int = R.string.nickname_android_next
 ) {
-    if (!androidReleaseDialogVisible) {
+    if (!androidNextDialogVisible) {
         return
     }
     val context = LocalContext.current
     AlertDialog(
         onDismissRequest = {
-            androidReleaseDialogVisible = false
+            androidNextDialogVisible = false
         },
         title = {
             Row(
@@ -83,7 +82,7 @@ fun AndroidReleaseTimelineDialog(
         text = {
             Column {
                 Text(
-                    text = AndroidNextReleaseEasterEgg.getTimelineMessage(context),
+                    text = AndroidNextEasterEgg.getTimelineMessage(context),
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Spacer(modifier = Modifier.height(12.dp))
@@ -96,14 +95,26 @@ fun AndroidReleaseTimelineDialog(
         },
         confirmButton = {
             TextButton(onClick = {
-                androidReleaseDialogVisible = false
-                CustomTabsBrowser.launchUrl(context, R.string.url_android_releases)
+                androidNextDialogVisible = false
+                val customTabsBrowser =
+                    DynamicObjectUtils.asDynamicObject("com.dede.android_eggs.util.CustomTabsBrowser")
+                        .getProperty("INSTANCE")
+                        .getValue()
+                if (customTabsBrowser != null) {
+                    DynamicObjectUtils.asDynamicObject(customTabsBrowser)
+                        .invokeMethod(
+                            "launchUrl",
+                            arrayOf(Context::class.java, Int::class.java),
+                            arrayOf(context, R.string.url_android_releases)
+                        )
+                }
+                // CustomTabsBrowser.launchUrl(context, R.string.url_android_releases)
             }) {
                 Text(text = stringResource(id = R.string.label_timeline_releases))
             }
         },
         dismissButton = {
-            TextButton(onClick = { androidReleaseDialogVisible = false }) {
+            TextButton(onClick = { androidNextDialogVisible = false }) {
                 Text(text = stringResource(id = android.R.string.cancel))
             }
         },
@@ -121,7 +132,7 @@ private fun AndroidReleaseTimeline() {
     // Jul          5           6
     // Aug          -           7
     val offsetXArr = intArrayOf(20, 111, 202, 294, 386, 478, 584)
-    val nextReleaseYear = AndroidNextReleaseEasterEgg.RELEASE_YEAR
+    val nextReleaseYear = AndroidNextEasterEgg.RELEASE_YEAR
     val offsetXIndex =
         if (year < nextReleaseYear || (year == nextReleaseYear && month < Calendar.FEBRUARY)) {
             // No preview
@@ -186,7 +197,7 @@ private fun AndroidReleaseTimeline() {
                 }
             }
             val matrix = ColorMatrix()
-            if (ThemeUtils.isSystemNightMode(LocalContext.current)) {
+            if (isSystemNightMode(LocalContext.current)) {
                 // Increase the overall brightness and more blue brightness
                 matrix.setToScale(1.3f, 1.5f, 2f, 1f)
             }
@@ -197,4 +208,9 @@ private fun AndroidReleaseTimeline() {
             )
         }
     }
+}
+
+private fun isSystemNightMode(context: Context): Boolean {
+    return (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+            Configuration.UI_MODE_NIGHT_YES
 }

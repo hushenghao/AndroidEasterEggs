@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">În așteptare…</string>
+    <string name="summary_android_release_pushed">Versiunea finală a fost lansată</string>
+    <string name="label_timeline_title">Cronologie, etape și actualizări</string>
+    <string name="label_timeline_releases">Lansări</string>
+</resources>

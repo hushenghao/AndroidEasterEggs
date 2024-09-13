@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="url_android_releases" translatable="false">https://developer.android.google.cn/about/versions</string>
     <string name="url_translation" translatable="false">https://zh.crowdin.com/project/easter-eggs</string>
     <string name="url_privacy" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy-zh-CN</string>
 </resources>

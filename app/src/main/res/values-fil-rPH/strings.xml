@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Naghihintay…</string>
-    <string name="summary_android_release_pushed">Ang huling bersyon ng paglabas ay inilabas na</string>
     <string name="title_open_with">Buksan sa</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -13,8 +11,6 @@
     <string name="label_license">Lisensya</string>
     <string name="label_feedback">Feedback</string>
     <string name="label_star">Bituin</string>
-    <string name="label_timeline_title">Timeline, milestone, at update</string>
-    <string name="label_timeline_releases">Mga release</string>
     <string name="message_trypophobia_warning">Ito ay isang babala sa mga may &lt;b&gt;Trypophobia&lt;/b&gt; na maaaring magdulot ng kakulangan sa ginhawa ang ilang larawan. Gusto mo bang magpatuloy?</string>
     <string name="label_settings">Mga setting</string>
     <string name="label_project_desc">Ang proyektong ito ay naglalaman ng kumpletong code ng system Easter egg, na naglalayong ayusin at maging tugma sa system easter egg, upang matiyak na karamihan sa mga device ay makakaranas ng iba\'t ibang bersyon ng Easter egg nang hindi gumagawa ng masyadong maraming pagbabago sa code ng easter egg. Gumagamit ang mga mas bagong bersyon ng mga bagong feature ng nasabing system, ngunit ang mga mas mababang bersyon ay maaari lamang gumamit ng ilang function.</string>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">Henüz yayınlanmadı</string>
+    <string name="summary_android_release_pushed">Son sürüm yayınlandı</string>
+    <string name="label_timeline_title">Zaman çizelgesi, dönüm noktaları ve güncellemeler</string>
+    <string name="label_timeline_releases">Sürümler</string>
+</resources>

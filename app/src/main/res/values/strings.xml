@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">Easter Eggs</string>
 
-    <string name="summary_android_waiting">Currently unavailable</string>
-    <string name="summary_android_release_pushed">The final release version has been released</string>
-
     <string name="title_open_with">Open with</string>
 
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
@@ -13,7 +10,6 @@
     <string name="url_privacy" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy</string>
     <string name="url_license" translatable="false">https://www.apache.org/licenses/LICENSE-2.0.txt</string>
     <string name="url_translation" translatable="false">https://crowdin.com/project/easter-eggs</string>
-    <string name="url_android_releases" translatable="false">https://developer.android.com/about/versions</string>
     <string name="label_mail_me" translatable="false">dede.hu@qq.com</string>
     <string name="url_sponsor" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Sponsor</string>
     <string name="url_telegram_group" translatable="false">https://t.me/+AD_rLq66XERkMDNl</string>
@@ -33,9 +29,6 @@
     <string name="label_email_title">Email</string>
 
     <string name="label_version" translatable="false">v%s (%d)</string>
-
-    <string name="label_timeline_title">Timeline, milestones, and updates</string>
-    <string name="label_timeline_releases">Releases</string>
 
     <string name="message_trypophobia_warning">This is a trigger warning to those with &lt;b&gt;Trypophobia&lt;/b&gt; that some images may cause discomfort. Do you want to continue anyway?</string>
 

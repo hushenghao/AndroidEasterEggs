@@ -40,7 +40,9 @@ include(
     ":eggs:Tiramisu",
     ":eggs:UpsideDownCake",
     ":eggs:VanillaIceCream",
+    ":eggs:AndroidNext",
+
+    ":script:compose-material-icons-generator",
+    ":script:emoji-svg-xml-convertor",
 )
-include(":script:compose-material-icons-generator")
-include(":script:emoji-svg-xml-convertor")
 rootProject.name = "Easter Eggs"

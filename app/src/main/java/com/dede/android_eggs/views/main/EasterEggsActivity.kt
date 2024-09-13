@@ -25,13 +25,13 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
+import com.android_next.egg.AndroidNextTimelineDialog
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.compose.end
-import com.dede.android_eggs.views.main.compose.AndroidReleaseTimelineDialog
 import com.dede.android_eggs.views.main.compose.BottomSearchBar
 import com.dede.android_eggs.views.main.compose.EasterEggScreen
 import com.dede.android_eggs.views.main.compose.Konfetti
@@ -125,7 +125,7 @@ class EasterEggsActivity : AppCompatActivity() {
                     }
                     Welcome()
                     Konfetti(konfettiState)
-                    AndroidReleaseTimelineDialog()
+                    AndroidNextTimelineDialog()
                 }
             }
         }

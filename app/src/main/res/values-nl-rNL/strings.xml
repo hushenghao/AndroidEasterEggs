@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Wachten…</string>
-    <string name="summary_android_release_pushed">De definitieve releaseversie is gepusht</string>
     <string name="title_open_with">Openen met</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -13,8 +11,6 @@
     <string name="label_license">Licentie</string>
     <string name="label_feedback">Terugkoppeling</string>
     <string name="label_star">Ster</string>
-    <string name="label_timeline_title">Tijdlijnen, mijlpalen en updates</string>
-    <string name="label_timeline_releases">Publicaties</string>
     <string name="message_trypophobia_warning">Dit is een waarschuwing voor mensen met &lt;b&gt;Trypofobie&lt;/b&gt; dat sommige beelden ongemak kunnen veroorzaken. Wil je doorgaan?</string>
     <string name="label_settings">Instellingen</string>
     <string name="label_project_desc">Het project bevat de volledige code van het systeem Easter Eggs, met als doel de systeemeieren te organiseren en compatibel te maken, om ervoor te zorgen dat de meeste apparaten verschillende versies van Easter Eggs kunnen ervaren en niet te veel wijzigingen in de systeemeiercode zullen aanbrengen. Sommige versies gebruiken nieuwe functies van het systeem, en lagere versies kunnen slechts enkele functies gebruiken.</string>

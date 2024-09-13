@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Пасхальні яйця</string>
-    <string name="summary_android_waiting">Ще не зроблено</string>
-    <string name="summary_android_release_pushed">Фінальна версія випущена</string>
     <string name="title_open_with">Відкрити завдяки</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -16,8 +14,6 @@
     <string name="label_star">Оцінити додаток</string>
     <string name="label_contact_me">Мої контакти</string>
     <string name="label_email_title">Електронна пошта</string>
-    <string name="label_timeline_title">Хронологія, віхи та оновлення</string>
-    <string name="label_timeline_releases">Релізи</string>
     <string name="message_trypophobia_warning">Це попередження для тих, хто має &lt;b&gt;трипофобію&lt;/b&gt; - деякі зображення можуть викликати дискомфорт. Ви хочете продовжити?</string>
     <string name="label_settings">Налаштування</string>
     <string name="label_project_desc">Проект містить повний код системних Пасхальних Яєць, який спрямований на організацію та сумісність з різними версіями системи, щоб гарантувати, що більшість пристроїв зможуть працювати з різними версіями Пасхальних Яєць і не вноситимуть надто багато модифікацій у системний код. Деякі версії використовують нові функції системи, а попередні версії можуть використовувати лише деякі функції.</string>

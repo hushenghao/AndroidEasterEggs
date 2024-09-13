@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">Exspectat…</string>
+    <string name="summary_android_release_pushed">Finalis release versio protrusit</string>
+</resources>

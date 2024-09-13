@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">En attente…</string>
+    <string name="summary_android_release_pushed">La version finale a été publiée</string>
+    <string name="label_timeline_title">Chronologie, jalons et mises à jour</string>
+    <string name="label_timeline_releases">Sorties</string>
+</resources>

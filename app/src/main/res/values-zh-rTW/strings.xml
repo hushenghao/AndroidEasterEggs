@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">尚未公佈</string>
-    <string name="summary_android_release_pushed">最終版本已推送</string>
     <string name="title_open_with">開啟</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -16,8 +14,6 @@
     <string name="label_star">給個好評</string>
     <string name="label_contact_me">聯絡我們</string>
     <string name="label_email_title">電子郵件</string>
-    <string name="label_timeline_title">時間表、里程碑和更新</string>
-    <string name="label_timeline_releases">版本</string>
     <string name="message_trypophobia_warning">對有&lt;b&gt;密集恐懼症&lt;/b&gt;人士的警告，一些畫面可能會引起不適。要繼續嗎？</string>
     <string name="label_settings">設定</string>
     <string name="label_project_desc">項目包含了系統彩蛋完整程式碼，旨在對系統彩蛋的整理和相容，以保證大多數設備可以體驗到不同版本的彩蛋，不會對系統彩蛋程式碼做過多修改。 部分版本使用了系統新特性，低版本只能使用部分功能。</string>

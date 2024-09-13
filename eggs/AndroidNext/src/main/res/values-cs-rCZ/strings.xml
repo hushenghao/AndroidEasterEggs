@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">Čekání…</string>
+    <string name="summary_android_release_pushed">Finální verze byla vydána</string>
+    <string name="label_timeline_title">Časová osa, milníky a aktualizace</string>
+    <string name="label_timeline_releases">Vydání</string>
+</resources>

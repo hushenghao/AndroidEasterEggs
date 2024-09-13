@@ -21,3 +21,13 @@ files:
         zh-CN: "zh"
         es-ES: "es"
         pt-PT: "pt"
+
+  # AndroidNext
+  - source: "/eggs/AndroidNext/src/main/res/values/strings.xml"
+    translation: "/eggs/AndroidNext/src/main/res/values-%android_code%/%original_file_name%"
+    skip_untranslated_files: true
+    languages_mapping:
+      android_code:
+        zh-CN: "zh"
+        es-ES: "es"
+        pt-PT: "pt"

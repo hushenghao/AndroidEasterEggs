@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Ожидание…</string>
-    <string name="summary_android_release_pushed">Выпущен финальный релиз версии</string>
     <string name="title_open_with">Открыть с помощью</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">–</string>
@@ -16,8 +14,6 @@
     <string name="label_star">Оценить</string>
     <string name="label_contact_me">Связаться со мной</string>
     <string name="label_email_title">Эл. почта</string>
-    <string name="label_timeline_title">Хронология, вехи и обновления</string>
-    <string name="label_timeline_releases">Релизы</string>
     <string name="message_trypophobia_warning">Это предупреждение для людей с &lt;b&gt;трипофобией&lt;/b&gt; о том, что некоторые изображения могут вызывать дискомфорт. Вы всё равно хотите продолжить?</string>
     <string name="label_settings">Настройки</string>
     <string name="label_project_desc">Данный проект содержит весь код системных пасхальных яиц, целью которого является организация и совместимость с различными версиями системы. Это гарантирует, что на большинстве устройств можно экспериментировать с пасхальными яйцами из разных систем, не требуя значительных изменений системного кода. В некоторых версиях используются новые системные функции, в то время как более старые версии могут иметь доступ только к некоторым определённым функциям.</string>

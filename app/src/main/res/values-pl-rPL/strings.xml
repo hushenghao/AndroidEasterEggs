@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Obecnie niedostępny</string>
-    <string name="summary_android_release_pushed">Ostateczna wersja została wydana</string>
     <string name="title_open_with">Otwórz z</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -16,8 +14,6 @@
     <string name="label_star">Oceń</string>
     <string name="label_contact_me">Skontaktuj się ze mną</string>
     <string name="label_email_title">Email</string>
-    <string name="label_timeline_title">Oś czasu, etapy i aktualizacje</string>
-    <string name="label_timeline_releases">Wersje</string>
     <string name="message_trypophobia_warning">To jest ostrzeżenie dla osób z &lt;b&gt;Trypofobią&lt;/b&gt;. Niektóre obrazy mogą powodować dyskomfort. Czy chcesz kontynuować?</string>
     <string name="label_settings">Ustawienia</string>
     <string name="label_project_desc">Projekt zawiera pełny kod wszystkich systemowych Easter Eggów, który ma na celu zapewnić uporządkowanie i kompatybilność z systemowymi Easter Eggami tak, aby większość urządzeń mogła doświadczyć różnych wersji Easter eggów i nie wprowadzała zbyt wielu modyfikacji w kodzie easter egga. Niektóre wersje korzystają z nowych funkcji systemu, a wersje niższe mogą korzystać tylko z niektórych funkcji.</string>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Menunggu…</string>
-    <string name="summary_android_release_pushed">Versi rilis akhir telah diluncurkan</string>
     <string name="title_open_with">Buka dengan</string>
     <string name="char_separator"></string>
     <string name="char_en_dash">-</string>
@@ -13,8 +11,6 @@
     <string name="label_license">Lisensi</string>
     <string name="label_feedback">Masukan</string>
     <string name="label_star">Penilaian</string>
-    <string name="label_timeline_title">Linimasa, Sejarah, dan pembaruan</string>
-    <string name="label_timeline_releases">Perilisan</string>
     <string name="message_trypophobia_warning">Ini adalah peringatan bagi pengidap &lt;b&gt;Trypophobia&lt;/b&gt; bahwa beberapa gambar mungkin menyebabkan ketidaknyamanan. Apakah Anda ingin melanjutkan?</string>
     <string name="label_settings">Setelan</string>
     <string name="label_project_desc">Proyek ini berisi kode lengkap Easter Egg sistem, yang bertujuan untuk mengatur dan kompatibel dengan Easter Egg sistem, untuk memastikan bahwa sebagian besar perangkat dapat mengalami versi Easter Egg yang berbeda dan tidak akan membuat terlalu banyak modifikasi pada kode Easter Egg sistem. Beberapa versi menggunakan fitur sistem baru, dan versi yang lebih rendah hanya dapat menggunakan beberapa fungsi.</string>

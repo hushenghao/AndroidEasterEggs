@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Attendere…</string>
-    <string name="summary_android_release_pushed">La versione finale è stata rilasciata</string>
     <string name="title_open_with">Apri con</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -14,8 +12,6 @@
     <string name="label_license">Licenza</string>
     <string name="label_feedback">Feedback</string>
     <string name="label_star">Vota l\'app</string>
-    <string name="label_timeline_title">Cronologia, tappe e aggiornamenti</string>
-    <string name="label_timeline_releases">Versioni</string>
     <string name="message_trypophobia_warning">Questo è un avvertimento per coloro che soffrono di &lt;b&gt;Tripofobia&lt;/b&gt;. Alcune immagini possono causare disagio. Vuoi continuare?</string>
     <string name="label_settings">Impostazioni</string>
     <string name="label_project_desc">Il progetto contiene l\'intero codice del sistema di Easter Eggs con lo scopo di organizzare e di essere compatibile con diverse versioni del sistema. Ciò garantisce che la maggior parte dei dispositivi possa sperimentare versioni diverse di Easter Eggs senza richiedere modifiche eccessive al codice del sistema. Alcune versioni utilizzano nuove funzionalità del sistema, mentre le versioni precedenti possono accedere solo ad alcune delle funzioni.</string>

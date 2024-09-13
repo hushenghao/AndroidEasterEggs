@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Đang chờ…</string>
-    <string name="summary_android_release_pushed">Phiên bản cuối cùng đã được phát hành</string>
     <string name="title_open_with">Mở bằng</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -13,8 +11,6 @@
     <string name="label_license">Giấy phép</string>
     <string name="label_feedback">Nhận xét</string>
     <string name="label_star">Xếp hạng</string>
-    <string name="label_timeline_title">Dòng thời gian, các mốc quan trọng và thông tin cập nhật</string>
-    <string name="label_timeline_releases">Các bản phát hành</string>
     <string name="message_trypophobia_warning">Cảnh báo đối với những người mắc &lt;b&gt;Trypophobia&lt;/b&gt; là một số hình ảnh có thể gây khó chịu. Bạn có muốn tiếp tục không?</string>
     <string name="label_settings">Cài đặt</string>
     <string name="label_project_desc">Dự án này chứa mã hoàn chỉnh của các Easter egg hệ thống, với mục tiêu là sắp xếp và tương thích với các easter egg của hệ thống, đảm bảo rằng hầu hết các thiết bị đều có thể trải nghiệm các phiên bản Easter egg khác nhau mà không thay đổi mã easter egg quá nhiều. Những phiên bản mới hơn sử dụng các tính năng mới của chúng, còn những phiên bản thấp hơn chỉ sử dụng được một số chức năng.</string>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Ouă de Paște</string>
-    <string name="summary_android_waiting">În așteptare…</string>
-    <string name="summary_android_release_pushed">Versiunea finală a fost lansată</string>
     <string name="title_open_with">Deschis cu</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -14,8 +12,6 @@
     <string name="label_license">Licență</string>
     <string name="label_feedback">Părere</string>
     <string name="label_star">Stea</string>
-    <string name="label_timeline_title">Cronologie, etape și actualizări</string>
-    <string name="label_timeline_releases">Lansări</string>
     <string name="message_trypophobia_warning">Acesta este un avertisment pentru cei cu &lt;b&gt;Tripofobie&lt;/b&gt; că unele imagini pot provoca disconfort. Doriți să continuați?</string>
     <string name="label_settings">Setări</string>
     <string name="label_project_desc">Acest proiect conține codul complet al sistemului Easter eggs, care își propune să organizeze și să fie compatibil cu sistemul easter eggs, astfel încât să se asigure că majoritatea dispozitivelor pot experimenta diferite versiuni ale ouălor de Paște fără a face prea multe modificări codului easter egg. Versiunile mai noi folosesc caracteristici noi ale sistemului respectiv, dar versiunile inferioare pot folosi doar unele funcții.</string>

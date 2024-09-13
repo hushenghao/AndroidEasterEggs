@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Œufs de Pâques</string>
-    <string name="summary_android_waiting">En attente…</string>
-    <string name="summary_android_release_pushed">La version finale a été publiée</string>
     <string name="title_open_with">Ouvrir avec</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -16,8 +14,6 @@
     <string name="label_star">Évaluer l\'application</string>
     <string name="label_contact_me">Contactez-moi</string>
     <string name="label_email_title">E-mail</string>
-    <string name="label_timeline_title">Chronologie, jalons et mises à jour</string>
-    <string name="label_timeline_releases">Sorties</string>
     <string name="message_trypophobia_warning">Ceci est un avertissement pour les personnes avec  &lt;b&gt;Trypophobie&lt;/b&gt; que certaines images peuvent causer un malaise. Voulez-vous continuer ?</string>
     <string name="label_settings">Paramètres</string>
     <string name="label_project_desc">Le projet contient le code complet du système Easter Eggs, qui vise à organiser et à être compatible avec les œufs du système, afin de garantir que la plupart des appareils peuvent expérimenter différentes versions des œufs de Pâques et n\'apporteront pas trop de modifications au code des œufs du système. Certaines versions utilisent de nouvelles fonctionnalités du système et les versions inférieures ne peuvent utiliser que certaines fonctions.</string>

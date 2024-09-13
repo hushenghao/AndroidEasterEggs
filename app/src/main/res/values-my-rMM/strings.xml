@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">မထုတ်ပြန်သေးပါဘူး။</string>
-    <string name="summary_android_release_pushed">နောက်ဆုံးထွက်ဗားရှင်း ထွက်လာပါပြီ။</string>
     <string name="title_open_with">ဖြင့်ဖွင့်သည်။</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -15,8 +13,6 @@
     <string name="label_star">အက်ပ်ကို အဆင့်သတ်မှတ်ပါ။</string>
     <string name="label_contact_me">ငါ့ကိုဆက်သွယ်ပါ</string>
     <string name="label_email_title">အီးမေးလ်</string>
-    <string name="label_timeline_title">အချိန်ဇယား၊ မှတ်တိုင်များနှင့် အပ်ဒိတ်များ</string>
-    <string name="label_timeline_releases">ထုတ်ဝေသည်။</string>
     <string name="message_trypophobia_warning">ဤသည်မှာ &lt;b&gt;Trypophobia&lt;/b&gt; ရှိသူအား အချို့သောပုံများတွင် မသက်မသာဖြစ်စေနိုင်သော သတိပေးချက်ဖြစ်သည်။ ဘာပဲဖြစ်ဖြစ် ဆက်လုပ်ချင်ပါသလား။?</string>
     <string name="label_settings">ဆက်တင်များ</string>
     <string name="label_project_desc">ဤပရောဂျက်တွင် အီစတာကြက်ဥ၏ကုဒ်ကို ပြုပြင်ပြောင်းလဲမှုများစွာမပြုလုပ်ဘဲ စက်ပစ္စည်းအများစုသည် ကွဲပြားခြားနားသော အီစတာကြက်ဥ၏ ဗားရှင်းကို အများအပြားမွမ်းမံပြင်ဆင်မှုမပြုလုပ်ဘဲ စနစ်အီစတာကြက်ဥအားလုံးနှင့် တွဲဖက်အသုံးပြုနိုင်စေရန် ရည်ရွယ်သည့် စနစ်အားလုံး၏ ကုဒ်အပြည့်အစုံပါရှိသည်။ ဗားရှင်းအသစ်များသည် အဆိုပါစနစ်၏ အင်္ဂါရပ်အသစ်များကို အသုံးပြုသော်လည်း အောက်ဗားရှင်းများသည် အချို့သောလုပ်ဆောင်ချက်များကိုသာ အသုံးပြုနိုင်ပါသည်။.</string>

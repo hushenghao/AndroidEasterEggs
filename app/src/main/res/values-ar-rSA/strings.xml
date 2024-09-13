@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">لم يتم الاطلاق بعد</string>
-    <string name="summary_android_release_pushed">لقد دفعت النسخة الإصدار النهائي</string>
     <string name="title_open_with">مفتوحة مع</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -16,8 +14,6 @@
     <string name="label_star">نجمة</string>
     <string name="label_contact_me">تواصل معي</string>
     <string name="label_email_title">البريد الإلكتروني</string>
-    <string name="label_timeline_title">الجدول الزمني والمعالم والتحديثات</string>
-    <string name="label_timeline_releases">إطلاق</string>
     <string name="message_trypophobia_warning">وهذا تحذير لأولئك الذين يعانون من &lt;b&gt;رهاب النخاريب&lt;/b&gt; من أن بعض الصور قد تسبب عدم الراحة. هل تريد الاستمرار؟</string>
     <string name="label_settings">إعدادات</string>
     <string name="label_project_desc">يحتوي المشروع على الكود الكامل لنظام بيض عيد الفصح، والذي يهدف إلى تنظيم بيض النظام والتوافق معه، وذلك للتأكد من أن معظم الأجهزة يمكنها تجربة إصدارات مختلفة من بيض عيد الفصح ولن تقوم بإجراء الكثير من التعديلات على كود بيض النظام. تستخدم بعض الإصدارات ميزات جديدة للنظام، ويمكن للإصدارات الأقل استخدام بعض الوظائف فقط.</string>

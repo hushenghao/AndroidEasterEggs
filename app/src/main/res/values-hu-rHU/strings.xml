@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easter Eggs</string>
-    <string name="summary_android_waiting">Várakozás…</string>
-    <string name="summary_android_release_pushed">A végleges kiadási verziót eltolták</string>
     <string name="title_open_with">Nyitott</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -13,8 +11,6 @@
     <string name="label_license">Engedély</string>
     <string name="label_feedback">Visszacsatolás</string>
     <string name="label_star">Csillag</string>
-    <string name="label_timeline_title">Idővonal, mérföldkövek és frissítések</string>
-    <string name="label_timeline_releases">Kiadások</string>
     <string name="message_trypophobia_warning">Ez figyelmeztetés a &lt;b&gt;Trypophobiában&lt;/b&gt; szenvedők számára, hogy egyes képek kényelmetlenséget okozhatnak. Akarod folytatni?</string>
     <string name="label_settings">Beállítások</string>
     <string name="label_project_desc">A projekt tartalmazza az Easter eggs rendszer teljes kódját, melynek célja a rendszertojás rendszerezés és kompatibilitás, hogy a legtöbb eszköz megtapasztalhassa a húsvéti tojások különböző verzióit, és ne végezzen túl sok módosítást a rendszertojás kódon. Egyes verziók a rendszer új funkcióit használják, az alacsonyabb verziók pedig csak bizonyos funkciókat.</string>

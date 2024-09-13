@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ไข่อีสเตอร์</string>
-    <string name="summary_android_waiting">กำลังรอ…</string>
-    <string name="summary_android_release_pushed">รุ่นสุดท้ายได้ผลักดันแล้ว</string>
     <string name="title_open_with">เปิดด้วย</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">- -</string>
@@ -13,8 +11,6 @@
     <string name="label_license">ใบอนุญาต</string>
     <string name="label_feedback">ข้อเสนอแนะ</string>
     <string name="label_star">ดาว</string>
-    <string name="label_timeline_title">ไทม์ไลน์ เหตุการณ์สำคัญ และการอัปเดต</string>
-    <string name="label_timeline_releases">ข่าวประชาสัมพันธ์</string>
     <string name="message_trypophobia_warning">นี่เป็นคำเตือนสำหรับผู้ที่มี &lt;b&gt;Trypophobia&lt;/b&gt; ว่าภาพบางภาพอาจทำให้รู้สึกไม่สบาย คุณต้องการดำเนินการต่อหรือไม่?</string>
     <string name="label_settings">การตั้งค่า</string>
     <string name="label_project_desc">โปรเจ็กต์ประกอบด้วยโค้ดที่สมบูรณ์ของระบบ Easter Eggs ซึ่งมีจุดมุ่งหมายเพื่อจัดระเบียบและเข้ากันได้กับ Egg ของระบบ เพื่อให้แน่ใจว่าอุปกรณ์ส่วนใหญ่สามารถสัมผัสประสบการณ์ Easter Eggs เวอร์ชันต่างๆ ได้ และจะไม่ทำการปรับเปลี่ยนโค้ด Egg ของระบบมากเกินไป บางเวอร์ชันใช้คุณสมบัติใหม่ของระบบ และเวอร์ชันต่ำกว่าสามารถใช้ได้เพียงบางฟังก์ชันเท่านั้น</string>

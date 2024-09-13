@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Påske Egg</string>
-    <string name="summary_android_waiting">Venter…</string>
-    <string name="summary_android_release_pushed">Den endelige utgivelsesversjonen har presset</string>
     <string name="title_open_with">Åpne med</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -13,8 +11,6 @@
     <string name="label_license">Lisens</string>
     <string name="label_feedback">Tilbakemelding</string>
     <string name="label_star">Stjerne</string>
-    <string name="label_timeline_title">Timeline, milepæler og oppdateringer</string>
-    <string name="label_timeline_releases">Utgivelser</string>
     <string name="message_trypophobia_warning">Dette er en advarsel til de med &lt;b&gt;Trypofobi&lt;/b&gt; om at noen bilder kan forårsake ubehag. Vil du fortsette?</string>
     <string name="label_settings">Innstillinger</string>
     <string name="label_project_desc">Prosjektet inneholder den komplette koden til systemet påskeegg, som tar sikte på å organisere og kompatible med systemeggene, for å sikre at de fleste enheter kan oppleve forskjellige versjoner av påskeegg og ikke vil gjøre for mange endringer i systemets eggkode. Noen versjoner bruker nye funksjoner i systemet, og lavere versjoner kan bare bruke enkelte funksjoner.</string>

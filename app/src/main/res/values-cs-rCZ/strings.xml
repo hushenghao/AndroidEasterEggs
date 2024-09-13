@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Velikonoční vejce</string>
-    <string name="summary_android_waiting">Čekání…</string>
-    <string name="summary_android_release_pushed">Finální verze byla vydána</string>
     <string name="title_open_with">Otevřít pomocí</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -16,8 +14,6 @@
     <string name="label_star">Hvězda</string>
     <string name="label_contact_me">Moje kontakty</string>
     <string name="label_email_title">E-mail</string>
-    <string name="label_timeline_title">Časová osa, milníky a aktualizace</string>
-    <string name="label_timeline_releases">Vydání</string>
     <string name="message_trypophobia_warning">Toto je varování pro ty s &lt;b&gt;Trypofobií&lt;/b&gt;. Některé obrázky mohou vyvolat nepohodlí. Chcete pokračovat?</string>
     <string name="label_settings">Nastavení</string>
     <string name="label_project_desc">Tento projekt má plný kód systémových vajíček, které se snaží organizovat, a být kompatibilní se systémovými vajíčky, takže proto aby jsme zařídili že každé vajíčko funguje na skoro každém telefonu bez toho aby jsme udělali moc modifikací do vajíčkova kódu. Novější verze používají nové funkce, ale nižší verze mohou využívat jen některé funkce.</string>

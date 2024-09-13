@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- tasty treat name -->
-    <string name="nickname_android_vanilla_ice_cream" translatable="false">Vanilla Ice Cream</string>
-
     <string name="android_version_nickname_format" translatable="false">Android %s (%s)</string>
     <string name="android_version_format" translatable="false">Android %s</string>
     <string name="api_version_format" translatable="false">API %s</string>

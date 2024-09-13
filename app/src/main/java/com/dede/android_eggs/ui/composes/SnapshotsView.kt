@@ -55,10 +55,9 @@ fun SnapshotView(snapshot: SnapshotProvider? = null) {
                 },
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(if (snapshot.includeBackground) 0.dp else 12.dp)
+                    .padding(if (snapshot.includeBackground || !snapshot.insertPadding) 0.dp else 12.dp)
                     .clip(MaterialTheme.shapes.extraLarge)
             )
         }
     }
 }
-

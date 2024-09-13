@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">မထုတ်ပြန်သေးပါဘူး။</string>
+    <string name="summary_android_release_pushed">နောက်ဆုံးထွက်ဗားရှင်း ထွက်လာပါပြီ။</string>
+    <string name="label_timeline_title">အချိန်ဇယား၊ မှတ်တိုင်များနှင့် အပ်ဒိတ်များ</string>
+    <string name="label_timeline_releases">ထုတ်ဝေသည်။</string>
+</resources>

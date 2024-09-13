@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ஈஸ்டர் முட்டைகள்</string>
-    <string name="summary_android_waiting">இன்னும் வெளியாகவில்லை</string>
-    <string name="summary_android_release_pushed">இறுதி வெளியீட்டு பதிப்பு வெளியிடப்பட்டது</string>
     <string name="title_open_with">இதனுடன் திறக்கவும்</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -16,8 +14,6 @@
     <string name="label_star">செயலியை மதிப்பிடவும்</string>
     <string name="label_contact_me">என்னை தொடர்பு கொள்க</string>
     <string name="label_email_title">மின்னஞ்சல்</string>
-    <string name="label_timeline_title">காலவரிசை, மைல்கற்கள் மற்றும் புதுப்பிப்புகள்</string>
-    <string name="label_timeline_releases">வெளியீடுகள்</string>
     <string name="message_trypophobia_warning">&lt;b&gt;டிரைபோபோபியா&lt;/b&gt; உள்ளவர்களுக்கு இது ஒரு எச்சரிக்கையாகும், சில படங்கள் மனநலிவு ஏற்படுத்தலாம். தொடர வேண்டுமா?</string>
     <string name="label_settings">அமைப்புகள்</string>
     <string name="label_project_desc">இந்தத் திட்டமானது ஈஸ்டர் முட்டைகள் செயலியின் முழுமையான குறியீட்டைக் கொண்டுள்ளது, இது அமைப்பு ஈஸ்டர் முட்டைகளை ஒழுங்கமைத்து இணக்கமாக இருப்பதை நோக்கமாகக் கொண்டுள்ளது, இதனால் ஈஸ்டர் முட்டைகளின் குறியீட்டில் பல மாற்றங்களைச் செய்யாமல் பெரும்பாலான கருவிகள் ஈஸ்டர் முட்டைகளின் வெவ்வேறு பதிப்புகளை அனுபவிக்க முடியும் என்பதை உறுதிப்படுத்துகிறது. புதிய பதிப்புகள் கூறப்பட்ட அமைப்பின் புதிய சிறப்புகளைப் பயன்படுத்துகின்றன, ஆனால் குறைந்த பதிப்புகள் சில செயல்பாடுகளை மட்டுமே பயன்படுத்த முடியும்.</string>

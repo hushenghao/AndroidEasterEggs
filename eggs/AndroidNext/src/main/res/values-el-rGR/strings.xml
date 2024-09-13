@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">Δεν κυκλοφόρησε ακόμα</string>
+    <string name="summary_android_release_pushed">Η τελική έκδοση έχει κυκλοφορήσει</string>
+    <string name="label_timeline_title">Χρονοδιάγραμμα, ορόσημα και ενημερώσεις</string>
+    <string name="label_timeline_releases">Κυκλοφορίες</string>
+</resources>

@@ -138,6 +138,7 @@ object EasterEggHelp {
     private val apiLevelArrays = SparseArray<String>()
 
     init {
+        apiLevelArrays[Build.VERSION_CODES.CUR_DEVELOPMENT] = "Next"
         apiLevelArrays[Build.VERSION_CODES.VANILLA_ICE_CREAM] = "15"
         apiLevelArrays[Build.VERSION_CODES.UPSIDE_DOWN_CAKE] = "14"
         apiLevelArrays[Build.VERSION_CODES.TIRAMISU] = "13"

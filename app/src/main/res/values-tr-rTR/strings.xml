@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Paskalya Yumurtaları</string>
-    <string name="summary_android_waiting">Henüz yayınlanmadı</string>
-    <string name="summary_android_release_pushed">Son sürüm yayınlandı</string>
     <string name="title_open_with">Şununla aç</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -16,8 +14,6 @@
     <string name="label_star">Uygulamayı Değerlendir</string>
     <string name="label_contact_me">Benimle İletişime Geç</string>
     <string name="label_email_title">E-posta</string>
-    <string name="label_timeline_title">Zaman çizelgesi, dönüm noktaları ve güncellemeler</string>
-    <string name="label_timeline_releases">Sürümler</string>
     <string name="message_trypophobia_warning">Bu, &lt;b&gt;Tripofobisi&lt;/b&gt; olanlara, bazı görüntülerin rahatsızlık verebileceğine dair bir uyarıdır. Yine de devam etmek istiyor musunuz?</string>
     <string name="label_settings">Ayarlar</string>
     <string name="label_project_desc">Bu proje, tüm sistem Paskalya yumurtalarının tam kodunu içerir ve tüm sistem paskalya yumurtalarını düzenlemeyi ve uyumlu hale getirmeyi amaçlar. Böylece, çoğu cihazın paskalya yumurtası kodunda çok fazla değişiklik yapmadan farklı sürümlerdeki Paskalya yumurtalarını deneyimleyebilmesini sağlar. Yeni sürümler, söz konusu sistemin yeni özelliklerini kullanır, ancak daha düşük sürümler sadece bazı işlevleri kullanabilir.</string>

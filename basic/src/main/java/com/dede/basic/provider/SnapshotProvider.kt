@@ -7,5 +7,7 @@ abstract class SnapshotProvider {
 
     open val includeBackground: Boolean = false
 
+    open val insertPadding: Boolean = false
+
     abstract fun create(context: Context): View
 }

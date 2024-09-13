@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Πασχαλινά Αυγά</string>
-    <string name="summary_android_waiting">Δεν κυκλοφόρησε ακόμα</string>
-    <string name="summary_android_release_pushed">Η τελική έκδοση έχει κυκλοφορήσει</string>
     <string name="title_open_with">Άνοιγμα με</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -16,8 +14,6 @@
     <string name="label_star">Αξιολόγηση Εφαρμογής</string>
     <string name="label_contact_me">Επικοινώνησε μαζί μου</string>
     <string name="label_email_title">Email</string>
-    <string name="label_timeline_title">Χρονοδιάγραμμα, ορόσημα και ενημερώσεις</string>
-    <string name="label_timeline_releases">Κυκλοφορίες</string>
     <string name="message_trypophobia_warning">Αυτή είναι μια προειδοποίηση για όσους έχουν &lt;b&gt;Τρυποφοβία&lt;/b&gt; διότι ορισμένες εικόνες μπορεί να προκαλέσουν δυσφορία. Θέλετε να συνεχίσετε;</string>
     <string name="label_settings">Ρυθμίσεις</string>
     <string name="label_project_desc">Αυτό το έργο περιέχει τον πλήρη κώδικα όλων των πασχαλινών αυγών του συστήματος, ο οποίος στοχεύει να οργανώσει και να είναι συμβατός με όλα τα πασχαλινά αυγά του συστήματος, έτσι ώστε να διασφαλιστεί ότι οι περισσότερες συσκευές μπορούν να δοκιμάσουν διαφορετικές εκδόσεις πασχαλινών αυγών χωρίς να γίνουν πολλές τροποποιήσεις στον κώδικα του πασχαλινού αυγού. Οι νεότερες εκδόσεις χρησιμοποιούν νέες δυνατότητες του εν λόγω συστήματος, αλλά οι χαμηλότερες εκδόσεις μπορούν να χρησιμοποιούν μόνο ορισμένες λειτουργίες.</string>
