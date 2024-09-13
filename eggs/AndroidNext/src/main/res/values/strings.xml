@@ -1,5 +1,4 @@
 <resources>
-    <!-- tasty treat name -->
     <string name="nickname_android_next" translatable="false">Droid Next</string>
 
     <string name="summary_android_waiting">Currently unavailable</string>
