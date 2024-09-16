@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="summary_android_waiting">Ожидание…</string>
+    <string name="summary_android_waiting">В настоящее время недоступно</string>
     <string name="summary_android_release_pushed">Выпущен финальный релиз версии</string>
     <string name="label_timeline_title">Хронология, вехи и обновления</string>
     <string name="label_timeline_releases">Релизы</string>
