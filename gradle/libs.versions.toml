@@ -3,7 +3,7 @@ kotlin = "2.0.20"
 ksp = "2.0.20-1.0.25"
 agp = "8.6.0"
 hilt = "2.52"
-compose-bom = "2024.09.00"
+compose-bom = "2024.09.01"
 # https://google.github.io/accompanist
 accompanist = "0.36.0"
 lifecycle = "2.8.5"
@@ -22,7 +22,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [libraries]
-kotlinx-coroutines-android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1"
+kotlinx-coroutines-android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0"
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.0"
 androidx-core = "androidx.core:core-ktx:1.13.1"
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
@@ -58,7 +58,7 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.4"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
 free-reflection = "com.github.tiann:FreeReflection:3.2.0"
-squareup-okio = { module = "com.squareup.okio:okio", version = "3.8.0" }
+squareup-okio = { module = "com.squareup.okio:okio", version = "3.9.1" }
 squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.14"
 nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
 
