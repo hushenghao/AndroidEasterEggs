@@ -6,4 +6,7 @@
         <attr name="hand_hour" format="reference" />
         <attr name="hand_minute" format="reference" />
     </declare-styleable>
+
+    <attr name="supportAdaptiveIcon" format="boolean" />
+
 </resources>

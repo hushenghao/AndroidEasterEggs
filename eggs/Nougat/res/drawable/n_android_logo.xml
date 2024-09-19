@@ -1,4 +1,6 @@
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:supportAdaptiveIcon="true">
     <item android:drawable="@color/n_android_logo_bg" />
     <item>
         <inset

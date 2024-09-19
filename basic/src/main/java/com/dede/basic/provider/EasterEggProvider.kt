@@ -2,7 +2,6 @@ package com.dede.basic.provider
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
@@ -52,9 +51,6 @@ open class EasterEgg(
         apiLevel: Int,
         actionClass: Class<out Activity>? = null,
     ) : this(iconRes, nameRes, nicknameRes, apiLevel..apiLevel, actionClass)
-
-    val supportAdaptiveIcon: Boolean
-        get() = apiLevelRange.first >= Build.VERSION_CODES.LOLLIPOP
 
     open fun onEasterEggAction(context: Context): Boolean {
         return false

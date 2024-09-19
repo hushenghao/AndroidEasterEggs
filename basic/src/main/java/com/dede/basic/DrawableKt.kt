@@ -9,11 +9,15 @@ import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.LruCache
+import android.util.TypedValue
+import android.util.Xml
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.ResourceManagerInternal
 import androidx.core.content.ContextCompat
+import androidx.core.content.withStyledAttributes
 import com.dede.basic.utils.DynamicObjectUtils
+import org.xmlpull.v1.XmlPullParser
 import java.util.concurrent.atomic.AtomicBoolean
 
 @Throws(Resources.NotFoundException::class)
@@ -56,6 +60,42 @@ fun Context.getIdentifier(name: String, defType: DefType, defPackage: String = p
         identifierCache.put(key, id)
     }
     return id
+}
+
+private val sharedTypedValue = TypedValue()
+
+/**
+ * Check is SupportAdaptiveIconDrawable
+ */
+fun Context.isAdaptiveIconDrawable(@DrawableRes id: Int): Boolean {
+    val outValue = sharedTypedValue
+    val resources = this.resources
+    resources.getValue(id, outValue, true)
+    val path: CharSequence? = outValue.string
+    if (path?.endsWith(".xml") != true) {
+        return false
+    }
+
+    @Suppress("ResourceType")
+    val parser = resources.getXml(id)
+    val attrs = Xml.asAttributeSet(parser)
+    var type = parser.next()
+    while (type != XmlPullParser.START_TAG && type != XmlPullParser.END_DOCUMENT) {
+        // Empty loop
+        type = parser.next()
+    }
+    if (type != XmlPullParser.START_TAG) {
+        return false
+    }
+    if (parser.name == "adaptive-icon") {
+        return true
+    }
+
+    var supportAdaptiveIcon = false
+    withStyledAttributes(attrs, intArrayOf(R.attr.supportAdaptiveIcon)) {
+        supportAdaptiveIcon = getBoolean(0, supportAdaptiveIcon)
+    }
+    return supportAdaptiveIcon
 }
 
 /**

@@ -2,7 +2,6 @@
 
 package com.dede.android_eggs.views.timeline
 
-import android.os.Build
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
@@ -50,15 +49,15 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.compose.PathShape
-import com.dede.android_eggs.views.main.compose.DrawableImage
+import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.eventAnnotatedString
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.isNewGroup
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localMonth
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localYear
+import com.dede.basic.isAdaptiveIconDrawable
 import com.dede.basic.provider.TimelineEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Calendar
@@ -207,32 +206,28 @@ private fun TimelineItem(
                 }
         )
 
-        val iconShape = remember { IconShapePrefUtil.getMaskPath(context) }
-        val drawable = remember(logoRes, context.theme) {
-            AlterableAdaptiveIconDrawable(context, logoRes, iconShape)
-        }
-        val imageModifier = Modifier
+        var imageModifier = Modifier
             .size(40.dp)
             .constrainAs(img) {
                 top.linkTo(parent.top, 16.dp)
                 centerHorizontallyTo(line)
             }
-        if (event.apiLevel >= Build.VERSION_CODES.LOLLIPOP) {
-            DrawableImage(
-                drawable = drawable,
-                contentDescription = null,
-                modifier = imageModifier
-            )
-        } else {
-            DrawableImage(
-                res = logoRes,
-                contentDescription = null,
-                modifier = Modifier
-                    .background(colorScheme.secondaryContainer, PathShape(iconShape))
-                    .then(imageModifier)
-                    .padding(6.dp)
-            )
+        val isAdaptiveIcon = remember { context.isAdaptiveIconDrawable(logoRes) }
+        if (!isAdaptiveIcon) {
+            val iconShape = remember { IconShapePrefUtil.getMaskPath(context) }
+            imageModifier = Modifier
+                .background(
+                    colorScheme.secondaryContainer,
+                    PathShape(iconShape)
+                )
+                .then(imageModifier)
+                .padding(6.dp)
         }
+        EasterEggLogo(
+            res = logoRes,
+            contentDescription = null,
+            modifier = imageModifier
+        )
         if (isNewGroup) {
             Text(
                 text = event.localYear,

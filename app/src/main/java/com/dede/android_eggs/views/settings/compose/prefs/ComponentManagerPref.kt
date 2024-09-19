@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dede.android_eggs.R
-import com.dede.android_eggs.views.main.compose.DrawableImage
+import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.EasterEggHelp.VersionFormatter
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
@@ -39,7 +39,7 @@ fun ComponentManagerPref(viewModel: ComponentManagerViewModel = viewModel()) {
             SwitchOption(
                 shape = OptionShapes.indexOfShape(index = index, optionsCount = componentCount),
                 leadingIcon = {
-                    DrawableImage(
+                    EasterEggLogo(
                         res = component.iconRes,
                         modifier = Modifier.size(28.dp),
                         contentDescription = stringResource(id = component.nameRes),
