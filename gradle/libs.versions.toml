@@ -6,7 +6,7 @@ hilt = "2.52"
 compose-bom = "2024.09.01"
 # https://google.github.io/accompanist
 accompanist = "0.36.0"
-lifecycle = "2.8.5"
+lifecycle = "2.8.6"
 activity = "1.9.2"
 # test
 androidx-junit = "1.2.1"
