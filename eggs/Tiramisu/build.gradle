@@ -10,9 +10,6 @@ android {
             manifest.srcFile 'AndroidManifest.xml'
         }
     }
-    buildFeatures {
-        viewBinding true
-    }
 }
 
 dependencies {

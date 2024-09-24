@@ -1,5 +1,9 @@
 # Building and Installing
 
+## Modularization
+
+[graph](./assets/image/modularization-graph.drawio.png)
+
 ## Requested
 
 * Java 17
