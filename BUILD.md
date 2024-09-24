@@ -2,7 +2,7 @@
 
 ## Modularization
 
-[graph](./assets/image/modularization-graph.drawio.png)
+![graph](./assets/image/modularization-graph.drawio.png)
 
 ## Requested
 
