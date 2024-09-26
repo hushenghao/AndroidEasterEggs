@@ -127,6 +127,7 @@ fun getDessertCode(): String =
         Build.VERSION_CODES.N -> "NYC"
         Build.VERSION_CODES.N_MR1 -> "NM1"
         Build.VERSION_CODES.O -> "OC"
+        Build.VERSION_CODES.O_MR1 -> "OC1"
         Build.VERSION_CODES.P -> "PIE"
         Build.VERSION_CODES.Q -> "QT"
         Build.VERSION_CODES.R -> "RVC"

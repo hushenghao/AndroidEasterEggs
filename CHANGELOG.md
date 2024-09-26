@@ -1,6 +1,11 @@
 # Changelog
 
-### v3.0.0
+### v3.0.1
+
+- Fix Android 15 Easter Egg add flag crash on Android 8.1 [#384](https://github.com/hushenghao/AndroidEasterEggs/issues/384)
+- Upgrade project dependencies
+
+### v3.0.0 (2024-09-18)
 
 - Add Android 15 Easter Egg Landroid
 - Update App logo, use Android 15 Easter Egg logo

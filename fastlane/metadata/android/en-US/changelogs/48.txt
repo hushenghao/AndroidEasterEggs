@@ -1,0 +1,2 @@
+- Fix Android 15 Easter Egg add flag crash on Android 8.1
+- Upgrade project dependencies

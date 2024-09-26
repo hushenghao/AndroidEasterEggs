@@ -1,6 +1,11 @@
 # 更新日志
 
-### v3.0.0
+### v3.0.1
+
+- 修复 Android 8.1 系统 Android 15 彩蛋添加旗帜时崩溃 [#384](https://github.com/hushenghao/AndroidEasterEggs/issues/384)
+- 升级项目依赖项
+
+### v3.0.0 (2024-09-18)
 
 - 新增 Android 15 彩蛋 Landroid
 - 更新应用图标，使用 Android 15 彩蛋图标
