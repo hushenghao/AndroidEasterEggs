@@ -10,6 +10,7 @@
               <build path="$PROJECT_DIR$/build-logic" name="build-logic">
                 <projects>
                   <project path="$PROJECT_DIR$/build-logic" />
+                  <project path="$PROJECT_DIR$/build-logic/convention" />
                 </projects>
               </build>
             </builds>
@@ -23,6 +24,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/basic" />
             <option value="$PROJECT_DIR$/build-logic" />
+            <option value="$PROJECT_DIR$/build-logic/convention" />
             <option value="$PROJECT_DIR$/eggs" />
             <option value="$PROJECT_DIR$/eggs/AndroidNext" />
             <option value="$PROJECT_DIR$/eggs/Base" />

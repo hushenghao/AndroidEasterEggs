@@ -117,6 +117,13 @@ platform :android do
       next
     end
 
+    # zip mapping.txt
+    mapping_dir = File::dirname(mapping_path)
+    mapping_zip = File::join(mapping_dir, "mapping.zip")
+    Dir.chdir(mapping_dir) do
+      sh("zip", "mapping.zip", File::basename(mapping_path))
+    end
+
     changelogs = (File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1]) rescue "No changelog provided")
     # https://docs.fastlane.tools/actions/set_github_release/
     github_release = set_github_release(
@@ -125,7 +132,7 @@ platform :android do
       name: ref_name,
       tag_name: ref_name,
       description: changelogs,
-      upload_assets: [apk_path, mapping_path]
+      upload_assets: [apk_path, mapping_zip]
     )
 
     # Send to Telegram
