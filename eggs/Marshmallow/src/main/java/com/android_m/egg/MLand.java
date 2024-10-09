@@ -49,6 +49,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import kotlin.collections.ArraysKt;
 
 //import com.android.internal.logging.MetricsLogger;
 
@@ -1039,7 +1042,7 @@ public class MLand extends FrameLayout {
         private int mScore;
         private TextView mScoreField;
 
-        private final int[] sColors = new int[]{
+        private static final int[] sColors = new int[]{
                 //0xFF78C557,
                 0xFFDB4437,
                 0xFF3B78E7,
@@ -1063,6 +1066,17 @@ public class MLand extends FrameLayout {
         public final float[] corners = new float[sHull.length];
 
         public static Player create(MLand land) {
+            // Fix sNextColor index
+            // https://github.com/hushenghao/AndroidEasterEggs/issues/387
+            final List<Player> players = land.mPlayers;
+            if (!players.isEmpty()) {
+                Player last = players.get(players.size() - 1);
+                int indexOf = ArraysKt.indexOf(Player.sColors, last.color);
+                if (indexOf != -1) {
+                    Player.sNextColor = indexOf + 1;
+                }
+            }
+
             final Player p = new Player(land.getContext());
             p.mLand = land;
             p.reset();

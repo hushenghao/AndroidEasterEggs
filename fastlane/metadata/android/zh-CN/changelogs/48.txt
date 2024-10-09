@@ -1,2 +1,3 @@
 - 修复 Android 8.1 系统 Android 15 彩蛋添加旗帜时崩溃
+- 修复 Android M 彩蛋玩家的颜色
 - 升级项目依赖项

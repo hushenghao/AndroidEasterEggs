@@ -13,3 +13,4 @@ deploymentTargetDropDown.xml
 deploymentTargetSelector.xml
 appInsightsSettings.xml
 other.xml
+runConfigurations.xml
