@@ -1,3 +1,2 @@
 - Fix Android 15 Easter Egg add flag crash on Android 8.1
-- Fix Android M Easter Egg players color
 - Upgrade project dependencies

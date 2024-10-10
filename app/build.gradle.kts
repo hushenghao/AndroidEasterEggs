@@ -7,8 +7,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
-        versionCode = 48
-        versionName = "3.0.1"
+        versionCode = 50
+        versionName = "3.1.0-beta01"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(
@@ -54,8 +54,16 @@ android {
             )
             signingConfig = config
         }
-        createWith("beta", "release") {
-            matchingFallbacks += listOf("release", "debug")
+    }
+
+    flavorDimensions += "app"
+
+    productFlavors {
+        create("foss") {
+            dimension = "app"
+        }
+        create("market") {
+            dimension = "app"
         }
     }
 

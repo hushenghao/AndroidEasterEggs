@@ -1,4 +1,4 @@
-name: Build Beta CI
+name: Build Pgyer apk
 
 on:
   push:
@@ -51,4 +51,4 @@ jobs:
         run: |
           bundle install
           bundle exec fastlane install_plugins
-          bundle exec fastlane beta
+          bundle exec fastlane pgyer

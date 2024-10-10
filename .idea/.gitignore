@@ -14,3 +14,4 @@ deploymentTargetSelector.xml
 appInsightsSettings.xml
 other.xml
 runConfigurations.xml
+modules.xml

@@ -29,17 +29,16 @@ val Project.keyprops: Properties
 val Project.catalog: VersionCatalog
     get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
-fun NamedDomainObjectContainer<ApplicationBuildType>.createWith(
+fun NamedDomainObjectContainer<ApplicationBuildType>.create(
     name: String,
     with: String? = null,
-    configureAction: Action<ApplicationBuildType>
-) {
-    create(name) {
-        if (with != null) {
-            initWith(getByName(with))
-        }
-        configureAction.execute(this)
+    configureAction: Action<ApplicationBuildType>? = null
+) = create(name) {
+    if (with != null) {
+        initWith(getByName(with))
     }
+    matchingFallbacks += listOf("release", "debug")
+    configureAction?.execute(this)
 }
 
 val Project.javaExtension: JavaPluginExtension

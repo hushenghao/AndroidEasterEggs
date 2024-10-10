@@ -1,9 +1,14 @@
 # 更新日志
 
-### v3.0.1
+### v3.1.0-beta01
+
+- 添加 Beta 版本渠道
+- 修复 Android M 彩蛋玩家的颜色 [#387](https://github.com/hushenghao/AndroidEasterEggs/issues/387)
+- 升级项目依赖项
+
+### v3.0.1 (2024-09-26)
 
 - 修复 Android 8.1 系统 Android 15 彩蛋添加旗帜时崩溃 [#384](https://github.com/hushenghao/AndroidEasterEggs/issues/384)
-- 修复 Android M 彩蛋玩家的颜色 [#387](https://github.com/hushenghao/AndroidEasterEggs/issues/387)
 - 升级项目依赖项
 
 ### v3.0.0 (2024-09-18)

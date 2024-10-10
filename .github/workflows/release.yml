@@ -82,4 +82,4 @@ jobs:
         run: |
           bundle install
           bundle exec fastlane install_plugins
-          bundle exec fastlane deploy
+          bundle exec fastlane deploy ref_name:${{ github.ref_name }}

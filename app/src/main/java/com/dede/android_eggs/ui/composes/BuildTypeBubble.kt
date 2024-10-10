@@ -25,7 +25,7 @@ fun BuildTypeBubble() {
     @Suppress("KotlinConstantConditions")
     val bubble = when {
         BuildConfig.DEBUG -> "Debug"
-        BuildConfig.BUILD_TYPE == "beta" -> "Beta"
+        BuildConfig.FLAVOR == "foss" -> "FOSS"
         else -> return
     }
     Box(

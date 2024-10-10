@@ -1,0 +1,3 @@
+- Add Beta version track
+- Fix Android M Easter Egg players color
+- Upgrade project dependencies

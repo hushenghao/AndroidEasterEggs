@@ -27,7 +27,7 @@ def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_T
   end
 
   if photo == nil
-    photo = 'https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.png'
+    photo = "https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.png"
   end
 
   # https://core.telegram.org/bots/api#sendphoto
@@ -37,35 +37,38 @@ def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_T
 
   request = Net::HTTP::Post.new(url)
   form_data = [
-    ['chat_id', chat_id],
-    ['parse_mode', 'Markdown'],
-    ['caption', caption],
-    ['photo', photo],
+    ["chat_id", chat_id],
+    ["parse_mode", "Markdown"],
+    ["caption", caption],
+    ["photo", photo],
   ]
-  request.set_form form_data, 'multipart/form-data'
+  request.set_form form_data, "multipart/form-data"
   response = https.request(request)
   puts response.read_body
+end
+
+def is_beta_ref(ref_name)
+  return ref_name =~ /v?(\d|.)+-beta\d+/
 end
 
 default_platform(:android)
 
 platform :android do
-
-  desc "Submit a new Beta Build to Pgyer"
-  lane :beta do
+  desc "Submit a new Build to Pgyer"
+  lane :pgyer do
     if ENV["PGYER_API_KEY"].nil?
       puts "⚠️ PGYER_API_KEY env not found, skip!"
       next
     end
 
-    gradle(tasks: ["clean", "app:assembleBeta"])
+    gradle(tasks: ["clean", "app:assembleFossRelease"])
 
     changelogs_zh = (File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1]) rescue "No changelog provided")
     changelogs_en = (File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1]) rescue "No changelog provided")
     # https://www.pgyer.com/doc/view/fastlane
     pgyer_answer = pgyer(
       api_key: ENV["PGYER_API_KEY"],
-      update_description: changelogs_zh
+      update_description: changelogs_zh,
     )
 
     # Send to Telegram
@@ -74,21 +77,21 @@ platform :android do
     message = <<~EOF
       *Easter Eggs*
 
-      🚀 New Beta Version ! 🎉
+      🚀 New Pgyer Version ! 🎉
 
       *❇️ Changelogs:*
 
       #{changelogs_en}
 
-      *🔗 Links:*
-
-      - ⬇️ [Download](https://www.pgyer.com/#{pgyer_build_key})
-      - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
-
       *🧑‍💻 Build:*
 
       - Commit: [#{commit_hash}](https://github.com/hushenghao/AndroidEasterEggs/commit/#{commit_hash})
       - Build Key: [#{pgyer_build_key}](https://www.pgyer.com/#{pgyer_build_key})
+
+      *🔗 Links:*
+
+      - ⬇️ [Download](https://www.pgyer.com/#{pgyer_build_key})
+      - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
     EOF
     send_telegram_photo(message)
   end
@@ -100,7 +103,7 @@ platform :android do
       next
     end
 
-    gradle(tasks: ["clean", "app:assembleRelease"])
+    gradle(tasks: ["clean", "app:assembleFossRelease"])
 
     ref_name = options[:ref_name]
     if ref_name.nil?
@@ -123,6 +126,10 @@ platform :android do
     Dir.chdir(mapping_dir) do
       sh("zip", "mapping.zip", File::basename(mapping_path))
     end
+    missing_rules = File::join(mapping_dir, "missing_rules.txt")
+    if File::exist?(missing_rules)
+      sh("cat", missing_rules)
+    end
 
     changelogs = (File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1]) rescue "No changelog provided")
     # https://docs.fastlane.tools/actions/set_github_release/
@@ -132,9 +139,10 @@ platform :android do
       name: ref_name,
       tag_name: ref_name,
       description: changelogs,
-      upload_assets: [apk_path, mapping_zip]
+      upload_assets: [apk_path, mapping_zip],
     )
 
+    commit_hash = last_git_commit[:commit_hash]
     # Send to Telegram
     message = <<~EOF
       *Easter Eggs*
@@ -144,6 +152,11 @@ platform :android do
       *❇️ Changelogs:*
 
       #{changelogs}
+
+      *🧑‍💻 Build:*
+
+      - Version: #{ref_name}
+      - Commit: [#{commit_hash}](https://github.com/hushenghao/AndroidEasterEggs/commit/#{commit_hash})
 
       *🔗 Links:*
 
@@ -166,42 +179,61 @@ platform :android do
     # skip_upload_images        Whether to skip uploading images, screenshots not included	    false
     # skip_upload_screenshots   Whether to skip uploading SCREENSHOTS	                        false
     # skip_upload_changelogs    Whether to skip uploading changelogs	                        false
+    # sync_image_upload         Whether to use sha256 comparison to skip upload of images and   false
+    #                           screenshots that are already in Play Store
+    # track                     The track of the application to use. The default available      production
+    #                           tracks are: production, beta, alpha, internal
+
+    ref_name = options[:ref_name]
+    if is_beta_ref(ref_name)
+      # Upload new beta version
+      gradle(task: "clean app:bundleMarketRelease")
+      upload_to_play_store(
+        skip_upload_metadata: true,
+        skip_upload_images: true,
+        skip_upload_screenshots: true,
+        track: "beta",
+      )
+      next
+    end
+
     case options[:mode]
     when "metadata"
-        # Upload metadata and images, screenshots not included
-        upload_to_play_store(
-            skip_upload_aab: true,
-            skip_upload_screenshots: true,
-            skip_upload_changelogs: true
-        )
-    when "screenshots"
-        # Device art generator
-        #   https://developer.android.google.cn/distribute/marketing-tools/device-art-generator
-        # Screenshot Devices:
-        #   phone:      Pixel 6                     1080x2400
-        #   sevenInch:  7.6" Foldable main screen   1768x2208
-        #   tenInch:    Nexus 9                     1536x2048
-        # Style:
-        #   [ ] Shadow  [x] Screen Glare
-        upload_to_play_store(
-            skip_upload_aab: true,
-            skip_upload_metadata: true,
-            skip_upload_images: true,
-            skip_upload_changelogs: true
-        )
+      # Upload metadata
+      upload_to_play_store(
+        skip_upload_aab: true,
+        skip_upload_images: true,
+        skip_upload_screenshots: true,
+        skip_upload_changelogs: true,
+      )
+    when "images"
+      # Upload images and screenshots
+
+      # Device art generator
+      #   https://developer.android.google.cn/distribute/marketing-tools/device-art-generator
+      # Screenshot Devices:
+      #   phone:      Pixel 6                     1080x2400
+      #   sevenInch:  7.6" Foldable main screen   1768x2208
+      #   tenInch:    Nexus 9                     1536x2048
+      # Style:
+      #   [ ] Shadow  [x] Screen Glare
+      upload_to_play_store(
+        skip_upload_aab: true,
+        skip_upload_metadata: true,
+        skip_upload_changelogs: true,
+        sync_image_upload: true,
+      )
     when "full"
-        # Upload All
-        gradle(task: "clean app:bundleRelease")
-        upload_to_play_store
+      # Upload All
+      gradle(task: "clean app:bundleMarketRelease")
+      upload_to_play_store
     else
-        # Upload new version
-        gradle(task: "clean app:bundleRelease")
-        upload_to_play_store(
-            skip_upload_metadata: true,
-            skip_upload_images: true,
-            skip_upload_screenshots: true
-        )
+      # Upload new version
+      gradle(task: "clean app:bundleMarketRelease")
+      upload_to_play_store(
+        skip_upload_metadata: true,
+        sync_image_upload: true,
+      )
     end
   end
-
 end

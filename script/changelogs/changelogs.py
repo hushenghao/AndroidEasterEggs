@@ -12,14 +12,14 @@ CHANGELOG_MD_ZH = "../../CHANGELOG_zh.md"
 OUTPUT_DIR_EN = "../../fastlane/metadata/android/en-US/changelogs"
 OUTPUT_DIR_ZH = "../../fastlane/metadata/android/zh-CN/changelogs"
 
-REGEX_VERSION_TITLE = r"^#+ v([\d\.]+).*$"  # markdown version title regex
+REGEX_VERSION_TITLE = r"^#+ v((\d|.)+(-[a-z]+\d+)?).*$"  # markdown version title regex, ### v1.2.3-beta01 (2024-01-01)
 REGEX_CHANGELOG = r"^(- .+)+$"  # markdown changelog line regex
 REGEX_LINK_SUB = r'\[#.+\]\(\S+\)'  # markdown sub link regex
 
 # version script path
 VERSION_SCRIPT = "../../app/build.gradle.kts"
 
-REGEX_VERSION_NAME = r'versionName\s+=\s+"([\d\.]+)"'  # versionName regex
+REGEX_VERSION_NAME = r'versionName\s+=\s+"((\d|.)+(-[a-z]+\d+)?)"'  # versionName regex
 REGEX_VERSION_CODE = r'versionCode\s+=\s+(\d+)'  # versionCode reges
 
 

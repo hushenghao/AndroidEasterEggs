@@ -1,0 +1,2 @@
+- Fix Android M Easter Egg players color
+- Upgrade project dependencies

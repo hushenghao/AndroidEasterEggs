@@ -5,7 +5,6 @@ import androidx.compose.material.icons.outlined.NewReleases
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.core.net.toUri
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.AGPUtils
@@ -28,13 +27,7 @@ fun VersionOption() {
         ),
         desc = AGPUtils.getVcsRevision(7),
         onClick = {
-            val revision = AGPUtils.getVcsRevision()
-            val uri = if (revision == null) {
-                context.getString(R.string.url_github)
-            } else {
-                context.getString(R.string.url_github_commit, revision)
-            }
-            CustomTabsBrowser.launchUrl(context, uri.toUri())
+            CustomTabsBrowser.launchUrl(context, R.string.url_beta)
         }
     )
 }
