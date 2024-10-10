@@ -15,13 +15,13 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## Android
 
-### android beta
+### android publish_to_pgyer
 
 ```sh
-[bundle exec] fastlane android beta
+[bundle exec] fastlane android publish_to_pgyer
 ```
 
-Submit a new Beta Build to Pgyer
+Publish to Pgyer
 
 ### android release
 

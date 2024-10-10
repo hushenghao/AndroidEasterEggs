@@ -51,4 +51,4 @@ jobs:
         run: |
           bundle install
           bundle exec fastlane install_plugins
-          bundle exec fastlane pgyer
+          bundle exec fastlane publish_to_pgyer

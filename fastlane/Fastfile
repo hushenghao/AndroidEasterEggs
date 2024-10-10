@@ -54,8 +54,8 @@ end
 default_platform(:android)
 
 platform :android do
-  desc "Submit a new Build to Pgyer"
-  lane :pgyer do
+  desc "Publish to Pgyer"
+  lane :publish_to_pgyer do
     if ENV["PGYER_API_KEY"].nil?
       puts "⚠️ PGYER_API_KEY env not found, skip!"
       next
