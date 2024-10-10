@@ -3,6 +3,7 @@
 ### v3.1.0-beta01
 
 - Add Beta version track
+- Fix Android MLand safely space
 - Fix Android M Easter Egg players color [#387](https://github.com/hushenghao/AndroidEasterEggs/issues/387)
 - Upgrade project dependencies
 

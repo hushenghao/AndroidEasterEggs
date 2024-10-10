@@ -3,6 +3,7 @@
 ### v3.1.0-beta01
 
 - 添加 Beta 版本渠道
+- 修复 Android MLand 安全距离
 - 修复 Android M 彩蛋玩家的颜色 [#387](https://github.com/hushenghao/AndroidEasterEggs/issues/387)
 - 升级项目依赖项
 

@@ -21,6 +21,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.core.graphics.Insets;
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 
 public class MLandActivity extends Activity {
     MLand mLand;
@@ -37,6 +43,16 @@ public class MLandActivity extends Activity {
         if (numControllers > 0) {
             mLand.setupPlayers(numControllers);
         }
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.player_setup), new OnApplyWindowInsetsListener() {
+            @NonNull
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(@NonNull View v, @NonNull WindowInsetsCompat insets) {
+                Insets edge = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(0, edge.top, 0, 0);
+                return WindowInsetsCompat.CONSUMED;
+            }
+        });
     }
 
     public void updateSplashPlayers() {

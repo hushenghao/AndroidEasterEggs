@@ -1,3 +1,4 @@
 - Add Beta version track
+- Fix Android MLand safely space
 - Fix Android M Easter Egg players color
 - Upgrade project dependencies
