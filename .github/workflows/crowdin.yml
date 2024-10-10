@@ -1,4 +1,4 @@
-name: Crowdin Synchronize Action
+name: Crowdin Synchronize
 
 on:
   push:
