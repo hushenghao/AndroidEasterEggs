@@ -61,7 +61,7 @@ platform :android do
       next
     end
 
-    gradle(tasks: ["clean", "app:assembleFossRelease"])
+    gradle(tasks: ["clean", "app:assembleAlphaRelease"])
 
     changelogs_zh = (File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1]) rescue "No changelog provided")
     changelogs_en = (File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1]) rescue "No changelog provided")
@@ -77,7 +77,7 @@ platform :android do
     message = <<~EOF
       *Easter Eggs*
 
-      🚀 New Pgyer Version ! 🎉
+      🚀 New Alpha Version ! 🎉
 
       *🧑‍💻 Build:*
 

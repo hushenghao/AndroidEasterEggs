@@ -59,6 +59,9 @@ android {
     flavorDimensions += "app"
 
     productFlavors {
+        create("alpha") {
+            dimension = "app"
+        }
         create("foss") {
             dimension = "app"
         }
