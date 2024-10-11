@@ -79,10 +79,6 @@ platform :android do
 
       🚀 New Pgyer Version ! 🎉
 
-      *❇️ Changelogs:*
-
-      #{changelogs_en}
-
       *🧑‍💻 Build:*
 
       - Commit: [#{commit_hash}](https://github.com/hushenghao/AndroidEasterEggs/commit/#{commit_hash})
@@ -92,6 +88,10 @@ platform :android do
 
       - ⬇️ [Download](https://www.pgyer.com/#{pgyer_build_key})
       - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
+
+      *❇️ Changelogs:*
+
+      #{changelogs_en}
     EOF
     send_telegram_photo(message)
   end
@@ -147,11 +147,7 @@ platform :android do
     message = <<~EOF
       *Easter Eggs*
 
-      🚀 New Release Version ! 🎉
-
-      *❇️ Changelogs:*
-
-      #{changelogs}
+      🚀 New Version Released ! 🎉
 
       *🧑‍💻 Build:*
 
@@ -162,6 +158,10 @@ platform :android do
 
       - ⬇️ [Download](#{github_release["html_url"]})
       - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
+
+      *❇️ Changelogs:*
+
+      #{changelogs}
     EOF
     send_telegram_photo(message)
   end
