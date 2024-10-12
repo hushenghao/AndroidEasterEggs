@@ -22,7 +22,14 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -189,6 +196,7 @@ public class DessertCaseView extends FrameLayout {
         Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
         pt.setColorFilter(new ColorMatrixColorFilter(MASK));
         c.drawBitmap(b, 0.0f, 0.0f, pt);
+        c.setBitmap(null);
         return a;
     }
 
@@ -249,10 +257,20 @@ public class DessertCaseView extends FrameLayout {
 
         if (DEBUG) Log.v(TAG, String.format("New dimensions: %dx%d", mColumns, mRows));
 
-        setScaleX(SCALE);
-        setScaleY(SCALE);
-        setTranslationX(0.5f * (mWidth - mCellSize * mColumns) * SCALE);
-        setTranslationY(0.5f * (mHeight - mCellSize * mRows) * SCALE);
+        float scaleS = 1f;
+        if (mWidth > 0 && mHeight > 0 && mCellSize > 0) {
+            scaleS = Math.max(
+                    mWidth / (mCellSize * mColumns * 1f),
+                    mHeight / (mCellSize * mRows * 1f)
+            );
+        }
+        // fix scale, fill black edge
+        // https://github.com/hushenghao/AndroidEasterEggs/issues/349
+        float scale = SCALE * scaleS;
+        setScaleX(scale);
+        setScaleY(scale);
+        setTranslationX(0.5f * (mWidth - mCellSize * mColumns) * scale);
+        setTranslationY(0.5f * (mHeight - mCellSize * mRows) * scale);
 
         for (int j=0; j<mRows; j++) {
             for (int i=0; i<mColumns; i++) {
