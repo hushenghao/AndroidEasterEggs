@@ -47,8 +47,8 @@ def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_T
   puts response.read_body
 end
 
-def is_beta_ref(ref_name)
-  return ref_name =~ /v?(\d|.)+-beta\d+/
+def is_test_ref(ref_name)
+  return ref_name =~ /v?(\d|.)+-([a-z]+)\d*/
 end
 
 default_platform(:android)
@@ -61,7 +61,7 @@ platform :android do
       next
     end
 
-    gradle(tasks: ["clean", "app:assembleAlphaRelease"])
+    gradle(tasks: ["clean", "app:assembleFossAlphaRelease"])
 
     changelogs_zh = (File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1]) rescue "No changelog provided")
     changelogs_en = (File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1]) rescue "No changelog provided")
@@ -103,9 +103,14 @@ platform :android do
       next
     end
 
-    gradle(tasks: ["clean", "app:assembleFossRelease"])
-
     ref_name = options[:ref_name]
+
+    if is_test_ref(ref_name)
+      gradle(tasks: ["clean", "app:assembleFossBetaRelease"])
+    else
+      gradle(tasks: ["clean", "app:assembleFossProductRelease"])
+    end
+
     if ref_name.nil?
       puts "⚠️ github.ref_name not found, skip!"
       next
@@ -185,9 +190,9 @@ platform :android do
     #                           tracks are: production, beta, alpha, internal
 
     ref_name = options[:ref_name]
-    if is_beta_ref(ref_name)
+    if is_test_ref(ref_name)
       # Upload new beta version
-      gradle(task: "clean app:bundleMarketRelease")
+      gradle(task: "clean app:bundleMarketBetaRelease")
       upload_to_play_store(
         skip_upload_metadata: true,
         skip_upload_images: true,
@@ -225,11 +230,11 @@ platform :android do
       )
     when "full"
       # Upload All
-      gradle(task: "clean app:bundleMarketRelease")
+      gradle(task: "clean app:bundleMarketProductRelease")
       upload_to_play_store
     else
       # Upload new version
-      gradle(task: "clean app:bundleMarketRelease")
+      gradle(task: "clean app:bundleMarketProductRelease")
       upload_to_play_store(
         skip_upload_metadata: true,
         sync_image_upload: true,

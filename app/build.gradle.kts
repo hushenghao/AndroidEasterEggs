@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId = "com.dede.android_eggs"
         versionCode = 51
-        versionName = "3.1.0-beta02"
+        versionName = "3.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(
@@ -56,21 +56,41 @@ android {
         }
     }
 
-    flavorDimensions += "app"
+    flavorDimensions += listOf("app", "track")
 
     productFlavors {
         create("alpha") {
-            dimension = "app"
+            dimension = "track"
+            versionNameSuffix = "-alpha"
             ndk {
                 //noinspection ChromeOsAbiSupport
                 abiFilters += listOf("arm64-v8a", "armeabi-v7a")
             }
         }
+        create("beta") {
+            dimension = "track"
+            versionNameSuffix = "-beta02"
+        }
+        create("product") {
+            dimension = "track"
+        }
+
         create("foss") {
             dimension = "app"
         }
         create("market") {
             dimension = "app"
+        }
+    }
+
+    androidComponents {
+        beforeVariants { variantBuilder ->
+            if (variantBuilder.productFlavors.containsAll(
+                    listOf("app" to "market", "track" to "alpha")
+                )
+            ) {
+                variantBuilder.enable = false
+            }
         }
     }
 
