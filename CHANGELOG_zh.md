@@ -5,6 +5,7 @@
 - 添加 Beta 版本渠道
 - 修复 Android MLand 安全距离
 - 修复 Android M 彩蛋玩家的颜色 [#387](https://github.com/hushenghao/AndroidEasterEggs/issues/387)
+- 修复 Android K Dessert Case 不全屏显示 [#349](https://github.com/hushenghao/AndroidEasterEggs/issues/349)
 - 升级项目依赖项
 
 ### v3.0.1 (2024-09-26)

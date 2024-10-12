@@ -5,6 +5,7 @@
 - Add Beta version track
 - Fix Android MLand safely space
 - Fix Android M Easter Egg players color [#387](https://github.com/hushenghao/AndroidEasterEggs/issues/387)
+- Fix Android K Dessert Case does not cover the full screen [#349](https://github.com/hushenghao/AndroidEasterEggs/issues/349)
 - Upgrade project dependencies
 
 ### v3.0.1 (2024-09-26)
