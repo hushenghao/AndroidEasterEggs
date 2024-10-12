@@ -61,6 +61,10 @@ android {
     productFlavors {
         create("alpha") {
             dimension = "app"
+            ndk {
+                //noinspection ChromeOsAbiSupport
+                abiFilters += listOf("arm64-v8a", "armeabi-v7a")
+            }
         }
         create("foss") {
             dimension = "app"
@@ -73,7 +77,10 @@ android {
     packaging {
         resources.excludes += listOf(
             "META-INF/*.version",
-            "DebugProbesKt.bin"
+            "META-INF/NOTICE.*",
+            "META-INF/LICENSE",
+            "kotlin/**.kotlin_builtins",
+            "DebugProbesKt.bin",
         )
     }
 
