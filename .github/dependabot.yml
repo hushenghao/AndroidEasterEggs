@@ -13,6 +13,7 @@ updates:
       kotlin: # Kotlin and KSP
         patterns:
           - "org.jetbrains.kotlin:*"
+          - "org.jetbrains.kotlin.*"
           - "com.google.devtools.ksp"
       agp: # APG and SVG to xml convertor
         patterns:
