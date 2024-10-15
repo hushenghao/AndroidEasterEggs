@@ -59,6 +59,13 @@ android {
     flavorDimensions += listOf("app", "track")
 
     productFlavors {
+        create("foss") {
+            dimension = "app"
+        }
+        create("market") {
+            dimension = "app"
+        }
+
         create("alpha") {
             dimension = "track"
             versionNameSuffix = "-alpha"
@@ -73,13 +80,6 @@ android {
         }
         create("product") {
             dimension = "track"
-        }
-
-        create("foss") {
-            dimension = "app"
-        }
-        create("market") {
-            dimension = "app"
         }
     }
 

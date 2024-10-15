@@ -20,4 +20,4 @@ jobs:
       - name: Build with Gradle
         run: |
           chmod +x gradlew
-          ./gradlew clean app:assembleDebug
+          ./gradlew clean app:assembleFossAlphaDebug
