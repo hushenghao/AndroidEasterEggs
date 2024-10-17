@@ -1,0 +1,5 @@
+- Add Beta version track
+- Fix Android MLand safely space
+- Fix Android M Easter Egg players color
+- Fix Android K Dessert Case does not cover the full screen
+- Upgrade project dependencies

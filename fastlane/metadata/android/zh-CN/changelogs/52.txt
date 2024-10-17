@@ -1,0 +1,5 @@
+- 添加 Beta 版本渠道
+- 修复 Android MLand 安全距离
+- 修复 Android M 彩蛋玩家的颜色
+- 修复 Android K Dessert Case 不全屏显示
+- 升级项目依赖项

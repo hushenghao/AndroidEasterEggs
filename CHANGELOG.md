@@ -1,6 +1,6 @@
 # Changelog
 
-### v3.1.0-beta02 (2024-10-12)
+### v3.1.0 (2024-10-17)
 
 - Add Beta version track
 - Fix Android MLand safely space
