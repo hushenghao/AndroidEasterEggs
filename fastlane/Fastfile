@@ -105,7 +105,8 @@ platform :android do
 
     ref_name = options[:ref_name]
 
-    if is_test_ref(ref_name)
+    is_test_ref = is_test_ref(ref_name)
+    if is_test_ref
       gradle(tasks: ["clean", "app:assembleFossBetaRelease"])
     else
       gradle(tasks: ["clean", "app:assembleFossProductRelease"])
@@ -141,6 +142,7 @@ platform :android do
     github_release = set_github_release(
       repository_name: "hushenghao/AndroidEasterEggs",
       api_bearer: ENV["GITHUB_TOKEN"],
+      is_prerelease: is_test_ref,
       name: ref_name,
       tag_name: ref_name,
       description: changelogs,
