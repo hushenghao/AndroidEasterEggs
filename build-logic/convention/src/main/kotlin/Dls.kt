@@ -5,8 +5,10 @@ import com.android.build.gradle.BaseExtension
 import org.gradle.api.Action
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.kotlin.dsl.getByType
@@ -40,6 +42,9 @@ fun NamedDomainObjectContainer<ApplicationBuildType>.create(
     matchingFallbacks += listOf("release", "debug")
     configureAction?.execute(this)
 }
+
+fun DependencyHandler.implementation(flavor: String, dependencyNotation: Any): Dependency? =
+    add("${flavor}Implementation", dependencyNotation)
 
 val Project.javaExtension: JavaPluginExtension
     get() = extensions.getByName<JavaPluginExtension>("java")

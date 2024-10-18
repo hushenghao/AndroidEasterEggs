@@ -1,5 +1,6 @@
 package com.dede.android_eggs.views.main.compose
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -29,9 +30,14 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.CustomTabsBrowser
+import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
 
 private const val KEY = "key_welcome_status"
+
+fun isAgreedPrivacyPolicy(context: Context): Boolean {
+    return context.pref.getBoolean(KEY, false)
+}
 
 @Composable
 @Preview

@@ -162,6 +162,9 @@ dependencies {
     implementation(project(":eggs:Gingerbread"))
     implementation(project(":eggs:Base"))
 
+    implementation("market", libs.google.play.services)
+    implementation("market", libs.google.play.review)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.nanohttpd)
     androidTestImplementation(platform(libs.androidx.compose.bom))

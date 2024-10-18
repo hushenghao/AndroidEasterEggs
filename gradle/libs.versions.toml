@@ -62,6 +62,9 @@ squareup-okio = { module = "com.squareup.okio:okio", version = "3.9.1" }
 squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.14"
 nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
 
+google-play-services = "com.google.android.gms:play-services-base:18.5.0"
+google-play-review = "com.google.android.play:review-ktx:2.0.1"
+
 # Script dependencies
 guava = { module = "com.google.guava:guava", version = "33.3.1-jre" }
 kotlinpoet = { module = "com.squareup:kotlinpoet", version = "1.18.1" }
