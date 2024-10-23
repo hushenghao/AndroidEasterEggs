@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Œufs de Pâques</string>
-    <string name="title_open_with">Ouvrir avec</string>
+    <string name="app_name">Oeufs de Pâques</string>
+    <string name="title_open_with">Ouvrir avec le</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
     <string name="label_github">Code source</string>
