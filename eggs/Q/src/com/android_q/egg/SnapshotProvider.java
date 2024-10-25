@@ -11,7 +11,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
-import com.dede.basic.UtilExt;
+import com.dede.basic.DimenUtils;
+
 
 public class SnapshotProvider extends com.dede.basic.provider.SnapshotProvider {
 
@@ -25,7 +26,7 @@ public class SnapshotProvider extends com.dede.basic.provider.SnapshotProvider {
     public View create(@NonNull Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.q_platlogo_snapshot_layout, null, false);
 
-        Drawable mBackslash = new PlatLogoActivity.BackslashDrawable(UtilExt.getDp(50));
+        Drawable mBackslash = new PlatLogoActivity.BackslashDrawable(DimenUtils.getDp(50));
         mBackslash.setAlpha(0x20);
 
         ImageView mOneView = view.findViewById(R.id.one);

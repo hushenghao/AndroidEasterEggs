@@ -17,10 +17,11 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
-import com.dede.basic.UtilExt;
+import com.dede.basic.DimenUtils;
+import com.dede.basic.DrawableKt;
+
 
 public class SnapshotProvider extends com.dede.basic.provider.SnapshotProvider {
 
@@ -33,7 +34,7 @@ public class SnapshotProvider extends com.dede.basic.provider.SnapshotProvider {
     @Override
     public View create(@NonNull Context context) {
         ImageView imageView = new ImageView(context);
-        int padding = UtilExt.getDp(30f);
+        int padding = DimenUtils.getDp(30f);
         imageView.setPadding(padding, padding, padding, padding);
         imageView.setImageDrawable(new BigDialDrawable(context));
         final FrameLayout layout = new FrameLayout(context);
@@ -62,7 +63,7 @@ public class SnapshotProvider extends com.dede.basic.provider.SnapshotProvider {
             } else {
                 mNightMode = false;
             }
-            mEleven = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.r_ic_number11));
+            mEleven = DrawableCompat.wrap(DrawableKt.requireDrawable(context, R.drawable.r_ic_number11));
         }
 
         @Override

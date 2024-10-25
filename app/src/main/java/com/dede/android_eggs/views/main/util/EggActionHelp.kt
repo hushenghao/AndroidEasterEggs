@@ -3,6 +3,7 @@ package com.dede.android_eggs.views.main.util
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.ActivityManager.AppTask
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -11,8 +12,8 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.toast
-import com.dede.android_eggs.views.main.EasterEggsActivity
 import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPrefUtil
+import com.dede.basic.Utils
 import com.dede.basic.provider.EasterEgg
 
 
@@ -73,16 +74,22 @@ object EggActionHelp {
         context.startActivity(intent)
     }
 
+    private fun AppTask.isThisTask(component: ComponentName): Boolean {
+        return taskInfo.baseIntent.component?.className == component.className
+    }
+
     private fun AppTask.isThisTask(target: Class<out Activity>): Boolean {
         return taskInfo.baseIntent.component?.className == target.name
     }
 
     private fun findTaskWithTrim(context: Context, target: Class<out Activity>): AppTask? {
+        val mainComponent = Utils.getLaunchIntent(context)?.component ?: return null
+
         val activityManager = context.getSystemService<ActivityManager>() ?: return null
         var targetTask: AppTask? = null
         val appTasks = ArrayList<AppTask>()
         for (task in activityManager.appTasks) {
-            if (task.isThisTask(EasterEggsActivity::class.java)) {
+            if (task.isThisTask(mainComponent)) {
                 // exclude main task
                 continue
             }

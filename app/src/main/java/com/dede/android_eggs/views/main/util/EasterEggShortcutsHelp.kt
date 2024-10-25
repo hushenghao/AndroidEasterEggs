@@ -18,7 +18,7 @@ import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.applyNotNull
 import com.dede.android_eggs.util.toast
-import com.dede.android_eggs.views.main.EasterEggsActivity
+import com.dede.basic.Utils
 import com.dede.basic.cachedExecutor
 import com.dede.basic.cancel
 import com.dede.basic.delay
@@ -104,12 +104,16 @@ object EasterEggShortcutsHelp {
                 setRank(egg.apiLevel)
             }
             .applyNotNull(clazz) {
-                val mainIntent = Intent(context, EasterEggsActivity::class.java)
-                    .setAction(Intent.ACTION_VIEW)
-
-                val intent = EggActionHelp.createIntent(context, clazz, false)
+                val eggIntent = EggActionHelp.createIntent(context, clazz, false)
                     .putExtra(EXTRA_SHORTCUT_ID, shortcutId)
-                setIntents(arrayOf(mainIntent, intent))
+
+                val mainIntent = Utils.getLaunchIntent(context)
+                if (mainIntent != null) {
+                    mainIntent.setAction(Intent.ACTION_VIEW)
+                    setIntents(arrayOf(mainIntent, eggIntent))
+                } else {
+                    setIntent(eggIntent)
+                }
             }
             .build()
     }

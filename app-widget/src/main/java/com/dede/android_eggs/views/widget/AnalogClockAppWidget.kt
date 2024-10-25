@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.core.app.PendingIntentCompat
+import com.dede.basic.Utils
 import com.dede.basic.cachedExecutor
 
 /**
@@ -49,19 +50,11 @@ private fun updateAppWidget(
 ) {
     val views = RemoteViews(context.packageName, R.layout.widget_easter_egg_analog_clock)
 
-    var mainClass: Class<*>? = null
-    try {
-        mainClass = Class.forName("com.dede.android_eggs.views.main.EasterEggsActivity")
-    } catch (e: Exception) {
-        if (BuildConfig.DEBUG) {
-            throw e
-        }
-    }
-    if (mainClass != null) {
+    val launchIntent: Intent? = Utils.getLaunchIntent(context)
+    if (launchIntent != null) {
         val intent = PendingIntentCompat.getActivity(
             context, 0,
-            Intent(context, mainClass)
-                .putExtra(EXTRA_FROM_WIDGET, appWidgetId),
+            launchIntent.putExtra(EXTRA_FROM_WIDGET, appWidgetId),
             PendingIntent.FLAG_UPDATE_CURRENT,
             false
         )

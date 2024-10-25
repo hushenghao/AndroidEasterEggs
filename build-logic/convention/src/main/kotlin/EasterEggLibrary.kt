@@ -27,6 +27,10 @@ class EasterEggLibrary : EasterEggBasicLibrary() {
                 lint {
                     baseline = project.file("lint-baseline.xml")
                 }
+
+                buildFeatures {
+                    buildConfig = false
+                }
             }
         }
     }

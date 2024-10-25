@@ -64,8 +64,8 @@ import com.dede.android_eggs.util.AGPUtils
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.copy
 import com.dede.android_eggs.views.crash.GlobalExceptionHandler.Companion.getUncaughtException
-import com.dede.android_eggs.views.main.EasterEggsActivity
 import com.dede.android_eggs.views.theme.AppTheme
+import com.dede.basic.Utils
 import kotlin.system.exitProcess
 
 class CrashActivity : AppCompatActivity() {
@@ -107,12 +107,13 @@ private fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
     val bodySpan = remember(tr) {
         buildAnnotatedString {
             withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
-                val devicesInfo = "Device: %s (%s - %s), SDK: %s (%d), App: %s (%d), VcsRevision: %s".format(
-                    Build.MODEL, Build.BRAND, Build.DEVICE,
-                    Build.VERSION.RELEASE, Build.VERSION.SDK_INT,
-                    BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,
-                    AGPUtils.getVcsRevision(7)
-                )
+                val devicesInfo =
+                    "Device: %s (%s - %s), SDK: %s (%d), App: %s (%d), VcsRevision: %s".format(
+                        Build.MODEL, Build.BRAND, Build.DEVICE,
+                        Build.VERSION.RELEASE, Build.VERSION.SDK_INT,
+                        BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,
+                        AGPUtils.getVcsRevision(7)
+                    )
                 append(devicesInfo)
             }
             val stackTraceString: String? = try {
@@ -210,10 +211,11 @@ private fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
         ) {
             FloatingActionButton(
                 onClick = {
-                    context.startActivity(
-                        Intent(context, EasterEggsActivity::class.java)
-                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    )
+                    val intent = Utils.getLaunchIntent(context)
+                    if (intent != null) {
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        context.startActivity(intent)
+                    }
                 },
                 shape = FloatingActionButtonDefaults.largeShape
             ) {

@@ -3,8 +3,8 @@ package com.dede.android_eggs.util.actions
 import android.app.Activity
 import com.dede.android_eggs.util.ActivityActionDispatcher
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
-import com.dede.basic.isPlatLogoActivity
-import com.dede.basic.platLogoEdge2Edge
+import com.dede.basic.Utils.isPlatLogoActivity
+import com.dede.basic.Utils.platLogoEdge2Edge
 
 class PlatLogoActivityAction : ActivityActionDispatcher.ActivityAction {
 

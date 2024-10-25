@@ -23,17 +23,21 @@ open class EasterEggBasicLibrary : Plugin<Project> {
                 }
 
                 lint {
-                    fatal += listOf("NewApi", "InlinedApi", "NotifyDataSetChanged")
+                    fatal += listOf("NewApi", "InlinedApi")
                 }
 
                 buildTypes {
                     release {
-                        isMinifyEnabled = false
+                        isMinifyEnabled = true
                         proguardFiles(
                             getDefaultProguardFile("proguard-android-optimize.txt"),
                             "proguard-rules.pro"
                         )
                     }
+                }
+
+                buildFeatures {
+                    buildConfig = false
                 }
             }
         }

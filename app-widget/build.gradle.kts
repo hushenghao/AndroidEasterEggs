@@ -6,10 +6,6 @@ android {
     namespace = "com.dede.android_eggs.views.widget"
 
     resourcePrefix = null
-
-    buildFeatures {
-        buildConfig = true
-    }
 }
 
 dependencies {

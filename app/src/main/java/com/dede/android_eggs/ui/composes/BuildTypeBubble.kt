@@ -27,7 +27,6 @@ fun BuildTypeBubble() {
         BuildConfig.DEBUG -> "Debug"
         BuildConfig.FLAVOR == "alpha" -> "Alpha"
         BuildConfig.FLAVOR == "beta" -> "Beta"
-        BuildConfig.FLAVOR == "foss" -> "FOSS"
         else -> return
     }
     Box(
