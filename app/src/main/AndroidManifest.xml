@@ -21,17 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasterEggs"
         tools:targetApi="tiramisu">
-        <receiver
-            android:name=".views.widget.AnalogClockAppWidget"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/analog_clock_widget_info" />
-        </receiver>
 
         <property
             android:name="android.window.PROPERTY_ACTIVITY_EMBEDDING_SPLITS_ENABLED"

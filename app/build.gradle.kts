@@ -7,8 +7,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
-        versionCode = 52
-        versionName = "3.1.0"
+        versionCode = 53
+        versionName = "3.2.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(
@@ -142,6 +142,8 @@ dependencies {
     implementation(libs.free.reflection)
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
+
+    implementation(project(":app-widget"))
 
     implementation(project(":eggs:AndroidNext"))
     implementation(project(":eggs:VanillaIceCream"))

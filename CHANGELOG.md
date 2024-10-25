@@ -1,5 +1,10 @@
 # Changelog
 
+### v3.2.0
+
+- Project modularization
+- Upgrade project dependencies
+
 ### v3.1.0 (2024-10-17)
 
 - Add Beta version track

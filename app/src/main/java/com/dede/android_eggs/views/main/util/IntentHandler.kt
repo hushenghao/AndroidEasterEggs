@@ -17,6 +17,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
 
         private const val TAG = "IntentHandler"
 
+        // from widget module
         const val EXTRA_FROM_WIDGET = "extra_from_widget"
     }
 

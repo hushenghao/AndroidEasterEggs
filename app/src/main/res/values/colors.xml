@@ -62,6 +62,4 @@
     <color name="md_theme_dark_surfaceVariant">#414942</color>
     <color name="md_theme_dark_onSurfaceVariant">#C0C9BF</color>
 
-    <color name="appwidget_background_color">?attr/colorSurfaceVariant</color>
-
 </resources>

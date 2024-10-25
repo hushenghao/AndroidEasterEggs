@@ -1,0 +1,2 @@
+- Project modularization
+- Upgrade project dependencies
