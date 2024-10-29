@@ -20,10 +20,10 @@
 # hide the original source file name.
 -renamesourcefileattribute SourceFile
 
--keepclassmembers class com.dede.android_eggs.util.CustomTabsBrowser {
-    public <methods>;
+-keepclasseswithmembernames class com.dede.android_eggs.util.CustomTabsBrowser {
+    public static <methods>;
 }
 
--keepclassmembers class com.dede.android_eggs.GooglePlayCore {
-    public <methods>;
+-keepclasseswithmembernames class com.dede.android_eggs.GooglePlayCore {
+    public static <methods>;
 }
