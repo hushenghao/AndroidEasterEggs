@@ -44,4 +44,6 @@
     <string name="pref_summary_retain_recent_egg_tasks">在最近任务中保留最近的彩蛋任务，最多保留5个（在活动嵌入模式下无效）</string>
     <string name="label_about">关于</string>
     <string name="label_contribute">参与贡献</string>
+    <string name="animator_disabled_alert_message">由于系统动画被禁用，可能导致一些功能无法正常使用。请进入“开发者选项”并启用“Animator 时长缩放”选项以开启动画。</string>
+    <string name="action_goto_settings">去设置</string>
 </resources>

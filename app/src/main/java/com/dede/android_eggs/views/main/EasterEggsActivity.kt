@@ -20,9 +20,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
@@ -33,6 +36,7 @@ import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.compose.end
+import com.dede.android_eggs.views.main.compose.AnimatorDisabledAlertDialog
 import com.dede.android_eggs.views.main.compose.BottomSearchBar
 import com.dede.android_eggs.views.main.compose.EasterEggScreen
 import com.dede.android_eggs.views.main.compose.Konfetti
@@ -50,6 +54,7 @@ import com.dede.android_eggs.views.settings.SettingsScreen
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
 import com.dede.android_eggs.views.theme.AppTheme
+import com.dede.basic.Utils
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.utils.DynamicObjectUtils
@@ -82,16 +87,13 @@ class EasterEggsActivity : AppCompatActivity() {
 
         setContent {
             val konfettiState = rememberKonfettiState()
-            val searchBarState = rememberBottomSearchBarState()
-            val drawerState = rememberDrawerState(DrawerValue.Closed)
-
-            val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
             CompositionLocalProvider(
                 LocalFragmentManager provides supportFragmentManager,
                 LocalEasterEggLogoSensor provides sensor,
                 LocalKonfettiState provides konfettiState
             ) {
                 AppTheme {
+                    val drawerState = rememberDrawerState(DrawerValue.Closed)
                     ReverseModalNavigationDrawer(
                         drawerContent = {
                             ModalDrawerSheet(
@@ -108,6 +110,8 @@ class EasterEggsActivity : AppCompatActivity() {
                         },
                         drawerState = drawerState
                     ) {
+                        val searchBarState = rememberBottomSearchBarState()
+                        val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
                         Scaffold(
                             topBar = {
                                 MainTitleBar(
@@ -125,8 +129,20 @@ class EasterEggsActivity : AppCompatActivity() {
                             EasterEggScreen(easterEggs, searchBarState.searchText, contentPadding)
                         }
                     }
-                    Welcome()
+
+                    val context = LocalContext.current
+                    val animatorDisabledAlertState = remember { mutableStateOf(false) }
+
+                    Welcome(onNext = {
+                        if (!Utils.areAnimatorEnabled(context)) {
+                            animatorDisabledAlertState.value = true
+                        }
+                    })
+
+                    AnimatorDisabledAlertDialog(animatorDisabledAlertState)
+
                     Konfetti(konfettiState)
+
                     AndroidNextTimelineDialog()
                 }
             }

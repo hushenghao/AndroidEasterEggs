@@ -1,6 +1,5 @@
 package com.dede.android_eggs.views.main.compose
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

@@ -29,6 +29,7 @@ private class PrefMutableBooleanState(
 ) : MutableState<Boolean> {
 
     private val delegate = mutableStateOf(context.pref.getBoolean(key, default))
+
     override var value: Boolean
         get() = delegate.value
         set(value) {

@@ -13,7 +13,7 @@
     <string name="label_feedback">Feedback geben</string>
     <string name="label_star">Bewerten</string>
     <string name="label_contact_me">Kontakt aufnehmen</string>
-    <string name="label_email_title">E-Mail</string>
+    <string name="label_email_title">E-mail</string>
     <string name="message_trypophobia_warning">Dies ist eine Warnung für Personen mit einer &lt;b&gt;Trypophobie&lt;/b&gt; , dass einige Bilder Unbehagen verursachen können. Möchtest du fortfahren?</string>
     <string name="label_settings">Einstellungen</string>
     <string name="label_project_desc">Das Projekt enthält den vollständigen Code der Android-Easter Eggs. Ziel ist eine Kompatibilität aller Easter Eggs herzustellen, um sicherzustellen, dass die meisten Geräte verschiedene Versionen von Easter Eggs ausführen können, Ziel ist es außerdem, nicht zu viele Änderungen am Easter Egg Code vornehmen. Einige Easter Eggs nutzen funktionen von neueren Android-Versionen und können daher evtl. nicht auf allen Android-Versionen korrekt ausgeführt werden.</string>

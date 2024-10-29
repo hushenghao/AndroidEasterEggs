@@ -41,13 +41,17 @@ fun isAgreedPrivacyPolicy(context: Context): Boolean {
 
 @Composable
 @Preview
-fun Welcome() {
+fun Welcome(
+    onNext: () -> Unit = {}
+) {
     var visible by rememberSaveable { mutableStateOf(true) }
     if (!visible) {
+        onNext()
         return
     }
     var prefShowed by rememberPrefBoolState(KEY, false)
     if (prefShowed) {
+        onNext()
         return
     }
     val context = LocalContext.current
@@ -87,9 +91,13 @@ fun Welcome() {
         },
         onDismissRequest = {
             visible = false
+            onNext()
         },
         dismissButton = {
-            TextButton(onClick = { visible = false }) {
+            TextButton(onClick = {
+                visible = false
+                onNext()
+            }) {
                 Text(text = stringResource(android.R.string.cancel))
             }
         },
@@ -98,6 +106,7 @@ fun Welcome() {
                 visible = false
                 prefShowed = true
                 konfettiState = true
+                onNext()
             }) {
                 Text(text = stringResource(R.string.action_agree))
             }
