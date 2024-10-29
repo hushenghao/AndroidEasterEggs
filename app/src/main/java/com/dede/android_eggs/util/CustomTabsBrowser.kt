@@ -26,10 +26,12 @@ import com.google.android.material.R as M3R
  */
 object CustomTabsBrowser {
 
+    @JvmStatic
     fun launchUrl(context: Context, @StringRes urlId: Int) {
         launchUrl(context, context.getString(urlId).toUri())
     }
 
+    @JvmStatic
     fun launchUrl(context: Context, uri: Uri) {
         val colorScheme = when (AppCompatDelegate.getDefaultNightMode()) {
             AppCompatDelegate.MODE_NIGHT_YES -> CustomTabsIntent.COLOR_SCHEME_DARK
@@ -72,6 +74,7 @@ object CustomTabsBrowser {
         }
     }
 
+    @JvmStatic
     fun launchUrlByBrowser(context: Context, uri: Uri) {
         val target = Intent(Intent.ACTION_VIEW, uri)
         val intent = context.createChooser(target)

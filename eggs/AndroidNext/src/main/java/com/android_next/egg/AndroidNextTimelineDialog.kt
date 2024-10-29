@@ -96,18 +96,12 @@ fun AndroidNextTimelineDialog(
         confirmButton = {
             TextButton(onClick = {
                 androidNextDialogVisible = false
-                val customTabsBrowser =
-                    DynamicObjectUtils.asDynamicObject("com.dede.android_eggs.util.CustomTabsBrowser")
-                        .getProperty("INSTANCE")
-                        .getValue()
-                if (customTabsBrowser != null) {
-                    DynamicObjectUtils.asDynamicObject(customTabsBrowser)
-                        .invokeMethod(
-                            "launchUrl",
-                            arrayOf(Context::class.java, Int::class.java),
-                            arrayOf(context, R.string.url_android_releases)
-                        )
-                }
+                DynamicObjectUtils.asDynamicObject("com.dede.android_eggs.util.CustomTabsBrowser")
+                    .invokeMethod(
+                        "launchUrl",
+                        arrayOf(Context::class.java, Int::class.java),
+                        arrayOf(context, R.string.url_android_releases)
+                    )
                 // CustomTabsBrowser.launchUrl(context, R.string.url_android_releases)
             }) {
                 Text(text = stringResource(id = R.string.label_timeline_releases))
