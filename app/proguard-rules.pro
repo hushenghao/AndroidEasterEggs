@@ -24,6 +24,5 @@
     public static <methods>;
 }
 
--keepclasseswithmembernames class com.dede.android_eggs.GooglePlayCore {
-    public static <methods>;
-}
+-keep class com.dede.android_eggs.GooglePlayCore
+-dontwarn com.google.android.gms.common.annotation.NoNullnessRewrite
