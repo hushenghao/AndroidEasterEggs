@@ -44,4 +44,6 @@
     <string name="pref_summary_retain_recent_egg_tasks">최근 화면에 Egg 작업 유지, 최대 5개 유지 (활동 포함 모드에는 유효하지 않음)</string>
     <string name="label_about">정보</string>
     <string name="label_contribute">기여하기</string>
+    <string name="animator_disabled_alert_message">시스템 애니메이션이 비활성화되어 일부 기능이 제대로 작동하지 않을 수 있습니다. \"개발자 옵션\"으로 이동하여 \"Animator 길이 배율\" 옵션을 활성화하여 애니메이션을 활성화하세요.</string>
+    <string name="action_goto_settings">설정으로 이동</string>
 </resources>

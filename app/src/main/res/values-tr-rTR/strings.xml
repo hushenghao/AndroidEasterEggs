@@ -44,4 +44,6 @@
     <string name="pref_summary_retain_recent_egg_tasks">Son ekranda Paskalya Yumurtası görevlerini sakla, en fazla 5 görev saklanabilir (Aktivite Gömülü Modu için geçerli değildir.)</string>
     <string name="label_about">Hakkında</string>
     <string name="label_contribute">Katkıda Bulun</string>
+    <string name="animator_disabled_alert_message">Sistem animasyonunun devre dışı bırakılması nedeniyle bazı özellikler düzgün çalışmayabilir. Lütfen \"Geliştirici Seçenekleri \"ne gidin ve animasyonu etkinleştirmek için \"Animatör süre ölçeği\" seçeneğini etkinleştirin.</string>
+    <string name="action_goto_settings">Ayarlara git</string>
 </resources>
