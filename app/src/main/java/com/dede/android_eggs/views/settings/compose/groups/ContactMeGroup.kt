@@ -10,11 +10,11 @@ import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.composes.icons.Telegram
 import com.dede.android_eggs.util.CustomTabsBrowser
-import com.dede.android_eggs.util.copy
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
 import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
+import com.dede.basic.copy
 
 @Composable
 fun ContactMeGroup() {

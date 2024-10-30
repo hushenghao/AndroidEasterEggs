@@ -22,6 +22,7 @@ include(
     ":app",
     ":app-theme",
     ":app-widget",
+    ":app-crash",
     ":basic",
     ":jvm-basic",
 

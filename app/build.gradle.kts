@@ -145,6 +145,7 @@ dependencies {
 
     implementation(project(":app-theme"))
     implementation(project(":app-widget"))
+    implementation(project(":app-crash"))
 
     implementation(project(":eggs:AndroidNext"))
     implementation(project(":eggs:VanillaIceCream"))

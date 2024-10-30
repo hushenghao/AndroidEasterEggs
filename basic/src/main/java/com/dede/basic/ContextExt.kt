@@ -3,27 +3,34 @@
 package com.dede.basic
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.res.Configuration
-import android.os.Build
+import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 import androidx.core.os.ConfigurationCompat
 import androidx.core.os.LocaleListCompat
 
 
 val globalContext: Context
     get() = GlobalContext.globalContext
+
 val globalThemeContext: Context
     get() = GlobalContext.globalThemeContext
 
 @SuppressLint("StaticFieldLeak")
 object GlobalContext {
-    lateinit var globalContext: Context
+
+    internal lateinit var globalContext: Context
         private set
-    val globalThemeContext by lazy { globalContext.createThemeWrapperContext() }
+
+    internal val globalThemeContext by lazy { globalContext.createThemeWrapperContext() }
 
     class Initializer : androidx.startup.Initializer<Unit> {
         override fun create(context: Context) {
@@ -33,6 +40,22 @@ object GlobalContext {
         override fun dependencies(): List<Class<out androidx.startup.Initializer<*>>> = emptyList()
     }
 }
+
+
+fun Context.toast(@StringRes resId: Int, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, resId, duration).show()
+}
+
+fun Context.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, text, duration).show()
+}
+
+fun Context.copy(text: String) {
+    val service = getSystemService<ClipboardManager>() ?: return
+    service.setPrimaryClip(ClipData.newPlainText(null, text))
+    toast(android.R.string.copy)
+}
+
 
 fun Context.createThemeWrapperContext(): Context {
     if (this is AppCompatActivity) {

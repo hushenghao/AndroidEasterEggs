@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.crash
+package com.dede.android_eggs.crash
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -58,16 +58,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.BuildConfig
-import com.dede.android_eggs.R
 import com.dede.android_eggs.util.AGPUtils
 import com.dede.android_eggs.util.ThemeUtils
-import com.dede.android_eggs.util.copy
-import com.dede.android_eggs.views.crash.GlobalExceptionHandler.Companion.getUncaughtException
 import com.dede.android_eggs.views.theme.AppTheme
 import com.dede.basic.Utils
+import com.dede.basic.copy
 import kotlin.system.exitProcess
 
+/**
+ * App crash report
+ */
 class CrashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,7 +75,7 @@ class CrashActivity : AppCompatActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        val tr: Throwable? = getUncaughtException(intent)
+        val tr: Throwable? = GlobalExceptionHandler.getUncaughtException(intent)
         if (tr == null) {
             finish()
             return
@@ -104,27 +104,28 @@ private fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
             }
         }
     }
+    val (versionName, versionCode) = remember {
+        Utils.getAppVersionPair(context)
+    }
     val bodySpan = remember(tr) {
         buildAnnotatedString {
             withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
                 val devicesInfo =
-                    "Device: %s (%s - %s), SDK: %s (%d), App: %s (%d), VcsRevision: %s".format(
+                    "Device: %s (%s - %s), SDK: %s (%d), App: %s (%d), VcsRevision: %s\n\n".format(
                         Build.MODEL, Build.BRAND, Build.DEVICE,
                         Build.VERSION.RELEASE, Build.VERSION.SDK_INT,
-                        BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,
+                        versionName, versionCode,
                         AGPUtils.getVcsRevision(7)
                     )
                 append(devicesInfo)
             }
-            val stackTraceString: String? = try {
+
+            val stackTraceString = try {
                 Log.getStackTraceString(tr)
             } catch (ignore: Throwable) {
-                tr.toString()// NPE ???
+                tr.toString()
             }
-            if (stackTraceString != null) {
-                append("\n\n")
-                append(stackTraceString)
-            }
+            append(stackTraceString)
         }
     }
 

@@ -7,6 +7,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.squareup.okio)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)

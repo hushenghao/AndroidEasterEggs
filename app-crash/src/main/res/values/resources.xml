@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">app-crash</string>
+    <string name="url_github_issues" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/issues</string>
+</resources>

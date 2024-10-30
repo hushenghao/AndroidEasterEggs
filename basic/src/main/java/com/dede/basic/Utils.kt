@@ -7,6 +7,8 @@ import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager.NameNotFoundException
 import android.graphics.Color
 import android.os.Build
 import android.provider.Settings
@@ -57,6 +59,25 @@ object Utils {
                 setFlags(0)
             }
         }
+    }
+
+    fun getAppVersionPair(context: Context): Pair<String?, Long> {
+        var packageInfo: PackageInfo? = null
+        try {
+            packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+        } catch (ignore: NameNotFoundException) {
+        }
+        if (packageInfo != null) {
+            val versionName = packageInfo.versionName
+            val versionCode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                packageInfo.longVersionCode
+            } else {
+                @Suppress("DEPRECATION")
+                packageInfo.versionCode.toLong()
+            }
+            return versionName to versionCode
+        }
+        return null to -1L
     }
 
     val Activity.isPlatLogoActivity: Boolean

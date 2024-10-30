@@ -44,21 +44,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.views.main.compose.DrawableImage
+import com.dede.android_eggs.views.settings.compose.basic.SettingDivider
+import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.groups.AboutGroup
-import com.dede.android_eggs.views.settings.compose.prefs.ComponentManagerPref
 import com.dede.android_eggs.views.settings.compose.groups.ContactMeGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContributeGroup
+import com.dede.android_eggs.views.settings.compose.options.TestCrashOption
+import com.dede.android_eggs.views.settings.compose.prefs.ComponentManagerPref
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePref
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPref
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePref
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPref
-import com.dede.android_eggs.views.settings.compose.basic.SettingDivider
-import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePref
 import com.dede.android_eggs.views.settings.compose.prefs.TimelinePref
 import kotlinx.coroutines.launch
@@ -158,6 +160,10 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                 AboutGroup()
 
                 ContactMeGroup()
+
+                if (BuildConfig.DEBUG) {
+                    TestCrashOption()
+                }
 
                 PoweredByCompose()
             }

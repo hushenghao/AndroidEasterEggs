@@ -1,4 +1,4 @@
-package com.dede.android_eggs.views.crash
+package com.dede.android_eggs.crash
 
 import android.app.Activity
 import android.content.Context
@@ -8,9 +8,9 @@ import androidx.core.content.IntentCompat
 import java.io.Serializable
 import kotlin.system.exitProcess
 
-class GlobalExceptionHandler<T : Activity> private constructor(
+class GlobalExceptionHandler private constructor(
     private val applicationContext: Context,
-    private val activityToBeLaunched: Class<T>,
+    private val activityToBeLaunched: Class<out Activity>,
     private val defaultHandler: Thread.UncaughtExceptionHandler?,
 ) : Thread.UncaughtExceptionHandler {
 
@@ -24,7 +24,7 @@ class GlobalExceptionHandler<T : Activity> private constructor(
         }
     }
 
-    private fun <T : Activity> Context.launchCrashActivity(activity: Class<T>, e: Throwable) {
+    private fun Context.launchCrashActivity(activity: Class<out Activity>, e: Throwable) {
         val crashedIntent = Intent(applicationContext, activity)
             .putExtra(INTENT_DATA_NAME, e as Serializable)
             .addFlags(DEF_INTENT_FLAGS)
@@ -44,9 +44,13 @@ class GlobalExceptionHandler<T : Activity> private constructor(
             )
         }
 
-        fun <T : Activity> initialize(
+        fun testCrash() {
+            throw IllegalStateException("Test Crash!")
+        }
+
+        fun initialize(
             applicationContext: Context,
-            activityToBeLaunched: Class<T>,
+            activityToBeLaunched: Class<out Activity> = CrashActivity::class.java,
         ) = Thread.setDefaultUncaughtExceptionHandler(
             GlobalExceptionHandler(
                 applicationContext, activityToBeLaunched,
