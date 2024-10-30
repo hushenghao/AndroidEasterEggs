@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import androidx.annotation.StyleRes
-import com.dede.android_eggs.R
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
+import com.dede.android_eggs.views.theme.R
 import com.google.android.material.color.ThemeUtils
 import com.google.android.material.internal.ContextUtils
 import com.google.android.material.resources.MaterialAttributes
@@ -36,7 +36,7 @@ object ThemeUtils {
 
     fun tryApplyOLEDTheme(context: Context) {
         if (ThemePrefUtil.isAmoledMode(context)) {
-            applyThemeOverlay(context, R.style.ThemeOverlay_EasterEggs_OLED)
+            applyThemeOverlay(context, R.style.ThemeOverlay_OLED)
         }
     }
 

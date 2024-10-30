@@ -1,6 +1,5 @@
 package com.dede.android_eggs.views.settings.compose.basic
 
-import android.content.Context
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -26,24 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
-import com.dede.android_eggs.util.pref
 
-object SettingPrefUtil {
-    const val ON = 1
-    const val OFF = 0
-
-    const val EXTRA_VALUE = "extra_value"
-
-    const val ACTION_CLOSE_SETTING = "com.dede.easter_eggs.CloseSetting"
-
-    fun getValue(context: Context, key: String, default: Int): Int {
-        return context.pref.getInt(key, default)
-    }
-
-    fun setValue(context: Context, key: String, value: Int) {
-        context.pref.edit().putInt(key, value).apply()
-    }
-}
 
 @Composable
 fun SettingDivider() {

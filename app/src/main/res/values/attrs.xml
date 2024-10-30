@@ -4,5 +4,4 @@
         <attr name="once" format="string" />
     </declare-styleable>
 
-    <attr name="isOLEDTheme" format="boolean" />
 </resources>

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.EasterEggs" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.EasterEggs" parent="Theme.AppColors">
         <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
             animated drawable. One of these is required. -->
         <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">
@@ -11,75 +11,9 @@
         </item>
     </style>
 
-    <style name="Theme.EasterEggs" parent="Base.EasterEggs">
-        <item name="colorPrimary">@color/md_theme_light_primary</item>
-        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
-        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
-        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
-        <item name="colorSecondary">@color/md_theme_light_secondary</item>
-        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
-        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
-        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
-        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
-        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</item>
-        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</item>
-        <item name="colorError">@color/md_theme_light_error</item>
-        <item name="colorOnError">@color/md_theme_light_onError</item>
-        <item name="colorErrorContainer">@color/md_theme_light_errorContainer</item>
-        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
-        <item name="colorOutline">@color/md_theme_light_outline</item>
-        <item name="android:colorBackground">@color/md_theme_light_background</item>
-        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
-        <item name="colorSurface">@color/md_theme_light_surface</item>
-        <item name="colorSurfaceContainerLowest">#ffffff</item>
-        <item name="colorSurfaceContainerLow">#eef6ec</item>
-        <item name="colorSurfaceContainer">#e8f0e6</item>
-        <item name="colorSurfaceContainerHigh">#e2eae1</item>
-        <item name="colorSurfaceContainerHighest">#dde5db</item>
-        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
-        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
-        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
-        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
-        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
-        <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
-    </style>
-
-    <style name="ThemeOverlay.EasterEggs.OLED" parent="">
-        <item name="android:colorBackground">#ff000000</item>
-        <item name="colorError">#ffffb4ab</item>
-        <item name="colorErrorContainer">#ff93000a</item>
-        <item name="colorOnSurfaceInverse">#ff141614</item>
-        <item name="colorPrimaryInverse">#ff004c2a</item>
-        <item name="colorSurfaceInverse">#ff70716f</item>
-        <item name="colorOnBackground">#ffbfc0bc</item>
-        <item name="colorOnError">#ff690005</item>
-        <item name="colorOnErrorContainer">#ffffdad6</item>
-        <item name="colorOnPrimary">#ff002714</item>
-        <item name="colorOnPrimaryContainer">#ff4db174</item>
-        <item name="colorOnSecondary">#ff17251b</item>
-        <item name="colorOnSecondaryContainer">#ff93a294</item>
-        <item name="colorOnSurface">#ffa7a9a4</item>
-        <item name="colorOnSurfaceVariant">#ffc0c9bf</item>
-        <item name="colorOnTertiary">#ff01252c</item>
-        <item name="colorOnTertiaryContainer">#ff98bbc5</item>
-        <item name="colorOutline">#ff6f756e</item>
-        <item name="colorOutlineVariant">#ff343a34</item>
-        <item name="colorPrimary">#ff369c62</item>
-        <item name="colorPrimaryContainer">#ff00391e</item>
-        <item name="colorSecondary">#ff7f8e81</item>
-        <item name="colorSecondaryContainer">#ff27342a</item>
-        <item name="colorSurface">#ff000000</item>
-        <item name="colorSurfaceVariant">#ff414942</item>
-        <item name="colorTertiary">#ff718f98</item>
-        <item name="colorTertiaryContainer">#ff17353c</item>
-
-        <item name="isOLEDTheme">true</item>
-    </style>
-
     <style name="ThemeOverlay.MaterialAlertDialog.BlurBehind" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
-        <item name="android:windowBlurBehindEnabled" tools:ignore="NewApi">true</item>
-        <item name="android:windowBlurBehindRadius" tools:ignore="NewApi">4dp</item>
+        <item name="android:windowBlurBehindEnabled" tools:targetApi="s">true</item>
+        <item name="android:windowBlurBehindRadius" tools:targetApi="s">4dp</item>
         <item name="alertDialogStyle">@style/Theme.MaterialAlertDialog.Style</item>
     </style>
 

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="adapter_hf_lp" type="id" />
+    <attr name="isOLEDTheme" format="boolean" />
 </resources>

@@ -143,6 +143,7 @@ dependencies {
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
 
+    implementation(project(":app-theme"))
     implementation(project(":app-widget"))
 
     implementation(project(":eggs:AndroidNext"))

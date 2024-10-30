@@ -20,6 +20,7 @@ dependencyResolutionManagement {
 
 include(
     ":app",
+    ":app-theme",
     ":app-widget",
     ":basic",
     ":jvm-basic",
