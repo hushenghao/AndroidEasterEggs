@@ -44,4 +44,6 @@
     <string name="pref_summary_retain_recent_egg_tasks">الاحتفاظ بمهام البيض على شاشة العناصر الأخيرة، بحد أقصى للاحتفاظ بـ5 (غير صالح لوضع النشاط المضمن)</string>
     <string name="label_about">حول</string>
     <string name="label_contribute">ساهم</string>
+    <string name="animator_disabled_alert_message">نظرًا لتعطيل الرسوم المتحركة للنظام، قد لا تعمل بعض الميزات بشكل صحيح. يُرجى الانتقال إلى \"خيارات المطور\" وتمكين خيار \"مقياس مدة الرسوم المتحركة\" لتنشيط الرسوم المتحركة.</string>
+    <string name="action_goto_settings">الانتقال إلى الإعدادات</string>
 </resources>
