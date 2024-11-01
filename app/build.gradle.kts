@@ -142,10 +142,10 @@ dependencies {
     implementation(libs.free.reflection)
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
+    implementation(project(":theme"))
 
-    implementation(project(":app-theme"))
-    implementation(project(":app-widget"))
-    implementation(project(":app-crash"))
+    implementation(project(":widget"))
+    implementation(project(":crash"))
 
     implementation(project(":eggs:AndroidNext"))
     implementation(project(":eggs:VanillaIceCream"))

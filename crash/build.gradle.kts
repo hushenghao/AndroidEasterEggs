@@ -14,8 +14,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":app-theme"))
 
+    implementation(project(":theme"))
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)
 

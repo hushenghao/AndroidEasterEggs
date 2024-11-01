@@ -20,9 +20,9 @@ dependencyResolutionManagement {
 
 include(
     ":app",
-    ":app-theme",
-    ":app-widget",
-    ":app-crash",
+    ":theme",
+    ":widget",
+    ":crash",
     ":basic",
     ":jvm-basic",
 
