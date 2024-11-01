@@ -34,6 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.random.Random
 
+// todo Move to embedding-splits module
 @AndroidEntryPoint
 class PlaceholderActivity : AppCompatActivity() {
 

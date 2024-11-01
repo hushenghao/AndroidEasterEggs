@@ -3,7 +3,6 @@ package com.dede.android_eggs.startup
 import android.app.Application
 import android.content.Context
 import androidx.startup.Initializer
-import com.dede.android_eggs.crash.GlobalExceptionHandler
 import com.dede.android_eggs.util.ActivityActionDispatcher
 import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
@@ -17,7 +16,6 @@ class ApplicationInitializer : Initializer<Unit> {
         DynamicColorPrefUtil.apply(application)
         ThemePrefUtil.apply(application)
         ActivityActionDispatcher.register(application)
-        GlobalExceptionHandler.initialize(application)
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> = listOf(

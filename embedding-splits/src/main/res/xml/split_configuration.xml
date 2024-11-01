@@ -6,66 +6,67 @@
         window:clearTop="true"
         window:finishPrimaryWithSecondary="never"
         window:finishSecondaryWithPrimary="always"
+        window:splitLayoutDirection="locale"
         window:splitMinSmallestWidthDp="600"
         window:splitRatio="0.5">
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_u.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_t.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_s.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_r.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_q.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_p.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_o.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_n.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_l.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_k.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_j.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_i.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_h.egg.PlatLogoActivity" />
         <SplitPairFilter
-            window:primaryActivityName=".views.main.EasterEggsActivity"
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_g.egg.PlatLogoActivity" />
     </SplitPairRule>
 
     <!-- Specify a placeholder for the secondary container when content is
          not available. -->
     <SplitPlaceholderRule
-        window:finishPrimaryWithPlaceholder="always"
-        window:placeholderActivityName=".views.placeholder.PlaceholderActivity"
+        window:placeholderActivityName="com.dede.android_eggs.views.placeholder.PlaceholderActivity"
+        window:splitMaxAspectRatioInPortrait="alwaysAllow"
         window:splitMinSmallestWidthDp="600"
-        window:splitRatio="0.5">
-        <ActivityFilter window:activityName=".views.main.EasterEggsActivity" />
+        window:splitRatio="0.5"
+        window:stickyPlaceholder="false">
+        <ActivityFilter window:activityName="com.dede.android_eggs.views.main.EasterEggsActivity" />
     </SplitPlaceholderRule>
 
     <!-- Define activities that should never be part of a split. Note: Takes
          precedence over other split rules. -->
     <ActivityRule window:alwaysExpand="true">
-        <ActivityFilter window:activityName=".views.crash.CrashActivity" />
         <ActivityFilter window:activityName="com.android_u.egg.landroid.MainActivity" />
     </ActivityRule>
 

@@ -120,7 +120,6 @@ dependencies {
     implementation(libs.androidx.viewmodel)
     implementation(libs.androidx.livedata)
     implementation(libs.androidx.browser)
-    implementation(libs.androidx.window)
     implementation(libs.google.material)
     implementation(libs.androidx.startup)
 
@@ -142,9 +141,10 @@ dependencies {
     implementation(libs.free.reflection)
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
-    implementation(project(":theme"))
 
+    implementation(project(":theme"))
     implementation(project(":widget"))
+    implementation(project(":embedding-splits"))
     implementation(project(":crash"))
 
     implementation(project(":eggs:AndroidNext"))

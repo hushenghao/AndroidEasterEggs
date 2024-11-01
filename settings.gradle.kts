@@ -23,6 +23,8 @@ include(
     ":theme",
     ":widget",
     ":crash",
+    ":embedding-splits",
+
     ":basic",
     ":jvm-basic",
 

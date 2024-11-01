@@ -31,7 +31,7 @@ import androidx.compose.material.icons.rounded.ContentCopy
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.PowerSettingsNew
 import androidx.compose.material.icons.rounded.RestartAlt
-import androidx.compose.material.icons.rounded.SmartToy
+import androidx.compose.material.icons.rounded.SentimentDissatisfied
 import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
@@ -142,7 +142,7 @@ private fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
-                imageVector = Icons.Rounded.SmartToy,
+                imageVector = Icons.Rounded.SentimentDissatisfied,
                 contentDescription = null,
                 modifier = Modifier
                     .statusBarsPadding()

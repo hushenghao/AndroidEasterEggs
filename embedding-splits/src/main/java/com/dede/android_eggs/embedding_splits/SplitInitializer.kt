@@ -1,9 +1,8 @@
-package com.dede.android_eggs.startup
+package com.dede.android_eggs.embedding_splits
 
 import android.content.Context
 import androidx.startup.Initializer
 import androidx.window.embedding.RuleController
-import com.dede.android_eggs.R
 
 class SplitInitializer : Initializer<Unit> {
 

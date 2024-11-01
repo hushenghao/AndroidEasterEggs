@@ -18,7 +18,7 @@ class GlobalExceptionHandler private constructor(
         runCatching {
             Log.e(this.toString(), e.stackTraceToString())
             applicationContext.launchCrashActivity(activityToBeLaunched, e)
-            exitProcess(0)
+            exitProcess(-1)
         }.getOrElse {
             defaultHandler?.uncaughtException(t, e)
         }
@@ -29,6 +29,15 @@ class GlobalExceptionHandler private constructor(
             .putExtra(INTENT_DATA_NAME, e as Serializable)
             .addFlags(DEF_INTENT_FLAGS)
         applicationContext.startActivity(crashedIntent)
+    }
+
+    class Initializer : androidx.startup.Initializer<Unit> {
+
+        override fun create(context: Context) {
+            initialize(context)
+        }
+
+        override fun dependencies(): List<Class<out androidx.startup.Initializer<*>>> = emptyList()
     }
 
     companion object {

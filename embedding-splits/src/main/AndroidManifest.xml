@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application>
-        <activity android:name=".CrashActivity" />
+
+        <property
+            android:name="android.window.PROPERTY_ACTIVITY_EMBEDDING_SPLITS_ENABLED"
+            android:value="true" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"
@@ -11,7 +14,7 @@
             android:exported="false"
             tools:node="merge">
             <meta-data
-                android:name="com.dede.android_eggs.crash.GlobalExceptionHandler$Initializer"
+                android:name="com.dede.android_eggs.embedding_splits.SplitInitializer"
                 android:value="androidx.startup" />
         </provider>
     </application>

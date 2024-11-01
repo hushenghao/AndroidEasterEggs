@@ -22,10 +22,6 @@
         android:theme="@style/Theme.EasterEggs"
         tools:targetApi="tiramisu">
 
-        <property
-            android:name="android.window.PROPERTY_ACTIVITY_EMBEDDING_SPLITS_ENABLED"
-            android:value="true" />
-
         <service
             android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
             android:enabled="false"
@@ -42,9 +38,6 @@
             tools:node="merge">
             <meta-data
                 android:name="com.dede.android_eggs.startup.ReflectionInitializer"
-                android:value="androidx.startup" />
-            <meta-data
-                android:name="com.dede.android_eggs.startup.SplitInitializer"
                 android:value="androidx.startup" />
             <meta-data
                 android:name="com.dede.android_eggs.startup.ApplicationInitializer"
