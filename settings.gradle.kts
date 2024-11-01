@@ -21,9 +21,9 @@ dependencyResolutionManagement {
 include(
     ":app",
     ":theme",
-    ":widget",
-    ":crash",
-    ":embedding-splits",
+    ":feature:widget",
+    ":feature:crash",
+    ":feature:embedding-splits",
 
     ":basic",
     ":jvm-basic",

@@ -28,6 +28,10 @@ gradlePlugin {
             id = "easter.egg.library"
             implementationClass = "EasterEggLibrary"
         }
+        register("easterEggComposeLibrary") {
+            id = "easter.egg.compose.library"
+            implementationClass = "EasterEggComposeLibrary"
+        }
         register("easterEggApp") {
             id = "easter.egg.app"
             implementationClass = "EasterEggApp"

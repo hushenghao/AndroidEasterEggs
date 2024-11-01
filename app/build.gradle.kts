@@ -143,9 +143,9 @@ dependencies {
     debugImplementation(libs.squareup.leakcanary)
 
     implementation(project(":theme"))
-    implementation(project(":widget"))
-    implementation(project(":embedding-splits"))
-    implementation(project(":crash"))
+    implementation(project(":feature:widget"))
+    implementation(project(":feature:crash"))
+    implementation(project(":feature:embedding-splits"))
 
     implementation(project(":eggs:AndroidNext"))
     implementation(project(":eggs:VanillaIceCream"))

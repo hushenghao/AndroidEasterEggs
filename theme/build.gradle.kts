@@ -1,16 +1,9 @@
 plugins {
-    id("easter.egg.library")
-    alias(libs.plugins.compose.compiler)
+    id("easter.egg.compose.library")
 }
 
 android {
     namespace = "com.dede.android_eggs.views.theme"
-
-    resourcePrefix = null
-
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
