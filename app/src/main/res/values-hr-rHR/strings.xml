@@ -44,4 +44,6 @@
     <string name="pref_summary_retain_recent_egg_tasks">Zadrži zadatke za Easter Eggs na zaslonu nedavnih aplikacija. Maksimalno 5 zadržanih zadataka (nije dostupno za Activity Embedded Mode)</string>
     <string name="label_about">O aplikaciji</string>
     <string name="label_contribute">Doprinesi</string>
+    <string name="animator_disabled_alert_message">Neke značajke možda neće ispravno raditi jer su isključene animacije sustava. Idite u \"Razvojne opcije\" i omogućite postavku \"Animator duration scale\" kako bi se aktivirale animacije.</string>
+    <string name="action_goto_settings">Idi u Postavke</string>
 </resources>
