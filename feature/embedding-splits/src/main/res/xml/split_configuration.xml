@@ -56,7 +56,7 @@
     <!-- Specify a placeholder for the secondary container when content is
          not available. -->
     <SplitPlaceholderRule
-        window:placeholderActivityName="com.dede.android_eggs.views.placeholder.PlaceholderActivity"
+        window:placeholderActivityName="com.dede.android_eggs.embedding_splits.PlaceholderActivity"
         window:splitMaxAspectRatioInPortrait="alwaysAllow"
         window:splitMinSmallestWidthDp="600"
         window:splitRatio="0.5"

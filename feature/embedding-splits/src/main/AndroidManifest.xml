@@ -17,6 +17,8 @@
                 android:name="com.dede.android_eggs.embedding_splits.SplitInitializer"
                 android:value="androidx.startup" />
         </provider>
+
+        <activity android:name=".PlaceholderActivity" />
     </application>
 
 </manifest>

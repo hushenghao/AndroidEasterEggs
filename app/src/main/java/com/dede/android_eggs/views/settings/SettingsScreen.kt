@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
+import com.dede.android_eggs.util.DisposableReceiver
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.views.main.compose.DrawableImage
@@ -80,7 +81,7 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
         closeDrawer()
     }
 
-    LocalEvent.receiver().register(action = SettingPrefUtil.ACTION_CLOSE_SETTING) {
+    LocalEvent.DisposableReceiver(SettingPrefUtil.ACTION_CLOSE_SETTING) {
         closeDrawer()
     }
 
