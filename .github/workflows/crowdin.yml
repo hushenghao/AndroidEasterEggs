@@ -7,7 +7,7 @@ on:
       - 'app/src/main/res/values*/languages.xml'
       - 'app/src/main/res/values*/strings*.xml'
       - 'eggs/AndroidNext/src/main/res/values*/strings*.xml'
-      - 'crowdin.yml'
+      - '.github/crowdin.yml'
     branches: [ main ]
   schedule:
     - cron: '0 1 * * 0'
