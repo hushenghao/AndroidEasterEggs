@@ -83,6 +83,31 @@ class PlaceholderActivity : AppCompatActivity() {
 }
 
 internal val shapes = arrayOf(
+    // Love
+    RoundedPolygon(
+        vertices = floatArrayOf(
+            radialToCartesian(0.8f, 0f.toRadians()).x,
+            radialToCartesian(0.8f, 0f.toRadians()).y,
+            radialToCartesian(1f, 90f.toRadians()).x,
+            radialToCartesian(1f, 90f.toRadians()).y,
+            radialToCartesian(0.8f, 180f.toRadians()).x,
+            radialToCartesian(0.8f, 180f.toRadians()).y,
+            radialToCartesian(1f, 250f.toRadians()).x,
+            radialToCartesian(1f, 250f.toRadians()).y,
+            radialToCartesian(0.1f, 270f.toRadians()).x,
+            radialToCartesian(0.1f, 270f.toRadians()).y,
+            radialToCartesian(1f, 290f.toRadians()).x,
+            radialToCartesian(1f, 290f.toRadians()).y,
+        ),
+        perVertexRounding = listOf(
+            CornerRounding(0.6f),
+            CornerRounding(0f),
+            CornerRounding(0.6f),
+            CornerRounding(0.6f),
+            CornerRounding(0f),
+            CornerRounding(0.6f),
+        )
+    ),
     // PillStar
     RoundedPolygon.pillStar(
         numVerticesPerRadius = 12,
@@ -183,7 +208,7 @@ internal fun Placeholder() {
         MorphComposable(
             sizedMorph = morphed,
             modifier = Modifier
-                .fillMaxSize(0.3f)
+                .fillMaxSize(0.28f)
                 .clickable(
                     indication = null, // Eliminate the ripple effect.
                     interactionSource = remember { MutableInteractionSource() }
