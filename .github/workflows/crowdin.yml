@@ -31,6 +31,7 @@ jobs:
       - name: Crowdin push
         uses: crowdin/github-action@v2
         with:
+          config: '.github/crowdin.yml'
           upload_sources: true
           upload_translations: true
           download_translations: false
@@ -53,6 +54,7 @@ jobs:
       - name: Crowdin pull
         uses: crowdin/github-action@v2
         with:
+          config: '.github/crowdin.yml'
           upload_sources: false
           upload_translations: false
           download_translations: true
