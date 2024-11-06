@@ -94,24 +94,3 @@ fun Context.getConfigurationLocales(): LocaleListCompat {
     val localeConfig = ContextCompat.getContextForLanguage(this).resources.configuration
     return ConfigurationCompat.getLocales(localeConfig)
 }
-
-fun Context.createScaleWrapper(scale: Float): Context {
-    val override = Configuration(resources.configuration).apply {
-        densityDpi = (densityDpi * scale).toInt()
-        fontScale *= scale
-        val newMode = when (AppCompatDelegate.getDefaultNightMode()) {
-            AppCompatDelegate.MODE_NIGHT_YES -> Configuration.UI_MODE_NIGHT_YES
-            AppCompatDelegate.MODE_NIGHT_NO -> Configuration.UI_MODE_NIGHT_NO
-            else -> {
-                // If we're following the system, we just use the system default from the
-                // application context
-                val appConfig = this@createScaleWrapper.applicationContext.resources.configuration
-                appConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK
-            }
-        }
-        uiMode = (newMode or (uiMode and Configuration.UI_MODE_NIGHT_MASK.inv()))
-    }
-    return ContextThemeWrapper(this, androidx.appcompat.R.style.Theme_AppCompat_Empty).apply {
-        applyOverrideConfiguration(override)
-    }
-}

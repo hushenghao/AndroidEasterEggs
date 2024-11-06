@@ -404,7 +404,7 @@ public class PlatLogoActivity extends Activity {
 
 
     public static class Starfield extends Drawable {
-        private static final int NUM_STARS = 34; // Build.VERSION_CODES.UPSIDE_DOWN_CAKE
+        private static final int NUM_STARS = Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
 
         private static final int NUM_PLANES = 2;
         private final float[] mStars = new float[NUM_STARS * 4];

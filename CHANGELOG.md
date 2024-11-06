@@ -3,6 +3,7 @@
 ### v3.2.0
 
 - Add 'Animator duration scale' alert
+- Update App theme colors
 - Project modularization
 - Upgrade project dependencies
 

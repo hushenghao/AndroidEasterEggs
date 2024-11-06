@@ -11,14 +11,14 @@
     <item
         android:width="200dp"
         android:height="200dp"
-        android:drawable="@drawable/v_platlogo"
+        android:drawable="@drawable/ic_platlogo_v"
         android:gravity="center" />
 
     <item
         android:id="@+id/o_clock_12"
         android:width="44dp"
         android:height="44dp"
-        android:drawable="@drawable/s_icon"
+        android:drawable="@drawable/ic_android_s"
         android:gravity="top|center_horizontal"
         android:top="10dp" />
 
@@ -35,7 +35,7 @@
         android:id="@+id/o_clock_2"
         android:width="44dp"
         android:height="44dp"
-        android:drawable="@drawable/g_android_logo"
+        android:drawable="@drawable/ic_android_g"
         android:gravity="top|right"
         android:right="30dp"
         android:top="88dp" />
@@ -44,7 +44,7 @@
         android:id="@+id/o_clock_3"
         android:width="44dp"
         android:height="44dp"
-        android:drawable="@drawable/h_android_logo"
+        android:drawable="@drawable/ic_android_h"
         android:gravity="center_vertical|right"
         android:right="10dp" />
 
@@ -53,7 +53,7 @@
         android:width="44dp"
         android:height="42dp"
         android:bottom="90dp"
-        android:drawable="@drawable/k_android_logo"
+        android:drawable="@drawable/ic_android_k"
         android:gravity="bottom|right"
         android:right="28dp" />
 
@@ -62,7 +62,7 @@
         android:width="46dp"
         android:height="46dp"
         android:bottom="30dp"
-        android:drawable="@drawable/l_icon"
+        android:drawable="@drawable/ic_android_l"
         android:gravity="bottom|right"
         android:right="88dp" />
 
@@ -71,7 +71,7 @@
         android:width="46dp"
         android:height="46dp"
         android:bottom="10dp"
-        android:drawable="@drawable/m_icon"
+        android:drawable="@drawable/ic_android_m"
         android:gravity="bottom|center_horizontal" />
 
     <item
@@ -79,7 +79,7 @@
         android:width="46dp"
         android:height="46dp"
         android:bottom="30dp"
-        android:drawable="@drawable/n_icon"
+        android:drawable="@drawable/ic_android_n"
         android:gravity="bottom|left"
         android:left="90dp" />
 
@@ -88,7 +88,7 @@
         android:width="48dp"
         android:height="48dp"
         android:bottom="88dp"
-        android:drawable="@drawable/o_icon"
+        android:drawable="@drawable/ic_android_o"
         android:gravity="bottom|left"
         android:left="30dp" />
 
@@ -96,7 +96,7 @@
         android:id="@+id/o_clock_9"
         android:width="48dp"
         android:height="48dp"
-        android:drawable="@drawable/ic_android_p_scale"
+        android:drawable="@drawable/ic_android_p"
         android:gravity="center_vertical|left"
         android:left="6dp"
         android:top="-4dp" />
@@ -105,7 +105,7 @@
         android:id="@+id/o_clock_10"
         android:width="48dp"
         android:height="48dp"
-        android:drawable="@drawable/q"
+        android:drawable="@drawable/ic_android_q"
         android:gravity="top|left"
         android:left="26dp"
         android:top="86dp" />
