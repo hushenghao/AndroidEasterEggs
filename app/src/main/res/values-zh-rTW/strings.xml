@@ -44,4 +44,6 @@
     <string name="pref_summary_retain_recent_egg_tasks">在最近工作畫面保留彩蛋工作，最多保留 5 个 (在活動嵌入模式中無效)</string>
     <string name="label_about">關於</string>
     <string name="label_contribute">參與</string>
+    <string name="animator_disabled_alert_message">由於系統動畫被停用，某些功能可能無法正常使用。請前往“開發人員選項”並啟用“動畫影片長度比例”選項來啟動動畫。</string>
+    <string name="action_goto_settings">前往設定</string>
 </resources>
