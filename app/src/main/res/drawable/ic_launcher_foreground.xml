@@ -26,11 +26,11 @@ Copyright (C) 2024 The Android Open Source Project
             android:fillType="evenOdd"
             android:pathData="M53,42C52.21,50.58 46.46,68.95 32.11,74.63C19.22,79.75 5.77,82.32 1.19,83.19C0.68,83.29 0.28,83.36 0,83.42V108H54H108V83.42C107.72,83.36 107.32,83.29 106.81,83.19C102.23,82.32 88.78,79.75 75.89,74.63C61.54,68.95 55.79,50.58 55,42H54H53Z" />
         <path
-            android:fillColor="#ffffff"
+            android:fillColor="#fff"
             android:fillType="evenOdd"
             android:pathData="M53.25,42C52.88,50.53 50.44,69.01 43.68,74.67C36.91,80.33 32.65,82.86 31.37,83.41L54,102.87L76.63,83.41C75.35,82.86 71.09,80.33 64.32,74.67C57.56,69.01 55.12,50.53 54.75,42H54H53.25Z" />
         <path
-            android:fillColor="#ffffff"
+            android:fillColor="#fff"
             android:pathData="M54,42m-1,0a1,1 0,1 1,2 0a1,1 0,1 1,-2 0" />
     </group>
     <group>
@@ -40,13 +40,11 @@ Copyright (C) 2024 The Android Open Source Project
             android:pathData="M54,94.25m-26.25,0a26.25,26.25 0,1 1,52.5 0a26.25,26.25 0,1 1,-52.5 0" />
         <!-- ant -->
         <path
-            android:fillColor="#00000000"
             android:pathData="M38,63.5L44.5,74.5"
             android:strokeWidth="5"
             android:strokeColor="#34A853"
             android:strokeLineCap="round" />
         <path
-            android:fillColor="#00000000"
             android:pathData="M70,63.5L63.5,74.5"
             android:strokeWidth="5"
             android:strokeColor="#34A853"

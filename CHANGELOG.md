@@ -4,6 +4,8 @@
 
 - Add 'Animator duration scale' alert
 - Update App theme colors
+- Update App monochrome logo
+- Fix Android U platlogo
 - Project modularization
 - Upgrade project dependencies
 
