@@ -47,6 +47,7 @@
             <option value="$PROJECT_DIR$/eggs/VanillaIceCream" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/crash" />
+            <option value="$PROJECT_DIR$/feature/custom-tab-browser" />
             <option value="$PROJECT_DIR$/feature/embedding-splits" />
             <option value="$PROJECT_DIR$/feature/widget" />
             <option value="$PROJECT_DIR$/jvm-basic" />
