@@ -23,7 +23,7 @@ fun GithubOption() {
         desc = stringResource(R.string.url_github),
         trailingContent = imageVectorIconBlock(imageVector = Icons.Rounded.Star),
         onClick = {
-            CustomTabsBrowser.launchUrl(context, R.string.url_github)
+            com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_github)
         }
     )
 }

@@ -9,4 +9,5 @@
 
     <attr name="supportAdaptiveIcon" format="boolean" />
 
+    <string name="title_open_with">Open with</string>
 </resources>

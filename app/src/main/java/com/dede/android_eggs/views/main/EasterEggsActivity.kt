@@ -28,9 +28,9 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
-import androidx.fragment.app.FragmentActivity
 import com.android_next.egg.AndroidNextTimelineDialog
 import com.dede.android_eggs.R
+import com.dede.android_eggs.inject.FlavorFeatures
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
@@ -57,7 +57,6 @@ import com.dede.android_eggs.views.theme.AppTheme
 import com.dede.basic.Utils
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
-import com.dede.basic.utils.DynamicObjectUtils
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
@@ -157,9 +156,8 @@ class EasterEggsActivity : AppCompatActivity() {
         intentHandler.handleIntent(intent)
         EasterEggShortcutsHelp.updateShortcuts(this, pureEasterEggs)
 
-        // for market flavor
-        DynamicObjectUtils.asDynamicObject("com.dede.android_eggs.GooglePlayCore")
-            .invokeMethod("launchReview", arrayOf(FragmentActivity::class.java), arrayOf(this))
+        // call flavor features
+        FlavorFeatures.get().call(this)
     }
 
 

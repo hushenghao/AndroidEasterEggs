@@ -11,10 +11,10 @@ import androidx.core.content.getSystemService
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
-import com.dede.android_eggs.util.toast
 import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPrefUtil
 import com.dede.basic.Utils
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.toast
 
 
 object EggActionHelp {

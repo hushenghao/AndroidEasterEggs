@@ -43,7 +43,7 @@ fun ContactMeGroup() {
             ),
             title = stringResource(R.string.label_feedback),
             onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
+                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
             }
         )
         Option(
@@ -53,7 +53,7 @@ fun ContactMeGroup() {
             ),
             title = "Telegram",
             onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_telegram_group)
+                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_telegram_group)
             }
         )
     }

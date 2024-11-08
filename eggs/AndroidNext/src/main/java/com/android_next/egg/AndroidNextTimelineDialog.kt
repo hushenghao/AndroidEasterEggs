@@ -40,8 +40,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.basic.requireDrawable
-import com.dede.basic.utils.DynamicObjectUtils
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -96,13 +96,7 @@ fun AndroidNextTimelineDialog(
         confirmButton = {
             TextButton(onClick = {
                 androidNextDialogVisible = false
-                DynamicObjectUtils.asDynamicObject("com.dede.android_eggs.util.CustomTabsBrowser")
-                    .invokeMethod(
-                        "launchUrl",
-                        arrayOf(Context::class.java, Int::class.java),
-                        arrayOf(context, R.string.url_android_releases)
-                    )
-                // CustomTabsBrowser.launchUrl(context, R.string.url_android_releases)
+                CustomTabsBrowser.launchUrl(context, R.string.url_android_releases)
             }) {
                 Text(text = stringResource(id = R.string.label_timeline_releases))
             }

@@ -117,16 +117,16 @@ fun ProjectDescription() {
                 fontWeight = FontWeight.SemiBold
             )
             ChipItem2(R.string.label_privacy_policy) {
-                CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
+                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
             }
             ChipItem2(R.string.label_license) {
-                CustomTabsBrowser.launchUrl(context, R.string.url_license)
+                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_license)
             }
             ChipItem2(R.string.label_github) {
-                CustomTabsBrowser.launchUrl(context, R.string.url_github)
+                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_github)
             }
             ChipItem2(R.string.label_feedback) {
-                CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
+                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
             }
         }
     }

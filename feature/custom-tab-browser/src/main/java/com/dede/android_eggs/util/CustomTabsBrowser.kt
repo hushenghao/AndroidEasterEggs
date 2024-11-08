@@ -10,9 +10,9 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import com.dede.basic.createChooser
 import com.dede.basic.getConfigurationLocales
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.MaterialColors
@@ -79,7 +79,7 @@ object CustomTabsBrowser {
         val target = Intent(Intent.ACTION_VIEW, uri)
         val intent = context.createChooser(target)
         try {
-            ContextCompat.startActivity(context, intent, null)
+            context.startActivity(intent)
         } catch (_: ActivityNotFoundException) {
         }
     }

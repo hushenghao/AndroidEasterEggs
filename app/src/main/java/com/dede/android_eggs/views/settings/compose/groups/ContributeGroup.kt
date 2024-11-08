@@ -30,7 +30,7 @@ fun ContributeGroup() {
             title = stringResource(R.string.label_translation),
             desc = stringResource(R.string.url_translation),
             onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_translation)
+                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_translation)
             }
         )
         Option(
@@ -41,7 +41,7 @@ fun ContributeGroup() {
             shape = OptionShapes.lastShape(),
             title = stringResource(R.string.label_donate),
             onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_sponsor)
+                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_sponsor)
             }
         )
     }

@@ -17,13 +17,13 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.applyNotNull
-import com.dede.android_eggs.util.toast
 import com.dede.basic.Utils
 import com.dede.basic.cachedExecutor
 import com.dede.basic.cancel
 import com.dede.basic.delay
 import com.dede.basic.dp
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.toast
 import kotlin.math.min
 
 object EasterEggShortcutsHelp {

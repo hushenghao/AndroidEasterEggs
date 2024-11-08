@@ -119,7 +119,6 @@ dependencies {
     implementation(libs.androidx.lifecycle)
     implementation(libs.androidx.viewmodel)
     implementation(libs.androidx.livedata)
-    implementation(libs.androidx.browser)
     implementation(libs.google.material)
     implementation(libs.androidx.startup)
 
@@ -146,6 +145,7 @@ dependencies {
     implementation(project(":feature:widget"))
     implementation(project(":feature:crash"))
     implementation(project(":feature:embedding-splits"))
+    implementation(project(":feature:custom-tab-browser"))
 
     implementation(project(":eggs:AndroidNext"))
     implementation(project(":eggs:VanillaIceCream"))

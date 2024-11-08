@@ -14,7 +14,6 @@ import com.google.android.play.core.ktx.launchReview
 import com.google.android.play.core.ktx.requestReview
 import com.google.android.play.core.review.ReviewManagerFactory
 
-@Keep
 object GooglePlayCore {
 
     private const val TAG = "GooglePlayCore"

@@ -48,7 +48,7 @@ fun AboutGroup() {
             title = stringResource(R.string.label_beta),
             trailingContent = imageVectorIconBlock(imageVector = Icons.Rounded.Download),
             onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_beta)
+                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_beta)
             }
         )
 
@@ -60,7 +60,7 @@ fun AboutGroup() {
             ),
             title = stringResource(R.string.label_privacy_policy),
             onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
+                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
             }
         )
     }

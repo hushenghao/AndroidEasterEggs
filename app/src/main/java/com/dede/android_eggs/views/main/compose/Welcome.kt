@@ -75,7 +75,7 @@ fun Welcome(
                     modifier = Modifier.align(Alignment.End),
                     contentPadding = PaddingValues(horizontal = 14.dp),
                     onClick = {
-                        CustomTabsBrowser.launchUrl(
+                        com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(
                             context, context.getString(R.string.url_privacy).toUri()
                         )
                     }

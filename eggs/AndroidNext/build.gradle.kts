@@ -23,4 +23,6 @@ dependencies {
     implementation(libs.accompanist.drawablepainter)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    implementation(project(":feature:custom-tab-browser"))
 }

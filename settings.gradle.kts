@@ -24,6 +24,7 @@ include(
     ":feature:widget",
     ":feature:crash",
     ":feature:embedding-splits",
+    ":feature:custom-tab-browser",
 
     ":basic",
     ":jvm-basic",

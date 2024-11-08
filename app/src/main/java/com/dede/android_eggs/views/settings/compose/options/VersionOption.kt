@@ -34,7 +34,7 @@ fun VersionOption() {
             } else {
                 context.getString(R.string.url_github_commit, revision)
             }
-            CustomTabsBrowser.launchUrl(context, uri.toUri())
+            com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, uri.toUri())
         }
     )
 }
