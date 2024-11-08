@@ -22,4 +22,4 @@ keyPassword=key-password
 
 ## Build
 
-Run `./gradlew assembleRelease` to build the package, which can be installed using the Android package manager.
+Run `./gradlew app:assembleFossProductRelease` to build the package, which can be installed using the Android package manager.
