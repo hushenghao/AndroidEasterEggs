@@ -1,6 +1,7 @@
 @file:Suppress("SpellCheckingInspection", "ObjectPropertyName")
 
 import com.android.build.api.dsl.ApplicationBuildType
+import com.android.build.gradle.AppExtension
 import com.android.build.gradle.BaseExtension
 import org.gradle.api.Action
 import org.gradle.api.NamedDomainObjectContainer
@@ -48,6 +49,9 @@ fun DependencyHandler.implementation(flavor: String, dependencyNotation: Any): D
 
 val Project.javaExtension: JavaPluginExtension
     get() = extensions.getByName<JavaPluginExtension>("java")
+
+val Project.android: AppExtension
+    get() = extensions.getByName<AppExtension>("android")
 
 fun <T : BaseExtension> Project.configureAndroid(configure: Action<T>? = null) {
 

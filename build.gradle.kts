@@ -15,9 +15,3 @@ tasks.wrapper {
 task<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
-
-task<Exec>("changelogs") {
-    // requirement python3
-    workingDir("script/changelogs")
-    commandLine("python3", "changelogs.py")
-}

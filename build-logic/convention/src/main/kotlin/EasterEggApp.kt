@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import com.dede.android_eggs.tasks.UpdateChangelogsTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -36,6 +37,8 @@ class EasterEggApp : Plugin<Project> {
                     fatal += listOf("NewApi", "InlinedApi")
                 }
             }
+
+            UpdateChangelogsTask.register(this)
         }
     }
 }
