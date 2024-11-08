@@ -1,6 +1,5 @@
 package com.dede.android_eggs.tasks
 
-import android
 import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
@@ -9,7 +8,6 @@ import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Exec
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputDirectory
-import org.gradle.internal.extensions.stdlib.capitalized
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.register
 
@@ -33,11 +31,11 @@ abstract class UpdateChangelogsTask : Exec() {
                     group = "custom"
                 }
 
-                android.applicationVariants.forEach { variant ->
-                    val variantName = variant.name.capitalized()
-                    val assembleTask = tasks.findByName("assemble$variantName")
-                    assembleTask?.dependsOn(task)
-                }
+//                android.applicationVariants.forEach { variant ->
+//                    val variantName = variant.name.capitalized()
+//                    val assembleTask = tasks.findByName("assemble$variantName")
+//                    assembleTask?.dependsOn(task)
+//                }
             }
         }
 
