@@ -1,10 +1,9 @@
 @file:Suppress("SpellCheckingInspection", "ObjectPropertyName")
 
-import com.android.build.api.dsl.ApplicationBuildType
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.BaseExtension
 import org.gradle.api.Action
-import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.VersionCatalog
@@ -32,18 +31,6 @@ val Project.keyprops: Properties
 val Project.catalog: VersionCatalog
     get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
-fun NamedDomainObjectContainer<ApplicationBuildType>.create(
-    name: String,
-    with: String? = null,
-    configureAction: Action<ApplicationBuildType>? = null
-) = create(name) {
-    if (with != null) {
-        initWith(getByName(with))
-    }
-    matchingFallbacks += listOf("release", "debug")
-    configureAction?.execute(this)
-}
-
 fun DependencyHandler.implementation(flavor: String, dependencyNotation: Any): Dependency? =
     add("${flavor}Implementation", dependencyNotation)
 
@@ -52,6 +39,11 @@ val Project.javaExtension: JavaPluginExtension
 
 val Project.android: AppExtension
     get() = extensions.getByName<AppExtension>("android")
+
+fun Project.androidAppComponent(): ApplicationAndroidComponentsExtension? =
+    extensions.findByType(ApplicationAndroidComponentsExtension::class.java)
+
+const val EGG_TASK_GROUP = "egg"
 
 fun <T : BaseExtension> Project.configureAndroid(configure: Action<T>? = null) {
 
