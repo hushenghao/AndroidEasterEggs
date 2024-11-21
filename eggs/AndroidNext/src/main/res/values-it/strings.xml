@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="summary_android_waiting">Attendere…</string>
+    <string name="summary_android_waiting">Non disponibile al momento</string>
     <string name="summary_android_release_pushed">La versione finale è stata rilasciata</string>
     <string name="label_timeline_title">Cronologia, tappe e aggiornamenti</string>
     <string name="label_timeline_releases">Versioni</string>
