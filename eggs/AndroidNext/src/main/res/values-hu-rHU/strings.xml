@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    <string name="nickname_android_next" translatable="false">Droid Next</string>-->
     <string name="summary_android_waiting">Várakozás…</string>
     <string name="summary_android_release_pushed">A végleges kiadási verziót eltolták</string>
     <string name="label_timeline_title">Idővonal, mérföldkövek és frissítések</string>

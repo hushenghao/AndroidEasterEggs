@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    <string name="nickname_android_next" translatable="false">Droid Next</string>-->
     <string name="summary_android_waiting">Naghihintay…</string>
     <string name="summary_android_release_pushed">Ang huling bersyon ng paglabas ay inilabas na</string>
     <string name="label_timeline_title">Timeline, milestone, at update</string>

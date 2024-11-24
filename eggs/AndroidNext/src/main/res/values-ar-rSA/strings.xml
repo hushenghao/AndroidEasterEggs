@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    <string name="nickname_android_next" translatable="false">Droid Next</string>-->
     <string name="summary_android_waiting">لم يتم الاطلاق بعد</string>
     <string name="summary_android_release_pushed">لقد دفعت النسخة الإصدار النهائي</string>
     <string name="label_timeline_title">الجدول الزمني والمعالم والتحديثات</string>
