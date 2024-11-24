@@ -54,7 +54,7 @@ class AlterableAdaptiveIconDrawable(
     private var layerBitmap: Bitmap? = null
     private var layerShader: BitmapShader? = null
 
-    val isAdaptiveIconDrawable: Boolean
+    val isSupportMatrix: Boolean
     private val foregroundMatrix = Matrix()
 
     init {
@@ -71,10 +71,10 @@ class AlterableAdaptiveIconDrawable(
                 ChildDrawable(drawable.background, BACKGROUND_ID),
                 ChildDrawable(drawable.foreground, FOREGROUND_ID)
             )
-            isAdaptiveIconDrawable = true
+            isSupportMatrix = true
         } else {
             childDrawables = arrayOf(ChildDrawable(drawable, BACKGROUND_ID))
-            isAdaptiveIconDrawable = false
+            isSupportMatrix = false
         }
     }
 
@@ -89,7 +89,7 @@ class AlterableAdaptiveIconDrawable(
     }
 
     fun setForegroundMatrix(matrix: Matrix) {
-        if (!isAdaptiveIconDrawable) return
+        if (!isSupportMatrix) return
         foregroundMatrix.set(matrix)
         invalidateSelf()
     }
@@ -155,7 +155,7 @@ class AlterableAdaptiveIconDrawable(
 
     private fun updateLayerBoundsInternal(bounds: Rect) {
         val outRect = tempRect
-        if (isAdaptiveIconDrawable) {
+        if (isSupportMatrix) {
             val cX: Int = bounds.width() / 2
             val cY: Int = bounds.height() / 2
             val insetWidth: Int = (bounds.width() / (DEFAULT_VIEW_PORT_SCALE * 2)).toInt()

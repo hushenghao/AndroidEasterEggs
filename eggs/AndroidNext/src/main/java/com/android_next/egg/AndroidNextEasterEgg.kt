@@ -1,7 +1,6 @@
 package com.android_next.egg
 
 import android.content.Context
-import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
@@ -20,25 +19,27 @@ import dagger.multibindings.IntoSet
 import java.util.Calendar
 import javax.inject.Singleton
 
-//@Module
-//@InstallIn(SingletonComponent::class)
+@Module
+@InstallIn(SingletonComponent::class)
 object AndroidNextEasterEgg : EasterEggProvider {
 
     const val RELEASE_YEAR = 2025
     private const val RELEASE_MONTH = Calendar.SEPTEMBER
 
-    private const val NEXT_API = Build.VERSION_CODES.CUR_DEVELOPMENT// android next
+//    private const val NEXT_API = Build.VERSION_CODES.CUR_DEVELOPMENT// android next
+    private const val NEXT_API = 36// android 16
 
-    private const val TIMELINE_EVENT = "Wow, Android Next."
+//    private const val TIMELINE_EVENT = "Wow, Android Next."
+    private const val TIMELINE_EVENT = "Hello, Android Baklava."
 
     @StringRes
     private val NICKNAME_RES = R.string.nickname_android_next
 
     @DrawableRes
-    private val LOGO_RES = R.drawable.ic_droid_logo
+    private val LOGO_RES = R.drawable.ic_android_16_logo
 
     @DrawableRes
-    private val PLATLOGO_RES = R.drawable.img_droid_next
+    private val PLATLOGO_RES = R.drawable.ic_android_16_platlogo
 
     fun getTimelineMessage(context: Context): String {
         val calendar = Calendar.getInstance()
@@ -50,9 +51,9 @@ object AndroidNextEasterEgg : EasterEggProvider {
         }
     }
 
-//    @Provides
-//    @IntoSet
-//    @Singleton
+    @Provides
+    @IntoSet
+    @Singleton
     override fun provideEasterEgg(): BaseEasterEgg {
         return object : EasterEgg(
             iconRes = LOGO_RES,
@@ -80,9 +81,9 @@ object AndroidNextEasterEgg : EasterEggProvider {
         }
     }
 
-//    @Provides
-//    @IntoSet
-//    @Singleton
+    @Provides
+    @IntoSet
+    @Singleton
     override fun provideTimelineEvents(): List<TimelineEvent> {
         return listOf(
             TimelineEvent(

@@ -59,6 +59,7 @@ import com.dede.android_eggs.views.settings.compose.options.TestCrashOption
 import com.dede.android_eggs.views.settings.compose.prefs.ComponentManagerPref
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePref
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPref
+import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePref
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPref
@@ -142,7 +143,9 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                     LanguagePref()
                 }
 
-                IconVisualEffectsPref()
+                if (IconVisualEffectsPrefUtil.isSupported()) {
+                    IconVisualEffectsPref()
+                }
 
                 SettingDivider()
 

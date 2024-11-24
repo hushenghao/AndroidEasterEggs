@@ -69,10 +69,6 @@ android {
         create("alpha") {
             dimension = "track"
             versionNameSuffix = "-alpha"
-            ndk {
-                //noinspection ChromeOsAbiSupport
-                abiFilters += listOf("arm64-v8a", "armeabi-v7a")
-            }
         }
         create("beta") {
             dimension = "track"

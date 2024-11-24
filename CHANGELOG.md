@@ -2,6 +2,7 @@
 
 ### v3.2.0
 
+- Add Android 16 preview
 - Add 'Animator duration scale' alert
 - Update App theme colors
 - Update App monochrome logo
