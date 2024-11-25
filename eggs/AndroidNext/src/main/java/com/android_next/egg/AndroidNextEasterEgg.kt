@@ -24,7 +24,7 @@ import javax.inject.Singleton
 object AndroidNextEasterEgg : EasterEggProvider {
 
     const val RELEASE_YEAR = 2025
-    private const val RELEASE_MONTH = Calendar.SEPTEMBER
+    const val RELEASE_MONTH = Calendar.MAY
 
 //    private const val NEXT_API = Build.VERSION_CODES.CUR_DEVELOPMENT// android next
     private const val NEXT_API = 36// android 16
@@ -40,16 +40,6 @@ object AndroidNextEasterEgg : EasterEggProvider {
 
     @DrawableRes
     private val PLATLOGO_RES = R.drawable.ic_android_16_platlogo
-
-    fun getTimelineMessage(context: Context): String {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        return if (year > RELEASE_YEAR) {
-            context.getString(R.string.summary_android_release_pushed)
-        } else {
-            context.getString(R.string.summary_android_waiting)
-        }
-    }
 
     @Provides
     @IntoSet

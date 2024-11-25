@@ -5,8 +5,8 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.basic.provider.TimelineEvent
+import com.dede.basic.utils.AppLocaleDateFormatter
 import java.util.Calendar
 import java.util.TimeZone
 
@@ -37,14 +37,14 @@ object TimelineEventHelp {
         get() {
             val calendar = Calendar.getInstance(TimeZone.getDefault())
             calendar.set(Calendar.YEAR, year)
-            return EasterEggHelp.DateFormatter.getInstance("yyyy").format(calendar.time)
+            return AppLocaleDateFormatter.getInstance("yyyy").format(calendar.time)
         }
 
     val TimelineEvent.localMonth: String
         get() {
             val calendar = Calendar.getInstance(TimeZone.getDefault())
             calendar.set(Calendar.MONTH, month)
-            return EasterEggHelp.DateFormatter.getInstance("MMMM").format(calendar.time)
+            return AppLocaleDateFormatter.getInstance("MMMM").format(calendar.time)
         }
 
     val TimelineEvent.eventAnnotatedString: AnnotatedString

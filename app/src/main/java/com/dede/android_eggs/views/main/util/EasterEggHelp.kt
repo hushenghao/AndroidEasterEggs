@@ -1,11 +1,9 @@
 package com.dede.android_eggs.views.main.util
 
 import android.content.Context
-import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.util.SparseArray
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalInspectionMode
 import com.dede.android_eggs.R
@@ -13,9 +11,6 @@ import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
 import dagger.Module
-import java.text.Format
-import java.util.Date
-import java.util.Locale
 
 
 object EasterEggHelp {
@@ -37,34 +32,6 @@ object EasterEggHelp {
             provider.provideEasterEgg()
         }
         return EasterEggModules.providePureEasterEggList(baseEasterEggs)
-    }
-
-    class DateFormatter private constructor(pattern: String, locale: Locale) {
-
-        companion object {
-            fun getInstance(pattern: String): DateFormatter {
-                return DateFormatter(pattern, getApplicationLocale())
-            }
-
-            private fun getApplicationLocale(): Locale {
-                val locales = AppCompatDelegate.getApplicationLocales()
-                return if (locales.isEmpty) {
-                    Locale.getDefault()
-                } else {
-                    locales.get(0) ?: Locale.getDefault()
-                }
-            }
-        }
-
-        private val format: Format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            SimpleDateFormat(pattern, locale)
-        } else {
-            java.text.SimpleDateFormat(pattern, locale)
-        }
-
-        fun format(date: Date): String {
-            return format.format(date)
-        }
     }
 
     class VersionFormatter private constructor(

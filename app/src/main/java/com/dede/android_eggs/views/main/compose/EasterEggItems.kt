@@ -39,6 +39,7 @@ import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.EggActionHelp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.utils.AppLocaleDateFormatter
 
 @Composable
 @Preview
@@ -55,7 +56,7 @@ fun EasterEggHighestItem(
         EasterEggHelp.ApiLevelFormatter.create(egg.apiLevelRange).format(context)
     }
     val dateFormat = remember(egg, context.resources.configuration) {
-        EasterEggHelp.DateFormatter.getInstance("MM yyyy")
+        AppLocaleDateFormatter.getInstance("MM yyyy")
     }
 
     Card(
