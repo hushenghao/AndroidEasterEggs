@@ -7,7 +7,6 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -33,17 +32,17 @@ import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.ColorMatrix
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -58,7 +57,7 @@ internal var androidNextDialogVisible by mutableStateOf(false)
 
 @Composable
 fun AndroidNextTimelineDialog(
-    @DrawableRes logoRes: Int = R.drawable.ic_droid_logo,
+    @DrawableRes logoRes: Int = R.drawable.ic_android_16_logo,
     @StringRes titleRes: Int = R.string.nickname_android_next
 ) {
     if (!androidNextDialogVisible) {
@@ -115,37 +114,26 @@ fun AndroidNextTimelineDialog(
     )
 }
 
-private val offsetXPercentArr = floatArrayOf(
-    49 / 789f,
-    153 / 789f,
-    257 / 789f,
-    361 / 789f,
-    465 / 789f,
-    569 / 789f,
-    717 / 789f
-)
-
-private const val offsetYPercent = 135 / 180f
 
 @Composable
+@Preview(showBackground = true)
 private fun AndroidReleaseTimeline() {
     val nowDate = Calendar.getInstance().setDateZero()
-    val releaseDate = remember { getReleaseCalendar() }
+    val releaseDate = remember { getReleaseDate() }
 
     val offsetXIndex = remember(nowDate, releaseDate) {
         val diffMonth = getDateDiffMonth(start = nowDate, end = releaseDate)
-        if (diffMonth > MONTH_CYCLE) {
+        if (diffMonth <= 0) {
+            6 // Final release
+        } else if (diffMonth > MONTH_CYCLE) {
             // No preview
             -1
-        } else if (diffMonth < MONTH_CYCLE) {
+        } else {
             // Preview
             MONTH_CYCLE - diffMonth - 1
-        } else {
-            // Final release
-            6
         }
     }
-    val isFinalRelease = offsetXIndex == 6
+    val isFinalRelease = offsetXIndex == (MONTH_CYCLE - 1)
 
     val scrollState = rememberScrollState()
     if (offsetXIndex != -1) {
@@ -153,7 +141,7 @@ private fun AndroidReleaseTimeline() {
             val value = if (isFinalRelease) {
                 scrollState.maxValue
             } else {
-                scrollState.maxValue / offsetXPercentArr.size * offsetXIndex
+                scrollState.maxValue / MONTH_CYCLE * offsetXIndex
             }
             launch {
                 scrollState.animateScrollTo(value)
@@ -161,52 +149,69 @@ private fun AndroidReleaseTimeline() {
         }
     }
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
-        Box(
+        val context = LocalContext.current
+        val configuration = LocalConfiguration.current
+
+        val isNightMode = remember(configuration, context.resources) { isSystemNightMode(context) }
+        val timelineMonths = remember(configuration) { getReleaseCycleMonths(context) }
+        if (timelineMonths.size != monthExtras.size) {
+            throw IllegalArgumentException("Timeline months cycle != %d".format(MONTH_CYCLE))
+        }
+        val textMeasurer = rememberTextMeasurer(cacheSize = timelineMonths.size + labelExtras.size)
+        Image(
+            painter = painterResource(id = R.drawable.timeline_bg),
+            contentDescription = null,
             modifier = Modifier
                 .horizontalScroll(scrollState)
                 .height(160.dp)
                 .aspectRatio(789f / 180)
-        ) {
-            val context = LocalContext.current
-            val matrix = ColorMatrix()
-            if (isSystemNightMode(context)) {
-                // Increase the overall brightness and more blue brightness
-                matrix.setToScale(1.3f, 1.5f, 2f, 1f)
-            }
-
-            val timelineMonths = remember { getReleaseCycleMonths(context) }
-            val textMeasurer = rememberTextMeasurer(cacheSize = timelineMonths.size)
-            Image(
-                painter = painterResource(id = R.drawable.timeline_bg),
-                contentDescription = null,
-                colorFilter = ColorFilter.colorMatrix(matrix),
-                modifier = Modifier.drawWithCache {
+                .drawWithCache {
                     onDrawWithContent {
+                        for (extra in labelExtras) {
+                            val textLayout = textMeasurer.measure(
+                                text = context.getString(extra.labelRes),
+                                style = TextStyle(
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    fontFamily = FontFamily.SansSerif,
+                                ),
+                            )
+                            val offsetX = size.width * extra.offsetXPercent
+                            val offsetY = size.height * extra.offsetYPercent
+                            drawText(
+                                textLayoutResult = textLayout,
+                                color = extra.color,
+                                topLeft = Offset(x = offsetX, y = offsetY),
+                            )
+                        }
+
                         for ((index, month) in timelineMonths.withIndex()) {
                             val isLastMonth = index == timelineMonths.size - 1
+                            val isSelected = index == offsetXIndex
+
+                            val extra = monthExtras[index]
+                            val colors = if (isNightMode) extra.nightColors else extra.colors
 
                             val textLayout = textMeasurer.measure(
                                 text = month,
                                 style = TextStyle(
                                     fontSize = 14.sp,
-                                    fontWeight = if (isLastMonth) FontWeight.Bold else FontWeight.Medium
+                                    fontWeight = if (isSelected || isLastMonth) FontWeight.Bold else FontWeight.Medium,
+                                    fontFamily = FontFamily.SansSerif,
                                 ),
                             )
 
-                            val offsetX = size.width * offsetXPercentArr[index]
-                            val offsetY = size.height * offsetYPercent
+                            val offsetX = size.width * extra.offsetXPercent
+                            val offsetY = size.height * extra.offsetYPercent
 
-                            if (index == offsetXIndex) {
+                            if (isSelected) {
                                 val rectSize = Size(
                                     width = textLayout.size.width + textLayout.size.height * 1.3f,
                                     height = textLayout.size.height * 1.6f
                                 )
                                 val radius = min(rectSize.height, rectSize.width) / 2f
                                 drawRoundRect(
-                                    color = if (isLastMonth)
-                                        Color(0xFF3DDC84)
-                                    else
-                                        Color(0xFFF86734),
+                                    color = colors.shapeColor,
                                     topLeft = Offset(
                                         x = offsetX - rectSize.width / 2f,
                                         y = offsetY - rectSize.height / 2f
@@ -218,11 +223,9 @@ private fun AndroidReleaseTimeline() {
 
                             drawText(
                                 textLayoutResult = textLayout,
-                                color = if (isLastMonth)
-                                    Color(0xFF188038)
-                                else
-                                    Color.Black,
+                                color = if (isSelected) colors.selectedTextColor else colors.textColor,
                                 topLeft = Offset(
+                                    // text align center
                                     x = offsetX - textLayout.size.width / 2f,
                                     y = offsetY - textLayout.size.height / 2f,
                                 ),
@@ -232,14 +235,13 @@ private fun AndroidReleaseTimeline() {
                         drawContent()
                     }
                 }
-            )
-        }
+        )
     }
 }
 
 private fun getTimelineMessage(context: Context): String {
     val nowDate = Calendar.getInstance().setDateZero()
-    val releaseDate = getReleaseCalendar()
+    val releaseDate = getReleaseDate()
     return if (nowDate.after(releaseDate)) {
         context.getString(R.string.summary_android_release_pushed)
     } else {

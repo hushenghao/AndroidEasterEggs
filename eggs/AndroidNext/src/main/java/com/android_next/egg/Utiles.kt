@@ -5,20 +5,6 @@ import com.dede.basic.utils.AppLocaleDateFormatter
 import java.util.Calendar
 
 internal const val MONTH_CYCLE = 7
-internal val MONTHS = intArrayOf(
-    Calendar.JANUARY,
-    Calendar.FEBRUARY,
-    Calendar.MARCH,
-    Calendar.APRIL,
-    Calendar.MAY,
-    Calendar.JUNE,
-    Calendar.JULY,
-    Calendar.AUGUST,
-    Calendar.SEPTEMBER,
-    Calendar.OCTOBER,
-    Calendar.NOVEMBER,
-    Calendar.DECEMBER,
-)
 
 internal fun Calendar.setDateZero(): Calendar {
     clear(Calendar.HOUR_OF_DAY)
@@ -28,7 +14,7 @@ internal fun Calendar.setDateZero(): Calendar {
     return this
 }
 
-internal fun getReleaseCalendar(): Calendar {
+internal fun getReleaseDate(): Calendar {
     val calendar = Calendar.getInstance()
     calendar.set(AndroidNextEasterEgg.RELEASE_YEAR, AndroidNextEasterEgg.RELEASE_MONTH, 1)
     calendar.setDateZero()
@@ -36,7 +22,7 @@ internal fun getReleaseCalendar(): Calendar {
 }
 
 internal fun getReleaseCycleMonths(context: Context): List<String> {
-    val calendar = getReleaseCalendar()
+    val calendar = getReleaseDate()
     val list = ArrayList<String>()
     // add final release label
     list.add(context.getString(R.string.label_timeline_final_release))

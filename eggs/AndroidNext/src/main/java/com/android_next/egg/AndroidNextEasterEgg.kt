@@ -5,6 +5,10 @@ import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.core.view.setPadding
+import com.dede.basic.dp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
@@ -26,10 +30,10 @@ object AndroidNextEasterEgg : EasterEggProvider {
     const val RELEASE_YEAR = 2025
     const val RELEASE_MONTH = Calendar.MAY
 
-//    private const val NEXT_API = Build.VERSION_CODES.CUR_DEVELOPMENT// android next
+    // private const val NEXT_API = Build.VERSION_CODES.CUR_DEVELOPMENT// android next
     private const val NEXT_API = 36// android 16
 
-//    private const val TIMELINE_EVENT = "Wow, Android Next."
+    // private const val TIMELINE_EVENT = "Wow, Android Next."
     private const val TIMELINE_EVENT = "Hello, Android Baklava."
 
     @StringRes
@@ -61,10 +65,14 @@ object AndroidNextEasterEgg : EasterEggProvider {
                     override fun create(context: Context): View {
                         return ImageView(context).apply {
                             setImageDrawable(context.requireDrawable(PLATLOGO_RES))
+                            setPadding(12.dp)
+                            setBackgroundColor(Color(0xFF_202124).toArgb())
                         }
                     }
 
-                    override val insertPadding: Boolean = false
+                    override val includeBackground: Boolean = true
+
+                    override val insertPadding: Boolean = true
                 }
             }
 

@@ -4,5 +4,8 @@
     <string name="summary_android_release_pushed">最终版本已经发布</string>
     <string name="label_timeline_title">时间表、里程碑和更新</string>
     <string name="label_timeline_releases">版本</string>
+    <string name="label_timeline_developer_previews">开发者预览版</string>
+    <string name="label_timeline_beta_release">Beta 版</string>
+    <string name="label_timeline_platform_stability">平台稳定版本</string>
     <string name="label_timeline_final_release">最终发布</string>
 </resources>
