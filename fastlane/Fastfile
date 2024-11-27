@@ -47,8 +47,12 @@ def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_T
   puts response.read_body
 end
 
-def is_test_ref(ref_name)
-  return ref_name =~ /v?(\d|.)+-([a-z]+)\d*/
+def is_pre_release_ref(ref_name)
+  if (ref_name =~ /v?(\d|.)+-([a-z]+)\d*/)
+    return true
+  else
+    return false
+  end
 end
 
 default_platform(:android)
@@ -105,8 +109,8 @@ platform :android do
 
     ref_name = options[:ref_name]
 
-    is_test_ref = is_test_ref(ref_name)
-    if is_test_ref
+    is_pre_release = is_pre_release_ref(ref_name)
+    if is_pre_release
       gradle(tasks: ["clean", "app:assembleFossBetaRelease"])
     else
       gradle(tasks: ["clean", "app:assembleFossProductRelease"])
@@ -142,7 +146,7 @@ platform :android do
     github_release = set_github_release(
       repository_name: "hushenghao/AndroidEasterEggs",
       api_bearer: ENV["GITHUB_TOKEN"],
-      is_prerelease: is_test_ref,
+      is_prerelease: is_pre_release,
       name: ref_name,
       tag_name: ref_name,
       description: changelogs,
@@ -192,7 +196,7 @@ platform :android do
     #                           tracks are: production, beta, alpha, internal
 
     ref_name = options[:ref_name]
-    if is_test_ref(ref_name)
+    if is_pre_release(ref_name)
       # Upload new beta version
       gradle(task: "clean app:bundleMarketBetaRelease")
       upload_to_play_store(
