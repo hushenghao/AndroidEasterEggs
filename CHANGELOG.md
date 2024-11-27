@@ -3,7 +3,8 @@
 ### v3.2.0
 
 - Add Android 16 preview
-- Add 'Animator duration scale' alert
+- Add 'Animator duration scale' check alert
+- New Welcome alert UI
 - Update App theme colors
 - Update App monochrome logo
 - Update Android release timeline dialog 

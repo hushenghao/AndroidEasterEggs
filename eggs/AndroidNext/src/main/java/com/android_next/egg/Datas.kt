@@ -38,7 +38,7 @@ internal data class MonthExtra(
     val colors: Colors,
     val nightColors: Colors,
     val offsetXPercent: Float,
-    val offsetYPercent: Float = 135 / 180f,
+    val offsetYPercent: Float = 136 / 180f,
 )
 
 internal val monthExtras = arrayOf(
