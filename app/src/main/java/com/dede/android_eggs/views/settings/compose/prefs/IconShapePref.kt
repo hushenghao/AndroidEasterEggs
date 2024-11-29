@@ -101,7 +101,7 @@ fun IconShapePref() {
         IconShapeGroup(selectedIndex) { index, path ->
             selectedIndex = index
             val extras = bundleOf(SettingPrefUtil.EXTRA_VALUE to path)
-            with(LocalEvent.poster(context)) {
+            with(LocalEvent.poster()) {
                 post(IconShapePrefUtil.ACTION_CHANGED, extras)
                 post(SettingPrefUtil.ACTION_CLOSE_SETTING)
             }

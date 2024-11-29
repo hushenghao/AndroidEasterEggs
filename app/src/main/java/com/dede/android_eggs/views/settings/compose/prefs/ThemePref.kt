@@ -50,12 +50,12 @@ fun ThemePref() {
         if (appCompatMode == AppCompatDelegate.getDefaultNightMode()) {
             if ((mode == AMOLED) != ThemeUtils.isOLEDTheme(context)) {
                 ThemeUtils.recreateActivityIfPossible(context)
-                LocalEvent.poster(context).post(ACTION_NIGHT_MODE_CHANGED)
+                LocalEvent.poster().post(ACTION_NIGHT_MODE_CHANGED)
             }
             return@click
         }
         AppCompatDelegate.setDefaultNightMode(appCompatMode)
-        LocalEvent.poster(context).post(ACTION_NIGHT_MODE_CHANGED)
+        LocalEvent.poster().post(ACTION_NIGHT_MODE_CHANGED)
     }
 
     ExpandOptionsPref(

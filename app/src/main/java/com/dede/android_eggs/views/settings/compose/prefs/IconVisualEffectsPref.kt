@@ -38,7 +38,7 @@ fun IconVisualEffectsPref() {
         title = stringResource(R.string.pref_title_icon_visual_effects),
         default = SettingPrefUtil.OFF,
         onCheckedChange = {
-            with(LocalEvent.poster(context)) {
+            with(LocalEvent.poster()) {
                 if (it == SettingPrefUtil.ON) {
                     post(SettingPrefUtil.ACTION_CLOSE_SETTING)
                 }

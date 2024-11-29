@@ -1,25 +1,31 @@
 package com.dede.android_eggs.util
 
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 
 typealias EventCallback = (intent: Intent) -> Unit
 
 object LocalEvent {
 
-    val Context.localBroadcastManager: LocalBroadcastManager
-        get() = LocalBroadcastManager.getInstance(this)
+    private val localEventLiveDataMap = HashMap<String, MutableLiveData<Intent?>>()
 
-    fun poster(context: Context): Poster {
-        return Poster(context)
+    private fun getKey(action: String): String {
+        return action
+    }
+
+    private fun getOrCreateLocalEventLiveData(action: String): MutableLiveData<Intent?> {
+        val key = getKey(action)
+        val liveData = localEventLiveDataMap.getOrPut(key) {
+            MutableLiveData()
+        }
+        return liveData
+    }
+
+    fun poster(): Poster {
+        return Poster()
     }
 
     fun receiver(owner: LifecycleOwner): Receiver {
@@ -28,39 +34,33 @@ object LocalEvent {
 
     class Receiver(private val owner: LifecycleOwner) {
 
-        private class LifecycleReceiver(val callback: EventCallback) :
-            BroadcastReceiver(), DefaultLifecycleObserver {
-            override fun onReceive(context: Context?, intent: Intent) {
-                callback.invoke(intent)
-            }
-
-            override fun onDestroy(owner: LifecycleOwner) {
-                owner.context.localBroadcastManager.unregisterReceiver(this)
+        private class OnlyUpdateDispatchValueObserver(
+            private val oldValue: Intent?,
+            private val observer: Observer<Intent>,
+        ) : Observer<Intent?> {
+            override fun onChanged(value: Intent?) {
+                if (value == null || oldValue === value) {
+                    return
+                }
+                observer.onChanged(value)
             }
         }
 
         fun register(action: String, eventCallback: EventCallback) {
-            val receiver = LifecycleReceiver(eventCallback)
-            owner.lifecycle.addObserver(receiver)
-            owner.context.localBroadcastManager.registerReceiver(receiver, IntentFilter(action))
+            val liveData = getOrCreateLocalEventLiveData(action)
+            val oldValue = if (liveData.isInitialized) liveData.value else null
+            liveData.observe(owner, OnlyUpdateDispatchValueObserver(oldValue, eventCallback))
         }
     }
 
-    class Poster(private val context: Context) {
+    class Poster {
         fun post(action: String, extras: Bundle? = null) {
             val intent = Intent(action)
             if (extras != null) {
                 intent.putExtras(extras)
             }
-            context.localBroadcastManager.sendBroadcast(intent)
+            getOrCreateLocalEventLiveData(action).postValue(intent)
         }
     }
 
 }
-
-private val LifecycleOwner.context: Context
-    get() = when (this) {
-        is ComponentActivity -> this
-        is Fragment -> requireContext()
-        else -> throw IllegalArgumentException(this.toString())
-    }
