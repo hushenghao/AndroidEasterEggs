@@ -2,6 +2,7 @@ package com.dede.android_eggs.util
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -22,6 +23,23 @@ object LocalEvent {
             MutableLiveData()
         }
         return liveData
+    }
+
+    init {
+        GcWatcher.get().addWatcher { trim() }
+    }
+
+    private fun trim() {
+        var count = 0
+        val keys = localEventLiveDataMap.keys
+        for (key in keys) {
+            val liveData = localEventLiveDataMap[key] ?: continue
+            if (!liveData.hasObservers()) {
+                localEventLiveDataMap.remove(key)
+                count++
+            }
+        }
+        Log.i("LocalEvent", "trim: %d".format(count))
     }
 
     fun poster(): Poster {
