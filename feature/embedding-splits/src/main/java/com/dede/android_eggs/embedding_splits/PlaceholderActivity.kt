@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -45,6 +46,7 @@ import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 import com.dede.android_eggs.views.theme.AppTheme
 import kotlinx.coroutines.launch
 import kotlin.math.max
+import kotlin.random.Random
 
 /**
  * Placeholder for embedding splits
@@ -101,10 +103,10 @@ internal val shapes = arrayOf(
         ),
         perVertexRounding = listOf(
             CornerRounding(0.6f),
-            CornerRounding(0f),
+            CornerRounding(0.1f),
             CornerRounding(0.6f),
             CornerRounding(0.6f),
-            CornerRounding(0f),
+            CornerRounding(0.1f),
             CornerRounding(0.6f),
         )
     ),
@@ -188,14 +190,17 @@ internal val shapes = arrayOf(
 @Composable
 internal fun Placeholder() {
     val progress = remember { Animatable(0f) }
-    var currShape by remember { mutableIntStateOf(-1) }
-    val morphed by remember {
+    var currShape by remember { mutableIntStateOf(Random.nextInt(shapes.size)) }
+    val morphed by remember(currShape) {
         derivedStateOf {
             Morph(
-                shapes[max(currShape, 0) % shapes.size],
+                shapes[currShape % shapes.size],
                 shapes[(currShape + 1) % shapes.size]
             )
         }
+    }
+    LaunchedEffect(Unit) {
+        doAnimation(progress)
     }
 
     Box(
