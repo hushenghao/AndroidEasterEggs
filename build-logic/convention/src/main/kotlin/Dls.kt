@@ -31,8 +31,8 @@ val Project.keyprops: Properties
 val Project.catalog: VersionCatalog
     get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
-fun DependencyHandler.implementation(flavor: String, dependencyNotation: Any): Dependency? =
-    add("${flavor}Implementation", dependencyNotation)
+fun DependencyHandler.marketImplementation(dependencyNotation: Any): Dependency? =
+    add("marketImplementation", dependencyNotation)
 
 val Project.javaExtension: JavaPluginExtension
     get() = extensions.getByName<JavaPluginExtension>("java")
