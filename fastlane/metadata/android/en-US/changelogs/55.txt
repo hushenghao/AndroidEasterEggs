@@ -1,0 +1,9 @@
+- Add Android 16 preview
+- Add 'Animator duration scale' check alert
+- New Welcome alert UI
+- Update App theme colors
+- Update App monochrome logo
+- Update Android release timeline dialog
+- Fix Android U platlogo
+- Project modularization
+- Upgrade project dependencies

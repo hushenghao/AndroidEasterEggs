@@ -1,6 +1,6 @@
 # Changelog
 
-### v3.2.0
+### v3.2.0 (2024-12-03)
 
 - Add Android 16 preview
 - Add 'Animator duration scale' check alert
