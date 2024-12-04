@@ -43,6 +43,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -51,6 +52,7 @@ import com.dede.basic.requireDrawable
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 import java.util.Calendar
+import kotlin.math.floor
 import kotlin.math.min
 
 internal var androidNextDialogVisible by mutableStateOf(false)
@@ -168,6 +170,9 @@ private fun AndroidReleaseTimeline() {
                 .drawWithCache {
                     onDrawWithContent {
                         for (extra in labelExtras) {
+                            val offsetX = size.width * extra.offsetXPercent
+                            val rangeX = size.width * extra.rangeXPercent
+                            val offsetY = size.height * extra.offsetYPercent
                             val textLayout = textMeasurer.measure(
                                 text = context.getString(extra.labelRes),
                                 style = TextStyle(
@@ -175,9 +180,10 @@ private fun AndroidReleaseTimeline() {
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.SansSerif,
                                 ),
+                                constraints = Constraints(
+                                    maxWidth = floor(rangeX - offsetX).toInt(),
+                                )
                             )
-                            val offsetX = size.width * extra.offsetXPercent
-                            val offsetY = size.height * extra.offsetYPercent
                             drawText(
                                 textLayoutResult = textLayout,
                                 color = extra.color,

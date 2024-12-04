@@ -7,14 +7,16 @@ internal data class LabelExtra(
     @StringRes val labelRes: Int,
     val color: Color,
     val offsetXPercent: Float,
-    val offsetYPercent: Float = 35.2f / 180f,
+    val offsetYPercent: Float = 35f / 180f,
+    val rangeXPercent: Float = 1f
 )
 
 internal val labelExtras = arrayOf(
     LabelExtra(
         labelRes = R.string.label_timeline_developer_previews,
         color = Color(0xFF_54585D),
-        offsetXPercent = 25f / 789f
+        offsetXPercent = 24f / 789f,
+        rangeXPercent = 204f / 789f,
     ),
     LabelExtra(
         labelRes = R.string.label_timeline_beta_release,
