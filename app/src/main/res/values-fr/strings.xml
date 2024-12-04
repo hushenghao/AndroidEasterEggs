@@ -44,4 +44,6 @@
     <string name="pref_summary_retain_recent_egg_tasks">Conserver les tâches Easter Egg sur l\'écran Récents, maximum de 5 tâches conservées (non disponible pour le mode Activité intégré.)</string>
     <string name="label_about">À propos</string>
     <string name="label_contribute">Contribuer</string>
+    <string name="animator_disabled_alert_message">En raison de la désactivation de l\'animation système, certaines fonctionnalités peuvent ne pas fonctionner correctement. Veuillez accéder aux « Options de développeur » et activer l\'option « Échelle de durée de l\'animation » pour activer l\'animation.</string>
+    <string name="action_goto_settings">Accéder aux paramètres</string>
 </resources>
