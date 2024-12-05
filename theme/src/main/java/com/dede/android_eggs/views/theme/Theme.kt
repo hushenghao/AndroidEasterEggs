@@ -1,5 +1,3 @@
-@file:Suppress("PrivatePropertyName")
-
 package com.dede.android_eggs.views.theme
 
 import android.content.Context
@@ -138,13 +136,17 @@ var currentColorScheme: ColorScheme = lightScheme
     private set
 
 @Composable
-fun EasterEggsTheme(content: @Composable () -> Unit) {
-    var nightModeValue = themeMode
+fun EasterEggsTheme(
+    theme: Int = themeMode,
+    dynamicColor: Boolean = isDynamicColorEnable,
+    content: @Composable () -> Unit
+) {
+    var nightModeValue = theme
     if (nightModeValue == ThemePrefUtil.FOLLOW_SYSTEM) {
         nightModeValue = if (isSystemInDarkTheme()) ThemePrefUtil.DARK else ThemePrefUtil.LIGHT
     }
 
-    val colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && isDynamicColorEnable) {
+    val colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && dynamicColor) {
         val context: Context = LocalContext.current
         when (nightModeValue) {
             ThemePrefUtil.AMOLED -> dynamicDarkColorScheme(context).toAmoled()
