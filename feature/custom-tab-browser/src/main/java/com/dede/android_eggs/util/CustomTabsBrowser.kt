@@ -36,7 +36,7 @@ object CustomTabsBrowser {
         }
 
         val params = CustomTabColorSchemeParams.Builder()
-            .setToolbarColor(ThemeUtils.getThemedSurfaceColor(context))
+            .setToolbarColor(ThemeUtils.getThemedSurfaceColor())
             .build()
 
         val builder = CustomTabsIntent.Builder()

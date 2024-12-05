@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="appwidget_background_color">#DDE5DB</color>
+    <color name="appwidget_background_color">?attr/colorSurfaceVariant</color>
 </resources>

@@ -2,8 +2,8 @@ package com.dede.android_eggs.util.actions
 
 import android.app.Activity
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,7 +35,7 @@ import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.ActivityActionDispatcher
-import com.dede.android_eggs.views.theme.AppTheme
+import com.dede.android_eggs.views.theme.EasterEggsTheme
 import com.dede.basic.androidLifecycleOwner
 import com.dede.basic.androidSavedStateOwner
 import com.dede.basic.getBoolean
@@ -83,7 +83,7 @@ class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
             )
         }
         composeView.setContent {
-            AppTheme {
+            EasterEggsTheme {
                 val context = LocalContext.current
                 WarningDialog(
                     info.title,
@@ -143,15 +143,17 @@ private fun WarningDialog(
             val messageSpanned = remember(messageText) {
                 HtmlCompat.fromHtml(messageText, HtmlCompat.FROM_HTML_MODE_COMPACT)
             }
-            val textColor = MaterialTheme.colorScheme.onPrimaryContainer.toArgb()
+            val textStyle = MaterialTheme.typography.bodyMedium
+            val textColor = MaterialTheme.colorScheme.onSurfaceVariant
             AndroidView(
                 modifier = Modifier.fillMaxWidth(),
                 factory = {
-                    TextView(it)
+                    AppCompatTextView(it)
                 },
                 update = {
                     it.text = messageSpanned
-                    it.setTextColor(textColor)
+                    it.setTextColor(textColor.toArgb())
+                    it.textSize = textStyle.fontSize.value
                 }
             )
         },

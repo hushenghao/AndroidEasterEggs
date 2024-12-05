@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
@@ -33,7 +34,6 @@ import com.dede.android_eggs.inject.FlavorFeatures
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
-import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.util.compose.end
 import com.dede.android_eggs.views.main.compose.AnimatorDisabledAlertDialog
 import com.dede.android_eggs.views.main.compose.BottomSearchBar
@@ -51,7 +51,7 @@ import com.dede.android_eggs.views.main.util.IntentHandler
 import com.dede.android_eggs.views.settings.SettingsScreen
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
-import com.dede.android_eggs.views.theme.AppTheme
+import com.dede.android_eggs.views.theme.EasterEggsTheme
 import com.dede.basic.Utils
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
@@ -78,7 +78,7 @@ class EasterEggsActivity : AppCompatActivity() {
     lateinit var sensor: EasterEggLogoSensorMatrixConvert
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeUtils.enableEdgeToEdge(this)
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         setContent {
@@ -87,7 +87,7 @@ class EasterEggsActivity : AppCompatActivity() {
                 LocalEasterEggLogoSensor provides sensor,
                 LocalKonfettiState provides konfettiState
             ) {
-                AppTheme {
+                EasterEggsTheme {
                     val drawerState = rememberDrawerState(DrawerValue.Closed)
                     ReverseModalNavigationDrawer(
                         drawerContent = {

@@ -1,1 +1,2 @@
+- Optimize the setting of theme logic
 - Optimize APK file size

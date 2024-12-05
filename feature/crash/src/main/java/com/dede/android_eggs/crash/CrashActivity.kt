@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
@@ -58,8 +59,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.util.AGPUtils
-import com.dede.android_eggs.util.ThemeUtils
-import com.dede.android_eggs.views.theme.AppTheme
+import com.dede.android_eggs.views.theme.EasterEggsTheme
 import com.dede.basic.Utils
 import com.dede.basic.copy
 import kotlin.system.exitProcess
@@ -70,7 +70,7 @@ import kotlin.system.exitProcess
 class CrashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeUtils.enableEdgeToEdge(this)
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         val tr: Throwable? = GlobalExceptionHandler.getUncaughtException(intent)
@@ -80,7 +80,7 @@ class CrashActivity : AppCompatActivity() {
         }
 
         setContent {
-            AppTheme {
+            EasterEggsTheme {
                 Surface {
                     CrashScreen(tr)
                 }

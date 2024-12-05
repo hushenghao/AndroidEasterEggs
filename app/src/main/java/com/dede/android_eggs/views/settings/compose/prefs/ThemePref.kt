@@ -1,5 +1,6 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
@@ -37,8 +38,16 @@ import com.dede.android_eggs.views.theme.themeMode
 fun ThemePref() {
     var themeModeValue by rememberPrefIntState(KEY_NIGHT_MODE, FOLLOW_SYSTEM)
     val onOptionClick = click@{ mode: Int ->
+        if (themeModeValue == mode) {
+            return@click
+        }
         themeModeValue = mode
         themeMode = themeModeValue
+        var appCompatMode = mode
+        if (appCompatMode == AMOLED) {
+            appCompatMode = DARK
+        }
+        AppCompatDelegate.setDefaultNightMode(appCompatMode)
         LocalEvent.poster().post(ACTION_NIGHT_MODE_CHANGED)
     }
 

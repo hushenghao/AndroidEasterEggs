@@ -21,11 +21,11 @@ fun rememberThemedHashImageBitmap(
     height: Int = 32
 ): ImageBitmap {
     val context = LocalContext.current
-    return remember(hash, ThemeUtils.isDarkMode(context.resources)) {
+    return remember(hash, ThemeUtils.isDarkMode(context)) {
         var bitmap = checkNotNull(BlurHashDecoder.decode(hash, width, height)) {
             "BlurHash decode error! hash: ".format(hash)
         }
-        if (ThemeUtils.isDarkMode(context.resources)) {
+        if (ThemeUtils.isDarkMode(context)) {
             val nightMode =
                 Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888)
             val paint = Paint(Paint.ANTI_ALIAS_FLAG)

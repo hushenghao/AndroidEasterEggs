@@ -2,6 +2,7 @@
 
 ### v3.2.1
 
+- Optimize the setting of theme logic
 - Optimize APK file size
 
 ### v3.2.0 (2024-12-03)
