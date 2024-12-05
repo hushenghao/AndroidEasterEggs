@@ -1,8 +1,10 @@
 package com.dede.android_eggs.views.main.compose
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -16,13 +18,13 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.createRepeatWavyDrawable
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun PreviewWavyRepeat() {
     Wavy(R.drawable.ic_wavy_line_1, true)
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun PreviewWavy() {
     Wavy(R.drawable.ic_wavy_line)
@@ -30,7 +32,11 @@ fun PreviewWavy() {
 
 
 @Composable
-fun Wavy(res: Int, repeat: Boolean = false, tint: Color? = null) {
+fun Wavy(
+    @DrawableRes res: Int,
+    repeat: Boolean = false,
+    tint: Color = MaterialTheme.colorScheme.secondary
+) {
     val modifier = Modifier
         .fillMaxWidth()
         .padding(vertical = 26.dp)
@@ -38,9 +44,7 @@ fun Wavy(res: Int, repeat: Boolean = false, tint: Color? = null) {
         val context = LocalContext.current
         val drawable = remember(res, context.theme) {
             createRepeatWavyDrawable(context, res).apply {
-                if (tint != null) {
-                    setTint(tint.toArgb())
-                }
+                setTint(tint.toArgb())
             }
         }
         DrawableImage(

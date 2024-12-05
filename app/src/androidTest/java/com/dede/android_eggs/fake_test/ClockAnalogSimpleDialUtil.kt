@@ -3,7 +3,6 @@ package com.dede.android_eggs.fake_test
 import androidx.core.graphics.drawable.toBitmap
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.dede.android_eggs.R
 import com.dede.android_eggs.fake_test.utils.EasterEggsServer
 import com.dede.android_eggs.fake_test.utils.ResponseUtils.toResponse
 import com.dede.basic.createThemeWrapperContext
@@ -26,8 +25,9 @@ class ClockAnalogSimpleDialUtil {
     @Test
     fun generate() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val drawableRes = com.dede.android_eggs.views.widget.R.drawable.clock_analog_simple_dial
         val wrapperContext = context.createThemeWrapperContext()
-        val drawable = wrapperContext.requireDrawable(R.drawable.clock_analog_simple_dial)
+        val drawable = wrapperContext.requireDrawable(drawableRes)
         val bitmap = drawable.toBitmap()
 
         //bitmap = bitmap.scale(IMAGE_SIZE, IMAGE_SIZE)

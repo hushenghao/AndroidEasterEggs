@@ -9,8 +9,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":theme"))
+
     implementation(libs.androidx.core)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.google.material)
     implementation(libs.androidx.browser)
 }

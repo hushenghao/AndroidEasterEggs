@@ -3,20 +3,16 @@ package com.dede.android_eggs.util
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.provider.Browser
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 import com.dede.basic.createChooser
 import com.dede.basic.getConfigurationLocales
-import com.google.android.material.color.DynamicColors
-import com.google.android.material.color.MaterialColors
-import com.google.android.material.R as M3R
 
 /**
  * CustomTabs Help
@@ -33,16 +29,14 @@ object CustomTabsBrowser {
 
     @JvmStatic
     fun launchUrl(context: Context, uri: Uri) {
-        val colorScheme = when (AppCompatDelegate.getDefaultNightMode()) {
-            AppCompatDelegate.MODE_NIGHT_YES -> CustomTabsIntent.COLOR_SCHEME_DARK
-            AppCompatDelegate.MODE_NIGHT_NO -> CustomTabsIntent.COLOR_SCHEME_LIGHT
+        val colorScheme = when (ThemePrefUtil.getThemeModeValue(context)) {
+            ThemePrefUtil.DARK, ThemePrefUtil.AMOLED -> CustomTabsIntent.COLOR_SCHEME_DARK
+            ThemePrefUtil.LIGHT -> CustomTabsIntent.COLOR_SCHEME_LIGHT
             else -> CustomTabsIntent.COLOR_SCHEME_SYSTEM
         }
 
-        val dynamicContext = DynamicColors.wrapContextIfAvailable(context)
-        val color = MaterialColors.getColor(dynamicContext, M3R.attr.colorSurface, Color.WHITE)
         val params = CustomTabColorSchemeParams.Builder()
-            .setToolbarColor(color)
+            .setToolbarColor(ThemeUtils.getThemedSurfaceColor(context))
             .build()
 
         val builder = CustomTabsIntent.Builder()

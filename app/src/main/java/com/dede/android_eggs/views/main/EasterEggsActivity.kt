@@ -7,7 +7,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
@@ -41,7 +40,6 @@ import com.dede.android_eggs.views.main.compose.BottomSearchBar
 import com.dede.android_eggs.views.main.compose.EasterEggScreen
 import com.dede.android_eggs.views.main.compose.Konfetti
 import com.dede.android_eggs.views.main.compose.LocalEasterEggLogoSensor
-import com.dede.android_eggs.views.main.compose.LocalFragmentManager
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.MainTitleBar
 import com.dede.android_eggs.views.main.compose.Welcome
@@ -80,14 +78,12 @@ class EasterEggsActivity : AppCompatActivity() {
     lateinit var sensor: EasterEggLogoSensorMatrixConvert
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeUtils.tryApplyOLEDTheme(this)
-        enableEdgeToEdge()
+        ThemeUtils.enableEdgeToEdge(this)
         super.onCreate(savedInstanceState)
 
         setContent {
             val konfettiState = rememberKonfettiState()
             CompositionLocalProvider(
-                LocalFragmentManager provides supportFragmentManager,
                 LocalEasterEggLogoSensor provides sensor,
                 LocalKonfettiState provides konfettiState
             ) {

@@ -1,48 +1,79 @@
 package com.dede.android_eggs.util
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
-import androidx.annotation.StyleRes
+import android.content.res.Resources
+import android.graphics.Color
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
+import androidx.annotation.ColorInt
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.ui.graphics.toArgb
+import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
-import com.dede.android_eggs.views.theme.R
-import com.google.android.material.color.ThemeUtils
-import com.google.android.material.internal.ContextUtils
-import com.google.android.material.resources.MaterialAttributes
-import com.google.android.material.R as M3R
+import com.dede.android_eggs.views.theme.isDynamicColorEnable
+import com.dede.android_eggs.views.theme.surfaceDark
+import com.dede.android_eggs.views.theme.surfaceLight
+import com.dede.android_eggs.views.theme.themeMode
 
 
 object ThemeUtils {
 
-    fun isSystemNightMode(context: Context): Boolean {
-        return (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+    private fun isSystemNightMode(resources: Resources): Boolean {
+        return (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
                 Configuration.UI_MODE_NIGHT_YES
     }
 
-    @SuppressLint("RestrictedApi")
-    fun applyThemeOverlay(context: Context, @StyleRes theme: Int) {
-        ThemeUtils.applyThemeOverlay(context, theme)
+    fun isDarkMode(resources: Resources): Boolean {
+        val currentThemeMode = themeMode
+        return currentThemeMode == ThemePrefUtil.DARK ||
+                currentThemeMode == ThemePrefUtil.AMOLED ||
+                (currentThemeMode == ThemePrefUtil.FOLLOW_SYSTEM && isSystemNightMode(resources))
     }
 
-    @SuppressLint("RestrictedApi")
-    fun isOLEDTheme(context: Context): Boolean {
-        return MaterialAttributes.resolveBoolean(context, R.attr.isOLEDTheme, false)
-    }
+    fun enableEdgeToEdge(activity: ComponentActivity) {
+        activity.enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(
+                Color.TRANSPARENT, Color.TRANSPARENT
+            ) { resources -> isDarkMode(resources) },
+        )
 
-    @SuppressLint("RestrictedApi", "PrivateResource")
-    fun isMaterial3Theme(context: Context): Boolean {
-        return MaterialAttributes.resolveBoolean(context, M3R.attr.isMaterial3Theme, false)
-    }
-
-    fun tryApplyOLEDTheme(context: Context) {
-        if (ThemePrefUtil.isAmoledMode(context)) {
-            applyThemeOverlay(context, R.style.ThemeOverlay_OLED)
+        LocalEvent.receiver(activity).register(ThemePrefUtil.ACTION_NIGHT_MODE_CHANGED) {
+            enableEdgeToEdge(activity)
         }
     }
 
-    @SuppressLint("RestrictedApi")
-    fun recreateActivityIfPossible(context: Context) {
-        val activity = ContextUtils.getActivity(context)
-        activity?.recreate()
+    @ColorInt
+    fun getThemedSurfaceColor(context: Context): Int {
+        val themeModeValue = ThemePrefUtil.getThemeModeValue(context)
+        if (DynamicColorPrefUtil.isSupported() && isDynamicColorEnable) {
+            return when (themeModeValue) {
+                ThemePrefUtil.LIGHT -> dynamicLightColorScheme(context).surface.toArgb()
+                ThemePrefUtil.DARK -> dynamicDarkColorScheme(context).surface.toArgb()
+                ThemePrefUtil.FOLLOW_SYSTEM -> {
+                    if (isSystemNightMode(context.resources)) {
+                        dynamicDarkColorScheme(context).surface.toArgb()
+                    } else {
+                        dynamicLightColorScheme(context).surface.toArgb()
+                    }
+                }
+                else -> Color.WHITE
+            }
+        }
+
+        return when (themeModeValue) {
+            ThemePrefUtil.LIGHT -> surfaceLight.toArgb()
+            ThemePrefUtil.DARK -> surfaceDark.toArgb()
+            ThemePrefUtil.FOLLOW_SYSTEM -> {
+                if (isSystemNightMode(context.resources)) {
+                    surfaceDark.toArgb()
+                } else {
+                    surfaceLight.toArgb()
+                }
+            }
+            else -> Color.WHITE
+        }
     }
 }

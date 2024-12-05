@@ -1,9 +1,9 @@
 package com.dede.android_eggs
 
-import androidx.fragment.app.FragmentActivity
+import androidx.activity.ComponentActivity
 import com.dede.android_eggs.inject.FlavorFeatures
 
 class FlavorFeaturesImpl : FlavorFeatures {
-    override fun call(activity: FragmentActivity) {
+    override fun call(activity: ComponentActivity) {
     }
 }

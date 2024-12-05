@@ -2,8 +2,7 @@ package com.dede.android_eggs
 
 import android.content.Context
 import android.util.Log
-import androidx.annotation.Keep
-import androidx.fragment.app.FragmentActivity
+import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
 import com.dede.android_eggs.util.launchCatchable
 import com.dede.android_eggs.util.pref
@@ -38,7 +37,7 @@ object GooglePlayCore {
     }
 
     @JvmStatic
-    fun launchReview(activity: FragmentActivity) {
+    fun launchReview(activity: ComponentActivity) {
         if (!isAgreedPrivacyPolicy(activity) ||
             !isGooglePlayServicesAvailable(activity) ||
             !isLaunchReviewTiming(activity)

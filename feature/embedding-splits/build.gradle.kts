@@ -10,9 +10,8 @@ dependencies {
     implementation(project(":theme"))
 
     implementation(libs.androidx.core)
-    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity)
     implementation(libs.androidx.window)
-    implementation(libs.google.material)
     implementation(libs.androidx.startup)
     implementation(libs.androidx.shapes)
     implementation(libs.androidx.compose.activity)

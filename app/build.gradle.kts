@@ -7,8 +7,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
-        versionCode = 55
-        versionName = "3.2.0"
+        versionCode = 56
+        versionName = "3.2.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(
@@ -95,8 +95,10 @@ android {
             "META-INF/*.version",
             "META-INF/NOTICE.*",
             "META-INF/LICENSE",
+            "META-INF/**/LICENSE.txt",
             "kotlin/**.kotlin_builtins",
             "DebugProbesKt.bin",
+            "*.properties"
         )
     }
 
@@ -115,7 +117,6 @@ dependencies {
     implementation(libs.androidx.lifecycle)
     implementation(libs.androidx.viewmodel)
     implementation(libs.androidx.livedata)
-    implementation(libs.google.material)
     implementation(libs.androidx.startup)
 
     implementation(libs.androidx.compose.activity)

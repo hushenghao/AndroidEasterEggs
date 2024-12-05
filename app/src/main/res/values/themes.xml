@@ -7,18 +7,5 @@
             @drawable/avd_anim_v_platlogo
         </item>
         <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">600</item>
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialAlertDialog.BlurBehind
-        </item>
     </style>
-
-    <style name="ThemeOverlay.MaterialAlertDialog.BlurBehind" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
-        <item name="android:windowBlurBehindEnabled" tools:targetApi="s">true</item>
-        <item name="android:windowBlurBehindRadius" tools:targetApi="s">4dp</item>
-        <item name="alertDialogStyle">@style/Theme.MaterialAlertDialog.Style</item>
-    </style>
-
-    <style name="Theme.MaterialAlertDialog.Style" parent="MaterialAlertDialog.Material3">
-        <item name="backgroundTint">?attr/colorSurface</item>
-    </style>
-
 </resources>

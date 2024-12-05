@@ -3,9 +3,11 @@
 package com.dede.basic
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.res.Configuration
 import android.widget.Toast
@@ -22,16 +24,11 @@ import androidx.core.os.LocaleListCompat
 val globalContext: Context
     get() = GlobalContext.globalContext
 
-val globalThemeContext: Context
-    get() = GlobalContext.globalThemeContext
-
 @SuppressLint("StaticFieldLeak")
 object GlobalContext {
 
     internal lateinit var globalContext: Context
         private set
-
-    internal val globalThemeContext by lazy { globalContext.createThemeWrapperContext() }
 
     class Initializer : androidx.startup.Initializer<Unit> {
         override fun create(context: Context) {
@@ -42,6 +39,16 @@ object GlobalContext {
     }
 }
 
+fun Context.getActivity(): Activity? {
+    var context = this
+    while (context is ContextWrapper) {
+        if (context is Activity) {
+            return context
+        }
+        context = context.baseContext
+    }
+    return null
+}
 
 fun Context.toast(@StringRes resId: Int, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, resId, duration).show()

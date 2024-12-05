@@ -15,5 +15,4 @@ dependencies {
     implementation(libs.androidx.viewmodel)
     implementation(libs.androidx.startup)
     implementation(libs.androidx.activity)
-    implementation(libs.androidx.localbroadcastmanager)
 }

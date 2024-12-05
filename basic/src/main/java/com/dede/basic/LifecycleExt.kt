@@ -13,6 +13,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.coroutineScope
+import androidx.savedstate.SavedStateRegistry
+import androidx.savedstate.SavedStateRegistryController
+import androidx.savedstate.SavedStateRegistryOwner
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
@@ -32,25 +35,28 @@ private val handler = Handler(Looper.getMainLooper()) { msg ->
     true
 }
 
+val Activity.androidLifecycleOwner: LifecycleOwner
+    get() {
+        if (this is ComponentActivity) {
+            return this
+        }
+        return LifecycleFragment.injectIfNeededIn(this)
+    }
+
+val Activity.androidSavedStateOwner: SavedStateRegistryOwner
+    get() {
+        if (this is ComponentActivity) {
+            return this
+        }
+        return LifecycleFragment.injectIfNeededIn(this)
+    }
+
 val Activity.androidLifecycle: Lifecycle
     get() {
         if (this is ComponentActivity) {
             return lifecycle
         }
-
-        // com.bumptech.glide.manager.RequestManagerRetriever#get(android.app.Activity)
-        val fm = fragmentManager
-        var current = fm.findFragmentByTag(TAG_FRAGMENT) as? LifecycleFragment
-        if (current == null) {
-            current = pendingLifecycleFragments[fm]
-            if (current == null) {
-                current = LifecycleFragment()
-                pendingLifecycleFragments[fm] = current
-                fm.beginTransaction().add(current, TAG_FRAGMENT).commitAllowingStateLoss()
-                handler.obtainMessage(ID_REMOVE, fm).sendToTarget()
-            }
-        }
-        return current.lifecycle
+        return LifecycleFragment.injectIfNeededIn(this).lifecycle
     }
 
 fun Lifecycle.launch(
@@ -61,11 +67,35 @@ fun Lifecycle.launch(
 
 @Suppress("OVERRIDE_DEPRECATION")
 @SuppressLint("ValidFragment")
-internal class LifecycleFragment : android.app.Fragment(), LifecycleOwner {
+internal class LifecycleFragment : android.app.Fragment(), LifecycleOwner, SavedStateRegistryOwner {
+
+    companion object {
+        fun injectIfNeededIn(activity: Activity): LifecycleFragment {
+            // com.bumptech.glide.manager.RequestManagerRetriever#get(android.app.Activity)
+            val fm = activity.fragmentManager
+            var current = fm.findFragmentByTag(TAG_FRAGMENT) as? LifecycleFragment
+            if (current == null) {
+                current = pendingLifecycleFragments[fm]
+                if (current == null) {
+                    current = LifecycleFragment()
+                    pendingLifecycleFragments[fm] = current
+                    fm.beginTransaction().add(current, TAG_FRAGMENT).commitAllowingStateLoss()
+                    handler.obtainMessage(ID_REMOVE, fm).sendToTarget()
+                }
+            }
+            return current
+        }
+    }
 
     private val lifecycleRegistry = LifecycleRegistry(this)
+    private val savedStateRegistryController = SavedStateRegistryController.create(this)
+
+    init {
+        savedStateRegistryController.performAttach()
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        savedStateRegistryController.performRestore(savedInstanceState)
         super.onActivityCreated(savedInstanceState)
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
     }
@@ -95,6 +125,15 @@ internal class LifecycleFragment : android.app.Fragment(), LifecycleOwner {
         super.onDestroy()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        lifecycleRegistry.currentState = Lifecycle.State.CREATED
+        super.onSaveInstanceState(outState)
+        savedStateRegistryController.performSave(outState)
+    }
+
     override val lifecycle: Lifecycle
         get() = lifecycleRegistry
+
+    override val savedStateRegistry: SavedStateRegistry
+        get() = savedStateRegistryController.savedStateRegistry
 }

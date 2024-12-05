@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
@@ -71,8 +70,7 @@ import kotlin.system.exitProcess
 class CrashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeUtils.tryApplyOLEDTheme(this)
-        enableEdgeToEdge()
+        ThemeUtils.enableEdgeToEdge(this)
         super.onCreate(savedInstanceState)
 
         val tr: Throwable? = GlobalExceptionHandler.getUncaughtException(intent)

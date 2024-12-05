@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.window.embedding.ActivityEmbeddingController
 import androidx.window.embedding.SplitController
-import com.google.android.material.internal.ContextUtils
+import com.dede.basic.getActivity
 
 /**
  * SplitController API.
@@ -16,7 +16,7 @@ object SplitUtils {
 
     @SuppressLint("RestrictedApi")
     fun isActivityEmbedded(context: Context): Boolean {
-        val activity = ContextUtils.getActivity(context) ?: return false
+        val activity = context.getActivity() ?: return false
         return ActivityEmbeddingController.getInstance(context).isActivityEmbedded(activity)
     }
 

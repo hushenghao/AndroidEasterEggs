@@ -1,6 +1,5 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
@@ -13,13 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
-import com.dede.android_eggs.util.ThemeUtils
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
 import com.dede.android_eggs.views.settings.compose.basic.ValueOption
@@ -38,23 +35,10 @@ import com.dede.android_eggs.views.theme.themeMode
 @Preview
 @Composable
 fun ThemePref() {
-    val context = LocalContext.current
     var themeModeValue by rememberPrefIntState(KEY_NIGHT_MODE, FOLLOW_SYSTEM)
     val onOptionClick = click@{ mode: Int ->
         themeModeValue = mode
         themeMode = themeModeValue
-        var appCompatMode = mode
-        if (appCompatMode == AMOLED) {
-            appCompatMode = DARK
-        }
-        if (appCompatMode == AppCompatDelegate.getDefaultNightMode()) {
-            if ((mode == AMOLED) != ThemeUtils.isOLEDTheme(context)) {
-                ThemeUtils.recreateActivityIfPossible(context)
-                LocalEvent.poster().post(ACTION_NIGHT_MODE_CHANGED)
-            }
-            return@click
-        }
-        AppCompatDelegate.setDefaultNightMode(appCompatMode)
         LocalEvent.poster().post(ACTION_NIGHT_MODE_CHANGED)
     }
 

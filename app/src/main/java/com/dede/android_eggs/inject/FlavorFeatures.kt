@@ -1,6 +1,6 @@
 package com.dede.android_eggs.inject
 
-import androidx.fragment.app.FragmentActivity
+import androidx.activity.ComponentActivity
 import com.dede.android_eggs.FlavorFeaturesImpl
 
 interface FlavorFeatures {
@@ -14,5 +14,5 @@ interface FlavorFeatures {
         }
     }
 
-    fun call(activity: FragmentActivity)
+    fun call(activity: ComponentActivity)
 }

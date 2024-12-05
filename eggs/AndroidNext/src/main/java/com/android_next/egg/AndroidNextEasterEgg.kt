@@ -5,8 +5,6 @@ import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.core.view.setPadding
 import com.dede.basic.dp
 import com.dede.basic.provider.BaseEasterEgg
@@ -66,7 +64,7 @@ object AndroidNextEasterEgg : EasterEggProvider {
                         return ImageView(context).apply {
                             setImageDrawable(context.requireDrawable(PLATLOGO_RES))
                             setPadding(12.dp)
-                            setBackgroundColor(Color(0xFF_202124).toArgb())
+                            setBackgroundColor(0xFF_202124.toInt())
                         }
                     }
 

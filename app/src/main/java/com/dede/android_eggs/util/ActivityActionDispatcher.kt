@@ -30,10 +30,10 @@ class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks {
         }
     }
 
-    private val actions = arrayListOf(
-        PermissionRequestAction(),
+    private val actions: List<ActivityAction> = arrayListOf(
+        PlatLogoActivityAction(),
         WarningDialogAction(),
-        PlatLogoActivityAction()
+        PermissionRequestAction(),
     )
 
     override fun onActivityPreCreated(activity: Activity, savedInstanceState: Bundle?) {
