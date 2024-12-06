@@ -35,7 +35,7 @@ private val handler = Handler(Looper.getMainLooper()) { msg ->
     true
 }
 
-val Activity.androidLifecycleOwner: LifecycleOwner
+val Activity.lifecycleOwnerCompat: LifecycleOwner
     get() {
         if (this is ComponentActivity) {
             return this
@@ -43,7 +43,7 @@ val Activity.androidLifecycleOwner: LifecycleOwner
         return LifecycleFragment.injectIfNeededIn(this)
     }
 
-val Activity.androidSavedStateOwner: SavedStateRegistryOwner
+val Activity.savedStateOwnerCompat: SavedStateRegistryOwner
     get() {
         if (this is ComponentActivity) {
             return this
@@ -51,7 +51,7 @@ val Activity.androidSavedStateOwner: SavedStateRegistryOwner
         return LifecycleFragment.injectIfNeededIn(this)
     }
 
-val Activity.androidLifecycle: Lifecycle
+val Activity.lifecycleCompat: Lifecycle
     get() {
         if (this is ComponentActivity) {
             return lifecycle

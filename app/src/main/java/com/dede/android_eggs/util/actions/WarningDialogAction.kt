@@ -35,10 +35,10 @@ import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.ActivityActionDispatcher
 import com.dede.android_eggs.views.theme.EasterEggsTheme
-import com.dede.basic.androidLifecycleOwner
-import com.dede.basic.androidSavedStateOwner
 import com.dede.basic.getBoolean
+import com.dede.basic.lifecycleOwnerCompat
 import com.dede.basic.putBoolean
+import com.dede.basic.savedStateOwnerCompat
 
 class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
 
@@ -68,9 +68,9 @@ class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
         if (activity.getBoolean(info.key, false)) return
 
         val composeView = ComposeView(activity)
-        composeView.setViewTreeLifecycleOwner(activity.androidLifecycleOwner)
+        composeView.setViewTreeLifecycleOwner(activity.lifecycleOwnerCompat)
         // composeView.setViewTreeViewModelStoreOwner()
-        composeView.setViewTreeSavedStateRegistryOwner(activity.androidSavedStateOwner)
+        composeView.setViewTreeSavedStateRegistryOwner(activity.savedStateOwnerCompat)
         activity.window.decorView.post {
             activity.addContentView(
                 composeView,

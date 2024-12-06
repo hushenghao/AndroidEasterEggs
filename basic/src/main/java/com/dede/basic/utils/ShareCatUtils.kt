@@ -9,8 +9,8 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import com.dede.basic.MIME_PNG
-import com.dede.basic.androidLifecycle
 import com.dede.basic.launch
+import com.dede.basic.lifecycleCompat
 import com.dede.basic.saveToAlbum
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -36,7 +36,7 @@ object ShareCatUtils {
 
     @JvmStatic
     fun share(activity: Activity, bitmap: Bitmap, catName: String) {
-        activity.androidLifecycle.launch {
+        activity.lifecycleCompat.launch {
             val uri = saveCat(activity, bitmap, catName) ?: return@launch
             Log.v("Neko", "cat uri: $uri")
 
