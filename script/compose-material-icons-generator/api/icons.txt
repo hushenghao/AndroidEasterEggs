@@ -1,2 +1,1 @@
-Rounded.FamilyStar
 Rounded.Shapes

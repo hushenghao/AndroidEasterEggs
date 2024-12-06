@@ -6,15 +6,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.SearchOff
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -101,16 +96,16 @@ fun EasterEggScreen(
 @Composable
 private fun SearchEmpty(contentPadding: PaddingValues) {
     Box(
-        contentAlignment = Alignment.TopCenter,
+        contentAlignment = Alignment.Center,
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .padding(contentPadding)
-            .padding(top = 32.dp)
     ) {
-        Icon(
-            imageVector = Icons.Rounded.SearchOff,
+        DrawableImage(
+            res = R.drawable.img_samples,
             contentDescription = null,
-            modifier = Modifier.size(102.dp)
+            modifier = Modifier
+                .fillMaxSize(0.6f)
         )
     }
 }

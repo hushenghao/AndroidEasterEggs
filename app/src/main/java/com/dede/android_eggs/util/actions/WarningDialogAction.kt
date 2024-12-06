@@ -7,10 +7,9 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.TipsAndUpdates
+import androidx.compose.material.icons.rounded.WarningAmber
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -66,8 +65,7 @@ class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
 
     override fun onCreate(activity: Activity) {
         val info = target[activity.javaClass.kotlin] ?: return
-        val agreed = activity.getBoolean(info.key, false)
-        if (agreed) return
+        if (activity.getBoolean(info.key, false)) return
 
         val composeView = ComposeView(activity)
         composeView.setViewTreeLifecycleOwner(activity.androidLifecycleOwner)
@@ -125,17 +123,14 @@ private fun WarningDialog(
         title = {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.TipsAndUpdates,
+                    imageVector = Icons.Rounded.WarningAmber,
                     contentDescription = stringResource(id = title),
-                    modifier = Modifier.size(28.dp)
+                    modifier = Modifier.size(30.dp)
                 )
-                Text(
-                    text = stringResource(id = title),
-                    modifier = Modifier.padding(start = 10.dp)
-                )
+                Text(text = stringResource(id = title))
             }
         },
         text = {
