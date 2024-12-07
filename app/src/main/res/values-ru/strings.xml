@@ -44,4 +44,6 @@
     <string name="pref_summary_retain_recent_egg_tasks">Сохранять недавние задачи запуска пасхальных яиц на экране «Недавние», максимум 5 (Недопустимо для режима встроенной активности (Acitivity Embedded Mode).)</string>
     <string name="label_about">О приложении</string>
     <string name="label_contribute">Внести вклад</string>
+    <string name="animator_disabled_alert_message">Из-за того, что системная анимация отключена, некоторые функции могут работать некорректно. Пожалуйста, зайдите в \"Настройки разработчика\" и включите опцию \"Длительность анимации\", чтобы активировать анимацию.</string>
+    <string name="action_goto_settings">Открыть настройки</string>
 </resources>
