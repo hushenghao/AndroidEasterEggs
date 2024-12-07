@@ -1,0 +1,208 @@
+- From: master.eni
+  NetworkType: EtherCAT
+  DCCycle: 1000
+  IOVariable:
+  - Name: X3E_Film.4th RxPdo mapping.Control Word
+    Type: UINT
+    Address: '%QW'
+    Description: ""
+  - Name: X3E_Film.4th RxPdo mapping.Modes of operation
+    Type: SINT
+    Address: '%QB'
+    Description: ""
+  - Name: X3E_Film.4th RxPdo mapping.Target torque
+    Type: INT
+    Address: '%QW'
+    Description: ""
+  - Name: X3E_Film.4th RxPdo mapping.Max torque
+    Type: UINT
+    Address: '%QW'
+    Description: ""
+  - Name: X3E_Film.4th RxPdo mapping.Target position
+    Type: DINT
+    Address: '%QD'
+    Description: ""
+  - Name: X3E_Film.4th RxPdo mapping.Max motor speed
+    Type: UDINT
+    Address: '%QD'
+    Description: ""
+  - Name: X3E_Film.4th RxPdo mapping.Touch Probe Function
+    Type: UINT
+    Address: '%QW'
+    Description: ""
+  - Name: X3E_Film.4th RxPdo mapping.Target velocity
+    Type: DINT
+    Address: '%QD'
+    Description: ""
+  - Name: X3E_Cut.4th RxPdo mapping.Control Word
+    Type: UINT
+    Address: '%QW'
+    Description: ""
+  - Name: X3E_Cut.4th RxPdo mapping.Modes of operation
+    Type: SINT
+    Address: '%QB'
+    Description: ""
+  - Name: X3E_Cut.4th RxPdo mapping.Target torque
+    Type: INT
+    Address: '%QW'
+    Description: ""
+  - Name: X3E_Cut.4th RxPdo mapping.Max torque
+    Type: UINT
+    Address: '%QW'
+    Description: ""
+  - Name: X3E_Cut.4th RxPdo mapping.Target position
+    Type: DINT
+    Address: '%QD'
+    Description: ""
+  - Name: X3E_Cut.4th RxPdo mapping.Max motor speed
+    Type: UDINT
+    Address: '%QD'
+    Description: ""
+  - Name: X3E_Cut.4th RxPdo mapping.Touch Probe Function
+    Type: UINT
+    Address: '%QW'
+    Description: ""
+  - Name: X3E_Cut.4th RxPdo mapping.Target velocity
+    Type: DINT
+    Address: '%QD'
+    Description: ""
+  - Name: X3E_Material.4th RxPdo mapping.Control Word
+    Type: UINT
+    Address: '%QW'
+    Description: ""
+  - Name: X3E_Material.4th RxPdo mapping.Modes of operation
+    Type: SINT
+    Address: '%QB'
+    Description: ""
+  - Name: X3E_Material.4th RxPdo mapping.Target torque
+    Type: INT
+    Address: '%QW'
+    Description: ""
+  - Name: X3E_Material.4th RxPdo mapping.Max torque
+    Type: UINT
+    Address: '%QW'
+    Description: ""
+  - Name: X3E_Material.4th RxPdo mapping.Target position
+    Type: DINT
+    Address: '%QD'
+    Description: ""
+  - Name: X3E_Material.4th RxPdo mapping.Max motor speed
+    Type: UDINT
+    Address: '%QD'
+    Description: ""
+  - Name: X3E_Material.4th RxPdo mapping.Touch Probe Function
+    Type: UINT
+    Address: '%QW'
+    Description: ""
+  - Name: X3E_Material.4th RxPdo mapping.Target velocity
+    Type: DINT
+    Address: '%QD'
+    Description: ""
+  - Name: X3E_Film.4th TxPdo mapping.Error code
+    Type: UINT
+    Address: '%IW'
+    Description: ""
+  - Name: X3E_Film.4th TxPdo mapping.Statusword
+    Type: UINT
+    Address: '%IW'
+    Description: ""
+  - Name: X3E_Film.4th TxPdo mapping.Modes of operation display
+    Type: SINT
+    Address: '%IB'
+    Description: ""
+  - Name: X3E_Film.4th TxPdo mapping.Position actual value
+    Type: DINT
+    Address: '%ID'
+    Description: ""
+  - Name: X3E_Film.4th TxPdo mapping.Velocity actual value
+    Type: DINT
+    Address: '%ID'
+    Description: ""
+  - Name: X3E_Film.4th TxPdo mapping.Torque actual value
+    Type: INT
+    Address: '%IW'
+    Description: ""
+  - Name: X3E_Film.4th TxPdo mapping.Touch probe status
+    Type: UINT
+    Address: '%IW'
+    Description: ""
+  - Name: X3E_Film.4th TxPdo mapping.Touch probe pos1 pos value
+    Type: DINT
+    Address: '%ID'
+    Description: ""
+  - Name: X3E_Film.4th TxPdo mapping.Digital inputs
+    Type: UDINT
+    Address: '%ID'
+    Description: ""
+  - Name: X3E_Cut.4th TxPdo mapping.Error code
+    Type: UINT
+    Address: '%IW'
+    Description: ""
+  - Name: X3E_Cut.4th TxPdo mapping.Statusword
+    Type: UINT
+    Address: '%IW'
+    Description: ""
+  - Name: X3E_Cut.4th TxPdo mapping.Modes of operation display
+    Type: SINT
+    Address: '%IB'
+    Description: ""
+  - Name: X3E_Cut.4th TxPdo mapping.Position actual value
+    Type: DINT
+    Address: '%ID'
+    Description: ""
+  - Name: X3E_Cut.4th TxPdo mapping.Velocity actual value
+    Type: DINT
+    Address: '%ID'
+    Description: ""
+  - Name: X3E_Cut.4th TxPdo mapping.Torque actual value
+    Type: INT
+    Address: '%IW'
+    Description: ""
+  - Name: X3E_Cut.4th TxPdo mapping.Touch probe status
+    Type: UINT
+    Address: '%IW'
+    Description: ""
+  - Name: X3E_Cut.4th TxPdo mapping.Touch probe pos1 pos value
+    Type: DINT
+    Address: '%ID'
+    Description: ""
+  - Name: X3E_Cut.4th TxPdo mapping.Digital inputs
+    Type: UDINT
+    Address: '%ID'
+    Description: ""
+  - Name: X3E_Material.4th TxPdo mapping.Error code
+    Type: UINT
+    Address: '%IW'
+    Description: ""
+  - Name: X3E_Material.4th TxPdo mapping.Statusword
+    Type: UINT
+    Address: '%IW'
+    Description: ""
+  - Name: X3E_Material.4th TxPdo mapping.Modes of operation display
+    Type: SINT
+    Address: '%IB'
+    Description: ""
+  - Name: X3E_Material.4th TxPdo mapping.Position actual value
+    Type: DINT
+    Address: '%ID'
+    Description: ""
+  - Name: X3E_Material.4th TxPdo mapping.Velocity actual value
+    Type: DINT
+    Address: '%ID'
+    Description: ""
+  - Name: X3E_Material.4th TxPdo mapping.Torque actual value
+    Type: INT
+    Address: '%IW'
+    Description: ""
+  - Name: X3E_Material.4th TxPdo mapping.Touch probe status
+    Type: UINT
+    Address: '%IW'
+    Description: ""
+  - Name: X3E_Material.4th TxPdo mapping.Touch probe pos1 pos value
+    Type: DINT
+    Address: '%ID'
+    Description: ""
+  - Name: X3E_Material.4th TxPdo mapping.Digital inputs
+    Type: UDINT
+    Address: '%ID'
+    Description: ""
