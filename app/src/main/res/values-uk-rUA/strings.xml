@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Великодні яйця</string>
-    <string name="title_open_with">Відкрити завдяки</string>
+    <string name="title_open_with">Відкрити за допомогою</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
     <string name="label_github">Код проєкту</string>
@@ -44,4 +44,6 @@
     <string name="pref_summary_retain_recent_egg_tasks">Відкривати окремі, Великодні яйця максимумом до 5 вікон (Не доступно у режимі вбудованої активності)</string>
     <string name="label_about">Про додаток</string>
     <string name="label_contribute">Допомогти автору</string>
+    <string name="animator_disabled_alert_message">Через те, що системну анімацію вимкнено, деякі функції можуть працювати некоректно. Будь ласка, зайдіть у \"Для розробників\" та увімкніть опцію \"Тривалість анімації\", щоб активувати анімацію.</string>
+    <string name="action_goto_settings">Відкрити налаштування</string>
 </resources>
