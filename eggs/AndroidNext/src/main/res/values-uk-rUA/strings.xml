@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="summary_android_waiting">Ще не зроблено</string>
     <string name="summary_android_release_pushed">Фінальна версія випущена</string>
     <string name="label_timeline_title">Хронологія, віхи та оновлення</string>
     <string name="label_timeline_releases">Релізи</string>
+    <string name="label_timeline_developer_previews">Версії для розробників</string>
+    <string name="label_timeline_beta_release">Бета релізи</string>
+    <string name="label_timeline_platform_stability">Стабільні платформи</string>
+    <string name="label_timeline_final_release">Фінальний реліз</string>
 </resources>
