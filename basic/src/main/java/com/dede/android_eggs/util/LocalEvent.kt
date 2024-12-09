@@ -1,8 +1,12 @@
 package com.dede.android_eggs.util
 
+import android.app.Application
+import android.content.ComponentCallbacks2
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
+import androidx.collection.ArrayMap
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -11,7 +15,7 @@ typealias EventCallback = (intent: Intent) -> Unit
 
 object LocalEvent {
 
-    private val localEventLiveDataMap = HashMap<String, MutableLiveData<Intent?>>()
+    private val localEventLiveDataMap = ArrayMap<String, MutableLiveData<Intent?>>()
 
     private fun getKey(action: String): String {
         return action
@@ -25,21 +29,43 @@ object LocalEvent {
         return liveData
     }
 
-    init {
-        GcWatcher.get().addWatcher { trim() }
+    fun registerTrimMemoryCallback(application: Application) {
+        application.registerComponentCallbacks(object : ComponentCallbacks2 {
+            override fun onConfigurationChanged(newConfig: Configuration) {
+            }
+
+            override fun onTrimMemory(level: Int) {
+                if (level >= ComponentCallbacks2.TRIM_MEMORY_BACKGROUND) {
+                    trimToSize(0)
+                } else if (level <= ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
+                    trimToSize(localEventLiveDataMap.size / 2)
+                }
+            }
+
+            @Deprecated("Deprecated in Java")
+            override fun onLowMemory() {
+            }
+        })
     }
 
-    private fun trim() {
-        var count = 0
+    fun trimToSize(size: Int) {
+        var trimCount = 0
         val keys = localEventLiveDataMap.keys
         for (key in keys) {
-            val liveData = localEventLiveDataMap[key] ?: continue
+            val liveData = localEventLiveDataMap[key]
+            if (liveData == null) {
+                localEventLiveDataMap.remove(key)
+                continue
+            }
             if (!liveData.hasObservers()) {
                 localEventLiveDataMap.remove(key)
-                count++
+                trimCount++
+            }
+            if (size > 0 && size >= localEventLiveDataMap.size) {
+                break
             }
         }
-        Log.i("LocalEvent", "trim: %d".format(count))
+        Log.i("LocalEvent", "trimToSize, trim: %d".format(trimCount))
     }
 
     fun poster(): Poster {
