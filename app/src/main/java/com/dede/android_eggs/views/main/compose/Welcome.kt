@@ -43,6 +43,7 @@ import com.dede.android_eggs.ui.composes.rememberLoopPagerState
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
+import com.dede.android_eggs.resources.R as StringsR
 
 private const val KEY = "key_welcome_status"
 
@@ -85,7 +86,7 @@ fun Welcome(
     var konfettiState by LocalKonfettiState.current
     AlertDialog(
         title = {
-            Text(text = stringResource(R.string.label_welcome))
+            Text(text = stringResource(StringsR.string.label_welcome))
         },
         text = {
             Column {
@@ -115,7 +116,7 @@ fun Welcome(
                         .padding(horizontal = 12.dp, vertical = 6.dp)
                 )
                 Text(
-                    text = stringResource(R.string.summary_browse_privacy_policy),
+                    text = stringResource(StringsR.string.summary_browse_privacy_policy),
                     modifier = Modifier.padding(vertical = 12.dp)
                 )
                 FilledTonalButton(
@@ -129,10 +130,10 @@ fun Welcome(
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.PrivacyTip,
-                        contentDescription = stringResource(R.string.label_privacy_policy)
+                        contentDescription = stringResource(StringsR.string.label_privacy_policy)
                     )
                     Spacer(modifier = Modifier.width(6.dp))
-                    Text(text = stringResource(R.string.label_privacy_policy))
+                    Text(text = stringResource(StringsR.string.label_privacy_policy))
                 }
             }
         },
@@ -155,7 +156,7 @@ fun Welcome(
                 konfettiState = true
                 onNext()
             }) {
-                Text(text = stringResource(R.string.action_agree))
+                Text(text = stringResource(StringsR.string.action_agree))
             }
         },
     )

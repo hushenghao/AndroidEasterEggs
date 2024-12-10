@@ -20,10 +20,6 @@ class EasterEggLibrary : EasterEggBasicLibrary() {
             }
 
             configureAndroid<LibraryExtension> {
-                val key = name.substring(0, 1).lowercase()
-                namespace = "com.android_$key.egg"
-                resourcePrefix("${key}_")
-
                 lint {
                     baseline = project.file("lint-baseline.xml")
                 }

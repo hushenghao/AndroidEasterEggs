@@ -53,8 +53,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
-import com.dede.android_eggs.R
 import kotlinx.coroutines.flow.catch
+import com.dede.android_eggs.resources.R as StringsR
 
 @Stable
 class BottomSearchBarState(initVisible: Boolean, initSearchText: String) {
@@ -202,7 +202,7 @@ private fun BottomSearchBarView(
                 state.searchText = it
             },
             placeholder = {
-                Text(text = stringResource(R.string.label_search_hint))
+                Text(text = stringResource(StringsR.string.label_search_hint))
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Ascii, imeAction = ImeAction.Search

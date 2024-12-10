@@ -1,16 +1,9 @@
 plugins {
-    id("easter.egg.library")
-    alias(libs.plugins.compose.compiler)
+    id("easter.egg.compose.library")
 }
 
 android {
     namespace = "com.android_next.egg"
-
-    resourcePrefix = null
-
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
@@ -24,5 +17,5 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    implementation(project(":feature:custom-tab-browser"))
+    implementation(project(":core:custom-tab-browser"))
 }

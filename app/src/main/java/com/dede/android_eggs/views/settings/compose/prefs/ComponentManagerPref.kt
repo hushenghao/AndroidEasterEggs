@@ -20,6 +20,7 @@ import com.dede.android_eggs.views.settings.compose.basic.SwitchOption
 import com.dede.basic.provider.ComponentProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import com.dede.android_eggs.resources.R as StringsR
 
 @Composable
 fun ComponentManagerPref(viewModel: ComponentManagerViewModel = viewModel()) {
@@ -30,7 +31,7 @@ fun ComponentManagerPref(viewModel: ComponentManagerViewModel = viewModel()) {
     }
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.AppRegistration,
-        title = stringResource(id = R.string.label_component_manager),
+        title = stringResource(id = StringsR.string.label_component_manager),
     ) {
         val componentCount = componentList.size
         val context = LocalContext.current

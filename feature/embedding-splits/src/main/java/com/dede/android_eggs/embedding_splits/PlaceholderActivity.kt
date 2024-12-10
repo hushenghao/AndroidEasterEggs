@@ -40,7 +40,6 @@ import androidx.graphics.shapes.rectangle
 import androidx.graphics.shapes.star
 import androidx.graphics.shapes.toPath
 import com.dede.android_eggs.util.LocalEvent
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 import com.dede.android_eggs.views.theme.EasterEggsTheme
 import kotlinx.coroutines.launch
 import kotlin.math.max
@@ -64,7 +63,7 @@ class PlaceholderActivity : AppCompatActivity() {
             }
         }
 
-        LocalEvent.receiver(this).register(ThemePrefUtil.ACTION_NIGHT_MODE_CHANGED) {
+        LocalEvent.receiver(this).register(com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.ACTION_NIGHT_MODE_CHANGED) {
             recreate()
         }
     }

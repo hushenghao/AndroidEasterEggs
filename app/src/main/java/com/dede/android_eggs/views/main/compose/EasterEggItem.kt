@@ -60,7 +60,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.views.ViscousFluidInterpolator
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
@@ -71,6 +70,7 @@ import com.dede.basic.provider.EasterEggGroup
 import kotlin.math.abs
 import kotlin.math.min
 import kotlin.math.roundToInt
+import com.dede.android_eggs.resources.R as StringsR
 
 
 @Composable
@@ -255,7 +255,7 @@ fun EasterEggItemContent(
                                 .padding(start = 4.dp)
                                 .size(22.dp),
                             imageVector = Icons.Rounded.KeyboardArrowDown,
-                            contentDescription = stringResource(R.string.pref_title_language_more)
+                            contentDescription = stringResource(StringsR.string.pref_title_language_more)
                         )
                     }
                 }
@@ -308,7 +308,7 @@ fun EasterEggItemFloor(
                 modifier = Modifier.offset(x = (swipeProgress * -14).dp)
             ) {
                 Text(
-                    text = stringResource(R.string.label_add_shortcut),
+                    text = stringResource(StringsR.string.label_add_shortcut),
                     modifier = Modifier.padding(end = 4.dp),
                     maxLines = 2,
                     style = typography.labelLarge
@@ -332,7 +332,7 @@ private fun ShortcutIcon(showShortcut: Boolean = false) {
             Icon(
                 modifier = Modifier.size(30.dp),
                 imageVector = Icons.Rounded.AppShortcut,
-                contentDescription = stringResource(R.string.label_add_shortcut)
+                contentDescription = stringResource(StringsR.string.label_add_shortcut)
             )
         } else {
             val swipeIcon = if (LocalLayoutDirection.current == LayoutDirection.Rtl) {
@@ -343,7 +343,7 @@ private fun ShortcutIcon(showShortcut: Boolean = false) {
             Icon(
                 modifier = Modifier.size(30.dp),
                 imageVector = swipeIcon,
-                contentDescription = stringResource(R.string.label_add_shortcut)
+                contentDescription = stringResource(StringsR.string.label_add_shortcut)
             )
         }
     }

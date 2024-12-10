@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.CustomTabsBrowser
-
+import com.dede.android_eggs.resources.R as StringsR
 
 @Composable
 private fun FlowRowScope.ChipItem2(
@@ -81,11 +81,11 @@ fun ProjectDescription() {
                     ) {
                         konfettiState = true
                     },
-                contentDescription = stringResource(id = R.string.app_name)
+                contentDescription = stringResource(id = StringsR.string.app_name)
             )
             Column(modifier = Modifier.padding(horizontal = 12.dp)) {
                 Text(
-                    text = stringResource(R.string.app_name),
+                    text = stringResource(StringsR.string.app_name),
                     style = typography.titleSmall,
                 )
                 Spacer(modifier = Modifier.height(2.dp))
@@ -100,7 +100,7 @@ fun ProjectDescription() {
             }
         }
         Text(
-            text = stringResource(R.string.label_project_desc),
+            text = stringResource(StringsR.string.label_project_desc),
             modifier = Modifier.padding(top = 20.dp),
             style = typography.bodyMedium
         )
@@ -111,22 +111,22 @@ fun ProjectDescription() {
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                text = stringResource(R.string.app_name),
+                text = stringResource(StringsR.string.app_name),
                 style = typography.titleSmall,
                 modifier = Modifier.align(Alignment.CenterVertically),
                 fontWeight = FontWeight.SemiBold
             )
-            ChipItem2(R.string.label_privacy_policy) {
-                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
+            ChipItem2(StringsR.string.label_privacy_policy) {
+                CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
             }
-            ChipItem2(R.string.label_license) {
-                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_license)
+            ChipItem2(StringsR.string.label_license) {
+                CustomTabsBrowser.launchUrl(context, R.string.url_license)
             }
-            ChipItem2(R.string.label_github) {
-                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_github)
+            ChipItem2(StringsR.string.label_github) {
+                CustomTabsBrowser.launchUrl(context, R.string.url_github)
             }
-            ChipItem2(R.string.label_feedback) {
-                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
+            ChipItem2(StringsR.string.label_feedback) {
+                CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
             }
         }
     }

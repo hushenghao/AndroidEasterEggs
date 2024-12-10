@@ -23,6 +23,7 @@ import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
 import com.dede.android_eggs.views.settings.compose.options.GithubOption
 import com.dede.android_eggs.views.settings.compose.options.VersionOption
+import com.dede.android_eggs.resources.R as StringsR
 
 @Preview
 @Composable
@@ -31,7 +32,7 @@ fun AboutGroup() {
 
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.Info,
-        title = stringResource(R.string.label_about)
+        title = stringResource(StringsR.string.label_about)
     ) {
         VersionOption()
         Option(
@@ -45,10 +46,10 @@ fun AboutGroup() {
                     modifier = Modifier.width(24.dp),
                 )
             },
-            title = stringResource(R.string.label_beta),
+            title = stringResource(StringsR.string.label_beta),
             trailingContent = imageVectorIconBlock(imageVector = Icons.Rounded.Download),
             onClick = {
-                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_beta)
+                CustomTabsBrowser.launchUrl(context, R.string.url_beta)
             }
         )
 
@@ -56,11 +57,11 @@ fun AboutGroup() {
         Option(
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Policy,
-                contentDescription = stringResource(R.string.label_privacy_policy),
+                contentDescription = stringResource(StringsR.string.label_privacy_policy),
             ),
-            title = stringResource(R.string.label_privacy_policy),
+            title = stringResource(StringsR.string.label_privacy_policy),
             onClick = {
-                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
+                CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
             }
         )
     }

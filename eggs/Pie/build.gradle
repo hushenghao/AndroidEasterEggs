@@ -3,6 +3,9 @@ plugins {
 }
 
 android {
+	namespace = "com.android_p.egg"
+	resourcePrefix = "p_"
+
 	sourceSets {
 		main {
 			res.srcDirs = ['res']
@@ -15,4 +18,3 @@ android {
 dependencies {
     implementation(libs.androidx.appcompat)
 }
-

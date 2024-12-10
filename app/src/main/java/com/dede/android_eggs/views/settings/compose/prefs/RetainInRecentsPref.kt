@@ -7,10 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
-import com.dede.android_eggs.R
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.basic.SwitchPref
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
+import com.dede.android_eggs.resources.R as StringsR
 
 object RetainInRecentsPrefUtil {
     const val KEY_RETAIN_IN_RECENTS = "key_retain_in_recents"
@@ -29,8 +29,8 @@ fun RetainInRecentsPref() {
     SwitchPref(
         key = RetainInRecentsPrefUtil.KEY_RETAIN_IN_RECENTS,
         leadingIcon = Icons.Rounded.ViewCarousel,
-        title = stringResource(id = R.string.pref_retain_recent_egg_tasks),
-        desc = stringResource(id = R.string.pref_summary_retain_recent_egg_tasks),
+        title = stringResource(id = StringsR.string.pref_retain_recent_egg_tasks),
+        desc = stringResource(id = StringsR.string.pref_summary_retain_recent_egg_tasks),
         default = state
     ) {
         state = it

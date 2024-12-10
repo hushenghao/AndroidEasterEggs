@@ -7,7 +7,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":theme"))
+    implementation(project(":core:theme"))
+    implementation(project(":core:settings"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)

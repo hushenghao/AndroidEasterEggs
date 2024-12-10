@@ -3,8 +3,8 @@ api_token_env: "CROWDIN_PERSONAL_TOKEN"
 preserve_hierarchy: true
 
 files:
-  - source: "/app/src/main/res/values/strings.xml"
-    translation: "/app/src/main/res/values-%android_code%/%original_file_name%"
+  - source: "/core/resources/src/main/res/values/strings.xml"
+    translation: "/core/resources/src/main/res/values-%android_code%/%original_file_name%"
     update_option: update_as_unapproved
     skip_untranslated_files: true
     # https://developer.crowdin.com/language-codes/
@@ -14,8 +14,8 @@ files:
         es-ES: "es"
         pt-PT: "pt"
 
-  - source: "/app/src/main/res/values/languages.xml"
-    translation: "/app/src/main/res/values-%android_code%/%original_file_name%"
+  - source: "/core/resources/src/main/res/values/languages.xml"
+    translation: "/core/resources/src/main/res/values-%android_code%/%original_file_name%"
     skip_untranslated_files: true
     languages_mapping:
       android_code:

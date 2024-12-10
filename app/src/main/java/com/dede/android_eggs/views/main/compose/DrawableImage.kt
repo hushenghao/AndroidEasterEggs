@@ -26,7 +26,7 @@ private fun PreviewImage() {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         DrawableImage(res = R.mipmap.ic_launcher_round, contentDescription = null)
 
-        val maskPath = stringArrayResource(id = R.array.icon_shape_override_paths).last()
+        val maskPath = stringArrayResource(id = com.dede.android_eggs.settings.R.array.icon_shape_override_paths).last()
         val drawable = remember(context.theme, maskPath) {
             AlterableAdaptiveIconDrawable(context, R.mipmap.ic_launcher, maskPath)
         }

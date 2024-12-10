@@ -20,11 +20,18 @@ dependencyResolutionManagement {
 
 include(
     ":app",
-    ":theme",
+
+    ":core:theme",
+    ":core:resources",
+    ":core:activity-actions",
+    ":core:settings",
+    ":core:shortcut",
+    ":core:alterable-adaptive-icon",
+    ":core:custom-tab-browser",
+
     ":feature:widget",
     ":feature:crash",
     ":feature:embedding-splits",
-    ":feature:custom-tab-browser",
 
     ":basic",
     ":jvm-basic",

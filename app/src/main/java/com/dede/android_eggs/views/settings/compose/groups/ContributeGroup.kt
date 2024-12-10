@@ -13,35 +13,36 @@ import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
 import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
+import com.dede.android_eggs.resources.R as StringsR
 
 @Composable
 fun ContributeGroup() {
     val context = LocalContext.current
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.Hive,
-        title = stringResource(id = R.string.label_contribute)
+        title = stringResource(id = StringsR.string.label_contribute)
     ) {
         Option(
             shape = OptionShapes.firstShape(),
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Crowdin,
-                contentDescription = stringResource(id = R.string.label_contribute),
+                contentDescription = stringResource(id = StringsR.string.label_contribute),
             ),
-            title = stringResource(R.string.label_translation),
+            title = stringResource(StringsR.string.label_translation),
             desc = stringResource(R.string.url_translation),
             onClick = {
-                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_translation)
+                CustomTabsBrowser.launchUrl(context, R.string.url_translation)
             }
         )
         Option(
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Coffee,
-                contentDescription = stringResource(R.string.label_donate),
+                contentDescription = stringResource(StringsR.string.label_donate),
             ),
             shape = OptionShapes.lastShape(),
-            title = stringResource(R.string.label_donate),
+            title = stringResource(StringsR.string.label_donate),
             onClick = {
-                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_sponsor)
+                CustomTabsBrowser.launchUrl(context, R.string.url_sponsor)
             }
         )
     }

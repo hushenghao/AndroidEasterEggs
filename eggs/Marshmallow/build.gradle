@@ -2,6 +2,11 @@ plugins {
     id("easter.egg.library")
 }
 
+android {
+    namespace = "com.android_m.egg"
+    resourcePrefix = "m_"
+}
+
 dependencies {
     implementation(libs.androidx.annotation)
 }

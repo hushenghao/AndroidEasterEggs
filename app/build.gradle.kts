@@ -138,11 +138,17 @@ dependencies {
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
 
-    implementation(project(":theme"))
+    implementation(project(":core:theme"))
+    implementation(project(":core:settings"))
+    implementation(project(":core:shortcut"))
+    implementation(project(":core:activity-actions"))
+    implementation(project(":core:resources"))
+    implementation(project(":core:alterable-adaptive-icon"))
+    implementation(project(":core:custom-tab-browser"))
+
     implementation(project(":feature:widget"))
     implementation(project(":feature:crash"))
     implementation(project(":feature:embedding-splits"))
-    implementation(project(":feature:custom-tab-browser"))
 
     implementation(project(":eggs:AndroidNext"))
     implementation(project(":eggs:VanillaIceCream"))

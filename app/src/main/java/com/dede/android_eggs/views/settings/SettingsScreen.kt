@@ -46,8 +46,8 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
-import com.dede.android_eggs.util.Receiver
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.util.Receiver
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.views.main.compose.DrawableImage
 import com.dede.android_eggs.views.settings.compose.basic.SettingDivider
@@ -66,6 +66,7 @@ import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPref
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePref
 import com.dede.android_eggs.views.settings.compose.prefs.TimelinePref
 import kotlinx.coroutines.launch
+import com.dede.android_eggs.resources.R as StringsR
 
 @Preview(widthDp = 320)
 @Composable
@@ -97,7 +98,7 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                     .only(WindowInsetsSides.End + WindowInsetsSides.Top),
                 title = {
                     Text(
-                        text = stringResource(R.string.label_settings),
+                        text = stringResource(StringsR.string.label_settings),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         fontWeight = FontWeight.Medium

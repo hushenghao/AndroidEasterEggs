@@ -1,11 +1,5 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.content.res.Resources
-import android.os.Build
-import android.text.TextUtils
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -26,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
@@ -41,51 +34,8 @@ import com.dede.android_eggs.util.compose.PathShape
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
-
-object IconShapePrefUtil {
-
-    const val KEY_ICON_SHAPE = "pref_key_override_icon_shape"
-
-    const val ACTION_CHANGED = "com.dede.easter_eggs.IconShapeChanged"
-
-    fun getSystemMaskPath(context: Context): String {
-        var pathStr = ""
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val resId = getConfigResId(context.resources)
-            if (resId != Resources.ID_NULL) {
-                pathStr = context.resources.getString(resId)
-            }
-        }
-        if (TextUtils.isEmpty(pathStr)) {
-            pathStr = context.resources.getString(R.string.icon_shape_circle_path)
-        }
-        return pathStr
-    }
-
-    @SuppressLint("DiscouragedApi")
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun getConfigResId(resources: Resources): Int {
-        return resources.getIdentifier("config_icon_mask", "string", "android")
-    }
-
-    fun getMaskPath(context: Context): String {
-        val index = SettingPrefUtil.getValue(context, KEY_ICON_SHAPE, 0)
-        var path = getMaskPathByIndex(context, index)
-        if (path.isEmpty()) {
-            path = getSystemMaskPath(context)
-        }
-        return path
-    }
-
-    private fun getMaskPathByIndex(context: Context, index: Int): String {
-        val paths = context.resources.getStringArray(R.array.icon_shape_override_paths)
-        if (index < 0 || index > paths.size - 1) {
-            return ""
-        }
-        return paths[index]
-    }
-
-}
+import com.dede.android_eggs.resources.R as StringsR
+import com.dede.android_eggs.settings.R as SettingsR
 
 private const val SPAN_COUNT = 5
 
@@ -93,10 +43,9 @@ private const val SPAN_COUNT = 5
 @Composable
 fun IconShapePref() {
     var selectedIndex by rememberPrefIntState(IconShapePrefUtil.KEY_ICON_SHAPE, 0)
-    val context = LocalContext.current
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.Shapes,
-        title = stringResource(R.string.pref_title_icon_shape_override),
+        title = stringResource(StringsR.string.pref_title_icon_shape_override),
     ) {
         IconShapeGroup(selectedIndex) { index, path ->
             selectedIndex = index
@@ -115,7 +64,7 @@ private fun IconShapeGroup(
     selectedIndex: Int = 0,
     onShapeClick: ((index: Int, path: String) -> Unit)? = null
 ) {
-    val items = stringArrayResource(R.array.icon_shape_override_paths)
+    val items = stringArrayResource(SettingsR.array.icon_shape_override_paths)
     Layout(
         content = {
             items.forEachIndexed { index, path ->
@@ -159,11 +108,11 @@ private fun IconShapeGroup(
 private fun ShapeItem(
     modifier: Modifier = Modifier,
     isChecked: Boolean = false,
-    path: String = stringResource(id = R.string.icon_shape_clover_path),
+    path: String = stringResource(id = SettingsR.string.icon_shape_clover_path),
     onClick: () -> Unit = {}
 ) {
     Card(
-        shape = PathShape(stringResource(R.string.icon_shape_clover_path)),
+        shape = PathShape(stringResource(SettingsR.string.icon_shape_clover_path)),
         onClick = onClick,
         modifier = modifier then Modifier.aspectRatio(1f),
         colors = CardDefaults.cardColors(containerColor = colorScheme.surface)

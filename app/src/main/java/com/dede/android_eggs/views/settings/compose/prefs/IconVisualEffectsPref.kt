@@ -8,11 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.core.os.bundleOf
-import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.basic.SwitchIntPref
-
+import com.dede.android_eggs.resources.R as StringsR
 
 object IconVisualEffectsPrefUtil {
     const val ACTION_CHANGED = "com.dede.android_eggs.IconVisualEffectsChanged"
@@ -35,7 +34,7 @@ fun IconVisualEffectsPref() {
     SwitchIntPref(
         key = IconVisualEffectsPrefUtil.KEY_ICON_VISUAL_EFFECTS,
         leadingIcon = Icons.Rounded.Animation,
-        title = stringResource(R.string.pref_title_icon_visual_effects),
+        title = stringResource(StringsR.string.pref_title_icon_visual_effects),
         default = SettingPrefUtil.OFF,
         onCheckedChange = {
             with(LocalEvent.poster()) {

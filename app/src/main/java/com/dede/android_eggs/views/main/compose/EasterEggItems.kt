@@ -31,7 +31,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.views.main.util.AndroidReleaseDateMatcher
 import com.dede.android_eggs.views.main.util.EasterEggHelp
@@ -40,6 +39,7 @@ import com.dede.android_eggs.views.main.util.EggActionHelp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.utils.AppLocaleDateFormatter
+import com.dede.android_eggs.resources.R as StringsR
 
 @Composable
 @Preview
@@ -92,7 +92,7 @@ fun EasterEggHighestItem(
                     Icon(
                         imageVector = Icons.Rounded.BookmarkBorder,
                         tint = colorScheme.onPrimary,
-                        contentDescription = stringResource(id = R.string.label_add_shortcut)
+                        contentDescription = stringResource(id = StringsR.string.label_add_shortcut)
                     )
                 }
             }

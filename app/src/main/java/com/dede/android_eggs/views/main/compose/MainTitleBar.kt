@@ -27,7 +27,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.R
 import kotlinx.coroutines.launch
-
+import com.dede.android_eggs.resources.R as StringsR
 
 @Composable
 @Preview
@@ -77,7 +77,7 @@ fun MainTitleBar(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Settings,
-                    contentDescription = stringResource(R.string.label_settings),
+                    contentDescription = stringResource(StringsR.string.label_settings),
                     tint = MaterialTheme.colorScheme.onSurface
                 )
             }

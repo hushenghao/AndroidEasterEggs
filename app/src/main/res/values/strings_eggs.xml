@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="android_version_nickname_format" translatable="false">Android %s (%s)</string>
-    <string name="android_version_format" translatable="false">Android %s</string>
-    <string name="api_version_format" translatable="false">API %s</string>
-</resources>

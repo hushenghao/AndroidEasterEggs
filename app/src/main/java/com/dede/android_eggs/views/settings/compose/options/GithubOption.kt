@@ -10,6 +10,7 @@ import com.dede.android_eggs.ui.composes.icons.Github
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
+import com.dede.android_eggs.resources.R as StringsR
 
 @Composable
 fun GithubOption() {
@@ -17,13 +18,13 @@ fun GithubOption() {
     Option(
         leadingIcon = imageVectorIconBlock(
             imageVector = Icons.Github,
-            contentDescription = stringResource(R.string.label_github)
+            contentDescription = stringResource(StringsR.string.label_github)
         ),
-        title = stringResource(R.string.label_github),
+        title = stringResource(StringsR.string.label_github),
         desc = stringResource(R.string.url_github),
         trailingContent = imageVectorIconBlock(imageVector = Icons.Rounded.Star),
         onClick = {
-            com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_github)
+            CustomTabsBrowser.launchUrl(context, R.string.url_github)
         }
     )
 }

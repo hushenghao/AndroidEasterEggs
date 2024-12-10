@@ -4,6 +4,8 @@
 
 - Optimize the setting of theme logic
 - Optimize APK file size
+- Project modularization
+- Upgrade project dependencies
 
 ### v3.2.0 (2024-12-03)
 

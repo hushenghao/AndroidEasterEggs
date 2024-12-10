@@ -15,6 +15,7 @@ import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
 import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
 import com.dede.basic.copy
+import com.dede.android_eggs.resources.R as StringsR
 
 @Composable
 fun ContactMeGroup() {
@@ -22,15 +23,15 @@ fun ContactMeGroup() {
 
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.PersonSearch,
-        title = stringResource(R.string.label_contact_me)
+        title = stringResource(StringsR.string.label_contact_me)
     ) {
         Option(
             shape = OptionShapes.firstShape(),
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.AlternateEmail,
-                contentDescription = stringResource(id = R.string.label_email_title)
+                contentDescription = stringResource(id = StringsR.string.label_email_title)
             ),
-            title = stringResource(id = R.string.label_email_title),
+            title = stringResource(id = StringsR.string.label_email_title),
             desc = stringResource(id = R.string.label_mail_me),
             onClick = {
                 context.copy(context.getString(R.string.label_mail_me))
@@ -39,11 +40,11 @@ fun ContactMeGroup() {
         Option(
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.BugReport,
-                contentDescription = stringResource(R.string.label_feedback),
+                contentDescription = stringResource(StringsR.string.label_feedback),
             ),
-            title = stringResource(R.string.label_feedback),
+            title = stringResource(StringsR.string.label_feedback),
             onClick = {
-                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
+                CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
             }
         )
         Option(
@@ -53,7 +54,7 @@ fun ContactMeGroup() {
             ),
             title = "Telegram",
             onClick = {
-                com.dede.android_eggs.util.CustomTabsBrowser.launchUrl(context, R.string.url_telegram_group)
+                CustomTabsBrowser.launchUrl(context, R.string.url_telegram_group)
             }
         )
     }

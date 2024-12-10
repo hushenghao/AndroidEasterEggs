@@ -1,3 +1,8 @@
 plugins {
     id("easter.egg.library")
 }
+
+android {
+    namespace = "com.android_g.egg"
+    resourcePrefix = "g_"
+}

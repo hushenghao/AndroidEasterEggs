@@ -11,6 +11,7 @@ import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
 import dagger.Module
+import com.dede.android_eggs.resources.R as StringsR
 
 
 object EasterEggHelp {
@@ -57,7 +58,7 @@ object EasterEggHelp {
         }
 
         fun format(context: Context): String {
-            val enDash = context.getString(R.string.char_en_dash)
+            val enDash = context.getString(StringsR.string.char_en_dash)
             val sb = StringBuilder()
             versionNames.joinTo(sb, separator = enDash)
             return if (nicknameRes != -1) {
@@ -84,7 +85,7 @@ object EasterEggHelp {
             return if (apiLevel.first == apiLevel.last) {
                 context.getString(R.string.api_version_format, apiLevel.first.toString())
             } else {
-                val enDash = context.getString(R.string.char_en_dash)
+                val enDash = context.getString(StringsR.string.char_en_dash)
                 context.getString(R.string.api_version_format, apiLevel.join(enDash))
             }
         }

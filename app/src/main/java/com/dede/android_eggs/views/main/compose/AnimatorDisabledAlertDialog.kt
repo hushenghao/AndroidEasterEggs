@@ -18,9 +18,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.R
 import com.dede.basic.Utils
 import com.dede.basic.toast
+import com.dede.android_eggs.resources.R as StringsR
 
 
 @Composable
@@ -40,13 +40,14 @@ fun AnimatorDisabledAlertDialog(
             Text(
                 text = stringResource(android.R.string.dialog_alert_title),
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(6.dp)
+                modifier = Modifier
+                    .padding(6.dp)
                     .fillMaxWidth()
             )
         },
         text = {
             Column {
-                Text(text = stringResource(R.string.animator_disabled_alert_message))
+                Text(text = stringResource(StringsR.string.animator_disabled_alert_message))
             }
         },
         dismissButton = {
@@ -64,7 +65,7 @@ fun AnimatorDisabledAlertDialog(
                 }
                 visible = false
             }) {
-                Text(text = stringResource(R.string.action_goto_settings))
+                Text(text = stringResource(StringsR.string.action_goto_settings))
             }
         },
         onDismissRequest = {
