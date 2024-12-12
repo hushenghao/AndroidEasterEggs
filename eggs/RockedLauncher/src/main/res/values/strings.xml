@@ -2,4 +2,5 @@
 <resources>
     <!-- Title of the Android Dreams (screensaver) module -->
     <string name="dream_name">Rocket Launcher</string>
+    <string name="rocket_launcher_desc">Easter Egg of the Launcher in Android 4.0 (Ice Cream Sandwich)</string>
 </resources>

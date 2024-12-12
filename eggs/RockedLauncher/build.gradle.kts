@@ -4,5 +4,4 @@ plugins {
 
 android {
     namespace = "com.android.launcher2"
-    resourcePrefix("")
 }

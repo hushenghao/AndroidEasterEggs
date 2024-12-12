@@ -2,6 +2,7 @@
 
 ### v3.2.1
 
+- Add Rocked Launcher Easter Egg
 - Optimize the setting of theme logic
 - Optimize APK file size
 - Project modularization

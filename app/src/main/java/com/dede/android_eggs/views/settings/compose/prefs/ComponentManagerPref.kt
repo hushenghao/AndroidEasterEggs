@@ -1,7 +1,11 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
+import android.content.Intent
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.RocketLaunch
 import androidx.compose.material.icons.rounded.AppRegistration
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,12 +15,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.dede.android_eggs.R
+import com.android.launcher2.RocketLauncher
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.EasterEggHelp.VersionFormatter
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
+import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
 import com.dede.android_eggs.views.settings.compose.basic.SwitchOption
+import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
 import com.dede.basic.provider.ComponentProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -33,8 +39,20 @@ fun ComponentManagerPref(viewModel: ComponentManagerViewModel = viewModel()) {
         leadingIcon = Icons.Rounded.AppRegistration,
         title = stringResource(id = StringsR.string.label_component_manager),
     ) {
-        val componentCount = componentList.size
         val context = LocalContext.current
+        Option(
+            shape = OptionShapes.borderShape,
+            leadingIcon = imageVectorIconBlock(imageVector = Icons.Outlined.RocketLaunch),
+            title = stringResource(com.android.launcher2.R.string.dream_name),
+            desc = stringResource(com.android.launcher2.R.string.rocket_launcher_desc),
+            onClick = {
+                context.startActivity(Intent(context, RocketLauncher::class.java))
+            }
+        )
+
+        Spacer(modifier = Modifier.height(1.dp))
+
+        val componentCount = componentList.size
         componentList.forEachIndexed { index, component ->
             val formatter = VersionFormatter.create(component.apiLevelRange, component.nicknameRes)
             SwitchOption(

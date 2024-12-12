@@ -26,13 +26,11 @@ import android.animation.TimeAnimator;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.v13.dreams.BasicDream;
+import android.support.v13.dreams.Hilt_BasicDream;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -41,14 +39,21 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.dede.basic.provider.EasterEgg;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import javax.inject.Inject;
 
-public class RocketLauncher extends BasicDream {
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
+public class RocketLauncher extends Hilt_BasicDream {
     public static final boolean ROCKET_LAUNCHER = true;
 
+    @AndroidEntryPoint
     public static class Board extends FrameLayout {
         public static final boolean FIXED_STARS = true;
         public static final boolean FLYING_STARS = true;
@@ -246,33 +251,15 @@ public class RocketLauncher extends BasicDream {
 
         TimeAnimator mAnim;
 
+        @Inject
+        List<EasterEgg> mEasterEggs;
+
         public Board(Context context, AttributeSet as) {
             super(context, as);
 
             setBackgroundColor(0xFF000000);
 
-            // todo May be slow, ANR
-            List<ApplicationInfo> list = context.getPackageManager().getInstalledApplications(PackageManager.GET_ACTIVITIES);
-            HashMap<ComponentName, Drawable> icons = new HashMap<>(50);
-            for (ApplicationInfo info : list) {
-                if (!info.enabled) {
-                    continue;
-                }
-                Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(info.packageName);
-                if (launchIntent == null) {
-                    continue;
-                }
-                Drawable drawable = null;
-                try {
-                    drawable = context.getPackageManager().getApplicationIcon(info.packageName);
-                } catch (PackageManager.NameNotFoundException ignore) {
-                }
-                if (drawable == null) {
-                    continue;
-                }
-                icons.put(launchIntent.getComponent(), drawable);
-            }
-            mIcons = icons;
+            mIcons = Utils.convertComponentNameDrawableIcons(getContext(), mEasterEggs);
 //            LauncherApplication app = (LauncherApplication)context.getApplicationContext();
 //            mIcons = app.getIconCache().getAllIcons();
             mComponentNames = new ComponentName[mIcons.size()];
