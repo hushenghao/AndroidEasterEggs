@@ -1,4 +1,4 @@
-- 添加 Rocked Launcher 彩蛋
+- 添加 Rocket Launcher 彩蛋
 - 优化设置主题逻辑
 - 优化 APK 文件大小
 - 项目模块化
