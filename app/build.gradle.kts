@@ -149,8 +149,8 @@ dependencies {
     implementation(project(":feature:widget"))
     implementation(project(":feature:crash"))
     implementation(project(":feature:embedding-splits"))
-    implementation(project(":eggs:RocketLauncher"))
 
+    implementation(project(":eggs:RocketLauncher"))
     implementation(project(":eggs:AndroidNext"))
     implementation(project(":eggs:VanillaIceCream"))
     implementation(project(":eggs:UpsideDownCake"))

@@ -49,7 +49,6 @@ import dagger.hilt.EntryPoint;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.EntryPointAccessors;
 import dagger.hilt.components.SingletonComponent;
-import dagger.hilt.internal.GeneratedComponent;
 
 public class RocketLauncher extends BasicDream {
     public static final boolean ROCKET_LAUNCHER = true;
@@ -251,7 +250,7 @@ public class RocketLauncher extends BasicDream {
 
         @EntryPoint
         @InstallIn(SingletonComponent.class)
-        interface RocketLauncherEntryPoint extends GeneratedComponent {
+        interface RocketLauncherEntryPoint {
             List<EasterEgg> getEasterEggs();
         }
 
