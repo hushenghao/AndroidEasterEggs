@@ -64,7 +64,7 @@ object AndroidNextEasterEgg : EasterEggProvider {
                         return ImageView(context).apply {
                             setImageDrawable(context.requireDrawable(PLATLOGO_RES))
                             setPadding(12.dp)
-                            setBackgroundColor(0xFF_202124.toInt())
+                            setBackgroundColor(0xFF_1B1E22.toInt())
                         }
                     }
 

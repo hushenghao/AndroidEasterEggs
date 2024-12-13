@@ -51,6 +51,9 @@
         <SplitPairFilter
             window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_g.egg.PlatLogoActivity" />
+        <SplitPairFilter
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
+            window:secondaryActivityName="com.android.launcher2.RocketLauncher" />
     </SplitPairRule>
 
     <!-- Specify a placeholder for the secondary container when content is

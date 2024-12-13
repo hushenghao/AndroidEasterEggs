@@ -3,10 +3,11 @@
 
     <application>
         <activity
-            android:name="com.android.launcher2.RocketLauncher"
+            android:name=".RocketLauncher"
             android:exported="true"
-            android:icon="@drawable/ic_rocket_launch"
+            android:icon="@mipmap/ic_rocket_launcher"
             android:label="@string/dream_name"
+            android:roundIcon="@mipmap/ic_rocket_launcher_round"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -15,5 +16,19 @@
                 <category android:name="android.intent.category.DREAM" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".RocketLauncherDream"
+            android:exported="true"
+            android:icon="@mipmap/ic_rocket_launcher"
+            android:label="@string/dream_name"
+            android:permission="android.permission.BIND_DREAM_SERVICE"
+            android:roundIcon="@mipmap/ic_rocket_launcher_round">
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
     </application>
 </manifest>

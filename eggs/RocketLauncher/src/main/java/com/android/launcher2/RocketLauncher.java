@@ -30,7 +30,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.v13.dreams.Hilt_BasicDream;
+import android.support.v13.dreams.BasicDream;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -45,15 +45,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import javax.inject.Inject;
+import dagger.hilt.EntryPoint;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.EntryPointAccessors;
+import dagger.hilt.components.SingletonComponent;
+import dagger.hilt.internal.GeneratedComponent;
 
-import dagger.hilt.android.AndroidEntryPoint;
-
-@AndroidEntryPoint
-public class RocketLauncher extends Hilt_BasicDream {
+public class RocketLauncher extends BasicDream {
     public static final boolean ROCKET_LAUNCHER = true;
 
-    @AndroidEntryPoint
     public static class Board extends FrameLayout {
         public static final boolean FIXED_STARS = true;
         public static final boolean FLYING_STARS = true;
@@ -249,17 +249,25 @@ public class RocketLauncher extends Hilt_BasicDream {
             }
         }
 
-        TimeAnimator mAnim;
+        @EntryPoint
+        @InstallIn(SingletonComponent.class)
+        interface RocketLauncherEntryPoint extends GeneratedComponent {
+            List<EasterEgg> getEasterEggs();
+        }
 
-        @Inject
-        List<EasterEgg> mEasterEggs;
+        TimeAnimator mAnim;
 
         public Board(Context context, AttributeSet as) {
             super(context, as);
 
+            // Inject in DreamService and Activity
+            List<EasterEgg> easterEggs = EntryPointAccessors
+                    .fromApplication(getContext(), RocketLauncherEntryPoint.class)
+                    .getEasterEggs();
+
             setBackgroundColor(0xFF000000);
 
-            mIcons = Utils.convertComponentNameDrawableIcons(getContext(), mEasterEggs);
+            mIcons = Utils.convertComponentNameDrawableIcons(getContext(), easterEggs);
 //            LauncherApplication app = (LauncherApplication)context.getApplicationContext();
 //            mIcons = app.getIconCache().getAllIcons();
             mComponentNames = new ComponentName[mIcons.size()];

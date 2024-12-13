@@ -50,7 +50,7 @@ object LocalEvent {
 
     fun trimToSize(size: Int) {
         var trimCount = 0
-        val keys = localEventLiveDataMap.keys
+        val keys = HashSet(localEventLiveDataMap.keys)
         for (key in keys) {
             val liveData = localEventLiveDataMap[key]
             if (liveData == null) {
