@@ -1,6 +1,6 @@
 # Changelog
 
-### v3.2.1
+### v3.3.0
 
 - Add Rocket Launcher Easter Egg
 - Optimize the setting of theme logic
