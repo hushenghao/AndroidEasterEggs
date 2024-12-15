@@ -26,7 +26,7 @@
     <text style="text-anchor:end;" x="200" y="18">Chinese Simplified</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
     <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
-    <rect fill="#71C277" height="6" rx="3" ry="3" width="136.0" x="210" y="11.4"/>
+    <rect fill="#71C277" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
     <text x="380" y="18">100%</text>
   </g>
   <g class="font12" transform="translate(0,78)">
@@ -173,8 +173,8 @@
   <g class="font12" transform="translate(0,676)">
     <text style="text-anchor:end;" x="200" y="18">Spanish</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="132.79999999999998" x="210" y="11.4"/>
-    <text x="380" y="18">83%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
+    <text x="380" y="18">100%</text>
   </g>
   <g class="font12" transform="translate(0,702)">
     <text style="text-anchor:end;" x="200" y="18">Swedish</text>
@@ -191,9 +191,9 @@
   <g class="font12" transform="translate(0,754)">
     <text style="text-anchor:end;" x="200" y="18">Thai</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="99.2" x="210" y="11.4"/>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="100.8" x="210" y="11.4"/>
     <rect fill="#71C277" height="6" rx="3" ry="3" width="8.0" x="210" y="11.4"/>
-    <text x="380" y="18">62%</text>
+    <text x="380" y="18">63%</text>
   </g>
   <g class="font12" transform="translate(0,780)">
     <text style="text-anchor:end;" x="200" y="18">Turkish</text>
