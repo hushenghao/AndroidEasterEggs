@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Easter Eggs</string>
+    <string name="app_name">Huevos de Pascua</string>
     <string name="title_open_with">Abrir con</string>
     <string name="char_separator">/</string>
-    <string name="char_en_dash">-</string>
+    <string name="char_en_dash">a</string>
     <string name="label_github">Código fuente</string>
     <string name="label_translation">Traducción</string>
     <string name="label_beta">Obtener Beta</string>
@@ -44,4 +44,6 @@
     <string name="pref_summary_retain_recent_egg_tasks">Guardar tareas de Easter Eggs en la pantalla Recientes, máximo 5 tareas guardadas (No disponible para el modo de Actividad Incorporada)</string>
     <string name="label_about">Acerca de</string>
     <string name="label_contribute">Contribuir</string>
+    <string name="animator_disabled_alert_message">Debido a que el sistema de animación está inhabilitado, algunas características podrían no funcionar correctamente. Por favor, vaya a \"Opciones de Desarrollador\" y habilite la opción \"Escala de duración del animador\" para activar la animación.</string>
+    <string name="action_goto_settings">Ir a Ajustes</string>
 </resources>
