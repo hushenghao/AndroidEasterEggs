@@ -1,8 +1,8 @@
 # Changelog
 
-### v3.3.0
+### v3.3.0 (2024-12-20)
 
-- Add Rocket Launcher Easter Egg
+- Add Rocket Launcher Easter Egg [#286](https://github.com/hushenghao/AndroidEasterEggs/issues/286)
 - Optimize the setting of theme logic
 - Optimize APK file size
 - Project modularization

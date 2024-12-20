@@ -1,8 +1,8 @@
 # 更新日志
 
-### v3.3.0
+### v3.3.0 (2024-12-20)
 
-- 添加 Rocket Launcher 彩蛋
+- 添加 Rocket Launcher 彩蛋 [#286](https://github.com/hushenghao/AndroidEasterEggs/issues/286)
 - 优化设置主题逻辑
 - 优化 APK 文件大小
 - 项目模块化

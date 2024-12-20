@@ -1,0 +1,5 @@
+- Add Rocket Launcher Easter Egg
+- Optimize the setting of theme logic
+- Optimize APK file size
+- Project modularization
+- Upgrade project dependencies
