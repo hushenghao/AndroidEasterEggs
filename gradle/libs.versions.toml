@@ -2,7 +2,7 @@
 kotlin = "2.1.0"
 ksp = "2.1.0-1.0.29"
 agp = "8.7.3"
-hilt = "2.53.1"
+hilt = "2.54"
 compose-bom = "2024.12.01"
 # https://google.github.io/accompanist
 accompanist = "0.37.0"
