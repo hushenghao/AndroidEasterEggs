@@ -8,8 +8,8 @@ import android.content.Context
 import android.os.Bundle
 import androidx.startup.Initializer
 import com.dede.android_eggs.activity_actions.noOpDelegate
-import com.dede.android_eggs.util.actions.PermissionRequestAction
 import com.dede.android_eggs.util.actions.PlatLogoActivityAction
+import com.dede.android_eggs.util.actions.RequestNotificationPermissionAction
 import com.dede.android_eggs.util.actions.WarningDialogAction
 
 internal class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks by noOpDelegate(),
@@ -23,6 +23,8 @@ internal class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks
 
     interface ActivityAction {
 
+        fun isEnabled(): Boolean = true
+
         fun onPreCreate(activity: Activity) {}
 
         fun onCreate(activity: Activity) {}
@@ -31,28 +33,31 @@ internal class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks
 
     }
 
-    private val actions: List<ActivityAction> = arrayListOf(
+    private val actions: Array<ActivityAction> = arrayOf(
         PlatLogoActivityAction(),
         WarningDialogAction(),
-        PermissionRequestAction(),
+        RequestNotificationPermissionAction(),
     )
 
-    override fun onActivityPreCreated(activity: Activity, savedInstanceState: Bundle?) {
-        for (action in actions) {
-            action.onPreCreate(activity)
+    private fun filterPerformAction(action: ActivityAction.() -> Unit) {
+        for (impl in actions) {
+            if (!impl.isEnabled()) {
+                continue
+            }
+            action(impl)
         }
+    }
+
+    override fun onActivityPreCreated(activity: Activity, savedInstanceState: Bundle?) {
+        filterPerformAction { onPreCreate(activity) }
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-        for (action in actions) {
-            action.onCreate(activity)
-        }
+        filterPerformAction { onCreate(activity) }
     }
 
     override fun onActivityStarted(activity: Activity) {
-        for (action in actions) {
-            action.onStart(activity)
-        }
+        filterPerformAction { onStart(activity) }
     }
 
 }
