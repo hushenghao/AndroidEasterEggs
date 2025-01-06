@@ -7,11 +7,12 @@ import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import androidx.startup.Initializer
+import com.dede.android_eggs.activity_actions.noOpDelegate
 import com.dede.android_eggs.util.actions.PermissionRequestAction
 import com.dede.android_eggs.util.actions.PlatLogoActivityAction
 import com.dede.android_eggs.util.actions.WarningDialogAction
 
-internal class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks,
+internal class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks by noOpDelegate(),
     Initializer<Unit> {
 
     override fun create(context: Context) {
@@ -28,13 +29,6 @@ internal class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks
 
         fun onStart(activity: Activity) {}
 
-        fun onResume(activity: Activity) {}
-
-        fun onPause(activity: Activity) {}
-
-        fun onStop(activity: Activity) {}
-
-        fun onDestroyed(activity: Activity) {}
     }
 
     private val actions: List<ActivityAction> = arrayListOf(
@@ -61,30 +55,4 @@ internal class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks
         }
     }
 
-    override fun onActivityResumed(activity: Activity) {
-        for (action in actions) {
-            action.onResume(activity)
-        }
-    }
-
-    override fun onActivityPaused(activity: Activity) {
-        for (action in actions) {
-            action.onPause(activity)
-        }
-    }
-
-    override fun onActivityStopped(activity: Activity) {
-        for (action in actions) {
-            action.onStop(activity)
-        }
-    }
-
-    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-    }
-
-    override fun onActivityDestroyed(activity: Activity) {
-        for (action in actions) {
-            action.onDestroyed(activity)
-        }
-    }
 }
