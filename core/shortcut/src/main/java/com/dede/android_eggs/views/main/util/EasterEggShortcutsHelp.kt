@@ -132,12 +132,16 @@ object EasterEggShortcutsHelp {
         val shortcutId = FORMAT_PIN_SHORTCUT_ID.format(egg.apiLevel)
         val shortcut = createShortcutInfo(context, shortcutId, egg, true)
         val callback = PinShortcutReceiver.registerCallbackWithTimeout(context)
-        ShortcutManagerCompat.requestPinShortcut(context, shortcut, callback)
+        cachedExecutor.execute {
+            ShortcutManagerCompat.requestPinShortcut(context, shortcut, callback)
+        }
     }
 
     fun autoReportShortcutUsed(context: Context, intent: Intent) {
         val shortcutId = intent.getStringExtra(EXTRA_SHORTCUT_ID) ?: return
-        ShortcutManagerCompat.reportShortcutUsed(context, shortcutId)
+        cachedExecutor.execute {
+            ShortcutManagerCompat.reportShortcutUsed(context, shortcutId)
+        }
     }
 
     private class PinShortcutReceiver : BroadcastReceiver() {

@@ -4,6 +4,7 @@
 
 - EdgeToEdge mode is enabled on the Easter Egg pages
 - Upgrade project dependencies
+- Known issue fixes
 
 ### v3.3.0 (2024-12-20)
 
