@@ -71,6 +71,7 @@ class DynamicResult private constructor(
             return getTypeValue(kClass.java)
         }
 
+        @JvmStatic
         @Suppress("UNCHECKED_CAST")
         fun <T : Any> DynamicResult.getTypeValue(tClass: Class<out T>): T? {
             val value = this.getValue()

@@ -9,15 +9,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager.NameNotFoundException
-import android.graphics.Color
 import android.os.Build
 import android.provider.Settings
-import android.view.WindowManager
-import androidx.activity.ComponentActivity
-import androidx.activity.enableEdgeToEdge
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 
 object Utils {
 
@@ -83,36 +76,4 @@ object Utils {
     val Activity.isPlatLogoActivity: Boolean
         get() = javaClass.simpleName == "PlatLogoActivity"
 
-    fun Activity.platLogoEdge2Edge() {
-        if (this is ComponentActivity) {
-            this.enableEdgeToEdge()
-            return
-        }
-
-        @Suppress("DEPRECATION")
-        with(window) {
-            addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
-
-            navigationBarColor = Color.TRANSPARENT
-            statusBarColor = Color.TRANSPARENT
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                isNavigationBarContrastEnforced = false
-                isStatusBarContrastEnforced = false
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                attributes = attributes.apply {
-                    layoutInDisplayCutoutMode =
-                        WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
-                }
-            }
-
-            WindowCompat.setDecorFitsSystemWindows(this, false)
-            val windowInsetsController = WindowCompat.getInsetsController(this, this.decorView)
-            windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
-            windowInsetsController.systemBarsBehavior =
-                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        }
-    }
 }

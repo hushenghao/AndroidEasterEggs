@@ -135,7 +135,7 @@ object EasterEggShortcutsHelp {
         ShortcutManagerCompat.requestPinShortcut(context, shortcut, callback)
     }
 
-    fun reportShortcutUsed(context: Context, intent: Intent) {
+    fun autoReportShortcutUsed(context: Context, intent: Intent) {
         val shortcutId = intent.getStringExtra(EXTRA_SHORTCUT_ID) ?: return
         ShortcutManagerCompat.reportShortcutUsed(context, shortcutId)
     }
