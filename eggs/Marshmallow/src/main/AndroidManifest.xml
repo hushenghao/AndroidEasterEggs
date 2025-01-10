@@ -21,6 +21,7 @@
             android:label="@string/m_mland"
             android:launchMode="singleInstance"
             android:screenOrientation="locked"
-            android:theme="@android:style/Theme.Material.NoActionBar" />
+            android:theme="@android:style/Theme.Material.NoActionBar.Fullscreen" />
+        <!--android:theme="@android:style/Theme.Material.NoActionBar"-->
     </application>
 </manifest>

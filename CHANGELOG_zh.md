@@ -1,5 +1,10 @@
 # 更新日志
 
+### v3.4.0
+
+- 彩蛋相关页面开启了 EdgeToEdge 模式
+- 升级项目依赖项
+
 ### v3.3.0 (2024-12-20)
 
 - 添加 Rocket Launcher 彩蛋 [#286](https://github.com/hushenghao/AndroidEasterEggs/issues/286)

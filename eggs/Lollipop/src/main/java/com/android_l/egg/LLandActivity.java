@@ -19,7 +19,16 @@ package com.android_l.egg;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.activity.EdgeToEdgeCompat;
+import androidx.annotation.NonNull;
+import androidx.core.graphics.Insets;
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 
 public class LLandActivity extends Activity {
@@ -31,5 +40,24 @@ public class LLandActivity extends Activity {
         world.setScoreField((TextView) findViewById(R.id.score));
         world.setSplash(findViewById(R.id.welcome));
         Log.v(LLand.TAG, "focus: " + world.requestFocus());
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.score), new OnApplyWindowInsetsListener() {
+
+            private ViewGroup.MarginLayoutParams copyParams;
+
+            @NonNull
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(@NonNull View v, @NonNull WindowInsetsCompat insets) {
+                Insets edge = insets.getInsets(EdgeToEdgeCompat.EDGE_INSETS_MASK);
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams)v.getLayoutParams();
+                if (copyParams == null) {
+                    copyParams = new ViewGroup.MarginLayoutParams(params);
+                }
+                params.topMargin = edge.top + copyParams.topMargin;
+                params.leftMargin = edge.left + copyParams.leftMargin;
+                v.setLayoutParams(params);
+                return insets;
+            }
+        });
     }
 }

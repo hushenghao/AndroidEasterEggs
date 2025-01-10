@@ -8,7 +8,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.startup.Initializer
 import com.dede.android_eggs.activity_actions.noOpDelegate
-import com.dede.android_eggs.util.actions.PlatLogoActivityAction
+import com.dede.android_eggs.util.actions.EggActivityAction
 import com.dede.android_eggs.util.actions.RequestNotificationPermissionAction
 import com.dede.android_eggs.util.actions.WarningDialogAction
 
@@ -34,7 +34,7 @@ internal class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks
     }
 
     private val actions: Array<ActivityAction> = arrayOf(
-        PlatLogoActivityAction(),
+        EggActivityAction(),
         WarningDialogAction(),
         RequestNotificationPermissionAction(),
     )

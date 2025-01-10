@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.EdgeToEdgeCompat;
 import androidx.annotation.NonNull;
 import androidx.core.graphics.Insets;
 import androidx.core.view.OnApplyWindowInsetsListener;
@@ -48,9 +49,9 @@ public class MLandActivity extends Activity {
             @NonNull
             @Override
             public WindowInsetsCompat onApplyWindowInsets(@NonNull View v, @NonNull WindowInsetsCompat insets) {
-                Insets edge = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                Insets edge = insets.getInsets(EdgeToEdgeCompat.EDGE_INSETS_MASK);
                 v.setPadding(0, edge.top, 0, 0);
-                return WindowInsetsCompat.CONSUMED;
+                return insets;
             }
         });
     }

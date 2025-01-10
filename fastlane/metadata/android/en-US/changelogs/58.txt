@@ -1,0 +1,2 @@
+- EdgeToEdge mode is enabled on the Easter Egg pages
+- Upgrade project dependencies

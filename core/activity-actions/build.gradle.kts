@@ -15,7 +15,13 @@ dependencies {
     implementation(project(":eggs:Tiramisu"))
     implementation(project(":eggs:S"))
     implementation(project(":eggs:R"))
+    implementation(project(":eggs:Oreo"))
     implementation(project(":eggs:Nougat"))
+    implementation(project(":eggs:Marshmallow"))
+    implementation(project(":eggs:Lollipop"))
+    implementation(project(":eggs:KitKat"))
+    implementation(project(":eggs:JellyBean"))
+    implementation(project(":eggs:IceCreamSandwich"))
 
     implementation(libs.androidx.startup)
     implementation(platform(libs.androidx.compose.bom))

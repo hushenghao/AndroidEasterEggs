@@ -21,7 +21,8 @@
             android:exported="true"
             android:icon="@drawable/s_icon"
             android:label="@string/s_egg_name"
-            android:theme="@android:style/Theme.DeviceDefault.Wallpaper.NoTitleBar" />
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+        <!--android:theme="@android:style/Theme.DeviceDefault.Wallpaper.NoTitleBar"-->
 
         <!-- Android N easter egg bits -->
         <activity

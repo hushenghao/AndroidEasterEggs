@@ -1,5 +1,10 @@
 # Changelog
 
+### v3.4.0
+
+- EdgeToEdge mode is enabled on the Easter Egg pages
+- Upgrade project dependencies
+
 ### v3.3.0 (2024-12-20)
 
 - Add Rocket Launcher Easter Egg [#286](https://github.com/hushenghao/AndroidEasterEggs/issues/286)

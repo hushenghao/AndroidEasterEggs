@@ -4,7 +4,6 @@
 package com.dede.basic
 
 import android.animation.ValueAnimator
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
@@ -72,8 +71,5 @@ object Utils {
         }
         return null to -1L
     }
-
-    val Activity.isPlatLogoActivity: Boolean
-        get() = javaClass.simpleName == "PlatLogoActivity"
 
 }
