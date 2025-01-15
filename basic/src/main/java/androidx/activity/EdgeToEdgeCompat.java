@@ -45,7 +45,7 @@ public class EdgeToEdgeCompat {
         };
         for (int api : apis) {
             if (Build.VERSION.SDK_INT >= api) {
-                className = "androidx.activity.EdgeToEdgeApi1" + api;
+                className = "androidx.activity.EdgeToEdgeApi" + api;
                 break;
             }
         }
