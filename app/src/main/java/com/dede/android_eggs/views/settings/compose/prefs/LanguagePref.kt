@@ -172,7 +172,7 @@ object LanguagePrefUtil {
         // check gradle resourceConfigurations count
         actual = BuildConfig.LANGUAGE_RES
         check(expected == actual) {
-            "android.defaultConfig.resourceConfigurations length, expected: %d, actual: %d."
+            "android.androidResources.localeFilters length, expected: %d, actual: %d."
                 .format(expected, actual)
         }
     }

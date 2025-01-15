@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")// androidResources.localeFilters
+
 plugins {
     id("easter.egg.app")
 }
@@ -5,13 +7,8 @@ plugins {
 android {
     namespace = "com.dede.android_eggs"
 
-    defaultConfig {
-        applicationId = "com.dede.android_eggs"
-        versionCode = 58
-        versionName = "3.4.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        resourceConfigurations += listOf(
+    androidResources {
+        localeFilters += listOf(
             "zh", "zh-rTW",
             "ru", "uk-rUA",
             "en", "it", "de", "fr", "nl-rNL", "hu-rHU",
@@ -20,11 +17,18 @@ android {
             "ja-rJP", "ko-rKR", "vi-rVN", "th-rTH", "fil-rPH", "lo-rLA",
             "ar-rSA", "cs-rCZ", "ta-rIN", "ro-rRO", "sv-rSE", "my-rMM",
         )
+    }
+
+    defaultConfig {
+        applicationId = "com.dede.android_eggs"
+        versionCode = 58
+        versionName = "3.4.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
 
         // Language configuration only
-        buildConfigField("int", "LANGUAGE_RES", resourceConfigurations.size.toString())
+        buildConfigField("int", "LANGUAGE_RES", androidResources.localeFilters.size.toString())
     }
 
     signingConfigs {
