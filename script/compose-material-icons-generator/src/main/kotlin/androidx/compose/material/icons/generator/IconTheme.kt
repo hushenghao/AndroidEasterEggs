@@ -25,11 +25,11 @@ import java.util.Locale
  * @property themeClassName the CameCase name used for the theme objects
  */
 enum class IconTheme(val themePackageName: String, val themeClassName: String) {
-//    Filled("filled", "Filled"),
-//    Outlined("outlined", "Outlined"),
+    Filled("filled", "Filled"),
+    Outlined("outlined", "Outlined"),
     Rounded("rounded", "Rounded"),
-//    TwoTone("twotone", "TwoTone"),
-//    Sharp("sharp", "Sharp"),
+    TwoTone("twotone", "TwoTone"),
+    Sharp("sharp", "Sharp"),
 }
 
 /**

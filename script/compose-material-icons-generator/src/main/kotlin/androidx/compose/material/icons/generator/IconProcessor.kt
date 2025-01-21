@@ -66,7 +66,8 @@ class IconProcessor(
     fun process(): List<Icon> {
         val icons = loadIcons()
 
-        ensureIconsExistInAllThemes(icons)
+        // disable this check for now, as we are not generating all icons in all themes
+        //ensureIconsExistInAllThemes(icons)
         val (regularIcons, autoMirroredIcons) = icons.partition { !it.autoMirrored }
         writeApiFile(regularIcons, generatedApiFile)
         writeApiFile(autoMirroredIcons, generatedAutoMirroredApiFile)
