@@ -1,2 +1,2 @@
-crowdin-api-client==1.19.0
+crowdin-api-client==1.20.0
 svgwrite==1.4.3
