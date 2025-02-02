@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="summary_android_waiting">Δεν κυκλοφόρησε ακόμα</string>
     <string name="summary_android_release_pushed">Η τελική έκδοση έχει κυκλοφορήσει</string>
     <string name="label_timeline_title">Χρονοδιάγραμμα, ορόσημα και ενημερώσεις</string>
     <string name="label_timeline_releases">Κυκλοφορίες</string>
+    <string name="label_timeline_developer_previews">Προεπισκοπήσεις Προγραμματιστή</string>
+    <string name="label_timeline_beta_release">Κυκλοφορίες Beta</string>
+    <string name="label_timeline_platform_stability">Σταθερότητα Πλατφόρμας</string>
+    <string name="label_timeline_final_release">Τελική Κυκλοφορία</string>
 </resources>
