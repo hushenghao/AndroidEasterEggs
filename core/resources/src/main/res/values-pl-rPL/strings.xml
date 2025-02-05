@@ -39,9 +39,11 @@
     <string name="label_share">Udostępnij</string>
     <string name="label_search_hint">Szukaj…</string>
     <string name="label_component_manager">Menedżer Komponentów</string>
-    <string name="pref_more_settings">Więcej Ustawień</string>
+    <string name="pref_more_settings">Więcej ustawień</string>
     <string name="pref_retain_recent_egg_tasks">Zachowaj ostatnie zadania Easter Egg\'ów</string>
     <string name="pref_summary_retain_recent_egg_tasks">Zachowaj zadania Easter Egg\'ów na ekranie Ostatnie, maksymalnie 5 zachowanych zadań (niedostępne w trybie osadzonej aktywności).</string>
     <string name="label_about">O aplikacji</string>
     <string name="label_contribute">Wspomóż</string>
+    <string name="animator_disabled_alert_message">Z powodu wyłączenia animacji systemowych niektóre funkcje mogą nie działać poprawnie. Przejdź do \"Opcji programisty\" i włącz opcję \"Skala długości animacji\", aby aktywować animacje.</string>
+    <string name="action_goto_settings">Przejdź do ustawień</string>
 </resources>
