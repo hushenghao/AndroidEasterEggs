@@ -61,8 +61,8 @@ fun Context.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, text, duration).show()
 }
 
-fun Context.createChooser(target: Intent): Intent {
-    return Intent.createChooser(target, getString(R.string.title_open_with))
+fun Context.createChooser(target: Intent, title: CharSequence? = null): Intent {
+    return Intent.createChooser(target, title ?: getString(R.string.title_open_with))
         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 }
 

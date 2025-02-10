@@ -2,18 +2,23 @@
 
 package com.dede.basic.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import com.dede.basic.MIME_PNG
+import com.dede.basic.createChooser
 import com.dede.basic.launch
 import com.dede.basic.lifecycleCompat
 import com.dede.basic.saveToAlbum
+import com.dede.basic.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import androidx.appcompat.R as appCompatR
 
 
 /**
@@ -45,10 +50,16 @@ object ShareCatUtils {
             intent.putExtra(Intent.EXTRA_SUBJECT, catName)
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             intent.type = MIME_PNG
-            activity.startActivity(
-                Intent.createChooser(intent, null)
-                    .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            )
+
+            @SuppressLint("PrivateResource")
+            val title = activity.getString(appCompatR.string.abc_shareactionprovider_share_with)
+            val chooser = activity.createChooser(intent, title)
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            try {
+                activity.startActivity(chooser)
+            } catch (_: ActivityNotFoundException) {
+                activity.toast("Share failure!")
+            }
         }
     }
 }
