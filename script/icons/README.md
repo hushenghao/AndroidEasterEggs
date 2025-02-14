@@ -1,4 +1,4 @@
-# Subset Icons font
+# ~~Subset Icons font~~ ~Deprecated, Replace with Jetpack Compose material icons~
 
 FontTools Subset [Material Design Icons](https://fonts.google.com/icons) font.
 
