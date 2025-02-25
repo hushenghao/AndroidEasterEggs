@@ -5,7 +5,7 @@ agp = "8.8.1"
 hilt = "2.55"
 compose-bom = "2025.02.00"
 # https://google.github.io/accompanist
-accompanist = "0.37.0"
+accompanist = "0.37.2"
 lifecycle = "2.8.7"
 activity = "1.10.0"
 # test
