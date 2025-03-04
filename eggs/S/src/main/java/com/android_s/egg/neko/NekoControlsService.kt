@@ -16,6 +16,8 @@
 
 package com.android_s.egg.neko
 
+//import com.android.internal.logging.MetricsLogger
+
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -34,13 +36,11 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.util.Log
 import androidx.annotation.RequiresApi
-//import com.android.internal.logging.MetricsLogger
+import com.android_s.egg.R
+import com.dede.basic.cachedExecutor
 import java.util.Random
 import java.util.concurrent.Flow
 import java.util.function.Consumer
-
-import com.android_s.egg.R
-import com.dede.basic.cachedExecutor
 
 const val CONTROL_ID_WATER = "water"
 const val CONTROL_ID_FOOD = "food"
@@ -206,14 +206,14 @@ public class NekoControlsService : ControlsProviderService(), PrefState.PrefsLis
                 controls[CONTROL_ID_TOY] =
                     makeToyControl(currentToyIcon(), true)
                 // TODO: re-enable toy
-                Thread() {
+                cachedExecutor.execute {
                     Thread.sleep((1 + Random().nextInt(4)) * 1000L)
                     NekoService.getExistingCat(prefs)?.let {
                         NekoService.notifyCat(this, it)
                     }
                     controls[CONTROL_ID_TOY] = makeToyControl(randomToyIcon(), false)
                     pushControlChanges()
-                }.start()
+                }
             }
             CONTROL_ID_WATER -> {
                 if (action is FloatAction) {

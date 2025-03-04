@@ -38,7 +38,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import com.android_t.egg.R
 import com.dede.basic.cachedExecutor
-import java.util.*
+import java.util.Random
 import java.util.concurrent.Flow
 import java.util.function.Consumer
 
@@ -207,14 +207,14 @@ public class NekoControlsService : ControlsProviderService(), PrefState.PrefsLis
                 controls[CONTROL_ID_TOY] =
                     makeToyControl(currentToyIcon(), true)
                 // TODO: re-enable toy
-                Thread() {
+                cachedExecutor.execute {
                     Thread.sleep((1 + Random().nextInt(4)) * 1000L)
                     NekoService.getExistingCat(prefs)?.let {
                         NekoService.notifyCat(this, it)
                     }
                     controls[CONTROL_ID_TOY] = makeToyControl(randomToyIcon(), false)
                     pushControlChanges()
-                }.start()
+                }
             }
             CONTROL_ID_WATER -> {
                 if (action is FloatAction) {
