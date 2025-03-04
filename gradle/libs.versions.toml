@@ -46,7 +46,7 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-material = { module = "androidx.compose.material:material" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
 androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended" }
-androidx-compose-constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.1.0"
+androidx-compose-constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.1.1"
 accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
 # Preview support
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
