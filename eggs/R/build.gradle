@@ -5,14 +5,6 @@ plugins {
 android {
 	namespace = "com.android_r.egg"
 	resourcePrefix = "r_"
-
-	sourceSets {
-		main {
-			res.srcDirs = ['res']
-			java.srcDirs = ['src']
-			manifest.srcFile 'AndroidManifest.xml'
-		}
-	}
 }
 
 dependencies {

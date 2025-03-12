@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- used for cat notifications -->
     <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />
@@ -28,14 +29,16 @@
             android:name=".neko.NekoLand"
             android:exported="true"
             android:label="@string/t_app_name"
-            android:theme="@android:style/Theme.Material.NoActionBar" />
+            android:theme="@android:style/Theme.Material.NoActionBar"
+            tools:targetApi="30" />
 
         <!-- This is where the magic happens -->
         <service
             android:name=".neko.NekoService"
             android:enabled="true"
             android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            tools:targetApi="30" />
         <!-- Used to enable easter egg -->
         <activity
             android:name=".ComponentActivationActivity"
@@ -49,7 +52,8 @@
             android:exported="true"
             android:icon="@drawable/t_ic_fullcat_icon"
             android:label="@string/t_egg_name"
-            android:permission="android.permission.BIND_CONTROLS">
+            android:permission="android.permission.BIND_CONTROLS"
+            tools:targetApi="30">
             <intent-filter>
                 <action android:name="android.service.controls.ControlsProviderService" />
             </intent-filter>
@@ -64,7 +68,8 @@
             android:enabled="false"
             android:exported="true"
             android:label="@string/t_egg_name"
-            android:theme="@android:style/Theme.Material.Wallpaper.NoTitleBar" />
+            android:theme="@android:style/Theme.Material.Wallpaper.NoTitleBar"
+            tools:targetApi="31" />
 
         <!-- Homescreen widget also showing paint chips (may be affected by the exact position in
              the workspace) -->
@@ -72,7 +77,8 @@
             android:name=".widget.PaintChipsWidget"
             android:enabled="false"
             android:exported="true"
-            android:label="@string/t_egg_name">
+            android:label="@string/t_egg_name"
+            tools:targetApi="31">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
