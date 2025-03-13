@@ -50,6 +50,8 @@ import com.dede.basic.views.AnalogClock;
 import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
 
+import java.util.Calendar;
+
 /**
  * Android S
  */
@@ -238,19 +240,15 @@ public class PlatLogoActivity extends Activity {
             super(context);
         }
 
-        @Override
-        public Time now() {
-            Time realNow = super.now();
+//        @Override
+//        protected Instant now() {
 //            final Instant realNow = super.now();
 //            final ZoneId tz = Clock.systemDefaultZone().getZone();
 //            final ZonedDateTime zdTime = realNow.atZone(tz);
-            if (mOverride) {
-                if (mOverrideHour < 0) {
+//            if (mOverride) {
+//                if (mOverrideHour < 0) {
 //                    mOverrideHour = zdTime.getHour();
-                    mOverrideHour = realNow.hour;
-                }
-                realNow.set(0, mOverrideMinute, mOverrideHour,
-                        realNow.monthDay, realNow.month, realNow.year);
+//                }
 //                return Clock.fixed(zdTime
 //                        .withHour(mOverrideHour)
 //                        .withMinute(mOverrideMinute)
@@ -258,6 +256,19 @@ public class PlatLogoActivity extends Activity {
 //                        .toInstant(), tz).instant();
 //            } else {
 //                return realNow;
+//            }
+//        }
+
+        @Override
+        public Calendar now() {
+            Calendar realNow = super.now();
+            if (mOverride) {
+                if (mOverrideHour < 0) {
+                    mOverrideHour = realNow.get(Calendar.HOUR_OF_DAY);
+                }
+                realNow.set(Calendar.HOUR_OF_DAY, mOverrideHour);
+                realNow.set(Calendar.MINUTE, mOverrideMinute);
+                realNow.set(Calendar.SECOND, 0);
             }
             return realNow;
         }

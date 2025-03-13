@@ -24,34 +24,38 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.text.format.DateUtils;
-import android.text.format.Time;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import com.dede.basic.DrawableKt;
 import com.dede.basic.R;
 
+import java.util.Calendar;
+import java.util.Objects;
 import java.util.TimeZone;
 
 /**
  * This widget display an analogic clock with two hands for hours and
  * minutes.
  * <p>
- * Copy from Framework branch android-7.1.2_r39
+ * Copy from <a href="https://cs.android.com/android/platform/superproject/+/android-7.1.2_r39:frameworks/base/core/java/android/widget/AnalogClock.java">android-7.1.2_r39:frameworks:AnalogClock.java</a>.
  *
  * @attr ref android.R.styleable#AnalogClock_dial
  * @attr ref android.R.styleable#AnalogClock_hand_hour
  * @attr ref android.R.styleable#AnalogClock_hand_minute
  */
 public class AnalogClock extends View {
-    private Time mCalendar;
+    // Use java.util.Calendar replace android.text.format.Time
+    private Calendar mCalendar;
 
     private Drawable mHourHand;
     private Drawable mMinuteHand;
     private Drawable mDial;
 
-    private int mDialWidth;
-    private int mDialHeight;
+    private final int mDialWidth;
+    private final int mDialHeight;
 
     private boolean mAttached;
 
@@ -97,7 +101,7 @@ public class AnalogClock extends View {
         }
         a.recycle();
 
-        mCalendar = new Time();
+        mCalendar = Calendar.getInstance();
 
         mDialWidth = mDial.getIntrinsicWidth();
         mDialHeight = mDial.getIntrinsicHeight();
@@ -139,7 +143,7 @@ public class AnalogClock extends View {
         // in the main thread, therefore the receiver can't run before this method returns.
 
         // The time zone may have changed while the receiver wasn't registered, so update the Time
-        mCalendar = new Time();
+        mCalendar = Calendar.getInstance();
 
         // Make sure we update to the current time
         onTimeChanged();
@@ -186,7 +190,7 @@ public class AnalogClock extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
 
         boolean changed = mChanged;
@@ -247,17 +251,17 @@ public class AnalogClock extends View {
         }
     }
 
-    protected Time now() {
-        mCalendar.setToNow();
+    protected Calendar now() {
+        mCalendar.setTimeInMillis(System.currentTimeMillis());
         return mCalendar;
     }
 
     protected void onTimeChanged() {
-        Time now = this.now();
+        Calendar now = this.now();
 
-        int hour = now.hour;
-        int minute = now.minute;
-        int second = now.second;
+        int hour = now.get(Calendar.HOUR_OF_DAY);
+        int minute = now.get(Calendar.MINUTE);
+        int second = now.get(Calendar.SECOND);
 
         mMinutes = minute + second / 60.0f;
         mHour = hour + mMinutes / 60.0f;
@@ -269,9 +273,9 @@ public class AnalogClock extends View {
     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Intent.ACTION_TIMEZONE_CHANGED)) {
+            if (Objects.equals(intent.getAction(), Intent.ACTION_TIMEZONE_CHANGED)) {
                 String tz = intent.getStringExtra("time-zone");
-                mCalendar = new Time(TimeZone.getTimeZone(tz).getID());
+                mCalendar = Calendar.getInstance(TimeZone.getTimeZone(tz));
             }
 
             onTimeChanged();
@@ -280,10 +284,10 @@ public class AnalogClock extends View {
         }
     };
 
-    private void updateContentDescription(Time time) {
-        final int flags = DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_24HOUR;
+    private void updateContentDescription(Calendar time) {
+        final int flags = DateUtils.FORMAT_SHOW_TIME;// | DateUtils.FORMAT_24HOUR;
         String contentDescription = DateUtils.formatDateTime(getContext(),
-                time.toMillis(false), flags);
+                time.getTimeInMillis(), flags);
         setContentDescription(contentDescription);
     }
 }

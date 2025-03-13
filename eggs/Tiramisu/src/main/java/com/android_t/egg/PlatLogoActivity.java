@@ -50,6 +50,7 @@ import com.dede.basic.DrawableKt;
 import com.dede.basic.SpUtils;
 
 import java.io.File;
+import java.util.Calendar;
 
 /**
  * @hide
@@ -255,14 +256,15 @@ public class PlatLogoActivity extends Activity {
 //        }
 
         @Override
-        public Time now() {
-            Time realNow = super.now();
+        public Calendar now() {
+            Calendar realNow = super.now();
             if (mOverride) {
                 if (mOverrideHour < 0) {
-                    mOverrideHour = realNow.hour;
+                    mOverrideHour = realNow.get(Calendar.HOUR_OF_DAY);
                 }
-                realNow.set(0, mOverrideMinute, mOverrideHour,
-                        realNow.monthDay, realNow.month, realNow.year);
+                realNow.set(Calendar.HOUR_OF_DAY, mOverrideHour);
+                realNow.set(Calendar.MINUTE, mOverrideMinute);
+                realNow.set(Calendar.SECOND, 0);
             }
             return realNow;
         }
