@@ -25,7 +25,7 @@ android {
         versionName = "3.4.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        setProperty("archivesBaseName", "easter_eggs_${versionName}_${versionCode}")
+        base.archivesName.set("easter_eggs_${versionName}_${versionCode}")
 
         // Language configuration only
         buildConfigField("int", "LANGUAGE_RES", androidResources.localeFilters.size.toString())
