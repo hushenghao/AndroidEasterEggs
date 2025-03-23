@@ -13,8 +13,8 @@
   <g class="font12" transform="translate(0,0)">
     <text style="text-anchor:end;" x="200" y="18">Arabic</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="155.2" x="210" y="11.4"/>
-    <text x="380" y="18">97%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="156.8" x="210" y="11.4"/>
+    <text x="380" y="18">98%</text>
   </g>
   <g class="font12" transform="translate(0,26)">
     <text style="text-anchor:end;" x="200" y="18">Burmese</text>
@@ -210,7 +210,7 @@
   <g class="font12" transform="translate(0,832)">
     <text style="text-anchor:end;" x="200" y="18">Vietnamese</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="94.39999999999999" x="210" y="11.4"/>
-    <text x="380" y="18">59%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="100.8" x="210" y="11.4"/>
+    <text x="380" y="18">63%</text>
   </g>
 </svg>
