@@ -8,11 +8,11 @@
 
     <string name="label_github">Source code</string>
     <string name="label_translation">Translations</string>
-    <string name="label_beta">Download Beta</string>
+    <string name="label_beta">Download beta</string>
     <string name="label_timeline">Timeline</string>
-    <string name="label_privacy_policy">Privacy Policy</string>
+    <string name="label_privacy_policy">Privacy policy</string>
     <string name="label_license">License</string>
-    <string name="label_feedback">Give Feedback</string>
+    <string name="label_feedback">Give feedback</string>
     <string name="label_star">Rate App</string>
     <string name="label_contact_me">Contact Me</string>
     <string name="label_email_title">Email</string>
