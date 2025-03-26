@@ -5,16 +5,12 @@ package com.dede.android_eggs.views.settings
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -31,25 +27,19 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.BuildConfig
-import com.dede.android_eggs.R
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.Receiver
 import com.dede.android_eggs.util.SplitUtils
-import com.dede.android_eggs.views.main.compose.DrawableImage
 import com.dede.android_eggs.views.settings.compose.basic.SettingDivider
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.groups.AboutGroup
@@ -170,43 +160,7 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                     TestCrashOption()
                 }
 
-                PoweredByCompose()
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PoweredByCompose() {
-    Row(
-        modifier = Modifier
-            .padding(vertical = 8.dp)
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Column {
-            Text(
-                text = "Powered by",
-                fontSize = TextUnit(8f, TextUnitType.Sp),
-                fontFamily = FontFamily.SansSerif,
-                lineHeight = TextUnit(8f, TextUnitType.Sp),
-            )
-            Text(
-                text = "Compose",
-                fontSize = TextUnit(14f, TextUnitType.Sp),
-                fontWeight = FontWeight.Bold,
-                lineHeight = TextUnit(12f, TextUnitType.Sp),
-                fontFamily = FontFamily.SansSerif,
-            )
-        }
-        Spacer(modifier = Modifier.width(2.dp))
-        DrawableImage(
-            res = R.drawable.ic_compose_logo,
-            contentDescription = "Compose Logo",
-            modifier = Modifier
-                .width(24.dp)
-                .align(Alignment.Bottom)
-        )
     }
 }
