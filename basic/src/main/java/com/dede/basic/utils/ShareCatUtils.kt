@@ -30,7 +30,7 @@ object ShareCatUtils {
 
     private const val CATS_DIR = "Cats"
 
-    private suspend fun saveCat(context: Context, bitmap: Bitmap, catName: String): Uri? =
+    suspend fun saveCat(context: Context, bitmap: Bitmap, catName: String): Uri? =
         withContext(Dispatchers.IO) {
             bitmap.saveToAlbum(context, catName.toFileName(), CATS_DIR, 0)
         }

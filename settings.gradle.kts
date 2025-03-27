@@ -35,6 +35,7 @@ include(
     ":core:alterable-adaptive-icon",
     ":core:custom-tab-browser",
 
+    ":feature:cat-editor",
     ":feature:widget",
     ":feature:crash",
     ":feature:embedding-splits",
