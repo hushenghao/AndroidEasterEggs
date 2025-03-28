@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
@@ -27,7 +28,7 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Refresh
-import androidx.compose.material.icons.rounded.SaveAlt
+import androidx.compose.material.icons.rounded.Save
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -135,6 +136,8 @@ fun CatEditorSheetDialog(
 
             val context = LocalContext.current
 
+            CatEditorGridLine()
+
             CatEditor(colors = colors, captureController = captureController)
 
             Column(
@@ -154,7 +157,7 @@ fun CatEditorSheetDialog(
                     }
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.SaveAlt,
+                        imageVector = Icons.Rounded.Save,
                         contentDescription = null
                     )
                 }
@@ -191,7 +194,7 @@ fun CatEditorSheetDialog(
 fun CatEditor(
     modifier: Modifier = Modifier,
     colors: IntArray = CatPartColors.colors(),
-    touchable: Boolean = false,
+    touchable: Boolean = true,
     captureController: CaptureController = rememberCaptureController()
 ) {
     var selectedPartIndex by remember { mutableIntStateOf(-1) }
@@ -212,6 +215,7 @@ fun CatEditor(
         contentDescription = "Cat Editor",
         modifier = Modifier
             .capturable(captureController)
+            .aspectRatio(1f)
             .fillMaxSize()
             .onSizeChanged {
                 val size = min(it.width, it.height)
@@ -229,8 +233,8 @@ fun CatEditor(
                     for (i in CatParts.drawOrders.size - 1 downTo 0) {
                         val rect = matrix.map(CatParts.drawOrders[i].bounds)
                         if (rect.contains(position)) {
-                            selectedPartIndex = if (selectedPartIndex == i) -1 else i
-                            handler = true
+                            handler = selectedPartIndex != i
+                            selectedPartIndex = i
                             break
                         }
                     }
