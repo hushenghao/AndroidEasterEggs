@@ -2,6 +2,7 @@
 
 ### v3.4.0
 
+- Add Cat Editor 🎉🎉🎉
 - Update Android 12, 13 AnalogClock clock impl
 - EdgeToEdge mode is enabled on the Easter Egg pages
 - Upgrade project dependencies

@@ -55,6 +55,7 @@
             <option value="$PROJECT_DIR$/eggs/UpsideDownCake" />
             <option value="$PROJECT_DIR$/eggs/VanillaIceCream" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/cat-editor" />
             <option value="$PROJECT_DIR$/feature/crash" />
             <option value="$PROJECT_DIR$/feature/embedding-splits" />
             <option value="$PROJECT_DIR$/feature/widget" />
@@ -64,7 +65,6 @@
             <option value="$PROJECT_DIR$/script/emoji-svg-xml-convertor" />
           </set>
         </option>
-        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
