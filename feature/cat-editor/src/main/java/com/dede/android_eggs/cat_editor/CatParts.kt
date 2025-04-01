@@ -66,7 +66,7 @@ internal object CatParts {
         verticalLineToRelative(-6.2f)
     }
 
-    private val leftEar = vectorPath {
+    internal val leftEar = vectorPath {
         moveTo(15.4f, 1f)
         lineToRelative(5.1000004f, 5.3f)
         lineToRelative(-6.3f, 2.8000002f)
@@ -324,12 +324,12 @@ internal object CatParts {
         ClosedPD(cap),
         ClosedPD(leftEye), ClosedPD(rightEye),
         RoundStrokePD(mouth, MOUTH_STROKE_WIDTH), ClosedPD(nose),
-        RoundStrokePD(tail, TAIL_STROKE_WIDTH), ClosedPD(tailCap), ClosedPD(tailShadow),
+        RoundStrokePD(tail, TAIL_STROKE_WIDTH), ClosedPD(tailCap), ClosedPD(tailShadow, false),
         ClosedPD(foot1), ClosedPD(leg1),
         ClosedPD(foot2), ClosedPD(leg2),
         ClosedPD(foot3), ClosedPD(leg3),
         ClosedPD(foot4), ClosedPD(leg4),
-        ClosedPD(leg2Shadow),
+        ClosedPD(leg2Shadow, false),
         ClosedPD(body), ClosedPD(belly),
         ClosedPD(bowtie)
     )
@@ -340,13 +340,13 @@ internal object CatParts {
         }
     }
 
-    private class ClosedPD(path: Path) : PathDraw(path) {
+    private class ClosedPD(path: Path, touchable: Boolean = true) : PathDraw(path, touchable) {
         override fun DrawScope.draw(color: Color) {
             drawPath(path, color, style = Fill)
         }
     }
 
-    abstract class PathDraw(val path: Path) {
+    abstract class PathDraw(val path: Path, val touchable: Boolean = true) {
 
         val drawLambda: DrawScope.(color: Color) -> Unit = { draw(it) }
 

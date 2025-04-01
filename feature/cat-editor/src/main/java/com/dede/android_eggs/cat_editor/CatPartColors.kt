@@ -74,20 +74,6 @@ internal object CatPartColors {
         return (r + g + b) < 0x80
     }
 
-    fun getInverseColor(color: Int): Int {
-        val a = (color shr 24) and 0xFF
-        val r = (color shr 16) and 0xFF
-        val g = (color shr 8) and 0xFF
-        val b = color and 0xFF
-
-        val iA = if (a > 128) a else 255 - a
-        val iR = 255 - r
-        val iG = 255 - g
-        val iB = 255 - b
-
-        return (iA shl 24) or (iR shl 16) or (iG shl 8) or iB
-    }
-
     private const val INDEX_OF_BODY = 24
     private const val INDEX_OF_HEAD = 5
     private const val INDEX_OF_LEG1 = 16
@@ -116,8 +102,8 @@ internal object CatPartColors {
     private const val INDEX_OF_COLLAR = 0
     private const val INDEX_OF_BOWTIE = 26
 
-    fun colors(seed: Long = System.currentTimeMillis()): IntArray {
-        val arr = IntArray(27) { -0x1000000 }
+    fun colors(seed: Long = System.currentTimeMillis()): Array<Int> {
+        val arr = Array(27) { -0x1000000 }
         val nsr = Random(seed)
 
         var bodyColor = chooseP(nsr, P_BODY_COLORS)

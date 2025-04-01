@@ -11,6 +11,7 @@ dependencies {
     implementation(project(":core:resources"))
 
     implementation(libs.androidx.core)
+    implementation(libs.google.material)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
