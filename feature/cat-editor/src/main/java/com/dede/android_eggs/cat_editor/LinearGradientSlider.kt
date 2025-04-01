@@ -2,6 +2,7 @@
 
 package com.dede.android_eggs.cat_editor
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -10,6 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,6 +34,8 @@ internal fun LinearGradientSlider(
 ) {
     val sliderColors = SliderDefaults.colors()
     val interactionSource = remember { MutableInteractionSource() }
+
+    val animValue by animateFloatAsState(value, label = "SliderValue")
     Slider(
         colors = sliderColors,
         modifier = Modifier.then(modifier),
@@ -62,7 +66,7 @@ internal fun LinearGradientSlider(
                     },
             )
         },
-        value = value,
+        value = animValue,
         onValueChange = onValueChange,
         onValueChangeFinished = onValueChangeFinished
     )
