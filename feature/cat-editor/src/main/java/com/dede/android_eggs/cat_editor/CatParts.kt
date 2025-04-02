@@ -1,5 +1,6 @@
 package com.dede.android_eggs.cat_editor
 
+import android.graphics.Region
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
@@ -8,6 +9,7 @@ import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.PathBuilder
 import androidx.compose.ui.graphics.vector.toPath
+import com.dede.android_eggs.cat_editor.Utilities.getRegion
 
 internal object CatParts {
 
@@ -66,7 +68,7 @@ internal object CatParts {
         verticalLineToRelative(-6.2f)
     }
 
-    internal val leftEar = vectorPath {
+    private val leftEar = vectorPath {
         moveTo(15.4f, 1f)
         lineToRelative(5.1000004f, 5.3f)
         lineToRelative(-6.3f, 2.8000002f)
@@ -350,7 +352,7 @@ internal object CatParts {
 
         val drawLambda: DrawScope.(color: Color) -> Unit = { draw(it) }
 
-        val bounds = path.getBounds()
+        val regin: Region = path.getRegion(this.javaClass == ClosedPD::class.java)
 
         protected abstract fun DrawScope.draw(color: Color)
     }

@@ -37,7 +37,7 @@ internal class CatEditorRecords(recordIndexState: MutableIntState) {
         fun restore(colors: SnapshotStateList<Int>)
     }
 
-    internal data class ColorRecord(private val color: Int, private val index: Int) : Record {
+    internal class ColorRecord(private val color: Int, private val index: Int) : Record {
         override fun restore(colors: SnapshotStateList<Int>) {
             colors[index] = color
         }

@@ -55,7 +55,7 @@ internal fun LinearGradientSlider(
                 listOf(startColor, endColor)
             }
             val linear = Brush.linearGradient(colors)
-            Mosaic(
+            Checkerboard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(16.dp)

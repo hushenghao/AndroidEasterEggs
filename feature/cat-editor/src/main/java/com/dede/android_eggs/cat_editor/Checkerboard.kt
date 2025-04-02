@@ -10,8 +10,11 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+/**
+ * A checkerboard pattern.
+ */
 @Composable
-fun Mosaic(
+fun Checkerboard(
     modifier: Modifier = Modifier,
     step: Dp = 8.dp,
     lightColor: Color = Color.White,

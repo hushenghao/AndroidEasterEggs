@@ -96,7 +96,7 @@ fun ColorPalette(
                     modifier = Modifier.clip(MaterialTheme.shapes.medium),
                     contentAlignment = Alignment.Center
                 ) {
-                    Mosaic(
+                    Checkerboard(
                         modifier = Modifier
                             .size(54.dp)
                             .drawWithContent {

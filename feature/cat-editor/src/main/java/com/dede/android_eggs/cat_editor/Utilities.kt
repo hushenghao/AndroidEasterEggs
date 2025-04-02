@@ -1,15 +1,22 @@
 package com.dede.android_eggs.cat_editor
 
+import android.graphics.Region
 import androidx.annotation.ColorInt
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Matrix
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.asAndroidPath
+import androidx.compose.ui.graphics.toAndroidRectF
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.IntSize
+import androidx.core.graphics.toRegion
 import com.google.android.material.color.MaterialColors
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.roundToInt
 import kotlin.math.sin
 import kotlin.math.sqrt
 
@@ -73,6 +80,9 @@ internal object Utilities {
         return Color.hsv(hue, saturation, 1f)
     }
 
+    /**
+     * Restrict the point to be within the circle of the given size.
+     */
     fun rangeHsvPalettePoint(position: Offset, size: IntSize): Offset {
         val centerX = size.width / 2f
         val centerY = size.height / 2f
@@ -89,4 +99,24 @@ internal object Utilities {
         }
         return position
     }
+
+    fun Matrix.toInvert(): Matrix {
+        return Matrix(values.copyOf()).apply { invert() }
+    }
+
+    fun Path.getRegion(isClosePath: Boolean): Region {
+        val boundsRegion = getBounds().toAndroidRectF().toRegion()
+        if (!isClosePath) {
+            return boundsRegion
+        }
+        val region = Region()
+        region.setPath(asAndroidPath(), boundsRegion)
+        return region
+    }
+
+    fun isPointInRegion(point: Offset, pointMatrix: Matrix, region: Region): Boolean {
+        val p = pointMatrix.map(point)
+        return region.contains(p.x.roundToInt(), p.y.roundToInt())
+    }
+
 }

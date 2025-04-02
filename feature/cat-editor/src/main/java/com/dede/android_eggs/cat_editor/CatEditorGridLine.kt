@@ -17,7 +17,7 @@ import kotlin.math.roundToInt
  * A grid line for the cat editor.
  */
 @Composable
-fun CatEditorGridLine(
+internal fun CatEditorGridLine(
     modifier: Modifier = Modifier,
     color: Color = MaterialTheme.colorScheme.tertiary,
     step: Dp = 20.dp,
