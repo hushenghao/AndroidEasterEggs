@@ -80,6 +80,7 @@ fun CatEditorSheetDialog(
         mutableStateListOf(*CatPartColors.colors(catSpeed))
     }
     val catName = stringResource(R.string.default_cat_name, catSpeed % 1000)
+    var isSaving by remember { mutableStateOf(false) }
 
     var gridState by remember { mutableStateOf(false) }
 
@@ -191,13 +192,16 @@ fun CatEditorSheetDialog(
 
                         IconButton(
                             onClick = {
+                                isSaving = true
                                 val deferred =
                                     captureController.captureAsync(Bitmap.Config.ARGB_8888)
                                 scope.launch {
                                     val bitmap = deferred.await().asAndroidBitmap()
                                     ShareCatUtils.saveCat(context, bitmap, catName)
+                                    isSaving = false
                                 }
-                            }
+                            },
+                            enabled = !isSaving
                         ) {
                             Icon(
                                 imageVector = Icons.Rounded.Save,

@@ -38,12 +38,14 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
 import com.dede.android_eggs.cat_editor.CatParts.VIEW_PORT_SIZE
 import com.dede.android_eggs.cat_editor.Utilities.toInvert
 import com.dede.android_eggs.views.theme.blend
 import dev.shreyaspatil.capturable.capturable
 import kotlin.math.min
+import com.dede.android_eggs.resources.R as StringR
 
 private const val TAG = "CatEditor"
 
@@ -82,7 +84,7 @@ internal fun CatEditor(
 
     val matrix = remember { Matrix() }
     Canvas(
-        contentDescription = "Cat Editor",
+        contentDescription = stringResource(StringR.string.cat_editor),
         modifier = Modifier
             .then(modifier)
             .capturable(captureController.getDelegate())
