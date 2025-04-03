@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="summary_android_waiting">În așteptare…</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="summary_android_waiting">Indisponibil momentan</string>
     <string name="summary_android_release_pushed">Versiunea finală a fost lansată</string>
     <string name="label_timeline_title">Cronologie, etape și actualizări</string>
     <string name="label_timeline_releases">Lansări</string>
+    <string name="label_timeline_developer_previews">Previzualizări pentru dezvoltatori</string>
+    <string name="label_timeline_beta_release">Lansări beta</string>
+    <string name="label_timeline_platform_stability">Stabilitatea platformei</string>
+    <string name="label_timeline_final_release">Lansarea finală</string>
 </resources>
