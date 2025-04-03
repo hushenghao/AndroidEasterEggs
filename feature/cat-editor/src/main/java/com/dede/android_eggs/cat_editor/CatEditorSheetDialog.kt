@@ -39,6 +39,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -78,6 +79,12 @@ fun CatEditorSheetDialog(
     val catEditorRecords = rememberCatEditorRecords()
     // split with cat speed
     val catEditorController = rememberCatEditorController(catSpeed)
+
+    LaunchedEffect(catEditorController.selectPart) {
+        if (catEditorController.hasSelectedPart) {
+            colorPaletteState.value = true
+        }
+    }
 
     LaunchedEffect(Unit) {
         // add first speed record
@@ -158,7 +165,7 @@ fun CatEditorSheetDialog(
                             onClick = {
                                 colorPaletteState.value = true
                             },
-                            enabled = catEditorController.selectPart != -1
+                            enabled = catEditorController.hasSelectedPart
                         ) {
                             Icon(
                                 imageVector = Icons.Rounded.Palette,
@@ -234,13 +241,13 @@ fun CatEditorSheetDialog(
 
                 ColorPalette(
                     visibility = colorPaletteState,
+                    selectedColor = catEditorController.getSelectedPartColor(Color.White),
                     onColorSelected = { color ->
-                        val index = catEditorController.selectPart
-                        if (index == -1) {
+                        if (!catEditorController.hasSelectedPart) {
                             return@ColorPalette
                         }
 
-                        catEditorController.setPartColor(index, color)
+                        catEditorController.setSelectedPartColor(color)
                         catEditorRecords.addRecord(
                             CatEditorRecords.colors(
                                 catEditorController.colorList,

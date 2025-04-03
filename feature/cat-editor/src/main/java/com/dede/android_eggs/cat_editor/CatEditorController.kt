@@ -14,12 +14,15 @@ import androidx.compose.ui.graphics.Color
 
 internal class CatEditorControllerImpl(speed: Long) : CatEditorController {
     val scaleState = mutableFloatStateOf(1f)
+
     val offsetState = mutableStateOf(Offset.Zero)
 
     val selectedPartState = mutableIntStateOf(-1)
+
     private val gridVisibleState = mutableStateOf(false)
 
     private val selectEnabledState = mutableStateOf(true)
+
     private val gesturesEnabledState = mutableStateOf(true)
 
     private val colorStateList = mutableStateListOf(*CatPartColors.colors(speed))
@@ -34,20 +37,17 @@ internal class CatEditorControllerImpl(speed: Long) : CatEditorController {
 
     override var isGesturesEnabled: Boolean by gesturesEnabledState
 
-    override fun updateColors(speed: Long) {
-        val colors = CatPartColors.colors(speed)
-        updateColors(colors.toList())
-    }
-
     override fun updateColors(colors: List<Color>) {
         colorStateList.clear()
         colorStateList.addAll(colors)
         resetGraphicsLayer()
     }
 
-    override fun setPartColor(part: Int, color: Color) {
-        colorStateList[part] = color
-        selectPart = -1
+    override fun setSelectedPartColor(color: Color) {
+        if (hasSelectedPart) {
+            colorStateList[selectPart] = color
+            selectPart = -1
+        }
     }
 
     override fun resetGraphicsLayer() {
@@ -68,13 +68,23 @@ internal interface CatEditorController {
 
     val colorList: List<Color>
 
-    fun resetGraphicsLayer()
+    val hasSelectedPart: Boolean
+        get() = selectPart != -1
 
-    fun updateColors(speed: Long)
+    fun resetGraphicsLayer()
 
     fun updateColors(colors: List<Color>)
 
-    fun setPartColor(part: Int, color: Color)
+    fun updateColors(speed: Long) {
+        updateColors(CatPartColors.colors(speed).toList())
+    }
+
+    fun setSelectedPartColor(color: Color)
+
+    fun getSelectedPartColor(default: Color): Color {
+        if (!hasSelectedPart) return default
+        return colorList[selectPart]
+    }
 }
 
 @Composable

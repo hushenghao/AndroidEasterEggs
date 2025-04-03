@@ -53,7 +53,12 @@ internal class CatEditorRecords(recordIndexState: MutableIntState, private val m
         }
 
         override fun toString(): String {
-            return "ColorRecord(colors=$colors, speed=$speed)"
+            val colorsStr = colors.joinToString(
+                prefix = "[",
+                separator = ",",
+                postfix = "]"
+            ) { Utilities.getHexColor(it) }
+            return "ColorRecord(colors=$colorsStr, speed=$speed)"
         }
     }
 

@@ -43,6 +43,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.cat_editor.Utilities.getHsv
 import com.dede.basic.copy
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -51,6 +52,7 @@ import kotlin.random.Random
 @Composable
 fun ColorPalette(
     visibility: MutableState<Boolean> = mutableStateOf(false),
+    selectedColor: Color = Color.White,
     onColorSelected: (color: Color) -> Unit = {}
 ) {
     var visible by remember { visibility }
@@ -68,11 +70,12 @@ fun ColorPalette(
             visible = false
         }
     ) {
-        var hue by remember { mutableFloatStateOf(0f) }
-        var saturation by remember { mutableFloatStateOf(0f) }
-        var value by remember { mutableFloatStateOf(1f) }
-        var alpha by remember { mutableFloatStateOf(1f) }
-        var hsvColor by remember { mutableStateOf(Color.hsv(hue, saturation, value)) }
+        val hsv = selectedColor.getHsv()
+        var hue by remember { mutableFloatStateOf(hsv[0]) }
+        var saturation by remember { mutableFloatStateOf(hsv[1]) }
+        var value by remember { mutableFloatStateOf(hsv[2]) }
+        var alpha by remember { mutableFloatStateOf(selectedColor.alpha) }
+        var hsvColor by remember { mutableStateOf(Color.hsv(hue, saturation, 1f)) }
 
         val finalColor =
             remember(hue, saturation, value, alpha) { Color.hsv(hue, saturation, value, alpha) }

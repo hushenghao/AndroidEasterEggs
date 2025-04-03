@@ -151,13 +151,9 @@ internal object CatPartColors {
         }
 
         // D.leftEarInside, D.rightEarInside
-        if (isDarkBody) {
-            arr[INDEX_OF_LEFT_EAR_INSIDE] = Color(-0x106566)
-            arr[INDEX_OF_RIGHT_EAR_INSIDE] = Color(-0x106566)
-        } else {
-            arr[INDEX_OF_LEFT_EAR_INSIDE] = Color(0x20D50000)
-            arr[INDEX_OF_RIGHT_EAR_INSIDE] = Color(0x20D50000)
-        }
+        val earInsideColor = if (isDarkBody) Color(-0x106566) else Color(0x20D50000)
+        arr[INDEX_OF_LEFT_EAR_INSIDE] = earInsideColor
+        arr[INDEX_OF_RIGHT_EAR_INSIDE] = earInsideColor
 
         // D.belly
         val bellyColor = Color(chooseP(nsr, P_BELLY_COLORS))
