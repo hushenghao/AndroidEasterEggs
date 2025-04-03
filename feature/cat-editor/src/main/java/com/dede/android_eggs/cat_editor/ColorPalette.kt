@@ -221,7 +221,9 @@ fun ColorPalette(
                         scope.launch {
                             sheetState.hide()
                             visible = false
-                            performColorSelected(finalColor)
+                            if (selectedColor != finalColor) {
+                                performColorSelected(finalColor)
+                            }
                         }
                     },
                 ) {
