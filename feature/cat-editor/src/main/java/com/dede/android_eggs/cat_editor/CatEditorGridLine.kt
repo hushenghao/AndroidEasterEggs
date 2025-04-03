@@ -9,6 +9,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
@@ -16,6 +17,7 @@ import kotlin.math.roundToInt
 /**
  * A grid line for the cat editor.
  */
+@Preview
 @Composable
 internal fun CatEditorGridLine(
     modifier: Modifier = Modifier,

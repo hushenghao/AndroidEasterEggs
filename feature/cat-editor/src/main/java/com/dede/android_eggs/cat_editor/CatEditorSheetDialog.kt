@@ -4,12 +4,8 @@ package com.dede.android_eggs.cat_editor
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
@@ -36,9 +32,7 @@ import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -46,7 +40,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asAndroidBitmap
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -75,25 +68,20 @@ fun CatEditorSheetDialog(
 
     val context = LocalContext.current
 
-    var catSpeed by remember { mutableLongStateOf(System.currentTimeMillis()) }
-    val catColors = remember(catSpeed) {
-        mutableStateListOf(*CatPartColors.colors(catSpeed))
-    }
+    val catSpeedState = remember { mutableLongStateOf(System.currentTimeMillis()) }
+    var catSpeed by catSpeedState
     val catName = stringResource(R.string.default_cat_name, catSpeed % 1000)
+
     var isSaving by remember { mutableStateOf(false) }
-
-    var gridState by remember { mutableStateOf(false) }
-
     val colorPaletteState = remember { mutableStateOf(false) }
 
-    val selectedPartIndexState = remember { mutableIntStateOf(-1) }
-    var selectedPartIndex by selectedPartIndexState
-
-    val records = rememberCatEditorRecords()
+    val catEditorRecords = rememberCatEditorRecords()
+    // split with cat speed
+    val catEditorController = rememberCatEditorController(catSpeed)
 
     LaunchedEffect(Unit) {
         // add first speed record
-        records.addRecord(CatEditorRecords.speed(catSpeed))
+        catEditorRecords.addRecord(CatEditorRecords.speed(catSpeed))
     }
 
     ModalBottomSheet(
@@ -137,9 +125,13 @@ fun CatEditorSheetDialog(
                     actions = {
                         IconButton(
                             onClick = {
-                                records.goBack(catColors)
+                                CatEditorRecords.restoreRecord(
+                                    catEditorRecords.goBack(),
+                                    catEditorController,
+                                    catSpeedState
+                                )
                             },
-                            enabled = records.canGoBack()
+                            enabled = catEditorRecords.canGoBack()
                         ) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
@@ -148,9 +140,13 @@ fun CatEditorSheetDialog(
                         }
                         IconButton(
                             onClick = {
-                                records.goNext(catColors)
+                                CatEditorRecords.restoreRecord(
+                                    catEditorRecords.goNext(),
+                                    catEditorController,
+                                    catSpeedState
+                                )
                             },
-                            enabled = records.canGoNext()
+                            enabled = catEditorRecords.canGoNext()
                         ) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Rounded.ArrowForward,
@@ -162,7 +158,7 @@ fun CatEditorSheetDialog(
                             onClick = {
                                 colorPaletteState.value = true
                             },
-                            enabled = selectedPartIndex != -1
+                            enabled = catEditorController.selectPart != -1
                         ) {
                             Icon(
                                 imageVector = Icons.Rounded.Palette,
@@ -172,10 +168,11 @@ fun CatEditorSheetDialog(
 
                         IconButton(
                             onClick = {
-                                gridState = !gridState
+                                catEditorController.isGridVisible =
+                                    !catEditorController.isGridVisible
                             }
                         ) {
-                            Crossfade(gridState) {
+                            Crossfade(catEditorController.isGridVisible) {
                                 if (it) {
                                     Icon(
                                         imageVector = Icons.Rounded.GridOff,
@@ -213,7 +210,8 @@ fun CatEditorSheetDialog(
                         FloatingActionButton(
                             onClick = {
                                 catSpeed = System.currentTimeMillis()
-                                records.addRecord(CatEditorRecords.speed(catSpeed))
+                                catEditorController.updateColors(catSpeed)
+                                catEditorRecords.addRecord(CatEditorRecords.speed(catSpeed))
                             }
                         ) {
                             Icon(
@@ -229,35 +227,26 @@ fun CatEditorSheetDialog(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-
-                Column {
-                    AnimatedVisibility(
-                        visible = gridState,
-                        enter = fadeIn(),
-                        exit = fadeOut()
-                    ) {
-                        CatEditorGridLine()
-                    }
-                }
-
                 CatEditor(
-                    colors = catColors,
+                    controller = catEditorController,
                     captureController = captureController,
-                    selectedPartIndexState = selectedPartIndexState
                 )
 
                 ColorPalette(
                     visibility = colorPaletteState,
                     onColorSelected = { color ->
-                        val index = selectedPartIndex
+                        val index = catEditorController.selectPart
                         if (index == -1) {
                             return@ColorPalette
                         }
 
-                        catColors[index] = color.toArgb()
-                        selectedPartIndex = -1
-
-                        records.addRecord(CatEditorRecords.color(catColors[index], index))
+                        catEditorController.setPartColor(index, color)
+                        catEditorRecords.addRecord(
+                            CatEditorRecords.colors(
+                                catEditorController.colorList,
+                                catSpeed
+                            )
+                        )
                     }
                 )
             }

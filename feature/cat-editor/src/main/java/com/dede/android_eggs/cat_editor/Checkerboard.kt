@@ -7,12 +7,14 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
  * A checkerboard pattern.
  */
+@Preview(widthDp = 160, heightDp = 160)
 @Composable
 fun Checkerboard(
     modifier: Modifier = Modifier,

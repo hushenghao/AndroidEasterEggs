@@ -3,16 +3,17 @@ package com.dede.android_eggs.cat_editor
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.MutableLongState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.ui.graphics.Color
 
 /**
  * CatEditorRecords is a class that manages the history of color changes in a cat editor.
  */
-internal class CatEditorRecords(recordIndexState: MutableIntState) {
+internal class CatEditorRecords(recordIndexState: MutableIntState, private val maxSize: Int) {
 
     companion object {
 
@@ -22,33 +23,48 @@ internal class CatEditorRecords(recordIndexState: MutableIntState) {
             return SpeedRecord(speed)
         }
 
-        fun color(color: Int, index: Int): Record {
-            return ColorRecord(color, index)
+        fun colors(colors: List<Color>, speed: Long): Record {
+            return ColorsRecord(ArrayList(colors), speed)
         }
 
         @Composable
-        fun rememberCatEditorRecords(): CatEditorRecords {
+        fun rememberCatEditorRecords(maxSize: Int = 50): CatEditorRecords {
             val state = remember { mutableIntStateOf(0) }
-            return remember { CatEditorRecords(state) }
+            return remember { CatEditorRecords(state, maxSize) }
+        }
+
+        fun restoreRecord(
+            record: Record?,
+            controller: CatEditorController,
+            speedState: MutableLongState
+        ) {
+            record?.restore(controller, speedState)
         }
     }
 
-    internal interface Record {
-        fun restore(colors: SnapshotStateList<Int>)
+    internal abstract class Record(val speed: Long) {
+        abstract fun restore(controller: CatEditorController, speedState: MutableLongState)
     }
 
-    internal class ColorRecord(private val color: Int, private val index: Int) : Record {
-        override fun restore(colors: SnapshotStateList<Int>) {
-            colors[index] = color
+    private class ColorsRecord(private val colors: List<Color>, speed: Long) : Record(speed) {
+        override fun restore(controller: CatEditorController, speedState: MutableLongState) {
+            speedState.longValue = speed
+            controller.updateColors(colors)
+        }
+
+        override fun toString(): String {
+            return "ColorRecord(colors=$colors, speed=$speed)"
         }
     }
 
-    internal data class SpeedRecord(private val speed: Long) : Record {
-        override fun restore(colors: SnapshotStateList<Int>) {
-            val src = CatPartColors.colors(speed)
-            src.forEachIndexed { index, color ->
-                colors[index] = color
-            }
+    private open class SpeedRecord(speed: Long) : Record(speed) {
+        override fun restore(controller: CatEditorController, speedState: MutableLongState) {
+            speedState.longValue = speed
+            controller.updateColors(speed)
+        }
+
+        override fun toString(): String {
+            return "SpeedRecord(speed=$speed)"
         }
     }
 
@@ -68,19 +84,15 @@ internal class CatEditorRecords(recordIndexState: MutableIntState) {
         return records.getOrNull(index)
     }
 
-    fun goBack(colors: SnapshotStateList<Int>) {
-        getRecord(--recordIndex)?.restore(colors)
+    fun goBack(): Record? {
+        return getRecord(--recordIndex)
     }
 
-    fun goNext(colors: SnapshotStateList<Int>) {
-        getRecord(++recordIndex)?.restore(colors)
+    fun goNext(): Record? {
+        return getRecord(++recordIndex)
     }
 
     fun addRecord(record: Record) {
-        if (records.contains(record)) {
-            Log.i(TAG, "addRecord: already contains")
-            return
-        }
         Log.i(TAG, "addRecord: $record")
 
         val from = recordIndex
@@ -88,6 +100,10 @@ internal class CatEditorRecords(recordIndexState: MutableIntState) {
             records.removeLast()
         }
         records.addLast(record)
+
+        while (records.size > maxSize) {
+            records.removeFirst()
+        }
         recordIndex = records.size - 1
     }
 

@@ -26,9 +26,9 @@ import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.isSpecified
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toIntSize
@@ -40,6 +40,7 @@ private const val TAG = "ColorHsvPalette"
 /**
  * A color palette that allows users to select a color using HSV (Hue, Saturation, Value) model.
  */
+@Preview
 @Composable
 internal fun ColorHsvPalette(
     modifier: Modifier = Modifier,
@@ -136,7 +137,7 @@ internal fun ColorHsvPalette(
                     style = Fill
                 )
                 drawCircle(
-                    color = Utilities.getHighlightColor(paletteColor.toArgb()),
+                    color = Utilities.getHighlightColor(paletteColor),
                     radius = touchCircleRadius,
                     center = palettePoint.value,
                     style = Stroke(

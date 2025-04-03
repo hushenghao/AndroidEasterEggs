@@ -1,7 +1,6 @@
 package com.dede.android_eggs.cat_editor
 
 import android.graphics.Region
-import androidx.annotation.ColorInt
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Matrix
@@ -10,6 +9,7 @@ import androidx.compose.ui.graphics.asAndroidPath
 import androidx.compose.ui.graphics.toAndroidRectF
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.IntSize
+import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.toRegion
 import com.google.android.material.color.MaterialColors
 import kotlin.math.atan2
@@ -19,6 +19,7 @@ import kotlin.math.min
 import kotlin.math.roundToInt
 import kotlin.math.sin
 import kotlin.math.sqrt
+import android.graphics.Color as AndroidColor
 
 internal object Utilities {
 
@@ -32,16 +33,20 @@ internal object Utilities {
         return String.format("#%02X%02X%02X%02X", a, r, g, b)
     }
 
-    fun getHighlightColor(@ColorInt color: Int): Color {
-        return if (MaterialColors.isColorLight(color)) {
+    fun getHighlightColor(color: Color): Color {
+        return if (MaterialColors.isColorLight(color.toArgb())) {
             Color.DarkGray
         } else {
             Color.White
         }
     }
 
+    fun blendColor(color1: Color, color2: Color, ratio: Float): Color {
+        return Color(ColorUtils.blendARGB(color1.toArgb(), color2.toArgb(), ratio))
+    }
+
     fun Color.getHsv(): FloatArray {
-        android.graphics.Color.colorToHSV(this.toArgb(), hsv)
+        AndroidColor.colorToHSV(this.toArgb(), hsv)
         return hsv
     }
 

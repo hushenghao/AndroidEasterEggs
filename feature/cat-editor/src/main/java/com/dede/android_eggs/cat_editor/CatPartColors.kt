@@ -1,6 +1,7 @@
 package com.dede.android_eggs.cat_editor
 
-import android.graphics.Color
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import java.util.Random
 
 internal object CatPartColors {
@@ -67,7 +68,8 @@ internal object CatPartColors {
         return a[i + 1]
     }
 
-    private fun isDark(color: Int): Boolean {
+    private fun isDark(c: Color): Boolean {
+        val color = c.toArgb()
         val r = (color and 0xFF0000) shr 16
         val g = (color and 0x00FF00) shr 8
         val b = color and 0x0000FF
@@ -102,19 +104,17 @@ internal object CatPartColors {
     private const val INDEX_OF_COLLAR = 0
     private const val INDEX_OF_BOWTIE = 26
 
-    fun colors(seed: Long = System.currentTimeMillis()): Array<Int> {
-        val arr = Array(27) { -0x1000000 }
+    fun colors(seed: Long = System.currentTimeMillis()): Array<Color> {
+        val arr = Array(27) { Color.Black }
         val nsr = Random(seed)
 
-        var bodyColor = chooseP(nsr, P_BODY_COLORS)
-        if (bodyColor == 0) {
+        var bodyColor = Color(chooseP(nsr, P_BODY_COLORS))
+        if (bodyColor == Color.Transparent) {
             // invisible cat
-            bodyColor = Color.HSVToColor(
-                floatArrayOf(
-                    nsr.nextFloat() * 360f,
-                    frandrange(nsr, 0.5f, 1f),
-                    frandrange(nsr, 0.5f, 1f)
-                )
+            bodyColor = Color.hsv(
+                hue = nsr.nextFloat() * 360f,
+                saturation = frandrange(nsr, 0.5f, 1f),
+                value = frandrange(nsr, 0.5f, 1f)
             )
         }
         val isDarkBody = isDark(bodyColor)
@@ -138,75 +138,76 @@ internal object CatPartColors {
         arr[INDEX_OF_BELLY] = bodyColor
 
         // D.leg2Shadow, D.tailShadow
-        arr[INDEX_OF_LEG2_SHADOW] = 0x20000000
-        arr[INDEX_OF_TAIL_SHADOW] = 0x20000000
+        val shadowColor = Color(0x20000000)
+        arr[INDEX_OF_LEG2_SHADOW] = shadowColor
+        arr[INDEX_OF_TAIL_SHADOW] = shadowColor
 
         // D.leftEye, D.rightEye, D.mouth, D.nose
         if (isDarkBody) {
-            arr[INDEX_OF_LEFT_EYE] = -0x1
-            arr[INDEX_OF_RIGHT_EYE] = -0x1
-            arr[INDEX_OF_MOUTH] = -0x1
-            arr[INDEX_OF_NOSE] = -0x1
+            arr[INDEX_OF_LEFT_EYE] = Color.White
+            arr[INDEX_OF_RIGHT_EYE] = Color.White
+            arr[INDEX_OF_MOUTH] = Color.White
+            arr[INDEX_OF_NOSE] = Color.White
         }
 
         // D.leftEarInside, D.rightEarInside
         if (isDarkBody) {
-            arr[INDEX_OF_LEFT_EAR_INSIDE] = -0x106566
-            arr[INDEX_OF_RIGHT_EAR_INSIDE] = -0x106566
+            arr[INDEX_OF_LEFT_EAR_INSIDE] = Color(-0x106566)
+            arr[INDEX_OF_RIGHT_EAR_INSIDE] = Color(-0x106566)
         } else {
-            arr[INDEX_OF_LEFT_EAR_INSIDE] = 0x20D50000
-            arr[INDEX_OF_RIGHT_EAR_INSIDE] = 0x20D50000
+            arr[INDEX_OF_LEFT_EAR_INSIDE] = Color(0x20D50000)
+            arr[INDEX_OF_RIGHT_EAR_INSIDE] = Color(0x20D50000)
         }
 
         // D.belly
-        val bellyColor = chooseP(nsr, P_BELLY_COLORS)
-        if (bellyColor != 0) {
+        val bellyColor = Color(chooseP(nsr, P_BELLY_COLORS))
+        if (bellyColor != Color.Transparent) {
             arr[INDEX_OF_BELLY] = bellyColor
         }
 
-        val faceColor = chooseP(nsr, P_BELLY_COLORS)
+        val faceColor = Color(chooseP(nsr, P_BELLY_COLORS))
         // D.faceSpot
         arr[INDEX_OF_FACE_SPOT] = faceColor
         if (!isDark(faceColor)) {
             // D.mouth, D.nose
-            arr[INDEX_OF_MOUTH] = -0x1000000
-            arr[INDEX_OF_NOSE] = -0x1000000
+            arr[INDEX_OF_MOUTH] = Color.Black
+            arr[INDEX_OF_NOSE] = Color.Black
         }
 
         if (nsr.nextFloat() < 0.25f) {
             // D.foot1, D.foot2, D.foot3, D.foot4
-            arr[INDEX_OF_FOOT1] = -0x1
-            arr[INDEX_OF_FOOT2] = -0x1
-            arr[INDEX_OF_FOOT3] = -0x1
-            arr[INDEX_OF_FOOT4] = -0x1
+            arr[INDEX_OF_FOOT1] = Color.White
+            arr[INDEX_OF_FOOT2] = Color.White
+            arr[INDEX_OF_FOOT3] = Color.White
+            arr[INDEX_OF_FOOT4] = Color.White
         } else if (nsr.nextFloat() < 0.25f) {
             // D.foot1, D.foot3
-            arr[INDEX_OF_FOOT1] = -0x1
-            arr[INDEX_OF_FOOT3] = -0x1
+            arr[INDEX_OF_FOOT1] = Color.White
+            arr[INDEX_OF_FOOT3] = Color.White
         } else if (nsr.nextFloat() < 0.25f) {
             // D.foot2, D.foot4
-            arr[INDEX_OF_FOOT2] = -0x1
-            arr[INDEX_OF_FOOT4] = -0x1
+            arr[INDEX_OF_FOOT2] = Color.White
+            arr[INDEX_OF_FOOT4] = Color.White
         } else if (nsr.nextFloat() < 0.1f) {
             // D.foot1, D.foot2, D.foot3, D.foot4
             val footIndex =
                 choose(nsr, INDEX_OF_FOOT1, INDEX_OF_FOOT2, INDEX_OF_FOOT3, INDEX_OF_FOOT4) as Int
-            arr[footIndex] = -0x1
+            arr[footIndex] = Color.White
         }
 
         // D.tailCap
-        arr[INDEX_OF_TAIL_CAP] = if (nsr.nextFloat() < 0.333f) -0x1 else bodyColor
+        arr[INDEX_OF_TAIL_CAP] = if (nsr.nextFloat() < 0.333f) Color.White else bodyColor
 
         // D.cap
         arr[INDEX_OF_CAP] =
-            chooseP(nsr, if (isDarkBody) P_LIGHT_SPOT_COLORS else P_DARK_SPOT_COLORS)
+            Color(chooseP(nsr, if (isDarkBody) P_LIGHT_SPOT_COLORS else P_DARK_SPOT_COLORS))
 
         // D.collar
-        val collarColor = chooseP(nsr, P_COLLAR_COLORS)
+        val collarColor = Color(chooseP(nsr, P_COLLAR_COLORS))
         arr[INDEX_OF_COLLAR] = collarColor
 
         // D.bowtie
-        arr[INDEX_OF_BOWTIE] = if (nsr.nextFloat() < 0.1f) collarColor else 0
+        arr[INDEX_OF_BOWTIE] = if (nsr.nextFloat() < 0.1f) collarColor else Color.Transparent
 
         // 0:collar,
         // 1:leftEar, 2:leftEarInside, 3:rightEar, 4:rightEarInside,
