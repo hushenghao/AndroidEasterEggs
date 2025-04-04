@@ -53,4 +53,6 @@
     <string name="label_contribute">Contribute</string>
     <string name="animator_disabled_alert_message">Due to the system animation being disabled, some features may not work properly. Please go to \"Developer Options\" and enable the \"Animator duration scale\" option to activate the animation.</string>
     <string name="action_goto_settings">Go to Settings</string>
+
+    <string name="cat_editor">Cat Editor</string>
 </resources>

@@ -150,6 +150,7 @@ dependencies {
     implementation(project(":core:alterable-adaptive-icon"))
     implementation(project(":core:custom-tab-browser"))
 
+    implementation(project(":feature:cat-editor"))
     implementation(project(":feature:widget"))
     implementation(project(":feature:crash"))
     implementation(project(":feature:embedding-splits"))
