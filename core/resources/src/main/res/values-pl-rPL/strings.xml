@@ -20,8 +20,8 @@
     <string name="pref_title_icon_shape_override">Kształt ikony</string>
     <string name="pref_title_language">Język</string>
     <string name="pref_title_language_more">Więcej</string>
-    <string name="pref_title_theme">Motyw</string>
-    <string name="pref_title_dynamic_color">Dynamiczny kolor</string>
+    <string name="pref_title_theme">Motywy</string>
+    <string name="pref_title_dynamic_color">Dynamiczny motyw</string>
     <string name="pref_title_icon_visual_effects">Efekty wizualne ikon</string>
     <string name="summary_system_default">Domyślny</string>
     <string name="summary_theme_dark_mode">Ciemny</string>
