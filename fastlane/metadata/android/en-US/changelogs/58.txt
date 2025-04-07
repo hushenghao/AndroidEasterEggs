@@ -1,5 +1,6 @@
 - Add Cat Editor 🎉🎉🎉
 - Update Android 12, 13 AnalogClock clock impl
 - EdgeToEdge mode is enabled on the Easter Egg pages
+- Fix Android 15 Landroid not fullscreen
 - Upgrade project dependencies
 - Known issue fixes

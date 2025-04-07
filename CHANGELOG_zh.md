@@ -5,6 +5,7 @@
 - 添加 Cat Editor 🎉🎉🎉
 - 更新 Android 12，13 模拟时钟 时钟实现
 - 彩蛋相关页面开启了 EdgeToEdge 模式
+- 修复 Android 15 Landroid 不全屏显示 [#505](https://github.com/hushenghao/AndroidEasterEggs/issues/505)
 - 升级项目依赖项
 - 修复已知问题
 
