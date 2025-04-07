@@ -1,7 +1,4 @@
-@file:OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalComposeApi::class,
-    ExperimentalComposeUiApi::class
-)
+@file:OptIn(ExperimentalComposeUiApi::class)
 
 package com.dede.android_eggs.cat_editor
 
@@ -22,9 +19,7 @@ import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -53,7 +48,6 @@ private const val TAG = "CatEditor"
 @Preview
 @Composable
 internal fun CatEditor(
-    modifier: Modifier = Modifier,
     controller: CatEditorController = rememberCatEditorController(),
     captureController: CaptureControllerDelegate = rememberCaptureControllerDelegate()
 ) {
@@ -103,13 +97,21 @@ internal fun CatEditor(
                     translationX = offsetAnim.x
                     translationY = offsetAnim.y
                 }
+                .pointerInput(controllerImpl.isGesturesEnabled) {
+                    if (!controllerImpl.isGesturesEnabled) {
+                        return@pointerInput
+                    }
+                    detectTapGestures {
+                        controllerImpl.selectPart = -1
+                    }
+                }
         ) {
             val infiniteTransition = rememberInfiniteTransition(label = "CatEditor_SelectedPart")
             val blendRatio by infiniteTransition.animateFloat(
                 initialValue = 0f,
                 targetValue = 0.5f,
                 animationSpec = infiniteRepeatable(
-                    animation = tween(600, easing = LinearEasing),
+                    animation = tween(700, easing = LinearEasing),
                     repeatMode = RepeatMode.Reverse,
                 ),
                 label = "HighlightColorBlend"
@@ -119,7 +121,6 @@ internal fun CatEditor(
             Canvas(
                 contentDescription = stringResource(StringR.string.cat_editor),
                 modifier = Modifier
-                    .then(modifier)
                     .fillMaxSize()
                     .aspectRatio(1f)
                     .capturable(captureController.getDelegate())
