@@ -4,6 +4,7 @@
 
 - Update Android 12, 13 AnalogClock clock impl
 - EdgeToEdge mode is enabled on the Easter Egg pages
+- Fix Android 15 Landroid not fullscreen [#505](https://github.com/hushenghao/AndroidEasterEggs/issues/505)
 - Upgrade project dependencies
 - Known issue fixes
 
