@@ -46,6 +46,7 @@ import com.dede.android_eggs.views.settings.compose.groups.AboutGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContactMeGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContributeGroup
 import com.dede.android_eggs.views.settings.compose.options.TestCrashOption
+import com.dede.android_eggs.views.settings.compose.prefs.CatEditorPref
 import com.dede.android_eggs.views.settings.compose.prefs.ComponentManagerPref
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePref
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPref
@@ -141,6 +142,8 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                 SettingDivider()
 
                 TimelinePref()
+
+                CatEditorPref()
 
                 ComponentManagerPref()
 

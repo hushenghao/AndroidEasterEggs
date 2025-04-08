@@ -126,6 +126,8 @@ dependencies {
     implementation(libs.androidx.compose.activity)
     implementation(libs.androidx.compose.lifecycle)
     implementation(libs.androidx.compose.viewmodel)
+    implementation(libs.androidx.compose.navigation)
+    implementation(libs.androidx.compose.hilt.navigation)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.livedata)
     implementation(libs.androidx.compose.ui)
@@ -142,6 +144,8 @@ dependencies {
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
 
+    implementation(project(":core:local-provider"))
+    implementation(project(":core:navigation"))
     implementation(project(":core:theme"))
     implementation(project(":core:settings"))
     implementation(project(":core:shortcut"))
@@ -150,6 +154,7 @@ dependencies {
     implementation(project(":core:alterable-adaptive-icon"))
     implementation(project(":core:custom-tab-browser"))
 
+    implementation(project(":feature:cat-editor"))
     implementation(project(":feature:widget"))
     implementation(project(":feature:crash"))
     implementation(project(":feature:embedding-splits"))

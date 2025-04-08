@@ -32,7 +32,6 @@ import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -46,9 +45,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dede.android_eggs.R
+import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.util.compose.PathShape
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
@@ -65,16 +65,15 @@ import javax.inject.Inject
 
 private const val TIMELINE_HORIZONTAL_BIAS = 0.3f
 
-@Composable
-fun TimelineList(
-    showSheetState: MutableState<Boolean>,
-    viewModel: TimelineViewModel = viewModel()
-) {
-    var showSheet by showSheetState
-    if (!showSheet) {
-        return
-    }
+object TimelineListDialog : EasterEggsDestination {
+    override val route: String = "timeline_list_dialog"
+}
 
+@Composable
+fun TimelineListDialog(
+    viewModel: TimelineViewModel = hiltViewModel(),
+    onDismiss: () -> Unit = {},
+) {
     var sheetExpanded by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(
         confirmValueChange = {
@@ -92,7 +91,7 @@ fun TimelineList(
         animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
     )
     ModalBottomSheet(
-        onDismissRequest = { showSheet = false },
+        onDismissRequest = onDismiss,
         sheetState = sheetState,
         contentWindowInsets = {
             WindowInsets(0.dp, topPadding, 0.dp, 0.dp)

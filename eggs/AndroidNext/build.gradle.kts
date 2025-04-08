@@ -18,4 +18,5 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(project(":core:custom-tab-browser"))
+    implementation(project(":core:navigation"))
 }

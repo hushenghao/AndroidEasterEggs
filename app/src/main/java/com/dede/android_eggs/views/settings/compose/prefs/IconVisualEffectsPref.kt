@@ -5,7 +5,6 @@ import android.os.Build
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Animation
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.core.os.bundleOf
 import com.dede.android_eggs.util.LocalEvent
@@ -30,7 +29,6 @@ object IconVisualEffectsPrefUtil {
 
 @Composable
 fun IconVisualEffectsPref() {
-    val context = LocalContext.current
     SwitchIntPref(
         key = IconVisualEffectsPrefUtil.KEY_ICON_VISUAL_EFFECTS,
         leadingIcon = Icons.Rounded.Animation,

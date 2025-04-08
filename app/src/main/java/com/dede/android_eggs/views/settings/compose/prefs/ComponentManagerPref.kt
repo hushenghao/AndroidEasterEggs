@@ -12,8 +12,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.launcher2.RocketLauncher
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
@@ -29,7 +29,7 @@ import javax.inject.Inject
 import com.dede.android_eggs.resources.R as StringsR
 
 @Composable
-fun ComponentManagerPref(viewModel: ComponentManagerViewModel = viewModel()) {
+fun ComponentManagerPref(viewModel: ComponentManagerViewModel = hiltViewModel()) {
     val componentList = if (LocalInspectionMode.current) {
         emptyList()
     } else {

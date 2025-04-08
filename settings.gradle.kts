@@ -28,6 +28,8 @@ include(
     ":app",
 
     ":core:theme",
+    ":core:navigation",
+    ":core:local-provider",
     ":core:resources",
     ":core:activity-actions",
     ":core:settings",
@@ -35,6 +37,7 @@ include(
     ":core:alterable-adaptive-icon",
     ":core:custom-tab-browser",
 
+    ":feature:cat-editor",
     ":feature:widget",
     ":feature:crash",
     ":feature:embedding-splits",

@@ -24,8 +24,6 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,6 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
+import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.ui.composes.LoopHorizontalPager
 import com.dede.android_eggs.ui.composes.LoopPagerIndicator
 import com.dede.android_eggs.ui.composes.rememberLoopPagerState
@@ -63,19 +62,16 @@ private val pagers = intArrayOf(
     R.drawable.img_samples,
 )
 
-@Composable
+object WelcomeDialog : EasterEggsDestination {
+    override val route: String = "welcome_dialog"
+}
+
 @Preview
-fun Welcome(
-    onNext: () -> Unit = {}
-) {
-    var visible by rememberSaveable { mutableStateOf(true) }
-    if (!visible) {
-        onNext()
-        return
-    }
+@Composable
+fun WelcomeDialog(onDismiss: () -> Unit = {}) {
     var prefShowed by rememberPrefBoolState(KEY, false)
     if (prefShowed) {
-        onNext()
+        onDismiss()
         return
     }
 
@@ -137,28 +133,20 @@ fun Welcome(
                 }
             }
         },
-        onDismissRequest = {
-            visible = false
-            onNext()
-        },
+        onDismissRequest = onDismiss,
         dismissButton = {
-            TextButton(onClick = {
-                visible = false
-                onNext()
-            }) {
+            TextButton(onClick = onDismiss) {
                 Text(text = stringResource(android.R.string.cancel))
             }
         },
         confirmButton = {
             TextButton(onClick = {
-                visible = false
                 prefShowed = true
                 konfettiState = true
-                onNext()
+                onDismiss()
             }) {
                 Text(text = stringResource(StringsR.string.action_agree))
             }
         },
     )
 }
-

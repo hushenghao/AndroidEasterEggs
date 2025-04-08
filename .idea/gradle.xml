@@ -30,6 +30,8 @@
             <option value="$PROJECT_DIR$/core/activity-actions" />
             <option value="$PROJECT_DIR$/core/alterable-adaptive-icon" />
             <option value="$PROJECT_DIR$/core/custom-tab-browser" />
+            <option value="$PROJECT_DIR$/core/local-provider" />
+            <option value="$PROJECT_DIR$/core/navigation" />
             <option value="$PROJECT_DIR$/core/resources" />
             <option value="$PROJECT_DIR$/core/settings" />
             <option value="$PROJECT_DIR$/core/shortcut" />
@@ -55,6 +57,7 @@
             <option value="$PROJECT_DIR$/eggs/UpsideDownCake" />
             <option value="$PROJECT_DIR$/eggs/VanillaIceCream" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/cat-editor" />
             <option value="$PROJECT_DIR$/feature/crash" />
             <option value="$PROJECT_DIR$/feature/embedding-splits" />
             <option value="$PROJECT_DIR$/feature/widget" />
@@ -64,7 +67,6 @@
             <option value="$PROJECT_DIR$/script/emoji-svg-xml-convertor" />
           </set>
         </option>
-        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

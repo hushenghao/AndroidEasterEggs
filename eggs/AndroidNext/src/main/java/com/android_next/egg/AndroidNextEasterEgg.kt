@@ -6,6 +6,7 @@ import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.view.setPadding
+import com.dede.android_eggs.util.LocalEvent
 import com.dede.basic.dp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
@@ -54,7 +55,7 @@ object AndroidNextEasterEgg : EasterEggProvider {
             apiLevel = NEXT_API,
         ) {
             override fun onEasterEggAction(context: Context): Boolean {
-                androidNextDialogVisible = true
+                LocalEvent.poster().post(ACTION_SHOE_ANDROID_NEXT_DIALOG)
                 return true
             }
 
