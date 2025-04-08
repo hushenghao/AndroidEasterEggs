@@ -28,6 +28,8 @@ include(
     ":app",
 
     ":core:theme",
+    ":core:navigation",
+    ":core:local-provider",
     ":core:resources",
     ":core:activity-actions",
     ":core:settings",

@@ -30,6 +30,8 @@
             <option value="$PROJECT_DIR$/core/activity-actions" />
             <option value="$PROJECT_DIR$/core/alterable-adaptive-icon" />
             <option value="$PROJECT_DIR$/core/custom-tab-browser" />
+            <option value="$PROJECT_DIR$/core/local-provider" />
+            <option value="$PROJECT_DIR$/core/navigation" />
             <option value="$PROJECT_DIR$/core/resources" />
             <option value="$PROJECT_DIR$/core/settings" />
             <option value="$PROJECT_DIR$/core/shortcut" />

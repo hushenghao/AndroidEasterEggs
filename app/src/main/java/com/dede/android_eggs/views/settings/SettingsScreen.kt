@@ -143,9 +143,9 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
 
                 TimelinePref()
 
-                ComponentManagerPref()
-
                 CatEditorPref()
+
+                ComponentManagerPref()
 
                 if (!SplitUtils.isActivityEmbedded(context)) {
                     RetainInRecentsPref()

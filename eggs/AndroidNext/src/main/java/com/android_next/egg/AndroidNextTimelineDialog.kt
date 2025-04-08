@@ -22,10 +22,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
@@ -47,6 +44,7 @@ import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.basic.requireDrawable
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
@@ -55,21 +53,21 @@ import java.util.Calendar
 import kotlin.math.floor
 import kotlin.math.min
 
-internal var androidNextDialogVisible by mutableStateOf(false)
+object AndroidNextTimelineDialog : EasterEggsDestination {
+    override val route: String = "android_next_timeline_dialog"
+}
+
+const val ACTION_SHOE_ANDROID_NEXT_DIALOG = "action_show_android_next_dialog"
 
 @Composable
 fun AndroidNextTimelineDialog(
     @DrawableRes logoRes: Int = R.drawable.ic_android_16_logo,
-    @StringRes titleRes: Int = R.string.nickname_android_next
+    @StringRes titleRes: Int = R.string.nickname_android_next,
+    onDismiss: () -> Unit = {},
 ) {
-    if (!androidNextDialogVisible) {
-        return
-    }
     val context = LocalContext.current
     AlertDialog(
-        onDismissRequest = {
-            androidNextDialogVisible = false
-        },
+        onDismissRequest = onDismiss,
         title = {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -102,14 +100,14 @@ fun AndroidNextTimelineDialog(
         },
         confirmButton = {
             TextButton(onClick = {
-                androidNextDialogVisible = false
+                onDismiss()
                 CustomTabsBrowser.launchUrl(context, R.string.url_android_releases)
             }) {
                 Text(text = stringResource(id = R.string.label_timeline_releases))
             }
         },
         dismissButton = {
-            TextButton(onClick = { androidNextDialogVisible = false }) {
+            TextButton(onClick = onDismiss) {
                 Text(text = stringResource(id = android.R.string.cancel))
             }
         },
