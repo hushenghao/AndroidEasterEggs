@@ -229,12 +229,12 @@ fun CatEditorScreen() {
                 captureController = captureController,
             )
 
-            ColorPalette(
-                visibility = colorPaletteState,
+            ColorPaletteDialog(
+                visibleState = colorPaletteState,
                 selectedColor = catEditorController.getSelectedPartColor(Color.White),
                 onColorSelected = { color ->
                     if (!catEditorController.hasSelectedPart) {
-                        return@ColorPalette
+                        return@ColorPaletteDialog
                     }
 
                     catEditorController.setSelectedPartColor(color)

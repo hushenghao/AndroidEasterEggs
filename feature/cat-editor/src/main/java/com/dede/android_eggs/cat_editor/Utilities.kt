@@ -23,14 +23,17 @@ import android.graphics.Color as AndroidColor
 
 internal object Utilities {
 
-    fun getHexColor(color: Color): String {
+    fun getHexColor(color: Color, withAlpha: Boolean): String {
         val argb = color.toArgb()
-        val a = (argb shr 24) and 0xFF
         val r = (argb shr 16) and 0xFF
         val g = (argb shr 8) and 0xFF
         val b = argb and 0xFF
-
-        return String.format("#%02X%02X%02X%02X", a, r, g, b)
+        if (withAlpha) {
+            val a = (argb shr 24) and 0xFF
+            return String.format("#%02X%02X%02X%02X", a, r, g, b)
+        } else {
+            return String.format("#%02X%02X%02X", r, g, b)
+        }
     }
 
     fun getHighlightColor(color: Color): Color {

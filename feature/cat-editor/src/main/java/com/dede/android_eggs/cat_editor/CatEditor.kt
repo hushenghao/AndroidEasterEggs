@@ -45,6 +45,23 @@ import com.dede.android_eggs.resources.R as StringR
 
 private const val TAG = "CatEditor"
 
+private const val S_MIN = 0.5f
+private const val S_MAX = 3f
+
+private fun range(float: Float, max: Float, min: Float): Float {
+    return min(max, max(float, min))
+}
+
+private const val S_STEP = 1.5f
+
+private fun nextScaleLevel(scale: Float, max: Float, min: Float): Float {
+    val ns = scale * S_STEP
+    if (ns > max) {
+        return min
+    }
+    return ns
+}
+
 @Preview
 @Composable
 internal fun CatEditor(
@@ -78,6 +95,10 @@ internal fun CatEditor(
             CatEditorGridLine()
         }
 
+        val onDoubleTab: (Offset) -> Unit = {
+            scale = nextScaleLevel(scale, S_MAX, S_MIN)
+        }
+
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
@@ -87,7 +108,7 @@ internal fun CatEditor(
                         return@pointerInput
                     }
                     detectTransformGestures { _, pan, zoom, _ ->
-                        scale = min(3f, max(scale * zoom, 0.2f))
+                        scale = range(scale * zoom, S_MAX, S_MIN)
                         offset += (pan * scale)
                     }
                 }
@@ -101,7 +122,9 @@ internal fun CatEditor(
                     if (!controllerImpl.isGesturesEnabled) {
                         return@pointerInput
                     }
-                    detectTapGestures {
+                    detectTapGestures(
+                        onDoubleTap = onDoubleTab
+                    ) {
                         controllerImpl.selectPart = -1
                     }
                 }
@@ -134,7 +157,9 @@ internal fun CatEditor(
                         if (!controllerImpl.isSelectEnabled) {
                             return@pointerInput
                         }
-                        detectTapGestures {
+                        detectTapGestures(
+                            onDoubleTap = onDoubleTab,
+                        ) {
                             var handler = false
                             val pointMatrix = canvasMatrix.toInvert()
                             for (i in CatParts.drawOrders.size - 1 downTo 0) {

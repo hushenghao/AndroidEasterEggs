@@ -43,7 +43,6 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.cat_editor.Utilities.getHsv
 import com.dede.basic.copy
@@ -52,12 +51,13 @@ import kotlin.random.Random
 
 
 @Composable
-fun ColorPalette(
-    visibility: MutableState<Boolean> = mutableStateOf(false),
+fun ColorPaletteDialog(
+    visibleState: MutableState<Boolean> = mutableStateOf(false),
     selectedColor: Color = Color.White,
+    withAlphaPalette: Boolean = true,
     onColorSelected: (color: Color) -> Unit = {}
 ) {
-    var visible by remember { visibility }
+    var visible by remember { visibleState }
     if (!visible) {
         return
     }
@@ -76,7 +76,9 @@ fun ColorPalette(
         var hue by remember { mutableFloatStateOf(hsv[0]) }
         var saturation by remember { mutableFloatStateOf(hsv[1]) }
         var value by remember { mutableFloatStateOf(hsv[2]) }
-        var alpha by remember { mutableFloatStateOf(selectedColor.alpha) }
+        var alpha by remember {
+            mutableFloatStateOf(if (withAlphaPalette) selectedColor.alpha else 1f)
+        }
         var hsvColor by remember { mutableStateOf(Color.hsv(hue, saturation, 1f)) }
 
         val finalColor =
@@ -127,9 +129,8 @@ fun ColorPalette(
                         horizontalArrangement = Arrangement.End
                     ) {
                         Text(
-                            text = Utilities.getHexColor(finalColor),
+                            text = Utilities.getHexColor(finalColor, withAlphaPalette),
                             style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.SemiBold,
                             modifier = Modifier.weight(1f)
                         )
 
@@ -152,7 +153,7 @@ fun ColorPalette(
 
                         IconButton(
                             onClick = {
-                                context.copy(Utilities.getHexColor(finalColor))
+                                context.copy(Utilities.getHexColor(finalColor, withAlphaPalette))
                             }
                         ) {
                             Icon(
@@ -170,7 +171,7 @@ fun ColorPalette(
             ColorHsvPalette(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 10.dp)
+                    .padding(horizontal = 14.dp)
                     .align(Alignment.CenterHorizontally),
                 defaultColor = Color.hsv(hue, saturation, 1f),
                 onColorChanged = { hsv, h, s ->
@@ -192,15 +193,17 @@ fun ColorPalette(
                 }
             )
 
-            LinearGradientSlider(
-                modifier = Modifier.padding(horizontal = 10.dp),
-                value = alpha,
-                startColor = Color.Transparent,
-                endColor = hsvColor,
-                onValueChange = { newValue ->
-                    alpha = newValue
-                }
-            )
+            if (withAlphaPalette) {
+                LinearGradientSlider(
+                    modifier = Modifier.padding(horizontal = 10.dp),
+                    value = alpha,
+                    startColor = Color.Transparent,
+                    endColor = hsvColor,
+                    onValueChange = { newValue ->
+                        alpha = newValue
+                    }
+                )
+            }
 
             Spacer(modifier = Modifier.height(12.dp))
 

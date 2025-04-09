@@ -57,7 +57,7 @@ internal class CatEditorRecords(recordIndexState: MutableIntState, private val m
                 prefix = "[",
                 separator = ",",
                 postfix = "]"
-            ) { Utilities.getHexColor(it) }
+            ) { Utilities.getHexColor(it, true) }
             return "ColorRecord(colors=$colorsStr, speed=$speed)"
         }
     }
