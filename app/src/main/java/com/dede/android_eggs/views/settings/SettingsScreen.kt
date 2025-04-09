@@ -54,6 +54,7 @@ import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefU
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePref
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPref
+import com.dede.android_eggs.views.settings.compose.prefs.RocketLauncherPref
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePref
 import com.dede.android_eggs.views.settings.compose.prefs.TimelinePref
 import kotlinx.coroutines.launch
@@ -144,6 +145,8 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                 TimelinePref()
 
                 CatEditorPref()
+
+                RocketLauncherPref()
 
                 ComponentManagerPref()
 
