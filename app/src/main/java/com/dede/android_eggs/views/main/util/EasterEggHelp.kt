@@ -107,7 +107,7 @@ object EasterEggHelp {
 
     init {
         apiLevelArrays[Build.VERSION_CODES.CUR_DEVELOPMENT] = "Next"
-        apiLevelArrays[36] = "16"
+        apiLevelArrays[Build.VERSION_CODES.BAKLAVA] = "16"
         apiLevelArrays[Build.VERSION_CODES.VANILLA_ICE_CREAM] = "15"
         apiLevelArrays[Build.VERSION_CODES.UPSIDE_DOWN_CAKE] = "14"
         apiLevelArrays[Build.VERSION_CODES.TIRAMISU] = "13"

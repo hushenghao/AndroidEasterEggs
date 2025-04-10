@@ -7,6 +7,7 @@
 - 彩蛋相关页面开启了 EdgeToEdge 模式
 - 项目导航图迁移
 - 修复 Android 15 Landroid 不全屏显示 [#505](https://github.com/hushenghao/AndroidEasterEggs/issues/505)
+- 修复 Platlogo 壁纸主题关闭动画
 - 升级项目依赖项
 - 修复已知问题
 

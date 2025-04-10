@@ -1,5 +1,5 @@
 @file:JvmName("DynamicObjectUtils")
-@file:Suppress("MemberVisibilityCanBePrivate")
+@file:Suppress("MemberVisibilityCanBePrivate", "NOTHING_TO_INLINE")
 
 package com.dede.basic.utils
 
@@ -30,6 +30,12 @@ object DynamicObjectUtils {
     }
 
     @JvmStatic
+    fun asDynamicObject(obj: Any, className: String): DynamicObject {
+        val clazz = forName(className) ?: return ClassNotFoundDynamicObject.INSTANCE
+        return asDynamicObject(obj, clazz)
+    }
+
+    @JvmStatic
     fun asDynamicObject(obj: Any): DynamicObject {
         return ReflectDynamicObject(obj, obj.javaClass)
     }
@@ -39,9 +45,17 @@ object DynamicObjectUtils {
         return ReflectDynamicObject(null, clazz)
     }
 
-    @JvmStatic
-    fun asDynamicObject(clazz: KClass<out Any>): DynamicObject {
+    inline fun asDynamicObject(clazz: KClass<out Any>): DynamicObject {
         return asDynamicObject(clazz.java)
+    }
+
+    @JvmStatic
+    fun asDynamicObject(obj: Any, clazz: Class<out Any>): DynamicObject {
+        return ReflectDynamicObject(obj, clazz)
+    }
+
+    inline fun asDynamicObject(obj: Any, clazz: KClass<out Any>): DynamicObject {
+        return asDynamicObject(obj, clazz.java)
     }
 
 }

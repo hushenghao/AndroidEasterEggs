@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+@file:JvmName("LifecycleUtils")
 
 package com.dede.basic
 

@@ -7,6 +7,7 @@
 - EdgeToEdge mode is enabled on the Easter Egg pages
 - Project Navigation graph migration
 - Fix Android 15 Landroid not fullscreen [#505](https://github.com/hushenghao/AndroidEasterEggs/issues/505)
+- Fix Platlogo wallpaper theme finish animation
 - Upgrade project dependencies
 - Known issue fixes
 

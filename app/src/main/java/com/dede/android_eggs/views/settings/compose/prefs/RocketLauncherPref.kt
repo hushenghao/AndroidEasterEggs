@@ -8,9 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.launcher2.RocketLauncher
-import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.settings.compose.basic.SettingPref
-import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 
 @Composable
 fun RocketLauncherPref() {
@@ -22,7 +20,6 @@ fun RocketLauncherPref() {
         trailingContent = Icons.AutoMirrored.Rounded.NavigateNext,
         onClick = {
             context.startActivity(Intent(context, RocketLauncher::class.java))
-            LocalEvent.poster().post(SettingPrefUtil.ACTION_CLOSE_SETTING)
         }
     )
 }

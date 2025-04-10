@@ -32,6 +32,7 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
+import com.dede.android_eggs.activity_actions.WallpaperPlatLogoUtils
 import com.dede.android_eggs.resources.R
 import com.dede.android_eggs.util.ActivityActionDispatcher
 import com.dede.android_eggs.views.theme.EasterEggsTheme
@@ -90,8 +91,7 @@ internal class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
                         context.putBoolean(info.key, true)
                     },
                     onCancel = {
-                        @Suppress("DEPRECATION")
-                        activity.onBackPressed()
+                        WallpaperPlatLogoUtils.finishWithAnimation(activity)
                     },
                 )
             }
@@ -105,7 +105,7 @@ private fun WarningDialog(
     @StringRes title: Int,
     @StringRes message: Int,
     onConfirm: () -> Unit,
-    onCancel: () -> Unit
+    onCancel: () -> Unit,
 ) {
     var visible by remember { mutableStateOf(true) }
     if (!visible) {

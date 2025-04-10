@@ -2,6 +2,7 @@ package com.dede.android_eggs.util.actions
 
 import android.app.Activity
 import androidx.activity.EdgeToEdgeCompat
+import com.dede.android_eggs.activity_actions.WallpaperPlatLogoUtils
 import com.dede.android_eggs.util.ActivityActionDispatcher
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 
@@ -28,6 +29,10 @@ internal class EggActivityAction : ActivityActionDispatcher.ActivityAction {
     override fun onCreate(activity: Activity) {
         if (activity.isPlatLogoActivity) {
             EasterEggShortcutsHelp.autoReportShortcutUsed(activity, activity.intent)
+
+            if (WallpaperPlatLogoUtils.isShowWallpaper(activity)) {
+                WallpaperPlatLogoUtils.setupOnBackPressedViewAnimate(activity)
+            }
         }
     }
 }

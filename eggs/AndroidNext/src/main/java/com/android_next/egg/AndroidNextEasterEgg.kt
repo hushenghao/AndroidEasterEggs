@@ -1,6 +1,7 @@
 package com.android_next.egg
 
 import android.content.Context
+import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
@@ -30,7 +31,7 @@ object AndroidNextEasterEgg : EasterEggProvider {
     const val RELEASE_MONTH = Calendar.MAY
 
     // private const val NEXT_API = Build.VERSION_CODES.CUR_DEVELOPMENT// android next
-    private const val NEXT_API = 36// android 16
+    private const val NEXT_API = Build.VERSION_CODES.BAKLAVA// android 16
 
     // private const val TIMELINE_EVENT = "Wow, Android Next."
     private const val TIMELINE_EVENT = "Hello, Android Baklava."
