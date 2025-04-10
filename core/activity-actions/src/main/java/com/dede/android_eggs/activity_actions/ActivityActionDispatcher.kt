@@ -31,6 +31,8 @@ internal class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks
 
         fun onStart(activity: Activity) {}
 
+        fun onResume(activity: Activity) {}
+
     }
 
     private val actions: Array<ActivityAction> = arrayOf(
@@ -58,6 +60,10 @@ internal class ActivityActionDispatcher : Application.ActivityLifecycleCallbacks
 
     override fun onActivityStarted(activity: Activity) {
         filterPerformAction { onStart(activity) }
+    }
+
+    override fun onActivityResumed(activity: Activity) {
+        filterPerformAction { onResume(activity) }
     }
 
 }

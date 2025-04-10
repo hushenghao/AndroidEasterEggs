@@ -29,10 +29,13 @@ internal class EggActivityAction : ActivityActionDispatcher.ActivityAction {
     override fun onCreate(activity: Activity) {
         if (activity.isPlatLogoActivity) {
             EasterEggShortcutsHelp.autoReportShortcutUsed(activity, activity.intent)
-
-            if (WallpaperPlatLogoUtils.isShowWallpaper(activity)) {
-                WallpaperPlatLogoUtils.setupOnBackPressedViewAnimate(activity)
-            }
         }
     }
+
+    override fun onResume(activity: Activity) {
+        if (activity.isPlatLogoActivity && WallpaperPlatLogoUtils.isShowWallpaper(activity)) {
+            WallpaperPlatLogoUtils.setupOnBackPressedViewAnimate(activity)
+        }
+    }
+
 }

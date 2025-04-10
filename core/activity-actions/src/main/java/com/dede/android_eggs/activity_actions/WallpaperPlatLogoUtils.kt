@@ -3,44 +3,27 @@ package com.dede.android_eggs.activity_actions
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Build
-import android.view.ContextThemeWrapper
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER
 import android.window.OnBackInvokedDispatcher.PRIORITY_OVERLAY
-import com.dede.basic.utils.DynamicObjectUtils
 
 /**
  * fix wallpaper theme finish animation
  */
 object WallpaperPlatLogoUtils {
 
-    private fun getThemeResId(activity: Activity): Int {
-        return DynamicObjectUtils.asDynamicObject(activity, ContextThemeWrapper::class)
-            .invokeMethod("getThemeResId")
-            .getValue() as? Int ?: -1
-    }
-
     fun isShowWallpaper(activity: Activity): Boolean {
         val flags = activity.window.attributes.flags
-        if ((flags and FLAG_SHOW_WALLPAPER) == FLAG_SHOW_WALLPAPER) {
-            return true
-        }
-
-        // android 9
-        val theme = getThemeResId(activity)
-        val wallpaperThemes = intArrayOf(
-            android.R.style.Theme_Wallpaper,
-            android.R.style.Theme_Wallpaper_NoTitleBar,
-            android.R.style.Theme_Wallpaper_NoTitleBar_Fullscreen,
-            @Suppress("DEPRECATION") android.R.style.Theme_Holo_Wallpaper,
-            @Suppress("DEPRECATION") android.R.style.Theme_Holo_Wallpaper_NoTitleBar,
-            android.R.style.Theme_DeviceDefault_Wallpaper,
-            android.R.style.Theme_DeviceDefault_Wallpaper_NoTitleBar,
-        )
-        return wallpaperThemes.contains(theme)
+        return (flags and FLAG_SHOW_WALLPAPER) == FLAG_SHOW_WALLPAPER
     }
 
     fun setupOnBackPressedViewAnimate(activity: Activity) {
+        val decorView = activity.window.decorView
+        val setupFlag = decorView.getTag(R.id.tag_wallpaper_platlogo_setup_flag) as? Boolean ?: false
+        if (setupFlag) {
+            return
+        }
+
         val onBackPressedCallback = {
             finishWithAnimation(activity)
         }
@@ -50,6 +33,7 @@ object WallpaperPlatLogoUtils {
         } else {
             OnBackPressedCallback.attach(activity, onBackPressedCallback)
         }
+        decorView.setTag(R.id.tag_wallpaper_platlogo_setup_flag, true)
     }
 
     @SuppressLint("ValidFragment")
