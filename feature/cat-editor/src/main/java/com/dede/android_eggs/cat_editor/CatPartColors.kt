@@ -104,8 +104,10 @@ internal object CatPartColors {
     private const val INDEX_OF_COLLAR = 0
     private const val INDEX_OF_BOWTIE = 26
 
+    const val COLOR_SIZE = 27
+
     fun colors(seed: Long = System.currentTimeMillis()): Array<Color> {
-        val arr = Array(27) { Color.Black }
+        val arr = Array(COLOR_SIZE) { Color.Black }
         val nsr = Random(seed)
 
         var bodyColor = Color(chooseP(nsr, P_BODY_COLORS))

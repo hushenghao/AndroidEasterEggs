@@ -34,6 +34,7 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -63,7 +64,7 @@ fun CatEditorScreen() {
     val navController = LocalNavController.current
     val context = LocalContext.current
 
-    val catSpeedState = remember { mutableLongStateOf(System.currentTimeMillis()) }
+    val catSpeedState = rememberSaveable { mutableLongStateOf(System.currentTimeMillis()) }
     var catSpeed by catSpeedState
     val catName = stringResource(R.string.default_cat_name, catSpeed % 1000)
 
