@@ -71,7 +71,7 @@ fun CatEditorScreen() {
     var isSaving by remember { mutableStateOf(false) }
     val colorPaletteState = remember { mutableStateOf(false) }
 
-    val catEditorRecords = rememberCatEditorRecords()
+    val catEditorRecords = rememberCatEditorRecords(firstRecord = CatEditorRecords.speed(catSpeed))
     // split with cat speed
     val catEditorController = rememberCatEditorController(catSpeed)
 
@@ -79,11 +79,6 @@ fun CatEditorScreen() {
         if (catEditorController.hasSelectedPart) {
             colorPaletteState.value = true
         }
-    }
-
-    LaunchedEffect(Unit) {
-        // add first speed record
-        catEditorRecords.addRecord(CatEditorRecords.speed(catSpeed))
     }
 
     Scaffold(

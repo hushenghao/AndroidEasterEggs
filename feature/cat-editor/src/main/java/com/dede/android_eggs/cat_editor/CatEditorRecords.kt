@@ -8,12 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableLongState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.SaverScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.core.os.BundleCompat
 import com.dede.android_eggs.util.applyIf
 
 /**
@@ -21,7 +22,7 @@ import com.dede.android_eggs.util.applyIf
  */
 internal class CatEditorRecords(private val maxSize: Int, recordIndex: Int = 0) {
 
-    object SaverImpl : Saver<CatEditorRecords, Bundle> {
+    internal object SaverImpl : Saver<CatEditorRecords, Bundle> {
 
         private const val KEY_MAX_SIZE = "max_size"
         private const val KEY_RECORD_INDEX = "record_index"
@@ -30,7 +31,8 @@ internal class CatEditorRecords(private val maxSize: Int, recordIndex: Int = 0) 
         override fun restore(value: Bundle): CatEditorRecords {
             val maxSize = value.getInt(KEY_MAX_SIZE)
             val recordIndex = value.getInt(KEY_RECORD_INDEX)
-            val records = value.getParcelableArrayList<Record>(KEY_RECORDS)
+            val records =
+                BundleCompat.getParcelableArrayList(value, KEY_RECORDS, Record::class.java)
             return CatEditorRecords(maxSize, recordIndex).applyIf(records != null) {
                 this.records.addAll(records!!)
             }
@@ -58,9 +60,14 @@ internal class CatEditorRecords(private val maxSize: Int, recordIndex: Int = 0) 
         }
 
         @Composable
-        fun rememberCatEditorRecords(maxSize: Int = 50): CatEditorRecords {
-            return remember { CatEditorRecords(maxSize) }
-//            return rememberSaveable(saver = SaverImpl) { CatEditorRecords(maxSize) }
+        fun rememberCatEditorRecords(maxSize: Int = 50, firstRecord: Record? = null): CatEditorRecords {
+            return rememberSaveable(saver = SaverImpl) {
+                val catEditorRecords = CatEditorRecords(maxSize)
+                if (firstRecord != null && catEditorRecords.recordCount == 0) {
+                    catEditorRecords.addRecord(firstRecord)
+                }
+                return@rememberSaveable catEditorRecords
+            }
         }
 
         fun restoreRecord(
@@ -149,6 +156,8 @@ internal class CatEditorRecords(private val maxSize: Int, recordIndex: Int = 0) 
     private val records = ArrayDeque<Record>()
 
     private var recordIndex by recordIndexState
+
+    val recordCount: Int get() = records.size
 
     fun canGoBack(): Boolean {
         return recordIndex > 0
