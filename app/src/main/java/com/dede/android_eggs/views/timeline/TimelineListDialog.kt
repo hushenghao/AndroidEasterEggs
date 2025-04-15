@@ -14,8 +14,8 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -32,6 +32,7 @@ import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -71,9 +72,14 @@ object TimelineListDialog : EasterEggsDestination {
 
 @Composable
 fun TimelineListDialog(
+    visibleState: MutableState<Boolean> = remember { mutableStateOf(true) },
     viewModel: TimelineViewModel = hiltViewModel(),
     onDismiss: () -> Unit = {},
 ) {
+    var visible by visibleState
+    if (!visible) {
+        return
+    }
     var sheetExpanded by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(
         confirmValueChange = {
@@ -81,7 +87,7 @@ fun TimelineListDialog(
             true
         }
     )
-    val paddingValues = WindowInsets.systemBars.asPaddingValues()
+    val paddingValues = WindowInsets.safeDrawing.asPaddingValues()
     val topPadding by animateDpAsState(
         targetValue = if (sheetExpanded)
             max(0.dp, (paddingValues.calculateTopPadding() - 16.dp))
@@ -91,11 +97,14 @@ fun TimelineListDialog(
         animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
     )
     ModalBottomSheet(
-        onDismissRequest = onDismiss,
+        onDismissRequest = {
+            visible = false
+            onDismiss()
+        },
         sheetState = sheetState,
         contentWindowInsets = {
             WindowInsets(0.dp, topPadding, 0.dp, 0.dp)
-        }
+        },
     ) {
         LazyColumn(
             contentPadding = PaddingValues(bottom = paddingValues.calculateBottomPadding())
