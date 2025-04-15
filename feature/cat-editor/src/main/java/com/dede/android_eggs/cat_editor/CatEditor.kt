@@ -109,7 +109,7 @@ internal fun CatEditor(
                     }
                     detectTransformGestures { _, pan, zoom, _ ->
                         scale = range(scale * zoom, S_MAX, S_MIN)
-                        offset += (pan * scale)
+                        offset += pan
                     }
                 }
                 .graphicsLayer {

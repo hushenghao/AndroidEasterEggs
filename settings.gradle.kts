@@ -31,6 +31,7 @@ include(
     ":core:navigation",
     ":core:local-provider",
     ":core:resources",
+    ":core:icons",
     ":core:activity-actions",
     ":core:settings",
     ":core:shortcut",

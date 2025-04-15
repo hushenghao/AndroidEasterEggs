@@ -16,7 +16,7 @@ fun main() {
     ).process()
 
 //    val outputDir = File(dir, "build/outputs")
-    val outputDir = File("app/src/main/java")
+    val outputDir = File("core/icons/src/main/java")
     IconWriter(icons)
         .generateTo(outputDir, iconNamePredicate = { true })
 }

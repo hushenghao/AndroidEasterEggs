@@ -147,6 +147,7 @@ dependencies {
     implementation(project(":core:local-provider"))
     implementation(project(":core:navigation"))
     implementation(project(":core:theme"))
+    implementation(project(":core:icons"))
     implementation(project(":core:settings"))
     implementation(project(":core:shortcut"))
     implementation(project(":core:activity-actions"))
