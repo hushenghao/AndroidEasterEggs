@@ -10,6 +10,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -108,8 +109,7 @@ fun EasterEggsNavHost(
                 }
             }
             dialog(route = TimelineListDialog.route) {
-                // double mask???
-                TimelineListDialog {
+                TimelineListDialog(scrimColor = Color.Transparent) {
                     navController.popBackStack()
                 }
             }
