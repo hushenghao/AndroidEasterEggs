@@ -46,4 +46,5 @@
     <string name="label_contribute">ساهم</string>
     <string name="animator_disabled_alert_message">نظرًا لتعطيل الرسوم المتحركة للنظام، قد لا تعمل بعض الميزات بشكل صحيح. يُرجى الانتقال إلى \"خيارات المطور\" وتمكين خيار \"مقياس مدة الرسوم المتحركة\" لتنشيط الرسوم المتحركة.</string>
     <string name="action_goto_settings">الانتقال إلى الإعدادات</string>
+    <string name="cat_editor">محرر القطط</string>
 </resources>
