@@ -180,7 +180,6 @@ dependencies {
     implementation(project(":eggs:Gingerbread"))
     implementation(project(":eggs:Base"))
 
-    marketImplementation(libs.google.play.services)
     marketImplementation(libs.google.play.review)
 
     testImplementation(libs.junit)

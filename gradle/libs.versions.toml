@@ -65,7 +65,6 @@ squareup-okio = { module = "com.squareup.okio:okio", version = "3.11.0" }
 squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.14"
 nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
 
-google-play-services = "com.google.android.gms:play-services-base:18.7.0"
 google-play-review = "com.google.android.play:review-ktx:2.0.2"
 
 # Script dependencies
