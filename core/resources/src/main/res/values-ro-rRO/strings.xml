@@ -31,7 +31,7 @@
     <string name="label_donate">Donează</string>
     <string name="preference_on">Pornit</string>
     <string name="preference_off">Oprit</string>
-    <string name="toast_shortcut_added">Scurtătură adăugată</string>
+    <string name="toast_shortcut_added">Scurtătură adăugată pe ecranul de pornire.</string>
     <string name="app_widget_description">Acesta este ceasul analogic al Easter Eggs</string>
     <string name="action_agree">De acord</string>
     <string name="summary_browse_privacy_policy">Citiți și acceptați politica noastră de confidențialitate pentru a continua.</string>
@@ -46,4 +46,5 @@
     <string name="label_contribute">Contribuie</string>
     <string name="animator_disabled_alert_message">Deoarece animațiile de sistem sunt dezactivate, s-ar putea ca unele funcții să nu funcționeze cum trebuie. Te rugăm să deschizi aplicația Setări, mergi la \"Opțiuni dezvoltator\" și activează opțiuni \"Scară durată animator\" pentru a activa animațiile.</string>
     <string name="action_goto_settings">Mergi la Setări</string>
+    <string name="cat_editor">Editor de pisici</string>
 </resources>
