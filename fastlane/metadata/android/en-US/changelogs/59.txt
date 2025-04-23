@@ -1,0 +1,8 @@
+- Add Cat Editor 🎉🎉🎉
+- Update Android 12, 13 AnalogClock clock impl
+- EdgeToEdge mode is enabled on the Easter Egg pages
+- Project Navigation graph migration
+- Fix Android 15 Landroid not fullscreen
+- Fix Platlogo wallpaper theme finish animation
+- Upgrade project dependencies
+- Known issue fixes

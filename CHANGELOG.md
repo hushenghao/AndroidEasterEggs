@@ -1,6 +1,6 @@
 # Changelog
 
-### v3.4.0
+### v3.4.0 (2025-04-23)
 
 - Add Cat Editor 🎉🎉🎉
 - Update Android 12, 13 AnalogClock clock impl
