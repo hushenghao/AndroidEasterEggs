@@ -3,6 +3,7 @@ package com.android_next.egg
 import android.content.Context
 import android.os.Build
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -15,6 +16,7 @@ import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.SnapshotProvider
 import com.dede.basic.provider.TimelineEvent
 import com.dede.basic.requireDrawable
+import com.dede.basic.utils.DynamicObjectUtils
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -62,17 +64,26 @@ object AndroidNextEasterEgg : EasterEggProvider {
 
             override fun provideSnapshotProvider(): SnapshotProvider {
                 return object : SnapshotProvider() {
+
+                    private val delegate = DynamicObjectUtils
+                        .asDynamicObject("com.android_v.egg.SnapshotProvider")
+                        .newInstance()
+                        .getValue() as SnapshotProvider
+
                     override fun create(context: Context): View {
-                        return ImageView(context).apply {
-                            setImageDrawable(context.requireDrawable(PLATLOGO_RES))
-                            setPadding(12.dp)
-                            setBackgroundColor(0xFF_1B1E22.toInt())
+                        return delegate.create(context).apply {
+                            val logo = (this as ViewGroup).getChildAt(0) as ImageView
+                            logo.setImageDrawable(context.requireDrawable(PLATLOGO_RES))
+                            logo.setPadding(10.dp)
                         }
+//                        return ImageView(context).apply {
+//                            setImageDrawable(context.requireDrawable(PLATLOGO_RES))
+//                            setPadding(12.dp)
+//                            setBackgroundColor(0xFF_1B1E22.toInt())
+//                        }
                     }
 
                     override val includeBackground: Boolean = true
-
-                    override val insertPadding: Boolean = true
                 }
             }
 
