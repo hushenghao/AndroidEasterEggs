@@ -3,7 +3,7 @@
 
     <!-- Path values for icon shape overrides. -->
     <string-array name="icon_shape_override_paths" translatable="false">
-        <item></item>
+        <item />
         <item>M0,24 A24 24 0 0 1 24,0 L76,0 A24 24 0 0 1 100,24 L100,76 A24 24 0 0 1 76,100 L24,100 A24 24 0 0 1 0,76 z"</item>
         <item>M50,0 C10,0 0,10 0,50 0,90 10,100 50,100 90,100 100,90 100,50 100,10 90,0 50,0 Z</item>
         <item>@string/icon_shape_circle_path</item>
