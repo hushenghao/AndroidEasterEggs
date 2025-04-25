@@ -1,5 +1,11 @@
 # Changelog
 
+### v3.5.0
+
+- Update Android Baklava Snapshot background
+- Upgrade project dependencies
+- Known issue fixes
+
 ### v3.4.0 (2025-04-23)
 
 - Add Cat Editor 🎉🎉🎉

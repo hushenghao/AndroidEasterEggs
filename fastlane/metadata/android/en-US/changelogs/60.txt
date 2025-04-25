@@ -1,0 +1,3 @@
+- Update Android Baklava Snapshot background
+- Upgrade project dependencies
+- Known issue fixes
