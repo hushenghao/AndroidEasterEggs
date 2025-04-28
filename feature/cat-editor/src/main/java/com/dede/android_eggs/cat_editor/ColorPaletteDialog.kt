@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -18,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ContentCopy
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.Refresh
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -70,7 +74,8 @@ fun ColorPaletteDialog(
         sheetState = sheetState,
         onDismissRequest = {
             visible = false
-        }
+        },
+        contentWindowInsets = { WindowInsets(0, 0, 0, 0) }
     ) {
         val hsv = selectedColor.getHsv()
         var hue by remember { mutableFloatStateOf(hsv[0]) }
@@ -89,12 +94,14 @@ fun ColorPaletteDialog(
         val scope = rememberCoroutineScope()
         val scrollState = rememberScrollState()
 
+        val paddingValues = BottomSheetDefaults.windowInsets.asPaddingValues()
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp)
-                .padding(bottom = 20.dp)
                 .verticalScroll(state = scrollState)
+                .padding(horizontal = 20.dp)
+                .padding(bottom = 20.dp + paddingValues.calculateBottomPadding())
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -166,12 +173,13 @@ fun ColorPaletteDialog(
                 }
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(14.dp))
 
             ColorHsvPalette(
                 modifier = Modifier
+                    .sizeIn(maxWidth = 360.dp)
                     .fillMaxWidth()
-                    .padding(horizontal = 14.dp)
+                    .padding(horizontal = 16.dp)
                     .align(Alignment.CenterHorizontally),
                 defaultColor = Color.hsv(hue, saturation, 1f),
                 onColorChanged = { hsv, h, s ->

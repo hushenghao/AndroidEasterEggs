@@ -2,6 +2,9 @@ package com.dede.android_eggs.embedding_splits
 
 import android.content.Context
 import androidx.startup.Initializer
+import androidx.window.WindowSdkExtensions
+import androidx.window.embedding.ActivityEmbeddingController
+import androidx.window.embedding.EmbeddingConfiguration
 import androidx.window.embedding.RuleController
 
 class SplitInitializer : Initializer<Unit> {
@@ -12,6 +15,14 @@ class SplitInitializer : Initializer<Unit> {
             val rules = RuleController.parseRules(context, R.xml.split_configuration)
             ruleController.setRules(rules)
         } catch (ignore: RuntimeException) {
+        }
+        if (WindowSdkExtensions.getInstance().extensionVersion >= 5) {
+            ActivityEmbeddingController.getInstance(context)
+                .setEmbeddingConfiguration(
+                    EmbeddingConfiguration.Builder()
+                        .setDimAreaBehavior(EmbeddingConfiguration.DimAreaBehavior.ON_TASK)
+                        .build()
+                )
         }
     }
 

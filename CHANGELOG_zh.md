@@ -2,6 +2,7 @@
 
 ### v3.5.0
 
+- 修复 Cat Editor hvs颜色选择器最大宽度 [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522)
 - 更新 Android Baklava 快照背景
 - 升级项目依赖项
 - 修复已知问题

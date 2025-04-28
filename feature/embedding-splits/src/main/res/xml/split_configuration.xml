@@ -8,7 +8,8 @@
         window:finishSecondaryWithPrimary="always"
         window:splitLayoutDirection="locale"
         window:splitMinSmallestWidthDp="600"
-        window:splitRatio="0.5">
+        window:splitRatio="0.5"
+        window:tag="split_pair_rule">
         <SplitPairFilter
             window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_u.egg.PlatLogoActivity" />
@@ -63,7 +64,8 @@
         window:splitMaxAspectRatioInPortrait="alwaysAllow"
         window:splitMinSmallestWidthDp="600"
         window:splitRatio="0.5"
-        window:stickyPlaceholder="false">
+        window:stickyPlaceholder="false"
+        window:tag="split_placeholder_rule">
         <ActivityFilter window:activityName="com.dede.android_eggs.views.main.EasterEggsActivity" />
     </SplitPlaceholderRule>
 

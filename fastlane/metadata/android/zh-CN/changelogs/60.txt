@@ -1,3 +1,4 @@
+- 修复 Cat Editor hvs颜色选择器最大宽度
 - 更新 Android Baklava 快照背景
 - 升级项目依赖项
 - 修复已知问题
