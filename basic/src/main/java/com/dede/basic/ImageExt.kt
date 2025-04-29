@@ -2,13 +2,19 @@
 
 package com.dede.basic
 
-import android.content.*
+import android.Manifest
+import android.content.ContentResolver
+import android.content.ContentUris
+import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import androidx.annotation.RequiresPermission
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.InputStream
@@ -62,6 +68,10 @@ private class OutputFileTaker(var file: File? = null)
  * @param fileName 文件名。 需要携带后缀
  * @param relativePath 相对于Pictures的路径
  */
+@RequiresPermission(
+    allOf = [Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE],
+    conditional = true
+)
 fun File.copyToAlbum(context: Context, fileName: String, relativePath: String?): Uri? {
     if (!this.canRead() || !this.exists()) {
         Log.w(TAG, "check: read file error: $this")
@@ -79,6 +89,10 @@ fun File.copyToAlbum(context: Context, fileName: String, relativePath: String?):
  * @param fileName 文件名。 需要携带后缀
  * @param relativePath 相对于Pictures的路径
  */
+@RequiresPermission(
+    allOf = [Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE],
+    conditional = true
+)
 fun InputStream.saveToAlbum(context: Context, fileName: String, relativePath: String?): Uri? {
     val resolver = context.contentResolver
     val outputFile = OutputFileTaker()
@@ -107,6 +121,10 @@ fun InputStream.saveToAlbum(context: Context, fileName: String, relativePath: St
  * @param relativePath 相对于Pictures的路径
  * @param quality 质量
  */
+@RequiresPermission(
+    allOf = [Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE],
+    conditional = true
+)
 fun Bitmap.saveToAlbum(
     context: Context,
     fileName: String,

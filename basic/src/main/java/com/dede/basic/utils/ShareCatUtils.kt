@@ -12,6 +12,8 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.util.Log
+import androidx.annotation.ChecksSdkIntAtLeast
+import androidx.annotation.RequiresPermission
 import com.dede.basic.MIME_PNG
 import com.dede.basic.createChooser
 import com.dede.basic.launch
@@ -33,7 +35,8 @@ object ShareCatUtils {
     private const val CATS_DIR = "Cats"
 
     @JvmStatic
-    val isRequireStoragePermissions = Build.VERSION.SDK_INT < Build.VERSION_CODES.Q
+    @ChecksSdkIntAtLeast(Build.VERSION_CODES.Q)
+    val isNotRequireStoragePermissions = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
 
     @JvmStatic
     val storagePermissions = arrayOf(
@@ -41,6 +44,10 @@ object ShareCatUtils {
         Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
 
+    @RequiresPermission(
+        allOf = [Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE],
+        conditional = true
+    )
     suspend fun saveCat(context: Context, bitmap: Bitmap, catName: String): Uri? =
         withContext(Dispatchers.IO) {
             try {
@@ -55,6 +62,10 @@ object ShareCatUtils {
     }
 
     @JvmStatic
+    @RequiresPermission(
+        allOf = [Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE],
+        conditional = true
+    )
     fun shareCat(activity: Activity, bitmap: Bitmap, catName: String) {
         activity.lifecycleCompat.launch {
             val uri = saveCat(activity, bitmap, catName) ?: return@launch

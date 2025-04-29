@@ -20,6 +20,7 @@ import kotlin.math.roundToInt
 import kotlin.math.sin
 import kotlin.math.sqrt
 import android.graphics.Color as AndroidColor
+import android.graphics.Matrix as AndroidMatrix
 
 internal object Utilities {
 
@@ -110,6 +111,27 @@ internal object Utilities {
 
     fun Matrix.toInvert(): Matrix {
         return Matrix(values.copyOf()).apply { invert() }
+    }
+
+    private val floats = FloatArray(9)
+    private val androidMatrix: AndroidMatrix = AndroidMatrix()
+
+    fun Matrix.asAndroidMatrix(dest: AndroidMatrix? = androidMatrix): AndroidMatrix {
+        val matrix = dest ?: AndroidMatrix()
+
+        val srcArr = this.values
+        val destArr = floats
+        destArr[AndroidMatrix.MSCALE_X] = srcArr[Matrix.ScaleX]
+        destArr[AndroidMatrix.MSKEW_X] = srcArr[Matrix.SkewX]
+        destArr[AndroidMatrix.MTRANS_X] = srcArr[Matrix.TranslateX]
+        destArr[AndroidMatrix.MSKEW_Y] = srcArr[Matrix.SkewY]
+        destArr[AndroidMatrix.MSCALE_Y] = srcArr[Matrix.ScaleY]
+        destArr[AndroidMatrix.MTRANS_Y] = srcArr[Matrix.TranslateY]
+        destArr[AndroidMatrix.MPERSP_0] = srcArr[Matrix.Perspective0]
+        destArr[AndroidMatrix.MPERSP_1] = srcArr[Matrix.Perspective1]
+        destArr[AndroidMatrix.MPERSP_2] = srcArr[Matrix.Perspective2]
+        matrix.setValues(destArr)
+        return matrix
     }
 
     fun Path.getRegion(isClosePath: Boolean): Region {

@@ -1,15 +1,19 @@
 package com.dede.android_eggs.cat_editor
 
+import android.graphics.Paint
 import android.graphics.Region
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.asAndroidPath
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.PathBuilder
 import androidx.compose.ui.graphics.vector.toPath
 import com.dede.android_eggs.cat_editor.Utilities.getRegion
+import android.graphics.Canvas as AndroidCanvas
 
 internal object CatParts {
 
@@ -340,11 +344,23 @@ internal object CatParts {
         override fun DrawScope.draw(color: Color) {
             drawPath(path, color, style = Stroke(width = strokeWidth, cap = StrokeCap.Round))
         }
+
+        override fun AndroidCanvas.androidDraw(paint: Paint) {
+            paint.style = Paint.Style.STROKE
+            paint.strokeWidth = strokeWidth
+            paint.strokeCap = Paint.Cap.ROUND
+            drawPath(path.asAndroidPath(), paint)
+        }
     }
 
     private class ClosedPD(path: Path, touchable: Boolean = true) : PathDraw(path, touchable) {
         override fun DrawScope.draw(color: Color) {
             drawPath(path, color, style = Fill)
+        }
+
+        override fun AndroidCanvas.androidDraw(paint: Paint) {
+            paint.style = Paint.Style.FILL
+            drawPath(path.asAndroidPath(), paint)
         }
     }
 
@@ -352,9 +368,16 @@ internal object CatParts {
 
         val drawLambda: DrawScope.(color: Color) -> Unit = { draw(it) }
 
+        val drawLambda2: AndroidCanvas.(color: Color, paint: Paint) -> Unit = { c, p ->
+            p.setColor(c.toArgb())
+            androidDraw(p)
+        }
+
         val regin: Region = path.getRegion(this.javaClass == ClosedPD::class.java)
 
         protected abstract fun DrawScope.draw(color: Color)
+
+        protected abstract fun AndroidCanvas.androidDraw(paint: Paint)
     }
 
 }

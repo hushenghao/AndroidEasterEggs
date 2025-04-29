@@ -209,7 +209,7 @@ fun CatEditorScreen() {
                     IconButton(
                         onClick = {
                             when {
-                                !ShareCatUtils.isRequireStoragePermissions -> saveCatToAlbum()
+                                ShareCatUtils.isNotRequireStoragePermissions -> saveCatToAlbum()
                                 storagePermissionState.allPermissionsGranted -> saveCatToAlbum()
                                 storagePermissionState.shouldShowRationale -> context.toast("🚫")
                                 else -> storagePermissionState.launchMultiplePermissionRequest()
