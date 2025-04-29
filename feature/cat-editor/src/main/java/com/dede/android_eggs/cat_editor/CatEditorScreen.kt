@@ -1,8 +1,10 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeApi::class)
+@file:OptIn(
+    ExperimentalMaterial3Api::class, ExperimentalComposeApi::class,
+    ExperimentalPermissionsApi::class
+)
 
 package com.dede.android_eggs.cat_editor
 
-import android.graphics.Bitmap
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.calculateEndPadding
@@ -49,7 +51,10 @@ import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.reme
 import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEditorRecords
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavController
+import com.dede.basic.toast
 import com.dede.basic.utils.ShareCatUtils
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import kotlinx.coroutines.launch
 
 object CatEditorScreen : EasterEggsDestination {
@@ -108,6 +113,33 @@ fun CatEditorScreen() {
             )
         },
         bottomBar = {
+
+            fun saveCatToAlbum() {
+                isSaving = true
+                val deferred = captureController.captureAsync()
+                scope.launch {
+                    val bitmap = deferred.await().asAndroidBitmap()
+                    val uri = ShareCatUtils.saveCat(context, bitmap, catName)
+                    if (uri != null) {
+                        context.toast("🐱")
+                    } else {
+                        context.toast("🚫")
+                    }
+                    isSaving = false
+                }
+            }
+
+            val storagePermissionState = rememberMultiplePermissionsState(
+                ShareCatUtils.storagePermissions.toList(),
+                onPermissionsResult = { result ->
+                    if (result.all { it.value }) {
+                        saveCatToAlbum()
+                    } else {
+                        context.toast("🚫")
+                    }
+                }
+            )
+
             BottomAppBar(
                 actions = {
                     IconButton(
@@ -176,13 +208,11 @@ fun CatEditorScreen() {
 
                     IconButton(
                         onClick = {
-                            isSaving = true
-                            val deferred =
-                                captureController.captureAsync(Bitmap.Config.ARGB_8888)
-                            scope.launch {
-                                val bitmap = deferred.await().asAndroidBitmap()
-                                ShareCatUtils.saveCat(context, bitmap, catName)
-                                isSaving = false
+                            when {
+                                !ShareCatUtils.isRequireStoragePermissions -> saveCatToAlbum()
+                                storagePermissionState.allPermissionsGranted -> saveCatToAlbum()
+                                storagePermissionState.shouldShowRationale -> context.toast("🚫")
+                                else -> storagePermissionState.launchMultiplePermissionRequest()
                             }
                         },
                         enabled = !isSaving

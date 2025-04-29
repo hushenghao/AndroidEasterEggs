@@ -16,14 +16,12 @@
 
 package com.android_r.egg.neko;
 
-import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -46,6 +44,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android_r.egg.R;
 import com.android_r.egg.neko.PrefState.PrefsListener;
+import com.dede.basic.ContextExt;
 import com.dede.basic.utils.ShareCatUtils;
 
 import java.util.Collections;
@@ -65,7 +64,7 @@ public class NekoLand extends Activity implements PrefsListener {
 
     private static final int STORAGE_PERM_REQUEST = 123;
 
-    private static boolean CAT_GEN = false;
+    private static final boolean CAT_GEN = false;
     private PrefState mPrefs;
     private CatAdapter mAdapter;
     private Cat mPendingShareCat;
@@ -146,7 +145,7 @@ public class NekoLand extends Activity implements PrefsListener {
                 android.R.style.Theme_Material_Light_Dialog_NoActionBar);
         // TODO: Move to XML, add correct margins.
         View view = LayoutInflater.from(context).inflate(R.layout.r_edit_text, null);
-        final EditText text = (EditText) view.findViewById(android.R.id.edit);
+        final EditText text = view.findViewById(android.R.id.edit);
         text.setText(cat.getName());
         text.setSelection(cat.getName().length());
         final int size = context.getResources()
@@ -263,16 +262,14 @@ public class NekoLand extends Activity implements PrefsListener {
                 public void onClick(View v) {
                     setContextGroupVisible(holder, false);
                     Cat cat = mCats[holder.getBindingAdapterPosition()];
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    if (!ShareCatUtils.isRequireStoragePermissions()) {
                         shareCat(cat);
                         return;
                     }
-                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            != PackageManager.PERMISSION_GRANTED) {
+                    String[] permissions = ShareCatUtils.getStoragePermissions();
+                    if (ContextExt.checkSelfPermissions(NekoLand.this, permissions)) {
                         mPendingShareCat = cat;
-                        requestPermissions(
-                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                STORAGE_PERM_REQUEST);
+                        requestPermissions(permissions, STORAGE_PERM_REQUEST);
                         return;
                     }
                     shareCat(cat);
@@ -289,14 +286,13 @@ public class NekoLand extends Activity implements PrefsListener {
     private void shareCat(Cat cat) {
         Bitmap bitmap = cat.createBitmap(EXPORT_BITMAP_SIZE, EXPORT_BITMAP_SIZE);
         if (bitmap != null) {
-            ShareCatUtils.share(this, bitmap, cat.getName());
+            ShareCatUtils.shareCat(this, bitmap, cat.getName());
             cat.logShare(this);
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == STORAGE_PERM_REQUEST) {
             if (mPendingShareCat != null) {
                 shareCat(mPendingShareCat);
@@ -314,8 +310,8 @@ public class NekoLand extends Activity implements PrefsListener {
 
         public CatHolder(View itemView) {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.icon);
-            textView = (TextView) itemView.findViewById(R.id.title);
+            imageView = itemView.findViewById(R.id.icon);
+            textView = itemView.findViewById(R.id.title);
             contextGroup = itemView.findViewById(R.id.contextGroup);
             delete = itemView.findViewById(R.id.closeButton);
             share = itemView.findViewById(R.id.shareText);

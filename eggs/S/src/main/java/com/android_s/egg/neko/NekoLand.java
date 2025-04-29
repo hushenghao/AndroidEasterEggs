@@ -16,14 +16,12 @@
 
 package com.android_s.egg.neko;
 
-import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -46,6 +44,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android_s.egg.R;
 import com.android_s.egg.neko.PrefState.PrefsListener;
+import com.dede.basic.ContextExt;
 import com.dede.basic.utils.ShareCatUtils;
 //import com.android.internal.logging.MetricsLogger;
 
@@ -262,16 +261,14 @@ public class NekoLand extends Activity implements PrefsListener {
                 public void onClick(View v) {
                     setContextGroupVisible(holder, false);
                     Cat cat = mCats[holder.getBindingAdapterPosition()];
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    if (!ShareCatUtils.isRequireStoragePermissions()) {
                         shareCat(cat);
                         return;
                     }
-                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            != PackageManager.PERMISSION_GRANTED) {
+                    String[] permissions = ShareCatUtils.getStoragePermissions();
+                    if (ContextExt.checkSelfPermissions(NekoLand.this, permissions)) {
                         mPendingShareCat = cat;
-                        requestPermissions(
-                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                STORAGE_PERM_REQUEST);
+                        requestPermissions(permissions, STORAGE_PERM_REQUEST);
                         return;
                     }
                     shareCat(cat);
@@ -288,7 +285,7 @@ public class NekoLand extends Activity implements PrefsListener {
     private void shareCat(Cat cat) {
         Bitmap bitmap = cat.createBitmap(EXPORT_BITMAP_SIZE, EXPORT_BITMAP_SIZE);
         if (bitmap != null) {
-            ShareCatUtils.share(this, bitmap, cat.getName());
+            ShareCatUtils.shareCat(this, bitmap, cat.getName());
             cat.logShare(this);
         }
 //        final File dir = new File(
@@ -328,8 +325,7 @@ public class NekoLand extends Activity implements PrefsListener {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == STORAGE_PERM_REQUEST) {
             if (mPendingShareCat != null) {
                 shareCat(mPendingShareCat);

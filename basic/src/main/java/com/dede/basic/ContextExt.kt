@@ -10,12 +10,14 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.view.ContextThemeWrapper
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.core.os.ConfigurationCompat
@@ -109,4 +111,16 @@ fun Context.createLocalesContext(locales: LocaleListCompat): Context {
 fun Context.getConfigurationLocales(): LocaleListCompat {
     val localeConfig = ContextCompat.getContextForLanguage(this).resources.configuration
     return ConfigurationCompat.getLocales(localeConfig)
+}
+
+fun Context.checkSelfPermissions(vararg permissions: String): Boolean {
+    for (permission in permissions) {
+        if (ActivityCompat.checkSelfPermission(
+                this, permission
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return false
+        }
+    }
+    return true
 }

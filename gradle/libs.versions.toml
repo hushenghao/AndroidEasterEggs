@@ -22,7 +22,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [libraries]
-kotlinx-coroutines-android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2"
+kotlinx-coroutines-bom = "org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.10.2"
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.0"
 androidx-core = "androidx.core:core-ktx:1.16.0"
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
@@ -49,7 +49,8 @@ androidx-compose-material = { module = "androidx.compose.material:material" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
 androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended" }
 androidx-compose-constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.1.1"
-accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
+google-accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
+google-accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 # Preview support
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
@@ -57,7 +58,7 @@ androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
-shreyaspatil-capturable = "dev.shreyaspatil:capturable:2.1.0"
+shreyaspatil-capturable = "dev.shreyaspatil:capturable:3.0.1"
 dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.5"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
 free-reflection = "com.github.tiann:FreeReflection:3.2.0"

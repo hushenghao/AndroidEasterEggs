@@ -3,6 +3,7 @@
 ### v3.5.0
 
 - Fix Cat Editor color hvs palette maxWidth [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522)
+- Fix Cat Editor storage permission on Android Q below
 - Update Android Baklava Snapshot background
 - Upgrade project dependencies
 - Known issue fixes

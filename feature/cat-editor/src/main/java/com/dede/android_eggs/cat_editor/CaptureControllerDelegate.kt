@@ -1,11 +1,10 @@
 package com.dede.android_eggs.cat_editor
 
-import android.graphics.Bitmap
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.ImageBitmap
 import dev.shreyaspatil.capturable.controller.CaptureController
+import dev.shreyaspatil.capturable.controller.rememberCaptureController
 import kotlinx.coroutines.Deferred
 
 
@@ -15,7 +14,8 @@ internal class CaptureControllerDelegate private constructor(private val control
 
         @Composable
         fun rememberCaptureControllerDelegate(): CaptureControllerDelegate {
-            return remember { CaptureControllerDelegate(CaptureController()) }
+            val captureController = rememberCaptureController()
+            return remember(captureController) { CaptureControllerDelegate(captureController) }
         }
     }
 
@@ -23,9 +23,8 @@ internal class CaptureControllerDelegate private constructor(private val control
 
     fun getDelegate(): CaptureController = controller
 
-    @ExperimentalComposeApi
-    fun captureAsync(config: Bitmap.Config = Bitmap.Config.ARGB_8888): Deferred<ImageBitmap> {
+    fun captureAsync(): Deferred<ImageBitmap> {
         onPerCapture()
-        return controller.captureAsync(config)
+        return controller.captureAsync()
     }
 }

@@ -2,6 +2,7 @@
 
 package com.dede.basic.utils
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ActivityNotFoundException
@@ -9,6 +10,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.util.Log
 import com.dede.basic.MIME_PNG
 import com.dede.basic.createChooser
@@ -30,9 +32,22 @@ object ShareCatUtils {
 
     private const val CATS_DIR = "Cats"
 
+    @JvmStatic
+    val isRequireStoragePermissions = Build.VERSION.SDK_INT < Build.VERSION_CODES.Q
+
+    @JvmStatic
+    val storagePermissions = arrayOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    )
+
     suspend fun saveCat(context: Context, bitmap: Bitmap, catName: String): Uri? =
         withContext(Dispatchers.IO) {
-            bitmap.saveToAlbum(context, catName.toFileName(), CATS_DIR, 0)
+            try {
+                bitmap.saveToAlbum(context, catName.toFileName(), CATS_DIR, 0)
+            } catch (e: Throwable) {
+                null
+            }
         }
 
     private fun String.toFileName(): String {
@@ -40,7 +55,7 @@ object ShareCatUtils {
     }
 
     @JvmStatic
-    fun share(activity: Activity, bitmap: Bitmap, catName: String) {
+    fun shareCat(activity: Activity, bitmap: Bitmap, catName: String) {
         activity.lifecycleCompat.launch {
             val uri = saveCat(activity, bitmap, catName) ?: return@launch
             Log.v("Neko", "cat uri: $uri")

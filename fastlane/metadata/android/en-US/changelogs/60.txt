@@ -1,4 +1,5 @@
 - Fix Cat Editor color hvs palette maxWidth
+- Fix Cat Editor storage permission on Android Q below
 - Update Android Baklava Snapshot background
 - Upgrade project dependencies
 - Known issue fixes
