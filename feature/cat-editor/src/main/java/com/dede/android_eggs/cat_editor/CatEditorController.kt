@@ -83,6 +83,12 @@ internal class CatEditorControllerImpl(private val speed: Long) : CatEditorContr
 
     private val colorStateList = mutableStateListOf(*CatPartColors.colors(speed))
 
+    override var defaultGraphicsLayerScale: Float = 1f
+        set(value) {
+            field = value
+            resetGraphicsLayer()
+        }
+
     override val colorList: List<Color> = colorStateList
 
     override var selectPart: Int by selectedPartState
@@ -107,12 +113,14 @@ internal class CatEditorControllerImpl(private val speed: Long) : CatEditorContr
     }
 
     override fun resetGraphicsLayer() {
-        scaleState.floatValue = 1f
+        scaleState.floatValue = defaultGraphicsLayerScale
         offsetState.value = Offset.Zero
     }
 }
 
 internal interface CatEditorController {
+
+    var defaultGraphicsLayerScale: Float
 
     var isSelectEnabled: Boolean
 

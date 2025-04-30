@@ -27,8 +27,7 @@ internal fun createAndroidBitmap(size: Size): Bitmap {
 }
 
 // fix Android N canvas scale
-internal val needAndroidCanvasDraw =
-    Build.VERSION.SDK_INT in Build.VERSION_CODES.N..Build.VERSION_CODES.N_MR1
+internal val useAndroidCanvasDraw = Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1
 
 private val androidPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
@@ -46,13 +45,8 @@ internal fun DrawScope.androidCanvasDraw(
     // draw bitmap
     bitmap.applyCanvas {
         withMatrix(matrix) {
-            CatParts.drawOrders.forEachIndexed { index, pathDraw ->
-                var color = colorList[index]
-                if (selectedPart == index) {
-                    val blend = Utilities.getHighlightColor(color)
-                    color = Utilities.blendColor(color, blend, blendRatio)
-                }
-                pathDraw.drawLambda2.invoke(this, color, androidPaint)
+            forEachCatDrawPart(colorList, selectedPart, blendRatio) { part, color ->
+                part.androidDrawLambda(this, color, androidPaint)
             }
         }
     }

@@ -12,7 +12,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import kotlin.math.roundToInt
 
 /**
  * A grid line for the cat editor.
@@ -22,11 +21,10 @@ import kotlin.math.roundToInt
 internal fun CatEditorGridLine(
     modifier: Modifier = Modifier,
     color: Color = MaterialTheme.colorScheme.tertiary,
-    step: Dp = 20.dp,
+    gridLineCount: Int = 28,
     strokeWidth: Dp = 1.dp,
 ) {
 
-    val stepPx = with(LocalDensity.current) { step.toPx() }
     val strokeWidthPx = with(LocalDensity.current) { strokeWidth.toPx() }
 
     Canvas(
@@ -35,10 +33,12 @@ internal fun CatEditorGridLine(
             .then(modifier),
         onDraw = {
             clipRect {
-                val columns = (size.width / stepPx).roundToInt()
-                val offsetX = (size.width - columns * stepPx) / 2f
+                val step = size.maxDimension / gridLineCount
+
+                val columns = (size.width / step).toInt() + 1
+                val offsetX = (size.width - columns * step) / 2f
                 for (c in 0 until columns) {
-                    val x = offsetX + c * stepPx
+                    val x = offsetX + c * step
                     drawLine(
                         color,
                         start = Offset(x, 0f),
@@ -47,10 +47,10 @@ internal fun CatEditorGridLine(
                     )
                 }
 
-                val rows = (size.height / stepPx).roundToInt()
-                val offsetY = (size.height - rows * stepPx) / 2f
+                val rows = (size.height / step).toInt() + 1
+                val offsetY = (size.height - rows * step) / 2f
                 for (r in 0 until rows) {
-                    val y = offsetY + r * stepPx
+                    val y = offsetY + r * step
                     drawLine(
                         color,
                         start = Offset(0f, y),

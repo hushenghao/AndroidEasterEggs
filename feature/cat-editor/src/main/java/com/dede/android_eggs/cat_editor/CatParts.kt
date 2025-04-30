@@ -368,7 +368,7 @@ internal object CatParts {
 
         val drawLambda: DrawScope.(color: Color) -> Unit = { draw(it) }
 
-        val drawLambda2: AndroidCanvas.(color: Color, paint: Paint) -> Unit = { c, p ->
+        val androidDrawLambda: AndroidCanvas.(color: Color, paint: Paint) -> Unit = { c, p ->
             p.setColor(c.toArgb())
             androidDraw(p)
         }

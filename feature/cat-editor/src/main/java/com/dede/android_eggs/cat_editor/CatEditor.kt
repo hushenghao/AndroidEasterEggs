@@ -32,11 +32,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Matrix
-import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.toSize
 import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
 import com.dede.android_eggs.cat_editor.CatParts.VIEW_PORT_SIZE
 import com.dede.android_eggs.cat_editor.Utilities.asAndroidMatrix
@@ -84,8 +85,7 @@ internal fun CatEditor(
         captureController.onPerCapture = {
             // set normal state
             selectedPart = -1
-            scale = 1f
-            offset = Offset.Zero
+            controllerImpl.resetGraphicsLayer()
         }
     }
 
@@ -102,10 +102,15 @@ internal fun CatEditor(
             scale = nextScaleLevel(scale, S_MAX, S_MIN)
         }
 
+        var editorSize by remember { mutableStateOf(Size.Zero) }
+
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxSize()
+                .onSizeChanged {
+                    editorSize = it.toSize()
+                }
                 .pointerInput(controllerImpl.isGesturesEnabled) {
                     if (!controllerImpl.isGesturesEnabled) {
                         return@pointerInput
@@ -146,8 +151,15 @@ internal fun CatEditor(
             var canvasSize by remember { mutableStateOf(Size.Zero) }
             val canvasMatrix = remember(canvasSize) { createCanvasMatrix(canvasSize) }
 
+            LaunchedEffect(canvasSize, editorSize) {
+                if (canvasSize != Size.Zero && editorSize != Size.Zero) {
+                    controllerImpl.defaultGraphicsLayerScale =
+                        editorSize.minDimension / canvasSize.maxDimension
+                }
+            }
+
             val bitmap: Bitmap? = remember(canvasSize) {
-                if (needAndroidCanvasDraw) createAndroidBitmap(canvasSize) else null
+                if (useAndroidCanvasDraw) createAndroidBitmap(canvasSize) else null
             }
             Canvas(
                 contentDescription = stringResource(StringR.string.cat_editor),
@@ -188,8 +200,8 @@ internal fun CatEditor(
                         return@Canvas
                     }
 
-                    // native canvas draw
-                    if (needAndroidCanvasDraw && bitmap != null) {
+                    if (useAndroidCanvasDraw && bitmap != null) {
+                        // android canvas draw
                         androidCanvasDraw(
                             canvasMatrix.asAndroidMatrix(),
                             bitmap,
@@ -197,19 +209,14 @@ internal fun CatEditor(
                             selectedPart,
                             blendRatio
                         )
-                        return@Canvas
-                    }
-
-                    // compose canvas draw
-                    withTransform({ transform(canvasMatrix) }) {
-                        CatParts.drawOrders.forEachIndexed { index, pathDraw ->
-                            var color = controllerImpl.colorList[index]
-                            if (selectedPart == index) {
-                                val blend = Utilities.getHighlightColor(color)
-                                color = Utilities.blendColor(color, blend, blendRatio)
-                            }
-                            pathDraw.drawLambda.invoke(this, color)
-                        }
+                    } else {
+                        // compose canvas draw
+                        composeCanvasDraw(
+                            canvasMatrix,
+                            controllerImpl.colorList,
+                            selectedPart,
+                            blendRatio
+                        )
                     }
                 }
             )
