@@ -7,29 +7,20 @@ import androidx.compose.ui.graphics.drawscope.withTransform
 
 
 internal fun forEachCatDrawPart(
-    colorList: List<Color>,
-    selectedPart: Int,
-    blendRatio: Float,
-    block: (part: CatParts.PathDraw, color: Color) -> Unit
+    onPartColor: (index: Int) -> Color,
+    onDrawPart: (part: CatParts.PathDraw, color: Color) -> Unit
 ) {
     CatParts.drawOrders.forEachIndexed { index, pathDraw ->
-        var color = colorList[index]
-        if (selectedPart == index) {
-            val blend = Utilities.getHighlightColor(color)
-            color = Utilities.blendColor(color, blend, blendRatio)
-        }
-        block(pathDraw, color)
+        onDrawPart(pathDraw, onPartColor(index))
     }
 }
 
 internal fun DrawScope.composeCanvasDraw(
     matrix: Matrix,
-    colorList: List<Color>,
-    selectedPart: Int,
-    blendRatio: Float
+    onPartColor: (index: Int) -> Color
 ) {
     withTransform({ transform(matrix) }) {
-        forEachCatDrawPart(colorList, selectedPart, blendRatio) { part, color ->
+        forEachCatDrawPart(onPartColor) { part, color ->
             part.drawLambda(this, color)
         }
     }

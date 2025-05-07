@@ -31,6 +31,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Matrix
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
@@ -148,6 +149,15 @@ internal fun CatEditor(
                 label = "HighlightColorBlend"
             )
 
+            val partColorBlend: (index: Int) -> Color = { index ->
+                var color = controllerImpl.colorList[index]
+                if (selectedPart == index) {
+                    val blend = Utilities.getHighlightColor(color)
+                    color = Utilities.blendColor(color, blend, blendRatio)
+                }
+                color
+            }
+
             var canvasSize by remember { mutableStateOf(Size.Zero) }
             val canvasMatrix = remember(canvasSize) { createCanvasMatrix(canvasSize) }
 
@@ -205,17 +215,13 @@ internal fun CatEditor(
                         androidCanvasDraw(
                             canvasMatrix.asAndroidMatrix(),
                             bitmap,
-                            controllerImpl.colorList,
-                            selectedPart,
-                            blendRatio
+                            partColorBlend
                         )
                     } else {
                         // compose canvas draw
                         composeCanvasDraw(
                             canvasMatrix,
-                            controllerImpl.colorList,
-                            selectedPart,
-                            blendRatio
+                            partColorBlend
                         )
                     }
                 }

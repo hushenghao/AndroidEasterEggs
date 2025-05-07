@@ -35,9 +35,7 @@ private val androidPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 internal fun DrawScope.androidCanvasDraw(
     matrix: Matrix,
     bitmap: Bitmap,
-    colorList: List<androidx.compose.ui.graphics.Color>,
-    selectedPart: Int,
-    blendRatio: Float
+    onPartColor: (index: Int) -> androidx.compose.ui.graphics.Color,
 ) {
     // clear bitmap
     bitmap.eraseColor(Color.TRANSPARENT)
@@ -45,7 +43,7 @@ internal fun DrawScope.androidCanvasDraw(
     // draw bitmap
     bitmap.applyCanvas {
         withMatrix(matrix) {
-            forEachCatDrawPart(colorList, selectedPart, blendRatio) { part, color ->
+            forEachCatDrawPart(onPartColor) { part, color ->
                 part.androidDrawLambda(this, color, androidPaint)
             }
         }
