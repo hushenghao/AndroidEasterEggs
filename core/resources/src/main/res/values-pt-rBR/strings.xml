@@ -44,4 +44,7 @@
     <string name="pref_summary_retain_recent_egg_tasks">Reter tarefas do Easter Egg na tela Recentes, máximo de 5 tarefas retidas (não disponível para o modo incorporado de atividade.)</string>
     <string name="label_about">Sobre</string>
     <string name="label_contribute">Contribuir</string>
+    <string name="animator_disabled_alert_message">Devido a animação do sistema estar desativada, alguns recursos podem não funcionar corretamente. Por favor vá para \"Opções de Desenvolvedor\" e ative a opção \"Tamanho da duração do animador\" para ativar a animação.</string>
+    <string name="action_goto_settings">Ir para Configurações</string>
+    <string name="cat_editor">Editor de Gatos</string>
 </resources>
