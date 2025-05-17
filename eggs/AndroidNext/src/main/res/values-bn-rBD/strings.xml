@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="summary_android_waiting">বর্তমানে পাওয়া যাচ্ছে না</string>
+    <string name="summary_android_release_pushed">চূড়ান্ত প্রকাশ সংস্করণ প্রকাশিত হয়েছে</string>
+    <string name="label_timeline_title">সময়রেখা, মাইলফলক এবং আপডেট</string>
+    <string name="label_timeline_releases">রিলিজ</string>
+    <string name="label_timeline_developer_previews">ডেভেলপার প্রিভিউ</string>
+    <string name="label_timeline_beta_release">বেটা রিলিজ</string>
+    <string name="label_timeline_platform_stability">প্ল্যাটফর্ম স্থিতিশীলতা</string>
+    <string name="label_timeline_final_release">চূড়ান্ত প্রকাশ</string>
+</resources>
