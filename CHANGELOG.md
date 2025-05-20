@@ -2,7 +2,7 @@
 
 ### v3.5.0
 
-- Add Bengali translation, Thanks for [@ChildishRifty7](https://crowdin.com/profile/childishrifty7) 's contribution
+- Add Bengali translation, Thanks for [@ChildishRifty7](https://github.com/childishrifty7) 's contribution
 - Fix Cat Editor draw problem on Android N [#37138664](https://issuetracker.google.com/issues/37138664)
 - Fix Cat Editor color hvs palette maxWidth [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522)
 - Fix Cat Editor storage permission on Android Q below
