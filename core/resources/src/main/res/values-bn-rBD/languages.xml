@@ -3,14 +3,14 @@
     <!-- locality language -->
     <string name="locale_lang_zh_SC">সরলীকৃত চীনা</string>
     <string name="locale_lang_zh_TC">ঐতিহ্যবাহী চীনা</string>
-    <string name="locale_lang_de">জার্মানি</string>
+    <string name="locale_lang_de">জার্মান</string>
     <string name="locale_lang_en">ইংরেজি</string>
     <string name="locale_lang_es">স্পেনীয়</string>
     <string name="locale_lang_hr_HR">ক্রোয়েশিয়ান</string>
-    <string name="locale_lang_in_ID">ইন্দোনেশিয়া</string>
+    <string name="locale_lang_in_ID">ইন্দোনেশিয়ান</string>
     <string name="locale_lang_it">ইতালীয়</string>
-    <string name="locale_lang_pt">পর্তুগাল</string>
-    <string name="locale_lang_pt_BR">পর্তুগাল (ব্রাজিল)</string>
+    <string name="locale_lang_pt">পর্তুগিজ</string>
+    <string name="locale_lang_pt_BR">পর্তুগিজ (ব্রাজিল)</string>
     <string name="locale_lang_ru">রুশ</string>
     <string name="locale_lang_ar_SA">আরবি</string>
     <string name="locale_lang_ja_JP">জাপানি</string>
@@ -19,7 +19,7 @@
     <string name="locale_lang_la_LA">ল্যাটিন</string>
     <string name="locale_lang_fr">ফরাসি</string>
     <string name="locale_lang_uk_UA">ইউক্রেনীয়</string>
-    <string name="locale_lang_tr_TR">তুর্কী</string>
+    <string name="locale_lang_tr_TR">তুরস্ক</string>
     <string name="locale_lang_ko_KR">কোরিয়ান</string>
     <string name="locale_lang_el_GR">গ্রীক</string>
     <string name="locale_lang_fi_FI">ফিনিশ</string>
@@ -34,4 +34,5 @@
     <string name="locale_lang_ro">রোমানীয়</string>
     <string name="locale_lang_sv_SE">সুইডিশ</string>
     <string name="locale_lang_my_MM">বার্মিজ</string>
+    <string name="locale_lang_bn_BD">বাংলা</string>
 </resources>
