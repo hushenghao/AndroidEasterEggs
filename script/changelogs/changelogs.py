@@ -14,7 +14,7 @@ OUTPUT_DIR_ZH = "../../fastlane/metadata/android/zh-CN/changelogs"
 
 REGEX_VERSION_TITLE = r"^#+ v((\d|\.)+)\s*(\((\d|-)+\))?$"  # markdown version title regex, ### v1.2.3 (2024-01-01)
 REGEX_CHANGELOG = r"^(- .+)+$"  # markdown changelog line regex
-REGEX_LINK_SUB = r'\[#.+\]\(\S+\)'  # markdown sub link regex
+REGEX_LINK_SUB = r'\[([#@]?.+)\]\(\S+\)'  # markdown sub link regex
 
 # version script path
 VERSION_SCRIPT = "../../app/build.gradle.kts"
@@ -55,7 +55,7 @@ def get_latest_changelog(markdown: str) -> tuple[str, str]:
             if line == None:
                 break
             if (finded and re.match(REGEX_CHANGELOG, line)):
-                changelog += re.sub(REGEX_LINK_SUB, "", line).strip() + "\n"
+                changelog += re.sub(REGEX_LINK_SUB, "\\g<1>", line).strip() + "\n"
             version_title_match = re.search(REGEX_VERSION_TITLE, line)
             if (version_title_match != None):
                 if finded:

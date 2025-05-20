@@ -2,6 +2,7 @@
 
 ### v3.5.0
 
+- 新增孟加拉语翻译，感谢 [@ChildishRifty7](https://crowdin.com/profile/childishrifty7) 的贡献
 - 修复 Cat Editor 在 Android N 的绘制问题 [#37138664](https://issuetracker.google.com/issues/37138664)
 - 修复 Cat Editor hvs颜色选择器最大宽度 [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522)
 - 修复 Cat Editor 在 Android Q 以下时的存储权限

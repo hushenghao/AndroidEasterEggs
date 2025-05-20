@@ -52,4 +52,5 @@
     <string name="language_ro" translatable="false">Română</string>
     <string name="language_sv_SE" translatable="false">Svenska</string>
     <string name="language_my_MM" translatable="false">မြန်မာ</string>
+    <string name="language_bn_BD" translatable="false">বাঙালী</string>
 </resources>
