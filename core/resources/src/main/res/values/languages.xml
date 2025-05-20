@@ -3,14 +3,14 @@
     <!-- locality language -->
     <string name="locale_lang_zh_SC">Chinese Simplified</string>
     <string name="locale_lang_zh_TC">Chinese Traditional</string>
-    <string name="locale_lang_de">Germany</string>
+    <string name="locale_lang_de">German</string>
     <string name="locale_lang_en">English</string>
     <string name="locale_lang_es">Spanish</string>
     <string name="locale_lang_hr_HR">Croatian</string>
-    <string name="locale_lang_in_ID">Indonesia</string>
+    <string name="locale_lang_in_ID">Indonesian</string>
     <string name="locale_lang_it">Italian</string>
-    <string name="locale_lang_pt">Portugal</string>
-    <string name="locale_lang_pt_BR">Portugal (Brazil)</string>
+    <string name="locale_lang_pt">Portuguese</string>
+    <string name="locale_lang_pt_BR">Portuguese (Brazil)</string>
     <string name="locale_lang_ru">Russian</string>
     <string name="locale_lang_ar_SA">Arabic</string>
     <string name="locale_lang_ja_JP">Japanese</string>
