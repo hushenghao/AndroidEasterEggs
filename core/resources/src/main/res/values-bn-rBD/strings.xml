@@ -10,11 +10,11 @@
     <string name="label_timeline">সময়রেখা</string>
     <string name="label_privacy_policy">গোপনীয়তা নীতি</string>
     <string name="label_license">লাইসেন্স</string>
-    <string name="label_feedback">মতামত দিন</string>
+    <string name="label_feedback">মতামত জানান</string>
     <string name="label_star">অ্যাপ নিয়ে রেট করুন</string>
     <string name="label_contact_me">আমার সাথে যোগাযোগ করুন</string>
     <string name="label_email_title">ইমেইল</string>
-    <string name="message_trypophobia_warning">যারা &lt;b&gt;ট্রাইপোফোবিয়া&lt;/b&gt; রোগে ভুগছেন তাদের জন্য এটি একটি সতর্কীকরণ যে কিছু ছবি অস্বস্তির কারণ হতে পারে। তা সত্ত্বেও আপনি কি চালিয়ে যেতে চান?</string>
+    <string name="message_trypophobia_warning">যারা &lt;b&gt;ট্রাইপোফোবিয়া&lt;/b&gt; রোগে আক্রান্ত তাদের জন্য এটি একটি সতর্কীকরণ যে কিছু ছবি অস্বস্তির কারণ হতে পারে। তা সত্ত্বেও আপনি কি চালিয়ে যেতে চান?</string>
     <string name="label_settings">সেটিংস</string>
     <string name="label_project_desc">এই প্রকল্পে সকল সিস্টেম ইস্টার এগগুলোর সম্পূর্ণ কোড রয়েছে, যার লক্ষ্য হচ্ছে সমস্ত সিস্টেম ইস্টার এগগুলোকে সংগঠিত করা এবং সামঞ্জস্যপূর্ণ করা, যাতে নিশ্চিত করা যায় যে ইস্টার এগের কোডে খুব বেশি পরিবর্তন না করেই ইস্টার এগের বিভিন্ন সংস্করণের অভিজ্ঞতা বেশিরভাগ ডিভাইস অর্জন করতে পারে। নতুন সংস্করণগুলো উক্ত সিস্টেমের নতুন বৈশিষ্ট্যসমূহ ব্যবহার করে, কিন্তু নিম্ন সংস্করণগুলো শুধুমাত্র কিছু ফাংশন ব্যবহার করতে পারে।</string>
     <string name="pref_title_icon_shape_override">আইকনের আকার</string>
@@ -22,7 +22,7 @@
     <string name="pref_title_language_more">আরও</string>
     <string name="pref_title_theme">থিম</string>
     <string name="pref_title_dynamic_color">গতিশীল রঙ</string>
-    <string name="pref_title_icon_visual_effects">আইকন ভিজ্যুয়াল এফেক্টস</string>
+    <string name="pref_title_icon_visual_effects">আইকন ভিজ্যুয়াল ইফেক্টস</string>
     <string name="summary_system_default">ডিফল্ট</string>
     <string name="summary_theme_dark_mode">অন্ধকার</string>
     <string name="summary_theme_light_mode">আলো</string>
@@ -41,10 +41,10 @@
     <string name="label_component_manager">কম্পোনেন্ট ম্যানেজার</string>
     <string name="pref_more_settings">আরও সেটিংস</string>
     <string name="pref_retain_recent_egg_tasks">ইস্টার এগের কাজগুলো ধরে রাখুন</string>
-    <string name="pref_summary_retain_recent_egg_tasks">সাম্প্রতিক স্ক্রিনে ইস্টার এগ কাজগুলো ধরে রাখুন। সর্বোচ্চ ৫টি পর্যন্ত ধরে রাখা যেতে পারে। (অ্যাক্টিভিটি এম্বেডেড মোডের জন্য প্রযোজ্য নয়।)</string>
+    <string name="pref_summary_retain_recent_egg_tasks">সাম্প্রতিক স্ক্রিনে ইস্টার এগ কাজগুলো ধরে রাখুন। সর্বোচ্চ ৫টি ধরে রাখা যেতে পারে। (অ্যাক্টিভিটি এম্বেডেড মোডের জন্য প্রযোজ্য নয়।)</string>
     <string name="label_about">সম্পর্কে</string>
     <string name="label_contribute">অবদান রাখুন</string>
-    <string name="animator_disabled_alert_message">সিস্টেম অ্যানিমেশন অচল থাকার কারণে, কিছু বৈশিষ্ট্য সঠিকভাবে কাজ নাও করতে পারে। অনুগ্রহ করে \"ডেভেলপার অপশন্স\" এ যান এবং অ্যানিমেশনটি সক্রিয় করতে \"অ্যানিমেটর সময়কাল স্কেল\" অপশনটি চালু করুন।</string>
+    <string name="animator_disabled_alert_message">সিস্টেম অ্যানিমেশন অচল থাকার কারণে, কিছু বৈশিষ্ট্য সঠিকভাবে কাজ নাও করতে পারে। অনুগ্রহ করে \"ডেভেলপারের অপশন\" এ যান এবং অ্যানিমেশনটি সক্রিয় করতে \"অ্যানিমেটর ডিউরেশন স্কেল\" অপশনটি চালু করুন।</string>
     <string name="action_goto_settings">সেটিংসে যান</string>
     <string name="cat_editor">বিড়াল সম্পাদক</string>
 </resources>
