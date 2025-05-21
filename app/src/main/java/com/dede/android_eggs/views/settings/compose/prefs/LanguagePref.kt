@@ -122,7 +122,7 @@ object LanguagePrefUtil {
         LangOp(TURKISH,             StringsR.string.locale_lang_tr_TR,  createLocale("tr", "TR")),
         LangOp(UKRAINIAN,           StringsR.string.locale_lang_uk_UA,  createLocale("uk", "UA")),
         LangOp(JAPANESE,            StringsR.string.locale_lang_ja_JP,  Locale.JAPAN),
-        LangOp(KOREAN_KOREA,           StringsR.string.locale_lang_ko_KR,     createLocale("ko","KR")),
+        LangOp(KOREAN_KOREA,        StringsR.string.locale_lang_ko_KR,  createLocale("ko","KR")),
         LangOp(GREEK,               StringsR.string.locale_lang_el_GR,  createLocale("el", "GR")),
         LangOp(FINNISH,             StringsR.string.locale_lang_fi_FI,  createLocale("fi", "FI")),
         LangOp(VIETNAMESE,          StringsR.string.locale_lang_vi_VN,  createLocale("vi", "VN")),

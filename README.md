@@ -5,7 +5,6 @@ Collections the Android release Easter Egg
 [![GitHub license](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache&label=License&style=flat)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/hushenghao/AndroidEasterEggs/total?logo=github&label=Downloads&style=flat)
 ![Play Store installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.dede.android_eggs%26l%3DInstalls%26m%3D%24shortinstalls&style=flat&logo=googleplay)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hushenghao/AndroidEasterEggs?style=flat&label=Code%20Size)
 [![GitHub Pgyer CI Status](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/pgyer.yml?logo=github&label=Pgyer%20CI&style=flat)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/pgyer.yml)
 [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
 
