@@ -27,10 +27,10 @@
     <string name="language_hr_HR" translatable="false">Hrvatski</string>
     <string name="language_in_ID" translatable="false">Indonesia</string>
     <string name="language_it" translatable="false">Italiano</string>
-    <string name="language_pt" translatable="false">Português</string>
-    <string name="language_pt_BR" translatable="false">Português (Brasil)</string>
+    <string name="language_pt" translatable="false">Portugal</string>
+    <string name="language_pt_BR" translatable="false">Portugal (Brasil)</string>
     <string name="language_ru" translatable="false">Русский</string>
-    <string name="language_ar_SA" translatable="false">اللغة العربية</string>
+    <string name="language_ar_SA" translatable="false">العربية</string>
     <string name="language_ja_JP" translatable="false">日本語</string>
     <string name="language_pl_PL" translatable="false">Polski</string>
     <string name="language_nl_NL" translatable="false">Nederlands</string>
@@ -52,5 +52,5 @@
     <string name="language_ro" translatable="false">Română</string>
     <string name="language_sv_SE" translatable="false">Svenska</string>
     <string name="language_my_MM" translatable="false">မြန်မာ</string>
-    <string name="language_bn_BD" translatable="false">বাঙালী</string>
+    <string name="language_bn_BD" translatable="false">বাংলা</string>
 </resources>
