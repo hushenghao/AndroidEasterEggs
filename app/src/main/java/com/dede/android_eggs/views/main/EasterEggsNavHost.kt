@@ -1,12 +1,10 @@
 package com.dede.android_eggs.views.main
 
-import androidx.compose.animation.AnimatedContentTransitionScope.SlideDirection
-import androidx.compose.animation.core.EaseIn
-import androidx.compose.animation.core.EaseOut
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -33,7 +31,7 @@ import com.dede.android_eggs.views.timeline.TimelineListDialog
 import com.dede.basic.Utils
 
 
-private const val TRANSITION_DURATION = 320
+private const val TRANSITION_DURATION = 400
 
 @Composable
 fun EasterEggsNavHost(
@@ -51,36 +49,20 @@ fun EasterEggsNavHost(
             startDestination = EasterEggsScreen.route,
             modifier = modifier,
             enterTransition = {
-                fadeIn(
-                    animationSpec = tween(TRANSITION_DURATION, easing = LinearEasing)
-                ) + slideIntoContainer(
-                    animationSpec = tween(TRANSITION_DURATION, easing = EaseIn),
-                    towards = SlideDirection.Start
-                )
+                fadeIn(animationSpec = tween(TRANSITION_DURATION)) +
+                        slideInHorizontally(animationSpec = tween(TRANSITION_DURATION)) { it }
             },
             exitTransition = {
-                fadeOut(
-                    animationSpec = tween(TRANSITION_DURATION, easing = LinearEasing)
-                ) + slideOutOfContainer(
-                    animationSpec = tween(TRANSITION_DURATION, easing = EaseIn),
-                    towards = SlideDirection.Start
-                )
+                fadeOut(animationSpec = tween(TRANSITION_DURATION)) +
+                        slideOutHorizontally(animationSpec = tween(TRANSITION_DURATION))
             },
             popEnterTransition = {
-                fadeIn(
-                    animationSpec = tween(TRANSITION_DURATION, easing = LinearEasing)
-                ) + slideIntoContainer(
-                    animationSpec = tween(TRANSITION_DURATION, easing = EaseOut),
-                    towards = SlideDirection.End,
-                )
+                fadeIn(animationSpec = tween(TRANSITION_DURATION), initialAlpha = 0.3f) +
+                        slideInHorizontally(animationSpec = tween(TRANSITION_DURATION))
             },
             popExitTransition = {
-                fadeOut(
-                    animationSpec = tween(TRANSITION_DURATION, easing = LinearEasing)
-                ) + slideOutOfContainer(
-                    animationSpec = tween(TRANSITION_DURATION, easing = EaseOut),
-                    towards = SlideDirection.End
-                )
+                fadeOut(animationSpec = tween(TRANSITION_DURATION)) +
+                        slideOutHorizontally(animationSpec = tween(TRANSITION_DURATION)) { it }
             },
         ) {
             composable(route = EasterEggsScreen.route) {
