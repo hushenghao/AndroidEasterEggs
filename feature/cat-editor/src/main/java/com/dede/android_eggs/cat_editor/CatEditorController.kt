@@ -16,10 +16,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 
 
-internal class CatEditorControllerImpl(private val speed: Long) : CatEditorController {
+internal class CatEditorControllerImpl(private val seed: Long) : CatEditorController {
 
     internal object SaverImpl : Saver<CatEditorControllerImpl, Bundle> {
-        private const val KEY_SPEED = "speed"
+        private const val KEY_SEED = "seed"
         private const val KEY_COLORS = "colors"
         private const val KEY_SCALE = "scale"
         private const val KEY_OFFSET_X = "offset_x"
@@ -30,7 +30,7 @@ internal class CatEditorControllerImpl(private val speed: Long) : CatEditorContr
         private const val KEY_GRID_VISIBLE = "grid_visible"
 
         override fun restore(value: Bundle): CatEditorControllerImpl {
-            val speed = value.getLong(KEY_SPEED)
+            val seed = value.getLong(KEY_SEED)
             val colors = value.getIntArray(KEY_COLORS)
             val offsetX = value.getFloat(KEY_OFFSET_X)
             val offsetY = value.getFloat(KEY_OFFSET_Y)
@@ -40,7 +40,7 @@ internal class CatEditorControllerImpl(private val speed: Long) : CatEditorContr
             val gesturesEnabled = value.getBoolean(KEY_GESTURES_ENABLED)
             val gridVisible = value.getBoolean(KEY_GRID_VISIBLE)
 
-            val impl = CatEditorControllerImpl(speed).apply {
+            val impl = CatEditorControllerImpl(seed).apply {
                 if (colors != null) {
                     updateColors(colors.map(::Color))
                 }
@@ -56,7 +56,7 @@ internal class CatEditorControllerImpl(private val speed: Long) : CatEditorContr
 
         override fun SaverScope.save(value: CatEditorControllerImpl): Bundle {
             return Bundle().apply {
-                putLong(KEY_SPEED, value.speed)
+                putLong(KEY_SEED, value.seed)
                 putIntArray(KEY_COLORS, value.colorStateList.map(Color::toArgb).toIntArray())
                 putFloat(KEY_OFFSET_X, value.offsetState.value.x)
                 putFloat(KEY_OFFSET_Y, value.offsetState.value.y)
@@ -81,7 +81,7 @@ internal class CatEditorControllerImpl(private val speed: Long) : CatEditorContr
 
     private val gesturesEnabledState = mutableStateOf(true)
 
-    private val colorStateList = mutableStateListOf(*CatPartColors.colors(speed))
+    private val colorStateList = mutableStateListOf(*CatPartColors.colors(seed))
 
     override var defaultGraphicsLayerScale: Float = 1f
         set(value) {
@@ -139,8 +139,8 @@ internal interface CatEditorController {
 
     fun updateColors(colors: List<Color>)
 
-    fun updateColors(speed: Long) {
-        updateColors(CatPartColors.colors(speed).toList())
+    fun updateColors(seed: Long) {
+        updateColors(CatPartColors.colors(seed).toList())
     }
 
     fun setSelectedPartColor(color: Color)
@@ -152,8 +152,8 @@ internal interface CatEditorController {
 }
 
 @Composable
-internal fun rememberCatEditorController(speed: Long = System.currentTimeMillis()): CatEditorController {
+internal fun rememberCatEditorController(seed: Long = Utilities.randomSeed()): CatEditorController {
     return rememberSaveable(saver = CatEditorControllerImpl.SaverImpl) {
-        CatEditorControllerImpl(speed)
+        CatEditorControllerImpl(seed)
     }
 }

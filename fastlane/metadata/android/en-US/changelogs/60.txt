@@ -1,3 +1,4 @@
+- Add Cat Editor seed input #545
 - Add Bengali translation, Thanks for @ChildishRifty7 's contribution
 - Fix Cat Editor draw problem on Android N #37138664
 - Fix Cat Editor color hvs palette maxWidth #522

@@ -1,6 +1,7 @@
 package com.dede.android_eggs.cat_editor
 
 import android.graphics.Region
+import android.util.Log
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Matrix
@@ -22,7 +23,10 @@ import kotlin.math.sqrt
 import android.graphics.Color as AndroidColor
 import android.graphics.Matrix as AndroidMatrix
 
+
 internal object Utilities {
+
+    private const val TAG = "Utilities"
 
     fun getHexColor(color: Color, withAlpha: Boolean): String {
         val argb = color.toArgb()
@@ -147,6 +151,22 @@ internal object Utilities {
     fun isPointInRegion(point: Offset, pointMatrix: Matrix, region: Region): Boolean {
         val p = pointMatrix.map(point)
         return region.contains(p.x.roundToInt(), p.y.roundToInt())
+    }
+
+    fun randomSeed(): Long {
+        return System.currentTimeMillis()
+    }
+
+    fun string2Seed(string: String): Long {
+        val seed = string.toLongOrNull()
+        if (seed != null) {
+            return seed
+        }
+
+        val hash = string.hashCode().toLong()
+        val noise = OpenSimplex2S.noise2_ImproveX(hash, 8.0, 4.0)
+        Log.i(TAG, "noise: $noise")
+        return noise.hashCode().toLong()
     }
 
 }

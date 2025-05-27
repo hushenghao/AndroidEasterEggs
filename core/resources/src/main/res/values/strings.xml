@@ -55,4 +55,5 @@
     <string name="action_goto_settings">Go to Settings</string>
 
     <string name="cat_editor">Cat Editor</string>
+    <string name="cat_editor_input_seed">Input Cat Seed</string>
 </resources>

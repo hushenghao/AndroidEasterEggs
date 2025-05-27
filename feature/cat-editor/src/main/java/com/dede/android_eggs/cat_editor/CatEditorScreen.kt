@@ -2,27 +2,48 @@
 
 package com.dede.android_eggs.cat_editor
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
+import androidx.compose.material.icons.rounded.Clear
+import androidx.compose.material.icons.rounded.ContentCopy
+import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.GridOff
 import androidx.compose.material.icons.rounded.GridOn
+import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material.icons.rounded.Save
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -39,15 +60,24 @@ import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.intl.LocaleList
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
 import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEditorRecords
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavController
+import com.dede.android_eggs.ui.composes.icons.rounded.Cat
+import com.dede.basic.copy
 import com.dede.basic.toast
 import com.dede.basic.utils.ShareCatUtils
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import kotlinx.coroutines.launch
+import androidx.appcompat.R as AppCompatR
+import com.dede.android_eggs.resources.R as StringR
 
 object CatEditorScreen : EasterEggsDestination {
     override val route: String = "cat_editor"
@@ -61,22 +91,26 @@ fun CatEditorScreen() {
     val navController = LocalNavController.current
     val context = LocalContext.current
 
-    val catSpeedState = rememberSaveable { mutableLongStateOf(System.currentTimeMillis()) }
-    var catSpeed by catSpeedState
-    val catName = stringResource(R.string.default_cat_name, catSpeed % 1000)
+    val catSeedState = rememberSaveable { mutableLongStateOf(Utilities.randomSeed()) }
+    var catSeed by catSeedState
+    val catName = stringResource(R.string.default_cat_name, catSeed % 1000)
 
     var isSaving by remember { mutableStateOf(false) }
     val colorPaletteState = remember { mutableStateOf(false) }
 
-    val catEditorRecords = rememberCatEditorRecords(firstRecord = CatEditorRecords.speed(catSpeed))
-    // split with cat speed
-    val catEditorController = rememberCatEditorController(catSpeed)
+    val catEditorRecords = rememberCatEditorRecords(firstRecord = CatEditorRecords.seed(catSeed))
+    // split with cat seed
+    val catEditorController = rememberCatEditorController(catSeed)
 
     LaunchedEffect(catEditorController.selectPart) {
         if (catEditorController.hasSelectedPart) {
             colorPaletteState.value = true
         }
     }
+
+    var moreOptionsVisible by remember { mutableStateOf(false) }
+    var inputSeedDialog by remember { mutableStateOf(false) }
+    var inputSeedText by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -140,7 +174,7 @@ fun CatEditorScreen() {
                             CatEditorRecords.restoreRecord(
                                 catEditorRecords.goBack(),
                                 catEditorController,
-                                catSpeedState
+                                catSeedState
                             )
                         },
                         enabled = catEditorRecords.canGoBack()
@@ -155,7 +189,7 @@ fun CatEditorScreen() {
                             CatEditorRecords.restoreRecord(
                                 catEditorRecords.goNext(),
                                 catEditorController,
-                                catSpeedState
+                                catSeedState
                             )
                         },
                         enabled = catEditorRecords.canGoNext()
@@ -214,18 +248,13 @@ fun CatEditorScreen() {
                             contentDescription = null
                         )
                     }
-                },
-                floatingActionButton = {
-                    FloatingActionButton(
-                        onClick = {
-                            catSpeed = System.currentTimeMillis()
-                            catEditorController.updateColors(catSpeed)
-                            catEditorRecords.addRecord(CatEditorRecords.speed(catSpeed))
-                        }
-                    ) {
+
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    IconButton(onClick = { moreOptionsVisible = !moreOptionsVisible }) {
                         Icon(
-                            imageVector = Icons.Rounded.Refresh,
-                            contentDescription = null,
+                            imageVector = Icons.Rounded.MoreVert,
+                            contentDescription = stringResource(AppCompatR.string.abc_action_menu_overflow_description)
                         )
                     }
                 }
@@ -255,11 +284,125 @@ fun CatEditorScreen() {
                     catEditorRecords.addRecord(
                         CatEditorRecords.colors(
                             catEditorController.colorList,
-                            catSpeed
+                            catSeed
                         )
                     )
                 }
             )
+
+            fun updateCatSeed(seed: Long) {
+                catSeed = seed
+                catEditorController.updateColors(catSeed)
+                catEditorRecords.addRecord(CatEditorRecords.seed(catSeed))
+            }
+
+            if (inputSeedDialog) {
+
+                fun onInputDone() {
+                    if (inputSeedText.isBlank()) {
+                        return
+                    }
+                    val seed = Utilities.string2Seed(inputSeedText)
+                    updateCatSeed(seed)
+                }
+
+                AlertDialog(
+                    onDismissRequest = {
+                        inputSeedDialog = false
+                    },
+                    title = {
+                        Text(text = stringResource(StringR.string.cat_editor))
+                    },
+                    text = {
+                        TextField(
+                            modifier = Modifier.focusable(true),
+                            value = inputSeedText,
+                            onValueChange = { inputSeedText = it },
+                            placeholder = {
+                                Text(text = "XXX")
+                            },
+                            leadingIcon = {
+                                Icon(imageVector = Icons.Rounded.Cat, contentDescription = null)
+                            },
+                            trailingIcon = {
+                                IconButton(onClick = {
+                                    inputSeedText = ""
+                                }) {
+                                    Icon(
+                                        imageVector = Icons.Rounded.Clear,
+                                        contentDescription = null
+                                    )
+                                }
+                            },
+                            label = { Text(text = stringResource(StringR.string.cat_editor_input_seed)) },
+                            keyboardOptions = KeyboardOptions(
+                                autoCorrectEnabled = false,
+                                keyboardType = KeyboardType.Text,
+                                imeAction = ImeAction.Done,
+                                showKeyboardOnFocus = true,
+                                hintLocales = LocaleList("en"),
+                                capitalization = KeyboardCapitalization.None,
+                            ),
+                            keyboardActions = KeyboardActions {
+                                onInputDone()
+                                inputSeedDialog = false
+                            }
+                        )
+                    },
+                    dismissButton = {
+                        TextButton(onClick = {
+                            inputSeedDialog = false
+                        }) {
+                            Text(text = stringResource(android.R.string.cancel))
+                        }
+                    },
+                    confirmButton = {
+                        TextButton(onClick = {
+                            onInputDone()
+                            inputSeedDialog = false
+                        }) {
+                            Text(text = stringResource(android.R.string.ok))
+                        }
+                    },
+                )
+            }
+
+            AnimatedVisibility(
+                visible = moreOptionsVisible,
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(vertical = 14.dp, horizontal = 10.dp),
+                label = "More Options Visibility",
+                enter = fadeIn(animationSpec = tween(220)) +
+                        slideInVertically(animationSpec = tween(220)) { it / 2 },
+                exit = fadeOut(animationSpec = tween(220)) +
+                        slideOutVertically(animationSpec = tween(220)) { it / 2 }
+            ) {
+                Column(
+                    modifier = Modifier
+                        .background(colorScheme.surfaceColorAtElevation(4.dp), CircleShape)
+                        .padding(4.dp)
+                ) {
+
+                    IconButton(onClick = {
+                        context.copy(catSeed.toString())
+                    }) {
+                        Icon(imageVector = Icons.Rounded.ContentCopy, contentDescription = null)
+                    }
+
+                    IconButton(onClick = {
+                        inputSeedDialog = true
+                    }) {
+                        Icon(imageVector = Icons.Rounded.Edit, contentDescription = null)
+                    }
+
+                    IconButton(onClick = {
+                        updateCatSeed(Utilities.randomSeed())
+                    }) {
+                        Icon(imageVector = Icons.Rounded.Refresh, contentDescription = null)
+                    }
+                }
+            }
         }
     }
 }

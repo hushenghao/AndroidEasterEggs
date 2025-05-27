@@ -51,12 +51,12 @@ internal class CatEditorRecords(private val maxSize: Int, recordIndex: Int = 0) 
 
         private const val TAG = "CatEditorRecords"
 
-        fun speed(speed: Long): Record {
-            return SpeedRecord(speed)
+        fun seed(seed: Long): Record {
+            return SeedRecord(seed)
         }
 
-        fun colors(colors: List<Color>, speed: Long): Record {
-            return ColorsRecord(ArrayList(colors), speed)
+        fun colors(colors: List<Color>, seed: Long): Record {
+            return ColorsRecord(ArrayList(colors), seed)
         }
 
         @Composable
@@ -73,19 +73,19 @@ internal class CatEditorRecords(private val maxSize: Int, recordIndex: Int = 0) 
         fun restoreRecord(
             record: Record?,
             controller: CatEditorController,
-            speedState: MutableLongState
+            seedState: MutableLongState
         ) {
-            record?.restore(controller, speedState)
+            record?.restore(controller, seedState)
         }
     }
 
-    internal abstract class Record(val speed: Long) : Parcelable {
-        abstract fun restore(controller: CatEditorController, speedState: MutableLongState)
+    internal abstract class Record(val seed: Long) : Parcelable {
+        abstract fun restore(controller: CatEditorController, seedState: MutableLongState)
     }
 
-    private class ColorsRecord(private val colors: List<Color>, speed: Long) : Record(speed) {
-        override fun restore(controller: CatEditorController, speedState: MutableLongState) {
-            speedState.longValue = speed
+    private class ColorsRecord(private val colors: List<Color>, seed: Long) : Record(seed) {
+        override fun restore(controller: CatEditorController, seedState: MutableLongState) {
+            seedState.longValue = seed
             controller.updateColors(colors)
         }
 
@@ -95,7 +95,7 @@ internal class CatEditorRecords(private val maxSize: Int, recordIndex: Int = 0) 
                 separator = ",",
                 postfix = "]"
             ) { Utilities.getHexColor(it, true) }
-            return "ColorRecord(colors=$colorsStr, speed=$speed)"
+            return "ColorRecord(colors=$colorsStr, seed=$seed)"
         }
 
         override fun describeContents(): Int {
@@ -104,15 +104,15 @@ internal class CatEditorRecords(private val maxSize: Int, recordIndex: Int = 0) 
 
         override fun writeToParcel(dest: Parcel, flags: Int) {
             dest.writeIntArray(colors.map(Color::toArgb).toIntArray())
-            dest.writeLong(speed)
+            dest.writeLong(seed)
         }
 
         companion object CREATOR : Parcelable.Creator<ColorsRecord> {
             override fun createFromParcel(parcel: Parcel): ColorsRecord {
                 val colors = IntArray(CatPartColors.COLOR_SIZE)
                 parcel.readIntArray(colors)
-                val speed = parcel.readLong()
-                return ColorsRecord(colors.map(::Color).toList(), speed)
+                val seed = parcel.readLong()
+                return ColorsRecord(colors.map(::Color).toList(), seed)
             }
 
             override fun newArray(size: Int): Array<ColorsRecord?> {
@@ -121,14 +121,14 @@ internal class CatEditorRecords(private val maxSize: Int, recordIndex: Int = 0) 
         }
     }
 
-    private open class SpeedRecord(speed: Long) : Record(speed) {
-        override fun restore(controller: CatEditorController, speedState: MutableLongState) {
-            speedState.longValue = speed
-            controller.updateColors(speed)
+    private open class SeedRecord(seed: Long) : Record(seed) {
+        override fun restore(controller: CatEditorController, seedState: MutableLongState) {
+            seedState.longValue = seed
+            controller.updateColors(seed)
         }
 
         override fun toString(): String {
-            return "SpeedRecord(speed=$speed)"
+            return "SeedRecord(seed=$seed)"
         }
 
         override fun describeContents(): Int {
@@ -136,16 +136,16 @@ internal class CatEditorRecords(private val maxSize: Int, recordIndex: Int = 0) 
         }
 
         override fun writeToParcel(dest: Parcel, flags: Int) {
-            dest.writeLong(speed)
+            dest.writeLong(seed)
         }
 
-        companion object CREATOR : Parcelable.Creator<SpeedRecord> {
-            override fun createFromParcel(parcel: Parcel): SpeedRecord {
-                val speed = parcel.readLong()
-                return SpeedRecord(speed)
+        companion object CREATOR : Parcelable.Creator<SeedRecord> {
+            override fun createFromParcel(parcel: Parcel): SeedRecord {
+                val seed = parcel.readLong()
+                return SeedRecord(seed)
             }
 
-            override fun newArray(size: Int): Array<SpeedRecord?> {
+            override fun newArray(size: Int): Array<SeedRecord?> {
                 return arrayOfNulls(size)
             }
         }
@@ -172,11 +172,15 @@ internal class CatEditorRecords(private val maxSize: Int, recordIndex: Int = 0) 
     }
 
     fun goBack(): Record? {
-        return getRecord(--recordIndex)
+        return getRecord(--recordIndex).apply {
+            Log.i(TAG, "goBack, index: $recordIndex, count: $recordCount")
+        }
     }
 
     fun goNext(): Record? {
-        return getRecord(++recordIndex)
+        return getRecord(++recordIndex).apply {
+            Log.i(TAG, "goNext, index: $recordIndex, count: $recordCount")
+        }
     }
 
     fun addRecord(record: Record) {

@@ -3,8 +3,8 @@ package com.dede.android_eggs.ui.composes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -37,8 +37,7 @@ fun BuildTypeBubble() {
             modifier = Modifier
                 .background(
                     Color.Red,
-                    RoundedCornerShape(50)
-                        .copy(bottomStart = CornerSize(0))
+                    CircleShape.copy(bottomStart = CornerSize(0))
                 )
                 .padding(horizontal = 4.dp, vertical = 1.dp),
             color = Color.White,

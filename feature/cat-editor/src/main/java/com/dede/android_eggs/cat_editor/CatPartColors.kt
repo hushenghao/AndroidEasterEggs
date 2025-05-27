@@ -106,7 +106,7 @@ internal object CatPartColors {
 
     const val COLOR_SIZE = 27
 
-    fun colors(seed: Long = System.currentTimeMillis()): Array<Color> {
+    fun colors(seed: Long = Utilities.randomSeed()): Array<Color> {
         val arr = Array(COLOR_SIZE) { Color.Black }
         val nsr = Random(seed)
 

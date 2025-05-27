@@ -2,6 +2,7 @@
 
 ### v3.5.0
 
+- Add Cat Editor seed input [#545](https://github.com/hushenghao/AndroidEasterEggs/issues/545)
 - Add Bengali translation, Thanks for [@ChildishRifty7](https://github.com/childishrifty7) 's contribution
 - Fix Cat Editor draw problem on Android N [#37138664](https://issuetracker.google.com/issues/37138664)
 - Fix Cat Editor color hvs palette maxWidth [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522)
