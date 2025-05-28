@@ -47,4 +47,5 @@
     <string name="animator_disabled_alert_message">由于系统动画被禁用，可能导致一些功能无法正常使用。请进入“开发者选项”并启用“Animator 时长缩放”选项以开启动画。</string>
     <string name="action_goto_settings">去设置</string>
     <string name="cat_editor">Cat Editor</string>
+    <string name="cat_editor_input_seed">输入猫种子</string>
 </resources>

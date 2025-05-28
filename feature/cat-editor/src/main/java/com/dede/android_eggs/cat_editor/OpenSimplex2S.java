@@ -1,6 +1,6 @@
 package com.dede.android_eggs.cat_editor;
 
-// https://github.com/KdotJPG/OpenSimplex2
+// OpenSimplex2 (https://github.com/KdotJPG/OpenSimplex2)
 //
 // Creative Commons Legal Code
 //
