@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.toRegion
 import com.google.android.material.color.MaterialColors
+import java.util.Objects
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.max
@@ -166,7 +167,7 @@ internal object Utilities {
         val hash = string.hashCode().toLong()
         val noise = OpenSimplex2S.noise2_ImproveX(hash, 8.0, 4.0)
         Log.i(TAG, "noise: $noise")
-        return noise.hashCode().toLong()
+        return Objects.hash(hash, noise).toLong()
     }
 
 }

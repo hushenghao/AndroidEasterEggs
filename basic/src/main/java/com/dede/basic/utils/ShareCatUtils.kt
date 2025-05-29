@@ -71,21 +71,25 @@ object ShareCatUtils {
             val uri = saveCat(activity, bitmap, catName) ?: return@launch
             Log.v("Neko", "cat uri: $uri")
 
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.putExtra(Intent.EXTRA_STREAM, uri)
-            intent.putExtra(Intent.EXTRA_SUBJECT, catName)
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            intent.type = MIME_PNG
+            shareCatOnly(activity, uri, catName)
+        }
+    }
 
-            @SuppressLint("PrivateResource")
-            val title = activity.getString(appCompatR.string.abc_shareactionprovider_share_with)
-            val chooser = activity.createChooser(intent, title)
-                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            try {
-                activity.startActivity(chooser)
-            } catch (_: ActivityNotFoundException) {
-                activity.toast("Share failure!")
-            }
+    fun shareCatOnly(context: Context, uri: Uri, catName: String) {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.putExtra(Intent.EXTRA_STREAM, uri)
+        intent.putExtra(Intent.EXTRA_SUBJECT, catName)
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        intent.type = MIME_PNG
+
+        @SuppressLint("PrivateResource")
+        val title = context.getString(appCompatR.string.abc_shareactionprovider_share_with)
+        val chooser = context.createChooser(intent, title)
+            .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        try {
+            context.startActivity(chooser)
+        } catch (_: ActivityNotFoundException) {
+            context.toast("Share failure!")
         }
     }
 }
