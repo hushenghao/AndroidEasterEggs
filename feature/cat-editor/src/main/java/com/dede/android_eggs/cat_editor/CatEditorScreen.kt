@@ -12,7 +12,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -39,6 +39,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
@@ -64,6 +65,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
 import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEditorRecords
 import com.dede.android_eggs.navigation.EasterEggsDestination
@@ -75,6 +77,7 @@ import com.dede.basic.utils.ShareCatUtils
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import kotlinx.coroutines.launch
 import androidx.appcompat.R as AppCompatR
+import com.dede.android_eggs.resources.R as StringR
 
 object CatEditorScreen : EasterEggsDestination {
     override val route: String = "cat_editor"
@@ -89,7 +92,7 @@ fun CatEditorScreen() {
 
     val catSeedState = rememberSaveable { mutableLongStateOf(Utilities.randomSeed()) }
     var catSeed by catSeedState
-    val catName = stringResource(R.string.default_cat_name, catSeed % 1000)
+    val catName = stringResource(R.string.default_cat_name, catSeed)// full seed name
 
     val colorPaletteState = remember { mutableStateOf(false) }
 
@@ -188,10 +191,7 @@ fun CatEditorScreen() {
         }
     }
     val inputCatButton: @Composable () -> Unit = {
-        IconButton(onClick = {
-            moreOptionsPopVisible = false
-            inputSeedDialogState.value = true
-        }) {
+        IconButton(onClick = { inputSeedDialogState.value = true }) {
             Icon(imageVector = Icons.Rounded.Cat, contentDescription = null)
         }
     }
@@ -231,12 +231,25 @@ fun CatEditorScreen() {
                     }
                 },
                 title = {
-                    Text(
-                        text = catName,//"Cat Editor",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        fontWeight = FontWeight.Medium
-                    )
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = stringResource(StringR.string.cat_editor),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            fontWeight = FontWeight.Medium
+                        )
+                        Text(
+                            text = stringResource(R.string.label_cat_seed, catSeed),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            style = typography.labelSmall.copy(
+                                fontSize = 9.sp,
+                                fontWeight = FontWeight.Normal
+                            ),
+                        )
+                    }
                 },
             )
         },
@@ -291,6 +304,7 @@ fun CatEditorScreen() {
 
             if (bottomButtonCount < menuButtonList.size) {
                 MoreOptionsPopup(
+                    modifier = Modifier.align(Alignment.BottomEnd),
                     visible = moreOptionsPopVisible,
                 ) {
                     for (i in bottomButtonCount..<menuButtonList.size) {
@@ -384,6 +398,10 @@ private fun BottomOptionsBar(
                             // Add 'more options' button
                             iconButtonCount = count - 1
                             moreOptionsVisible = true
+                        } else {
+                            // Show all options
+                            iconButtonCount = totalOptionsCount
+                            moreOptionsVisible = false
                         }
                     }
             ) {
@@ -406,14 +424,15 @@ private fun BottomOptionsBar(
 }
 
 @Composable
-private fun BoxScope.MoreOptionsPopup(
+private fun MoreOptionsPopup(
+    modifier: Modifier = Modifier,
     visible: Boolean,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable() (RowScope.() -> Unit)
 ) {
     AnimatedVisibility(
         visible = visible,
         modifier = Modifier
-            .align(Alignment.BottomEnd)
+            .then(modifier)
             .padding(vertical = 12.dp, horizontal = 14.dp),
         label = "More Options Visibility",
         enter = fadeIn(animationSpec = tween(220)) +

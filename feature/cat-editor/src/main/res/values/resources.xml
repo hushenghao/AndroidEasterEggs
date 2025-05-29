@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="default_cat_name" translatable="false">Cat #%d</string>
+    <string name="label_cat_seed" translatable="false">#%d</string>
 </resources>

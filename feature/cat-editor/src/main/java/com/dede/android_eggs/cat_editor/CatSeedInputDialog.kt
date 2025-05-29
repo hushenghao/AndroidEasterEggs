@@ -33,8 +33,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.LocaleList
-import com.dede.android_eggs.resources.R
 import com.dede.android_eggs.ui.composes.icons.rounded.Cat
+import com.dede.android_eggs.resources.R as StringR
 
 /**
  * A dialog for inputting a cat seed.
@@ -76,7 +76,7 @@ fun CatSeedInputDialog(
             dismiss()
         },
         title = {
-            Text(text = stringResource(R.string.cat_editor))
+            Text(text = stringResource(StringR.string.cat_editor))
         },
         text = {
             val focusRequester = remember { FocusRequester() }
@@ -120,11 +120,16 @@ fun CatSeedInputDialog(
                         enter = fadeIn() + slideInVertically(),
                         exit = fadeOut() + slideOutVertically(),
                     ) {
-                        Text(text = "# ${Utilities.string2Seed(inputSeedText)}")
+                        Text(
+                            text = stringResource(
+                                R.string.label_cat_seed,
+                                Utilities.string2Seed(inputSeedText)
+                            )
+                        )
                     }
                 },
                 label = {
-                    Text(text = stringResource(R.string.cat_editor_input_seed))
+                    Text(text = stringResource(StringR.string.cat_editor_input_seed))
                 },
                 keyboardOptions = KeyboardOptions(
                     autoCorrectEnabled = false,
