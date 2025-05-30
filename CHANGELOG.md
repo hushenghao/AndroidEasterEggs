@@ -3,6 +3,7 @@
 ### v3.5.0
 
 - Add Cat Editor seed input [#545](https://github.com/hushenghao/AndroidEasterEggs/issues/545)
+- Add to favorites in Cat Editor
 - Add Bengali translation, Thanks for [@ChildishRifty7](https://github.com/childishrifty7) 's contribution
 - Cat Editor bottom menu bar optimization
 - Fix Cat Editor draw problem on Android N [#37138664](https://issuetracker.google.com/issues/37138664)

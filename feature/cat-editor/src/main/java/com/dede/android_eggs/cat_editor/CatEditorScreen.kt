@@ -23,6 +23,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material.icons.rounded.ContentCopy
+import androidx.compose.material.icons.rounded.Draw
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.GridOff
 import androidx.compose.material.icons.rounded.GridOn
 import androidx.compose.material.icons.rounded.MoreVert
@@ -75,6 +78,7 @@ import com.dede.basic.copy
 import com.dede.basic.toast
 import com.dede.basic.utils.ShareCatUtils
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import androidx.appcompat.R as AppCompatR
 import com.dede.android_eggs.resources.R as StringR
@@ -109,10 +113,32 @@ fun CatEditorScreen() {
     var moreOptionsPopVisible by remember { mutableStateOf(false) }
     val inputSeedDialogState = remember { mutableStateOf(false) }
 
-    fun updateCatSeed(seed: Long) {
+    val rememberCatsDialogState = remember { mutableStateOf(false) }
+    var isRememberCat by remember { mutableStateOf(false) }
+    var isRememberCatProcessing by remember { mutableStateOf(false) }
+
+    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(catSeed, catEditorController.colorListVersion, rememberCatsDialogState.value) {
+        if (rememberCatsDialogState.value) {
+            return@LaunchedEffect
+        }
+        isRememberCatProcessing = true
+        launch(Dispatchers.IO) {
+            isRememberCat = CatRememberDataStore.isFavorite(catSeed, catEditorController.colorList)
+            isRememberCatProcessing = false
+        }
+    }
+
+    fun updateCatSeed(seed: Long, colors: List<Color>? = null) {
         catSeed = seed
-        catEditorController.updateColors(catSeed)
-        catEditorRecords.addRecord(CatEditorRecords.seed(catSeed))
+        if (colors == null) {
+            catEditorController.updateColors(catSeed)
+            catEditorRecords.addRecord(CatEditorRecords.seed(catSeed))
+        } else {
+            catEditorController.updateColors(colors)
+            catEditorRecords.addRecord(CatEditorRecords.colors(colors, catSeed))
+        }
     }
 
     val goBackButton: @Composable () -> Unit = {
@@ -192,7 +218,7 @@ fun CatEditorScreen() {
     }
     val inputCatButton: @Composable () -> Unit = {
         IconButton(onClick = { inputSeedDialogState.value = true }) {
-            Icon(imageVector = Icons.Rounded.Cat, contentDescription = null)
+            Icon(imageVector = Icons.Rounded.Draw, contentDescription = null)
         }
     }
     val refreshButton: @Composable () -> Unit = {
@@ -202,12 +228,37 @@ fun CatEditorScreen() {
             Icon(imageVector = Icons.Rounded.Refresh, contentDescription = null)
         }
     }
+    val favoriteButton: @Composable () -> Unit = {
+        IconButton(
+            onClick = {
+                isRememberCatProcessing = true
+                scope.launch(Dispatchers.IO) {
+                    if (isRememberCat) {
+                        CatRememberDataStore.forget(catSeed, catEditorController.colorList)
+                    } else {
+                        CatRememberDataStore.remember(catSeed, catEditorController.colorList)
+                    }
+                    isRememberCat = !isRememberCat
+                    isRememberCatProcessing = false
+                }
+            },
+            enabled = !isRememberCatProcessing
+        ) {
+            Crossfade(targetState = isRememberCat) {
+                if (it) {
+                    Icon(imageVector = Icons.Rounded.Favorite, contentDescription = null)
+                } else {
+                    Icon(imageVector = Icons.Rounded.FavoriteBorder, contentDescription = null)
+                }
+            }
+        }
+    }
 
     val menuButtonList = remember {
         listOf(
             goBackButton, goNextButton,
             paletteButton, gridButton,
-            saveButton, shareButton,
+            favoriteButton, saveButton, shareButton,
             copyButton, inputCatButton, refreshButton,
         )
     }
@@ -251,6 +302,15 @@ fun CatEditorScreen() {
                         )
                     }
                 },
+                actions = {
+                    IconButton(onClick = { rememberCatsDialogState.value = true }) {
+                        Icon(
+                            imageVector = Icons.Rounded.Cat,
+                            contentDescription = null,
+                            tint = colorScheme.onSurface
+                        )
+                    }
+                }
             )
         },
         bottomBar = {
@@ -314,6 +374,13 @@ fun CatEditorScreen() {
             }
         }
     }
+
+    CatRememberBottomSheet(
+        visibleState = rememberCatsDialogState,
+        onCatSelected = { cat ->
+            updateCatSeed(cat.seed, cat.colors)
+        }
+    )
 }
 
 @Composable

@@ -3,6 +3,7 @@
 ### v3.5.0
 
 - 新增 Cat Editor 种子输入 [#545](https://github.com/hushenghao/AndroidEasterEggs/issues/545)
+- 新增 Cat Editor 收藏功能
 - 新增孟加拉语翻译，感谢 [@ChildishRifty7](https://github.com/childishrifty7) 的贡献
 - Cat Editor 底部菜单栏优化
 - 修复 Cat Editor 在 Android N 的绘制问题 [#37138664](https://issuetracker.google.com/issues/37138664)

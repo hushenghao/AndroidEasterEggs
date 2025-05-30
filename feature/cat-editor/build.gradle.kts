@@ -15,6 +15,8 @@ dependencies {
 
     implementation(libs.androidx.core)
     implementation(libs.google.material)
+    implementation(libs.androidx.room)
+    ksp(libs.androidx.room.compiler)
 
     implementation(libs.androidx.compose.navigation)
     implementation(platform(libs.androidx.compose.bom))

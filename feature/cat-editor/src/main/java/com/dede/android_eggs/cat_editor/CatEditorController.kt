@@ -57,7 +57,7 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
         override fun SaverScope.save(value: CatEditorControllerImpl): Bundle {
             return Bundle().apply {
                 putLong(KEY_SEED, value.seed)
-                putIntArray(KEY_COLORS, value.colorStateList.map(Color::toArgb).toIntArray())
+                putIntArray(KEY_COLORS, value.colorList.map(Color::toArgb).toIntArray())
                 putFloat(KEY_OFFSET_X, value.offsetState.value.x)
                 putFloat(KEY_OFFSET_Y, value.offsetState.value.y)
                 putFloat(KEY_SCALE, value.scaleState.floatValue)
@@ -81,6 +81,8 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
 
     private val gesturesEnabledState = mutableStateOf(true)
 
+    val colorListVersionState = mutableIntStateOf(0)
+
     private val colorStateList = mutableStateListOf(*CatPartColors.colors(seed))
 
     override var defaultGraphicsLayerScale: Float = 1f
@@ -88,6 +90,9 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
             field = value
             resetGraphicsLayer()
         }
+
+    // color list version is used to track changes in the color list
+    override val colorListVersion: Int by colorListVersionState
 
     override val colorList: List<Color> = colorStateList
 
@@ -102,12 +107,14 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
     override fun updateColors(colors: List<Color>) {
         colorStateList.clear()
         colorStateList.addAll(colors.toList())
+        colorListVersionState.intValue += 1
         resetGraphicsLayer()
     }
 
     override fun setSelectedPartColor(color: Color) {
         if (hasSelectedPart) {
             colorStateList[selectPart] = color
+            colorListVersionState.intValue += 1
             selectPart = -1
         }
     }
@@ -129,6 +136,8 @@ internal interface CatEditorController {
     var selectPart: Int
 
     var isGridVisible: Boolean
+
+    val colorListVersion: Int
 
     val colorList: List<Color>
 

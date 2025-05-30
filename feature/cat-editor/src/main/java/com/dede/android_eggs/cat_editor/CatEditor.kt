@@ -82,6 +82,9 @@ internal fun CatEditor(
     val scaleAnim by animateFloatAsState(scale)
     val offsetAnim by animateOffsetAsState(offset)
 
+    val colorsVersion by controllerImpl.colorListVersionState
+    val colors = remember(colorsVersion, controllerImpl.colorList) { controllerImpl.colorList }
+
     LaunchedEffect(captureController) {
         captureController.onPerCapture = {
             // set normal state
@@ -150,7 +153,7 @@ internal fun CatEditor(
             )
 
             val partColorBlend: (index: Int) -> Color = { index ->
-                var color = controllerImpl.colorList[index]
+                var color = colors[index]
                 if (selectedPart == index) {
                     val blend = Utilities.getHighlightColor(color)
                     color = Utilities.blendColor(color, blend, blendRatio)
@@ -230,7 +233,7 @@ internal fun CatEditor(
     }
 }
 
-private fun createCanvasMatrix(size: Size): Matrix {
+internal fun createCanvasMatrix(size: Size): Matrix {
     val matrix = Matrix()
     val minDimension = size.minDimension
     matrix.translate((size.width - minDimension) / 2f, (size.height - minDimension) / 2f)
