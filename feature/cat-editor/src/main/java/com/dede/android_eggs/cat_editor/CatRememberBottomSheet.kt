@@ -4,6 +4,8 @@ package com.dede.android_eggs.cat_editor
 
 import android.graphics.Bitmap
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
@@ -52,7 +54,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.cat_editor.Utilities.asAndroidMatrix
 import com.dede.android_eggs.ui.composes.icons.rounded.Cat
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
@@ -70,7 +71,7 @@ fun CatRememberBottomSheet(
     val allCats = remember { mutableStateListOf<CatRememberDataStore.Cat>() }
     val scope = rememberCoroutineScope()
     LaunchedEffect(Unit) {
-        launch(Dispatchers.IO) {
+        launch {
             allCats.clear()
             allCats.addAll(CatRememberDataStore.getAllCats())
         }
@@ -83,53 +84,55 @@ fun CatRememberBottomSheet(
         onDismissRequest = { visible = false },
         sheetState = sheetState,
     ) {
-        if (allCats.isEmpty()) {
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Favorite,
-                    contentDescription = null,
-                )
-                Icon(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .size(60.dp),
-                    imageVector = Icons.Rounded.Cat,
-                    contentDescription = null,
-                )
-            }
-            return@ModalBottomSheet
-        }
-
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(80.dp),
-            contentPadding = PaddingValues(start = 20.dp, end = 20.dp, bottom = 30.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            items(allCats, key = { it.id }) { cat ->
-                CatItem(
-                    cat = cat,
-                    isDeletedMode = isDeletedMode,
-                    modifier = Modifier
-                        .size(66.dp),
-                    onClick = {
-                        onCatSelected(cat)
-                        visible = false
-                    },
-                    onLongClick = {
-                        isDeletedMode = !isDeletedMode
-                    },
-                    onCatDeleteClick = {
-                        scope.launch(Dispatchers.IO) {
-                            CatRememberDataStore.forgetById(cat.id)
-                            allCats.remove(cat)
-                        }
+        Crossfade(targetState = allCats.isEmpty()) { isEmpty ->
+            if (isEmpty) {
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Favorite,
+                        contentDescription = null,
+                    )
+                    Icon(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .size(60.dp),
+                        imageVector = Icons.Rounded.Cat,
+                        contentDescription = null,
+                    )
+                }
+            } else {
+                LazyVerticalGrid(
+                    columns = GridCells.Adaptive(80.dp),
+                    contentPadding = PaddingValues(start = 20.dp, end = 20.dp, bottom = 30.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.animateContentSize()
+                ) {
+                    items(allCats, key = { it.id }) { cat ->
+                        CatItem(
+                            cat = cat,
+                            isDeletedMode = isDeletedMode,
+                            modifier = Modifier.animateItem(),
+                            canvasModifier = Modifier.size(66.dp),
+                            onClick = {
+                                onCatSelected(cat)
+                                visible = false
+                            },
+                            onLongClick = {
+                                isDeletedMode = !isDeletedMode
+                            },
+                            onCatDeleteClick = {
+                                scope.launch {
+                                    CatRememberDataStore.forgetById(cat.id)
+                                    allCats.remove(cat)
+                                }
+                            }
+                        )
                     }
-                )
+                }
             }
         }
     }
@@ -140,6 +143,7 @@ private fun CatItem(
     cat: CatRememberDataStore.Cat,
     isDeletedMode: Boolean,
     modifier: Modifier = Modifier,
+    canvasModifier: Modifier = Modifier,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
     onCatDeleteClick: () -> Unit,
@@ -151,6 +155,7 @@ private fun CatItem(
                 onLongClick = onLongClick,
                 onClick = onClick,
             )
+            .then(modifier)
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(1f),
@@ -170,7 +175,7 @@ private fun CatItem(
             Canvas(
                 contentDescription = stringResource(R.string.label_cat_seed, cat.seed),
                 modifier = Modifier
-                    .then(modifier)
+                    .then(canvasModifier)
                     .aspectRatio(1f),
                 onDraw = {
                     if (size != canvasSize) {

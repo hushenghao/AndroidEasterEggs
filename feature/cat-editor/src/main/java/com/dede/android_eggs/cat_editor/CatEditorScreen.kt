@@ -78,7 +78,6 @@ import com.dede.basic.copy
 import com.dede.basic.toast
 import com.dede.basic.utils.ShareCatUtils
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import androidx.appcompat.R as AppCompatR
 import com.dede.android_eggs.resources.R as StringR
@@ -124,7 +123,7 @@ fun CatEditorScreen() {
             return@LaunchedEffect
         }
         isRememberCatProcessing = true
-        launch(Dispatchers.IO) {
+        launch {
             isRememberCat = CatRememberDataStore.isFavorite(catSeed, catEditorController.colorList)
             isRememberCatProcessing = false
         }
@@ -232,7 +231,7 @@ fun CatEditorScreen() {
         IconButton(
             onClick = {
                 isRememberCatProcessing = true
-                scope.launch(Dispatchers.IO) {
+                scope.launch {
                     if (isRememberCat) {
                         CatRememberDataStore.forget(catSeed, catEditorController.colorList)
                     } else {

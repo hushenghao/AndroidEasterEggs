@@ -16,6 +16,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.dede.basic.globalContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * A data store for remembering cats.
@@ -76,25 +78,35 @@ object CatRememberDataStore {
         return Cat(0, seed, colors ?: listOf(*CatPartColors.colors(seed)))
     }
 
-    fun remember(seed: Long, colors: List<Color>? = null) {
-        val cat = createCat(seed, colors)
-        db.catDan().remember(cat)
+    suspend fun remember(seed: Long, colors: List<Color>? = null) {
+        withContext(Dispatchers.IO) {
+            val cat = createCat(seed, colors)
+            db.catDan().remember(cat)
+        }
     }
 
-    fun forgetById(id: Long) {
-        db.catDan().forgetById(id)
+    suspend fun forgetById(id: Long) {
+        withContext(Dispatchers.IO) {
+            db.catDan().forgetById(id)
+        }
     }
 
-    fun forget(seed: Long, colors: List<Color>? = null) {
-        val cat = createCat(seed, colors)
-        db.catDan().forget(cat)
+    suspend fun forget(seed: Long, colors: List<Color>? = null) {
+        withContext(Dispatchers.IO) {
+            val cat = createCat(seed, colors)
+            db.catDan().forget(cat)
+        }
     }
 
-    fun isFavorite(seed: Long, colors: List<Color>): Boolean {
-        return db.catDan().isFavorite(seed, colors)
+    suspend fun isFavorite(seed: Long, colors: List<Color>): Boolean {
+        return withContext(Dispatchers.IO) {
+            db.catDan().isFavorite(seed, colors)
+        }
     }
 
-    fun getAllCats(): List<Cat> {
-        return db.catDan().getAllCats()
+    suspend fun getAllCats(): List<Cat> {
+        return withContext(Dispatchers.IO) {
+            db.catDan().getAllCats()
+        }
     }
 }
