@@ -427,7 +427,7 @@ private fun BottomOptionsBar(
 private fun MoreOptionsPopup(
     modifier: Modifier = Modifier,
     visible: Boolean,
-    content: @Composable() (RowScope.() -> Unit)
+    content: @Composable RowScope.() -> Unit
 ) {
     AnimatedVisibility(
         visible = visible,

@@ -87,7 +87,7 @@ object EasterEggShortcutsHelp {
         val clazz = requireNotNull(egg.actionClass) {
             "EasterEgg unsupported shortcut, provide class == null!"
         }
-        val label = context.getString(egg.nicknameRes)
+        val label = context.getString(egg.nameRes)
 
         val icon = if (isPinShortcut && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             val bitmap = AlterableAdaptiveIconDrawable(context, egg.iconRes)
