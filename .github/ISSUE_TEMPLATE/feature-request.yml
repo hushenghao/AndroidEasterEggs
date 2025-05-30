@@ -7,7 +7,7 @@ body:
     id: checklist
     attributes:
       label: Checklist / 检查清单
-      description: Ensure that our bug report form is appropriate for you. / 确保我们的错误报告表单适合您。
+      description: Make sure your feature request follows the checklist below. / 确保我们的错误报告表单适合您。
       options:
         - label: No one has submitted a similar or identical feature request before. / 之前没有人提交过类似或相同的功能请求。
           required: true
@@ -16,7 +16,7 @@ body:
   - type: textarea
     id: propose
     attributes:
-      label: Enhancement propose / 改进目的
+      label: Proposed enhancement / 改进目的
       description: Propose of the enhancement. / 改进有什么用
       placeholder: |
         Show your idea here.
@@ -26,11 +26,11 @@ body:
     id: solution
     attributes:
       label: Solution / 解决方案
-      description: What's your solution for this enhancement? / 你会怎么完成这个改进？
+      description: What is your suggested solution for this enhancement? / 你会怎么完成这个改进？
       placeholder: |
-        How to do it on your opinion? Or left this blank
+        How do you think this should be done?
   - type: textarea
     id: addition
     attributes:
       label: Additional info / 额外信息
-      description: Everything else you consider worthy that we didn't ask for. / 任何你觉得值得说的。
+      description: Everything else you consider worthy that we did not ask for. / 任何你觉得值得说的。
