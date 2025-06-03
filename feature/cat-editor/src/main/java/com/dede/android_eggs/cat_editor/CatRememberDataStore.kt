@@ -24,51 +24,6 @@ import kotlinx.coroutines.withContext
  */
 object CatRememberDataStore {
 
-    @Database(entities = [Cat::class], version = 1)
-    @TypeConverters(value = [CatColorsConverter::class])
-    abstract class CatRememberDatabase : RoomDatabase() {
-        abstract fun catDan(): CatDao
-    }
-
-    @Dao
-    interface CatDao {
-        @Insert(onConflict = OnConflictStrategy.REPLACE)
-        fun remember(cat: Cat)
-
-        @Query("DELETE FROM remember_cats WHERE id = :id")
-        fun forgetById(id: Long)
-
-        @Delete
-        fun forget(cat: Cat)
-
-        @Query("SELECT EXISTS(SELECT * FROM remember_cats WHERE seed = :seed AND colors = :colors)")
-        fun isFavorite(seed: Long, colors: List<Color>?): Boolean
-
-        @Query("SELECT * FROM remember_cats ORDER BY id DESC")
-        fun getAllCats(): List<Cat>
-    }
-
-    @Entity(tableName = "remember_cats")
-    data class Cat(
-        @PrimaryKey(autoGenerate = true) val id: Long,
-        @ColumnInfo(name = "seed") val seed: Long,
-        @ColumnInfo(name = "colors") val colors: List<Color>
-    )
-
-    @TypeConverters
-    class CatColorsConverter {
-
-        @TypeConverter
-        fun colorsToString(value: List<Color>?): String? {
-            return value?.joinToString(separator = ",") { it.toArgb().toString() }
-        }
-
-        @TypeConverter
-        fun stringToColors(string: String?): List<Color>? {
-            return string?.split(",")?.map { Color(it.toInt()) }
-        }
-    }
-
     private val db by lazy {
         Room.databaseBuilder<CatRememberDatabase>(globalContext, "cat_remember.db")
             .build()
@@ -108,5 +63,50 @@ object CatRememberDataStore {
         return withContext(Dispatchers.IO) {
             db.catDan().getAllCats()
         }
+    }
+}
+
+@Database(entities = [Cat::class], version = 1)
+@TypeConverters(value = [CatColorsConverter::class])
+abstract class CatRememberDatabase : RoomDatabase() {
+    abstract fun catDan(): CatDao
+}
+
+@Entity(tableName = "remember_cats")
+data class Cat(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id") val id: Long,
+    @ColumnInfo(name = "seed") val seed: Long,
+    @ColumnInfo(name = "colors") val colors: List<Color>
+)
+
+@Dao
+interface CatDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun remember(cat: Cat)
+
+    @Query("DELETE FROM remember_cats WHERE id = :id")
+    suspend fun forgetById(id: Long)
+
+    @Delete
+    suspend fun forget(cat: Cat)
+
+    @Query("SELECT EXISTS(SELECT * FROM remember_cats WHERE seed = :seed AND colors = :colors)")
+    suspend fun isFavorite(seed: Long, colors: List<Color>?): Boolean
+
+    @Query("SELECT * FROM remember_cats ORDER BY id DESC")
+    suspend fun getAllCats(): List<Cat>
+}
+
+@TypeConverters
+class CatColorsConverter {
+    @TypeConverter
+    fun colorsToString(value: List<Color>?): String? {
+        return value?.joinToString(separator = ",") { it.toArgb().toString() }
+    }
+
+    @TypeConverter
+    fun stringToColors(string: String?): List<Color>? {
+        return string?.split(",")?.map { Color(it.toInt()) }
     }
 }

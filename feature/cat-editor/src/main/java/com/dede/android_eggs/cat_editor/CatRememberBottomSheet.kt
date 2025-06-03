@@ -62,13 +62,13 @@ import kotlinx.coroutines.launch
 @Composable
 fun CatRememberBottomSheet(
     visibleState: MutableState<Boolean>,
-    onCatSelected: (cat: CatRememberDataStore.Cat) -> Unit
+    onCatSelected: (cat: Cat) -> Unit
 ) {
     var visible by visibleState
     if (!visible) {
         return
     }
-    val allCats = remember { mutableStateListOf<CatRememberDataStore.Cat>() }
+    val allCats = remember { mutableStateListOf<Cat>() }
     val scope = rememberCoroutineScope()
     LaunchedEffect(Unit) {
         launch {
@@ -140,7 +140,7 @@ fun CatRememberBottomSheet(
 
 @Composable
 private fun CatItem(
-    cat: CatRememberDataStore.Cat,
+    cat: Cat,
     isDeletedMode: Boolean,
     modifier: Modifier = Modifier,
     canvasModifier: Modifier = Modifier,
