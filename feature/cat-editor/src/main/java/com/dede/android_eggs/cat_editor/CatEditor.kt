@@ -99,7 +99,7 @@ internal fun CatEditor(
             enter = fadeIn(),
             exit = fadeOut()
         ) {
-            CatEditorGridLine()
+            CatEditorGridPoint()
         }
 
         val onDoubleTab: (Offset) -> Unit = {

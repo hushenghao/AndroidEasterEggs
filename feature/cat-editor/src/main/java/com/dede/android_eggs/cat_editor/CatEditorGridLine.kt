@@ -61,3 +61,43 @@ internal fun CatEditorGridLine(
             }
         })
 }
+
+@Preview
+@Composable
+internal fun CatEditorGridPoint(
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.tertiary,
+    gridCount: Int = 28,
+    radius: Dp = 1.25.dp,
+) {
+
+    val radiusPx = with(LocalDensity.current) { radius.toPx() }
+
+    Canvas(
+        modifier = Modifier
+            .fillMaxSize()
+            .then(modifier),
+        onDraw = {
+            clipRect {
+                val step = size.maxDimension / gridCount
+
+                val columns = (size.width / step).toInt() + 1
+                val offsetX = (size.width - columns * step) / 2f
+
+                val rows = (size.height / step).toInt() + 1
+                val offsetY = (size.height - rows * step) / 2f
+
+                for (c in 0 until columns) {
+                    val x = offsetX + c * step
+                    for (r in 0 until rows) {
+                        val y = offsetY + r * step
+                        drawCircle(
+                            color = color,
+                            radius = radiusPx,
+                            center = Offset(x, y)
+                        )
+                    }
+                }
+            }
+        })
+}
