@@ -20,7 +20,7 @@
     <string name="message_trypophobia_warning">This is a trigger warning to those with &lt;b&gt;trypophobia&lt;/b&gt;. Some images may cause discomfort. Do you want to continue?</string>
 
     <string name="label_settings">Settings</string>
-    <string name="label_project_desc">This project contains the complete code for all system Easter eggs, aiming to organize and ensure compatibility with all system Easter eggs. The goal is to enable most devices to experience different versions of the Easter eggs with minimal modifications to the Easter egg\'s code. Newer versions utilize newer system features, while older versions are limited to using only certain functions.</string>
+    <string name="label_project_desc">This project contains the complete code for all Android Easter eggs, aiming to organize and ensure compatibility with all Android Easter eggs. The goal is to enable most devices to experience different versions of the Easter eggs with minimal modifications to the Easter egg\'s code. Newer versions use newer system features, while older versions are limited to using only certain features.</string>
 
     <string name="pref_title_icon_shape_override">Icon shape</string>
     <string name="pref_title_language">Language</string>
