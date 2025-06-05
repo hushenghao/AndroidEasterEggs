@@ -50,8 +50,8 @@ development here.
 
 ## Thanks to
 
-* [AOSP](https://cs.android.com/android/platform/superproject/main)
 * [All translation contributors](https://crowdin.com/project/easter-eggs/members)
+* [AOSP](https://cs.android.com/android/platform/superproject/main)
 * [Hotpot, Google Play Feature Graphics](https://hotpot.ai/templates/google-play-feature-graphic)
 
 ## Star history
