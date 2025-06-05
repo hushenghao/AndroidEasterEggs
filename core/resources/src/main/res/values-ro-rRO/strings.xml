@@ -48,4 +48,8 @@
     <string name="action_goto_settings">Mergi la Setări</string>
     <string name="cat_editor">Editor de pisici</string>
     <string name="cat_editor_input_seed">Introdu seed-ul pisicii</string>
+    <string name="rocket_launcher_easter_egg_icons">Pictogramele easter egg-urilor</string>
+    <string name="rocket_launcher_all_app_icons">Pictogramele tuturor aplicațiilor</string>
+    <string name="rocket_launcher_all_icons">Toate pictogramele</string>
+    <string name="rocket_launcher_query_all_app_desc">Este necesară obținerea listei tuturor aplicațiilor</string>
 </resources>
