@@ -1,6 +1,7 @@
 package com.dede.android_eggs.views.settings.compose.basic
 
 import android.content.Context
+import androidx.core.content.edit
 import com.dede.android_eggs.util.pref
 
 object SettingPrefUtil {
@@ -16,6 +17,6 @@ object SettingPrefUtil {
     }
 
     fun setValue(context: Context, key: String, value: Int) {
-        context.pref.edit().putInt(key, value).apply()
+        context.pref.edit { putInt(key, value) }
     }
 }

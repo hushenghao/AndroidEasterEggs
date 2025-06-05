@@ -6,10 +6,54 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import androidx.annotation.RequiresPermission
+import com.android.launcher2.RocketLauncher.Board.RocketLauncherEntryPoint
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.requireDrawable
+import dagger.hilt.android.EntryPointAccessors.fromApplication
 
-object Utils {
+internal object Utils {
+
+    @JvmStatic
+    @RequiresPermission(Manifest.permission.QUERY_ALL_PACKAGES)
+    fun getComponentNameDrawableIcons(context: Context): HashMap<ComponentName, Drawable> {
+        return when (val sourceValue = RocketLauncherPrefUtil.getCurrentIconsSourceValue(context)) {
+            RocketLauncherPrefUtil.VALUE_EASTER_EGG_ICONS,
+            RocketLauncherPrefUtil.VALUE_ALL_APP_ICONS -> {
+                getComponentNameDrawableIconsBySourceValue(context, sourceValue)
+            }
+            RocketLauncherPrefUtil.VALUE_ALL_ICONS -> {
+                getComponentNameDrawableIconsBySourceValue(context, sourceValue)
+            }
+            else -> throw IllegalStateException("Unknown icons source value: $sourceValue")
+        }
+    }
+
+    private fun getComponentNameDrawableIconsBySourceValue(
+        context: Context, sourceValue: Int
+    ): HashMap<ComponentName, Drawable> {
+        return when (sourceValue) {
+            RocketLauncherPrefUtil.VALUE_EASTER_EGG_ICONS -> {
+                // Inject in DreamService and Activity
+                val easterEggs = fromApplication<RocketLauncherEntryPoint>(context).easterEggs
+                convertComponentNameDrawableIcons(context, easterEggs)
+            }
+            RocketLauncherPrefUtil.VALUE_ALL_APP_ICONS -> {
+                queryAllPackagesComponentNameDrawableIcons(context)
+            }
+            RocketLauncherPrefUtil.VALUE_ALL_ICONS -> {
+                HashMap(
+                    getComponentNameDrawableIconsBySourceValue(
+                        context,
+                        RocketLauncherPrefUtil.VALUE_EASTER_EGG_ICONS
+                    ) + getComponentNameDrawableIconsBySourceValue(
+                        context,
+                        RocketLauncherPrefUtil.VALUE_ALL_APP_ICONS
+                    )
+                )
+            }
+            else -> throw IllegalStateException("Unknown icons source value: $sourceValue")
+        }
+    }
 
     @JvmStatic
     @RequiresPermission(Manifest.permission.QUERY_ALL_PACKAGES)

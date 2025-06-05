@@ -5,3 +5,7 @@ plugins {
 android {
     namespace = "com.android.launcher2"
 }
+
+dependencies {
+    implementation(project(":core:resources"))
+}

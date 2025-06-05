@@ -48,4 +48,8 @@
     <string name="action_goto_settings">去设置</string>
     <string name="cat_editor">Cat Editor</string>
     <string name="cat_editor_input_seed">输入猫种子</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter Egg 图标</string>
+    <string name="rocket_launcher_all_app_icons">所有应用图标</string>
+    <string name="rocket_launcher_all_icons">所有图标</string>
+    <string name="rocket_launcher_query_all_app_desc">需要获取所有应用列表</string>
 </resources>

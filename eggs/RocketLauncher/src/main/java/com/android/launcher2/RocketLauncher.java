@@ -39,15 +39,17 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.dede.basic.ExecutorUtils;
 import com.dede.basic.provider.EasterEgg;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 import dagger.hilt.EntryPoint;
 import dagger.hilt.InstallIn;
-import dagger.hilt.android.EntryPointAccessors;
 import dagger.hilt.components.SingletonComponent;
 
 public class RocketLauncher extends BasicDream {
@@ -259,18 +261,26 @@ public class RocketLauncher extends BasicDream {
         public Board(Context context, AttributeSet as) {
             super(context, as);
 
-            // Inject in DreamService and Activity
-            List<EasterEgg> easterEggs = EntryPointAccessors
-                    .fromApplication(getContext(), RocketLauncherEntryPoint.class)
-                    .getEasterEggs();
-
             setBackgroundColor(0xFF000000);
 
-            mIcons = Utils.convertComponentNameDrawableIcons(getContext(), easterEggs);
 //            LauncherApplication app = (LauncherApplication)context.getApplicationContext();
 //            mIcons = app.getIconCache().getAllIcons();
+            mIcons = new HashMap<>();
+            mComponentNames = new ComponentName[0];
+        }
+
+        public void setComponentIcons(HashMap<ComponentName, Drawable> icons) {
+            mIcons = icons;
             mComponentNames = new ComponentName[mIcons.size()];
             mComponentNames = mIcons.keySet().toArray(mComponentNames);
+
+            if (isAttachedToWindow()) {
+                if (mAnim != null) {
+                    mAnim.cancel();
+                }
+                reset();
+                mAnim.start();
+            }
         }
 
         private void reset() {
@@ -352,6 +362,8 @@ public class RocketLauncher extends BasicDream {
             });
         }
 
+        private FutureTask<HashMap<ComponentName, Drawable>> loadIconsTask;
+
         @Override
         protected void onAttachedToWindow() {
             super.onAttachedToWindow();
@@ -361,6 +373,29 @@ public class RocketLauncher extends BasicDream {
             // fix size
 //            reset();
 //            mAnim.start();
+
+            loadIconsTask = new FutureTask<>(() ->
+                    Utils.getComponentNameDrawableIcons(getContext())
+            ) {
+                @Override
+                protected void done() {
+                    if (isCancelled()) {
+                        return;
+                    }
+                    HashMap<ComponentName, Drawable> icons;
+                    try {
+                        icons = get();
+                    } catch (ExecutionException | InterruptedException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    ExecutorUtils.getUiExecutor().execute(() ->
+                            setComponentIcons(icons)
+                    );
+
+                }
+            };
+            ExecutorUtils.getCachedExecutor().submit(loadIconsTask);
         }
 
         protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -375,6 +410,7 @@ public class RocketLauncher extends BasicDream {
 
         @Override
         protected void onDetachedFromWindow() {
+            loadIconsTask.cancel(true);
             super.onDetachedFromWindow();
             mAnim.cancel();
         }
