@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
-        versionCode = 61
+        versionCode = 62
         versionName = "3.5.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -77,7 +77,7 @@ android {
         }
         create("beta") {
             dimension = "track"
-            versionNameSuffix = "-beta02"
+            versionNameSuffix = "-beta01"
         }
         create("product") {
             dimension = "track"
