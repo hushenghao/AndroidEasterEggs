@@ -40,17 +40,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.dede.basic.ExecutorUtils;
-import com.dede.basic.provider.EasterEgg;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-
-import dagger.hilt.EntryPoint;
-import dagger.hilt.InstallIn;
-import dagger.hilt.components.SingletonComponent;
 
 public class RocketLauncher extends BasicDream {
     public static final boolean ROCKET_LAUNCHER = true;
@@ -248,12 +242,6 @@ public class RocketLauncher extends BasicDream {
                 v = randfrange(VMAX * 0.75f, VMAX * 2f); // fasticate
                 endscale = randfrange(1f, 2f); // ensmallen
             }
-        }
-
-        @EntryPoint
-        @InstallIn(SingletonComponent.class)
-        interface RocketLauncherEntryPoint {
-            List<EasterEgg> getEasterEggs();
         }
 
         TimeAnimator mAnim;

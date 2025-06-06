@@ -7,13 +7,12 @@ import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import androidx.annotation.WorkerThread
-import com.android.launcher2.RocketLauncher.Board.RocketLauncherEntryPoint
 import com.android.launcher2.RocketLauncherPrefUtil.VALUE_ALL_APP_ICONS
 import com.android.launcher2.RocketLauncherPrefUtil.VALUE_ALL_ICONS
 import com.android.launcher2.RocketLauncherPrefUtil.VALUE_EASTER_EGG_ICONS
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.requireDrawable
-import dagger.hilt.android.EntryPointAccessors.fromApplication
+import dagger.hilt.android.EntryPointAccessors
 
 internal object Utils {
 
@@ -30,7 +29,8 @@ internal object Utils {
         return when (sourceValue) {
             VALUE_EASTER_EGG_ICONS -> {
                 // Inject in DreamService and Activity
-                val easterEggs = fromApplication<RocketLauncherEntryPoint>(context).easterEggs
+                val easterEggs = EntryPointAccessors
+                    .fromApplication<RocketLauncherEntryPoint>(context).easterEggs
                 convertComponentNameDrawableIcons(context, easterEggs)
             }
             VALUE_ALL_APP_ICONS -> {

@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.setFrom
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.composes.icons.outlined.Beta
 import com.dede.android_eggs.util.CustomTabsBrowser
@@ -21,6 +22,7 @@ import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
 import com.dede.android_eggs.views.settings.compose.options.GithubOption
+import com.dede.android_eggs.views.settings.compose.options.TestCrashOption
 import com.dede.android_eggs.views.settings.compose.options.VersionOption
 import com.dede.android_eggs.resources.R as StringsR
 
@@ -81,5 +83,9 @@ fun AboutGroup() {
                 CustomTabsBrowser.launchUrl(context, R.string.url_wiki)
             }
         )
+
+        if (BuildConfig.DEBUG) {
+            TestCrashOption()
+        }
     }
 }

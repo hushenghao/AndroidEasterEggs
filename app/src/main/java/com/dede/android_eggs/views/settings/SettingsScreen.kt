@@ -36,7 +36,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.Receiver
 import com.dede.android_eggs.util.SplitUtils
@@ -45,7 +44,6 @@ import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.groups.AboutGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContactMeGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContributeGroup
-import com.dede.android_eggs.views.settings.compose.options.TestCrashOption
 import com.dede.android_eggs.views.settings.compose.prefs.CatEditorPref
 import com.dede.android_eggs.views.settings.compose.prefs.ComponentManagerPref
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePref
@@ -161,10 +159,6 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                 AboutGroup()
 
                 ContactMeGroup()
-
-                if (BuildConfig.DEBUG) {
-                    TestCrashOption()
-                }
 
             }
         }

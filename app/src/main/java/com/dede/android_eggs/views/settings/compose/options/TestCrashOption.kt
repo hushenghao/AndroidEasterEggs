@@ -1,22 +1,20 @@
 package com.dede.android_eggs.views.settings.compose.options
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.rounded.SentimentDissatisfied
 import androidx.compose.runtime.Composable
-import com.dede.android_eggs.crash.GlobalExceptionHandler
-import com.dede.android_eggs.views.settings.compose.basic.SettingPref
+import com.dede.android_eggs.views.settings.compose.basic.Option
+import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
 import com.dede.basic.uiHandler
 
 @Composable
 fun TestCrashOption() {
-    SettingPref(
-        leadingIcon = Icons.Rounded.SentimentDissatisfied,
+    Option(
+        leadingIcon = imageVectorIconBlock(Icons.Rounded.SentimentDissatisfied),
         title = "Test Crash",
-        trailingContent = Icons.AutoMirrored.Rounded.NavigateNext,
         onClick = {
             uiHandler.post {
-                GlobalExceptionHandler.testCrash()
+                throw IllegalStateException("This is a test crash triggered by TestCrashOption.")
             }
         }
     )
