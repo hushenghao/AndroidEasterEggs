@@ -1,6 +1,7 @@
 package com.dede.android_eggs.views.settings.compose.groups
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.MenuBook
 import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Policy
@@ -67,6 +68,17 @@ fun AboutGroup() {
             title = stringResource(StringsR.string.label_privacy_policy),
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
+            }
+        )
+
+        Option(
+            leadingIcon = imageVectorIconBlock(
+                imageVector = Icons.AutoMirrored.Rounded.MenuBook,
+                contentDescription = stringResource(StringsR.string.label_wiki),
+            ),
+            title = stringResource(StringsR.string.label_wiki),
+            onClick = {
+                CustomTabsBrowser.launchUrl(context, R.string.url_wiki)
             }
         )
     }
