@@ -1,5 +1,6 @@
 package com.dede.android_eggs.crash
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
@@ -49,11 +50,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.crash.GlobalExceptionHandler.Companion.copyThrowablePlantText
-import com.dede.android_eggs.crash.GlobalExceptionHandler.Companion.getCrashTitle
-import com.dede.android_eggs.crash.GlobalExceptionHandler.Companion.getDeviceInfo
-import com.dede.android_eggs.crash.GlobalExceptionHandler.Companion.getStackTraceString
-import com.dede.android_eggs.crash.GlobalExceptionHandler.Companion.openNewIssue
+import com.dede.android_eggs.crash.Utilities.getCrashTitle
+import com.dede.android_eggs.crash.Utilities.getDeviceInfo
+import com.dede.android_eggs.crash.Utilities.getStackTraceString
 import com.dede.basic.Utils
 import kotlin.system.exitProcess
 
@@ -176,7 +175,7 @@ internal fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
             }
             FloatingActionButton(
                 onClick = {
-                    copyThrowablePlantText(context, tr)
+                    Utilities.copyThrowablePlantText(context, tr)
                 },
                 shape = FloatingActionButtonDefaults.largeShape
             ) {
@@ -187,8 +186,12 @@ internal fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
             }
             FloatingActionButton(
                 onClick = {
-                    openNewIssue(context, tr)
-                    copyThrowablePlantText(context, tr)
+                    val intent = Utilities.createNewIssueIntent(context, tr)
+                    try {
+                        context.startActivity(intent)
+                    } catch (_: ActivityNotFoundException) {
+                    }
+                    Utilities.copyThrowablePlantText(context, tr)
                 },
                 shape = FloatingActionButtonDefaults.largeShape
             ) {

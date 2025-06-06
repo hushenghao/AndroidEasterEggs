@@ -3,27 +3,25 @@ package com.dede.android_eggs.crash
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.dede.android_eggs.crash.GlobalExceptionHandler.Companion.copyThrowablePlantText
-import com.dede.android_eggs.crash.GlobalExceptionHandler.Companion.getUncaughtException
-import com.dede.android_eggs.crash.GlobalExceptionHandler.Companion.openNewIssue
 
 class CrashNotificationActionsReceiver : BroadcastReceiver() {
 
     companion object {
         const val ACTION_COPY = "com.dede.android_eggs.crash.action.COPY"
 
-        const val ACTION_NEW_ISSUE = "com.dede.android_eggs.crash.action.NEW_ISSUE"
+        fun copyActionIntent(context: Context, tr: Throwable): Intent {
+            return Intent(ACTION_COPY)
+                .setPackage(context.packageName)
+                .putExtra(Utilities.INTENT_DATA_NAME, tr)
+        }
     }
 
     override fun onReceive(context: Context, intent: Intent?) {
-        val tr = getUncaughtException(intent) ?: return
-        when (intent?.action) {
+        val action = intent?.action ?: return
+        val tr = Utilities.getUncaughtException(intent) ?: return
+        when (action) {
             ACTION_COPY -> {
-                copyThrowablePlantText(context, tr)
-            }
-            ACTION_NEW_ISSUE -> {
-                openNewIssue(context, tr)
-                copyThrowablePlantText(context, tr)
+                Utilities.copyThrowablePlantText(context, tr)
             }
         }
     }

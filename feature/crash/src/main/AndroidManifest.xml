@@ -24,7 +24,6 @@
             tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="com.dede.android_eggs.crash.action.COPY" />
-                <action android:name="com.dede.android_eggs.crash.action.NEW_ISSUE" />
             </intent-filter>
         </receiver>
     </application>
