@@ -9,6 +9,7 @@
     <string name="label_beta">Beta\'yı İndir</string>
     <string name="label_timeline">İşletim Sistemi Zaman Çizelgesi</string>
     <string name="label_privacy_policy">Gizlilik</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">Lisans</string>
     <string name="label_feedback">Geri Bildirim</string>
     <string name="label_star">Uygulamayı Değerlendir</string>
@@ -26,7 +27,7 @@
     <string name="summary_system_default">Varsayılan</string>
     <string name="summary_theme_dark_mode">Karanlık</string>
     <string name="summary_theme_light_mode">Aydınlık</string>
-    <string name="summary_theme_amoled_mode">Amoled</string>
+    <string name="summary_theme_amoled_mode">Siyah</string>
     <string name="label_add_shortcut">Kısayol</string>
     <string name="label_donate">Bağış Yap</string>
     <string name="preference_on">Açık</string>
@@ -48,4 +49,8 @@
     <string name="action_goto_settings">Ayarlara git</string>
     <string name="cat_editor">Cat Editörü</string>
     <string name="cat_editor_input_seed">Kedi tohumu girdisi</string>
+    <string name="rocket_launcher_easter_egg_icons">Paskalya Yumurtası simgeleri</string>
+    <string name="rocket_launcher_all_app_icons">Tüm uygulama simgeleri</string>
+    <string name="rocket_launcher_all_icons">Tüm simgeler</string>
+    <string name="rocket_launcher_query_all_app_desc">Tüm uygulamaların listesinin alınması gerekiyor</string>
 </resources>
