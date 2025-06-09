@@ -45,6 +45,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android_r.egg.R;
 import com.android_r.egg.neko.PrefState.PrefsListener;
 import com.dede.basic.ContextExt;
+import com.dede.basic.utils.NekoLandEdgeInsetsUtil;
 import com.dede.basic.utils.ShareCatUtils;
 
 import java.util.Collections;
@@ -80,6 +81,7 @@ public class NekoLand extends Activity implements PrefsListener {
             actionBar.setDisplayUseLogoEnabled(false);
             actionBar.setDisplayShowHomeEnabled(true);
         }
+        NekoLandEdgeInsetsUtil.applyWindowInsets(this);
 
         mPrefs = new PrefState(this);
         mPrefs.setListener(this);
