@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="summary_android_waiting">В настоящее время недоступно</string>
     <string name="summary_android_release_pushed">Выпущен финальный релиз версии</string>
-    <string name="label_timeline_title">Хронология, вехи и обновления</string>
+    <string name="label_timeline_title">Хронология, века и обновления</string>
     <string name="label_timeline_releases">Релизы</string>
     <string name="label_timeline_developer_previews">Превью для разработчиков</string>
     <string name="label_timeline_beta_release">Бета-релизы</string>
