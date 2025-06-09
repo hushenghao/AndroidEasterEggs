@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="r_notification_name" translatable="false">Android R Neko</string>
-    <string name="r_notification_channel_name" translatable="false">New cats(R)</string>
+    <string name="r_notification_channel_name" translatable="false">New cats (R)</string>
     <string name="r_notification_title" translatable="false">A cat is here.</string>
     <string name="r_default_cat_name" translatable="false">Cat #%s</string>
     <string name="r_confirm_delete" translatable="false">Forget %s?</string>

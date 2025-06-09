@@ -39,6 +39,9 @@ internal object Utilities {
         }
 
         val notificationManager = NotificationManagerCompat.from(context)
+        if (!notificationManager.areNotificationsEnabled()) {
+            return
+        }
 
         val notificationChannel = NotificationChannelCompat.Builder(
             NOTIFICATION_CHANNEL,
