@@ -10,6 +10,7 @@
 - 修复 Cat Editor 在 Android N 的绘制问题 [#37138664](https://issuetracker.google.com/issues/37138664)
 - 修复 Cat Editor hvs颜色选择器最大宽度 [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522)
 - 修复 Cat Editor 在 Android Q 以下时的存储权限
+- 修复 NekoLand 安全区域 [#566](https://github.com/hushenghao/AndroidEasterEggs/issues/566)
 - 更新 Android Baklava 快照背景
 - 升级项目依赖项
 - 修复已知问题
