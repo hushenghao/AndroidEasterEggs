@@ -24,7 +24,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [libraries]
 kotlinx-coroutines-bom = "org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.10.2"
-androidx-appcompat = "androidx.appcompat:appcompat:1.7.0"
+androidx-appcompat = "androidx.appcompat:appcompat:1.7.1"
 androidx-core = "androidx.core:core-ktx:1.16.0"
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "lifecycle" }
