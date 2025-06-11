@@ -142,12 +142,13 @@ private fun buildXmlAnnotatedString(
     colorRenderChar: Char = '■', // fill='#FF0000' will be rendered as fill='■#FF0000'
     transparentColorRenderChar: Char = '□'
 ): AnnotatedString {
-    val colorAttributeRegex = Regex("(?<name>[\\w_-]+)=[\"'](?<color>#\\w{3,8})[\"']")
+    // "(?<name>[\\w_-]+)=[\"'](?<color>#\\w{3,8})[\"']")
+    val colorAttributeRegex = Regex("([\\w_-]+)=[\"'](#\\w{3,8})[\"']")
     var offset = 0
     val xmlBuilder = StringBuilder(xml)
     colorAttributeRegex.findAll(xml).forEach {
-        val gColor = it.groups["color"]
-        val gName = it.groups["name"]
+        val gColor = it.groups[2]
+        val gName = it.groups[1]
         if (gColor == null || gName == null) {
             return@forEach
         }
@@ -164,11 +165,11 @@ private fun buildXmlAnnotatedString(
 
     val modifiedXml = xmlBuilder.toString()
 
-    val tagsRegexValue = xmlTags.joinToString(prefix = "(?<tag>", separator = "|", postfix = ")")
+    val tagsRegexValue = xmlTags.joinToString(prefix = "(", separator = "|", postfix = ")")
     val tagStartRegex = Regex("<$tagsRegexValue?")
     val tagEndRegex = Regex("/?$tagsRegexValue?>")
-    val attributeRegex =
-        Regex("(?<name>[\\w_-]+)(?<attrSign>=[\"'](?<color>$colorRenderChar?)(?<value>[^'\"]*)['\"])")
+    // "(?<name>[\\w_-]+)(?<attrSign>=[\"'](?<color>$colorRenderChar?)(?<value>[^'\"]*)['\"])"
+    val attributeRegex = Regex("([\\w_-]+)(=[\"']($colorRenderChar?)([^'\"]*)['\"])")
 
     fun AnnotatedString.Builder.addStyle(style: SpanStyle, range: IntRange) {
         addStyle(style, start = range.first, end = range.last + 1)
@@ -189,19 +190,19 @@ private fun buildXmlAnnotatedString(
         val attrSignStyle = SpanStyle(color = attributeColor)
         val attrValueStyle = SpanStyle(fontWeight = FontWeight.Medium)
         attributeRegex.findAll(modifiedXml).forEach {
-            val gName = it.groups["name"]
+            val gName = it.groups[1]
             if (gName != null) {
                 addStyle(attrNameStyle, gName.range)
             }
-            val gAttrSign = it.groups["attrSign"]
+            val gAttrSign = it.groups[2]
             if (gAttrSign != null) {
                 addStyle(attrSignStyle, gAttrSign.range)
             }
-            val gValue = it.groups["value"]
+            val gValue = it.groups[3]
             if (gValue != null) {
                 addStyle(attrValueStyle, gValue.range)
 
-                val gColor = it.groups["color"]
+                val gColor = it.groups[4]
                 if (gColor != null) {
                     val color = gValue.value.toColorOrNull()
                     if (color != null && color.alpha > 0f) {
