@@ -1,4 +1,5 @@
 - Add Cat Editor seed input #545
+- Add Cat Editor svg export
 - Add to favorites in Cat Editor
 - Add Bengali translation, Thanks for @ChildishRifty7 's contribution
 - Rocket Launcher add icon collection selection #554
