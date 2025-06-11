@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.toAndroidRectF
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.IntSize
 import androidx.core.graphics.ColorUtils
+import androidx.core.graphics.toColorInt
 import androidx.core.graphics.toRegion
 import com.google.android.material.color.MaterialColors
 import java.util.Objects
@@ -28,6 +29,36 @@ import android.graphics.Matrix as AndroidMatrix
 internal object Utilities {
 
     private const val TAG = "Utilities"
+
+    fun String.toColorOrNull(): Color? {
+        if (this == "none") {
+            return Color.Transparent
+        }
+        if (!this.startsWith("#") && this.length !in 4..9) {
+            return null // invalid color length
+        }
+        var str = this
+        if (this.length == 4) {
+            // convert #RGB to #RRGGBB
+            val r = this[1].toString().repeat(2)
+            val g = this[2].toString().repeat(2)
+            val b = this[3].toString().repeat(2)
+            str = "#$r$g$b"
+        } else if (this.length == 5) {
+            // convert #ARGB to #AARRGGBB
+            val a = this[1].toString().repeat(2)
+            val r = this[2].toString().repeat(2)
+            val g = this[3].toString().repeat(2)
+            val b = this[4].toString().repeat(2)
+            str = "#$a$r$g$b"
+        }
+        val colorInt = try {
+            str.toColorInt()
+        } catch (_: IllegalArgumentException) {
+            return null
+        }
+        return Color(colorInt)
+    }
 
     fun getHexColor(color: Color, withAlpha: Boolean): String {
         val argb = color.toArgb()

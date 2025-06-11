@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.cat_editor.Utilities.toColorOrNull
 import com.dede.basic.copy
 
 @Composable
@@ -137,32 +138,57 @@ private fun buildXmlAnnotatedString(
     highlightColor: Color,
     attributeNameColor: Color,
     attributeColor: Color,
-    xmlTags: Set<String> = setOf("svg", "path")
+    xmlTags: Set<String> = setOf("svg", "path"),
+    colorRenderChar: Char = '■', // fill='#FF0000' will be rendered as fill='■#FF0000'
+    transparentColorRenderChar: Char = '□'
 ): AnnotatedString {
+    val colorAttributeRegex = Regex("(?<name>[\\w_-]+)=[\"'](?<color>#\\w{3,8})[\"']")
+    var offset = 0
+    val xmlBuilder = StringBuilder(xml)
+    colorAttributeRegex.findAll(xml).forEach {
+        val gColor = it.groups["color"]
+        val gName = it.groups["name"]
+        if (gColor == null || gName == null) {
+            return@forEach
+        }
+        val color = gColor.value.toColorOrNull()
+        if (color != null) {
+            // fill='#FFFF0000' will be rendered as fill='■#FFFF0000'
+            // fill='#00FF0000' will be rendered as fill='□#00FF0000'
+            val char = if (color.alpha == 0f) transparentColorRenderChar else colorRenderChar
+            val index = gName.range.last + 1 + offset + 2// length of "='"
+            xmlBuilder.insert(index, char)
+            offset += 1 // for the added character
+        }
+    }
+
+    val modifiedXml = xmlBuilder.toString()
+
     val tagsRegexValue = xmlTags.joinToString(prefix = "(?<tag>", separator = "|", postfix = ")")
     val tagStartRegex = Regex("<$tagsRegexValue?")
     val tagEndRegex = Regex("/?$tagsRegexValue?>")
-    val attributeRegex = Regex("(?<name>[\\w_-]+)(?<attrSign>=[\"'](?<value>[^'\"]*)['\"])")
+    val attributeRegex =
+        Regex("(?<name>[\\w_-]+)(?<attrSign>=[\"'](?<color>$colorRenderChar?)(?<value>[^'\"]*)['\"])")
 
     fun AnnotatedString.Builder.addStyle(style: SpanStyle, range: IntRange) {
         addStyle(style, start = range.first, end = range.last + 1)
     }
 
     return buildAnnotatedString {
-        append(xml)
+        append(modifiedXml)
 
         val tagStyle = SpanStyle(color = highlightColor, fontWeight = FontWeight.Bold)
-        tagStartRegex.findAll(xml).forEach {
+        tagStartRegex.findAll(modifiedXml).forEach {
             addStyle(tagStyle, it.range)
         }
-        tagEndRegex.findAll(xml).forEach {
+        tagEndRegex.findAll(modifiedXml).forEach {
             addStyle(tagStyle, it.range)
         }
 
         val attrNameStyle = SpanStyle(color = attributeNameColor)
         val attrSignStyle = SpanStyle(color = attributeColor)
         val attrValueStyle = SpanStyle(fontWeight = FontWeight.Medium)
-        attributeRegex.findAll(xml).forEach {
+        attributeRegex.findAll(modifiedXml).forEach {
             val gName = it.groups["name"]
             if (gName != null) {
                 addStyle(attrNameStyle, gName.range)
@@ -174,6 +200,14 @@ private fun buildXmlAnnotatedString(
             val gValue = it.groups["value"]
             if (gValue != null) {
                 addStyle(attrValueStyle, gValue.range)
+
+                val gColor = it.groups["color"]
+                if (gColor != null) {
+                    val color = gValue.value.toColorOrNull()
+                    if (color != null && color.alpha > 0f) {
+                        addStyle(SpanStyle(color = color), gColor.range)
+                    }
+                }
             }
         }
     }
