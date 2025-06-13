@@ -2,6 +2,7 @@
 
 ### v3.5.0
 
+- Add Android 16 Easter Egg 🎉🎉🎉
 - Add Cat Editor seed input [#545](https://github.com/hushenghao/AndroidEasterEggs/issues/545)
 - Add Cat Editor svg export
 - Add to favorites in Cat Editor

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--    <uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
+
+    <!-- used for cat notifications -->
+    <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />
+
+    <!-- used to save cat images -->
+    <!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+
+    <!-- controls -->
+    <!--    <uses-permission android:name="android.permission.BIND_CONTROLS" />-->
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application>
+        <activity
+            android:name=".PlatLogoActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:enableOnBackInvokedCallback="true"
+            android:exported="true"
+            android:icon="@drawable/baklava_platlogo"
+            android:label="@string/baklava_egg_name"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            tools:targetApi="33" />
+
+        <!-- Android V easter egg: Daydream version of Landroid
+       (must be enabled by unlocking the egg) -->
+        <service
+            android:name=".landroid.DreamUniverse"
+            android:description="@string/baklava_dream_description"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/baklava_android16_patch_adaptive"
+            android:label="@string/baklava_egg_name"
+            android:permission="android.permission.BIND_DREAM_SERVICE">
+
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.dream"
+                android:resource="@xml/baklava_landroid_dream" />
+        </service>
+
+        <!-- Android U easter egg -->
+        <activity
+            android:name=".landroid.MainActivity"
+            android:configChanges="orientation|screenLayout|screenSize|density"
+            android:exported="true"
+            android:icon="@drawable/baklava_android16_patch_adaptive"
+            android:label="@string/baklava_egg_name"
+            android:theme="@style/baklava_Theme.Landroid" />
+
+    </application>
+</manifest>

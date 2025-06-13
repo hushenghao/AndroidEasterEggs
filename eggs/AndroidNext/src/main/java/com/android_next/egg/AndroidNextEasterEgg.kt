@@ -17,16 +17,10 @@ import com.dede.basic.provider.SnapshotProvider
 import com.dede.basic.provider.TimelineEvent
 import com.dede.basic.requireDrawable
 import com.dede.basic.utils.DynamicObjectUtils
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import dagger.multibindings.IntoSet
 import java.util.Calendar
-import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
+//@Module
+//@InstallIn(SingletonComponent::class)
 object AndroidNextEasterEgg : EasterEggProvider {
 
     const val RELEASE_YEAR = 2025
@@ -47,9 +41,9 @@ object AndroidNextEasterEgg : EasterEggProvider {
     @DrawableRes
     private val PLATLOGO_RES = R.drawable.ic_android_16_platlogo
 
-    @Provides
-    @IntoSet
-    @Singleton
+//    @Provides
+//    @IntoSet
+//    @Singleton
     override fun provideEasterEgg(): BaseEasterEgg {
         return object : EasterEgg(
             iconRes = LOGO_RES,
@@ -90,9 +84,9 @@ object AndroidNextEasterEgg : EasterEggProvider {
         }
     }
 
-    @Provides
-    @IntoSet
-    @Singleton
+//    @Provides
+//    @IntoSet
+//    @Singleton
     override fun provideTimelineEvents(): List<TimelineEvent> {
         return listOf(
             TimelineEvent(

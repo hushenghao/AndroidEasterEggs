@@ -39,6 +39,7 @@
             <option value="$PROJECT_DIR$/core/theme" />
             <option value="$PROJECT_DIR$/eggs" />
             <option value="$PROJECT_DIR$/eggs/AndroidNext" />
+            <option value="$PROJECT_DIR$/eggs/Baklava" />
             <option value="$PROJECT_DIR$/eggs/Base" />
             <option value="$PROJECT_DIR$/eggs/Gingerbread" />
             <option value="$PROJECT_DIR$/eggs/Honeycomb" />

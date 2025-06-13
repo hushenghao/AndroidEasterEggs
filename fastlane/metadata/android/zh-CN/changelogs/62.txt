@@ -1,3 +1,4 @@
+- 新增 Android 16 Easter Egg 🎉🎉🎉
 - 新增 Cat Editor 种子输入 #545
 - 新增 Cat Editor svg 导出
 - 新增 Cat Editor 收藏功能

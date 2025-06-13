@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:supportAdaptiveIcon="true">
+    <item>
+        <inset
+            android:drawable="@drawable/baklava_android16_patch_background"
+            android:inset="-16dp" />
+    </item>
+    <item android:drawable="@drawable/baklava_android16_patch_foreground" />
+</layer-list>

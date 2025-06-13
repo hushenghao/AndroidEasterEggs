@@ -13,6 +13,7 @@ import com.dede.android_eggs.util.ActivityActionDispatcher
 internal class RequestNotificationPermissionAction : ActivityActionDispatcher.ActivityAction {
 
     private val pagers = arrayOf(
+        com.android_baklava.egg.landroid.MainActivity::class,// auto pilot
         com.android_t.egg.ComponentActivationActivity::class,
         com.android_s.egg.ComponentActivationActivity::class,
         com.android_r.egg.neko.NekoActivationActivity::class,

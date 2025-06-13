@@ -12,6 +12,7 @@ dependencies {
     implementation(project(":core:shortcut"))
 
     // cats
+    implementation(project(":eggs:Baklava"))
     implementation(project(":eggs:Tiramisu"))
     implementation(project(":eggs:S"))
     implementation(project(":eggs:R"))

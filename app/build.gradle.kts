@@ -163,6 +163,7 @@ dependencies {
 
     implementation(project(":eggs:RocketLauncher"))
     implementation(project(":eggs:AndroidNext"))
+    implementation(project(":eggs:Baklava"))
     implementation(project(":eggs:VanillaIceCream"))
     implementation(project(":eggs:UpsideDownCake"))
     implementation(project(":eggs:Tiramisu"))
