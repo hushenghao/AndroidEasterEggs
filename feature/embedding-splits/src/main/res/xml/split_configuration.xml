@@ -74,6 +74,7 @@
     <ActivityRule window:alwaysExpand="true">
         <ActivityFilter window:activityName="com.android_u.egg.landroid.MainActivity" />
         <ActivityFilter window:activityName="com.android_v.egg.landroid.MainActivity" />
+        <ActivityFilter window:activityName="com.android_baklava.egg.landroid.MainActivity" />
     </ActivityRule>
 
 </resources>

@@ -85,37 +85,27 @@ class UniverseProgressNotifier(val context: Context, val universe: Universe) {
     private lateinit var progress: Notification.ProgressStyle
 //    private val progress = Notification.ProgressStyle().setProgressTrackerIcon(spacecraftIcon)
 
-    private val builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        Notification.Builder(context, CHANNEL_ID)
-            .setColorized(true)
-    } else {
-        @Suppress("DEPRECATION")
-        Notification.Builder(context)
-    }
-        .setContentIntent(
-            PendingIntent.getActivity(
-                context,
-                0,
-                Intent(context, MainActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-                },
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
-            )
-        )
-        .setOngoing(true)
-        .setColor(Colors.Eigengrau2.toArgb())
-        .apply {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                setFlag(Notification.FLAG_ONLY_ALERT_ONCE, true)
-            }
-            if (isProgressNotifierSupported) {
-                setStyle(progress)
-            }
-        }
-
+    private val builder:Notification.Builder
+//    private val builder =
+//        Notification.Builder(context, CHANNEL_ID)
+//            .setContentIntent(
+//                PendingIntent.getActivity(
+//                    context,
+//                    0,
+//                    Intent(context, MainActivity::class.java).apply {
+//                        flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+//                    },
+//                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+//                )
+//            )
+//            .setFlag(Notification.FLAG_ONLY_ALERT_ONCE, true)
+//            .setColorized(true)
+//            .setOngoing(true)
+//            .setColor(Colors.Eigengrau2.toArgb())
+//            .setStyle(progress)
 
     init {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
+        if (isProgressNotifierSupported) {
             val spacecraftIcon = Icon.createWithResource(context, R.drawable.baklava_ic_spacecraft_filled)
             progress = Notification.ProgressStyle().setProgressTrackerIcon(spacecraftIcon)
             planetIcons = listOf(
@@ -129,6 +119,33 @@ class UniverseProgressNotifier(val context: Context, val universe: Universe) {
                         Icon.createWithResource(context, R.drawable.baklava_ic_planet_tiny)),
             )
         }
+
+        builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Notification.Builder(context, CHANNEL_ID)
+                .setColorized(true)
+        } else {
+            @Suppress("DEPRECATION")
+            Notification.Builder(context)
+        }
+            .setContentIntent(
+                PendingIntent.getActivity(
+                    context, 0,
+                    Intent(context, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    },
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+                )
+            )
+            .setOngoing(true)
+            .setColor(Colors.Eigengrau2.toArgb())
+            .apply {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    setFlag(Notification.FLAG_ONLY_ALERT_ONCE, true)
+                }
+                if (isProgressNotifierSupported) {
+                    setStyle(progress)
+                }
+            }
     }
 
     private var lastUpdate = 0f

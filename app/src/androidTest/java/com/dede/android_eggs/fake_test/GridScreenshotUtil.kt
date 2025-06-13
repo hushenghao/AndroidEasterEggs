@@ -35,13 +35,12 @@ class GridScreenshotUtil {
         // Pixel 5
         private val TARGET_SIZE = Size(1080, 2400)
 
-        // 17 cells
+        // 18 cells
         private val GROUPS: List<Group> = listOf(
-            Split(560, 2),                // 2
-            Triple(530, false, 4),  // 3
-            Split(270, 4),                // 4
-            Pentad(520, false),            // 5
-            Triple(520, true, 4),   // 3
+            Triple(690, false, 3),// 3
+            Pentad(570, false),          // 5
+            Pentad(570, true),           // 5
+            Pentad(570, false),          // 5
         )
 
         private const val ASSET_DIR = "screenshots"
@@ -234,11 +233,11 @@ class GridScreenshotUtil {
     @Test
     fun generate() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        val screenshots =
-            requireNotNull(context.assets.list(ASSET_DIR)).reversed() as MutableList<String>
-        // 让g显示在最后一个
-        val g = screenshots.removeAt(screenshots.size - 1)
-        screenshots.add(screenshots.size - 2, g)
+        val screenshots = requireNotNull(context.assets.list(ASSET_DIR)).toMutableList()
+        val apiRegex = Regex("api(\\d+)[\\w.]+")
+        screenshots.sortByDescending {
+            apiRegex.find(it)?.groups?.get(1)?.value?.toInt() ?: 0
+        }
         EasterEggsServer.start(context) {
             for (screenshot in screenshots) {
                 registerHandler("/$screenshot.webp") {
