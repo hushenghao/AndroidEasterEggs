@@ -6,7 +6,6 @@
 - Rocket Launcher add icon collection selection #554
 - Add Cat Editor, Rocket Launcher shortcuts #550
 - Cat Editor bottom menu bar optimization
-- Fix Cat Editor draw on Android N #37138664
-- Fix Cat Editor color palette maxWidth #522
+- Fix Cat Editor problems #522 #37138664
 - Fix NekoLand safe space #566
 - Upgrade project dependencies
