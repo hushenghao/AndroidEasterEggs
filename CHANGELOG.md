@@ -14,9 +14,7 @@
 - Fix Cat Editor color hvs palette maxWidth [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522)
 - Fix Cat Editor storage permission on Android Q below
 - Fix NekoLand safe space [#566](https://github.com/hushenghao/AndroidEasterEggs/issues/566)
-- Update Android Baklava Snapshot background
 - Upgrade project dependencies
-- Known issue fixes
 
 ### v3.4.0 (2025-04-23)
 
