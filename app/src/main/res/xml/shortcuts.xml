@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:targetApi="25">
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_rocket_launcher"
+        android:shortcutId="shortcut_rocket_launcher"
+        android:shortcutLongLabel="@string/rocket_launcher_desc"
+        android:shortcutShortLabel="@string/rocket_launcher_dream_name">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.dede.android_eggs.views.main.EasterEggsActivity"
+            android:targetPackage="com.dede.android_eggs">
+            <extra
+                android:name="extra_static_shortcut_action"
+                android:value="com.dede.android_eggs.action.ROCKET_LAUNCHER" />
+        </intent>
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_cat_editor_launcher"
+        android:shortcutId="shortcut_cat_editor"
+        android:shortcutLongLabel="@string/cat_editor"
+        android:shortcutShortLabel="@string/cat_editor">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.dede.android_eggs.views.main.EasterEggsActivity"
+            android:targetPackage="com.dede.android_eggs">
+            <extra
+                android:name="extra_static_shortcut_action"
+                android:value="com.dede.android_eggs.action.CAT_EDITOR" />
+        </intent>
+    </shortcut>
+
+</shortcuts>

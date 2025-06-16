@@ -24,13 +24,14 @@ import com.dede.basic.delay
 import com.dede.basic.dp
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.toast
+import kotlin.math.max
 import kotlin.math.min
 
 object EasterEggShortcutsHelp {
 
     private const val EXTRA_SHORTCUT_ID = "extra_shortcut_id"
 
-    private const val DEFAULT_SHORTCUT_COUNT = 3
+    private const val DEFAULT_MAX_SHORTCUT_COUNT = 3
 
     private const val FORMAT_DYNAMIC_SHORTCUT_ID = "dynamic_shortcut_android_%d"
     private const val FORMAT_PIN_SHORTCUT_ID = "android_%d"
@@ -41,12 +42,17 @@ object EasterEggShortcutsHelp {
     ) : Runnable {
 
         override fun run() {
-            val shortcutCount = min(
+            val maxShortcutCount = min(
                 ShortcutManagerCompat.getMaxShortcutCountPerActivity(context),
-                DEFAULT_SHORTCUT_COUNT
+                DEFAULT_MAX_SHORTCUT_COUNT
             )
-            val subEggs = if (eggs.size > shortcutCount) {
-                eggs.subList(0, shortcutCount)
+            val staticShortcuts = ShortcutManagerCompat.getShortcuts(
+                context,
+                ShortcutManagerCompat.FLAG_MATCH_MANIFEST
+            )
+            val dynamicShortcutCount = max(maxShortcutCount - staticShortcuts.size, 0)
+            val subEggs = if (eggs.size > dynamicShortcutCount) {
+                eggs.subList(0, dynamicShortcutCount)
             } else {
                 eggs
             }

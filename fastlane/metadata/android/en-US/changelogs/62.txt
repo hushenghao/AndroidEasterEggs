@@ -4,6 +4,7 @@
 - Add to favorites in Cat Editor
 - Add Bengali translation, Thanks for @ChildishRifty7 's contribution
 - Rocket Launcher add icon collection selection #554
+- Add Cat Editor, Rocket Launcher shortcuts #550
 - Cat Editor bottom menu bar optimization
 - Fix Cat Editor draw problem on Android N #37138664
 - Fix Cat Editor color hvs palette maxWidth #522

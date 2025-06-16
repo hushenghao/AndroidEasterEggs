@@ -1,5 +1,6 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
+import android.content.Context
 import android.content.Intent
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.material.icons.Icons
@@ -27,6 +28,10 @@ import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
 import com.dede.android_eggs.resources.R as StringR
 
+fun launchRocketLauncher(context: Context) {
+    context.startActivity(Intent(context, RocketLauncher::class.java))
+}
+
 @Composable
 fun RocketLauncherPref() {
     val context = LocalContext.current
@@ -38,10 +43,10 @@ fun RocketLauncherPref() {
     ExpandOptionsPref(
         expandedState = expandedState,
         leadingIcon = Icons.Rounded.RocketLaunch,
-        title = stringResource(com.android.launcher2.R.string.dream_name),
+        title = stringResource(com.android.launcher2.R.string.rocket_launcher_dream_name),
         desc = stringResource(com.android.launcher2.R.string.rocket_launcher_desc),
         onClick = {
-            context.startActivity(Intent(context, RocketLauncher::class.java))
+            launchRocketLauncher(context)
         },
         trailingContent = { expanded ->
             val rotate by animateFloatAsState(
