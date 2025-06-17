@@ -3,7 +3,7 @@
 A collection of Android Easter eggs.
 
 [![GitHub license](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache&label=License&style=flat)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/hushenghao/AndroidEasterEggs/total?logo=github&label=Downloads&style=flat)
+![GitHub downloads](https://img.shields.io/github/downloads/hushenghao/AndroidEasterEggs/total?logo=github&label=Downloads&style=flat)
 ![Play Store installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.dede.android_eggs%26l%3DInstalls%26m%3D%24shortinstalls&style=flat&logo=googleplay)
 [![GitHub Pgyer CI status](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/pgyer.yml?logo=github&label=Pgyer%20CI&style=flat)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/pgyer.yml)
 [![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
@@ -16,7 +16,7 @@ A collection of Android Easter eggs.
 
 </div>
 
-This project contains the complete code for all Android Easter eggs, aiming to organize and ensure compatibility with all Android Easter eggs. The goal is to enable most devices to experience different versions of the Easter eggs with minimal modifications to the Easter egg's code. Newer versions use newer system features, while older versions are limited to using only certain features.
+This project contains the complete code for all Android Easter eggs, aiming to organize and ensure compatibility with all Android Easter eggs. The goal is to enable most devices to experience different versions of the Easter eggs with minimal modifications to the Easter egg\'s code. Newer versions can use features from the Android version they were introduced in, while older versions are limited to the features available in their Android versions.
 
 ## Download
 
