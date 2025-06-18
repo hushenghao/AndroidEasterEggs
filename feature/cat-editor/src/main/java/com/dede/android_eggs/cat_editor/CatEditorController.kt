@@ -2,6 +2,7 @@ package com.dede.android_eggs.cat_editor
 
 import android.os.Bundle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
@@ -14,6 +15,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.edit
+import com.dede.android_eggs.cat_editor.CatEditorControllerImpl.SaverImpl.KEY_GRID_VISIBLE
+import com.dede.android_eggs.util.pref
 
 
 internal class CatEditorControllerImpl(private val seed: Long) : CatEditorController {
@@ -27,7 +32,7 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
         private const val KEY_SELECTED_ENABLED = "selected_enabled"
         private const val KEY_SELECTED_PART = "selected_part"
         private const val KEY_GESTURES_ENABLED = "gestures_enabled"
-        private const val KEY_GRID_VISIBLE = "grid_visible"
+        internal const val KEY_GRID_VISIBLE = "cat_editor_grid_visible"// pref key
 
         override fun restore(value: Bundle): CatEditorControllerImpl {
             val seed = value.getLong(KEY_SEED)
@@ -162,7 +167,18 @@ internal interface CatEditorController {
 
 @Composable
 internal fun rememberCatEditorController(seed: Long = Utilities.randomSeed()): CatEditorController {
-    return rememberSaveable(saver = CatEditorControllerImpl.SaverImpl) {
+    val controller = rememberSaveable(saver = CatEditorControllerImpl.SaverImpl) {
         CatEditorControllerImpl(seed)
     }
+    val context = LocalContext.current
+    LaunchedEffect(controller) {
+        controller.isGridVisible =
+            context.pref.getBoolean(KEY_GRID_VISIBLE, controller.isGridVisible)
+    }
+    LaunchedEffect(controller.isGridVisible) {
+        context.pref.edit {
+            putBoolean(KEY_GRID_VISIBLE, controller.isGridVisible)
+        }
+    }
+    return controller
 }

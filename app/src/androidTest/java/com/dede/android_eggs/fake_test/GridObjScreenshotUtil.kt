@@ -29,7 +29,7 @@ import kotlin.math.min
  */
 @org.junit.Ignore("Generate Grid Screenshot picture") // remove this line to run test
 @RunWith(AndroidJUnit4::class)
-class GridScreenshotUtil {
+class GridObjScreenshotUtil {
 
     companion object {
         // Pixel 5

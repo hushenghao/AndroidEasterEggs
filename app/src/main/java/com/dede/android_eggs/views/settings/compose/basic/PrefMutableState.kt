@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.edit
 import com.dede.android_eggs.util.pref
 
 @Composable
@@ -34,7 +35,7 @@ private class PrefMutableBooleanState(
         get() = delegate.value
         set(value) {
             delegate.value = value
-            context.pref.edit().putBoolean(key, value).apply()
+            context.pref.edit { putBoolean(key, value) }
         }
 
     override fun component1(): Boolean {
@@ -61,7 +62,7 @@ private class PrefMutableIntState(
         }
         set(value) {
             delegate.intValue = value
-            context.pref.edit().putInt(key, value).apply()
+            context.pref.edit { putInt(key, value) }
         }
 
     override fun component1(): Int {
