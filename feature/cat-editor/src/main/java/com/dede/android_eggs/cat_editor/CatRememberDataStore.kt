@@ -15,6 +15,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
+import com.dede.android_eggs.cat_editor.Cat.Companion.createCat
 import com.dede.basic.globalContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -27,10 +28,6 @@ object CatRememberDataStore {
     private val db by lazy {
         Room.databaseBuilder<CatRememberDatabase>(globalContext, "cat_remember.db")
             .build()
-    }
-
-    private fun createCat(seed: Long, colors: List<Color>?): Cat {
-        return Cat(0, seed, colors ?: listOf(*CatPartColors.colors(seed)))
     }
 
     suspend fun remember(seed: Long, colors: List<Color>? = null) {
@@ -78,7 +75,13 @@ data class Cat(
     @ColumnInfo(name = "id") val id: Long,
     @ColumnInfo(name = "seed") val seed: Long,
     @ColumnInfo(name = "colors") val colors: List<Color>
-)
+) {
+    companion object {
+        fun createCat(seed: Long, colors: List<Color>?): Cat {
+            return Cat(0, seed, colors ?: listOf(*CatPartColors.colors(seed)))
+        }
+    }
+}
 
 @Dao
 interface CatDao {

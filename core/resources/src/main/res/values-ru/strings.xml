@@ -9,6 +9,7 @@
     <string name="label_beta">Скачать бета-версию</string>
     <string name="label_timeline">Хронология</string>
     <string name="label_privacy_policy">Политика конфиденциальности</string>
+    <string name="label_wiki">Вики</string>
     <string name="label_license">Лицензия</string>
     <string name="label_feedback">Отправить отзыв</string>
     <string name="label_star">Оценить приложение</string>
@@ -47,4 +48,9 @@
     <string name="animator_disabled_alert_message">Из-за того, что системные анимации отключены, некоторые функции могут работать некорректно. Пожалуйста, зайдите в «Настройки разработчика» и включите опцию «Длительность анимации», чтобы активировать анимацию.</string>
     <string name="action_goto_settings">Открыть настройки</string>
     <string name="cat_editor">Редактор кошек</string>
+    <string name="cat_editor_input_seed">Введите кошачье семя</string>
+    <string name="rocket_launcher_easter_egg_icons">Иконки пасхалок</string>
+    <string name="rocket_launcher_all_app_icons">Все иконки приложений</string>
+    <string name="rocket_launcher_all_icons">Все иконки</string>
+    <string name="rocket_launcher_query_all_app_desc">Надо, чтоб получить список получить список всех приложений</string>
 </resources>

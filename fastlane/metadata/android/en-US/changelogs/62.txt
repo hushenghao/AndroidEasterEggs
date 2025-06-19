@@ -1,10 +1,13 @@
+- Add Android 16 Easter Egg 🎉🎉🎉
 - Add Cat Editor seed input #545
+- Add Cat Editor svg export
 - Add to favorites in Cat Editor
 - Add Bengali translation, Thanks for @ChildishRifty7 's contribution
+- Rocket Launcher add icon collection selection #554
+- Add Cat Editor, Rocket Launcher shortcuts #550
 - Cat Editor bottom menu bar optimization
 - Fix Cat Editor draw problem on Android N #37138664
 - Fix Cat Editor color hvs palette maxWidth #522
 - Fix Cat Editor storage permission on Android Q below
-- Update Android Baklava Snapshot background
+- Fix NekoLand safe space #566
 - Upgrade project dependencies
-- Known issue fixes

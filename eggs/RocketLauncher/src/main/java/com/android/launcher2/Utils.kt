@@ -1,42 +1,71 @@
 package com.android.launcher2
 
-import android.Manifest
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
-import androidx.annotation.RequiresPermission
+import android.text.TextUtils
+import androidx.annotation.WorkerThread
+import com.android.launcher2.RocketLauncherPrefUtil.VALUE_ALL_APP_ICONS
+import com.android.launcher2.RocketLauncherPrefUtil.VALUE_ALL_ICONS
+import com.android.launcher2.RocketLauncherPrefUtil.VALUE_EASTER_EGG_ICONS
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.requireDrawable
+import dagger.hilt.android.EntryPointAccessors
 
-object Utils {
+internal object Utils {
 
     @JvmStatic
-    @RequiresPermission(Manifest.permission.QUERY_ALL_PACKAGES)
-    fun queryAllPackagesComponentNameDrawableIcons(context: Context): HashMap<ComponentName, Drawable> {
-        val packageManager = context.packageManager
-        val list = packageManager
-            .getInstalledApplications(PackageManager.GET_ACTIVITIES)
+    @WorkerThread
+    fun getComponentNameDrawableIcons(context: Context): HashMap<ComponentName, Drawable> {
+        val sourceValue = RocketLauncherPrefUtil.getCurrentIconsSourceValue(context)
+        return getComponentNameDrawableIconsBySourceValue(context, sourceValue)
+    }
+
+    private fun getComponentNameDrawableIconsBySourceValue(
+        context: Context, sourceValue: Int
+    ): HashMap<ComponentName, Drawable> {
+        return when (sourceValue) {
+            VALUE_EASTER_EGG_ICONS -> {
+                // Inject in DreamService and Activity
+                val easterEggs = EntryPointAccessors
+                    .fromApplication<RocketLauncherEntryPoint>(context).easterEggs
+                convertComponentNameDrawableIcons(context, easterEggs)
+            }
+            VALUE_ALL_APP_ICONS -> {
+                queryAppLaunchComponentNameDrawableIcons(context)
+            }
+            VALUE_ALL_ICONS -> {
+                HashMap(
+                    getComponentNameDrawableIconsBySourceValue(context, VALUE_EASTER_EGG_ICONS) +
+                            getComponentNameDrawableIconsBySourceValue(context, VALUE_ALL_APP_ICONS)
+                )
+            }
+            else -> throw IllegalStateException("Unknown icons source value: $sourceValue")
+        }
+    }
+
+    private fun queryAppLaunchComponentNameDrawableIcons(context: Context): HashMap<ComponentName, Drawable> {
+        val pm = context.packageManager
+        val intent = Intent(Intent.ACTION_MAIN)
+            .addCategory(Intent.CATEGORY_LAUNCHER)
+        val activities = pm.queryIntentActivities(intent, PackageManager.GET_ACTIVITIES)
         val icons = HashMap<ComponentName, Drawable>()
-        for (info in list) {
-            if (!info.enabled) {
-                continue
-            }
-            val launchComponent = packageManager
-                .getLaunchIntentForPackage(info.packageName)?.component ?: continue
-            val drawable: Drawable
-            try {
-                drawable = packageManager.getApplicationIcon(info.packageName);
-            } catch (ignore: PackageManager.NameNotFoundException) {
-                continue
-            }
-            icons[launchComponent] = drawable;
+        for (info in activities) {
+            val packageName = info?.activityInfo?.packageName
+            if (packageName == null || TextUtils.isEmpty(packageName)) continue
+
+            val launchComponent = pm.getLaunchIntentForPackage(packageName)?.component
+                ?: createNotFoundComponent(context, packageName.hashCode())
+            val drawable = info.loadIcon(pm)
+            icons[launchComponent] = drawable
         }
         return icons
     }
 
     @JvmStatic
-    fun convertComponentNameDrawableIcons(
+    private fun convertComponentNameDrawableIcons(
         context: Context,
         easterEggs: List<EasterEgg>
     ): HashMap<ComponentName, Drawable> {

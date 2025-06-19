@@ -26,8 +26,8 @@ internal fun createAndroidBitmap(size: Size): Bitmap {
     return createBitmap(width, height)
 }
 
-// fix Android N canvas scale
-internal val useAndroidCanvasDraw = Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1
+// fix Android N canvas scale, Android O ???
+internal val useAndroidCanvasDraw = Build.VERSION.SDK_INT <= Build.VERSION_CODES.O_MR1
 
 private val androidPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 

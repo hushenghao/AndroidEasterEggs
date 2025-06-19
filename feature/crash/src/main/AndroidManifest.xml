@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application>
         <activity android:name=".CrashActivity" />
 
@@ -14,6 +16,16 @@
                 android:name="com.dede.android_eggs.crash.GlobalExceptionHandler$Initializer"
                 android:value="androidx.startup" />
         </provider>
+
+        <!-- Send from notification manager -->
+        <receiver
+            android:name=".CrashNotificationActionsReceiver"
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="com.dede.android_eggs.crash.action.COPY" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

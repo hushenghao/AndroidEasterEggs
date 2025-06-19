@@ -7,6 +7,7 @@ import android.os.Looper
 import androidx.core.os.ExecutorCompat
 import androidx.core.os.HandlerCompat
 import java.util.concurrent.Executor
+import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
@@ -28,4 +29,4 @@ val uiExecutor: Executor = ExecutorCompat.create(uiHandler)
 
 //val singleExecutor: Executor = Executors.newSingleThreadExecutor()
 
-val cachedExecutor: Executor = Executors.newCachedThreadPool()
+val cachedExecutor: ExecutorService = Executors.newCachedThreadPool()

@@ -2,7 +2,7 @@ package com.dede.android_eggs.views.settings.compose.basic
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.VisibilityThreshold
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.fadeIn
@@ -29,6 +29,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,42 +41,60 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.util.compose.bottom
 import com.dede.android_eggs.util.compose.top
 
+@Composable
+internal fun ExpandOptionsPrefTrailing(
+    expanded: Boolean,
+    modifier: Modifier = Modifier
+) {
+    val rotate by animateFloatAsState(targetValue = if (expanded) 180f else 0f, label = "Arrow")
+    Box(modifier = Modifier.padding(end = 12.dp)) {
+        Icon(
+            imageVector = Icons.Rounded.KeyboardArrowDown,
+            contentDescription = null,
+            modifier = Modifier
+                .rotate(rotate)
+                .then(modifier)
+        )
+    }
+}
 
 @Composable
 fun ExpandOptionsPref(
+    expandedState: MutableState<Boolean>,
     leadingIcon: ImageVector,
     title: String,
     desc: String? = null,
-    initializeExpanded: Boolean = false,
+    onClick: () -> Unit = {
+        expandedState.value = !expandedState.value
+    },
+    trailingContent: @Composable (expended: Boolean) -> Unit = {
+        ExpandOptionsPrefTrailing(it)
+    },
     options: @Composable ColumnScope.() -> Unit
 ) {
-    var expanded by rememberSaveable { mutableStateOf(initializeExpanded) }
-    val rotate by animateFloatAsState(targetValue = if (expanded) 180f else 0f, label = "Arrow")
     SettingPref(
         leadingIcon = leadingIcon,
         title = title,
         desc = desc,
         trailingContent = {
-            Box(modifier = Modifier.padding(end = 12.dp)) {
-                Icon(
-                    imageVector = Icons.Rounded.KeyboardArrowDown,
-                    contentDescription = null,
-                    modifier = Modifier.rotate(rotate)
-                )
-            }
+            trailingContent(expandedState.value)
         },
-        onClick = {
-            expanded = !expanded
-        },
+        onClick = onClick,
     ) {
         AnimatedVisibility(
-            visible = expanded,
+            visible = expandedState.value,
             enter = slideInVertically() + fadeIn(),
-            exit = shrinkVertically(animationSpec = spring(stiffness = Spring.StiffnessMedium)) + fadeOut(),
+            exit = shrinkVertically(
+                animationSpec = spring(
+                    stiffness = 1200f,
+                    visibilityThreshold = IntSize.VisibilityThreshold
+                )
+            ) + fadeOut(),
         ) {
             Column(
                 modifier = Modifier
@@ -86,6 +105,23 @@ fun ExpandOptionsPref(
             )
         }
     }
+}
+
+@Composable
+fun ExpandOptionsPref(
+    leadingIcon: ImageVector,
+    title: String,
+    desc: String? = null,
+    initializeExpanded: Boolean = false,
+    options: @Composable ColumnScope.() -> Unit
+) {
+    ExpandOptionsPref(
+        expandedState = rememberSaveable { mutableStateOf(initializeExpanded) },
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        options = options
+    )
 }
 
 object OptionShapes {
@@ -149,6 +185,31 @@ fun <T : Any> ValueOption(
     shape: Shape = OptionShapes.defaultShape,
     onOptionClick: (value: T) -> Unit,
     value: T,
+) {
+    Option(
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        trailingContent = trailingContent,
+        shape = shape,
+        onClick = {
+            onOptionClick(value)
+        }
+    )
+}
+
+@Composable
+fun <T : Any> RadioOption(
+    leadingIcon: (@Composable () -> Unit)?,
+    title: String,
+    desc: String? = null,
+    shape: Shape = OptionShapes.defaultShape,
+    value: T,
+    currentValueState: MutableState<T>,
+    onOptionClick: (value: T) -> Unit = {
+        currentValueState.value = value
+    },
+    trailingContent: @Composable () -> Unit = radioButtonBlock(currentValueState.value == value),
 ) {
     Option(
         leadingIcon = leadingIcon,

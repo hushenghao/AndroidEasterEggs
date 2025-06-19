@@ -11,6 +11,7 @@
     <string name="label_beta">Download beta</string>
     <string name="label_timeline">Timeline</string>
     <string name="label_privacy_policy">Privacy policy</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">License</string>
     <string name="label_feedback">Give feedback</string>
     <string name="label_star">Rate app</string>
@@ -56,4 +57,9 @@
 
     <string name="cat_editor">Cat editor</string>
     <string name="cat_editor_input_seed">Input cat\'s seed</string>
+
+    <string name="rocket_launcher_easter_egg_icons">Easter Egg icons</string>
+    <string name="rocket_launcher_all_app_icons">All app icons</string>
+    <string name="rocket_launcher_all_icons">All icons</string>
+    <string name="rocket_launcher_query_all_app_desc">Need to get the list of all applications</string>
 </resources>

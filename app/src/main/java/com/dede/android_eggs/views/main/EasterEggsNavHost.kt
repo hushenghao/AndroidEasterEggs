@@ -30,6 +30,7 @@ import com.dede.android_eggs.views.main.compose.rememberKonfettiState
 import com.dede.android_eggs.views.timeline.TimelineListDialog
 import com.dede.basic.Utils
 
+const val ACTION_CAT_EDITOR = "com.dede.android_eggs.action.CAT_EDITOR"
 
 private const val TRANSITION_DURATION = 400
 
@@ -99,6 +100,10 @@ fun EasterEggsNavHost(
 
         LocalEvent.Receiver(ACTION_SHOE_ANDROID_NEXT_DIALOG) {
             navController.navigate(AndroidNextTimelineDialog.route)
+        }
+
+        LocalEvent.Receiver(ACTION_CAT_EDITOR) {
+            navController.navigate(CatEditorScreen.route)
         }
     }
 }

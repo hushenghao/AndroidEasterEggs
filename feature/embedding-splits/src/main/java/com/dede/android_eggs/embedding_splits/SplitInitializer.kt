@@ -1,11 +1,7 @@
 package com.dede.android_eggs.embedding_splits
 
-import android.annotation.SuppressLint
 import android.content.Context
 import androidx.startup.Initializer
-import androidx.window.WindowSdkExtensions
-import androidx.window.embedding.ActivityEmbeddingController
-import androidx.window.embedding.EmbeddingConfiguration
 import androidx.window.embedding.RuleController
 
 class SplitInitializer : Initializer<Unit> {
@@ -17,16 +13,18 @@ class SplitInitializer : Initializer<Unit> {
             ruleController.setRules(rules)
         } catch (ignore: RuntimeException) {
         }
-
-        @SuppressLint("RequiresWindowSdk")
-        if (WindowSdkExtensions.getInstance().extensionVersion >= 5) {
-            ActivityEmbeddingController.getInstance(context)
-                .setEmbeddingConfiguration(
-                    EmbeddingConfiguration.Builder()
-                        .setDimAreaBehavior(EmbeddingConfiguration.DimAreaBehavior.ON_TASK)
-                        .build()
-                )
-        }
+        // todo
+        //  fix androidx.window:window:1.4.0, release apk crash on android 15,16.
+        //  https://issuetracker.google.com/issues/406691744
+//        @SuppressLint("RequiresWindowSdk")
+//        if (WindowSdkExtensions.getInstance().extensionVersion >= 5) {
+//            ActivityEmbeddingController.getInstance(context)
+//                .setEmbeddingConfiguration(
+//                    EmbeddingConfiguration.Builder()
+//                        .setDimAreaBehavior(EmbeddingConfiguration.DimAreaBehavior.ON_TASK)
+//                        .build()
+//                )
+//        }
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> = emptyList()

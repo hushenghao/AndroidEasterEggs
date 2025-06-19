@@ -2,13 +2,12 @@
 
 package com.dede.android_eggs.cat_editor
 
-import android.graphics.Bitmap
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
@@ -46,13 +45,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.cat_editor.Utilities.asAndroidMatrix
 import com.dede.android_eggs.ui.composes.icons.rounded.Cat
 import kotlinx.coroutines.launch
 
@@ -105,7 +101,7 @@ fun CatRememberBottomSheet(
                 }
             } else {
                 LazyVerticalGrid(
-                    columns = GridCells.Adaptive(80.dp),
+                    columns = GridCells.Adaptive(76.dp),
                     contentPadding = PaddingValues(start = 20.dp, end = 20.dp, bottom = 30.dp),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -116,7 +112,6 @@ fun CatRememberBottomSheet(
                             cat = cat,
                             isDeletedMode = isDeletedMode,
                             modifier = Modifier.animateItem(),
-                            canvasModifier = Modifier.size(66.dp),
                             onClick = {
                                 onCatSelected(cat)
                                 visible = false
@@ -143,7 +138,6 @@ private fun CatItem(
     cat: Cat,
     isDeletedMode: Boolean,
     modifier: Modifier = Modifier,
-    canvasModifier: Modifier = Modifier,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
     onCatDeleteClick: () -> Unit,
@@ -161,44 +155,10 @@ private fun CatItem(
             modifier = Modifier.fillMaxWidth(1f),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val partColorBlend: (index: Int) -> Color = { index ->
-                cat.colors[index]
-            }
-
-            var canvasSize by remember { mutableStateOf(Size.Zero) }
-            val canvasMatrix = remember(canvasSize) { createCanvasMatrix(canvasSize) }
-
-            val bitmap: Bitmap? = remember(canvasSize) {
-                if (useAndroidCanvasDraw) createAndroidBitmap(canvasSize) else null
-            }
-
-            Canvas(
-                contentDescription = stringResource(R.string.label_cat_seed, cat.seed),
-                modifier = Modifier
-                    .then(canvasModifier)
-                    .aspectRatio(1f),
-                onDraw = {
-                    if (size != canvasSize) {
-                        // canvas size changed
-                        canvasSize = size
-                        return@Canvas
-                    }
-
-                    if (useAndroidCanvasDraw && bitmap != null) {
-                        // android canvas draw
-                        androidCanvasDraw(
-                            canvasMatrix.asAndroidMatrix(),
-                            bitmap,
-                            partColorBlend
-                        )
-                    } else {
-                        // compose canvas draw
-                        composeCanvasDraw(
-                            canvasMatrix,
-                            partColorBlend
-                        )
-                    }
-                }
+            Image(
+                modifier = Modifier.aspectRatio(1f),
+                painter = rememberCatPainter(cat),
+                contentDescription = null,
             )
             Text(
                 text = stringResource(R.string.label_cat_seed, cat.seed),

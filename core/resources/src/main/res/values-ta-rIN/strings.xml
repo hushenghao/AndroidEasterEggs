@@ -9,6 +9,7 @@
     <string name="label_beta">பீட்டா பதிப்பு பெறுங்கள்</string>
     <string name="label_timeline">ஓஎஸ் காலவரிசை</string>
     <string name="label_privacy_policy">தனியுரிமை</string>
+    <string name="label_wiki">விக்கி</string>
     <string name="label_license">உரிமம்</string>
     <string name="label_feedback">உங்களின் கருத்து</string>
     <string name="label_star">செயலியை மதிப்பிடவும்</string>
@@ -26,7 +27,7 @@
     <string name="summary_system_default">இயல்புநிலை</string>
     <string name="summary_theme_dark_mode">இருள்</string>
     <string name="summary_theme_light_mode">வெளிர்</string>
-    <string name="summary_theme_amoled_mode">அமொலெட்</string>
+    <string name="summary_theme_amoled_mode">கருப்பு</string>
     <string name="label_add_shortcut">குறுக்குவழி</string>
     <string name="label_donate">நன்கொடையளி</string>
     <string name="preference_on">ஆன்</string>
@@ -44,4 +45,12 @@
     <string name="pref_summary_retain_recent_egg_tasks">சமீபத்திய திரையில் முட்டைப் பணிகளைத் தக்கவைக்கவும், அதிகபட்சம் 5 பணிகள் (உட்பொதிக்கப்பட்ட செயல்பாட்டில் பயன்பாட்டிற்கு இல்லை)</string>
     <string name="label_about">செயலிபற்றி</string>
     <string name="label_contribute">பங்களி</string>
+    <string name="animator_disabled_alert_message">சிஸ்டம் அனிமேஷன் முடக்கப்பட்டுள்ளதால், சில அம்சங்கள் சரியாக வேலை செய்யாமல் போகலாம். அனிமேஷனைச் செயல்படுத்த \"டெவலப்பர் விருப்பங்கள்\" என்பதற்குச் சென்று \"அனிமேட்டர் கால அளவு\" விருப்பத்தை இயக்கவும்.</string>
+    <string name="action_goto_settings">அமைப்புகளுக்குச் செல்லவும்</string>
+    <string name="cat_editor">பூனை எடிட்டர்</string>
+    <string name="cat_editor_input_seed">பூனை விதையை உள்ளிடவும்</string>
+    <string name="rocket_launcher_easter_egg_icons">ஈஸ்டர் முட்டை சின்னங்கள்</string>
+    <string name="rocket_launcher_all_app_icons">அனைத்து பயன்பாட்டு ஐகான்கள்</string>
+    <string name="rocket_launcher_all_icons">அனைத்து ஐகான்கள்</string>
+    <string name="rocket_launcher_query_all_app_desc">அனைத்து செயலியின் பட்டியலையும் பெற வேண்டும்</string>
 </resources>

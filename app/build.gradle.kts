@@ -22,8 +22,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
-        versionCode = 60
-        versionName = "3.5.0"
+        versionCode = 64
+        versionName = "4.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         base.archivesName.set("easter_eggs_${versionName}_${versionCode}")
@@ -77,7 +77,7 @@ android {
         }
         create("beta") {
             dimension = "track"
-            versionNameSuffix = "-beta01"
+            versionNameSuffix = "-beta02"
         }
         create("product") {
             dimension = "track"
@@ -163,6 +163,7 @@ dependencies {
 
     implementation(project(":eggs:RocketLauncher"))
     implementation(project(":eggs:AndroidNext"))
+    implementation(project(":eggs:Baklava"))
     implementation(project(":eggs:VanillaIceCream"))
     implementation(project(":eggs:UpsideDownCake"))
     implementation(project(":eggs:Tiramisu"))

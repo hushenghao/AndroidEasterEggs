@@ -1,17 +1,18 @@
 # Changelog
 
-### v3.5.0
+### v4.0.0 (2025-06-19)
 
+- Add Android 16 Easter Egg 🎉🎉🎉
 - Add Cat Editor seed input [#545](https://github.com/hushenghao/AndroidEasterEggs/issues/545)
+- Add Cat Editor svg export
 - Add to favorites in Cat Editor
 - Add Bengali translation, Thanks for [@ChildishRifty7](https://github.com/childishrifty7) 's contribution
+- Rocket Launcher add icon collection selection [#554](https://github.com/hushenghao/AndroidEasterEggs/issues/554)
+- Add Cat Editor, Rocket Launcher shortcuts [#550](https://github.com/hushenghao/AndroidEasterEggs/issues/550)
 - Cat Editor bottom menu bar optimization
-- Fix Cat Editor draw problem on Android N [#37138664](https://issuetracker.google.com/issues/37138664)
-- Fix Cat Editor color hvs palette maxWidth [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522)
-- Fix Cat Editor storage permission on Android Q below
-- Update Android Baklava Snapshot background
+- Fix Cat Editor problems [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522) [#37138664](https://issuetracker.google.com/issues/37138664)
+- Fix NekoLand safe space [#566](https://github.com/hushenghao/AndroidEasterEggs/issues/566)
 - Upgrade project dependencies
-- Known issue fixes
 
 ### v3.4.0 (2025-04-23)
 

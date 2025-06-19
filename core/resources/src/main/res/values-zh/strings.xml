@@ -9,6 +9,7 @@
     <string name="label_beta">下载Beta版</string>
     <string name="label_timeline">时间线</string>
     <string name="label_privacy_policy">隐私协议</string>
+    <string name="label_wiki">文档</string>
     <string name="label_license">授权协议</string>
     <string name="label_feedback">问题反馈</string>
     <string name="label_star">给个好评</string>
@@ -48,4 +49,8 @@
     <string name="action_goto_settings">去设置</string>
     <string name="cat_editor">Cat Editor</string>
     <string name="cat_editor_input_seed">输入猫种子</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter Egg 图标</string>
+    <string name="rocket_launcher_all_app_icons">所有应用图标</string>
+    <string name="rocket_launcher_all_icons">所有图标</string>
+    <string name="rocket_launcher_query_all_app_desc">需要获取所有应用列表</string>
 </resources>

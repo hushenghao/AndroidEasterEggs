@@ -45,6 +45,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android_s.egg.R;
 import com.android_s.egg.neko.PrefState.PrefsListener;
 import com.dede.basic.ContextExt;
+import com.dede.basic.utils.NekoLandEdgeInsetsUtil;
 import com.dede.basic.utils.ShareCatUtils;
 //import com.android.internal.logging.MetricsLogger;
 
@@ -63,7 +64,7 @@ public class NekoLand extends Activity implements PrefsListener {
 
     private static final int STORAGE_PERM_REQUEST = 123;
 
-    private static boolean CAT_GEN = false;
+    private static final boolean CAT_GEN = false;
     private PrefState mPrefs;
     private CatAdapter mAdapter;
     private Cat mPendingShareCat;
@@ -79,6 +80,7 @@ public class NekoLand extends Activity implements PrefsListener {
             actionBar.setDisplayUseLogoEnabled(false);
             actionBar.setDisplayShowHomeEnabled(true);
         }
+        NekoLandEdgeInsetsUtil.applyWindowInsets(this);
 
         mPrefs = new PrefState(this);
         mPrefs.setListener(this);

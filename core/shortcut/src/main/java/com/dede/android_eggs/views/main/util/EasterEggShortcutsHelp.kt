@@ -24,13 +24,11 @@ import com.dede.basic.delay
 import com.dede.basic.dp
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.toast
-import kotlin.math.min
+import kotlin.math.max
 
 object EasterEggShortcutsHelp {
 
     private const val EXTRA_SHORTCUT_ID = "extra_shortcut_id"
-
-    private const val DEFAULT_SHORTCUT_COUNT = 3
 
     private const val FORMAT_DYNAMIC_SHORTCUT_ID = "dynamic_shortcut_android_%d"
     private const val FORMAT_PIN_SHORTCUT_ID = "android_%d"
@@ -41,33 +39,38 @@ object EasterEggShortcutsHelp {
     ) : Runnable {
 
         override fun run() {
-            val shortcutCount = min(
-                ShortcutManagerCompat.getMaxShortcutCountPerActivity(context),
-                DEFAULT_SHORTCUT_COUNT
+            val maxShortcutCount = ShortcutManagerCompat.getMaxShortcutCountPerActivity(context)
+            val staticShortcuts = ShortcutManagerCompat.getShortcuts(
+                context,
+                ShortcutManagerCompat.FLAG_MATCH_MANIFEST
             )
-            val subEggs = if (eggs.size > shortcutCount) {
-                eggs.subList(0, shortcutCount)
-            } else {
-                eggs
+            val dynamicShortcutCount = max(maxShortcutCount - staticShortcuts.size, 0)
+            val subEggs = ArrayList<EasterEgg>()
+            var index = 0
+            while (dynamicShortcutCount > 0 && subEggs.size < dynamicShortcutCount) {
+                val egg = eggs[index++]
+                if (isSupportShortcut(egg)) {
+                    subEggs.add(egg)
+                }
             }
-            val dynamicShortcuts = ShortcutManagerCompat.getDynamicShortcuts(context)
-            val removeShortcutIds = dynamicShortcuts.map { it.id }.toMutableList()
+
+            val removeShortcutIds =
+                ShortcutManagerCompat.getDynamicShortcuts(context).map { it.id }.toMutableList()
+            val pushShortcuts = ArrayList<ShortcutInfoCompat>()
             for (egg in subEggs) {
                 val shortcutId = FORMAT_DYNAMIC_SHORTCUT_ID.format(egg.apiLevel)
-                for (shortcut in dynamicShortcuts) {
-                    if (shortcutId == shortcut.id) {
-                        removeShortcutIds.remove(shortcut.id)
-                        break
-                    }
-                }
-                if (!isSupportShortcut(egg)) {
-                    continue
-                }
-                val shortcutInfo = createShortcutInfo(context, shortcutId, egg, false)
-                ShortcutManagerCompat.pushDynamicShortcut(context, shortcutInfo)
+                // Don't need remove this shortcut
+                removeShortcutIds.remove(shortcutId)
+
+                pushShortcuts.add(createShortcutInfo(context, shortcutId, egg, false))
             }
+            // Remove shortcuts that are no longer needed
             if (removeShortcutIds.size > 0) {
                 ShortcutManagerCompat.removeDynamicShortcuts(context, removeShortcutIds)
+            }
+            // Add new shortcuts
+            for (shortcut in pushShortcuts) {
+                ShortcutManagerCompat.pushDynamicShortcut(context, shortcut)
             }
         }
     }

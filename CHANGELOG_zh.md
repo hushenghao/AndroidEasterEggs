@@ -1,17 +1,18 @@
 # 更新日志
 
-### v3.5.0
+### v4.0.0 (2025-06-19)
 
+- 新增 Android 16 Easter Egg 🎉🎉🎉
 - 新增 Cat Editor 种子输入 [#545](https://github.com/hushenghao/AndroidEasterEggs/issues/545)
+- 新增 Cat Editor svg 导出
 - 新增 Cat Editor 收藏功能
 - 新增孟加拉语翻译，感谢 [@ChildishRifty7](https://github.com/childishrifty7) 的贡献
+- Rocket Launcher 添加图标集选择 [#554](https://github.com/hushenghao/AndroidEasterEggs/issues/554)
+- 添加 Cat Editor, Rocket Launcher 快捷方式 [#550](https://github.com/hushenghao/AndroidEasterEggs/issues/550)
 - Cat Editor 底部菜单栏优化
-- 修复 Cat Editor 在 Android N 的绘制问题 [#37138664](https://issuetracker.google.com/issues/37138664)
-- 修复 Cat Editor hvs颜色选择器最大宽度 [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522)
-- 修复 Cat Editor 在 Android Q 以下时的存储权限
-- 更新 Android Baklava 快照背景
+- Cat Editor 问题修复 [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522) [#37138664](https://issuetracker.google.com/issues/37138664) 
+- 修复 NekoLand 安全区域 [#566](https://github.com/hushenghao/AndroidEasterEggs/issues/566)
 - 升级项目依赖项
-- 修复已知问题
 
 ### v3.4.0 (2025-04-23)
 

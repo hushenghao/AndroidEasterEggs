@@ -6,4 +6,7 @@
     <include
         domain="file"
         path="androidx.appcompat.app.AppCompatDelegate.application_locales_record_file" />
+    <include
+        domain="database"
+        path="." />
 </full-backup-conten>

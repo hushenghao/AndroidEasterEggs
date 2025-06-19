@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
+import androidx.compose.material.icons.rounded.Code
 import androidx.compose.material.icons.rounded.ContentCopy
 import androidx.compose.material.icons.rounded.Draw
 import androidx.compose.material.icons.rounded.Favorite
@@ -140,6 +141,9 @@ fun CatEditorScreen() {
         }
     }
 
+    val catSvgDialogState = remember { mutableStateOf(false) }
+    var catSvgText by remember { mutableStateOf("") }
+
     val goBackButton: @Composable () -> Unit = {
         IconButton(
             onClick = {
@@ -215,6 +219,17 @@ fun CatEditorScreen() {
             )
         }
     }
+    val svgButton: @Composable () -> Unit = {
+        IconButton(onClick = {
+            catSvgText = CatParts.toSvg(catEditorController.colorList)
+            catSvgDialogState.value = true
+        }) {
+            Icon(
+                imageVector = Icons.Rounded.Code,
+                contentDescription = null
+            )
+        }
+    }
     val inputCatButton: @Composable () -> Unit = {
         IconButton(onClick = { inputSeedDialogState.value = true }) {
             Icon(imageVector = Icons.Rounded.Draw, contentDescription = null)
@@ -258,7 +273,7 @@ fun CatEditorScreen() {
             goBackButton, goNextButton,
             paletteButton, gridButton,
             favoriteButton, saveButton, shareButton,
-            copyButton, inputCatButton, refreshButton,
+            copyButton, svgButton, inputCatButton, refreshButton,
         )
     }
 
@@ -360,6 +375,14 @@ fun CatEditorScreen() {
             CatSeedInputDialog(inputSeedDialogState, onConfirm = { seed ->
                 updateCatSeed(seed)
             })
+
+            CatSvgCodeDialog(
+                catSvgDialogState,
+                cat = remember(catSeed, catEditorController.colorListVersion) {
+                    Cat.createCat(catSeed, catEditorController.colorList)
+                },
+                svg = catSvgText,
+            )
 
             if (bottomButtonCount < menuButtonList.size) {
                 MoreOptionsPopup(
