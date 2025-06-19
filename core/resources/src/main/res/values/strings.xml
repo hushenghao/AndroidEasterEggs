@@ -43,7 +43,7 @@
     <string name="app_widget_description">This is the Easter Eggs analog clock</string>
     <string name="action_agree">I agree</string>
     <string name="summary_browse_privacy_policy">By continuing you agree to Easter Egg's privacy policy</string>
-    <string name="label_welcome">Welcome to Easter Eggs! 🎉🎉🎉</string>
+    <string name="label_welcome">Welcome to Easter Eggs! 🎉</string>
     <string name="label_share">Share</string>
     <string name="label_search_hint">Search…</string>
     <string name="label_component_manager">Components manager</string>
@@ -58,8 +58,8 @@
     <string name="cat_editor">Cat editor</string>
     <string name="cat_editor_input_seed">Input cat\'s seed</string>
 
-    <string name="rocket_launcher_easter_egg_icons">Easter Egg icons</string>
-    <string name="rocket_launcher_all_app_icons">All app icons</string>
-    <string name="rocket_launcher_all_icons">All icons</string>
-    <string name="rocket_launcher_query_all_app_desc">Need to get the list of all applications</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>
