@@ -1,6 +1,6 @@
 # Changelog
 
-### v3.5.0
+### v4.0.0 (2025-06-19)
 
 - Add Android 16 Easter Egg 🎉🎉🎉
 - Add Cat Editor seed input [#545](https://github.com/hushenghao/AndroidEasterEggs/issues/545)

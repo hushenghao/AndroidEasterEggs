@@ -1,6 +1,6 @@
 # 更新日志
 
-### v3.5.0
+### v4.0.0 (2025-06-19)
 
 - 新增 Android 16 Easter Egg 🎉🎉🎉
 - 新增 Cat Editor 种子输入 [#545](https://github.com/hushenghao/AndroidEasterEggs/issues/545)
