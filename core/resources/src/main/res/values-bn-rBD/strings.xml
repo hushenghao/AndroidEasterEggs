@@ -9,6 +9,7 @@
     <string name="label_beta">বেটা ভার্সন ডাউনলোড করুন</string>
     <string name="label_timeline">সময়রেখা</string>
     <string name="label_privacy_policy">গোপনীয়তা নীতি</string>
+    <string name="label_wiki">উইকি</string>
     <string name="label_license">লাইসেন্স</string>
     <string name="label_feedback">মতামত জানান</string>
     <string name="label_star">অ্যাপ নিয়ে রেট করুন</string>
@@ -47,4 +48,9 @@
     <string name="animator_disabled_alert_message">সিস্টেম অ্যানিমেশন অচল থাকার কারণে, কিছু বৈশিষ্ট্য সঠিকভাবে কাজ নাও করতে পারে। অনুগ্রহ করে \"ডেভেলপারের অপশন\" এ যান এবং অ্যানিমেশনটি সক্রিয় করতে \"অ্যানিমেটর ডিউরেশন স্কেল\" অপশনটি চালু করুন।</string>
     <string name="action_goto_settings">সেটিংসে যান</string>
     <string name="cat_editor">বিড়াল সম্পাদক</string>
+    <string name="cat_editor_input_seed">বিড়ালের সিড নাম্বার লিখুন</string>
+    <string name="rocket_launcher_easter_egg_icons">ইস্টার এগ আইকনসমূহ</string>
+    <string name="rocket_launcher_all_app_icons">সকল অ্যাপ আইকন</string>
+    <string name="rocket_launcher_all_icons">সকল আইকন</string>
+    <string name="rocket_launcher_query_all_app_desc">সকল অ্যাপের তালিকা নেওয়া লাগবে</string>
 </resources>
