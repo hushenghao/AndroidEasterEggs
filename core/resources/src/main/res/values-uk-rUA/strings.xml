@@ -9,6 +9,7 @@
     <string name="label_beta">Отримати бета-версію</string>
     <string name="label_timeline">Хронологія</string>
     <string name="label_privacy_policy">Конфіденційність</string>
+    <string name="label_wiki">Вікі</string>
     <string name="label_license">Ліцензія</string>
     <string name="label_feedback">Зворотній зв\'язок</string>
     <string name="label_star">Оцінити додаток</string>
@@ -26,7 +27,7 @@
     <string name="summary_system_default">За замовчуванням</string>
     <string name="summary_theme_dark_mode">Темний</string>
     <string name="summary_theme_light_mode">Світлий</string>
-    <string name="summary_theme_amoled_mode">AMOLED (Насичена)</string>
+    <string name="summary_theme_amoled_mode">AMOLED</string>
     <string name="label_add_shortcut">Ярлик</string>
     <string name="label_donate">Пожертвувати</string>
     <string name="preference_on">Увімкнено</string>
@@ -47,4 +48,9 @@
     <string name="animator_disabled_alert_message">Через те, що системну анімацію вимкнено, деякі функції можуть працювати некоректно. Будь ласка, зайдіть у \"Для розробників\" та увімкніть опцію \"Тривалість анімації\", щоб активувати анімацію.</string>
     <string name="action_goto_settings">Відкрити налаштування</string>
     <string name="cat_editor">Редактор котів</string>
+    <string name="cat_editor_input_seed">Введіть насіння кота</string>
+    <string name="rocket_launcher_easter_egg_icons">Значки Великодніх Яєць</string>
+    <string name="rocket_launcher_all_app_icons">Всі значки програм</string>
+    <string name="rocket_launcher_all_icons">Всі значки</string>
+    <string name="rocket_launcher_query_all_app_desc">Необхідно отримати список всіх програм</string>
 </resources>
