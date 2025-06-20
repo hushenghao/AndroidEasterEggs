@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">بيض عيد الفصح</string>
+    <string name="app_name">Easter Eggs</string>
     <string name="title_open_with">فتح باستخدام</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -9,6 +9,7 @@
     <string name="label_beta">تنزيل النسخة التجريبية</string>
     <string name="label_timeline">الترخيص</string>
     <string name="label_privacy_policy">سياسة الخصوصية</string>
+    <string name="label_wiki">ويكي</string>
     <string name="label_license">الترخيص</string>
     <string name="label_feedback">تقديم ملاحظات</string>
     <string name="label_star">تقييم التطبيق</string>
@@ -32,10 +33,10 @@
     <string name="preference_on">تشغيل</string>
     <string name="preference_off">إيقاف</string>
     <string name="toast_shortcut_added">تم إضافة الاختصار إلى الشاشة الرئيسية.</string>
-    <string name="app_widget_description">هذه هي الساعة التناظرية لبيض عيد الفصح</string>
+    <string name="app_widget_description">هذه هي الساعة التناظرية لـEaster Eggs</string>
     <string name="action_agree">موافق</string>
     <string name="summary_browse_privacy_policy">اقرأ ووافق على سياسة الخصوصية الخاصة بنا للمتابعة.</string>
-    <string name="label_welcome">مرحبًا بك في كتالوج بيض عيد الفصح 🎉🎉🎉</string>
+    <string name="label_welcome">مرحبًا بك في كتالوج Easter Eggs! 🎉🎉🎉</string>
     <string name="label_share">مشاركة</string>
     <string name="label_search_hint">بحث…</string>
     <string name="label_component_manager">مدير المكونات</string>
@@ -47,4 +48,9 @@
     <string name="animator_disabled_alert_message">نظرًا لتعطيل الرسوم المتحركة للنظام، قد لا تعمل بعض الميزات بشكل صحيح. يُرجى الانتقال إلى \"خيارات المطور\" وتمكين خيار \"مقياس مدة الرسوم المتحركة\" لتنشيط الرسوم المتحركة.</string>
     <string name="action_goto_settings">الانتقال إلى الإعدادات</string>
     <string name="cat_editor">محرر القطط</string>
+    <string name="cat_editor_input_seed">إدخال بذور القطة</string>
+    <string name="rocket_launcher_easter_egg_icons">أيقونات Easter Eggs</string>
+    <string name="rocket_launcher_all_app_icons">جميع أيقونات التطبيق</string>
+    <string name="rocket_launcher_all_icons">جميع الأيقونات</string>
+    <string name="rocket_launcher_query_all_app_desc">تحتاج إلى الحصول على قائمة جميع التطبيقات</string>
 </resources>
