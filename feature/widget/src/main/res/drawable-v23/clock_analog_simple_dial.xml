@@ -9,9 +9,9 @@
         android:gravity="center" />
 
     <item
-        android:width="200dp"
-        android:height="200dp"
-        android:drawable="@drawable/ic_platlogo_v"
+        android:width="180dp"
+        android:height="180dp"
+        android:drawable="@drawable/ic_platlogo_baklava"
         android:gravity="center" />
 
     <item
