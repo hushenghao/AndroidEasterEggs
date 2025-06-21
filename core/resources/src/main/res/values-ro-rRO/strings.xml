@@ -9,6 +9,7 @@
     <string name="label_beta">Descarcă versiunea beta</string>
     <string name="label_timeline">Cronologie</string>
     <string name="label_privacy_policy">Politica de confidențialitate</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">Licență</string>
     <string name="label_feedback">Trimite feedback</string>
     <string name="label_star">Evaluează aplicația</string>
@@ -26,7 +27,7 @@
     <string name="summary_system_default">Implicită</string>
     <string name="summary_theme_dark_mode">Întunecată</string>
     <string name="summary_theme_light_mode">Luminoasă</string>
-    <string name="summary_theme_amoled_mode">Amoled</string>
+    <string name="summary_theme_amoled_mode">Negru</string>
     <string name="label_add_shortcut">Comandă rapidă</string>
     <string name="label_donate">Donează</string>
     <string name="preference_on">Pornit</string>
