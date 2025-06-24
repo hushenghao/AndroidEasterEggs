@@ -1,0 +1,1 @@
+- Fix Android Q Easter Egg 'one' text rotation animation #587

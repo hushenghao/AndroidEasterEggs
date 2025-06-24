@@ -1,5 +1,9 @@
 # 更新日志
 
+### v4.0.1
+
+- 修复 Android Q 彩蛋文字“1”旋转动画 [#587](https://github.com/hushenghao/AndroidEasterEggs/issues/587)
+
 ### v4.0.0 (2025-06-19)
 
 - 新增 Android 16 Easter Egg 🎉🎉🎉

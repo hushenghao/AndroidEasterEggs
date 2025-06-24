@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.0.1
+
+- Fix Android Q Easter Egg 'one' text rotation animation [#587](https://github.com/hushenghao/AndroidEasterEggs/issues/587)
+
 ### v4.0.0 (2025-06-19)
 
 - Add Android 16 Easter Egg 🎉🎉🎉
