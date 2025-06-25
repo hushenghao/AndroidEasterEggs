@@ -7,6 +7,7 @@ on:
       - 'app/src/main/res/values*/languages.xml'
       - 'core/resources/src/main/res/values*/strings*.xml'
       - 'eggs/AndroidNext/src/main/res/values*/strings*.xml'
+      - 'eggs/RockedLauncher/src/main/res/values*/strings*.xml'
       - 'crowdin.yml'
     branches: [ main ]
   schedule:
