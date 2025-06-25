@@ -3,6 +3,7 @@
 ### v4.0.1
 
 - 修复 Android Q 彩蛋文字“1”旋转动画 [#587](https://github.com/hushenghao/AndroidEasterEggs/issues/587)
+- 修复 Android 16 彩蛋在 Android 8.1 系统获取甜点代码崩溃 [#597](https://github.com/hushenghao/AndroidEasterEggs/issues/597)
 
 ### v4.0.0 (2025-06-19)
 

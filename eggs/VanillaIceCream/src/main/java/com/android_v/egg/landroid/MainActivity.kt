@@ -17,7 +17,6 @@
 package com.android_v.egg.landroid
 
 import android.content.res.Resources
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -74,6 +73,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.window.layout.FoldingFeature
 import androidx.window.layout.WindowInfoTracker
+import com.dede.basic.utils.DessertUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.lang.Float.max
 import java.lang.Float.min
 import java.util.Calendar
@@ -82,9 +85,6 @@ import kotlin.math.absoluteValue
 import kotlin.math.floor
 import kotlin.math.sqrt
 import kotlin.random.Random
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 enum class RandomSeedType {
     Fixed,
@@ -119,29 +119,29 @@ fun randomSeed(): Long {
     }.absoluteValue
 }
 
-fun getDessertCode(): String =
-    when (Build.VERSION.SDK_INT) {
-        Build.VERSION_CODES.LOLLIPOP -> "LMP"
-        Build.VERSION_CODES.LOLLIPOP_MR1 -> "LM1"
-        Build.VERSION_CODES.M -> "MNC"
-        Build.VERSION_CODES.N -> "NYC"
-        Build.VERSION_CODES.N_MR1 -> "NM1"
-        Build.VERSION_CODES.O -> "OC"
-        Build.VERSION_CODES.O_MR1 -> "OC1"
-        Build.VERSION_CODES.P -> "PIE"
-        Build.VERSION_CODES.Q -> "QT"
-        Build.VERSION_CODES.R -> "RVC"
-        Build.VERSION_CODES.S -> "SC"
-        Build.VERSION_CODES.S_V2 -> "SC2"
-        Build.VERSION_CODES.TIRAMISU -> "TM"
-        Build.VERSION_CODES.UPSIDE_DOWN_CAKE -> "UDC"
-        Build.VERSION_CODES.VANILLA_ICE_CREAM -> "VIC"
-        else -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            Build.VERSION.RELEASE_OR_CODENAME.replace(Regex("[a-z]*"), "")
-        } else {
-            throw IllegalStateException("getDessertCode, Build SDK: %d".format(Build.VERSION.SDK_INT))
-        }
-    }
+fun getDessertCode(): String = DessertUtils.getDessertCode()
+//    when (Build.VERSION.SDK_INT) {
+//        Build.VERSION_CODES.LOLLIPOP -> "LMP"
+//        Build.VERSION_CODES.LOLLIPOP_MR1 -> "LM1"
+//        Build.VERSION_CODES.M -> "MNC"
+//        Build.VERSION_CODES.N -> "NYC"
+//        Build.VERSION_CODES.N_MR1 -> "NM1"
+//        Build.VERSION_CODES.O -> "OC"
+//        Build.VERSION_CODES.O_MR1 -> "OC1"
+//        Build.VERSION_CODES.P -> "PIE"
+//        Build.VERSION_CODES.Q -> "QT"
+//        Build.VERSION_CODES.R -> "RVC"
+//        Build.VERSION_CODES.S -> "SC"
+//        Build.VERSION_CODES.S_V2 -> "SC2"
+//        Build.VERSION_CODES.TIRAMISU -> "TM"
+//        Build.VERSION_CODES.UPSIDE_DOWN_CAKE -> "UDC"
+//        Build.VERSION_CODES.VANILLA_ICE_CREAM -> "VIC"
+//        else -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            Build.VERSION.RELEASE_OR_CODENAME.replace(Regex("[a-z]*"), "")
+//        } else {
+//            throw IllegalStateException("getDessertCode, Build SDK: %d".format(Build.VERSION.SDK_INT))
+//        }
+//    }
 
 
 val DEBUG_TEXT = mutableStateOf("Hello Universe")
