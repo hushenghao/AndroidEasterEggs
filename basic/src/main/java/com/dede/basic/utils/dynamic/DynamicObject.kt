@@ -53,6 +53,10 @@ class DynamicResult private constructor(
         return error != null
     }
 
+    fun isSuccess(): Boolean {
+        return !isNotFound() && !isError()
+    }
+
     companion object {
 
         private val NOT_FOUND_VALUE = Any()

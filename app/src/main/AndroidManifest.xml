@@ -48,6 +48,7 @@
             android:name=".views.main.EasterEggsActivity"
             android:exported="true"
             android:launchMode="singleTask"
+            android:theme="@style/Theme.EasterEggs.Starting"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

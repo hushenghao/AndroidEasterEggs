@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
 import com.dede.android_eggs.inject.FlavorFeatures
+import com.dede.android_eggs.util.setupSplashScreen
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.IntentHandler
 import com.dede.android_eggs.views.theme.EasterEggsTheme
@@ -29,6 +30,7 @@ class EasterEggsActivity : AppCompatActivity() {
     lateinit var intentHandler: IntentHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setupSplashScreen()
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
