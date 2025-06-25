@@ -36,7 +36,7 @@
     <string name="app_widget_description">这是 Easter Eggs 模拟时钟</string>
     <string name="action_agree">同意</string>
     <string name="summary_browse_privacy_policy">请阅读并同意我们的隐私政策。</string>
-    <string name="label_welcome">欢迎使用 Easter Egg Catalogs 🎉🎉🎉</string>
+    <string name="label_welcome">欢迎使用 Easter Eggs 🎉🎉🎉</string>
     <string name="label_share">分享</string>
     <string name="label_search_hint">搜索…</string>
     <string name="label_component_manager">组件管理器</string>
@@ -47,6 +47,7 @@
     <string name="label_contribute">参与贡献</string>
     <string name="animator_disabled_alert_message">由于系统动画被禁用，可能导致一些功能无法正常使用。请进入“开发者选项”并启用“Animator 时长缩放”选项以开启动画。</string>
     <string name="action_goto_settings">去设置</string>
+    <string name="action_dont_show_again">不再提示</string>
     <string name="cat_editor">猫咪编辑器</string>
     <string name="cat_editor_input_seed">输入猫咪种子</string>
     <string name="rocket_launcher_easter_egg_icons">Easter Egg 图标</string>

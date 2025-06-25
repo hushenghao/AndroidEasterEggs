@@ -103,7 +103,9 @@ fun EasterEggScreen(
             navController.navigate(WelcomeDialog.route)
         }
 
-        if (!Utils.areAnimatorEnabled(context)) {
+        if (!AnimatorDisabledAlertDialog.isDontShowAgain(context) &&
+            !Utils.areAnimatorEnabled(context)
+        ) {
             navController.navigate(AnimatorDisabledAlertDialog.route)
         }
     }
