@@ -1,3 +1,3 @@
-- Add SplashScreen support Android 12 below
+- Add SplashScreen support Android 12 below system
 - Fix Android Q Easter Egg 'one' text rotation animation #587
 - Fix Android 16 Easter Egg get dessert code crash on Android 8.1 #597
