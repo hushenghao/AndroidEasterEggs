@@ -16,7 +16,7 @@ A collection of Android Easter eggs.
 
 </div>
 
-This project contains the complete code for all Android Easter eggs, aiming to organize and ensure compatibility with all Android Easter eggs. The goal is to enable most devices to experience different versions of the Easter eggs with minimal modifications to the Easter egg\'s code. Newer versions can use features from the Android version they were introduced in, while older versions are limited to the features available in their Android versions.
+This project contains the complete code for all Android Easter eggs, aiming to organize and ensure compatibility with all Android Easter eggs. The goal is to enable most devices to experience different versions of the Easter eggs with minimal modifications to the Easter egg\'s code.
 
 ## Download
 
