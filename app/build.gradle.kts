@@ -22,8 +22,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
-        versionCode = 64
-        versionName = "4.0.0"
+        versionCode = 65
+        versionName = "4.0.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         base.archivesName.set("easter_eggs_${versionName}_${versionCode}")
@@ -123,7 +123,7 @@ dependencies {
     implementation(libs.androidx.viewmodel)
     implementation(libs.androidx.livedata)
     implementation(libs.androidx.startup)
-
+    implementation(libs.androidx.splashscreen)
     implementation(libs.androidx.compose.activity)
     implementation(libs.androidx.compose.lifecycle)
     implementation(libs.androidx.compose.viewmodel)

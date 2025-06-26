@@ -1,0 +1,3 @@
+- SplashScreen 支持 Android 12 以下系统
+- 修复 Android Q 彩蛋文字“1”旋转动画 #587
+- 修复 Android 16 彩蛋在 Android 8.1 系统获取甜点代码崩溃 #597

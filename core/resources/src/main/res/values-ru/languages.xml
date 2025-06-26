@@ -34,4 +34,5 @@
     <string name="locale_lang_ro">Румынский</string>
     <string name="locale_lang_sv_SE">Шведский</string>
     <string name="locale_lang_my_MM">Бирманский</string>
+    <string name="locale_lang_bn_BD">Бенгальский</string>
 </resources>

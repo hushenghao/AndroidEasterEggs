@@ -140,8 +140,9 @@ public class PlatLogoActivity extends Activity {
                 return true;
             }
         };
+        View.OnTouchListener oneTl = new OffsetRotationAnimatorTouchListener(315f, this::testOverlap);
 
-        findViewById(R.id.one).setOnTouchListener(tl);
+        findViewById(R.id.one).setOnTouchListener(oneTl);
         findViewById(R.id.zero).setOnTouchListener(tl);
         findViewById(R.id.text).setOnTouchListener(tl);
     }

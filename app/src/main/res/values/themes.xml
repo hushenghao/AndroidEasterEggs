@@ -1,11 +1,21 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.EasterEggs" parent="Theme.AppColors">
-        <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
-            animated drawable. One of these is required. -->
-        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">
-            @drawable/avd_anim_baklava_platlogo
-        </item>
-        <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">600</item>
+<resources>
+
+    <!-- https://developer.android.google.cn/develop/ui/views/launch/splash-screen?hl=zh-cn#splash-screen-animate-reqs -->
+    <style name="Theme.EasterEggs.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background, animated icon, and animation
+        duration. -->
+        <item name="windowSplashScreenBackground">@color/md_theme_background</item>
+        <!-- Use windowSplashScreenAnimatedIcon to add a drawable or an animated
+             drawable. One of these is required. -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/avd_anim_baklava_platlogo</item>
+        <!-- Required for animated icons. -->
+        <item name="windowSplashScreenAnimationDuration">600</item>
+        <!-- Set the theme of the Activity that directly follows your splash
+        screen. This is required. -->
+        <item name="postSplashScreenTheme">@style/Theme.EasterEggs</item>
     </style>
+
+    <!-- Base application theme. -->
+    <style name="Theme.EasterEggs" parent="Theme.AppColors" />
+
 </resources>

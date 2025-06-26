@@ -48,9 +48,9 @@
     <string name="animator_disabled_alert_message">Из-за того, что системные анимации отключены, некоторые функции могут работать некорректно. Пожалуйста, зайдите в «Настройки разработчика» и включите опцию «Длительность анимации», чтобы активировать анимацию.</string>
     <string name="action_goto_settings">Открыть настройки</string>
     <string name="cat_editor">Редактор кошек</string>
-    <string name="cat_editor_input_seed">Введите кошачье семя</string>
-    <string name="rocket_launcher_easter_egg_icons">Иконки пасхалок</string>
-    <string name="rocket_launcher_all_app_icons">Все иконки приложений</string>
-    <string name="rocket_launcher_all_icons">Все иконки</string>
-    <string name="rocket_launcher_query_all_app_desc">Надо, чтоб получить список получить список всех приложений</string>
+    <string name="cat_editor_input_seed">Введите семя (сид) кошки</string>
+    <string name="rocket_launcher_easter_egg_icons">Значки пасхальных яиц</string>
+    <string name="rocket_launcher_all_app_icons">Значки всех приложений</string>
+    <string name="rocket_launcher_all_icons">Все значки</string>
+    <string name="rocket_launcher_query_all_app_desc">Нужно получить список всех приложений</string>
 </resources>

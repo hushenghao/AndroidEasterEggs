@@ -1,5 +1,6 @@
 package com.dede.android_eggs.views.main.compose
 
+import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,7 +14,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.edit
 import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.util.pref
 import com.dede.basic.Utils
 import com.dede.basic.toast
 import com.dede.android_eggs.resources.R as StringsR
@@ -21,6 +24,16 @@ import com.dede.android_eggs.resources.R as StringsR
 
 object AnimatorDisabledAlertDialog : EasterEggsDestination {
     override val route: String = "animator_disabled_alert_dialog"
+
+    private const val PREF_DONT_SHOW_AGAIN = "animator_disabled_alert_dialog_dont_show_again"
+
+    fun isDontShowAgain(context: Context): Boolean {
+        return context.pref.getBoolean(PREF_DONT_SHOW_AGAIN, false)
+    }
+
+    fun setDontShowAgain(context: Context) {
+        context.pref.edit { putBoolean(PREF_DONT_SHOW_AGAIN, true) }
+    }
 }
 
 @Composable
@@ -43,8 +56,11 @@ fun AnimatorDisabledAlertDialog(onDismiss: () -> Unit = {}) {
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text(text = stringResource(android.R.string.cancel))
+            TextButton(onClick = {
+                AnimatorDisabledAlertDialog.setDontShowAgain(context)
+                onDismiss()
+            }) {
+                Text(text = stringResource(StringsR.string.action_dont_show_again))
             }
         },
         confirmButton = {
