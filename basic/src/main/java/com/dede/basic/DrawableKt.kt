@@ -155,7 +155,7 @@ private fun installApi24InflateDelegates() {
     // vector, VdcInflateDelegate
     addDelegate("vector", "Vdc")
     // animated-vector, AvdcInflateDelegate
-    addDelegate("animated-vector", "Avdc")
+    addDelegate("animated-vector", "Avdc")// ??? android N AnimatedVectorDrawableCompat can't play
     // animated-selector, AsldcInflateDelegate
     addDelegate("animated-selector", "Asldc")
 

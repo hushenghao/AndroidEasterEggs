@@ -81,6 +81,7 @@ private fun Drawable.setAnimationEndCallback(defaultDuration: Long, callback: ()
             }
         })
     } else {
+        // android.graphics.drawable.Animatable without callback support
         delay(defaultDuration) {
             callback()
         }
