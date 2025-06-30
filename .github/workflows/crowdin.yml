@@ -57,6 +57,15 @@ jobs:
           upload_sources: false
           upload_translations: false
           download_translations: true
+
+          create_pull_request: true
+          localization_branch_name: l10n_crowdin_translations
+          pull_request_title: 'feat: New Crowdin translations'
+          pull_request_body: 'New Crowdin pull request with translations 🚀'
+          commit_message: "feat: New translations from Crowdin"
+          pull_request_base_branch_name: 'main'
+          pull_request_labels: 'translations, enhancement'
+          pull_request_assignees: 'crowdin-bot'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
