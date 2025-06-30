@@ -9,6 +9,7 @@
     <string name="label_beta">Preuzmi betu</string>
     <string name="label_timeline">Vremenska crta</string>
     <string name="label_privacy_policy">Privatnost</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">Licencija</string>
     <string name="label_feedback">Povratne informacije</string>
     <string name="label_star">Ocijeni</string>
@@ -26,7 +27,7 @@
     <string name="summary_system_default">Zadano</string>
     <string name="summary_theme_dark_mode">Tamno</string>
     <string name="summary_theme_light_mode">Svijetlo</string>
-    <string name="summary_theme_amoled_mode">Amoled</string>
+    <string name="summary_theme_amoled_mode">Crna</string>
     <string name="label_add_shortcut">Prečac</string>
     <string name="label_donate">Doniraj</string>
     <string name="preference_on">Uključeno</string>
@@ -46,4 +47,11 @@
     <string name="label_contribute">Doprinesi</string>
     <string name="animator_disabled_alert_message">Neke značajke možda neće ispravno raditi jer su isključene animacije sustava. Idite u \"Razvojne opcije\" i omogućite postavku \"Animator duration scale\" kako bi se aktivirale animacije.</string>
     <string name="action_goto_settings">Idi u Postavke</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
+    <string name="cat_editor">Cat editor</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

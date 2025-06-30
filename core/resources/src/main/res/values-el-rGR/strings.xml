@@ -47,6 +47,7 @@
     <string name="label_contribute">Συνεισφορά</string>
     <string name="animator_disabled_alert_message">Λόγω της απενεργοποίησης της κινούμενων εικόνων του συστήματος, ορισμένες λειτουργίες ενδέχεται να μη λειτουργούν σωστά. Μεταβείτε στις \"Επιλογές προγραμματιστή\" και ενεργοποιήστε την επιλογή \"Κλίμακα διάρκειας Animator\" για να ενεργοποιήσετε την κινούμενη εικόνα.</string>
     <string name="action_goto_settings">Μετάβαση στις Ρυθμίσεις</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
     <string name="cat_editor">Επεξεργαστής γάτας</string>
     <string name="cat_editor_input_seed">Εισαγωγή κωδικού γάτας</string>
     <string name="rocket_launcher_easter_egg_icons">Εικονίδια των Πασχαλινών Αυγών</string>

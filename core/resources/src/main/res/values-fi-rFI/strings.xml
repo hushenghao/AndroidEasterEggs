@@ -4,13 +4,17 @@
     <string name="title_open_with">Avaa sovelluksessa</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Source code</string>
     <string name="label_translation">Käännös</string>
     <string name="label_beta">Hanki Beta</string>
     <string name="label_timeline">Aikajana</string>
     <string name="label_privacy_policy">Yksityisyys</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">Lisenssi</string>
     <string name="label_feedback">Palaute</string>
     <string name="label_star">Tähti</string>
+    <string name="label_contact_me">Contact me</string>
+    <string name="label_email_title">Email</string>
     <string name="message_trypophobia_warning">Tämä on varoitus niille, joilla on &lt;b&gt;trypofobia&lt;/b&gt;, että jotkut kuvat voivat aiheuttaa epämukavuutta. Haluatko jatkaa?</string>
     <string name="label_settings">Asetukset</string>
     <string name="label_project_desc">Projekti sisältää pääsiäismunien järjestelmän täydellisen koodin, jonka tavoitteena on organisoida ja yhteensopiva järjestelmämunien kanssa niin, että useimmat laitteet voivat kokea pääsiäismunien eri versioita, eivätkä tee liikaa muutoksia järjestelmän munakoodiin. Jotkut versiot käyttävät järjestelmän uusia ominaisuuksia ja alemmissa versioissa vain joitain toimintoja.</string>
@@ -23,6 +27,7 @@
     <string name="summary_system_default">Oletus</string>
     <string name="summary_theme_dark_mode">Tumma</string>
     <string name="summary_theme_light_mode">Vaalea</string>
+    <string name="summary_theme_amoled_mode">Black</string>
     <string name="label_add_shortcut">Pikakuvake</string>
     <string name="label_donate">Lahjoita</string>
     <string name="preference_on">Päällä</string>
@@ -34,4 +39,19 @@
     <string name="label_welcome">Tervetuloa pääsiäismunaluetteloihin 🎉🎉🎉</string>
     <string name="label_share">Jaa</string>
     <string name="label_search_hint">Haku…</string>
+    <string name="label_component_manager">Components manager</string>
+    <string name="pref_more_settings">More settings</string>
+    <string name="pref_retain_recent_egg_tasks">Retain Easter egg tasks</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Retain Easter egg tasks on Recents screen. Up to 5 can be retained. Not available for the activity embedded mode</string>
+    <string name="label_about">About</string>
+    <string name="label_contribute">Contribute</string>
+    <string name="animator_disabled_alert_message">Due to the system animations being disabled, some features may not work properly. Please go to \"Developer options\" and set the \"Animator duration scale\" option to activate the animations</string>
+    <string name="action_goto_settings">Go to settings</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
+    <string name="cat_editor">Cat editor</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

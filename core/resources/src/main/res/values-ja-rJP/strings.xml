@@ -9,6 +9,7 @@
     <string name="label_beta">ベータ版を入手</string>
     <string name="label_timeline">OSの歴史</string>
     <string name="label_privacy_policy">プライバシー</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">ライセンス</string>
     <string name="label_feedback">フィードバック</string>
     <string name="label_star">アプリを評価</string>
@@ -46,4 +47,13 @@
     <string name="pref_summary_retain_recent_egg_tasks">最後に使われた5つのイースターエッグの状態を保持します。(埋め込みモードでは利用できません)</string>
     <string name="label_about">情報</string>
     <string name="label_contribute">開発を手伝う</string>
+    <string name="animator_disabled_alert_message">Due to the system animations being disabled, some features may not work properly. Please go to \"Developer options\" and set the \"Animator duration scale\" option to activate the animations</string>
+    <string name="action_goto_settings">Go to settings</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
+    <string name="cat_editor">Cat editor</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

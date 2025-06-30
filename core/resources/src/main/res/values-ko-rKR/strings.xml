@@ -9,6 +9,7 @@
     <string name="label_beta">베타 받기</string>
     <string name="label_timeline">타임라인</string>
     <string name="label_privacy_policy">개인정보</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">라이선스</string>
     <string name="label_feedback">피드백</string>
     <string name="label_star">별점</string>
@@ -26,7 +27,7 @@
     <string name="summary_system_default">기본</string>
     <string name="summary_theme_dark_mode">다크</string>
     <string name="summary_theme_light_mode">라이트</string>
-    <string name="summary_theme_amoled_mode">Amoled</string>
+    <string name="summary_theme_amoled_mode">검은색</string>
     <string name="label_add_shortcut">바로가기</string>
     <string name="label_donate">기부</string>
     <string name="preference_on">켜기</string>
@@ -46,5 +47,11 @@
     <string name="label_contribute">기여하기</string>
     <string name="animator_disabled_alert_message">시스템 애니메이션이 비활성화되어 일부 기능이 제대로 작동하지 않을 수 있습니다. \"개발자 옵션\"으로 이동하여 \"Animator 길이 배율\" 옵션을 활성화하여 애니메이션을 활성화하세요.</string>
     <string name="action_goto_settings">설정으로 이동</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
     <string name="cat_editor">고양이 편집기</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

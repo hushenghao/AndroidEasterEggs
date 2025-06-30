@@ -47,6 +47,7 @@
     <string name="label_contribute">Допомогти автору</string>
     <string name="animator_disabled_alert_message">Через те, що системну анімацію вимкнено, деякі функції можуть працювати некоректно. Будь ласка, зайдіть у \"Для розробників\" та увімкніть опцію \"Тривалість анімації\", щоб активувати анімацію.</string>
     <string name="action_goto_settings">Відкрити налаштування</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
     <string name="cat_editor">Редактор котів</string>
     <string name="cat_editor_input_seed">Введіть насіння кота</string>
     <string name="rocket_launcher_easter_egg_icons">Значки Великодніх Яєць</string>

@@ -33,4 +33,6 @@
     <string name="locale_lang_ta">Tamil</string>
     <string name="locale_lang_ro">Rumeno</string>
     <string name="locale_lang_sv_SE">Svedese</string>
+    <string name="locale_lang_my_MM">Burmese</string>
+    <string name="locale_lang_bn_BD">Bengali</string>
 </resources>

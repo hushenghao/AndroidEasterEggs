@@ -17,7 +17,7 @@
     <string name="label_email_title">Эл. почта</string>
     <string name="message_trypophobia_warning">Это предупреждение для людей с &lt;b&gt;трипофобией&lt;/b&gt; о том, что некоторые изображения могут вызывать дискомфорт. Вы всё равно хотите продолжить?</string>
     <string name="label_settings">Настройки</string>
-    <string name="label_project_desc">Данный проект содержит весь код системных пасхальных яиц, целью которого является организация и совместимость с различными версиями системных пасхальных яиц. Это гарантирует, что на большинстве устройств можно наслаждаться пасхальными яйцами из разных систем, не требуя значительных изменений кода пасхального яйца. В некоторых версиях используются новые системные функции, в то время как более старые версии могут иметь доступ только к некоторым определённым функциям.</string>
+    <string name="label_project_desc">Данный проект содержит весь код системных пасхалок, целью которого является организация и совместимость с различными версиями системных пасхалок. Это гарантирует, что на большинстве устройств можно наслаждаться пасхалками из разных систем, не требуя значительных изменений кода пасхалки. В некоторых версиях используются новые системные функции, в то время как более старые версии могут иметь доступ только к некоторым определённым функциям.</string>
     <string name="pref_title_icon_shape_override">Форма значков</string>
     <string name="pref_title_language">Язык</string>
     <string name="pref_title_language_more">Ещё</string>
@@ -27,7 +27,7 @@
     <string name="summary_system_default">По умолчанию</string>
     <string name="summary_theme_dark_mode">Тёмная</string>
     <string name="summary_theme_light_mode">Светлая</string>
-    <string name="summary_theme_amoled_mode">AMOLED</string>
+    <string name="summary_theme_amoled_mode">Черный</string>
     <string name="label_add_shortcut">Ярлык</string>
     <string name="label_donate">Пожертвование</string>
     <string name="preference_on">Вкл.</string>
@@ -47,6 +47,7 @@
     <string name="label_contribute">Внести вклад</string>
     <string name="animator_disabled_alert_message">Из-за того, что системные анимации отключены, некоторые функции могут работать некорректно. Пожалуйста, зайдите в «Настройки разработчика» и включите опцию «Длительность анимации», чтобы активировать анимацию.</string>
     <string name="action_goto_settings">Открыть настройки</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
     <string name="cat_editor">Редактор кошек</string>
     <string name="cat_editor_input_seed">Введите семя (сид) кошки</string>
     <string name="rocket_launcher_easter_egg_icons">Значки пасхальных яиц</string>

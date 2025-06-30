@@ -47,6 +47,7 @@
     <string name="label_contribute">பங்களி</string>
     <string name="animator_disabled_alert_message">சிஸ்டம் அனிமேஷன் முடக்கப்பட்டுள்ளதால், சில அம்சங்கள் சரியாக வேலை செய்யாமல் போகலாம். அனிமேஷனைச் செயல்படுத்த \"டெவலப்பர் விருப்பங்கள்\" என்பதற்குச் சென்று \"அனிமேட்டர் கால அளவு\" விருப்பத்தை இயக்கவும்.</string>
     <string name="action_goto_settings">அமைப்புகளுக்குச் செல்லவும்</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
     <string name="cat_editor">பூனை எடிட்டர்</string>
     <string name="cat_editor_input_seed">பூனை விதையை உள்ளிடவும்</string>
     <string name="rocket_launcher_easter_egg_icons">ஈஸ்டர் முட்டை சின்னங்கள்</string>
