@@ -9,6 +9,7 @@
     <string name="label_beta">Pobierz wersję beta</string>
     <string name="label_timeline">Oś czasu</string>
     <string name="label_privacy_policy">Polityka prywatności</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">Licencja</string>
     <string name="label_feedback">Przekaż opinię</string>
     <string name="label_star">Oceń aplikację</string>
@@ -26,7 +27,7 @@
     <string name="summary_system_default">Domyślny</string>
     <string name="summary_theme_dark_mode">Ciemny</string>
     <string name="summary_theme_light_mode">Jasny</string>
-    <string name="summary_theme_amoled_mode">AMOLED</string>
+    <string name="summary_theme_amoled_mode">Czarny</string>
     <string name="label_add_shortcut">Skrót</string>
     <string name="label_donate">Wesprzyj</string>
     <string name="preference_on">Wł.</string>
@@ -46,5 +47,11 @@
     <string name="label_contribute">Wspomóż</string>
     <string name="animator_disabled_alert_message">Z powodu wyłączenia animacji systemowych niektóre funkcje mogą nie działać poprawnie. Przejdź do \"Opcji programisty\" i włącz opcję \"Skala długości animacji\", aby aktywować animacje.</string>
     <string name="action_goto_settings">Przejdź do ustawień</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
     <string name="cat_editor">Edytor kota</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

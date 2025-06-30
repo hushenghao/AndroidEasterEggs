@@ -4,13 +4,17 @@
     <string name="title_open_with">ເປີດດ້ວຍ</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Source code</string>
     <string name="label_translation">ການແປ</string>
     <string name="label_beta">ຮັບເບຕ້າ</string>
     <string name="label_timeline">ທາມລາຍ</string>
     <string name="label_privacy_policy">ຄວາມເປັນສ່ວນຕົວ</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">ໃບອະນຸຍາດ</string>
     <string name="label_feedback">ຄໍາຕິຊົມ</string>
     <string name="label_star">ດາວ</string>
+    <string name="label_contact_me">Contact me</string>
+    <string name="label_email_title">Email</string>
     <string name="message_trypophobia_warning">ນີ້ແມ່ນການເຕືອນໄພໃຫ້ກັບຜູ້ທີ່ມີ &lt;b&gt;Trypophobia&lt;/b&gt; ວ່າບາງຮູບພາບອາດຈະເຮັດໃຫ້ເກີດຄວາມບໍ່ສະບາຍ. ທ່ານຕ້ອງການສືບຕໍ່ບໍ?</string>
     <string name="label_settings">ການຕັ້ງຄ່າ</string>
     <string name="label_project_desc">ໂຄງ​ການ​ນີ້​ປະ​ກອບ​ດ້ວຍ​ລະ​ຫັດ​ທີ່​ສົມ​ບູນ​ຂອງ​ໄຂ່ Easter ຂອງ​ລະ​ບົບ​, ທີ່​ມີ​ຈຸດ​ປະ​ສົງ​ເພື່ອ​ຈັດ​ຕັ້ງ​ແລະ​ເຂົ້າ​ກັນ​ໄດ້​ກັບ​ການ​ໄຂ່ Easter ຂອງ​ລະ​ບົບ​, ເພື່ອ​ໃຫ້​ແນ່​ໃຈວ່​າ​ອຸ​ປະ​ກອນ​ສ່ວນ​ໃຫຍ່​ສາ​ມາດ​ໄດ້​ຮັບ​ປະ​ສົບ​ການ​ສະ​ບັບ​ທີ່​ແຕກ​ຕ່າງ​ກັນ​ຂອງ​ໄຂ່ Easter ໂດຍ​ບໍ່​ມີ​ການ​ປັບ​ປຸງ​ຈໍາ​ນວນ​ຫຼາຍ​ເກີນ​ໄປ​ກັບ​ລະ​ຫັດ easter egg ຂອງ​. ຮຸ່ນໃຫມ່ໃຊ້ຄຸນສົມບັດໃຫມ່ຂອງລະບົບດັ່ງກ່າວ, ແຕ່ຮຸ່ນຕ່ໍາກວ່າສາມາດນໍາໃຊ້ບາງຫນ້າທີ່ເທົ່ານັ້ນ.</string>
@@ -23,6 +27,7 @@
     <string name="summary_system_default">ຄ່າເລີ່ມຕົ້ນ</string>
     <string name="summary_theme_dark_mode">ມືດ</string>
     <string name="summary_theme_light_mode">ແສງສະຫວ່າງ</string>
+    <string name="summary_theme_amoled_mode">Black</string>
     <string name="label_add_shortcut">ທາງລັດ</string>
     <string name="label_donate">ບໍ​ລິ​ຈາກ</string>
     <string name="preference_on">ສຸດ</string>
@@ -35,4 +40,18 @@
     <string name="label_share">ແບ່ງປັນ</string>
     <string name="label_search_hint">ຊອກຫາ…</string>
     <string name="label_component_manager">ຜູ້ຈັດການອົງປະກອບ</string>
+    <string name="pref_more_settings">More settings</string>
+    <string name="pref_retain_recent_egg_tasks">Retain Easter egg tasks</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Retain Easter egg tasks on Recents screen. Up to 5 can be retained. Not available for the activity embedded mode</string>
+    <string name="label_about">About</string>
+    <string name="label_contribute">Contribute</string>
+    <string name="animator_disabled_alert_message">Due to the system animations being disabled, some features may not work properly. Please go to \"Developer options\" and set the \"Animator duration scale\" option to activate the animations</string>
+    <string name="action_goto_settings">Go to settings</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
+    <string name="cat_editor">Cat editor</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

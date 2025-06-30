@@ -4,13 +4,17 @@
     <string name="title_open_with">Openen met</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Source code</string>
     <string name="label_translation">Vertaling</string>
     <string name="label_beta">Ontvang bèta</string>
     <string name="label_timeline">Tijdlijn</string>
     <string name="label_privacy_policy">Privacy</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">Licentie</string>
     <string name="label_feedback">Terugkoppeling</string>
     <string name="label_star">Ster</string>
+    <string name="label_contact_me">Contact me</string>
+    <string name="label_email_title">Email</string>
     <string name="message_trypophobia_warning">Dit is een waarschuwing voor mensen met &lt;b&gt;Trypofobie&lt;/b&gt; dat sommige beelden ongemak kunnen veroorzaken. Wil je doorgaan?</string>
     <string name="label_settings">Instellingen</string>
     <string name="label_project_desc">Het project bevat de volledige code van het systeem Easter Eggs, met als doel de systeemeieren te organiseren en compatibel te maken, om ervoor te zorgen dat de meeste apparaten verschillende versies van Easter Eggs kunnen ervaren en niet te veel wijzigingen in de systeemeiercode zullen aanbrengen. Sommige versies gebruiken nieuwe functies van het systeem, en lagere versies kunnen slechts enkele functies gebruiken.</string>
@@ -23,6 +27,7 @@
     <string name="summary_system_default">Standaard</string>
     <string name="summary_theme_dark_mode">Donker</string>
     <string name="summary_theme_light_mode">Licht</string>
+    <string name="summary_theme_amoled_mode">Black</string>
     <string name="label_add_shortcut">Snelkoppeling</string>
     <string name="label_donate">Doneren</string>
     <string name="preference_on">Op</string>
@@ -34,4 +39,19 @@
     <string name="label_welcome">Welkom bij Easter Egg Catalogi 🎉🎉🎉</string>
     <string name="label_share">Deel</string>
     <string name="label_search_hint">Zoek…</string>
+    <string name="label_component_manager">Components manager</string>
+    <string name="pref_more_settings">More settings</string>
+    <string name="pref_retain_recent_egg_tasks">Retain Easter egg tasks</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Retain Easter egg tasks on Recents screen. Up to 5 can be retained. Not available for the activity embedded mode</string>
+    <string name="label_about">About</string>
+    <string name="label_contribute">Contribute</string>
+    <string name="animator_disabled_alert_message">Due to the system animations being disabled, some features may not work properly. Please go to \"Developer options\" and set the \"Animator duration scale\" option to activate the animations</string>
+    <string name="action_goto_settings">Go to settings</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
+    <string name="cat_editor">Cat editor</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

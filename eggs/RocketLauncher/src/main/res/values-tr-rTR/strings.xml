@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Title of the Android Dreams (screensaver) module -->
+    <string name="rocket_launcher_dream_name">Rocket Launcher</string>
+    <string name="rocket_launcher_desc">Android 4,0\'daki Başlatıcının Paskalya Yumurtası (Ice Cream Sandwich)</string>
+</resources>

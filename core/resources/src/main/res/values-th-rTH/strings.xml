@@ -3,14 +3,18 @@
     <string name="app_name">ไข่อีสเตอร์</string>
     <string name="title_open_with">เปิดด้วย</string>
     <string name="char_separator">/</string>
-    <string name="char_en_dash">- -</string>
+    <string name="char_en_dash">-</string>
+    <string name="label_github">ไทย</string>
     <string name="label_translation">การแปล</string>
     <string name="label_beta">รับเบต้า</string>
     <string name="label_timeline">เส้นเวลา</string>
     <string name="label_privacy_policy">ความเป็นส่วนตัว</string>
+    <string name="label_wiki"></string>
     <string name="label_license">ใบอนุญาต</string>
     <string name="label_feedback">ข้อเสนอแนะ</string>
     <string name="label_star">ดาว</string>
+    <string name="label_contact_me"></string>
+    <string name="label_email_title"></string>
     <string name="message_trypophobia_warning">นี่เป็นคำเตือนสำหรับผู้ที่มี &lt;b&gt;Trypophobia&lt;/b&gt; ว่าภาพบางภาพอาจทำให้รู้สึกไม่สบาย คุณต้องการดำเนินการต่อหรือไม่?</string>
     <string name="label_settings">การตั้งค่า</string>
     <string name="label_project_desc">โปรเจ็กต์ประกอบด้วยโค้ดที่สมบูรณ์ของระบบ Easter Eggs ซึ่งมีจุดมุ่งหมายเพื่อจัดระเบียบและเข้ากันได้กับ Egg ของระบบ เพื่อให้แน่ใจว่าอุปกรณ์ส่วนใหญ่สามารถสัมผัสประสบการณ์ Easter Eggs เวอร์ชันต่างๆ ได้ และจะไม่ทำการปรับเปลี่ยนโค้ด Egg ของระบบมากเกินไป บางเวอร์ชันใช้คุณสมบัติใหม่ของระบบ และเวอร์ชันต่ำกว่าสามารถใช้ได้เพียงบางฟังก์ชันเท่านั้น</string>
@@ -23,6 +27,7 @@
     <string name="summary_system_default">ค่าเริ่มต้น</string>
     <string name="summary_theme_dark_mode">มืด</string>
     <string name="summary_theme_light_mode">แสงสว่าง</string>
+    <string name="summary_theme_amoled_mode">สีดำ</string>
     <string name="label_add_shortcut">ทางลัด</string>
     <string name="label_donate">บริจาค</string>
     <string name="preference_on">เปิด</string>
@@ -34,4 +39,19 @@
     <string name="label_welcome">ยินดีต้อนรับสู่แคตตาล็อกไข่อีสเตอร์ 🎉🎉🎉</string>
     <string name="label_share">แบ่งปัน</string>
     <string name="label_search_hint">ค้นหา…</string>
+    <string name="label_component_manager"></string>
+    <string name="pref_more_settings">ไทย</string>
+    <string name="pref_retain_recent_egg_tasks"></string>
+    <string name="pref_summary_retain_recent_egg_tasks">Retain Easter Egg tasks on Recents screen. Up to 5 can be retained. (Not available for Activity Embedded Mode.)</string>
+    <string name="label_about"></string>
+    <string name="label_contribute"></string>
+    <string name="animator_disabled_alert_message"></string>
+    <string name="action_goto_settings"></string>
+    <string name="action_dont_show_again"></string>
+    <string name="cat_editor"></string>
+    <string name="cat_editor_input_seed"></string>
+    <string name="rocket_launcher_easter_egg_icons"></string>
+    <string name="rocket_launcher_all_app_icons"></string>
+    <string name="rocket_launcher_all_icons"></string>
+    <string name="rocket_launcher_query_all_app_desc">จำเป็นต้องได้รับรายการแอปที่แสดงในแอปหน้าแรก</string>
 </resources>

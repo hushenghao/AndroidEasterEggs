@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Easter Eggs</string>
+    <string name="app_name">Trứng Phục Sinh</string>
     <string name="title_open_with">Mở bằng</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Mã nguồn</string>
     <string name="label_translation">Dịch</string>
     <string name="label_beta">Nhận bản thử nghiệm</string>
     <string name="label_timeline">Mốc thời gian</string>
     <string name="label_privacy_policy">Riêng tư</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">Giấy phép</string>
     <string name="label_feedback">Nhận xét</string>
     <string name="label_star">Xếp hạng</string>
+    <string name="label_contact_me">Liên hệ với tôi</string>
+    <string name="label_email_title">Thư điện tử</string>
     <string name="message_trypophobia_warning">Cảnh báo đối với những người mắc &lt;b&gt;Trypophobia&lt;/b&gt; là một số hình ảnh có thể gây khó chịu. Bạn có muốn tiếp tục không?</string>
     <string name="label_settings">Cài đặt</string>
     <string name="label_project_desc">Dự án này chứa mã hoàn chỉnh của các Easter egg hệ thống, với mục tiêu là sắp xếp và tương thích với các easter egg của hệ thống, đảm bảo rằng hầu hết các thiết bị đều có thể trải nghiệm các phiên bản Easter egg khác nhau mà không thay đổi mã easter egg quá nhiều. Những phiên bản mới hơn sử dụng các tính năng mới của chúng, còn những phiên bản thấp hơn chỉ sử dụng được một số chức năng.</string>
@@ -23,6 +27,7 @@
     <string name="summary_system_default">Mặc định</string>
     <string name="summary_theme_dark_mode">Tối</string>
     <string name="summary_theme_light_mode">Sáng</string>
+    <string name="summary_theme_amoled_mode">Đen</string>
     <string name="label_add_shortcut">Lối tắt</string>
     <string name="label_donate">Ủng hộ</string>
     <string name="preference_on">Bật</string>
@@ -35,4 +40,18 @@
     <string name="label_share">Chia sẻ</string>
     <string name="label_search_hint">Tìm kiếm…</string>
     <string name="label_component_manager">Quản lý thành phần</string>
+    <string name="pref_more_settings">Cài đặt bổ sung</string>
+    <string name="pref_retain_recent_egg_tasks">Retain Easter egg tasks</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Retain Easter egg tasks on Recents screen. Up to 5 can be retained. Not available for the activity embedded mode</string>
+    <string name="label_about">About</string>
+    <string name="label_contribute">Contribute</string>
+    <string name="animator_disabled_alert_message">Due to the system animations being disabled, some features may not work properly. Please go to \"Developer options\" and set the \"Animator duration scale\" option to activate the animations</string>
+    <string name="action_goto_settings">Go to settings</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
+    <string name="cat_editor">Cat editor</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

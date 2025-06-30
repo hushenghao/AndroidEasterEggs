@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Velikonoční vejce</string>
+    <string name="app_name">Easter egg</string>
     <string name="title_open_with">Otevřít pomocí</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -9,9 +9,10 @@
     <string name="label_beta">Získat Beta verzi</string>
     <string name="label_timeline">Časová osa</string>
     <string name="label_privacy_policy">Soukromí</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">Licence</string>
     <string name="label_feedback">Zpětná vazba</string>
-    <string name="label_star">Hvězda</string>
+    <string name="label_star">Ohodnoť</string>
     <string name="label_contact_me">Moje kontakty</string>
     <string name="label_email_title">E-mail</string>
     <string name="message_trypophobia_warning">Toto je varování pro ty s &lt;b&gt;Trypofobií&lt;/b&gt;. Některé obrázky mohou vyvolat nepohodlí. Chcete pokračovat?</string>
@@ -44,4 +45,13 @@
     <string name="pref_summary_retain_recent_egg_tasks">Zachovat úkoly vejce na obrazovce nedávných aplikací, maximálně zachování 5 (neplatné pro Vložený režim aktivity)</string>
     <string name="label_about">O aplikaci</string>
     <string name="label_contribute">Pomozet autorovi</string>
+    <string name="animator_disabled_alert_message">Due to the system animations being disabled, some features may not work properly. Please go to \"Developer options\" and set the \"Animator duration scale\" option to activate the animations</string>
+    <string name="action_goto_settings">Běž do nastavení</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
+    <string name="cat_editor">Cat editor</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

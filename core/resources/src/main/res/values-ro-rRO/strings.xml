@@ -47,6 +47,7 @@
     <string name="label_contribute">Contribuie</string>
     <string name="animator_disabled_alert_message">Deoarece animațiile de sistem sunt dezactivate, s-ar putea ca unele funcții să nu funcționeze cum trebuie. Te rugăm să deschizi aplicația Setări, mergi la \"Opțiuni dezvoltator\" și activează opțiuni \"Scară durată animator\" pentru a activa animațiile.</string>
     <string name="action_goto_settings">Mergi la Setări</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
     <string name="cat_editor">Editor de pisici</string>
     <string name="cat_editor_input_seed">Introdu seed-ul pisicii</string>
     <string name="rocket_launcher_easter_egg_icons">Pictogramele easter egg-urilor</string>

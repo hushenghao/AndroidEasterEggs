@@ -9,6 +9,7 @@
     <string name="label_beta">Obtener Beta</string>
     <string name="label_timeline">Cronología</string>
     <string name="label_privacy_policy">Privacidad</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">Licencia</string>
     <string name="label_feedback">Comentarios</string>
     <string name="label_star">Califica esta aplicación</string>
@@ -26,8 +27,8 @@
     <string name="summary_system_default">Predeterminado</string>
     <string name="summary_theme_dark_mode">Oscuro</string>
     <string name="summary_theme_light_mode">Claro</string>
-    <string name="summary_theme_amoled_mode">AMOLED</string>
-    <string name="label_add_shortcut">Acceso Directo</string>
+    <string name="summary_theme_amoled_mode">Negro</string>
+    <string name="label_add_shortcut">Shortcut</string>
     <string name="label_donate">Donar</string>
     <string name="preference_on">Activado</string>
     <string name="preference_off">Desactivado</string>
@@ -46,4 +47,11 @@
     <string name="label_contribute">Contribuir</string>
     <string name="animator_disabled_alert_message">Debido a que el sistema de animación está inhabilitado, algunas características podrían no funcionar correctamente. Por favor, vaya a \"Opciones de Desarrollador\" y habilite la opción \"Escala de duración del animador\" para activar la animación.</string>
     <string name="action_goto_settings">Ir a Ajustes</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
+    <string name="cat_editor">Cat editor</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

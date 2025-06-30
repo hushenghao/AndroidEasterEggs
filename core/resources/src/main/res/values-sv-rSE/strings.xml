@@ -9,9 +9,12 @@
     <string name="label_beta">Skaffa Beta</string>
     <string name="label_timeline">Tidslinje</string>
     <string name="label_privacy_policy">Sekretess</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">Licens</string>
     <string name="label_feedback">Återkoppling</string>
     <string name="label_star">Stjärna</string>
+    <string name="label_contact_me">Contact me</string>
+    <string name="label_email_title">Email</string>
     <string name="message_trypophobia_warning">Detta är en varning till dem med &lt;b&gt;Trypophobia&lt;/b&gt; att vissa bilder kan orsaka obehag. Vill du fortsätta?</string>
     <string name="label_settings">Inställningar</string>
     <string name="label_project_desc">Detta projekt innehåller den fullständiga koden för systemets påskägg, som syftar till att organisera och vara kompatibel med systemets påskägg, för att säkerställa att de flesta enheter kan uppleva olika versioner av påskägg utan att göra för många modifieringar av påskäggets kod. Nyare versioner använder nya funktioner i nämnda system, men lägre versioner kan bara använda vissa funktioner.</string>
@@ -24,6 +27,7 @@
     <string name="summary_system_default">Standard</string>
     <string name="summary_theme_dark_mode">Mörk</string>
     <string name="summary_theme_light_mode">Ljus</string>
+    <string name="summary_theme_amoled_mode">Black</string>
     <string name="label_add_shortcut">Genväg</string>
     <string name="label_donate">Donera</string>
     <string name="preference_on">På</string>
@@ -40,4 +44,14 @@
     <string name="pref_retain_recent_egg_tasks">Behåll de senaste Ägguppgifterna</string>
     <string name="pref_summary_retain_recent_egg_tasks">Behåll ägguppgifter på skärmen Senaste, maximalt 5 (ogiltigt för inbäddat aktivitetsläge)</string>
     <string name="label_about">Om</string>
+    <string name="label_contribute">Contribute</string>
+    <string name="animator_disabled_alert_message">Due to the system animations being disabled, some features may not work properly. Please go to \"Developer options\" and set the \"Animator duration scale\" option to activate the animations</string>
+    <string name="action_goto_settings">Go to settings</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
+    <string name="cat_editor">Cat editor</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

@@ -27,7 +27,7 @@
     <string name="summary_system_default">ডিফল্ট</string>
     <string name="summary_theme_dark_mode">অন্ধকার</string>
     <string name="summary_theme_light_mode">আলো</string>
-    <string name="summary_theme_amoled_mode">অ্যামোলেড</string>
+    <string name="summary_theme_amoled_mode">কালো</string>
     <string name="label_add_shortcut">শর্টকাট</string>
     <string name="label_donate">অনুদান</string>
     <string name="preference_on">চালু</string>
@@ -47,10 +47,11 @@
     <string name="label_contribute">অবদান রাখুন</string>
     <string name="animator_disabled_alert_message">সিস্টেম অ্যানিমেশন অচল থাকার কারণে, কিছু বৈশিষ্ট্য সঠিকভাবে কাজ নাও করতে পারে। অনুগ্রহ করে \"ডেভেলপারের অপশন\" এ যান এবং অ্যানিমেশনটি সক্রিয় করতে \"অ্যানিমেটর ডিউরেশন স্কেল\" অপশনটি চালু করুন।</string>
     <string name="action_goto_settings">সেটিংসে যান</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
     <string name="cat_editor">বিড়াল সম্পাদক</string>
     <string name="cat_editor_input_seed">বিড়ালের সিড নাম্বার লিখুন</string>
     <string name="rocket_launcher_easter_egg_icons">ইস্টার এগ আইকনসমূহ</string>
     <string name="rocket_launcher_all_app_icons">সকল অ্যাপ আইকন</string>
-    <string name="rocket_launcher_all_icons">সকল আইকন</string>
+    <string name="rocket_launcher_all_icons">সমস্ত আইকন</string>
     <string name="rocket_launcher_query_all_app_desc">সকল অ্যাপের তালিকা নেওয়া লাগবে</string>
 </resources>

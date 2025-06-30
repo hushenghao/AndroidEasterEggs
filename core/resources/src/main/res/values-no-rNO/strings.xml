@@ -4,13 +4,17 @@
     <string name="title_open_with">Åpne med</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_github">Source code</string>
     <string name="label_translation">Oversettelse</string>
     <string name="label_beta">Få Beta</string>
     <string name="label_timeline">Tidslinje</string>
     <string name="label_privacy_policy">Personvern</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">Lisens</string>
     <string name="label_feedback">Tilbakemelding</string>
     <string name="label_star">Stjerne</string>
+    <string name="label_contact_me">Contact me</string>
+    <string name="label_email_title">Email</string>
     <string name="message_trypophobia_warning">Dette er en advarsel til de med &lt;b&gt;Trypofobi&lt;/b&gt; om at noen bilder kan forårsake ubehag. Vil du fortsette?</string>
     <string name="label_settings">Innstillinger</string>
     <string name="label_project_desc">Prosjektet inneholder den komplette koden til systemet påskeegg, som tar sikte på å organisere og kompatible med systemeggene, for å sikre at de fleste enheter kan oppleve forskjellige versjoner av påskeegg og ikke vil gjøre for mange endringer i systemets eggkode. Noen versjoner bruker nye funksjoner i systemet, og lavere versjoner kan bare bruke enkelte funksjoner.</string>
@@ -23,6 +27,7 @@
     <string name="summary_system_default">Standard</string>
     <string name="summary_theme_dark_mode">Mørk</string>
     <string name="summary_theme_light_mode">Lys</string>
+    <string name="summary_theme_amoled_mode">Black</string>
     <string name="label_add_shortcut">Snarvei</string>
     <string name="label_donate">Donere</string>
     <string name="preference_on">På</string>
@@ -34,4 +39,19 @@
     <string name="label_welcome">Velkommen til påskeeggkataloger 🎉🎉🎉</string>
     <string name="label_share">Del</string>
     <string name="label_search_hint">Søk…</string>
+    <string name="label_component_manager">Components manager</string>
+    <string name="pref_more_settings">More settings</string>
+    <string name="pref_retain_recent_egg_tasks">Retain Easter egg tasks</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Retain Easter egg tasks on Recents screen. Up to 5 can be retained. Not available for the activity embedded mode</string>
+    <string name="label_about">About</string>
+    <string name="label_contribute">Contribute</string>
+    <string name="animator_disabled_alert_message">Due to the system animations being disabled, some features may not work properly. Please go to \"Developer options\" and set the \"Animator duration scale\" option to activate the animations</string>
+    <string name="action_goto_settings">Go to settings</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
+    <string name="cat_editor">Cat editor</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

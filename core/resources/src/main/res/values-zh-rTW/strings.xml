@@ -9,6 +9,7 @@
     <string name="label_beta">下載 Beta 版</string>
     <string name="label_timeline">時間線</string>
     <string name="label_privacy_policy">隱私權</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">授權</string>
     <string name="label_feedback">意見回饋</string>
     <string name="label_star">給個好評</string>
@@ -26,7 +27,7 @@
     <string name="summary_system_default">預設</string>
     <string name="summary_theme_dark_mode">深色</string>
     <string name="summary_theme_light_mode">淺色</string>
-    <string name="summary_theme_amoled_mode">AMOLED</string>
+    <string name="summary_theme_amoled_mode">黑色的</string>
     <string name="label_add_shortcut">捷徑</string>
     <string name="label_donate">捐贈</string>
     <string name="preference_on">開啟</string>
@@ -46,5 +47,11 @@
     <string name="label_contribute">參與</string>
     <string name="animator_disabled_alert_message">由於系統動畫被停用，某些功能可能無法正常使用。請前往“開發人員選項”並啟用“動畫影片長度比例”選項來啟動動畫。</string>
     <string name="action_goto_settings">前往設定</string>
+    <string name="action_dont_show_again">Don\'t show again</string>
     <string name="cat_editor">Cat Editor</string>
+    <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
 </resources>

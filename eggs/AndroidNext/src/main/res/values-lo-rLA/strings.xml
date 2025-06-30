@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="summary_android_waiting">ລໍຖ້າ…</string>
     <string name="summary_android_release_pushed">ສະບັບສຸດທ້າຍໄດ້ຖືກປ່ອຍອອກມາ</string>
     <string name="label_timeline_title">ທາມລາຍ, ຈຸດສຳຄັນ ແລະອັບເດດ</string>
     <string name="label_timeline_releases">ການປ່ອຍ</string>
+    <string name="label_timeline_developer_previews">Developer Previews</string>
+    <string name="label_timeline_beta_release">Beta Releases</string>
+    <string name="label_timeline_platform_stability">Platform Stability</string>
+    <string name="label_timeline_final_release">Final Release</string>
 </resources>
