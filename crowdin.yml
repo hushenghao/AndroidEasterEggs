@@ -1,3 +1,4 @@
+# https://support.crowdin.com/developer/configuration-file/
 project_id_env: "CROWDIN_PROJECT_ID"
 api_token_env: "CROWDIN_PERSONAL_TOKEN"
 preserve_hierarchy: true
@@ -6,7 +7,6 @@ files:
   - source: "/core/resources/src/main/res/values/strings.xml"
     translation: "/core/resources/src/main/res/values-%android_code%/%original_file_name%"
     update_option: update_as_unapproved
-    skip_untranslated_files: true
     # https://developer.crowdin.com/language-codes/
     languages_mapping:
       android_code:
@@ -16,7 +16,7 @@ files:
 
   - source: "/core/resources/src/main/res/values/languages.xml"
     translation: "/core/resources/src/main/res/values-%android_code%/%original_file_name%"
-    skip_untranslated_files: true
+    update_option: update_as_unapproved
     languages_mapping:
       android_code:
         zh-CN: "zh"
@@ -26,7 +26,7 @@ files:
   # AndroidNext
   - source: "/eggs/AndroidNext/src/main/res/values/strings.xml"
     translation: "/eggs/AndroidNext/src/main/res/values-%android_code%/%original_file_name%"
-    skip_untranslated_files: true
+    update_option: update_as_unapproved
     languages_mapping:
       android_code:
         zh-CN: "zh"
@@ -36,7 +36,7 @@ files:
   # RocketLauncher
   - source: "/eggs/RocketLauncher/src/main/res/values/strings.xml"
     translation: "/eggs/RocketLauncher/src/main/res/values-%android_code%/%original_file_name%"
-    skip_untranslated_files: true
+    update_option: update_as_unapproved
     languages_mapping:
       android_code:
         zh-CN: "zh"
