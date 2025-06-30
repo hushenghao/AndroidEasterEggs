@@ -11,7 +11,7 @@ pull_request_body: "New Crowdin pull request with translations 🚀"
 pull_request_labels: [ "translations", "enhancement" ]
 pull_request_assignees: [ "crowdin-bot" ]
 
-commit_message: "feat: New translations %language%(%original_file_name%) from Crowdin"
+commit_message: "feat: New translations %original_file_name% from Crowdin"
 append_commit_message: false
 
 files:
@@ -28,6 +28,7 @@ files:
   - source: "/core/resources/src/main/res/values/languages.xml"
     translation: "/core/resources/src/main/res/values-%android_code%/%original_file_name%"
     update_option: update_as_unapproved
+    skip_untranslated_files: true
     languages_mapping:
       android_code:
         zh-CN: "zh"
