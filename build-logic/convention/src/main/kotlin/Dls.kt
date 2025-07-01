@@ -12,6 +12,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 import java.util.Properties
 
@@ -53,6 +54,14 @@ fun <T : BaseExtension> Project.configureAndroid(configure: Action<T>? = null) {
 
     kotlinExtension.jvmToolchain {
         languageVersion.set(Versions.JAVA_VERSION)
+    }
+
+    extensions.configure<KotlinAndroidProjectExtension>("kotlin") {
+        compilerOptions {
+            // https://kotlinlang.org/docs/annotations.html#annotation-use-site-targets
+            // https://youtrack.jetbrains.com/issue/KT-73255
+            freeCompilerArgs.addAll("-Xannotation-default-target=param-property")
+        }
     }
 
     extensions.configure<BaseExtension>("android") {
