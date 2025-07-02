@@ -22,11 +22,13 @@ abstract class AbsConfigurablePlugin(
         moduleType: ModuleType,
         isHiltEnable: Boolean = false,
         isComposeEnabled: Boolean = false,
+        isBaselineEnabled: Boolean = false,
     ) : this(
         Configurable(
             moduleType = moduleType,
             isHiltEnable = isHiltEnable,
-            isComposeEnabled = isComposeEnabled
+            isComposeEnabled = isComposeEnabled,
+            isBaselineEnabled = isBaselineEnabled,
         )
     )
 
@@ -41,6 +43,8 @@ abstract class AbsConfigurablePlugin(
 
         val isHiltEnable: Boolean = false,
         val isComposeEnabled: Boolean = false,
+
+        val isBaselineEnabled: Boolean = false,
     )
 
     override fun apply(target: Project) {
@@ -146,7 +150,9 @@ abstract class AbsConfigurablePlugin(
 
             lint {
                 fatal += listOf("NewApi", "InlinedApi")
-                baseline = project.file("lint-baseline.xml")
+                if (configurable.isBaselineEnabled) {
+                    baseline = project.file("lint-baseline.xml")
+                }
             }
 
         }
