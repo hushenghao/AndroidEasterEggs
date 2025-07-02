@@ -1,5 +1,5 @@
 plugins {
-    id("easter.egg.compose.library")
+    id("easter.eggs.compose.library")
 }
 
 android {

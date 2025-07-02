@@ -20,21 +20,21 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        register("easterEggBasicLibrary") {
-            id = "easter.egg.basic.library"
-            implementationClass = "EasterEggBasicLibrary"
+        register("basic") {
+            id = "easter.eggs.basic.library"
+            implementationClass = "com.dede.android_eggs.plugins.EasterEggsBasicLibrary"
         }
-        register("easterEggLibrary") {
-            id = "easter.egg.library"
-            implementationClass = "EasterEggLibrary"
+        register("library") {
+            id = "easter.eggs.library"
+            implementationClass = "com.dede.android_eggs.plugins.EasterEggsLibrary"
         }
-        register("easterEggComposeLibrary") {
-            id = "easter.egg.compose.library"
-            implementationClass = "EasterEggComposeLibrary"
+        register("composeLibrary") {
+            id = "easter.eggs.compose.library"
+            implementationClass = "com.dede.android_eggs.plugins.EasterEggsComposeLibrary"
         }
-        register("easterEggApp") {
-            id = "easter.egg.app"
-            implementationClass = "EasterEggApp"
+        register("app") {
+            id = "easter.eggs.app"
+            implementationClass = "com.dede.android_eggs.plugins.EasterEggsApp"
         }
     }
 }

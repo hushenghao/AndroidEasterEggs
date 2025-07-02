@@ -1,7 +1,10 @@
-@file:Suppress("UnstableApiUsage")// androidResources.localeFilters
+@file:Suppress("UnstableApiUsage")
+
+import com.dede.android_eggs.dls.keyprops
+import com.dede.android_eggs.dls.marketImplementation
 
 plugins {
-    id("easter.egg.app")
+    id("easter.eggs.app")
 }
 
 android {

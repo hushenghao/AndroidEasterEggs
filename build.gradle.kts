@@ -12,6 +12,6 @@ tasks.wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
 
-task<Delete>("clean") {
+tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }

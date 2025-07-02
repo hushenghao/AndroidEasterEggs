@@ -1,7 +1,7 @@
 package com.dede.android_eggs.tasks
 
-import EGG_TASK_GROUP
-import androidAppComponent
+import com.dede.android_eggs.dls.EGG_TASK_GROUP
+import com.dede.android_eggs.dls.androidAppComponent
 import com.android.build.api.variant.Variant
 import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty

@@ -1,5 +1,5 @@
 plugins {
-    id("easter.egg.library")
+    id("easter.eggs.library")
 }
 
 android {

@@ -1,5 +1,5 @@
 plugins {
-    id("easter.egg.basic.library")
+    id("easter.eggs.basic.library")
 }
 
 android {
@@ -8,7 +8,6 @@ android {
 
 dependencies {
     implementation(libs.squareup.okio)
-    implementation(platform(libs.kotlinx.coroutines.bom))
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle)
