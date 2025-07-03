@@ -40,7 +40,7 @@
     <text style="text-anchor:end;" x="200" y="18">Chinese Traditional</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
     <rect fill="#5D89C3" height="6" rx="3" ry="3" width="134.4" x="210" y="11.4"/>
-    <rect fill="#71C277" height="6" rx="3" ry="3" width="44.800000000000004" x="210" y="11.4"/>
+    <rect fill="#71C277" height="6" rx="3" ry="3" width="43.2" x="210" y="11.4"/>
     <text x="380" y="18">84%</text>
   </g>
   <g class="font12" transform="translate(0,130)">
@@ -167,8 +167,8 @@
   <g class="font12" transform="translate(0,650)">
     <text style="text-anchor:end;" x="200" y="18">Romanian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="150.39999999999998" x="210" y="11.4"/>
-    <text x="380" y="18">94%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
+    <text x="380" y="18">100%</text>
   </g>
   <g class="font12" transform="translate(0,676)">
     <text style="text-anchor:end;" x="200" y="18">Russian</text>
@@ -198,15 +198,15 @@
   <g class="font12" transform="translate(0,780)">
     <text style="text-anchor:end;" x="200" y="18">Thai</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="94.39999999999999" x="210" y="11.4"/>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="84.80000000000001" x="210" y="11.4"/>
     <rect fill="#71C277" height="6" rx="3" ry="3" width="6.4" x="210" y="11.4"/>
-    <text x="380" y="18">59%</text>
+    <text x="380" y="18">53%</text>
   </g>
   <g class="font12" transform="translate(0,806)">
     <text style="text-anchor:end;" x="200" y="18">Turkish</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="150.39999999999998" x="210" y="11.4"/>
-    <text x="380" y="18">94%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
+    <text x="380" y="18">100%</text>
   </g>
   <g class="font12" transform="translate(0,832)">
     <text style="text-anchor:end;" x="200" y="18">Ukrainian</text>

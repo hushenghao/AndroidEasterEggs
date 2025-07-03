@@ -47,6 +47,7 @@
     <string name="label_contribute">Katkıda Bulun</string>
     <string name="animator_disabled_alert_message">Sistem animasyonunun devre dışı bırakılması nedeniyle bazı özellikler düzgün çalışmayabilir. Lütfen \"Geliştirici Seçenekleri \"ne gidin ve animasyonu etkinleştirmek için \"Animatör süre ölçeği\" seçeneğini etkinleştirin.</string>
     <string name="action_goto_settings">Ayarlara git</string>
+    <string name="action_dont_show_again">Tekrar gösterme</string>
     <string name="cat_editor">Cat Editörü</string>
     <string name="cat_editor_input_seed">Kedi tohumu girdisi</string>
     <string name="rocket_launcher_easter_egg_icons">Paskalya Yumurtası simgeleri</string>
