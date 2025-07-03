@@ -11,20 +11,28 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.kotlin.dsl.getByType
-import org.jetbrains.kotlin.konan.properties.loadProperties
 import java.util.Properties
+import org.jetbrains.kotlin.konan.properties.loadProperties as konanLoadProperties
 
 private lateinit var _keyprops: Properties
 
 val Project.keyprops: Properties
     get() {
         if (!::_keyprops.isInitialized) {
-            _keyprops = with(rootProject.file("key.properties")) {
-                if (exists()) loadProperties(absolutePath) else Properties()
-            }
+            _keyprops = loadProperties("key.properties")
         }
         return _keyprops
     }
+
+fun Project.loadProperties(path: String): Properties {
+    return with(file(path)) {
+        if (exists()) konanLoadProperties(absolutePath) else Properties()
+    }
+}
+
+fun Properties.getBoolean(key: String, defaultValue: Boolean = false): Boolean {
+    return getProperty(key)?.toBoolean() ?: defaultValue
+}
 
 val Project.libs: VersionCatalog
     get() = extensions.getByType<VersionCatalogsExtension>().named("libs")

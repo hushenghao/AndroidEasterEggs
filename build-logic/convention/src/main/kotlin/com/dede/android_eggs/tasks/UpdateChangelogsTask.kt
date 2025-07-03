@@ -1,8 +1,10 @@
 package com.dede.android_eggs.tasks
 
+import com.android.build.api.variant.Variant
 import com.dede.android_eggs.dls.EGG_TASK_GROUP
 import com.dede.android_eggs.dls.androidAppComponent
-import com.android.build.api.variant.Variant
+import com.dede.android_eggs.dls.getBoolean
+import com.dede.android_eggs.dls.loadProperties
 import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
@@ -12,7 +14,6 @@ import org.gradle.api.tasks.OutputDirectory
 import org.gradle.internal.extensions.stdlib.capitalized
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.register
-import java.util.Properties
 
 abstract class UpdateChangelogsTask : Exec() {
 
@@ -20,7 +21,7 @@ abstract class UpdateChangelogsTask : Exec() {
 
         private const val TASK_NAME = "updateChangelogs"
 
-        private const val PROPERTY_KEY = "egg.updateChangelogs"
+        private const val PROPERTY_KEY = "eggs.updateChangelogs"
 
         fun register(project: Project) {
             with(project) {
@@ -34,14 +35,8 @@ abstract class UpdateChangelogsTask : Exec() {
                     group = EGG_TASK_GROUP
                 }
 
-                val enableDepends = with(rootProject) {
-                    val file = file("local.properties")
-                    val properties = Properties()
-                    if (file.exists()) {
-                        file.inputStream().use(properties::load)
-                    }
-                    properties.getProperty(PROPERTY_KEY).toBoolean()
-                }
+                val enableDepends = rootProject.loadProperties("local.properties")
+                    .getBoolean(PROPERTY_KEY)
 
                 if (enableDepends) {
                     val variantNameSet = HashSet<String>()
