@@ -1,6 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import com.dede.android_eggs.dls.keyprops
 import com.dede.android_eggs.dls.marketImplementation
 
 plugins {
@@ -35,35 +34,6 @@ android {
         buildConfigField("int", "LANGUAGE_RES", androidResources.localeFilters.size.toString())
     }
 
-    signingConfigs {
-        if (keyprops.isEmpty) return@signingConfigs
-        create("release") {
-            keyAlias = keyprops.getProperty("keyAlias")
-            keyPassword = keyprops.getProperty("keyPassword")
-            storeFile = file(keyprops.getProperty("storeFile"))
-            storePassword = keyprops.getProperty("storePassword")
-            enableV3Signing = true
-            enableV4Signing = true
-        }
-    }
-
-    buildTypes {
-        val config = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
-        debug {
-            signingConfig = config
-            // vcsInfo.include = true
-        }
-        release {
-            isShrinkResources = true
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-            signingConfig = config
-        }
-    }
-
     flavorDimensions += listOf("app", "track")
 
     productFlavors {
@@ -96,24 +66,6 @@ android {
                 variantBuilder.enable = false
             }
         }
-    }
-
-    packaging {
-        resources.excludes += listOf(
-            "META-INF/*.version",
-            "META-INF/NOTICE.*",
-            "META-INF/LICENSE",
-            "META-INF/**/LICENSE.txt",
-            "kotlin/**.kotlin_builtins",
-            "DebugProbesKt.bin",
-            "*.properties"
-        )
-    }
-
-    dependenciesInfo {
-        // https://developer.android.com/build/dependencies#dependency-info-play
-        // Disables dependency metadata when building APKs.
-        includeInApk = false
     }
 
 }

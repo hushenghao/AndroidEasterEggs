@@ -4,10 +4,10 @@ import Versions
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.LibraryExtension
+import com.dede.android_eggs.dls.android
 import com.dede.android_eggs.dls.javaExtension
 import com.dede.android_eggs.dls.library
 import com.dede.android_eggs.dls.libs
-import com.dede.android_eggs.tasks.UpdateChangelogsTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -47,7 +47,7 @@ abstract class AbsConfigurablePlugin(
         val isBaselineEnabled: Boolean = false,
     )
 
-    override fun apply(target: Project) {
+    final override fun apply(target: Project) {
         with(target) {
             applyPlugins(configurable)
 
@@ -55,11 +55,13 @@ abstract class AbsConfigurablePlugin(
 
             configureAndroid(configurable)
 
-            registerTasks(configurable)
-
             addDependencies(configurable)
+
+            onApply()
         }
     }
+
+    protected open fun Project.onApply() {}
 
     private fun Project.applyPlugins(configurable: Configurable) {
         with(pluginManager) {
@@ -103,7 +105,8 @@ abstract class AbsConfigurablePlugin(
     }
 
     private fun Project.configureAndroid(configurable: Configurable) {
-        extensions.configure<CommonExtension<*, *, *, *, *, *>>("android") {
+
+        android<CommonExtension<*, *, *, *, *, *>> {
             compileSdk = Versions.COMPILE_SDK
             buildToolsVersion = Versions.BUILD_TOOLS
 
@@ -155,12 +158,9 @@ abstract class AbsConfigurablePlugin(
                 }
             }
 
-        }
-    }
 
-    private fun Project.registerTasks(configurable: Configurable) {
-        if (configurable.moduleType == ModuleType.APP) {
-            UpdateChangelogsTask.register(this)
+
+
         }
     }
 

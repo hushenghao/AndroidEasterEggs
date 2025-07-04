@@ -3,6 +3,7 @@
 package com.dede.android_eggs.dls
 
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
+import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.VersionCatalog
@@ -47,5 +48,9 @@ val Project.javaExtension: JavaPluginExtension
 
 fun Project.androidAppComponent(): ApplicationAndroidComponentsExtension? =
     extensions.findByType(ApplicationAndroidComponentsExtension::class.java)
+
+fun <T> Project.android(action: Action<out T>) {
+    extensions.configure("android", action)
+}
 
 const val EGG_TASK_GROUP = "egg"
