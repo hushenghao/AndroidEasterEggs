@@ -20,7 +20,9 @@ private lateinit var _keyprops: Properties
 val Project.keyprops: Properties
     get() {
         if (!::_keyprops.isInitialized) {
-            _keyprops = loadProperties("key.properties")
+            _keyprops = rootProject.loadProperties("key.properties")
+            val stortFilePath = _keyprops.getProperty("storeFile")
+            println("Key store file path: $stortFilePath")
         }
         return _keyprops
     }
