@@ -1,6 +1,6 @@
 # 更新日志
 
-### v4.0.1
+### v4.1.0 (2025-07-07)
 
 - SplashScreen 支持 Android 12 以下系统
 - 修复 Android Q 彩蛋文字“1”旋转动画 [#587](https://github.com/hushenghao/AndroidEasterEggs/issues/587)
