@@ -2,5 +2,5 @@
 <resources>
     <!-- Title of the Android Dreams (screensaver) module -->
     <string name="rocket_launcher_dream_name">Lansator rachetă</string>
-    <string name="rocket_launcher_desc">Easter egg-ul lansatorului din Android 4.0 (Ice Cream Sandwich)</string>
+    <string name="rocket_launcher_desc">(Cream Sandwich) 4.0</string>
 </resources>
