@@ -44,7 +44,7 @@ androidx-splashscreen = "androidx.core:core-splashscreen:1.0.1"
 androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 androidx-compose-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
-androidx-compose-navigation = { module = "androidx.navigation:navigation-compose", version = "2.9.0" }
+androidx-compose-navigation = { module = "androidx.navigation:navigation-compose", version = "2.9.1" }
 androidx-compose-hilt-navigation = "androidx.hilt:hilt-navigation-compose:1.2.0"
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 androidx-compose-livedata = { module = "androidx.compose.runtime:runtime-livedata" }
