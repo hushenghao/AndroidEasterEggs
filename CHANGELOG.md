@@ -1,5 +1,10 @@
 # Changelog
 
+### v4.2.0
+
+- Use Composable wavy line
+- Upgrade project dependencies
+
 ### v4.1.0 (2025-07-07)
 
 - Add SplashScreen support Android 12 below system

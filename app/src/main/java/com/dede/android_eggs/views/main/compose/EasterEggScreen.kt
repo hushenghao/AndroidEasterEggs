@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
@@ -206,13 +207,21 @@ fun EasterEggList(
                             EasterEggHighestItem(it)
                         }
                         item {
-                            Wavy(res = R.drawable.ic_wavy_line)
+                            Wavy(
+                                modifier = Modifier
+                                    .fillMaxWidth(0.4f)
+                                    .padding(vertical = 26.dp),
+                            )
                         }
                         items(items = normalList) {
                             EasterEggItem(it, enableItemAnim = false)
                         }
                         item("wavy2") {
-                            Wavy(res = R.drawable.ic_wavy_line)
+                            Wavy(
+                                modifier = Modifier
+                                    .fillMaxWidth(0.4f)
+                                    .padding(vertical = 26.dp),
+                            )
                         }
                         item("footer") {
                             ProjectDescription()

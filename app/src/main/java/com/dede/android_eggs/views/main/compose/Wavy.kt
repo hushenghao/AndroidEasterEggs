@@ -1,63 +1,58 @@
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package com.dede.android_eggs.views.main.compose
 
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.LinearWavyProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.R
-import com.dede.android_eggs.util.createRepeatWavyDrawable
-
-@Preview
-@Composable
-fun PreviewWavyRepeat() {
-    Wavy(R.drawable.ic_wavy_line_1, true)
-}
 
 @Preview
 @Composable
 fun PreviewWavy() {
-    Wavy(R.drawable.ic_wavy_line)
+    Wavy(
+        modifier = Modifier.fillMaxWidth(),
+        strokeWidth = 1.dp,
+        amplitude = 0.8f,
+        wavelength = 30.dp,
+    )
 }
-
 
 @Composable
 fun Wavy(
-    @DrawableRes res: Int,
-    repeat: Boolean = false,
-    tint: Color = MaterialTheme.colorScheme.secondary
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.secondaryContainer,
+    strokeWidth: Dp = 1.2.dp,
+    amplitude: Float = 0.8f,
+    wavelength: Dp = 30.dp,
+    waveSpeed: Dp = 0.dp,// still waves
 ) {
-    val modifier = Modifier
-        .fillMaxWidth()
-        .padding(vertical = 26.dp)
-    if (repeat) {
-        val context = LocalContext.current
-        val drawable = remember(res, context.theme) {
-            createRepeatWavyDrawable(context, res).apply {
-                setTint(tint.toArgb())
-            }
-        }
-        DrawableImage(
-            drawable = drawable,
-            contentDescription = null,
-            contentScale = ContentScale.FillBounds,
-            modifier = modifier
-        )
-    } else {
-        Image(
-            painter = painterResource(id = res),
-            contentDescription = null,
-            modifier = modifier
+    val strokeWidthPx = with(LocalDensity.current) { strokeWidth.toPx() }
+    val stroke = Stroke(width = strokeWidthPx, cap = StrokeCap.Round)
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        LinearWavyProgressIndicator(
+            modifier = modifier,
+            color = color,
+            trackColor = Color.Transparent,
+            stroke = stroke,
+            progress = { 1f },
+            amplitude = { amplitude },
+            wavelength = wavelength,
+            waveSpeed = waveSpeed,
         )
     }
 }

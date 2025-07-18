@@ -73,6 +73,13 @@ fun ProjectDescription() {
             modifier = Modifier.padding(top = 20.dp),
             style = typography.bodyMedium
         )
-        Wavy(res = R.drawable.ic_wavy_line_1, true, colorScheme.secondaryContainer)
+        Wavy(
+            modifier = Modifier.fillMaxWidth()
+                .padding(vertical = 26.dp),
+            color = colorScheme.secondaryContainer,
+            strokeWidth = 0.9.dp,
+            amplitude = 0.7f,
+            wavelength = 26.dp,
+        )
     }
 }

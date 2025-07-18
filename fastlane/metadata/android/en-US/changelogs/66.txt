@@ -1,0 +1,2 @@
+- Use Composable wavy line
+- Upgrade project dependencies
