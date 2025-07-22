@@ -136,7 +136,11 @@ object EasterEggShortcutsHelp {
         val shortcut = createShortcutInfo(context, shortcutId, egg, true)
         val callback = PinShortcutReceiver.registerCallbackWithTimeout(context)
         cachedExecutor.execute {
-            ShortcutManagerCompat.requestPinShortcut(context, shortcut, callback)
+            try {
+                // https://github.com/hushenghao/AndroidEasterEggs/issues/617
+                ShortcutManagerCompat.requestPinShortcut(context, shortcut, callback)
+            } catch (_: IllegalStateException) {
+            }
         }
     }
 
