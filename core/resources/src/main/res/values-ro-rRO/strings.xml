@@ -15,7 +15,7 @@
     <string name="label_star">Evaluează aplicația</string>
     <string name="label_contact_me">Contactează-mă</string>
     <string name="label_email_title">Email</string>
-    <string name="message_trypophobia_warning">Acesta este un avertisment pentru cei cu &lt;b&gt;Tripofobie&lt;/b&gt; că unele imagini pot provoca disconfort. Doriți să continuați?</string>
+    <string name="message_trypophobia_warning">Acesta este un avertisment pentru cei cu &lt;b&gt;Tripofobie&lt;/b&gt;. Unele imagini pot provoca disconfort. Dorești să continui?</string>
     <string name="label_settings">Setări</string>
     <string name="label_project_desc">Acest proiect conține codul complet al tuturor easter egg-urilor ale sistemului, care își propune să organizeze și să fie compatibil cu easter egg-urile de sistem, astfel încât să se asigure că majoritatea dispozitivelor pot experimenta diferite versiuni ale easter egg-urilor fără a face prea multe modificări codului acestora. Versiunile mai noi folosesc caracteristici noi ale sistemului respectiv, dar versiunile inferioare pot folosi doar unele funcții.</string>
     <string name="pref_title_icon_shape_override">Forma pictogramei</string>
@@ -27,12 +27,12 @@
     <string name="summary_system_default">Implicită</string>
     <string name="summary_theme_dark_mode">Întunecată</string>
     <string name="summary_theme_light_mode">Luminoasă</string>
-    <string name="summary_theme_amoled_mode">Negru</string>
+    <string name="summary_theme_amoled_mode">Neagră</string>
     <string name="label_add_shortcut">Comandă rapidă</string>
     <string name="label_donate">Donează</string>
     <string name="preference_on">Pornit</string>
     <string name="preference_off">Oprit</string>
-    <string name="toast_shortcut_added">Scurtătură adăugată pe ecranul de pornire.</string>
+    <string name="toast_shortcut_added">Scurtătură adăugată pe ecranul de pornire</string>
     <string name="app_widget_description">Acesta este ceasul analogic al Easter Eggs</string>
     <string name="action_agree">De acord</string>
     <string name="summary_browse_privacy_policy">Citiți și acceptați politica noastră de confidențialitate pentru a continua.</string>
