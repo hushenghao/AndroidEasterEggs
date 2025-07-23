@@ -34,6 +34,6 @@ object AGPUtils {
         if (revision.isEmpty()) {
             return null
         }
-        return revision.substring(0, min(len, revision.length) - 1)
+        return revision.substring(0, min(len, revision.length))
     }
 }
