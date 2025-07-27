@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Title of the Android Dreams (screensaver) module -->
+    <string name="rocket_launcher_dream_name">튀어나오는 안드로이드 로고 화면 보호기</string>
+    <string name="rocket_launcher_desc">튀어나오는 안드로이드 로고 화면 보호기(안드로이드 4.0 이하 런처 전용)</string>
+</resources>

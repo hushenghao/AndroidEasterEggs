@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="summary_android_waiting">아직 출시하지 않음</string>
     <string name="summary_android_release_pushed">최종 릴리스 버전이 출시되었습니다.</string>
-    <string name="label_timeline_title">타임라인, 마일스톤 및 업데이트</string>
+    <string name="label_timeline_title">안드로이드의 역사, 중요한 단계 및 업데이트</string>
     <string name="label_timeline_releases">릴리스</string>
     <string name="label_timeline_developer_previews">개발자 미리보기</string>
     <string name="label_timeline_beta_release">베타 릴리스</string>
