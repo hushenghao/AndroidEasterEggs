@@ -4,6 +4,7 @@
 
 - 使用 Composable 波浪线
 - 修复 Android 16 Landroid 状态栏颜色
+- 修复 Rocket Launcher 缩放进入动画
 - 升级项目依赖项
 
 ### v4.1.0 (2025-07-07)

@@ -1,3 +1,4 @@
 - Use Composable wavy line
 - Fix Android 16 Landroid status bar color
+- Fix Rocket Launcher scale in animation
 - Upgrade project dependencies

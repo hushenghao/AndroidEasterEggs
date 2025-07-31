@@ -308,7 +308,9 @@ public class RocketLauncher extends BasicDream {
                     final int START_ZOOM_TIME = 3000;
                     if (totalTime < START_ZOOM_TIME) {
                         final float x = totalTime / (float) START_ZOOM_TIME;
-                        final float s = 1f - (float) Math.pow(x - 1, 4);
+                        // scale range from 0 to 1
+                        // https://github.com/hushenghao/AndroidEasterEggs/issues/618
+                        final float s = Math.max(0f, Math.min(1f - (float) Math.pow(x - 1, 4), 1f));
                         setScaleX(s);
                         setScaleY(s);
                     } else {
