@@ -194,11 +194,14 @@ public class RocketLauncher extends BasicDream {
 
             public void reset() {
                 randomize();
-                boardCenterX = (Board.this.getWidth() - getWidth()) / 2;
-                boardCenterY = (Board.this.getHeight() - getHeight()) / 2;
+                boardCenterX = (Board.this.getWidth() - getWidth()) / 2f;
+                boardCenterY = (Board.this.getHeight() - getHeight()) / 2f;
                 setX(boardCenterX);
                 setY(boardCenterY);
                 fuse = (float) Math.max(boardCenterX, boardCenterY);
+                if (fuse == 0f) {
+                    fuse = 1f; // avoid divide by zero
+                }
                 setRotation(180 - angle);
                 setScaleX(0f);
                 setScaleY(0f);
@@ -262,13 +265,7 @@ public class RocketLauncher extends BasicDream {
             mComponentNames = new ComponentName[mIcons.size()];
             mComponentNames = mIcons.keySet().toArray(mComponentNames);
 
-            if (isAttachedToWindow()) {
-                if (mAnim != null) {
-                    mAnim.cancel();
-                }
-                reset();
-                mAnim.start();
-            }
+            this.freeStart();
         }
 
         private void reset() {
@@ -360,7 +357,6 @@ public class RocketLauncher extends BasicDream {
             setLayerType(View.LAYER_TYPE_HARDWARE, null);
             setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
 
-            // fix size
 //            reset();
 //            mAnim.start();
 
@@ -388,13 +384,21 @@ public class RocketLauncher extends BasicDream {
             ExecutorUtils.getCachedExecutor().submit(loadIconsTask);
         }
 
-        protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-            super.onSizeChanged(w, h, oldw, oldh);
+        private void freeStart() {
+            if (getWidth() == 0 || getHeight() == 0 || !isAttachedToWindow()) {
+                return;
+            }
             if (mAnim != null) {
                 mAnim.cancel();
             }
             reset();
             mAnim.start();
+        }
+
+        protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+            super.onSizeChanged(w, h, oldw, oldh);
+
+            freeStart();
         }
 
 
@@ -453,13 +457,12 @@ public class RocketLauncher extends BasicDream {
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        final int longside = metrics.widthPixels > metrics.heightPixels
-                ? metrics.widthPixels : metrics.heightPixels;
+        final int longside = Math.max(metrics.widthPixels, metrics.heightPixels);
 
         Board b = new Board(this, null);
         setContentView(b, new ViewGroup.LayoutParams(longside, longside));
-        b.setX((metrics.widthPixels - longside) / 2);
-        b.setY((metrics.heightPixels - longside) / 2);
+        b.setX((metrics.widthPixels - longside) / 2f);
+        b.setY((metrics.heightPixels - longside) / 2f);
     }
 
     @Override
