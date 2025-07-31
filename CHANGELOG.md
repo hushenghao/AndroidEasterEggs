@@ -3,6 +3,7 @@
 ### v4.2.0
 
 - Use Composable wavy line
+- Fix Android 16 Landroid status bar color
 - Upgrade project dependencies
 
 ### v4.1.0 (2025-07-07)

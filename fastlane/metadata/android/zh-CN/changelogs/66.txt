@@ -1,2 +1,3 @@
 - 使用 Composable 波浪线
+- 修复 Android 16 Landroid 状态栏颜色
 - 升级项目依赖项

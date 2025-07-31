@@ -1,2 +1,3 @@
 - Use Composable wavy line
+- Fix Android 16 Landroid status bar color
 - Upgrade project dependencies
