@@ -27,6 +27,7 @@ dependencyResolutionManagement {
 include(
     ":app",
 
+    ":core:composable",
     ":core:theme",
     ":core:navigation",
     ":core:local-provider",

@@ -13,6 +13,8 @@ import androidx.activity.ComponentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.coroutineScope
 import androidx.savedstate.SavedStateRegistry
 import androidx.savedstate.SavedStateRegistryController
@@ -35,6 +37,14 @@ private val handler = Handler(Looper.getMainLooper()) { msg ->
     }
     true
 }
+
+val Activity.viewModelStoreOwnerCompat: ViewModelStoreOwner
+    get() {
+        if (this is ComponentActivity) {
+            return this
+        }
+        return LifecycleFragment.injectIfNeededIn(this)
+    }
 
 val Activity.lifecycleOwnerCompat: LifecycleOwner
     get() {
@@ -68,7 +78,8 @@ fun Lifecycle.launch(
 
 @Suppress("OVERRIDE_DEPRECATION")
 @SuppressLint("ValidFragment")
-internal class LifecycleFragment : android.app.Fragment(), LifecycleOwner, SavedStateRegistryOwner {
+internal class LifecycleFragment : android.app.Fragment(),
+    LifecycleOwner, SavedStateRegistryOwner, ViewModelStoreOwner {
 
     companion object {
         fun injectIfNeededIn(activity: Activity): LifecycleFragment {
@@ -90,6 +101,7 @@ internal class LifecycleFragment : android.app.Fragment(), LifecycleOwner, Saved
 
     private val lifecycleRegistry = LifecycleRegistry(this)
     private val savedStateRegistryController = SavedStateRegistryController.create(this)
+    private val _viewModelStore = ViewModelStore()
 
     init {
         savedStateRegistryController.performAttach()
@@ -137,4 +149,7 @@ internal class LifecycleFragment : android.app.Fragment(), LifecycleOwner, Saved
 
     override val savedStateRegistry: SavedStateRegistry
         get() = savedStateRegistryController.savedStateRegistry
+
+    override val viewModelStore: ViewModelStore
+        get() = _viewModelStore
 }

@@ -33,12 +33,14 @@ import android.os.Handler;
 import android.support.v13.dreams.BasicDream;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.dede.android_eggs.composable.ComposeViewBuilder;
 import com.dede.basic.ExecutorUtils;
 
 import java.util.HashMap;
@@ -260,10 +262,23 @@ public class RocketLauncher extends BasicDream {
             mComponentNames = new ComponentName[0];
         }
 
+        public interface OnComponentIconsChangeListener {
+            void onComponentIconsChanged();
+        }
+
+        private OnComponentIconsChangeListener mOnComponentIconsChangeListener;
+
+        public void setOnComponentIconsChangeListener(OnComponentIconsChangeListener listener) {
+            mOnComponentIconsChangeListener = listener;
+        }
+
         public void setComponentIcons(HashMap<ComponentName, Drawable> icons) {
             mIcons = icons;
             mComponentNames = new ComponentName[mIcons.size()];
             mComponentNames = mIcons.keySet().toArray(mComponentNames);
+            if (mOnComponentIconsChangeListener != null) {
+                mOnComponentIconsChangeListener.onComponentIconsChanged();
+            }
 
             this.freeStart();
         }
@@ -463,6 +478,21 @@ public class RocketLauncher extends BasicDream {
         setContentView(b, new ViewGroup.LayoutParams(longside, longside));
         b.setX((metrics.widthPixels - longside) / 2f);
         b.setY((metrics.heightPixels - longside) / 2f);
+
+        View loadingIndicator = ComposeViewBuilder.buildDarkThemeLoadingIndicator(this);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER;
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        viewGroup.addView(loadingIndicator, params);
+        b.setOnComponentIconsChangeListener(() ->
+                loadingIndicator.animate()
+                        .scaleX(0.2f)
+                        .scaleY(0.2f)
+                        .alpha(0f)
+                        .setDuration(300)
+                        .withEndAction(() -> viewGroup.removeView(loadingIndicator))
+                        .start());
+
     }
 
     @Override

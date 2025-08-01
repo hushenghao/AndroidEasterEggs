@@ -7,7 +7,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:theme"))
+    implementation(project(":core:composable"))
     implementation(project(":core:resources"))
     implementation(project(":core:shortcut"))
 
