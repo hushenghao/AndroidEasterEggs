@@ -1,4 +1,4 @@
-# Android Easter Egg
+# Android Easter Eggs
 
 A collection of Android Easter eggs.
 
@@ -30,10 +30,10 @@ This project contains the complete code for all Android Easter eggs, aiming to o
 [![GitHub release (includes prereleases)](https://img.shields.io/github/v/release/hushenghao/AndroidEasterEggs?logo=github&label=Beta&include_prereleases&style=for-the-badge)](https://github.com/hushenghao/AndroidEasterEggs/releases)
 [![Pgyer alpha version](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhushenghao%2FAndroidEasterEggs%2Frefs%2Fheads%2Fmain%2Fapp%2Fbuild.gradle.kts&search=versionName%5Cs*%3D%5Cs*%5C%22(%5B%5Cd.%5D%2B)%5C%22&replace=V%241-alpha&style=for-the-badge&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAqFBMVEUAAAD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8j1z1tAAAAN3RSTlMABf36CfYWxNZADidJ7eBcGxGmfjTn3F9VPDAsI%2FHKmoUfz7GVjHNuT0Sqn5FlOL%2Fkuo%2Fid2i13BxKKgAAAt5JREFUSMe1Vol2okAQbJgZ7ltAVLw18b6SbP3%2Fn21DTPZtQLO%2BtynGcRirj%2BpmHtL%2FwfM8fICt0TMAj79pkvJ8nyt50AICT3zjDoPxG91HZ8nTIMcsIioyBdjs4A6khR67NnrEiBIgcO%2FRvZ0pEJgTh6gfFik5%2FmJRkGGnt4R0AaHA6Zdz8DLp9XmzN4M%2Bj26FyFhuhxyL6QKYsWfDgtKRtNJjinwoLGgHJXSdg42JVlC8eCkb9a03vOHWMzesXAfAk%2BWQBwx95FFbQwyKbS5UNH35MAhKcuZgTKiJ9cacr5nPsfLPCLFG0yS3Oi29WAkwukyXVw1KYFk7cAze1b4%2BEiaGYohZXN04s%2Fcqmf2QuXbK9IZg9wTBl99nlysjShSgkrjUR%2FsdLkRvK2n8bcDl9vkKpsT95WqmRdGvm8CBQjJGauR9PQKolHZ4tYRisxrcQQXRoxEwnDYOTaBOT%2BREK3WtokbxL%2B6ywmjqvuBkNxs90LxZEAiOpM6ddUmUoA6LhDr7yKAGJDlmTdHfe6W56%2Bcc2WtvIFsf1%2BnZrqormM5jrF2lLakdxnoLc%2BkaeRVBr1R0R5nVdTcpkXc8rhsGgwxD%2BKXMIZjvS%2BqgwpZ71lPAcNBo3cEH9uQJVNCjEnUnsSJ6glDoNgz6p1EwoVcgCY9AvwtRa9kRrStVB%2FoK1%2BPCUrhIidPP7BCiFnNhX908L6gd2pQnyUO6Fb1O6SZYXrTRTbde01X0mOTBjvm3VguaQGFLjF%2Bccmhax71GAx0pyXY%2BXVhpQsXrFsv3HUYvCGxq5xuxcYZ1oDdACZNZ7tFMeeZPO3amlLbBizmq00Y0BjZ1mPYAno5RWdXIyLhCxCiUvyftlmDHZH%2BOJlnm0n6ynDp%2Fm26jC8zizwQG8ru3jsaJP3%2FwP9hSu23Qz2CVpP3Z%2BA4huGWPoIP6tfbvWECEDxmMoYofjfC4hj0wfujvgpvhrD0Uwr4c6CfwG4zbVbi6qU7LAAAAAElFTkSuQmCC&label=Pgyer&color=%2319B491)](https://www.pgyer.com/eggs)
 
-</div>
+## Source notes
 
-* **Play Store** uses [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756). This may cause app updates from other sources to fail.
-* **Pgyer** has the alpha version. Alpha versions contain unfinished features that are not final and could be removed or reworked without notice. They may contain bugs.
+* **Play Store** uses [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756). This will cause app updates from other sources to fail. You will need to uninstall the Play Store version and install the other source's version to update from another source and vice versa.
+* **Pgyer** hosts the Alpha version. Alpha versions contain unfinished features that are not final and may be removed, reworked or replaced without notice. They may contain bugs.
 
 ## Contributing
 
@@ -42,7 +42,7 @@ issues, [translate](https://crowdin.com/project/easter-eggs) the app into your l
 development here.
 
 <details>
-<summary>View translation status for all languages.</summary>
+<summary>View translation status for all languages</summary>
 
 [![Crowdin](script/crowdin/crowdin_project_progress.svg)](https://crowdin.com/project/easter-eggs)
 
@@ -67,7 +67,7 @@ development here.
 ## License
 
 ```text
-Copyright 2024 Hu Shenghao
+Copyright 2025 Hu Shenghao
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
