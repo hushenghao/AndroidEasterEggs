@@ -29,6 +29,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/activity-actions" />
             <option value="$PROJECT_DIR$/core/alterable-adaptive-icon" />
+            <option value="$PROJECT_DIR$/core/composable" />
             <option value="$PROJECT_DIR$/core/custom-tab-browser" />
             <option value="$PROJECT_DIR$/core/icons" />
             <option value="$PROJECT_DIR$/core/local-provider" />
