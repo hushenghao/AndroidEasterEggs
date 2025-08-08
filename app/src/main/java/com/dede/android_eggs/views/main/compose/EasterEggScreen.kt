@@ -206,7 +206,7 @@ fun EasterEggList(
                         items(items = highestList) {
                             EasterEggHighestItem(it)
                         }
-                        item {
+                        item("wavy") {
                             Wavy(
                                 modifier = Modifier
                                     .fillMaxWidth(0.4f)
@@ -216,7 +216,7 @@ fun EasterEggList(
                         items(items = normalList) {
                             EasterEggItem(it, enableItemAnim = false)
                         }
-                        item("wavy2") {
+                        item("wavy") {
                             Wavy(
                                 modifier = Modifier
                                     .fillMaxWidth(0.4f)
