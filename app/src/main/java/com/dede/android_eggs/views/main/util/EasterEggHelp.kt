@@ -98,7 +98,7 @@ object EasterEggHelp {
             .append(last)
     }
 
-    fun getVersionNameByApiLevel(level: Int): String {
+    fun getVersionNameByApiLevel(@androidx.annotation.IntRange(from = 1L) level: Int): String {
         return apiLevelArrays[level]
             ?: throw IllegalArgumentException("Illegal Api level: $level")
     }
@@ -137,6 +137,7 @@ object EasterEggHelp {
         apiLevelArrays[Build.VERSION_CODES.GINGERBREAD] = "2.3"
         apiLevelArrays[Build.VERSION_CODES.FROYO] = "2.2"
         apiLevelArrays[Build.VERSION_CODES.ECLAIR_MR1] = "2.1"
+        apiLevelArrays[Build.VERSION_CODES.ECLAIR_0_1] = "2.0.1"
         apiLevelArrays[Build.VERSION_CODES.ECLAIR] = "2.0"
         apiLevelArrays[Build.VERSION_CODES.DONUT] = "1.6"
         apiLevelArrays[Build.VERSION_CODES.CUPCAKE] = "1.5"

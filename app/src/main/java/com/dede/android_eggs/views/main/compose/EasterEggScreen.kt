@@ -255,22 +255,40 @@ private fun filterEasterEggs(
     pureEasterEggs: List<EasterEgg>,
     searchText: String,
 ): List<EasterEgg> {
-    val isApiLevel = Regex("^\\d{1,2}$").matches(searchText)
 
-    fun EasterEgg.matchVersionName(version: String): Boolean {
-        val containsStart = EasterEggHelp.getVersionNameByApiLevel(apiLevelRange.first)
-            .contains(version, true)
-        return if (apiLevelRange.first == apiLevelRange.last) {
-            containsStart
-        } else {
-            containsStart || EasterEggHelp.getVersionNameByApiLevel(apiLevelRange.last)
-                .contains(version, true)
+    fun EasterEgg.matchStringResNames(searchText: String): Boolean {
+        return context.getString(nameRes).contains(searchText, true) ||
+                context.getString(nicknameRes).contains(searchText, true)
+    }
+
+    fun EasterEgg.matchApiLevel(searchText: String): Boolean {
+        val isApiLevel = Regex("^\\d{1,2}$").matches(searchText)
+        if (isApiLevel) {
+            val apiLevel = searchText.toIntOrNull() ?: return false
+            return apiLevelRange.contains(apiLevel)
         }
+        return false
+    }
+
+    fun EasterEgg.matchAndroidVersion(searchText: String): Boolean {
+        val versionNameResult = Regex("[\\d.]{1,3}").find(searchText) ?: return false
+        val versionNameValue = versionNameResult.value
+        for (level in apiLevelRange) {
+            val versionName = try {
+                EasterEggHelp.getVersionNameByApiLevel(level)
+            } catch (e: IllegalArgumentException) {
+                // illegal api level, skip
+                return false
+            }
+            if (versionName.startsWith(versionNameValue, true)) {
+                return true
+            }
+        }
+        return false
     }
     return pureEasterEggs.filter {
-        context.getString(it.nameRes).contains(searchText, true) ||
-                context.getString(it.nicknameRes).contains(searchText, true) ||
-                it.matchVersionName(searchText) ||
-                (isApiLevel && it.apiLevelRange.contains(searchText.toIntOrNull() ?: -1))
+        it.matchStringResNames(searchText) ||
+                it.matchApiLevel(searchText) ||
+                it.matchAndroidVersion(searchText)
     }
 }

@@ -17,6 +17,7 @@ import com.google.android.material.color.MaterialColors
 import java.util.Objects
 import kotlin.math.atan2
 import kotlin.math.cos
+import kotlin.math.hypot
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -73,11 +74,15 @@ internal object Utilities {
         }
     }
 
-    fun getHighlightColor(color: Color): Color {
+    fun getHighlightColor(
+        color: Color,
+        lightColor: Color = Color.White,
+        darkColor: Color = Color.DarkGray
+    ): Color {
         return if (MaterialColors.isColorLight(color.toArgb())) {
-            Color.DarkGray
+            darkColor
         } else {
-            Color.White
+            lightColor
         }
     }
 
@@ -135,7 +140,7 @@ internal object Utilities {
 
         val x = position.x - centerX
         val y = position.y - centerY
-        val r = sqrt(x * x + y * y)
+        val r = hypot(x, y)
         if (r > radius) {
             val angle = atan2(y, x)
             val newX = radius * cos(angle)
