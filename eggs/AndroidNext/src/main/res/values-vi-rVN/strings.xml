@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="summary_android_waiting">Đang chờ…</string>
     <string name="summary_android_release_pushed">Phiên bản cuối cùng đã được phát hành</string>
     <string name="label_timeline_title">Dòng thời gian, các mốc quan trọng và thông tin cập nhật</string>
     <string name="label_timeline_releases">Các bản phát hành</string>
+    <string name="label_timeline_developer_previews">Bản xem trước dành cho nhà phát triển</string>
+    <string name="label_timeline_beta_release">Bản phát hành Beta</string>
+    <string name="label_timeline_platform_stability">Độ ổn định của nền tảng</string>
+    <string name="label_timeline_final_release">Bản phát hành cuối cùng</string>
 </resources>
