@@ -51,7 +51,7 @@ val Project.javaExtension: JavaPluginExtension
 fun Project.androidAppComponent(): ApplicationAndroidComponentsExtension? =
     extensions.findByType(ApplicationAndroidComponentsExtension::class.java)
 
-fun <T> Project.android(action: Action<out T>) {
+fun <T : Any> Project.android(action: Action<out T>) {
     extensions.configure("android", action)
 }
 
