@@ -27,7 +27,7 @@ jobs:
         run: exit 0
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Crowdin push
         uses: crowdin/github-action@v2 # https://github.com/marketplace/actions/crowdin-action
