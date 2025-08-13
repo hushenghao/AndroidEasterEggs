@@ -162,15 +162,12 @@ private const val HIGHEST_COUNT = 1
 @Preview(showBackground = true)
 fun EasterEggList(
     easterEggs: List<BaseEasterEgg> = EasterEggHelp.previewEasterEggs(),
-    searchFilter: String = "",
+    searchText: String = "",
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
     val context = LocalContext.current
     val pureEasterEggs = remember(easterEggs) {
         EasterEggModules.providePureEasterEggList(easterEggs)
-    }
-    val searchText = remember(searchFilter) {
-        searchFilter.trim().uppercase()
     }
     val searchMode = searchText.isNotBlank()
     val currentList = remember(searchText, searchMode, easterEggs, pureEasterEggs) {
