@@ -98,6 +98,7 @@ dependencies {
     implementation(libs.squareup.okio)
     implementation(libs.free.reflection)
     implementation(libs.blurhash.android)
+    implementation("com.google.zxing:core:3.5.3")
     debugImplementation(libs.squareup.leakcanary)
 
     implementation(project(":core:local-provider"))

@@ -4,6 +4,7 @@ package com.dede.android_eggs.views.main.compose
 
 import android.content.Context
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,6 +29,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
@@ -43,6 +45,7 @@ import com.dede.android_eggs.navigation.LocalNavController
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
+import com.dede.android_eggs.util.QRCodeUtil
 import com.dede.android_eggs.util.Receiver
 import com.dede.android_eggs.util.compose.end
 import com.dede.android_eggs.util.compose.plus
@@ -149,6 +152,12 @@ fun EasterEggScreen(
                 }
             ) { contentPadding ->
                 EasterEggList(viewModel.easterEggs, searchBarState.searchText, contentPadding)
+                Image(
+                    bitmap = QRCodeUtil.generateQRCode("wxp://f2f0HUx189brtInq9P5t6f8ei40cJnbCmh6DdC9gVai6cHBPAb40fxNLfCQBMZCGvxQP")
+                        .asImageBitmap(),
+                    contentDescription = null,
+                    modifier = Modifier.padding(contentPadding)
+                )
             }
         }
 
