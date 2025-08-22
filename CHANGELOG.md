@@ -3,6 +3,7 @@
 ### v4.2.0
 
 - Use Composable wavy line
+- Fix Landroid spaceship landing enter planet interior [#640](https://github.com/hushenghao/AndroidEasterEggs/issues/640)
 - Fix Android 16 Landroid status bar color
 - Fix Rocket Launcher scale in animation
 - Upgrade project dependencies

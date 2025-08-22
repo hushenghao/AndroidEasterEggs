@@ -3,6 +3,7 @@
 ### v4.2.0
 
 - 使用 Composable 波浪线
+- 修复 Landroid 着陆时进入行星内部 [#640](https://github.com/hushenghao/AndroidEasterEggs/issues/640)
 - 修复 Android 16 Landroid 状态栏颜色
 - 修复 Rocket Launcher 缩放进入动画
 - 升级项目依赖项

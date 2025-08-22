@@ -1,4 +1,5 @@
 - Use Composable wavy line
+- Fix Landroid spaceship landing enter planet interior #640
 - Fix Android 16 Landroid status bar color
 - Fix Rocket Launcher scale in animation
 - Upgrade project dependencies

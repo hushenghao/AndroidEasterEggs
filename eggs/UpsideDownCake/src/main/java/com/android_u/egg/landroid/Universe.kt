@@ -301,6 +301,10 @@ open class Universe(val namer: Namer, randomSeed: Long) : Simulator(randomSeed) 
                     //                        vDiff < 100f
                     ) {
                         val landing = Landing(ship, planet, a)
+                        if (ship.thrust != Vec2.Zero) {
+                            // kill the power
+                            ship.thrust = Vec2.Zero
+                        }
                         ship.landing = landing
                         ship.velocity = planet.velocity
                         add(landing)
