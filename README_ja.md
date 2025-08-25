@@ -6,7 +6,7 @@ Androidリリースのイースターエッグを収集
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/hushenghao/AndroidEasterEggs/total?logo=github&label=Downloads&style=flat)
 ![Play Store installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.dede.android_eggs%26l%3DInstalls%26m%3D%24shortinstalls&style=flat&logo=googleplay)
 [![GitHub Pgyer CI Status](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/pgyer.yml?logo=github&label=Pgyer%20CI&style=flat)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/pgyer.yml)
-[![Crowdin](https://badges.crowdin.net/easter-eggs/localized.svg)](https://crowdin.com/project/easter-eggs)
+[![Crowdin](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fbadges.crowdin.net%2Feaster-eggs%2Flocalized.svg&query=%2F*%5Blocal-name()%3D'svg'%5D%2F*%5Blocal-name()%3D'g'%5D%2F*%5Blocal-name()%3D'text'%5D%5Blast()%5D&style=flat&logo=crowdin&label=Localized&labelColor=%23555&color=%234c1)](https://crowdin.com/project/easter-eggs)
 
 ![featureGraphic](fastlane/metadata/android/en-US/images/featureGraphic.png)
 
