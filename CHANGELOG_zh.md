@@ -1,6 +1,6 @@
 # 更新日志
 
-### v4.2.0
+### v4.2.0 (2025-08-25)
 
 - 使用 Composable 波浪线
 - 修复 Landroid 着陆时进入行星内部 [#640](https://github.com/hushenghao/AndroidEasterEggs/issues/640)

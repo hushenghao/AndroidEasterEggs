@@ -1,6 +1,6 @@
 # Changelog
 
-### v4.2.0
+### v4.2.0 (2025-08-25)
 
 - Use Composable wavy line
 - Fix Landroid spaceship landing enter planet interior [#640](https://github.com/hushenghao/AndroidEasterEggs/issues/640)
