@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.R
-import com.dede.android_eggs.ui.composes.icons.Telegram
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.Option
@@ -45,16 +44,6 @@ fun ContactMeGroup() {
             title = stringResource(StringsR.string.label_feedback),
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
-            }
-        )
-        Option(
-            leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Telegram,
-                contentDescription = "Telegram"
-            ),
-            title = "Telegram",
-            onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_telegram_group)
             }
         )
     }

@@ -6,6 +6,7 @@
 - Fix Landroid spaceship landing enter planet interior [#640](https://github.com/hushenghao/AndroidEasterEggs/issues/640)
 - Fix Android 16 Landroid status bar color
 - Fix Rocket Launcher scale in animation
+- Remove Telegram group entrance
 - Upgrade project dependencies
 
 ### v4.1.0 (2025-07-07)

@@ -6,6 +6,7 @@
 - 修复 Landroid 着陆时进入行星内部 [#640](https://github.com/hushenghao/AndroidEasterEggs/issues/640)
 - 修复 Android 16 Landroid 状态栏颜色
 - 修复 Rocket Launcher 缩放进入动画
+- 移除 Telegram 群聊入口
 - 升级项目依赖项
 
 ### v4.1.0 (2025-07-07)

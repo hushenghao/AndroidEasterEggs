@@ -13,40 +13,6 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-require "uri"
-require "net/http"
-
-def send_telegram_photo(token = ENV["TELEGRAM_TOKEN"], chat_id = ENV["TELEGRAM_TO"], photo = nil, caption)
-  if token == nil
-    puts "⚠️ token is nil, skip!"
-    return
-  end
-  if chat_id == nil
-    puts "⚠️ chat_id is nil, skip!"
-    return
-  end
-
-  if photo == nil
-    photo = "https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/fastlane/metadata/android/en-US/images/featureGraphic.png"
-  end
-
-  # https://core.telegram.org/bots/api#sendphoto
-  url = URI("https://api.telegram.org/bot#{token}/sendPhoto")
-  https = Net::HTTP.new(url.host, url.port)
-  https.use_ssl = true
-
-  request = Net::HTTP::Post.new(url)
-  form_data = [
-    ["chat_id", chat_id],
-    ["parse_mode", "Markdown"],
-    ["caption", caption],
-    ["photo", photo],
-  ]
-  request.set_form form_data, "multipart/form-data"
-  response = https.request(request)
-  puts response.read_body
-end
-
 def is_pre_release_ref(ref_name)
   if (ref_name =~ /v?(\d|.)+-([a-z]+)\d*/)
     return true
@@ -74,30 +40,6 @@ platform :android do
       api_key: ENV["PGYER_API_KEY"],
       update_description: changelogs_zh,
     )
-
-    # Send to Telegram
-    pgyer_build_key = pgyer_answer["buildKey"]
-    commit_hash = last_git_commit[:commit_hash]
-    message = <<~EOF
-      *Easter Eggs*
-
-      🚀 New Alpha Version ! 🎉
-
-      *🧑‍💻 Build:*
-
-      - Commit: [#{commit_hash}](https://github.com/hushenghao/AndroidEasterEggs/commit/#{commit_hash})
-      - Build Key: [#{pgyer_build_key}](https://www.pgyer.com/#{pgyer_build_key})
-
-      *🔗 Links:*
-
-      - ⬇️ [Download](https://www.pgyer.com/#{pgyer_build_key})
-      - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
-
-      *❇️ Changelogs:*
-
-      #{changelogs_en}
-    EOF
-    send_telegram_photo(message)
   end
 
   desc "Deploy to Github release"
@@ -151,29 +93,6 @@ platform :android do
       description: changelogs,
       upload_assets: [apk_path, mapping_zip],
     )
-
-    commit_hash = last_git_commit[:commit_hash]
-    # Send to Telegram
-    message = <<~EOF
-      *Easter Eggs*
-
-      🚀 New Version Released ! 🎉
-
-      *🧑‍💻 Build:*
-
-      - Version: #{ref_name}
-      - Commit: [#{commit_hash}](https://github.com/hushenghao/AndroidEasterEggs/commit/#{commit_hash})
-
-      *🔗 Links:*
-
-      - ⬇️ [Download](#{github_release["html_url"]})
-      - 🐙 [Source Code](https://github.com/hushenghao/AndroidEasterEggs)
-
-      *❇️ Changelogs:*
-
-      #{changelogs}
-    EOF
-    send_telegram_photo(message)
   end
 
   desc "Deploy to Google Play"
