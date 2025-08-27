@@ -2,7 +2,7 @@
 kotlin = "2.2.10"
 ksp = "2.2.10-2.0.2"
 agp = "8.12.1"
-hilt = "2.57"
+hilt = "2.57.1"
 # https://developer.android.com/develop/ui/compose/bom/bom-mapping
 compose-bom = "2025.08.00"
 # https://google.github.io/accompanist
