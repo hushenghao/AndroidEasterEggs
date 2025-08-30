@@ -34,4 +34,5 @@
     <string name="locale_lang_ro">Romeno</string>
     <string name="locale_lang_sv_SE">Sueco</string>
     <string name="locale_lang_my_MM">Birmanês</string>
+    <string name="locale_lang_bn_BD">Bengali</string>
 </resources>
