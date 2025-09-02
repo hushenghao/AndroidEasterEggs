@@ -75,7 +75,10 @@ fun ColorPaletteDialog(
         onDismissRequest = {
             visible = false
         },
-        contentWindowInsets = { WindowInsets(0, 0, 0, 0) }
+        contentWindowInsets = {
+            // add child padding
+            WindowInsets(0, 0, 0, 0)
+        }
     ) {
         val hsv = selectedColor.getHsv()
         var hue by remember { mutableFloatStateOf(hsv[0]) }

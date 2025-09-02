@@ -3,16 +3,15 @@
 package com.dede.android_eggs.views.timeline
 
 import androidx.annotation.DrawableRes
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
@@ -29,7 +28,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -45,7 +43,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -83,22 +80,8 @@ fun TimelineListDialog(
     if (!visible) {
         return
     }
-    var sheetExpanded by remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState(
-        confirmValueChange = {
-            sheetExpanded = it == SheetValue.Expanded
-            true
-        }
-    )
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val paddingValues = WindowInsets.safeDrawing.asPaddingValues()
-    val topPadding by animateDpAsState(
-        targetValue = if (sheetExpanded)
-            max(0.dp, (paddingValues.calculateTopPadding() - 16.dp))
-        else
-            0.dp,
-        label = "ModalBottomSheet contentWindowInsetTop",
-        animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
-    )
     ModalBottomSheet(
         onDismissRequest = {
             visible = false
@@ -107,7 +90,7 @@ fun TimelineListDialog(
         scrimColor = scrimColor,
         sheetState = sheetState,
         contentWindowInsets = {
-            WindowInsets(0.dp, topPadding, 0.dp, 0.dp)
+            WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
         },
     ) {
         LazyColumn(
