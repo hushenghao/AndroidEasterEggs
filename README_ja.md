@@ -1,19 +1,23 @@
-# Android Easter Egg Collections
-
-Androidリリースのイースターエッグを収集
-
-[![GitHub license](https://img.shields.io/github/license/hushenghao/AndroidEasterEggs?logo=apache&label=License&style=flat)](https://github.com/hushenghao/AndroidEasterEggs/blob/master/LICENSE)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/hushenghao/AndroidEasterEggs/total?logo=github&label=Downloads&style=flat)
-![Play Store installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.dede.android_eggs%26l%3DInstalls%26m%3D%24shortinstalls&style=flat&logo=googleplay)
-[![GitHub Pgyer CI Status](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/pgyer.yml?logo=github&label=Pgyer%20CI&style=flat)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/pgyer.yml)
-[![Crowdin](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fbadges.crowdin.net%2Feaster-eggs%2Flocalized.svg&query=%2F*%5Blocal-name()%3D'svg'%5D%2F*%5Blocal-name()%3D'g'%5D%2F*%5Blocal-name()%3D'text'%5D%5Blast()%5D&style=flat&logo=crowdin&label=Localized&labelColor=%23555&color=%234c1)](https://crowdin.com/project/easter-eggs)
-[![Featured｜HelloGitHub](https://api.hellogithub.com/v1/widgets/recommend.svg?rid=6dc746d7397446ad91a05fae03bf2a1c&claim_uid=DU42yF0SLpPH9qO&theme=small)](https://hellogithub.com/repository/hushenghao/AndroidEasterEggs)
+# Android Easter Eggs
 
 ![featureGraphic](fastlane/metadata/android/en-US/images/featureGraphic.png)
 
 <div align="center">
 
 **[English](./README.md) • [中文](./README_zh.md) • [日本語](./README_ja.md)**
+
+<a href="https://hellogithub.com/repository/hushenghao/AndroidEasterEggs">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=6dc746d7397446ad91a05fae03bf2a1c&claim_uid=DU42yF0SLpPH9qO&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=6dc746d7397446ad91a05fae03bf2a1c&claim_uid=DU42yF0SLpPH9qO&theme=light" />
+   <img alt="Featured｜HelloGitHub" src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=6dc746d7397446ad91a05fae03bf2a1c&claim_uid=DU42yF0SLpPH9qO&theme=light" />
+ </picture>
+</a>
+
+![GitHub downloads](https://img.shields.io/github/downloads/hushenghao/AndroidEasterEggs/total?logo=github&label=Downloads&style=for-the-badge)
+![Play Store installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dcom.dede.android_eggs%26l%3DInstalls%26m%3D%24shortinstalls&style=for-the-badge&logo=googleplay)
+[![Crowdin](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fbadges.crowdin.net%2Feaster-eggs%2Flocalized.svg&query=%2F*%5Blocal-name()%3D'svg'%5D%2F*%5Blocal-name()%3D'g'%5D%2F*%5Blocal-name()%3D'text'%5D%5Blast()%5D&style=for-the-badge&logo=crowdin&label=Localized&labelColor=%23555&color=%234c1)](https://crowdin.com/project/easter-eggs)
+[![GitHub Pgyer CI status](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/pgyer.yml?logo=githubactions&logoColor=white&label=Pgyer%20CI&style=for-the-badge)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/pgyer.yml)
 
 </div>
 
