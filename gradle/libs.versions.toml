@@ -7,7 +7,7 @@ hilt = "2.57.1"
 compose-bom = "2025.08.00"
 # https://google.github.io/accompanist
 accompanist = "0.37.3"
-lifecycle = "2.9.2"
+lifecycle = "2.9.3"
 activity = "1.10.1"
 room = "2.7.2"
 # test
