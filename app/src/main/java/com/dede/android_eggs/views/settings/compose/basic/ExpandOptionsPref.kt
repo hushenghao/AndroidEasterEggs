@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.util.compose.bottom
 import com.dede.android_eggs.util.compose.top
+import com.dede.android_eggs.views.settings.LocalExpandOptionsPrefState
 
 @Composable
 internal fun ExpandOptionsPrefTrailing(
@@ -115,8 +116,10 @@ fun ExpandOptionsPref(
     initializeExpanded: Boolean = false,
     options: @Composable ColumnScope.() -> Unit
 ) {
+    val expandedState = LocalExpandOptionsPrefState.current
+        ?: rememberSaveable { mutableStateOf(initializeExpanded) }
     ExpandOptionsPref(
-        expandedState = rememberSaveable { mutableStateOf(initializeExpanded) },
+        expandedState = expandedState,
         leadingIcon = leadingIcon,
         title = title,
         desc = desc,

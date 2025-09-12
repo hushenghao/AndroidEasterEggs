@@ -3,7 +3,9 @@
 package com.dede.android_eggs.views.settings
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -26,10 +28,20 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.compositionLocalWithComputedDefaultOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -55,6 +67,7 @@ import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPref
 import com.dede.android_eggs.views.settings.compose.prefs.RocketLauncherPref
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePref
 import com.dede.android_eggs.views.settings.compose.prefs.TimelinePref
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import com.dede.android_eggs.resources.R as StringsR
 
@@ -146,7 +159,7 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
 
                 RocketLauncherPref()
 
-                ComponentManagerPref()
+                ExpandOptionsPrefFocusWrapper { ComponentManagerPref() }
 
                 if (!SplitUtils.isActivityEmbedded(context)) {
                     RetainInRecentsPref()
@@ -154,13 +167,45 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
 
                 SettingDivider()
 
-                ContributeGroup()
+                ExpandOptionsPrefFocusWrapper { ContributeGroup() }
 
-                AboutGroup()
+                ExpandOptionsPrefFocusWrapper { AboutGroup() }
 
-                ContactMeGroup()
-
+                ExpandOptionsPrefFocusWrapper { ContactMeGroup() }
             }
         }
     }
+}
+
+@Composable
+private fun ExpandOptionsPrefFocusWrapper(
+    initializeExpanded: Boolean = false,
+    content: @Composable () -> Unit
+) {
+    val expandedState = rememberSaveable { mutableStateOf(initializeExpanded) }
+    val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
+
+    LaunchedEffect(expandedState.value) {
+        if (expandedState.value) {
+            focusManager.clearFocus(true)
+            delay(50)
+            focusRequester.requestFocus()
+        } else {
+            focusRequester.freeFocus()
+        }
+    }
+    Box(
+        modifier = Modifier
+            .focusRequester(focusRequester)
+            .focusable()
+    ) {
+        CompositionLocalProvider(
+            LocalExpandOptionsPrefState provides expandedState, content
+        )
+    }
+}
+
+internal val LocalExpandOptionsPrefState = compositionLocalWithComputedDefaultOf<MutableState<Boolean>?> {
+    null
 }
