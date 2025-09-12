@@ -1,8 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
 pluginManagement {
-    includeBuild("build-logic")
     repositories {
+        includeBuild("build-logic")
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -18,9 +18,15 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
+        google{
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
-        maven { setUrl("https://jitpack.io") }
+        maven("https://jitpack.io") { name = "JitPack" }
     }
 }
 
