@@ -64,6 +64,7 @@ fun SettingPref(
 
 @Composable
 fun SettingPref(
+    modifier: Modifier = Modifier,
     leadingIcon: ImageVector,
     title: String,
     desc: String? = null,
@@ -73,6 +74,7 @@ fun SettingPref(
     content: @Composable ColumnScope.() -> Unit = {},
 ) {
     SettingPref(
+        modifier = modifier,
         leadingIcon = {
             Box(Modifier.padding(start = 14.dp)) {
                 Icon(imageVector = leadingIcon, contentDescription = title)
@@ -89,6 +91,7 @@ fun SettingPref(
 
 @Composable
 fun SettingPref(
+    modifier: Modifier = Modifier,
     leadingIcon: (@Composable () -> Unit)? = null,
     title: String,
     desc: String? = null,
@@ -103,7 +106,7 @@ fun SettingPref(
     Card(
         shape = shape,
         colors = cardColors,
-        modifier = Modifier.animateContentSize(),
+        modifier = Modifier.animateContentSize() then modifier,
     ) {
         Card(
             onClick = onClick,

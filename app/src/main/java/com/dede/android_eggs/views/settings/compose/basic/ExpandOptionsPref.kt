@@ -9,6 +9,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInVertically
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,14 +40,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.util.compose.bottom
 import com.dede.android_eggs.util.compose.top
-import com.dede.android_eggs.views.settings.LocalExpandOptionsPrefState
+import kotlinx.coroutines.delay
 
 @Composable
 internal fun ExpandOptionsPrefTrailing(
@@ -78,7 +83,23 @@ fun ExpandOptionsPref(
     },
     options: @Composable ColumnScope.() -> Unit
 ) {
+    val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
+
+    LaunchedEffect(expandedState.value) {
+        if (expandedState.value) {
+            focusManager.clearFocus(true)
+            delay(100)
+            focusRequester.requestFocus()
+        } else {
+            focusRequester.freeFocus()
+        }
+    }
+
     SettingPref(
+        modifier = Modifier
+            .focusRequester(focusRequester)
+            .focusable(),
         leadingIcon = leadingIcon,
         title = title,
         desc = desc,
@@ -116,8 +137,7 @@ fun ExpandOptionsPref(
     initializeExpanded: Boolean = false,
     options: @Composable ColumnScope.() -> Unit
 ) {
-    val expandedState = LocalExpandOptionsPrefState.current
-        ?: rememberSaveable { mutableStateOf(initializeExpanded) }
+    val expandedState = rememberSaveable { mutableStateOf(initializeExpanded) }
     ExpandOptionsPref(
         expandedState = expandedState,
         leadingIcon = leadingIcon,
