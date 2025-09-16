@@ -39,8 +39,8 @@ This project contains the complete code for all Android Easter eggs, aiming to o
 
 </div>
 
-* **Play Store** uses [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756). This may cause app updates from other sources to fail.
-* **Pgyer** has the alpha version. Alpha versions contain unfinished features that are not final and could be removed or reworked without notice. They may contain bugs.
+* **Play Store** uses [Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756). This will cause app updates from other sources to fail. You will need to uninstall the Play Store version and install the other source's version to update from another source and vice versa.
+* **Pgyer** hosts the Alpha version. Alpha versions contain unfinished features that are not final and may be removed, reworked or replaced without notice. They may contain bugs.
 
 ## Contributing
 
@@ -74,7 +74,7 @@ development here.
 ## License
 
 ```text
-Copyright 2024 Hu Shenghao
+Copyright 2025 Hu Shenghao
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

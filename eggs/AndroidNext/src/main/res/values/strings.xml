@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="summary_android_waiting">Currently unavailable</string>
-    <string name="summary_android_release_pushed">The final release version has been released</string>
+    <string name="summary_android_release_pushed">The final release version has been released.</string>
 
     <string name="label_timeline_title">Timeline, milestones, and updates</string>
     <string name="label_timeline_releases">Releases</string>
