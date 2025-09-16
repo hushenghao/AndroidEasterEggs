@@ -16,7 +16,7 @@
     <string name="locale_lang_ja_JP">Japoński</string>
     <string name="locale_lang_pl_PL">Polski</string>
     <string name="locale_lang_nl_NL">Holenderski</string>
-    <string name="locale_lang_la_LA">Łacina</string>
+    <string name="locale_lang_la_LA">Łaciński</string>
     <string name="locale_lang_fr">Francuski</string>
     <string name="locale_lang_uk_UA">Ukraiński</string>
     <string name="locale_lang_tr_TR">Turecki</string>
@@ -34,4 +34,5 @@
     <string name="locale_lang_ro">Rumuński</string>
     <string name="locale_lang_sv_SE">Szwedzki</string>
     <string name="locale_lang_my_MM">Birmański</string>
+    <string name="locale_lang_bn_BD">Bengalski</string>
 </resources>
