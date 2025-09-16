@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Title of the Android Dreams (screensaver) module -->
+    <string name="rocket_launcher_dream_name">Uruchamiacz rakietowy</string>
+    <string name="rocket_launcher_desc">Easter Egg ekranu głównego w Androidzie 4.0 (Ice Cream Sandwich)</string>
+</resources>
