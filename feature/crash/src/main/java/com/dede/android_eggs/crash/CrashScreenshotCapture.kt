@@ -106,7 +106,7 @@ object CrashScreenshotCapture : Application.ActivityLifecycleCallbacks by noOpDe
         if (!dir.exists()) {
             dir.mkdirs()
         }
-        val file = File(dir, "screenshot_${System.currentTimeMillis()}.png")
+        val file = File(dir, "screenshot_${System.currentTimeMillis()}.webp")
         if (file.exists()) {
             file.delete()
         }
