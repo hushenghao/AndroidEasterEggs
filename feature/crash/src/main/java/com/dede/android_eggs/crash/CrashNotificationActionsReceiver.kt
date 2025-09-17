@@ -12,7 +12,7 @@ class CrashNotificationActionsReceiver : BroadcastReceiver() {
         fun copyActionIntent(context: Context, tr: Throwable): Intent {
             return Intent(ACTION_COPY)
                 .setPackage(context.packageName)
-                .putExtra(Utilities.INTENT_DATA_NAME, tr)
+                .putExtra(Utilities.EXTRA_THROWABLE, tr)
         }
     }
 

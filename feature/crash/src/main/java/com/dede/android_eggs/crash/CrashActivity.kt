@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import com.dede.android_eggs.views.theme.EasterEggsTheme
 
 /**
@@ -34,10 +34,11 @@ class CrashActivity : AppCompatActivity() {
             request.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
 
+        val screenshotPath = intent.getStringExtra(Utilities.EXTRA_SCREENSHOT_PATH)
         setContent {
             EasterEggsTheme {
-                Surface {
-                    CrashScreen(throwable)
+                Scaffold {
+                    CrashScreen(it, throwable, screenshotPath)
                 }
             }
         }

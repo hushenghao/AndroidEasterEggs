@@ -1,4 +1,4 @@
-package com.dede.android_eggs.activity_actions
+package com.dede.android_eggs.util
 
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Proxy
@@ -14,13 +14,13 @@ import java.lang.reflect.Proxy
  * }
  * ```
  */
-internal inline fun <reified T> noOpDelegate(): T {
+inline fun <reified T> noOpDelegate(): T {
     val javaClass = T::class.java
     return Proxy.newProxyInstance(
         javaClass.classLoader, arrayOf(javaClass), NO_OP_HANDLER
     ) as T
 }
 
-private val NO_OP_HANDLER = InvocationHandler { _, _, _ ->
+val NO_OP_HANDLER = InvocationHandler { _, _, _ ->
     // no-op
 }

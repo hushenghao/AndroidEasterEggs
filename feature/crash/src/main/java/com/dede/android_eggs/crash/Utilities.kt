@@ -21,7 +21,8 @@ import com.dede.basic.copy
 
 internal object Utilities {
 
-    const val INTENT_DATA_NAME = "extra_throwable"
+    const val EXTRA_THROWABLE = "extra_throwable"
+    const val EXTRA_SCREENSHOT_PATH = "extra_screenshot"
 
     private const val NOTIFICATION_ID = 1
     private const val NOTIFICATION_CHANNEL = "crash_notification_channel"
@@ -127,7 +128,7 @@ internal object Utilities {
 
     fun getUncaughtException(intent: Intent?): Throwable? {
         return IntentCompat.getSerializableExtra(
-            intent ?: return null, INTENT_DATA_NAME, Throwable::class.java
+            intent ?: return null, EXTRA_THROWABLE, Throwable::class.java
         )
     }
 }

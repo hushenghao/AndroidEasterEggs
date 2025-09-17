@@ -7,7 +7,6 @@ import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import androidx.startup.Initializer
-import com.dede.android_eggs.activity_actions.noOpDelegate
 import com.dede.android_eggs.util.actions.EggActivityAction
 import com.dede.android_eggs.util.actions.RequestNotificationPermissionAction
 import com.dede.android_eggs.util.actions.WarningDialogAction

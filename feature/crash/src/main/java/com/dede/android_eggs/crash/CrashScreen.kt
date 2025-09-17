@@ -2,10 +2,16 @@ package com.dede.android_eggs.crash
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.BitmapFactory
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +20,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -24,6 +29,7 @@ import androidx.compose.material.icons.rounded.ContentCopy
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.PowerSettingsNew
 import androidx.compose.material.icons.rounded.RestartAlt
+import androidx.compose.material.icons.rounded.Screenshot
 import androidx.compose.material.icons.rounded.SentimentDissatisfied
 import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
@@ -41,6 +47,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -58,7 +65,11 @@ import kotlin.system.exitProcess
 
 @Composable
 @Preview(showSystemUi = true)
-internal fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
+internal fun CrashScreen(
+    padding: PaddingValues = PaddingValues(0.dp),
+    tr: Throwable = IllegalStateException("test"),
+    screenshotPath: String? = null
+) {
     var expanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
 
@@ -81,7 +92,9 @@ internal fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
         }
     }
 
-    Box {
+    var showScreenshot by remember { mutableStateOf(false) }
+
+    Box(modifier = Modifier.padding(padding)) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -92,9 +105,7 @@ internal fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
             Icon(
                 imageVector = Icons.Rounded.SentimentDissatisfied,
                 contentDescription = null,
-                modifier = Modifier
-                    .statusBarsPadding()
-                    .size(42.dp),
+                modifier = Modifier.size(42.dp),
                 tint = colorScheme.primary
             )
             Spacer(modifier = Modifier.height(6.dp))
@@ -110,7 +121,6 @@ internal fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
                 shape = shapes.extraLarge,
                 modifier = Modifier
                     .fillMaxWidth(fraction = 0.9f)
-                    .navigationBarsPadding()
                     .animateContentSize()
             ) {
                 Row(
@@ -139,8 +149,7 @@ internal fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
         IconButton(
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .padding(top = 12.dp, end = 12.dp)
-                .statusBarsPadding(),
+                .padding(top = 12.dp, end = 12.dp),
             onClick = {
                 exitProcess(0)
             },
@@ -173,6 +182,19 @@ internal fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
                     contentDescription = null
                 )
             }
+            if (screenshotPath != null) {
+                FloatingActionButton(
+                    onClick = {
+                        showScreenshot = true
+                    },
+                    shape = FloatingActionButtonDefaults.largeShape
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Screenshot,
+                        contentDescription = null
+                    )
+                }
+            }
             FloatingActionButton(
                 onClick = {
                     Utilities.copyThrowablePlantText(context, tr)
@@ -200,6 +222,22 @@ internal fun CrashScreen(tr: Throwable = IllegalStateException("test")) {
                     contentDescription = null
                 )
             }
+        }
+
+        AnimatedVisibility(showScreenshot && screenshotPath != null) {
+            val imageBitmap = remember(screenshotPath) {
+                BitmapFactory.decodeFile(screenshotPath).asImageBitmap()
+            }
+            Image(
+                bitmap = imageBitmap,
+                contentDescription = null,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .border(2.dp, colorScheme.error)
+                    .clickable {
+                        showScreenshot = false
+                    },
+            )
         }
     }
 }
