@@ -18,6 +18,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.TextUtils
 import androidx.annotation.DrawableRes
+import androidx.core.graphics.createBitmap
 import androidx.core.graphics.withSave
 import com.dede.android_eggs.util.PathInflater
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
@@ -180,9 +181,7 @@ class AlterableAdaptiveIconDrawable(
 
         val bitmap = layerBitmap
         if (bitmap == null || bounds.width() != bitmap.width || bounds.height() != bitmap.height) {
-            layerBitmap = Bitmap.createBitmap(
-                bounds.width(), bounds.height(), Bitmap.Config.ARGB_8888
-            )
+            layerBitmap = createBitmap(bounds.width(), bounds.height())
         }
         paint.shader = null
         layerShader = null

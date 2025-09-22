@@ -13,6 +13,11 @@ import kotlin.math.max
 class EasterEggLogoSensorMatrixConvert @Inject constructor() :
     OrientationAngleSensor.OnOrientationAnglesUpdate {
 
+        companion object {
+            private const val DEGREES_THRESHOLD = 3f
+            private const val OFFSET_RATIO = 0.1f
+        }
+
     private val list = ArrayList<Listener>()
 
     fun register(listener: Listener) {
@@ -25,8 +30,8 @@ class EasterEggLogoSensorMatrixConvert @Inject constructor() :
 
     abstract class Listener(bounds: Rect) {
 
-        private val width = bounds.width() / 6f
-        private val height = bounds.height() / 6f
+        private val width = bounds.width() * OFFSET_RATIO
+        private val height = bounds.height() * OFFSET_RATIO
 
         private val matrix = Matrix()
 
@@ -57,7 +62,7 @@ class EasterEggLogoSensorMatrixConvert @Inject constructor() :
     override fun updateOrientationAngles(zAngle: Float, xAngle: Float, yAngle: Float) {
         val xDegrees = xAngle.toRoundDegrees()// 俯仰角
         val yDegrees = yAngle.toRoundDegrees()// 侧倾角
-        if (max(abs(lastXDegrees - xDegrees), abs(lastYDegrees - yDegrees)) < 5f) return
+        if (max(abs(lastXDegrees - xDegrees), abs(lastYDegrees - yDegrees)) < DEGREES_THRESHOLD) return
 
         animator?.cancel()
         val saveXDegrees = lastXDegrees

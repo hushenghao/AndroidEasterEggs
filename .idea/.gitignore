@@ -15,5 +15,4 @@ appInsightsSettings.xml
 other.xml
 runConfigurations.xml
 modules.xml
-copilot.data.migration.agent.xml
-copilot.data.migration.edit.xml
+copilot.data.migration.*.xml
