@@ -15,9 +15,13 @@ data class TimelineEvent(
     val month: Int,
     val apiLevel: Int,
     val event: CharSequence,
+    val fullApiLevel: Int = apiLevel * SDK_INT_MULTIPLIER,
 ) {
 
     companion object {
+
+        // android.os.Build.VERSION_CODES_FULL#SDK_INT_MULTIPLIER
+        const val SDK_INT_MULTIPLIER = 100000
 
         @JvmStatic
         fun timelineEvent(apiLevel: Int, event: CharSequence): TimelineEvent {

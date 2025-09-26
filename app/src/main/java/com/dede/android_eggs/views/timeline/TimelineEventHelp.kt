@@ -21,6 +21,9 @@ object TimelineEventHelp {
             if (order == 0) {
                 order = o2.apiLevel.compareTo(o1.apiLevel)
             }
+            if (order == 0) {
+                order = o2.fullApiLevel.compareTo(o1.fullApiLevel)
+            }
             return order
         }
     }
