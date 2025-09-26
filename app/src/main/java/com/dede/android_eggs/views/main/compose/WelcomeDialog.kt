@@ -51,12 +51,12 @@ fun isAgreedPrivacyPolicy(context: Context): Boolean {
 }
 
 private val pagers = intArrayOf(
+    R.drawable.img_interop,
     R.drawable.img_android_ai_tools_hero,
     R.drawable.img_compose_cluster,
     R.drawable.img_build_apps,
     R.drawable.img_launch_app,
     R.drawable.img_billions,
-    R.drawable.img_better_together_hero,
     R.drawable.img_controllers,
     R.drawable.img_android_studio,
     R.drawable.img_samples,
