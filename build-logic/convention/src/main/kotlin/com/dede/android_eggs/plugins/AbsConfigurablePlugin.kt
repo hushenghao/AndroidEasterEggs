@@ -107,7 +107,7 @@ abstract class AbsConfigurablePlugin(
     private fun Project.configureAndroid(configurable: Configurable) {
 
         android<CommonExtension<*, *, *, *, *, *>> {
-            compileSdk = Versions.COMPILE_SDK
+            compileSdk(Versions.compileSdk)
             buildToolsVersion = Versions.BUILD_TOOLS
 
             defaultConfig {
@@ -127,7 +127,7 @@ abstract class AbsConfigurablePlugin(
                 ModuleType.APP -> {
                     with(this as AppExtension) {
                         defaultConfig {
-                            targetSdk = Versions.TARGET_SDK
+                            targetSdk(Versions.targetSdk)
                         }
                     }
                 }
