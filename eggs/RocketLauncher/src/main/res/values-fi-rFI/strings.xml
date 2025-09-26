@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Title of the Android Dreams (screensaver) module -->
+    <string name="rocket_launcher_dream_name">Rocket Launcher</string>
+    <string name="rocket_launcher_desc">Pääsiäismuna käynnistysohjelmassa Android 4.0:ssa (Ice Cream Sandwich)</string>
+</resources>
