@@ -1,5 +1,10 @@
 # Changelog
 
+### v4.2.1
+- Add no Easter egg toast for Android 2.2
+- Update translations
+- Upgrade project dependencies
+
 ### v4.2.0 (2025-08-25)
 
 - Use Composable wavy line

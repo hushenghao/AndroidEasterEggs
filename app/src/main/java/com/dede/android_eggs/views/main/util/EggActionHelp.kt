@@ -7,6 +7,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.widget.Toast
 import androidx.core.content.getSystemService
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.SplitUtils
@@ -15,6 +16,9 @@ import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPrefUti
 import com.dede.basic.Utils
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.toast
+import com.dede.basic.uiHandler
+import java.lang.ref.WeakReference
+import com.dede.android_eggs.resources.R as StringR
 
 
 object EggActionHelp {
@@ -45,11 +49,36 @@ object EggActionHelp {
             }
     }
 
+    private object NoEggAction : Function1<Context, Unit>, Runnable {
+        private const val RESET_DELAY = 3000L
+
+        private var showDetail = false
+        private var toastRef: WeakReference<Toast>? = null
+
+        override fun invoke(context: Context) {
+            if (!showDetail) {
+                toastRef = WeakReference(context.toast(R.string.toast_no_egg))
+                showDetail = true
+                return
+            }
+            // show detail toast, for rookies
+            toastRef?.get()?.cancel()
+            context.toast(StringR.string.toast_no_egg_detail)
+
+            uiHandler.removeCallbacks(this)
+            uiHandler.postDelayed(this, RESET_DELAY)
+        }
+
+        override fun run() {
+            showDetail = false
+        }
+    }
+
     fun launchEgg(context: Context, egg: EasterEgg) {
         val targetClass = egg.actionClass
         if (targetClass == null) {
             if (!egg.onEasterEggAction(context)) {
-                context.toast(R.string.toast_no_egg)
+                NoEggAction.invoke(context)
             }
             return
         }

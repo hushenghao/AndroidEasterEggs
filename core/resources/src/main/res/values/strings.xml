@@ -40,6 +40,8 @@
     <string name="preference_off">Off</string>
 
     <string name="toast_shortcut_added">Shortcut added to home screen</string>
+    <string name="toast_no_egg_detail">This Android version doesn\'t have an Easter Egg</string>
+
     <string name="app_widget_description">This is the Easter Eggs analog clock</string>
     <string name="action_agree">I agree</string>
     <string name="summary_browse_privacy_policy">By continuing you agree to the Easter Egg\'s privacy policy.</string>

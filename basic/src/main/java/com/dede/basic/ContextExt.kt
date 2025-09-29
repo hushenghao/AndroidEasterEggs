@@ -55,12 +55,12 @@ fun Context.getActivity(): Activity? {
     return null
 }
 
-fun Context.toast(@StringRes resId: Int, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(this, resId, duration).show()
+fun Context.toast(@StringRes resId: Int, duration: Int = Toast.LENGTH_SHORT): Toast {
+    return Toast.makeText(this, resId, duration).apply(Toast::show)
 }
 
-fun Context.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(this, text, duration).show()
+fun Context.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT): Toast {
+    return Toast.makeText(this, text, duration).apply(Toast::show)
 }
 
 fun Context.createChooser(target: Intent, title: CharSequence? = null): Intent {

@@ -33,6 +33,7 @@
     <string name="preference_on">开启</string>
     <string name="preference_off">关闭</string>
     <string name="toast_shortcut_added">已添加快捷方式</string>
+    <string name="toast_no_egg_detail">这个安卓版本没有 Easter Egg</string>
     <string name="app_widget_description">这是 Easter Eggs 模拟时钟</string>
     <string name="action_agree">同意</string>
     <string name="summary_browse_privacy_policy">继续即表示您同意 Easter Eggs 的隐私政策</string>
