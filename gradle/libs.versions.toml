@@ -68,7 +68,7 @@ shreyaspatil-capturable = "dev.shreyaspatil:capturable:3.0.1"
 dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.5"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
 free-reflection = "com.github.tiann:FreeReflection:3.2.2"
-squareup-okio = { module = "com.squareup.okio:okio", version = "3.16.1" }
+squareup-okio = { module = "com.squareup.okio:okio", version = "3.16.2" }
 squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.14"
 squareup-curtains = "com.squareup.curtains:curtains:1.2.5"
 nanohttpd = "org.nanohttpd:nanohttpd:2.3.1"
