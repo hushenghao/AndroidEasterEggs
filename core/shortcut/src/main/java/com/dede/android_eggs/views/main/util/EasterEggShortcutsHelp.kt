@@ -150,12 +150,13 @@ object EasterEggShortcutsHelp {
                         } catch (_: RuntimeException) {
                         }
                     }
-                    // already pinned, perform callback
-                    PinShortcutReceiver.performCallback(context, callback)
-                    return@execute
+                    if (pinedShortcut.isPinned) {
+                        // already pinned, perform callback
+                        PinShortcutReceiver.performCallback(context, callback)
+                        return@execute
+                    }
                 }
-            } catch (e: IllegalStateException) {
-                e.printStackTrace()
+            } catch (_: IllegalStateException) {
             }
 
             try {
@@ -169,7 +170,10 @@ object EasterEggShortcutsHelp {
     fun autoReportShortcutUsed(context: Context, intent: Intent) {
         val shortcutId = intent.getStringExtra(EXTRA_SHORTCUT_ID) ?: return
         cachedExecutor.execute {
-            ShortcutManagerCompat.reportShortcutUsed(context, shortcutId)
+            try {
+                ShortcutManagerCompat.reportShortcutUsed(context, shortcutId)
+            } catch (_: RuntimeException) {
+            }
         }
     }
 
