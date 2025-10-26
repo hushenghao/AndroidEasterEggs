@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="summary_android_waiting">En attente…</string>
-    <string name="summary_android_release_pushed">La version finale a été publiée</string>
+    <string name="summary_android_waiting">Indisponible pour le moment</string>
+    <string name="summary_android_release_pushed">La version définitive a été publiée.</string>
     <string name="label_timeline_title">Chronologie, jalons et mises à jour</string>
     <string name="label_timeline_releases">Sorties</string>
     <string name="label_timeline_developer_previews">Aperçus pour les développeurs</string>
     <string name="label_timeline_beta_release">Versions bêta</string>
     <string name="label_timeline_platform_stability">Stabilité de la plateforme</string>
-    <string name="label_timeline_final_release">Version finale</string>
+    <string name="label_timeline_final_release">Version définitive</string>
 </resources>
