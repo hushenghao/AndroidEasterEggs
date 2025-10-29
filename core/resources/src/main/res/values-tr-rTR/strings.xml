@@ -33,6 +33,7 @@
     <string name="preference_on">Açık</string>
     <string name="preference_off">Kapalı</string>
     <string name="toast_shortcut_added">Kısayol ana ekrana eklendi.</string>
+    <string name="toast_no_egg_detail">Bu Android sürümünde Paskalya Yumurtası yok</string>
     <string name="app_widget_description">Bu, Paskalya Yumurtaları analog saatidir</string>
     <string name="action_agree">Kabul ediyorum</string>
     <string name="summary_browse_privacy_policy">Devam etmek için Gizlilik Politikamızı okuyun ve kabul edin.</string>

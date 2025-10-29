@@ -27,12 +27,13 @@
     <string name="summary_system_default">ডিফল্ট</string>
     <string name="summary_theme_dark_mode">অন্ধকার</string>
     <string name="summary_theme_light_mode">আলো</string>
-    <string name="summary_theme_amoled_mode">কালো</string>
+    <string name="summary_theme_amoled_mode">অ্যামোলেড</string>
     <string name="label_add_shortcut">শর্টকাট</string>
     <string name="label_donate">অনুদান</string>
     <string name="preference_on">চালু</string>
     <string name="preference_off">বন্ধ</string>
     <string name="toast_shortcut_added">হোম স্ক্রিনে শর্টকাট যোগ করা হয়েছে।</string>
+    <string name="toast_no_egg_detail">অ্যান্ড্রয়েডের এই সংস্করণে কোনো ইস্টার এগ নেই</string>
     <string name="app_widget_description">এটি হলো ইস্টার এগস অ্যানালগ ঘড়ি</string>
     <string name="action_agree">আমি রাজি</string>
     <string name="summary_browse_privacy_policy">চালিয়ে যেতে আমাদের গোপনীয়তা নীতি পড়ুন এবং তাতে সম্মতি জানান।</string>

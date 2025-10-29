@@ -33,6 +33,7 @@
     <string name="preference_on">켜기</string>
     <string name="preference_off">끄기</string>
     <string name="toast_shortcut_added">바로가기가 추가됨</string>
+    <string name="toast_no_egg_detail">이 안드로이드 버전에는 이스터 에그가 존재하지 않습니다</string>
     <string name="app_widget_description">이것은 이스터 에그들이 있는 아날로그 시계입니다</string>
     <string name="action_agree">동의</string>
     <string name="summary_browse_privacy_policy">계속하려면 개인정보 보호정책을 읽고 동의하세요.</string>
