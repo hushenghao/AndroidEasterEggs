@@ -16,3 +16,4 @@ other.xml
 runConfigurations.xml
 modules.xml
 copilot.data.migration.*.xml
+deviceManager.xml
