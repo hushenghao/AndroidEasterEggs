@@ -63,7 +63,11 @@ object CatRememberDataStore {
     }
 }
 
-@Database(entities = [Cat::class], version = 1)
+@Database(
+    version = 1,
+    entities = [Cat::class],
+    exportSchema = true,
+)
 @TypeConverters(value = [CatColorsConverter::class])
 abstract class CatRememberDatabase : RoomDatabase() {
     abstract fun catDan(): CatDao
@@ -74,11 +78,12 @@ data class Cat(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Long,
     @ColumnInfo(name = "seed") val seed: Long,
-    @ColumnInfo(name = "colors") val colors: List<Color>
+    @ColumnInfo(name = "colors") val colors: List<Color>,
+    val isMirrorMode: Boolean = false,
 ) {
     companion object {
-        fun createCat(seed: Long, colors: List<Color>?): Cat {
-            return Cat(0, seed, colors ?: listOf(*CatPartColors.colors(seed)))
+        fun createCat(seed: Long, colors: List<Color>?, isMirrorMode: Boolean = false): Cat {
+            return Cat(0, seed, colors ?: listOf(*CatPartColors.colors(seed)), isMirrorMode)
         }
     }
 }
@@ -94,7 +99,7 @@ interface CatDao {
     @Delete
     suspend fun forget(cat: Cat)
 
-    @Query("SELECT EXISTS(SELECT * FROM remember_cats WHERE seed = :seed AND colors = :colors)")
+    @Query("SELECT EXISTS(SELECT * FROM remember_cats WHERE seed = :seed AND colors = :colors LIMIT 1)")
     suspend fun isFavorite(seed: Long, colors: List<Color>?): Boolean
 
     @Query("SELECT * FROM remember_cats ORDER BY id DESC")

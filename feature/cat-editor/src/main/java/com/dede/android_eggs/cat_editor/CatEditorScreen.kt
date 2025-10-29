@@ -4,6 +4,7 @@ package com.dede.android_eggs.cat_editor
 
 import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
@@ -27,6 +28,7 @@ import androidx.compose.material.icons.rounded.ContentCopy
 import androidx.compose.material.icons.rounded.Draw
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
+import androidx.compose.material.icons.rounded.Flip
 import androidx.compose.material.icons.rounded.GridOff
 import androidx.compose.material.icons.rounded.GridOn
 import androidx.compose.material.icons.rounded.MoreVert
@@ -193,6 +195,17 @@ fun CatEditorScreen() {
             }
         }
     }
+    val mirrorButton: @Composable () -> Unit = {
+        IconButton(onClick = {
+            catEditorController.resetGraphicsLayer()
+            catEditorController.isMirrorMode = !catEditorController.isMirrorMode
+        }) {
+            Icon(
+                imageVector = Icons.Rounded.Flip,
+                contentDescription = null
+            )
+        }
+    }
     val saveButton: @Composable () -> Unit = {
         SaveCatButton(
             catName = catName,
@@ -221,7 +234,10 @@ fun CatEditorScreen() {
     }
     val svgButton: @Composable () -> Unit = {
         IconButton(onClick = {
-            catSvgText = CatParts.toSvg(catEditorController.colorList)
+            catSvgText = CatParts.toSvg(
+                catEditorController.colorList, catEditorController.isMirrorMode
+            )
+            Log.i("CatEditor", "\n" + catSvgText)
             catSvgDialogState.value = true
         }) {
             Icon(
@@ -271,7 +287,7 @@ fun CatEditorScreen() {
     val menuButtonList = remember {
         listOf(
             goBackButton, goNextButton,
-            paletteButton, gridButton,
+            paletteButton, gridButton, mirrorButton,
             favoriteButton, saveButton, shareButton,
             copyButton, svgButton, inputCatButton, refreshButton,
         )
@@ -378,8 +394,16 @@ fun CatEditorScreen() {
 
             CatSvgCodeDialog(
                 catSvgDialogState,
-                cat = remember(catSeed, catEditorController.colorListVersion) {
-                    Cat.createCat(catSeed, catEditorController.colorList)
+                cat = remember(
+                    catSeed,
+                    catEditorController.colorListVersion,
+                    catEditorController.isMirrorMode
+                ) {
+                    Cat.createCat(
+                        catSeed,
+                        catEditorController.colorList,
+                        catEditorController.isMirrorMode
+                    )
                 },
                 svg = catSvgText,
             )

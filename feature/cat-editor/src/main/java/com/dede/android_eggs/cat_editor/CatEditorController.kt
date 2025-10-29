@@ -82,6 +82,8 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
 
     private val gridVisibleState = mutableStateOf(false)
 
+    private val mirrorModeState = mutableStateOf(false)
+
     private val selectEnabledState = mutableStateOf(true)
 
     private val gesturesEnabledState = mutableStateOf(true)
@@ -104,6 +106,8 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
     override var selectPart: Int by selectedPartState
 
     override var isGridVisible: Boolean by gridVisibleState
+
+    override var isMirrorMode: Boolean by mirrorModeState
 
     override var isSelectEnabled: Boolean by selectEnabledState
 
@@ -141,6 +145,8 @@ internal interface CatEditorController {
     var selectPart: Int
 
     var isGridVisible: Boolean
+
+    var isMirrorMode: Boolean
 
     val colorListVersion: Int
 

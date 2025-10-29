@@ -21,6 +21,10 @@ internal class CatPainter(private val cat: Cat) : Painter() {
     override val intrinsicSize: Size = Size.Unspecified
 
     override fun DrawScope.onDraw() {
+        if (cat.isMirrorMode) {
+            this.drawContext.transform.scale(-1f, 1f)
+        }
+
         val canvasSize = Size(this.size.minDimension, this.size.minDimension)
 
         val canvasMatrix = createCanvasMatrix(canvasSize)

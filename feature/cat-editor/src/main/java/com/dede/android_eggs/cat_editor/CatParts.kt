@@ -25,7 +25,7 @@ internal object CatParts {
 
     private object SvgParts {
         val FORMAT_SVG = """
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='%d' height='%d'>
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='%d' height='%d'%s>
           %s
         </svg>
         """.trimIndent()
@@ -400,11 +400,12 @@ internal object CatParts {
         ClosedPD(bowtie, SvgParts.BOWTIE, "bowtie"),
     )
 
-    fun toSvg(colors: List<Color>, size: Int = 512): String {
+    fun toSvg(colors: List<Color>, isMirrorMode: Boolean, size: Int = 512): String {
         val nodes = drawOrders.mapIndexed { i, draw ->
             draw.toSvgNode(colors[i])
         }.joinToString(separator = "\n  ")
-        return SvgParts.FORMAT_SVG.format(size, size, nodes)
+        val attrs = if (isMirrorMode) " transform='scale(-1,1)'" else ""
+        return SvgParts.FORMAT_SVG.format(size, size, attrs, nodes)
     }
 
     private class RoundStrokePD(

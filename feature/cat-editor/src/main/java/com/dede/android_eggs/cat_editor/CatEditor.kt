@@ -174,12 +174,17 @@ internal fun CatEditor(
             val bitmap: Bitmap? = remember(canvasSize) {
                 if (useAndroidCanvasDraw) createAndroidBitmap(canvasSize) else null
             }
+            val rotationYAnim by animateFloatAsState(if (controllerImpl.isMirrorMode) 180f else 0f)
             Canvas(
                 contentDescription = stringResource(StringR.string.cat_editor),
                 modifier = Modifier
                     .fillMaxSize()
                     .aspectRatio(1f)
                     .capturable(captureController.getDelegate())
+                    .graphicsLayer {
+                        // for mirror mode
+                        rotationY = rotationYAnim
+                    }
                     .pointerInput(controllerImpl.isSelectEnabled) {
                         if (!controllerImpl.isSelectEnabled) {
                             return@pointerInput

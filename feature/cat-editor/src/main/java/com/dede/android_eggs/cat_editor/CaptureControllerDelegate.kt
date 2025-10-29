@@ -3,8 +3,8 @@ package com.dede.android_eggs.cat_editor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.rememberGraphicsLayer
 import dev.shreyaspatil.capturable.controller.CaptureController
-import dev.shreyaspatil.capturable.controller.rememberCaptureController
 import kotlinx.coroutines.Deferred
 
 
@@ -14,8 +14,12 @@ internal class CaptureControllerDelegate private constructor(private val control
 
         @Composable
         fun rememberCaptureControllerDelegate(): CaptureControllerDelegate {
-            val captureController = rememberCaptureController()
-            return remember(captureController) { CaptureControllerDelegate(captureController) }
+            val graphicsLayer = rememberGraphicsLayer()
+            return remember(graphicsLayer) {
+                CaptureControllerDelegate(
+                    CaptureController(graphicsLayer)
+                )
+            }
         }
     }
 

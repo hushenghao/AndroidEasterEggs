@@ -78,8 +78,8 @@ internal fun CatSvgCodeDialog(
                 modifier = Modifier
                     .fillMaxHeight(0.7f)
                     .background(colorScheme.surfaceContainerHighest)
-                    .clip(shapes.large)
-                    .border(1.dp, colorScheme.outline, shapes.large),
+                    .clip(shapes.medium)
+                    .border(1.dp, colorScheme.outline, shapes.medium),
                 horizontalAlignment = Alignment.Start,
             ) {
                 Row(
