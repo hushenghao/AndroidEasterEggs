@@ -201,15 +201,15 @@ private fun buildXmlAnnotatedString(
             if (gAttrSign != null) {
                 addStyle(attrSignStyle, gAttrSign.range)
             }
-            val gValue = it.groups[3]// value
+            val gValue = it.groups[4]// value
             if (gValue != null) {
                 addStyle(attrValueStyle, gValue.range)
 
-                val gColor = it.groups[4]// color
-                if (gColor != null) {
+                val gColorRenderChar = it.groups[3]// colorRenderChar
+                if (gColorRenderChar != null) {
                     val color = gValue.value.toColorOrNull()
                     if (color != null && color.alpha > 0f) {
-                        addStyle(SpanStyle(color = color), gColor.range)
+                        addStyle(SpanStyle(color = color), gColorRenderChar.range)
                     }
                 }
             }
