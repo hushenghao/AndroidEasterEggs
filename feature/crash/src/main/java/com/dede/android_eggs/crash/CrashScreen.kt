@@ -5,6 +5,10 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -47,6 +51,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -224,7 +229,12 @@ internal fun CrashScreen(
             }
         }
 
-        AnimatedVisibility(showScreenshot && screenshotPath != null) {
+        AnimatedVisibility(
+            visible = showScreenshot && screenshotPath != null,
+            modifier = Modifier.align(Alignment.Center),
+            enter = fadeIn() + slideInVertically { it / 2 },
+            exit = fadeOut() + slideOutVertically { it / 2 },
+        ) {
             val imageBitmap = remember(screenshotPath) {
                 BitmapFactory.decodeFile(screenshotPath).asImageBitmap()
             }
@@ -232,8 +242,7 @@ internal fun CrashScreen(
                 bitmap = imageBitmap,
                 contentDescription = null,
                 modifier = Modifier
-                    .align(Alignment.Center)
-                    .border(2.dp, colorScheme.error)
+                    .border(2.dp, Color.Red)
                     .clickable {
                         showScreenshot = false
                     },
