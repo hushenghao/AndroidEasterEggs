@@ -7,6 +7,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -14,6 +15,7 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -23,12 +25,13 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
+import androidx.compose.material.icons.rounded.CenterFocusStrong
 import androidx.compose.material.icons.rounded.Code
+import androidx.compose.material.icons.rounded.Compare
 import androidx.compose.material.icons.rounded.ContentCopy
 import androidx.compose.material.icons.rounded.Draw
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
-import androidx.compose.material.icons.rounded.Flip
 import androidx.compose.material.icons.rounded.GridOff
 import androidx.compose.material.icons.rounded.GridOn
 import androidx.compose.material.icons.rounded.MoreVert
@@ -36,6 +39,8 @@ import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material.icons.rounded.Save
 import androidx.compose.material.icons.rounded.Share
+import androidx.compose.material.icons.rounded.ZoomIn
+import androidx.compose.material.icons.rounded.ZoomOut
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults.cardColors
@@ -63,6 +68,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
@@ -72,6 +78,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.util.fastForEach
 import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
 import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEditorRecords
 import com.dede.android_eggs.navigation.EasterEggsDestination
@@ -200,8 +207,44 @@ fun CatEditorScreen() {
             catEditorController.resetGraphicsLayer()
             catEditorController.isMirrorMode = !catEditorController.isMirrorMode
         }) {
+            val rotationY by animateFloatAsState(if (catEditorController.isMirrorMode) 180f else 0f)
             Icon(
-                imageVector = Icons.Rounded.Flip,
+                modifier = Modifier.graphicsLayer {
+                    this.rotationY = rotationY
+                },
+                imageVector = Icons.Rounded.Compare,
+                contentDescription = null
+            )
+        }
+    }
+    val zoomIn: @Composable () -> Unit = {
+        IconButton(
+            onClick = { catEditorController.zoom *= S_STEP },
+            enabled = catEditorController.zoom != S_MAX
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.ZoomIn,
+                contentDescription = null
+            )
+        }
+    }
+    val zoomOut: @Composable () -> Unit = {
+        IconButton(
+            onClick = { catEditorController.zoom /= S_STEP },
+            enabled = catEditorController.zoom != S_MIN
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.ZoomOut,
+                contentDescription = null
+            )
+        }
+    }
+    val resetGraphicsLayer: @Composable () -> Unit = {
+        IconButton(
+            onClick = { catEditorController.resetGraphicsLayer() },
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.CenterFocusStrong,
                 contentDescription = null
             )
         }
@@ -284,16 +327,23 @@ fun CatEditorScreen() {
         }
     }
 
-    val menuButtonList = remember {
+    val bottomMenuButtonList = remember {
         listOf(
             goBackButton, goNextButton,
-            paletteButton, gridButton, mirrorButton,
+            paletteButton,
             favoriteButton, saveButton, shareButton,
             copyButton, svgButton, inputCatButton, refreshButton,
         )
     }
 
-    var bottomButtonCount by remember { mutableIntStateOf(menuButtonList.size) }
+    val columnButtonList = remember {
+        listOf(
+            gridButton, mirrorButton,
+            resetGraphicsLayer, zoomOut, zoomIn,
+        )
+    }
+
+    var bottomButtonCount by remember { mutableIntStateOf(bottomMenuButtonList.size) }
 
     Scaffold(
         topBar = {
@@ -345,7 +395,7 @@ fun CatEditorScreen() {
         },
         bottomBar = {
             BottomOptionsBar(
-                totalOptionsCount = menuButtonList.size,
+                totalOptionsCount = bottomMenuButtonList.size,
                 onVisibleOptionCountChanged = { visibleCount, _ ->
                     bottomButtonCount = visibleCount
                 },
@@ -354,7 +404,7 @@ fun CatEditorScreen() {
                 }
             ) {
                 for (i in 0..<bottomButtonCount) {
-                    menuButtonList[i]()
+                    bottomMenuButtonList[i]()
                 }
             }
         }
@@ -369,6 +419,16 @@ fun CatEditorScreen() {
                 controller = catEditorController,
                 captureController = captureController,
             )
+
+            ColumnOptionsPopup(
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(top = 20.dp)
+            ) {
+                columnButtonList.fastForEach { button ->
+                    button()
+                }
+            }
 
             ColorPaletteDialog(
                 visibleState = colorPaletteState,
@@ -408,13 +468,13 @@ fun CatEditorScreen() {
                 svg = catSvgText,
             )
 
-            if (bottomButtonCount < menuButtonList.size) {
+            if (bottomButtonCount < bottomMenuButtonList.size) {
                 MoreOptionsPopup(
                     modifier = Modifier.align(Alignment.BottomEnd),
                     visible = moreOptionsPopVisible,
                 ) {
-                    for (i in bottomButtonCount..<menuButtonList.size) {
-                        menuButtonList[i]()
+                    for (i in bottomButtonCount..<bottomMenuButtonList.size) {
+                        bottomMenuButtonList[i]()
                     }
                 }
             }
@@ -534,6 +594,22 @@ private fun BottomOptionsBar(
             }
         }
     )
+}
+
+@Composable
+private fun ColumnOptionsPopup(
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    Card(
+        shape = CircleShape,
+        colors = cardColors(containerColor = colorScheme.surfaceColorAtElevation(4.dp)),
+        modifier = Modifier
+            .then(modifier)
+            .padding(vertical = 12.dp, horizontal = 14.dp)
+    ) {
+        Column(modifier = Modifier.padding(4.dp), content = content)
+    }
 }
 
 @Composable

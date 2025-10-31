@@ -50,14 +50,14 @@ import com.dede.android_eggs.resources.R as StringR
 
 private const val TAG = "CatEditor"
 
-private const val S_MIN = 0.3f
-private const val S_MAX = 5f
+internal const val S_MIN = 0.3f
+internal const val S_MAX = 5f
 
-private fun range(float: Float, max: Float, min: Float): Float {
+internal fun range(float: Float, max: Float, min: Float): Float {
     return min(max, max(float, min))
 }
 
-private const val S_STEP = 1.5f
+internal const val S_STEP = 1.5f
 
 private fun nextScaleLevel(scale: Float, max: Float, min: Float): Float {
     val ns = scale * S_STEP

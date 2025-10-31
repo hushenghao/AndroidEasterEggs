@@ -92,7 +92,7 @@ internal fun CatSvgCodeDialog(
                     Image(
                         painter = rememberCatPainter(cat),
                         contentDescription = null,
-                        modifier = Modifier.size(width = 34.dp, height = 34.dp)
+                        modifier = Modifier.size(width = 32.dp, height = 32.dp)
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     IconButton(onClick = { context.copy(svg) }) {
@@ -208,7 +208,7 @@ private fun buildXmlAnnotatedString(
                 val gColorRenderChar = it.groups[3]// colorRenderChar
                 if (gColorRenderChar != null) {
                     val color = gValue.value.toColorOrNull()
-                    if (color != null && color.alpha > 0f) {
+                    if (color != null) {
                         addStyle(SpanStyle(color = color), gColorRenderChar.range)
                     }
                 }

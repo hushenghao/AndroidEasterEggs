@@ -33,6 +33,7 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
         private const val KEY_SELECTED_PART = "selected_part"
         private const val KEY_GESTURES_ENABLED = "gestures_enabled"
         internal const val KEY_GRID_VISIBLE = "cat_editor_grid_visible"// pref key
+        private const val KEY_MIRROR_MODE = "cat_editor_mirror_mode"
 
         override fun restore(value: Bundle): CatEditorControllerImpl {
             val seed = value.getLong(KEY_SEED)
@@ -44,6 +45,7 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
             val selectedEnabled = value.getBoolean(KEY_SELECTED_ENABLED)
             val gesturesEnabled = value.getBoolean(KEY_GESTURES_ENABLED)
             val gridVisible = value.getBoolean(KEY_GRID_VISIBLE)
+            val mirrorMode = value.getBoolean(KEY_MIRROR_MODE)
 
             val impl = CatEditorControllerImpl(seed).apply {
                 if (colors != null) {
@@ -55,6 +57,7 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
                 selectedPartState.intValue = selectedPart
                 gesturesEnabledState.value = gesturesEnabled
                 gridVisibleState.value = gridVisible
+                mirrorModeState.value = mirrorMode
             }
             return impl
         }
@@ -70,6 +73,7 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
                 putBoolean(KEY_SELECTED_ENABLED, value.selectEnabledState.value)
                 putBoolean(KEY_GESTURES_ENABLED, value.gesturesEnabledState.value)
                 putBoolean(KEY_GRID_VISIBLE, value.gridVisibleState.value)
+                putBoolean(KEY_MIRROR_MODE, value.mirrorModeState.value)
             }
         }
     }
@@ -113,6 +117,12 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
 
     override var isGesturesEnabled: Boolean by gesturesEnabledState
 
+    override var zoom: Float
+        get() = scaleState.floatValue
+        set(value) {
+            scaleState.floatValue = range(value, S_MAX, S_MIN)
+        }
+
     override fun updateColors(colors: List<Color>) {
         colorStateList.clear()
         colorStateList.addAll(colors.toList())
@@ -131,6 +141,7 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
     override fun resetGraphicsLayer() {
         scaleState.floatValue = defaultGraphicsLayerScale
         offsetState.value = Offset.Zero
+        selectPart = -1
     }
 }
 
@@ -154,6 +165,8 @@ internal interface CatEditorController {
 
     val hasSelectedPart: Boolean
         get() = selectPart != -1
+
+    var zoom: Float
 
     fun resetGraphicsLayer()
 
