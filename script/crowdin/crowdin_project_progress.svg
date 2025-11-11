@@ -101,8 +101,8 @@
   <g class="font12" transform="translate(0,364)">
     <text style="text-anchor:end;" x="200" y="18">Hungarian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="92.8" x="210" y="11.4"/>
-    <text x="380" y="18">58%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="132.79999999999998" x="210" y="11.4"/>
+    <text x="380" y="18">83%</text>
   </g>
   <g class="font12" transform="translate(0,390)">
     <text style="text-anchor:end;" x="200" y="18">Indonesian</text>
@@ -200,9 +200,9 @@
   <g class="font12" transform="translate(0,780)">
     <text style="text-anchor:end;" x="200" y="18">Thai</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="83.2" x="210" y="11.4"/>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="84.80000000000001" x="210" y="11.4"/>
     <rect fill="#71C277" height="6" rx="3" ry="3" width="3.2" x="210" y="11.4"/>
-    <text x="380" y="18">52%</text>
+    <text x="380" y="18">53%</text>
   </g>
   <g class="font12" transform="translate(0,806)">
     <text style="text-anchor:end;" x="200" y="18">Turkish</text>
