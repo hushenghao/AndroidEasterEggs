@@ -33,6 +33,7 @@
     <string name="preference_on">Вкл.</string>
     <string name="preference_off">Выкл.</string>
     <string name="toast_shortcut_added">Ярлык добавлен на главный экран.</string>
+    <string name="toast_no_egg_detail">Эта версия Android не имеет Пасхального яйца</string>
     <string name="app_widget_description">Это аналоговые часы Easter Eggs</string>
     <string name="action_agree">Принимаю</string>
     <string name="summary_browse_privacy_policy">Прочтите и примите нашу Политику конфиденциальности, чтобы продолжить.</string>
