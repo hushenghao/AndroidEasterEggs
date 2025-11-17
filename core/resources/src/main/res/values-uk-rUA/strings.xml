@@ -33,6 +33,7 @@
     <string name="preference_on">Увімкнено</string>
     <string name="preference_off">Вимкнено</string>
     <string name="toast_shortcut_added">Додано ярлик до домашнього екрану.</string>
+    <string name="toast_no_egg_detail">Ця версія Android не має Великоднього яйця</string>
     <string name="app_widget_description">Це аналоговий годинник Великодних Яєць</string>
     <string name="action_agree">Я приймаю</string>
     <string name="summary_browse_privacy_policy">Прочитайте і погодьтеся з нашою Політикою конфіденційності для продовження.</string>
