@@ -1,1 +1,2 @@
+- Cat Editor add slide options panel
 - Remove dependency FreeReflection

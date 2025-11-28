@@ -2,6 +2,7 @@
 
 ### v4.3.1
 
+- Cat Editor add slide options panel
 - Remove dependency FreeReflection 
 
 ### v4.3.0 (2025-11-28)

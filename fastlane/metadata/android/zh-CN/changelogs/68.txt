@@ -1,1 +1,2 @@
+- Cat Editor 添加侧边栏
 - 删除依赖 FreeReflection

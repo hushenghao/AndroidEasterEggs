@@ -2,6 +2,7 @@
 
 ### v4.3.1
 
+- Cat Editor 添加侧边栏
 - 删除依赖 FreeReflection
 
 ### v4.3.0 (2025-11-28)

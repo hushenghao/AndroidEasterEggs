@@ -7,13 +7,19 @@ import android.net.Uri
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
@@ -21,11 +27,16 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
+import androidx.compose.material.icons.automirrored.rounded.ArrowRight
 import androidx.compose.material.icons.rounded.CenterFocusStrong
+import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Code
 import androidx.compose.material.icons.rounded.Compare
 import androidx.compose.material.icons.rounded.ContentCopy
@@ -46,6 +57,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
@@ -56,6 +68,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
@@ -66,6 +79,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.graphicsLayer
@@ -120,6 +134,7 @@ fun CatEditorScreen() {
     }
 
     var moreOptionsPopVisible by remember { mutableStateOf(false) }
+    val slideOptionsPanelVisibleState = remember { mutableStateOf(false) }
     val inputSeedDialogState = remember { mutableStateOf(false) }
 
     val rememberCatsDialogState = remember { mutableStateOf(false) }
@@ -336,7 +351,7 @@ fun CatEditorScreen() {
         )
     }
 
-    val columnButtonList = remember {
+    val slidePanelButtonList = remember {
         listOf(
             gridButton, mirrorButton,
             resetGraphicsLayer, zoomOut, zoomIn,
@@ -420,12 +435,8 @@ fun CatEditorScreen() {
                 captureController = captureController,
             )
 
-            ColumnOptionsPopup(
-                modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .padding(top = 20.dp)
-            ) {
-                columnButtonList.fastForEach { button ->
+            SlideOptionsPanel(visibleState = slideOptionsPanelVisibleState) {
+                slidePanelButtonList.fastForEach { button ->
                     button()
                 }
             }
@@ -470,7 +481,9 @@ fun CatEditorScreen() {
 
             if (bottomButtonCount < bottomMenuButtonList.size) {
                 MoreOptionsPopup(
-                    modifier = Modifier.align(Alignment.BottomEnd),
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(end = 14.dp),
                     visible = moreOptionsPopVisible,
                 ) {
                     for (i in bottomButtonCount..<bottomMenuButtonList.size) {
@@ -584,7 +597,7 @@ private fun BottomOptionsBar(
                 if (moreOptionsVisible) {
                     Spacer(modifier = Modifier.weight(1f))
 
-                    IconButton(onClick = onMoreOptionsClick) {
+                    FilledTonalIconButton(onClick = onMoreOptionsClick) {
                         Icon(
                             imageVector = Icons.Rounded.MoreVert,
                             contentDescription = stringResource(AppCompatR.string.abc_action_menu_overflow_description)
@@ -597,18 +610,63 @@ private fun BottomOptionsBar(
 }
 
 @Composable
-private fun ColumnOptionsPopup(
-    modifier: Modifier = Modifier,
-    content: @Composable ColumnScope.() -> Unit
+private fun BoxScope.SlideOptionsPanel(
+    visibleState: MutableState<Boolean>,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
-    Card(
-        shape = CircleShape,
-        colors = cardColors(containerColor = colorScheme.surfaceColorAtElevation(4.dp)),
+    var visible by visibleState
+    AnimatedVisibility(
         modifier = Modifier
-            .then(modifier)
-            .padding(vertical = 12.dp, horizontal = 14.dp)
+            .align(Alignment.BottomStart)
+            .padding(bottom = 20.dp),
+        visible = visible,
+        enter = slideInHorizontally(spring(Spring.DampingRatioLowBouncy)) + fadeIn(),
+        exit = slideOutHorizontally(spring(Spring.DampingRatioLowBouncy)) + fadeOut(),
+        label = "Slide Options Popup Visibility",
     ) {
-        Column(modifier = Modifier.padding(4.dp), content = content)
+        Card(
+            shape = CircleShape,
+            colors = cardColors(containerColor = colorScheme.surfaceColorAtElevation(4.dp)),
+            modifier = Modifier.padding(horizontal = 14.dp)
+        ) {
+            Column(modifier = Modifier.padding(4.dp)) {
+                content()
+
+                FilledTonalIconButton(onClick = { visible = false }) {
+                    Icon(
+                        imageVector = Icons.Rounded.Close,
+                        contentDescription = null
+                    )
+                }
+            }
+        }
+    }
+
+    AnimatedVisibility(
+        modifier = Modifier
+            .align(Alignment.BottomStart)
+            .padding(bottom = 40.dp),
+        visible = !visible,
+        enter = slideInHorizontally(spring(Spring.DampingRatioLowBouncy)) + fadeIn(),
+        exit = slideOutHorizontally(spring(Spring.DampingRatioLowBouncy)) + fadeOut(),
+        label = "Slide Options Handler Visibility",
+    ) {
+        Box(
+            modifier = Modifier
+                .size(14.dp, 66.dp)
+                .clip(RoundedCornerShape(topEnd = 6.dp, bottomEnd = 6.dp))
+                .background(colorScheme.surfaceColorAtElevation(4.dp))
+                .clickable { visible = true }
+        ) {
+            Icon(
+                modifier = Modifier
+                    .requiredSize(20.dp)
+                    .align(Alignment.Center),
+                imageVector = Icons.AutoMirrored.Rounded.ArrowRight,
+                tint = colorScheme.primary,
+                contentDescription = null,
+            )
+        }
     }
 }
 
@@ -620,16 +678,13 @@ private fun MoreOptionsPopup(
 ) {
     AnimatedVisibility(
         visible = visible,
-        modifier = Modifier
-            .then(modifier)
-            .padding(vertical = 12.dp, horizontal = 14.dp),
+        modifier = modifier,
         label = "More Options Visibility",
-        enter = fadeIn(animationSpec = tween(220)) +
-                slideInVertically(animationSpec = tween(220)) { it / 2 },
-        exit = fadeOut(animationSpec = tween(220)) +
-                slideOutVertically(animationSpec = tween(220)) { it / 2 },
+        enter = slideInVertically(spring(Spring.DampingRatioLowBouncy)) { it / 2 } + fadeIn(),
+        exit = slideOutVertically(spring(Spring.DampingRatioLowBouncy)) { it / 2 } + fadeOut(),
     ) {
         Card(
+            modifier = Modifier.padding(vertical = 14.dp),
             shape = CircleShape,
             colors = cardColors(containerColor = colorScheme.surfaceColorAtElevation(4.dp))
         ) {
