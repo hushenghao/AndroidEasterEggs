@@ -50,7 +50,7 @@ android {
         }
         create("beta") {
             dimension = "track"
-            versionNameSuffix = "-beta02"
+            versionNameSuffix = "-beta01"
         }
         create("product") {
             dimension = "track"
@@ -59,11 +59,11 @@ android {
 
     androidComponents {
         beforeVariants { variantBuilder ->
-            if (variantBuilder.productFlavors.containsAll(
-                    listOf("app" to "market", "track" to "alpha")
-                )
-            ) {
-                variantBuilder.enable = false
+            val app = variantBuilder.productFlavors[0].second
+            val track = variantBuilder.productFlavors[1].second
+            if (app == "market") {
+                // Enable product only for market build
+                variantBuilder.enable = track == "product"
             }
         }
     }

@@ -113,10 +113,12 @@ platform :android do
     # track                     The track of the application to use. The default available      production
     #                           tracks are: production, beta, alpha, internal
 
+    # all track use "MarketProductRelease" build variant,
+    tasks = ["clean", "app:assembleMarketProductRelease"]
     ref_name = options[:ref_name]
     if is_pre_release_ref(ref_name)
       # Upload new beta version
-      gradle(task: "clean app:bundleMarketBetaRelease")
+      gradle(tasks: tasks)
       upload_to_play_store(
         skip_upload_metadata: true,
         skip_upload_images: true,
@@ -154,11 +156,11 @@ platform :android do
       )
     when "full"
       # Upload All
-      gradle(task: "clean app:bundleMarketProductRelease")
+      gradle(tasks: tasks)
       upload_to_play_store
     else
       # Upload new version
-      gradle(task: "clean app:bundleMarketProductRelease")
+      gradle(tasks: tasks)
       upload_to_play_store(
         skip_upload_metadata: true,
         sync_image_upload: true,
