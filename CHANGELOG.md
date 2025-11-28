@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.3.1
+
+- Remove dependency FreeReflection 
+
 ### v4.3.0 (2025-11-28)
 
 - Add no Easter egg toast for Android 2.2
