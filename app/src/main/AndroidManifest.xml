@@ -37,9 +37,6 @@
             android:exported="false"
             tools:node="merge">
             <meta-data
-                android:name="com.dede.android_eggs.startup.ReflectionInitializer"
-                android:value="androidx.startup" />
-            <meta-data
                 android:name="com.dede.android_eggs.startup.ApplicationInitializer"
                 android:value="androidx.startup" />
         </provider>

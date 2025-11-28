@@ -15,7 +15,6 @@ class ApplicationInitializer : Initializer<Unit> {
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> = listOf(
-        ReflectionInitializer::class.java,
         GlobalContext.Initializer::class.java
     )
 }

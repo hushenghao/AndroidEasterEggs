@@ -96,7 +96,6 @@ dependencies {
 
     implementation(libs.dionsegijn.konfetti)
     implementation(libs.squareup.okio)
-    implementation(libs.free.reflection)
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
 
