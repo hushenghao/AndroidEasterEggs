@@ -55,6 +55,7 @@ fun findCOLRFontFile(): File? {
     }
 
     // Find first und-Zsye font from `/system/etc/fonts.xml`.
+    // Call hide api, may be not work on some devices.
     val undZsyeFontFile = UndZsyeFonts.findFirstUndZsyeFontFile()
     if (undZsyeFontFile != null) {
         if (COLRv1.analyzeCOLR(undZsyeFontFile)) {

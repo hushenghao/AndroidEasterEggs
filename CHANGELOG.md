@@ -1,7 +1,9 @@
 # Changelog
 
-### v4.2.1
+### v4.3.0 (2025-11-28)
+
 - Add no Easter egg toast for Android 2.2
+- Add Cat Editor mirror mode and zoom control
 - Update translations
 - Upgrade project dependencies
 
