@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="summary_android_waiting">Menunggu…</string>
-    <string name="summary_android_release_pushed">Versi rilis akhir telah diluncurkan</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="summary_android_waiting">Saat ini tidak tersedia</string>
+    <string name="summary_android_release_pushed">Versi rilis akhir telah diluncurkan.</string>
     <string name="label_timeline_title">Linimasa, Sejarah, dan pembaruan</string>
     <string name="label_timeline_releases">Perilisan</string>
+    <string name="label_timeline_developer_previews">Pratinjau Pengembang</string>
+    <string name="label_timeline_beta_release">Rilis Beta</string>
+    <string name="label_timeline_platform_stability">Stabilitas Platform</string>
+    <string name="label_timeline_final_release">Rilis Akhir</string>
 </resources>
