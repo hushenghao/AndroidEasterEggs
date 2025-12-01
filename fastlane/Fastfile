@@ -34,7 +34,7 @@ platform :android do
     gradle(tasks: ["clean", "app:assembleFossAlphaRelease"])
 
     changelogs_zh = (File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1]) rescue "No changelog provided")
-    changelogs_en = (File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1]) rescue "No changelog provided")
+    #changelogs_en = (File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1]) rescue "No changelog provided")
     # https://www.pgyer.com/doc/view/fastlane
     pgyer_answer = pgyer(
       api_key: ENV["PGYER_API_KEY"],
