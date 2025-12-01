@@ -1,2 +1,4 @@
 - Cat Editor add slide options panel
 - Remove dependency FreeReflection
+- Fix Cat Editor room schema #688
+- Update translations

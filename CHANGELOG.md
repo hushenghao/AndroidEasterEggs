@@ -1,9 +1,11 @@
 # Changelog
 
-### v4.3.1
+### v4.3.1 (2025-12-01)
 
 - Cat Editor add slide options panel
-- Remove dependency FreeReflection 
+- Remove dependency FreeReflection
+- Fix Cat Editor room schema [#688](https://github.com/hushenghao/AndroidEasterEggs/issues/688)
+- Update translations
 
 ### v4.3.0 (2025-11-28)
 

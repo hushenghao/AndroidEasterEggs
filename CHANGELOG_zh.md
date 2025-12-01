@@ -1,9 +1,11 @@
 # 更新日志
 
-### v4.3.1
+### v4.3.1 (2025-12-01)
 
 - Cat Editor 添加侧边栏
 - 删除依赖 FreeReflection
+- 修复 Cat Editor 数据库错误 [#688](https://github.com/hushenghao/AndroidEasterEggs/issues/688)
+- 更新翻译
 
 ### v4.3.0 (2025-11-28)
 
