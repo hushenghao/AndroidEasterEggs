@@ -7,6 +7,7 @@ import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Delete
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
@@ -79,11 +80,16 @@ data class Cat(
     @ColumnInfo(name = "id") val id: Long,
     @ColumnInfo(name = "seed") val seed: Long,
     @ColumnInfo(name = "colors") val colors: List<Color>,
-    val isMirrorMode: Boolean = false,
 ) {
+    @Ignore
+    var isMirrorMode: Boolean = false
+        private set
+
     companion object {
         fun createCat(seed: Long, colors: List<Color>?, isMirrorMode: Boolean = false): Cat {
-            return Cat(0, seed, colors ?: listOf(*CatPartColors.colors(seed)), isMirrorMode)
+            return Cat(0, seed, colors ?: listOf(*CatPartColors.colors(seed))).apply {
+                this.isMirrorMode = isMirrorMode
+            }
         }
     }
 }
