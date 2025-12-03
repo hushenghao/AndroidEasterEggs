@@ -34,32 +34,32 @@ object CatRememberDataStore {
     suspend fun remember(seed: Long, colors: List<Color>? = null) {
         withContext(Dispatchers.IO) {
             val cat = createCat(seed, colors)
-            db.catDan().remember(cat)
+            db.catDao().remember(cat)
         }
     }
 
     suspend fun forgetById(id: Long) {
         withContext(Dispatchers.IO) {
-            db.catDan().forgetById(id)
+            db.catDao().forgetById(id)
         }
     }
 
     suspend fun forget(seed: Long, colors: List<Color>? = null) {
         withContext(Dispatchers.IO) {
             val cat = createCat(seed, colors)
-            db.catDan().forget(cat)
+            db.catDao().forget(cat)
         }
     }
 
     suspend fun isFavorite(seed: Long, colors: List<Color>): Boolean {
         return withContext(Dispatchers.IO) {
-            db.catDan().isFavorite(seed, colors)
+            db.catDao().isFavorite(seed, colors)
         }
     }
 
     suspend fun getAllCats(): List<Cat> {
         return withContext(Dispatchers.IO) {
-            db.catDan().getAllCats()
+            db.catDao().getAllCats()
         }
     }
 }
@@ -71,7 +71,7 @@ object CatRememberDataStore {
 )
 @TypeConverters(value = [CatColorsConverter::class])
 abstract class CatRememberDatabase : RoomDatabase() {
-    abstract fun catDan(): CatDao
+    abstract fun catDao(): CatDao
 }
 
 @Entity(tableName = "remember_cats")
