@@ -1,5 +1,9 @@
 # 更新日志
 
+### v4.3.2
+
+- 修复时间线列表滚动手势冲突 [#654](https://github.com/hushenghao/AndroidEasterEggs/issues/654)
+
 ### v4.3.1 (2025-12-01)
 
 - Cat Editor 添加侧边栏

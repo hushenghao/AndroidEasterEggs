@@ -1,0 +1,1 @@
+- Fix Timeline list scroll gesture conflicts #654
