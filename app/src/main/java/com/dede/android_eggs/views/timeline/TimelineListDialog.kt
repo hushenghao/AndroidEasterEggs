@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -32,6 +33,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -82,6 +84,13 @@ fun TimelineListDialog(
     }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val paddingValues = WindowInsets.safeDrawing.asPaddingValues()
+
+    val lazyListState = rememberLazyListState()
+    // https://issuetracker.google.com/issues/353304855
+    val sheetGesturesEnabled by remember {
+        // disable sheet gestures when can scroll backward
+        derivedStateOf { !lazyListState.canScrollBackward }
+    }
     ModalBottomSheet(
         onDismissRequest = {
             visible = false
@@ -92,8 +101,10 @@ fun TimelineListDialog(
         contentWindowInsets = {
             WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
         },
+        sheetGesturesEnabled = sheetGesturesEnabled,
     ) {
         LazyColumn(
+            state = lazyListState,
             contentPadding = PaddingValues(bottom = paddingValues.calculateBottomPadding())
         ) {
             item {
