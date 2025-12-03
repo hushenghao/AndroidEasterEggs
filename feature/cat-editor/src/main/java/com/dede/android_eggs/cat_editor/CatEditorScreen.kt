@@ -62,7 +62,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -72,6 +71,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -98,6 +98,7 @@ import com.dede.basic.trimZeroAndDot
 import com.dede.basic.utils.ShareCatUtils
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import androidx.appcompat.R as AppCompatR
 import com.dede.android_eggs.resources.R as StringR
@@ -117,22 +118,24 @@ fun CatEditorScreen() {
     var catSeed by catSeedState
     val catName = stringResource(R.string.default_cat_name, catSeed)// full seed name
 
-    val colorPaletteState = remember { mutableStateOf(false) }
+    val colorPaletteState = rememberSaveable { mutableStateOf(false) }
 
     val catEditorRecords = rememberCatEditorRecords(firstRecord = CatEditorRecords.seed(catSeed))
     // split with cat seed
     val catEditorController = rememberCatEditorController(catSeed)
 
-    LaunchedEffect(catEditorController.selectPart) {
-        if (catEditorController.hasSelectedPart) {
-            colorPaletteState.value = true
-        }
+    LaunchedEffect(catEditorController) {
+        snapshotFlow { catEditorController.selectPart }
+            .distinctUntilChanged()
+            .collect { part ->
+                colorPaletteState.value = part != CatEditorController.UNSELECTED_PART
+            }
     }
 
     var moreOptionsPopVisible by remember { mutableStateOf(false) }
     val inputSeedDialogState = remember { mutableStateOf(false) }
 
-    val rememberCatsDialogState = remember { mutableStateOf(false) }
+    val rememberCatsDialogState = rememberSaveable { mutableStateOf(false) }
     var isRememberCat by remember { mutableStateOf(false) }
     var isRememberCatProcessing by remember { mutableStateOf(false) }
 

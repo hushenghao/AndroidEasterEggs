@@ -82,7 +82,7 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
 
     val offsetState = mutableStateOf(Offset.Zero)
 
-    val selectedPartState = mutableIntStateOf(-1)
+    val selectedPartState = mutableIntStateOf(CatEditorController.UNSELECTED_PART)
 
     private val gridVisibleState = mutableStateOf(false)
 
@@ -134,18 +134,22 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
         if (hasSelectedPart) {
             colorStateList[selectPart] = color
             colorListVersionState.intValue += 1
-            selectPart = -1
+            selectPart = CatEditorController.UNSELECTED_PART
         }
     }
 
     override fun resetGraphicsLayer() {
         scaleState.floatValue = defaultGraphicsLayerScale
         offsetState.value = Offset.Zero
-        selectPart = -1
+        selectPart = CatEditorController.UNSELECTED_PART
     }
 }
 
 internal interface CatEditorController {
+
+    companion object {
+        const val UNSELECTED_PART = -1
+    }
 
     var defaultGraphicsLayerScale: Float
 
@@ -164,7 +168,7 @@ internal interface CatEditorController {
     val colorList: List<Color>
 
     val hasSelectedPart: Boolean
-        get() = selectPart != -1
+        get() = selectPart != UNSELECTED_PART
 
     var zoom: Float
 

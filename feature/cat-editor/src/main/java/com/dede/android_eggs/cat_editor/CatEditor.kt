@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -88,7 +89,7 @@ internal fun CatEditor(
     LaunchedEffect(captureController) {
         captureController.onPerCapture = {
             // set normal state
-            selectedPart = -1
+            selectedPart = CatEditorController.UNSELECTED_PART
             controllerImpl.resetGraphicsLayer()
         }
     }
@@ -137,16 +138,19 @@ internal fun CatEditor(
                     detectTapGestures(
                         onDoubleTap = onDoubleTab
                     ) {
-                        controllerImpl.selectPart = -1
+                        controllerImpl.selectPart = CatEditorController.UNSELECTED_PART
                     }
                 }
         ) {
             val infiniteTransition = rememberInfiniteTransition(label = "CatEditor_SelectedPart")
+            val hasSelected by remember {
+                derivedStateOf { selectedPart != CatEditorController.UNSELECTED_PART }
+            }
             val blendRatio by infiniteTransition.animateFloat(
                 initialValue = 0f,
-                targetValue = if (selectedPart != -1) 0.5f else 0f,
+                targetValue = if (hasSelected) 0.5f else 0f,
                 animationSpec = infiniteRepeatable(
-                    animation = tween(700, easing = LinearEasing),
+                    animation = tween(600, easing = LinearEasing),
                     repeatMode = RepeatMode.Reverse,
                 ),
                 label = "HighlightColorBlend"
@@ -207,7 +211,7 @@ internal fun CatEditor(
                                 }
                             }
                             if (!handler) {
-                                selectedPart = -1
+                                selectedPart = CatEditorController.UNSELECTED_PART
                             }
                         }
                     },
