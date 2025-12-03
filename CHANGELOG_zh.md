@@ -2,6 +2,7 @@
 
 ### v4.3.2
 
+- 优化 Cat Editor 选项面板
 - 修复时间线列表滚动手势冲突 [#654](https://github.com/hushenghao/AndroidEasterEggs/issues/654)
 
 ### v4.3.1 (2025-12-01)

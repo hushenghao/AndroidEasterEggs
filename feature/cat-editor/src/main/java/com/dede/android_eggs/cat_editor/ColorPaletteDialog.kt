@@ -71,6 +71,7 @@ fun ColorPaletteDialog(
     val performColorSelected by rememberUpdatedState(onColorSelected)
 
     ModalBottomSheet(
+        modifier = Modifier.sizeIn(maxWidth = 420.dp),
         sheetState = sheetState,
         onDismissRequest = {
             visible = false

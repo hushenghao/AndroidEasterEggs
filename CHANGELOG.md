@@ -2,6 +2,7 @@
 
 ### v4.3.2
 
+- Optimization Cat Editor options panel
 - Fix Timeline list scroll gesture conflicts [#654](https://github.com/hushenghao/AndroidEasterEggs/issues/654)
 
 ### v4.3.1 (2025-12-01)
