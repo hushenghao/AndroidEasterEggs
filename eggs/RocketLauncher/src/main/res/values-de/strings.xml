@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Title of the Android Dreams (screensaver) module -->
+    <string name="rocket_launcher_dream_name">Raketenwerfer</string>
+    <string name="rocket_launcher_desc">Osterei des Launchers in Android 4.0 (Ice cream Sandwich)</string>
+</resources>

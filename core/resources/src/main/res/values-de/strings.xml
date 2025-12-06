@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Easter Eggs</string>
+    <string name="app_name">Ostereier</string>
     <string name="title_open_with">Öffnen mit</string>
     <string name="char_separator">/</string>
-    <string name="char_en_dash">-</string>
+    <string name="char_en_dash">bis</string>
     <string name="label_github">Quellcode</string>
     <string name="label_translation">Übersetzen</string>
     <string name="label_beta">Laden Sie die Beta-Version herunter</string>
     <string name="label_timeline">Zeitleiste</string>
     <string name="label_privacy_policy">Privatsphäre &amp; Datenschutz</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">Lizenz</string>
     <string name="label_feedback">Feedback geben</string>
     <string name="label_star">Bewerten</string>
@@ -26,12 +27,13 @@
     <string name="summary_system_default">Systemstandard</string>
     <string name="summary_theme_dark_mode">Dunkel</string>
     <string name="summary_theme_light_mode">Hell</string>
-    <string name="summary_theme_amoled_mode">Amoled</string>
+    <string name="summary_theme_amoled_mode">Schwarz</string>
     <string name="label_add_shortcut">Verknüpfung</string>
     <string name="label_donate">Spenden sie an das Projekt</string>
     <string name="preference_on">An</string>
     <string name="preference_off">Aus</string>
     <string name="toast_shortcut_added">Verknüpfung wurde zum Startbildschirm hinzugefügt</string>
+    <string name="toast_no_egg_detail">Diese Android Version hat kein Osterei</string>
     <string name="app_widget_description">Eine analoge Easter Egg-Uhr</string>
     <string name="action_agree">Zustimmen</string>
     <string name="summary_browse_privacy_policy">Lesen Sie unsere Datenschutzrichtlinie und stimmen Sie ihr zu, um fortzufahren.</string>
@@ -44,4 +46,13 @@
     <string name="pref_summary_retain_recent_egg_tasks">Behalten Sie Easter Egg-Aufgaben auf dem Bildschirm „Letzte“ bei, maximal 5 (ungültig für den eingebetteten Aktivitätsmodus)</string>
     <string name="label_about">Über</string>
     <string name="label_contribute">Mithelfen</string>
+    <string name="animator_disabled_alert_message">Systemanimationen wurden ausgeschaltet. Manche Funktionen werden nicht wie gedacht funktionieren. Bitte gehe zu \"Entwickleroptionen\" und stelle \"Animationsdauerfaktor\" ein um die Animation zu aktivieren</string>
+    <string name="action_goto_settings">Zu den Einstellungen</string>
+    <string name="action_dont_show_again">Nicht nochmal zeigen</string>
+    <string name="cat_editor">Katzen Editor</string>
+    <string name="cat_editor_input_seed">Trage den seed der Katze ein</string>
+    <string name="rocket_launcher_easter_egg_icons">Ostereier</string>
+    <string name="rocket_launcher_all_app_icons">Apps</string>
+    <string name="rocket_launcher_all_icons">Ostereier und Apps</string>
+    <string name="rocket_launcher_query_all_app_desc">Braucht eine liste von den Apps die in Home Apps angezeigt werden</string>
 </resources>
