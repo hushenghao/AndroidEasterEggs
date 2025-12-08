@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="summary_android_waiting">Trenutno nedostupno</string>
     <string name="summary_android_release_pushed">Objavljeno je konačno izdanje</string>
     <string name="label_timeline_title">Vremenska crta, dostignuća i ažuriranja</string>
     <string name="label_timeline_releases">Izdanja</string>
+    <string name="label_timeline_developer_previews">Pregledi za programere</string>
+    <string name="label_timeline_beta_release">Beta izdanja</string>
+    <string name="label_timeline_platform_stability">Stabilnost platforme</string>
+    <string name="label_timeline_final_release">Konačno izdanje</string>
 </resources>
