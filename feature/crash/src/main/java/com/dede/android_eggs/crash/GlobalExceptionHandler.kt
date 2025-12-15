@@ -69,11 +69,14 @@ private class GlobalExceptionHandler private constructor(
         fun initialize(
             applicationContext: Context,
             activityToBeLaunched: Class<out Activity> = CrashActivity::class.java,
-        ) = Thread.setDefaultUncaughtExceptionHandler(
-            GlobalExceptionHandler(
-                applicationContext, activityToBeLaunched,
-                Thread.getDefaultUncaughtExceptionHandler(),
+        ) {
+            Thread.setDefaultUncaughtExceptionHandler(
+                GlobalExceptionHandler(
+                    applicationContext, activityToBeLaunched,
+                    Thread.getDefaultUncaughtExceptionHandler(),
+                )
             )
-        )
+            Utilities.saveVcsRevision(applicationContext)
+        }
     }
 }
