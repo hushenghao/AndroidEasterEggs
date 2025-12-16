@@ -293,7 +293,10 @@ public class NekoControlsService : ControlsProviderService(), PrefState.PrefsLis
 
             fun send(c: Control) {
                 Log.v(TAG, "sending update: " + Control_toString(c) + " => " + subscriber)
-                subscriber?.onNext(c)
+                try {
+                    subscriber?.onNext(c)
+                } catch (ignore: RuntimeException) {
+                }
             }
         }
 
