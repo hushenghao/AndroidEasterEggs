@@ -114,7 +114,7 @@ platform :android do
     #                           tracks are: production, beta, alpha, internal
 
     # all track use "MarketProductRelease" build variant,
-    tasks = ["clean", "app:assembleMarketProductRelease"]
+    tasks = ["clean", "app:bundleMarketProductRelease"]
     ref_name = options[:ref_name]
     if is_pre_release_ref(ref_name)
       # Upload new beta version
