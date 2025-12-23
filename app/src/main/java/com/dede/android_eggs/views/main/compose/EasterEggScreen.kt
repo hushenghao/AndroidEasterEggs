@@ -118,14 +118,15 @@ fun EasterEggScreen(
         val drawerState = rememberDrawerState(DrawerValue.Closed)
         ReverseModalNavigationDrawer(
             drawerContent = {
-                val maxWidth = LocalConfiguration.current.smallestScreenWidthDp * 0.8f
                 ModalDrawerSheet(
                     drawerState = drawerState,
                     drawerShape = shapes.extraLarge.end(0.dp),
                     windowInsets = WindowInsets(0, 0, 0, 0),
-                    modifier = Modifier.width(maxWidth.dp),
                 ) {
-                    SettingsScreen(drawerState)
+                    val maxWidth = LocalConfiguration.current.smallestScreenWidthDp * 0.8f
+                    Box(modifier = Modifier.width(maxWidth.dp)) {
+                        SettingsScreen(drawerState)
+                    }
                 }
             },
             drawerState = drawerState
