@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalContext
@@ -35,26 +36,26 @@ fun launchRocketLauncher(context: Context) {
 @Composable
 fun RocketLauncherPref() {
     val context = LocalContext.current
-    val expandedState = rememberSaveable { mutableStateOf(false) }
+    var expanded by rememberSaveable { mutableStateOf(false) }
     val currentIconsValueState = rememberPrefIntState(
         RocketLauncherPrefUtil.KEY_ROCKET_LAUNCHER_ICONS_SOURCE,
         RocketLauncherPrefUtil.VALUE_DEFAULT
     )
     ExpandOptionsPref(
-        expandedState = expandedState,
+        expended = expanded,
         leadingIcon = Icons.Rounded.RocketLaunch,
         title = stringResource(com.android.launcher2.R.string.rocket_launcher_dream_name),
         desc = stringResource(com.android.launcher2.R.string.rocket_launcher_desc),
         onClick = {
             launchRocketLauncher(context)
         },
-        trailingContent = { expanded ->
+        trailingContent = { isExpanded ->
             val rotate by animateFloatAsState(
-                targetValue = if (expanded) 180f else 0f,
+                targetValue = if (isExpanded) 180f else 0f,
                 label = "Arrow"
             )
             IconButton(
-                onClick = { expandedState.value = !expandedState.value },
+                onClick = { expanded = !expanded },
                 modifier = Modifier
             ) {
                 Icon(

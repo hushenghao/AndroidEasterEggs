@@ -30,11 +30,12 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -44,13 +45,16 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.dede.android_eggs.util.compose.bottom
 import com.dede.android_eggs.util.compose.top
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 internal fun ExpandOptionsPrefTrailing(
@@ -71,45 +75,29 @@ internal fun ExpandOptionsPrefTrailing(
 
 @Composable
 fun ExpandOptionsPref(
-    expandedState: MutableState<Boolean>,
+    modifier: Modifier = Modifier,
+    expended: Boolean,
     leadingIcon: ImageVector,
     title: String,
     desc: String? = null,
-    onClick: () -> Unit = {
-        expandedState.value = !expandedState.value
-    },
+    onClick: () -> Unit = {},
     trailingContent: @Composable (expended: Boolean) -> Unit = {
         ExpandOptionsPrefTrailing(it)
     },
     options: @Composable ColumnScope.() -> Unit
 ) {
-    val focusRequester = remember { FocusRequester() }
-    val focusManager = LocalFocusManager.current
-
-    LaunchedEffect(expandedState.value) {
-        if (expandedState.value) {
-            focusManager.clearFocus(true)
-            delay(100)
-            focusRequester.requestFocus()
-        } else {
-            focusRequester.freeFocus()
-        }
-    }
-
     SettingPref(
-        modifier = Modifier
-            .focusRequester(focusRequester)
-            .focusable(),
+        modifier = modifier,
         leadingIcon = leadingIcon,
         title = title,
         desc = desc,
         trailingContent = {
-            trailingContent(expandedState.value)
+            trailingContent(expended)
         },
         onClick = onClick,
     ) {
         AnimatedVisibility(
-            visible = expandedState.value,
+            visible = expended,
             enter = slideInVertically() + fadeIn(),
             exit = shrinkVertically(
                 animationSpec = spring(
@@ -127,6 +115,66 @@ fun ExpandOptionsPref(
             )
         }
     }
+}
+
+@Composable
+fun ExpandOptionsPref(
+    expandedState: MutableState<Boolean>,
+    leadingIcon: ImageVector,
+    title: String,
+    desc: String? = null,
+    requestFocusOnExpanded: Boolean = true,
+    trailingContent: @Composable (expended: Boolean) -> Unit = {
+        ExpandOptionsPrefTrailing(it)
+    },
+    options: @Composable ColumnScope.() -> Unit
+) {
+    var expanded by expandedState
+
+    val focusRequester = remember { FocusRequester() }
+    if (requestFocusOnExpanded) {
+        val lifecycleOwner = LocalLifecycleOwner.current
+        DisposableEffect(lifecycleOwner) {
+            val observer = object : DefaultLifecycleObserver {
+                override fun onPause(owner: LifecycleOwner) {
+                    focusRequester.freeFocus()
+                }
+            }
+            lifecycleOwner.lifecycle.addObserver(observer)
+
+            onDispose {
+                lifecycleOwner.lifecycle.removeObserver(observer)
+            }
+        }
+    }
+
+    val coroutineScope = rememberCoroutineScope()
+    ExpandOptionsPref(
+        modifier = Modifier
+            .focusRequester(focusRequester)
+            .focusable(),
+        expended = expanded,
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        trailingContent = trailingContent,
+        onClick = onClick@{
+            expanded = !expanded
+
+            if (!requestFocusOnExpanded) {
+                return@onClick
+            }
+            coroutineScope.launch {
+                if (expanded) {
+                    delay(300)
+                    focusRequester.requestFocus()
+                } else {
+                    focusRequester.freeFocus()
+                }
+            }
+        },
+        options = options,
+    )
 }
 
 @Composable
