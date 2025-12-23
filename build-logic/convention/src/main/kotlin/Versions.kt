@@ -16,7 +16,7 @@ object Versions {
         version = release(36)
     }
 
-    const val MIN_SDK = 21
+    const val MIN_SDK = 23
 
     val JAVA_VERSION: JavaLanguageVersion = JavaLanguageVersion.of(17)
 

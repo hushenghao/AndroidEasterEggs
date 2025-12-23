@@ -64,9 +64,9 @@ public class EdgeToEdgeCompat {
         private static int getScrimColor(SystemBarStyle systemBarStyle, boolean isDark) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 // support dark mode
-                return systemBarStyle.getScrimWithEnforcedContrast$activity_release(isDark);
+                return systemBarStyle.getScrimWithEnforcedContrast$activity(isDark);
             } else {
-                return systemBarStyle.getScrim$activity_release(isDark);
+                return systemBarStyle.getScrim$activity(isDark);
             }
         }
 
@@ -99,8 +99,7 @@ public class EdgeToEdgeCompat {
     private static boolean getDetectDarkMode(SystemBarStyle systemBarStyle, View view) {
         // internal val detectDarkMode: (Resources) -> Boolean
         //  androidx.activity library
-        //  release build
-        return systemBarStyle.getDetectDarkMode$activity_release().invoke(view.getResources());
+        return systemBarStyle.getDetectDarkMode$activity().invoke(view.getResources());
     }
 
     public static void enable(Activity activity, SystemBarStyle statusBarStyle, SystemBarStyle navigationBarStyle) {

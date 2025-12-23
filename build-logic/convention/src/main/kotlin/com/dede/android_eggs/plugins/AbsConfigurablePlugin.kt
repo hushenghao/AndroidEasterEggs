@@ -158,9 +158,6 @@ abstract class AbsConfigurablePlugin(
                 }
             }
 
-
-
-
         }
     }
 
@@ -178,6 +175,8 @@ abstract class AbsConfigurablePlugin(
             if (configurable.isHiltEnable) {
                 "implementation"(libs.library("hilt.android"))
                 "ksp"(libs.library("hilt.compiler"))
+                // https://github.com/google/dagger/issues/5059
+                "ksp"(libs.library("kotlin.metadata.jvm"))
             }
             if (configurable.isComposeEnabled) {
                 "implementation"(platform(libs.library("androidx.compose.bom")))
