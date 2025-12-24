@@ -2,7 +2,8 @@
 
 ### v4.3.2
 
-- 新增 Android L 预览版彩蛋
+- 新增 Android L 预览版彩蛋 [#714](https://github.com/hushenghao/AndroidEasterEggs/issues/714)
+- 新增 Platlogo 快照预览
 - 优化 Cat Editor 选项面板
 - 修复时间线列表滚动手势冲突 [#654](https://github.com/hushenghao/AndroidEasterEggs/issues/654)
 - 升级最小支持版本到 Android 6.0

@@ -3,16 +3,13 @@ package com.dede.android_eggs.ui.composes
 import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,16 +28,14 @@ private fun randomHash(context: Context): String {
 
 @Preview
 @Composable
-fun SnapshotView(snapshot: SnapshotProvider? = null) {
-    val context = LocalContext.current
-    val hash = remember(snapshot) { randomHash(context) }
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(1.8f)
-            .clipToBounds()
-    ) {
+fun SnapshotView(
+    modifier: Modifier = Modifier,
+    snapshot: SnapshotProvider? = null,
+) {
+    Box(modifier = modifier) {
         if (snapshot == null || !snapshot.includeBackground) {
+            val context = LocalContext.current
+            val hash = remember(snapshot) { randomHash(context) }
             Image(
                 bitmap = rememberThemedHashImageBitmap(hash),
                 modifier = Modifier.fillMaxSize(),

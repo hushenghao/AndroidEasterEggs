@@ -17,6 +17,7 @@
     <string name="label_star">Rate app</string>
     <string name="label_contact_me">Contact me</string>
     <string name="label_email_title">Email</string>
+    <string name="label_snapshot_preview">Snapshot preview</string>
 
     <string name="message_trypophobia_warning">This is a trigger warning to those with &lt;b&gt;trypophobia&lt;/b&gt;. Some images may cause discomfort. Do you want to continue?</string>
 

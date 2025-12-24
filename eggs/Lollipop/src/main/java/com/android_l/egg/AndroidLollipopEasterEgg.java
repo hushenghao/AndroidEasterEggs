@@ -10,6 +10,7 @@ import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggGroup;
 import com.dede.basic.provider.EasterEggProvider;
+import com.dede.basic.provider.SnapshotProvider;
 import com.dede.basic.provider.TimelineEvent;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public class AndroidLollipopEasterEgg implements EasterEggProvider {
                 ) {
                     @Override
                     public SnapshotProvider provideSnapshotProvider() {
-                        return new SnapshotProvider();
+                        return new com.android_l.egg.SnapshotProvider();
                     }
                 },
                 new EasterEgg(
@@ -52,7 +53,12 @@ public class AndroidLollipopEasterEgg implements EasterEggProvider {
                         R.string.l_preview_nickname,
                         Build.VERSION_CODES.LOLLIPOP,
                         com.android_l.egg.preview.PlatLogoActivity.class
-                )
+                ) {
+                    @Override
+                    public SnapshotProvider provideSnapshotProvider() {
+                        return new com.android_l.egg.preview.SnapshotProvider();
+                    }
+                }
         );
     }
 

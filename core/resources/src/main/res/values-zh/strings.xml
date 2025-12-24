@@ -55,4 +55,5 @@
     <string name="rocket_launcher_all_app_icons">所有应用图标</string>
     <string name="rocket_launcher_all_icons">所有图标</string>
     <string name="rocket_launcher_query_all_app_desc">需要获取所有应用列表</string>
+    <string name="label_snapshot_preview">快照预览</string>
 </resources>

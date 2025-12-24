@@ -27,6 +27,7 @@ import com.dede.android_eggs.views.main.compose.EasterEggsScreen
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.WelcomeDialog
 import com.dede.android_eggs.views.main.compose.rememberKonfettiState
+import com.dede.android_eggs.views.settings.compose.prefs.SnapshotDialog
 import com.dede.android_eggs.views.timeline.TimelineListDialog
 import com.dede.basic.Utils
 
@@ -93,6 +94,11 @@ fun EasterEggsNavHost(
             }
             dialog(route = TimelineListDialog.route) {
                 TimelineListDialog(scrimColor = Color.Transparent) {
+                    navController.popBackStack()
+                }
+            }
+            dialog(route = SnapshotDialog.route) {
+                SnapshotDialog {
                     navController.popBackStack()
                 }
             }

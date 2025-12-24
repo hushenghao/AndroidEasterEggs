@@ -1,6 +1,5 @@
 package com.dede.android_eggs.ui.composes
 
-import android.graphics.Bitmap
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
@@ -10,6 +9,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.graphics.applyCanvas
+import androidx.core.graphics.createBitmap
 import com.dede.android_eggs.util.ThemeUtils
 import com.wolt.blurhashkt.BlurHashDecoder
 
@@ -26,8 +26,7 @@ fun rememberThemedHashImageBitmap(
             "BlurHash decode error! hash: ".format(hash)
         }
         if (ThemeUtils.isDarkMode(context)) {
-            val nightMode =
-                Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888)
+            val nightMode = createBitmap(bitmap.width, bitmap.height)
             val paint = Paint(Paint.ANTI_ALIAS_FLAG)
             val matrix = ColorMatrix()
             matrix.setScale(0.8f, 0.8f, 0.8f, 0.8f)
