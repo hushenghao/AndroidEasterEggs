@@ -39,6 +39,9 @@
             window:secondaryActivityName="com.android_l.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
+            window:secondaryActivityName="com.android_l.egg.preview.PlatLogoActivity" />
+        <SplitPairFilter
+            window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"
             window:secondaryActivityName="com.android_k.egg.PlatLogoActivity" />
         <SplitPairFilter
             window:primaryActivityName="com.dede.android_eggs.views.main.EasterEggsActivity"

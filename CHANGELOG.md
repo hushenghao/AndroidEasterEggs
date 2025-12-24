@@ -2,6 +2,7 @@
 
 ### v4.3.2
 
+- Add Android L Preview Easter Egg
 - Optimization Cat Editor options panel
 - Fix Timeline list scroll gesture conflicts [#654](https://github.com/hushenghao/AndroidEasterEggs/issues/654)
 - Upgrade the minimum supported version to Android 6.0

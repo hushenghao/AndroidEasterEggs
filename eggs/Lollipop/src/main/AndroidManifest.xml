@@ -3,6 +3,13 @@
 
     <application>
         <activity
+            android:name=".preview.PlatLogoActivity"
+            android:exported="true"
+            android:label="@string/l_webdriver_torso"
+            android:icon="@drawable/l_android_preview_logo"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen"/>
+
+        <activity
             android:name=".PlatLogoActivity"
             android:configChanges="orientation|keyboardHidden"
             android:exported="true"

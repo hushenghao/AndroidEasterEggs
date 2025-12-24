@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="l_webdriver_torso">Webdriver Torso</string>
+    <string name="l_preview_nickname" translatable="false">L Preview</string>
+
+    <color name="l_android_preview_bg">#FFFFFF</color>
+</resources>

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
+import com.dede.basic.provider.EasterEggGroup;
 import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.TimelineEvent;
 
@@ -32,18 +33,27 @@ public class AndroidLollipopEasterEgg implements EasterEggProvider {
     @Singleton
     @Override
     public BaseEasterEgg provideEasterEgg() {
-        return new EasterEgg(
-                R.drawable.l_android_logo,
-                R.string.l_lland,
-                R.string.l_android_nickname,
-                new IntRange(Build.VERSION_CODES.LOLLIPOP, Build.VERSION_CODES.LOLLIPOP_MR1),
-                PlatLogoActivity.class
-        ) {
-            @Override
-            public SnapshotProvider provideSnapshotProvider() {
-                return new SnapshotProvider();
-            }
-        };
+        return new EasterEggGroup(
+                new EasterEgg(
+                        R.drawable.l_android_logo,
+                        R.string.l_lland,
+                        R.string.l_android_nickname,
+                        new IntRange(Build.VERSION_CODES.LOLLIPOP, Build.VERSION_CODES.LOLLIPOP_MR1),
+                        com.android_l.egg.PlatLogoActivity.class
+                ) {
+                    @Override
+                    public SnapshotProvider provideSnapshotProvider() {
+                        return new SnapshotProvider();
+                    }
+                },
+                new EasterEgg(
+                        R.drawable.l_android_preview_logo,
+                        R.string.l_webdriver_torso,
+                        R.string.l_preview_nickname,
+                        Build.VERSION_CODES.LOLLIPOP,
+                        com.android_l.egg.preview.PlatLogoActivity.class
+                )
+        );
     }
 
     @IntoSet
