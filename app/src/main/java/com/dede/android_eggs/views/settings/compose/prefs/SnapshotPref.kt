@@ -2,19 +2,24 @@
 
 package com.dede.android_eggs.views.settings.compose.prefs
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.rounded.ViewCarousel
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.carousel.CarouselDefaults.multiBrowseFlingBehavior
 import androidx.compose.material3.carousel.HorizontalCenteredHeroCarousel
 import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -61,25 +66,43 @@ fun SnapshotDialog(
     viewModel: SnapshotViewModel = hiltViewModel(),
     onDismiss: () -> Unit = {},
 ) {
-    val snapshotProviders = remember(viewModel) {
-        viewModel.easterEggs.mapNotNull { it.provideSnapshotProvider() }
+    val pairList = remember(viewModel) {
+        buildList {
+            for (egg in viewModel.easterEggs) {
+                val snapshot = egg.provideSnapshotProvider() ?: continue
+                add(snapshot to egg)
+            }
+        }
     }
     Dialog(onDismissRequest = onDismiss) {
-        val carouselState = rememberCarouselState { snapshotProviders.size }
-        HorizontalCenteredHeroCarousel(
-            state = carouselState,
-            flingBehavior = multiBrowseFlingBehavior(carouselState),
-            itemSpacing = 6.dp,
-            minSmallItemWidth = 34.dp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(PHI),
-        ) { i ->
-            SnapshotView(
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            val carouselState = rememberCarouselState { pairList.size }
+            HorizontalCenteredHeroCarousel(
+                state = carouselState,
+                flingBehavior = multiBrowseFlingBehavior(carouselState),
+                itemSpacing = 6.dp,
+                minSmallItemWidth = 34.dp,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .maskClip(MaterialTheme.shapes.extraLarge),
-                snapshot = snapshotProviders[i],
+                    .fillMaxWidth()
+                    .aspectRatio(PHI),
+            ) { i ->
+                SnapshotView(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .maskClip(MaterialTheme.shapes.extraLarge),
+                    snapshot = pairList[i].first,
+                )
+            }
+
+            Spacer(modifier = Modifier.height(14.dp))
+
+            Text(
+                modifier = Modifier,
+                text = stringResource(pairList[carouselState.currentItem].second.nameRes),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
     }

@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Color
 import android.view.View
 import android.widget.FrameLayout
+import com.dede.basic.dp
 import com.dede.basic.provider.SnapshotProvider
+import kotlin.math.max
 
 class SnapshotProvider : SnapshotProvider() {
 
@@ -13,6 +15,8 @@ class SnapshotProvider : SnapshotProvider() {
     }
 
     private class Torso(context: Context) : FrameLayout(context), Runnable, View.OnClickListener {
+
+        private val minTorsoSize = 10.dp
 
         init {
             for (i in 0..1) {
@@ -33,8 +37,8 @@ class SnapshotProvider : SnapshotProvider() {
             val parenth = measuredHeight.toFloat()
             for (i in 0..<childCount) {
                 val v = getChildAt(i)
-                val w = (Math.random() * parentw).toInt()
-                val h = (Math.random() * parenth).toInt()
+                val w = max((Math.random() * parentw).toInt(), minTorsoSize)
+                val h = max((Math.random() * parenth).toInt(), minTorsoSize)
                 v.layoutParams = LayoutParams(w, h)
 
                 v.x = Math.random().toFloat() * (parentw - w)
