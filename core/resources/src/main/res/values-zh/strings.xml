@@ -15,6 +15,7 @@
     <string name="label_star">给个好评</string>
     <string name="label_contact_me">联系我</string>
     <string name="label_email_title">邮箱</string>
+    <string name="label_snapshot_preview">快照预览</string>
     <string name="message_trypophobia_warning">对有&lt;b&gt;密集恐惧症&lt;/b&gt;的提示，一些画面可能会引起不适。是否继续？</string>
     <string name="label_settings">设置</string>
     <string name="label_project_desc">项目包含了系统彩蛋完整代码，旨在对系统彩蛋的整理和兼容，以保证大多数设备可以体验到不同版本的彩蛋，不会对系统彩蛋代码做过多修改。</string>
@@ -55,5 +56,4 @@
     <string name="rocket_launcher_all_app_icons">所有应用图标</string>
     <string name="rocket_launcher_all_icons">所有图标</string>
     <string name="rocket_launcher_query_all_app_desc">需要获取所有应用列表</string>
-    <string name="label_snapshot_preview">快照预览</string>
 </resources>
