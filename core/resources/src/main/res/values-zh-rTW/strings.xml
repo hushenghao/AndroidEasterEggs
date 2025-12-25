@@ -9,11 +9,13 @@
     <string name="label_beta">下載 Beta 版</string>
     <string name="label_timeline">時間線</string>
     <string name="label_privacy_policy">隱私權</string>
+    <string name="label_wiki">Wiki</string>
     <string name="label_license">授權</string>
     <string name="label_feedback">意見回饋</string>
     <string name="label_star">給個好評</string>
     <string name="label_contact_me">聯絡我們</string>
     <string name="label_email_title">電子郵件</string>
+    <string name="label_snapshot_preview">快照預覽</string>
     <string name="message_trypophobia_warning">對有&lt;b&gt;密集恐懼症&lt;/b&gt;人士的警告，一些畫面可能會引起不適。要繼續嗎？</string>
     <string name="label_settings">設定</string>
     <string name="label_project_desc">項目包含了系統彩蛋完整程式碼，旨在對系統彩蛋的整理和相容，以保證大多數設備可以體驗到不同版本的彩蛋，不會對系統彩蛋程式碼做過多修改。</string>
@@ -26,12 +28,13 @@
     <string name="summary_system_default">預設</string>
     <string name="summary_theme_dark_mode">深色</string>
     <string name="summary_theme_light_mode">淺色</string>
-    <string name="summary_theme_amoled_mode">AMOLED</string>
+    <string name="summary_theme_amoled_mode">黑色的</string>
     <string name="label_add_shortcut">捷徑</string>
     <string name="label_donate">捐贈</string>
     <string name="preference_on">開啟</string>
     <string name="preference_off">關閉</string>
     <string name="toast_shortcut_added">捷徑已新增</string>
+    <string name="toast_no_egg_detail">這個 Android 版本沒有彩蛋</string>
     <string name="app_widget_description">這是 Easter Eggs 的類比時鐘</string>
     <string name="action_agree">同意</string>
     <string name="summary_browse_privacy_policy">閱讀並同意我們的隱私權政策以繼續進行。</string>
@@ -46,5 +49,11 @@
     <string name="label_contribute">參與</string>
     <string name="animator_disabled_alert_message">由於系統動畫被停用，某些功能可能無法正常使用。請前往“開發人員選項”並啟用“動畫影片長度比例”選項來啟動動畫。</string>
     <string name="action_goto_settings">前往設定</string>
+    <string name="action_dont_show_again">不再顯示</string>
     <string name="cat_editor">Cat Editor</string>
+    <string name="cat_editor_input_seed">輸入貓咪種子</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter Egg 圖示</string>
+    <string name="rocket_launcher_all_app_icons">應用程式</string>
+    <string name="rocket_launcher_all_icons">彩蛋和應用程式</string>
+    <string name="rocket_launcher_query_all_app_desc">需要取得主畫面應用程式中顯示的應用程式清單</string>
 </resources>
