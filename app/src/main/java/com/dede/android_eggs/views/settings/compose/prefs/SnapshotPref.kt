@@ -3,13 +3,14 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.rounded.ViewCarousel
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.carousel.CarouselDefaults.multiBrowseFlingBehavior
 import androidx.compose.material3.carousel.HorizontalCenteredHeroCarousel
 import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
@@ -23,6 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavController
+import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.views.settings.compose.basic.SettingPref
 import com.dede.basic.provider.EasterEgg
@@ -66,16 +68,16 @@ fun SnapshotDialog(
         val carouselState = rememberCarouselState { snapshotProviders.size }
         HorizontalCenteredHeroCarousel(
             state = carouselState,
+            flingBehavior = multiBrowseFlingBehavior(carouselState),
             itemSpacing = 6.dp,
             minSmallItemWidth = 34.dp,
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight(),
+                .aspectRatio(PHI),
         ) { i ->
             SnapshotView(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1.2f)
+                    .fillMaxSize()
                     .maskClip(MaterialTheme.shapes.extraLarge),
                 snapshot = snapshotProviders[i],
             )

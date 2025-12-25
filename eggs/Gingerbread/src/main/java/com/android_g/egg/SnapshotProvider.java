@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 
 public class SnapshotProvider extends com.dede.basic.provider.SnapshotProvider {
 
@@ -12,8 +14,9 @@ public class SnapshotProvider extends com.dede.basic.provider.SnapshotProvider {
         return true;
     }
 
+    @NonNull
     @Override
-    public View create(Context context) {
+    public View create(@NonNull Context context) {
         ImageView content = new ImageView(context);
         content.setImageResource(R.drawable.g_platlogo);
         content.setScaleType(ImageView.ScaleType.CENTER_CROP);

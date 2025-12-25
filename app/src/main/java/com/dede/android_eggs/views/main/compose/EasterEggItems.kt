@@ -69,6 +69,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.ui.views.ViscousFluidInterpolator
 import com.dede.android_eggs.views.main.util.AndroidReleaseDateMatcher
@@ -125,7 +126,7 @@ fun EasterEggHighestItem(
             SnapshotView(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(1.8f),
+                    .aspectRatio(PHI),
                 snapshot = snapshot
             )
 

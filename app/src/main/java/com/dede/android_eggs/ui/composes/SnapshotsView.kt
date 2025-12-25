@@ -26,6 +26,8 @@ private fun randomHash(context: Context): String {
     return strings[index]
 }
 
+const val PHI = 1.618034f
+
 @Preview
 @Composable
 fun SnapshotView(
