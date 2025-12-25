@@ -68,22 +68,26 @@ fun Activity.setupSplashScreen() {
 }
 
 private fun Drawable.setAnimationEndCallback(defaultDuration: Long, callback: () -> Unit) {
-    if (this is Animatable2Compat) {
-        registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
-            override fun onAnimationEnd(drawable: Drawable?) {
+    when (this) {
+        is Animatable2Compat -> {
+            registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
+                override fun onAnimationEnd(drawable: Drawable?) {
+                    callback()
+                }
+            })
+        }
+        is Animatable2 -> {
+            registerAnimationCallback(object : Animatable2.AnimationCallback() {
+                override fun onAnimationEnd(drawable: Drawable?) {
+                    callback()
+                }
+            })
+        }
+        else -> {
+            // android.graphics.drawable.Animatable without callback support
+            delay(defaultDuration) {
                 callback()
             }
-        })
-    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && this is Animatable2) {
-        registerAnimationCallback(object : Animatable2.AnimationCallback() {
-            override fun onAnimationEnd(drawable: Drawable?) {
-                callback()
-            }
-        })
-    } else {
-        // android.graphics.drawable.Animatable without callback support
-        delay(defaultDuration) {
-            callback()
         }
     }
 }

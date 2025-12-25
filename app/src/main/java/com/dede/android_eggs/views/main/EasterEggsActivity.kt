@@ -2,7 +2,6 @@ package com.dede.android_eggs.views.main
 
 import android.app.assist.AssistContent
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -54,7 +53,7 @@ class EasterEggsActivity : AppCompatActivity() {
 
     override fun onProvideAssistContent(outContent: AssistContent?) {
         super.onProvideAssistContent(outContent)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && outContent != null) {
+        if (outContent != null) {
             outContent.webUri = getString(R.string.url_github).toUri()
         }
     }

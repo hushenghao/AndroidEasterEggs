@@ -16,7 +16,6 @@ import androidx.core.content.edit
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
 import com.dede.android_eggs.util.AGPUtils
-import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.pref
 import com.dede.basic.Utils
 import com.dede.basic.copy
@@ -86,12 +85,9 @@ internal object Utilities {
             context, 0, createNewIssueIntent(context, tr), flags
         )
         val notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL)
-            .applyIf(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                @Suppress("NewApi")
-                setSmallIcon(
-                    IconCompat.createWithResource(context, R.drawable.round_sentiment_dissatisfied)
-                )
-            }
+            .setSmallIcon(
+                IconCompat.createWithResource(context, R.drawable.round_sentiment_dissatisfied)
+            )
             .setStyle(bigTextStyle)
             .setContentTitle(tr.getCrashTitle())
             .setContentText(tr.getStackTraceString())
@@ -100,6 +96,7 @@ internal object Utilities {
             .addAction(-1, context.getString(android.R.string.copy), copyIntent)
             .addAction(-1, "New issue", newIssueIntent)
             .build()
+        @Suppress("MissingPermission")
         notificationManager.notify(NOTIFICATION_ID, notification)
     }
 

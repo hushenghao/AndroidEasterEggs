@@ -93,6 +93,7 @@ fun EasterEggsNavHost(
                 }
             }
             dialog(route = TimelineListDialog.route) {
+                // don't work, https://issuetracker.google.com/issues/435672848
                 TimelineListDialog(scrimColor = Color.Transparent) {
                     navController.popBackStack()
                 }
