@@ -107,10 +107,10 @@ class LoopPagerState internal constructor(
 
 @Composable
 fun LoopHorizontalPager(
+    modifier: Modifier = Modifier,
     state: LoopPagerState,
     autoLoop: Boolean = true,
     interval: Long = 2000L,
-    modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     pageSize: PageSize = PageSize.Fill,
     beyondViewportPageCount: Int = PagerDefaults.BeyondViewportPageCount,

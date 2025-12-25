@@ -22,7 +22,7 @@ import com.dede.android_eggs.BuildConfig
 @Composable
 @Preview
 fun BuildTypeBubble() {
-    @Suppress("KotlinConstantConditions")
+    @Suppress("KotlinConstantConditions", "SimplifyBooleanWithConstants")
     val bubble = when {
         BuildConfig.DEBUG -> "Debug"
         BuildConfig.FLAVOR == "alpha" -> "Alpha"
