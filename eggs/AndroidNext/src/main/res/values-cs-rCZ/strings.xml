@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="summary_android_waiting">Čekání…</string>
-    <string name="summary_android_release_pushed">Finální verze byla vydána</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="summary_android_waiting">Nyní nedostupné</string>
+    <string name="summary_android_release_pushed">Finální verze byla vydána.</string>
     <string name="label_timeline_title">Časová osa, milníky a aktualizace</string>
     <string name="label_timeline_releases">Vydání</string>
+    <string name="label_timeline_developer_previews">Verze pro vývojáře</string>
+    <string name="label_timeline_beta_release">Beta verze</string>
+    <string name="label_timeline_platform_stability">Stabilita platformy</string>
+    <string name="label_timeline_final_release">Finální vydání</string>
 </resources>
