@@ -15,6 +15,7 @@
     <string name="label_star">Ocijeni</string>
     <string name="label_contact_me">Kontaktiraj me</string>
     <string name="label_email_title">E-pošta</string>
+    <string name="label_snapshot_preview">Pregled snimke</string>
     <string name="message_trypophobia_warning">Neke slike mogu izazvati nelagodu u osobama koje pate od &lt;b&gt;tripofobije&lt;/b&gt;. Želite li nastaviti?</string>
     <string name="label_settings">Postavke</string>
     <string name="label_project_desc">Ovaj projekt sadrži kompletni programski kod uskršnjih jaja (engl. easter eggs) u operacijskom sustavu Android. Cilj projekta je organizirati uskršnja jaja i omogućiti njihovo vjerno pokretanje na većini uređaja bez obzira na verziju Androida i uz minimalne izmjene u originalnom kodu. Na nekim verzijama Androida možda neće raditi neke funkcije pojedinih uskršnjih jaja.</string>
