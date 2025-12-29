@@ -13,7 +13,6 @@ import android.graphics.Paint
 import android.graphics.Shader
 import android.graphics.drawable.InsetDrawable
 import android.os.Build
-import android.util.Log
 import androidx.core.app.PendingIntentCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutInfoCompat
@@ -44,6 +43,10 @@ object EasterEggShortcutsHelp {
     private const val FORMAT_DYNAMIC_SHORTCUT_ID = "dynamic_shortcut_android_%d"
     private const val FORMAT_PIN_SHORTCUT_ID = "android_%d"
 
+    private fun EasterEgg.shortcutIdNum(): Int {
+        return this.hashCode()
+    }
+
     private class UpdateShortcutsRunnable(
         private val context: Context,
         private val eggs: List<EasterEgg>
@@ -69,7 +72,7 @@ object EasterEggShortcutsHelp {
                 ShortcutManagerCompat.getDynamicShortcuts(context).map { it.id }.toMutableList()
             val pushShortcuts = ArrayList<ShortcutInfoCompat>()
             for (egg in subEggs) {
-                val shortcutId = FORMAT_DYNAMIC_SHORTCUT_ID.format(egg.apiLevel)
+                val shortcutId = FORMAT_DYNAMIC_SHORTCUT_ID.format(egg.shortcutIdNum())
                 // Don't need remove this shortcut
                 removeShortcutIds.remove(shortcutId)
 
@@ -128,14 +131,16 @@ object EasterEggShortcutsHelp {
         val label = context.getString(egg.nameRes)
         val icon = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             if (context.isAdaptiveIconDrawable(egg.iconRes)) {
-                val size = 48.dp
-                val insert = size / 2f - (DEFAULT_VIEW_PORT_SCALE * size / 2f * ICON_DIAMETER_FACTOR)
-                Log.i("TAG", "createShortcutInfo: " + (size - insert * 2) / size)
+                val size = max(48.dp, 192)
                 val circleBitmap = context.requireDrawable(egg.iconRes)
                     .toBitmap(size, size)
                     .toCircleBitmap()
-                val bitmap = InsetDrawable(circleBitmap.toDrawable(context.resources), insert.toInt())
-                        .toBitmap(size, size)
+
+                // IconCompat.createLegacyIconFromAdaptiveIcon
+                val radius = (DEFAULT_VIEW_PORT_SCALE * size) / 2f * ICON_DIAMETER_FACTOR
+                val insert = (size * 0.5f - radius).toInt()
+                val bitmap = InsetDrawable(circleBitmap.toDrawable(context.resources), insert)
+                    .toBitmap(size, size)
                 IconCompat.createWithAdaptiveBitmap(bitmap)
             } else {
                 IconCompat.createWithResource(context, egg.iconRes)
@@ -176,7 +181,7 @@ object EasterEggShortcutsHelp {
     fun pinShortcut(context: Context, egg: EasterEgg) {
         if (!isSupportShortcut(egg)) return
 
-        val shortcutId = FORMAT_PIN_SHORTCUT_ID.format(egg.apiLevel)
+        val shortcutId = FORMAT_PIN_SHORTCUT_ID.format(egg.shortcutIdNum())
         val shortcut = createShortcutInfo(context, shortcutId, egg, true)
         val callback = PinShortcutReceiver.registerCallbackWithTimeout(context)
         cachedExecutor.execute {
