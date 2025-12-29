@@ -28,6 +28,7 @@ fun Context.getSystemColor(resName: String): Int {
 
 enum class DefType {
     DRAWABLE,
+    MIPMAP,
     COLOR,
     RAW,
     XML,
@@ -36,6 +37,7 @@ enum class DefType {
     override fun toString(): String {
         return when (this) {
             DRAWABLE -> "drawable"
+            MIPMAP -> "mipmap"
             COLOR -> "color"
             RAW -> "raw"
             XML -> "xml"

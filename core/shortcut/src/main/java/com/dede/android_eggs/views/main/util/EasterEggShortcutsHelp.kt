@@ -7,14 +7,22 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.IntentSender
+import android.graphics.Bitmap
+import android.graphics.BitmapShader
+import android.graphics.Paint
+import android.graphics.Shader
+import android.graphics.drawable.InsetDrawable
 import android.os.Build
+import android.util.Log
 import androidx.core.app.PendingIntentCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.applyCanvas
+import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.graphics.drawable.toBitmap
-import com.dede.android_eggs.ui.drawables.AlterableAdaptiveIconDrawable
+import androidx.core.graphics.drawable.toDrawable
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.util.applyNotNull
 import com.dede.basic.Utils
@@ -22,9 +30,12 @@ import com.dede.basic.cachedExecutor
 import com.dede.basic.cancel
 import com.dede.basic.delay
 import com.dede.basic.dp
+import com.dede.basic.isAdaptiveIconDrawable
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.requireDrawable
 import com.dede.basic.toast
 import kotlin.math.max
+import kotlin.math.min
 
 object EasterEggShortcutsHelp {
 
@@ -81,6 +92,30 @@ object EasterEggShortcutsHelp {
         cachedExecutor.execute(UpdateShortcutsRunnable(appCtx, providedEggs))
     }
 
+    /**
+     * 将 Bitmap 裁切成圆形。
+     * @return 新的圆形 Bitmap（ARGB_8888）
+     */
+    private fun Bitmap.toCircleBitmap(): Bitmap {
+        val size: Int = min(width, height)
+        val x: Int = (width - size) / 2
+        val y: Int = (height - size) / 2
+        val squared = Bitmap.createBitmap(this, x, y, size, size)
+        return createBitmap(size, size).applyCanvas {
+            val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+            paint.shader = BitmapShader(squared, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+            val r = size / 2f
+            drawCircle(r, r, r, paint)
+
+            setBitmap(null)
+            squared.recycle()
+        }
+    }
+
+    private const val ADAPTIVE_ICON_INSET_FACTOR: Float = 1 / 4f
+    private const val DEFAULT_VIEW_PORT_SCALE: Float = 1 / (1 + 2 * ADAPTIVE_ICON_INSET_FACTOR)
+    private const val ICON_DIAMETER_FACTOR: Float = 176f / 192
+
     private fun createShortcutInfo(
         context: Context,
         shortcutId: String,
@@ -91,11 +126,20 @@ object EasterEggShortcutsHelp {
             "EasterEgg unsupported shortcut, provide class == null!"
         }
         val label = context.getString(egg.nameRes)
-
-        val icon = if (isPinShortcut && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            val bitmap = AlterableAdaptiveIconDrawable(context, egg.iconRes)
-                .toBitmap(48.dp, 48.dp)
-            IconCompat.createWithBitmap(bitmap)
+        val icon = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            if (context.isAdaptiveIconDrawable(egg.iconRes)) {
+                val size = 48.dp
+                val insert = size / 2f - (DEFAULT_VIEW_PORT_SCALE * size / 2f * ICON_DIAMETER_FACTOR)
+                Log.i("TAG", "createShortcutInfo: " + (size - insert * 2) / size)
+                val circleBitmap = context.requireDrawable(egg.iconRes)
+                    .toBitmap(size, size)
+                    .toCircleBitmap()
+                val bitmap = InsetDrawable(circleBitmap.toDrawable(context.resources), insert.toInt())
+                        .toBitmap(size, size)
+                IconCompat.createWithAdaptiveBitmap(bitmap)
+            } else {
+                IconCompat.createWithResource(context, egg.iconRes)
+            }
         } else {
             IconCompat.createWithResource(context, egg.iconRes)
         }

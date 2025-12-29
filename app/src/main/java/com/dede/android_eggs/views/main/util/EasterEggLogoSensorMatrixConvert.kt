@@ -15,7 +15,7 @@ class EasterEggLogoSensorMatrixConvert @Inject constructor() :
 
         companion object {
             private const val DEGREES_THRESHOLD = 3f
-            private const val OFFSET_RATIO = 0.1f
+            private const val OFFSET_RATIO = 0.18f
         }
 
     private val list = ArrayList<Listener>()
