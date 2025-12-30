@@ -15,6 +15,7 @@
     <string name="label_star">Penilaian</string>
     <string name="label_contact_me">Hubungi saya</string>
     <string name="label_email_title">Email</string>
+    <string name="label_snapshot_preview"></string>
     <string name="message_trypophobia_warning">Ini adalah peringatan bagi pengidap &lt;b&gt;Trypophobia&lt;/b&gt; bahwa beberapa gambar mungkin menyebabkan ketidaknyamanan. Apakah Anda ingin melanjutkan?</string>
     <string name="label_settings">Setelan</string>
     <string name="label_project_desc">Proyek ini berisi kode lengkap Easter Egg sistem, yang bertujuan untuk mengatur dan kompatibel dengan Easter Egg sistem, untuk memastikan bahwa sebagian besar perangkat dapat mengalami versi Easter Egg yang berbeda dan tidak akan membuat terlalu banyak modifikasi pada kode Easter Egg sistem. Beberapa versi menggunakan fitur sistem baru, dan versi yang lebih rendah hanya dapat menggunakan beberapa fungsi.</string>
