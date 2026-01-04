@@ -1,5 +1,6 @@
 package com.dede.android_eggs.views.settings.compose.groups
 
+import android.util.Base64
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AlternateEmail
 import androidx.compose.material.icons.rounded.BugReport
@@ -31,9 +32,9 @@ fun ContactMeGroup() {
                 contentDescription = stringResource(id = StringsR.string.label_email_title)
             ),
             title = stringResource(id = StringsR.string.label_email_title),
-            desc = stringResource(id = R.string.label_mail_me),
+            desc = FuckRobotHarass.oG0vY4xD,
             onClick = {
-                context.copy(context.getString(R.string.label_mail_me))
+                context.copy(FuckRobotHarass.oG0vY4xD)
             }
         )
         Option(
@@ -47,4 +48,16 @@ fun ContactMeGroup() {
             }
         )
     }
+}
+
+
+private object FuckRobotHarass {
+    private val sN0rN9sA =
+        byteArrayOf(
+            90, 71, 86, 107, 90, 83, 53, 111, 100, 85,
+            66, 120, 99, 83, 53, 106, 98, 50, 48, 61
+        )
+
+    val oG0vY4xD: String
+        get() = String(Base64.decode(sN0rN9sA, Base64.DEFAULT))
 }

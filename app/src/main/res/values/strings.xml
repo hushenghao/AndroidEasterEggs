@@ -9,7 +9,6 @@
     <string name="url_wiki" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki</string>
     <string name="url_license" translatable="false">https://www.apache.org/licenses/LICENSE-2.0.txt</string>
     <string name="url_translation" translatable="false">https://crowdin.com/project/easter-eggs</string>
-    <string name="label_mail_me" translatable="false">dede.hu@qq.com</string>
     <string name="url_sponsor" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Sponsor</string>
 
     <string name="label_version" translatable="false">v%s (%d)</string>
