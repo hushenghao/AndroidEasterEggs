@@ -98,7 +98,9 @@ object AndroidBaseEasterEgg : EasterEggProvider {
             timelineEvent(
                 Build.VERSION_CODES.BASE,
                 "The original, first, version of Android. Yay!\nReleased publicly as Android 1.0 in September 2008."
-            )
+            ).apply {
+                androidLogo = R.drawable.b_android_logo_2007_2014
+            }
         )
     }
 }

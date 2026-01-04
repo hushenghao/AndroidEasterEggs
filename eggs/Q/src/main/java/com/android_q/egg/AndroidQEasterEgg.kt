@@ -42,7 +42,9 @@ object AndroidQEasterEgg : EasterEggProvider {
             timelineEvent(
                 Build.VERSION_CODES.Q,
                 "Q.\nReleased publicly as Android 10 in September 2019."
-            )
+            ).apply {
+                androidLogo = R.drawable.q_android_logo_2019_2023
+            }
         )
     }
 }

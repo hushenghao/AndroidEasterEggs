@@ -68,15 +68,17 @@ public class AndroidLollipopEasterEgg implements EasterEggProvider {
     @NonNull
     @Override
     public List<TimelineEvent> provideTimelineEvents() {
+        TimelineEvent e2 = timelineEvent(
+                Build.VERSION_CODES.LOLLIPOP,
+                "L.\nReleased publicly as Android 5.0 in November 2014."
+        );
+        e2.setAndroidLogo(R.drawable.l_android_logo_2015_2019);
         return List.of(
                 timelineEvent(
                         Build.VERSION_CODES.LOLLIPOP_MR1,
                         "L MR1.\nReleased publicly as Android 5.1 in March 2015."
                 ),
-                timelineEvent(
-                        Build.VERSION_CODES.LOLLIPOP,
-                        "L.\nReleased publicly as Android 5.0 in November 2014."
-                )
+                e2
         );
     }
 }

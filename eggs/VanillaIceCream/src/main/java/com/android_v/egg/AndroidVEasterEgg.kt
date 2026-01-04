@@ -47,7 +47,9 @@ object AndroidVEasterEgg : EasterEggProvider, ComponentProvider {
                 2024, Calendar.SEPTEMBER,
                 Build.VERSION_CODES.VANILLA_ICE_CREAM,
                 "Vanilla Ice Cream."
-            )
+            ).apply {
+                androidLogo = R.drawable.v_android_logo_2024_
+            }
         )
     }
 

@@ -1,5 +1,6 @@
 package com.dede.basic.provider
 
+import androidx.annotation.DrawableRes
 import java.util.Calendar
 
 data class TimelineEvent(
@@ -17,6 +18,8 @@ data class TimelineEvent(
     val event: CharSequence,
     val fullApiLevel: Int = apiLevel * SDK_INT_MULTIPLIER,
 ) {
+    @DrawableRes
+    var androidLogo: Int = -1
 
     companion object {
 

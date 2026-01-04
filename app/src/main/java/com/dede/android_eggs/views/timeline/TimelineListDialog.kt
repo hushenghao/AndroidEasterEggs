@@ -3,6 +3,7 @@
 package com.dede.android_eggs.views.timeline
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -42,6 +43,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -61,6 +63,8 @@ import com.dede.android_eggs.views.timeline.TimelineEventHelp.localMonth
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localYear
 import com.dede.basic.isAdaptiveIconDrawable
 import com.dede.basic.provider.TimelineEvent
+import com.dede.basic.requireDrawable
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Calendar
 import javax.inject.Inject
@@ -198,7 +202,8 @@ private fun TimelineItem(
     ConstraintLayout(
         modifier = Modifier.fillMaxWidth()
     ) {
-        val (year, img, month, desc, line) = createRefs()
+        val (year, img, month,
+            androidLogo, desc, line) = createRefs()
 
         Box(
             modifier = Modifier
@@ -254,6 +259,22 @@ private fun TimelineItem(
                 top.linkTo(img.top)
             }
         )
+        if (event.androidLogo != -1) {
+            val drawable = remember(LocalResources.current) {
+                context.requireDrawable(event.androidLogo)
+            }
+            Image(
+                painter = rememberDrawablePainter(drawable),
+                modifier = Modifier
+                    .height(20.dp)
+                    .padding(bottom = 3.dp)
+                    .constrainAs(androidLogo) {
+                        top.linkTo(month.bottom)
+                        start.linkTo(month.start)
+                    },
+                contentDescription = null
+            )
+        }
         Text(
             text = event.eventAnnotatedString,
             style = typography.bodySmall,
@@ -267,7 +288,7 @@ private fun TimelineItem(
                         endMargin = 16.dp,
                         bias = 0f,
                     )
-                    top.linkTo(month.bottom)
+                    top.linkTo(if (event.androidLogo != -1) androidLogo.bottom else month.bottom)
                 }
         )
     }

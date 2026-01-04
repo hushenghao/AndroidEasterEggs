@@ -86,15 +86,17 @@ public class AndroidKitKatEasterEgg implements EasterEggProvider, ComponentProvi
     @NonNull
     @Override
     public List<TimelineEvent> provideTimelineEvents() {
+        TimelineEvent e2 = timelineEvent(
+                Build.VERSION_CODES.KITKAT,
+                "K.\nReleased publicly as Android 4.4 in October 2013."
+        );
+        e2.setAndroidLogo(R.drawable.k_android_logo_2014_2015);
         return List.of(
                 timelineEvent(
                         Build.VERSION_CODES.KITKAT_WATCH,
                         "K for watches.\nReleased publicly as Android 4.4W in June 2014."
                 ),
-                timelineEvent(
-                        Build.VERSION_CODES.KITKAT,
-                        "K.\nReleased publicly as Android 4.4 in October 2013."
-                )
+                e2
         );
     }
 }
