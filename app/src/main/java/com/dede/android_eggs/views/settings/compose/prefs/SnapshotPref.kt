@@ -18,9 +18,13 @@ import androidx.compose.material3.carousel.CarouselDefaults.multiBrowseFlingBeha
 import androidx.compose.material3.carousel.HorizontalCenteredHeroCarousel
 import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,6 +38,9 @@ import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.views.settings.compose.basic.SettingPref
 import com.dede.basic.provider.EasterEgg
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
 import javax.inject.Inject
 import com.dede.android_eggs.resources.R as StringR
 
@@ -79,6 +86,15 @@ fun SnapshotDialog(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             val carouselState = rememberCarouselState { pairList.size }
+            val hapticFeedback = LocalHapticFeedback.current
+            LaunchedEffect(carouselState) {
+                snapshotFlow { carouselState.currentItem }
+                    .distinctUntilChangedIgnoreInitializeValue(0)
+                    .collect {
+                        hapticFeedback.performHapticFeedback(HapticFeedbackType.SegmentFrequentTick)
+                    }
+            }
+
             HorizontalCenteredHeroCarousel(
                 state = carouselState,
                 flingBehavior = multiBrowseFlingBehavior(carouselState),
@@ -106,4 +122,17 @@ fun SnapshotDialog(
             )
         }
     }
+}
+
+
+fun <T> Flow<T>.distinctUntilChangedIgnoreInitializeValue(initializeValue: T): Flow<T> {
+    var saveValue: T? = initializeValue
+    return distinctUntilChanged()
+        .filter {
+            if (saveValue != null && it == saveValue) {
+                saveValue = null
+                return@filter false
+            }
+            true
+        }
 }
