@@ -92,6 +92,7 @@ import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEd
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavController
 import com.dede.android_eggs.ui.composes.icons.rounded.Cat
+import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
 import com.dede.basic.copy
 import com.dede.basic.toast
 import com.dede.basic.trimZeroAndDot
@@ -636,8 +637,6 @@ private fun BottomOptionsBar(
     )
 }
 
-private val moreOptionGuideState = mutableStateOf(true)
-
 @Composable
 private fun MoreOptionsPopup(
     modifier: Modifier = Modifier,
@@ -656,7 +655,7 @@ private fun MoreOptionsPopup(
             shape = CircleShape,
             colors = cardColors(containerColor = colorScheme.surfaceColorAtElevation(4.dp))
         ) {
-            var moreOptionGuide by rememberSaveable { moreOptionGuideState }
+            var moreOptionGuide by rememberPrefBoolState("cat_editor_more_option_guide", true)
             val scrollState = rememberScrollState()
             LaunchedEffect(scrollState) {
                 if (moreOptionGuide && scrollState.canScrollForward) {

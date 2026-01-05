@@ -17,6 +17,7 @@ dependencies {
     implementation(project(":core:local-provider"))
     implementation(project(":core:navigation"))
     implementation(project(":core:icons"))
+    implementation(project(":core:composable"))
 
     implementation(libs.androidx.core)
     implementation(libs.google.material)

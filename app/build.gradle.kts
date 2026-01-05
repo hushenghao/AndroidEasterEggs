@@ -104,6 +104,7 @@ dependencies {
     implementation(project(":core:theme"))
     implementation(project(":core:icons"))
     implementation(project(":core:settings"))
+    implementation(project(":core:composable"))
     implementation(project(":core:shortcut"))
     implementation(project(":core:activity-actions"))
     implementation(project(":core:resources"))
