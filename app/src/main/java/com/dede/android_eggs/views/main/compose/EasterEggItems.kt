@@ -2,7 +2,6 @@
 
 package com.dede.android_eggs.views.main.compose
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animate
@@ -54,12 +53,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -274,13 +274,13 @@ private fun EasterEggItemSwipe(
         }
     }
 
-    val view = LocalView.current
     Box(
         contentAlignment = Alignment.Center,
     ) {
         if (offsetX != 0f) {
             floor()
         }
+        val hapticFeedback = LocalHapticFeedback.current
         Box(
             modifier = Modifier
                 .onSizeChanged { triggerOffsetX = it.width / 5f * 2 }
@@ -300,7 +300,7 @@ private fun EasterEggItemSwipe(
                         if (supportShortcut) {
                             if (!needTrigger && (-offsetX) >= triggerOffsetX) {
                                 needTrigger = true
-                                view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+                                hapticFeedback.performHapticFeedback(HapticFeedbackType.SegmentTick)
                             }
                             callbackSwipeProgress(offsetX)
                         }
