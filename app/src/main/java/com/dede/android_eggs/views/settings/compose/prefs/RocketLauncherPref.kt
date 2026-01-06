@@ -3,14 +3,15 @@ package com.dede.android_eggs.views.settings.compose.prefs
 import android.content.Context
 import android.content.Intent
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.CallMerge
 import androidx.compose.material.icons.rounded.Android
 import androidx.compose.material.icons.rounded.Apps
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.RocketLaunch
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.android.launcher2.RocketLauncher
 import com.android.launcher2.RocketLauncherPrefUtil
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
@@ -54,9 +56,9 @@ fun RocketLauncherPref() {
                 targetValue = if (isExpanded) 180f else 0f,
                 label = "Arrow"
             )
-            IconButton(
+            FilledTonalIconButton(
                 onClick = { expanded = !expanded },
-                modifier = Modifier
+                modifier = Modifier.padding(end = 8.dp)
             ) {
                 Icon(
                     imageVector = Icons.Rounded.KeyboardArrowDown,

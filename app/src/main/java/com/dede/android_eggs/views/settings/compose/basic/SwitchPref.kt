@@ -1,6 +1,5 @@
 package com.dede.android_eggs.views.settings.compose.basic
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
@@ -25,12 +24,13 @@ fun SwitchPref(
         title = title,
         desc = desc,
         trailingContent = {
-            Box(modifier = Modifier.padding(end = 14.dp)) {
-                Switch(checked = boolState, onCheckedChange = {
+            Switch(
+                checked = boolState,
+                modifier = Modifier.padding(end = 12.dp),
+                onCheckedChange = {
                     boolState = it
                     onCheckedChange(it)
                 })
-            }
         },
         onClick = {
             boolState = !boolState
@@ -54,12 +54,13 @@ fun SwitchIntPref(
         title = title,
         desc = desc,
         trailingContent = {
-            Box(modifier = Modifier.padding(end = 14.dp)) {
-                Switch(checked = intState == SettingPrefUtil.ON, onCheckedChange = {
+            Switch(
+                checked = intState == SettingPrefUtil.ON,
+                modifier = Modifier.padding(end = 12.dp),
+                onCheckedChange = {
                     intState = if (it) SettingPrefUtil.ON else SettingPrefUtil.OFF
                     onCheckedChange(intState)
                 })
-            }
         },
         onClick = {
             intState = if (intState == SettingPrefUtil.ON) {
