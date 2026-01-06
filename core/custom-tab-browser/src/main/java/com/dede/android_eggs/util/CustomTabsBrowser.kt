@@ -51,7 +51,7 @@ object CustomTabsBrowser {
             val applicationId = context.packageName
             putExtra(
                 Intent.EXTRA_REFERRER,
-                Uri.parse("android-app://%s".format(applicationId))
+                "android-app://%s".format(applicationId).toUri()
             )
             val headers = bundleOf(
                 // https://developer.android.google.cn/guide/topics/resources/app-languages?hl=zh-cn#consider-header
