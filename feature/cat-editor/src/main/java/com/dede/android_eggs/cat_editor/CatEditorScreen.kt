@@ -98,14 +98,30 @@ import com.dede.basic.toast
 import com.dede.basic.trimZeroAndDot
 import com.dede.basic.utils.ShareCatUtils
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import dagger.multibindings.IntoSet
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import androidx.appcompat.R as AppCompatR
 import com.dede.android_eggs.resources.R as StringR
 
-object CatEditorScreen : EasterEggsDestination {
+@Module
+@InstallIn(SingletonComponent::class)
+object CatEditorScreen : EasterEggsDestination, EasterEggsDestination.Provider {
     override val route: String = "cat_editor"
+
+    @Composable
+    override fun content() {
+        CatEditorScreen()
+    }
+
+    @IntoSet
+    @Provides
+    override fun provider(): EasterEggsDestination = this
 }
 
 @Composable

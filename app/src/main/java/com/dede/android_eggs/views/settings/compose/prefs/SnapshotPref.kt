@@ -37,7 +37,12 @@ import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.views.settings.compose.basic.SettingPref
 import com.dede.basic.provider.EasterEgg
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.components.SingletonComponent
+import dagger.multibindings.IntoSet
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
@@ -57,8 +62,26 @@ fun SnapshotPref() {
     )
 }
 
-object SnapshotDialog : EasterEggsDestination {
+@Module
+@InstallIn(SingletonComponent::class)
+object SnapshotDialog : EasterEggsDestination, EasterEggsDestination.Provider {
+    override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.Dialog
+
     override val route: String = "snapshot_dialog"
+
+    @Composable
+    override fun content() {
+        val navController = LocalNavController.current
+        SnapshotDialog {
+            navController.popBackStack()
+        }
+    }
+
+    @IntoSet
+    @Provides
+    override fun provider(): EasterEggsDestination {
+        return this
+    }
 }
 
 @HiltViewModel

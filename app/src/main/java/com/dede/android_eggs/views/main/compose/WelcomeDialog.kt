@@ -36,12 +36,19 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
 import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.navigation.LocalNavController
 import com.dede.android_eggs.ui.composes.LoopHorizontalPager
 import com.dede.android_eggs.ui.composes.LoopPagerIndicator
 import com.dede.android_eggs.ui.composes.rememberLoopPagerState
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
+import com.dede.basic.Utils
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import dagger.multibindings.IntoSet
 import com.dede.android_eggs.resources.R as StringsR
 
 private const val KEY = "key_welcome_status"
@@ -62,8 +69,31 @@ private val pagers = intArrayOf(
     R.drawable.img_samples,
 )
 
-object WelcomeDialog : EasterEggsDestination {
+@Module
+@InstallIn(SingletonComponent::class)
+object WelcomeDialog : EasterEggsDestination, EasterEggsDestination.Provider {
+    override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.Dialog
+
     override val route: String = "welcome_dialog"
+
+    @Composable
+    override fun content() {
+        val context = LocalContext.current
+        val navController = LocalNavController.current
+        WelcomeDialog {
+            navController.popBackStack()
+
+            if (!Utils.areAnimatorEnabled(context)) {
+                navController.navigate(AnimatorDisabledAlertDialog.route)
+            }
+        }
+    }
+
+    @Provides
+    @IntoSet
+    override fun provider(): EasterEggsDestination {
+        return this
+    }
 }
 
 @Preview

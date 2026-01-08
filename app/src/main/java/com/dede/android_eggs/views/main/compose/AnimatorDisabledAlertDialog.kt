@@ -16,13 +16,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.edit
 import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.navigation.LocalNavController
 import com.dede.android_eggs.util.pref
 import com.dede.basic.Utils
 import com.dede.basic.toast
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import dagger.multibindings.IntoSet
 import com.dede.android_eggs.resources.R as StringsR
 
+@Module
+@InstallIn(SingletonComponent::class)
+object AnimatorDisabledAlertDialog : EasterEggsDestination, EasterEggsDestination.Provider {
 
-object AnimatorDisabledAlertDialog : EasterEggsDestination {
+    override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.Dialog
+
     override val route: String = "animator_disabled_alert_dialog"
 
     private const val PREF_DONT_SHOW_AGAIN = "animator_disabled_alert_dialog_dont_show_again"
@@ -34,6 +44,18 @@ object AnimatorDisabledAlertDialog : EasterEggsDestination {
     fun setDontShowAgain(context: Context) {
         context.pref.edit { putBoolean(PREF_DONT_SHOW_AGAIN, true) }
     }
+
+    @Composable
+    override fun content() {
+        val navController = LocalNavController.current
+        AnimatorDisabledAlertDialog {
+            navController.popBackStack()
+        }
+    }
+
+    @Provides
+    @IntoSet
+    override fun provider(): EasterEggsDestination = this
 }
 
 @Composable

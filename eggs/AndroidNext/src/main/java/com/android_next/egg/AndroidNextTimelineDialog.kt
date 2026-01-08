@@ -45,16 +45,38 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.navigation.LocalNavController
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.basic.requireDrawable
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import dagger.multibindings.IntoSet
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import kotlin.math.floor
 import kotlin.math.min
 
-object AndroidNextTimelineDialog : EasterEggsDestination {
+@Module
+@InstallIn(SingletonComponent::class)
+object AndroidNextTimelineDialog : EasterEggsDestination, EasterEggsDestination.Provider {
+    override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.Dialog
+
     override val route: String = "android_next_timeline_dialog"
+
+    @Composable
+    override fun content() {
+        val navController = LocalNavController.current
+        AndroidNextTimelineDialog {
+            navController.popBackStack()
+        }
+    }
+
+    @Provides
+    @IntoSet
+    override fun provider(): EasterEggsDestination = this
 }
 
 const val ACTION_SHOE_ANDROID_NEXT_DIALOG = "action_show_android_next_dialog"

@@ -53,7 +53,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import com.dede.android_eggs.R
 import com.dede.android_eggs.alterable_adaptive_icon.PathShape
-import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
@@ -70,10 +69,6 @@ import java.util.Calendar
 import javax.inject.Inject
 
 private const val TIMELINE_HORIZONTAL_BIAS = 0.3f
-
-object TimelineListDialog : EasterEggsDestination {
-    override val route: String = "timeline_list_dialog"
-}
 
 @Composable
 fun TimelineListDialog(

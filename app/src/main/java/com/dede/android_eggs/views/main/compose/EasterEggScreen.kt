@@ -54,11 +54,27 @@ import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefU
 import com.dede.basic.Utils
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.components.SingletonComponent
+import dagger.multibindings.IntoSet
 import javax.inject.Inject
 
-object EasterEggsScreen : EasterEggsDestination {
+@Module
+@InstallIn(SingletonComponent::class)
+object EasterEggsScreen : EasterEggsDestination,EasterEggsDestination.Provider {
     override val route: String = "easter_eggs"
+
+    @Composable
+    override fun content() {
+        EasterEggScreen()
+    }
+
+    @IntoSet
+    @Provides
+    override fun provider(): EasterEggsDestination = this
 }
 
 @HiltViewModel
