@@ -63,6 +63,7 @@
             <option value="$PROJECT_DIR$/feature/cat-editor" />
             <option value="$PROJECT_DIR$/feature/crash" />
             <option value="$PROJECT_DIR$/feature/embedding-splits" />
+            <option value="$PROJECT_DIR$/feature/libraries-info" />
             <option value="$PROJECT_DIR$/feature/widget" />
             <option value="$PROJECT_DIR$/jvm-basic" />
             <option value="$PROJECT_DIR$/script" />
