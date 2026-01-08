@@ -64,10 +64,10 @@ fun EasterEggsNavHost(
             navDestinations.forEach { dest ->
                 when (dest.type) {
                     EasterEggsDestination.Type.Composable -> {
-                        composable(route = dest.route, content = { dest.content() })
+                        composable(route = dest.route, content = { dest.Content() })
                     }
                     EasterEggsDestination.Type.Dialog -> {
-                        dialog(route = dest.route, content = { dest.content() })
+                        dialog(route = dest.route, content = { dest.Content() })
                     }
                     EasterEggsDestination.Type.ModalBottomSheet -> {
                         // don't work, https://issuetracker.google.com/issues/435672848

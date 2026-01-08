@@ -115,7 +115,7 @@ object CatEditorScreen : EasterEggsDestination, EasterEggsDestination.Provider {
     override val route: String = "cat_editor"
 
     @Composable
-    override fun content() {
+    override fun Content() {
         CatEditorScreen()
     }
 

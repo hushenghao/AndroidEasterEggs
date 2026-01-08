@@ -28,6 +28,11 @@ object CustomTabsBrowser {
     }
 
     @JvmStatic
+    fun launchUrl(context: Context, url: String) {
+        launchUrl(context, url.toUri())
+    }
+
+    @JvmStatic
     fun launchUrl(context: Context, uri: Uri) {
         val colorScheme = when (ThemePrefUtil.getThemeModeValue(context)) {
             ThemePrefUtil.DARK, ThemePrefUtil.AMOLED -> CustomTabsIntent.COLOR_SCHEME_DARK

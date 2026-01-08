@@ -46,7 +46,7 @@ object AnimatorDisabledAlertDialog : EasterEggsDestination, EasterEggsDestinatio
     }
 
     @Composable
-    override fun content() {
+    override fun Content() {
         val navController = LocalNavController.current
         AnimatorDisabledAlertDialog {
             navController.popBackStack()

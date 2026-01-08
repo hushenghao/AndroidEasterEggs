@@ -22,7 +22,7 @@ interface EasterEggsDestination {
     val route: String
 
     @Composable
-    fun content() {
+    fun Content() {
     }
 
     interface Provider {

@@ -70,7 +70,7 @@ object SnapshotDialog : EasterEggsDestination, EasterEggsDestination.Provider {
     override val route: String = "snapshot_dialog"
 
     @Composable
-    override fun content() {
+    override fun Content() {
         val navController = LocalNavController.current
         SnapshotDialog {
             navController.popBackStack()

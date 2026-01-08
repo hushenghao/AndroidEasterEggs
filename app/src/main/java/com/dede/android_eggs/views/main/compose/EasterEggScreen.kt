@@ -68,7 +68,7 @@ object EasterEggsScreen : EasterEggsDestination,EasterEggsDestination.Provider {
     override val route: String = "easter_eggs"
 
     @Composable
-    override fun content() {
+    override fun Content() {
         EasterEggScreen()
     }
 

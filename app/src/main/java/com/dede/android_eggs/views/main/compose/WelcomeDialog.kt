@@ -77,7 +77,7 @@ object WelcomeDialog : EasterEggsDestination, EasterEggsDestination.Provider {
     override val route: String = "welcome_dialog"
 
     @Composable
-    override fun content() {
+    override fun Content() {
         val context = LocalContext.current
         val navController = LocalNavController.current
         WelcomeDialog {

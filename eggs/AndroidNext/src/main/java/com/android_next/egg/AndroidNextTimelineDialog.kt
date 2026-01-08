@@ -67,7 +67,7 @@ object AndroidNextTimelineDialog : EasterEggsDestination, EasterEggsDestination.
     override val route: String = "android_next_timeline_dialog"
 
     @Composable
-    override fun content() {
+    override fun Content() {
         val navController = LocalNavController.current
         AndroidNextTimelineDialog {
             navController.popBackStack()
