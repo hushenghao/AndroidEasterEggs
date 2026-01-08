@@ -4,6 +4,7 @@ import com.dede.android_eggs.dls.marketImplementation
 
 plugins {
     id("easter.eggs.app")
+    alias(libs.plugins.aboutlibraries.android)
 }
 
 android {
@@ -115,6 +116,7 @@ dependencies {
     implementation(project(":feature:widget"))
     implementation(project(":feature:crash"))
     implementation(project(":feature:embedding-splits"))
+    implementation(project(":feature:libraries-info"))
 
     implementation(project(":eggs:RocketLauncher"))
     implementation(project(":eggs:AndroidNext"))

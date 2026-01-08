@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.MenuBook
 import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material.icons.rounded.Info
+import androidx.compose.material.icons.rounded.LocalPolice
 import androidx.compose.material.icons.rounded.Policy
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -16,6 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
+import com.dede.android_eggs.libraries_info.LibrariesInfoScreen
+import com.dede.android_eggs.navigation.LocalNavController
 import com.dede.android_eggs.ui.composes.icons.outlined.Beta
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
@@ -30,7 +33,7 @@ import com.dede.android_eggs.resources.R as StringsR
 @Composable
 fun AboutGroup() {
     val context = LocalContext.current
-
+    val navController = LocalNavController.current
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.Info,
         title = stringResource(StringsR.string.label_about)
@@ -70,6 +73,16 @@ fun AboutGroup() {
             title = stringResource(StringsR.string.label_privacy_policy),
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
+            }
+        )
+        Option(
+            leadingIcon = imageVectorIconBlock(
+                imageVector = Icons.Rounded.LocalPolice,
+                contentDescription = stringResource(StringsR.string.label_open_source_license),
+            ),
+            title = stringResource(StringsR.string.label_open_source_license),
+            onClick = {
+                navController.navigate(LibrariesInfoScreen.route)
             }
         )
 

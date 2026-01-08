@@ -49,6 +49,7 @@ include(
     ":feature:widget",
     ":feature:crash",
     ":feature:embedding-splits",
+    ":feature:libraries-info",
 
     ":basic",
     ":jvm-basic",
