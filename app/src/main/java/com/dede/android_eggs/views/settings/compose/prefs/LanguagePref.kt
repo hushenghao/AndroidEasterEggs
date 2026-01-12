@@ -3,8 +3,11 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
 import android.app.LocaleConfig
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
 import android.os.Build
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import androidx.annotation.StringRes
@@ -45,6 +48,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
@@ -237,6 +241,18 @@ object LanguagePrefUtil {
     }
 }
 
+private fun launchAppLocaleSettings(context: Context) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        val intent = Intent(Settings.ACTION_APP_LOCALE_SETTINGS)
+            .setData("package:${context.packageName}".toUri())
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        try {
+            context.startActivity(intent)
+        } catch (_: ActivityNotFoundException) {
+        }
+    }
+}
+
 @Preview
 @Composable
 fun LanguagePref() {
@@ -249,13 +265,18 @@ fun LanguagePref() {
         LanguagePrefUtil.getLangOpByValue(languageOptionValue)
     }
 
+    val context = LocalContext.current
+
     val onOptionClick = { option: Int ->
         languageOptionValue = option
         val locales = LanguagePrefUtil.getLocaleByValue(option)
-        AppCompatDelegate.setApplicationLocales(locales)
+        try {
+            AppCompatDelegate.setApplicationLocales(locales)
+        } catch (_: RuntimeException) {
+            // https://issuetracker.google.com/issues/318314368
+            launchAppLocaleSettings(context)
+        }
     }
-
-    val context = LocalContext.current
 
     var moreDialogVisible by remember { mutableStateOf(false) }
 
