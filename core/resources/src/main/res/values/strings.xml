@@ -6,6 +6,7 @@
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
 
+    <string name="label_back">Back</string>
     <string name="label_github">Source code</string>
     <string name="label_translation">Translations</string>
     <string name="label_beta">Download beta</string>
