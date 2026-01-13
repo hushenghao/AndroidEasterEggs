@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     dede:once="🍃">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <uses-permission
         android:name="com.android.launcher.permission.INSTALL_SHORTCUT"
         android:maxSdkVersion="26" />

@@ -4,6 +4,7 @@ import com.dede.android_eggs.dls.marketImplementation
 
 plugins {
     id("easter.eggs.app")
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.aboutlibraries.android)
 }
 
@@ -99,6 +100,11 @@ dependencies {
     implementation(libs.squareup.okio)
     implementation(libs.blurhash.android)
     debugImplementation(libs.squareup.leakcanary)
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.android)
+    implementation(libs.ktor.content.negotiation)
+    implementation(libs.ktor.logging)
+    implementation(libs.ktor.json)
 
     implementation(project(":core:local-provider"))
     implementation(project(":core:navigation"))
@@ -140,6 +146,7 @@ dependencies {
     implementation(project(":eggs:Base"))
 
     marketImplementation(libs.google.play.review)
+    marketImplementation(libs.google.play.update)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.nanohttpd)

@@ -1,5 +1,6 @@
 package com.dede.android_eggs
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -8,8 +9,13 @@ import androidx.lifecycle.lifecycleScope
 import com.dede.android_eggs.util.launchCatchable
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.main.compose.isAgreedPrivacyPolicy
+import com.dede.basic.toast
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailabilityLight
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.AppUpdateOptions
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.ktx.launchReview
 import com.google.android.play.core.ktx.requestReview
 import com.google.android.play.core.review.ReviewManagerFactory
@@ -64,6 +70,32 @@ object GooglePlayCore {
             val reviewManager = ReviewManagerFactory.create(activity)
             val reviewInfo = reviewManager.requestReview()
             reviewManager.launchReview(activity, reviewInfo)
+        }
+    }
+
+    fun checkUpdate(activity: Activity) {
+        if (!isAgreedPrivacyPolicy(activity) ||
+            !isGooglePlayServicesAvailable(activity)
+        ) {
+            return
+        }
+        val appUpdateManager = AppUpdateManagerFactory.create(activity)
+        // Returns an intent object that you use to check for an update.
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
+                appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+            ) {
+                // Request the update.
+                val appUpdateOptions = AppUpdateOptions.defaultOptions(AppUpdateType.IMMEDIATE)
+                appUpdateManager.startUpdateFlow(appUpdateInfo, activity, appUpdateOptions)
+            } else {
+                activity.toast(com.dede.android_eggs.resources.R.string.toast_no_update_found)
+            }
+        }
+        appUpdateInfoTask.addOnFailureListener {
+            Log.e(TAG, "checkUpdate failed: ${it.message}", it)
         }
     }
 }

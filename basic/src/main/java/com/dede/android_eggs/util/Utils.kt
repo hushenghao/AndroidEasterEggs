@@ -16,11 +16,19 @@ fun isXiaomi(): Boolean {
 }
 
 fun compareStringVersion(version1: String, version2: String): Int {
-    if (version1 == version2) return 0
+    var v1 = version1
+    if (v1.startsWith("v")) {
+        v1 = v1.substring(1)
+    }
+    var v2 = version2
+    if (v2.startsWith("v")) {
+        v2 = v2.substring(1)
+    }
+    if (v1 == v2) return 0
 
     val versionSplit = Regex("[.\\-_]")
-    val versionArr1 = version1.split(versionSplit)
-    val versionArr2 = version2.split(versionSplit)
+    val versionArr1 = v1.split(versionSplit)
+    val versionArr2 = v2.split(versionSplit)
     val len = max(versionArr1.size, versionArr2.size)
     var ver1: Int
     var ver2: Int

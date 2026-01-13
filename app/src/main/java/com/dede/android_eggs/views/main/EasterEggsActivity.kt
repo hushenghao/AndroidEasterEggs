@@ -8,7 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
-import com.dede.android_eggs.inject.FlavorFeatures
+import com.dede.android_eggs.flavor.FlavorFeatures
 import com.dede.android_eggs.util.setupSplashScreen
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.IntentHandler
@@ -43,7 +43,7 @@ class EasterEggsActivity : AppCompatActivity() {
         EasterEggShortcutsHelp.updateShortcuts(this, pureEasterEggs)
 
         // call flavor features
-        FlavorFeatures.get().call(this)
+        FlavorFeatures.get().launchReview(this)
     }
 
     override fun onNewIntent(intent: Intent) {

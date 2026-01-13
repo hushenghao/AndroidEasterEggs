@@ -1,5 +1,6 @@
-package com.dede.android_eggs.inject
+package com.dede.android_eggs.flavor
 
+import android.app.Activity
 import androidx.activity.ComponentActivity
 import com.dede.android_eggs.FlavorFeaturesImpl
 
@@ -14,5 +15,7 @@ interface FlavorFeatures {
         }
     }
 
-    fun call(activity: ComponentActivity)
+    fun launchReview(activity: ComponentActivity)
+
+    suspend fun checkUpdate(activity: Activity): LatestRelease?
 }

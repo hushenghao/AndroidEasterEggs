@@ -156,9 +156,9 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
 
             SettingDivider()
 
-            ContributeGroup()
-
             AboutGroup()
+
+            ContributeGroup()
 
             ContactMeGroup()
         }
