@@ -4,6 +4,7 @@
     <string name="url_github" translatable="false">https://github.com/hushenghao/AndroidEasterEggs</string>
     <string name="url_github_commit" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/commit/%s</string>
     <string name="url_github_issues" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/issues</string>
+    <string name="url_github_issues_id" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/issues/%s</string>
     <string name="url_beta" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/releases</string>
     <string name="url_privacy" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy</string>
     <string name="url_wiki" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki</string>

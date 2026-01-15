@@ -53,14 +53,14 @@ object Utils {
         }
     }
 
-    fun getAppVersionPair(context: Context): Pair<String?, Long> {
+    fun getAppVersionPair(context: Context): Pair<String, Long> {
         var packageInfo: PackageInfo? = null
         try {
             packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
         } catch (ignore: NameNotFoundException) {
         }
         if (packageInfo != null) {
-            val versionName = packageInfo.versionName
+            val versionName = packageInfo.versionName ?: "-1"
             val versionCode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 packageInfo.longVersionCode
             } else {
@@ -69,7 +69,7 @@ object Utils {
             }
             return versionName to versionCode
         }
-        return null to -1L
+        return "-1" to -1L
     }
 
 }

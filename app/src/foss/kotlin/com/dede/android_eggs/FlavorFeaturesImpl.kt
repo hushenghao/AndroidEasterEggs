@@ -4,7 +4,7 @@ import android.app.Activity
 import android.util.Log
 import androidx.activity.ComponentActivity
 import com.dede.android_eggs.flavor.FlavorFeatures
-import com.dede.android_eggs.flavor.LatestRelease
+import com.dede.android_eggs.flavor.LatestVersion
 import io.ktor.client.HttpClient
 import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
@@ -26,7 +26,7 @@ class FlavorFeaturesImpl : FlavorFeatures {
     override fun launchReview(activity: ComponentActivity) {
     }
 
-    override suspend fun checkUpdate(activity: Activity): LatestRelease? {
+    override suspend fun checkUpdate(activity: Activity): LatestVersion? {
         val client = HttpClient {
             install(Logging) {
                 logger = object : Logger {
@@ -81,13 +81,13 @@ private data class GitHubLatestRelease(
         val contentType: String,
     )
 
-    fun toLatestRelease(): LatestRelease? {
+    fun toLatestRelease(): LatestVersion? {
         val apkAsset =
             assets.firstOrNull { it.contentType == "application/vnd.android.package-archive" }
         if (apkAsset == null) {
             return null
         }
-        return LatestRelease(
+        return LatestVersion(
             versionName = tagName,
             pageUrl = htmlUrl,
             downloadUrl = apkAsset.downloadUrl,
