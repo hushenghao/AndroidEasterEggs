@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -15,7 +16,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Matrix
-import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -27,12 +27,12 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.alterable_adaptive_icon.AlterableAdaptiveIcon
 import com.dede.android_eggs.local_provider.currentOutInspectionMode
 import com.dede.android_eggs.util.LocalEvent
-import com.dede.android_eggs.util.PathInflater
 import com.dede.android_eggs.util.Receiver
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
-import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.getIconShapeRoundedPolygon
+import com.dede.android_eggs.views.settings.compose.prefs.toShapePlus
 import com.dede.basic.isAdaptiveIconDrawable
 import com.dede.basic.provider.EasterEgg
 
@@ -48,28 +48,22 @@ fun PreviewEasterEggLogo() {
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun EasterEggLogo(
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
-    mask: String? = null,
     sensor: Boolean = false,
     @DrawableRes res: Int,
 ) {
     val context = LocalContext.current
     val isAdaptiveIcon = remember(res) { context.isAdaptiveIconDrawable(res) }
     if (isAdaptiveIcon) {
-        val maskPath = remember(mask) {
-            mask ?: IconShapePrefUtil.getMaskPath(context)
-        }
-        var maskP by remember {
-            mutableStateOf(PathInflater.inflate(maskPath).asComposePath())
+        var clipRoundedPolygon by remember {
+            mutableStateOf(getIconShapeRoundedPolygon(context))
         }
         LocalEvent.Receiver(IconShapePrefUtil.ACTION_CHANGED) {
-            val newMaskPath = it.getStringExtra(SettingPrefUtil.EXTRA_VALUE)
-            if (newMaskPath != null) {
-                maskP = PathInflater.inflate(newMaskPath).asComposePath()
-            }
+            clipRoundedPolygon = getIconShapeRoundedPolygon(context)
         }
         var foregroundMatrix by remember { mutableStateOf(Matrix()) }
         var size by remember { mutableStateOf(IntSize.Zero) }
@@ -100,7 +94,7 @@ fun EasterEggLogo(
         }
         AlterableAdaptiveIcon(
             modifier = modifier.onSizeChanged { size = it },
-            maskPath = maskP,
+            clipShape = clipRoundedPolygon.toShapePlus(),
             foregroundMatrix = foregroundMatrix,
             res = res,
         )

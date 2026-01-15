@@ -14,6 +14,9 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialShapes
+import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -22,8 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Matrix
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.asComposePath
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
@@ -31,8 +33,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastRoundToInt
-import com.dede.android_eggs.util.PathInflater
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.DefType
 import com.dede.basic.getIdentifier
 import com.dede.basic.requireDrawable
@@ -72,6 +72,7 @@ private fun buildChildDrawableArray(context: Context, @DrawableRes res: Int): Ar
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Preview(showBackground = true)
 @Composable
 private fun PreviewAlterableAdaptiveIcon() {
@@ -84,12 +85,10 @@ private fun PreviewAlterableAdaptiveIcon() {
     ) {
         val context = LocalContext.current
         val id = context.getIdentifier("ic_launcher", DefType.MIPMAP)
-        val maskPathStr = IconShapePrefUtil.getMaskPath(context)
-        val composePath = PathInflater.inflate(maskPathStr).asComposePath()
         AlterableAdaptiveIcon(
             modifier = Modifier.size(100.dp),
             res = id,
-            maskPath = composePath
+            clipShape = MaterialShapes.Clover4Leaf.toShape()
         )
 
         Image(
@@ -122,16 +121,13 @@ private fun Modifier.adaptiveIconChild(scale: Float = DEFAULT_CHILD_SCALE) = thi
 @Composable
 fun AlterableAdaptiveIcon(
     modifier: Modifier = Modifier,
-    maskPath: Path,
+    clipShape: Shape,
     @DrawableRes res: Int,
     foregroundMatrix: Matrix = Matrix(),
 ) {
     val context = LocalContext.current
     val childDrawables = remember(res, context.theme) {
         buildChildDrawableArray(context, res)
-    }
-    val clipShape = remember(maskPath) {
-        PathShape(maskPath)
     }
     val isAdaptiveIcon = childDrawables.size >= 2
     Box(

@@ -52,10 +52,9 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import com.dede.android_eggs.R
-import com.dede.android_eggs.alterable_adaptive_icon.PathShape
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.getIconShapePref
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.eventAnnotatedString
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.isNewGroup
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localMonth
@@ -220,12 +219,8 @@ private fun TimelineItem(
             }
         val isAdaptiveIcon = context.isAdaptiveIconDrawable(logoRes)
         if (!isAdaptiveIcon) {
-            val iconShape = IconShapePrefUtil.getMaskPath(context)
             imageModifier = Modifier
-                .background(
-                    colorScheme.secondaryContainer,
-                    PathShape(iconShape)
-                )
+                .background(colorScheme.secondaryContainer, getIconShapePref())
                 .then(imageModifier)
                 .padding(6.dp)
         }

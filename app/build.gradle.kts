@@ -99,6 +99,7 @@ dependencies {
     implementation(libs.dionsegijn.konfetti)
     implementation(libs.squareup.okio)
     implementation(libs.blurhash.android)
+    implementation(libs.squircle.shape)
     debugImplementation(libs.squareup.leakcanary)
     implementation(libs.ktor.core)
     implementation(libs.ktor.android)
