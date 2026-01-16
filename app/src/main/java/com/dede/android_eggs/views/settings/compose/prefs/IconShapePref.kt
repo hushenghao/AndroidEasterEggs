@@ -2,7 +2,6 @@
 
 package com.dede.android_eggs.views.settings.compose.prefs
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -27,25 +26,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
-import androidx.graphics.shapes.CornerRounding
-import androidx.graphics.shapes.RoundedPolygon
-import androidx.graphics.shapes.rectangle
-import androidx.graphics.shapes.star
 import com.dede.android_eggs.R
-import com.dede.android_eggs.alterable_adaptive_icon.PathShape
 import com.dede.android_eggs.ui.composes.icons.rounded.Shapes
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
-import sv.lib.squircleshape.SquircleShape
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.polygonItems
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.toShapePlusNullable
 import com.dede.android_eggs.resources.R as StringsR
 
 private const val SPAN_COUNT = 5
@@ -79,77 +73,6 @@ fun IconShapePref() {
         }
     }
 }
-
-fun getIconShapeRoundedPolygon(context: Context): RoundedPolygon? {
-    val index = IconShapePrefUtil.getIconShapeIndexOf(context)
-    return polygonItems.getOrNull(index)
-}
-
-@Composable
-fun getIconShapePref(): Shape {
-    val roundedPolygon = getIconShapeRoundedPolygon(LocalContext.current)
-    return roundedPolygon.toShapePlus()
-}
-
-@Composable
-fun RoundedPolygon?.toShapePlus(): Shape {
-    val shape = this.toShapePlusNullable()
-    if (shape == null) {
-        val path = IconShapePrefUtil.getSystemIconMaskPath(LocalContext.current)
-        if (path != null) {
-            return PathShape(path)
-        }
-        return defaultSquare.toShape()
-    }
-    return shape
-}
-
-@Composable
-private fun RoundedPolygon?.toShapePlusNullable(): Shape? {
-    if (this == null) return null
-    if (this == _fakeSquircle) return SquircleShape()
-    return this.toShape()
-}
-
-private val defaultSquare = MaterialShapes.Square
-
-@Suppress("ObjectPropertyName")
-private val _fakeSquircle = RoundedPolygon.rectangle()
-
-private val polygonItems: Array<RoundedPolygon?> = arrayOf(
-    null,
-    defaultSquare,
-    // Squircle
-    _fakeSquircle,
-    MaterialShapes.Circle,
-    // CornerSE
-    RoundedPolygon(
-        vertices = floatArrayOf(1f, 1f, -1f, 1f, -1f, -1f, 1f, -1f),
-        perVertexRounding = listOf(
-            CornerRounding(0.4f),
-            CornerRounding(1f),
-            CornerRounding(1f),
-            CornerRounding(1f),
-        ),
-    ).normalized(),
-
-    MaterialShapes.Cookie4Sided,
-    // Scallop
-    RoundedPolygon.star(
-        numVerticesPerRadius = 13,
-        innerRadius = .9f,
-        rounding = CornerRounding(.2f),
-        innerRounding = CornerRounding(.3f)
-    ).normalized(),
-    MaterialShapes.Clover8Leaf,
-    MaterialShapes.Pill,
-    RoundedPolygon.star(
-        numVerticesPerRadius = 10,
-        innerRadius = .6f,
-        rounding = CornerRounding(.3f),
-        innerRounding = CornerRounding(.3f)
-    ).normalized(),
-)
 
 @Composable
 private fun IconShapeGridLayout(spanCount: Int = SPAN_COUNT, content: @Composable () -> Unit) {

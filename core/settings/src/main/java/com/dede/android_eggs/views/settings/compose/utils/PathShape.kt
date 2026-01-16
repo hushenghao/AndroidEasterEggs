@@ -1,4 +1,4 @@
-package com.dede.android_eggs.alterable_adaptive_icon
+package com.dede.android_eggs.views.settings.compose.utils
 
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Matrix

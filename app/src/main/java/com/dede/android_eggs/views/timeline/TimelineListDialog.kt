@@ -54,7 +54,7 @@ import androidx.lifecycle.ViewModel
 import com.dede.android_eggs.R
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
-import com.dede.android_eggs.views.settings.compose.prefs.getIconShapePref
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.eventAnnotatedString
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.isNewGroup
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localMonth
@@ -220,7 +220,7 @@ private fun TimelineItem(
         val isAdaptiveIcon = context.isAdaptiveIconDrawable(logoRes)
         if (!isAdaptiveIcon) {
             imageModifier = Modifier
-                .background(colorScheme.secondaryContainer, getIconShapePref())
+                .background(colorScheme.secondaryContainer, IconShapePrefUtil.getIconShapePref())
                 .then(imageModifier)
                 .padding(6.dp)
         }

@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -31,8 +30,7 @@ import com.dede.android_eggs.util.Receiver
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
-import com.dede.android_eggs.views.settings.compose.prefs.getIconShapeRoundedPolygon
-import com.dede.android_eggs.views.settings.compose.prefs.toShapePlus
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.toShapePlus
 import com.dede.basic.isAdaptiveIconDrawable
 import com.dede.basic.provider.EasterEgg
 
@@ -48,7 +46,6 @@ fun PreviewEasterEggLogo() {
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun EasterEggLogo(
     modifier: Modifier = Modifier,
@@ -60,10 +57,10 @@ fun EasterEggLogo(
     val isAdaptiveIcon = remember(res) { context.isAdaptiveIconDrawable(res) }
     if (isAdaptiveIcon) {
         var clipRoundedPolygon by remember {
-            mutableStateOf(getIconShapeRoundedPolygon(context))
+            mutableStateOf(IconShapePrefUtil.getIconShapeRoundedPolygon(context))
         }
         LocalEvent.Receiver(IconShapePrefUtil.ACTION_CHANGED) {
-            clipRoundedPolygon = getIconShapeRoundedPolygon(context)
+            clipRoundedPolygon = IconShapePrefUtil.getIconShapeRoundedPolygon(context)
         }
         var foregroundMatrix by remember { mutableStateOf(Matrix()) }
         var size by remember { mutableStateOf(IntSize.Zero) }
@@ -74,16 +71,16 @@ fun EasterEggLogo(
                     val floats = FloatArray(9)
                     val bounds = Rect(0, 0, size.width, size.height)
                     val listener = object : EasterEggLogoSensorMatrixConvert.Listener(bounds) {
-                            override fun onUpdateMatrix(matrix: android.graphics.Matrix) {
-                                matrix.getValues(floats)
-                                foregroundMatrix = Matrix().apply {
-                                    resetToPivotedTransform(
-                                        translationX = floats[android.graphics.Matrix.MTRANS_X],
-                                        translationY = floats[android.graphics.Matrix.MTRANS_Y]
-                                    )
-                                }
+                        override fun onUpdateMatrix(matrix: android.graphics.Matrix) {
+                            matrix.getValues(floats)
+                            foregroundMatrix = Matrix().apply {
+                                resetToPivotedTransform(
+                                    translationX = floats[android.graphics.Matrix.MTRANS_X],
+                                    translationY = floats[android.graphics.Matrix.MTRANS_Y]
+                                )
                             }
                         }
+                    }
                     sensorGroup.register(listener)
 
                     onDispose {
