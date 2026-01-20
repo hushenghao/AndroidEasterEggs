@@ -34,7 +34,7 @@ interface EasterEggsDestination {
 @EntryPoint
 interface EasterEggDestinationsEntryPoint {
 
-    var destinations: Set<@JvmSuppressWildcards EasterEggsDestination>
+    val destinations: Set<@JvmSuppressWildcards EasterEggsDestination>
 }
 
 @Composable
