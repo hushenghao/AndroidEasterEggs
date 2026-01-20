@@ -1,8 +1,10 @@
 package com.dede.android_eggs.views.settings.compose.basic
 
 import android.content.Context
+import androidx.compose.runtime.mutableStateOf
 import androidx.core.content.edit
 import com.dede.android_eggs.util.pref
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 
 object SettingPrefUtil {
     const val ON = 1
@@ -18,5 +20,11 @@ object SettingPrefUtil {
 
     fun setValue(context: Context, key: String, value: Int) {
         context.pref.edit { putInt(key, value) }
+    }
+
+    val iconShapeValueState = mutableStateOf(OFF)
+
+    fun setup(context: Context) {
+        iconShapeValueState.value = getValue(context, IconShapePrefUtil.KEY_ICON_SHAPE, OFF)
     }
 }

@@ -61,6 +61,7 @@ fun IconShapePref() {
                         onClick = onClick@{
                             if (selectedIndex == index) return@onClick
                             selectedIndex = index
+                            SettingPrefUtil.iconShapeValueState.value = index
                             val extras = bundleOf(SettingPrefUtil.EXTRA_VALUE to index)
                             with(LocalEvent.poster()) {
                                 post(IconShapePrefUtil.ACTION_CHANGED, extras)

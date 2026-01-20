@@ -56,6 +56,10 @@ object IconShapePrefUtil {
         return polygonItems.getOrNull(index)
     }
 
+    fun getIconShapeRoundedPolygon(index: Int): RoundedPolygon? {
+        return polygonItems.getOrNull(index)
+    }
+
     @Composable
     fun getIconShapePref(): Shape {
         val roundedPolygon = getIconShapeRoundedPolygon(LocalContext.current)

@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.views.main.compose.Wavy
+import com.dede.android_eggs.views.settings.compose.prefs.SettingPrefIcon
 
 
 @Composable
@@ -76,9 +77,11 @@ fun SettingPref(
     SettingPref(
         modifier = modifier,
         leadingIcon = {
-            Box(Modifier.padding(start = 14.dp)) {
-                Icon(imageVector = leadingIcon, contentDescription = title)
-            }
+            SettingPrefIcon(
+                icon = leadingIcon,
+                contentDescription = title,
+                modifier = Modifier.padding(start = 14.dp),
+            )
         },
         title = title,
         desc = desc,
