@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,12 +24,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.graphics.shapes.RoundedPolygon
 import com.dede.android_eggs.alterable_adaptive_icon.AlterableAdaptiveIcon
 import com.dede.android_eggs.local_provider.currentOutInspectionMode
-import com.dede.android_eggs.util.LocalEvent
-import com.dede.android_eggs.util.Receiver
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
+import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.toShapePlus
 import com.dede.basic.isAdaptiveIconDrawable
@@ -56,11 +57,10 @@ fun EasterEggLogo(
     val context = LocalContext.current
     val isAdaptiveIcon = remember(res) { context.isAdaptiveIconDrawable(res) }
     if (isAdaptiveIcon) {
-        var clipRoundedPolygon by remember {
-            mutableStateOf(IconShapePrefUtil.getIconShapeRoundedPolygon(context))
-        }
-        LocalEvent.Receiver(IconShapePrefUtil.ACTION_CHANGED) {
-            clipRoundedPolygon = IconShapePrefUtil.getIconShapeRoundedPolygon(context)
+        var clipRoundedPolygon: RoundedPolygon? by remember { mutableStateOf(null) }
+        val iconShapeIndex by SettingPrefUtil.iconShapeValueState
+        LaunchedEffect(iconShapeIndex) {
+            clipRoundedPolygon = IconShapePrefUtil.getIconShapeRoundedPolygon(iconShapeIndex)
         }
         var foregroundMatrix by remember { mutableStateOf(Matrix()) }
         var size by remember { mutableStateOf(IntSize.Zero) }

@@ -2,12 +2,10 @@
 
 package com.dede.android_eggs.views.settings.compose.prefs
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.os.Build
 import android.text.TextUtils
-import androidx.annotation.RequiresApi
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.toShape
@@ -20,18 +18,23 @@ import androidx.graphics.shapes.rectangle
 import androidx.graphics.shapes.star
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.utils.PathShape
+import com.dede.basic.DefType
+import com.dede.basic.getIdentifier
 import sv.lib.squircleshape.SquircleShape
 
 object IconShapePrefUtil {
 
     const val KEY_ICON_SHAPE = "pref_key_override_icon_shape"
 
-    const val ACTION_CHANGED = "com.dede.easter_eggs.IconShapeChanged"
+    private var sCachedSystemIconShape: Shape? = null
 
     private fun getSystemIconMaskShape(context: Context): Shape? {
+        if (sCachedSystemIconShape != null) {
+            return sCachedSystemIconShape
+        }
         var pathStr: String? = null
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val resId = getConfigResId(context.resources)
+            val resId = context.getIdentifier("config_icon_mask", DefType.STRING, "android")
             if (resId != Resources.ID_NULL) {
                 try {
                     pathStr = context.resources.getString(resId)
@@ -42,18 +45,7 @@ object IconShapePrefUtil {
         if (pathStr == null || TextUtils.isEmpty(pathStr)) {
             return null
         }
-        return PathShape(pathStr)
-    }
-
-    @SuppressLint("DiscouragedApi")
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun getConfigResId(resources: Resources): Int {
-        return resources.getIdentifier("config_icon_mask", "string", "android")
-    }
-
-    fun getIconShapeRoundedPolygon(context: Context): RoundedPolygon? {
-        val index = SettingPrefUtil.getValue(context, KEY_ICON_SHAPE, 0)
-        return polygonItems.getOrNull(index)
+        return PathShape(pathStr).also { sCachedSystemIconShape = it }
     }
 
     fun getIconShapeRoundedPolygon(index: Int): RoundedPolygon? {
@@ -62,8 +54,7 @@ object IconShapePrefUtil {
 
     @Composable
     fun getIconShapePref(): Shape {
-        val roundedPolygon = getIconShapeRoundedPolygon(LocalContext.current)
-        return roundedPolygon.toShapePlus()
+        return getIconShapeRoundedPolygon(SettingPrefUtil.iconShapeValueState.value).toShapePlus()
     }
 
     @Composable

@@ -32,6 +32,7 @@ enum class DefType {
     COLOR,
     RAW,
     XML,
+    STRING,
     ;
 
     override fun toString(): String {
@@ -41,6 +42,7 @@ enum class DefType {
             COLOR -> "color"
             RAW -> "raw"
             XML -> "xml"
+            STRING -> "string"
         }
     }
 }
