@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="summary_android_waiting">まだリリースされていません</string>
     <string name="summary_android_release_pushed">新しいバージョンがリリースされました</string>
     <string name="label_timeline_title">タイムライン</string>
     <string name="label_timeline_releases">リリース</string>
+    <string name="label_timeline_developer_previews">開発者プレビュー版</string>
+    <string name="label_timeline_beta_release">ベータリリース</string>
+    <string name="label_timeline_platform_stability">プラットフォームの安定性</string>
+    <string name="label_timeline_final_release">最終リリース</string>
 </resources>
