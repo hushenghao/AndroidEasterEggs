@@ -1,20 +1,26 @@
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package com.dede.android_eggs.views.settings.compose.prefs
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.dp
 import androidx.graphics.shapes.RoundedPolygon
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.toShapePlus
@@ -38,22 +44,42 @@ fun SettingPrefIcon(
     )
 }
 
+object SettingPrefIconDefaults {
+    @Composable
+    fun defaultColors() = SettingPrefIconColors(
+        containerColor = colorScheme.secondaryContainer,
+        contentColor = colorScheme.onSecondaryContainer,
+    )
+}
+
+@Immutable
+class SettingPrefIconColors(
+    val containerColor: Color,
+    val contentColor: Color,
+)
+
 @Composable
 fun SettingPrefIcon(
     icon: ImageVector,
     shape: Shape,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
+    colors: SettingPrefIconColors = SettingPrefIconDefaults.defaultColors(),
 ) {
-    Card(
+    Surface(
         modifier = modifier,
         shape = shape,
-        colors = CardDefaults.cardColors(containerColor = colorScheme.primaryContainer)
+        color = colors.containerColor,
+        contentColor = colors.contentColor,
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = contentDescription,
-            modifier = Modifier.padding(6.dp)
-        )
+        Box(
+            modifier = Modifier.size(IconButtonDefaults.smallContainerSize()),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = contentDescription,
+            )
+        }
     }
 }

@@ -80,7 +80,7 @@ fun SettingPref(
             SettingPrefIcon(
                 icon = leadingIcon,
                 contentDescription = title,
-                modifier = Modifier.padding(start = 14.dp),
+                modifier = Modifier.padding(start = 12.dp),
             )
         },
         title = title,
