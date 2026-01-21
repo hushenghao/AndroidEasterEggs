@@ -23,6 +23,7 @@ import com.dede.android_eggs.ui.composes.icons.outlined.Beta
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.Option
+import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
 import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
 import com.dede.android_eggs.views.settings.compose.options.GithubOption
 import com.dede.android_eggs.views.settings.compose.options.TestCrashOption
@@ -38,7 +39,7 @@ fun AboutGroup() {
         leadingIcon = Icons.Rounded.Info,
         title = stringResource(StringsR.string.label_about)
     ) {
-        VersionOption()
+        VersionOption(shape = OptionShapes.firstShape())
         Option(
             leadingIcon = {
                 Icon(
@@ -94,7 +95,8 @@ fun AboutGroup() {
             title = stringResource(StringsR.string.label_wiki),
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_wiki)
-            }
+            },
+            shape = OptionShapes.lastShape()
         )
 
         if (BuildConfig.DEBUG) {

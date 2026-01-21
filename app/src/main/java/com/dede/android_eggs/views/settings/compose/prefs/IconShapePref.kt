@@ -54,22 +54,21 @@ fun IconShapePref() {
     ) {
         IconShapeGridLayout {
             polygonItems.forEachIndexed { index, roundedPolygon ->
-                Box(modifier = Modifier.padding(4.dp)) {
-                    ShapeItem(
-                        isChecked = index == selectedIndex,
-                        polygon = roundedPolygon.toShapePlusNullable(),
-                        onClick = onClick@{
-                            if (selectedIndex == index) return@onClick
-                            selectedIndex = index
-                            SettingPrefUtil.iconShapeValueState.value = index
-                            val extras = bundleOf(SettingPrefUtil.EXTRA_VALUE to index)
-                            with(LocalEvent.poster()) {
-                                post(IconShapePrefUtil.ACTION_CHANGED, extras)
-                                post(SettingPrefUtil.ACTION_CLOSE_SETTING)
-                            }
+                ShapeItem(
+                    modifier = Modifier.padding(2.dp),
+                    isChecked = index == selectedIndex,
+                    polygon = roundedPolygon.toShapePlusNullable(),
+                    onClick = onClick@{
+                        if (selectedIndex == index) return@onClick
+                        selectedIndex = index
+                        SettingPrefUtil.iconShapeValueState.value = index
+                        val extras = bundleOf(SettingPrefUtil.EXTRA_VALUE to index)
+                        with(LocalEvent.poster()) {
+                            post(IconShapePrefUtil.ACTION_CHANGED, extras)
+                            post(SettingPrefUtil.ACTION_CLOSE_SETTING)
                         }
-                    )
-                }
+                    }
+                )
             }
         }
     }

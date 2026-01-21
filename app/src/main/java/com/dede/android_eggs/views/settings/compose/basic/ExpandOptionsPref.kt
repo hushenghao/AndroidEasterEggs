@@ -23,6 +23,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -110,7 +111,7 @@ fun ExpandOptionsPref(
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
                     .padding(top = 4.dp, bottom = 10.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
+                verticalArrangement = Arrangement.spacedBy(6.dp),
                 content = options
             )
         }
@@ -335,12 +336,13 @@ fun Option(
         Icon(imageVector = Icons.AutoMirrored.Rounded.NavigateNext, contentDescription = title)
     },
     shape: Shape = OptionShapes.defaultShape,
+    colors: CardColors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     onClick: () -> Unit = {},
 ) {
     Card(
         onClick = onClick,
         shape = shape,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        colors = colors,
         modifier = modifier
     ) {
         Row(

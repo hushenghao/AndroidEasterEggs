@@ -118,7 +118,7 @@ fun SettingPref(
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.defaultMinSize(minHeight = 54.dp)
+                modifier = Modifier.defaultMinSize(minHeight = 58.dp)
             ) {
                 if (leadingIcon != null) {
                     leadingIcon()

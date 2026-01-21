@@ -3,14 +3,12 @@
 package com.dede.android_eggs.views.settings.compose.options
 
 import androidx.activity.compose.LocalActivity
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,6 +36,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -60,11 +60,11 @@ import com.dede.android_eggs.resources.R as StringR
 
 
 @Composable
-fun VersionOption() {
+fun VersionOption(shape: Shape = OptionShapes.defaultShape) {
     val context = LocalContext.current
     val (versionName, versionCode) = remember(context) { Utils.getAppVersionPair(context) }
     Option(
-        shape = OptionShapes.firstShape(),
+        shape = shape,
         leadingIcon = imageVectorIconBlock(imageVector = Icons.Outlined.NewReleases),
         title = stringResource(R.string.label_version, versionName, versionCode),
         desc = AGPUtils.getVcsRevision(7),
@@ -90,66 +90,57 @@ fun VersionOption() {
     )
 }
 
+private val newVersionState: MutableState<LatestVersion?> = mutableStateOf(null)
+
 @Composable
 private fun UpgradeIconButton() {
-    var newVersion: LatestVersion? by remember { mutableStateOf(null) }
-    Box(
-        modifier = Modifier.offset(x = 4.dp),// fix padding end of Option
-        contentAlignment = Alignment.Center
-    ) {
-        val context = LocalContext.current
-        val activity = LocalActivity.current
-        val coroutineScope = rememberCoroutineScope()
+    var newVersion: LatestVersion? by remember { newVersionState }
 
-        var iconButtonAnimatable by remember { mutableStateOf(true) }
-        val infiniteTransition =
-            rememberInfiniteTransition(label = "UpgradeIconButtonInfiniteTransition")
-        val scale by infiniteTransition.animateFloat(
-            initialValue = 1f, targetValue = 1.2f,
-            animationSpec = infiniteRepeatable(tween(1000), RepeatMode.Reverse)
-        )
-        val degrees by infiniteTransition.animateFloat(
-            initialValue = 0f, targetValue = 360f,
-            animationSpec = infiniteRepeatable(
-                animation = tween(2200, easing = LinearEasing),
-                repeatMode = RepeatMode.Restart
-            )
-        )
-        FilledTonalIconButton(
-            modifier = Modifier.graphicsLayer {
+    val context = LocalContext.current
+    val activity = LocalActivity.current
+    val coroutineScope = rememberCoroutineScope()
+
+    var iconButtonAnimatable by remember { mutableStateOf(true) }
+    val infiniteTransition =
+        rememberInfiniteTransition(label = "UpgradeIconButtonInfiniteTransition")
+    val scale by infiniteTransition.animateFloat(
+        initialValue = 1f, targetValue = 1.2f,
+        animationSpec = infiniteRepeatable(tween(800), RepeatMode.Reverse)
+    )
+    FilledTonalIconButton(
+        modifier = Modifier
+            .offset(x = 4.dp)// fix padding end of Option
+            .graphicsLayer {
                 if (iconButtonAnimatable) {
                     scaleY = scale
                     scaleX = scale
-                    rotationZ = degrees
                 }
             },
-            shapes = IconButtonShapes(MaterialShapes.Cookie12Sided.toShape()),
-            onClick = onClick@{
-                if (activity == null) {
-                    iconButtonAnimatable = false
-                    return@onClick
-                }
-                coroutineScope.launch {
-                    val latestVersion = FlavorFeatures.get().checkUpdate(activity)
-                    if (latestVersion != null) {
-                        if (compareStringVersion(
-                                latestVersion.versionName,
-                                Utils.getAppVersionPair(context).first
-                            ) > 0
-                        ) {
-                            newVersion = latestVersion
-                        } else {
-                            context.toast(StringR.string.toast_no_update_found)
-                            iconButtonAnimatable = false
-                        }
+        shapes = IconButtonShapes(MaterialShapes.Cookie12Sided.toShape()),
+        onClick = onClick@{
+            if (activity == null) {
+                iconButtonAnimatable = false
+                return@onClick
+            }
+            coroutineScope.launch {
+                val latestVersion = FlavorFeatures.get().checkUpdate(activity)
+                if (latestVersion != null) {
+                    if (compareStringVersion(
+                            latestVersion.versionName,
+                            Utils.getAppVersionPair(context).first
+                        ) > 0
+                    ) {
+                        newVersion = latestVersion
                     } else {
+                        context.toast(StringR.string.toast_no_update_found)
                         iconButtonAnimatable = false
                     }
+                } else {
+                    iconButtonAnimatable = false
                 }
             }
-        ) {
-            // no content
         }
+    ) {
         Icon(imageVector = Icons.Rounded.Upgrade, contentDescription = null)
     }
 
