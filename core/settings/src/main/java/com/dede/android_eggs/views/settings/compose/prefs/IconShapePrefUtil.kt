@@ -2,10 +2,6 @@
 
 package com.dede.android_eggs.views.settings.compose.prefs
 
-import android.content.Context
-import android.content.res.Resources
-import android.os.Build
-import android.text.TextUtils
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.toShape
@@ -17,36 +13,12 @@ import androidx.graphics.shapes.RoundedPolygon
 import androidx.graphics.shapes.rectangle
 import androidx.graphics.shapes.star
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
-import com.dede.android_eggs.views.settings.compose.utils.PathShape
-import com.dede.basic.DefType
-import com.dede.basic.getIdentifier
+import com.dede.android_eggs.views.settings.compose.utils.SystemIconMaskUtil
 import sv.lib.squircleshape.SquircleShape
 
 object IconShapePrefUtil {
 
     const val KEY_ICON_SHAPE = "pref_key_override_icon_shape"
-
-    private var sCachedSystemIconShape: Shape? = null
-
-    private fun getSystemIconMaskShape(context: Context): Shape? {
-        if (sCachedSystemIconShape != null) {
-            return sCachedSystemIconShape
-        }
-        var pathStr: String? = null
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val resId = context.getIdentifier("config_icon_mask", DefType.STRING, "android")
-            if (resId != Resources.ID_NULL) {
-                try {
-                    pathStr = context.resources.getString(resId)
-                } catch (ignore: Resources.NotFoundException) {
-                }
-            }
-        }
-        if (pathStr == null || TextUtils.isEmpty(pathStr)) {
-            return null
-        }
-        return PathShape(pathStr).also { sCachedSystemIconShape = it }
-    }
 
     fun getIconShapeRoundedPolygon(index: Int): RoundedPolygon? {
         return polygonItems.getOrNull(index)
@@ -63,9 +35,8 @@ object IconShapePrefUtil {
         if (shape != null) {
             return shape
         }
-        return getSystemIconMaskShape(LocalContext.current) ?: defaultSquare.toShape()
+        return SystemIconMaskUtil.getIconMaskShape(LocalContext.current) ?: defaultSquare.toShape()
     }
-
 
     @Composable
     fun RoundedPolygon?.toShapePlusNullable(): Shape? {

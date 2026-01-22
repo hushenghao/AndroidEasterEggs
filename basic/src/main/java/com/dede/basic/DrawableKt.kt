@@ -5,6 +5,7 @@ package com.dede.basic
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -59,8 +60,22 @@ fun Context.getIdentifier(name: String, defType: DefType, defPackage: String = p
     val key = makeKey(name, defType, defPackage)
     var id = identifierCache.get(key)
     if (id == null) {
+        val appResources: Resources? = when (defPackage) {
+            packageName -> resources
+            "android" -> Resources.getSystem()
+            else -> {
+                val pm = packageManager
+                try {
+                    val applicationInfo =
+                        pm.getApplicationInfo(defPackage, PackageManager.GET_META_DATA)
+                    pm.getResourcesForApplication(applicationInfo)
+                } catch (ignore: PackageManager.NameNotFoundException) {
+                    null
+                }
+            }
+        }
         val type = defType.toString()
-        id = resources.getIdentifier(name, type, defPackage)
+        id = appResources?.getIdentifier(name, type, defPackage) ?: Resources.ID_NULL
         identifierCache.put(key, id)
     }
     return id
