@@ -4,11 +4,13 @@
     <string name="title_open_with">Otvori s</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
+    <string name="label_back">Natrag</string>
     <string name="label_github">Izvorni kod</string>
     <string name="label_translation">Prijevod</string>
     <string name="label_beta">Preuzmi betu</string>
     <string name="label_timeline">Vremenska crta</string>
     <string name="label_privacy_policy">Privatnost</string>
+    <string name="label_open_source_license">Licencije otvorenog koda</string>
     <string name="label_wiki">Wiki</string>
     <string name="label_license">Licencija</string>
     <string name="label_feedback">Povratne informacije</string>
@@ -31,10 +33,12 @@
     <string name="summary_theme_amoled_mode">Crna</string>
     <string name="label_add_shortcut">Prečac</string>
     <string name="label_donate">Doniraj</string>
+    <string name="label_update">Ažuriraj</string>
     <string name="preference_on">Uključeno</string>
     <string name="preference_off">Isključeno</string>
     <string name="toast_shortcut_added">Prečac dodan</string>
     <string name="toast_no_egg_detail">Ova inačica Androida nema easter egg</string>
+    <string name="toast_no_update_found">Nema pronađenih ažuriranja</string>
     <string name="app_widget_description">Easter Eggs analogni sat</string>
     <string name="action_agree">Prihvati</string>
     <string name="summary_browse_privacy_policy">Za nastavak pročitajte i prihvatite našu politiku privatnosti.</string>
