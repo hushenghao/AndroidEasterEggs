@@ -17,6 +17,7 @@ package com.android_n.egg.neko;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
+import android.os.IBinder;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.util.Log;
@@ -37,6 +38,21 @@ public class NekoTile extends TileService implements PrefsListener {
     public void onCreate() {
         super.onCreate();
         mPrefs = new PrefState(this);
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        if (Build.VERSION_CODES.TIRAMISU >= Build.VERSION.SDK_INT) {
+            return super.onBind(intent);
+        }
+        // fix https://github.com/hushenghao/AndroidEasterEggs/issues/729
+        // Unable to reach IQSService
+        // https://cs.android.com/android/platform/superproject/+/android-12.1.0_r1:frameworks/base/core/java/android/service/quicksettings/TileService.java
+        try {
+            return super.onBind(intent);
+        } catch (RuntimeException ignore) {
+            return null;
+        }
     }
 
     @Override
