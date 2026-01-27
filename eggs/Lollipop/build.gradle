@@ -6,3 +6,7 @@ android {
     namespace = "com.android_l.egg"
     resourcePrefix = "l_"
 }
+
+dependencies {
+    implementation(libs.androidx.core)
+}

@@ -1,9 +1,9 @@
 package com.dede.android_eggs.plugins
 
 import Versions
+import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
-import com.android.build.gradle.AppExtension
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.dede.android_eggs.dls.android
 import com.dede.android_eggs.dls.javaExtension
 import com.dede.android_eggs.dls.library
@@ -74,7 +74,6 @@ abstract class AbsConfigurablePlugin(
                     apply("com.android.library")
                 }
             }
-            apply("org.jetbrains.kotlin.android")
             if (configurable.isHiltEnable) {
                 apply("com.google.devtools.ksp")
                 apply("com.google.dagger.hilt.android")
@@ -105,12 +104,11 @@ abstract class AbsConfigurablePlugin(
     }
 
     private fun Project.configureAndroid(configurable: Configurable) {
-
-        android<CommonExtension<*, *, *, *, *, *>> {
+        android<CommonExtension> {
             compileSdk(Versions.compileSdk)
             buildToolsVersion = Versions.BUILD_TOOLS
 
-            defaultConfig {
+            with(defaultConfig) {
                 minSdk = Versions.MIN_SDK
 
                 vectorDrawables {
@@ -118,14 +116,14 @@ abstract class AbsConfigurablePlugin(
                 }
             }
 
-            buildFeatures {
+            with(buildFeatures) {
                 buildConfig = configurable.moduleType == ModuleType.APP
                 compose = configurable.isComposeEnabled
             }
 
             when (configurable.moduleType) {
                 ModuleType.APP -> {
-                    with(this as AppExtension) {
+                    with(this as ApplicationExtension) {
                         defaultConfig {
                             targetSdk(Versions.targetSdk)
                         }
@@ -151,7 +149,7 @@ abstract class AbsConfigurablePlugin(
                 }
             }
 
-            lint {
+            with(lint) {
                 fatal += listOf("NewApi", "InlinedApi")
                 if (configurable.isBaselineEnabled) {
                     baseline = project.file("lint-baseline.xml")
@@ -175,8 +173,8 @@ abstract class AbsConfigurablePlugin(
             if (configurable.isHiltEnable) {
                 "implementation"(libs.library("hilt.android"))
                 "ksp"(libs.library("hilt.compiler"))
-                // https://github.com/google/dagger/issues/5059
-                "ksp"(libs.library("kotlin.metadata.jvm"))
+//                // https://github.com/google/dagger/issues/5059
+//                "ksp"(libs.library("kotlin.metadata.jvm"))
             }
             if (configurable.isComposeEnabled) {
                 "implementation"(platform(libs.library("androidx.compose.bom")))

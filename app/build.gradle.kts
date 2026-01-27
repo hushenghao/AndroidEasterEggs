@@ -59,14 +59,13 @@ android {
         }
     }
 
-    androidComponents {
-        beforeVariants { variantBuilder ->
-            val app = variantBuilder.productFlavors[0].second
+    with(androidComponents) {
+        beforeVariants(
+            selector().withFlavor("app", "market")
+        ) { variantBuilder ->
             val track = variantBuilder.productFlavors[1].second
-            if (app == "market") {
-                // Enable product only for market build
-                variantBuilder.enable = track == "product"
-            }
+            // Enable product only for market build
+            variantBuilder.enable = track == "product"
         }
     }
 

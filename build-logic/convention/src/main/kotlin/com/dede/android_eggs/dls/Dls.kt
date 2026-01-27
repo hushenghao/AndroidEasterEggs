@@ -2,6 +2,7 @@
 
 package com.dede.android_eggs.dls
 
+import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import org.gradle.api.Action
 import org.gradle.api.Project
@@ -51,7 +52,7 @@ val Project.javaExtension: JavaPluginExtension
 fun Project.androidAppComponent(): ApplicationAndroidComponentsExtension? =
     extensions.findByType(ApplicationAndroidComponentsExtension::class.java)
 
-fun <T : Any> Project.android(action: Action<out T>) {
+fun <T : CommonExtension> Project.android(action: Action<out T>) {
     extensions.configure("android", action)
 }
 

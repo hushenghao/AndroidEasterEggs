@@ -1,6 +1,6 @@
 package com.dede.android_eggs.plugins
 
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import com.android.build.api.dsl.ApplicationExtension
 import com.dede.android_eggs.dls.android
 import com.dede.android_eggs.dls.keyprops
 import com.dede.android_eggs.tasks.UpdateChangelogsTask
@@ -13,7 +13,7 @@ class EasterEggsApp : AbsConfigurablePlugin(
 ) {
 
     override fun Project.onApply() {
-        android<BaseAppModuleExtension> {
+        android<ApplicationExtension> {
 
             signingConfigs {
                 if (keyprops.isEmpty) return@signingConfigs
