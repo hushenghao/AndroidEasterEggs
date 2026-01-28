@@ -191,7 +191,7 @@ class OrientationAngleSensor(
         }
         if (currentDisplay == null && this is Activity) {
             @Suppress("DEPRECATION")
-            currentDisplay = (this as Activity).windowManager.defaultDisplay
+            currentDisplay = this.windowManager.defaultDisplay
         }
         if (currentDisplay != null) {
             return currentDisplay.rotation

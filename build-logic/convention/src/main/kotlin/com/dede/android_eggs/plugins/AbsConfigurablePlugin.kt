@@ -132,8 +132,11 @@ abstract class AbsConfigurablePlugin(
                 ModuleType.LIBRARY,
                 ModuleType.BASIC -> {
                     with(this as LibraryExtension) {
-                        defaultConfig {
-                            consumerProguardFiles("consumer-rules.pro")
+                        val consumerRulesFile = file("consumer-rules.pro")
+                        if (consumerRulesFile.exists()) {
+                            defaultConfig {
+                                consumerProguardFiles("consumer-rules.pro")
+                            }
                         }
 
                         buildTypes {
@@ -173,8 +176,6 @@ abstract class AbsConfigurablePlugin(
             if (configurable.isHiltEnable) {
                 "implementation"(libs.library("hilt.android"))
                 "ksp"(libs.library("hilt.compiler"))
-//                // https://github.com/google/dagger/issues/5059
-//                "ksp"(libs.library("kotlin.metadata.jvm"))
             }
             if (configurable.isComposeEnabled) {
                 "implementation"(platform(libs.library("androidx.compose.bom")))
