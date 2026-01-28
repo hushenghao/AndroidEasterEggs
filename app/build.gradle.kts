@@ -5,7 +5,7 @@ import com.dede.android_eggs.dls.marketImplementation
 plugins {
     id("easter.eggs.app")
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.aboutlibraries.android)
+    alias(libs.plugins.aboutlibraries)
 }
 
 android {
