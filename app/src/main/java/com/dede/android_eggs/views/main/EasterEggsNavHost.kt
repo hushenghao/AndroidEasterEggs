@@ -2,7 +2,8 @@ package com.dede.android_eggs.views.main
 
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
@@ -27,7 +28,9 @@ import com.dede.android_eggs.views.main.compose.rememberKonfettiState
 
 const val ACTION_CAT_EDITOR = "com.dede.android_eggs.action.CAT_EDITOR"
 
-private const val TRANSITION_DURATION = 400
+private const val DURATION = 400
+private const val SCALE = 0.88f
+private const val ALPHA = 0.6f
 
 @Composable
 fun EasterEggsNavHost(
@@ -45,20 +48,22 @@ fun EasterEggsNavHost(
             startDestination = EasterEggsScreen.route,
             modifier = modifier,
             enterTransition = {
-                fadeIn(animationSpec = tween(TRANSITION_DURATION)) +
-                        slideInHorizontally(animationSpec = tween(TRANSITION_DURATION)) { it }
+                fadeIn(animationSpec = tween(DURATION), initialAlpha = ALPHA) +
+                        scaleIn(animationSpec = tween(DURATION), initialScale = SCALE) +
+                        slideInHorizontally(animationSpec = tween(DURATION)) { it }
             },
             exitTransition = {
-                fadeOut(animationSpec = tween(TRANSITION_DURATION)) +
-                        slideOutHorizontally(animationSpec = tween(TRANSITION_DURATION))
+                scaleOut(animationSpec = tween(DURATION), targetScale = SCALE) +
+                        slideOutHorizontally(animationSpec = tween(DURATION))
             },
             popEnterTransition = {
-                fadeIn(animationSpec = tween(TRANSITION_DURATION), initialAlpha = 0.3f) +
-                        slideInHorizontally(animationSpec = tween(TRANSITION_DURATION))
+                fadeIn(animationSpec = tween(DURATION), initialAlpha = ALPHA) +
+                        scaleIn(animationSpec = tween(DURATION), initialScale = SCALE) +
+                        slideInHorizontally(animationSpec = tween(DURATION))
             },
             popExitTransition = {
-                fadeOut(animationSpec = tween(TRANSITION_DURATION)) +
-                        slideOutHorizontally(animationSpec = tween(TRANSITION_DURATION)) { it }
+                scaleOut(animationSpec = tween(DURATION), targetScale = SCALE) +
+                        slideOutHorizontally(animationSpec = tween(DURATION)) { it }
             },
         ) {
             navDestinations.forEach { dest ->
