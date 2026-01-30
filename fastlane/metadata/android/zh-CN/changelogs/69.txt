@@ -1,6 +1,7 @@
 - 新增 Android L 预览版彩蛋 #714
 - 新增 Platlogo 快照预览
 - 新增 App 更新检查
+- 新增 图标形状
 - 时间线添加 Android logo
 - 优化 Cat Editor 选项面板
 - 修复时间线列表滚动手势冲突 #654
