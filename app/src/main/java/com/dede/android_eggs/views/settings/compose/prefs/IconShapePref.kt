@@ -38,7 +38,7 @@ import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.polygonItems
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.toShapePlusNullable
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.toShapeNullable
 import com.dede.android_eggs.resources.R as StringsR
 
 private const val SPAN_COUNT = 5
@@ -56,11 +56,11 @@ fun IconShapePref() {
                 ShapeItem(
                     modifier = Modifier.padding(2.dp),
                     isChecked = index == selectedIndex,
-                    polygon = roundedPolygon.toShapePlusNullable(),
+                    polygon = roundedPolygon.toShapeNullable(),
                     onClick = onClick@{
                         if (selectedIndex == index) return@onClick
                         selectedIndex = index
-                        SettingPrefUtil.iconShapeValueState.value = index
+                        SettingPrefUtil.iconShapeValueState.intValue = index
                         with(LocalEvent.poster()) {
                             post(SettingPrefUtil.ACTION_CLOSE_SETTING)
                         }

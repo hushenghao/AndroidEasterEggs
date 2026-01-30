@@ -220,7 +220,7 @@ private fun TimelineItem(
         val isAdaptiveIcon = context.isAdaptiveIconDrawable(logoRes)
         if (!isAdaptiveIcon) {
             imageModifier = Modifier
-                .background(colorScheme.secondaryContainer, IconShapePrefUtil.getIconShapePref())
+                .background(colorScheme.secondaryContainer, IconShapePrefUtil.getIconShape())
                 .then(imageModifier)
                 .padding(6.dp)
         }

@@ -30,16 +30,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Matrix
 import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.graphics.shapes.CornerRounding
 import androidx.graphics.shapes.Morph
 import androidx.graphics.shapes.RoundedPolygon
-import androidx.graphics.shapes.circle
-import androidx.graphics.shapes.pill
-import androidx.graphics.shapes.pillStar
-import androidx.graphics.shapes.rectangle
-import androidx.graphics.shapes.star
 import androidx.graphics.shapes.toPath
 import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 import com.dede.android_eggs.views.theme.EasterEggsTheme
 import kotlinx.coroutines.launch
@@ -59,7 +54,9 @@ class PlaceholderActivity : AppCompatActivity() {
             EasterEggsTheme {
                 @Suppress("UnusedMaterial3ScaffoldPaddingParameter")
                 Scaffold {
-                    Placeholder()
+                    Placeholder(
+                        shapes = IconShapePrefUtil.providerPolygonItems().apply { shuffle() }
+                    )
                 }
             }
         }
@@ -69,117 +66,11 @@ class PlaceholderActivity : AppCompatActivity() {
         }
     }
 
-    init {
-        shapes.shuffle()
-    }
-
 }
-
-internal val shapes = arrayOf(
-    // Love
-    RoundedPolygon(
-        vertices = floatArrayOf(
-            radialToCartesian(0.8f, 0f.toRadians()).x,
-            radialToCartesian(0.8f, 0f.toRadians()).y,
-            radialToCartesian(1f, 90f.toRadians()).x,
-            radialToCartesian(1f, 90f.toRadians()).y,
-            radialToCartesian(0.8f, 180f.toRadians()).x,
-            radialToCartesian(0.8f, 180f.toRadians()).y,
-            radialToCartesian(1f, 250f.toRadians()).x,
-            radialToCartesian(1f, 250f.toRadians()).y,
-            radialToCartesian(0.1f, 270f.toRadians()).x,
-            radialToCartesian(0.1f, 270f.toRadians()).y,
-            radialToCartesian(1f, 290f.toRadians()).x,
-            radialToCartesian(1f, 290f.toRadians()).y,
-        ),
-        perVertexRounding = listOf(
-            CornerRounding(0.6f),
-            CornerRounding(0.1f),
-            CornerRounding(0.6f),
-            CornerRounding(0.6f),
-            CornerRounding(0.1f),
-            CornerRounding(0.6f),
-        )
-    ),
-    // PillStar
-    RoundedPolygon.pillStar(
-        numVerticesPerRadius = 12,
-        width = 1f,
-        height = 1f,
-        rounding = CornerRounding(.3f),
-        innerRounding = CornerRounding(.3f)
-    ).rotated(45f),
-    // Pill
-    RoundedPolygon.pill(
-        width = 1f,
-        height = 0.8f,
-    ).rotated(45f),
-    // Triangle
-    RoundedPolygon(
-        numVertices = 3,
-        rounding = CornerRounding(0.2f)
-    ),
-    // Circle
-    RoundedPolygon.circle(
-        numVertices = 4,
-    ),
-    // Square
-    RoundedPolygon.rectangle(
-        width = 1f,
-        height = 1f,
-        rounding = CornerRounding(0.3f)
-    ),
-    // Scallop
-    RoundedPolygon.star(
-        numVerticesPerRadius = 12,
-        innerRadius = .828f,
-        rounding = CornerRounding(.32f),
-        innerRounding = CornerRounding(.32f)
-    ),
-    // Clover
-    RoundedPolygon.star(
-        numVerticesPerRadius = 4,
-        innerRadius = .352f,
-        rounding = CornerRounding(.32f),
-        innerRounding = CornerRounding(.32f)
-    ).rotated(45f),
-    // Hexagon
-    RoundedPolygon(
-        numVertices = 6,
-        rounding = CornerRounding(0.2f),
-    ),
-    // Triangle
-    RoundedPolygon(
-        vertices = floatArrayOf(
-            radialToCartesian(1f, 270f.toRadians()).x,
-            radialToCartesian(1f, 270f.toRadians()).y,
-            radialToCartesian(1f, 30f.toRadians()).x,
-            radialToCartesian(1f, 30f.toRadians()).y,
-            radialToCartesian(0.1f, 90f.toRadians()).x,
-            radialToCartesian(0.1f, 90f.toRadians()).y,
-            radialToCartesian(1f, 150f.toRadians()).x,
-            radialToCartesian(1f, 150f.toRadians()).y
-        ),
-        rounding = CornerRounding(0.2f),
-        centerX = 0f,
-        centerY = 0f
-    ),
-    // CornerSE
-    RoundedPolygon(
-        vertices = floatArrayOf(1f, 1f, -1f, 1f, -1f, -1f, 1f, -1f),
-        perVertexRounding = listOf(
-            CornerRounding(0.4f),
-            CornerRounding(1f),
-            CornerRounding(1f),
-            CornerRounding(1f)
-        ),
-    ),
-
-    )
 
 @Preview
 @Composable
-internal fun Placeholder() {
+internal fun Placeholder(shapes: Array<RoundedPolygon> = IconShapePrefUtil.providerPolygonItems()) {
     val progress = remember { Animatable(0f) }
     var currShape by remember { mutableIntStateOf(Random.nextInt(shapes.size)) }
     val morphed by remember(currShape) {

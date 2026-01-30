@@ -1,7 +1,7 @@
 package com.dede.android_eggs.views.settings.compose.basic
 
 import android.content.Context
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.core.content.edit
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
@@ -22,9 +22,9 @@ object SettingPrefUtil {
         context.pref.edit { putInt(key, value) }
     }
 
-    val iconShapeValueState = mutableStateOf(OFF)
+    val iconShapeValueState = mutableIntStateOf(OFF)
 
     fun setup(context: Context) {
-        iconShapeValueState.value = getValue(context, IconShapePrefUtil.KEY_ICON_SHAPE, OFF)
+        iconShapeValueState.intValue = getValue(context, IconShapePrefUtil.KEY_ICON_SHAPE, OFF)
     }
 }

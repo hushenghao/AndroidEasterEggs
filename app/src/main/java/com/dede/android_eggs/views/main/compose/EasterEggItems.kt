@@ -34,8 +34,8 @@ import androidx.compose.material.icons.rounded.SwipeLeft
 import androidx.compose.material.icons.rounded.SwipeRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.MaterialTheme.typography
@@ -76,6 +76,7 @@ import com.dede.android_eggs.views.main.util.AndroidReleaseDateMatcher
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.EggActionHelp
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
@@ -131,12 +132,13 @@ fun EasterEggHighestItem(
             )
 
             if (isSupportShortcut) {
-                IconButton(
+                FilledIconButton(
                     onClick = {
                         EasterEggShortcutsHelp.pinShortcut(context, egg)
                     },
+                    shape = IconShapePrefUtil.getIconShape(),
                     modifier = Modifier
-                        .padding(6.dp)
+                        .padding(8.dp)
                         .align(Alignment.TopEnd)
                 ) {
                     Icon(

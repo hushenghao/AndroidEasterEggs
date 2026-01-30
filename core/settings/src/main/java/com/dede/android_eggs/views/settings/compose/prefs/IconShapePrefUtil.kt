@@ -20,41 +20,42 @@ object IconShapePrefUtil {
 
     const val KEY_ICON_SHAPE = "pref_key_override_icon_shape"
 
-    fun getIconShapeRoundedPolygon(index: Int): RoundedPolygon? {
-        return polygonItems.getOrNull(index)
+    @Composable
+    fun getIconShape(index: Int = SettingPrefUtil.iconShapeValueState.intValue): Shape {
+        val polygon = polygonItems.getOrNull(index)
+        return polygon.toShapePlus()
     }
 
     @Composable
-    fun getIconShapePref(): Shape {
-        return getIconShapeRoundedPolygon(SettingPrefUtil.iconShapeValueState.value).toShapePlus()
-    }
-
-    @Composable
-    fun RoundedPolygon?.toShapePlus(): Shape {
-        val shape = this.toShapePlusNullable()
+    private fun RoundedPolygon?.toShapePlus(): Shape {
+        val shape = this.toShapeNullable()
         if (shape != null) {
             return shape
         }
-        return SystemIconMaskUtil.getIconMaskShape(LocalContext.current) ?: defaultSquare.toShape()
+        return SystemIconMaskUtil.getIconMaskShape(LocalContext.current) ?: defaultCircle.toShape()
     }
 
     @Composable
-    fun RoundedPolygon?.toShapePlusNullable(): Shape? {
+    fun RoundedPolygon?.toShapeNullable(): Shape? {
         if (this == null) return null
         if (this == fakeSquircle) return SquircleShape()
         return this.toShape()
     }
 
-    private val defaultSquare = MaterialShapes.Square
+    private val defaultCircle = MaterialShapes.Circle
 
     private val fakeSquircle = RoundedPolygon.rectangle()
 
+    fun providerPolygonItems(): Array<RoundedPolygon> {
+        return polygonItems.filterNotNull().filter { it != fakeSquircle }.toTypedArray()
+    }
+
     val polygonItems: Array<RoundedPolygon?> = arrayOf(
         null,
-        defaultSquare,
+        MaterialShapes.Square,
         // Squircle
         fakeSquircle,
-        MaterialShapes.Circle,
+        defaultCircle,
         // CornerSE
         RoundedPolygon(
             vertices = floatArrayOf(1f, 1f, -1f, 1f, -1f, -1f, 1f, -1f),
@@ -82,6 +83,26 @@ object IconShapePrefUtil {
             rounding = CornerRounding(.3f),
             innerRounding = CornerRounding(.3f)
         ).normalized(),
+
+        // Triangle
+        RoundedPolygon(
+            numVertices = 3,
+            rounding = CornerRounding(0.2f),
+        ).normalized(),
+        MaterialShapes.Arch,
+        MaterialShapes.Ghostish,
+        MaterialShapes.Gem,
+        MaterialShapes.Sunny,
+
+        // Hexagon
+        RoundedPolygon(
+            numVertices = 6,
+            rounding = CornerRounding(0.2f),
+        ).normalized(),
+        MaterialShapes.Flower,
+        MaterialShapes.Cookie12Sided,
+        MaterialShapes.SoftBurst,
+        MaterialShapes.PixelCircle,
     )
 
 }

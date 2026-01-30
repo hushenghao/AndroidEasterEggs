@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.dede.android_eggs.embedding_splits
+package com.dede.android_eggs.views.settings.compose.utils
 
 import android.graphics.PointF
 import androidx.compose.ui.geometry.Offset

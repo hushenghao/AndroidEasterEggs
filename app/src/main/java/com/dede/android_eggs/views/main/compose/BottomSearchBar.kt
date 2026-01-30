@@ -10,6 +10,7 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -193,11 +194,13 @@ private fun BottomSearchBarView(
         tonalElevation = 4.dp,
         shadowElevation = 4.dp,
     ) {
-        TextField(modifier = Modifier
-            .fillMaxWidth()
-            .focusRequester(focusRequester)
-            .navigationBarsPadding()
-            .padding(horizontal = 16.dp, vertical = 10.dp),
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .focusRequester(focusRequester)
+                .focusable()
+                .navigationBarsPadding()
+                .padding(horizontal = 16.dp, vertical = 10.dp),
             value = state.searchText,
             onValueChange = {
                 state.searchText = it
