@@ -8,6 +8,8 @@ import androidx.compose.ui.graphics.toArgb
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 import com.dede.android_eggs.views.theme.currentColorScheme
 
+const val PREF_ON = 1
+const val PREF_OFF = 0
 
 object ThemeUtils {
 

@@ -14,7 +14,6 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.window)
     implementation(libs.androidx.startup)
-    implementation(libs.androidx.shapes)
     implementation(libs.androidx.compose.activity)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)

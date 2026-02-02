@@ -3,12 +3,14 @@ package com.dede.android_eggs.views.settings.compose.basic
 import android.content.Context
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.core.content.edit
+import com.dede.android_eggs.util.PREF_OFF
+import com.dede.android_eggs.util.PREF_ON
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 
 object SettingPrefUtil {
-    const val ON = 1
-    const val OFF = 0
+    const val ON = PREF_ON
+    const val OFF = PREF_OFF
 
     const val EXTRA_VALUE = "extra_value"
 

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -22,18 +21,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.views.main.compose.Wavy
-import com.dede.android_eggs.views.settings.compose.prefs.SettingPrefIcon
-
-
-@Composable
-fun SettingDivider() {
-    Wavy(
-        modifier = Modifier
-            .fillMaxWidth(0.4f)
-            .padding(vertical = 16.dp),
-    )
-}
 
 @Composable
 fun SettingPref(
@@ -152,4 +139,3 @@ fun SettingPref(
         content()
     }
 }
-

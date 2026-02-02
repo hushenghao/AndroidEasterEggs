@@ -79,7 +79,7 @@ fun ComposeViewThemeBuilder(
 
 fun buildDarkThemeLoadingIndicator(activity: Activity): View {
     return ComposeViewBuilder(activity) {
-        EasterEggsTheme(theme = ThemePrefUtil.DARK) {
+        EasterEggsTheme(themeMode = ThemePrefUtil.DARK) {
             LoadingIndicator(
                 modifier = Modifier.size(92.dp)
             )

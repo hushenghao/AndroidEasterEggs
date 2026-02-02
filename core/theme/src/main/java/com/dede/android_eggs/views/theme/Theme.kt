@@ -11,15 +11,11 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
-import com.dede.basic.globalContext
 
 
 fun ColorScheme.toAmoled(): ColorScheme {
@@ -129,24 +125,24 @@ private val darkScheme = darkColorScheme(
     surfaceContainerHighest = surfaceContainerHighestDark,
 )
 
-var themeMode by mutableIntStateOf(ThemePrefUtil.getThemeModeValue(globalContext))
-var isDynamicColorEnable by mutableStateOf(DynamicColorPrefUtil.isDynamicColorEnable(globalContext))
+private val currentThemeMode by ThemePrefUtil.themeModeState
+private val currentDynamicColorEnabled by DynamicColorPrefUtil.isDynamicColorEnabledState
 
-var currentColorScheme: ColorScheme = lightScheme
+internal var currentColorScheme: ColorScheme = lightScheme
     private set
 
 @Composable
 fun EasterEggsTheme(
-    theme: Int = themeMode,
-    dynamicColor: Boolean = isDynamicColorEnable,
+    themeMode: Int = currentThemeMode,
+    isDynamicColorEnabled: Boolean = currentDynamicColorEnabled,
     content: @Composable () -> Unit
 ) {
-    var nightModeValue = theme
+    var nightModeValue = themeMode
     if (nightModeValue == ThemePrefUtil.FOLLOW_SYSTEM) {
         nightModeValue = if (isSystemInDarkTheme()) ThemePrefUtil.DARK else ThemePrefUtil.LIGHT
     }
 
-    val colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && dynamicColor) {
+    val colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && isDynamicColorEnabled) {
         val context: Context = LocalContext.current
         when (nightModeValue) {
             ThemePrefUtil.AMOLED -> dynamicDarkColorScheme(context).toAmoled()

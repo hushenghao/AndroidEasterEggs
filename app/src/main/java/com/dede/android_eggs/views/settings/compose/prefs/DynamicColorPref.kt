@@ -14,7 +14,6 @@ import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
 import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil.DEFAULT
 import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil.KEY_DYNAMIC_COLOR
-import com.dede.android_eggs.views.theme.isDynamicColorEnable
 import com.dede.android_eggs.resources.R as StringsR
 
 @Preview
@@ -31,7 +30,7 @@ fun DynamicColorPref() {
         shape = OptionShapes.borderShape,
         onCheckedChange = {
             intState = if (it) SettingPrefUtil.ON else SettingPrefUtil.OFF
-            isDynamicColorEnable = intState == SettingPrefUtil.ON
+            DynamicColorPrefUtil.isDynamicColorEnabledState.value = intState == SettingPrefUtil.ON
         }
     )
 }

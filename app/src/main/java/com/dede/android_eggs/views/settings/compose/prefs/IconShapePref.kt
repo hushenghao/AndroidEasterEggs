@@ -31,7 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.R
+import com.dede.android_eggs.resources.R
 import com.dede.android_eggs.ui.composes.icons.rounded.Shapes
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref

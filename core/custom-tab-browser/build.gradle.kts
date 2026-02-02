@@ -8,7 +8,6 @@ android {
 
 dependencies {
     implementation(project(":core:theme"))
-    implementation(project(":core:settings"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.browser)

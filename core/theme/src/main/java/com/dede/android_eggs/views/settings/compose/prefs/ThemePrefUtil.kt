@@ -2,6 +2,7 @@ package com.dede.android_eggs.views.settings.compose.prefs
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.runtime.mutableIntStateOf
 import com.dede.android_eggs.util.pref
 
 
@@ -20,11 +21,15 @@ object ThemePrefUtil {
         return context.pref.getInt(KEY_NIGHT_MODE, FOLLOW_SYSTEM)
     }
 
+    val themeModeState = mutableIntStateOf(FOLLOW_SYSTEM)
+
     fun apply(context: Context) {
         var mode = getThemeModeValue(context)
         if (mode == AMOLED) {
             mode = DARK
         }
+        themeModeState.intValue = mode
         AppCompatDelegate.setDefaultNightMode(mode)
+        DynamicColorPrefUtil.apply(context)
     }
 }

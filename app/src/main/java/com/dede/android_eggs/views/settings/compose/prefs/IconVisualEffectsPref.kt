@@ -2,6 +2,7 @@ package com.dede.android_eggs.views.settings.compose.prefs
 
 import android.content.Context
 import android.os.Build
+import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Animation
 import androidx.compose.runtime.Composable
@@ -16,6 +17,7 @@ object IconVisualEffectsPrefUtil {
     const val ACTION_CHANGED = "com.dede.android_eggs.IconVisualEffectsChanged"
     const val KEY_ICON_VISUAL_EFFECTS = "pref_key_icon_visual_effects"
 
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.O)
     fun isSupported(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
     }

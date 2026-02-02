@@ -29,7 +29,6 @@ import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.DARK
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.FOLLOW_SYSTEM
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.KEY_NIGHT_MODE
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.LIGHT
-import com.dede.android_eggs.views.theme.themeMode
 import com.dede.android_eggs.resources.R as StringsR
 
 
@@ -42,7 +41,7 @@ fun ThemePref() {
             return@click
         }
         themeModeValue = mode
-        themeMode = themeModeValue
+        ThemePrefUtil.themeModeState.intValue = themeModeValue
         var appCompatMode = mode
         if (appCompatMode == AMOLED) {
             appCompatMode = DARK

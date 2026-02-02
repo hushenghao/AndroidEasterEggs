@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
 
-package com.dede.android_eggs.views.settings.compose.prefs
+package com.dede.android_eggs.views.settings.compose.basic
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 
 @Composable
 fun SettingPrefIcon(
