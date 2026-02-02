@@ -16,5 +16,6 @@ dependencies {
     implementation(libs.androidx.compose.material.icons)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
+    implementation(libs.androidx.shapes)
     implementation(libs.squircle.shape)
 }
