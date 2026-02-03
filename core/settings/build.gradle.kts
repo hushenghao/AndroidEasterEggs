@@ -9,6 +9,8 @@ android {
 dependencies {
     implementation(project(":core:theme"))
 
+    implementation(libs.androidx.core)
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling.preview)

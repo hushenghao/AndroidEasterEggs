@@ -58,7 +58,8 @@ fun RocketLauncherPref() {
             )
             FilledTonalIconButton(
                 onClick = { expanded = !expanded },
-                modifier = Modifier.padding(end = 8.dp)
+                modifier = Modifier.padding(end = 8.dp),
+                shape = IconShapePrefUtil.getIconShape()
             ) {
                 Icon(
                     imageVector = Icons.Rounded.KeyboardArrowDown,

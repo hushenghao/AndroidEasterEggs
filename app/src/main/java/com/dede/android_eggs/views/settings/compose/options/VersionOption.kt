@@ -22,11 +22,8 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonShapes
-import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -53,6 +50,7 @@ import com.dede.android_eggs.views.main.compose.isAgreedPrivacyPolicy
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
 import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.Utils
 import com.dede.basic.toast
 import kotlinx.coroutines.launch
@@ -116,7 +114,7 @@ private fun UpgradeIconButton() {
                     scaleX = scale
                 }
             },
-        shapes = IconButtonShapes(MaterialShapes.Cookie12Sided.toShape()),
+        shape = IconShapePrefUtil.getIconShape(),
         onClick = onClick@{
             if (activity == null) {
                 iconButtonAnimatable = false
@@ -177,8 +175,8 @@ private fun UpgradeDialog(version: LatestVersion, onDismiss: () -> Unit) {
                     .forEach { match ->
                         // issue or pull request id
                         // github can automatically redirect to correct page
-                        val id = match.groupValues.getOrNull(1)
-                        val url = context.getString(R.string.url_github_issues_id, id)
+                        val id = match.groupValues.getOrNull(1) ?: ""
+                        val url = stringResource(R.string.url_github_issues_id, id)
                         addLink(
                             LinkAnnotation.Url(url = url, linkInteractionListener = {
                                 CustomTabsBrowser.launchUrl(context, url)
