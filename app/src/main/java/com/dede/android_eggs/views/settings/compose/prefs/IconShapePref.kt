@@ -28,7 +28,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.ui.composes.icons.rounded.Shapes
-import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
@@ -56,9 +55,6 @@ fun IconShapePref() {
                         if (selectedIndex == index) return@onClick
                         selectedIndex = index
                         SettingPrefUtil.iconShapeValueState.intValue = index
-                        with(LocalEvent.poster()) {
-                            post(SettingPrefUtil.ACTION_CLOSE_SETTING)
-                        }
                     }
                 )
             }

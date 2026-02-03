@@ -16,6 +16,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.ResourceManagerInternal
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
 import com.dede.basic.utils.DynamicObjectUtils
 import org.xmlpull.v1.XmlPullParser
@@ -54,31 +55,55 @@ private fun makeKey(name: String, defType: DefType, packageName: String): String
     return "$packageName:$defType/$name"
 }
 
-@JvmOverloads
-@SuppressLint("DiscouragedApi")
-fun Context.getIdentifier(name: String, defType: DefType, defPackage: String = packageName): Int {
-    val key = makeKey(name, defType, defPackage)
-    var id = identifierCache.get(key)
-    if (id == null) {
-        val appResources: Resources? = when (defPackage) {
-            packageName -> resources
-            "android" -> Resources.getSystem()
-            else -> {
-                val pm = packageManager
-                try {
-                    val applicationInfo =
-                        pm.getApplicationInfo(defPackage, PackageManager.GET_META_DATA)
-                    pm.getResourcesForApplication(applicationInfo)
-                } catch (ignore: PackageManager.NameNotFoundException) {
-                    null
-                }
+private fun Context.getPackageResources(pkg: String?): Resources? {
+    return when (pkg) {
+        null, packageName -> resources
+        "android" -> Resources.getSystem()
+        else -> {
+            val pm = packageManager
+            var flags = PackageManager.GET_SHARED_LIBRARY_FILES
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                flags = flags or PackageManager.MATCH_UNINSTALLED_PACKAGES
+            }
+            try {
+                val applicationInfo = pm.getApplicationInfo(pkg, flags)
+                pm.getResourcesForApplication(applicationInfo)
+            } catch (ignore: Exception) {
+                null
             }
         }
+    }
+}
+
+@JvmOverloads
+@SuppressLint("DiscouragedApi")
+fun Context.getIdentifier(name: String, defType: DefType, pkg: String = packageName): Int {
+    val key = makeKey(name, defType, pkg)
+    var id = identifierCache.get(key)
+    if (id == null) {
+        val appResources: Resources? = getPackageResources(pkg)
         val type = defType.toString()
-        id = appResources?.getIdentifier(name, type, defPackage) ?: Resources.ID_NULL
+        id = appResources?.getIdentifier(name, type, pkg) ?: 0//Resources.ID_NULL
         identifierCache.put(key, id)
     }
     return id
+}
+
+fun Context.getPackageDrawable(id: Int, pkg: String? = null): Drawable? {
+    if (pkg == null || pkg == packageName || pkg == "android") {
+        return getDrawableCompat(id)
+    }
+
+    val resource: Resources = getPackageResources(pkg) ?: return null
+    val theme: Resources.Theme? = try {
+        val packageContext = createPackageContext(
+            pkg, Context.CONTEXT_INCLUDE_CODE or Context.CONTEXT_IGNORE_SECURITY
+        )
+        packageContext.theme
+    } catch (ignore: Exception) {
+        null
+    }
+    return ResourcesCompat.getDrawable(resource, id, theme)
 }
 
 private val sharedTypedValue = TypedValue()
@@ -117,6 +142,10 @@ fun Context.isAdaptiveIconDrawable(@DrawableRes id: Int): Boolean {
     return supportAdaptiveIcon
 }
 
+fun Context.requireDrawable(@DrawableRes id: Int): Drawable {
+    return requireNotNull(getDrawableCompat(id))
+}
+
 /**
  * Return a drawable object associated with a particular resource ID.
  *
@@ -126,12 +155,11 @@ fun Context.isAdaptiveIconDrawable(@DrawableRes id: Int): Boolean {
  * Fixed issues:
  * * Android N VectorDrawable [#37138664](https://issuetracker.google.com/issues/37138664)
  */
-fun Context.requireDrawable(@DrawableRes id: Int): Drawable {
+private fun Context.getDrawableCompat(@DrawableRes id: Int): Drawable? {
     if (Build.VERSION.SDK_INT in Build.VERSION_CODES.N..Build.VERSION_CODES.N_MR1 && !installed.get()) {
         installApi24InflateDelegates()
     }
-    val drawable = AppCompatResources.getDrawable(this, id)
-    return requireNotNull(drawable)
+    return AppCompatResources.getDrawable(this, id)
 }
 
 private val installed = AtomicBoolean(false)

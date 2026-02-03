@@ -18,9 +18,7 @@ package com.android_q.egg.quares
 
 import android.app.Activity
 import android.content.Context
-import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Typeface
@@ -38,6 +36,7 @@ import android.widget.CompoundButton
 import android.widget.GridLayout
 import androidx.core.content.ContextCompat
 import com.android_q.egg.R
+import com.dede.basic.getPackageDrawable
 import java.util.Random
 
 
@@ -126,21 +125,6 @@ class QuaresActivity : Activity() {
         loadPuzzle()
     }
 
-    private fun createDrawable(resName: String, resId: Int): Drawable? {
-        var res: Resources? = null
-        try {
-            res = packageManager.getResourcesForApplication(getPackageNameForResourceName(resName))
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-        }
-        try {
-            return (res ?: resources).getDrawable(resId, theme)
-        } catch (e: Resources.NotFoundException) {
-            e.printStackTrace()
-        }
-        return null
-    }
-
     fun getPackageNameForResourceName(name: String): String {
         return if (name.contains(":") && !name.startsWith("android:")) {
             name.substring(0, name.indexOf(":"))
@@ -172,7 +156,7 @@ class QuaresActivity : Activity() {
 
         val dp = resources.displayMetrics.density
 
-        icon = createDrawable(resName, resId)
+        icon = getPackageDrawable(resId, getPackageNameForResourceName(resName))
         if (icon == null) {
             resId = 0
             resName = ""
