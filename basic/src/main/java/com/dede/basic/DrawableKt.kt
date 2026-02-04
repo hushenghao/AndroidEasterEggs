@@ -192,7 +192,7 @@ private fun installApi24InflateDelegates() {
             if (interfaces.isNotEmpty()) {
                 managerDynamicObject.invokeMethod(
                     "addDelegate",
-                    arrayOf(String::class.java, interfaces[0]),
+                    arrayOf(String::class.java, interfaces[0]),// androidx.appcompat.widget.ResourceManagerInternal$InflateDelegate
                     arrayOf(tagName, inflateDelegate)
                 )
             }

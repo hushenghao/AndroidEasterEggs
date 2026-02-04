@@ -95,7 +95,7 @@ fun EasterEggHighestItem(
     val context = LocalContext.current
     val egg = base as EasterEgg
     val androidVersion = remember(egg) {
-        EasterEggHelp.VersionFormatter.create(egg.apiLevelRange, egg.nicknameRes)
+        EasterEggHelp.VersionFormatter.create(egg.fullApiLevelRange, egg.nicknameRes)
             .format(context)
     }
     val apiLevel = remember(egg) {
@@ -335,7 +335,7 @@ fun EasterEggItemContent(
     val context = LocalContext.current
     val isGroup = base is EasterEggGroup
     val androidVersion = remember(egg) {
-        EasterEggHelp.VersionFormatter.create(egg.apiLevelRange, egg.nicknameRes)
+        EasterEggHelp.VersionFormatter.create(egg.fullApiLevelRange, egg.nicknameRes)
             .format(context)
     }
     Card(
@@ -405,8 +405,8 @@ private fun EasterEggItemFloor(
     swipeProgress: Float = 0f,
 ) {
     val content = LocalContext.current
-    val androidVersion = remember(egg.apiLevelRange, content) {
-        EasterEggHelp.VersionFormatter.create(egg.apiLevelRange)
+    val androidVersion = remember(egg.fullApiLevelRange, content) {
+        EasterEggHelp.VersionFormatter.create(egg.fullApiLevelRange)
             .format(content)
     }
     val apiVersion = remember(egg.apiLevelRange, content) {

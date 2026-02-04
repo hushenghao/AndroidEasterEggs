@@ -1,6 +1,7 @@
 package com.dede.basic.provider
 
 import androidx.annotation.DrawableRes
+import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
 import java.util.Calendar
 
 data class TimelineEvent(
@@ -16,15 +17,12 @@ data class TimelineEvent(
     val month: Int,
     val apiLevel: Int,
     val event: CharSequence,
-    val fullApiLevel: Int = apiLevel * SDK_INT_MULTIPLIER,
+    val fullApiLevel: Int = apiLevel.toFullApiLevel(),
 ) {
     @DrawableRes
     var androidLogo: Int = -1
 
     companion object {
-
-        // android.os.Build.VERSION_CODES_FULL#SDK_INT_MULTIPLIER
-        const val SDK_INT_MULTIPLIER = 100000
 
         @JvmStatic
         fun timelineEvent(apiLevel: Int, event: CharSequence): TimelineEvent {

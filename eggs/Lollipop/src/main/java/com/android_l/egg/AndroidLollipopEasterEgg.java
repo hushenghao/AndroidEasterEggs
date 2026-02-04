@@ -10,6 +10,7 @@ import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggGroup;
 import com.dede.basic.provider.EasterEggProvider;
+import com.dede.basic.provider.EasterEggProviderKt;
 import com.dede.basic.provider.SnapshotProvider;
 import com.dede.basic.provider.TimelineEvent;
 
@@ -51,8 +52,9 @@ public class AndroidLollipopEasterEgg implements EasterEggProvider {
                         R.drawable.l_android_preview_logo,
                         R.string.l_webdriver_torso,
                         R.string.l_preview_nickname,
-                        Build.VERSION_CODES.LOLLIPOP,
-                        com.android_l.egg.preview.PlatLogoActivity.class
+                        EasterEggProviderKt.toRange(Build.VERSION_CODES.LOLLIPOP),
+                        com.android_l.egg.preview.PlatLogoActivity.class,
+                        EasterEggProviderKt.toRange(EasterEgg.VERSION_CODES_FULL.L_PREVIEW)
                 ) {
                     @Override
                     public SnapshotProvider provideSnapshotProvider() {

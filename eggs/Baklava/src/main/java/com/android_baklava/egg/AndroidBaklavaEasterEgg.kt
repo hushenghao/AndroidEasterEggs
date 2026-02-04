@@ -12,9 +12,11 @@ import com.android_baklava.egg.landroid.DreamUniverse
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.ComponentProvider
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.SnapshotProvider
 import com.dede.basic.provider.TimelineEvent
+import com.dede.basic.provider.toRange
 import com.dede.basic.requireDrawable
 import dagger.Module
 import dagger.Provides
@@ -37,8 +39,9 @@ object AndroidBaklavaEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.baklava_android16_patch_adaptive,
             nameRes = R.string.baklava_egg_name,
             nicknameRes = R.string.baklava_android_nickname,
-            apiLevel = Build.VERSION_CODES.BAKLAVA,
-            actionClass = PlatLogoActivity::class.java
+            apiLevelRange = Build.VERSION_CODES.BAKLAVA.toRange(),
+            actionClass = PlatLogoActivity::class.java,
+            fullApiLevelRange = Build.VERSION_CODES.BAKLAVA.toFullApiLevel()..VERSION_CODES_FULL.BAKLAVA_1
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
                 return SP()
@@ -61,7 +64,7 @@ object AndroidBaklavaEasterEgg : EasterEggProvider, ComponentProvider {
                 Build.VERSION_CODES.BAKLAVA,
                 "Baklava.\nAndroid 16.1.",
                 // Build.VERSION_CODES_FULL.BAKLAVA_1
-                Build.VERSION_CODES.BAKLAVA * TimelineEvent.SDK_INT_MULTIPLIER + 1
+                EasterEgg.VERSION_CODES_FULL.BAKLAVA_1
             )
         )
     }

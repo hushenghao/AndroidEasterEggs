@@ -6,9 +6,12 @@ import android.util.SparseArray
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.core.util.forEach
+import androidx.core.util.putAll
 import com.dede.android_eggs.R
 import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
 import com.dede.basic.provider.EasterEggProvider
 import dagger.Module
 import com.dede.android_eggs.resources.R as StringsR
@@ -98,15 +101,19 @@ object EasterEggHelp {
             .append(last)
     }
 
-    fun getVersionNameByApiLevel(@androidx.annotation.IntRange(from = 1L) level: Int): String {
-        return apiLevelArrays[level]
+    fun getVersionNameByApiLevel(
+        @androidx.annotation.IntRange(from = Build.VERSION_CODES.BASE.toLong())
+        level: Int
+    ): String {
+        return apiLevelArrays[level.toFullApiLevel()]
+            ?: apiLevelArrays[level]
             ?: throw IllegalArgumentException("Illegal Api level: $level")
     }
 
     private val apiLevelArrays = SparseArray<String>()
 
     init {
-        apiLevelArrays[Build.VERSION_CODES.CUR_DEVELOPMENT] = "Next"
+        // api level mappings
         apiLevelArrays[Build.VERSION_CODES.BAKLAVA] = "16"
         apiLevelArrays[Build.VERSION_CODES.VANILLA_ICE_CREAM] = "15"
         apiLevelArrays[Build.VERSION_CODES.UPSIDE_DOWN_CAKE] = "14"
@@ -143,6 +150,20 @@ object EasterEggHelp {
         apiLevelArrays[Build.VERSION_CODES.CUPCAKE] = "1.5"
         apiLevelArrays[Build.VERSION_CODES.BASE_1_1] = "1.1"
         apiLevelArrays[Build.VERSION_CODES.BASE] = "1.0"
+
+        // full api level mappings
+        val fullApiLevelArrays = SparseArray<String>()
+        apiLevelArrays.forEach { apiLevel, value ->
+            fullApiLevelArrays.put(apiLevel.toFullApiLevel(), value)
+        }
+        apiLevelArrays.putAll(fullApiLevelArrays)
+
+        // static full api level mappings
+        apiLevelArrays[EasterEgg.VERSION_CODES_FULL.L_PREVIEW] = "L"
+        apiLevelArrays[EasterEgg.VERSION_CODES_FULL.BAKLAVA_1] = "16.1"
+
+        // development version
+        apiLevelArrays[Build.VERSION_CODES.CUR_DEVELOPMENT] = "Next"
     }
 
 }
