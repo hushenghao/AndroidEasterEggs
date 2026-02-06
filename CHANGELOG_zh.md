@@ -1,6 +1,6 @@
 # 更新日志
 
-### v4.3.2
+### v4.4.0 (2026-02-06)
 
 - 新增 Android L 预览版彩蛋 [#714](https://github.com/hushenghao/AndroidEasterEggs/issues/714)
 - 新增 Platlogo 快照预览

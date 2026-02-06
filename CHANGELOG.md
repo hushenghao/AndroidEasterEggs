@@ -1,6 +1,6 @@
 # Changelog
 
-### v4.3.2
+### v4.4.0 (2026-02-06)
 
 - Add Android L Preview Easter Egg [#714](https://github.com/hushenghao/AndroidEasterEggs/issues/714)
 - Add Platlogo snapshot preview
