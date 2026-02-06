@@ -51,7 +51,10 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.R
+import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
@@ -63,11 +66,37 @@ import com.dede.basic.isAdaptiveIconDrawable
 import com.dede.basic.provider.TimelineEvent
 import com.dede.basic.requireDrawable
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.components.SingletonComponent
+import dagger.multibindings.IntoSet
 import java.util.Calendar
 import javax.inject.Inject
 
 private const val TIMELINE_HORIZONTAL_BIAS = 0.3f
+
+@Module
+@InstallIn(SingletonComponent::class)
+object TimelineListDialog : EasterEggsDestination, EasterEggsDestination.Provider {
+
+    override val route: NavKey = EasterEggsDestination.TimelineDialog
+
+    override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.ModalBottomSheet
+
+    @Provides
+    @IntoSet
+    override fun provider(): EasterEggsDestination = this
+
+    @Composable
+    override fun Content() {
+        val navigator = LocalNavigator.current
+        TimelineListDialog() {
+            navigator.goBack()
+        }
+    }
+}
 
 @Composable
 fun TimelineListDialog(

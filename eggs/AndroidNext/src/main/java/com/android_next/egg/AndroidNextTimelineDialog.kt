@@ -44,8 +44,9 @@ import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavController
+import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.basic.requireDrawable
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
@@ -64,13 +65,13 @@ import kotlin.math.min
 object AndroidNextTimelineDialog : EasterEggsDestination, EasterEggsDestination.Provider {
     override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.Dialog
 
-    override val route: String = "android_next_timeline_dialog"
+    override val route: NavKey = EasterEggsDestination.AndroidNextTimelineDialog
 
     @Composable
     override fun Content() {
-        val navController = LocalNavController.current
+        val navigator = LocalNavigator.current
         AndroidNextTimelineDialog {
-            navController.popBackStack()
+            navigator.goBack()
         }
     }
 

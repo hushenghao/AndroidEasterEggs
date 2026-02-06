@@ -1,0 +1,3 @@
+- Migrate to Navigation3
+- Update translations
+- Upgrade project dependencies

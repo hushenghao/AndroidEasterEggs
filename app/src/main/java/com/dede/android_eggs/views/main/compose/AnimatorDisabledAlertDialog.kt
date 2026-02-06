@@ -15,8 +15,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.edit
+import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavController
+import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.util.pref
 import com.dede.basic.Utils
 import com.dede.basic.toast
@@ -33,7 +34,7 @@ object AnimatorDisabledAlertDialog : EasterEggsDestination, EasterEggsDestinatio
 
     override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.Dialog
 
-    override val route: String = "animator_disabled_alert_dialog"
+    override val route: NavKey = EasterEggsDestination.AnimatorDisabledAlertDialog
 
     private const val PREF_DONT_SHOW_AGAIN = "animator_disabled_alert_dialog_dont_show_again"
 
@@ -47,9 +48,9 @@ object AnimatorDisabledAlertDialog : EasterEggsDestination, EasterEggsDestinatio
 
     @Composable
     override fun Content() {
-        val navController = LocalNavController.current
+        val navigator = LocalNavigator.current
         AnimatorDisabledAlertDialog {
-            navController.popBackStack()
+            navigator.goBack()
         }
     }
 

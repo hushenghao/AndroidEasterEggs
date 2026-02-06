@@ -26,8 +26,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
-        versionCode = 69
-        versionName = "4.4.0"
+        versionCode = 70
+        versionName = "4.4.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         base.archivesName.set("easter_eggs_${versionName}_${versionCode}")
@@ -83,8 +83,10 @@ dependencies {
     implementation(libs.androidx.compose.activity)
     implementation(libs.androidx.compose.lifecycle)
     implementation(libs.androidx.compose.viewmodel)
-    implementation(libs.androidx.compose.navigation)
-    implementation(libs.androidx.compose.hilt.navigation)
+    implementation(libs.androidx.compose.hilt.viewmodel)
+    implementation(libs.androidx.navigation3.ui)
+    implementation(libs.androidx.navigation3.runtime)
+    implementation(libs.androidx.lifecycle.viewmodel.navigation3)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.livedata)
     implementation(libs.androidx.compose.ui)

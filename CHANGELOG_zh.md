@@ -1,5 +1,11 @@
 # 更新日志
 
+### v4.4.1
+
+- 迁移到 Navigation3
+- 更新翻译
+- 升级项目依赖项
+
 ### v4.4.0 (2026-02-06)
 
 - 新增 Android L 预览版彩蛋 [#714](https://github.com/hushenghao/AndroidEasterEggs/issues/714)

@@ -34,9 +34,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
+import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.R
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavController
+import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.ui.composes.LoopHorizontalPager
 import com.dede.android_eggs.ui.composes.LoopPagerIndicator
 import com.dede.android_eggs.ui.composes.rememberLoopPagerState
@@ -74,18 +75,13 @@ private val pagers = intArrayOf(
 object WelcomeDialog : EasterEggsDestination, EasterEggsDestination.Provider {
     override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.Dialog
 
-    override val route: String = "welcome_dialog"
+    override val route: NavKey = EasterEggsDestination.WelcomeDialog
 
     @Composable
     override fun Content() {
-        val context = LocalContext.current
-        val navController = LocalNavController.current
+        val navigator = LocalNavigator.current
         WelcomeDialog {
-            navController.popBackStack()
-
-            if (!Utils.areAnimatorEnabled(context)) {
-                navController.navigate(AnimatorDisabledAlertDialog.route)
-            }
+            navigator.goBack()
         }
     }
 

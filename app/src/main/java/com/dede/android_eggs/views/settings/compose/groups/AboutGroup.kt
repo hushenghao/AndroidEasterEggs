@@ -17,8 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
-import com.dede.android_eggs.libraries_info.LibrariesInfoScreen
-import com.dede.android_eggs.navigation.LocalNavController
+import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.ui.composes.icons.outlined.Beta
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
@@ -34,7 +34,7 @@ import com.dede.android_eggs.resources.R as StringsR
 @Composable
 fun AboutGroup() {
     val context = LocalContext.current
-    val navController = LocalNavController.current
+    val navigator = LocalNavigator.current
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.Info,
         title = stringResource(StringsR.string.label_about)
@@ -83,7 +83,7 @@ fun AboutGroup() {
             ),
             title = stringResource(StringsR.string.label_open_source_license),
             onClick = {
-                navController.navigate(LibrariesInfoScreen.route)
+                navigator.navigate(EasterEggsDestination.LibrariesInfo)
             }
         )
 

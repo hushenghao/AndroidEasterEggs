@@ -1,5 +1,11 @@
 # Changelog
 
+### v4.4.1
+
+- Migrate to Navigation3
+- Update translations
+- Upgrade project dependencies
+
 ### v4.4.0 (2026-02-06)
 
 - Add Android L Preview Easter Egg [#714](https://github.com/hushenghao/AndroidEasterEggs/issues/714)

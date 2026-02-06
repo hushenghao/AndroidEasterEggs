@@ -1,28 +1,32 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.dede.android_eggs.views.main
 
+import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.scaleIn
-import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.dialog
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.scene.DialogSceneStrategy
+import androidx.navigation3.ui.NavDisplay
 import com.android_next.egg.ACTION_SHOE_ANDROID_NEXT_DIALOG
-import com.android_next.egg.AndroidNextTimelineDialog
-import com.dede.android_eggs.cat_editor.CatEditorScreen
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavController
+import com.dede.android_eggs.navigation.LocalNavigator
+import com.dede.android_eggs.navigation.ModalBottomSheetSceneStrategy
+import com.dede.android_eggs.navigation.Navigator
 import com.dede.android_eggs.navigation.rememberEasterEggsDestinations
+import com.dede.android_eggs.navigation.rememberNavigationState
+import com.dede.android_eggs.navigation.toEntries
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.Receiver
-import com.dede.android_eggs.views.main.compose.EasterEggsScreen
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiState
 
@@ -32,62 +36,75 @@ private const val DURATION = 400
 private const val SCALE = 0.88f
 private const val ALPHA = 0.6f
 
+private fun navTransition(): ContentTransform {
+    return ContentTransform(
+        targetContentEnter = fadeIn(animationSpec = tween(DURATION), initialAlpha = ALPHA) +
+                scaleIn(animationSpec = tween(DURATION), initialScale = SCALE) +
+                slideInHorizontally(animationSpec = tween(DURATION)) { it },
+        initialContentExit = slideOutHorizontally(animationSpec = tween(DURATION))
+    )
+}
+
+private fun popTransition(): ContentTransform {
+    return ContentTransform(
+        targetContentEnter = fadeIn(animationSpec = tween(DURATION), initialAlpha = ALPHA) +
+                scaleIn(animationSpec = tween(DURATION), initialScale = SCALE) +
+                slideInHorizontally(animationSpec = tween(DURATION)),
+        initialContentExit = slideOutHorizontally(animationSpec = tween(DURATION)) { it }
+    )
+}
+
 @Composable
 fun EasterEggsNavHost(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
 ) {
-    val konfettiState = rememberKonfettiState()
+    val navigationState = rememberNavigationState(startRoute = EasterEggsDestination.EasterEggs)
+    val navigator = remember { Navigator(navigationState) }
     CompositionLocalProvider(
-        LocalNavController provides navController,
-        LocalKonfettiState provides konfettiState,
+        LocalNavigator provides navigator,
+        LocalKonfettiState provides rememberKonfettiState(),
     ) {
         val navDestinations = rememberEasterEggsDestinations()
-        NavHost(
-            navController = navController,
-            startDestination = EasterEggsScreen.route,
-            modifier = modifier,
-            enterTransition = {
-                fadeIn(animationSpec = tween(DURATION), initialAlpha = ALPHA) +
-                        scaleIn(animationSpec = tween(DURATION), initialScale = SCALE) +
-                        slideInHorizontally(animationSpec = tween(DURATION)) { it }
-            },
-            exitTransition = {
-                scaleOut(animationSpec = tween(DURATION), targetScale = SCALE) +
-                        slideOutHorizontally(animationSpec = tween(DURATION))
-            },
-            popEnterTransition = {
-                fadeIn(animationSpec = tween(DURATION), initialAlpha = ALPHA) +
-                        scaleIn(animationSpec = tween(DURATION), initialScale = SCALE) +
-                        slideInHorizontally(animationSpec = tween(DURATION))
-            },
-            popExitTransition = {
-                scaleOut(animationSpec = tween(DURATION), targetScale = SCALE) +
-                        slideOutHorizontally(animationSpec = tween(DURATION)) { it }
-            },
-        ) {
+        val entryProvider = entryProvider<NavKey> {
             navDestinations.forEach { dest ->
                 when (dest.type) {
                     EasterEggsDestination.Type.Composable -> {
-                        composable(route = dest.route, content = { dest.Content() })
+                        entry(dest.route) { dest.Content() }
                     }
                     EasterEggsDestination.Type.Dialog -> {
-                        dialog(route = dest.route, content = { dest.Content() })
+                        entry(key = dest.route, metadata = DialogSceneStrategy.dialog()) {
+                            dest.Content()
+                        }
                     }
                     EasterEggsDestination.Type.ModalBottomSheet -> {
-                        // don't work, https://issuetracker.google.com/issues/435672848
-                        throw UnsupportedOperationException()
+                        entry(
+                            key = dest.route,
+                            metadata = ModalBottomSheetSceneStrategy.modalBottomSheet()
+                        ) {
+                            dest.Content()
+                        }
                     }
                 }
             }
         }
+        NavDisplay(
+            modifier = modifier,
+            entries = navigationState.toEntries(entryProvider),
+            onBack = { navigator.goBack() },
+            sceneStrategy = remember {
+                DialogSceneStrategy<NavKey>() then ModalBottomSheetSceneStrategy()
+            },
+            transitionSpec = { navTransition() },
+            popTransitionSpec = { popTransition() },
+            predictivePopTransitionSpec = { popTransition() },
+        )
 
         LocalEvent.Receiver(ACTION_SHOE_ANDROID_NEXT_DIALOG) {
-            navController.navigate(AndroidNextTimelineDialog.route)
+            navigator.navigate(EasterEggsDestination.AndroidNextTimelineDialog)
         }
 
         LocalEvent.Receiver(ACTION_CAT_EDITOR) {
-            navController.navigate(CatEditorScreen.route)
+            navigator.navigate(EasterEggsDestination.CatEditor)
         }
     }
 }

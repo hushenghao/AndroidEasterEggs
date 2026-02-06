@@ -33,13 +33,14 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.R
 import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavController
+import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
@@ -64,8 +65,8 @@ import javax.inject.Inject
 
 @Module
 @InstallIn(SingletonComponent::class)
-object EasterEggsScreen : EasterEggsDestination,EasterEggsDestination.Provider {
-    override val route: String = "easter_eggs"
+object EasterEggsScreen : EasterEggsDestination, EasterEggsDestination.Provider {
+    override val route: NavKey = EasterEggsDestination.EasterEggs
 
     @Composable
     override fun Content() {
@@ -114,16 +115,16 @@ fun EasterEggScreen(
         }
     }
 
-    val navController = LocalNavController.current
-    LaunchedEffect(navController) {
+    val navigator = LocalNavigator.current
+    LaunchedEffect(navigator.state) {
         if (!isAgreedPrivacyPolicy(context)) {
-            navController.navigate(WelcomeDialog.route)
+            navigator.navigate(EasterEggsDestination.WelcomeDialog)
         }
 
         if (!AnimatorDisabledAlertDialog.isDontShowAgain(context) &&
             !Utils.areAnimatorEnabled(context)
         ) {
-            navController.navigate(AnimatorDisabledAlertDialog.route)
+            navigator.navigate(EasterEggsDestination.AnimatorDisabledAlertDialog)
         }
     }
 

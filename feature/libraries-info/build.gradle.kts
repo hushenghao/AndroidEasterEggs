@@ -12,7 +12,8 @@ dependencies {
     implementation(project(":core:navigation"))
     implementation(project(":core:custom-tab-browser"))
 
-    implementation(libs.androidx.compose.navigation)
+    implementation(libs.androidx.navigation3.ui)
+    implementation(libs.androidx.navigation3.runtime)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)

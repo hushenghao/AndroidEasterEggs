@@ -20,8 +20,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavController
+import com.dede.android_eggs.navigation.LocalNavigator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,7 +34,7 @@ import com.dede.android_eggs.resources.R as StringsR
 @InstallIn(SingletonComponent::class)
 object LibrariesInfoScreen : EasterEggsDestination, EasterEggsDestination.Provider {
 
-    override val route: String = "libraries_info"
+    override val route: NavKey = EasterEggsDestination.LibrariesInfo
 
     @Composable
     override fun Content() {
@@ -47,7 +48,7 @@ object LibrariesInfoScreen : EasterEggsDestination, EasterEggsDestination.Provid
 
 @Composable
 fun LibrariesInfoScreen() {
-    val navHostController = LocalNavController.current
+    val navigator = LocalNavigator.current
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -69,7 +70,7 @@ fun LibrariesInfoScreen() {
                     ) {
                         IconButton(
                             onClick = {
-                                navHostController.popBackStack()
+                                navigator.goBack()
                             }
                         ) {
                             Icon(

@@ -92,10 +92,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
 import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEditorRecords
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavController
+import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.ui.composes.icons.rounded.Cat
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
 import com.dede.basic.copy
@@ -117,7 +118,7 @@ import com.dede.android_eggs.resources.R as StringR
 @Module
 @InstallIn(SingletonComponent::class)
 object CatEditorScreen : EasterEggsDestination, EasterEggsDestination.Provider {
-    override val route: String = "cat_editor"
+    override val route: NavKey = EasterEggsDestination.CatEditor
 
     @Composable
     override fun Content() {
@@ -133,7 +134,7 @@ object CatEditorScreen : EasterEggsDestination, EasterEggsDestination.Provider {
 fun CatEditorScreen() {
     val captureController = rememberCaptureControllerDelegate()
 
-    val navController = LocalNavController.current
+    val navigator = LocalNavigator.current
     val context = LocalContext.current
 
     val catSeedState = rememberSaveable { mutableLongStateOf(Utilities.randomSeed()) }
@@ -388,7 +389,7 @@ fun CatEditorScreen() {
                     ) {
                         IconButton(
                             onClick = {
-                                navController.popBackStack()
+                                navigator.goBack()
                             }
                         ) {
                             Icon(

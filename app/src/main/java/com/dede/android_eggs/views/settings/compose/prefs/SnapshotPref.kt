@@ -31,8 +31,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavController
+import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.views.settings.compose.basic.SettingPref
@@ -51,13 +52,13 @@ import com.dede.android_eggs.resources.R as StringR
 
 @Composable
 fun SnapshotPref() {
-    val navHostController = LocalNavController.current
+    val navigator = LocalNavigator.current
     SettingPref(
         title = stringResource(StringR.string.label_snapshot_preview),
         leadingIcon = Icons.Rounded.ViewCarousel,
         trailingContent = Icons.AutoMirrored.Rounded.NavigateNext,
         onClick = {
-            navHostController.navigate(SnapshotDialog.route)
+            navigator.navigate(EasterEggsDestination.SnapshotDialog)
         }
     )
 }
@@ -67,13 +68,13 @@ fun SnapshotPref() {
 object SnapshotDialog : EasterEggsDestination, EasterEggsDestination.Provider {
     override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.Dialog
 
-    override val route: String = "snapshot_dialog"
+    override val route: NavKey = EasterEggsDestination.SnapshotDialog
 
     @Composable
     override fun Content() {
-        val navController = LocalNavController.current
+        val navigator = LocalNavigator.current
         SnapshotDialog {
-            navController.popBackStack()
+            navigator.goBack()
         }
     }
 

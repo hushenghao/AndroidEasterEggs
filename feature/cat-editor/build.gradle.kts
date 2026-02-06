@@ -24,7 +24,8 @@ dependencies {
     implementation(libs.androidx.room)
     ksp(libs.androidx.room.compiler)
 
-    implementation(libs.androidx.compose.navigation)
+    implementation(libs.androidx.navigation3.ui)
+    implementation(libs.androidx.navigation3.runtime)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)
