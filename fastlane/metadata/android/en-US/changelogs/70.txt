@@ -1,3 +1,4 @@
 - Migrate to Navigation3
+- Fix the failure of black mode after restart #739
 - Update translations
 - Upgrade project dependencies

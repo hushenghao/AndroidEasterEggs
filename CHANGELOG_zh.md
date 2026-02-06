@@ -3,6 +3,7 @@
 ### v4.4.1
 
 - 迁移到 Navigation3
+- 修复黑色模式重启后失效 [#739](https://github.com/hushenghao/AndroidEasterEggs/issues/739)
 - 更新翻译
 - 升级项目依赖项
 

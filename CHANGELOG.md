@@ -3,6 +3,7 @@
 ### v4.4.1
 
 - Migrate to Navigation3
+- Fix the failure of black mode after restart [#739](https://github.com/hushenghao/AndroidEasterEggs/issues/739)
 - Update translations
 - Upgrade project dependencies
 
