@@ -1,6 +1,12 @@
 # 更新日志
 
-### v4.4.1
+### v4.4.2
+
+- 优化Cat随机数生成算法
+- 升级项目依赖项
+- 更新翻译
+
+### v4.4.1 (2026-02-06)
 
 - 迁移到 Navigation3
 - 修复黑色模式重启后失效 [#739](https://github.com/hushenghao/AndroidEasterEggs/issues/739)

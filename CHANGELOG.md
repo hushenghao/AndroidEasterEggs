@@ -1,6 +1,12 @@
 # Changelog
 
-### v4.4.1
+### v4.4.2
+
+- Optimize the Cat random number generation algorithm
+- Upgrade project dependencies
+- Update translations
+
+### v4.4.1 (2026-02-06)
 
 - Migrate to Navigation3
 - Fix the failure of black mode after restart [#739](https://github.com/hushenghao/AndroidEasterEggs/issues/739)

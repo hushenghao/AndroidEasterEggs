@@ -1,5 +1,8 @@
 package com.dede.basic.utils
 
+import java.util.UUID
+import kotlin.random.Random
+
 /**
  * Cat Eggs Random impl
  *
@@ -8,10 +11,13 @@ package com.dede.basic.utils
  */
 object CatRandom {
 
+    // ThreadLocalRandom.current()
+    private val random: Random = Random(UUID.randomUUID().mostSignificantBits)
+
     @JvmStatic
-    fun get(): java.util.Random {
-        //return ThreadLocalRandom.current()// default
-        return java.util.Random()
+    fun nextSeed(): Long {
+        // Math.abs(ThreadLocalRandom.current().nextInt())
+        return random.nextLong()
     }
 
 }
