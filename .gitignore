@@ -12,4 +12,3 @@ key.properties
 
 .vscode
 fastlane/report.xml
-Gemfile.lock
