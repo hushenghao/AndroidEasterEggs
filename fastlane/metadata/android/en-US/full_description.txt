@@ -1,8 +1,6 @@
 Collections the Android release Easter Egg.
 
-Except for Android 13, 12, 11 and 7, which use new features of the system, the lower version can only use some functions, and other versions are full of egg functions.
-
-The project contains the system egg complete code, only do part of the API compatibility.
+This project contains the complete code for all Android Easter eggs, aiming to organize and ensure compatibility with all Android Easter eggs. The goal is to enable most devices to experience different versions of the Easter eggs with minimal modifications to the Easter egg's code.
 
 GitHub：
 https://github.com/hushenghao/AndroidEasterEggs
