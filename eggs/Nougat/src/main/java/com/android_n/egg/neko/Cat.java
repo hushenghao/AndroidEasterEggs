@@ -29,7 +29,6 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Build;
-import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 
@@ -213,8 +212,8 @@ public class Cat extends Drawable {
     }
 
     public Notification.Builder buildNotification(Context context) {
-        final Bundle extras = new Bundle();
-        extras.putString("android.substName", context.getString(R.string.n_notification_name));
+//        final Bundle extras = new Bundle();
+//        extras.putString("android.substName", context.getString(R.string.n_notification_name));
         final Intent intent = new Intent(Intent.ACTION_MAIN)
                 .setClass(context, NekoLand.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -233,7 +232,8 @@ public class Cat extends Drawable {
                 .setContentIntent(PendingIntent.getActivity(context, 0, intent, flag))
                 .setAutoCancel(true)
                 .setVibrate(PURR)
-                .addExtras(extras);
+                .setSubText(context.getString(R.string.n_notification_name));
+//                .addExtras(extras);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setChannelId(NekoService.CHAN_ID);
         }

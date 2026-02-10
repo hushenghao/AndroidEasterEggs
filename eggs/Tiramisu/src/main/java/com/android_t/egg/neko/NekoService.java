@@ -30,11 +30,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
-
 
 import com.android_t.egg.R;
 
@@ -79,10 +77,10 @@ public class NekoService extends JobService {
 
         if (NekoLand.DEBUG_NOTIFICATIONS) {
             NotificationManager noman = getSystemService(NotificationManager.class);
-            final Bundle extras = new Bundle();
-            extras.putString("android.substName", getString(R.string.t_notification_name));
-            final int size = getResources()
-                    .getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
+//            final Bundle extras = new Bundle();
+//            extras.putString("android.substName", getString(R.string.t_notification_name));
+//            final int size = getResources()
+//                    .getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
             final Cat cat = Cat.create(this);
             final Notification.Builder builder
                     = cat.buildNotification(this)

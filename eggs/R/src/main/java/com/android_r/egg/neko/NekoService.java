@@ -16,6 +16,9 @@
 
 package com.android_r.egg.neko;
 
+import static com.android_r.egg.neko.Cat.PURR;
+import static com.android_r.egg.neko.NekoLand.CHAN_ID;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -27,7 +30,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
@@ -36,9 +38,6 @@ import com.android_r.egg.R;
 
 import java.util.List;
 import java.util.Random;
-
-import static com.android_r.egg.neko.Cat.PURR;
-import static com.android_r.egg.neko.NekoLand.CHAN_ID;
 
 @RequiresApi(30)
 public class NekoService extends JobService {
@@ -78,10 +77,10 @@ public class NekoService extends JobService {
 
         if (NekoLand.DEBUG_NOTIFICATIONS) {
             NotificationManager noman = getSystemService(NotificationManager.class);
-            final Bundle extras = new Bundle();
-            extras.putString("android.substName", getString(R.string.r_notification_name));
-            final int size = getResources()
-                    .getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
+//            final Bundle extras = new Bundle();
+//            extras.putString("android.substName", getString(R.string.r_notification_name));
+//            final int size = getResources()
+//                    .getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
             final Cat cat = Cat.create(this);
             final Notification.Builder builder
                     = cat.buildNotification(this)

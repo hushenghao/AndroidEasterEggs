@@ -16,6 +16,8 @@
 
 package com.android_r.egg.neko;
 
+import static com.android_r.egg.neko.NekoLand.CHAN_ID;
+
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Person;
@@ -32,21 +34,16 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Build;
-import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 
 import com.android_r.egg.R;
+import com.dede.basic.utils.CatRandom;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Random;
-
-import static com.android_r.egg.neko.NekoLand.CHAN_ID;
-
-//import com.android.internal.logging.MetricsLogger;
-import com.dede.basic.utils.CatRandom;
 
 /**
  * It's a cat.
@@ -245,8 +242,8 @@ public class Cat extends Drawable {
     }
 
     public Notification.Builder buildNotification(Context context) {
-        final Bundle extras = new Bundle();
-        extras.putString("android.substName", context.getString(R.string.r_notification_name));
+//        final Bundle extras = new Bundle();
+//        extras.putString("android.substName", context.getString(R.string.r_notification_name));
 
         final Icon notificationIcon = createNotificationLargeIcon(context);
 
@@ -294,7 +291,8 @@ public class Cat extends Drawable {
                 )
                 .setBubbleMetadata(bubbs)
                 .setShortcutId(getShortcutId())
-                .addExtras(extras);
+                .setSubText(context.getString(R.string.r_notification_name));
+//                .addExtras(extras);
     }
 
     @RequiresApi(30)

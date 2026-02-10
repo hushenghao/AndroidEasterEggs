@@ -25,7 +25,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
@@ -56,16 +55,29 @@ public class NekoService extends JobService {
 
     public static float INTERVAL_JITTER_FRAC = 0.25f;
 
+    private static void setupNotificationChannels(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager noman = context.getSystemService(NotificationManager.class);
+            NotificationChannel channel = new NotificationChannel(CHAN_ID,
+                    context.getString(R.string.n_notification_channel_name), NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setSound(Uri.EMPTY, Notification.AUDIO_ATTRIBUTES_DEFAULT); // cats are quiet
+            channel.setVibrationPattern(PURR); // not totally quiet though
+            //eggChan.setBlockableSystem(true); // unlike a real cat, you can push this one off your lap
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC); // cats sit in the window
+            noman.createNotificationChannel(channel);
+        }
+    }
+
     @Override
     public boolean onStartJob(JobParameters params) {
         Log.v(TAG, "Starting job: " + String.valueOf(params));
 
         NotificationManager noman = getSystemService(NotificationManager.class);
         if (NekoLand.DEBUG_NOTIFICATIONS) {
-            final Bundle extras = new Bundle();
-            extras.putString("android.substName", getString(R.string.n_notification_name));
-            final int size = getResources()
-                    .getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
+//            final Bundle extras = new Bundle();
+//            extras.putString("android.substName", getString(R.string.n_notification_name));
+//            final int size = getResources()
+//                    .getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
             final Cat cat = Cat.create(this);
             final Notification.Builder builder
                     = cat.buildNotification(this)
@@ -117,6 +129,8 @@ public class NekoService extends JobService {
     }
 
     public static void registerJob(Context context, long intervalMinutes) {
+        setupNotificationChannels(context);
+
         JobScheduler jss = context.getSystemService(JobScheduler.class);
         jss.cancel(JOB_ID);
         long interval = intervalMinutes * MINUTES;
@@ -131,15 +145,6 @@ public class NekoService extends JobService {
         jss.schedule(jobInfo);
 
         NotificationManager noman = context.getSystemService(NotificationManager.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(CHAN_ID,
-                    context.getString(R.string.n_notification_channel_name), NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setSound(Uri.EMPTY, Notification.AUDIO_ATTRIBUTES_DEFAULT); // cats are quiet
-            channel.setVibrationPattern(PURR); // not totally quiet though
-            //eggChan.setBlockableSystem(true); // unlike a real cat, you can push this one off your lap
-            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC); // cats sit in the window
-            noman.createNotificationChannel(channel);
-        }
         if (NekoLand.DEBUG_NOTIFICATIONS) {
             Notification.Builder builder = new Notification.Builder(context)
                     .setSmallIcon(R.drawable.n_stat_icon)

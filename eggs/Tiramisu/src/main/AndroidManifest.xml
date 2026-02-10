@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <!-- used for cat notifications -->
-    <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />
+<!--    <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />-->
 
     <!-- used to save cat images -->
     <uses-permission
@@ -11,7 +11,8 @@
         android:maxSdkVersion="28" />
 
     <!-- controls -->
-    <uses-permission android:name="android.permission.BIND_CONTROLS" />
+    <uses-permission android:name="android.permission.BIND_CONTROLS"
+        tools:ignore="ProtectedPermissions" />
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 

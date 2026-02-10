@@ -32,9 +32,6 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Build;
-import android.os.Bundle;
-
-//import com.android.internal.logging.MetricsLogger;
 
 import androidx.annotation.RequiresApi;
 
@@ -241,8 +238,8 @@ public class Cat extends Drawable {
     }
 
     public Notification.Builder buildNotification(Context context) {
-        final Bundle extras = new Bundle();
-        extras.putString("android.substName", context.getString(R.string.t_notification_name));
+//        final Bundle extras = new Bundle();
+//        extras.putString("android.substName", context.getString(R.string.t_notification_name));
 
         final Icon notificationIcon = createNotificationLargeIcon(context);
 
@@ -290,7 +287,8 @@ public class Cat extends Drawable {
                 )
                 .setBubbleMetadata(bubbs)
                 .setShortcutId(getShortcutId())
-                .addExtras(extras);
+                .setSubText(context.getString(R.string.t_notification_name));
+//                .addExtras(extras);
     }
 
     private Person createPerson() {
