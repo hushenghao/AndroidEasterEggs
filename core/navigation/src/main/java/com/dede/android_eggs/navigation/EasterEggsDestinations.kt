@@ -24,12 +24,22 @@ interface EasterEggsDestination {
     val route: NavKey
 
     @Composable
+    fun Content(properties: DestinationProps) {
+        Content()
+    }
+
+    @Composable
     fun Content() {
     }
 
     interface Provider {
         fun provider(): EasterEggsDestination
     }
+
+    data class DestinationProps(
+        val navKey: NavKey,
+        val onBack: () -> Unit = {},
+    )
 
     // @formatter:off
     @Serializable data object EasterEggs : NavKey

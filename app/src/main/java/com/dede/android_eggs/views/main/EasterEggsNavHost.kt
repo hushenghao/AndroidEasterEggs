@@ -19,6 +19,7 @@ import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import com.android_next.egg.ACTION_SHOE_ANDROID_NEXT_DIALOG
 import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.navigation.EasterEggsDestination.DestinationProps
 import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.navigation.ModalBottomSheetSceneStrategy
 import com.dede.android_eggs.navigation.Navigator
@@ -65,15 +66,21 @@ fun EasterEggsNavHost(
         LocalKonfettiState provides rememberKonfettiState(),
     ) {
         val navDestinations = rememberEasterEggsDestinations()
-        val entryProvider = entryProvider<NavKey> {
+        val entryProvider = entryProvider {
             navDestinations.forEach { dest ->
                 when (dest.type) {
                     EasterEggsDestination.Type.Composable -> {
-                        entry(dest.route) { dest.Content() }
+                        entry(dest.route) {
+                            val properties = DestinationProps(it)
+                            dest.Content(properties)
+                        }
                     }
                     EasterEggsDestination.Type.Dialog -> {
                         entry(key = dest.route, metadata = DialogSceneStrategy.dialog()) {
-                            dest.Content()
+                            val properties = DestinationProps(it, onBack = {
+                                navigator.goBack()
+                            })
+                            dest.Content(properties)
                         }
                     }
                     EasterEggsDestination.Type.ModalBottomSheet -> {
@@ -81,7 +88,10 @@ fun EasterEggsNavHost(
                             key = dest.route,
                             metadata = ModalBottomSheetSceneStrategy.modalBottomSheet()
                         ) {
-                            dest.Content()
+                            val properties = DestinationProps(it, onBack = {
+                                navigator.goBack()
+                            })
+                            dest.Content(properties)
                         }
                     }
                 }

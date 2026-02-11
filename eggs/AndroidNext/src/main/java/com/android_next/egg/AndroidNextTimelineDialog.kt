@@ -46,7 +46,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.basic.requireDrawable
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
@@ -68,11 +67,8 @@ object AndroidNextTimelineDialog : EasterEggsDestination, EasterEggsDestination.
     override val route: NavKey = EasterEggsDestination.AndroidNextTimelineDialog
 
     @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.current
-        AndroidNextTimelineDialog {
-            navigator.goBack()
-        }
+    override fun Content(properties: EasterEggsDestination.DestinationProps) {
+        AndroidNextTimelineDialog(onDismiss = properties.onBack)
     }
 
     @Provides

@@ -54,7 +54,6 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.R
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
@@ -90,11 +89,8 @@ object TimelineListDialog : EasterEggsDestination, EasterEggsDestination.Provide
     override fun provider(): EasterEggsDestination = this
 
     @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.current
-        TimelineListDialog() {
-            navigator.goBack()
-        }
+    override fun Content(properties: EasterEggsDestination.DestinationProps) {
+        TimelineListDialog(onDismiss = properties.onBack)
     }
 }
 

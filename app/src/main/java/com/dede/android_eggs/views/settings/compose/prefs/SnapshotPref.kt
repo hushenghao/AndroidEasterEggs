@@ -2,12 +2,11 @@
 
 package com.dede.android_eggs.views.settings.compose.prefs
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.rounded.ViewCarousel
@@ -71,18 +70,13 @@ object SnapshotDialog : EasterEggsDestination, EasterEggsDestination.Provider {
     override val route: NavKey = EasterEggsDestination.SnapshotDialog
 
     @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.current
-        SnapshotDialog {
-            navigator.goBack()
-        }
+    override fun Content(properties: EasterEggsDestination.DestinationProps) {
+        SnapshotDialog(onDismiss = properties.onBack)
     }
 
     @IntoSet
     @Provides
-    override fun provider(): EasterEggsDestination {
-        return this
-    }
+    override fun provider(): EasterEggsDestination = this
 }
 
 @HiltViewModel
@@ -91,11 +85,11 @@ class SnapshotViewModel @Inject constructor() : ViewModel() {
     lateinit var easterEggs: List<@JvmSuppressWildcards EasterEgg>
 }
 
-@Preview
 @Composable
-fun SnapshotDialog(
+fun SnapshotDialogView(
+    modifier: Modifier = Modifier,
     viewModel: SnapshotViewModel = hiltViewModel(),
-    onDismiss: () -> Unit = {},
+    showEasterEggName: Boolean = true,
 ) {
     val pairList = remember(viewModel) {
         buildList {
@@ -105,39 +99,38 @@ fun SnapshotDialog(
             }
         }
     }
-    Dialog(onDismissRequest = onDismiss) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            val carouselState = rememberCarouselState { pairList.size }
-            val hapticFeedback = LocalHapticFeedback.current
-            LaunchedEffect(carouselState) {
-                snapshotFlow { carouselState.currentItem }
-                    .distinctUntilChangedIgnoreInitializeValue(0)
-                    .collect {
-                        hapticFeedback.performHapticFeedback(HapticFeedbackType.SegmentFrequentTick)
-                    }
-            }
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(14.dp),
+    ) {
+        val carouselState = rememberCarouselState { pairList.size }
+        val hapticFeedback = LocalHapticFeedback.current
+        LaunchedEffect(carouselState) {
+            snapshotFlow { carouselState.currentItem }
+                .distinctUntilChangedIgnoreInitializeValue(0)
+                .collect {
+                    hapticFeedback.performHapticFeedback(HapticFeedbackType.SegmentFrequentTick)
+                }
+        }
 
-            HorizontalCenteredHeroCarousel(
-                state = carouselState,
-                flingBehavior = multiBrowseFlingBehavior(carouselState),
-                itemSpacing = 6.dp,
-                minSmallItemWidth = 34.dp,
+        HorizontalCenteredHeroCarousel(
+            state = carouselState,
+            flingBehavior = multiBrowseFlingBehavior(carouselState),
+            itemSpacing = 6.dp,
+            minSmallItemWidth = 34.dp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(PHI),
+        ) { i ->
+            SnapshotView(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(PHI),
-            ) { i ->
-                SnapshotView(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .maskClip(MaterialTheme.shapes.extraLarge),
-                    snapshot = pairList[i].first,
-                )
-            }
-
-            Spacer(modifier = Modifier.height(14.dp))
-
+                    .fillMaxSize()
+                    .maskClip(MaterialTheme.shapes.extraLarge),
+                snapshot = pairList[i].first,
+            )
+        }
+        if (showEasterEggName) {
             Text(
                 modifier = Modifier,
                 text = stringResource(pairList[carouselState.currentItem].second.nameRes),
@@ -145,6 +138,14 @@ fun SnapshotDialog(
                 color = MaterialTheme.colorScheme.onBackground
             )
         }
+    }
+}
+
+@Preview
+@Composable
+private fun SnapshotDialog(onDismiss: () -> Unit = {}) {
+    Dialog(onDismissRequest = onDismiss) {
+        SnapshotDialogView()
     }
 }
 

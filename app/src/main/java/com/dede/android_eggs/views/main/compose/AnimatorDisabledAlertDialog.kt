@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.edit
 import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.util.pref
 import com.dede.basic.Utils
 import com.dede.basic.toast
@@ -47,11 +46,8 @@ object AnimatorDisabledAlertDialog : EasterEggsDestination, EasterEggsDestinatio
     }
 
     @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.current
-        AnimatorDisabledAlertDialog {
-            navigator.goBack()
-        }
+    override fun Content(properties: EasterEggsDestination.DestinationProps) {
+        AnimatorDisabledAlertDialog(onDismiss = properties.onBack)
     }
 
     @Provides

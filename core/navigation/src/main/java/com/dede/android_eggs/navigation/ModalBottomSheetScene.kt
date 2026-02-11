@@ -3,6 +3,7 @@
 package com.dede.android_eggs.navigation
 
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.Dialog
@@ -23,10 +24,14 @@ class ModalBottomSheetScene<T : Any>(
 
     override val entries: List<NavEntry<T>> = listOf(entry)
 
-
     override val content: @Composable () -> Unit = {
-        entry.Content()
-//        ModalBottomSheet(onDismissRequest = onBack, properties = properties) { entry.Content() }
+        if (properties !== ModalBottomSheetSceneStrategy.sDefaultProperties) {
+            ModalBottomSheet(onDismissRequest = onBack, properties = properties) {
+                entry.Content()
+            }
+        } else {
+            entry.Content()
+        }
     }
 
     override fun equals(other: Any?): Boolean {
@@ -82,8 +87,10 @@ class ModalBottomSheetSceneStrategy<T : Any> : SceneStrategy<T> {
          * @param properties properties that should be passed to the containing [ModalBottomSheetProperties].
          */
         fun modalBottomSheet(
-            properties: ModalBottomSheetProperties = ModalBottomSheetProperties()
+            properties: ModalBottomSheetProperties = sDefaultProperties,
         ): Map<String, Any> = mapOf(MODAL_BOTTOM_SHEET_KEY to properties)
+
+        internal val sDefaultProperties = ModalBottomSheetProperties()
 
         internal const val MODAL_BOTTOM_SHEET_KEY = "modal_bottom_sheet"
     }
