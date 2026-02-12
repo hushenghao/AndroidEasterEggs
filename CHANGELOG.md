@@ -2,8 +2,10 @@
 
 ### v4.4.2
 
+- Fix Quares drawable not found exception
 - Optimize the Cat random number generation algorithm
 - Upgrade project dependencies
+- Known issue fixes
 - Update translations
 
 ### v4.4.1 (2026-02-06)
