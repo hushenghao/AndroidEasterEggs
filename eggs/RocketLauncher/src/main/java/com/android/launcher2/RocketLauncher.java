@@ -42,6 +42,7 @@ import android.widget.ImageView;
 
 import com.dede.android_eggs.composable.ComposeViewBuilder;
 import com.dede.basic.ExecutorUtils;
+import com.dede.basic.utils.NumberUtils;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -322,7 +323,7 @@ public class RocketLauncher extends BasicDream {
                         final float x = totalTime / (float) START_ZOOM_TIME;
                         // scale range from 0 to 1
                         // https://github.com/hushenghao/AndroidEasterEggs/issues/618
-                        final float s = Math.max(0f, Math.min(1f - (float) Math.pow(x - 1, 4), 1f));
+                        final float s = NumberUtils.rangeOf(1f - (float) Math.pow(x - 1, 4), 0f, 1f);
                         setScaleX(s);
                         setScaleY(s);
                     } else {
