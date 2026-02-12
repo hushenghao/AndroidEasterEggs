@@ -1,4 +1,5 @@
 - Fix Quares drawable not found exception
 - Optimize the Cat random number generation algorithm
 - Upgrade project dependencies
+- Known issue fixes
 - Update translations
