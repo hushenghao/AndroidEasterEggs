@@ -103,7 +103,11 @@ fun Context.getPackageDrawable(id: Int, pkg: String? = null): Drawable? {
     } catch (ignore: Exception) {
         null
     }
-    return ResourcesCompat.getDrawable(resource, id, theme)
+    return try {
+        ResourcesCompat.getDrawable(resource, id, theme)
+    } catch (ignore: Resources.NotFoundException) {
+        null
+    }
 }
 
 private val sharedTypedValue = TypedValue()
@@ -192,7 +196,10 @@ private fun installApi24InflateDelegates() {
             if (interfaces.isNotEmpty()) {
                 managerDynamicObject.invokeMethod(
                     "addDelegate",
-                    arrayOf(String::class.java, interfaces[0]),// androidx.appcompat.widget.ResourceManagerInternal$InflateDelegate
+                    arrayOf(
+                        String::class.java,
+                        interfaces[0]
+                    ),// androidx.appcompat.widget.ResourceManagerInternal$InflateDelegate
                     arrayOf(tagName, inflateDelegate)
                 )
             }

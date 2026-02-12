@@ -11,8 +11,10 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.scene.DialogSceneStrategy
@@ -28,8 +30,11 @@ import com.dede.android_eggs.navigation.rememberNavigationState
 import com.dede.android_eggs.navigation.toEntries
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.Receiver
+import com.dede.android_eggs.views.main.compose.AnimatorDisabledAlertDialog
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
+import com.dede.android_eggs.views.main.compose.isAgreedPrivacyPolicy
 import com.dede.android_eggs.views.main.compose.rememberKonfettiState
+import com.dede.basic.Utils
 
 const val ACTION_CAT_EDITOR = "com.dede.android_eggs.action.CAT_EDITOR"
 
@@ -108,6 +113,19 @@ fun EasterEggsNavHost(
             popTransitionSpec = { popTransition() },
             predictivePopTransitionSpec = { popTransition() },
         )
+
+        val context = LocalContext.current
+        LaunchedEffect(navigator.state) {
+            if (!isAgreedPrivacyPolicy(context)) {
+                navigator.navigate(EasterEggsDestination.WelcomeDialog)
+            }
+
+            if (!AnimatorDisabledAlertDialog.isDontShowAgain(context) &&
+                !Utils.areAnimatorEnabled(context)
+            ) {
+                navigator.navigate(EasterEggsDestination.AnimatorDisabledAlertDialog)
+            }
+        }
 
         LocalEvent.Receiver(ACTION_SHOE_ANDROID_NEXT_DIALOG) {
             navigator.navigate(EasterEggsDestination.AndroidNextTimelineDialog)

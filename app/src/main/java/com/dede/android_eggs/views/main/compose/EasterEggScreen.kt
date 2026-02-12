@@ -40,7 +40,6 @@ import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.R
 import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
@@ -52,7 +51,6 @@ import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
 import com.dede.android_eggs.views.settings.SettingsScreen
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
-import com.dede.basic.Utils
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import dagger.Module
@@ -85,7 +83,7 @@ class EasterEggViewModel @Inject constructor(
 
 @Composable
 fun EasterEggScreen(
-    viewModel: EasterEggViewModel = hiltViewModel<EasterEggViewModel>(),
+    viewModel: EasterEggViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
 
@@ -112,19 +110,6 @@ fun EasterEggScreen(
 
         LaunchedEffect(Unit) {
             handleOrientationAngleSensor(IconVisualEffectsPrefUtil.isEnable(context))
-        }
-    }
-
-    val navigator = LocalNavigator.current
-    LaunchedEffect(navigator.state) {
-        if (!isAgreedPrivacyPolicy(context)) {
-            navigator.navigate(EasterEggsDestination.WelcomeDialog)
-        }
-
-        if (!AnimatorDisabledAlertDialog.isDontShowAgain(context) &&
-            !Utils.areAnimatorEnabled(context)
-        ) {
-            navigator.navigate(EasterEggsDestination.AnimatorDisabledAlertDialog)
         }
     }
 
