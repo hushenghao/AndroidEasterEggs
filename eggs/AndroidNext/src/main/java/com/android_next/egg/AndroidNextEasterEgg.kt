@@ -24,7 +24,7 @@ import javax.inject.Singleton
 object AndroidNextEasterEgg : EasterEggProvider {
 
     internal const val RELEASE_YEAR = 2026
-    internal const val RELEASE_MONTH = Calendar.MAY
+    internal const val RELEASE_MONTH = Calendar.SEPTEMBER
 
     // private const val NEXT_API = Build.VERSION_CODES.CUR_DEVELOPMENT// android next
     private const val NEXT_API = 37// android 17
