@@ -68,7 +68,7 @@ private fun Context.getPackageResources(pkg: String?): Resources? {
             try {
                 val applicationInfo = pm.getApplicationInfo(pkg, flags)
                 pm.getResourcesForApplication(applicationInfo)
-            } catch (ignore: Exception) {
+            } catch (_: Exception) {
                 null
             }
         }
@@ -100,12 +100,12 @@ fun Context.getPackageDrawable(id: Int, pkg: String? = null): Drawable? {
             pkg, Context.CONTEXT_INCLUDE_CODE or Context.CONTEXT_IGNORE_SECURITY
         )
         packageContext.theme
-    } catch (ignore: Exception) {
+    } catch (_: Exception) {
         null
     }
     return try {
         ResourcesCompat.getDrawable(resource, id, theme)
-    } catch (ignore: Resources.NotFoundException) {
+    } catch (_: Resources.NotFoundException) {
         null
     }
 }

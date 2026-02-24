@@ -53,6 +53,13 @@ object EasterEggShortcutsHelp {
     ) : Runnable {
 
         override fun run() {
+            try {
+                this.action()
+            } catch (_: RuntimeException) {
+            }
+        }
+
+        private fun action() {
             val maxShortcutCount = ShortcutManagerCompat.getMaxShortcutCountPerActivity(context)
             val staticShortcuts = ShortcutManagerCompat.getShortcuts(
                 context,
@@ -73,13 +80,13 @@ object EasterEggShortcutsHelp {
             val pushShortcuts = ArrayList<ShortcutInfoCompat>()
             for (egg in subEggs) {
                 val shortcutId = FORMAT_DYNAMIC_SHORTCUT_ID.format(egg.shortcutIdNum())
-                // Don't need remove this shortcut
+                // Don't need to remove this shortcut
                 removeShortcutIds.remove(shortcutId)
 
                 pushShortcuts.add(createShortcutInfo(context, shortcutId, egg, false))
             }
             // Remove shortcuts that are no longer needed
-            if (removeShortcutIds.size > 0) {
+            if (removeShortcutIds.isNotEmpty()) {
                 ShortcutManagerCompat.removeDynamicShortcuts(context, removeShortcutIds)
             }
             // Add new shortcuts
