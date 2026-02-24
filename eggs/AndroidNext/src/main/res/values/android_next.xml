@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--    <string name="nickname_android_next" translatable="false">Droid Next</string>-->
-    <string name="nickname_android_next" translatable="false">Baklava</string>
+    <string name="nickname_android_next" translatable="false">CinnamonBun</string>
 
     <string name="url_android_releases" translatable="false">https://developer.android.com/about/versions</string>
 </resources>

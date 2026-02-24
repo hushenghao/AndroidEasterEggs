@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:supportAdaptiveIcon="true">
+    <item android:drawable="@drawable/ic_droid_logo_background" />
+    <item>
+        <inset
+            android:drawable="@drawable/ic_droid_logo_foreground"
+            android:inset="-16dp" />
+    </item>
+</layer-list>

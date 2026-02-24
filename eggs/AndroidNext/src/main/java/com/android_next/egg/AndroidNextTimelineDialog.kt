@@ -1,5 +1,6 @@
 package com.android_next.egg
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import androidx.annotation.DrawableRes
@@ -80,7 +81,7 @@ const val ACTION_SHOE_ANDROID_NEXT_DIALOG = "action_show_android_next_dialog"
 
 @Composable
 fun AndroidNextTimelineDialog(
-    @DrawableRes logoRes: Int = R.drawable.ic_android_16_logo,
+    @DrawableRes logoRes: Int = R.drawable.ic_droid_logo,
     @StringRes titleRes: Int = R.string.nickname_android_next,
     onDismiss: () -> Unit = {},
 ) {
@@ -171,7 +172,7 @@ private fun AndroidReleaseTimeline() {
         val context = LocalContext.current
         val configuration = LocalConfiguration.current
 
-        val isNightMode = remember(configuration, context.resources) { isSystemNightMode(context) }
+        val isNightMode = remember(configuration) { isSystemNightMode(configuration) }
         val timelineMonths = remember(configuration) { getReleaseCycleMonths(context) }
         if (timelineMonths.size != monthExtras.size) {
             throw IllegalArgumentException("Timeline months cycle != %d".format(MONTH_CYCLE))
@@ -190,6 +191,7 @@ private fun AndroidReleaseTimeline() {
                             val offsetX = size.width * extra.offsetXPercent
                             val rangeX = size.width * extra.rangeXPercent
                             val offsetY = size.height * extra.offsetYPercent
+                            @SuppressLint("LocalContextGetResourceValueCall")
                             val textLayout = textMeasurer.measure(
                                 text = context.getString(extra.labelRes),
                                 style = TextStyle(
@@ -272,7 +274,6 @@ private fun getTimelineMessage(context: Context): String {
     }
 }
 
-private fun isSystemNightMode(context: Context): Boolean {
-    return (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
-            Configuration.UI_MODE_NIGHT_YES
+private fun isSystemNightMode(configuration: Configuration): Boolean {
+    return (configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 }

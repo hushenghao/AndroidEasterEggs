@@ -1,5 +1,12 @@
 # Changelog
 
+### v4.4.3
+
+- Add Android 17 Plotlogo
+- Known issue fixes
+- Upgrade project dependencies
+- Update translations
+
 ### v4.4.2 (2026-02-24)
 
 - Fix Quares drawable not found exception

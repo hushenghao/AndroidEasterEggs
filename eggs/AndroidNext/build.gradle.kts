@@ -7,7 +7,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)
 
     implementation(platform(libs.androidx.compose.bom))

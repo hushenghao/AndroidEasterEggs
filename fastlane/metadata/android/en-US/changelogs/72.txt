@@ -1,0 +1,4 @@
+- Add Android 17 Plotlogo
+- Known issue fixes
+- Upgrade project dependencies
+- Update translations
