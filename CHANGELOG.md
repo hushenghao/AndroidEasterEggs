@@ -1,6 +1,6 @@
 # Changelog
 
-### v4.4.2
+### v4.4.2 (2026-02-24)
 
 - Fix Quares drawable not found exception
 - Optimize the Cat random number generation algorithm
