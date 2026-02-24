@@ -80,7 +80,7 @@ aboutlibraries-m3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version
 shreyaspatil-capturable = "dev.shreyaspatil:capturable:3.0.1"
 dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.5"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
-squircle-shape = "com.stoyanvuchev:squircle-shape:5.1.0"
+squircle-shape = "com.stoyanvuchev:squircle-shape:5.1.1"
 squareup-okio = { module = "com.squareup.okio:okio", version = "3.16.4" }
 squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.14"
 squareup-curtains = "com.squareup.curtains:curtains:1.2.5"
