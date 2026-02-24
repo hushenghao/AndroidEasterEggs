@@ -13,7 +13,7 @@
     <locale android:name="ar-SA" />
     <locale android:name="hr-HR" />
     <locale android:name="nl-NL" />
-    <!--    <locale android:name="la-LA" />-->
+    <locale android:name="la-LA" />
     <locale android:name="fr" />
     <locale android:name="pl-PL" />
     <locale android:name="tr-TR" />
@@ -34,4 +34,5 @@
     <locale android:name="sv-SE" />
     <locale android:name="my-MM" />
     <locale android:name="bn-BD" />
+    <locale android:name="sq" />
 </locale-config>

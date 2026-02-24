@@ -35,4 +35,5 @@
     <string name="locale_lang_sv_SE">Swedish</string>
     <string name="locale_lang_my_MM">Burmese</string>
     <string name="locale_lang_bn_BD">Bengali</string>
+    <string name="locale_lang_sq">Albanian</string>
 </resources>
