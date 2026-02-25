@@ -2,7 +2,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:supportAdaptiveIcon="true">
-    <item android:drawable="@drawable/ic_droid_logo_background" />
+    <item>
+        <color android:color="@color/ic_droid_logo_background" />
+    </item>
     <item>
         <inset
             android:drawable="@drawable/ic_droid_logo_foreground"

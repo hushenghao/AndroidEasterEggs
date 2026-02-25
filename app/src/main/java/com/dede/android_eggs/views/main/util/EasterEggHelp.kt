@@ -114,7 +114,7 @@ object EasterEggHelp {
 
     init {
         // api level mappings
-        apiLevelArrays[37] = "17"
+        apiLevelArrays[EasterEgg.VERSION_CODES.CINNAMON_BUN] = "17"
         apiLevelArrays[Build.VERSION_CODES.BAKLAVA] = "16"
         apiLevelArrays[Build.VERSION_CODES.VANILLA_ICE_CREAM] = "15"
         apiLevelArrays[Build.VERSION_CODES.UPSIDE_DOWN_CAKE] = "14"

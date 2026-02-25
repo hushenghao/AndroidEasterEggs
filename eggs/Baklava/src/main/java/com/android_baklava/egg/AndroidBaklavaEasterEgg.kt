@@ -62,7 +62,7 @@ object AndroidBaklavaEasterEgg : EasterEggProvider, ComponentProvider {
             TimelineEvent(
                 2025, Calendar.DECEMBER,
                 Build.VERSION_CODES.BAKLAVA,
-                "Baklava.\nAndroid 16.1.",
+                "Baklava.\nAndroid 16.1",
                 // Build.VERSION_CODES_FULL.BAKLAVA_1
                 EasterEgg.VERSION_CODES_FULL.BAKLAVA_1
             )

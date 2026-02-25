@@ -69,6 +69,11 @@ open class EasterEgg @JvmOverloads constructor(
         const val BAKLAVA_1 = Build.VERSION_CODES.BAKLAVA * SDK_INT_MULTIPLIER + 1
     }
 
+    @Suppress("ClassName")
+    object VERSION_CODES {
+        const val CINNAMON_BUN = 37// android 17
+    }
+
     constructor(
         @DrawableRes iconRes: Int,
         @StringRes nameRes: Int,

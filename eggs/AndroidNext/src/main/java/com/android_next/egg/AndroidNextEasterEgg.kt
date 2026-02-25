@@ -11,6 +11,7 @@ import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.SnapshotProvider
 import com.dede.basic.provider.TimelineEvent
+import com.dede.basic.requireDrawable
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,13 +25,13 @@ import javax.inject.Singleton
 object AndroidNextEasterEgg : EasterEggProvider {
 
     internal const val RELEASE_YEAR = 2026
-    internal const val RELEASE_MONTH = Calendar.SEPTEMBER
+    internal const val RELEASE_MONTH = Calendar.AUGUST
 
     // private const val NEXT_API = Build.VERSION_CODES.CUR_DEVELOPMENT// android next
-    private const val NEXT_API = 37// android 17
+    private const val NEXT_API = EasterEgg.VERSION_CODES.CINNAMON_BUN
 
     // private const val TIMELINE_EVENT = "Wow, Android Next."
-    private const val TIMELINE_EVENT = "Hello, Android CinnamonBun."
+    private const val TIMELINE_EVENT = "Hello, Android CinnamonBun.\nAndroid 17"
 
     @StringRes
     private val NICKNAME_RES: Int = R.string.nickname_android_next
@@ -39,7 +40,7 @@ object AndroidNextEasterEgg : EasterEggProvider {
     private val LOGO_RES: Int = R.drawable.ic_droid_logo
 
     @DrawableRes
-    private val PLATLOGO_RES: Int = R.drawable.img_droid_next
+    private val PLATLOGO_RES: Int = R.drawable.android_17_platlogo
 
     @Provides
     @IntoSet
@@ -60,12 +61,11 @@ object AndroidNextEasterEgg : EasterEggProvider {
                 return object : SnapshotProvider() {
                     override fun create(context: Context): View {
                         return ImageView(context).apply {
-                            setImageResource(PLATLOGO_RES)
-                            scaleType = ImageView.ScaleType.CENTER_CROP
+                            setImageDrawable(context.requireDrawable(PLATLOGO_RES))
                         }
                     }
 
-                    override val includeBackground: Boolean = true
+                    override val includeBackground: Boolean = false
                 }
             }
 
