@@ -1,13 +1,13 @@
 package com.dede.android_eggs.views.settings.compose.basic
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SettingPref(
+    modifier: Modifier = Modifier,
+    colors: CardColors? = null,
     leadingIcon: ImageVector,
     title: String,
     desc: String? = null,
@@ -33,16 +35,17 @@ fun SettingPref(
     content: @Composable ColumnScope.() -> Unit = {},
 ) {
     SettingPref(
+        modifier = modifier,
+        colors = colors,
         leadingIcon = leadingIcon,
         title = title,
         desc = desc,
         trailingContent = {
-            Box(modifier = Modifier.padding(end = 12.dp)) {
-                Icon(
-                    imageVector = trailingContent,
-                    contentDescription = null,
-                )
-            }
+            Icon(
+                modifier = Modifier.padding(end = 12.dp),
+                imageVector = trailingContent,
+                contentDescription = title,
+            )
         },
         onClick = onClick,
         shape = shape,
@@ -53,6 +56,7 @@ fun SettingPref(
 @Composable
 fun SettingPref(
     modifier: Modifier = Modifier,
+    colors: CardColors? = null,
     leadingIcon: ImageVector,
     title: String,
     desc: String? = null,
@@ -63,6 +67,7 @@ fun SettingPref(
 ) {
     SettingPref(
         modifier = modifier,
+        colors = colors,
         leadingIcon = {
             SettingPrefIcon(
                 icon = leadingIcon,
@@ -82,6 +87,7 @@ fun SettingPref(
 @Composable
 fun SettingPref(
     modifier: Modifier = Modifier,
+    colors: CardColors? = null,
     leadingIcon: (@Composable () -> Unit)? = null,
     title: String,
     desc: String? = null,
@@ -90,7 +96,7 @@ fun SettingPref(
     shape: Shape = MaterialTheme.shapes.medium,
     content: @Composable ColumnScope.() -> Unit = {},
 ) {
-    val cardColors = CardDefaults.cardColors(
+    val cardColors = colors ?: CardDefaults.cardColors(
         containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp)
     )
     Card(
