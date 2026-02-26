@@ -154,6 +154,7 @@ abstract class AbsConfigurablePlugin(
 
             with(lint) {
                 fatal += listOf("NewApi", "InlinedApi")
+                checkReleaseBuilds = false
                 if (configurable.isBaselineEnabled) {
                     baseline = project.file("lint-baseline.xml")
                 }

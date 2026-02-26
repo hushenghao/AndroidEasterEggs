@@ -17,7 +17,6 @@
 package com.android_l.egg.preview;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -130,7 +129,7 @@ public class PlatLogoActivity extends Activity {
                 .setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        final ContentResolver cr = getContentResolver();
+//                        final ContentResolver cr = getContentResolver();
 
                         if (SpUtils.getLong(PlatLogoActivity.this, "l_egg_mode", 0)
                                 == 0) {
