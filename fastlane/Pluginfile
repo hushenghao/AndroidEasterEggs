@@ -2,4 +2,5 @@
 #
 # Ensure this file is checked in to source control!
 
+# https://github.com/PGYER/fastlane-plugin-pgyer
 gem 'fastlane-plugin-pgyer', '~> 0.3.3'
