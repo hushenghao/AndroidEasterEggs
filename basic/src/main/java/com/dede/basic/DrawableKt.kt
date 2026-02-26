@@ -90,7 +90,7 @@ fun Context.getIdentifier(name: String, defType: DefType, pkg: String = packageN
 }
 
 fun Context.getPackageDrawable(id: Int, pkg: String? = null): Drawable? {
-    if (pkg == null || pkg == packageName || pkg == "android") {
+    if (pkg == null || pkg == packageName) {
         return getDrawableCompat(id)
     }
 
