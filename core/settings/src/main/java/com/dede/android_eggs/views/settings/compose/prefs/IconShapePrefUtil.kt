@@ -111,6 +111,13 @@ object IconShapePrefUtil {
         MaterialShapes.Flower,
         MaterialShapes.PuffyDiamond,
         MaterialShapes.PixelCircle,
+
+        RoundedPolygon.star(
+            numVerticesPerRadius = 17,// android 17
+            innerRadius = 0.88f,
+            rounding = CornerRounding(0.08f),
+            innerRounding = CornerRounding.Unrounded,
+        ).rotated(17f).normalized()
     )
 
 }
