@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-inline fun materialIcon(
+internal inline fun materialIcon(
     name: String,
     autoMirror: Boolean = false,
     defaultWidth: Dp = 24.dp,

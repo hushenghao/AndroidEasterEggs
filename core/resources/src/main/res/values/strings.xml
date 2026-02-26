@@ -10,6 +10,7 @@
     <string name="label_github">Source code</string>
     <string name="label_translation">Translations</string>
     <string name="label_beta">Download beta</string>
+    <string name="label_experiment">Experimental version</string>
     <string name="label_timeline">Timeline</string>
     <string name="label_privacy_policy">Privacy policy</string>
     <string name="label_open_source_license">Open source license</string>

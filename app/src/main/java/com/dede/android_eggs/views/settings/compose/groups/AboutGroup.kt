@@ -6,12 +6,7 @@ import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.LocalPolice
 import androidx.compose.material.icons.rounded.Policy
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.graphics.Matrix
-import androidx.compose.ui.graphics.setFrom
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,23 +36,10 @@ fun AboutGroup() {
     ) {
         VersionOption(shape = OptionShapes.firstShape())
         Option(
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Outlined.Beta,
-                    modifier = Modifier
-                        .drawWithCache {
-                            onDrawWithContent {
-                                val androidMatrix = android.graphics.Matrix()
-                                androidMatrix.setSkew(-.18f, 0f)
-                                androidMatrix.postTranslate(drawContext.size.width * .16f, 0f)
-                                val matrix = Matrix().apply { setFrom(androidMatrix) }
-                                drawContext.transform.transform(matrix)
-                                drawContent()
-                            }
-                        },
-                    contentDescription = stringResource(StringsR.string.label_beta)
-                )
-            },
+            leadingIcon = imageVectorIconBlock(
+                imageVector = Icons.Outlined.Beta,
+                contentDescription = stringResource(StringsR.string.label_beta),
+            ),
             title = stringResource(StringsR.string.label_beta),
             trailingContent = imageVectorIconBlock(imageVector = Icons.Rounded.Download),
             onClick = {
@@ -76,16 +58,6 @@ fun AboutGroup() {
                 CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
             }
         )
-        Option(
-            leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.LocalPolice,
-                contentDescription = stringResource(StringsR.string.label_open_source_license),
-            ),
-            title = stringResource(StringsR.string.label_open_source_license),
-            onClick = {
-                navigator.navigate(EasterEggsDestination.LibrariesInfo)
-            }
-        )
 
         Option(
             leadingIcon = imageVectorIconBlock(
@@ -95,6 +67,17 @@ fun AboutGroup() {
             title = stringResource(StringsR.string.label_wiki),
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_wiki)
+            },
+        )
+
+        Option(
+            leadingIcon = imageVectorIconBlock(
+                imageVector = Icons.Rounded.LocalPolice,
+                contentDescription = stringResource(StringsR.string.label_open_source_license),
+            ),
+            title = stringResource(StringsR.string.label_open_source_license),
+            onClick = {
+                navigator.navigate(EasterEggsDestination.LibrariesInfo)
             },
             shape = OptionShapes.lastShape()
         )

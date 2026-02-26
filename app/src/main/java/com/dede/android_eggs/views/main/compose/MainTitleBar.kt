@@ -9,7 +9,6 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
-import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.R
+import com.dede.android_eggs.ui.composes.icons.rounded.SettingsOutline
 import kotlinx.coroutines.launch
 import com.dede.android_eggs.resources.R as StringsR
 
@@ -76,7 +76,7 @@ fun MainTitleBar(
                 },
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.Settings,
+                    imageVector = Icons.Rounded.SettingsOutline,
                     contentDescription = stringResource(StringsR.string.label_settings),
                     tint = MaterialTheme.colorScheme.onSurface
                 )

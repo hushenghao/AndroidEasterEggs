@@ -1,4 +1,5 @@
 Outlined.Beta
 Rounded.Cat
+Rounded.Experiment
+Rounded.SettingsOutline
 Rounded.Shapes
-Rounded.ViewRealSize

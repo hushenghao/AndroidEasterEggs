@@ -20,4 +20,6 @@ dependencies {
 
     implementation(project(":core:custom-tab-browser"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:alterable-adaptive-icon"))
+    implementation(project(":core:settings"))
 }

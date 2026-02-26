@@ -8,6 +8,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.composes.icons.Crowdin
+import com.dede.android_eggs.ui.composes.icons.rounded.Experiment
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.Option
@@ -39,11 +40,22 @@ fun ContributeGroup() {
                 imageVector = Icons.Rounded.Coffee,
                 contentDescription = stringResource(StringsR.string.label_donate),
             ),
-            shape = OptionShapes.lastShape(),
             title = stringResource(StringsR.string.label_donate),
             onClick = {
                 CustomTabsBrowser.launchUrl(context, R.string.url_sponsor)
             }
+        )
+        Option(
+            leadingIcon = imageVectorIconBlock(
+                imageVector = Icons.Rounded.Experiment,
+                contentDescription = stringResource(StringsR.string.label_experiment),
+            ),
+            title = stringResource(StringsR.string.label_experiment),
+            desc = stringResource(R.string.url_pgyer),
+            onClick = {
+                CustomTabsBrowser.launchUrl(context, R.string.url_pgyer)
+            },
+            shape = OptionShapes.lastShape(),
         )
     }
 }

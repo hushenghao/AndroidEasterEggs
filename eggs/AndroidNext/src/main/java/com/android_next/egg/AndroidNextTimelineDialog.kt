@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.AlertDialog
@@ -29,10 +28,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
+import com.dede.android_eggs.alterable_adaptive_icon.AlterableAdaptiveIcon
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.util.CustomTabsBrowser
-import com.dede.basic.requireDrawable
-import com.google.accompanist.drawablepainter.rememberDrawablePainter
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -71,17 +70,14 @@ fun AndroidNextTimelineDialog(
         title = {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Image(
-                    painter = rememberDrawablePainter(context.requireDrawable(logoRes)),
-                    contentDescription = stringResource(titleRes),
-                    modifier = Modifier.size(36.dp)
+                AlterableAdaptiveIcon(
+                    modifier = Modifier.size(42.dp),
+                    clipShape = IconShapePrefUtil.getIconShape(),
+                    res = logoRes,
                 )
-                Text(
-                    text = stringResource(id = titleRes),
-                    modifier = Modifier.padding(start = 10.dp)
-                )
+                Text(text = stringResource(id = titleRes))
             }
         },
         text = {

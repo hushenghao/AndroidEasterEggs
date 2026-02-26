@@ -8,6 +8,7 @@
     <string name="label_github">源码</string>
     <string name="label_translation">翻译与国际化</string>
     <string name="label_beta">下载Beta版</string>
+    <string name="label_experiment">实验性版本</string>
     <string name="label_timeline">时间线</string>
     <string name="label_privacy_policy">隐私协议</string>
     <string name="label_open_source_license">开源许可</string>
