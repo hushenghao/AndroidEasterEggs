@@ -31,7 +31,7 @@ platform :android do
       next
     end
 
-    gradle(tasks: ["clean", "app:assembleFossAlphaRelease"])
+    gradle(tasks: ["clean", "app:assembleFossAlphaRelease"], flags: "--stacktrace")
 
     changelogs_zh = (File.read(Dir["./metadata/android/zh-CN/changelogs/*.txt"][-1]) rescue "No changelog provided")
     #changelogs_en = (File.read(Dir["./metadata/android/en-US/changelogs/*.txt"][-1]) rescue "No changelog provided")
