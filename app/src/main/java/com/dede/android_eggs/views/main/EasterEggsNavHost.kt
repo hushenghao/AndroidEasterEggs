@@ -19,12 +19,11 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
-import com.android_next.egg.ACTION_SHOE_ANDROID_NEXT_DIALOG
 import com.dede.android_eggs.navigation.BottomSheetSceneStrategy
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.EasterEggsDestination.DestinationProps
 import com.dede.android_eggs.navigation.LocalNavigator
-import com.dede.android_eggs.navigation.Navigator
+import com.dede.android_eggs.navigation.Navigator.Companion.rememberNavigator
 import com.dede.android_eggs.navigation.rememberEasterEggsDestinations
 import com.dede.android_eggs.navigation.rememberNavigationState
 import com.dede.android_eggs.navigation.toEntries
@@ -65,7 +64,7 @@ fun EasterEggsNavHost(
     modifier: Modifier = Modifier,
 ) {
     val navigationState = rememberNavigationState(startRoute = EasterEggsDestination.EasterEggs)
-    val navigator = remember { Navigator(navigationState) }
+    val navigator = rememberNavigator(navigationState)
     CompositionLocalProvider(
         LocalNavigator provides navigator,
         LocalKonfettiState provides rememberKonfettiState(),
@@ -122,10 +121,6 @@ fun EasterEggsNavHost(
             ) {
                 navigator.navigate(EasterEggsDestination.AnimatorDisabledAlertDialog, true)
             }
-        }
-
-        LocalEvent.Receiver(ACTION_SHOE_ANDROID_NEXT_DIALOG) {
-            navigator.navigate(EasterEggsDestination.AndroidNextTimelineDialog)
         }
 
         LocalEvent.Receiver(ACTION_CAT_EDITOR) {

@@ -5,7 +5,8 @@ import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.dede.android_eggs.util.LocalEvent
+import com.dede.android_eggs.navigation.EasterEggsDestination.AndroidNextTimelineDialog
+import com.dede.android_eggs.navigation.Navigator
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
@@ -53,7 +54,7 @@ object AndroidNextEasterEgg : EasterEggProvider {
             apiLevel = NEXT_API,
         ) {
             override fun onEasterEggAction(context: Context): Boolean {
-                LocalEvent.poster().post(ACTION_SHOE_ANDROID_NEXT_DIALOG)
+                Navigator.findNavigator()?.navigate(AndroidNextTimelineDialog)
                 return true
             }
 

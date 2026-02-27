@@ -1,11 +1,34 @@
 package com.dede.android_eggs.navigation
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.navigation3.runtime.NavKey
+import java.lang.ref.WeakReference
 
 /**
  * Handles navigation events (forward and back) by updating the navigation state.
  */
 class Navigator(val state: NavigationState) {
+
+    companion object {
+
+        private var navigatorRef: WeakReference<Navigator>? = null
+
+        @JvmStatic
+        fun findNavigator(): Navigator? {
+            return navigatorRef?.get()
+        }
+
+        @Composable
+        fun rememberNavigator(state: NavigationState): Navigator {
+            val navigator = remember { Navigator(state) }
+            LaunchedEffect(navigator) {
+                navigatorRef = WeakReference(navigator)
+            }
+            return navigator
+        }
+    }
 
     fun navigate(route: NavKey, popUpTo: Boolean = false) {
         if (route in state.backStacks.keys) {

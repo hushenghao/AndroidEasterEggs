@@ -56,8 +56,6 @@ object AndroidNextTimelineDialog : EasterEggsDestination, EasterEggsDestination.
     override fun provider(): EasterEggsDestination = this
 }
 
-const val ACTION_SHOE_ANDROID_NEXT_DIALOG = "action_show_android_next_dialog"
-
 @Composable
 fun AndroidNextTimelineDialog(
     @DrawableRes logoRes: Int = R.drawable.ic_droid_logo,
