@@ -82,7 +82,7 @@ object TimelineListDialog : EasterEggsDestination, EasterEggsDestination.Provide
 
     override val route: NavKey = EasterEggsDestination.TimelineDialog
 
-    override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.ModalBottomSheet
+    override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.BottomSheet
 
     @Provides
     @IntoSet

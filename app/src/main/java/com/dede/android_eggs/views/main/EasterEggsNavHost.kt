@@ -20,10 +20,10 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import com.android_next.egg.ACTION_SHOE_ANDROID_NEXT_DIALOG
+import com.dede.android_eggs.navigation.BottomSheetSceneStrategy
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.EasterEggsDestination.DestinationProps
 import com.dede.android_eggs.navigation.LocalNavigator
-import com.dede.android_eggs.navigation.ModalBottomSheetSceneStrategy
 import com.dede.android_eggs.navigation.Navigator
 import com.dede.android_eggs.navigation.rememberEasterEggsDestinations
 import com.dede.android_eggs.navigation.rememberNavigationState
@@ -70,8 +70,9 @@ fun EasterEggsNavHost(
         LocalNavigator provides navigator,
         LocalKonfettiState provides rememberKonfettiState(),
     ) {
-        val navDestinations = rememberEasterEggsDestinations()
         val entryProvider = entryProvider {
+            val navDestinations = rememberEasterEggsDestinations()
+            val onBackProp = { navigator.goBack() }
             navDestinations.forEach { dest ->
                 when (dest.type) {
                     EasterEggsDestination.Type.Composable -> {
@@ -82,20 +83,16 @@ fun EasterEggsNavHost(
                     }
                     EasterEggsDestination.Type.Dialog -> {
                         entry(key = dest.route, metadata = DialogSceneStrategy.dialog()) {
-                            val properties = DestinationProps(it, onBack = {
-                                navigator.goBack()
-                            })
+                            val properties = DestinationProps(it, onBack = onBackProp)
                             dest.Content(properties)
                         }
                     }
-                    EasterEggsDestination.Type.ModalBottomSheet -> {
+                    EasterEggsDestination.Type.BottomSheet -> {
                         entry(
                             key = dest.route,
-                            metadata = ModalBottomSheetSceneStrategy.modalBottomSheet()
+                            metadata = BottomSheetSceneStrategy.bottomSheet(customBottomSheet = true)
                         ) {
-                            val properties = DestinationProps(it, onBack = {
-                                navigator.goBack()
-                            })
+                            val properties = DestinationProps(it, onBack = onBackProp)
                             dest.Content(properties)
                         }
                     }
@@ -107,7 +104,7 @@ fun EasterEggsNavHost(
             entries = navigationState.toEntries(entryProvider),
             onBack = { navigator.goBack() },
             sceneStrategy = remember {
-                DialogSceneStrategy<NavKey>() then ModalBottomSheetSceneStrategy()
+                DialogSceneStrategy<NavKey>() then BottomSheetSceneStrategy()
             },
             transitionSpec = { navTransition() },
             popTransitionSpec = { popTransition() },
@@ -115,15 +112,15 @@ fun EasterEggsNavHost(
         )
 
         val context = LocalContext.current
-        LaunchedEffect(navigator.state) {
+        LaunchedEffect(navigator) {
             if (!isAgreedPrivacyPolicy(context)) {
-                navigator.navigate(EasterEggsDestination.WelcomeDialog)
+                navigator.navigate(EasterEggsDestination.WelcomeDialog, true)
             }
 
             if (!AnimatorDisabledAlertDialog.isDontShowAgain(context) &&
                 !Utils.areAnimatorEnabled(context)
             ) {
-                navigator.navigate(EasterEggsDestination.AnimatorDisabledAlertDialog)
+                navigator.navigate(EasterEggsDestination.AnimatorDisabledAlertDialog, true)
             }
         }
 

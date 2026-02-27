@@ -15,7 +15,7 @@ interface EasterEggsDestination {
     enum class Type {
         Composable,
         Dialog,
-        ModalBottomSheet,
+        BottomSheet,
     }
 
     val type: Type
