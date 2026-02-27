@@ -2,6 +2,7 @@ package com.dede.android_eggs.views.settings.compose.basic
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.VisibilityThreshold
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -102,7 +103,7 @@ fun ExpandOptionsPref(
             enter = slideInVertically() + fadeIn(),
             exit = shrinkVertically(
                 animationSpec = spring(
-                    stiffness = 1200f,
+                    stiffness = Spring.StiffnessMedium,
                     visibilityThreshold = IntSize.VisibilityThreshold
                 )
             ) + fadeOut(),

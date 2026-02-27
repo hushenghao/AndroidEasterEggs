@@ -1,6 +1,7 @@
 package com.dede.android_eggs.views.settings.compose.basic
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
@@ -96,6 +97,46 @@ fun SettingPref(
     shape: Shape = MaterialTheme.shapes.medium,
     content: @Composable ColumnScope.() -> Unit = {},
 ) {
+    SettingPref(
+        modifier = modifier,
+        colors = colors,
+        leadingIcon = leadingIcon,
+        title = {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Medium
+            )
+        },
+        desc = {
+            if (desc != null) {
+                Text(
+                    text = desc,
+                    style = MaterialTheme.typography.bodySmall,
+                    maxLines = 5,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        },
+        trailingContent = trailingContent,
+        onClick = onClick,
+        shape = shape,
+        content = content
+    )
+}
+
+@Composable
+fun SettingPref(
+    modifier: Modifier = Modifier,
+    colors: CardColors? = null,
+    leadingIcon: (@Composable () -> Unit)? = null,
+    title: @Composable () -> Unit = {},
+    desc: @Composable () -> Unit = {},
+    trailingContent: (@Composable () -> Unit)? = null,
+    onClick: () -> Unit = {},
+    shape: Shape = MaterialTheme.shapes.medium,
+    content: @Composable ColumnScope.() -> Unit = {},
+) {
     val cardColors = colors ?: CardDefaults.cardColors(
         containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp)
     )
@@ -119,22 +160,12 @@ fun SettingPref(
                 Column(
                     modifier = Modifier
                         .weight(1f)
-                        .padding(horizontal = 10.dp, vertical = 10.dp),
+                        .padding(10.dp),
+                    verticalArrangement = Arrangement.spacedBy(2.dp)
                 ) {
-                    Text(
-                        text = title,
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Medium
-                    )
-                    if (desc != null) {
-                        Text(
-                            text = desc,
-                            style = MaterialTheme.typography.bodySmall,
-                            modifier = Modifier.padding(top = 2.dp),
-                            maxLines = 5,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
+                    title()
+
+                    desc()
                 }
                 if (trailingContent != null) {
                     trailingContent()

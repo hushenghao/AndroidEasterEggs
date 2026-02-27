@@ -3,6 +3,7 @@
 package com.dede.android_eggs.views.settings
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
@@ -123,7 +124,8 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                 .padding(// 3. vertical padding
                     top = contentPadding.calculateTopPadding() + 8.dp,
                     bottom = contentPadding.calculateBottomPadding() + 12.dp
-                ),
+                )
+                .animateContentSize(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             val context = LocalContext.current
@@ -162,6 +164,8 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
             ContributeGroup()
 
             ContactMeGroup()
+
+            SettingDivider()
 
             KeepAndroidOpenPref()
         }

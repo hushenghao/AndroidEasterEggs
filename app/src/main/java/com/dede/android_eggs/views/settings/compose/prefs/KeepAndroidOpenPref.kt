@@ -1,24 +1,33 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.NavigateNext
-import androidx.compose.material.icons.rounded.LockOpen
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.basic.SettingPref
-import com.dede.android_eggs.views.settings.compose.basic.SettingPrefIcon
+import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
 import kotlinx.coroutines.delay
 import kotlin.math.min
 import kotlin.time.Instant
@@ -35,31 +44,56 @@ private fun getLockedDownDesc(millis: Long): String {
     return "Android will become a locked-down platform\nin ${days}d ${hours}h ${minutes}m ${remainingSeconds}s"
 }
 
+private const val KEY = "key_keep_android_open_dismissed"
+
 @Composable
 fun KeepAndroidOpenPref() {
-    val context = LocalContext.current
-    val countdownMillis = rememberCountdown(LOCKED_TIME_MILLIS)
-    SettingPref(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
-        title = "Keep Android Open",
-        desc = getLockedDownDesc(countdownMillis).uppercase(),
-        leadingIcon = {
-            SettingPrefIcon(
-                modifier = Modifier.padding(start = 12.dp),
-                icon = Icons.Rounded.LockOpen,
-            )
+    var isDismissed by rememberPrefBoolState(KEY, false)
+    if (isDismissed) {
+        return
+    }
+    SwipeToDismissBox(
+        state = rememberSwipeToDismissBoxState(),
+        backgroundContent = {
         },
-        trailingContent = {
-            Icon(
-                modifier = Modifier.padding(end = 12.dp),
-                imageVector = Icons.AutoMirrored.Rounded.NavigateNext,
-                contentDescription = null,
-            )
+        onDismiss = {
+            isDismissed = true
         },
-        onClick = {
-            CustomTabsBrowser.launchUrl(context, "https://keepandroidopen.org/")
-        }
-    )
+    ) {
+        val context = LocalContext.current
+        val infiniteTransition =
+            rememberInfiniteTransition(label = "KeepAndroidOpenInfiniteTransition")
+        val containerColor by infiniteTransition.animateColor(
+            initialValue = Color(0xFF_CC2929), targetValue = Color(0xFF_AE1A1A),
+            animationSpec = infiniteRepeatable(
+                tween(2000, easing = LinearEasing),
+                RepeatMode.Reverse
+            )
+        )
+        SettingPref(
+            colors = CardDefaults.cardColors(
+                containerColor = containerColor,
+                contentColor = Color.White,
+            ),
+            desc = {
+                val countdownMillis = rememberCountdown(LOCKED_TIME_MILLIS)
+                val shadowOffset = with(LocalDensity.current) {
+                    Offset(0.5.dp.toPx(), 2.dp.toPx())
+                }
+                Text(
+                    text = getLockedDownDesc(countdownMillis).uppercase(),
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        shadow = Shadow(color = Color(0xFF_941919), offset = shadowOffset)
+                    ),
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold,
+                )
+            },
+            onClick = {
+                CustomTabsBrowser.launchUrl(context, "https://keepandroidopen.org/")
+            }
+        )
+    }
 }
 
 @Composable
