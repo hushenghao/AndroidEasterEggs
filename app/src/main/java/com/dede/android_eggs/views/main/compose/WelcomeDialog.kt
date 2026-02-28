@@ -22,7 +22,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.R
 import com.dede.android_eggs.navigation.EasterEggsDestination
@@ -65,11 +64,6 @@ object WelcomeDialog : EasterEggsDestination, EasterEggsDestination.Provider {
 @Composable
 fun WelcomeDialog(onDismiss: () -> Unit = {}) {
     var prefShowed by rememberPrefBoolState(KEY, false)
-    if (prefShowed) {
-        onDismiss()
-        return
-    }
-
     val context = LocalContext.current
     var konfettiState by LocalKonfettiState.current
     AlertDialog(
@@ -78,7 +72,7 @@ fun WelcomeDialog(onDismiss: () -> Unit = {}) {
         },
         text = {
             Column {
-                SnapshotDialogView(showEasterEggName = false)
+                SnapshotDialogView(showEasterEggName = false, carouselFeedback = false)
                 Text(
                     text = stringResource(StringsR.string.summary_browse_privacy_policy),
                     modifier = Modifier.padding(vertical = 12.dp)
@@ -87,9 +81,7 @@ fun WelcomeDialog(onDismiss: () -> Unit = {}) {
                     modifier = Modifier.align(Alignment.End),
                     contentPadding = PaddingValues(horizontal = 14.dp),
                     onClick = {
-                        CustomTabsBrowser.launchUrl(
-                            context, context.getString(R.string.url_privacy).toUri()
-                        )
+                        CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
                     }
                 ) {
                     Icon(

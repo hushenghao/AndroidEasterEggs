@@ -27,7 +27,6 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.navigation3.runtime.NavKey
@@ -71,7 +70,7 @@ object SnapshotDialog : EasterEggsDestination, EasterEggsDestination.Provider {
 
     @Composable
     override fun Content(properties: EasterEggsDestination.DestinationProps) {
-        SnapshotDialog(onDismiss = properties.onBack)
+        SnapshotDialogView()
     }
 
     @IntoSet
@@ -80,16 +79,17 @@ object SnapshotDialog : EasterEggsDestination, EasterEggsDestination.Provider {
 }
 
 @HiltViewModel
-class SnapshotViewModel @Inject constructor() : ViewModel() {
-    @Inject
-    lateinit var easterEggs: List<@JvmSuppressWildcards EasterEgg>
-}
+class SnapshotViewModel @Inject constructor(
+    val easterEggs: List<@JvmSuppressWildcards EasterEgg>
+) : ViewModel()
 
+@Preview
 @Composable
 fun SnapshotDialogView(
     modifier: Modifier = Modifier,
     viewModel: SnapshotViewModel = hiltViewModel(),
     showEasterEggName: Boolean = true,
+    carouselFeedback: Boolean = true,
 ) {
     val pairList = remember(viewModel) {
         buildList {
@@ -105,13 +105,15 @@ fun SnapshotDialogView(
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
         val carouselState = rememberCarouselState { pairList.size }
-        val hapticFeedback = LocalHapticFeedback.current
-        LaunchedEffect(carouselState) {
-            snapshotFlow { carouselState.currentItem }
-                .distinctUntilChangedIgnoreInitializeValue(0)
-                .collect {
-                    hapticFeedback.performHapticFeedback(HapticFeedbackType.SegmentFrequentTick)
-                }
+        if (carouselFeedback) {
+            val hapticFeedback = LocalHapticFeedback.current
+            LaunchedEffect(carouselState) {
+                snapshotFlow { carouselState.currentItem }
+                    .distinctUntilChangedIgnoreInitializeValue(0)
+                    .collect {
+                        hapticFeedback.performHapticFeedback(HapticFeedbackType.SegmentFrequentTick)
+                    }
+            }
         }
 
         HorizontalCenteredHeroCarousel(
@@ -140,15 +142,6 @@ fun SnapshotDialogView(
         }
     }
 }
-
-@Preview
-@Composable
-private fun SnapshotDialog(onDismiss: () -> Unit = {}) {
-    Dialog(onDismissRequest = onDismiss) {
-        SnapshotDialogView()
-    }
-}
-
 
 fun <T> Flow<T>.distinctUntilChangedIgnoreInitializeValue(initializeValue: T): Flow<T> {
     var saveValue: T? = initializeValue
