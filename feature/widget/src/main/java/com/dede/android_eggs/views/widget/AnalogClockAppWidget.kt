@@ -62,7 +62,7 @@ private fun updateAppWidgetAsync(
             if (launchIntent != null) {
                 val intent = PendingIntentCompat.getActivity(
                     context, 0,
-                    launchIntent.putExtra(EXTRA_FROM_WIDGET, appWidgetId),
+                    launchIntent.putExtra(EXTRA_FROM_WIDGET, true),
                     PendingIntent.FLAG_UPDATE_CURRENT,
                     false
                 )

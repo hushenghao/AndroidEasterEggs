@@ -11,12 +11,9 @@
         android:shortcutShortLabel="@string/rocket_launcher_dream_name">
         <intent
             android:action="android.intent.action.VIEW"
+            android:data="egg://easter_egg/rocket_launcher"
             android:targetClass="com.dede.android_eggs.views.main.EasterEggsActivity"
-            android:targetPackage="com.dede.android_eggs">
-            <extra
-                android:name="extra_static_shortcut_action"
-                android:value="com.dede.android_eggs.action.ROCKET_LAUNCHER" />
-        </intent>
+            android:targetPackage="com.dede.android_eggs" />
     </shortcut>
 
     <shortcut
@@ -27,12 +24,9 @@
         android:shortcutShortLabel="@string/cat_editor">
         <intent
             android:action="android.intent.action.VIEW"
+            android:data="egg://easter_egg/cat_editor"
             android:targetClass="com.dede.android_eggs.views.main.EasterEggsActivity"
-            android:targetPackage="com.dede.android_eggs">
-            <extra
-                android:name="extra_static_shortcut_action"
-                android:value="com.dede.android_eggs.action.CAT_EDITOR" />
-        </intent>
+            android:targetPackage="com.dede.android_eggs" />
     </shortcut>
 
 </shortcuts>

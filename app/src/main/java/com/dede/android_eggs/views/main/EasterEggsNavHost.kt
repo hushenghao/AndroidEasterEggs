@@ -20,22 +20,22 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import com.dede.android_eggs.navigation.BottomSheetSceneStrategy
+import com.dede.android_eggs.navigation.DeepLink
 import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.navigation.EasterEggsDestination.AnimatorDisabledAlertDialog
 import com.dede.android_eggs.navigation.EasterEggsDestination.DestinationProps
+import com.dede.android_eggs.navigation.EasterEggsDestination.EasterEggs
+import com.dede.android_eggs.navigation.EasterEggsDestination.WelcomeDialog
 import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.navigation.Navigator.Companion.rememberNavigator
 import com.dede.android_eggs.navigation.rememberEasterEggsDestinations
 import com.dede.android_eggs.navigation.rememberNavigationState
 import com.dede.android_eggs.navigation.toEntries
-import com.dede.android_eggs.util.LocalEvent
-import com.dede.android_eggs.util.Receiver
-import com.dede.android_eggs.views.main.compose.AnimatorDisabledAlertDialog
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.isAgreedPrivacyPolicy
 import com.dede.android_eggs.views.main.compose.rememberKonfettiState
 import com.dede.basic.Utils
-
-const val ACTION_CAT_EDITOR = "com.dede.android_eggs.action.CAT_EDITOR"
+import com.dede.android_eggs.views.main.compose.AnimatorDisabledAlertDialog as AnimatorDisabledAlert
 
 private const val DURATION = 400
 private const val SCALE = 0.88f
@@ -63,15 +63,15 @@ private fun popTransition(): ContentTransform {
 fun EasterEggsNavHost(
     modifier: Modifier = Modifier,
 ) {
-    val navigationState = rememberNavigationState(startRoute = EasterEggsDestination.EasterEggs)
+    val navigationState = rememberNavigationState(startRoute = EasterEggs)
     val navigator = rememberNavigator(navigationState)
     CompositionLocalProvider(
         LocalNavigator provides navigator,
         LocalKonfettiState provides rememberKonfettiState(),
     ) {
+        val onBack = { navigator.goBack() }
         val entryProvider = entryProvider {
             val navDestinations = rememberEasterEggsDestinations()
-            val onBackProp = { navigator.goBack() }
             navDestinations.forEach { dest ->
                 when (dest.type) {
                     EasterEggsDestination.Type.Composable -> {
@@ -82,7 +82,7 @@ fun EasterEggsNavHost(
                     }
                     EasterEggsDestination.Type.Dialog -> {
                         entry(key = dest.route, metadata = DialogSceneStrategy.dialog()) {
-                            val properties = DestinationProps(it, onBack = onBackProp)
+                            val properties = DestinationProps(it, onBack = onBack)
                             dest.Content(properties)
                         }
                     }
@@ -91,7 +91,7 @@ fun EasterEggsNavHost(
                             key = dest.route,
                             metadata = BottomSheetSceneStrategy.bottomSheet(customBottomSheet = true)
                         ) {
-                            val properties = DestinationProps(it, onBack = onBackProp)
+                            val properties = DestinationProps(it, onBack = onBack)
                             dest.Content(properties)
                         }
                     }
@@ -101,7 +101,7 @@ fun EasterEggsNavHost(
         NavDisplay(
             modifier = modifier,
             entries = navigationState.toEntries(entryProvider),
-            onBack = { navigator.goBack() },
+            onBack = onBack,
             sceneStrategy = remember {
                 DialogSceneStrategy<NavKey>() then BottomSheetSceneStrategy()
             },
@@ -113,18 +113,16 @@ fun EasterEggsNavHost(
         val context = LocalContext.current
         LaunchedEffect(navigator) {
             if (!isAgreedPrivacyPolicy(context)) {
-                navigator.navigate(EasterEggsDestination.WelcomeDialog, true)
-            }
-
-            if (!AnimatorDisabledAlertDialog.isDontShowAgain(context) &&
+                navigator.navigate(WelcomeDialog, true)
+            } else if (
+                !AnimatorDisabledAlert.isDontShowAgain(context) &&
                 !Utils.areAnimatorEnabled(context)
             ) {
-                navigator.navigate(EasterEggsDestination.AnimatorDisabledAlertDialog, true)
+                navigator.navigate(AnimatorDisabledAlertDialog, true)
+            } else {
+                DeepLink.handleNavKey(navigator)
             }
         }
 
-        LocalEvent.Receiver(ACTION_CAT_EDITOR) {
-            navigator.navigate(EasterEggsDestination.CatEditor)
-        }
     }
 }

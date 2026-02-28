@@ -6,28 +6,22 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import com.dede.android_eggs.util.LocalEvent
-import com.dede.android_eggs.views.main.ACTION_CAT_EDITOR
+import com.dede.android_eggs.navigation.DeepLink
+import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.views.settings.compose.prefs.launchRocketLauncher
-import com.dede.basic.delay
 import com.dede.basic.provider.EasterEgg
 import dagger.hilt.android.qualifiers.ActivityContext
 import java.util.Calendar
 import javax.inject.Inject
 
+private const val TAG = "IntentHandler"
+
 class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
-
-    companion object {
-
-        private const val TAG = "IntentHandler"
-
-    }
 
     @Inject
     lateinit var easterEggs: List<@JvmSuppressWildcards EasterEgg>
 
     private val eggHandlers: Array<EggHandler> = arrayOf(
-        StaticShortcutHandler(),
         FromWidgetHandler(),
         UriHandler(),
     )
@@ -42,34 +36,6 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
             }
         }
         return false
-    }
-
-    private class StaticShortcutHandler : EggHandler {
-
-        companion object {
-            // from static shortcut
-            const val EXTRA_STATIC_SHORTCUT_ACTION = "extra_static_shortcut_action"
-
-            private const val ACTION_ROCKET_LAUNCHER = "com.dede.android_eggs.action.ROCKET_LAUNCHER"
-        }
-
-        override fun handleEggIntent(eggIntent: EggIntent): Boolean {
-            val action = eggIntent.extras.getString(EXTRA_STATIC_SHORTCUT_ACTION)
-            when (action) {
-                ACTION_CAT_EDITOR -> {
-                    delay(500L) {
-                        // await for the app to be ready
-                        LocalEvent.poster().post(ACTION_CAT_EDITOR)
-                    }
-                    return true
-                }
-                ACTION_ROCKET_LAUNCHER -> {
-                    launchRocketLauncher(eggIntent.context)
-                    return true
-                }
-            }
-            return false
-        }
     }
 
     private class FromWidgetHandler : EggHandler {
@@ -97,8 +63,8 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
         }
 
         override fun handleEggIntent(eggIntent: EggIntent): Boolean {
-            val appWidgetId = eggIntent.extras.getInt(EXTRA_FROM_WIDGET, -1)
-            if (appWidgetId == -1) {
+            val fromWidget = eggIntent.extras.getBoolean(EXTRA_FROM_WIDGET, false)
+            if (!fromWidget) {
                 return false
             }
 
@@ -119,6 +85,8 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
             private const val HOST = "easter_egg"
 
             private const val PATH_API_LEVEL = "api"
+            private const val PATH_ROCKET_LAUNCHER = "rocket_launcher"
+            private const val PATH_CAT_EDITOR = "cat_editor"
         }
 
         private fun filterUri(uri: Uri?): Boolean {
@@ -144,6 +112,14 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
             Log.i(TAG, "handleScheme: $uri")
             return when (uri.pathSegments.firstOrNull()) {
                 PATH_API_LEVEL -> handleApiPath(eggIntent, uri)
+                PATH_CAT_EDITOR -> {
+                    DeepLink.setNavKey(EasterEggsDestination.CatEditor)
+                    true
+                }
+                PATH_ROCKET_LAUNCHER -> {
+                    launchRocketLauncher(eggIntent.context)
+                    true
+                }
                 else -> false
             }
         }
