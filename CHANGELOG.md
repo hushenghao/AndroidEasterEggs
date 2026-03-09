@@ -1,6 +1,6 @@
 # Changelog
 
-### v4.4.3
+### v4.4.3 (2026-03-09)
 
 - Add Android 17 Plotlogo
 - Known issue fixes
