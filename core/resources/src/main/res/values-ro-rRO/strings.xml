@@ -8,6 +8,7 @@
     <string name="label_github">Cod sursă</string>
     <string name="label_translation">Traduceri</string>
     <string name="label_beta">Descarcă versiunea beta</string>
+    <string name="label_experiment">Versiune experimentală</string>
     <string name="label_timeline">Cronologie</string>
     <string name="label_privacy_policy">Politica de confidențialitate</string>
     <string name="label_open_source_license">Licențe open source</string>
