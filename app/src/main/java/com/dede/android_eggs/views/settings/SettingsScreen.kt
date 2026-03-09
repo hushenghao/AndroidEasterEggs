@@ -152,9 +152,9 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
 
             RocketLauncherPref()
 
-            ComponentManagerPref()
-
             Widgets()
+
+            ComponentManagerPref()
 
             if (!SplitUtils.isActivityEmbedded(context)) {
                 RetainInRecentsPref()
