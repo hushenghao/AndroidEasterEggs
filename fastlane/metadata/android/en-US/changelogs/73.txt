@@ -1,0 +1,4 @@
+- Add more Icon shapes
+- Known issue fixes
+- Upgrade project dependencies
+- Update translations

@@ -16,6 +16,7 @@ import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.utils.SystemIconMaskUtil
 import com.dede.android_eggs.views.settings.compose.utils.rotated
 import sv.lib.squircleshape.SquircleShape
+import kotlin.random.Random
 
 object IconShapePrefUtil {
 
@@ -23,27 +24,42 @@ object IconShapePrefUtil {
 
     @Composable
     fun getIconShape(index: Int = SettingPrefUtil.iconShapeValueState.intValue): Shape {
-        val polygon = polygonItems.getOrNull(index)
-        val shape = polygon.toShapeWithSystem()
-        if (shape != null) {
-            return shape
-        }
-        return SystemIconMaskUtil.getIconMaskShape(LocalContext.current) ?: defaultCircle.toShape()
+        val polygon = polygonItems.getOrNull(index) ?: defaultCircle
+        return polygon.toShapePlus()
     }
 
+    fun RoundedPolygon.isSystemShape(): Boolean = this === systemShape
+
+    fun RoundedPolygon.isRandomPolygon(): Boolean = this === randomPolygon
+
+    internal fun RoundedPolygon.isSquircle(): Boolean = this === fakeSquircle
+
     @Composable
-    fun RoundedPolygon?.toShapeWithSystem(): Shape? {
-        if (this == null) return null
-        if (this == fakeSquircle) return SquircleShape()
+    fun RoundedPolygon.toShapePlus(): Shape {
+        if (this.isRandomPolygon()) {
+            val index = Random.nextInt(indexOfRandom)
+            return getIconShape(index)
+        }
+        if (this.isSystemShape()) {
+            return SystemIconMaskUtil.getIconMaskShape(LocalContext.current)
+                ?: defaultCircle.toShape()
+        }
+        if (this.isSquircle()) {
+            return SquircleShape()
+        }
         return this.toShape()
     }
 
     private val defaultCircle = MaterialShapes.Circle
 
     private val fakeSquircle = RoundedPolygon.rectangle()
+    private val systemShape = RoundedPolygon.rectangle()
+    private val randomPolygon = RoundedPolygon.rectangle()
+
+    private val privatePolygonSet = setOf(systemShape, fakeSquircle, randomPolygon)
 
     fun providerPolygonItems(): Array<RoundedPolygon> {
-        return polygonItems.filterNotNull().filter { it != fakeSquircle }.toTypedArray()
+        return polygonItems.filter { !privatePolygonSet.contains(it) }.toTypedArray()
     }
 
     private val cornerRound30 = CornerRounding(0.3f)
@@ -57,6 +73,17 @@ object IconShapePrefUtil {
         ).normalized()
     }
 
+    private fun cloverLeaf(numVertices: Int, rotate: Float = 0f): RoundedPolygon {
+        return RoundedPolygon.star(
+            numVerticesPerRadius = numVertices,
+            innerRadius = .5f,
+            rounding = CornerRounding(1f),
+            innerRounding = CornerRounding.Unrounded,
+            centerY = 0.5f,
+            centerX = 0.5f,
+        ).rotated(rotate).normalized()
+    }
+
     private fun polygon(numVertices: Int, rotate: Float = 0f): RoundedPolygon {
         return RoundedPolygon(
             numVertices = numVertices,
@@ -64,8 +91,8 @@ object IconShapePrefUtil {
         ).rotated(rotate).normalized()
     }
 
-    val polygonItems: Array<RoundedPolygon?> = arrayOf(
-        null,
+    val polygonItems: Array<RoundedPolygon> = arrayOf(
+        systemShape,
         MaterialShapes.Square,
         // Squircle
         fakeSquircle,
@@ -94,6 +121,7 @@ object IconShapePrefUtil {
         MaterialShapes.Cookie12Sided,
 
         MaterialShapes.Clover4Leaf,
+        cloverLeaf(6, -60f),
         MaterialShapes.Clover8Leaf,
         // Scallop
         scallop(8),
@@ -117,7 +145,11 @@ object IconShapePrefUtil {
             innerRadius = 0.88f,
             rounding = CornerRounding(0.08f),
             innerRounding = CornerRounding.Unrounded,
-        ).rotated(17f).normalized()
+        ).rotated(17f).normalized(),
+
+        randomPolygon
     )
+
+    internal val indexOfRandom: Int = polygonItems.size - 1
 
 }

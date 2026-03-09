@@ -1,5 +1,12 @@
 # Changelog
 
+### v4.4.4
+
+- Add more Icon shapes
+- Known issue fixes
+- Upgrade project dependencies
+- Update translations
+
 ### v4.4.3 (2026-03-09)
 
 - Add Android 17 Plotlogo

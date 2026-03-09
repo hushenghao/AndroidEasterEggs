@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Android
+import androidx.compose.material.icons.rounded.Shuffle
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
@@ -27,12 +28,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
+import androidx.graphics.shapes.RoundedPolygon
 import com.dede.android_eggs.ui.composes.icons.rounded.Shapes
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.isRandomPolygon
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.isSystemShape
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.polygonItems
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.toShapeWithSystem
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.toShapePlus
 import com.dede.android_eggs.resources.R as StringsR
 
 private const val SPAN_COUNT = 5
@@ -49,8 +53,9 @@ fun IconShapePref() {
             polygonItems.forEachIndexed { index, roundedPolygon ->
                 ShapeItem(
                     modifier = Modifier.padding(2.dp),
+                    shape = MaterialShapes.Cookie4Sided.toShape(),
                     isSelected = index == selectedIndex,
-                    polygonShape = roundedPolygon.toShapeWithSystem(),
+                    roundedPolygon = roundedPolygon,
                     onClick = onClick@{
                         if (selectedIndex == index) return@onClick
                         selectedIndex = index
@@ -93,11 +98,12 @@ private fun IconShapeGridLayout(spanCount: Int = SPAN_COUNT, content: @Composabl
 private fun ShapeItem(
     modifier: Modifier = Modifier,
     isSelected: Boolean = false,
-    polygonShape: Shape? = MaterialShapes.Circle.toShape(),
+    shape: Shape = MaterialShapes.Cookie4Sided.toShape(),
+    roundedPolygon: RoundedPolygon = MaterialShapes.Circle,
     onClick: () -> Unit = {}
 ) {
     FilledTonalIconButton(
-        shape = MaterialShapes.Cookie4Sided.toShape(),
+        shape = shape,
         onClick = onClick,
         modifier = modifier then Modifier.aspectRatio(1f),
         colors = IconButtonDefaults.filledTonalIconButtonColors(
@@ -105,16 +111,24 @@ private fun ShapeItem(
             contentColor = colorScheme.onSurface,
         ),
     ) {
-        if (polygonShape == null) {
+        if (roundedPolygon.isRandomPolygon()) {
+            Icon(
+                imageVector = Icons.Rounded.Shuffle,
+                contentDescription = null,
+                tint = colorScheme.primary,
+            )
+        } else if (roundedPolygon.isSystemShape()) {
             Icon(
                 imageVector = Icons.Rounded.Android,
                 contentDescription = null,
+                tint = colorScheme.primary,
             )
         } else {
+            val polygonShape = roundedPolygon.toShapePlus()
             Box(
                 modifier = Modifier
                     .clip(polygonShape)
-                    .border(1.5.dp, colorScheme.primary, polygonShape)
+                    .border(1.6.dp, colorScheme.primary, polygonShape)
                     .size(24.dp)
             )
         }
