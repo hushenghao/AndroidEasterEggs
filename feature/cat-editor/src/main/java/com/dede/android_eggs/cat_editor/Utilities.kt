@@ -31,10 +31,13 @@ import android.graphics.Matrix as AndroidMatrix
 
 internal object Utilities {
 
+    const val ACTION_OPEN_EYE_DROPPER = "android.intent.action.OPEN_EYE_DROPPER"// Intent.ACTION_OPEN_EYE_DROPPER
+    const val EXTRA_COLOR = "android.intent.extra.COLOR"// Intent.EXTRA_COLOR
+
     private const val TAG = "Utilities"
 
     fun isEyeDropperSupported(context: Context): Boolean {
-        val intent = Intent(Intent.ACTION_OPEN_EYE_DROPPER)
+        val intent = Intent(ACTION_OPEN_EYE_DROPPER)
         val resolveInfo = context.packageManager.resolveActivity(intent, 0)
         return resolveInfo?.activityInfo != null
     }

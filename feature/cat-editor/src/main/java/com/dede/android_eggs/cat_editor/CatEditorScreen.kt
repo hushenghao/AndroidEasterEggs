@@ -476,7 +476,7 @@ fun CatEditorScreen() {
             val eyeDropperLauncher =
                 rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) eyeDropperResult@{
                     if (it.resultCode == Activity.RESULT_OK) {
-                        val colorInt = it.data?.getIntExtra(Intent.EXTRA_COLOR, 0) ?: 0
+                        val colorInt = it.data?.getIntExtra(Utilities.EXTRA_COLOR, 0) ?: 0
                         if (colorInt != 0) {
                             if (!catEditorController.hasSelectedPart) {
                                 return@eyeDropperResult
@@ -511,7 +511,7 @@ fun CatEditorScreen() {
                 },
                 isColorStrawEnabled = remember { Utilities.isEyeDropperSupported(context) },
                 onColorStrawClick = {
-                    val intent = Intent(Intent.ACTION_OPEN_EYE_DROPPER)
+                    val intent = Intent(Utilities.ACTION_OPEN_EYE_DROPPER)
                     eyeDropperLauncher.launch(intent)
                 }
             )

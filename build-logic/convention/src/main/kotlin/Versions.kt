@@ -5,10 +5,9 @@ import org.gradle.jvm.toolchain.JavaLanguageVersion
 object Versions {
 
     val compileSdk: CompileSdkSpec.() -> Unit = {
-//        version = release(36) {
-//            minorApiLevel = 1
-//        }
-        version = preview("CinnamonBun")
+        version = release(36) {
+            minorApiLevel = 1
+        }
     }
 
     const val BUILD_TOOLS = "36.1.0"
