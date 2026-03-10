@@ -11,7 +11,7 @@ object Versions {
         version = preview("CinnamonBun")
     }
 
-    const val BUILD_TOOLS = "37.0.0-rc2"
+    const val BUILD_TOOLS = "36.1.0"
 
     val targetSdk: TargetSdkSpec.() -> Unit = {
         version = release(36)
