@@ -1,5 +1,7 @@
 package com.dede.android_eggs.cat_editor
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Region
 import android.util.Log
 import androidx.compose.ui.geometry.Offset
@@ -30,6 +32,12 @@ import android.graphics.Matrix as AndroidMatrix
 internal object Utilities {
 
     private const val TAG = "Utilities"
+
+    fun isEyeDropperSupported(context: Context): Boolean {
+        val intent = Intent(Intent.ACTION_OPEN_EYE_DROPPER)
+        val resolveInfo = context.packageManager.resolveActivity(intent, 0)
+        return resolveInfo?.activityInfo != null
+    }
 
     fun String.toColorOrNull(): Color? {
         if (this == "none") {

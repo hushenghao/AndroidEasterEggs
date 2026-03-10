@@ -2,9 +2,13 @@
 
 package com.dede.android_eggs.cat_editor
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.Spring
@@ -469,6 +473,26 @@ fun CatEditorScreen() {
                     .align(Alignment.TopCenter),
             )
 
+            val eyeDropperLauncher =
+                rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) eyeDropperResult@{
+                    if (it.resultCode == Activity.RESULT_OK) {
+                        val colorInt = it.data?.getIntExtra(Intent.EXTRA_COLOR, 0) ?: 0
+                        if (colorInt != 0) {
+                            if (!catEditorController.hasSelectedPart) {
+                                return@eyeDropperResult
+                            }
+
+                            val color = Color(colorInt)
+                            catEditorController.setSelectedPartColor(color)
+                            catEditorRecords.addRecord(
+                                CatEditorRecords.colors(
+                                    catEditorController.colorList,
+                                    catSeed
+                                )
+                            )
+                        }
+                    }
+                }
             ColorPaletteDialog(
                 visibleState = colorPaletteState,
                 selectedColor = catEditorController.getSelectedPartColor(Color.White),
@@ -484,6 +508,11 @@ fun CatEditorScreen() {
                             catSeed
                         )
                     )
+                },
+                isColorStrawEnabled = remember { Utilities.isEyeDropperSupported(context) },
+                onColorStrawClick = {
+                    val intent = Intent(Intent.ACTION_OPEN_EYE_DROPPER)
+                    eyeDropperLauncher.launch(intent)
                 }
             )
 

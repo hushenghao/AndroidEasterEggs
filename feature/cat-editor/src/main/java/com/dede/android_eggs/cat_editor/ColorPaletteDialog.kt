@@ -1,8 +1,7 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 
 package com.dede.android_eggs.cat_editor
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,19 +17,24 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Colorize
 import androidx.compose.material.icons.rounded.ContentCopy
 import androidx.compose.material.icons.rounded.Palette
-import androidx.compose.material.icons.rounded.Refresh
+import androidx.compose.material.icons.rounded.Shuffle
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -49,6 +53,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.cat_editor.Utilities.getHsv
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.copy
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -59,7 +64,9 @@ fun ColorPaletteDialog(
     visibleState: MutableState<Boolean> = mutableStateOf(false),
     selectedColor: Color = Color.White,
     withAlphaPalette: Boolean = true,
-    onColorSelected: (color: Color) -> Unit = {}
+    onColorSelected: (color: Color) -> Unit = {},
+    isColorStrawEnabled: Boolean = true,
+    onColorStrawClick: () -> Unit = {},
 ) {
     var visible by remember { visibleState }
     if (!visible) {
@@ -112,12 +119,12 @@ fun ColorPaletteDialog(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Box(
-                    modifier = Modifier.clip(MaterialTheme.shapes.medium),
-                    contentAlignment = Alignment.Center
+                    modifier = Modifier.clip(IconShapePrefUtil.getIconShape()),
+                    contentAlignment = Alignment.Center,
                 ) {
                     Checkerboard(
                         modifier = Modifier
-                            .size(54.dp)
+                            .size(IconButtonDefaults.mediumContainerSize())
                             .drawWithContent {
                                 drawContent()
                                 drawRect(finalColor)
@@ -131,13 +138,15 @@ fun ColorPaletteDialog(
 
                 Spacer(modifier = Modifier.width(16.dp))
 
-                Card {
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
+                    ),
+                ) {
                     Row(
                         modifier = Modifier
-                            .height(56.dp)
-                            .padding(start = 14.dp, end = 4.dp),
+                            .padding(start = 14.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.End
                     ) {
                         Text(
                             text = Utilities.getHexColor(finalColor, withAlphaPalette),
@@ -145,7 +154,8 @@ fun ColorPaletteDialog(
                             modifier = Modifier.weight(1f)
                         )
 
-                        IconButton(
+                        FilledTonalIconButton(
+                            shape = IconShapePrefUtil.getIconShape(),
                             onClick = {
                                 val h = Random.nextFloat() * 360f
                                 val s = Random.nextFloat()
@@ -157,12 +167,13 @@ fun ColorPaletteDialog(
                             }
                         ) {
                             Icon(
-                                imageVector = Icons.Rounded.Refresh,
+                                imageVector = Icons.Rounded.Shuffle,
                                 contentDescription = null
                             )
                         }
 
-                        IconButton(
+                        FilledTonalIconButton(
+                            shape = IconShapePrefUtil.getIconShape(),
                             onClick = {
                                 context.copy(Utilities.getHexColor(finalColor, withAlphaPalette))
                             }
@@ -179,19 +190,43 @@ fun ColorPaletteDialog(
 
             Spacer(modifier = Modifier.height(14.dp))
 
-            ColorHsvPalette(
+            Box(
                 modifier = Modifier
                     .sizeIn(maxWidth = 360.dp)
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
                     .align(Alignment.CenterHorizontally),
-                defaultColor = Color.hsv(hue, saturation, 1f),
-                onColorChanged = { hsv, h, s ->
-                    hue = h
-                    saturation = s
-                    hsvColor = hsv
+            ) {
+                ColorHsvPalette(
+                    modifier = Modifier.fillMaxWidth(),
+                    defaultColor = Color.hsv(hue, saturation, 1f),
+                    onColorChanged = { hsv, h, s ->
+                        hue = h
+                        saturation = s
+                        hsvColor = hsv
+                    }
+                )
+
+                if (isColorStrawEnabled) {
+                    FilledTonalIconButton(
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd),
+                        shape = IconShapePrefUtil.getIconShape(),
+                        onClick = {
+                            scope.launch {
+                                sheetState.hide()
+                                visible = false
+                                onColorStrawClick()
+                            }
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Colorize,
+                            contentDescription = null
+                        )
+                    }
                 }
-            )
+            }
 
             Spacer(modifier = Modifier.height(10.dp))
 

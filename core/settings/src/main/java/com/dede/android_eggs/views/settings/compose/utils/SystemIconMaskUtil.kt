@@ -35,7 +35,7 @@ object SystemIconMaskUtil {
             if (resId != Resources.ID_NULL) {
                 try {
                     pathStr = context.resources.getString(resId)
-                } catch (ignore: Resources.NotFoundException) {
+                } catch (_: Resources.NotFoundException) {
                 }
             }
         }

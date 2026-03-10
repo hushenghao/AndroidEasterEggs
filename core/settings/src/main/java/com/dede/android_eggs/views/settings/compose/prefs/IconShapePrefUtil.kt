@@ -6,6 +6,7 @@ import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.graphics.shapes.CornerRounding
@@ -37,7 +38,7 @@ object IconShapePrefUtil {
     @Composable
     fun RoundedPolygon.toShapePlus(): Shape {
         if (this.isRandomPolygon()) {
-            val index = Random.nextInt(indexOfRandom)
+            val index = remember { Random.nextInt(indexOfRandom) }
             return getIconShape(index)
         }
         if (this.isSystemShape()) {
@@ -45,7 +46,7 @@ object IconShapePrefUtil {
                 ?: defaultCircle.toShape()
         }
         if (this.isSquircle()) {
-            return SquircleShape()
+            return squircleShape
         }
         return this.toShape()
     }
@@ -53,6 +54,7 @@ object IconShapePrefUtil {
     private val defaultCircle = MaterialShapes.Circle
 
     private val fakeSquircle = RoundedPolygon.rectangle()
+    private val squircleShape = SquircleShape()
     private val systemShape = RoundedPolygon.rectangle()
     private val randomPolygon = RoundedPolygon.rectangle()
 
