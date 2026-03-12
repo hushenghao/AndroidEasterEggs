@@ -1,9 +1,7 @@
 package com.dede.android_eggs.views.main.compose
 
 import android.os.Bundle
-import androidx.activity.compose.PredictiveBackHandler
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animate
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
@@ -33,7 +31,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
@@ -55,7 +52,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
-import kotlinx.coroutines.flow.catch
+import com.dede.android_eggs.ui.composes.predictiveBackProgressState
 import com.dede.android_eggs.resources.R as StringsR
 
 @Stable
@@ -128,21 +125,8 @@ fun BottomSearchBar(
     state: BottomSearchBarState = rememberBottomSearchBarState(true),
     onClose: (() -> Unit)? = null
 ) {
-    var backProgress by remember { mutableFloatStateOf(0f) }
-    PredictiveBackHandler(enabled = state.visible) { flow ->
-        flow.catch {
-            animate(backProgress, 0f) { value, _ ->
-                backProgress = value
-            }
-        }.collect { event ->
-            backProgress = event.progress
-        }
+    val backProgress by predictiveBackProgressState(enabled = state.visible) {
         state.close()
-    }
-    LaunchedEffect(state.visible) {
-        if (state.visible) {
-            backProgress = 0f
-        }
     }
     AnimatedVisibility(
         visible = state.visible,

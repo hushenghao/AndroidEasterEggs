@@ -2,7 +2,6 @@
 
 package com.dede.android_eggs.views.settings
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -74,10 +73,6 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
         }
     }
 
-    BackHandler(drawerState.isOpen) {
-        closeDrawer()
-    }
-
     LocalEvent.Receiver(SettingPrefUtil.ACTION_CLOSE_SETTING) {
         closeDrawer()
     }
@@ -85,6 +80,7 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout)
     Scaffold(
+        modifier = Modifier,
         contentWindowInsets = windowInsets
             .only(WindowInsetsSides.End + WindowInsetsSides.Vertical),
         topBar = {

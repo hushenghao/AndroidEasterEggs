@@ -25,13 +25,18 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
@@ -41,6 +46,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
+import com.dede.android_eggs.ui.composes.predictiveBackProgressState
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.Receiver
@@ -120,8 +126,22 @@ fun EasterEggScreen(
         val drawerState = rememberDrawerState(DrawerValue.Closed)
         ReverseModalNavigationDrawer(
             drawerContent = {
+                val backProgress by predictiveBackProgressState(
+                    enabled = drawerState.isOpen,
+                    backEndValue = { 0f },
+                ) {
+                    drawerState.close()
+                }
+                val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
                 ModalDrawerSheet(
-                    drawerState = drawerState,
+                    modifier = Modifier
+                        .graphicsLayer(
+                            scaleX = 1F - (0.1F * backProgress),
+                            scaleY = 1F - (0.1F * backProgress),
+                            transformOrigin = remember {
+                                TransformOrigin(if (isRtl) 0f else 1f, 0.5f)
+                            },
+                        ),
                     drawerShape = shapes.extraLarge.end(0.dp),
                     windowInsets = WindowInsets(0, 0, 0, 0),
                 ) {
