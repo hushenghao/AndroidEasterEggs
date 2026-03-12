@@ -8,7 +8,9 @@ import androidx.annotation.NonNull;
 
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
+import com.dede.basic.provider.EasterEggGroup;
 import com.dede.basic.provider.EasterEggProvider;
+import com.dede.basic.provider.EasterEggProviderKt;
 import com.dede.basic.provider.TimelineEvent;
 
 import java.util.List;
@@ -32,18 +34,33 @@ public class AndroidIceCreamSandwichEasterEgg implements EasterEggProvider {
     @Singleton
     @Override
     public BaseEasterEgg provideEasterEgg() {
-        return new EasterEgg(
-                R.drawable.i_platlogo_rectangle,
-                R.string.i_egg_name,
-                R.string.i_android_nickname,
-                new IntRange(Build.VERSION_CODES.ICE_CREAM_SANDWICH, Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1),
-                PlatLogoActivity.class
-        ) {
-            @Override
-            public SnapshotProvider provideSnapshotProvider() {
-                return new SnapshotProvider();
-            }
-        };
+        return new EasterEggGroup(
+                new EasterEgg(
+                        R.drawable.i_platlogo_rectangle,
+                        R.string.i_egg_name,
+                        R.string.i_android_nickname,
+                        new IntRange(Build.VERSION_CODES.ICE_CREAM_SANDWICH, Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1),
+                        PlatLogoActivity.class
+                ) {
+                    @Override
+                    public SnapshotProvider provideSnapshotProvider() {
+                        return new SnapshotProvider(R.drawable.i_platlogo);
+                    }
+                },
+                new EasterEgg(
+                        R.drawable.i_platlogo_preview,
+                        R.string.i_android_nickname,
+                        R.string.i_preview_nickname,
+                        EasterEggProviderKt.toRange(Build.VERSION_CODES.ICE_CREAM_SANDWICH),
+                        com.android_i.egg.preview.PlatLogoActivity.class,
+                        EasterEggProviderKt.toRange(EasterEgg.VERSION_CODES_FULL.ICS_PREVIEW)
+                ) {
+                    @Override
+                    public SnapshotProvider provideSnapshotProvider() {
+                        return new SnapshotProvider(R.drawable.i_platlogo_preview);
+                    }
+                }
+        );
     }
 
     @NonNull

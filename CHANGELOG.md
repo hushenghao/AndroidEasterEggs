@@ -3,6 +3,7 @@
 ### v4.4.4
 
 - Add more Icon shapes
+- Add Android ICS Preview Easter Egg
 - Known issue fixes
 - Upgrade project dependencies
 - Update translations

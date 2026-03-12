@@ -160,6 +160,7 @@ object EasterEggHelp {
         apiLevelArrays.putAll(fullApiLevelArrays)
 
         // static full api level mappings
+        apiLevelArrays[EasterEgg.VERSION_CODES_FULL.ICS_PREVIEW] = "ICS"
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.L_PREVIEW] = "L"
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.BAKLAVA_1] = "16.1"
 

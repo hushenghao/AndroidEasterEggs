@@ -3,4 +3,5 @@
     <string name="i_egg_name">Nyandroid</string>
 
     <string name="i_android_nickname" translatable="false">Ice Cream Sandwich</string>
+    <string name="i_preview_nickname" translatable="false">ICS Preview</string>
 </resources>
