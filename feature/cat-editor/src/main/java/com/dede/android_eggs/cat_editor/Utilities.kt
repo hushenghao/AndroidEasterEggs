@@ -38,8 +38,7 @@ internal object Utilities {
 
     fun isEyeDropperSupported(context: Context): Boolean {
         val intent = Intent(ACTION_OPEN_EYE_DROPPER)
-        val resolveInfo = context.packageManager.resolveActivity(intent, 0)
-        return resolveInfo?.activityInfo != null
+        return intent.resolveActivity(context.packageManager) != null
     }
 
     fun String.toColorOrNull(): Color? {
