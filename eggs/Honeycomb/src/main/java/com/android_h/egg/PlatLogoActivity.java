@@ -32,10 +32,19 @@ public class PlatLogoActivity extends Activity {
         mToast = Toast.makeText(this, "REZZZZZZZ...", Toast.LENGTH_SHORT);
 
         ImageView content = new ImageView(this);
-        content.setImageResource(R.drawable.h_platlogo);
+        content.setImageResource(randomPlatlogo());
+//        content.setImageResource(R.drawable.h_platlogo);
         content.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         
         setContentView(content);
+    }
+
+    private int randomPlatlogo() {
+        double r = Math.random();
+        if (r >= 0.5) {
+            return R.drawable.h_platlogo_1;
+        }
+        return R.drawable.h_platlogo;
     }
 
     @Override
