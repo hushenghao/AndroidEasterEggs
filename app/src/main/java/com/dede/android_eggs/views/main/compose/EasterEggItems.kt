@@ -42,7 +42,9 @@ import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
@@ -205,6 +207,33 @@ private fun Chip(text: String) {
     }
 }
 
+@Immutable
+private class EasterEggState(val base: BaseEasterEgg, index: Int) {
+    private val indexState: MutableState<Int> = mutableIntStateOf(index)
+
+    fun getEasterEgg(): EasterEgg {
+        return when (base) {
+            is EasterEgg -> base
+            is EasterEggGroup -> base.eggs[indexState.value]
+            else -> throw IllegalArgumentException("Unknown EasterEgg type: ${base::class.java.name}")
+        }
+    }
+
+    fun selectedEgg(newIndex: Int) {
+        if (base is EasterEggGroup) {
+            val index = newIndex.coerceIn(0, base.eggs.size - 1)
+            base.selectedIndex = index
+            indexState.value = index
+        }
+    }
+}
+
+@Composable
+private fun rememberEasterEggState(base: BaseEasterEgg): EasterEggState {
+    return remember(base) {
+        EasterEggState(base, if (base is EasterEggGroup) base.selectedIndex else 0)
+    }
+}
 
 @Composable
 @Preview(showBackground = true)
@@ -214,12 +243,8 @@ fun EasterEggItem(
 ) {
     val context = LocalContext.current
 
-    var groupIndex by remember { mutableIntStateOf(0) }
-    val egg = when (base) {
-        is EasterEgg -> base
-        is EasterEggGroup -> base.eggs[groupIndex]
-        else -> throw UnsupportedOperationException("Unsupported type: ${base.javaClass}")
-    }
+    val easterEggState = rememberEasterEggState(base)
+    val egg = easterEggState.getEasterEgg()
     val supportShortcut = remember(egg) { EasterEggShortcutsHelp.isSupportShortcut(egg) }
     var swipeProgress by remember { mutableFloatStateOf(0f) }
 
@@ -228,8 +253,8 @@ fun EasterEggItem(
             EasterEggItemFloor(egg, supportShortcut, swipeProgress)
         },
         content = {
-            EasterEggItemContent(egg, base, enableItemAnim) {
-                groupIndex = it
+            EasterEggItemContent(egg, base, enableItemAnim) { index ->
+                easterEggState.selectedEgg(index)
             }
         },
         supportShortcut = supportShortcut,

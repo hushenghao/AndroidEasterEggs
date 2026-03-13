@@ -23,6 +23,8 @@ interface BaseEasterEgg {
 
 class EasterEggGroup(vararg val eggs: EasterEgg) : BaseEasterEgg {
 
+    var selectedIndex: Int = 0
+
     override val apiLevelRange: IntRange
         get() = eggs.first().apiLevelRange.first..eggs.last().apiLevelRange.last
 
