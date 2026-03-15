@@ -6,6 +6,6 @@
     <string name="label_timeline_releases">Релизы</string>
     <string name="label_timeline_developer_previews">Превью для разработчиков</string>
     <string name="label_timeline_beta_release">Бета-версии</string>
-    <string name="label_timeline_platform_stability">Стабильность платформы</string>
+    <string name="label_timeline_platform_stability">Стабилизация платформы</string>
     <string name="label_timeline_final_release">Финальный релиз</string>
 </resources>

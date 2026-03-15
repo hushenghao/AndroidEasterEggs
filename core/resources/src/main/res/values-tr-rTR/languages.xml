@@ -7,7 +7,7 @@
     <string name="locale_lang_en">İngilizce</string>
     <string name="locale_lang_es">İspanyolca</string>
     <string name="locale_lang_hr_HR">Hırvatça</string>
-    <string name="locale_lang_in_ID">Endonezce</string>
+    <string name="locale_lang_in_ID">Indonesian</string>
     <string name="locale_lang_it">İtalyanca</string>
     <string name="locale_lang_pt">Portekizce</string>
     <string name="locale_lang_pt_BR">Portekizce (Brezilya)</string>
@@ -27,12 +27,13 @@
     <string name="locale_lang_hu_HU">Macarca</string>
     <string name="locale_lang_th_TH">Tayca</string>
     <string name="locale_lang_no_NO">Norveççe</string>
-    <string name="locale_lang_fil_PH">Filipince</string>
-    <string name="locale_lang_lo_LA">Laoca</string>
+    <string name="locale_lang_fil_PH">Filipino</string>
+    <string name="locale_lang_lo_LA">Lao</string>
     <string name="locale_lang_cs_CZ">Çekçe</string>
-    <string name="locale_lang_ta">Tamilce</string>
+    <string name="locale_lang_ta">Tamil</string>
     <string name="locale_lang_ro">Romence</string>
     <string name="locale_lang_sv_SE">İsveççe</string>
-    <string name="locale_lang_my_MM">Birmanca</string>
-    <string name="locale_lang_bn_BD">Bengalce</string>
+    <string name="locale_lang_my_MM">Burmese</string>
+    <string name="locale_lang_bn_BD">Bengali</string>
+    <string name="locale_lang_sq">Arnavut</string>
 </resources>
