@@ -8,6 +8,7 @@
     <string name="label_github">Kaynak kodu</string>
     <string name="label_translation">Çeviriler</string>
     <string name="label_beta">Beta\'yı İndir</string>
+    <string name="label_experiment">Deneysel sürüm</string>
     <string name="label_timeline">İşletim Sistemi Zaman Çizelgesi</string>
     <string name="label_privacy_policy">Gizlilik</string>
     <string name="label_open_source_license">Açık kaynak lisansı</string>
