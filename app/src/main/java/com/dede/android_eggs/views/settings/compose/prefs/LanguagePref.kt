@@ -13,7 +13,6 @@ import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -29,6 +28,8 @@ import androidx.compose.material.icons.rounded.Spellcheck
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -41,6 +42,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
@@ -372,16 +374,18 @@ private fun LanguageSelectedDialog(
                 LazyColumn(
                     modifier = Modifier.fillMaxHeight(0.7f)
                 ) {
-                    items(languageOptions) {
+                    items(languageOptions, key = { it.value }) {
                         Row(
-                            modifier = Modifier.clickable {
-                                selectedLangOp = it
-                            },
+                            modifier = Modifier
+                                .clip(MaterialTheme.shapes.medium)
+                                .clickable { selectedLangOp = it },
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Box(modifier = Modifier.padding(start = 14.dp, end = 16.dp)) {
-                                RadioButton(selected = selectedLangOp == it, onClick = null)
-                            }
+                            RadioButton(
+                                modifier = Modifier.padding(start = 12.dp, end = 16.dp),
+                                selected = selectedLangOp == it,
+                                onClick = null,
+                            )
                             val itemLocaleContext = remember(it) { it.toLocalContext(basicContext) }
                             Column(
                                 modifier = Modifier
@@ -390,11 +394,11 @@ private fun LanguageSelectedDialog(
                             ) {
                                 Text(
                                     text = itemLocaleContext.getString(it.langRes),
-                                    style = MaterialTheme.typography.titleMedium
+                                    style = typography.titleMedium.copy(color = colorScheme.onSurface),
                                 )
                                 Text(
                                     text = localeContext.getString(it.langRes),
-                                    style = MaterialTheme.typography.bodySmall,
+                                    style = typography.bodySmall,
                                 )
                             }
                         }
