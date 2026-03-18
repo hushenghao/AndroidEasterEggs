@@ -8,6 +8,7 @@
     <string name="label_github">Izvorni kod</string>
     <string name="label_translation">Prijevod</string>
     <string name="label_beta">Preuzmi betu</string>
+    <string name="label_experiment">Eksperimentalna verzija</string>
     <string name="label_timeline">Vremenska crta</string>
     <string name="label_privacy_policy">Privatnost</string>
     <string name="label_open_source_license">Licencije otvorenog koda</string>
