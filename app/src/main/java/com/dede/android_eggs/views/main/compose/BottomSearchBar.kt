@@ -38,12 +38,12 @@ import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.SaverScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
@@ -52,6 +52,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
+import com.dede.android_eggs.ui.composes.PredictiveBackProgressHandler.predictiveBackShrink
 import com.dede.android_eggs.ui.composes.predictiveBackProgressState
 import com.dede.android_eggs.resources.R as StringsR
 
@@ -136,11 +137,12 @@ fun BottomSearchBar(
         BottomSearchBarView(
             state = state,
             modifier = Modifier
-                .graphicsLayer(
-                    scaleX = 1F - (0.1F * backProgress),
-                    scaleY = 1F - (0.1F * backProgress),
-                    transformOrigin = remember { TransformOrigin(0.5f, 1f) },
-                ),
+                .graphicsLayer {
+                    predictiveBackShrink(
+                        progress = backProgress,
+                        shrinkOrigin = Alignment.BottomCenter
+                    )
+                },
             shape = RoundedCornerShape(
                 topStart = (28 * backProgress).dp,
                 topEnd = (28 * backProgress).dp

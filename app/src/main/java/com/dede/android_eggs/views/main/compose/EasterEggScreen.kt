@@ -29,14 +29,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
@@ -45,6 +43,7 @@ import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.R
 import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.ui.composes.PredictiveBackProgressHandler.predictiveBackShrink
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.ui.composes.predictiveBackProgressState
 import com.dede.android_eggs.util.LocalEvent
@@ -132,16 +131,16 @@ fun EasterEggScreen(
                 ) {
                     drawerState.close()
                 }
-                val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
+                val layoutDirection = LocalLayoutDirection.current
                 ModalDrawerSheet(
                     modifier = Modifier
-                        .graphicsLayer(
-                            scaleX = 1F - (0.1F * backProgress),
-                            scaleY = 1F - (0.1F * backProgress),
-                            transformOrigin = remember {
-                                TransformOrigin(if (isRtl) 0f else 1f, 0.5f)
-                            },
-                        ),
+                        .graphicsLayer {
+                            predictiveBackShrink(
+                                progress = backProgress,
+                                shrinkOrigin = Alignment.CenterEnd,
+                                layoutDirection = layoutDirection
+                            )
+                        },
                     drawerShape = shapes.extraLarge.end(0.dp),
                     windowInsets = WindowInsets(0, 0, 0, 0),
                 ) {
