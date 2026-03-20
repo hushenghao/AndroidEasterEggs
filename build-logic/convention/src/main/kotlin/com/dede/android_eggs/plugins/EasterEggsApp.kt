@@ -47,7 +47,6 @@ class EasterEggsApp : AbsConfigurablePlugin(
 
             packaging {
                 resources.excludes += listOf(
-                    "META-INF/*.version",
                     "META-INF/NOTICE.*",
                     "META-INF/LICENSE",
                     "META-INF/**/LICENSE.txt",
