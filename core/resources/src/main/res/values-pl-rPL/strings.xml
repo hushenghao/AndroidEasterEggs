@@ -8,6 +8,7 @@
     <string name="label_github">Kod źródłowy</string>
     <string name="label_translation">Tłumaczenia</string>
     <string name="label_beta">Pobierz wersję beta</string>
+    <string name="label_experiment">Wersja Eksperymentalna</string>
     <string name="label_timeline">Oś czasu</string>
     <string name="label_privacy_policy">Polityka prywatności</string>
     <string name="label_open_source_license">Licencje Open source</string>
@@ -30,7 +31,7 @@
     <string name="summary_system_default">System</string>
     <string name="summary_theme_dark_mode">Ciemny</string>
     <string name="summary_theme_light_mode">Jasny</string>
-    <string name="summary_theme_amoled_mode">Czarny</string>
+    <string name="summary_theme_amoled_mode">Amoled</string>
     <string name="label_add_shortcut">Skrót</string>
     <string name="label_donate">Darowizna</string>
     <string name="label_update">Aktualizacje</string>
