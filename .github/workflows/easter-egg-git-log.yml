@@ -1,0 +1,44 @@
+name: Easter Egg GitLog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0'  # 每周日零点运行
+
+jobs:
+  easter-egg-gitlog:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Run easter-egg-git-log script
+        run: |
+          cd script/easter-egg-git-log
+          pip install -r requirements.txt
+          python index.py
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet git_logs.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: 'chore: Update easter egg git log'
+          title: 'chore: Update Easter Egg GitLog'
+          body: 'Automated changes from easter-egg-git-log script'
+          branch: update-gitlog-${{ github.run_number }}
+          delete-branch: true
