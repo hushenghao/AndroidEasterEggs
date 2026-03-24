@@ -105,7 +105,7 @@ fun ColorPaletteDialog(
         val scope = rememberCoroutineScope()
         val scrollState = rememberScrollState()
 
-        val paddingValues = BottomSheetDefaults.windowInsets.asPaddingValues()
+        val paddingValues = BottomSheetDefaults.modalWindowInsets.asPaddingValues()
 
         Column(
             modifier = Modifier

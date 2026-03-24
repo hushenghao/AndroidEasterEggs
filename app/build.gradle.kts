@@ -6,6 +6,7 @@ plugins {
     id("easter.eggs.app")
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.aboutlibraries)
+    alias(libs.plugins.stability.analyzer)
 }
 
 android {

@@ -9,7 +9,7 @@ compose-bom = "2026.03.00"
 # https://google.github.io/accompanist
 accompanist = "0.37.3"
 lifecycle = "2.10.0"
-activity = "1.12.2"
+activity = "1.13.0"
 room = "2.8.4"
 about-libraries = "14.0.0-b03"
 ktor = "3.4.1"
@@ -28,10 +28,11 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
 aboutlibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "about-libraries" }
+stability-analyzer = { id = "com.github.skydoves.compose.stability.analyzer", version = "0.7.1" }
 
 [libraries]
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.1"
-androidx-core = "androidx.core:core-ktx:1.17.0"
+androidx-core = "androidx.core:core-ktx:1.18.0"
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "lifecycle" }
 androidx-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
@@ -59,7 +60,7 @@ androidx-compose-livedata = { module = "androidx.compose.runtime:runtime-livedat
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-material = { module = "androidx.compose.material:material" }
-androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.5.0-alpha12" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.5.0-alpha15" }
 androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended" }
 androidx-compose-constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.1.1"
 google-accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
