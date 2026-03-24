@@ -48,6 +48,7 @@
     <string name="toast_no_egg_detail">This Android version doesn\'t have an Easter Egg</string>
     <string name="toast_no_update_found">No update found</string>
 
+    <string name="label_widgets">Widgets</string>
     <string name="app_widget_description">This is the Easter Eggs analog clock</string>
     <string name="action_agree">I agree</string>
     <string name="summary_browse_privacy_policy">By continuing you agree to the Easter Egg\'s privacy policy.</string>

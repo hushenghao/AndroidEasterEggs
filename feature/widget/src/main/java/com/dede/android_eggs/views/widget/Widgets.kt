@@ -30,7 +30,7 @@ import com.dede.android_eggs.resources.R as StringR
 fun Widgets() {
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.Widgets,
-        title = "Widget",
+        title = stringResource(StringR.string.label_widgets),
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
