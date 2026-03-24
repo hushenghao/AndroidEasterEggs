@@ -71,6 +71,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.fastRoundToInt
 import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.ui.views.ViscousFluidInterpolator
@@ -86,7 +87,6 @@ import com.dede.basic.utils.AppLocaleDateFormatter
 import java.util.Date
 import kotlin.math.abs
 import kotlin.math.min
-import kotlin.math.roundToInt
 import com.dede.android_eggs.resources.R as StringsR
 
 @Composable
@@ -311,7 +311,7 @@ private fun EasterEggItemSwipe(
         Box(
             modifier = Modifier
                 .onSizeChanged { triggerOffsetX = it.width / 5f * 2 }
-                .offset { IntOffset(offsetX.roundToInt(), 0) }
+                .offset { IntOffset(offsetX.fastRoundToInt(), 0) }
                 .draggable(
                     reverseDirection = LocalLayoutDirection.current == LayoutDirection.Rtl,
                     orientation = Orientation.Horizontal,

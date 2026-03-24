@@ -1,11 +1,5 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
-import androidx.compose.animation.animateColor
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SwipeToDismissBox
@@ -61,18 +55,9 @@ fun KeepAndroidOpenPref() {
         },
     ) {
         val context = LocalContext.current
-        val infiniteTransition =
-            rememberInfiniteTransition(label = "KeepAndroidOpenInfiniteTransition")
-        val containerColor by infiniteTransition.animateColor(
-            initialValue = Color(0xFF_CC2929), targetValue = Color(0xFF_AE1A1A),
-            animationSpec = infiniteRepeatable(
-                tween(2000, easing = LinearEasing),
-                RepeatMode.Reverse
-            )
-        )
         SettingPref(
             colors = CardDefaults.cardColors(
-                containerColor = containerColor,
+                containerColor = Color(0xFF_CC2929),
                 contentColor = Color.White,
             ),
             desc = {
