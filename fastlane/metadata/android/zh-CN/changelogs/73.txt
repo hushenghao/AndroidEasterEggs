@@ -1,6 +1,7 @@
 - 新增更多图标形状
 - 新增 Android ICS 预览版彩蛋
 - 新增 Android Honeycomb 新的 Platlogo
+- 新增小部件显示
 - 修复已知问题
 - 升级项目依赖项
 - 更新翻译

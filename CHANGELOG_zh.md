@@ -5,6 +5,7 @@
 - 新增更多图标形状
 - 新增 Android ICS 预览版彩蛋
 - 新增 Android Honeycomb 新的 Platlogo
+- 新增小部件显示
 - 修复已知问题
 - 升级项目依赖项
 - 更新翻译
@@ -61,7 +62,8 @@
 ### v4.2.0 (2025-08-25)
 
 - 使用 Composable 波浪线
-- 修复 Landroid 着陆时进入行星内部 [#640](https://github.com/hushenghao/AndroidEasterEggs/issues/640)
+- 修复 Landroid
+  着陆时进入行星内部 [#640](https://github.com/hushenghao/AndroidEasterEggs/issues/640)
 - 修复 Android 16 Landroid 状态栏颜色
 - 修复 Rocket Launcher 缩放进入动画
 - 移除 Telegram 群聊入口
@@ -70,8 +72,10 @@
 ### v4.1.0 (2025-07-07)
 
 - SplashScreen 支持 Android 12 以下系统
-- 修复 Android Q 彩蛋文字“1”旋转动画 [#587](https://github.com/hushenghao/AndroidEasterEggs/issues/587)
-- 修复 Android 16 彩蛋在 Android 8.1 系统获取甜点代码崩溃 [#597](https://github.com/hushenghao/AndroidEasterEggs/issues/597)
+- 修复 Android Q
+  彩蛋文字“1”旋转动画 [#587](https://github.com/hushenghao/AndroidEasterEggs/issues/587)
+- 修复 Android 16 彩蛋在 Android 8.1
+  系统获取甜点代码崩溃 [#597](https://github.com/hushenghao/AndroidEasterEggs/issues/597)
 
 ### v4.0.0 (2025-06-19)
 
@@ -81,9 +85,11 @@
 - 新增 Cat Editor 收藏功能
 - 新增孟加拉语翻译，感谢 [@ChildishRifty7](https://github.com/childishrifty7) 的贡献
 - Rocket Launcher 添加图标集选择 [#554](https://github.com/hushenghao/AndroidEasterEggs/issues/554)
-- 添加 Cat Editor, Rocket Launcher 快捷方式 [#550](https://github.com/hushenghao/AndroidEasterEggs/issues/550)
+- 添加 Cat Editor, Rocket Launcher
+  快捷方式 [#550](https://github.com/hushenghao/AndroidEasterEggs/issues/550)
 - Cat Editor 底部菜单栏优化
-- Cat Editor 问题修复 [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522) [#37138664](https://issuetracker.google.com/issues/37138664) 
+- Cat Editor
+  问题修复 [#522](https://github.com/hushenghao/AndroidEasterEggs/issues/522) [#37138664](https://issuetracker.google.com/issues/37138664)
 - 修复 NekoLand 安全区域 [#566](https://github.com/hushenghao/AndroidEasterEggs/issues/566)
 - 升级项目依赖项
 
@@ -93,7 +99,8 @@
 - 更新 Android 12，13 模拟时钟 时钟实现
 - 彩蛋相关页面开启了 EdgeToEdge 模式
 - 项目导航图迁移
-- 修复 Android 15 Landroid 不全屏显示 [#505](https://github.com/hushenghao/AndroidEasterEggs/issues/505)
+- 修复 Android 15 Landroid
+  不全屏显示 [#505](https://github.com/hushenghao/AndroidEasterEggs/issues/505)
 - 修复 Platlogo 壁纸主题关闭动画
 - 升级项目依赖项
 - 修复已知问题
@@ -123,12 +130,14 @@
 - 添加 Beta 版本渠道
 - 修复 Android MLand 安全距离
 - 修复 Android M 彩蛋玩家的颜色 [#387](https://github.com/hushenghao/AndroidEasterEggs/issues/387)
-- 修复 Android K Dessert Case 不全屏显示 [#349](https://github.com/hushenghao/AndroidEasterEggs/issues/349)
+- 修复 Android K Dessert Case
+  不全屏显示 [#349](https://github.com/hushenghao/AndroidEasterEggs/issues/349)
 - 升级项目依赖项
 
 ### v3.0.1 (2024-09-26)
 
-- 修复 Android 8.1 系统 Android 15 彩蛋添加旗帜时崩溃 [#384](https://github.com/hushenghao/AndroidEasterEggs/issues/384)
+- 修复 Android 8.1 系统 Android 15
+  彩蛋添加旗帜时崩溃 [#384](https://github.com/hushenghao/AndroidEasterEggs/issues/384)
 - 升级项目依赖项
 
 ### v3.0.0 (2024-09-18)
@@ -136,9 +145,10 @@
 - 新增 Android 15 彩蛋 Landroid
 - 更新应用图标，使用 Android 15 彩蛋图标
 - 更新 Android 14 彩蛋名称
-- 更新 EasterEggs 模拟时钟小部件点击行为 [#348](https://github.com/hushenghao/AndroidEasterEggs/issues/348)
+- 更新 EasterEggs
+  模拟时钟小部件点击行为 [#348](https://github.com/hushenghao/AndroidEasterEggs/issues/348)
 - 更新 SplashScreen 图标
-- 修复了时间线缺失 Android JellyBean 
+- 修复了时间线缺失 Android JellyBean
 - 更新翻译
 - 升级项目依赖项
 
@@ -168,8 +178,10 @@
 
 ### v2.5.1 (2024-05-27)
 
-- 修复时间线 BottomModalSheet 崩溃 [#250](https://github.com/hushenghao/AndroidEasterEggs/issues/250)
-- 修复 JellyBean 和 IceCreamSandwich 图像显示密度 [#256](https://github.com/hushenghao/AndroidEasterEggs/issues/256)
+- 修复时间线 BottomModalSheet
+  崩溃 [#250](https://github.com/hushenghao/AndroidEasterEggs/issues/250)
+- 修复 JellyBean 和 IceCreamSandwich
+  图像显示密度 [#256](https://github.com/hushenghao/AndroidEasterEggs/issues/256)
 - 升级项目依赖项
 - 修复其他已知问题
 

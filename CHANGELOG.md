@@ -5,6 +5,7 @@
 - Add more Icon shapes
 - Add Android ICS Preview Easter Egg
 - Add Android Honeycomb new Platlogo
+- Add Widgets pref
 - Known issue fixes
 - Upgrade project dependencies
 - Update translations
