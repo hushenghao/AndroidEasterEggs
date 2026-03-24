@@ -77,7 +77,7 @@ public class PlatLogoActivity extends Activity {
 
     private static final long LAUNCH_TIME = 5000L;
 
-    private static final String EGG_UNLOCK_SETTING = "egg_mode_v";
+    private static final String EGG_UNLOCK_SETTING = "egg_mode_baklava";
 
     private static final float MIN_WARP = 1f;
     private static final float MAX_WARP = 16f; // must go faster
