@@ -40,6 +40,7 @@
     <string name="toast_shortcut_added">Scurtătură adăugată pe ecranul de pornire</string>
     <string name="toast_no_egg_detail">Această versiune de Android nu are un easter egg</string>
     <string name="toast_no_update_found">Nicio actualizare găsită</string>
+    <string name="label_widgets">Widgeturi</string>
     <string name="app_widget_description">Acesta este ceasul analogic al Easter Eggs</string>
     <string name="action_agree">De acord</string>
     <string name="summary_browse_privacy_policy">Continuând, ești de acord cu Politica de confidențialitate a Easter Eggs</string>
