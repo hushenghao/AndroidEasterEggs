@@ -18,9 +18,9 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
 
-      - name: Run easter-egg-git-log script
+      - name: Run easter-egg-log script
         run: |
-          cd script/easter-egg-git-log
+          cd script/easter-egg-log
           pip install -r requirements.txt
           python index.py
 
@@ -39,6 +39,7 @@ jobs:
         with:
           commit-message: 'chore: Update easter egg git log'
           title: 'chore: Update Easter Egg GitLog'
-          body: 'Automated changes from easter-egg-git-log script'
+          body: 'Automated changes from easter-egg-log script'
           branch: update-gitlog-${{ github.run_number }}
           delete-branch: true
+          labels: 'easter-egg'
