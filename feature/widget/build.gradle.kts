@@ -1,5 +1,5 @@
 plugins {
-    id("easter.eggs.library")
+    id("easter.eggs.compose.library")
 }
 
 android {
@@ -8,6 +8,16 @@ android {
 
 dependencies {
     implementation(project(":core:resources"))
+    implementation(project(":core:settings"))
+    implementation(project(":core:icons"))
     implementation(libs.androidx.core)
     implementation(libs.google.material)
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.google.accompanist.drawablepainter)
 }
