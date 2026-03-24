@@ -1,0 +1,38 @@
+{
+  "EasterEgg": {
+    "author": {
+      "email": "mankoff@google.com",
+      "name": "Dave Mankoff",
+      "time": "Wed Feb 26 22:24:15 2025 +0000"
+    },
+    "commit": "f419e8514be2bed47c954b564669d6aeecb1d8e2",
+    "committer": {
+      "email": "mankoff@google.com",
+      "name": "Dave Mankoff",
+      "time": "Thu Feb 27 06:50:33 2025 -0800"
+    },
+    "message": "Fix deprecation errors in EasterEgg.\n\nThese errors block an upgrade to Kotlin 2.1.\n\nBug: 399463072\nFlag: EXEMPT minor refactor\nTest: m EasterEgg\nChange-Id: I8d1c4d299af5621ea27161f5015ab9526332ea39\nMerged-In: I8d1c4d299af5621ea27161f5015ab9526332ea39\n",
+    "parents": [
+      "a80655b5b9b396bb27fc9c36910d7937784e7860"
+    ],
+    "tree": "e0e1133980c2d7eaf094e66305df76bc7aa2bccf"
+  },
+  "PlatLogoActivity.java": {
+    "author": {
+      "email": "dsandler@android.com",
+      "name": "Dan Sandler",
+      "time": "Mon Jun 03 00:06:58 2024 -0400"
+    },
+    "commit": "9f6f73224dabf9db4f7d3840d218fff39991d51b",
+    "committer": {
+      "email": "dsandler@android.com",
+      "name": "Dan Sandler",
+      "time": "Tue Jun 04 16:18:48 2024 -0400"
+    },
+    "message": "ANDROID 15 MISSION UPDATE -- \"VANILLA ICE CREAM\"\n\n// UPDATES\n\n  + IDLE DIVERSIONS\n  + \"AI\" AUTOPILOT\n  + TYPOGRAPHIC COMPRESSION\n  + OCCUPATIONAL DESCRIPTIONS\n  + RENDERING TO THE EDGE OF SPACE\n  + FLAG SUPPORT: LANDED\n\n// TECHNICAL NOTE //\n\n  This brings back the old enable-components trick; once\n  the egg has been invoked, the daydream mode will be\n  unlocked for use and will appear in Settings > Display >\n  Screen saver, or wherever you get your Dreams.\n\nA PRODUCT OF YOYODROID PROPULSION SYSTEMS\n\"WHERE INTEGRATION COMPLETE IS TOMORROW!\"\n\nFixes: 330919557\nBug: 320695719\nFlag: com.android.egg.flags.flag_flag\nTest: easter egg main entry point:\n      adb shell am start -n android/com.android.internal.app.PlatLogoActivity\nTest: interactive mode:\n      adb shell am start -n com.android.egg/.landroid.MainActivity\nTest: screensaver mode:\n      # first, enable the component if you haven't gone\n      # through the main entry point\n      adb root ; adb shell pm enable com.android.egg/.landroid.DreamUniverse\n      # select the screensaver\n      adb shell settings put secure screensaver_components \\\n          com.android.egg.landroid/com.android.egg.landroid.DreamUniverse\n      # start dreaming\n      adb shell service call dreams 1\nChange-Id: I57a8834ce7f3d41aacaa56133e6f512cf81f5346\n",
+    "parents": [
+      "12a0c0125d2d3fe32cb2c8a3cfc205a1f61ec36d"
+    ],
+    "tree": "3a526d5ac206165eac8889ba7a55385bcef813a6"
+  }
+}
