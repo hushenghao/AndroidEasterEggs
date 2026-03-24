@@ -7,10 +7,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Animation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.core.os.bundleOf
 import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.basic.SwitchIntPref
+import com.dede.basic.bundleBuilder
 import com.dede.android_eggs.resources.R as StringsR
 
 object IconVisualEffectsPrefUtil {
@@ -41,10 +41,10 @@ fun IconVisualEffectsPref() {
                 if (it == SettingPrefUtil.ON) {
                     post(SettingPrefUtil.ACTION_CLOSE_SETTING)
                 }
-                post(
-                    IconVisualEffectsPrefUtil.ACTION_CHANGED,
-                    bundleOf(SettingPrefUtil.EXTRA_VALUE to (it == SettingPrefUtil.ON))
-                )
+                val bundle = bundleBuilder {
+                    putBoolean(SettingPrefUtil.EXTRA_VALUE, (it == SettingPrefUtil.ON))
+                }
+                post(IconVisualEffectsPrefUtil.ACTION_CHANGED, bundle)
             }
         }
     )

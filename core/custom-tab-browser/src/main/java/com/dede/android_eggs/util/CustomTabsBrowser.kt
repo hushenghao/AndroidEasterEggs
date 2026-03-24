@@ -9,8 +9,8 @@ import androidx.annotation.StringRes
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
+import com.dede.basic.bundleBuilder
 import com.dede.basic.createChooser
 import com.dede.basic.getConfigurationLocales
 
@@ -58,11 +58,11 @@ object CustomTabsBrowser {
                 Intent.EXTRA_REFERRER,
                 "android-app://%s".format(applicationId).toUri()
             )
-            val headers = bundleOf(
+            val headers = bundleBuilder {
                 // https://developer.android.google.cn/guide/topics/resources/app-languages?hl=zh-cn#consider-header
                 // https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Accept-Language
-                "Accept-Language" to context.getConfigurationLocales().toLanguageTags()
-            )
+                putString("Accept-Language", context.getConfigurationLocales().toLanguageTags())
+            }
             putExtra(Browser.EXTRA_HEADERS, headers)
             putExtra(Browser.EXTRA_APPLICATION_ID, applicationId)
         }

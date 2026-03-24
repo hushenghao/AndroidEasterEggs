@@ -19,6 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.edit
 import com.dede.android_eggs.cat_editor.CatEditorControllerImpl.SaverImpl.KEY_GRID_VISIBLE
 import com.dede.android_eggs.util.pref
+import com.dede.basic.bundleBuilder
 
 
 internal class CatEditorControllerImpl(private val seed: Long) : CatEditorController {
@@ -63,7 +64,7 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
         }
 
         override fun SaverScope.save(value: CatEditorControllerImpl): Bundle {
-            return Bundle().apply {
+            return bundleBuilder {
                 putLong(KEY_SEED, value.seed)
                 putIntArray(KEY_COLORS, value.colorList.map(Color::toArgb).toIntArray())
                 putFloat(KEY_OFFSET_X, value.offsetState.value.x)

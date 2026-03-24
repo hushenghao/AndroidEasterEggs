@@ -51,9 +51,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.os.bundleOf
 import com.dede.android_eggs.ui.composes.PredictiveBackProgressHandler.predictiveBackShrink
 import com.dede.android_eggs.ui.composes.predictiveBackProgressState
+import com.dede.basic.bundleBuilder
 import com.dede.android_eggs.resources.R as StringsR
 
 @Stable
@@ -72,7 +72,6 @@ class BottomSearchBarState(initVisible: Boolean, initSearchText: String) {
         visible = true
     }
 
-    @Suppress("RedundantIf")
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is BottomSearchBarState) return false
@@ -102,10 +101,10 @@ class BottomSearchBarState(initVisible: Boolean, initSearchText: String) {
         }
 
         override fun SaverScope.save(value: BottomSearchBarState): Bundle {
-            return bundleOf(
-                KEY_VISIBLE to value.visible,
-                KEY_SEARCH_TEXT to value.searchText
-            )
+            return bundleBuilder {
+                putBoolean(KEY_VISIBLE, value.visible)
+                putString(KEY_SEARCH_TEXT, value.searchText)
+            }
         }
     }
 }
@@ -173,6 +172,7 @@ private fun BottomSearchBarView(
     Surface(
         modifier = Modifier
             .then(modifier)
+            .focusable()
             .imePadding(),
         shape = shape,
         color = colorScheme.surfaceColorAtElevation(4.dp),
