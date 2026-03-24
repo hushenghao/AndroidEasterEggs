@@ -1,6 +1,6 @@
 # Changelog
 
-### v4.4.4
+### v4.4.4 (2026-03-24)
 
 - Add more Icon shapes
 - Add Android ICS Preview Easter Egg
