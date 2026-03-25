@@ -73,6 +73,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -87,9 +88,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -116,6 +119,7 @@ import dagger.multibindings.IntoSet
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 import androidx.appcompat.R as AppCompatR
 import com.dede.android_eggs.resources.R as StringR
 
@@ -473,6 +477,8 @@ fun CatEditorScreen() {
                     .align(Alignment.TopCenter),
             )
 
+            ZoomHapticFeedback(zoom = catEditorController.zoom)
+
             val eyeDropperLauncher =
                 rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) eyeDropperResult@{
                     if (it.resultCode == Activity.RESULT_OK) {
@@ -610,6 +616,25 @@ private fun SaveCatButton(
         enabled = !isSaving
     ) {
         Icon(imageVector = imageVector, contentDescription = contentDescription)
+    }
+}
+
+@Composable
+private fun ZoomHapticFeedback(
+    zoom: Float,
+    hapticZoomStep: Float = 0.1f,
+    hapticInterval: Long = 80L,
+) {
+    val hapticFeedback = LocalHapticFeedback.current
+    var lastHapticTime by remember(hapticInterval) { mutableLongStateOf(System.currentTimeMillis()) }
+    var lastHapticZoom by remember(hapticZoomStep) { mutableFloatStateOf(zoom) }
+    LaunchedEffect(zoom) {
+        val now = System.currentTimeMillis()
+        if ((now - lastHapticTime) >= hapticInterval && abs(lastHapticZoom - zoom) > hapticZoomStep) {
+            hapticFeedback.performHapticFeedback(HapticFeedbackType.SegmentFrequentTick)
+            lastHapticTime = now
+            lastHapticZoom = zoom
+        }
     }
 }
 

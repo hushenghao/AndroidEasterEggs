@@ -98,7 +98,7 @@ internal fun CatEditor(
         AnimatedVisibility(
             visible = controllerImpl.isGridVisible,
             enter = fadeIn(),
-            exit = fadeOut()
+            exit = fadeOut(),
         ) {
             CatEditorGridPoint()
         }

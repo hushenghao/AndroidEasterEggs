@@ -1,5 +1,12 @@
 # Changelog
 
+### v4.4.5
+
+- Cat Editor add zoom haptic feedback
+- Known issue fixes
+- Upgrade project dependencies
+- Update translations
+
 ### v4.4.4 (2026-03-24)
 
 - Add more Icon shapes
