@@ -40,6 +40,7 @@
     <string name="toast_shortcut_added">Dodano skrót do ekranu głównego</string>
     <string name="toast_no_egg_detail">Ta wersja androida nie miała easter eggów</string>
     <string name="toast_no_update_found">Nie znaleziono aktualizacji</string>
+    <string name="label_widgets">Widżety</string>
     <string name="app_widget_description">To jest zegar analogowy Easter Eggi</string>
     <string name="action_agree">Zgadzam się</string>
     <string name="summary_browse_privacy_policy">Przeczytaj i zaakceptuj naszą politykę prywatności, aby kontynuować</string>
