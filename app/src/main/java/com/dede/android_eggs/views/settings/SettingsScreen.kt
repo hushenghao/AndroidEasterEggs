@@ -38,11 +38,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.util.LocalEvent
-import com.dede.android_eggs.util.Receiver
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.views.settings.compose.basic.SettingDivider
-import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.groups.AboutGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContactMeGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContributeGroup
@@ -66,18 +63,6 @@ import com.dede.android_eggs.resources.R as StringsR
 @Preview(widthDp = 320)
 @Composable
 fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed)) {
-    val scope = rememberCoroutineScope()
-
-    fun closeDrawer() {
-        scope.launch {
-            drawerState.close()
-        }
-    }
-
-    LocalEvent.Receiver(SettingPrefUtil.ACTION_CLOSE_SETTING) {
-        closeDrawer()
-    }
-
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout)
     Scaffold(
@@ -97,9 +82,14 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = {
-                        closeDrawer()
-                    }) {
+                    val scope = rememberCoroutineScope()
+                    IconButton(
+                        onClick = {
+                            scope.launch {
+                                drawerState.close()
+                            }
+                        },
+                    ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
                             contentDescription = null

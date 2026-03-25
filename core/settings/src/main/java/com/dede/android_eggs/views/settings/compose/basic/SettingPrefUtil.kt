@@ -14,8 +14,6 @@ object SettingPrefUtil {
 
     const val EXTRA_VALUE = "extra_value"
 
-    const val ACTION_CLOSE_SETTING = "com.dede.easter_eggs.CloseSetting"
-
     fun getValue(context: Context, key: String, default: Int): Int {
         return context.pref.getInt(key, default)
     }

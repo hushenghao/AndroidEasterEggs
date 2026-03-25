@@ -119,10 +119,11 @@ fun EasterEggScreen(
     }
 
     val konfettiState = LocalKonfettiState.current
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
     CompositionLocalProvider(
         LocalEasterEggLogoSensor provides logoSensor,
+        LocalDrawerState provides drawerState,
     ) {
-        val drawerState = rememberDrawerState(DrawerValue.Closed)
         ReverseModalNavigationDrawer(
             drawerContent = {
                 val backProgress by predictiveBackProgressState(

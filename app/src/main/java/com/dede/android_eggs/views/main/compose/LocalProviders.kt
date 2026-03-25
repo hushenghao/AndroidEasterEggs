@@ -1,5 +1,6 @@
 package com.dede.android_eggs.views.main.compose
 
+import androidx.compose.material3.DrawerState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -12,4 +13,8 @@ val LocalEasterEggLogoSensor = compositionLocalOf<EasterEggLogoSensorMatrixConve
 
 val LocalKonfettiState = staticCompositionLocalOf {
     mutableStateOf(false)
+}
+
+val LocalDrawerState = compositionLocalOf<DrawerState> {
+    noLocalProvidedFor("LocalDrawerState")
 }
