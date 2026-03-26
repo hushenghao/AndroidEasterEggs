@@ -39,6 +39,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,6 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.BuildConfig
+import com.dede.android_eggs.views.main.compose.LocalDrawerState
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
@@ -61,6 +63,7 @@ import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
 import com.dede.android_eggs.views.settings.compose.basic.radioButtonBlock
 import com.dede.basic.createLocalesContext
 import com.dede.basic.getLayoutDirection
+import kotlinx.coroutines.launch
 import java.util.Locale
 import com.dede.android_eggs.resources.R as StringsR
 
@@ -270,15 +273,21 @@ fun LanguagePref() {
     }
 
     val context = LocalContext.current
+    val drawerState = LocalDrawerState.current
+    val scope = rememberCoroutineScope()
 
-    val onOptionClick = { option: Int ->
-        languageOptionValue = option
-        val locales = LanguagePrefUtil.getLocaleByValue(option)
-        try {
-            AppCompatDelegate.setApplicationLocales(locales)
-        } catch (_: RuntimeException) {
-            // https://issuetracker.google.com/issues/318314368
-            launchAppLocaleSettings(context)
+    fun performOnOptionSelected(option: Int) {
+        scope.launch {
+            drawerState.close()
+
+            languageOptionValue = option
+            val locales = LanguagePrefUtil.getLocaleByValue(option)
+            try {
+                AppCompatDelegate.setApplicationLocales(locales)
+            } catch (_: RuntimeException) {
+                // https://issuetracker.google.com/issues/318314368
+                launchAppLocaleSettings(context)
+            }
         }
     }
 
@@ -293,7 +302,7 @@ fun LanguagePref() {
             },
             onLanguageSelected = {
                 moreDialogVisible = false
-                onOptionClick.invoke(it.value)
+                performOnOptionSelected(it.value)
             }
         )
     }
@@ -307,7 +316,7 @@ fun LanguagePref() {
             shape = OptionShapes.firstShape(),
             title = stringResource(id = StringsR.string.summary_system_default),
             trailingContent = radioButtonBlock(languageOptionValue == LanguagePrefUtil.SYSTEM),
-            onOptionClick = onOptionClick,
+            onOptionClick = ::performOnOptionSelected,
             value = LanguagePrefUtil.SYSTEM
         )
         if (langOp != null) {
@@ -315,7 +324,7 @@ fun LanguagePref() {
                 leadingIcon = imageVectorIconBlock(imageVector = Icons.Rounded.Spellcheck),
                 title = stringResource(id = langOp.langRes),
                 trailingContent = radioButtonBlock(languageOptionValue == langOp.value),
-                onOptionClick = onOptionClick,
+                onOptionClick = ::performOnOptionSelected,
                 value = langOp.value
             )
         }
