@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.shapes
@@ -231,8 +232,8 @@ fun EasterEggList(
                                     .padding(vertical = 26.dp),
                             )
                         }
-                        items(items = normalList) {
-                            EasterEggItem(it, enableItemAnim = false)
+                        itemsIndexed(items = normalList) { index, item ->
+                            EasterEggItem(base = item, enableItemAnim = false, index = index)
                         }
                         item("wavy") {
                             Wavy(

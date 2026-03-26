@@ -33,6 +33,9 @@ class Navigator(val state: NavigationState) {
     val currentBackStack: NavBackStack<NavKey>?
         get() = state.backStacks[state.topLevelRoute]
 
+    val currentRoute: NavKey?
+        get() = currentBackStack?.lastOrNull()
+
     internal val requireCurrentBackStack: NavBackStack<NavKey>
         get() = currentBackStack ?: error("Stack for ${state.topLevelRoute} not found")
 

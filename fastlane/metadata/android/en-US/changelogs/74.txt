@@ -1,0 +1,5 @@
+- Easter Egg item add swipe guide
+- Cat Editor add zoom haptic feedback
+- Known issue fixes
+- Upgrade project dependencies
+- Update translations

@@ -4,6 +4,7 @@ package com.dede.android_eggs.views.main.compose
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -45,11 +46,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -72,6 +75,8 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastRoundToInt
+import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.ui.views.ViscousFluidInterpolator
@@ -79,12 +84,17 @@ import com.dede.android_eggs.views.main.util.AndroidReleaseDateMatcher
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.EggActionHelp
+import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
+import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
 import com.dede.basic.utils.AppLocaleDateFormatter
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.Date
+import kotlin.concurrent.atomics.ExperimentalAtomicApi
 import kotlin.math.abs
 import kotlin.math.min
 import com.dede.android_eggs.resources.R as StringsR
@@ -236,21 +246,49 @@ private fun rememberEasterEggState(base: BaseEasterEgg): EasterEggState {
 }
 
 @Composable
+private fun EasterEggItemSwipeGuide(isEnabled: Boolean, state: EasterEggItemSwipeState) {
+    if (!isEnabled) {
+        return
+    }
+    var needGuidePref by rememberPrefBoolState(SettingPrefUtil.KEY_EGG_ITEM_NEED_GUIDE_SWIPE, true)
+    if (!needGuidePref) {
+        return
+    }
+    val navigator = LocalNavigator.current
+    LaunchedEffect(navigator.currentRoute) {
+        if (navigator.currentRoute != EasterEggsDestination.EasterEggs) {
+            return@LaunchedEffect
+        }
+        val maxOffset = state.triggerOffsetXState.floatValue * -0.9f
+        state.animateToOffset(
+            maxOffset,
+            tween(800, delayMillis = 300)
+        )
+        delay(1000)
+        state.animateToRelease()
+        needGuidePref = false
+    }
+}
+
+@Composable
 @Preview(showBackground = true)
 fun EasterEggItem(
     base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first(),
     enableItemAnim: Boolean = false,
+    index: Int = -1,
 ) {
     val context = LocalContext.current
 
     val easterEggState = rememberEasterEggState(base)
     val egg = easterEggState.getEasterEgg()
     val supportShortcut = remember(egg) { EasterEggShortcutsHelp.isSupportShortcut(egg) }
-    var swipeProgress by remember { mutableFloatStateOf(0f) }
 
+    val state = rememberEasterEggItemSwipeState()
+    EasterEggItemSwipeGuide(isEnabled = index == 0, state = state)
     EasterEggItemSwipe(
+        state = state,
         floor = {
-            EasterEggItemFloor(egg, supportShortcut, swipeProgress)
+            EasterEggItemFloor(egg, supportShortcut, state.swipeProgress)
         },
         content = {
             EasterEggItemContent(egg, base, enableItemAnim) { index ->
@@ -258,9 +296,6 @@ fun EasterEggItem(
             }
         },
         supportShortcut = supportShortcut,
-        onSwipe = {
-            swipeProgress = it
-        },
         addShortcut = {
             EasterEggShortcutsHelp.pinShortcut(context, egg)
         },
@@ -268,46 +303,77 @@ fun EasterEggItem(
 }
 
 @Composable
+private fun rememberEasterEggItemSwipeState(): EasterEggItemSwipeState {
+    return remember() { EasterEggItemSwipeState() }
+}
+
+@OptIn(ExperimentalAtomicApi::class)
+@Stable
+private class EasterEggItemSwipeState {
+    val offsetXState = mutableFloatStateOf(0f)
+    val triggerOffsetXState = mutableFloatStateOf(0f)
+
+    val swipeProgress: Float
+        get() {
+            val offsetX = offsetXState.floatValue
+            val triggerOffsetX = triggerOffsetXState.floatValue
+            return if (triggerOffsetX == 0f) 0f else min(abs(offsetX) / triggerOffsetX, 1f)
+        }
+
+    suspend fun animateToOffset(
+        targetOffset: Float,
+        animationSpec: AnimationSpec<Float> = tween(300),
+    ) {
+        animate(offsetXState.floatValue, targetOffset, animationSpec = animationSpec) { value, _ ->
+            offsetXState.floatValue = value
+        }
+    }
+
+    suspend fun animateToRelease() {
+        animateToOffset(0f)
+    }
+}
+
+@Composable
 private fun EasterEggItemSwipe(
+    state: EasterEggItemSwipeState = rememberEasterEggItemSwipeState(),
     floor: @Composable () -> Unit,
     content: @Composable () -> Unit,
     supportShortcut: Boolean,
     addShortcut: () -> Unit,
-    onSwipe: (p: Float) -> Unit,
 ) {
     val currentAddShortcut by rememberUpdatedState(newValue = addShortcut)
-    val currentOnSwipe by rememberUpdatedState(newValue = onSwipe)
 
-    var released by remember { mutableStateOf(false) }
-    var offsetX by remember { mutableFloatStateOf(0f) }
-    var triggerOffsetX = remember { 0f }
-    var needTrigger by remember { mutableStateOf(false) }
+    var offsetX by state.offsetXState
+    var triggerOffsetX by state.triggerOffsetXState
 
-    val intercept = remember { ViscousFluidInterpolator.getInstance() }
-
-    fun callbackSwipeProgress(offsetX: Float) {
-        if (!supportShortcut) return
-        val p = if (triggerOffsetX == 0f) 0f else
-            min(abs(offsetX) / triggerOffsetX, 1f)
-        currentOnSwipe(p)
-    }
-
-    LaunchedEffect(released) {
-        if (released) {
-            animate(offsetX, 0f, animationSpec = tween(300)) { value, _ ->
-                offsetX = value
-                callbackSwipeProgress(value)
-            }
-        }
-    }
-
+    val scope = rememberCoroutineScope()
     Box(
         contentAlignment = Alignment.Center,
     ) {
         if (offsetX != 0f) {
             floor()
         }
+
+        var needTrigger by remember { mutableStateOf(false) }
+        val intercept = remember { ViscousFluidInterpolator.getInstance() }
+
         val hapticFeedback = LocalHapticFeedback.current
+        val draggableState = rememberDraggableState { delta ->
+            val p = if (triggerOffsetX == 0f) {
+                1f
+            } else {
+                intercept.getInterpolation(1f - abs(offsetX) / (triggerOffsetX * 1.24f))
+            }
+            offsetX += delta * min(p, 1f)
+
+            if (supportShortcut) {
+                if (!needTrigger && (-offsetX) >= triggerOffsetX) {
+                    needTrigger = true
+                    hapticFeedback.performHapticFeedback(HapticFeedbackType.SegmentTick)
+                }
+            }
+        }
         Box(
             modifier = Modifier
                 .onSizeChanged { triggerOffsetX = it.width / 5f * 2 }
@@ -315,31 +381,14 @@ private fun EasterEggItemSwipe(
                 .draggable(
                     reverseDirection = LocalLayoutDirection.current == LayoutDirection.Rtl,
                     orientation = Orientation.Horizontal,
-                    state = rememberDraggableState { delta ->
-                        val p = if (triggerOffsetX == 0f) {
-                            1f
-                        } else {
-                            intercept.getInterpolation(
-                                1f - abs(offsetX) / (triggerOffsetX * 1.24f)
-                            )
-                        }
-                        offsetX += delta * min(p, 1f)
-                        if (supportShortcut) {
-                            if (!needTrigger && (-offsetX) >= triggerOffsetX) {
-                                needTrigger = true
-                                hapticFeedback.performHapticFeedback(HapticFeedbackType.SegmentTick)
-                            }
-                            callbackSwipeProgress(offsetX)
-                        }
-                    },
-                    onDragStarted = {
-                        released = false
-                    },
+                    state = draggableState,
                     onDragStopped = {
                         if (supportShortcut && needTrigger && abs(offsetX) >= triggerOffsetX) {
                             currentAddShortcut()
                         }
-                        released = true
+                        scope.launch {
+                            state.animateToRelease()
+                        }
                         needTrigger = false
                     }
                 ),

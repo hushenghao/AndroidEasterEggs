@@ -27,6 +27,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.pref
+import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil.KEY_PRIVACY_POLICY_AGREED
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
 import com.dede.android_eggs.views.settings.compose.prefs.SnapshotDialogView
 import dagger.Module
@@ -36,10 +37,8 @@ import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import com.dede.android_eggs.resources.R as StringsR
 
-private const val KEY = "key_welcome_status"
-
 fun isAgreedPrivacyPolicy(context: Context): Boolean {
-    return context.pref.getBoolean(KEY, false)
+    return context.pref.getBoolean(KEY_PRIVACY_POLICY_AGREED, false)
 }
 
 @Module
@@ -63,7 +62,7 @@ object WelcomeDialog : EasterEggsDestination, EasterEggsDestination.Provider {
 @Preview
 @Composable
 fun WelcomeDialog(onDismiss: () -> Unit = {}) {
-    var prefShowed by rememberPrefBoolState(KEY, false)
+    var privacyPolicyAgreed by rememberPrefBoolState(KEY_PRIVACY_POLICY_AGREED, false)
     val context = LocalContext.current
     var konfettiState by LocalKonfettiState.current
     AlertDialog(
@@ -101,7 +100,7 @@ fun WelcomeDialog(onDismiss: () -> Unit = {}) {
         },
         confirmButton = {
             TextButton(onClick = {
-                prefShowed = true
+                privacyPolicyAgreed = true
                 konfettiState = true
                 onDismiss()
             }) {

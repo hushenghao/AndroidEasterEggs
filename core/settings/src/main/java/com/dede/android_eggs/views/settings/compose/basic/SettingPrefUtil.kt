@@ -14,6 +14,10 @@ object SettingPrefUtil {
 
     const val EXTRA_VALUE = "extra_value"
 
+    const val KEY_PRIVACY_POLICY_AGREED = "key_welcome_status"
+
+    const val KEY_EGG_ITEM_NEED_GUIDE_SWIPE = "key_egg_item_need_guide_swipe"
+
     fun getValue(context: Context, key: String, default: Int): Int {
         return context.pref.getInt(key, default)
     }
