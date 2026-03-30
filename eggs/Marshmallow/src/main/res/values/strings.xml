@@ -2,4 +2,11 @@
     <string name="m_mland">Marshmallow Land</string>
 
     <string name="m_android_nickname" translatable="false">Marshmallow</string>
+
+    <string name="m_preview_land">Shruggy</string>
+    <string name="m_preview_nickname" translatable="false">M Preview</string>
+    <!-- For preview release. DO NOT TRANSLATE -->
+    <string name="m_regrettable_lack_of_easter_egg">
+        ¯\\_(ツ)_/¯
+    </string>
 </resources>

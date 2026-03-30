@@ -8,7 +8,10 @@ import androidx.annotation.NonNull;
 
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
+import com.dede.basic.provider.EasterEggGroup;
 import com.dede.basic.provider.EasterEggProvider;
+import com.dede.basic.provider.EasterEggProviderKt;
+import com.dede.basic.provider.SnapshotProvider;
 import com.dede.basic.provider.TimelineEvent;
 
 import java.util.List;
@@ -31,18 +34,33 @@ public class AndroidMarshmallowEasterEgg implements EasterEggProvider {
     @Singleton
     @Override
     public BaseEasterEgg provideEasterEgg() {
-        return new EasterEgg(
-                R.drawable.m_android_logo,
-                R.string.m_mland,
-                R.string.m_android_nickname,
-                Build.VERSION_CODES.M,
-                PlatLogoActivity.class
-        ) {
-            @Override
-            public SnapshotProvider provideSnapshotProvider() {
-                return new SnapshotProvider();
-            }
-        };
+        return new EasterEggGroup(
+                new EasterEgg(
+                        R.drawable.m_android_logo,
+                        R.string.m_mland,
+                        R.string.m_android_nickname,
+                        Build.VERSION_CODES.M,
+                        PlatLogoActivity.class
+                ) {
+                    @Override
+                    public SnapshotProvider provideSnapshotProvider() {
+                        return new com.android_m.egg.SnapshotProvider();
+                    }
+                },
+                new EasterEgg(
+                        R.drawable.m_android_preview_logo,
+                        R.string.m_preview_land,
+                        R.string.m_preview_nickname,
+                        EasterEggProviderKt.toRange(Build.VERSION_CODES.M),
+                        com.android_m.egg.preview.PlatLogoActivity.class,
+                        EasterEggProviderKt.toRange(EasterEgg.VERSION_CODES_FULL.M_PREVIEW)
+                ) {
+                    @Override
+                    public SnapshotProvider provideSnapshotProvider() {
+                        return new com.android_m.egg.preview.SnapshotProvider();
+                    }
+                }
+        );
     }
 
     @IntoSet

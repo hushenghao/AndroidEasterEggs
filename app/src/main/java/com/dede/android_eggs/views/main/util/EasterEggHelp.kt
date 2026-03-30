@@ -11,6 +11,7 @@ import androidx.core.util.putAll
 import com.dede.android_eggs.R
 import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.isFullApiLevel
 import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
 import com.dede.basic.provider.EasterEggProvider
 import dagger.Module
@@ -105,6 +106,9 @@ object EasterEggHelp {
         @androidx.annotation.IntRange(from = Build.VERSION_CODES.BASE.toLong())
         level: Int
     ): String {
+        if (level.isFullApiLevel()) {
+            return apiLevelArrays[level] ?: throw IllegalArgumentException("Illegal full Api level: $level")
+        }
         return apiLevelArrays[level.toFullApiLevel()]
             ?: apiLevelArrays[level]
             ?: throw IllegalArgumentException("Illegal Api level: $level")
@@ -162,6 +166,7 @@ object EasterEggHelp {
         // static full api level mappings
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.ICS_PREVIEW] = "ICS"
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.L_PREVIEW] = "L"
+        apiLevelArrays[EasterEgg.VERSION_CODES_FULL.M_PREVIEW] = "M"
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.BAKLAVA_1] = "16.1"
 
         // development version

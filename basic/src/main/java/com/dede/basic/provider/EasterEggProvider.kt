@@ -64,9 +64,14 @@ open class EasterEgg @JvmOverloads constructor(
             return this * SDK_INT_MULTIPLIER
         }
 
+        fun Int.isFullApiLevel(): Boolean {
+            return this > SDK_INT_MULTIPLIER
+        }
+
         // android.os.Build.VERSION_CODES_FULL#SDK_INT_MULTIPLIER
         const val SDK_INT_MULTIPLIER = 100000
 
+        const val M_PREVIEW = Build.VERSION_CODES.M * SDK_INT_MULTIPLIER - 1
         const val L_PREVIEW = Build.VERSION_CODES.LOLLIPOP * SDK_INT_MULTIPLIER - 1
         const val ICS_PREVIEW = Build.VERSION_CODES.ICE_CREAM_SANDWICH * SDK_INT_MULTIPLIER - 1
         const val BAKLAVA_1 = Build.VERSION_CODES.BAKLAVA * SDK_INT_MULTIPLIER + 1

@@ -408,7 +408,7 @@ fun EasterEggItemContent(
 ) {
     val context = LocalContext.current
     val isGroup = base is EasterEggGroup
-    val androidVersion = remember(egg) {
+    val androidVersion = remember(egg.fullApiLevelRange) {
         EasterEggHelp.VersionFormatter.create(egg.fullApiLevelRange, egg.nicknameRes)
             .format(context)
     }
