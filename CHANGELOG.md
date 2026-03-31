@@ -2,7 +2,7 @@
 
 ### v4.4.5
 
-- Add Android M preview Egg
+- Add Android M preview Egg [#790](https://github.com/hushenghao/AndroidEasterEggs/issues/790)
 - Easter Egg item add swipe guide
 - Cat Editor add zoom haptic feedback
 - Known issue fixes

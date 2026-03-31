@@ -2,7 +2,7 @@
 
 ### v4.4.5
 
-- 新增 Android M 预览版彩蛋
+- 新增 Android M 预览版彩蛋 [#790](https://github.com/hushenghao/AndroidEasterEggs/issues/790)
 - Easter Egg 条目添加侧滑引导
 - Cat Editor 添加缩放反馈
 - 修复已知问题
