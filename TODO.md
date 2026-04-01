@@ -8,6 +8,7 @@
 |   ❓   |    Idea    | Just some ideas, not necessarily put into practice. |
 
 * ❓删除 IconVisualEffects
+* SharePreferences 迁移到 DataStore
 * 时间线列表 Android logo 布局优化
 * ✅语言修改后关闭侧滑菜单
 * ✅EasterEggItem添加引导侧滑功能

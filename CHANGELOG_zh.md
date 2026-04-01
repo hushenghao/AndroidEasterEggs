@@ -5,6 +5,7 @@
 - 新增 Android M 预览版彩蛋 [#790](https://github.com/hushenghao/AndroidEasterEggs/issues/790)
 - Easter Egg 条目添加侧滑引导
 - Cat Editor 添加缩放反馈
+- 修复搜索栏软件键盘不自动显示
 - 修复已知问题
 - 升级项目依赖项
 - 更新翻译

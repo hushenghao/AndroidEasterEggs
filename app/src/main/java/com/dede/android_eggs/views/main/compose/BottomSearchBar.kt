@@ -8,7 +8,6 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -166,13 +165,14 @@ private fun BottomSearchBarView(
             focusRequester.requestFocus()
             keyboardController?.show()
         } else {
+            focusRequester.freeFocus()
             keyboardController?.hide()
         }
     }
     Surface(
         modifier = Modifier
             .then(modifier)
-            .focusable()
+            .navigationBarsPadding()
             .imePadding(),
         shape = shape,
         color = colorScheme.surfaceColorAtElevation(4.dp),
@@ -184,8 +184,6 @@ private fun BottomSearchBarView(
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(focusRequester)
-                .focusable()
-                .navigationBarsPadding()
                 .padding(horizontal = 16.dp, vertical = 10.dp),
             value = state.searchText,
             onValueChange = {

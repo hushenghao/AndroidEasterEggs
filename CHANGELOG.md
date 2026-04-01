@@ -5,6 +5,7 @@
 - Add Android M preview Egg [#790](https://github.com/hushenghao/AndroidEasterEggs/issues/790)
 - Easter Egg item add swipe guide
 - Cat Editor add zoom haptic feedback
+- Fix search bar software keyboard not show automatically
 - Known issue fixes
 - Upgrade project dependencies
 - Update translations
