@@ -147,7 +147,9 @@ fun EasterEggScreen(
                     windowInsets = WindowInsets(0, 0, 0, 0),
                 ) {
                     val maxWidth = LocalConfiguration.current.smallestScreenWidthDp * 0.8f
-                    Box(modifier = Modifier.width(maxWidth.dp)) {
+                    Box(
+                        modifier = Modifier.width(maxWidth.dp),
+                    ) {
                         SettingsScreen(drawerState)
                     }
                 }
@@ -167,10 +169,14 @@ fun EasterEggScreen(
                 modifier = Modifier
                     .nestedScroll(scrollBehavior.nestedScrollConnection),
                 bottomBar = {
-                    BottomSearchBar(searchBarState)
+                    BottomSearchBar(state = searchBarState)
                 }
             ) { contentPadding ->
-                EasterEggList(viewModel.easterEggs, searchBarState.searchText, contentPadding)
+                EasterEggList(
+                    easterEggs = viewModel.easterEggs,
+                    searchText = searchBarState.searchText,
+                    contentPadding = contentPadding,
+                )
             }
         }
 
@@ -183,6 +189,7 @@ private const val HIGHEST_COUNT = 1
 @Composable
 @Preview(showBackground = true)
 fun EasterEggList(
+    modifier: Modifier = Modifier,
     easterEggs: List<BaseEasterEgg> = EasterEggHelp.previewEasterEggs(),
     searchText: String = "",
     contentPadding: PaddingValues = PaddingValues(0.dp),
@@ -200,7 +207,9 @@ fun EasterEggList(
         }
     }
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .then(modifier)
+            .fillMaxSize(),
         contentAlignment = Alignment.TopCenter,
     ) {
         Crossfade(
