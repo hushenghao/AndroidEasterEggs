@@ -10,8 +10,8 @@ class FlavorFeaturesImpl : FlavorFeatures {
         GooglePlayCore.launchReview(activity)
     }
 
-    override suspend fun checkUpdate(activity: Activity): LatestVersion? {
+    override suspend fun checkUpdate(activity: Activity): Result<LatestVersion> {
         GooglePlayCore.checkUpdate(activity)
-        return null
+        return Result.failure(UnsupportedOperationException("market flavor uses Google Play in-app update; no LatestVersion returned"))
     }
 }

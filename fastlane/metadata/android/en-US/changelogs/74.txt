@@ -2,6 +2,7 @@
 - Easter Egg item add swipe guide
 - Cat Editor add zoom haptic feedback
 - Fix search bar software keyboard not show automatically
+- Fix check update network error crash #797
 - Known issue fixes
 - Upgrade project dependencies
 - Update translations

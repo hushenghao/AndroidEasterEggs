@@ -17,5 +17,5 @@ interface FlavorFeatures {
 
     fun launchReview(activity: ComponentActivity)
 
-    suspend fun checkUpdate(activity: Activity): LatestVersion?
+    suspend fun checkUpdate(activity: Activity): Result<LatestVersion>
 }

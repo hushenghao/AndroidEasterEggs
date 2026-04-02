@@ -6,28 +6,32 @@ import androidx.activity.ComponentActivity
 import com.dede.android_eggs.flavor.FlavorFeatures
 import com.dede.android_eggs.flavor.LatestVersion
 import io.ktor.client.HttpClient
-import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.expectSuccess
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.request.get
+import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.headers
+import io.ktor.client.request.request
 import io.ktor.client.request.url
 import io.ktor.http.HttpHeaders.Accept
+import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.serialization.kotlinx.json.json
+import io.ktor.utils.io.CancellationException
+import kotlinx.io.IOException
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 class FlavorFeaturesImpl : FlavorFeatures {
-    override fun launchReview(activity: ComponentActivity) {
-    }
 
-    override suspend fun checkUpdate(activity: Activity): LatestVersion? {
-        val client = HttpClient {
+    companion object {
+
+        private val KtorClient = HttpClient {
             install(Logging) {
                 logger = object : Logger {
                     override fun log(message: String) {
@@ -41,23 +45,45 @@ class FlavorFeaturesImpl : FlavorFeatures {
                     ignoreUnknownKeys = true
                 })
             }
+            install(HttpTimeout) {
+                requestTimeoutMillis = 10_000
+                connectTimeoutMillis = 10_000
+                socketTimeoutMillis = 10_000
+            }
         }
-        try {
-            val response = client.get {
-                url("https://api.github.com/repos/hushenghao/AndroidEasterEggs/releases/latest")
-                headers {
-                    append(Accept, "application/vnd.github+json")
-                    append("X-GitHub-Api-Version", "2022-11-28")
+
+        private suspend inline fun <reified T> HttpClient.simpleRequest(block: HttpRequestBuilder.() -> Unit): Result<T> {
+            try {
+                val response = request {
+                    expectSuccess = false
+                    block()
                 }
+                if (response.status != OK) {
+                    return Result.failure(IOException("Unexpected response status: ${response.status}"))
+                }
+                return Result.success(response.body<T>())
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                return Result.failure(e)
             }
-            if (response.status != OK) {
-                return null
+        }
+    }
+
+    override fun launchReview(activity: ComponentActivity) {
+    }
+
+    override suspend fun checkUpdate(activity: Activity): Result<LatestVersion> {
+        val result = KtorClient.simpleRequest<GitHubLatestRelease> {
+            method = HttpMethod.Get
+            url("https://api.github.com/repos/hushenghao/AndroidEasterEggs/releases/latest")
+            headers {
+                append(Accept, "application/vnd.github+json")
+                append("X-GitHub-Api-Version", "2022-11-28")
             }
-            return response.body<GitHubLatestRelease>().toLatestRelease()
-        } catch (e: NoTransformationFoundException) {
-            return null
-        } finally {
-            client.close()
+        }
+        return result.mapCatching {
+            it.toLatestVersion() ?: throw IOException("No APK asset found in the latest release")
         }
     }
 }
@@ -81,7 +107,7 @@ private data class GitHubLatestRelease(
         val contentType: String,
     )
 
-    fun toLatestRelease(): LatestVersion? {
+    fun toLatestVersion(): LatestVersion? {
         val apkAsset =
             assets.firstOrNull { it.contentType == "application/vnd.android.package-archive" }
         if (apkAsset == null) {
