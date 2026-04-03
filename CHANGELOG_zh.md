@@ -2,6 +2,7 @@
 
 ### v4.4.5
 
+- 新增 Neko Controls 小组件 [#804](https://github.com/hushenghao/AndroidEasterEggs/issues/804)
 - 更新 Android 17 platlogo [#800](https://github.com/hushenghao/AndroidEasterEggs/issues/800)
 - 新增 Android M 预览版彩蛋 [#790](https://github.com/hushenghao/AndroidEasterEggs/issues/790)
 - 新增 Android K 预览版彩蛋 [#801](https://github.com/hushenghao/AndroidEasterEggs/issues/801)

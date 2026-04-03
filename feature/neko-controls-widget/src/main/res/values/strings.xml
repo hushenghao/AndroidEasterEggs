@@ -1,0 +1,24 @@
+<resources>
+    <string name="neko_widget_description">Neko controls widget</string>
+    <string name="neko_widget_title">Neko controls</string>
+    <string name="neko_widget_subtitle">Tap any card to shuffle its current state.</string>
+
+    <string name="neko_widget_status_title">Mood</string>
+    <string name="neko_widget_status_ready">Ready for chaos</string>
+    <string name="neko_widget_status_thriving">Thriving and curious</string>
+    <string name="neko_widget_status_playful">Playful and calm</string>
+    <string name="neko_widget_status_needs_attention">Needs a little care</string>
+
+    <string name="neko_widget_water_title">Water bubbler</string>
+    <string name="neko_widget_water_status">%1$d mL</string>
+
+    <string name="neko_widget_food_title">Food bowl</string>
+    <string name="neko_widget_food_full">Full</string>
+    <string name="neko_widget_food_mid">Half full</string>
+    <string name="neko_widget_food_empty">Empty</string>
+
+    <string name="neko_widget_toy_title">Toy</string>
+    <string name="neko_widget_toy_chaotic">Chaotic</string>
+    <string name="neko_widget_toy_curious">Curious</string>
+    <string name="neko_widget_toy_idle">Idle</string>
+</resources>

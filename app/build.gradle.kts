@@ -130,6 +130,7 @@ dependencies {
 
     implementation(project(":feature:cat-editor"))
     implementation(project(":feature:widget"))
+    implementation(project(":feature:neko-controls-widget"))
     implementation(project(":feature:crash"))
     implementation(project(":feature:embedding-splits"))
     implementation(project(":feature:libraries-info"))

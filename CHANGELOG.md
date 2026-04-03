@@ -2,6 +2,7 @@
 
 ### v4.4.5
 
+- Add Neko Controls Widget [#804](https://github.com/hushenghao/AndroidEasterEggs/issues/804)
 - Update Android 17 platlogo [#800](https://github.com/hushenghao/AndroidEasterEggs/issues/800)
 - Add Android M preview Egg [#790](https://github.com/hushenghao/AndroidEasterEggs/issues/790)
 - Add Android K preview Egg [#801](https://github.com/hushenghao/AndroidEasterEggs/issues/801)

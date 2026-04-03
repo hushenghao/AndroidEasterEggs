@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:description="@string/neko_widget_description"
+    android:initialLayout="@layout/neko_controls_widget"
+    android:minWidth="300dp"
+    android:minHeight="200dp"
+    android:minResizeWidth="300dp"
+    android:minResizeHeight="200dp"
+    android:previewLayout="@layout/neko_controls_widget"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellWidth="4"
+    android:targetCellHeight="2"
+    android:updatePeriodMillis="0"
+    android:widgetCategory="home_screen"
+    tools:targetApi="31" />

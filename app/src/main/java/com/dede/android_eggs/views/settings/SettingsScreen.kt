@@ -56,7 +56,7 @@ import com.dede.android_eggs.views.settings.compose.prefs.RocketLauncherPref
 import com.dede.android_eggs.views.settings.compose.prefs.SnapshotPref
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePref
 import com.dede.android_eggs.views.settings.compose.prefs.TimelinePref
-import com.dede.android_eggs.views.widget.Widgets
+import com.dede.android_eggs.views.settings.compose.prefs.WidgetsPref
 import kotlinx.coroutines.launch
 import com.dede.android_eggs.resources.R as StringsR
 
@@ -138,7 +138,7 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
 
             RocketLauncherPref()
 
-            Widgets()
+            WidgetsPref()
 
             ComponentManagerPref()
 

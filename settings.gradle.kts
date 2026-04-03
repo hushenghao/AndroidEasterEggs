@@ -50,6 +50,7 @@ include(
 
     ":feature:cat-editor",
     ":feature:widget",
+    ":feature:neko-controls-widget",
     ":feature:crash",
     ":feature:embedding-splits",
     ":feature:libraries-info",
