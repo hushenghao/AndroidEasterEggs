@@ -2,6 +2,7 @@
 
 ### v4.4.5
 
+- Update Android 17 platlogo [#800](https://github.com/hushenghao/AndroidEasterEggs/issues/800)
 - Add Android M preview Egg [#790](https://github.com/hushenghao/AndroidEasterEggs/issues/790)
 - Easter Egg item add swipe guide
 - Cat Editor add zoom haptic feedback

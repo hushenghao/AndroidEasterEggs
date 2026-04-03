@@ -1,3 +1,4 @@
+- Update Android 17 platlogo #800
 - Add Android M preview Egg #790
 - Easter Egg item add swipe guide
 - Cat Editor add zoom haptic feedback
