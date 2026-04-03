@@ -14,7 +14,7 @@
     <string name="label_open_source_license">Lisensi sumber terbuka</string>
     <string name="label_wiki">Wiki</string>
     <string name="label_license">Lisensi</string>
-    <string name="label_feedback">Masukan</string>
+    <string name="label_feedback">Berikan Umpan balik</string>
     <string name="label_star">Penilaian</string>
     <string name="label_contact_me">Hubungi saya</string>
     <string name="label_email_title">Email</string>
@@ -40,9 +40,9 @@
     <string name="toast_shortcut_added">Pintasan ditambahkan</string>
     <string name="toast_no_egg_detail">Versi Android ini tidak memiliki Easter Egg</string>
     <string name="toast_no_update_found">Tidak ada pembaruan yang ditemukan</string>
-    <string name="label_widgets">Widgets</string>
+    <string name="label_widgets">Widget</string>
     <string name="app_widget_description">Ini adalah jam analog Easter Egg</string>
-    <string name="action_agree">Setuju</string>
+    <string name="action_agree">Saya Setuju</string>
     <string name="summary_browse_privacy_policy">Baca dan setujui Kebijakan Privasi kami untuk melanjutkan.</string>
     <string name="label_welcome">Selamat datang di Easter Eggs 🎉🎉🎉</string>
     <string name="label_share">Bagikan</string>
