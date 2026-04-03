@@ -4,6 +4,7 @@
 
 - 更新 Android 17 platlogo [#800](https://github.com/hushenghao/AndroidEasterEggs/issues/800)
 - 新增 Android M 预览版彩蛋 [#790](https://github.com/hushenghao/AndroidEasterEggs/issues/790)
+- 新增 Android K 预览版彩蛋 [#801](https://github.com/hushenghao/AndroidEasterEggs/issues/801)
 - Easter Egg 条目添加侧滑引导
 - Cat Editor 添加缩放反馈
 - 修复搜索栏软件键盘不自动显示

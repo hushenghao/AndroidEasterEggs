@@ -1,5 +1,6 @@
 - Update Android 17 platlogo #800
 - Add Android M preview Egg #790
+- Add Android K preview Egg #801
 - Easter Egg item add swipe guide
 - Cat Editor add zoom haptic feedback
 - Fix search bar software keyboard not show automatically

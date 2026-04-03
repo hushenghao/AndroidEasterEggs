@@ -7,4 +7,7 @@
     <dimen name="k_dessert_case_cell_size">192dp</dimen>
 
     <string name="k_android_nickname" translatable="false">KitKat</string>
+
+    <string name="k_preview_nickname">K Preview</string>
+    <string name="k_key_lime_pie">KeyLimePie</string>
 </resources>

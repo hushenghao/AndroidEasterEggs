@@ -73,6 +73,7 @@ open class EasterEgg @JvmOverloads constructor(
 
         const val M_PREVIEW = Build.VERSION_CODES.M * SDK_INT_MULTIPLIER - 1
         const val L_PREVIEW = Build.VERSION_CODES.LOLLIPOP * SDK_INT_MULTIPLIER - 1
+        const val K_PREVIEW = Build.VERSION_CODES.KITKAT * SDK_INT_MULTIPLIER - 1
         const val ICS_PREVIEW = Build.VERSION_CODES.ICE_CREAM_SANDWICH * SDK_INT_MULTIPLIER - 1
         const val BAKLAVA_1 = Build.VERSION_CODES.BAKLAVA * SDK_INT_MULTIPLIER + 1
     }

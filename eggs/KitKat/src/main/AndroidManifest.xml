@@ -33,6 +33,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".preview.PlatLogoActivity"
+            android:exported="true"
+            android:icon="@drawable/k_platlogo_preview"
+            android:label="@string/k_preview_nickname"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
     </application>
 
 </manifest>
