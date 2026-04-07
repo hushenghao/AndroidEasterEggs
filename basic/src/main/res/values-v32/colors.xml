@@ -6,6 +6,7 @@
 
     <color name="system_accent2_500">@android:color/system_accent2_500</color>
 
+    <color name="system_accent3_400">@android:color/system_accent3_400</color>
     <color name="system_accent3_500">@android:color/system_accent3_500</color>
     <color name="system_accent3_800">@android:color/system_accent3_800</color>
 

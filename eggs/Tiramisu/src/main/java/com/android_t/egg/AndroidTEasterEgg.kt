@@ -11,8 +11,11 @@ import com.android_t.egg.widget.PaintChipsWidget
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.ComponentProvider
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.EasterEggGroup
 import com.dede.basic.provider.EasterEggProvider
+import com.dede.basic.provider.SnapshotProvider
 import com.dede.basic.provider.TimelineEvent
+import com.dede.basic.provider.toRange
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,17 +32,31 @@ object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
     @IntoSet
     @Singleton
     override fun provideEasterEgg(): BaseEasterEgg {
-        return object : EasterEgg(
-            iconRes = R.drawable.t_android_logo,
-            nameRes = R.string.t_egg_name,
-            nicknameRes = R.string.t_android_nickname,
-            apiLevel = Build.VERSION_CODES.TIRAMISU,
-            actionClass = PlatLogoActivity::class.java
-        ) {
-            override fun provideSnapshotProvider(): SnapshotProvider {
-                return SnapshotProvider()
+        return EasterEggGroup(
+            object : EasterEgg(
+                iconRes = R.drawable.t_android_logo,
+                nameRes = R.string.t_egg_name,
+                nicknameRes = R.string.t_android_nickname,
+                apiLevel = Build.VERSION_CODES.TIRAMISU,
+                actionClass = PlatLogoActivity::class.java
+            ) {
+                override fun provideSnapshotProvider(): SnapshotProvider {
+                    return com.android_t.egg.SnapshotProvider()
+                }
+            },
+            object : EasterEgg(
+                iconRes = R.drawable.t_android_logo_beta,
+                nameRes = R.string.t_egg_name,
+                nicknameRes = R.string.t_android_nickname_beta,
+                actionClass = com.android_t.egg.beta.PlatLogoActivity::class.java,
+                apiLevelRange = Build.VERSION_CODES.TIRAMISU.toRange(),
+                fullApiLevelRange = VERSION_CODES_FULL.T_BETA.toRange()
+            ) {
+                override fun provideSnapshotProvider(): SnapshotProvider {
+                    return com.android_t.egg.beta.SnapshotProvider()
+                }
             }
-        }
+        )
     }
 
     @Provides

@@ -56,6 +56,11 @@ internal class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
                 android.R.string.dialog_alert_title,
                 R.string.message_trypophobia_warning
             ),
+            com.android_t.egg.beta.PlatLogoActivity::class to WarningInfo(
+                "key_s_trypophobia_warning",
+                android.R.string.dialog_alert_title,
+                R.string.message_trypophobia_warning
+            ),
         )
     }
 

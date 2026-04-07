@@ -25,6 +25,14 @@
             android:label="@string/t_egg_name"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
 
+        <activity
+            android:name=".beta.PlatLogoActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="true"
+            android:icon="@drawable/t_platlogo_beta"
+            android:label="@string/t_egg_name"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+
         <!-- Android N easter egg bits -->
         <activity
             android:name=".neko.NekoLand"

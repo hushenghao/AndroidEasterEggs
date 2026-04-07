@@ -168,6 +168,7 @@ object EasterEggHelp {
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.K_PREVIEW] = "K"
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.L_PREVIEW] = "L"
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.M_PREVIEW] = "M"
+        apiLevelArrays[EasterEgg.VERSION_CODES_FULL.T_BETA] = "T Beta"
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.BAKLAVA_1] = "16.1"
 
         // development version

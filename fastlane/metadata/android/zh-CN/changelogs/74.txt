@@ -1,5 +1,6 @@
 - 新增 Neko Controls 小组件 #804
 - 更新 Android 17 platlogo #800
+- 新增 Android T beta 版彩蛋 #805
 - 新增 Android M 预览版彩蛋 #790
 - 新增 Android K 预览版彩蛋 #801
 - 新增保加利亚语翻译 #814

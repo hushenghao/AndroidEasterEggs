@@ -71,6 +71,7 @@ open class EasterEgg @JvmOverloads constructor(
         // android.os.Build.VERSION_CODES_FULL#SDK_INT_MULTIPLIER
         const val SDK_INT_MULTIPLIER = 100000
 
+        const val T_BETA = Build.VERSION_CODES.TIRAMISU * SDK_INT_MULTIPLIER - 1
         const val M_PREVIEW = Build.VERSION_CODES.M * SDK_INT_MULTIPLIER - 1
         const val L_PREVIEW = Build.VERSION_CODES.LOLLIPOP * SDK_INT_MULTIPLIER - 1
         const val K_PREVIEW = Build.VERSION_CODES.KITKAT * SDK_INT_MULTIPLIER - 1
