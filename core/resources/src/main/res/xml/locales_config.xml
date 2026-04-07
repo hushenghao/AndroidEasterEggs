@@ -35,4 +35,5 @@
     <locale android:name="my-MM" />
     <locale android:name="bn-BD" />
     <locale android:name="sq" />
+    <locale android:name="bg-BG" />
 </locale-config>
