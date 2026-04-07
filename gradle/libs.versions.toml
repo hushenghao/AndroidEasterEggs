@@ -28,7 +28,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
 aboutlibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "about-libraries" }
-stability-analyzer = { id = "com.github.skydoves.compose.stability.analyzer", version = "0.7.1" }
+stability-analyzer = { id = "com.github.skydoves.compose.stability.analyzer", version = "0.7.2" }
 
 [libraries]
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.1"
