@@ -13,8 +13,11 @@ import androidx.annotation.RequiresApi;
 import com.android_n.egg.neko.NekoTile;
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.ComponentProvider;
+import com.dede.basic.provider.SnapshotProvider;
 import com.dede.basic.provider.EasterEgg;
+import com.dede.basic.provider.EasterEggGroup;
 import com.dede.basic.provider.EasterEggProvider;
+import com.dede.basic.provider.EasterEggProviderKt;
 import com.dede.basic.provider.TimelineEvent;
 
 import java.util.List;
@@ -38,18 +41,33 @@ public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvi
     @Singleton
     @Override
     public BaseEasterEgg provideEasterEgg() {
-        return new EasterEgg(
-                R.drawable.n_android_logo,
-                R.string.n_app_name,
-                R.string.n_android_nickname,
-                new IntRange(Build.VERSION_CODES.N, Build.VERSION_CODES.N_MR1),
-                PlatLogoActivity.class
-        ) {
-            @Override
-            public SnapshotProvider provideSnapshotProvider() {
-                return new SnapshotProvider();
-            }
-        };
+        return new EasterEggGroup(
+                new EasterEgg(
+                        R.drawable.n_android_logo,
+                        R.string.n_app_name,
+                        R.string.n_android_nickname,
+                        new IntRange(Build.VERSION_CODES.N, Build.VERSION_CODES.N_MR1),
+                        PlatLogoActivity.class
+                ) {
+                    @Override
+                    public SnapshotProvider provideSnapshotProvider() {
+                        return new com.android_n.egg.SnapshotProvider();
+                    }
+                },
+                new EasterEgg(
+                        R.drawable.n_android_logo,
+                        R.string.n_app_name,
+                        R.string.n_android_nickname_preview,
+                        EasterEggProviderKt.toRange(Build.VERSION_CODES.N),
+                        com.android_n.egg.preview.PlatLogoActivity.class,
+                        EasterEggProviderKt.toRange(EasterEgg.VERSION_CODES_FULL.N_PREVIEW)
+                ) {
+                    @Override
+                    public SnapshotProvider provideSnapshotProvider() {
+                        return new com.android_n.egg.preview.SnapshotProvider();
+                    }
+                }
+        );
     }
 
     @NonNull

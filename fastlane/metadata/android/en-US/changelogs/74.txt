@@ -2,6 +2,7 @@
 - Update Android 17 platlogo #800
 - Add Android T beta Egg #805
 - Add Android M preview Egg #790
+- Add Android N preview Egg #809
 - Add Android K preview Egg #801
 - Add Bulgarian translations #814
 - Easter Egg item add swipe guide
