@@ -5,10 +5,12 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.view.View
+import android.util.SizeF
 import android.widget.RemoteViews
 import androidx.core.app.PendingIntentCompat
+import androidx.core.content.edit
 import kotlin.random.Random
 import com.android_r.egg.R as NekoR
 
@@ -16,6 +18,13 @@ private const val ACTION_ITEM_CLICK =
     "com.dede.android_eggs.neko_controls_widget.ACTION_ITEM_CLICK"
 private const val EXTRA_WIDGET_ID = "extra_widget_id"
 private const val EXTRA_ITEM = "extra_item"
+
+private const val COMPACT_WIDGET_HEIGHT_DP = 180f
+private const val EXPANDED_WIDGET_HEIGHT_DP = 260f
+private const val LARGE_WIDGET_HEIGHT_DP = 400f
+private const val WIDGET_WIDTH_DP = 300f
+private const val EXPANDED_LAYOUT_HEIGHT_THRESHOLD_DP = 200
+private const val LARGE_LAYOUT_HEIGHT_THRESHOLD_DP = 340
 
 class NekoControlsAppWidget : AppWidgetProvider() {
 
@@ -34,7 +43,7 @@ class NekoControlsAppWidget : AppWidgetProvider() {
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int,
-        newOptions: android.os.Bundle,
+        newOptions: Bundle,
     ) {
         super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions)
         updateAppWidget(context, appWidgetManager, appWidgetId)
@@ -64,80 +73,83 @@ private fun updateAppWidget(
     appWidgetId: Int,
 ) {
     val state = NekoControlsWidgetState.readState(context, appWidgetId)
-    val views = RemoteViews(context.packageName, R.layout.neko_controls_widget)
-    val compactContent = shouldUseCompactContent(appWidgetManager.getAppWidgetOptions(appWidgetId))
+    val compactViews = buildRemoteViews(
+        context = context,
+        appWidgetId = appWidgetId,
+        state = state,
+        mode = WidgetLayoutMode.Compact,
+    )
+    val expandedViews = buildRemoteViews(
+        context = context,
+        appWidgetId = appWidgetId,
+        state = state,
+        mode = WidgetLayoutMode.Expanded,
+    )
+    val largeViews = buildRemoteViews(
+        context = context,
+        appWidgetId = appWidgetId,
+        state = state,
+        mode = WidgetLayoutMode.Large,
+    )
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        val sizedViews = RemoteViews(
+            mapOf(
+                SizeF(WIDGET_WIDTH_DP, COMPACT_WIDGET_HEIGHT_DP) to compactViews,
+                SizeF(WIDGET_WIDTH_DP, EXPANDED_WIDGET_HEIGHT_DP) to expandedViews,
+                SizeF(WIDGET_WIDTH_DP, LARGE_WIDGET_HEIGHT_DP) to largeViews,
+            )
+        )
+        appWidgetManager.updateAppWidget(appWidgetId, sizedViews)
+        return
+    }
+
+    val minHeight = appWidgetManager
+        .getAppWidgetOptions(appWidgetId)
+        .getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 0)
+    val fallbackViews = when {
+        minHeight >= LARGE_LAYOUT_HEIGHT_THRESHOLD_DP -> largeViews
+        minHeight >= EXPANDED_LAYOUT_HEIGHT_THRESHOLD_DP -> expandedViews
+        else -> compactViews
+    }
+    appWidgetManager.updateAppWidget(appWidgetId, fallbackViews)
+}
+
+private fun buildRemoteViews(
+    context: Context,
+    appWidgetId: Int,
+    state: WidgetState,
+    mode: WidgetLayoutMode,
+): RemoteViews {
+    val views = RemoteViews(context.packageName, mode.layoutRes)
 
     bindCard(
         context = context,
         views = views,
         appWidgetId = appWidgetId,
         item = WidgetItem.Water,
-        titleViewId = R.id.water_title,
-        statusViewId = R.id.water_status,
-        iconViewId = R.id.water_icon,
-        cardViewId = R.id.water_card,
+        ids = mode.waterIds,
         progress = state.water,
-    )
-    bindCardLayoutMode(
-        views = views,
-        regularContentId = R.id.water_regular_content,
-        compactContentId = R.id.water_compact_content,
-        compactIconId = R.id.water_compact_icon,
-        compactStatusId = R.id.water_compact_status,
-        iconRes = WidgetItem.Water.iconRes(state.water),
-        statusText = WidgetItem.Water.statusText(context, state.water),
-        compact = compactContent,
     )
     bindCard(
         context = context,
         views = views,
         appWidgetId = appWidgetId,
         item = WidgetItem.Food,
-        titleViewId = R.id.food_title,
-        statusViewId = R.id.food_status,
-        iconViewId = R.id.food_icon,
-        cardViewId = R.id.food_card,
+        ids = mode.foodIds,
         progress = state.food,
-    )
-    bindCardLayoutMode(
-        views = views,
-        regularContentId = R.id.food_regular_content,
-        compactContentId = R.id.food_compact_content,
-        compactIconId = R.id.food_compact_icon,
-        compactStatusId = R.id.food_compact_status,
-        iconRes = WidgetItem.Food.iconRes(state.food),
-        statusText = WidgetItem.Food.statusText(context, state.food),
-        compact = compactContent,
     )
     bindCard(
         context = context,
         views = views,
         appWidgetId = appWidgetId,
         item = WidgetItem.Toy,
-        titleViewId = R.id.toy_title,
-        statusViewId = R.id.toy_status,
-        iconViewId = R.id.toy_icon,
-        cardViewId = R.id.toy_card,
+        ids = mode.toyIds,
         progress = state.toy,
     )
-    bindCardLayoutMode(
-        views = views,
-        regularContentId = R.id.toy_regular_content,
-        compactContentId = R.id.toy_compact_content,
-        compactIconId = R.id.toy_compact_icon,
-        compactStatusId = R.id.toy_compact_status,
-        iconRes = WidgetItem.Toy.iconRes(state.toy),
-        statusText = WidgetItem.Toy.statusText(context, state.toy),
-        compact = compactContent,
-    )
-    bindMoodLayoutMode(
-        views = views,
-        compact = compactContent,
-    )
     bindWaterProgress(views, state.water)
-    bindStatusCard(context, views, state, compactContent)
-
-    appWidgetManager.updateAppWidget(appWidgetId, views)
+    bindStatusCard(context, views, state, mode.statusIds)
+    return views
 }
 
 private fun bindCard(
@@ -145,46 +157,27 @@ private fun bindCard(
     views: RemoteViews,
     appWidgetId: Int,
     item: WidgetItem,
-    titleViewId: Int,
-    statusViewId: Int,
-    iconViewId: Int,
-    cardViewId: Int,
+    ids: CardViewIds,
     progress: Int,
 ) {
-    views.setTextViewText(titleViewId, context.getString(item.titleRes))
-    views.setTextViewText(statusViewId, item.statusText(context, progress))
-    views.setImageViewResource(iconViewId, item.iconRes(progress))
+    ids.titleViewId?.let { views.setTextViewText(it, context.getString(item.titleRes)) }
+    views.setTextViewText(ids.statusViewId, item.statusText(context, progress))
+    views.setImageViewResource(ids.iconViewId, item.iconRes(progress))
     if (item != WidgetItem.Water) {
-        views.setInt(cardViewId, "setBackgroundResource", item.backgroundRes(progress))
+        views.setInt(ids.cardViewId, "setBackgroundResource", item.backgroundRes(progress))
     }
-    views.setOnClickPendingIntent(cardViewId, createClickIntent(context, appWidgetId, item))
+    views.setOnClickPendingIntent(ids.cardViewId, createClickIntent(context, appWidgetId, item))
 }
 
 private fun bindWaterProgress(views: RemoteViews, progress: Int) {
     views.setProgressBar(R.id.water_progress, 100, progress, false)
 }
 
-private fun bindCardLayoutMode(
-    views: RemoteViews,
-    regularContentId: Int,
-    compactContentId: Int,
-    compactIconId: Int,
-    compactStatusId: Int,
-    iconRes: Int,
-    statusText: String,
-    compact: Boolean,
-) {
-    views.setViewVisibility(regularContentId, if (compact) View.GONE else View.VISIBLE)
-    views.setViewVisibility(compactContentId, if (compact) View.VISIBLE else View.GONE)
-    views.setImageViewResource(compactIconId, iconRes)
-    views.setTextViewText(compactStatusId, statusText)
-}
-
 private fun bindStatusCard(
     context: Context,
     views: RemoteViews,
     state: WidgetState,
-    compact: Boolean,
+    ids: StatusViewIds,
 ) {
     val average = (state.water + state.food + state.toy) / 3
     val statusInfo = when {
@@ -208,24 +201,11 @@ private fun bindStatusCard(
         )
     }
     val statusText = context.getString(statusInfo.textRes)
-    views.setTextViewText(R.id.status_value, statusText)
-    views.setTextViewText(R.id.status_compact_value, statusText)
-    views.setImageViewResource(R.id.status_icon, R.drawable.neko_card_cat)
-    views.setImageViewResource(R.id.status_compact_icon, R.drawable.neko_card_cat)
-    views.setInt(R.id.status_card, "setBackgroundResource", statusInfo.backgroundRes)
-    views.setTextColor(R.id.status_title, statusInfo.titleColor)
-    views.setTextColor(R.id.status_value, statusInfo.valueColor)
-    if (compact) {
-        views.setTextColor(R.id.status_compact_value, statusInfo.valueColor)
-    }
-}
-
-private fun bindMoodLayoutMode(
-    views: RemoteViews,
-    compact: Boolean,
-) {
-    views.setViewVisibility(R.id.status_regular_content, if (compact) View.GONE else View.VISIBLE)
-    views.setViewVisibility(R.id.status_compact_content, if (compact) View.VISIBLE else View.GONE)
+    views.setTextViewText(ids.valueViewId, statusText)
+    views.setImageViewResource(ids.iconViewId, R.drawable.neko_card_cat)
+    views.setInt(ids.cardViewId, "setBackgroundResource", statusInfo.backgroundRes)
+    ids.titleViewId?.let { views.setTextColor(it, statusInfo.titleColor) }
+    views.setTextColor(ids.valueViewId, statusInfo.valueColor)
 }
 
 private fun createClickIntent(
@@ -247,12 +227,6 @@ private fun createClickIntent(
             false
         )
     )
-}
-
-private fun shouldUseCompactContent(options: Bundle): Boolean {
-    val minWidth = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 0)
-    val minHeight = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 0)
-    return minHeight in 1..120 || minWidth in 1..235
 }
 
 private enum class WidgetItem(val titleRes: Int) {
@@ -328,6 +302,110 @@ private enum class WidgetItem(val titleRes: Int) {
     }
 }
 
+private enum class WidgetLayoutMode(
+    val layoutRes: Int,
+    val waterIds: CardViewIds,
+    val foodIds: CardViewIds,
+    val toyIds: CardViewIds,
+    val statusIds: StatusViewIds,
+) {
+    Compact(
+        layoutRes = R.layout.neko_controls_widget_compact,
+        waterIds = CardViewIds(
+            titleViewId = null,
+            statusViewId = R.id.water_status,
+            iconViewId = R.id.water_icon,
+            cardViewId = R.id.water_card,
+        ),
+        foodIds = CardViewIds(
+            titleViewId = null,
+            statusViewId = R.id.food_status,
+            iconViewId = R.id.food_icon,
+            cardViewId = R.id.food_card,
+        ),
+        toyIds = CardViewIds(
+            titleViewId = null,
+            statusViewId = R.id.toy_status,
+            iconViewId = R.id.toy_icon,
+            cardViewId = R.id.toy_card,
+        ),
+        statusIds = StatusViewIds(
+            titleViewId = null,
+            valueViewId = R.id.status_value,
+            iconViewId = R.id.status_icon,
+            cardViewId = R.id.status_card,
+        ),
+    ),
+    Expanded(
+        layoutRes = R.layout.neko_controls_widget_expanded,
+        waterIds = CardViewIds(
+            titleViewId = R.id.water_title,
+            statusViewId = R.id.water_status,
+            iconViewId = R.id.water_icon,
+            cardViewId = R.id.water_card,
+        ),
+        foodIds = CardViewIds(
+            titleViewId = R.id.food_title,
+            statusViewId = R.id.food_status,
+            iconViewId = R.id.food_icon,
+            cardViewId = R.id.food_card,
+        ),
+        toyIds = CardViewIds(
+            titleViewId = R.id.toy_title,
+            statusViewId = R.id.toy_status,
+            iconViewId = R.id.toy_icon,
+            cardViewId = R.id.toy_card,
+        ),
+        statusIds = StatusViewIds(
+            titleViewId = R.id.status_title,
+            valueViewId = R.id.status_value,
+            iconViewId = R.id.status_icon,
+            cardViewId = R.id.status_card,
+        ),
+    ),
+    Large(
+        layoutRes = R.layout.neko_controls_widget_large,
+        waterIds = CardViewIds(
+            titleViewId = R.id.water_title,
+            statusViewId = R.id.water_status,
+            iconViewId = R.id.water_icon,
+            cardViewId = R.id.water_card,
+        ),
+        foodIds = CardViewIds(
+            titleViewId = R.id.food_title,
+            statusViewId = R.id.food_status,
+            iconViewId = R.id.food_icon,
+            cardViewId = R.id.food_card,
+        ),
+        toyIds = CardViewIds(
+            titleViewId = R.id.toy_title,
+            statusViewId = R.id.toy_status,
+            iconViewId = R.id.toy_icon,
+            cardViewId = R.id.toy_card,
+        ),
+        statusIds = StatusViewIds(
+            titleViewId = R.id.status_title,
+            valueViewId = R.id.status_value,
+            iconViewId = R.id.status_icon,
+            cardViewId = R.id.status_card,
+        ),
+    ),
+}
+
+private data class CardViewIds(
+    val titleViewId: Int?,
+    val statusViewId: Int,
+    val iconViewId: Int,
+    val cardViewId: Int,
+)
+
+private data class StatusViewIds(
+    val titleViewId: Int?,
+    val valueViewId: Int,
+    val iconViewId: Int,
+    val cardViewId: Int,
+)
+
 private data class WidgetState(
     val water: Int,
     val food: Int,
@@ -380,20 +458,20 @@ private object NekoControlsWidgetState {
 
     fun removeState(context: Context, appWidgetId: Int) {
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-            .edit()
-            .remove(key(appWidgetId, WidgetItem.Water))
-            .remove(key(appWidgetId, WidgetItem.Food))
-            .remove(key(appWidgetId, WidgetItem.Toy))
-            .apply()
+            .edit {
+                remove(key(appWidgetId, WidgetItem.Water))
+                remove(key(appWidgetId, WidgetItem.Food))
+                remove(key(appWidgetId, WidgetItem.Toy))
+            }
     }
 
     private fun writeState(context: Context, appWidgetId: Int, state: WidgetState) {
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-            .edit()
-            .putInt(key(appWidgetId, WidgetItem.Water), state.water)
-            .putInt(key(appWidgetId, WidgetItem.Food), state.food)
-            .putInt(key(appWidgetId, WidgetItem.Toy), state.toy)
-            .apply()
+            .edit {
+                putInt(key(appWidgetId, WidgetItem.Water), state.water)
+                putInt(key(appWidgetId, WidgetItem.Food), state.food)
+                putInt(key(appWidgetId, WidgetItem.Toy), state.toy)
+            }
     }
 
     private fun key(appWidgetId: Int, item: WidgetItem): String {
