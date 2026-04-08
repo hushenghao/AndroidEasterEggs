@@ -118,10 +118,10 @@
                     android:layout_marginStart="8dp"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:text="@string/r_control_food_subtitle"
                     android:textColor="#FFF4E6"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    tools:text="@string/r_control_food_subtitle" />
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 
@@ -160,10 +160,10 @@
                     android:layout_marginStart="8dp"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:text="@string/neko_widget_toy_idle"
                     android:textColor="#FFEAF1"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    tools:text="@string/neko_widget_toy_idle" />
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
