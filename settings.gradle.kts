@@ -49,7 +49,7 @@ include(
     ":core:custom-tab-browser",
 
     ":feature:cat-editor",
-    ":feature:widget",
+    ":feature:analog-clock-widget",
     ":feature:neko-controls-widget",
     ":feature:crash",
     ":feature:embedding-splits",

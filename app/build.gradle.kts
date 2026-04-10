@@ -129,7 +129,7 @@ dependencies {
     implementation(project(":core:custom-tab-browser"))
 
     implementation(project(":feature:cat-editor"))
-    implementation(project(":feature:widget"))
+    implementation(project(":feature:analog-clock-widget"))
     implementation(project(":feature:neko-controls-widget"))
     implementation(project(":feature:crash"))
     implementation(project(":feature:embedding-splits"))
