@@ -14,7 +14,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Matrix
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -24,6 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.alterable_adaptive_icon.AlterableAdaptiveIcon
+import com.dede.android_eggs.alterable_adaptive_icon.rememberAdaptiveIconForegroundTransformState
 import com.dede.android_eggs.local_provider.currentOutInspectionMode
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
@@ -53,23 +53,16 @@ fun EasterEggLogo(
     val context = LocalContext.current
     val isAdaptiveIcon = remember(res) { context.isAdaptiveIconDrawable(res) }
     if (isAdaptiveIcon) {
-        var foregroundMatrix by remember { mutableStateOf(Matrix()) }
+        val foregroundTransformState = rememberAdaptiveIconForegroundTransformState()
         var size by remember { mutableStateOf(IntSize.Zero) }
         if (sensor && size != IntSize.Zero) {
             val sensorGroup = LocalEasterEggLogoSensor.currentOutInspectionMode
             if (sensorGroup != null) {
                 DisposableEffect(size) {
-                    val floats = FloatArray(9)
                     val bounds = Rect(0, 0, size.width, size.height)
                     val listener = object : EasterEggLogoSensorMatrixConvert.Listener(bounds) {
                         override fun onUpdateMatrix(matrix: android.graphics.Matrix) {
-                            matrix.getValues(floats)
-                            foregroundMatrix = Matrix().apply {
-                                resetToPivotedTransform(
-                                    translationX = floats[android.graphics.Matrix.MTRANS_X],
-                                    translationY = floats[android.graphics.Matrix.MTRANS_Y]
-                                )
-                            }
+                            foregroundTransformState.updateFrom(matrix)
                         }
                     }
                     sensorGroup.register(listener)
@@ -83,7 +76,7 @@ fun EasterEggLogo(
         AlterableAdaptiveIcon(
             modifier = modifier.onSizeChanged { size = it },
             clipShape = IconShapePrefUtil.getIconShape(),
-            foregroundMatrix = foregroundMatrix,
+            foregroundTransformState = foregroundTransformState,
             res = res,
         )
     } else {

@@ -25,9 +25,11 @@ class OrientationAngleSensor(
         fun updateOrientationAngles(zAngle: Float, xAngle: Float, yAngle: Float)
     }
 
-    private val sensorManager: SensorManager = context.getSystemService()!!
+    private val sensorManager: SensorManager? = context.getSystemService()
     private val accelerometerReading = FloatArray(3)
     private val magnetometerReading = FloatArray(3)
+    private var hasAccelerometerReading = false
+    private var hasMagnetometerReading = false
 
     private val rotationMatrix = FloatArray(9)
     private val remapRotationMatrix = FloatArray(9)
@@ -56,14 +58,12 @@ class OrientationAngleSensor(
             defaultOrientationAngles[i] = Float.NaN
     }
 
-    private fun isInvalidDefaultOrientationAngles(): Boolean {
-        // default is NaN
-        return !defaultOrientationAngles[0].isNaN() &&
-                // in most cases, it's not equal to 0
-                defaultOrientationAngles[1] != 0f && defaultOrientationAngles[2] != 0f
+    private fun hasDefaultOrientationAngles(): Boolean {
+        return defaultOrientationAngles.all { !it.isNaN() }
     }
 
     fun start() {
+        if (sensorManager == null) return
         // Get updates from the accelerometer and magnetometer at a constant rate.
         // To make batch operations more efficient and reduce power consumption,
         // provide support for delaying updates to the application.
@@ -90,6 +90,7 @@ class OrientationAngleSensor(
     }
 
     fun stop() {
+        if (sensorManager == null) return
         // Don't receive any more updates from either sensor.
         sensorManager.unregisterListener(this)
     }
@@ -110,12 +111,14 @@ class OrientationAngleSensor(
                     event.values, 0,
                     accelerometerReading, 0, accelerometerReading.size
                 )
+                hasAccelerometerReading = true
             }
             Sensor.TYPE_MAGNETIC_FIELD -> {
                 System.arraycopy(
                     event.values, 0,
                     magnetometerReading, 0, magnetometerReading.size
                 )
+                hasMagnetometerReading = true
             }
         }
         updateOrientationAngles()
@@ -129,14 +132,17 @@ class OrientationAngleSensor(
     // Compute the three orientation angles based on the most recent readings from
     // the device's accelerometer and magnetometer.
     private fun updateOrientationAngles() {
+        if (!hasAccelerometerReading || !hasMagnetometerReading) return
+
         // Rotation matrix based on current readings from accelerometer and magnetometer.
         // Update rotation matrix, which is needed to update orientation angles.
-        SensorManager.getRotationMatrix(
+        val success = SensorManager.getRotationMatrix(
             rotationMatrix,
             null,
             accelerometerReading,
             magnetometerReading
         )
+        if (!success) return
 
         // The Angle is converted according to the device orientation.
         var xAxis = SensorManager.AXIS_X
@@ -167,7 +173,7 @@ class OrientationAngleSensor(
         // Handles the default offset.
         if (handleDefaultOffset) {
             // take the result of the first callback as the default offset
-            if (!isInvalidDefaultOrientationAngles()) {
+            if (!hasDefaultOrientationAngles()) {
                 for (i in orientationAngles.indices) {
                     defaultOrientationAngles[i] = 0f - orientationAngles[i]
                 }

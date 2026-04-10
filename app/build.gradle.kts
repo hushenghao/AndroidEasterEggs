@@ -88,6 +88,7 @@ dependencies {
     implementation(libs.androidx.livedata)
     implementation(libs.androidx.startup)
     implementation(libs.androidx.splashscreen)
+    implementation(libs.androidx.dynamicanimation)
     implementation(libs.androidx.compose.activity)
     implementation(libs.androidx.compose.lifecycle)
     implementation(libs.androidx.compose.viewmodel)

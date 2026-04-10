@@ -9,6 +9,6 @@
 .cxx
 local.properties
 key.properties
-
+.codex
 .vscode
 fastlane/report.xml

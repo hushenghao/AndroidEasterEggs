@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Matrix
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.layout.layout
@@ -123,7 +122,7 @@ fun AlterableAdaptiveIcon(
     modifier: Modifier = Modifier,
     clipShape: Shape,
     @DrawableRes res: Int,
-    foregroundMatrix: Matrix = Matrix(),
+    foregroundTransformState: AdaptiveIconForegroundTransformState = rememberAdaptiveIconForegroundTransformState(),
 ) {
     val context = LocalContext.current
     val childDrawables = remember(res, context.theme) {
@@ -155,16 +154,18 @@ fun AlterableAdaptiveIcon(
 
         val foreground: Drawable? = childDrawables.getForeground()
         if (foreground != null) {
+            val foregroundTransformModifier = remember(foregroundTransformState.version) {
+                Modifier.drawWithContent {
+                    withTransform({
+                        transform(foregroundTransformState.matrix)
+                    }) {
+                        this@drawWithContent.drawContent()
+                    }
+                }
+            }
             Image(
                 painter = rememberDrawablePainter(foreground),
-                modifier = Modifier
-                    .drawWithContent {
-                        withTransform({
-                            transform(foregroundMatrix)
-                        }) {
-                            this@drawWithContent.drawContent()
-                        }
-                    }
+                modifier = foregroundTransformModifier
                     .adaptiveIconChild(),
                 contentDescription = null,
             )

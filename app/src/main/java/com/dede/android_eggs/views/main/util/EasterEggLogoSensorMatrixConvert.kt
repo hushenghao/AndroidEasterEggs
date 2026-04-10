@@ -1,22 +1,27 @@
 package com.dede.android_eggs.views.main.util
 
-import android.animation.Animator
-import android.animation.ValueAnimator
 import android.graphics.Matrix
 import android.graphics.Rect
-import android.view.animation.LinearInterpolator
+import androidx.dynamicanimation.animation.DynamicAnimation
+import androidx.dynamicanimation.animation.FloatValueHolder
+import androidx.dynamicanimation.animation.SpringAnimation
+import androidx.dynamicanimation.animation.SpringForce
 import com.dede.android_eggs.util.OrientationAngleSensor
 import javax.inject.Inject
 import kotlin.math.abs
+import kotlin.math.atan2
+import kotlin.math.cos
 import kotlin.math.max
+import kotlin.math.sin
 
 class EasterEggLogoSensorMatrixConvert @Inject constructor() :
     OrientationAngleSensor.OnOrientationAnglesUpdate {
 
-        companion object {
-            private const val DEGREES_THRESHOLD = 3f
-            private const val OFFSET_RATIO = 0.18f
-        }
+    companion object {
+        private const val DEGREES_THRESHOLD = 0.6f
+        private const val OFFSET_RATIO = 0.2f
+        private const val MAX_EFFECTIVE_DEGREES = 45f
+    }
 
     private val list = ArrayList<Listener>()
 
@@ -35,7 +40,7 @@ class EasterEggLogoSensorMatrixConvert @Inject constructor() :
 
         private val matrix = Matrix()
 
-        fun updateDegrees(cXDegrees: Float, cYDegrees: Float) {
+        internal fun updateDegrees(cXDegrees: Float, cYDegrees: Float) {
             // Swap coordinate systems
             val dx = cYDegrees / 90f * width * -1f
             val dy = cXDegrees / 90f * height
@@ -46,43 +51,104 @@ class EasterEggLogoSensorMatrixConvert @Inject constructor() :
         abstract fun onUpdateMatrix(matrix: Matrix)
     }
 
-    private var lastXDegrees: Float = 0f
-    private var lastYDegrees: Float = 0f
-    private var animator: Animator? = null
-    private val interpolator = LinearInterpolator()
+    private class SpringAngleAnimator(
+        private val onUpdate: (xDegrees: Float, yDegrees: Float) -> Unit,
+    ) : DynamicAnimation.OnAnimationUpdateListener {
 
-    private fun Float.toRoundDegrees(): Float {
-        return ((Math.toDegrees(toDouble())) % 90f).toFloat()
+        companion object {
+            private const val SPRING_STIFFNESS = 420f
+            private const val SPRING_DAMPING_RATIO = 0.85f
+            private const val MIN_VISIBLE_CHANGE = 0.08f
+        }
+
+        private val xHolder = FloatValueHolder(0f)
+        private val yHolder = FloatValueHolder(0f)
+        private val xAnimation = createSpringAnimation(xHolder)
+        private val yAnimation = createSpringAnimation(yHolder)
+
+        private fun createSpringAnimation(holder: FloatValueHolder): SpringAnimation {
+            return SpringAnimation(holder).apply {
+                setSpring(
+                    SpringForce().setStiffness(SPRING_STIFFNESS)
+                        .setDampingRatio(SPRING_DAMPING_RATIO)
+                )
+                setMinimumVisibleChange(MIN_VISIBLE_CHANGE)
+                addUpdateListener(this@SpringAngleAnimator)
+            }
+        }
+
+        private var targetXDegrees: Float = 0f
+        private var targetYDegrees: Float = 0f
+
+        private fun angleDistance(old: Float, new: Float): Float {
+            return abs(new - old)
+        }
+
+        fun snapTo(xDegrees: Float, yDegrees: Float) {
+            targetXDegrees = xDegrees
+            targetYDegrees = yDegrees
+            xAnimation.cancel()
+            yAnimation.cancel()
+            xHolder.value = xDegrees
+            yHolder.value = yDegrees
+            onUpdate(xDegrees, yDegrees)
+        }
+
+        fun targetDistance(xDegrees: Float, yDegrees: Float): Float {
+            return max(
+                angleDistance(targetXDegrees, xDegrees),
+                angleDistance(targetYDegrees, yDegrees)
+            )
+        }
+
+        fun animateTo(xDegrees: Float, yDegrees: Float) {
+            targetXDegrees = xDegrees
+            targetYDegrees = yDegrees
+            xAnimation.animateToFinalPosition(xDegrees)
+            yAnimation.animateToFinalPosition(yDegrees)
+        }
+
+        override fun onAnimationUpdate(
+            animation: DynamicAnimation<out DynamicAnimation<*>>,
+            value: Float,
+            velocity: Float
+        ) {
+            onUpdate(xHolder.value, yHolder.value)
+        }
     }
 
-    private fun calculateAnimDegrees(old: Float, new: Float, fraction: Float): Float {
-        return old + (new - old) * fraction
+    private var isInitialized = false
+    private val springAnimator = SpringAngleAnimator(onUpdate = ::dispatchDegrees)
+
+    private fun Float.toNormalizedDegrees(): Float {
+        val degrees = Math.toDegrees(toDouble())
+        return atan2(sin(Math.toRadians(degrees)), cos(Math.toRadians(degrees)))
+            .let { Math.toDegrees(it).toFloat() }
+    }
+
+    private fun Float.toUiDegrees(): Float {
+        return toNormalizedDegrees().coerceIn(-MAX_EFFECTIVE_DEGREES, MAX_EFFECTIVE_DEGREES)
+    }
+
+    private fun dispatchDegrees(xDegrees: Float, yDegrees: Float) {
+        for (listener in list) {
+            listener.updateDegrees(xDegrees, yDegrees)
+        }
     }
 
     override fun updateOrientationAngles(zAngle: Float, xAngle: Float, yAngle: Float) {
-        val xDegrees = xAngle.toRoundDegrees()// 俯仰角
-        val yDegrees = yAngle.toRoundDegrees()// 侧倾角
-        if (max(abs(lastXDegrees - xDegrees), abs(lastYDegrees - yDegrees)) < DEGREES_THRESHOLD) return
+        val xDegrees = xAngle.toUiDegrees()// 俯仰角
+        val yDegrees = yAngle.toUiDegrees()// 侧倾角
+        if (!isInitialized) {
+            isInitialized = true
+            springAnimator.snapTo(xDegrees, yDegrees)
+            return
+        }
 
-        animator?.cancel()
-        val saveXDegrees = lastXDegrees
-        val saveYDegrees = lastYDegrees
-        animator = ValueAnimator.ofFloat(0f, 1f)
-            .setDuration(80)
-            .apply {
-                interpolator = this@EasterEggLogoSensorMatrixConvert.interpolator
-                addUpdateListener {
-                    val fraction = it.animatedFraction
-                    val cXDegrees = calculateAnimDegrees(saveXDegrees, xDegrees, fraction)
-                    val cYDegrees = calculateAnimDegrees(saveYDegrees, yDegrees, fraction)
+        if (springAnimator.targetDistance(xDegrees, yDegrees) < DEGREES_THRESHOLD) {
+            return
+        }
 
-                    for (listener in list) {
-                        listener.updateDegrees(cXDegrees, cYDegrees)
-                    }
-                }
-                start()
-            }
-        lastYDegrees = yDegrees
-        lastXDegrees = xDegrees
+        springAnimator.animateTo(xDegrees, yDegrees)
     }
 }
