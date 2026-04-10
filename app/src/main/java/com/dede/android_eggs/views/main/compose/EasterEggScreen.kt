@@ -25,7 +25,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -47,9 +47,7 @@ import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.ui.composes.PredictiveBackProgressHandler.predictiveBackShrink
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.ui.composes.predictiveBackProgressState
-import com.dede.android_eggs.util.LocalEvent
 import com.dede.android_eggs.util.OrientationAngleSensor
-import com.dede.android_eggs.util.Receiver
 import com.dede.android_eggs.util.compose.end
 import com.dede.android_eggs.util.compose.plus
 import com.dede.android_eggs.views.main.util.EasterEggHelp
@@ -95,27 +93,19 @@ fun EasterEggScreen(
 
     val logoSensor = remember { EasterEggLogoSensorMatrixConvert() }
     if (IconVisualEffectsPrefUtil.isSupported()) {
-        var orientationAngleSensor: OrientationAngleSensor? = remember { null }
         val lifecycleOwner = LocalLifecycleOwner.current
-
-        fun handleOrientationAngleSensor(enable: Boolean) {
-            if (enable && orientationAngleSensor == null) {
+        val iconVisualEffectsEnabled = SettingPrefUtil.iconVisualEffectsState.value
+        DisposableEffect(iconVisualEffectsEnabled) {
+            var orientationAngleSensor: OrientationAngleSensor? = null
+            if (iconVisualEffectsEnabled) {
                 orientationAngleSensor = OrientationAngleSensor(
                     context, lifecycleOwner, logoSensor
                 )
-            } else if (!enable && orientationAngleSensor != null) {
-                orientationAngleSensor!!.destroy()
+            }
+            onDispose {
+                orientationAngleSensor?.destroy()
                 orientationAngleSensor = null
             }
-        }
-
-        LocalEvent.Receiver(IconVisualEffectsPrefUtil.ACTION_CHANGED) {
-            val enable = it.getBooleanExtra(SettingPrefUtil.EXTRA_VALUE, false)
-            handleOrientationAngleSensor(enable)
-        }
-
-        LaunchedEffect(Unit) {
-            handleOrientationAngleSensor(IconVisualEffectsPrefUtil.isEnable(context))
         }
     }
 
