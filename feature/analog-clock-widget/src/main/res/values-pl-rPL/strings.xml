@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Skonfiguruje widżet</string>
+    <string name="analog_clock_widget_config_summary">Wybierz co się stanie po kliknięciu zegara</string>
+    <string name="analog_clock_widget_click_action_title">Akcja po dotknięciu</string>
+    <string name="analog_clock_widget_action_open_egg">Otwórz aplikację</string>
+    <string name="analog_clock_widget_action_open_app">Otwórz aplikację</string>
+    <string name="analog_clock_widget_action_none">Nie ma akcji</string>
+</resources>
