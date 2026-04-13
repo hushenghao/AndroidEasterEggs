@@ -40,6 +40,7 @@
     <string name="toast_shortcut_added">Zkratka přidána</string>
     <string name="toast_no_egg_detail">Tato verze Android nemá žádný Easter Egg</string>
     <string name="toast_no_update_found">Žádná aktualizace nebyla nalezena</string>
+    <string name="label_widgets">Widgety</string>
     <string name="app_widget_description">Toto jsou analogové hodiny vajíčka</string>
     <string name="action_agree">Souhlasím</string>
     <string name="summary_browse_privacy_policy">Přečtěte a odsouhlaste naše Zásady Ochrany aby jste mohli pokračovat.</string>
