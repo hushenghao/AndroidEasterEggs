@@ -7,6 +7,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":basic"))
     implementation(project(":core:theme"))
     implementation(project(":core:settings"))
 

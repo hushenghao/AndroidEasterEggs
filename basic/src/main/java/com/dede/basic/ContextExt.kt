@@ -4,7 +4,6 @@ package com.dede.basic
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Application
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -22,7 +21,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.core.os.ConfigurationCompat
 import androidx.core.os.LocaleListCompat
-import com.dede.android_eggs.util.LocalEvent
 
 
 val globalContext: Context
@@ -37,7 +35,6 @@ object GlobalContext {
     class Initializer : androidx.startup.Initializer<Unit> {
         override fun create(context: Context) {
             globalContext = context
-            LocalEvent.registerTrimMemoryCallback(context as Application)
         }
 
         override fun dependencies(): List<Class<out androidx.startup.Initializer<*>>> = emptyList()

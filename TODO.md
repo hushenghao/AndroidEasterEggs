@@ -14,8 +14,8 @@
 * 时间线列表 Android logo 布局优化
 * ✅语言修改后关闭侧滑菜单
 * ✅EasterEggItem添加引导侧滑功能
-* 移除 LocalEvent
+* ❎移除 LocalEvent (优化事件总线实现方案，取消对TrimMemory的依赖)
     * ✅移除关闭设置本地事件
     * ✅移除图标动效本地事件
-    * 移除主题切换本地事件
+    * ❎移除主题切换本地事件
 * ✅Cat Editor 添加缩放反馈
