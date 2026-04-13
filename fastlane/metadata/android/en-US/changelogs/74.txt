@@ -5,6 +5,7 @@
 - Add Android N preview Egg #809
 - Add Android K preview Egg #801
 - Add Bulgarian translations #814
+- Make Analog clock widget configurable
 - Easter Egg item add swipe guide
 - Cat Editor add zoom haptic feedback
 - Fix search bar software keyboard not show automatically

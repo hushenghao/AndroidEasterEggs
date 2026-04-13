@@ -10,8 +10,8 @@ import android.widget.RemoteViews
 import androidx.core.app.PendingIntentCompat
 import com.dede.basic.Utils
 import com.dede.basic.cachedExecutor
+import com.dede.basic.launch
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeoutOrNull
 
 /**
@@ -42,34 +42,45 @@ class AnalogClockAppWidget : AppWidgetProvider() {
         updateAppWidgetAsync(context, appWidgetManager, appWidgetId)
     }
 
+    override fun onDeleted(context: Context, appWidgetIds: IntArray) {
+        super.onDeleted(context, appWidgetIds)
+        cachedExecutor.launch(Dispatchers.IO) {
+            for (appWidgetId in appWidgetIds) {
+                AnalogClockWidgetPrefs.clearClickAction(context, appWidgetId)
+            }
+        }
+    }
+
 }
 
-private const val EXTRA_FROM_WIDGET = "extra_from_widget"
+private const val EXTRA_FROM_ANALOG_CLOCK_WIDGET_ACTION = "extra_from_analog_clock_widget_action"
 
-private fun updateAppWidgetAsync(
+internal fun updateAppWidgetAsync(
     context: Context,
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int,
 ) {
-    cachedExecutor.execute {
-        runBlocking(Dispatchers.IO) {
-            val views = RemoteViews(context.packageName, R.layout.widget_easter_egg_analog_clock)
+    cachedExecutor.launch(Dispatchers.IO) {
+        val views = RemoteViews(context.packageName, R.layout.widget_easter_egg_analog_clock)
 
+        val action = AnalogClockWidgetPrefs.getClickAction(context, appWidgetId)
+        if (action != AnalogClockWidgetClickAction.NONE) {
             val launchIntent: Intent? = withTimeoutOrNull(300) {
                 // binder call
                 Utils.getLaunchIntent(context)
             }
             if (launchIntent != null) {
+                launchIntent.putExtra(EXTRA_FROM_ANALOG_CLOCK_WIDGET_ACTION, action.ordinal)
                 val intent = PendingIntentCompat.getActivity(
                     context, 0,
-                    launchIntent.putExtra(EXTRA_FROM_WIDGET, true),
+                    launchIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT,
                     false
                 )
                 views.setOnClickPendingIntent(R.id.analog_clock, intent)
             }
-            // binder call
-            appWidgetManager.updateAppWidget(appWidgetId, views)
         }
+        // binder call
+        appWidgetManager.updateAppWidget(appWidgetId, views)
     }
 }

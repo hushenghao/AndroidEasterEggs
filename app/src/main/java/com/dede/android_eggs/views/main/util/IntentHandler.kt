@@ -42,7 +42,8 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
 
         companion object {
             // from widget module
-            private const val EXTRA_FROM_WIDGET = "extra_from_widget"
+            private const val EXTRA_FROM_ANALOG_CLOCK_WIDGET_ACTION =
+                "extra_from_analog_clock_widget_action"
 
             private val hourApiLevelArray: IntArray = intArrayOf(
                 // Calendar.HOUR [0-11]
@@ -63,18 +64,22 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
         }
 
         override fun handleEggIntent(eggIntent: EggIntent): Boolean {
-            val fromWidget = eggIntent.extras.getBoolean(EXTRA_FROM_WIDGET, false)
-            if (!fromWidget) {
-                return false
+            val action = eggIntent.extras.getInt(EXTRA_FROM_ANALOG_CLOCK_WIDGET_ACTION, -1)
+            if (action == 1) {
+                // com.dede.android_eggs.views.widget.AnalogClockWidgetClickAction.OPEN_APP
+                return true
             }
-
-            val hour = Calendar.getInstance().get(Calendar.HOUR)
-            val apiLevel = hourApiLevelArray[hour]
-            val egg = eggIntent.easterEggs.find { apiLevel in it.apiLevelRange }
-            if (egg != null) {
-                EggActionHelp.launchEgg(eggIntent.context, egg)
+            if (action == 0) {
+                // com.dede.android_eggs.views.widget.AnalogClockWidgetClickAction.OPEN_EGG
+                val hour = Calendar.getInstance().get(Calendar.HOUR)
+                val apiLevel = hourApiLevelArray[hour]
+                val egg = eggIntent.easterEggs.find { apiLevel in it.apiLevelRange }
+                if (egg != null) {
+                    EggActionHelp.launchEgg(eggIntent.context, egg)
+                }
+                return egg != null
             }
-            return egg != null
+            return false
         }
     }
 

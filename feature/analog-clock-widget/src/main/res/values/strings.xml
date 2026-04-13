@@ -1,0 +1,8 @@
+<resources>
+    <string name="analog_clock_widget_config_title">Configure widget</string>
+    <string name="analog_clock_widget_config_summary">Choose what happens when you tap the analog clock widget.</string>
+    <string name="analog_clock_widget_click_action_title">Tap action</string>
+    <string name="analog_clock_widget_action_open_egg">Open egg</string>
+    <string name="analog_clock_widget_action_open_app">Open app</string>
+    <string name="analog_clock_widget_action_none">No action</string>
+</resources>

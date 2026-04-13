@@ -46,3 +46,14 @@ files:
         zh-CN: "zh"
         es-ES: "es"
         pt-PT: "pt"
+
+  # AnalogClockWidget
+  - source: "/feature/analog-clock-widget/src/main/res/values/strings.xml"
+    translation: "/feature/analog-clock-widget/src/main/res/values-%android_code%/%original_file_name%"
+    update_option: update_as_unapproved
+    skip_untranslated_files: true
+    languages_mapping:
+      android_code:
+        zh-CN: "zh"
+        es-ES: "es"
+        pt-PT: "pt"

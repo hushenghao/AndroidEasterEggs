@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:configure="com.dede.android_eggs.views.widget.AnalogClockWidgetConfigureActivity"
     android:description="@string/app_widget_description"
     android:initialLayout="@layout/widget_easter_egg_analog_clock"
     android:minWidth="110dp"
@@ -14,4 +15,5 @@
     android:targetCellHeight="2"
     android:updatePeriodMillis="0"
     android:widgetCategory="home_screen"
+    android:widgetFeatures="configuration_optional|reconfigurable"
     tools:targetApi="s" />

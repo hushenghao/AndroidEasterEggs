@@ -1,0 +1,8 @@
+<resources>
+    <string name="analog_clock_widget_config_title">配置小组件</string>
+    <string name="analog_clock_widget_config_summary">选择点击模拟时钟小组件后的动作。</string>
+    <string name="analog_clock_widget_click_action_title">点击动作</string>
+    <string name="analog_clock_widget_action_open_egg">打开彩蛋</string>
+    <string name="analog_clock_widget_action_open_app">打开 APP</string>
+    <string name="analog_clock_widget_action_none">无动作</string>
+</resources>
