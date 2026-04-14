@@ -62,6 +62,7 @@ internal fun updateAppWidgetAsync(
 ) {
     cachedExecutor.launch(Dispatchers.IO) {
         val views = RemoteViews(context.packageName, R.layout.widget_easter_egg_analog_clock)
+        views.setOnClickPendingIntent(R.id.analog_clock, null)
 
         val action = AnalogClockWidgetPrefs.getClickAction(context, appWidgetId)
         if (action != AnalogClockWidgetClickAction.NONE) {
