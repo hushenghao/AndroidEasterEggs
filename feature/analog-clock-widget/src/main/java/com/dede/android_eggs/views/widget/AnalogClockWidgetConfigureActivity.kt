@@ -21,11 +21,13 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.ToggleButton
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,9 +35,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.lifecycle.lifecycleScope
 import com.dede.android_eggs.views.theme.EasterEggsTheme
-import com.dede.basic.cachedExecutor
-import com.dede.basic.launch
+import kotlinx.coroutines.launch
 
 /**
  * The configuration activity for [AnalogClockAppWidget].
@@ -88,7 +90,7 @@ class AnalogClockWidgetConfigureActivity : ComponentActivity() {
     }
 
     private fun onConfirm(clickAction: AnalogClockWidgetClickAction) {
-        cachedExecutor.launch {
+        lifecycleScope.launch {
             AnalogClockWidgetPrefs.setClickAction(
                 this@AnalogClockWidgetConfigureActivity,
                 appWidgetId,
@@ -114,8 +116,21 @@ private fun AnalogClockWidgetConfigureSheet(
     onDismissRequest: () -> Unit,
     onConfirm: (AnalogClockWidgetClickAction) -> Unit,
 ) {
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    val scope = rememberCoroutineScope()
+
+    fun closeAfterAnimation(action: () -> Unit) {
+        scope.launch {
+            sheetState.hide()
+            action()
+        }
+    }
+
     ModalBottomSheet(
-        onDismissRequest = onDismissRequest,
+        onDismissRequest = {
+            closeAfterAnimation(onDismissRequest)
+        },
+        sheetState = sheetState,
     ) {
         Column(
             modifier = Modifier
@@ -186,10 +201,10 @@ private fun AnalogClockWidgetConfigureSheet(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                TextButton(onClick = onDismissRequest) {
+                TextButton(onClick = { closeAfterAnimation(onDismissRequest) }) {
                     Text(text = stringResource(android.R.string.cancel))
                 }
-                TextButton(onClick = { onConfirm(selectedAction) }) {
+                TextButton(onClick = { closeAfterAnimation { onConfirm(selectedAction) } }) {
                     Text(text = stringResource(android.R.string.ok))
                 }
             }
