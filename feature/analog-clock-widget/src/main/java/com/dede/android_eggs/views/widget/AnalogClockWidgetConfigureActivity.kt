@@ -20,7 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.ToggleButton
+import androidx.compose.material3.TonalToggleButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -179,9 +179,10 @@ private fun AnalogClockWidgetConfigureSheet(
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     buttons.forEachIndexed { index, (action, labelRes) ->
-                        ToggleButton(
+                        TonalToggleButton(
                             checked = action == selectedAction,
                             onCheckedChange = { if (it) selectedAction = action },
                             modifier = Modifier.weight(1f),
