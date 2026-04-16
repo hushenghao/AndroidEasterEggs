@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Widget konfigüre et</string>
+    <string name="analog_clock_widget_config_summary">Analog saat widget\'ına dokunduğunuzda ne olacağını seçin.</string>
+    <string name="analog_clock_widget_click_action_title">Dokunma eylemi</string>
+    <string name="analog_clock_widget_action_open_egg">Yumurta aç</string>
+    <string name="analog_clock_widget_action_open_app">Uygulama aç</string>
+    <string name="analog_clock_widget_action_none">Eylem yok</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">設定小工具</string>
+    <string name="analog_clock_widget_config_summary">選擇輕觸類比時鐘小工具時的動作。</string>
+    <string name="analog_clock_widget_click_action_title">輕觸動作</string>
+    <string name="analog_clock_widget_action_open_egg">開啟彩蛋</string>
+    <string name="analog_clock_widget_action_open_app">開啟應用程式</string>
+    <string name="analog_clock_widget_action_none">無動作</string>
+</resources>
