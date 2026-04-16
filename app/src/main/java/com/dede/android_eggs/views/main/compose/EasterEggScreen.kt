@@ -176,6 +176,13 @@ fun EasterEggScreen(
 
 private const val HIGHEST_COUNT = 1
 
+private fun BaseEasterEgg.lazyItemKey(): String {
+    if (apiLevelRange.first == apiLevelRange.last) {
+        return "${this.javaClass.name}:${apiLevelRange.first}"
+    }
+    return "${this.javaClass.name}:${apiLevelRange.first}-${apiLevelRange.last}"
+}
+
 @Composable
 @Preview(showBackground = true)
 fun EasterEggList(
@@ -215,13 +222,19 @@ fun EasterEggList(
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     if (searchMode) {
-                        items(items = currentList) {
+                        items(
+                            items = currentList,
+                            key = BaseEasterEgg::lazyItemKey,
+                        ) {
                             EasterEggItem(it, enableItemAnim = true)
                         }
                     } else {
                         val highestList = currentList.subList(0, HIGHEST_COUNT)
                         val normalList = currentList.subList(HIGHEST_COUNT, currentList.size)
-                        items(items = highestList) {
+                        items(
+                            items = highestList,
+                            key = BaseEasterEgg::lazyItemKey,
+                        ) {
                             EasterEggHighestItem(it)
                         }
                         item("wavy") {
@@ -231,7 +244,10 @@ fun EasterEggList(
                                     .padding(vertical = 26.dp),
                             )
                         }
-                        itemsIndexed(items = normalList) { index, item ->
+                        itemsIndexed(
+                            items = normalList,
+                            key = { _, item -> item.lazyItemKey() }
+                        ) { index, item ->
                             EasterEggItem(base = item, enableItemAnim = false, index = index)
                         }
                         item("wavy") {

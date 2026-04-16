@@ -133,7 +133,12 @@ fun TimelineListDialog(
             item {
                 TimelineHeader()
             }
-            items(viewModel.timelines) {
+            items(
+                items = viewModel.timelines,
+                key = { event ->
+                    "${event.fullApiLevel}:${event.year}-${event.month}-${event.event}"
+                }
+            ) {
                 TimelineItem(
                     event = it,
                     logoRes = AndroidLogoMatcher.findAndroidLogo(it.apiLevel),
