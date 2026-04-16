@@ -64,7 +64,7 @@ object WelcomeDialog : EasterEggsDestination, EasterEggsDestination.Provider {
 fun WelcomeDialog(onDismiss: () -> Unit = {}) {
     var privacyPolicyAgreed by rememberPrefBoolState(KEY_PRIVACY_POLICY_AGREED, false)
     val context = LocalContext.current
-    var konfettiState by LocalKonfettiState.current
+    val konfettiController = LocalKonfettiState.current
     AlertDialog(
         title = {
             Text(text = stringResource(StringsR.string.label_welcome))
@@ -101,7 +101,7 @@ fun WelcomeDialog(onDismiss: () -> Unit = {}) {
         confirmButton = {
             TextButton(onClick = {
                 privacyPolicyAgreed = true
-                konfettiState = true
+                konfettiController.trigger()
                 onDismiss()
             }) {
                 Text(text = stringResource(StringsR.string.action_agree))

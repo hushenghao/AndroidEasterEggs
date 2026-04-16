@@ -109,7 +109,7 @@ fun EasterEggScreen(
         }
     }
 
-    val konfettiState = LocalKonfettiState.current
+    val konfettiController = LocalKonfettiState.current
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     CompositionLocalProvider(
         LocalEasterEggLogoSensor provides logoSensor,
@@ -170,7 +170,10 @@ fun EasterEggScreen(
             }
         }
 
-        Konfetti(konfettiState)
+        Konfetti(
+            visible = konfettiController.visible,
+            onFinished = konfettiController::dismiss
+        )
     }
 }
 

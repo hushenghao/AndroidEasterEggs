@@ -33,7 +33,7 @@ import com.dede.android_eggs.navigation.rememberNavigationState
 import com.dede.android_eggs.navigation.toEntries
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.isAgreedPrivacyPolicy
-import com.dede.android_eggs.views.main.compose.rememberKonfettiState
+import com.dede.android_eggs.views.main.compose.rememberKonfettiController
 import com.dede.basic.Utils
 import com.dede.android_eggs.views.main.compose.AnimatorDisabledAlertDialog as AnimatorDisabledAlert
 
@@ -65,9 +65,10 @@ fun EasterEggsNavHost(
 ) {
     val navigationState = rememberNavigationState(startRoute = EasterEggs)
     val navigator = rememberNavigator(navigationState)
+    val konfettiController = rememberKonfettiController()
     CompositionLocalProvider(
         LocalNavigator provides navigator,
-        LocalKonfettiState provides rememberKonfettiState(),
+        LocalKonfettiState provides konfettiController,
     ) {
         val onBack = { navigator.goBack() }
         val entryProvider = entryProvider {

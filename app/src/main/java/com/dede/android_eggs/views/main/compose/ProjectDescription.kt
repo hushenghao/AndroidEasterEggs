@@ -29,7 +29,7 @@ import com.dede.android_eggs.resources.R as StringsR
 @Preview(showBackground = true)
 @Composable
 fun ProjectDescription() {
-    var konfettiState by LocalKonfettiState.current
+    val konfettiController = LocalKonfettiState.current
 
     Column(
         modifier = Modifier
@@ -48,7 +48,7 @@ fun ProjectDescription() {
                         interactionSource = remember { MutableInteractionSource() },
                         indication = ripple(false)
                     ) {
-                        konfettiState = true
+                        konfettiController.trigger()
                     },
                 contentDescription = stringResource(id = StringsR.string.app_name)
             )

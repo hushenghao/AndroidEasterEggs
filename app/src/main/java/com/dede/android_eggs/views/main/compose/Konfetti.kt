@@ -3,10 +3,10 @@ package com.dede.android_eggs.views.main.compose
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,26 +22,40 @@ import nl.dionsegijn.konfetti.core.Spread
 import nl.dionsegijn.konfetti.core.emitter.Emitter
 import java.util.concurrent.TimeUnit
 
+@Stable
+class KonfettiController internal constructor(visible: Boolean) {
+    var visible by mutableStateOf(visible)
+        private set
+
+    fun trigger() {
+        visible = true
+    }
+
+    fun dismiss() {
+        visible = false
+    }
+}
+
 @Composable
-fun rememberKonfettiState(visible: Boolean = false): MutableState<Boolean> {
-    return remember { mutableStateOf(visible) }
+fun rememberKonfettiController(visible: Boolean = false): KonfettiController {
+    return remember { KonfettiController(visible) }
 }
 
 @Composable
 fun Konfetti(
-    state: MutableState<Boolean> = rememberKonfettiState(),
+    visible: Boolean,
+    onFinished: () -> Unit,
     modifier: Modifier = Modifier,
     primary: Color = MaterialTheme.colorScheme.primary
 ) {
-    var visible by state
     if (!visible) {
         return
     }
-    val listener = remember(state) {
+    val listener = remember(onFinished) {
         object : OnParticleSystemUpdateListener {
             override fun onParticleSystemEnded(system: PartySystem, activeSystems: Int) {
                 if (activeSystems == 0)
-                    visible = false
+                    onFinished()
             }
         }
     }
