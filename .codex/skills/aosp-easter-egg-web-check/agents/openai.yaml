@@ -1,0 +1,4 @@
+interface:
+  display_name: "AOSP Easter Egg Web Check"
+  short_description: "Check public AOSP easter egg changes via web"
+  default_prompt: "Use $aosp-easter-egg-web-check to inspect public AOSP easter egg updates via cs.android.com and android.googlesource.com."
