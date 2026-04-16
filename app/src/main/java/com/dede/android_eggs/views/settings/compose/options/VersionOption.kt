@@ -23,7 +23,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.buildAnnotatedString
@@ -59,6 +59,8 @@ import com.dede.android_eggs.resources.R as StringR
 fun VersionOption(shape: Shape = OptionShapes.defaultShape) {
     val context = LocalContext.current
     val (versionName, versionCode) = remember(context) { Utils.getAppVersionPair(context) }
+    var newVersion: LatestVersion? by remember { mutableStateOf(null) }
+    val resources = LocalResources.current
     Option(
         shape = shape,
         leadingIcon = imageVectorIconBlock(imageVector = Icons.Outlined.NewReleases),
@@ -66,7 +68,10 @@ fun VersionOption(shape: Shape = OptionShapes.defaultShape) {
         desc = AGPUtils.getVcsRevision(7),
         trailingContent = {
             if (isAgreedPrivacyPolicy(context)) {
-                UpgradeIconButton()
+                UpgradeIconButton(
+                    newVersion = newVersion,
+                    onNewVersionChange = { newVersion = it },
+                )
             } else {
                 Icon(
                     imageVector = Icons.AutoMirrored.Rounded.NavigateNext,
@@ -77,26 +82,28 @@ fun VersionOption(shape: Shape = OptionShapes.defaultShape) {
         onClick = {
             val revision = AGPUtils.getVcsRevision()
             val uri = if (revision == null) {
-                context.getString(R.string.url_github)
+                resources.getString(R.string.url_github)
             } else {
-                context.getString(R.string.url_github_commit, revision)
+                resources.getString(R.string.url_github_commit, revision)
             }
             CustomTabsBrowser.launchUrl(context, uri)
         }
     )
+    if (newVersion != null) {
+        UpgradeDialog(version = newVersion!!, onDismiss = { newVersion = null })
+    }
 }
 
-private val newVersionState: MutableState<LatestVersion?> = mutableStateOf(null)
-
 @Composable
-private fun UpgradeIconButton() {
-    var newVersion: LatestVersion? by remember { newVersionState }
-
+private fun UpgradeIconButton(
+    newVersion: LatestVersion?,
+    onNewVersionChange: (LatestVersion?) -> Unit,
+) {
     val context = LocalContext.current
     val activity = LocalActivity.current
     val coroutineScope = rememberCoroutineScope()
 
-    var scaleAnimatable by remember { mutableStateOf(true) }
+    var scaleAnimatable by remember { mutableStateOf(newVersion == null) }
     val scaleAnim = remember { Animatable(1f) }
     LaunchedEffect(scaleAnimatable) {
         while (scaleAnimatable) {
@@ -133,7 +140,8 @@ private fun UpgradeIconButton() {
                             Utils.getAppVersionPair(context).first
                         ) > 0
                     ) {
-                        newVersion = latestVersion
+                        onNewVersionChange(latestVersion)
+                        scaleAnimatable = false
                     } else {
                         context.toast(StringR.string.toast_no_update_found)
                         scaleAnimatable = false
@@ -145,10 +153,6 @@ private fun UpgradeIconButton() {
         }
     ) {
         Icon(imageVector = Icons.Rounded.Upgrade, contentDescription = null)
-    }
-
-    if (newVersion != null) {
-        UpgradeDialog(version = newVersion!!, onDismiss = { newVersion = null })
     }
 }
 

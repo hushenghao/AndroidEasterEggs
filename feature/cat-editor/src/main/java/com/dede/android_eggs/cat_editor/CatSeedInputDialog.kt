@@ -40,6 +40,7 @@ import com.dede.android_eggs.resources.R as StringR
  */
 @Composable
 fun CatSeedInputDialog(
+    modifier: Modifier = Modifier,
     visible: Boolean,
     onConfirm: (seed: Long) -> Unit,
     onDismiss: () -> Unit = {},
@@ -72,6 +73,7 @@ fun CatSeedInputDialog(
         onDismissRequest = {
             dismiss()
         },
+        modifier = modifier,
         title = {
             Text(text = stringResource(StringR.string.cat_editor))
         },

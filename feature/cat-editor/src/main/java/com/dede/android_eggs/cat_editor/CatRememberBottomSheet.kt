@@ -56,6 +56,7 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun CatRememberBottomSheet(
+    modifier: Modifier = Modifier,
     visible: Boolean,
     onCatSelected: (cat: Cat) -> Unit,
     onDismiss: () -> Unit = {},
@@ -76,6 +77,7 @@ fun CatRememberBottomSheet(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     ModalBottomSheet(
+        modifier = modifier,
         onDismissRequest = onDismiss,
         sheetState = sheetState,
     ) {

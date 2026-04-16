@@ -119,6 +119,7 @@ fun ExpandOptionsPref(
 
 @Composable
 fun ExpandOptionsPref(
+    modifier: Modifier = Modifier,
     expanded: Boolean,
     onExpandedChange: (Boolean) -> Unit,
     leadingIcon: ImageVector,
@@ -151,7 +152,8 @@ fun ExpandOptionsPref(
     ExpandOptionsPref(
         modifier = Modifier
             .focusRequester(focusRequester)
-            .focusable(),
+            .focusable()
+            .then(modifier),
         expended = expanded,
         leadingIcon = leadingIcon,
         title = title,
@@ -179,6 +181,7 @@ fun ExpandOptionsPref(
 
 @Composable
 fun ExpandOptionsPref(
+    modifier: Modifier = Modifier,
     leadingIcon: ImageVector,
     title: String,
     desc: String? = null,
@@ -187,6 +190,7 @@ fun ExpandOptionsPref(
 ) {
     val expanded = rememberSaveable { mutableStateOf(initializeExpanded) }
     ExpandOptionsPref(
+        modifier = modifier,
         expanded = expanded.value,
         onExpandedChange = { expanded.value = it },
         leadingIcon = leadingIcon,
