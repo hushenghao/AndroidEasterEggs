@@ -33,12 +33,9 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
@@ -96,12 +93,11 @@ object TimelineListDialog : EasterEggsDestination, EasterEggsDestination.Provide
 
 @Composable
 fun TimelineListDialog(
-    visibleState: MutableState<Boolean> = remember { mutableStateOf(true) },
+    visible: Boolean = true,
     viewModel: TimelineViewModel = hiltViewModel(),
     scrimColor: Color = BottomSheetDefaults.ScrimColor,
     onDismiss: () -> Unit = {},
 ) {
-    var visible by visibleState
     if (!visible) {
         return
     }
@@ -116,7 +112,6 @@ fun TimelineListDialog(
     }
     ModalBottomSheet(
         onDismissRequest = {
-            visible = false
             onDismiss()
         },
         scrimColor = scrimColor,

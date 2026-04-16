@@ -26,7 +26,7 @@ fun DynamicColorPref() {
             contentDescription = stringResource(StringsR.string.pref_title_dynamic_color),
         ),
         title = stringResource(StringsR.string.pref_title_dynamic_color),
-        value = intState == SettingPrefUtil.ON,
+        checked = intState == SettingPrefUtil.ON,
         shape = OptionShapes.borderShape,
         onCheckedChange = {
             intState = if (it) SettingPrefUtil.ON else SettingPrefUtil.OFF

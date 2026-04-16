@@ -39,7 +39,7 @@ fun launchRocketLauncher(context: Context) {
 fun RocketLauncherPref() {
     val context = LocalContext.current
     var expanded by rememberSaveable { mutableStateOf(false) }
-    val currentIconsValueState = rememberPrefIntState(
+    var currentIconsValue by rememberPrefIntState(
         RocketLauncherPrefUtil.KEY_ROCKET_LAUNCHER_ICONS_SOURCE,
         RocketLauncherPrefUtil.VALUE_DEFAULT
     )
@@ -74,21 +74,24 @@ fun RocketLauncherPref() {
             title = stringResource(StringR.string.rocket_launcher_easter_egg_icons),
             shape = OptionShapes.firstShape(),
             value = RocketLauncherPrefUtil.VALUE_EASTER_EGG_ICONS,
-            currentValueState = currentIconsValueState
+            currentValue = currentIconsValue,
+            onOptionClick = { currentIconsValue = it }
         )
         RadioOption(
             leadingIcon = imageVectorIconBlock(imageVector = Icons.Rounded.Apps),
             title = stringResource(StringR.string.rocket_launcher_all_app_icons),
             value = RocketLauncherPrefUtil.VALUE_ALL_APP_ICONS,
             desc = stringResource(StringR.string.rocket_launcher_query_all_app_desc),
-            currentValueState = currentIconsValueState
+            currentValue = currentIconsValue,
+            onOptionClick = { currentIconsValue = it }
         )
         RadioOption(
             leadingIcon = imageVectorIconBlock(imageVector = Icons.AutoMirrored.Rounded.CallMerge),
             title = stringResource(StringR.string.rocket_launcher_all_icons),
             shape = OptionShapes.lastShape(),
             value = RocketLauncherPrefUtil.VALUE_ALL_ICONS,
-            currentValueState = currentIconsValueState
+            currentValue = currentIconsValue,
+            onOptionClick = { currentIconsValue = it }
         )
     }
 }

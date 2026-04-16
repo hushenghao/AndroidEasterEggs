@@ -36,7 +36,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -61,14 +60,14 @@ import kotlin.random.Random
 
 @Composable
 fun ColorPaletteDialog(
-    visibleState: MutableState<Boolean> = mutableStateOf(false),
+    visible: Boolean,
     selectedColor: Color = Color.White,
     withAlphaPalette: Boolean = true,
     onColorSelected: (color: Color) -> Unit = {},
     isColorStrawEnabled: Boolean = true,
     onColorStrawClick: () -> Unit = {},
+    onDismiss: () -> Unit = {},
 ) {
-    var visible by remember { visibleState }
     if (!visible) {
         return
     }
@@ -80,9 +79,7 @@ fun ColorPaletteDialog(
     ModalBottomSheet(
         modifier = Modifier.sizeIn(maxWidth = 420.dp),
         sheetState = sheetState,
-        onDismissRequest = {
-            visible = false
-        },
+        onDismissRequest = onDismiss,
         contentWindowInsets = {
             // add child padding
             WindowInsets(0, 0, 0, 0)
@@ -215,7 +212,7 @@ fun ColorPaletteDialog(
                         onClick = {
                             scope.launch {
                                 sheetState.hide()
-                                visible = false
+                                onDismiss()
                                 onColorStrawClick()
                             }
                         }
@@ -261,7 +258,7 @@ fun ColorPaletteDialog(
                     onClick = {
                         scope.launch {
                             sheetState.hide()
-                            visible = false
+                            onDismiss()
                         }
                     }
                 ) {
@@ -274,7 +271,7 @@ fun ColorPaletteDialog(
                     onClick = {
                         scope.launch {
                             sheetState.hide()
-                            visible = false
+                            onDismiss()
                             if (selectedColor != finalColor) {
                                 performColorSelected(finalColor)
                             }

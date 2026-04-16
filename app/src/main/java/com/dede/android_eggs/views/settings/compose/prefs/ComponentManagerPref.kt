@@ -48,7 +48,7 @@ fun ComponentManagerPref(viewModel: ComponentManagerViewModel = hiltViewModel())
                 },
                 title = stringResource(id = component.nameRes),
                 desc = formatter.format(context),
-                value = component.isEnabled(context),
+                checked = component.isEnabled(context),
                 onCheckedChange = {
                     component.setEnabled(context, it)
                 },

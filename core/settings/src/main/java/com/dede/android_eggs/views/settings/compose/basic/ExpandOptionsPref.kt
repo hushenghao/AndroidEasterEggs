@@ -33,13 +33,11 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -121,7 +119,8 @@ fun ExpandOptionsPref(
 
 @Composable
 fun ExpandOptionsPref(
-    expandedState: MutableState<Boolean>,
+    expanded: Boolean,
+    onExpandedChange: (Boolean) -> Unit,
     leadingIcon: ImageVector,
     title: String,
     desc: String? = null,
@@ -131,8 +130,6 @@ fun ExpandOptionsPref(
     },
     options: @Composable ColumnScope.() -> Unit
 ) {
-    var expanded by expandedState
-
     val focusRequester = remember { FocusRequester() }
     if (requestFocusOnExpanded) {
         val lifecycleOwner = LocalLifecycleOwner.current
@@ -161,13 +158,14 @@ fun ExpandOptionsPref(
         desc = desc,
         trailingContent = trailingContent,
         onClick = onClick@{
-            expanded = !expanded
+            val nextExpanded = !expanded
+            onExpandedChange(nextExpanded)
 
             if (!requestFocusOnExpanded) {
                 return@onClick
             }
             coroutineScope.launch {
-                if (expanded) {
+                if (nextExpanded) {
                     delay(300)
                     focusRequester.requestFocus()
                 } else {
@@ -187,9 +185,10 @@ fun ExpandOptionsPref(
     initializeExpanded: Boolean = false,
     options: @Composable ColumnScope.() -> Unit
 ) {
-    val expandedState = rememberSaveable { mutableStateOf(initializeExpanded) }
+    val expanded = rememberSaveable { mutableStateOf(initializeExpanded) }
     ExpandOptionsPref(
-        expandedState = expandedState,
+        expanded = expanded.value,
+        onExpandedChange = { expanded.value = it },
         leadingIcon = leadingIcon,
         title = title,
         desc = desc,
@@ -278,11 +277,9 @@ fun <T : Any> RadioOption(
     desc: String? = null,
     shape: Shape = OptionShapes.defaultShape,
     value: T,
-    currentValueState: MutableState<T>,
-    onOptionClick: (value: T) -> Unit = {
-        currentValueState.value = value
-    },
-    trailingContent: @Composable () -> Unit = radioButtonBlock(currentValueState.value == value),
+    currentValue: T,
+    onOptionClick: (value: T) -> Unit,
+    trailingContent: @Composable () -> Unit = radioButtonBlock(currentValue == value),
 ) {
     Option(
         leadingIcon = leadingIcon,
@@ -302,10 +299,9 @@ fun SwitchOption(
     title: String,
     desc: String? = null,
     shape: Shape = OptionShapes.defaultShape,
-    value: Boolean = false,
+    checked: Boolean = false,
     onCheckedChange: (checked: Boolean) -> Unit
 ) {
-    var isChecked by remember { mutableStateOf(value) }
     Option(
         shape = shape,
         leadingIcon = leadingIcon,
@@ -313,16 +309,12 @@ fun SwitchOption(
         desc = desc,
         trailingContent = {
             Switch(
-                checked = isChecked,
-                onCheckedChange = {
-                    isChecked = it
-                    onCheckedChange(it)
-                },
+                checked = checked,
+                onCheckedChange = onCheckedChange,
             )
         },
         onClick = {
-            isChecked = !isChecked
-            onCheckedChange(isChecked)
+            onCheckedChange(!checked)
         }
     )
 }

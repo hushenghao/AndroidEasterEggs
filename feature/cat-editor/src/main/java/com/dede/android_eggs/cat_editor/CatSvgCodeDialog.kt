@@ -25,9 +25,6 @@ import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,13 +43,12 @@ import com.dede.basic.copy
 
 @Composable
 internal fun CatSvgCodeDialog(
-    visibleState: MutableState<Boolean>,
+    visible: Boolean,
     cat: Cat,
     svg: String,
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit = {},
 ) {
-    var visible by visibleState
     if (!visible) {
         return
     }
@@ -126,7 +122,7 @@ internal fun CatSvgCodeDialog(
             }
         },
         confirmButton = {
-            TextButton(onClick = { visible = false }) {
+            TextButton(onClick = onDismiss) {
                 Text(text = stringResource(android.R.string.ok))
             }
         }

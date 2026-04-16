@@ -149,7 +149,7 @@ fun CatEditorScreen() {
     var catSeed by catSeedState
     val catName = stringResource(R.string.default_cat_name, catSeed)// full seed name
 
-    val colorPaletteState = rememberSaveable { mutableStateOf(false) }
+    var colorPaletteVisible by rememberSaveable { mutableStateOf(false) }
 
     val catEditorRecords = rememberCatEditorRecords(firstRecord = CatEditorRecords.seed(catSeed))
     // split with cat seed
@@ -159,21 +159,21 @@ fun CatEditorScreen() {
         snapshotFlow { catEditorController.selectPart }
             .distinctUntilChanged()
             .collect { part ->
-                colorPaletteState.value = part != CatEditorController.UNSELECTED_PART
+                colorPaletteVisible = part != CatEditorController.UNSELECTED_PART
             }
     }
 
     var moreOptionsPopVisible by remember { mutableStateOf(false) }
-    val inputSeedDialogState = remember { mutableStateOf(false) }
+    var inputSeedDialogVisible by remember { mutableStateOf(false) }
 
-    val rememberCatsDialogState = rememberSaveable { mutableStateOf(false) }
+    var rememberCatsDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isRememberCat by remember { mutableStateOf(false) }
     var isRememberCatProcessing by remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
 
-    LaunchedEffect(catSeed, catEditorController.colorListVersion, rememberCatsDialogState.value) {
-        if (rememberCatsDialogState.value) {
+    LaunchedEffect(catSeed, catEditorController.colorListVersion, rememberCatsDialogVisible) {
+        if (rememberCatsDialogVisible) {
             return@LaunchedEffect
         }
         isRememberCatProcessing = true
@@ -194,7 +194,7 @@ fun CatEditorScreen() {
         }
     }
 
-    val catSvgDialogState = remember { mutableStateOf(false) }
+    var catSvgDialogVisible by remember { mutableStateOf(false) }
     var catSvgText by remember { mutableStateOf("") }
 
     val goBackButton: @Composable () -> Unit = {
@@ -227,7 +227,7 @@ fun CatEditorScreen() {
     }
     val paletteButton: @Composable () -> Unit = {
         IconButton(
-            onClick = { colorPaletteState.value = true },
+            onClick = { colorPaletteVisible = true },
             enabled = catEditorController.hasSelectedPart
         ) {
             Icon(imageVector = Icons.Rounded.Palette, contentDescription = null)
@@ -325,7 +325,7 @@ fun CatEditorScreen() {
                 catEditorController.colorList, catEditorController.isMirrorMode
             )
             Log.i("CatEditor", "\n" + catSvgText)
-            catSvgDialogState.value = true
+            catSvgDialogVisible = true
         }) {
             Icon(
                 imageVector = Icons.Rounded.Code,
@@ -334,7 +334,7 @@ fun CatEditorScreen() {
         }
     }
     val inputCatButton: @Composable () -> Unit = {
-        IconButton(onClick = { inputSeedDialogState.value = true }) {
+        IconButton(onClick = { inputSeedDialogVisible = true }) {
             Icon(imageVector = Icons.Rounded.Draw, contentDescription = null)
         }
     }
@@ -430,7 +430,7 @@ fun CatEditorScreen() {
                     }
                 },
                 actions = {
-                    IconButton(onClick = { rememberCatsDialogState.value = true }) {
+                    IconButton(onClick = { rememberCatsDialogVisible = true }) {
                         Icon(
                             imageVector = Icons.Rounded.Cat,
                             contentDescription = null,
@@ -500,7 +500,7 @@ fun CatEditorScreen() {
                     }
                 }
             ColorPaletteDialog(
-                visibleState = colorPaletteState,
+                visible = colorPaletteVisible,
                 selectedColor = catEditorController.getSelectedPartColor(Color.White),
                 onColorSelected = { color ->
                     if (!catEditorController.hasSelectedPart) {
@@ -519,15 +519,20 @@ fun CatEditorScreen() {
                 onColorStrawClick = {
                     val intent = Intent(Utilities.ACTION_OPEN_EYE_DROPPER)
                     eyeDropperLauncher.launch(intent)
-                }
+                },
+                onDismiss = { colorPaletteVisible = false }
             )
 
-            CatSeedInputDialog(inputSeedDialogState, onConfirm = { seed ->
-                updateCatSeed(seed)
-            })
+            CatSeedInputDialog(
+                visible = inputSeedDialogVisible,
+                onConfirm = { seed ->
+                    updateCatSeed(seed)
+                },
+                onDismiss = { inputSeedDialogVisible = false }
+            )
 
             CatSvgCodeDialog(
-                catSvgDialogState,
+                visible = catSvgDialogVisible,
                 cat = remember(
                     catSeed,
                     catEditorController.colorListVersion,
@@ -540,6 +545,7 @@ fun CatEditorScreen() {
                     )
                 },
                 svg = catSvgText,
+                onDismiss = { catSvgDialogVisible = false },
             )
 
             if (bottomButtonCount < bottomMenuButtonList.size) {
@@ -558,10 +564,11 @@ fun CatEditorScreen() {
     }
 
     CatRememberBottomSheet(
-        visibleState = rememberCatsDialogState,
+        visible = rememberCatsDialogVisible,
         onCatSelected = { cat ->
             updateCatSeed(cat.seed, cat.colors)
-        }
+        },
+        onDismiss = { rememberCatsDialogVisible = false }
     )
 }
 

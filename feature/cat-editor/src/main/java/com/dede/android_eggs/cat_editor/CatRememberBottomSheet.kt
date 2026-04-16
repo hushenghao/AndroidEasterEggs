@@ -35,7 +35,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -57,10 +56,10 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun CatRememberBottomSheet(
-    visibleState: MutableState<Boolean>,
-    onCatSelected: (cat: Cat) -> Unit
+    visible: Boolean,
+    onCatSelected: (cat: Cat) -> Unit,
+    onDismiss: () -> Unit = {},
 ) {
-    var visible by visibleState
     if (!visible) {
         return
     }
@@ -77,7 +76,7 @@ fun CatRememberBottomSheet(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     ModalBottomSheet(
-        onDismissRequest = { visible = false },
+        onDismissRequest = onDismiss,
         sheetState = sheetState,
     ) {
         Crossfade(targetState = allCats.isEmpty()) { isEmpty ->
@@ -114,7 +113,7 @@ fun CatRememberBottomSheet(
                             modifier = Modifier.animateItem(),
                             onClick = {
                                 onCatSelected(cat)
-                                visible = false
+                                onDismiss()
                             },
                             onLongClick = {
                                 isDeletedMode = !isDeletedMode
