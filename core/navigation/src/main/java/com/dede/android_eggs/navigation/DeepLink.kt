@@ -1,19 +1,48 @@
 package com.dede.android_eggs.navigation
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.navigation3.runtime.NavKey
+
+private object PendingDeepLinkStore {
+    private var navKey: NavKey? = null
+
+    @Synchronized
+    fun set(route: NavKey) {
+        navKey = route
+    }
+
+    @Synchronized
+    fun peek(): NavKey? = navKey
+
+    @Synchronized
+    fun consume(): NavKey? {
+        val pending = navKey
+        navKey = null
+        return pending
+    }
+
+    @Synchronized
+    fun clear() {
+        navKey = null
+    }
+}
 
 object DeepLink {
 
-    internal val deeplinkNavKey: MutableState<NavKey?> = mutableStateOf(null)
-
     fun setNavKey(route: NavKey) {
-        deeplinkNavKey.value = route
+        PendingDeepLinkStore.set(route)
     }
 
-    fun handleNavKey(navigator: Navigator) {
-        navigator.navigate(deeplinkNavKey.value ?: return)
-        deeplinkNavKey.value = null
+    fun peekNavKey(): NavKey? {
+        return PendingDeepLinkStore.peek()
+    }
+
+    fun clearNavKey() {
+        PendingDeepLinkStore.clear()
+    }
+
+    fun handleNavKey(navigator: Navigator): Boolean {
+        val route = PendingDeepLinkStore.consume() ?: return false
+        navigator.navigate(route)
+        return true
     }
 }

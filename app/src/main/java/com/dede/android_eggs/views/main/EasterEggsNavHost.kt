@@ -65,6 +65,7 @@ fun EasterEggsNavHost(
 ) {
     val navigationState = rememberNavigationState(startRoute = EasterEggs)
     val navigator = rememberNavigator(navigationState)
+    val currentRoute = navigator.currentRoute
     val konfettiController = rememberKonfettiController()
     CompositionLocalProvider(
         LocalNavigator provides navigator,
@@ -112,12 +113,16 @@ fun EasterEggsNavHost(
         )
 
         val context = LocalContext.current
-        LaunchedEffect(navigator) {
-            if (!isAgreedPrivacyPolicy(context)) {
+        LaunchedEffect(navigator, currentRoute) {
+            if (
+                !isAgreedPrivacyPolicy(context) &&
+                currentRoute != WelcomeDialog
+            ) {
                 navigator.navigate(WelcomeDialog, true)
             } else if (
                 !AnimatorDisabledAlert.isDontShowAgain(context) &&
-                !Utils.areAnimatorEnabled(context)
+                !Utils.areAnimatorEnabled(context) &&
+                currentRoute != AnimatorDisabledAlertDialog
             ) {
                 navigator.navigate(AnimatorDisabledAlertDialog, true)
             } else {
