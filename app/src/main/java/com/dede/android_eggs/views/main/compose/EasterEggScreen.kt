@@ -57,6 +57,7 @@ import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.EasterEggGroup
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -180,10 +181,11 @@ fun EasterEggScreen(
 private const val HIGHEST_COUNT = 1
 
 private fun BaseEasterEgg.lazyItemKey(): String {
-    if (apiLevelRange.first == apiLevelRange.last) {
-        return "${this.javaClass.name}:${apiLevelRange.first}"
+    return when (this) {
+        is EasterEggGroup -> "group:${apiLevelRange.first}-${apiLevelRange.last}"
+        is EasterEgg -> "egg:${fullApiLevelRange.first}-${fullApiLevelRange.last}"
+        else -> throw IllegalArgumentException("Unsupported EasterEgg type: ${this::class.java}")
     }
-    return "${this.javaClass.name}:${apiLevelRange.first}-${apiLevelRange.last}"
 }
 
 @Composable
