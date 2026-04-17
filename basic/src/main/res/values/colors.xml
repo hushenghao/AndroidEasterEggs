@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="system_accent1_200">#93D6F0</color>
+    <color name="system_accent1_300">#5EC0E4</color>
     <color name="system_accent1_400">#219BCC</color>
     <color name="system_accent1_700">#074C67</color>
     <color name="system_accent1_800">#003549</color>
 
+    <color name="system_accent2_100">#D6E7EF</color>
+    <color name="system_accent2_200">#B7CBD6</color>
     <color name="system_accent2_500">#667984</color>
 
+    <color name="system_accent3_200">#C5BDE7</color>
     <color name="system_accent3_400">#938CB1</color>
     <color name="system_accent3_500">#787296</color>
     <color name="system_accent3_800">#352B4D</color>
 
+    <color name="system_neutral1_50">#F3F4F4</color>
     <color name="system_neutral1_100">#E2E2E2</color>
     <color name="system_neutral1_200">#C5C7C9</color>
+    <color name="system_neutral1_800">#2B3135</color>
 </resources>

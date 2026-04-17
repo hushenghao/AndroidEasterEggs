@@ -3,6 +3,7 @@ package com.dede.android_eggs.views.widget
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -18,6 +19,18 @@ import kotlinx.coroutines.withTimeoutOrNull
  * Easter Eggs Analog clock widget.
  */
 class AnalogClockAppWidget : AppWidgetProvider() {
+
+    override fun onReceive(context: Context, intent: Intent?) {
+        super.onReceive(context, intent)
+        if (intent?.action == Intent.ACTION_CONFIGURATION_CHANGED) {
+            val appWidgetManager = AppWidgetManager.getInstance(context)
+            val componentName = ComponentName(context, AnalogClockAppWidget::class.java)
+            val appWidgetIds = appWidgetManager.getAppWidgetIds(componentName)
+            for (appWidgetId in appWidgetIds) {
+                updateAppWidgetAsync(context, appWidgetManager, appWidgetId)
+            }
+        }
+    }
 
     override fun onUpdate(
         context: Context,
