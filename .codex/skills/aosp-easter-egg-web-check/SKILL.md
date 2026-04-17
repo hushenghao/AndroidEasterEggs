@@ -125,6 +125,24 @@ When the user also has a local repo:
    - local-only fixes or adaptations
    - preview signals for a newer Android version
 
+## Optional Local Accelerators
+
+If the project contains local monitoring helpers such as:
+
+- `script/easter-egg-log/index.py`
+- `script/easter-egg-log/git_logs.json`
+- `.github/workflows/easter-egg-log.yml`
+
+use them only as accelerators.
+
+They can help answer:
+
+- whether `packages/EasterEgg` changed recently on public `main`
+- whether `PlatLogoActivity.java` changed recently on public `main`
+- whether the repo already has an automated reminder flow for these changes
+
+Do not treat these local helpers as authoritative by themselves. Use them to detect likely changes quickly, then confirm the result on official web sources such as `source.android.com` and `android.googlesource.com`.
+
 ## Reporting Rules
 
 Output results in four buckets using the user's language:
