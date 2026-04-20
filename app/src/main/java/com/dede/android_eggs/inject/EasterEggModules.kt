@@ -2,6 +2,7 @@ package com.dede.android_eggs.inject
 
 import com.android_b.egg.AndroidBaseEasterEgg
 import com.android_baklava.egg.AndroidBaklavaEasterEgg
+import com.android_cinnamon_bun.egg.AndroidCinnamonBunEasterEgg
 import com.android_g.egg.AndroidGingerbreadEasterEgg
 import com.android_h.egg.AndroidHoneycombEasterEgg
 import com.android_i.egg.AndroidIceCreamSandwichEasterEgg
@@ -10,7 +11,6 @@ import com.android_k.egg.AndroidKitKatEasterEgg
 import com.android_l.egg.AndroidLollipopEasterEgg
 import com.android_m.egg.AndroidMarshmallowEasterEgg
 import com.android_n.egg.AndroidNougatEasterEgg
-import com.android_next.egg.AndroidNextEasterEgg
 import com.android_o.egg.AndroidOreoEasterEgg
 import com.android_p.egg.AndroidPieEasterEgg
 import com.android_q.egg.AndroidQEasterEgg
@@ -33,7 +33,7 @@ import javax.inject.Singleton
 
 @Module(
     includes = [
-        AndroidNextEasterEgg::class,
+        AndroidCinnamonBunEasterEgg::class,
         AndroidBaklavaEasterEgg::class,
         AndroidVEasterEgg::class,
         AndroidUEasterEgg::class,

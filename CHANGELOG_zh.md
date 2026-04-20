@@ -1,9 +1,9 @@
 # 更新日志
 
-### v4.4.5
+### v4.5.0 (2026-04-20)
 
+- 新增 Android 17 Platlogo (反编译版本) 🎉🎉🎉[#822](https://github.com/hushenghao/AndroidEasterEggs/issues/822)
 - 新增 Neko Controls 小组件 [#804](https://github.com/hushenghao/AndroidEasterEggs/issues/804)
-- 更新 Android 17 platlogo [#800](https://github.com/hushenghao/AndroidEasterEggs/issues/800)
 - 新增 Android T beta 版彩蛋 [#805](https://github.com/hushenghao/AndroidEasterEggs/issues/805)
 - 新增 Android M 预览版彩蛋 [#790](https://github.com/hushenghao/AndroidEasterEggs/issues/790)
 - 新增 Android N 预览版彩蛋 [#809](https://github.com/hushenghao/AndroidEasterEggs/issues/809)

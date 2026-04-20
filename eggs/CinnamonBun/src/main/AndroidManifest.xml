@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <application>
+        <activity
+            android:name=".PlatLogoActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:enableOnBackInvokedCallback="true"
+            android:exported="true"
+            android:icon="@drawable/cinnamon_bun_platlogo"
+            android:label="@string/cinnamon_bun_egg_name"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            tools:targetApi="33" />
+    </application>
+</manifest>

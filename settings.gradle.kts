@@ -76,6 +76,7 @@ include(
     ":eggs:UpsideDownCake",
     ":eggs:VanillaIceCream",
     ":eggs:Baklava",
+    ":eggs:CinnamonBun",
     ":eggs:AndroidNext",
     ":eggs:RocketLauncher",
 

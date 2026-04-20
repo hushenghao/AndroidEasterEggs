@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:supportAdaptiveIcon="true">
+    <item>
+        <color android:color="@color/cinnamon_bun_android17_patch_adaptive_background" />
+    </item>
+    <item>
+        <inset
+            android:drawable="@drawable/cinnamon_bun_android17_patch_adaptive_foreground"
+            android:inset="-16dp" />
+    </item>
+</layer-list>

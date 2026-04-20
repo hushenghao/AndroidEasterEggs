@@ -1,9 +1,9 @@
 # Changelog
 
-### v4.4.5
+### v4.5.0 (2026-04-20)
 
+- Add Android 17 Platlogo (Decompiled version) 🎉🎉🎉[#822](https://github.com/hushenghao/AndroidEasterEggs/issues/822)
 - Add Neko Controls Widget [#804](https://github.com/hushenghao/AndroidEasterEggs/issues/804)
-- Update Android 17 platlogo [#800](https://github.com/hushenghao/AndroidEasterEggs/issues/800)
 - Add Android T beta Egg [#805](https://github.com/hushenghao/AndroidEasterEggs/issues/805)
 - Add Android M preview Egg [#790](https://github.com/hushenghao/AndroidEasterEggs/issues/790)
 - Add Android N preview Egg [#809](https://github.com/hushenghao/AndroidEasterEggs/issues/809)
