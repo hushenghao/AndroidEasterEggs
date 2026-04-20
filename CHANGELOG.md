@@ -15,8 +15,6 @@
 - Fix search bar software keyboard not show automatically
 - Fix check update network error crash [#797](https://github.com/hushenghao/AndroidEasterEggs/issues/797)
 - Known issue fixes
-- Upgrade project dependencies
-- Update translations
 
 ### v4.4.4 (2026-03-24)
 

@@ -11,5 +11,3 @@
 - Fix search bar software keyboard not show automatically
 - Fix check update network error crash #797
 - Known issue fixes
-- Upgrade project dependencies
-- Update translations

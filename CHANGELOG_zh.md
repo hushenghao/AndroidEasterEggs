@@ -15,8 +15,6 @@
 - 修复搜索栏软件键盘不自动显示
 - 修复检查更新网络错误崩溃 [#797](https://github.com/hushenghao/AndroidEasterEggs/issues/797)
 - 修复已知问题
-- 升级项目依赖项
-- 更新翻译
 
 ### v4.4.4 (2026-03-24)
 
