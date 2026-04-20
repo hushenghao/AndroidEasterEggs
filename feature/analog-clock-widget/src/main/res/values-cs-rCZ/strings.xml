@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Nakonfigurovat widget</string>
+    <string name="analog_clock_widget_config_summary">Vyberte co se má stát po kliknutí na widget s analogovými hodinami.</string>
+    <string name="analog_clock_widget_click_action_title">Akce po klepnutí</string>
+    <string name="analog_clock_widget_action_open_egg">Otevřít easter egg</string>
+    <string name="analog_clock_widget_action_open_app">Otevřít aplikaci</string>
+    <string name="analog_clock_widget_action_none">Žádná akce</string>
+</resources>
