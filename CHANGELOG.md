@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.5.1
+
+- Update splash screen icon
+
 ### v4.5.0 (2026-04-20)
 
 - Add Android 17 Platlogo (Decompiled version) 🎉🎉🎉[#822](https://github.com/hushenghao/AndroidEasterEggs/issues/822)

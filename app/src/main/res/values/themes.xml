@@ -7,9 +7,9 @@
         <item name="windowSplashScreenBackground">@color/md_theme_background</item>
         <!-- Use windowSplashScreenAnimatedIcon to add a drawable or an animated
              drawable. One of these is required. -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/avd_anim_baklava_platlogo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/avd_anim_cinnamon_bun_platlogo</item>
         <!-- Required for animated icons. -->
-        <item name="windowSplashScreenAnimationDuration">600</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
         <!-- Set the theme of the Activity that directly follows your splash
         screen. This is required. -->
         <item name="postSplashScreenTheme">@style/Theme.EasterEggs</item>

@@ -1,5 +1,9 @@
 # 更新日志
 
+### v4.5.1
+
+- 更新启动动画图标
+
 ### v4.5.0 (2026-04-20)
 
 - 新增 Android 17 Platlogo (反编译版本) 🎉🎉🎉[#822](https://github.com/hushenghao/AndroidEasterEggs/issues/822)
