@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Конфигуриране на приспособлението</string>
+    <string name="analog_clock_widget_config_summary">Изберете какво да се случва, когато натиснете аналоговия часовник.</string>
+    <string name="analog_clock_widget_click_action_title">Действие при докосване</string>
+    <string name="analog_clock_widget_action_open_egg">Отвори Egg</string>
+    <string name="analog_clock_widget_action_open_app">Отвори Приложение</string>
+    <string name="analog_clock_widget_action_none">Без действие</string>
+</resources>

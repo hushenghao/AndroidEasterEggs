@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Konfigurasikan widget</string>
+    <string name="analog_clock_widget_config_summary">Pilih apa yang terjadi saat Anda mengetuk widget jam analog.</string>
+    <string name="analog_clock_widget_click_action_title">Ketuk tindakan</string>
+    <string name="analog_clock_widget_action_open_egg">Buka egg</string>
+    <string name="analog_clock_widget_action_open_app">Buka aplikasi</string>
+    <string name="analog_clock_widget_action_none">Tidak ada tindakan</string>
+</resources>
