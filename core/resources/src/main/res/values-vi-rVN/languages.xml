@@ -27,13 +27,14 @@
     <string name="locale_lang_hu_HU">Tiếng Hungary</string>
     <string name="locale_lang_th_TH">Tiếng Thái</string>
     <string name="locale_lang_no_NO">Tiếng Na Uy</string>
-    <string name="locale_lang_fil_PH">Tiếng Filipino</string>
+    <string name="locale_lang_fil_PH">Tiếng Philippines</string>
     <string name="locale_lang_lo_LA">Tiếng Lào</string>
     <string name="locale_lang_cs_CZ">Tiếng Séc</string>
     <string name="locale_lang_ta">Tiếng Tamil</string>
-    <string name="locale_lang_ro">Tiếng România</string>
+    <string name="locale_lang_ro">Tiếng Romania</string>
     <string name="locale_lang_sv_SE">Tiếng Thụy Điển</string>
     <string name="locale_lang_my_MM">Tiếng Miến Điện</string>
     <string name="locale_lang_bn_BD">Tiếng Bengal</string>
     <string name="locale_lang_sq">Tiếng Albania</string>
+    <string name="locale_lang_bg">Tiếng Bulgaria</string>
 </resources>

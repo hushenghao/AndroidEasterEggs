@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Cấu hình tiện ích</string>
+    <string name="analog_clock_widget_config_summary">Chọn điều gì sẽ xảy ra khi bạn chạm vào tiện ích đồng hồ kim.</string>
+    <string name="analog_clock_widget_click_action_title">Thao tác chạm</string>
+    <string name="analog_clock_widget_action_open_egg">Mở trứng</string>
+    <string name="analog_clock_widget_action_open_app">Mở ứng dụng</string>
+    <string name="analog_clock_widget_action_none">Không có hành động nào</string>
+</resources>

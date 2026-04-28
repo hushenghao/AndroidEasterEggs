@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Easter Eggy</string>
+    <string name="app_name">Easter eggy</string>
     <string name="title_open_with">Otevřít pomocí</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
     <string name="label_back">Zpět</string>
     <string name="label_github">Zdrojový kód</string>
-    <string name="label_translation">Překlad</string>
+    <string name="label_translation">Přeložit</string>
     <string name="label_beta">Stáhnout beta verzi</string>
     <string name="label_experiment">Experimentální verze</string>
     <string name="label_timeline">Časová osa</string>
-    <string name="label_privacy_policy">Soukromí</string>
+    <string name="label_privacy_policy">Zásady soukromí</string>
     <string name="label_open_source_license">Licence open source</string>
-    <string name="label_wiki">Wikipedie</string>
+    <string name="label_wiki">Wikipedia</string>
     <string name="label_license">Licence</string>
     <string name="label_feedback">Zpětná vazba</string>
     <string name="label_star">Ohodnotit aplikaci</string>
@@ -21,8 +21,8 @@
     <string name="label_snapshot_preview">Náhled snapshotu</string>
     <string name="message_trypophobia_warning">Toto je varování pro osoby s &lt;b&gt;trypofobií&lt;/b&gt;. Některé obrázky mohou vyvolat nepohodlí. Chcete pokračovat?</string>
     <string name="label_settings">Nastavení</string>
-    <string name="label_project_desc">Tento projekt obsahuje kompletní kód všech Easter Eggů systému Android. Naší snahou je je seskupit a zajistit kompatibilní se všemi Easter Eggy. Cílem je, aby co nejvíce zařízení mohlo vyzkoušet různé verze Easter Eggů s minimálními zásahy do jejich kódu.</string>
-    <string name="pref_title_icon_shape_override">Tvar Ikony</string>
+    <string name="label_project_desc">Tento projekt obsahuje kompletní kód všech Easter eggů systému Android. Naší snahou je je seskupit a zajistit kompatibilní se všemi Easter eggy. Cílem je, aby co nejvíce zařízení mohlo vyzkoušet různé verze Easter eggů s minimálními zásahy do jejich kódu.</string>
+    <string name="pref_title_icon_shape_override">Tvar ikony</string>
     <string name="pref_title_language">Jazyk</string>
     <string name="pref_title_language_more">Více</string>
     <string name="pref_title_theme">Motiv</string>
@@ -38,10 +38,10 @@
     <string name="preference_on">Zapnuto</string>
     <string name="preference_off">Vypnuto</string>
     <string name="toast_shortcut_added">Zkratka přidána</string>
-    <string name="toast_no_egg_detail">Tato verze Android nemá žádný Easter Egg</string>
+    <string name="toast_no_egg_detail">Tato verze Android nemá žádný Easter egg</string>
     <string name="toast_no_update_found">Žádná aktualizace nebyla nalezena</string>
     <string name="label_widgets">Widgety</string>
-    <string name="app_widget_description">Toto jsou analogové hodiny vajíčka</string>
+    <string name="app_widget_description">Toto jsou analogové hodiny Easter eggu</string>
     <string name="action_agree">Souhlasím</string>
     <string name="summary_browse_privacy_policy">Přečtěte a odsouhlaste naše Zásady Ochrany aby jste mohli pokračovat.</string>
     <string name="label_welcome">Vítejte v nabídce Easter Eggů! 🎉</string>
@@ -49,7 +49,7 @@
     <string name="label_search_hint">Vyhledat…</string>
     <string name="label_component_manager">Správce komponent</string>
     <string name="pref_more_settings">Více nastavení</string>
-    <string name="pref_retain_recent_egg_tasks">Zachovat nedávné úkoly Easter Eggů</string>
+    <string name="pref_retain_recent_egg_tasks">Zachovat nedávné úkoly Easter eggů</string>
     <string name="pref_summary_retain_recent_egg_tasks">Zachovat úlohy Easter Eggu na obrazovce nedávných aplikací, maximálně zachování pěti, toto je neplatné pro Vložený režim aktivity</string>
     <string name="label_about">O aplikaci</string>
     <string name="label_contribute">Pomozte autorovi</string>
@@ -58,7 +58,7 @@
     <string name="action_dont_show_again">Znovu nezobrazovat</string>
     <string name="cat_editor">Editor kočky</string>
     <string name="cat_editor_input_seed">Zadejte kód kočky</string>
-    <string name="rocket_launcher_easter_egg_icons">Easter Eggy</string>
+    <string name="rocket_launcher_easter_egg_icons">Easter eggy</string>
     <string name="rocket_launcher_all_app_icons">Aplikace</string>
     <string name="rocket_launcher_all_icons">Easter Eggy a aplikace</string>
     <string name="rocket_launcher_query_all_app_desc">Je potřeba získat seznam aplikací na domovské obrazovce</string>

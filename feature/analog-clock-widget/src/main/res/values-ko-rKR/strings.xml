@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">위젯을 구성하세요</string>
+    <string name="analog_clock_widget_config_summary">아날로그 시계 위젯을 탭했을 때 어떤 동작이 나타날지 선택하세요.</string>
+    <string name="analog_clock_widget_click_action_title">탭 동작</string>
+    <string name="analog_clock_widget_action_open_egg">이스터 에그 열기</string>
+    <string name="analog_clock_widget_action_open_app">앱 열기</string>
+    <string name="analog_clock_widget_action_none">동작 없음</string>
+</resources>
