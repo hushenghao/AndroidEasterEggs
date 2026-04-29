@@ -234,11 +234,17 @@ public class PlatLogoActivity extends Activity {
             this.mHeptaDecaView.performHapticFeedback(HapticFeedbackConstantsCompat.CONFIRM);
         }
         if (heptadecagram.getPathLength() > 17) {
-            swapToPlatlogo();
+            isPendingSwapToPlatlogo = true;
             return true;
+        }
+        if (event.getAction() == MotionEvent.ACTION_UP && isPendingSwapToPlatlogo) {
+            swapToPlatlogo();
+            isPendingSwapToPlatlogo = false;
         }
         return true;
     }
+
+    private boolean isPendingSwapToPlatlogo = false;
 
     private void swapToPlatlogo() {
         this.mHeptaDecaView.animate().alpha(0.0f).setDuration(500L).withEndAction(new Runnable() { // from class: com.android.internal.app.PlatLogoActivity$$ExternalSyntheticLambda1
