@@ -218,7 +218,8 @@ public class RocketLauncher extends BasicDream {
                 setY(getY() + angley * v * dt);
                 //setRotation(getRotation() + vr * dt);
                 if (endscale > 0) {
-                    float scale = lerp(0, endscale, (float) Math.sqrt(dist / fuse));
+                    // https://github.com/hushenghao/AndroidEasterEggs/issues/830
+                    float scale = NumberUtils.rangeOf(lerp(0, endscale, (float) Math.sqrt(dist / fuse)), 0f, endscale);
                     setScaleX(scale * lerp(1f, 0.75f, (float) Math.pow((v - VMIN) / (VMAX - VMIN), 3)));
                     setScaleY(scale * lerp(1f, 1.5f, (float) Math.pow((v - VMIN) / (VMAX - VMIN), 3)));
                     final float q1 = fuse * 0.15f;

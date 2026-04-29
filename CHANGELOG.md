@@ -3,6 +3,7 @@
 ### v4.5.1
 
 - Update splash screen icon
+- Known issue fixes
 
 ### v4.5.0 (2026-04-20)
 

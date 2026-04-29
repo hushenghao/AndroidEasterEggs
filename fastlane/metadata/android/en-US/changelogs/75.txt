@@ -1,1 +1,2 @@
 - Update splash screen icon
+- Known issue fixes
