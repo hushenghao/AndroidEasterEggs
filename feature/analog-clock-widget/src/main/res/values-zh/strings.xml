@@ -6,4 +6,9 @@
     <string name="analog_clock_widget_action_open_egg">打开彩蛋</string>
     <string name="analog_clock_widget_action_open_app">打开 APP</string>
     <string name="analog_clock_widget_action_none">无动作</string>
+    <string name="analog_clock_widget_dial_style_title">表盘样式</string>
+    <string name="analog_clock_widget_dial_style_summary">选择模拟时钟的表盘样式。</string>
+    <string name="analog_clock_widget_dial_android_icons">图标</string>
+    <string name="analog_clock_widget_dial_simple">简约</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">肉桂卷</string>
 </resources>

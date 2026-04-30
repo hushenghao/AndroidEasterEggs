@@ -5,4 +5,9 @@
     <string name="analog_clock_widget_action_open_egg">Open egg</string>
     <string name="analog_clock_widget_action_open_app">Open app</string>
     <string name="analog_clock_widget_action_none">No action</string>
+    <string name="analog_clock_widget_dial_style_title">Clock dial</string>
+    <string name="analog_clock_widget_dial_style_summary">Choose the analog clock dial style.</string>
+    <string name="analog_clock_widget_dial_android_icons">Icons</string>
+    <string name="analog_clock_widget_dial_simple">Simple</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
 </resources>
