@@ -2,6 +2,7 @@
 
 ### v4.5.1
 
+- Update App icon
 - Update splash screen icon
 - Android 16 Landroid add progress notifications as live updates
 - Known issue fixes
