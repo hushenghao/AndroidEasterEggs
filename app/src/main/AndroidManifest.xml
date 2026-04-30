@@ -16,10 +16,10 @@
         android:dataExtractionRules="@xml/backup_rules"
         android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_config_old"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_17"
         android:label="@string/app_name"
         android:localeConfig="@xml/locales_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_17_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EasterEggs"
         tools:targetApi="tiramisu">
@@ -50,12 +50,6 @@
             android:theme="@style/Theme.EasterEggs.Starting"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <intent-filter>
                 <!-- egg://easter_egg/api/26 -->
                 <data
                     android:host="easter_egg"
@@ -71,6 +65,44 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+
+        <activity-alias
+            android:name=".Android17IconAlias"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_17"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_17_round"
+            android:targetActivity=".views.main.EasterEggsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity-alias>
+
+        <activity-alias
+            android:name=".Android16IconAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_16"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_16_round"
+            android:targetActivity=".views.main.EasterEggsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity-alias>
     </application>
 
 </manifest>

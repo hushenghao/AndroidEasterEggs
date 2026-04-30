@@ -14,9 +14,7 @@ import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -41,7 +39,7 @@ fun ProjectDescription() {
             modifier = Modifier.padding(horizontal = 4.dp)
         ) {
             EasterEggLogo(
-                res = R.mipmap.ic_launcher_round,
+                res = R.mipmap.ic_launcher_17_round,
                 modifier = Modifier
                     .size(40.dp)
                     .clickable(

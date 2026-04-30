@@ -2,9 +2,10 @@
 
 ### v4.5.1
 
-- Update App icon
+- Add option to change app icon [#828](https://github.com/hushenghao/AndroidEasterEggs/issues/828)
+- Update App icon [#826](https://github.com/hushenghao/AndroidEasterEggs/issues/826)
 - Update splash screen icon
-- Android 16 Landroid add progress notifications as live updates
+- Android 16 Landroid add progress notifications as live updates [#829](https://github.com/hushenghao/AndroidEasterEggs/issues/829)
 - Known issue fixes
 
 ### v4.5.0 (2026-04-20)

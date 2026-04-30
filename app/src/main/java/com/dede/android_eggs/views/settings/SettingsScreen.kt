@@ -43,6 +43,7 @@ import com.dede.android_eggs.views.settings.compose.basic.SettingDivider
 import com.dede.android_eggs.views.settings.compose.groups.AboutGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContactMeGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContributeGroup
+import com.dede.android_eggs.views.settings.compose.prefs.AppIconPref
 import com.dede.android_eggs.views.settings.compose.prefs.CatEditorPref
 import com.dede.android_eggs.views.settings.compose.prefs.ComponentManagerPref
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePref
@@ -117,6 +118,8 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
         ) {
             val context = LocalContext.current
             ThemePref()
+
+            AppIconPref()
 
             IconShapePref()
 

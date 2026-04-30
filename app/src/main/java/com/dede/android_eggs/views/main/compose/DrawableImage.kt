@@ -18,7 +18,7 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 @Preview
 private fun PreviewImage() {
     DrawableImage(
-        res = R.mipmap.ic_launcher_round,
+        res = R.mipmap.ic_launcher_17_round,
         contentDescription = null
     )
 }

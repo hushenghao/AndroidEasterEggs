@@ -1,4 +1,5 @@
-- Update App icon
+- Add option to change app icon #828
+- Update App icon #826
 - Update splash screen icon
-- Android 16 Landroid add progress notifications as live updates
+- Android 16 Landroid add progress notifications as live updates #829
 - Known issue fixes

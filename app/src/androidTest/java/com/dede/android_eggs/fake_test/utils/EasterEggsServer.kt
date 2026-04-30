@@ -165,7 +165,7 @@ class EasterEggsServer(private val context: Context) : NanoHTTPD(PORT) {
         registerHandler("/favicon.ico", object : Handler() {
             override fun onHandler(session: IHTTPSession): Response {
                 return ResponseUtils.createDrawableResponse(
-                    context, R.mipmap.ic_launcher_round, 64, 64
+                    context, R.mipmap.ic_launcher_17_round, 64, 64
                 )
             }
         }, true)

@@ -214,7 +214,7 @@ private fun TimelineHeader() {
 @Preview(showBackground = true)
 private fun TimelineItem(
     event: TimelineEvent = TimelineEvent(2025, Calendar.SEPTEMBER, 99, "Demo event name"),
-    @DrawableRes logoRes: Int = R.mipmap.ic_launcher,
+    @DrawableRes logoRes: Int = R.mipmap.ic_launcher_17,
     isNewGroup: Boolean = true
 ) {
     val context = LocalContext.current
