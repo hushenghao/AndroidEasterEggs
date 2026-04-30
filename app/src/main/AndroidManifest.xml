@@ -103,6 +103,25 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity-alias>
+
+        <activity-alias
+            android:name=".Android15IconAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_15"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_15_round"
+            android:targetActivity=".views.main.EasterEggsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity-alias>
     </application>
 
 </manifest>

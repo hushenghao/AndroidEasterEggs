@@ -56,6 +56,12 @@ internal enum class AppIcon(
         iconRes = R.mipmap.ic_launcher_16,
         apiLevel = Build.VERSION_CODES.BAKLAVA,
         manifestEnabled = false,
+    ),
+    Android15(
+        aliasName = "Android15IconAlias",
+        iconRes = R.mipmap.ic_launcher_15,
+        apiLevel = Build.VERSION_CODES.VANILLA_ICE_CREAM,
+        manifestEnabled = false,
     );
 
     fun componentName(context: Context): ComponentName {
@@ -73,10 +79,15 @@ internal object AppIconPrefUtil {
 
     private fun getCurrentIcon(context: Context): AppIcon? {
         val pm = context.packageManager
+        val explicitEnabledIcon = AppIcon.entries.firstOrNull { icon ->
+            pm.getComponentEnabledSetting(icon.componentName(context)) ==
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+        }
+        if (explicitEnabledIcon != null) return explicitEnabledIcon
+
         return AppIcon.entries.firstOrNull { icon ->
             val state = pm.getComponentEnabledSetting(icon.componentName(context))
-            state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED ||
-                    (state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT && icon.manifestEnabled)
+            state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT && icon.manifestEnabled
         }
     }
 
@@ -134,10 +145,11 @@ fun AppIconPref() {
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             AppIcon.entries.forEach { icon ->
                 AppIconOption(
+                    modifier = Modifier.weight(1f),
                     icon = icon,
                     selected = currentIcon == icon,
                     onClick = {
@@ -168,7 +180,8 @@ private fun AppIconOption(
     ) {
         Column(
             modifier = Modifier
-                .padding(vertical = 10.dp, horizontal = 16.dp),
+                .fillMaxWidth()
+                .padding(vertical = 12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
