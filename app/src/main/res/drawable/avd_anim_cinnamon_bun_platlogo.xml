@@ -11,8 +11,8 @@
                 android:name="android_17_logo"
                 android:pivotX="256"
                 android:pivotY="256"
-                android:scaleX="0.6"
-                android:scaleY="0.6">
+                android:scaleX="0.7"
+                android:scaleY="0.7">
                 <path
                     android:name="spacebg"
                     android:fillColor="#0d242f"

@@ -85,7 +85,7 @@ class UniverseProgressNotifier(val context: Context, val universe: Universe) {
     private lateinit var progress: Notification.ProgressStyle
 //    private val progress = Notification.ProgressStyle().setProgressTrackerIcon(spacecraftIcon)
 
-    private val builder:Notification.Builder
+    private val builder: Notification.Builder
 //    private val builder =
 //        Notification.Builder(context, CHANNEL_ID)
 //            .setContentIntent(
@@ -122,7 +122,6 @@ class UniverseProgressNotifier(val context: Context, val universe: Universe) {
 
         builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Notification.Builder(context, CHANNEL_ID)
-                .setColorized(true)
         } else {
             @Suppress("DEPRECATION")
             Notification.Builder(context)
@@ -141,6 +140,12 @@ class UniverseProgressNotifier(val context: Context, val universe: Universe) {
             .apply {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     setFlag(Notification.FLAG_ONLY_ALERT_ONCE, true)
+                } else {
+                    setOnlyAlertOnce(true)
+                }
+                // https://developer.android.com/develop/ui/views/notifications/live-update
+                if (Build.VERSION.SDK_INT_FULL >= Build.VERSION_CODES_FULL.BAKLAVA_1) {
+                    setRequestPromotedOngoing(true)
                 }
                 if (isProgressNotifierSupported) {
                     setStyle(progress)

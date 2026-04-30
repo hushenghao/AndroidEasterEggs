@@ -20,7 +20,6 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
-import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
@@ -61,7 +60,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.translate
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.TextStyle
@@ -335,9 +333,7 @@ class MainActivity : ComponentActivity() {
 
         onWindowLayoutInfoChange()
 
-        // To highlight the notification of spacecraft autopilot
-        // https://cs.android.com/android/platform/superproject/+/android16-s2-release:frameworks/base/packages/EasterEgg/src/com/android/egg/landroid/MainActivity.kt;l=333
-        enableEdgeToEdge(statusBarStyle = SystemBarStyle.dark(Color.Red.toArgb()))
+        enableEdgeToEdge()
 
         val universe = Universe(namer = Namer(resources), randomSeed = randomSeed())
 
