@@ -6,4 +6,9 @@
     <string name="analog_clock_widget_action_open_egg">Otevřít easter egg</string>
     <string name="analog_clock_widget_action_open_app">Otevřít aplikaci</string>
     <string name="analog_clock_widget_action_none">Žádná akce</string>
+    <string name="analog_clock_widget_dial_style_title">Ciferník hodin</string>
+    <string name="analog_clock_widget_dial_style_summary">Vyberte si styl ciferníku analogových hodin.</string>
+    <string name="analog_clock_widget_dial_android_icons">Ikony</string>
+    <string name="analog_clock_widget_dial_simple">Jednoduchý</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
 </resources>

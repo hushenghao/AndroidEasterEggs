@@ -27,6 +27,7 @@
     <string name="pref_title_language_more">Lainnya</string>
     <string name="pref_title_theme">Tema</string>
     <string name="pref_title_dynamic_color">Warna Dinamis (Mengikuti wallpaper)</string>
+    <string name="pref_title_app_icon">Ikon Aplikasi</string>
     <string name="pref_title_icon_visual_effects">Efek Ikon</string>
     <string name="summary_system_default">Bawaan</string>
     <string name="summary_theme_dark_mode">Gelap</string>

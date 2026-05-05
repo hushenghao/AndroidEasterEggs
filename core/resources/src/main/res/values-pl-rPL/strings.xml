@@ -27,6 +27,7 @@
     <string name="pref_title_language_more">Więcej</string>
     <string name="pref_title_theme">Motywy</string>
     <string name="pref_title_dynamic_color">Dynamiczne kolory</string>
+    <string name="pref_title_app_icon">Ikona Aplikacji</string>
     <string name="pref_title_icon_visual_effects">Efekty wizualne w ikonach</string>
     <string name="summary_system_default">System</string>
     <string name="summary_theme_dark_mode">Ciemny</string>

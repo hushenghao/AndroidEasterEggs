@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Paskalya Yumurtaları</string>
+    <string name="app_name">Paskalya Yumurtalarıt</string>
     <string name="title_open_with">Şununla aç</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -27,6 +27,7 @@
     <string name="pref_title_language_more">Daha Fazla</string>
     <string name="pref_title_theme">Tema</string>
     <string name="pref_title_dynamic_color">Dinamik Renk</string>
+    <string name="pref_title_app_icon">Uygulama ikonu</string>
     <string name="pref_title_icon_visual_effects">Simge Görsel Efektleri</string>
     <string name="summary_system_default">Varsayılan</string>
     <string name="summary_theme_dark_mode">Karanlık</string>
