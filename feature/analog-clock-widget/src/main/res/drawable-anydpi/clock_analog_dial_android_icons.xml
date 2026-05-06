@@ -9,8 +9,8 @@
         android:gravity="center" />
 
     <item
-        android:width="190dp"
-        android:height="190dp"
+        android:width="180dp"
+        android:height="180dp"
         android:drawable="@drawable/clock_analog_dial_cinnamon_bun"
         android:gravity="center" />
 
