@@ -5,6 +5,7 @@ import com.dede.android_eggs.dls.android
 import com.dede.android_eggs.dls.keyprops
 import com.dede.android_eggs.tasks.UpdateChangelogsTask
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
 
 class EasterEggsApp : AbsConfigurablePlugin(
     moduleType = ModuleType.APP,
@@ -63,10 +64,23 @@ class EasterEggsApp : AbsConfigurablePlugin(
             }
         }
 
+        dependencies {
+            val enableAndroidNext = properties[KEY_ENABLE_ANDROID_NEXT]?.toString()?.toBoolean()
+            println("Enable Android Next: $enableAndroidNext")
+            if (enableAndroidNext == true) {
+                add("implementation", project(":eggs:AndroidNext"))
+            }
+        }
+
         registerTasks()
     }
 
     private fun Project.registerTasks() {
         UpdateChangelogsTask.register(this)
+    }
+
+
+    companion object {
+        private const val KEY_ENABLE_ANDROID_NEXT = "eggs.androidNext.enable"
     }
 }

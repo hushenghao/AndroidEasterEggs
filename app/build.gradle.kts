@@ -137,7 +137,6 @@ dependencies {
     implementation(project(":feature:libraries-info"))
 
     implementation(project(":eggs:RocketLauncher"))
-    //implementation(project(":eggs:AndroidNext"))
     implementation(project(":eggs:CinnamonBun"))
     implementation(project(":eggs:Baklava"))
     implementation(project(":eggs:VanillaIceCream"))
