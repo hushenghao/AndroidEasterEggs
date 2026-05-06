@@ -18,14 +18,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.R
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil.KEY_PRIVACY_POLICY_AGREED
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
@@ -63,7 +62,8 @@ object WelcomeDialog : EasterEggsDestination, EasterEggsDestination.Provider {
 @Composable
 fun WelcomeDialog(onDismiss: () -> Unit = {}) {
     var privacyPolicyAgreed by rememberPrefBoolState(KEY_PRIVACY_POLICY_AGREED, false)
-    val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
+    val privacyUrl = stringResource(R.string.url_privacy)
     val konfettiController = LocalKonfettiState.current
     AlertDialog(
         title = {
@@ -80,7 +80,7 @@ fun WelcomeDialog(onDismiss: () -> Unit = {}) {
                     modifier = Modifier.align(Alignment.End),
                     contentPadding = PaddingValues(horizontal = 14.dp),
                     onClick = {
-                        CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
+                        uriHandler.openUri(privacyUrl)
                     }
                 ) {
                     Icon(

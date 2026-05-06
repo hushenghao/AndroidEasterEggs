@@ -17,12 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.fromHtml
-import com.dede.android_eggs.util.CustomTabsBrowser
 import com.mikepenz.aboutlibraries.entity.Library
 
 @Composable
@@ -30,7 +29,7 @@ fun LibrariesInfoDetail(
     library: Library,
     onDismissRequest: () -> Unit,
 ) {
-    val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
     AlertDialog(
         onDismissRequest = onDismissRequest,
         title = {
@@ -56,7 +55,7 @@ fun LibrariesInfoDetail(
                         linkInteractionListener = {
                             val url = it as? LinkAnnotation.Url
                             if (url != null && url.url.isNotBlank()) {
-                                CustomTabsBrowser.launchUrl(context, url.url)
+                                uriHandler.openUri(url.url)
                             }
                         }
                     )
@@ -73,7 +72,7 @@ fun LibrariesInfoDetail(
                     Text(stringResource(android.R.string.cancel))
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                FilledTonalIconButton(onClick = { library.openLink(context) }) {
+                FilledTonalIconButton(onClick = { library.openLink(uriHandler) }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Rounded.ArrowForward,
                         contentDescription = null

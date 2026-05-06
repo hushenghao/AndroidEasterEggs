@@ -10,10 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.toClipEntry
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.R
-import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
@@ -25,7 +25,8 @@ import com.dede.android_eggs.resources.R as StringsR
 
 @Composable
 fun ContactMeGroup() {
-    val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
+    val issuesUrl = stringResource(R.string.url_github_issues)
 
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.PersonSearch,
@@ -48,7 +49,7 @@ fun ContactMeGroup() {
             ),
             title = stringResource(StringsR.string.label_feedback),
             onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_github_issues)
+                uriHandler.openUri(issuesUrl)
             }
         )
     }

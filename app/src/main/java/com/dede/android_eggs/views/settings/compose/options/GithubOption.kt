@@ -4,11 +4,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.composes.icons.Github
-import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
 import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
@@ -16,7 +15,8 @@ import com.dede.android_eggs.resources.R as StringsR
 
 @Composable
 fun GithubOption(shape: Shape = OptionShapes.defaultShape) {
-    val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
+    val githubUrl = stringResource(R.string.url_github)
     Option(
         leadingIcon = imageVectorIconBlock(
             imageVector = Icons.Github,
@@ -24,10 +24,10 @@ fun GithubOption(shape: Shape = OptionShapes.defaultShape) {
         ),
         shape = shape,
         title = stringResource(StringsR.string.label_github),
-        desc = stringResource(R.string.url_github),
+        desc = githubUrl,
         trailingContent = imageVectorIconBlock(imageVector = Icons.Rounded.Star),
         onClick = {
-            CustomTabsBrowser.launchUrl(context, R.string.url_github)
+            uriHandler.openUri(githubUrl)
         }
     )
 }

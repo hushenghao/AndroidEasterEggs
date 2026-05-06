@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Browser
-import androidx.annotation.StringRes
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
@@ -21,11 +20,6 @@ import com.dede.basic.getConfigurationLocales
  * @since 2021/11/19 2:14 下午
  */
 object CustomTabsBrowser {
-
-    @JvmStatic
-    fun launchUrl(context: Context, @StringRes urlId: Int) {
-        launchUrl(context, context.getString(urlId).toUri())
-    }
 
     @JvmStatic
     fun launchUrl(context: Context, url: String) {

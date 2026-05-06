@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.buildAnnotatedString
@@ -42,7 +43,6 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.flavor.FlavorFeatures
 import com.dede.android_eggs.flavor.LatestVersion
 import com.dede.android_eggs.util.AGPUtils
-import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.util.compareStringVersion
 import com.dede.android_eggs.views.main.compose.isAgreedPrivacyPolicy
 import com.dede.android_eggs.views.settings.compose.basic.Option
@@ -58,6 +58,7 @@ import com.dede.android_eggs.resources.R as StringR
 @Composable
 fun VersionOption(shape: Shape = OptionShapes.defaultShape) {
     val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
     val (versionName, versionCode) = remember(context) { Utils.getAppVersionPair(context) }
     var newVersion: LatestVersion? by remember { mutableStateOf(null) }
     val resources = LocalResources.current
@@ -86,7 +87,7 @@ fun VersionOption(shape: Shape = OptionShapes.defaultShape) {
             } else {
                 resources.getString(R.string.url_github_commit, revision)
             }
-            CustomTabsBrowser.launchUrl(context, uri)
+            uriHandler.openUri(uri)
         }
     )
     if (newVersion != null) {
@@ -158,7 +159,7 @@ private fun UpgradeIconButton(
 
 @Composable
 private fun UpgradeDialog(version: LatestVersion, onDismiss: () -> Unit) {
-    val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
@@ -188,7 +189,7 @@ private fun UpgradeDialog(version: LatestVersion, onDismiss: () -> Unit) {
                         val url = stringResource(R.string.url_github_issues_id, id)
                         addLink(
                             LinkAnnotation.Url(url = url, linkInteractionListener = {
-                                CustomTabsBrowser.launchUrl(context, url)
+                                uriHandler.openUri(url)
                             }),
                             match.range.first, match.range.last + 1
                         )
@@ -199,7 +200,7 @@ private fun UpgradeDialog(version: LatestVersion, onDismiss: () -> Unit) {
         confirmButton = {
             TextButton(
                 onClick = {
-                    CustomTabsBrowser.launchUrl(context, version.downloadUrl)
+                    uriHandler.openUri(version.downloadUrl)
                 }
             ) {
                 Text(text = stringResource(StringR.string.label_update))

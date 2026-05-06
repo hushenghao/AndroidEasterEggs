@@ -1,6 +1,5 @@
 package com.dede.android_eggs.libraries_info
 
-import android.content.Context
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -9,8 +8,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.util.CustomTabsBrowser
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.entity.Library
 import com.mikepenz.aboutlibraries.ui.compose.LibraryDefaults
@@ -20,10 +20,10 @@ import com.mikepenz.aboutlibraries.util.withContext
 internal fun Library.link(): String? =
     (scm?.url ?: website ?: licenses.firstOrNull()?.url)?.replace("git://", "")
 
-internal fun Library.openLink(context: Context) {
+internal fun Library.openLink(uriHandler: UriHandler) {
     val link = this.link()
     if (!link.isNullOrBlank()) {
-        CustomTabsBrowser.launchUrl(context, link)
+        uriHandler.openUri(link)
     }
 }
 
@@ -33,6 +33,7 @@ fun LibrariesInfoContent(
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
     val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
     val libraries = remember {
         Libs.Builder().withContext(context).build()
     }
@@ -47,7 +48,7 @@ fun LibrariesInfoContent(
         onLibraryClick = {
             val license = it.licenses.firstOrNull()
             if (license == null || license.licenseContent.isNullOrBlank()) {
-                it.openLink(context)
+                it.openLink(uriHandler)
             } else {
                 openLibrary = it
             }

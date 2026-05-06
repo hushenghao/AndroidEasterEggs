@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.alterable_adaptive_icon.AlterableAdaptiveIcon
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import dagger.Module
 import dagger.Provides
@@ -63,6 +63,8 @@ fun AndroidNextTimelineDialog(
     onDismiss: () -> Unit = {},
 ) {
     val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
+    val androidReleasesUrl = stringResource(R.string.url_android_releases)
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
@@ -96,7 +98,7 @@ fun AndroidNextTimelineDialog(
         confirmButton = {
             TextButton(onClick = {
                 onDismiss()
-                CustomTabsBrowser.launchUrl(context, R.string.url_android_releases)
+                uriHandler.openUri(androidReleasesUrl)
             }) {
                 Text(text = stringResource(id = R.string.label_timeline_releases))
             }

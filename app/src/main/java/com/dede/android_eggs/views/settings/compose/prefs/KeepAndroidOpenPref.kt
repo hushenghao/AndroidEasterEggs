@@ -14,12 +14,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.basic.SettingPref
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
 import kotlinx.coroutines.delay
@@ -54,7 +53,7 @@ fun KeepAndroidOpenPref() {
             isDismissed = true
         },
     ) {
-        val context = LocalContext.current
+        val uriHandler = LocalUriHandler.current
         SettingPref(
             colors = CardDefaults.cardColors(
                 containerColor = Color(0xFF_CC2929),
@@ -75,7 +74,7 @@ fun KeepAndroidOpenPref() {
                 )
             },
             onClick = {
-                CustomTabsBrowser.launchUrl(context, "https://keepandroidopen.org/")
+                uriHandler.openUri("https://keepandroidopen.org/")
             }
         )
     }

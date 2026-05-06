@@ -7,7 +7,7 @@ import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.LocalPolice
 import androidx.compose.material.icons.rounded.Policy
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.BuildConfig
@@ -15,7 +15,6 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.ui.composes.icons.outlined.Beta
-import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
@@ -28,8 +27,11 @@ import com.dede.android_eggs.resources.R as StringsR
 @Preview
 @Composable
 fun AboutGroup() {
-    val context = LocalContext.current
     val navigator = LocalNavigator.current
+    val uriHandler = LocalUriHandler.current
+    val betaUrl = stringResource(R.string.url_beta)
+    val privacyUrl = stringResource(R.string.url_privacy)
+    val wikiUrl = stringResource(R.string.url_wiki)
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.Info,
         title = stringResource(StringsR.string.label_about)
@@ -43,7 +45,7 @@ fun AboutGroup() {
             title = stringResource(StringsR.string.label_beta),
             trailingContent = imageVectorIconBlock(imageVector = Icons.Rounded.Download),
             onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_beta)
+                uriHandler.openUri(betaUrl)
             }
         )
 
@@ -55,7 +57,7 @@ fun AboutGroup() {
             ),
             title = stringResource(StringsR.string.label_privacy_policy),
             onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_privacy)
+                uriHandler.openUri(privacyUrl)
             }
         )
 
@@ -66,7 +68,7 @@ fun AboutGroup() {
             ),
             title = stringResource(StringsR.string.label_wiki),
             onClick = {
-                CustomTabsBrowser.launchUrl(context, R.string.url_wiki)
+                uriHandler.openUri(wikiUrl)
             },
         )
 
