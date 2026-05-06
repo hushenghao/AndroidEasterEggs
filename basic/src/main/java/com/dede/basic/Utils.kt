@@ -4,9 +4,11 @@
 package com.dede.basic
 
 import android.animation.ValueAnimator
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.content.pm.PackageManager.NameNotFoundException
 import android.os.Build
 import android.provider.Settings
@@ -45,11 +47,26 @@ object Utils {
         val packageName = context.packageName
         // https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/app/ApplicationPackageManager.java?q=symbol%3A%5Cbandroid.app.ApplicationPackageManager.getLaunchIntentForPackage%5Cb%20case%3Ayes
         return pm.getLaunchIntentForPackage(packageName)?.apply {
+            component = component?.let { pm.getActivityTargetComponent(it) }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             } else {
                 setFlags(0)
             }
+        }
+    }
+
+    private fun PackageManager.getActivityTargetComponent(component: ComponentName): ComponentName {
+        return try {
+            val activityInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                getActivityInfo(component, PackageManager.ComponentInfoFlags.of(0))
+            } else {
+                @Suppress("DEPRECATION")
+                getActivityInfo(component, 0)
+            }
+            activityInfo.targetActivity?.let { ComponentName(component.packageName, it) } ?: component
+        } catch (_: NameNotFoundException) {
+            component
         }
     }
 
