@@ -2,6 +2,7 @@ package com.dede.android_eggs.views.widget
 
 import android.content.Context
 import androidx.annotation.DrawableRes
+import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -16,18 +17,22 @@ internal enum class AnalogClockWidgetClickAction(@StringRes val labelRes: Int) {
 
 internal enum class AnalogClockWidgetDialStyle(
     @DrawableRes val dialRes: Int,
+    @LayoutRes val layoutRes: Int,
     @StringRes val nameRes: Int,
 ) {
     SIMPLE(
-        R.drawable.clock_analog_dial,
+        R.drawable.clock_analog_dial_simple,
+        R.layout.widget_easter_egg_analog_clock_simple,
         R.string.analog_clock_widget_dial_simple,
     ),
     ANDROID_ICONS(
-        R.drawable.clock_analog_simple_dial,
+        R.drawable.clock_analog_dial_android_icons,
+        R.layout.widget_easter_egg_analog_clock_android_icons,
         R.string.analog_clock_widget_dial_android_icons,
     ),
     CINNAMON_BUN(
-        R.drawable.clock_analog_simple_dial_cinnamon_bun,
+        R.drawable.clock_analog_dial_cinnamon_bun,
+        R.layout.widget_easter_egg_analog_clock_cinnamon_bun,
         R.string.analog_clock_widget_dial_cinnamon_bun,
     );
 }

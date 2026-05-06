@@ -37,7 +37,7 @@ object AnalogClockWidgetPreviewProvider : WidgetPreviewProvider {
             modifier = modifier.then(Modifier.size(180.dp)),
             factory = { context ->
                 LayoutInflater.from(context).inflate(
-                    R.layout.widget_easter_egg_analog_clock,
+                    R.layout.widget_easter_egg_analog_clock_android_icons,
                     parent,
                     false
                 )

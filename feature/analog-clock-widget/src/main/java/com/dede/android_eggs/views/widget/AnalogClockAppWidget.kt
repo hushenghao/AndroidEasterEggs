@@ -6,7 +6,6 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.core.app.PendingIntentCompat
@@ -75,15 +74,8 @@ internal fun updateAppWidgetAsync(
     appWidgetId: Int,
 ) {
     cachedExecutor.launch(Dispatchers.IO) {
-        val views = RemoteViews(context.packageName, R.layout.widget_easter_egg_analog_clock)
-        views.setIcon(
-            R.id.analog_clock,
-            "setDial",
-            Icon.createWithResource(
-                context,
-                AnalogClockWidgetPrefs.getDialStyle(context, appWidgetId).dialRes
-            )
-        )
+        val dialStyle = AnalogClockWidgetPrefs.getDialStyle(context, appWidgetId)
+        val views = RemoteViews(context.packageName, dialStyle.layoutRes)
         views.setOnClickPendingIntent(R.id.analog_clock, null)
 
         val action = AnalogClockWidgetPrefs.getClickAction(context, appWidgetId)

@@ -5,13 +5,13 @@
     <item
         android:width="380dp"
         android:height="380dp"
-        android:drawable="@drawable/clock_analog_dial"
+        android:drawable="@drawable/clock_analog_dial_simple"
         android:gravity="center" />
 
     <item
         android:width="190dp"
         android:height="190dp"
-        android:drawable="@drawable/clock_analog_simple_dial_cinnamon_bun"
+        android:drawable="@drawable/clock_analog_dial_cinnamon_bun"
         android:gravity="center" />
 
     <item
