@@ -90,10 +90,6 @@ fun Context.getIdentifier(name: String, defType: DefType, pkg: String = packageN
 }
 
 fun Context.getPackageDrawable(id: Int, pkg: String? = null): Drawable? {
-//    if (pkg == packageName) {
-//        return getDrawableCompat(id)
-//    }
-
     val resource: Resources = getPackageResources(pkg) ?: return null
     val theme: Resources.Theme? = try {
         val packageContext = createPackageContext(
