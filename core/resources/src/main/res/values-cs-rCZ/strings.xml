@@ -27,6 +27,7 @@
     <string name="pref_title_language_more">Více</string>
     <string name="pref_title_theme">Motiv</string>
     <string name="pref_title_dynamic_color">Dynamická barva</string>
+    <string name="pref_title_app_icon">Ikonka aplikace</string>
     <string name="pref_title_icon_visual_effects">Vizuální Efekty Ikony</string>
     <string name="summary_system_default">Výchozí</string>
     <string name="summary_theme_dark_mode">Tmavý</string>

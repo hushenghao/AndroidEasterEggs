@@ -6,4 +6,9 @@
     <string name="analog_clock_widget_action_open_egg">Yumurta aç</string>
     <string name="analog_clock_widget_action_open_app">Uygulama aç</string>
     <string name="analog_clock_widget_action_none">Eylem yok</string>
+    <string name="analog_clock_widget_dial_style_title">Saat kadranı</string>
+    <string name="analog_clock_widget_dial_style_summary">Analog saat kadranı stilini seçin.</string>
+    <string name="analog_clock_widget_dial_android_icons">İkonlar</string>
+    <string name="analog_clock_widget_dial_simple">Basit</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
 </resources>

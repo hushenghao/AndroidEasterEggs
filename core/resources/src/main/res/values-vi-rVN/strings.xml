@@ -27,6 +27,7 @@
     <string name="pref_title_language_more">Thêm</string>
     <string name="pref_title_theme">Chủ đề</string>
     <string name="pref_title_dynamic_color">Màu động</string>
+    <string name="pref_title_app_icon">Icon ứng dụng</string>
     <string name="pref_title_icon_visual_effects">Hiệu ứng biểu tượng</string>
     <string name="summary_system_default">Mặc định</string>
     <string name="summary_theme_dark_mode">Tối</string>

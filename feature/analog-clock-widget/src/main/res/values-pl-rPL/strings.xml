@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="analog_clock_widget_config_title">Skonfiguruje widżet</string>
+    <string name="analog_clock_widget_config_title">Skonfiguruj widżet</string>
     <string name="analog_clock_widget_config_summary">Wybierz co się stanie po kliknięciu zegara</string>
     <string name="analog_clock_widget_click_action_title">Akcja po dotknięciu</string>
     <string name="analog_clock_widget_action_open_egg">Otwórz aplikację</string>
     <string name="analog_clock_widget_action_open_app">Otwórz aplikację</string>
     <string name="analog_clock_widget_action_none">Nie ma akcji</string>
+    <string name="analog_clock_widget_dial_style_title">Tarcza zegara</string>
+    <string name="analog_clock_widget_dial_style_summary">Wybierz styl tarczy zegara.</string>
+    <string name="analog_clock_widget_dial_android_icons">Ikony</string>
+    <string name="analog_clock_widget_dial_simple">Zwykły</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">Najnowszy Android</string>
 </resources>
