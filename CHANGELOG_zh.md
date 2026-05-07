@@ -1,6 +1,6 @@
 # 更新日志
 
-### v4.5.1
+### v4.5.1 (2026-05-07)
 
 - 新增应用图标切换功能 [#828](https://github.com/hushenghao/AndroidEasterEggs/issues/828)
 - 新增模拟时钟小部件表盘样式选择

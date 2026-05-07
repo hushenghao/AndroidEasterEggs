@@ -1,6 +1,6 @@
 # Changelog
 
-### v4.5.1
+### v4.5.1 (2026-05-07)
 
 - Add option to change app icon [#828](https://github.com/hushenghao/AndroidEasterEggs/issues/828)
 - Add analog clock widget dial styles
