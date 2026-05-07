@@ -7,15 +7,17 @@
     android:background="@drawable/neko_widget_background"
     android:orientation="vertical"
     android:padding="12dp"
+    android:theme="@style/Theme.AppColors"
     tools:layout_height="400dp"
-    tools:layout_width="300dp">
+    tools:layout_width="300dp"
+    tools:viewBindingIgnore="true">
 
     <TextView
         android:id="@+id/widget_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/neko_widget_title"
-        android:textColor="#EAF3EE"
+        android:textColor="@color/neko_widget_title_color"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -25,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/neko_widget_subtitle"
-        android:textColor="#B7CCC0"
+        android:textColor="@color/neko_widget_subtitle_color"
         android:textSize="11sp" />
 
     <LinearLayout
@@ -67,7 +69,7 @@
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:contentDescription="@null"
-                    android:src="@drawable/r_ic_water" />
+                    android:src="@drawable/neko_ic_water" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -81,7 +83,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/neko_widget_water_title"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/neko_widget_title_color"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
@@ -92,7 +94,7 @@
                         android:layout_marginTop="2dp"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:textColor="#D9F2FF"
+                        android:textColor="@color/neko_widget_subtitle_color"
                         android:textSize="11sp"
                         tools:text="@string/neko_widget_water_status" />
                 </LinearLayout>
@@ -117,7 +119,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:contentDescription="@null"
-                android:src="@drawable/r_ic_foodbowl_filled" />
+                android:src="@drawable/neko_ic_food_bowl_filled" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -131,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/neko_widget_food_title"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/neko_widget_title_color"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 
@@ -142,7 +144,7 @@
                     android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="#FFF0D9"
+                    android:textColor="@color/neko_widget_subtitle_color"
                     android:textSize="11sp"
                     tools:text="@string/r_control_food_subtitle" />
             </LinearLayout>
@@ -166,7 +168,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:contentDescription="@null"
-                android:src="@drawable/r_ic_toy_ball" />
+                android:src="@drawable/neko_ic_toy_ball" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -180,7 +182,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/neko_widget_toy_title"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/neko_widget_title_color"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 
@@ -191,7 +193,7 @@
                     android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="#FFE4EC"
+                    android:textColor="@color/neko_widget_subtitle_color"
                     android:textSize="11sp"
                     tools:text="@string/neko_widget_toy_idle" />
             </LinearLayout>
@@ -214,7 +216,7 @@
                 android:layout_height="28dp"
                 android:contentDescription="@null"
                 android:padding="1.5dp"
-                android:src="@drawable/neko_card_cat" />
+                android:src="@drawable/neko_ic_cat" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -228,7 +230,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/neko_widget_status_title"
-                    android:textColor="#F8F7F2"
+                    android:textColor="@color/neko_widget_title_color"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 
@@ -239,7 +241,7 @@
                     android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="#DDE8E1"
+                    android:textColor="@color/neko_widget_subtitle_color"
                     android:textSize="11sp"
                     tools:text="@string/neko_widget_status_ready" />
             </LinearLayout>

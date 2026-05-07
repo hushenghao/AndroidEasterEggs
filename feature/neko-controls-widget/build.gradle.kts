@@ -7,9 +7,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:theme"))
     implementation(project(":core:settings"))
-    implementation(project(":eggs:R"))
-
     implementation(libs.androidx.core)
     implementation(libs.google.material)
 

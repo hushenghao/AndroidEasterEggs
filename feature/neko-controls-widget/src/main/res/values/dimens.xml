@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="neko_widget_background_corner_radius">@dimen/m3_sys_shape_corner_value_extra_large</dimen>
+    <dimen name="neko_widget_card_corner_radius">@dimen/m3_sys_shape_corner_value_large_increased</dimen>
+</resources>

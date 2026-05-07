@@ -12,7 +12,6 @@ import android.widget.RemoteViews
 import androidx.core.app.PendingIntentCompat
 import androidx.core.content.edit
 import kotlin.random.Random
-import com.android_r.egg.R as NekoR
 
 private const val ACTION_ITEM_CLICK =
     "com.dede.android_eggs.neko_controls_widget.ACTION_ITEM_CLICK"
@@ -184,28 +183,20 @@ private fun bindStatusCard(
         average >= 80 -> MoodInfo(
             textRes = R.string.neko_widget_status_thriving,
             backgroundRes = R.drawable.neko_card_info_high,
-            titleColor = 0xFFE6F7FF.toInt(),
-            valueColor = 0xFFD6F0FF.toInt(),
         )
         average >= 45 -> MoodInfo(
             textRes = R.string.neko_widget_status_playful,
             backgroundRes = R.drawable.neko_card_info_mid,
-            titleColor = 0xFFF3FFF8.toInt(),
-            valueColor = 0xFFDDEFE6.toInt(),
         )
         else -> MoodInfo(
             textRes = R.string.neko_widget_status_needs_attention,
             backgroundRes = R.drawable.neko_card_info_low,
-            titleColor = 0xFFFFF1DD.toInt(),
-            valueColor = 0xFFFFDFC2.toInt(),
         )
     }
     val statusText = context.getString(statusInfo.textRes)
     views.setTextViewText(ids.valueViewId, statusText)
-    views.setImageViewResource(ids.iconViewId, R.drawable.neko_card_cat)
+    views.setImageViewResource(ids.iconViewId, R.drawable.neko_ic_cat)
     views.setInt(ids.cardViewId, "setBackgroundResource", statusInfo.backgroundRes)
-    ids.titleViewId?.let { views.setTextColor(it, statusInfo.titleColor) }
-    views.setTextColor(ids.valueViewId, statusInfo.valueColor)
 }
 
 private fun createClickIntent(
@@ -232,7 +223,7 @@ private fun createClickIntent(
 private enum class WidgetItem(val titleRes: Int) {
     Water(R.string.neko_widget_water_title) {
         override fun iconRes(progress: Int): Int {
-            return if (progress >= 50) NekoR.drawable.r_ic_water_filled else NekoR.drawable.r_ic_water
+            return if (progress >= 50) R.drawable.neko_ic_water_filled else R.drawable.neko_ic_water
         }
 
         override fun backgroundRes(progress: Int): Int {
@@ -245,7 +236,7 @@ private enum class WidgetItem(val titleRes: Int) {
     },
     Food(R.string.neko_widget_food_title) {
         override fun iconRes(progress: Int): Int {
-            return if (progress >= 50) NekoR.drawable.r_ic_foodbowl_filled else NekoR.drawable.r_ic_bowl
+            return if (progress >= 50) R.drawable.neko_ic_food_bowl_filled else R.drawable.neko_ic_bowl
         }
 
         override fun backgroundRes(progress: Int): Int {
@@ -268,10 +259,10 @@ private enum class WidgetItem(val titleRes: Int) {
     Toy(R.string.neko_widget_toy_title) {
         override fun iconRes(progress: Int): Int {
             return when {
-                progress < 25 -> NekoR.drawable.r_ic_toy_mouse
-                progress < 50 -> NekoR.drawable.r_ic_toy_fish
-                progress < 75 -> NekoR.drawable.r_ic_toy_ball
-                else -> NekoR.drawable.r_ic_toy_laser
+                progress < 25 -> R.drawable.neko_ic_toy_mouse
+                progress < 50 -> R.drawable.neko_ic_toy_fish
+                progress < 75 -> R.drawable.neko_ic_toy_ball
+                else -> R.drawable.neko_ic_toy_laser
             }
         }
 
@@ -415,8 +406,6 @@ private data class WidgetState(
 private data class MoodInfo(
     val textRes: Int,
     val backgroundRes: Int,
-    val titleColor: Int,
-    val valueColor: Int,
 )
 
 private object NekoControlsWidgetState {

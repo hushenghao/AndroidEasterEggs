@@ -50,7 +50,7 @@ object NekoControlsWidgetPreviewProvider : WidgetPreviewProvider {
                         cardView = findViewById(R.id.water_card),
                         progressView = findViewById(R.id.water_progress),
                         status = context.getString(R.string.neko_widget_water_status, 124),
-                        iconRes = com.android_r.egg.R.drawable.r_ic_water_filled,
+                        iconRes = R.drawable.neko_ic_water_filled,
                         backgroundRes = R.drawable.neko_card_water_low,
                         progress = 62,
                     )
@@ -60,7 +60,7 @@ object NekoControlsWidgetPreviewProvider : WidgetPreviewProvider {
                         cardView = findViewById(R.id.food_card),
                         progressView = null,
                         status = context.getString(R.string.neko_widget_food_full),
-                        iconRes = com.android_r.egg.R.drawable.r_ic_foodbowl_filled,
+                        iconRes = R.drawable.neko_ic_food_bowl_filled,
                         backgroundRes = R.drawable.neko_card_food_high,
                         progress = null,
                     )
@@ -70,7 +70,7 @@ object NekoControlsWidgetPreviewProvider : WidgetPreviewProvider {
                         cardView = findViewById(R.id.toy_card),
                         progressView = null,
                         status = context.getString(R.string.neko_widget_toy_curious),
-                        iconRes = com.android_r.egg.R.drawable.r_ic_toy_ball,
+                        iconRes = R.drawable.neko_ic_toy_ball,
                         backgroundRes = R.drawable.neko_card_toy_mid,
                         progress = null,
                     )
@@ -80,7 +80,7 @@ object NekoControlsWidgetPreviewProvider : WidgetPreviewProvider {
                         cardView = findViewById(R.id.status_card),
                         progressView = null,
                         status = context.getString(R.string.neko_widget_status_thriving),
-                        iconRes = R.drawable.neko_card_cat,
+                        iconRes = R.drawable.neko_ic_cat,
                         backgroundRes = R.drawable.neko_card_info_high,
                         progress = null,
                     )

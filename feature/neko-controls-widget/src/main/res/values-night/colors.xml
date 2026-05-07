@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="neko_widget_background_color">@color/md_theme_surfaceContainer</color>
+    <color name="neko_widget_title_color">@color/md_theme_onSurface</color>
+    <color name="neko_widget_subtitle_color">@color/md_theme_onSurfaceVariant</color>
+
+    <color name="neko_card_water_low_color">#243944</color>
+    <color name="neko_card_water_mid_color">#2D5870</color>
+    <color name="neko_card_water_high_color">#3B88B3</color>
+    <color name="neko_card_food_low_color">#4A3222</color>
+    <color name="neko_card_food_mid_color">#86522E</color>
+    <color name="neko_card_food_high_color">#C87933</color>
+    <color name="neko_card_toy_low_color">#4A2A35</color>
+    <color name="neko_card_toy_mid_color">#8B4058</color>
+    <color name="neko_card_toy_high_color">#D35A82</color>
+    <color name="neko_card_info_low_color">#3A2C1F</color>
+    <color name="neko_card_info_mid_color">#26443A</color>
+    <color name="neko_card_info_high_color">#234D63</color>
+
+    <color name="neko_water_progress_background_color">#23343D</color>
+    <color name="neko_water_progress_color">#4FA8D8</color>
+</resources>
