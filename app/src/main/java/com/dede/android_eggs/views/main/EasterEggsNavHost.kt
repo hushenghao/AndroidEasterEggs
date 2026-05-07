@@ -20,6 +20,7 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
+import com.dede.android_eggs.local_provider.rememberCustomTabsUriHandler
 import com.dede.android_eggs.navigation.BottomSheetSceneStrategy
 import com.dede.android_eggs.navigation.DeepLink
 import com.dede.android_eggs.navigation.EasterEggsDestination
@@ -32,7 +33,6 @@ import com.dede.android_eggs.navigation.Navigator.Companion.rememberNavigator
 import com.dede.android_eggs.navigation.rememberEasterEggsDestinations
 import com.dede.android_eggs.navigation.rememberNavigationState
 import com.dede.android_eggs.navigation.toEntries
-import com.dede.android_eggs.util.CustomTabsUriHandler
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.isAgreedPrivacyPolicy
 import com.dede.android_eggs.views.main.compose.rememberKonfettiController
@@ -70,7 +70,7 @@ fun EasterEggsNavHost(
     val currentRoute = navigator.currentRoute
     val konfettiController = rememberKonfettiController()
     val context = LocalContext.current
-    val uriHandler = remember(context) { CustomTabsUriHandler(context) }
+    val uriHandler = rememberCustomTabsUriHandler()
     CompositionLocalProvider(
         LocalUriHandler provides uriHandler,
         LocalNavigator provides navigator,

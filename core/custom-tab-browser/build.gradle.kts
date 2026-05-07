@@ -11,7 +11,4 @@ dependencies {
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.browser)
-
-    compileOnly(platform(libs.androidx.compose.bom))
-    compileOnly(libs.androidx.compose.ui)
 }
