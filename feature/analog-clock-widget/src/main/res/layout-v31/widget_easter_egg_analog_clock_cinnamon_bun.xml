@@ -10,8 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:dial="@drawable/clock_analog_dial_cinnamon_bun"
+        android:dial="@drawable/clock_analog_dial_cinnamon_bun_nolabel"
         android:hand_hour="@drawable/clock_analog_simple_hour"
-        android:hand_minute="@drawable/clock_analog_simple_minute" />
+        android:hand_minute="@drawable/clock_analog_simple_minute"
+        android:hand_second="@drawable/clock_analog_cinnamon_bun_label_second" />
 
 </RelativeLayout>
