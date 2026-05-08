@@ -96,21 +96,15 @@ class AnalogClockWidgetConfigureActivity : ComponentActivity() {
     }
 
     private fun onConfirm(
-        clickAction: AnalogClockWidgetClickAction,
-        dialStyle: AnalogClockWidgetDialStyle,
+        config: AnalogClockWidgetConfig,
     ) {
         lifecycleScope.launch {
-            AnalogClockWidgetPrefs.setClickAction(
+            AnalogClockWidgetPrefs.setConfig(
                 this@AnalogClockWidgetConfigureActivity,
                 appWidgetId,
-                clickAction
+                config
             )
-            AnalogClockWidgetPrefs.setDialStyle(
-                this@AnalogClockWidgetConfigureActivity,
-                appWidgetId,
-                dialStyle
-            )
-            updateAppWidgetAsync(
+            updateAppWidget(
                 this@AnalogClockWidgetConfigureActivity,
                 AppWidgetManager.getInstance(this@AnalogClockWidgetConfigureActivity),
                 appWidgetId
@@ -128,7 +122,7 @@ class AnalogClockWidgetConfigureActivity : ComponentActivity() {
 private fun AnalogClockWidgetConfigureSheet(
     appWidgetId: Int,
     onDismissRequest: () -> Unit,
-    onConfirm: (AnalogClockWidgetClickAction, AnalogClockWidgetDialStyle) -> Unit,
+    onConfirm: (AnalogClockWidgetConfig) -> Unit,
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
@@ -138,8 +132,9 @@ private fun AnalogClockWidgetConfigureSheet(
         mutableStateOf(AnalogClockWidgetDialStyle.ANDROID_ICONS)
     }
     LaunchedEffect(context, appWidgetId) {
-        selectedAction = AnalogClockWidgetPrefs.getClickAction(context, appWidgetId)
-        selectedDialStyle = AnalogClockWidgetPrefs.getDialStyle(context, appWidgetId)
+        val config = AnalogClockWidgetPrefs.getConfig(context, appWidgetId)
+        selectedAction = config.clickAction
+        selectedDialStyle = config.dialStyle
     }
 
     fun closeAfterAnimation(action: () -> Unit) {
@@ -228,7 +223,12 @@ private fun AnalogClockWidgetConfigureSheet(
                 TextButton(
                     onClick = {
                         closeAfterAnimation {
-                            onConfirm(selectedAction, selectedDialStyle)
+                            onConfirm(
+                                AnalogClockWidgetConfig(
+                                    clickAction = selectedAction,
+                                    dialStyle = selectedDialStyle,
+                                )
+                            )
                         }
                     }
                 ) {

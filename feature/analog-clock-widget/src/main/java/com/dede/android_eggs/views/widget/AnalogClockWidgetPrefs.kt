@@ -37,6 +37,11 @@ internal enum class AnalogClockWidgetDialStyle(
     );
 }
 
+internal data class AnalogClockWidgetConfig(
+    val clickAction: AnalogClockWidgetClickAction,
+    val dialStyle: AnalogClockWidgetDialStyle,
+)
+
 internal object AnalogClockWidgetPrefs {
     private const val ANALOG_CLOCK_WIDGET_DATASTORE = "analog_clock_widget_preferences"
 
@@ -45,47 +50,26 @@ internal object AnalogClockWidgetPrefs {
     private const val KEY_CLICK_ACTION_PREFIX = "analog_clock_widget_click_action_"
     private const val KEY_DIAL_STYLE_PREFIX = "analog_clock_widget_dial_style_"
 
-    suspend fun getClickAction(context: Context, appWidgetId: Int): AnalogClockWidgetClickAction {
-        return runCatching {
-            val name = context.analogClockWidgetDataStore.data.first()[clickActionKey(appWidgetId)]
-                ?: AnalogClockWidgetClickAction.OPEN_APP.name
-            AnalogClockWidgetClickAction.valueOf(name)
-        }.getOrElse {
-            AnalogClockWidgetClickAction.OPEN_APP
-        }
+    suspend fun getConfig(context: Context, appWidgetId: Int): AnalogClockWidgetConfig {
+        val preferences = context.analogClockWidgetDataStore.data.first()
+        return AnalogClockWidgetConfig(
+            clickAction = preferences[clickActionKey(appWidgetId)].toClickAction(),
+            dialStyle = preferences[dialStyleKey(appWidgetId)].toDialStyle(),
+        )
     }
 
-    suspend fun setClickAction(
+    suspend fun setConfig(
         context: Context,
         appWidgetId: Int,
-        clickAction: AnalogClockWidgetClickAction,
+        config: AnalogClockWidgetConfig,
     ) {
         context.analogClockWidgetDataStore.edit { preferences ->
-            preferences[clickActionKey(appWidgetId)] = clickAction.name
+            preferences[clickActionKey(appWidgetId)] = config.clickAction.name
+            preferences[dialStyleKey(appWidgetId)] = config.dialStyle.name
         }
     }
 
-    suspend fun getDialStyle(context: Context, appWidgetId: Int): AnalogClockWidgetDialStyle {
-        return runCatching {
-            val name = context.analogClockWidgetDataStore.data.first()[dialStyleKey(appWidgetId)]
-                ?: AnalogClockWidgetDialStyle.CINNAMON_BUN.name
-            AnalogClockWidgetDialStyle.valueOf(name)
-        }.getOrElse {
-            AnalogClockWidgetDialStyle.CINNAMON_BUN
-        }
-    }
-
-    suspend fun setDialStyle(
-        context: Context,
-        appWidgetId: Int,
-        dialStyle: AnalogClockWidgetDialStyle,
-    ) {
-        context.analogClockWidgetDataStore.edit { preferences ->
-            preferences[dialStyleKey(appWidgetId)] = dialStyle.name
-        }
-    }
-
-    suspend fun clearClickAction(context: Context, appWidgetId: Int) {
+    suspend fun clearConfig(context: Context, appWidgetId: Int) {
         context.analogClockWidgetDataStore.edit { preferences ->
             preferences.remove(clickActionKey(appWidgetId))
             preferences.remove(dialStyleKey(appWidgetId))
@@ -97,4 +81,20 @@ internal object AnalogClockWidgetPrefs {
 
     private fun dialStyleKey(appWidgetId: Int) =
         stringPreferencesKey(KEY_DIAL_STYLE_PREFIX + appWidgetId)
+
+    private fun String?.toClickAction(): AnalogClockWidgetClickAction {
+        return runCatching {
+            AnalogClockWidgetClickAction.valueOf(this ?: AnalogClockWidgetClickAction.OPEN_APP.name)
+        }.getOrElse {
+            AnalogClockWidgetClickAction.OPEN_APP
+        }
+    }
+
+    private fun String?.toDialStyle(): AnalogClockWidgetDialStyle {
+        return runCatching {
+            AnalogClockWidgetDialStyle.valueOf(this ?: AnalogClockWidgetDialStyle.CINNAMON_BUN.name)
+        }.getOrElse {
+            AnalogClockWidgetDialStyle.CINNAMON_BUN
+        }
+    }
 }
