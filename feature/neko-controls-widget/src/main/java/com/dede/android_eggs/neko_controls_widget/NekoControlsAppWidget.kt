@@ -10,7 +10,14 @@ import android.os.Bundle
 import android.util.SizeF
 import android.widget.RemoteViews
 import androidx.core.app.PendingIntentCompat
-import androidx.core.content.edit
+import androidx.datastore.preferences.SharedPreferencesMigration
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import com.dede.basic.cachedExecutor
+import com.dede.basic.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlin.random.Random
 
 private const val ACTION_ITEM_CLICK =
@@ -33,8 +40,7 @@ class NekoControlsAppWidget : AppWidgetProvider() {
         appWidgetIds: IntArray,
     ) {
         appWidgetIds.forEach { appWidgetId ->
-            NekoControlsWidgetState.ensureState(context, appWidgetId)
-            updateAppWidget(context, appWidgetManager, appWidgetId)
+            updateAppWidgetAsync(context, appWidgetManager, appWidgetId)
         }
     }
 
@@ -45,7 +51,7 @@ class NekoControlsAppWidget : AppWidgetProvider() {
         newOptions: Bundle,
     ) {
         super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions)
-        updateAppWidget(context, appWidgetManager, appWidgetId)
+        updateAppWidgetAsync(context, appWidgetManager, appWidgetId)
     }
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -56,17 +62,41 @@ class NekoControlsAppWidget : AppWidgetProvider() {
         val item = WidgetItem.fromName(intent.getStringExtra(EXTRA_ITEM)) ?: return
         if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) return
 
-        NekoControlsWidgetState.randomize(context, appWidgetId, item)
-        updateAppWidget(context, AppWidgetManager.getInstance(context), appWidgetId)
+        val pendingResult = goAsync()
+        cachedExecutor.launch(Dispatchers.IO) {
+            try {
+                NekoControlsWidgetState.randomize(context, appWidgetId, item)
+                updateAppWidget(context, AppWidgetManager.getInstance(context), appWidgetId)
+            } finally {
+                pendingResult.finish()
+            }
+        }
     }
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
         super.onDeleted(context, appWidgetIds)
-        appWidgetIds.forEach { NekoControlsWidgetState.removeState(context, it) }
+        val pendingResult = goAsync()
+        cachedExecutor.launch(Dispatchers.IO) {
+            try {
+                appWidgetIds.forEach { NekoControlsWidgetState.removeState(context, it) }
+            } finally {
+                pendingResult.finish()
+            }
+        }
     }
 }
 
-private fun updateAppWidget(
+private fun updateAppWidgetAsync(
+    context: Context,
+    appWidgetManager: AppWidgetManager,
+    appWidgetId: Int,
+) {
+    cachedExecutor.launch(Dispatchers.IO) {
+        updateAppWidget(context, appWidgetManager, appWidgetId)
+    }
+}
+
+private suspend fun updateAppWidget(
     context: Context,
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int,
@@ -412,12 +442,19 @@ private object NekoControlsWidgetState {
     private const val PREFS_NAME = "neko_controls_widget"
     private const val MISSING_VALUE = -1
 
-    fun ensureState(context: Context, appWidgetId: Int): WidgetState {
-        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private val Context.nekoControlsWidgetDataStore by preferencesDataStore(
+        name = PREFS_NAME,
+        produceMigrations = { context ->
+            listOf(SharedPreferencesMigration(context, PREFS_NAME))
+        },
+    )
+
+    suspend fun ensureState(context: Context, appWidgetId: Int): WidgetState {
+        val preferences = context.nekoControlsWidgetDataStore.data.first()
         val current = WidgetState(
-            water = prefs.getInt(key(appWidgetId, WidgetItem.Water), MISSING_VALUE),
-            food = prefs.getInt(key(appWidgetId, WidgetItem.Food), MISSING_VALUE),
-            toy = prefs.getInt(key(appWidgetId, WidgetItem.Toy), MISSING_VALUE),
+            water = preferences[key(appWidgetId, WidgetItem.Water)] ?: MISSING_VALUE,
+            food = preferences[key(appWidgetId, WidgetItem.Food)] ?: MISSING_VALUE,
+            toy = preferences[key(appWidgetId, WidgetItem.Toy)] ?: MISSING_VALUE,
         )
         if (current.isInitialized()) return current
 
@@ -430,11 +467,11 @@ private object NekoControlsWidgetState {
         return seeded
     }
 
-    fun readState(context: Context, appWidgetId: Int): WidgetState {
+    suspend fun readState(context: Context, appWidgetId: Int): WidgetState {
         return ensureState(context, appWidgetId)
     }
 
-    fun randomize(context: Context, appWidgetId: Int, item: WidgetItem): WidgetState {
+    suspend fun randomize(context: Context, appWidgetId: Int, item: WidgetItem): WidgetState {
         val current = ensureState(context, appWidgetId)
         val next = when (item) {
             WidgetItem.Water -> current.copy(water = randomProgress())
@@ -445,27 +482,25 @@ private object NekoControlsWidgetState {
         return next
     }
 
-    fun removeState(context: Context, appWidgetId: Int) {
-        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-            .edit {
-                remove(key(appWidgetId, WidgetItem.Water))
-                remove(key(appWidgetId, WidgetItem.Food))
-                remove(key(appWidgetId, WidgetItem.Toy))
-            }
+    suspend fun removeState(context: Context, appWidgetId: Int) {
+        context.nekoControlsWidgetDataStore.edit { preferences ->
+            preferences.remove(key(appWidgetId, WidgetItem.Water))
+            preferences.remove(key(appWidgetId, WidgetItem.Food))
+            preferences.remove(key(appWidgetId, WidgetItem.Toy))
+        }
     }
 
-    private fun writeState(context: Context, appWidgetId: Int, state: WidgetState) {
-        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-            .edit {
-                putInt(key(appWidgetId, WidgetItem.Water), state.water)
-                putInt(key(appWidgetId, WidgetItem.Food), state.food)
-                putInt(key(appWidgetId, WidgetItem.Toy), state.toy)
-            }
+    private suspend fun writeState(context: Context, appWidgetId: Int, state: WidgetState) {
+        context.nekoControlsWidgetDataStore.edit { preferences ->
+            preferences[key(appWidgetId, WidgetItem.Water)] = state.water
+            preferences[key(appWidgetId, WidgetItem.Food)] = state.food
+            preferences[key(appWidgetId, WidgetItem.Toy)] = state.toy
+        }
     }
 
-    private fun key(appWidgetId: Int, item: WidgetItem): String {
-        return "widget_${appWidgetId}_${item.name.lowercase()}"
-    }
+    private fun key(appWidgetId: Int, item: WidgetItem) = intPreferencesKey(
+        "widget_${appWidgetId}_${item.name.lowercase()}"
+    )
 
     private fun WidgetState.isInitialized(): Boolean {
         return water != MISSING_VALUE && food != MISSING_VALUE && toy != MISSING_VALUE
