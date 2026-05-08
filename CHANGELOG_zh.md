@@ -1,5 +1,9 @@
 # 更新日志
 
+### v4.5.2
+
+- 修复已知问题
+
 ### v4.5.1 (2026-05-07)
 
 - 新增应用图标切换功能 [#828](https://github.com/hushenghao/AndroidEasterEggs/issues/828)

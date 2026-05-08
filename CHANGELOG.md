@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.5.2
+
+- Known issue fixes
+
 ### v4.5.1 (2026-05-07)
 
 - Add option to change app icon [#828](https://github.com/hushenghao/AndroidEasterEggs/issues/828)
