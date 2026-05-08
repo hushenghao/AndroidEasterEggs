@@ -27,6 +27,7 @@
     <string name="pref_title_language_more">Mai multe</string>
     <string name="pref_title_theme">Temă</string>
     <string name="pref_title_dynamic_color">Culoare dinamică</string>
+    <string name="pref_title_app_icon">Pictograma aplicației</string>
     <string name="pref_title_icon_visual_effects">Efecte vizuale pictograme</string>
     <string name="summary_system_default">Implicită</string>
     <string name="summary_theme_dark_mode">Întunecată</string>
