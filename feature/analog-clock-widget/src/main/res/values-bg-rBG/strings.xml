@@ -6,4 +6,9 @@
     <string name="analog_clock_widget_action_open_egg">Отвори Egg</string>
     <string name="analog_clock_widget_action_open_app">Отвори Приложение</string>
     <string name="analog_clock_widget_action_none">Без действие</string>
+    <string name="analog_clock_widget_dial_style_title">Циферблат на часовника</string>
+    <string name="analog_clock_widget_dial_style_summary">Изберете стила на циферблата на аналоговия часовник.</string>
+    <string name="analog_clock_widget_dial_android_icons">Икони</string>
+    <string name="analog_clock_widget_dial_simple">Обикновен</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
 </resources>

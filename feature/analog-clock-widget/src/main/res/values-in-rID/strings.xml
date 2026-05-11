@@ -6,4 +6,9 @@
     <string name="analog_clock_widget_action_open_egg">Buka egg</string>
     <string name="analog_clock_widget_action_open_app">Buka aplikasi</string>
     <string name="analog_clock_widget_action_none">Tidak ada tindakan</string>
+    <string name="analog_clock_widget_dial_style_title">Pelat jam</string>
+    <string name="analog_clock_widget_dial_style_summary">Pilih gaya tampilan jam analog.</string>
+    <string name="analog_clock_widget_dial_android_icons">Ikon</string>
+    <string name="analog_clock_widget_dial_simple">Sederhana</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
 </resources>

@@ -27,6 +27,7 @@
     <string name="pref_title_language_more">Още</string>
     <string name="pref_title_theme">Тема</string>
     <string name="pref_title_dynamic_color">Динамичен Цвят</string>
+    <string name="pref_title_app_icon">Easter Eggs</string>
     <string name="pref_title_icon_visual_effects">Визуални ефекти на иконите</string>
     <string name="summary_system_default">По Подразбиране</string>
     <string name="summary_theme_dark_mode">Тъмна</string>
