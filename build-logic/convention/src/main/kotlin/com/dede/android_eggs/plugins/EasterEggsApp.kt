@@ -4,6 +4,7 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.dede.android_eggs.dls.android
 import com.dede.android_eggs.dls.keyprops
 import com.dede.android_eggs.tasks.UpdateChangelogsTask
+import com.dede.android_eggs.tasks.UpdateModularizationGraphTask
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
@@ -77,6 +78,7 @@ class EasterEggsApp : AbsConfigurablePlugin(
 
     private fun Project.registerTasks() {
         UpdateChangelogsTask.register(this)
+        UpdateModularizationGraphTask.register(rootProject)
     }
 
 
