@@ -11,6 +11,17 @@ module, and run the smallest useful verification command.
 - Use `rg` / `rg --files` for code search.
 - For Android changes, verify with the most relevant Gradle module task when possible.
 
+## Maintenance
+
+- Treat source code and Gradle configuration as the source of truth when this
+  document conflicts with the project.
+- Update this document whenever modules are added, removed, renamed, or their
+  responsibilities change.
+- Keep this document focused on stable structure, ownership, search targets, and
+  verification commands.
+- Do not record temporary implementation details, one-off bug context, or
+  volatile internal method behavior here.
+
 ## Project Shape
 
 This is a multi-module Android project using Kotlin DSL Gradle files.
@@ -208,7 +219,7 @@ Use these first for common tasks:
   - `basic/src/main/java/com/dede/basic/Utils.kt`
 - Shortcuts:
   - `core/shortcut/`
-  - `app/src/main/java/com/dede/android_eggs/views/settings/compose/prefs/EasterEggShortcutsHelp.kt`
+  - `core/shortcut/src/main/java/com/dede/android_eggs/views/main/util/EasterEggShortcutsHelp.kt`
 - App navigation:
   - `app/src/main/java/com/dede/android_eggs/views/main/`
   - `core/navigation/`
@@ -249,4 +260,3 @@ Use these first for common tasks:
   unless the task explicitly asks for modernization.
 - When adding or changing XML-driven widget metadata, keep XML as the source of
   truth if the existing flow reads from XML.
-
