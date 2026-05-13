@@ -6,8 +6,8 @@ import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.EdgeToEdgeCompat
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -44,8 +44,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.drawable.toDrawable
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import com.dede.android_eggs.views.theme.EasterEggsTheme
 import com.dede.basic.requireDrawable
@@ -65,18 +63,11 @@ class AnalogClockWidgetConfigureActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        EdgeToEdgeCompat.enable(this)
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
             onCancel()
             return
-        }
-
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        val windowInsetsControllerCompat = WindowInsetsControllerCompat(window, window.decorView)
-        windowInsetsControllerCompat.apply {
-            isAppearanceLightStatusBars = false
-            isAppearanceLightNavigationBars = false
         }
 
         setContent {
