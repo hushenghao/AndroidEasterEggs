@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">উইজেট কনফিগার করুন</string>
+    <string name="analog_clock_widget_config_summary">অ্যানালগ ঘড়ি উইজেটটিতে চাপ দিলে কী ঘটবে তা বেছে নিন।</string>
+    <string name="analog_clock_widget_click_action_title">ট্যাপ অ্যাকশন</string>
+    <string name="analog_clock_widget_action_open_egg">এগ খুলুন</string>
+    <string name="analog_clock_widget_action_open_app">অ্যাপটি খুলুন</string>
+    <string name="analog_clock_widget_action_none">কোন পদক্ষেপ নেই</string>
+    <string name="analog_clock_widget_dial_style_title">ঘড়ির ডায়াল</string>
+    <string name="analog_clock_widget_dial_style_summary">অ্যানালগ ঘড়ির ডায়ালের ধরন বেছে নিন।</string>
+    <string name="analog_clock_widget_dial_android_icons">আইকন</string>
+    <string name="analog_clock_widget_dial_simple">সিম্পল</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">সিনামনবান</string>
+</resources>
