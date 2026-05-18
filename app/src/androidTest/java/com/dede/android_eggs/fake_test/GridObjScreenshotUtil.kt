@@ -32,12 +32,12 @@ import kotlin.math.min
 class GridObjScreenshotUtil {
 
     companion object {
-        // Pixel 5
+        // Pixel 6
         private val TARGET_SIZE = Size(1080, 2400)
 
         // 18 cells
         private val GROUPS: List<Group> = listOf(
-            Triple(690, false, 3),// 3
+            Tetrad(690, false, 4),// 4
             Pentad(570, false),          // 5
             Pentad(570, true),           // 5
             Pentad(570, false),          // 5
