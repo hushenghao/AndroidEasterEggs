@@ -1,7 +1,7 @@
 package com.dede.android_eggs.views.main.util
 
-import android.graphics.Matrix
 import android.graphics.Rect
+import androidx.compose.ui.graphics.Matrix
 import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.dynamicanimation.animation.FloatValueHolder
 import androidx.dynamicanimation.animation.SpringAnimation
@@ -37,6 +37,8 @@ class EasterEggLogoSensorMatrixConvert @Inject constructor() :
 
         private val width = bounds.width() * OFFSET_RATIO
         private val height = bounds.height() * OFFSET_RATIO
+        private val pivotX = bounds.exactCenterX()
+        private val pivotY = bounds.exactCenterY()
 
         private val matrix = Matrix()
 
@@ -44,7 +46,12 @@ class EasterEggLogoSensorMatrixConvert @Inject constructor() :
             // Swap coordinate systems
             val dx = cYDegrees / 90f * width * -1f
             val dy = cXDegrees / 90f * height
-            matrix.setTranslate(dx, dy)
+            matrix.resetToPivotedTransform(
+                pivotX = pivotX,
+                pivotY = pivotY,
+                translationX = dx,
+                translationY = dy,
+            )
             onUpdateMatrix(matrix)
         }
 

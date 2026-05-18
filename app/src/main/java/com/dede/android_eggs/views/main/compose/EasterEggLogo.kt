@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Matrix
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -61,7 +62,7 @@ fun EasterEggLogo(
                 DisposableEffect(size) {
                     val bounds = Rect(0, 0, size.width, size.height)
                     val listener = object : EasterEggLogoSensorMatrixConvert.Listener(bounds) {
-                        override fun onUpdateMatrix(matrix: android.graphics.Matrix) {
+                        override fun onUpdateMatrix(matrix: Matrix) {
                             foregroundTransformState.updateFrom(matrix)
                         }
                     }

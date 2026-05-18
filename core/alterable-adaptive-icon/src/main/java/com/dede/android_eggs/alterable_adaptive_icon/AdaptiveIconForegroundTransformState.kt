@@ -18,8 +18,6 @@ class AdaptiveIconForegroundTransformState {
 
     val matrix = Matrix()
 
-    private val values = FloatArray(9)
-
     var version by mutableIntStateOf(0)
         private set
 
@@ -28,19 +26,8 @@ class AdaptiveIconForegroundTransformState {
         version++
     }
 
-    fun updateTranslation(translationX: Float, translationY: Float) {
-        matrix.resetToPivotedTransform(
-            translationX = translationX,
-            translationY = translationY,
-        )
+    fun updateFrom(transformMatrix: Matrix) {
+        matrix.setFrom(transformMatrix)
         version++
-    }
-
-    fun updateFrom(platformMatrix: android.graphics.Matrix) {
-        platformMatrix.getValues(values)
-        updateTranslation(
-            translationX = values[android.graphics.Matrix.MTRANS_X],
-            translationY = values[android.graphics.Matrix.MTRANS_Y],
-        )
     }
 }
