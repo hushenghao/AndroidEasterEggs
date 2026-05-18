@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Paskalya Yumurtalarıt</string>
+    <string name="app_name">Easter Eggs</string>
     <string name="title_open_with">Şununla aç</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>

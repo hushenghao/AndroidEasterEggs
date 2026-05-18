@@ -35,4 +35,6 @@
     <string name="locale_lang_sv_SE">সুইডিশ</string>
     <string name="locale_lang_my_MM">বার্মিজ</string>
     <string name="locale_lang_bn_BD">বাংলা</string>
+    <string name="locale_lang_sq">আলবেনিয়ান</string>
+    <string name="locale_lang_bg">বুলগেরীয়</string>
 </resources>
