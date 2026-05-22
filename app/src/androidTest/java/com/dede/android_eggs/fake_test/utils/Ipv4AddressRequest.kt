@@ -7,7 +7,6 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.net.wifi.WifiInfo
-import android.net.wifi.WifiManager
 import androidx.annotation.RequiresPermission
 import androidx.core.content.getSystemService
 import java.net.Inet4Address
@@ -28,12 +27,6 @@ class Ipv4AddressRequest() {
         return String.format("%d.%d.%d.%d",
             ipAddress and 0xff, ipAddress shr 8 and 0xff, ipAddress shr 16 and 0xff,
             ipAddress shr 24 and 0xff)
-    }
-
-    @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
-    private fun getAddressDeprecated(context: Context): String? {
-        val wifiManager = context.getSystemService<WifiManager>() ?: return null
-        return formatAddress(wifiManager.connectionInfo.ipAddress)
     }
 
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.CHANGE_NETWORK_STATE])

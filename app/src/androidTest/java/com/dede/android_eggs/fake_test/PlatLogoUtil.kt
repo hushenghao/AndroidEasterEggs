@@ -1,13 +1,16 @@
 package com.dede.android_eggs.fake_test
 
+import android.Manifest
 import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.GrantPermissionRule
 import com.dede.android_eggs.fake_test.utils.EasterEggsServer
 import com.dede.android_eggs.fake_test.utils.EasterEggsServer.Companion.registerHandler
 import com.dede.android_eggs.fake_test.utils.ResponseUtils
 import fi.iki.elonen.NanoHTTPD.Response
 import org.junit.Ignore
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -21,6 +24,12 @@ class PlatLogoUtil {
     companion object {
         private const val PLAT_LOGO_SIZE = 512
     }
+
+    @Rule
+    @JvmField
+    val permissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.ACCESS_LOCAL_NETWORK,
+    )
 
     @Test
     fun platLogos() {

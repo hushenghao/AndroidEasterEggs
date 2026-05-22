@@ -104,11 +104,11 @@ object EggActionHelp {
     }
 
     private fun AppTask.isThisTask(component: ComponentName): Boolean {
-        return taskInfo.baseIntent.component?.className == component.className
+        return taskInfo?.baseIntent?.component?.className == component.className
     }
 
     private fun AppTask.isThisTask(target: Class<out Activity>): Boolean {
-        return taskInfo.baseIntent.component?.className == target.name
+        return taskInfo?.baseIntent?.component?.className == target.name
     }
 
     private fun findTaskWithTrim(context: Context, target: Class<out Activity>): AppTask? {

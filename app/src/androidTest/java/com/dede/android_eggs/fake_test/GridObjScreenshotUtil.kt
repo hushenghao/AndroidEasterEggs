@@ -1,5 +1,6 @@
 package com.dede.android_eggs.fake_test
 
+import android.Manifest
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -11,12 +12,14 @@ import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.GrantPermissionRule
 import com.dede.android_eggs.fake_test.utils.EasterEggsServer
 import com.dede.android_eggs.fake_test.utils.EasterEggsServer.Companion.registerHandler
 import com.dede.android_eggs.fake_test.utils.ResponseUtils.toResponse
 import com.dede.android_eggs.ui.drawables.ScaleType
 import com.dede.android_eggs.ui.drawables.ScaleTypeDrawable
 import com.dede.basic.dpf
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.math.min
@@ -229,6 +232,12 @@ class GridObjScreenshotUtil {
             }
         }
     }
+
+    @Rule
+    @JvmField
+    val permissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.ACCESS_LOCAL_NETWORK,
+    )
 
     @Test
     fun generate() {
