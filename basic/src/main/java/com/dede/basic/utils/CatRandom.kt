@@ -1,6 +1,7 @@
 package com.dede.basic.utils
 
 import java.util.UUID
+import kotlin.math.abs
 import kotlin.random.Random
 
 /**
@@ -17,7 +18,7 @@ object CatRandom {
     @JvmStatic
     fun nextSeed(): Long {
         // Math.abs(ThreadLocalRandom.current().nextInt())
-        return random.nextLong()
+        return abs(random.nextLong())
     }
 
 }
