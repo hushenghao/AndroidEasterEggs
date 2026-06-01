@@ -11,7 +11,7 @@ accompanist = "0.37.3"
 lifecycle = "2.10.0"
 activity = "1.13.0"
 room = "2.8.4"
-about-libraries = "14.2.0"
+about-libraries = "14.2.1"
 ktor = "3.5.0"
 nav3 = "1.0.1"
 # test
