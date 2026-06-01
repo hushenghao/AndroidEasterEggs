@@ -6,4 +6,9 @@
     <string name="analog_clock_widget_action_open_egg">Mở trứng</string>
     <string name="analog_clock_widget_action_open_app">Mở ứng dụng</string>
     <string name="analog_clock_widget_action_none">Không có hành động nào</string>
+    <string name="analog_clock_widget_dial_style_title">Mặt đồng hồ</string>
+    <string name="analog_clock_widget_dial_style_summary">Chọn kiểu mặt đồng hồ kim.</string>
+    <string name="analog_clock_widget_dial_android_icons">Biểu tượng</string>
+    <string name="analog_clock_widget_dial_simple">Đơn giản</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
 </resources>
