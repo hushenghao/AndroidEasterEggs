@@ -9,32 +9,38 @@ import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
-import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.FormatListBulleted
-import androidx.compose.material.icons.rounded.Android
+import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.rounded.Language
-import androidx.compose.material.icons.rounded.Spellcheck
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -47,22 +53,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.BuildConfig
+import com.dede.android_eggs.local_provider.currentOutInspectionMode
 import com.dede.android_eggs.views.main.compose.LocalDrawerState
-import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
-import com.dede.android_eggs.views.settings.compose.basic.Option
-import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
-import com.dede.android_eggs.views.settings.compose.basic.ValueOption
-import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
-import com.dede.android_eggs.views.settings.compose.basic.radioButtonBlock
+import com.dede.android_eggs.views.settings.compose.basic.SettingPref
 import com.dede.basic.createLocalesContext
-import com.dede.basic.getLayoutDirection
 import kotlinx.coroutines.launch
 import java.util.Locale
 import com.dede.android_eggs.resources.R as StringsR
@@ -72,7 +71,6 @@ object LanguagePrefUtil {
     private const val TAG = "LanguagePref"
 
     const val SYSTEM = 0
-    private const val MORE = -1
     private const val SIMPLIFIED_CHINESE = 2    // zh-CN
     private const val TRADITIONAL_CHINESE = 3   // zh-TW
     private const val ENGLISH = 4               // en
@@ -110,7 +108,11 @@ object LanguagePrefUtil {
     private const val ALBANIAN = 36             // sq
     private const val BULGARIAN = 37            // bg-BG
 
+    @Stable
+    @Immutable
     class LangOp(val value: Int, @StringRes val langRes: Int, val locale: Locale)
+
+    val systemLangOp = LangOp(SYSTEM, StringsR.string.summary_system_default, Locale.getDefault())
 
     // @formatter:off
     private val languageOptions = listOf(
@@ -149,7 +151,7 @@ object LanguagePrefUtil {
         LangOp(BURMESE,             StringsR.string.locale_lang_my_MM,  createLocale("my","MM")),
         LangOp(BENGALI,             StringsR.string.locale_lang_bn_BD,  createLocale("bn","BD")),
         LangOp(ALBANIAN,            StringsR.string.locale_lang_sq,     createLocale("sq")),
-        LangOp(BULGARIAN,            StringsR.string.locale_lang_bg,     createLocale("bg","BG")),
+        LangOp(BULGARIAN,           StringsR.string.locale_lang_bg,     createLocale("bg","BG")),
     )
     // @formatter:on
 
@@ -159,7 +161,7 @@ object LanguagePrefUtil {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
     }
 
-    fun checkLocaleConfig(context: Context) {
+    internal fun checkLocaleConfig(context: Context) {
         // check languageOptions count
         val expected = languageOptions.size
         var actual = HashSet(languageOptions).size
@@ -209,7 +211,7 @@ object LanguagePrefUtil {
     }
 
     fun getLangOpByValue(value: Int): LangOp? {
-        if (value == SYSTEM || value == MORE) {
+        if (value == SYSTEM) {
             return null
         }
         return checkNotNull(languageOptions.find { it.value == value }) {
@@ -275,12 +277,12 @@ fun LanguagePref() {
     }
 
     val context = LocalContext.current
-    val drawerState = LocalDrawerState.current
+    val drawerState = LocalDrawerState.currentOutInspectionMode
     val scope = rememberCoroutineScope()
 
     fun performOnOptionSelected(option: Int) {
         scope.launch {
-            drawerState.close()
+            drawerState?.close()
 
             languageOptionValue = option
             val locales = LanguagePrefUtil.getLocaleByValue(option)
@@ -293,55 +295,34 @@ fun LanguagePref() {
         }
     }
 
-    var moreDialogVisible by remember { mutableStateOf(false) }
+    var moreSheetVisible by remember { mutableStateOf(false) }
 
-    if (moreDialogVisible) {
-        LanguageSelectedDialog(
+    if (moreSheetVisible) {
+        LanguageSelectedBottomSheet(
             languageOptions = LanguagePrefUtil.getLanguages(context),
-            currentLang = langOp,
+            selectedLangOp = langOp,
             onDismissRequest = {
-                moreDialogVisible = false
+                moreSheetVisible = false
             },
-            onLanguageSelected = {
-                moreDialogVisible = false
-                performOnOptionSelected(it.value)
+            onLanguageSelected = { value ->
+                moreSheetVisible = false
+                performOnOptionSelected(value)
             }
         )
     }
 
-    ExpandOptionsPref(
+    SettingPref(
         leadingIcon = Icons.Rounded.Language,
         title = stringResource(StringsR.string.pref_title_language),
-    ) {
-        ValueOption(
-            leadingIcon = imageVectorIconBlock(imageVector = Icons.Rounded.Android),
-            shape = OptionShapes.firstShape(),
-            title = stringResource(id = StringsR.string.summary_system_default),
-            trailingContent = radioButtonBlock(languageOptionValue == LanguagePrefUtil.SYSTEM),
-            onOptionClick = ::performOnOptionSelected,
-            value = LanguagePrefUtil.SYSTEM
-        )
-        if (langOp != null) {
-            ValueOption(
-                leadingIcon = imageVectorIconBlock(imageVector = Icons.Rounded.Spellcheck),
-                title = stringResource(id = langOp.langRes),
-                trailingContent = radioButtonBlock(languageOptionValue == langOp.value),
-                onOptionClick = ::performOnOptionSelected,
-                value = langOp.value
-            )
-        }
-        Option(
-            shape = OptionShapes.lastShape(),
-            leadingIcon = imageVectorIconBlock(imageVector = Icons.AutoMirrored.Rounded.FormatListBulleted),
-            title = stringResource(id = StringsR.string.pref_title_language_more),
-            onClick = {
-                moreDialogVisible = true
-                if (BuildConfig.DEBUG) {
-                    LanguagePrefUtil.checkLocaleConfig(context)
-                }
+        desc = langOp?.let { stringResource(id = it.langRes) },
+        trailingContent = Icons.AutoMirrored.Rounded.NavigateNext,
+        onClick = {
+            moreSheetVisible = true
+            if (BuildConfig.DEBUG) {
+                LanguagePrefUtil.checkLocaleConfig(context)
             }
-        )
-    }
+        }
+    )
 }
 
 private fun LanguagePrefUtil.LangOp?.toLocalContext(base: Context): Context {
@@ -352,85 +333,102 @@ private fun LanguagePrefUtil.LangOp?.toLocalContext(base: Context): Context {
 }
 
 @Composable
-private fun LanguageSelectedDialog(
-    languageOptions: List<LanguagePrefUtil.LangOp>,
-    currentLang: LanguagePrefUtil.LangOp? = null,
-    onDismissRequest: () -> Unit,
-    onLanguageSelected: (LanguagePrefUtil.LangOp) -> Unit
-) {
-    val basicContext = LocalContext.current
+@Preview
+private fun LanguageSelectedBottomSheetPreview() {
+    val context = LocalContext.current
+    val languages = remember(context) { LanguagePrefUtil.getLanguages(context) }
+    LanguageSelectedBottomSheet(
+        languageOptions = languages,
+        onDismissRequest = {},
+        onLanguageSelected = {}
+    )
+}
 
-    var selectedLangOp by remember { mutableStateOf(currentLang) }
-    val localeContext = remember(selectedLangOp) {
-        selectedLangOp.toLocalContext(basicContext)
+@Composable
+private fun LanguageSelectedBottomSheet(
+    languageOptions: List<LanguagePrefUtil.LangOp>,
+    selectedLangOp: LanguagePrefUtil.LangOp? = null,
+    onDismissRequest: () -> Unit,
+    onLanguageSelected: (Int) -> Unit
+) {
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    val lazyListState = rememberLazyListState()
+    val sheetGesturesEnabled by remember {
+        // disable sheet gestures when the list can scroll backward
+        derivedStateOf { !lazyListState.canScrollBackward }
     }
-    val localLayoutDirection = remember(localeContext) {
-        if (localeContext.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) LayoutDirection.Rtl else LayoutDirection.Ltr
-    }
-    // todo https://issuetracker.google.com/issues/204914500
-    CompositionLocalProvider(
-        LocalContext provides localeContext,
-        LocalLayoutDirection provides localLayoutDirection
+    ModalBottomSheet(
+        onDismissRequest = onDismissRequest,
+        sheetState = sheetState,
+        contentWindowInsets = {
+            WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
+        },
+        sheetGesturesEnabled = sheetGesturesEnabled,
     ) {
-        AlertDialog(
-            onDismissRequest = onDismissRequest,
-            title = {
-                Text(
-                    text = localeContext.getString(StringsR.string.pref_title_language),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
+        val paddingValues = WindowInsets.safeDrawing.asPaddingValues()
+        val layoutDirection = LocalLayoutDirection.current
+        LazyColumn(
+            state = lazyListState,
+            modifier = Modifier
+                .padding(
+                    start = paddingValues.calculateStartPadding(layoutDirection) + 14.dp,
+                    end = paddingValues.calculateEndPadding(layoutDirection) + 14.dp,
+                    bottom = paddingValues.calculateBottomPadding(),
                 )
-            },
-            text = {
-                LazyColumn(
-                    modifier = Modifier.fillMaxHeight(0.7f)
+        ) {
+            item {
+                LanguageItem(
+                    langOp = LanguagePrefUtil.systemLangOp,
+                    selected = selectedLangOp == null || selectedLangOp.value == LanguagePrefUtil.SYSTEM
                 ) {
-                    items(languageOptions, key = { it.value }) {
-                        Row(
-                            modifier = Modifier
-                                .clip(MaterialTheme.shapes.medium)
-                                .clickable { selectedLangOp = it },
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            RadioButton(
-                                modifier = Modifier.padding(start = 12.dp, end = 16.dp),
-                                selected = selectedLangOp == it,
-                                onClick = null,
-                            )
-                            val itemLocaleContext = remember(it) { it.toLocalContext(basicContext) }
-                            Column(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .padding(vertical = 4.dp)
-                            ) {
-                                Text(
-                                    text = itemLocaleContext.getString(it.langRes),
-                                    style = typography.titleMedium.copy(color = colorScheme.onSurface),
-                                )
-                                Text(
-                                    text = localeContext.getString(it.langRes),
-                                    style = typography.bodySmall,
-                                )
-                            }
-                        }
-                    }
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = onDismissRequest) {
-                    Text(text = localeContext.getString(android.R.string.cancel))
-                }
-            },
-            confirmButton = {
-                TextButton(onClick = {
-                    val op = selectedLangOp
-                    if (op != null) {
-                        onLanguageSelected(op)
-                    }
-                }) {
-                    Text(text = localeContext.getString(android.R.string.ok))
+                    onLanguageSelected(LanguagePrefUtil.SYSTEM)
                 }
             }
+            items(languageOptions, key = { it.value }) {
+                LanguageItem(it, it == selectedLangOp) {
+                    onLanguageSelected(it.value)
+                }
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun LanguageItem(
+    langOp: LanguagePrefUtil.LangOp = LanguagePrefUtil.systemLangOp,
+    selected: Boolean = true,
+    onClick: () -> Unit = {}
+) {
+    val context = LocalContext.current
+    val localeContext = remember(langOp) { langOp.toLocalContext(context) }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(MaterialTheme.shapes.medium)
+            .clickable {
+                onClick()
+            },
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        RadioButton(
+            modifier = Modifier.padding(horizontal = 12.dp),
+            selected = selected,
+            onClick = onClick,
         )
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(vertical = 6.dp)
+        ) {
+            Text(
+                text = localeContext.getString(langOp.langRes),
+                style = typography.titleMedium.copy(color = colorScheme.onSurface),
+            )
+            Text(
+                text = stringResource(langOp.langRes),
+                style = typography.bodySmall,
+            )
+        }
     }
 }
