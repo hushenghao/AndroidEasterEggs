@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Настроить виджет</string>
+    <string name="analog_clock_widget_config_summary">Выберите, что произойдёт при нажатии на виджет аналоговых часов.</string>
+    <string name="analog_clock_widget_click_action_title">Действие при нажатии</string>
+    <string name="analog_clock_widget_action_open_egg">Открыть пасхальное яйцо</string>
+    <string name="analog_clock_widget_action_open_app">Открыть приложение</string>
+    <string name="analog_clock_widget_action_none">Нет действия</string>
+    <string name="analog_clock_widget_dial_style_title">Циферблат часов</string>
+    <string name="analog_clock_widget_dial_style_summary">Выберите стиль циферблата аналоговых часов.</string>
+    <string name="analog_clock_widget_dial_android_icons">Значки</string>
+    <string name="analog_clock_widget_dial_simple">Простой</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>
