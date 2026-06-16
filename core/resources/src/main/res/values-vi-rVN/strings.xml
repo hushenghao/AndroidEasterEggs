@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Easter Eggs</string>
+    <string name="app_name">Trứng Phục sinh</string>
     <string name="title_open_with">Mở bằng</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
@@ -21,14 +21,14 @@
     <string name="label_snapshot_preview">Xem trước ảnh chụp nhanh</string>
     <string name="message_trypophobia_warning">Đây là lời cảnh báo dành cho những người mắc chứng sợ lỗ &lt;b&gt;Trypophobia&lt;/b&gt;. Một số hình ảnh có thể gây khó chịu. Bạn có muốn tiếp tục không?</string>
     <string name="label_settings">Cài đặt</string>
-    <string name="label_project_desc">Dự án này chứa mã nguồn hoàn chỉnh cho tất cả các Android Easter egg, nhằm mục đích tổ chức và đảm bảo khả năng tương thích với tất cả các Android Easter egg. Mục tiêu là cho phép hầu hết các thiết bị trải nghiệm các phiên bản Easter egg khác nhau với những sửa đổi tối thiểu đối với mã nguồn của Easter egg đó.</string>
+    <string name="label_project_desc">Dự án này chứa mã nguồn hoàn chỉnh cho tất cả các Android Trứng Phục sinh, nhằm mục đích tổ chức và đảm bảo khả năng tương thích với tất cả các Android Easter egg. Mục tiêu là cho phép hầu hết các thiết bị trải nghiệm các phiên bản Easter egg khác nhau với những sửa đổi tối thiểu đối với mã nguồn của Easter egg đó.</string>
     <string name="pref_title_icon_shape_override">Hình dạng biểu tượng</string>
     <string name="pref_title_language">Ngôn ngữ</string>
     <string name="pref_title_language_more">Thêm</string>
     <string name="pref_title_theme">Chủ đề</string>
     <string name="pref_title_dynamic_color">Màu động</string>
-    <string name="pref_title_app_icon">Icon ứng dụng</string>
-    <string name="pref_title_icon_visual_effects">Hiệu ứng biểu tượng</string>
+    <string name="pref_title_app_icon">Biểu tượng ứng dụng</string>
+    <string name="pref_title_icon_visual_effects">Hiệu ứng hình ảnh biểu tượng</string>
     <string name="summary_system_default">Mặc định</string>
     <string name="summary_theme_dark_mode">Tối</string>
     <string name="summary_theme_light_mode">Sáng</string>
@@ -39,13 +39,13 @@
     <string name="preference_on">Bật</string>
     <string name="preference_off">Tắt</string>
     <string name="toast_shortcut_added">Đã thêm lối tắt vào màn hình chính</string>
-    <string name="toast_no_egg_detail">Phiên bản Android này không có Easter Egg</string>
+    <string name="toast_no_egg_detail">Phiên bản Android này không có Trứng Phục sinh</string>
     <string name="toast_no_update_found">Không tìm thấy bản cập nhật</string>
     <string name="label_widgets">Tiện ích</string>
-    <string name="app_widget_description">Đây là đồng hồ analog Easter Egg</string>
+    <string name="app_widget_description">Đây là đồng hồ kim hình trứng Phục sinh.</string>
     <string name="action_agree">Tôi đồng ý</string>
-    <string name="summary_browse_privacy_policy">Bằng cách tiếp tục, bạn đồng ý với chính sách bảo mật của Easter Egg.</string>
-    <string name="label_welcome">Chào mừng đến với Easter Eggs! 🎉</string>
+    <string name="summary_browse_privacy_policy">Bằng cách tiếp tục, bạn đồng ý với chính sách bảo mật của Trứng Phục sinh.</string>
+    <string name="label_welcome">Chào mừng đến với Trứng Phục sinh! 🎉</string>
     <string name="label_share">Chia sẻ</string>
     <string name="label_search_hint">Tìm kiếm…</string>
     <string name="label_component_manager">Quản lý thành phần</string>
