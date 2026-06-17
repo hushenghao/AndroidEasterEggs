@@ -80,6 +80,7 @@ android {
 }
 
 dependencies {
+    ksp(libs.kotlin.metadata.jvm)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)
     implementation(libs.androidx.activity)

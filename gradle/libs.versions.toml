@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.3.21"
+kotlin = "2.4.0"
 ksp = "2.3.9"
 agp = "9.2.1"
 # https://github.com/google/dagger
@@ -28,9 +28,10 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
 aboutlibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "about-libraries" }
-stability-analyzer = { id = "com.github.skydoves.compose.stability.analyzer", version = "0.8.0" }
+stability-analyzer = { id = "com.github.skydoves.compose.stability.analyzer", version = "0.10.0" }
 
 [libraries]
+kotlin-metadata-jvm = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kotlin" }
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.1"
 androidx-core = "androidx.core:core-ktx:1.18.0"
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
@@ -82,7 +83,7 @@ aboutlibraries-m3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version
 shreyaspatil-capturable = "dev.shreyaspatil:capturable:3.0.1"
 dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.5"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
-squircle-shape = "com.stoyanvuchev:squircle-shape:5.2.1"
+squircle-shape = "com.stoyanvuchev:squircle-shape:5.3.0"
 squareup-okio = { module = "com.squareup.okio:okio", version = "3.17.0" }
 squareup-leakcanary = "com.squareup.leakcanary:leakcanary-android-startup:2.14"
 squareup-curtains = "com.squareup.curtains:curtains:1.2.5"

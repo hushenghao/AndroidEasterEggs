@@ -11,7 +11,6 @@ import com.dede.android_eggs.dls.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
-import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 
 abstract class AbsConfigurablePlugin(
@@ -93,14 +92,6 @@ abstract class AbsConfigurablePlugin(
         kotlinExtension.jvmToolchain {
             languageVersion.set(Versions.JAVA_VERSION)
         }
-
-        extensions.configure<KotlinAndroidProjectExtension>("kotlin") {
-            compilerOptions {
-                // https://kotlinlang.org/docs/annotations.html#annotation-use-site-targets
-                // https://youtrack.jetbrains.com/issue/KT-73255
-                freeCompilerArgs.addAll("-Xannotation-default-target=param-property")
-            }
-        }
     }
 
     private fun Project.configureAndroid(configurable: Configurable) {
@@ -154,7 +145,7 @@ abstract class AbsConfigurablePlugin(
 
             with(lint) {
                 fatal += listOf("NewApi", "InlinedApi")
-                checkReleaseBuilds = false
+                //checkReleaseBuilds = false
                 if (configurable.isBaselineEnabled) {
                     baseline = project.file("lint-baseline.xml")
                 }
