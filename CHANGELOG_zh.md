@@ -1,7 +1,8 @@
 # 更新日志
 
-### v4.5.2
+### v5.0.0
 
+- 同步 Android 17 彩蛋 [#791](https://github.com/hushenghao/AndroidEasterEggs/issues/791)
 - 修复已知问题
 
 ### v4.5.1 (2026-05-07)

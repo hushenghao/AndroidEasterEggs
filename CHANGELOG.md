@@ -1,7 +1,8 @@
 # Changelog
 
-### v4.5.2
+### v5.0.0
 
+- Sync Android 17 Egg [#791](https://github.com/hushenghao/AndroidEasterEggs/issues/791)
 - Known issue fixes
 
 ### v4.5.1 (2026-05-07)
