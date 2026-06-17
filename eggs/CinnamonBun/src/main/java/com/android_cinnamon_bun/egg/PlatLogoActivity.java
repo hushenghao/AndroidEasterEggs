@@ -1,11 +1,30 @@
+/*
+ * Copyright (C) 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.android_cinnamon_bun.egg;
 
 import static android.os.VibrationEffect.Composition.PRIMITIVE_SPIN;
+
+import static java.lang.Math.hypot;
 
 import android.animation.ObjectAnimator;
 import android.animation.TimeAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
@@ -27,120 +46,127 @@ import android.os.VibrationEffect;
 import android.os.VibratorManager;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.ChecksSdkIntAtLeast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.os.HandlerCompat;
-import androidx.core.view.HapticFeedbackConstantsCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
 import java.util.Random;
 
-/* JADX WARN: Classes with same name are omitted:
-  classes5.dex
+import com.dede.basic.SpUtils;
+
+/**
+ * @hide
  */
-/* loaded from: /var/folders/sf/d3h9bdnn53dc5z0lw5z5dvc80000gn/T/jadx-13338122255001829222/classes5.dex */
 public class PlatLogoActivity extends Activity {
-    private static final float MAX_WARP = 16.0f;
-    private static final float MIN_WARP = 1.0f;
     private static final String TAG = "PlatLogoActivity";
-    private TimeAnimator mAnim;
-    private float mDp;
-    private View mHeptaDecaView;
-    private FrameLayout mLayout;
+
+    private static final long LAUNCH_TIME = 5000L;
+
+    private static final String EGG_UNLOCK_SETTING = "egg_mode_cinnamon_bun";
+
+    private static final float MIN_WARP = 1f;
+    private static final float MAX_WARP = 16f; // must go faster
+    private static final boolean FINISH_AFTER_NEXT_STAGE_LAUNCH = false;
+
     private ImageView mLogo;
-    private Random mRandom;
-    private RumblePack mRumble;
+    private View mHeptaDecaView;
     private Starfield mStarfield;
+
+    private FrameLayout mLayout;
+
+    private TimeAnimator mAnim;
     private ObjectAnimator mWarpAnim;
+    private Random mRandom;
+    private float mDp;
+
+    private RumblePack mRumble;
+
     private boolean mAnimationsEnabled = true;
-    private final View.OnTouchListener mTouchListener = new View.OnTouchListener() { // from class: com.android.internal.app.PlatLogoActivity.1
-        @Override // android.view.View.OnTouchListener
+
+    private final View.OnTouchListener mTouchListener = new View.OnTouchListener() {
+        @Override
         public boolean onTouch(View v, MotionEvent event) {
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_DOWN:
-                    PlatLogoActivity.this.startWarp();
+                    startWarp();
                     break;
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
-                    PlatLogoActivity.this.stopWarp();
+                    stopWarp();
                     break;
             }
             return true;
         }
-    };
-    private final Runnable mLaunchNextStage = new Runnable() { // from class: com.android.internal.app.PlatLogoActivity$$ExternalSyntheticLambda2
-        @Override // java.lang.Runnable
-        public final void run() {
-            lambda$new$0();
-        }
-    };
-    private final TimeAnimator.TimeListener mTimeListener = new TimeAnimator.TimeListener() { // from class: com.android.internal.app.PlatLogoActivity.2
-        @Override // android.animation.TimeAnimator.TimeListener
-        public void onTimeUpdate(TimeAnimator animation, long totalTime, long deltaTime) {
-            PlatLogoActivity.this.mStarfield.update(deltaTime);
-            float warpFrac = (PlatLogoActivity.this.mStarfield.getWarp() - 1.0f) / 15.0f;
-            if (PlatLogoActivity.this.mAnimationsEnabled) {
-                PlatLogoActivity.this.mLogo.setTranslationX(PlatLogoActivity.this.mRandom.nextFloat() * warpFrac * 5.0f * PlatLogoActivity.this.mDp);
-                PlatLogoActivity.this.mLogo.setTranslationY(PlatLogoActivity.this.mRandom.nextFloat() * warpFrac * 5.0f * PlatLogoActivity.this.mDp);
-            }
-            if (warpFrac > 0.0f) {
-                PlatLogoActivity.this.mRumble.rumble(warpFrac);
-            }
-            PlatLogoActivity.this.mLayout.postInvalidate();
-        }
+
     };
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$new$0() {
+    private final Runnable mLaunchNextStage = () -> {
         stopWarp();
         launchNextStage(false);
-    }
+    };
 
-    /* JADX WARN: Classes with same name are omitted:
-      classes5.dex
-     */
-    private class RumblePack implements Handler.Callback {
-        private static final int INTERVAL = 50;
-        private static final int MSG = 6464;
-        private boolean mSpinPrimitiveSupported;
-        private final Handler mVibeHandler;
-        private final VibratorManager mVibeMan;
-        private long mLastVibe = 0;
-        private final HandlerThread mVibeThread = new HandlerThread("VibratorThread");
-
-        @Override // android.os.Handler.Callback
-        public boolean handleMessage(Message msg) {
-            float warpFrac = msg.arg1 / 100.0f;
-            if (!this.mSpinPrimitiveSupported) {
-                if (PlatLogoActivity.this.mRandom.nextFloat() < warpFrac) {
-                    PlatLogoActivity.this.mLogo.performHapticFeedback(4);
-                    return false;
-                }
-                return false;
+    private final TimeAnimator.TimeListener mTimeListener = new TimeAnimator.TimeListener() {
+        @Override
+        public void onTimeUpdate(TimeAnimator animation, long totalTime, long deltaTime) {
+            mStarfield.update(deltaTime);
+            final float warpFrac = (mStarfield.getWarp() - MIN_WARP) / (MAX_WARP - MIN_WARP);
+            if (mAnimationsEnabled) {
+                mLogo.setTranslationX(mRandom.nextFloat() * warpFrac * 5 * mDp);
+                mLogo.setTranslationY(mRandom.nextFloat() * warpFrac * 5 * mDp);
             }
-            if (msg.getWhen() > this.mLastVibe + 50) {
-                this.mLastVibe = msg.getWhen();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && mVibeMan != null) {
-                    mVibeMan.vibrate(CombinedVibration.createParallel(
-                            VibrationEffect.startComposition()
-                                    .addPrimitive(PRIMITIVE_SPIN, (float) Math.pow(warpFrac, 3.0))
-                                    .compose()
-                    ));
+            if (warpFrac > 0f) {
+                mRumble.rumble(warpFrac);
+            }
+            mLayout.postInvalidate();
+        }
+    };
+
+    private class RumblePack implements Handler.Callback {
+        private static final int MSG = 6464;
+        private static final int INTERVAL = 50;
+
+        private final VibratorManager mVibeMan;
+        private final HandlerThread mVibeThread;
+        private final Handler mVibeHandler;
+        private boolean mSpinPrimitiveSupported;
+
+        private long mLastVibe = 0;
+
+        @Override
+        public boolean handleMessage(Message msg) {
+            final float warpFrac = msg.arg1 / 100f;
+            if (mSpinPrimitiveSupported) {
+                if (msg.getWhen() > mLastVibe + INTERVAL) {
+                    mLastVibe = msg.getWhen();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && mVibeMan != null) {
+                        mVibeMan.vibrate(CombinedVibration.createParallel(
+                                VibrationEffect.startComposition()
+                                        .addPrimitive(PRIMITIVE_SPIN, (float) Math.pow(warpFrac, 3.0))
+                                        .compose()
+                        ));
+                    }
                 }
-                return false;
+            } else {
+                if (mRandom.nextFloat() < warpFrac) {
+                    mLogo.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK);
+                }
             }
             return false;
         }
-
         RumblePack() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 mVibeMan = getSystemService(VibratorManager.class);
@@ -150,198 +176,216 @@ public class PlatLogoActivity extends Activity {
                 mVibeMan = null;
                 mSpinPrimitiveSupported = false;
             }
-            this.mVibeThread.start();
-            this.mVibeHandler = HandlerCompat.createAsync(this.mVibeThread.getLooper(), this);
+
+            mVibeThread = new HandlerThread("VibratorThread");
+            mVibeThread.start();
+            mVibeHandler = HandlerCompat.createAsync(mVibeThread.getLooper(), this);
         }
 
         public void destroy() {
-            this.mVibeThread.quit();
+            mVibeThread.quit();
         }
 
-        /* JADX INFO: Access modifiers changed from: private */
-        public void rumble(float warpFrac) {
-            if (this.mVibeThread.isAlive()) {
-                Message msg = Message.obtain();
-                msg.what = MSG;
-                msg.arg1 = (int) (100.0f * warpFrac);
-                this.mVibeHandler.removeMessages(MSG);
-                this.mVibeHandler.sendMessage(msg);
-            }
+        private void rumble(float warpFrac) {
+            if (!mVibeThread.isAlive()) return;
+
+            final Message msg = Message.obtain();
+            msg.what = MSG;
+            msg.arg1 = (int) (warpFrac * 100);
+            mVibeHandler.removeMessages(MSG);
+            mVibeHandler.sendMessage(msg);
         }
+
     }
 
-    @Override // android.app.Activity
+    @Override
     protected void onDestroy() {
-        this.mRumble.destroy();
+        mRumble.destroy();
+
         super.onDestroy();
     }
 
-    @Override // android.app.Activity
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         getWindow().getDecorView().setFitsSystemWindows(false);
         getWindow().setNavigationBarColor(Color.TRANSPARENT);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars());
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // This will be silently ignored on displays that don't support HDR color, which is fine
             getWindow().setColorMode(ActivityInfo.COLOR_MODE_HDR);
         }
-        ActionBar ab = getActionBar();
-        if (ab != null) {
-            ab.hide();
-        }
-        try {
-            this.mAnimationsEnabled = Settings.Global.getFloat(getContentResolver(), "animator_duration_scale") > 0.0f;
-        } catch (Settings.SettingNotFoundException e) {
-            this.mAnimationsEnabled = true;
-        }
-        this.mRumble = new RumblePack();
-        this.mLayout = new FrameLayout(this);
-        this.mRandom = new Random();
-        this.mDp = getResources().getDisplayMetrics().density;
-        this.mStarfield = new Starfield(this.mRandom, this.mDp * 2.0f);
-        this.mStarfield.setWarp(0.1f);
-        this.mLayout.setBackground(this.mStarfield);
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        float dp = dm.density;
-        int minSide = Math.min(dm.widthPixels, dm.heightPixels);
-        int widgetSize = (int) (minSide * 0.75d);
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(widgetSize, widgetSize);
-        lp.gravity = 17;
-        this.mLogo = new ImageView(this);
-        this.mLogo.setImageResource(R.drawable.cinnamon_bun_platlogo);
-        this.mLogo.setOnTouchListener(this.mTouchListener);
-        this.mLogo.setVisibility(View.GONE);
-        this.mHeptaDecaView = new View(this);
-        final Heptadecagram heptadecagram = new Heptadecagram(dp);
-        this.mHeptaDecaView.setBackground(heptadecagram);
-        this.mHeptaDecaView.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.internal.app.PlatLogoActivity$$ExternalSyntheticLambda0
-            @Override // android.view.View.OnTouchListener
-            public final boolean onTouch(View view, MotionEvent motionEvent) {
-                return lambda$onCreate$1(heptadecagram, view, motionEvent);
-            }
-        });
-        this.mLayout.addView(this.mHeptaDecaView, lp);
-        this.mLayout.addView(this.mLogo, lp);
-        setContentView(this.mLayout);
-    }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ boolean lambda$onCreate$1(Heptadecagram heptadecagram, View v, MotionEvent event) {
-        if (heptadecagram.onTouch(event)) {
-            this.mHeptaDecaView.performHapticFeedback(HapticFeedbackConstantsCompat.CONFIRM);
+        final ActionBar ab = getActionBar();
+        if (ab != null) ab.hide();
+
+        try {
+            mAnimationsEnabled = Settings.Global.getFloat(getContentResolver(),
+                    Settings.Global.ANIMATOR_DURATION_SCALE) > 0f;
+        } catch (Settings.SettingNotFoundException e) {
+            mAnimationsEnabled = true;
         }
-        if (heptadecagram.getPathLength() > 17) {
-            isPendingSwapToPlatlogo = true;
+
+        mRumble = new RumblePack();
+
+        mLayout = new FrameLayout(this);
+        mRandom = new Random();
+        mDp = getResources().getDisplayMetrics().density;
+        mStarfield = new Starfield(mRandom, mDp * 2f);
+        mStarfield.setWarp(0.1f); // very slow to start
+        mLayout.setBackground(mStarfield);
+
+        final DisplayMetrics dm = getResources().getDisplayMetrics();
+        final float dp = dm.density;
+        final int minSide = Math.min(dm.widthPixels, dm.heightPixels);
+        final int widgetSize = (int) (minSide * 0.75);
+        final FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(widgetSize, widgetSize);
+        lp.gravity = Gravity.CENTER;
+
+        mLogo = new ImageView(this);
+        mLogo.setImageResource(R.drawable.cinnamon_bun_platlogo);
+        mLogo.setOnTouchListener(mTouchListener);
+        mLogo.setVisibility(View.GONE);
+
+        mHeptaDecaView = new View(this);
+        final Heptadecagram heptadecagram = new Heptadecagram(dp);
+        mHeptaDecaView.setBackground(heptadecagram);
+        mHeptaDecaView.setOnTouchListener((v, event) -> {
+            if (heptadecagram.onTouch(event)) {
+                mHeptaDecaView.performHapticFeedback(HapticFeedbackConstants.CONFIRM);
+            }
+            if (heptadecagram.getPathLength() > Heptadecagram.MAX_DOTS) {
+                isPendingSwapToPlatlogo = true;
+                return true;
+            }
+            if (event.getAction() == MotionEvent.ACTION_UP && isPendingSwapToPlatlogo) {
+                swapToPlatlogo();
+                isPendingSwapToPlatlogo = false;
+            }
             return true;
-        }
-        if (event.getAction() == MotionEvent.ACTION_UP && isPendingSwapToPlatlogo) {
-            swapToPlatlogo();
-            isPendingSwapToPlatlogo = false;
-        }
-        return true;
+        });
+        mLayout.addView(mHeptaDecaView, lp);
+        mLayout.addView(mLogo, lp);
+
+        setContentView(mLayout);
     }
 
     private boolean isPendingSwapToPlatlogo = false;
 
     private void swapToPlatlogo() {
-        this.mHeptaDecaView.animate().alpha(0.0f).setDuration(500L).withEndAction(new Runnable() { // from class: com.android.internal.app.PlatLogoActivity$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                lambda$swapToPlatlogo$2();
-            }
+        mHeptaDecaView.animate().alpha(0f).setDuration(500).withEndAction(() -> {
+            mHeptaDecaView.setVisibility(View.GONE);
         }).start();
-        this.mLogo.setAlpha(0.0f);
-        this.mLogo.setVisibility(View.VISIBLE);
-        this.mLogo.animate().alpha(1.0f).setDuration(500L).start();
-        this.mLogo.requestFocus();
-        ObjectAnimator.ofFloat(this.mStarfield, "warp", 1.0f).setDuration(250L).start();
-    }
-
-    /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$swapToPlatlogo$2() {
-        this.mHeptaDecaView.setVisibility(View.GONE);
+        mLogo.setAlpha(0f);
+        mLogo.setVisibility(View.VISIBLE);
+        mLogo.animate().alpha(1f).setDuration(500).start();
+        mLogo.requestFocus();
+        ObjectAnimator.ofFloat(mStarfield, "warp", MIN_WARP)
+                .setDuration(250).start();
     }
 
     private void startAnimating() {
-        this.mAnim = new TimeAnimator();
-        this.mAnim.setTimeListener(this.mTimeListener);
-        this.mAnim.start();
+        mAnim = new TimeAnimator();
+        mAnim.setTimeListener(mTimeListener);
+        mAnim.start();
     }
 
     private void stopAnimating() {
-        this.mAnim.cancel();
-        this.mAnim = null;
+        mAnim.cancel();
+        mAnim = null;
     }
 
-    @Override // android.app.Activity, android.view.KeyEvent.Callback
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_SPACE) {
-            if (this.mLogo.getVisibility() != View.VISIBLE) {
+            if (mLogo.getVisibility() != View.VISIBLE) {
+                // If using the keyboard, skip the cute star-drawing minigame.
                 swapToPlatlogo();
             }
             if (event.getRepeatCount() == 0) {
                 startWarp();
-                return true;
             }
             return true;
         }
-        return super.onKeyDown(keyCode, event);
+        return super.onKeyDown(keyCode,event);
     }
 
-    @Override // android.app.Activity, android.view.KeyEvent.Callback
+    @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_SPACE) {
             stopWarp();
             return true;
         }
-        return super.onKeyUp(keyCode, event);
+        return super.onKeyUp(keyCode,event);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public void startWarp() {
+    private void startWarp() {
         stopWarp();
-        this.mWarpAnim = ObjectAnimator.ofFloat(this.mStarfield, "warp", 1.0f, MAX_WARP).setDuration(5000L);
-        this.mWarpAnim.start();
-        this.mLogo.postDelayed(this.mLaunchNextStage, 6000L);
+        mWarpAnim = ObjectAnimator.ofFloat(mStarfield, "warp", MIN_WARP, MAX_WARP)
+                .setDuration(LAUNCH_TIME);
+        mWarpAnim.start();
+
+        mLogo.postDelayed(mLaunchNextStage, LAUNCH_TIME + 1000L);
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public void stopWarp() {
-        if (this.mWarpAnim != null) {
-            this.mWarpAnim.cancel();
-            this.mWarpAnim.removeAllListeners();
-            this.mWarpAnim = null;
+    private void stopWarp() {
+        if (mWarpAnim != null) {
+            mWarpAnim.cancel();
+            mWarpAnim.removeAllListeners();
+            mWarpAnim = null;
         }
-        this.mStarfield.setWarp(1.0f);
-        this.mLogo.removeCallbacks(this.mLaunchNextStage);
+        mStarfield.setWarp(1f);
+        mLogo.removeCallbacks(mLaunchNextStage);
     }
 
-    @Override // android.app.Activity
+    @Override
     public void onResume() {
         super.onResume();
         startAnimating();
     }
 
-    @Override // android.app.Activity
+    @Override
     public void onPause() {
         stopWarp();
         stopAnimating();
         super.onPause();
     }
 
+    private boolean shouldWriteSettings() {
+        return true;
+    }
+
     private void launchNextStage(boolean locked) {
         try {
-            Intent eggActivity = new Intent(this, Class.forName("com.android_baklava.egg.landroid.MainActivity"));
+            if (shouldWriteSettings()) {
+                Log.v(TAG, "Saving egg locked=" + locked);
+                SpUtils.putLong(this,
+                        EGG_UNLOCK_SETTING,
+                        locked ? 0 : System.currentTimeMillis());
+            }
+        } catch (RuntimeException e) {
+            Log.e(TAG, "Can't write settings", e);
+        }
+
+        try {
+            final Intent eggActivity = new Intent(Intent.ACTION_MAIN)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                            | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    .addCategory("com.android.internal.category.PLATLOGO");
+            Log.v(TAG, "launching: " + eggActivity);
             startActivity(eggActivity);
-            Toast.makeText(this, "launch Android 16 Easter Egg", Toast.LENGTH_SHORT).show();
-        } catch (Exception e2) {
+        } catch (ActivityNotFoundException ex) {
+            Log.e("com.android.internal.app.PlatLogoActivity", "No more eggs.");
+        }
+        if (FINISH_AFTER_NEXT_STAGE_LAUNCH) {
+            finish(); // we're done here.
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.Q)
     private static final boolean isSRgbExtSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
 
@@ -354,134 +398,138 @@ public class PlatLogoActivity extends Activity {
     private static ColorSpace sSrgbExt;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    /* JADX INFO: Access modifiers changed from: private */
-    public static long packHdrWhite(float value, float alpha) {
+    private static long packHdrWhite(float value, float alpha) {
         if (sSrgbExt == null) {
             sSrgbExt = ColorSpace.get(ColorSpace.Named.EXTENDED_SRGB);
         }
         return Color.valueOf(value, value, value, alpha, sSrgbExt).pack();
     }
 
-
-    /* JADX INFO: Access modifiers changed from: private */
-    public static boolean pointInRadius(float x, float y, float r) {
-        return (x * x) + (y * y) < r * r;
+    private static boolean pointInRadius(float x, float y, float r) {
+        return (x * x + y * y) < (r * r);
     }
 
-    /* JADX WARN: Classes with same name are omitted:
-      classes5.dex
-     */
-    public static class Starfield extends Drawable {
-        private static final int NUM_PLANES = 4;
+    static class Starfield extends Drawable {
         private static final int NUM_STARS = 128;
-        private static final float ROTATION = 45.0f;
-        private float mBuffer;
+
+        private static final int NUM_PLANES = 4;
+
+        private static final float ROTATION = 45;
+        private final float[] mStars = new float[NUM_STARS * 4];
+        private long mDt = 0;
+        private final Paint mStarPaint;
+
         private final Random mRng;
         private final float mSize;
-        private final float[] mStars = new float[512];
-        private long mDt = 0;
-        private float mRadius = 0.0f;
-        private float mWarp = 1.0f;
-        private final Paint mStarPaint = new Paint();
+
+        private float mRadius = 0f;
+        private float mWarp = MIN_WARP;
+
+        private float mBuffer;
 
         public void setWarp(float warp) {
-            this.mWarp = warp;
+            mWarp = warp;
         }
 
         public float getWarp() {
-            return this.mWarp;
+            return mWarp;
         }
 
         Starfield(Random rng, float size) {
-            this.mRng = rng;
-            this.mSize = size;
-            this.mStarPaint.setStyle(Paint.Style.STROKE);
-            this.mStarPaint.setColor(Color.WHITE);
+            mRng = rng;
+            mSize = size;
+            mStarPaint = new Paint();
+            mStarPaint.setStyle(Paint.Style.STROKE);
+            mStarPaint.setColor(Color.WHITE);
         }
 
-        @Override // android.graphics.drawable-nodpi.Drawable
+        @Override
         public void onBoundsChange(Rect bounds) {
-            this.mBuffer = this.mSize * 4.0f * 2.0f * PlatLogoActivity.MAX_WARP;
-            this.mRadius = (((float) Math.hypot(bounds.width(), bounds.height())) / 2.0f) + this.mBuffer;
-            for (int i = 0; i < 128; i++) {
-                double angle = this.mRng.nextDouble() * 2.0d * 3.141592653589793d;
-                float dist = this.mRng.nextFloat() * this.mRadius;
-                this.mStars[(i * 4) + 2] = (float) (Math.cos(angle) * dist);
-                this.mStars[(i * 4) + 3] = (float) (Math.sin(angle) * dist);
-                this.mStars[(i * 4) + 0] = -10000.0f;
-                this.mStars[(i * 4) + 1] = -10000.0f;
+            mBuffer = mSize * NUM_PLANES * 2 * MAX_WARP;
+            mRadius = ((float) hypot(bounds.width(), bounds.height()) / 2f) + mBuffer;
+            // I didn't clarify this the last time, but we store both the beginning and
+            // end of each star's trail in this data structure. When we're not in warp that means
+            // that we've got each star in there twice. It's fine, we're gonna move it off-screen
+            for (int i = 0; i < NUM_STARS; i++) {
+                // New in C: we're zooming out from the center this time. Classic.
+                final double angle = mRng.nextDouble() * 2 * Math.PI;
+                final float dist = mRng.nextFloat() * mRadius;
+                mStars[4 * i + 2] = (float) (Math.cos(angle) * dist);
+                mStars[4 * i + 3] = (float) (Math.sin(angle) * dist);
+                // duplicate copy (for now)
+                mStars[4 * i + 0] = -10000;
+                mStars[4 * i + 1] = -10000;
             }
         }
 
-        @Override // android.graphics.drawable-nodpi.Drawable
-        public void draw(Canvas canvas) {
-            int i;
-            float cx;
-            float cy;
-            float dtSec = this.mDt / 1000.0f;
-            int i2 = 1;
-            boolean inWarp = this.mWarp > 1.0f;
-            canvas.drawColor(-16777216);
-            float cx2 = getBounds().width() / 2.0f;
-            float cy2 = getBounds().height() / 2.0f;
-            canvas.translate(cx2, cy2);
+        @Override
+        public void draw(@NonNull Canvas canvas) {
+            final float dtSec = mDt / 1000f;
+            final boolean inWarp = mWarp > 1f;
+
+            canvas.drawColor(Color.BLACK);
+
+            final float cx = getBounds().width() / 2f;
+            final float cy = getBounds().height() / 2f;
+            canvas.translate(cx, cy);
+
             canvas.rotate(ROTATION);
-            if (this.mDt > 0 && this.mDt < 1000) {
-                canvas.translate(this.mRng.nextFloat() * (this.mWarp - 1.0f), this.mRng.nextFloat() * (this.mWarp - 1.0f));
-                float speedBase = 0.05f * dtSec * this.mWarp;
-                int i3 = 0;
-                while (i3 < 128) {
-                    int plane = ((int) ((i3 / 128.0f) * 4.0f)) + i2;
-                    float x = this.mStars[(i3 * 4) + 2];
-                    float y = this.mStars[(i3 * 4) + 3];
-                    float speed = plane * speedBase;
-                    float x2 = x + (x * speed);
-                    float y2 = y + (y * speed);
-                    if (PlatLogoActivity.pointInRadius(x2, y2, this.mRadius)) {
-                        i = i2;
-                        cx = cx2;
-                        cy = cy2;
-                    } else {
-                        double angle = this.mRng.nextDouble() * 2.0d * 3.141592653589793d;
-                        i = i2;
-                        float dist = this.mRng.nextFloat() * 0.1f * this.mRadius;
-                        cy = cy2;
-                        x2 = (float) (dist * Math.cos(angle));
-                        cx = cx2;
-                        y2 = (float) (Math.sin(angle) * dist);
+
+            if (mDt > 0 && mDt < 1000) {
+                canvas.translate(
+                        mRng.nextFloat() * (mWarp - 1f),
+                        mRng.nextFloat() * (mWarp - 1f)
+                );
+
+                final float speedBase = 0.05f * dtSec * mWarp;
+
+                for (int i = 0; i < NUM_STARS; i++) {
+                    final int plane = (int) ((((float) i) / NUM_STARS) * NUM_PLANES) + 1;
+
+                    float x = mStars[4 * i + 2];
+                    float y = mStars[4 * i + 3];
+
+                    final float speed = speedBase * plane;
+                    x += x * speed;
+                    y += y * speed;
+
+                    if (!pointInRadius(x, y, mRadius)) {
+                        final double angle = mRng.nextDouble() * 2 * Math.PI;
+                        final float dist = mRng.nextFloat() * 0.1f * mRadius;
+                        x = (float) (Math.cos(angle) * dist);
+                        y = (float) (Math.sin(angle) * dist);
                     }
-                    this.mStars[(i3 * 4) + 2] = x2;
-                    this.mStars[(i3 * 4) + 3] = y2;
+
+                    mStars[4 * i + 2] = x;
+                    mStars[4 * i + 3] = y;
+
                     if (inWarp) {
-                        float tailScale = 1.0f / ((this.mWarp * speed) + 1.0f);
-                        this.mStars[(i3 * 4) + 0] = x2 * tailScale;
-                        this.mStars[(i3 * 4) + 1] = y2 * tailScale;
+                        final float tailScale = 1f / (1f + speed * mWarp);
+                        mStars[4 * i + 0] = x * tailScale;
+                        mStars[4 * i + 1] = y * tailScale;
                     } else {
-                        this.mStars[(i3 * 4) + 0] = -10000.0f;
-                        this.mStars[(i3 * 4) + 1] = -10000.0f;
+                        mStars[4 * i + 0] = -10000;
+                        mStars[4 * i + 1] = -10000;
                     }
-                    i3++;
-                    i2 = i;
-                    cx2 = cx;
-                    cy2 = cy;
                 }
             }
-            int slice = ((this.mStars.length / 4) / 4) * 4;
-            for (int p = 0; p < 4; p++) {
-                float value = (p + 1.0f) / 3.0f;
+            final int slice = (mStars.length / NUM_PLANES / 4) * 4;
+            for (int p = 0; p < NUM_PLANES; p++) {
+                final float value = (p + 1f) / (NUM_PLANES - 1);
                 if (isSRgbExtSupported) {
                     mStarPaint.setColor(packHdrWhite(value, 1.0f));
                 } else {
                     mStarPaint.setColor(packColor(value, 1.0f));
                 }
-                this.mStarPaint.setStrokeWidth(this.mSize * (p + 1));
+                mStarPaint.setStrokeWidth(mSize * (p + 1));
                 if (inWarp) {
-                    canvas.drawLines(this.mStars, p * slice, slice, this.mStarPaint);
+                    canvas.drawLines(mStars, p * slice, slice, mStarPaint);
                 }
-                canvas.drawPoints(this.mStars, p * slice, slice, this.mStarPaint);
+                canvas.drawPoints(mStars, p * slice, slice, mStarPaint);
             }
+
             if (inWarp) {
-                float frac = (this.mWarp - 1.0f) / 15.0f;
+                final float frac = (mWarp - MIN_WARP) / (MAX_WARP - MIN_WARP);
                 if (isSRgbExtSupported) {
                     canvas.drawColor(packHdrWhite(2.0f, frac * frac));
                 } else {
@@ -490,148 +538,139 @@ public class PlatLogoActivity extends Activity {
             }
         }
 
-        @Override // android.graphics.drawable-nodpi.Drawable
+        @Override
         public void setAlpha(int alpha) {
+
         }
 
-        @Override // android.graphics.drawable-nodpi.Drawable
-        public void setColorFilter(ColorFilter colorFilter) {
+        @Override
+        public void setColorFilter(@Nullable ColorFilter colorFilter) {
+
         }
 
-        @Override // android.graphics.drawable-nodpi.Drawable
+        @Override
         public int getOpacity() {
             return PixelFormat.OPAQUE;
         }
 
         public void update(long dt) {
-            this.mDt = dt;
+            mDt = dt;
         }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Classes with same name are omitted:
-      classes5.dex
-     */
-    static class Heptadecagram extends Drawable {
+    private static class Heptadecagram extends Drawable {
         public static final int MAX_DOTS = 17;
-        private final Paint mBgPaint;
-        private float mDotRadius;
-        private final float mDp;
-        private float mHitRadius;
-        private final Paint mLinePaint;
-        private float mRadius;
-        private float mTouchX;
-        private float mTouchY;
-        private final float[] mDotsXY = new float[34];
-        private final int[] mPath = new int[18];
+        private final Paint mDotPaint, mLinePaint, mBgPaint;
+        private final float[] mDotsXY = new float[MAX_DOTS * 2];
+        private final int[] mPath = new int[MAX_DOTS + 1];
         private int mPathLength = 0;
+        private float mTouchX, mTouchY;
         private boolean mIsTracking = false;
+        private final float mDp;
+        private float mRadius;
+        private float mDotRadius;
+        private float mHitRadius;
+
         private Path mDrawingPath = new Path();
-        private final Paint mDotPaint = new Paint(1);
 
         Heptadecagram(float dp) {
-            this.mDp = dp;
+            mDp = dp;
+
+            mDotPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
             if (isSRgbExtSupported) {
-                this.mDotPaint.setColor(packHdrWhite(1.5f, 1.0f));
+                mDotPaint.setColor(packHdrWhite(1.5f, 1.0f));
             } else {
-                this.mDotPaint.setColor(packColor(1.5f, 1.0f));
+                mDotPaint.setColor(packColor(1.5f, 1.0f));
             }
-            this.mDotPaint.setStyle(Paint.Style.FILL);
-            this.mLinePaint = new Paint(1);
-            this.mLinePaint.setColor(-5038209);
-            this.mLinePaint.setStyle(Paint.Style.STROKE);
-            this.mLinePaint.setStrokeWidth(4.0f * dp);
-            this.mLinePaint.setStrokeJoin(Paint.Join.ROUND);
-            this.mLinePaint.setStrokeCap(Paint.Cap.ROUND);
-            this.mBgPaint = new Paint(1);
-            this.mBgPaint.setColor(-16777216);
-            this.mDotPaint.setStyle(Paint.Style.FILL);
+            mDotPaint.setStyle(Paint.Style.FILL);
+
+            mLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            mLinePaint.setColor(0xFFB31F7F);
+            mLinePaint.setStyle(Paint.Style.STROKE);
+            mLinePaint.setStrokeWidth(4 * dp);
+            mLinePaint.setStrokeJoin(Paint.Join.ROUND);
+            mLinePaint.setStrokeCap(Paint.Cap.ROUND);
+
+            mBgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            mBgPaint.setColor(Color.BLACK);
+            mDotPaint.setStyle(Paint.Style.FILL);
         }
 
-        @Override // android.graphics.drawable-nodpi.Drawable
+        @Override
         public void onBoundsChange(Rect bounds) {
-            float cx = bounds.width() / 2.0f;
-            float cy = bounds.height() / 2.0f;
-            this.mRadius = Math.min(cx, cy) * 0.9f;
-            this.mDotRadius = this.mDp * 4.0f;
-            this.mHitRadius = this.mDp * 24.0f;
-            for (int i = 0; i < 17; i++) {
-                double angle = ((i * 6.283185307179586d) / 17.0d) - 1.5707963267948966d;
-                this.mDotsXY[i * 2] = (((float) Math.cos(angle)) * this.mRadius) + cx;
-                this.mDotsXY[(i * 2) + 1] = (((float) Math.sin(angle)) * this.mRadius) + cy;
+            float cx = bounds.width() / 2f;
+            float cy = bounds.height() / 2f;
+            mRadius = Math.min(cx, cy) * 0.9f;
+            mDotRadius = 4 * mDp;
+            mHitRadius = 24 * mDp;
+
+            for (int i = 0; i < MAX_DOTS; i++) {
+                // start at the top
+                double angle = -Math.PI / 2 + (2 * Math.PI * i / MAX_DOTS);
+                mDotsXY[i * 2] = cx + (float) Math.cos(angle) * mRadius;
+                mDotsXY[i * 2 + 1] = cy + (float) Math.sin(angle) * mRadius;
             }
         }
 
         public boolean onTouch(MotionEvent event) {
             float x = event.getX();
             float y = event.getY();
+
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_DOWN:
-                    this.mPathLength = 0;
-                    this.mIsTracking = true;
-                    this.mTouchX = x;
-                    this.mTouchY = y;
+                    mPathLength = 0;
+                    mIsTracking = true;
+                    mTouchX = x;
+                    mTouchY = y;
                     invalidateSelf();
                     return checkDot(x, y);
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                    this.mIsTracking = false;
-                    this.mPathLength = 0;
-                    invalidateSelf();
-                    break;
                 case MotionEvent.ACTION_MOVE:
-                    if (this.mIsTracking) {
-                        this.mTouchX = x;
-                        this.mTouchY = y;
+                    if (mIsTracking) {
+                        mTouchX = x;
+                        mTouchY = y;
                         invalidateSelf();
                         return checkDot(x, y);
                     }
                     break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    mIsTracking = false;
+                    mPathLength = 0;
+                    invalidateSelf();
+                    break;
             }
-            if (this.mPathLength != 18) {
-                return false;
+
+            if (mPathLength == MAX_DOTS + 1) {
+                mIsTracking = false;
+                return true;
             }
-            this.mIsTracking = false;
-            return true;
+            return false;
         }
 
         private boolean checkDot(float x, float y) {
-            for (int i = 0; i < 17; i++) {
-                float dx = x - this.mDotsXY[i * 2];
-                float dy = y - this.mDotsXY[(i * 2) + 1];
-                if (PlatLogoActivity.pointInRadius(dx, dy, this.mHitRadius)) {
-                    int i2 = this.mPathLength;
-                    int[] iArr = this.mPath;
-                    if (i2 == 0) {
-                        int i3 = this.mPathLength;
-                        this.mPathLength = i3 + 1;
-                        iArr[i3] = i;
+            for (int i = 0; i < MAX_DOTS; i++) {
+                float dx = x - mDotsXY[i * 2];
+                float dy = y - mDotsXY[i * 2 + 1];
+                if (pointInRadius(dx, dy, mHitRadius)) {
+                    if (mPathLength == 0) {
+                        mPath[mPathLength++] = i;
                         return true;
-                    }
-                    int lastDot = iArr[this.mPathLength - 1];
-                    if (lastDot != i) {
-                        boolean visited = false;
-                        int j = 0;
-                        while (true) {
-                            if (j >= this.mPathLength) {
-                                break;
-                            }
-                            if (this.mPath[j] != i) {
-                                j++;
-                            } else {
-                                visited = true;
-                                break;
-                            }
-                        }
-                        if (!visited || (this.mPathLength == 17 && this.mPath[0] == i)) {
-                            int[] iArr2 = this.mPath;
-                            int i4 = this.mPathLength;
-                            this.mPathLength = i4 + 1;
-                            iArr2[i4] = i;
-                            return true;
-                        }
                     } else {
-                        continue;
+                        int lastDot = mPath[mPathLength - 1];
+                        if (lastDot != i) {
+                            boolean visited = false;
+                            for (int j = 0; j < mPathLength; j++) {
+                                if (mPath[j] == i) {
+                                    visited = true;
+                                    break;
+                                }
+                            }
+                            if (!visited || mPathLength == MAX_DOTS && mPath[0] == i) {
+                                // another dot reached!
+                                mPath[mPathLength++] = i;
+                                return true;
+                            }
+                        }
                     }
                 }
             }
@@ -641,45 +680,44 @@ public class PlatLogoActivity extends Activity {
         private void drawTargetDot(Canvas canvas, float x, float y, float r, Paint paint) {
             canvas.save();
             canvas.translate(x, y);
-            canvas.rotate(45.0f);
+            canvas.rotate(45);
             canvas.drawRect(-r, -r, r, r, paint);
             canvas.restore();
         }
 
-        @Override // android.graphics.drawable-nodpi.Drawable
-        public void draw(Canvas canvas) {
-            canvas.drawCircle(getBounds().width() * 0.5f, getBounds().height() * 0.5f, this.mRadius, this.mBgPaint);
-            if (this.mPathLength > 0) {
-                this.mDrawingPath.reset();
-                this.mDrawingPath.moveTo(this.mDotsXY[this.mPath[0] * 2], this.mDotsXY[(this.mPath[0] * 2) + 1]);
-                for (int i = 1; i < this.mPathLength; i++) {
-                    this.mDrawingPath.lineTo(this.mDotsXY[this.mPath[i] * 2], this.mDotsXY[(this.mPath[i] * 2) + 1]);
+        @Override
+        public void draw(@NonNull Canvas canvas) {
+            canvas.drawCircle(getBounds().width() * 0.5f, getBounds().height() * 0.5f,
+                    mRadius, mBgPaint);
+
+            if (mPathLength > 0) {
+                mDrawingPath.reset();
+                mDrawingPath.moveTo(mDotsXY[mPath[0] * 2], mDotsXY[mPath[0] * 2 + 1]);
+                for (int i = 1; i < mPathLength; i++) {
+                    mDrawingPath.lineTo(mDotsXY[mPath[i] * 2], mDotsXY[mPath[i] * 2 + 1]);
                 }
-                if (this.mIsTracking && this.mPathLength <= 17) {
-                    this.mDrawingPath.lineTo(this.mTouchX, this.mTouchY);
+                if (mIsTracking && mPathLength <= MAX_DOTS) {
+                    mDrawingPath.lineTo(mTouchX, mTouchY);
                 }
-                canvas.drawPath(this.mDrawingPath, this.mLinePaint);
+                canvas.drawPath(mDrawingPath, mLinePaint);
             }
-            for (int i2 = 0; i2 < 17; i2++) {
-                drawTargetDot(canvas, this.mDotsXY[i2 * 2], this.mDotsXY[(i2 * 2) + 1], this.mDotRadius, this.mDotPaint);
+
+            for (int i = 0; i < MAX_DOTS; i++) {
+                drawTargetDot(canvas, mDotsXY[i * 2], mDotsXY[i * 2 + 1], mDotRadius, mDotPaint);
             }
         }
 
-        @Override // android.graphics.drawable-nodpi.Drawable
-        public void setAlpha(int alpha) {
-        }
-
-        @Override // android.graphics.drawable-nodpi.Drawable
-        public void setColorFilter(ColorFilter colorFilter) {
-        }
-
-        @Override // android.graphics.drawable-nodpi.Drawable
+        @Override
+        public void setAlpha(int alpha) { }
+        @Override
+        public void setColorFilter(@Nullable ColorFilter colorFilter) { }
+        @Override
         public int getOpacity() {
             return PixelFormat.TRANSLUCENT;
         }
 
         public int getPathLength() {
-            return this.mPathLength;
+            return mPathLength;
         }
     }
 }
