@@ -4,6 +4,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AppRegistration
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
@@ -34,8 +38,10 @@ fun ComponentManagerPref(viewModel: ComponentManagerViewModel = hiltViewModel())
     ) {
         val context = LocalContext.current
 
-        val componentCount = componentList.size
-        componentList.forEachIndexed { index, component ->
+        val supportedList = componentList.filter { it.isSupported() }
+        val componentCount = supportedList.size
+        supportedList.forEachIndexed { index, component ->
+            var checked by remember { mutableStateOf(component.isEnabled(context)) }
             val formatter = VersionFormatter.create(component.apiLevelRange, component.nicknameRes)
             SwitchOption(
                 shape = OptionShapes.indexOfShape(index = index, optionsCount = componentCount),
@@ -48,15 +54,12 @@ fun ComponentManagerPref(viewModel: ComponentManagerViewModel = hiltViewModel())
                 },
                 title = stringResource(id = component.nameRes),
                 desc = formatter.format(context),
-                checked = component.isEnabled(context),
+                checked = checked,
                 onCheckedChange = {
+                    checked = it
                     component.setEnabled(context, it)
                 },
             )
-        }
-        for (component in viewModel.componentList) {
-            if (!component.isSupported()) continue
-
         }
     }
 }
