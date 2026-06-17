@@ -22,6 +22,7 @@ import static java.lang.Math.hypot;
 
 import android.animation.ObjectAnimator;
 import android.animation.TimeAnimator;
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -65,6 +66,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
 import java.util.Random;
+
+import com.android_cinnamon_bun.egg.landroid.MainActivity;
 
 import com.dede.basic.SpUtils;
 
@@ -146,6 +149,7 @@ public class PlatLogoActivity extends Activity {
 
         private long mLastVibe = 0;
 
+        @SuppressLint("MissingPermission")
         @Override
         public boolean handleMessage(Message msg) {
             final float warpFrac = msg.arg1 / 100f;
@@ -372,10 +376,7 @@ public class PlatLogoActivity extends Activity {
         }
 
         try {
-            final Intent eggActivity = new Intent(Intent.ACTION_MAIN)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                            | Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    .addCategory("com.android.internal.category.PLATLOGO");
+            final Intent eggActivity = new Intent(this, MainActivity.class);
             Log.v(TAG, "launching: " + eggActivity);
             startActivity(eggActivity);
         } catch (ActivityNotFoundException ex) {

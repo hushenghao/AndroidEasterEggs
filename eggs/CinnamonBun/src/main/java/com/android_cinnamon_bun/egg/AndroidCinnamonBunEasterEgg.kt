@@ -1,15 +1,21 @@
 package com.android_cinnamon_bun.egg
 
+import android.content.ComponentName
 import android.content.Context
+import android.os.Build
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import com.android_cinnamon_bun.egg.PlatLogoActivity.Starfield
+import com.android_cinnamon_bun.egg.landroid.DreamUniverse
 import com.dede.basic.provider.BaseEasterEgg
+import com.dede.basic.provider.ComponentProvider
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.SnapshotProvider
 import com.dede.basic.provider.TimelineEvent
+import com.dede.basic.provider.toRange
 import com.dede.basic.requireDrawable
 import dagger.Module
 import dagger.Provides
@@ -27,7 +33,7 @@ internal class SP : SnapshotProvider() {
     override fun create(context: Context): View {
         val dp = context.resources.displayMetrics.density
         val random = Random()
-        val starfield = PlatLogoActivity.Starfield(random, dp * 2.0f)
+        val starfield = Starfield(random, dp * 2.0f)
         starfield.warp = 0.1f
         val layout = FrameLayout(context)
         layout.background = starfield
@@ -47,7 +53,8 @@ internal class SP : SnapshotProvider() {
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AndroidCinnamonBunEasterEgg : EasterEggProvider {
+object AndroidCinnamonBunEasterEgg : EasterEggProvider, ComponentProvider {
+
     @Provides
     @IntoSet
     @Singleton
@@ -56,7 +63,7 @@ object AndroidCinnamonBunEasterEgg : EasterEggProvider {
             iconRes = R.drawable.cinnamon_bun_android17_patch_adaptive,
             nameRes = R.string.cinnamon_bun_egg_name,
             nicknameRes = R.string.cinnamon_bun_egg_name,
-            apiLevel = EasterEgg.VERSION_CODES.CINNAMON_BUN,
+            apiLevelRange = Build.VERSION_CODES.CINNAMON_BUN.toRange(),
             actionClass = PlatLogoActivity::class.java,
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
@@ -77,5 +84,29 @@ object AndroidCinnamonBunEasterEgg : EasterEggProvider {
                 event = "Hello, Android CinnamonBun.\nAndroid 17",
             )
         )
+    }
+
+    @Provides
+    @IntoSet
+    @Singleton
+    override fun provideComponent(): ComponentProvider.Component {
+        return object : ComponentProvider.Component(
+            R.drawable.cinnamon_bun_android17_patch_adaptive,
+            R.string.cinnamon_bun_egg_name,
+            R.string.cinnamon_bun_egg_name,
+            Build.VERSION_CODES.CINNAMON_BUN
+        ) {
+            override fun isSupported(): Boolean = true
+
+            override fun isEnabled(context: Context): Boolean {
+                val cn = ComponentName(context, DreamUniverse::class.java)
+                return cn.isEnabled(context)
+            }
+
+            override fun setEnabled(context: Context, enable: Boolean) {
+                val cn = ComponentName(context, DreamUniverse::class.java)
+                cn.setEnable(context, enable)
+            }
+        }
     }
 }

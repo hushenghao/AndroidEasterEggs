@@ -3,6 +3,7 @@
 
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_PROMOTED_NOTIFICATIONS"/>
 
     <application>
         <activity
@@ -14,5 +15,32 @@
             android:label="@string/cinnamon_bun_egg_name"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             tools:targetApi="33" />
+
+        <!-- DreamService (Daydream screensaver): disabled by default, unlocked via egg -->
+        <service
+            android:name=".landroid.DreamUniverse"
+            android:description="@string/cinnamon_bun_dream_description"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/cinnamon_bun_android17_patch_adaptive"
+            android:label="@string/cinnamon_bun_egg_name"
+            android:permission="android.permission.BIND_DREAM_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.dream"
+                android:resource="@xml/cinnamon_bun_landroid_dream" />
+        </service>
+
+        <!-- MainActivity: the primary interactive "Landroid" game -->
+        <activity
+            android:name=".landroid.MainActivity"
+            android:configChanges="orientation|screenLayout|screenSize|density"
+            android:exported="true"
+            android:icon="@drawable/cinnamon_bun_android17_patch_adaptive"
+            android:label="@string/cinnamon_bun_egg_name"
+            android:theme="@style/cinnamon_bun_Theme.Landroid" />
     </application>
 </manifest>
