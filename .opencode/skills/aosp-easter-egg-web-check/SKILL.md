@@ -164,9 +164,3 @@ Do not claim:
 - a complete file-level diff from web evidence alone
 - the first introducing commit unless a public source page clearly proves it
 - a next-generation easter egg release based only on preview assets, local modules, or unconfirmed search hits
-
-## Example Requests
-
-- `Use $aosp-easter-egg-web-check to see whether the latest public AOSP easter egg source has changed.`
-- `Use $aosp-easter-egg-web-check to inspect PlatLogoActivity, the EasterEgg module, and current release tags.`
-- `Use $aosp-easter-egg-web-check to look for public signs of an Android 17 or later easter egg.`
