@@ -5,10 +5,10 @@ agp = "9.2.1"
 # https://github.com/google/dagger
 hilt = "2.59.2"
 # https://developer.android.com/develop/ui/compose/bom/bom-mapping
-compose-bom = "2026.05.00"
+compose-bom = "2026.06.00"
 # https://google.github.io/accompanist
 accompanist = "0.37.3"
-lifecycle = "2.10.0"
+lifecycle = "2.11.0"
 activity = "1.13.0"
 room = "2.8.4"
 about-libraries = "14.2.1"
@@ -33,19 +33,19 @@ stability-analyzer = { id = "com.github.skydoves.compose.stability.analyzer", ve
 [libraries]
 kotlin-metadata-jvm = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kotlin" }
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.1"
-androidx-core = "androidx.core:core-ktx:1.18.0"
+androidx-core = "androidx.core:core-ktx:1.19.0"
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "lifecycle" }
 androidx-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
 androidx-livedata = { module = "androidx.lifecycle:lifecycle-livedata", version.ref = "lifecycle" }
 androidx-recyclerview = "androidx.recyclerview:recyclerview:1.4.0"
 androidx-dynamicanimation = "androidx.dynamicanimation:dynamicanimation:1.1.0"
-androidx-annotation = "androidx.annotation:annotation:1.9.1"
-androidx-browser = "androidx.browser:browser:1.9.0"
+androidx-annotation = "androidx.annotation:annotation:1.10.0"
+androidx-browser = "androidx.browser:browser:1.10.0"
 androidx-window = "androidx.window:window:1.5.1"
 androidx-room = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
-google-material = "com.google.android.material:material:1.13.0"
+google-material = "com.google.android.material:material:1.14.0"
 androidx-startup = "androidx.startup:startup-runtime:1.2.0"
 androidx-shapes = "androidx.graphics:graphics-shapes:1.1.0"
 androidx-splashscreen = "androidx.core:core-splashscreen:1.2.0"
@@ -62,7 +62,7 @@ androidx-compose-livedata = { module = "androidx.compose.runtime:runtime-livedat
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-material = { module = "androidx.compose.material:material" }
-androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.5.0-alpha15" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.5.0-alpha22" }
 androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended" }
 androidx-compose-constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.1.1"
 google-accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }

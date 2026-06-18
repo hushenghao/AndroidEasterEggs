@@ -19,3 +19,4 @@
     * ✅移除图标动效本地事件
     * ❎移除主题切换本地事件
 * ✅Cat Editor 添加缩放反馈
+* rememberModalBottomSheetState 过时方法替换
