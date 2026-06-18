@@ -109,8 +109,8 @@ fun EasterEggsNavHost(
             modifier = modifier,
             entries = navigationState.toEntries(entryProvider),
             onBack = onBack,
-            sceneStrategy = remember {
-                DialogSceneStrategy<NavKey>() then BottomSheetSceneStrategy()
+            sceneStrategies = remember {
+                listOf(DialogSceneStrategy<NavKey>(), BottomSheetSceneStrategy<NavKey>())
             },
             transitionSpec = { navTransition() },
             popTransitionSpec = { popTransition() },
