@@ -1,5 +1,9 @@
 # Changelog
 
+### v5.0.1
+
+- Fix Android 17 "In Space" notification not dismissed after exiting game [#883](https://github.com/hushenghao/AndroidEasterEggs/issues/883)
+
 ### v5.0.0
 
 - Sync Android 17 Egg [#791](https://github.com/hushenghao/AndroidEasterEggs/issues/791)

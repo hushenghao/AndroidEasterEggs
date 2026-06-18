@@ -1,5 +1,9 @@
 # 更新日志
 
+### v5.0.1
+
+- 修复 Android 17 "In Space" 通知在退出游戏后不消失的问题 [#883](https://github.com/hushenghao/AndroidEasterEggs/issues/883)
+
 ### v5.0.0
 
 - 同步 Android 17 彩蛋 [#791](https://github.com/hushenghao/AndroidEasterEggs/issues/791)

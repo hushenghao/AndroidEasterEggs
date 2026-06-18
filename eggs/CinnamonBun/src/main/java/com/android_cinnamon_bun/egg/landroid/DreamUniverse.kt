@@ -121,4 +121,9 @@ class DreamUniverse : DreamService() {
         super.onDreamingStopped()
         lifecycleOwner.onStop()
     }
+
+    override fun onDestroy() {
+        notifier?.cancel()
+        super.onDestroy()
+    }
 }

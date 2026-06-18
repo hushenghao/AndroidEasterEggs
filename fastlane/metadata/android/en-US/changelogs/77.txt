@@ -1,0 +1,1 @@
+- Fix Android 17 "In Space" notification not dismissed after exiting game #883

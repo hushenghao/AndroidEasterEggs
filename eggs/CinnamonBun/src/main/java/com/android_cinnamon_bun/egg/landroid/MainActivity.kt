@@ -381,6 +381,11 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    override fun onDestroy() {
+        notifier?.cancel()
+        super.onDestroy()
+    }
 }
 
 @Preview(name = "phone", device = Devices.PHONE)
