@@ -19,5 +19,6 @@
     <string name="android_version_nickname_format" translatable="false">Android %s (%s)</string>
     <string name="android_version_format" translatable="false">Android %s</string>
     <string name="api_version_format" translatable="false">API %s</string>
+    <string name="app_function_description" translatable="false">Browse and launch Android platform Easter eggs</string>
 
 </resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AppFunctionAppMetadata
+    xmlns:appfn="http://schemas.android.com/apk/androidx.appfunctions"
+    appfn:description="This app provides access to all Android platform Easter eggs.
+    Operational Patterns:
+    - Use 'listEasterEggs' to discover all available Easter eggs with API levels and version names.
+    - Use 'launchEasterEgg' with the apiLevel obtained from 'listEasterEggs' to open a specific egg.
+    Constraints:
+    - Eggs are read-only experiences; this app does not create or modify data."
+    appfn:displayDescription="@string/app_function_description" />

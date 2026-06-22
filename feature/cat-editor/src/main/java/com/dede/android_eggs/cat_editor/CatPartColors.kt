@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import java.util.Random
 
-internal object CatPartColors {
+object CatPartColors {
 
     private val P_BODY_COLORS: IntArray = intArrayOf(
         180, -0xdededf, // black

@@ -29,7 +29,7 @@ import android.graphics.Color as AndroidColor
 import android.graphics.Matrix as AndroidMatrix
 
 
-internal object Utilities {
+object Utilities {
 
     const val ACTION_OPEN_EYE_DROPPER = "android.intent.action.OPEN_EYE_DROPPER"// Intent.ACTION_OPEN_EYE_DROPPER
     const val EXTRA_COLOR = "android.intent.extra.COLOR"// Intent.EXTRA_COLOR

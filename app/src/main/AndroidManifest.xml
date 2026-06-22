@@ -24,6 +24,10 @@
         android:theme="@style/Theme.EasterEggs"
         tools:targetApi="tiramisu">
 
+        <property
+            android:name="android.app.appfunctions.app_metadata"
+            android:resource="@xml/app_metadata" />
+
         <service
             android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
             android:enabled="false"
