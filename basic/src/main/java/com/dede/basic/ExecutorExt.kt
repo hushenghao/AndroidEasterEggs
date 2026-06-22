@@ -7,6 +7,8 @@ import android.os.Looper
 import androidx.core.os.ExecutorCompat
 import androidx.core.os.HandlerCompat
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
@@ -31,8 +33,6 @@ fun cancel(token: Any) {
 
 val uiExecutor: Executor = ExecutorCompat.create(uiHandler)
 
-//val singleExecutor: Executor = Executors.newSingleThreadExecutor()
-
 val cachedExecutor: ExecutorService = Executors.newCachedThreadPool()
 
 fun Executor.launch(
@@ -45,3 +45,6 @@ fun Executor.launch(
         }
     }
 }
+
+val ioScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+

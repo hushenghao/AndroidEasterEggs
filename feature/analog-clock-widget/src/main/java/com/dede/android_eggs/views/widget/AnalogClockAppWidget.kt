@@ -10,11 +10,12 @@ import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.core.app.PendingIntentCompat
 import com.dede.basic.Utils
-import com.dede.basic.cachedExecutor
-import com.dede.basic.launch
+import com.dede.basic.ioScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withTimeoutOrNull
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * Easter Eggs Analog clock widget.
@@ -50,14 +51,9 @@ class AnalogClockAppWidget : AppWidgetProvider() {
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
         super.onDeleted(context, appWidgetIds)
-        val pendingResult = goAsync()
-        cachedExecutor.launch(Dispatchers.IO) {
-            try {
-                for (appWidgetId in appWidgetIds) {
-                    AnalogClockWidgetPrefs.clearConfig(context, appWidgetId)
-                }
-            } finally {
-                pendingResult.finish()
+        ioScope.launch {
+            for (appWidgetId in appWidgetIds) {
+                AnalogClockWidgetPrefs.clearConfig(context, appWidgetId)
             }
         }
     }
@@ -67,14 +63,9 @@ class AnalogClockAppWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray,
     ) {
-        val pendingResult = goAsync()
-        cachedExecutor.launch(Dispatchers.IO) {
-            try {
-                for (appWidgetId in appWidgetIds) {
-                    updateAppWidget(context, appWidgetManager, appWidgetId)
-                }
-            } finally {
-                pendingResult.finish()
+        ioScope.launch {
+            for (appWidgetId in appWidgetIds) {
+                updateAppWidget(context, appWidgetManager, appWidgetId)
             }
         }
     }
@@ -93,7 +84,7 @@ internal suspend fun updateAppWidget(
     views.setOnClickPendingIntent(R.id.analog_clock, null)
 
     if (config.clickAction != AnalogClockWidgetClickAction.NONE) {
-        val launchIntent: Intent? = withTimeoutOrNull(300) {
+        val launchIntent: Intent? = withTimeoutOrNull(300.milliseconds) {
             // binder call
             Utils.getLaunchIntent(context)
         }
@@ -103,7 +94,7 @@ internal suspend fun updateAppWidget(
                 context, 0,
                 launchIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT,
-                false
+                false,
             )
             views.setOnClickPendingIntent(R.id.analog_clock, intent)
         }

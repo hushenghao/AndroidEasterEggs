@@ -14,10 +14,9 @@ import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.dede.basic.cachedExecutor
-import com.dede.basic.launch
-import kotlinx.coroutines.Dispatchers
+import com.dede.basic.ioScope
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 private const val ACTION_ITEM_CLICK =
@@ -62,26 +61,16 @@ class NekoControlsAppWidget : AppWidgetProvider() {
         val item = WidgetItem.fromName(intent.getStringExtra(EXTRA_ITEM)) ?: return
         if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) return
 
-        val pendingResult = goAsync()
-        cachedExecutor.launch(Dispatchers.IO) {
-            try {
-                NekoControlsWidgetState.randomize(context, appWidgetId, item)
-                updateAppWidget(context, AppWidgetManager.getInstance(context), appWidgetId)
-            } finally {
-                pendingResult.finish()
-            }
+        ioScope.launch {
+            NekoControlsWidgetState.randomize(context, appWidgetId, item)
+            updateAppWidget(context, AppWidgetManager.getInstance(context), appWidgetId)
         }
     }
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
         super.onDeleted(context, appWidgetIds)
-        val pendingResult = goAsync()
-        cachedExecutor.launch(Dispatchers.IO) {
-            try {
-                appWidgetIds.forEach { NekoControlsWidgetState.removeState(context, it) }
-            } finally {
-                pendingResult.finish()
-            }
+        ioScope.launch {
+            appWidgetIds.forEach { NekoControlsWidgetState.removeState(context, it) }
         }
     }
 }
@@ -91,7 +80,7 @@ private fun updateAppWidgetAsync(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int,
 ) {
-    cachedExecutor.launch(Dispatchers.IO) {
+    ioScope.launch {
         updateAppWidget(context, appWidgetManager, appWidgetId)
     }
 }
