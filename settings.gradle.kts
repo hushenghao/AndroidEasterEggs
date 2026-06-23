@@ -83,4 +83,4 @@ include(
     ":script:compose-material-icons-generator",
     ":script:emoji-svg-xml-convertor",
 )
-rootProject.name = "Easter Eggs"
+rootProject.name = "AndroidEasterEggs"
