@@ -386,7 +386,7 @@ Path: `build-logic/convention/`
 
 - `assets/` — Design, image, and shapeshifter source assets.
 - `fastlane/` — Store metadata and release assets.
-- `wiki/` — Documentation and localized wiki pages.
+- `wiki/` — Git submodule for documentation and localized wiki pages (remote: `git@github.com:hushenghao/AndroidEasterEggs.wiki.git`).
 
 ## Dependency Management
 
