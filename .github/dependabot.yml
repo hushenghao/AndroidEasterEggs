@@ -31,7 +31,6 @@ updates:
 
   - package-ecosystem: "pip"
     directories:
-      - "/script/easter-egg-log"
       - "/script/blurhash"
       - "/script/crowdin"
     schedule:
