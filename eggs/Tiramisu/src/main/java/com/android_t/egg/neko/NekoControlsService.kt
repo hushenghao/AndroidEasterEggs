@@ -39,6 +39,7 @@ import androidx.annotation.RequiresApi
 import com.android_t.egg.R
 import com.dede.basic.cachedExecutor
 import java.util.Random
+import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.Flow
 import java.util.function.Consumer
 
@@ -74,7 +75,7 @@ public class NekoControlsService : ControlsProviderService(), PrefState.PrefsLis
     private val TAG = "NekoControls"
 
     private val controls = HashMap<String, Control>()
-    private val publishers = ArrayList<UglyPublisher>()
+    private val publishers = CopyOnWriteArrayList<UglyPublisher>()
     private val rng = Random()
 //    private val metricsLogger = MetricsLogger()
 
@@ -269,7 +270,7 @@ public class NekoControlsService : ControlsProviderService(), PrefState.PrefsLis
         val controlKeys: Iterable<String>,
         val indefinite: Boolean
     ) : Flow.Publisher<Control> {
-        val subscriptions = ArrayList<UglySubscription>()
+        val subscriptions = CopyOnWriteArrayList<UglySubscription>()
 
         private inner class UglySubscription(
             val initialControls: Iterator<Control>,
