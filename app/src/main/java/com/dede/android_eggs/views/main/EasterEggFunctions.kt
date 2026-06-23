@@ -6,6 +6,7 @@ import androidx.appfunctions.AppFunctionSerializable
 import androidx.appfunctions.service.AppFunction
 import com.dede.android_eggs.cat_editor.CatPartColors
 import com.dede.android_eggs.cat_editor.Utilities
+import com.dede.android_eggs.views.main.compose.filterEasterEggs
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EggActionHelp
 import com.dede.basic.provider.EasterEgg
@@ -52,35 +53,6 @@ class EasterEggFunctions @Inject constructor(
         )
     }
 
-    private fun EasterEgg.matchesQuery(context: android.content.Context, query: String): Boolean {
-        return context.getString(nameRes).contains(query, true) ||
-                context.getString(nicknameRes).contains(query, true) ||
-                matchesApiLevel(query) ||
-                matchesAndroidVersion(query)
-    }
-
-    private fun EasterEgg.matchesApiLevel(query: String): Boolean {
-        if (!Regex("^\\d{1,2}$").matches(query)) return false
-        val apiLevel = query.toIntOrNull() ?: return false
-        return apiLevelRange.contains(apiLevel)
-    }
-
-    private fun EasterEgg.matchesAndroidVersion(query: String): Boolean {
-        val versionNameResult = Regex("[\\d.]{1,3}").find(query) ?: return false
-        val versionNameValue = versionNameResult.value
-        for (level in apiLevelRange) {
-            val versionName = try {
-                EasterEggHelp.getVersionNameByApiLevel(level)
-            } catch (_: IllegalArgumentException) {
-                return false
-            }
-            if (versionName.startsWith(versionNameValue, true)) {
-                return true
-            }
-        }
-        return false
-    }
-
     /**
      * List all available Android platform Easter eggs with their API levels, version names, and nicknames.
      *
@@ -111,8 +83,7 @@ class EasterEggFunctions @Inject constructor(
     ): List<EasterEggInfo> {
         val context = appFunctionContext.context
         val latestApiLevel = pureEasterEggs.maxOf { it.apiLevelRange.first }
-        return pureEasterEggs
-            .filter { it.matchesQuery(context, query) }
+        return filterEasterEggs(context, pureEasterEggs, query)
             .map { it.toEasterEggInfo(context, latestApiLevel) }
     }
 

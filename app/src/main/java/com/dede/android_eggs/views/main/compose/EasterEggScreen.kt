@@ -289,7 +289,7 @@ private fun SearchEmpty(contentPadding: PaddingValues) {
     }
 }
 
-private fun filterEasterEggs(
+internal fun filterEasterEggs(
     context: Context,
     pureEasterEggs: List<EasterEgg>,
     searchText: String,
