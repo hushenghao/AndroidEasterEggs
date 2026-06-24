@@ -125,24 +125,30 @@ private val darkScheme = darkColorScheme(
     surfaceContainerHighest = surfaceContainerHighestDark,
 )
 
-private val currentThemeMode by ThemePrefUtil.themeModeState
-private val currentDynamicColorEnabled by DynamicColorPrefUtil.isDynamicColorEnabledState
-
 internal var currentColorScheme: ColorScheme = lightScheme
     private set
 
 @Composable
 fun EasterEggsTheme(
-    themeMode: Int = currentThemeMode,
-    isDynamicColorEnabled: Boolean = currentDynamicColorEnabled,
+    themeMode: Int = ThemePrefUtil.FOLLOW_SYSTEM,
+    isDynamicColorEnabled: Boolean? = null,
     content: @Composable () -> Unit
 ) {
+    // Read reactive states inside the composable body for proper snapshot tracking
+    val currentThemeMode by ThemePrefUtil.themeModeState
+    val currentDynamicColorEnabled by DynamicColorPrefUtil.isDynamicColorEnabledState
+
     var nightModeValue = themeMode
+    if (nightModeValue == ThemePrefUtil.FOLLOW_SYSTEM) {
+        nightModeValue = currentThemeMode
+    }
     if (nightModeValue == ThemePrefUtil.FOLLOW_SYSTEM) {
         nightModeValue = if (isSystemInDarkTheme()) ThemePrefUtil.DARK else ThemePrefUtil.LIGHT
     }
 
-    val colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && isDynamicColorEnabled) {
+    val dynamicColorEnabled = isDynamicColorEnabled ?: currentDynamicColorEnabled
+
+    val colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && dynamicColorEnabled) {
         val context: Context = LocalContext.current
         when (nightModeValue) {
             ThemePrefUtil.AMOLED -> dynamicDarkColorScheme(context).toAmoled()
