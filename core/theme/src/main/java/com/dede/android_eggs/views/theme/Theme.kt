@@ -130,18 +130,12 @@ internal var currentColorScheme: ColorScheme = lightScheme
 
 @Composable
 fun EasterEggsTheme(
-    themeMode: Int = ThemePrefUtil.FOLLOW_SYSTEM,
-    isDynamicColorEnabled: Boolean = DynamicColorPrefUtil.isSupported(),
     content: @Composable () -> Unit
 ) {
-    // Read reactive states inside the composable body for proper snapshot tracking
     val currentThemeMode by ThemePrefUtil.themeModeState
     val currentDynamicColorEnabled by DynamicColorPrefUtil.isDynamicColorEnabledState
 
-    var nightModeValue = themeMode
-    if (nightModeValue == ThemePrefUtil.FOLLOW_SYSTEM) {
-        nightModeValue = currentThemeMode
-    }
+    var nightModeValue = currentThemeMode
     if (nightModeValue == ThemePrefUtil.FOLLOW_SYSTEM) {
         nightModeValue = if (isSystemInDarkTheme()) ThemePrefUtil.DARK else ThemePrefUtil.LIGHT
     }
