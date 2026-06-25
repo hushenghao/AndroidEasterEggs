@@ -31,3 +31,6 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         with:
           model: deepseek/deepseek-v4-flash
+          prompt: |
+            When submit code:
+              - The message must conform to the project's style
