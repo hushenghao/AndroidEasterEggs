@@ -20,6 +20,7 @@ import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.lifecycle.setViewTreeViewModelStoreOwner
 import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
+import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 import com.dede.android_eggs.views.theme.EasterEggsTheme
 import com.dede.basic.lifecycleOwnerCompat
@@ -79,7 +80,11 @@ fun ComposeViewThemeBuilder(
 
 fun buildDarkThemeLoadingIndicator(activity: Activity): View {
     return ComposeViewBuilder(activity) {
-        EasterEggsTheme(themeMode = ThemePrefUtil.DARK) {
+        EasterEggsTheme(
+            themeMode = ThemePrefUtil.DARK,
+            isDynamicColorEnabled = DynamicColorPrefUtil.isDynamicColorEnable(activity),
+            updateGlobalColorScheme = false,
+        ) {
             LoadingIndicator(
                 modifier = Modifier.size(92.dp)
             )

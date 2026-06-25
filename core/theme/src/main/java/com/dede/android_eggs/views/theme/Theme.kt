@@ -1,7 +1,6 @@
 package com.dede.android_eggs.views.theme
 
 import android.content.Context
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
@@ -10,6 +9,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -125,16 +125,28 @@ private val darkScheme = darkColorScheme(
     surfaceContainerHighest = surfaceContainerHighestDark,
 )
 
-private val currentThemeMode by ThemePrefUtil.themeModeState
-private val currentDynamicColorEnabled by DynamicColorPrefUtil.isDynamicColorEnabledState
-
 internal var currentColorScheme: ColorScheme = lightScheme
     private set
 
 @Composable
 fun EasterEggsTheme(
-    themeMode: Int = currentThemeMode,
-    isDynamicColorEnabled: Boolean = currentDynamicColorEnabled,
+    content: @Composable () -> Unit
+) {
+    // Read reactive states inside the composable body for proper snapshot tracking
+    val currentThemeMode by ThemePrefUtil.themeModeState
+    val currentDynamicColorEnabled by DynamicColorPrefUtil.isDynamicColorEnabledState
+    EasterEggsTheme(
+        themeMode = currentThemeMode,
+        isDynamicColorEnabled = currentDynamicColorEnabled,
+        content = content
+    )
+}
+
+@Composable
+fun EasterEggsTheme(
+    themeMode: Int,
+    isDynamicColorEnabled: Boolean,
+    updateGlobalColorScheme: Boolean = true,
     content: @Composable () -> Unit
 ) {
     var nightModeValue = themeMode
@@ -142,7 +154,7 @@ fun EasterEggsTheme(
         nightModeValue = if (isSystemInDarkTheme()) ThemePrefUtil.DARK else ThemePrefUtil.LIGHT
     }
 
-    val colors = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && isDynamicColorEnabled) {
+    val colors = if (DynamicColorPrefUtil.isSupported() && isDynamicColorEnabled) {
         val context: Context = LocalContext.current
         when (nightModeValue) {
             ThemePrefUtil.AMOLED -> dynamicDarkColorScheme(context).toAmoled()
@@ -156,7 +168,11 @@ fun EasterEggsTheme(
             else -> lightScheme
         }
     }
-    currentColorScheme = colors
+    LaunchedEffect(updateGlobalColorScheme, colors) {
+        if (updateGlobalColorScheme) {
+            currentColorScheme = colors
+        }
+    }
     MaterialTheme(
         colorScheme = colors,
         content = content
