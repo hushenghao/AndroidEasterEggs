@@ -145,7 +145,7 @@ fun EasterEggsTheme(
 @Composable
 fun EasterEggsTheme(
     themeMode: Int,
-    isDynamicColorEnabled: Boolean = DynamicColorPrefUtil.isSupported(),
+    isDynamicColorEnabled: Boolean,
     updateGlobalColorScheme: Boolean = true,
     content: @Composable () -> Unit
 ) {
