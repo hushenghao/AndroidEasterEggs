@@ -170,7 +170,7 @@ fun EasterEggsTheme(
     }
     LaunchedEffect(updateGlobalColorScheme, colors) {
         if (updateGlobalColorScheme) {
-            currentColorScheme = colors
+            currentColorScheme = colors.copy()
         }
     }
     MaterialTheme(

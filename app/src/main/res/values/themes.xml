@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- https://developer.android.google.cn/develop/ui/views/launch/splash-screen?hl=zh-cn#splash-screen-animate-reqs -->
     <style name="Theme.EasterEggs.Starting" parent="Theme.SplashScreen">
@@ -13,9 +13,12 @@
         <!-- Set the theme of the Activity that directly follows your splash
         screen. This is required. -->
         <item name="postSplashScreenTheme">@style/Theme.EasterEggs</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
     </style>
 
     <!-- Base application theme. -->
-    <style name="Theme.EasterEggs" parent="Theme.AppColors" />
+    <style name="Theme.EasterEggs" parent="Theme.AppColors">
+        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
+    </style>
 
 </resources>
