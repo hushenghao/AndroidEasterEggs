@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,6 +20,7 @@ import nl.dionsegijn.konfetti.core.PartySystem
 import nl.dionsegijn.konfetti.core.Position
 import nl.dionsegijn.konfetti.core.Spread
 import nl.dionsegijn.konfetti.core.emitter.Emitter
+import nl.dionsegijn.konfetti.core.models.Shape
 import java.util.concurrent.TimeUnit
 
 @Stable
@@ -89,27 +90,30 @@ private fun particles(primary: Int) = listOf(
         angle = Angle.BOTTOM,
         spread = Spread.ROUND,
         colors = defaultColors.map { it.blend(primary, colorBlendFraction) },
-        emitter = Emitter(duration = 2, TimeUnit.SECONDS).perSecond(100),
+        emitter = Emitter(duration = 2, TimeUnit.SECONDS).perSecond(80),
         position = Position.Relative(0.0, 0.0).between(Position.Relative(1.0, 0.0)),
+        shapes = listOf(Shape.Square),
     ),
     Party(
         speed = 10f,
-        maxSpeed = 30f,
+        maxSpeed = 35f,
         damping = 0.9f,
         angle = Angle.RIGHT - 55,
         spread = 60,
         colors = defaultColors.map { it.blend(primary, colorBlendFraction) },
-        emitter = Emitter(duration = 2, TimeUnit.SECONDS).perSecond(100),
-        position = Position.Relative(0.0, 1.0)
+        emitter = Emitter(duration = 2, TimeUnit.SECONDS).perSecond(60),
+        position = Position.Relative(0.0, 1.0),
+        shapes = listOf(Shape.Square),
     ),
     Party(
         speed = 10f,
-        maxSpeed = 30f,
+        maxSpeed = 35f,
         damping = 0.9f,
         angle = Angle.RIGHT - 125,
         spread = 60,
         colors = defaultColors.map { it.blend(primary, colorBlendFraction) },
-        emitter = Emitter(duration = 2, TimeUnit.SECONDS).perSecond(100),
-        position = Position.Relative(1.0, 1.0)
+        emitter = Emitter(duration = 2, TimeUnit.SECONDS).perSecond(60),
+        position = Position.Relative(1.0, 1.0),
+        shapes = listOf(Shape.Square),
     )
 )
