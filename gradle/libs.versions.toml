@@ -3,7 +3,7 @@ kotlin = "2.4.0"
 ksp = "2.3.9"
 agp = "9.2.1"
 # https://github.com/google/dagger
-hilt = "2.59.2"
+hilt = "2.60"
 # https://developer.android.com/develop/ui/compose/bom/bom-mapping
 compose-bom = "2026.06.00"
 # https://google.github.io/accompanist
