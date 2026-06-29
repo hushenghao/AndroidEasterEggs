@@ -315,7 +315,7 @@ private fun filterEasterEggs(
         for (level in apiLevelRange) {
             val versionName = try {
                 EasterEggHelp.getVersionNameByApiLevel(level)
-            } catch (e: IllegalArgumentException) {
+            } catch (_: IllegalArgumentException) {
                 // illegal api level, skip
                 return false
             }
@@ -325,9 +325,11 @@ private fun filterEasterEggs(
         }
         return false
     }
+
+    val trim = searchText.trim()
     return pureEasterEggs.filter {
-        it.matchStringResNames(searchText) ||
-                it.matchApiLevel(searchText) ||
-                it.matchAndroidVersion(searchText)
+        it.matchStringResNames(trim) ||
+                it.matchApiLevel(trim) ||
+                it.matchAndroidVersion(trim)
     }
 }
