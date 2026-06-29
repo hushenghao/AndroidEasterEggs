@@ -1,3 +1,3 @@
 - Add Android base version egg #879
-- Fix MIUI dark theme #898
+- Fix MIUI dark theme #898 #899
 - Known issue fixes

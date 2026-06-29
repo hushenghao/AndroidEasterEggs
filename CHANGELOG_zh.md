@@ -3,7 +3,7 @@
 ### v5.1.1
 
 - 添加 Android base 版本彩蛋 [#879](https://github.com/hushenghao/AndroidEasterEggs/issues/879)
-- 修复 MIUI 黑色主题 [#898](https://github.com/hushenghao/AndroidEasterEggs/issues/898)
+- 修复 MIUI 黑色主题 [#898](https://github.com/hushenghao/AndroidEasterEggs/issues/898) [#899](https://github.com/hushenghao/AndroidEasterEggs/issues/899)
 - 修复已知问题
 
 ### v5.1.0 (2026-06-26)

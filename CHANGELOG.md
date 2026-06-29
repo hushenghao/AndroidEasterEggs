@@ -3,7 +3,7 @@
 ### v5.1.1
 
 - Add Android base version egg [#879](https://github.com/hushenghao/AndroidEasterEggs/issues/879)
-- Fix MIUI dark theme [#898](https://github.com/hushenghao/AndroidEasterEggs/issues/898)
+- Fix MIUI dark theme [#898](https://github.com/hushenghao/AndroidEasterEggs/issues/898) [#899](https://github.com/hushenghao/AndroidEasterEggs/issues/899)
 - Known issue fixes
 
 ### v5.1.0 (2026-06-26)
