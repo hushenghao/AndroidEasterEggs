@@ -1,11 +1,17 @@
 # Changelog
 
-### v5.1.0
+### v5.1.1
+
+- Add Android base version egg [#879](https://github.com/hushenghao/AndroidEasterEggs/issues/879)
+- Fix MIUI dark theme [#898](https://github.com/hushenghao/AndroidEasterEggs/issues/898)
+- Known issue fixes
+
+### v5.1.0 (2026-06-26)
 
 - Fix Android 17 "In Space" notification not dismissed after exiting game [#883](https://github.com/hushenghao/AndroidEasterEggs/issues/883)
 - Known issue fixes
 
-### v5.0.0
+### v5.0.0 (2026-06-17)
 
 - Sync Android 17 Egg [#791](https://github.com/hushenghao/AndroidEasterEggs/issues/791)
 - Known issue fixes

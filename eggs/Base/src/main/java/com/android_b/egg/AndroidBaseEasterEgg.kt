@@ -2,7 +2,6 @@ package com.android_b.egg
 
 import android.os.Build
 import com.dede.basic.provider.BaseEasterEgg
-import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.TimelineEvent
@@ -23,37 +22,37 @@ object AndroidBaseEasterEgg : EasterEggProvider {
     @Singleton
     override fun provideEasterEgg(): BaseEasterEgg {
         return EasterEggGroup(
-            EasterEgg(
+            BaseEasterEgg(
                 iconRes = R.drawable.b_android_froyo,
                 nameRes = R.string.b_nickname_android_froyo,
                 nicknameRes = R.string.b_nickname_android_froyo,
                 apiLevel = Build.VERSION_CODES.FROYO,
             ),
-            EasterEgg(
+            BaseEasterEgg(
                 iconRes = R.drawable.b_android_eclair,
                 nameRes = R.string.b_nickname_android_eclair,
                 nicknameRes = R.string.b_nickname_android_eclair,
                 apiLevelRange = Build.VERSION_CODES.ECLAIR..Build.VERSION_CODES.ECLAIR_MR1,
             ),
-            EasterEgg(
+            BaseEasterEgg(
                 iconRes = R.drawable.b_android_donut,
                 nameRes = R.string.b_nickname_android_donut,
                 nicknameRes = R.string.b_nickname_android_donut,
                 apiLevel = Build.VERSION_CODES.DONUT,
             ),
-            EasterEgg(
+            BaseEasterEgg(
                 iconRes = R.drawable.b_android_cupcake,
                 nameRes = R.string.b_nickname_android_cupcake,
                 nicknameRes = R.string.b_nickname_android_cupcake,
                 apiLevel = Build.VERSION_CODES.CUPCAKE,
             ),
-            EasterEgg(
+            BaseEasterEgg(
                 iconRes = R.drawable.b_android_classic,
                 nameRes = R.string.b_nickname_android_petit_four,
                 nicknameRes = R.string.b_nickname_android_petit_four,
                 apiLevel = Build.VERSION_CODES.BASE_1_1,
             ),
-            EasterEgg(
+            BaseEasterEgg(
                 iconRes = R.drawable.b_android_classic,
                 nameRes = R.string.b_nickname_android_base,
                 nicknameRes = R.string.b_nickname_android_base,

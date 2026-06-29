@@ -1,11 +1,17 @@
 # 更新日志
 
-### v5.1.0
+### v5.1.1
+
+- 添加 Android base 版本彩蛋 [#879](https://github.com/hushenghao/AndroidEasterEggs/issues/879)
+- 修复 MIUI 黑色主题 [#898](https://github.com/hushenghao/AndroidEasterEggs/issues/898)
+- 修复已知问题
+
+### v5.1.0 (2026-06-26)
 
 - 修复 Android 17 "In Space" 通知在退出游戏后不消失的问题 [#883](https://github.com/hushenghao/AndroidEasterEggs/issues/883)
 - 修复已知问题
 
-### v5.0.0
+### v5.0.0 (2026-06-17)
 
 - 同步 Android 17 彩蛋 [#791](https://github.com/hushenghao/AndroidEasterEggs/issues/791)
 - 修复已知问题
