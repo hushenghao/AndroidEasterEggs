@@ -109,7 +109,7 @@ open class EasterEgg @JvmOverloads constructor(
         if (other !is EasterEgg) {
             return false
         }
-        return apiLevelRange == other.apiLevelRange && apiLevelRange == other.apiLevelRange
+        return apiLevelRange == other.apiLevelRange && fullApiLevelRange == other.fullApiLevelRange
     }
 
 }
