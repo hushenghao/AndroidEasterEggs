@@ -1,5 +1,9 @@
 # Changelog
 
+### v5.2.1
+
+- Add more SplashScreen icon
+
 ### v5.2.0 (2026-07-01)
 
 - Add Android base version egg [#879](https://github.com/hushenghao/AndroidEasterEggs/issues/879)

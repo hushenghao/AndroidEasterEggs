@@ -1,5 +1,9 @@
 # 更新日志
 
+### v5.2.1
+
+- 添加更多启动动画
+
 ### v5.2.0 (2026-07-01)
 
 - 添加 Android base 版本彩蛋 [#879](https://github.com/hushenghao/AndroidEasterEggs/issues/879)

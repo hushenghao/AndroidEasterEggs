@@ -16,6 +16,16 @@
         <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
     </style>
 
+    <style name="Theme.EasterEggs.Starting.Android16" parent="Theme.EasterEggs.Starting">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/avd_anim_baklava_platlogo</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+    </style>
+
+    <style name="Theme.EasterEggs.Starting.Android15" parent="Theme.EasterEggs.Starting">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/avd_anim_v_platlogo</item>
+        <item name="windowSplashScreenAnimationDuration">600</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="Theme.EasterEggs" parent="Theme.AppColors">
         <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>

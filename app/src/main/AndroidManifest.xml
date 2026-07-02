@@ -66,6 +66,20 @@
                 android:resource="@xml/shortcuts" />
         </activity>
 
+        <activity
+            android:name=".views.main.Android16SplashActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.EasterEggs.Starting.Android16"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".views.main.Android15SplashActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.EasterEggs.Starting.Android15"
+            android:windowSoftInputMode="adjustResize" />
+
         <activity-alias
             android:name=".Android17IconAlias"
             android:enabled="true"
@@ -92,7 +106,7 @@
             android:icon="@mipmap/ic_launcher_16"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_16_round"
-            android:targetActivity=".views.main.EasterEggsActivity">
+            android:targetActivity=".views.main.Android16SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -111,7 +125,7 @@
             android:icon="@mipmap/ic_launcher_15"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_15_round"
-            android:targetActivity=".views.main.EasterEggsActivity">
+            android:targetActivity=".views.main.Android15SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

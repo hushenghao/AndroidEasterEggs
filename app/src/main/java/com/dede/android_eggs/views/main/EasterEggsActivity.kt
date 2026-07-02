@@ -1,3 +1,5 @@
+@file:Suppress("CustomSplashScreen")
+
 package com.dede.android_eggs.views.main
 
 import android.app.assist.AssistContent
@@ -18,8 +20,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
+class Android16SplashActivity : EasterEggsActivity()
+
+class Android15SplashActivity : EasterEggsActivity()
+
 @AndroidEntryPoint
-class EasterEggsActivity : AppCompatActivity() {
+open class EasterEggsActivity : AppCompatActivity() {
 
     @Inject
     lateinit var pureEasterEggs: List<@JvmSuppressWildcards EasterEgg>
