@@ -1,6 +1,22 @@
 name: Build Debug for PR
 
-on: [ pull_request ]
+on:
+  pull_request:
+    paths:
+      - 'app/**'
+      - 'eggs/**'
+      - 'basic/**'
+      - 'feature/**'
+      - 'core/**'
+      - 'jvm-basic/**'
+      - 'build-logic/**'
+      - 'gradle/**'
+      - '*.kts'
+      - 'gradle.properties'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
