@@ -84,4 +84,7 @@
     <string name="toast_restore_success">Restore complete. App will restart.</string>
     <string name="toast_backup_failed">Backup failed: %s</string>
     <string name="toast_restore_failed">Restore failed: %s</string>
+    <string name="dialog_import_backup_title">Import backup</string>
+    <string name="dialog_import_backup_message">This will overwrite all current app data, including settings, saved cats, and widget configurations. This action cannot be undone. Are you sure you want to continue?</string>
+    <string name="action_confirm_import">Import</string>
 </resources>

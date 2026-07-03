@@ -4,8 +4,11 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Backup
-import androidx.compose.material.icons.rounded.FileDownloadDone
 import androidx.compose.material.icons.rounded.Restore
+import androidx.compose.material.icons.rounded.SaveAs
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -55,6 +58,8 @@ fun DataBackupPref() {
         }
     }
 
+    var showImportConfirmDialog by rememberSaveable { mutableStateOf(false) }
+
     val importLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument(),
     ) { uri ->
@@ -74,6 +79,31 @@ fun DataBackupPref() {
         }
     }
 
+    if (showImportConfirmDialog) {
+        AlertDialog(
+            onDismissRequest = { showImportConfirmDialog = false },
+            title = {
+                Text(text = stringResource(StringsR.string.dialog_import_backup_title))
+            },
+            text = {
+                Text(text = stringResource(StringsR.string.dialog_import_backup_message))
+            },
+            dismissButton = {
+                TextButton(onClick = { showImportConfirmDialog = false }) {
+                    Text(text = stringResource(android.R.string.cancel))
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    showImportConfirmDialog = false
+                    importLauncher.launch(arrayOf("application/zip", "application/octet-stream"))
+                }) {
+                    Text(text = stringResource(StringsR.string.action_confirm_import))
+                }
+            },
+        )
+    }
+
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.Backup,
         title = stringResource(StringsR.string.label_data_backup),
@@ -82,7 +112,7 @@ fun DataBackupPref() {
         onExpandedChange = { expanded = it },
     ) {
         Option(
-            leadingIcon = imageVectorIconBlock(Icons.Rounded.FileDownloadDone),
+            leadingIcon = imageVectorIconBlock(Icons.Rounded.SaveAs),
             title = stringResource(StringsR.string.action_export_backup),
             desc = stringResource(StringsR.string.action_export_backup_desc),
             shape = OptionShapes.firstShape(),
@@ -99,7 +129,7 @@ fun DataBackupPref() {
             desc = stringResource(StringsR.string.action_import_backup_desc),
             shape = OptionShapes.lastShape(),
             onClick = {
-                importLauncher.launch(arrayOf("application/zip", "application/octet-stream"))
+                showImportConfirmDialog = true
             },
         )
     }
