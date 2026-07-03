@@ -12,7 +12,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
@@ -117,18 +121,24 @@ fun EasterEggsNavHost(
             predictivePopTransitionSpec = { popTransition() },
         )
 
+        var welcomeDialogNavigated by rememberSaveable { mutableStateOf(false) }
+        var animatorAlertNavigated by rememberSaveable { mutableStateOf(false) }
+
         LaunchedEffect(navigator, currentRoute) {
-            if (
-                !isAgreedPrivacyPolicy(context) &&
-                currentRoute != WelcomeDialog
-            ) {
+            if (currentRoute == WelcomeDialog || currentRoute == AnimatorDisabledAlertDialog) {
+                return@LaunchedEffect
+            }
+
+            if (!welcomeDialogNavigated && !isAgreedPrivacyPolicy(context)) {
                 navigator.navigate(WelcomeDialog, true)
+                welcomeDialogNavigated = true
             } else if (
-                !AnimatorDisabledAlert.isDontShowAgain(context) &&
+                !animatorAlertNavigated &&
                 !Utils.areAnimatorEnabled(context) &&
-                currentRoute != AnimatorDisabledAlertDialog
+                !AnimatorDisabledAlert.isDontShowAgain(context)
             ) {
                 navigator.navigate(AnimatorDisabledAlertDialog, true)
+                animatorAlertNavigated = true
             } else {
                 DeepLink.handleNavKey(navigator)
             }
