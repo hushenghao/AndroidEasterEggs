@@ -136,7 +136,6 @@ internal fun CrashScreen(
                         modifier = Modifier
                             .weight(1f)
                             .padding(16.dp),
-                        maxLines = if (expanded) Int.MAX_VALUE else 1,
                         style = typography.bodySmall,
                         overflow = TextOverflow.Ellipsis,
                     )
