@@ -137,7 +137,7 @@ Prefer the smallest module-specific compile/test command that covers the change.
 
 ## Commit Conventions
 
-**AI Submission Identifier**: AI-generated code commits use `git -c user.name="opencode" -c user.email="noreply@opencode.ai" commit -m "xxx"`, Avoid modifying the global git config.
+**AI Submission Identifier**: AI-generated code commits use `git -c user.name="opencode" -c user.email="opencode-agent[bot]@users.noreply.github.com" commit -m "xxx"`, Avoid modifying the global git config.
 
 The project uses **Conventional Commits** without scope parentheses. PR references
 appear as `(#NNN)` at the end.
