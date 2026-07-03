@@ -161,6 +161,22 @@ object LanguagePrefUtil {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
     }
 
+    fun getApplicationLocalesValue(): Int {
+        val applicationLocales = AppCompatDelegate.getApplicationLocales()
+        return getValueByLocale(applicationLocales)
+    }
+
+    fun setApplicationLocalesValue(option: Int): Boolean {
+        val locales = getLocaleByValue(option)
+        try {
+            AppCompatDelegate.setApplicationLocales(locales)
+        } catch (_: RuntimeException) {
+            // https://issuetracker.google.com/issues/318314368
+            return false
+        }
+        return true
+    }
+
     internal fun checkLocaleConfig(context: Context) {
         // check languageOptions count
         val expected = languageOptions.size
@@ -267,10 +283,8 @@ private fun launchAppLocaleSettings(context: Context) {
 @Preview
 @Composable
 fun LanguagePref() {
-    val applicationLocales = AppCompatDelegate.getApplicationLocales()
-
-    var languageOptionValue by remember(applicationLocales) {
-        mutableIntStateOf(LanguagePrefUtil.getValueByLocale(applicationLocales))
+    var languageOptionValue by remember {
+        mutableIntStateOf(LanguagePrefUtil.getApplicationLocalesValue())
     }
     val langOp = remember(languageOptionValue) {
         LanguagePrefUtil.getLangOpByValue(languageOptionValue)
@@ -285,11 +299,8 @@ fun LanguagePref() {
             drawerState?.close()
 
             languageOptionValue = option
-            val locales = LanguagePrefUtil.getLocaleByValue(option)
-            try {
-                AppCompatDelegate.setApplicationLocales(locales)
-            } catch (_: RuntimeException) {
-                // https://issuetracker.google.com/issues/318314368
+            val result = LanguagePrefUtil.setApplicationLocalesValue(option)
+            if (!result) {
                 launchAppLocaleSettings(context)
             }
         }

@@ -52,6 +52,7 @@ import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefU
 import com.dede.android_eggs.views.settings.compose.prefs.KeepAndroidOpenPref
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePref
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.DataBackupPref
 import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPref
 import com.dede.android_eggs.views.settings.compose.prefs.RocketLauncherPref
 import com.dede.android_eggs.views.settings.compose.prefs.SnapshotPref
@@ -148,6 +149,8 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
             if (!SplitUtils.isActivityEmbedded(context)) {
                 RetainInRecentsPref()
             }
+
+            DataBackupPref()
 
             SettingDivider()
 

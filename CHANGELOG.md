@@ -3,6 +3,7 @@
 ### v5.2.1
 
 - Add more SplashScreen icon
+- Add data backup and restore feature
 
 ### v5.2.0 (2026-07-01)
 

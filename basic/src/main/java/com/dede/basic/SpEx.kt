@@ -5,7 +5,8 @@ package com.dede.basic
 
 
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.core.content.edit
+import com.dede.android_eggs.util.pref
 
 /**
  * SharedPreferences Utils
@@ -14,30 +15,27 @@ import android.content.SharedPreferences
  * @since 2020/10/20 3:01 PM
  */
 
-private val Context.sp: SharedPreferences
-    get() = this.getSharedPreferences(this.packageName, Context.MODE_PRIVATE)
-
 @JvmOverloads
 fun Context.getString(key: String, default: String? = null): String? {
-    return sp.getString(key, default)
+    return pref.getString(key, default)
 }
 
 fun Context.putString(key: String, value: String?) {
-    sp.edit().putString(key, value).apply()
+    pref.edit { putString(key, value) }
 }
 
 fun Context.getLong(key: String, default: Long): Long {
-    return sp.getLong(key, default)
+    return pref.getLong(key, default)
 }
 
 fun Context.putLong(key: String, value: Long) {
-    sp.edit().putLong(key, value).apply()
+    pref.edit { putLong(key, value) }
 }
 
 fun Context.getBoolean(key: String, default: Boolean): Boolean {
-    return sp.getBoolean(key, default)
+    return pref.getBoolean(key, default)
 }
 
 fun Context.putBoolean(key: String, value: Boolean) {
-    sp.edit().putBoolean(key, value).apply()
+    pref.edit { putBoolean(key, value) }
 }

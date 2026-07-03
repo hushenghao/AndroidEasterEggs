@@ -74,7 +74,7 @@ object Utils {
         var packageInfo: PackageInfo? = null
         try {
             packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-        } catch (ignore: NameNotFoundException) {
+        } catch (_: NameNotFoundException) {
         }
         if (packageInfo != null) {
             val versionName = packageInfo.versionName ?: "-1"
@@ -87,6 +87,13 @@ object Utils {
             return versionName to versionCode
         }
         return "-1" to -1L
+    }
+
+    fun restartApp(context: Context) {
+        val intent = getLaunchIntent(context) ?: return
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        context.startActivity(intent)
+        Runtime.getRuntime().exit(0)
     }
 
 }

@@ -1,1 +1,2 @@
 - Add more SplashScreen icon
+- Add data backup and restore feature

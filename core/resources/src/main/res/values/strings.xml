@@ -73,4 +73,15 @@
     <string name="rocket_launcher_all_app_icons">Apps</string>
     <string name="rocket_launcher_all_icons">Easter eggs and apps</string>
     <string name="rocket_launcher_query_all_app_desc">Needs to get a list of the apps shown in home apps</string>
+
+    <string name="label_data_backup">Data backup &amp; restore</string>
+    <string name="pref_data_backup_desc">Export or import user data</string>
+    <string name="action_export_backup">Export backup</string>
+    <string name="action_export_backup_desc">Save settings, cats, and widget configs to a file</string>
+    <string name="action_import_backup">Import backup</string>
+    <string name="action_import_backup_desc">Restore from a previously exported backup file</string>
+    <string name="toast_backup_success">Backup exported successfully</string>
+    <string name="toast_restore_success">Restore complete. App will restart.</string>
+    <string name="toast_backup_failed">Backup failed: %s</string>
+    <string name="toast_restore_failed">Restore failed: %s</string>
 </resources>
