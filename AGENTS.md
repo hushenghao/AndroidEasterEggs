@@ -137,7 +137,20 @@ Prefer the smallest module-specific compile/test command that covers the change.
 
 ## Commit Conventions
 
-**AI Submission Identifier**: AI-generated code commits use `git -c user.name="opencode" -c user.email="opencode-agent[bot]@users.noreply.github.com" commit -m "xxx"`, Avoid modifying the global git config.
+**AI Submission Identifier**: AI-generated code commits should infer identity from runtime context first (`copilot` / `codex` / `opencode` / `gemini` / `claude`), then fall back to `opencode`. Only override per commit (never global config).
+
+```sh
+AI_COMMIT_TOOL="<infer-from-runtime-context>" # copilot | codex | opencode | gemini | claude
+case "$AI_COMMIT_TOOL" in
+  copilot|codex|opencode|gemini|claude) AI_INFERRED_NAME="$AI_COMMIT_TOOL" ;;
+  *) AI_INFERRED_NAME="opencode" ;;
+esac
+AI_INFERRED_EMAIL="${AI_INFERRED_NAME}[bot]@users.noreply.github.com"
+
+git -c user.name="$AI_INFERRED_NAME" \
+    -c user.email="$AI_INFERRED_EMAIL" \
+    commit -m "xxx"
+```
 
 The project uses **Conventional Commits** without scope parentheses. PR references
 appear as `(#NNN)` at the end.
