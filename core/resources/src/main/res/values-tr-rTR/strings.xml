@@ -63,4 +63,17 @@
     <string name="rocket_launcher_all_app_icons">Tüm uygulama simgeleri</string>
     <string name="rocket_launcher_all_icons">Tüm simgeler</string>
     <string name="rocket_launcher_query_all_app_desc">Tüm uygulamaların listesinin alınması gerekiyor</string>
+    <string name="label_data_backup">Veri yedekleme &amp; geri yükleme</string>
+    <string name="pref_data_backup_desc">Kullanıcı verilerini dışa aktar veya içe aktar</string>
+    <string name="action_export_backup">Yedeklemeyi dışa aktar</string>
+    <string name="action_export_backup_desc">Ayarları, kedileri ve widget yapılandırmalarını bir dosyaya kaydet</string>
+    <string name="action_import_backup">Yedeği içe aktar</string>
+    <string name="action_import_backup_desc">Daha önce dışa aktarılan bir yedekleme dosyasından geri yükle</string>
+    <string name="toast_backup_success">Yedekleme başarıyla dışa aktarıldı</string>
+    <string name="toast_restore_success">Geri yükleme tamamlandı. Uygulama yeniden başlatılacak.</string>
+    <string name="toast_backup_failed">Yedekleme başarısız oldu: %s</string>
+    <string name="toast_restore_failed">Geri yükleme başarısız oldu: %s</string>
+    <string name="dialog_import_backup_title">Yedeği içe aktar</string>
+    <string name="dialog_import_backup_message">Bu, ayarlar, kayıtlı kediler ve widget yapılandırmaları dahil olmak üzere mevcut tüm uygulama verilerinin üzerine yazılacaktır. Bu eylem geri alınamaz. Devam etmek istediğinizden emin misiniz?</string>
+    <string name="action_confirm_import">İçe Aktar</string>
 </resources>
