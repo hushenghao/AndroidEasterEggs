@@ -63,7 +63,6 @@
     <string name="rocket_launcher_all_app_icons">所有应用图标</string>
     <string name="rocket_launcher_all_icons">所有图标</string>
     <string name="rocket_launcher_query_all_app_desc">需要获取所有应用列表</string>
-
     <string name="label_data_backup">数据备份与恢复</string>
     <string name="pref_data_backup_desc">导出或导入用户数据</string>
     <string name="action_export_backup">导出备份</string>
