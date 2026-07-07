@@ -63,4 +63,17 @@
     <string name="rocket_launcher_all_app_icons">Aplikasi</string>
     <string name="rocket_launcher_all_icons">Easter eggs dan aplikasi</string>
     <string name="rocket_launcher_query_all_app_desc">Perlu mendapatkan daftar aplikasi yang ditampilkan di beranda</string>
+    <string name="label_data_backup">Cadangan data &amp; pulihkan</string>
+    <string name="pref_data_backup_desc">Ekspor atau impor data pengguna</string>
+    <string name="action_export_backup">Ekspor Cadangan</string>
+    <string name="action_export_backup_desc">Simpan pengaturan, cats, dan konfigurasi widget ke dalam sebuah berkas</string>
+    <string name="action_import_backup">Impor cadangan</string>
+    <string name="action_import_backup_desc">Pulihkan dari file cadangan yang telah diekspor sebelumnya</string>
+    <string name="toast_backup_success">Cadangan berhasil diekspor</string>
+    <string name="toast_restore_success">Pemulihan selesai. Aplikasi akan dimulai ulang.</string>
+    <string name="toast_backup_failed">Cadangan gagal: %s</string>
+    <string name="toast_restore_failed">Pemulihan gagal: %s</string>
+    <string name="dialog_import_backup_title">Impor cadangan</string>
+    <string name="dialog_import_backup_message">Tindakan ini akan menimpa semua data aplikasi saat ini, termasuk pengaturan, cats yang disimpan, dan konfigurasi widget. Tindakan ini tidak dapat dibatalkan. Apakah Anda yakin ingin melanjutkan?</string>
+    <string name="action_confirm_import">Impor</string>
 </resources>
