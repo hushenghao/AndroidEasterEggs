@@ -392,6 +392,31 @@ if (ship.thrust != Vec2.Zero) {
 ship.landing = landing
 ```
 
+### DYNAMIC_ZOOM global state not reset on destroy
+
+**File**: `landroid/MainActivity.kt` and `landroid/DreamUniverse.kt`  
+**Issue**: `DYNAMIC_ZOOM` is a top-level `var` that persists across Activity/DreamService
+lifecycles. When autopilot is toggled ON (or screensaver starts), it is set to `true`,
+but never reset to `false` on destroy. Re-entering the page causes the camera zoom
+to still dynamically adjust based on distance.  
+**Fix**: Reset `DYNAMIC_ZOOM = false` in `onDestroy()` of both classes:
+
+```kotlin
+// In MainActivity.kt:
+override fun onDestroy() {
+    notifier?.cancel()
+    DYNAMIC_ZOOM = false
+    super.onDestroy()
+}
+
+// In DreamUniverse.kt:
+override fun onDestroy() {
+    notifier?.cancel()
+    DYNAMIC_ZOOM = false
+    super.onDestroy()
+}
+```
+
 ### UniverseProgressNotifier live-update notification
 
 **File**: `landroid/UniverseProgressNotifier.kt`  

@@ -357,6 +357,11 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun onDestroy() {
+        DYNAMIC_ZOOM = false
+        super.onDestroy()
+    }
+
     private fun onWindowLayoutInfoChange() {
         val windowInfoTracker = WindowInfoTracker.getOrCreate(this@MainActivity)
 

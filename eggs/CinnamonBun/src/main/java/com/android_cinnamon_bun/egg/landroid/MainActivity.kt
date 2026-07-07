@@ -384,6 +384,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         notifier?.cancel()
+        DYNAMIC_ZOOM = false
         super.onDestroy()
     }
 }

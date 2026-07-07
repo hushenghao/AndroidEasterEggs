@@ -117,4 +117,9 @@ class DreamUniverse : DreamService() {
         super.onDreamingStopped()
         lifecycleOwner.onStop()
     }
+
+    override fun onDestroy() {
+        DYNAMIC_ZOOM = false
+        super.onDestroy()
+    }
 }
