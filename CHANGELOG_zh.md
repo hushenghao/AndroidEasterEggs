@@ -4,6 +4,7 @@
 
 - 添加更多启动动画
 - 新增数据备份与恢复功能
+- 修复 landroid 自动驾驶退出后视角缩放未恢复的问题 [#913](https://github.com/hushenghao/AndroidEasterEggs/issues/913)
 
 ### v5.2.0 (2026-07-01)
 

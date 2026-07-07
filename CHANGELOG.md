@@ -4,6 +4,7 @@
 
 - Add more SplashScreen icon
 - Add data backup and restore feature
+- Fix landroid camera zoom not resetting after exiting autopilot [#913](https://github.com/hushenghao/AndroidEasterEggs/issues/913)
 
 ### v5.2.0 (2026-07-01)
 
