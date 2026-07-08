@@ -63,4 +63,17 @@
     <string name="rocket_launcher_all_app_icons">Приложения</string>
     <string name="rocket_launcher_all_icons">Пасхальные яйца и приложения</string>
     <string name="rocket_launcher_query_all_app_desc">Нужно получить список приложений, отображаемых на главном экране</string>
+    <string name="label_data_backup">Резервное копирование и восстановление данных</string>
+    <string name="pref_data_backup_desc">Экспорт или импорт пользовательских данных</string>
+    <string name="action_export_backup">Экспорт резервной копии</string>
+    <string name="action_export_backup_desc">Сохранить настройки, кошек и конфигурацию виджетов в файл</string>
+    <string name="action_import_backup">Импорт резервной копии</string>
+    <string name="action_import_backup_desc">Восстановление из ранее экспортированного файла резервной копии</string>
+    <string name="toast_backup_success">Резервная копия успешно экспортирована</string>
+    <string name="toast_restore_success">Восстановление завершено. Приложение будет перезапущено.</string>
+    <string name="toast_backup_failed">Резервное копирование не удалось: %s</string>
+    <string name="toast_restore_failed">Восстановление не удалось: %s</string>
+    <string name="dialog_import_backup_title">Импорт резервной копии</string>
+    <string name="dialog_import_backup_message">Это перезапишет все текущие данные приложения, включая настройки, кошек и конфигурацию виджетов. Это действие нельзя будет отменить. Вы уверены, что хотите продолжить?</string>
+    <string name="action_confirm_import">Импорт</string>
 </resources>
