@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.4.0"
-ksp = "2.3.9"
+ksp = "2.3.10"
 agp = "9.2.1"
 # https://github.com/google/dagger
 hilt = "2.60"
