@@ -1,4 +1,4 @@
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.composable.colorpicker
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.VectorConverter
@@ -28,24 +28,21 @@ import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toIntSize
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getHighlightColor
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getHsvPaletteColorByPoint
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getHsvPalettePointByColor
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.rangeHsvPaletteColor
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.rangeHsvPalettePoint
 import kotlinx.coroutines.launch
 
-
-private const val TAG = "ColorHsvPalette"
-
-/**
- * A color palette that allows users to select a color using HSV (Hue, Saturation, Value) model.
- */
-@Preview
 @Composable
-internal fun ColorHsvPalette(
+fun ColorHsvPalette(
     modifier: Modifier = Modifier,
     defaultColor: Color = Color.White,
-    onColorChanged: (hvs: Color, hue: Float, saturation: Float) -> Unit = { _, _, _ -> }
+    onColorChanged: (hsv: Color, hue: Float, saturation: Float) -> Unit = { _, _, _ -> },
 ) {
     val performColorChanged by rememberUpdatedState(onColorChanged)
 
@@ -57,7 +54,7 @@ internal fun ColorHsvPalette(
 
     LaunchedEffect(defaultColor) {
         if (defaultColor != paletteColor) {
-            paletteColor = Utilities.rangeHsvPaletteColor(defaultColor)
+            paletteColor = rangeHsvPaletteColor(defaultColor)
             onDefaultColorUpdate = true
         }
     }
@@ -68,8 +65,8 @@ internal fun ColorHsvPalette(
     val touchStrokeWidth = with(LocalDensity.current) { 1.5.dp.toPx() }
 
     fun onTouched(anim: Boolean, position: Offset, size: IntSize) {
-        val pos = Utilities.rangeHsvPalettePoint(position, size)
-        val hsv = Utilities.getHsvPaletteColorByPoint(pos, size)
+        val pos = rangeHsvPalettePoint(position, size)
+        val hsv = getHsvPaletteColorByPoint(pos, size)
 
         val hue = hsv[0]
         val saturation = hsv[1]
@@ -108,20 +105,20 @@ internal fun ColorHsvPalette(
             colors = listOf(
                 Color.Red, Color.Magenta,
                 Color.Blue, Color.Cyan,
-                Color.Green, Color.Yellow, Color.Red
-            )
+                Color.Green, Color.Yellow, Color.Red,
+            ),
         )
         drawCircle(sweep)
         val radial = Brush.radialGradient(
             colors = listOf(Color.White, Color(0x00FFFFFF)),
-            tileMode = TileMode.Clamp
+            tileMode = TileMode.Clamp,
         )
         drawCircle(radial)
 
         if (onDefaultColorUpdate) {
             onDefaultColorUpdate = false
 
-            val point = Utilities.getHsvPalettePointByColor(paletteColor, size.toIntSize())
+            val point = getHsvPalettePointByColor(paletteColor, size.toIntSize())
             scope.launch {
                 palettePoint.animateTo(point)
             }
@@ -134,15 +131,13 @@ internal fun ColorHsvPalette(
                     color = paletteColor,
                     radius = touchCircleRadius,
                     center = palettePoint.value,
-                    style = Fill
+                    style = Fill,
                 )
                 drawCircle(
-                    color = Utilities.getHighlightColor(paletteColor),
+                    color = getHighlightColor(paletteColor),
                     radius = touchCircleRadius,
                     center = palettePoint.value,
-                    style = Stroke(
-                        width = touchStrokeWidth,
-                    )
+                    style = Stroke(width = touchStrokeWidth),
                 )
             }
         }

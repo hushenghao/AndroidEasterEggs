@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.composable.colorpicker
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -24,13 +24,13 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun LinearGradientSlider(
+fun LinearGradientSlider(
     modifier: Modifier = Modifier,
     value: Float,
     startColor: Color,
     endColor: Color,
     onValueChange: (Float) -> Unit,
-    onValueChangeFinished: () -> Unit = {}
+    onValueChangeFinished: () -> Unit = {},
 ) {
     val sliderColors = SliderDefaults.colors()
     val interactionSource = remember { MutableInteractionSource() }
@@ -68,7 +68,6 @@ internal fun LinearGradientSlider(
         },
         value = animValue,
         onValueChange = onValueChange,
-        onValueChangeFinished = onValueChangeFinished
+        onValueChangeFinished = onValueChangeFinished,
     )
-
 }

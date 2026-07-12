@@ -44,6 +44,7 @@ import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.reme
 import com.dede.android_eggs.cat_editor.CatParts.VIEW_PORT_SIZE
 import com.dede.android_eggs.cat_editor.Utilities.asAndroidMatrix
 import com.dede.android_eggs.cat_editor.Utilities.toInvert
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import dev.shreyaspatil.capturable.capturable
 import kotlin.math.max
 import kotlin.math.min
@@ -159,8 +160,8 @@ internal fun CatEditor(
             val partColorBlend: (index: Int) -> Color = { index ->
                 var color = colors[index]
                 if (selectedPart == index) {
-                    val blend = Utilities.getHighlightColor(color)
-                    color = Utilities.blendColor(color, blend, blendRatio)
+                    val blend = ColorPickerUtilities.getHighlightColor(color)
+                    color = ColorPickerUtilities.blendColor(color, blend, blendRatio)
                 }
                 color
             }

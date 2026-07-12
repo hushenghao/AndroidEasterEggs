@@ -26,7 +26,7 @@ object ThemePrefUtil {
     fun apply(context: Context) {
         var mode = getThemeModeValue(context)
         themeModeState.intValue = mode
-        DynamicColorPrefUtil.apply(context)
+        ColorSourcePrefUtil.apply(context)
 
         if (mode == AMOLED) {
             mode = DARK

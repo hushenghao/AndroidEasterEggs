@@ -14,9 +14,44 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import com.dede.android_eggs.views.settings.compose.prefs.DynamicColorPrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 
+
+@Composable
+fun resolveColorScheme(
+    themeMode: Int,
+    source: Int,
+    seedColor: Int,
+): ColorScheme {
+    val isDark = if (themeMode == ThemePrefUtil.FOLLOW_SYSTEM) {
+        isSystemInDarkTheme()
+    } else {
+        themeMode == ThemePrefUtil.DARK || themeMode == ThemePrefUtil.AMOLED
+    }
+    val colorScheme = when (source) {
+        ColorSourcePrefUtil.SOURCE_CUSTOM -> {
+            generateColorSchemeFromSeed(seedColor, isDark)
+        }
+        ColorSourcePrefUtil.SOURCE_DYNAMIC -> {
+            if (ColorSourcePrefUtil.isDynamicColorSupported()) {
+                val context: Context = LocalContext.current
+                if (isDark) dynamicDarkColorScheme(context)
+                else dynamicLightColorScheme(context)
+            } else {
+                if (isDark) darkScheme else lightScheme
+            }
+        }
+        else -> {
+            if (isDark) darkScheme else lightScheme
+        }
+    }
+    return if (themeMode == ThemePrefUtil.AMOLED) {
+        colorScheme.toAmoled()
+    } else {
+        colorScheme
+    }
+}
 
 fun ColorScheme.toAmoled(): ColorScheme {
     fun Color.darken(fraction: Float = 0.5f): Color =
@@ -45,7 +80,7 @@ fun ColorScheme.toAmoled(): ColorScheme {
         inverseSurface = inverseSurface.darken(),
         inverseOnSurface = inverseOnSurface.darken(0.2f),
         outline = outline.darken(0.2f),
-        outlineVariant = outlineVariant.darken(0.2f)
+        outlineVariant = outlineVariant.darken(0.2f),
     )
 }
 
@@ -132,42 +167,26 @@ internal var currentColorScheme: ColorScheme = lightScheme
 fun EasterEggsTheme(
     content: @Composable () -> Unit
 ) {
-    // Read reactive states inside the composable body for proper snapshot tracking
     val currentThemeMode by ThemePrefUtil.themeModeState
-    val currentDynamicColorEnabled by DynamicColorPrefUtil.isDynamicColorEnabledState
+    val currentColorSource by ColorSourcePrefUtil.colorSourceState
     EasterEggsTheme(
         themeMode = currentThemeMode,
-        isDynamicColorEnabled = currentDynamicColorEnabled,
-        content = content
+        colorSourcePacked = currentColorSource,
+        content = content,
     )
 }
 
 @Composable
 fun EasterEggsTheme(
     themeMode: Int,
-    isDynamicColorEnabled: Boolean,
+    colorSourcePacked: Int,
     updateGlobalColorScheme: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-    var nightModeValue = themeMode
-    if (nightModeValue == ThemePrefUtil.FOLLOW_SYSTEM) {
-        nightModeValue = if (isSystemInDarkTheme()) ThemePrefUtil.DARK else ThemePrefUtil.LIGHT
-    }
+    val colorSource = ColorSourcePrefUtil.decodeSource(colorSourcePacked)
+    val customSeedColor = ColorSourcePrefUtil.decodeSeedColor(colorSourcePacked)
+    val colors = resolveColorScheme(themeMode, colorSource, customSeedColor)
 
-    val colors = if (DynamicColorPrefUtil.isSupported() && isDynamicColorEnabled) {
-        val context: Context = LocalContext.current
-        when (nightModeValue) {
-            ThemePrefUtil.AMOLED -> dynamicDarkColorScheme(context).toAmoled()
-            ThemePrefUtil.DARK -> dynamicDarkColorScheme(context)
-            else -> dynamicLightColorScheme(context)
-        }
-    } else {
-        when (nightModeValue) {
-            ThemePrefUtil.AMOLED -> darkScheme.toAmoled()
-            ThemePrefUtil.DARK -> darkScheme
-            else -> lightScheme
-        }
-    }
     LaunchedEffect(updateGlobalColorScheme, colors) {
         if (updateGlobalColorScheme) {
             currentColorScheme = colors.copy()
@@ -175,6 +194,6 @@ fun EasterEggsTheme(
     }
     MaterialTheme(
         colorScheme = colors,
-        content = content
+        content = content,
     )
 }

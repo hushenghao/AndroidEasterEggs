@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.os.BundleCompat
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.util.applyIf
 
 /**
@@ -94,7 +95,7 @@ internal class CatEditorRecords(private val maxSize: Int, recordIndex: Int = 0) 
                 prefix = "[",
                 separator = ",",
                 postfix = "]"
-            ) { Utilities.getHexColor(it, true) }
+            ) { ColorPickerUtilities.getHexColor(it, true) }
             return "ColorRecord(colors=$colorsStr, seed=$seed)"
         }
 

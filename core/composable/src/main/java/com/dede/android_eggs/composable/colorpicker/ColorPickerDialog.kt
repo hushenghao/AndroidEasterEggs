@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.composable.colorpicker
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -48,22 +48,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.cat_editor.Utilities.getHsv
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.copy
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 
 @Composable
-fun ColorPaletteDialog(
+fun ColorPickerDialog(
     visible: Boolean,
-    selectedColor: Color = Color.White,
-    withAlphaPalette: Boolean = true,
-    onColorSelected: (color: Color) -> Unit = {},
+    initialColor: Color = Color.White,
+    withAlphaPalette: Boolean = false,
+    onColorSelected: (Color) -> Unit = {},
     isColorStrawEnabled: Boolean = true,
     onColorStrawClick: () -> Unit = {},
     onDismiss: () -> Unit = {},
@@ -76,47 +75,44 @@ fun ColorPaletteDialog(
 
     val performColorSelected by rememberUpdatedState(onColorSelected)
 
+    val hsv = colorToHsv(initialColor)
+    var hue by remember { mutableFloatStateOf(hsv[0]) }
+    var saturation by remember { mutableFloatStateOf(hsv[1]) }
+    var value by remember { mutableFloatStateOf(hsv[2]) }
+    var alpha by remember {
+        mutableFloatStateOf(if (withAlphaPalette) initialColor.alpha else 1f)
+    }
+    var hsvColor by remember { mutableStateOf(Color.hsv(hue, saturation, 1f)) }
+
+    val finalColor =
+        remember(hue, saturation, value, alpha) { Color.hsv(hue, saturation, value, alpha) }
+
+    val context = LocalContext.current
+
+    val scope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
+
+    val paddingValues = BottomSheetDefaults.modalWindowInsets.asPaddingValues()
+
     ModalBottomSheet(
         modifier = Modifier.sizeIn(maxWidth = 420.dp),
         sheetState = sheetState,
         onDismissRequest = onDismiss,
-        contentWindowInsets = {
-            // add child padding
-            WindowInsets(0, 0, 0, 0)
-        }
+        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
     ) {
-        val hsv = selectedColor.getHsv()
-        var hue by remember { mutableFloatStateOf(hsv[0]) }
-        var saturation by remember { mutableFloatStateOf(hsv[1]) }
-        var value by remember { mutableFloatStateOf(hsv[2]) }
-        var alpha by remember {
-            mutableFloatStateOf(if (withAlphaPalette) selectedColor.alpha else 1f)
-        }
-        var hsvColor by remember { mutableStateOf(Color.hsv(hue, saturation, 1f)) }
-
-        val finalColor =
-            remember(hue, saturation, value, alpha) { Color.hsv(hue, saturation, value, alpha) }
-
-        val context = LocalContext.current
-
-        val scope = rememberCoroutineScope()
-        val scrollState = rememberScrollState()
-
-        val paddingValues = BottomSheetDefaults.modalWindowInsets.asPaddingValues()
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(state = scrollState)
                 .padding(horizontal = 20.dp)
-                .padding(bottom = 20.dp + paddingValues.calculateBottomPadding())
+                .padding(bottom = 20.dp + paddingValues.calculateBottomPadding()),
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 Box(
-                    modifier = Modifier.clip(IconShapePrefUtil.getIconShape()),
+                    modifier = Modifier.clip(MaterialTheme.shapes.small),
                     contentAlignment = Alignment.Center,
                 ) {
                     Checkerboard(
@@ -125,11 +121,12 @@ fun ColorPaletteDialog(
                             .drawWithContent {
                                 drawContent()
                                 drawRect(finalColor)
-                            })
+                            },
+                    )
                     Icon(
                         imageVector = Icons.Rounded.Palette,
                         contentDescription = null,
-                        tint = Utilities.getHighlightColor(finalColor)
+                        tint = ColorPickerUtilities.getHighlightColor(finalColor),
                     )
                 }
 
@@ -137,7 +134,7 @@ fun ColorPaletteDialog(
 
                 Card(
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
+                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
                     ),
                 ) {
                     Row(
@@ -146,13 +143,13 @@ fun ColorPaletteDialog(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
-                            text = Utilities.getHexColor(finalColor, withAlphaPalette),
+                            text = ColorPickerUtilities.getHexColor(finalColor, withAlphaPalette),
                             style = MaterialTheme.typography.titleLarge,
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier.weight(1f),
                         )
 
                         FilledTonalIconButton(
-                            shape = IconShapePrefUtil.getIconShape(),
+                            shape = MaterialTheme.shapes.small,
                             onClick = {
                                 val h = Random.nextFloat() * 360f
                                 val s = Random.nextFloat()
@@ -161,26 +158,25 @@ fun ColorPaletteDialog(
                                 saturation = s
                                 value = v
                                 hsvColor = Color.hsv(hue, saturation, 1f)
-                            }
+                            },
                         ) {
                             Icon(
                                 imageVector = Icons.Rounded.Shuffle,
-                                contentDescription = null
+                                contentDescription = null,
                             )
                         }
 
                         FilledTonalIconButton(
-                            shape = IconShapePrefUtil.getIconShape(),
+                            shape = MaterialTheme.shapes.small,
                             onClick = {
-                                context.copy(Utilities.getHexColor(finalColor, withAlphaPalette))
-                            }
+                                context.copy(ColorPickerUtilities.getHexColor(finalColor, withAlphaPalette))
+                            },
                         ) {
                             Icon(
                                 imageVector = Icons.Rounded.ContentCopy,
-                                contentDescription = stringResource(android.R.string.copy)
+                                contentDescription = stringResource(android.R.string.copy),
                             )
                         }
-
                     }
                 }
             }
@@ -201,25 +197,25 @@ fun ColorPaletteDialog(
                         hue = h
                         saturation = s
                         hsvColor = hsv
-                    }
+                    },
                 )
 
                 if (isColorStrawEnabled) {
                     FilledTonalIconButton(
                         modifier = Modifier
                             .align(Alignment.BottomEnd),
-                        shape = IconShapePrefUtil.getIconShape(),
+                        shape = MaterialTheme.shapes.small,
                         onClick = {
                             scope.launch {
                                 sheetState.hide()
                                 onDismiss()
                                 onColorStrawClick()
                             }
-                        }
+                        },
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Colorize,
-                            contentDescription = null
+                            contentDescription = null,
                         )
                     }
                 }
@@ -234,7 +230,7 @@ fun ColorPaletteDialog(
                 endColor = hsvColor,
                 onValueChange = { newValue ->
                     value = newValue
-                }
+                },
             )
 
             if (withAlphaPalette) {
@@ -245,14 +241,14 @@ fun ColorPaletteDialog(
                     endColor = hsvColor,
                     onValueChange = { newValue ->
                         alpha = newValue
-                    }
+                    },
                 )
             }
 
             Spacer(modifier = Modifier.height(12.dp))
 
             Row(
-                modifier = Modifier.align(Alignment.End)
+                modifier = Modifier.align(Alignment.End),
             ) {
                 Button(
                     onClick = {
@@ -260,7 +256,7 @@ fun ColorPaletteDialog(
                             sheetState.hide()
                             onDismiss()
                         }
-                    }
+                    },
                 ) {
                     Text(text = stringResource(android.R.string.cancel))
                 }
@@ -272,7 +268,7 @@ fun ColorPaletteDialog(
                         scope.launch {
                             sheetState.hide()
                             onDismiss()
-                            if (selectedColor != finalColor) {
+                            if (initialColor != finalColor) {
                                 performColorSelected(finalColor)
                             }
                         }
@@ -283,4 +279,10 @@ fun ColorPaletteDialog(
             }
         }
     }
+}
+
+private fun colorToHsv(color: Color): FloatArray {
+    val hsv = floatArrayOf(0f, 0f, 1f)
+    android.graphics.Color.colorToHSV(color.toArgb(), hsv)
+    return hsv
 }

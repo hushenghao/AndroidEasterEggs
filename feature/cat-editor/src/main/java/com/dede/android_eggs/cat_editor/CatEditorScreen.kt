@@ -102,6 +102,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
 import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEditorRecords
+import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.ui.composes.icons.rounded.Cat
@@ -482,7 +484,7 @@ fun CatEditorScreen() {
             val eyeDropperLauncher =
                 rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) eyeDropperResult@{
                     if (it.resultCode == Activity.RESULT_OK) {
-                        val colorInt = it.data?.getIntExtra(Utilities.EXTRA_COLOR, 0) ?: 0
+                        val colorInt = it.data?.getIntExtra(ColorPickerUtilities.EXTRA_COLOR, 0) ?: 0
                         if (colorInt != 0) {
                             if (!catEditorController.hasSelectedPart) {
                                 return@eyeDropperResult
@@ -499,12 +501,13 @@ fun CatEditorScreen() {
                         }
                     }
                 }
-            ColorPaletteDialog(
+            ColorPickerDialog(
                 visible = colorPaletteVisible,
-                selectedColor = catEditorController.getSelectedPartColor(Color.White),
+                initialColor = catEditorController.getSelectedPartColor(Color.White),
+                withAlphaPalette = true,
                 onColorSelected = { color ->
                     if (!catEditorController.hasSelectedPart) {
-                        return@ColorPaletteDialog
+                        return@ColorPickerDialog
                     }
 
                     catEditorController.setSelectedPartColor(color)
@@ -515,9 +518,9 @@ fun CatEditorScreen() {
                         )
                     )
                 },
-                isColorStrawEnabled = remember { Utilities.isEyeDropperSupported(context) },
+                isColorStrawEnabled = remember { ColorPickerUtilities.isEyeDropperSupported(context) },
                 onColorStrawClick = {
-                    val intent = Intent(Utilities.ACTION_OPEN_EYE_DROPPER)
+                    val intent = Intent(ColorPickerUtilities.ACTION_OPEN_EYE_DROPPER)
                     eyeDropperLauncher.launch(intent)
                 },
                 onDismiss = { colorPaletteVisible = false }

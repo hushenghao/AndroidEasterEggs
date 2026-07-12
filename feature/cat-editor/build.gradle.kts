@@ -18,6 +18,7 @@ dependencies {
     implementation(project(":core:navigation"))
     implementation(project(":core:icons"))
     implementation(project(":core:settings"))
+    implementation(project(":core:composable"))
 
     implementation(libs.androidx.core)
     implementation(libs.google.material)

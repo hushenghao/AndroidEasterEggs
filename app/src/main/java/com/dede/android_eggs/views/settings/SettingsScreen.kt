@@ -56,6 +56,7 @@ import com.dede.android_eggs.views.settings.compose.prefs.DataBackupPref
 import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPref
 import com.dede.android_eggs.views.settings.compose.prefs.RocketLauncherPref
 import com.dede.android_eggs.views.settings.compose.prefs.SnapshotPref
+import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePref
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePref
 import com.dede.android_eggs.views.settings.compose.prefs.TimelinePref
 import com.dede.android_eggs.views.settings.compose.prefs.WidgetsPref
@@ -119,6 +120,8 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
         ) {
             val context = LocalContext.current
             ThemePref()
+
+            ColorSourcePref()
 
             AppIconPref()
 

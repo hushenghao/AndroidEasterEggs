@@ -1,8 +1,6 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.BrightnessAuto
 import androidx.compose.material.icons.rounded.Brush
@@ -58,7 +56,7 @@ fun ThemePref() {
             shape = OptionShapes.firstShape(),
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.BrightnessAuto,
-                contentDescription = stringResource(StringsR.string.summary_system_default)
+                contentDescription = stringResource(StringsR.string.summary_system_default),
             ),
             title = stringResource(StringsR.string.summary_system_default),
             trailingContent = radioButtonBlock(themeModeValue == FOLLOW_SYSTEM),
@@ -68,7 +66,7 @@ fun ThemePref() {
         ValueOption(
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.LightMode,
-                contentDescription = stringResource(StringsR.string.summary_theme_light_mode)
+                contentDescription = stringResource(StringsR.string.summary_theme_light_mode),
             ),
             title = stringResource(StringsR.string.summary_theme_light_mode),
             trailingContent = radioButtonBlock(themeModeValue == LIGHT),
@@ -78,7 +76,7 @@ fun ThemePref() {
         ValueOption(
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.DarkMode,
-                contentDescription = stringResource(StringsR.string.summary_theme_dark_mode)
+                contentDescription = stringResource(StringsR.string.summary_theme_dark_mode),
             ),
             title = stringResource(StringsR.string.summary_theme_dark_mode),
             trailingContent = radioButtonBlock(themeModeValue == DARK),
@@ -89,19 +87,13 @@ fun ThemePref() {
             shape = OptionShapes.lastShape(),
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.Contrast,
-                contentDescription = stringResource(id = StringsR.string.summary_theme_amoled_mode)
+                contentDescription = stringResource(id = StringsR.string.summary_theme_amoled_mode),
             ),
             title = stringResource(id = StringsR.string.summary_theme_amoled_mode),
             trailingContent = radioButtonBlock(themeModeValue == AMOLED),
             value = AMOLED,
             onOptionClick = onOptionClick,
         )
-
-        if (DynamicColorPrefUtil.isSupported()) {
-            Spacer(modifier = Modifier.height(1.dp))
-
-            DynamicColorPref()
-        }
 
     }
 }

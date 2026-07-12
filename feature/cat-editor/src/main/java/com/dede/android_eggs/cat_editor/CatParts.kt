@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.PathBuilder
 import androidx.compose.ui.graphics.vector.toPath
 import com.dede.android_eggs.cat_editor.Utilities.getRegion
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.basic.trimZeroAndDot
 import android.graphics.Canvas as AndroidCanvas
 
@@ -428,7 +429,7 @@ internal object CatParts {
         override fun toSvgNode(color: Color): String {
             return SvgParts.FORMAT_PATH_STROKE.format(
                 name, pathData, strokeWidth.toString().trimZeroAndDot(),
-                Utilities.getHexColor(color, color.alpha < 1f)
+                ColorPickerUtilities.getHexColor(color, color.alpha < 1f)
             )
         }
     }
@@ -451,7 +452,7 @@ internal object CatParts {
         override fun toSvgNode(color: Color): String {
             return SvgParts.FORMAT_PATH.format(
                 name, pathData,
-                Utilities.getHexColor(color, color.alpha < 1f)
+                ColorPickerUtilities.getHexColor(color, color.alpha < 1f)
             )
         }
     }

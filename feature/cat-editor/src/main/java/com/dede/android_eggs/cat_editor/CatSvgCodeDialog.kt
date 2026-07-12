@@ -38,7 +38,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.cat_editor.Utilities.toColorOrNull
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.blendColor
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.toColorOrNull
 import com.dede.basic.copy
 
 @Composable
@@ -102,7 +103,7 @@ internal fun CatSvgCodeDialog(
                 val text = buildXmlAnnotatedString(
                     xml = svg,
                     highlightColor = colorScheme.primary,
-                    attributeNameColor = Utilities.blendColor(
+                    attributeNameColor = blendColor(
                         colorScheme.tertiary,
                         colorScheme.surface,
                         0.3f
