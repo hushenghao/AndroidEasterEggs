@@ -1,24 +1,30 @@
 package com.dede.android_eggs.ui.composes
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.os.Build
+import android.window.BackEvent
+import android.window.OnBackAnimationCallback
+import android.window.OnBackInvokedCallback
+import android.window.OnBackInvokedDispatcher
 import androidx.compose.animation.core.animate
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.GraphicsLayerScope
 import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.toOffset
-import androidx.navigationevent.NavigationEventInfo
-import androidx.navigationevent.NavigationEventTransitionState
-import androidx.navigationevent.compose.NavigationBackHandler
-import androidx.navigationevent.compose.rememberNavigationEventState
 import kotlinx.coroutines.launch
 
 object PredictiveBackProgressHandler {
@@ -50,6 +56,7 @@ object PredictiveBackProgressHandler {
     }
 }
 
+@SuppressLint("NewApi")
 @Composable
 fun predictiveBackProgressState(
     enabled: Boolean,
@@ -59,34 +66,74 @@ fun predictiveBackProgressState(
     val progressState = remember { mutableFloatStateOf(0f) }
     var progress by progressState
 
-    val navState = rememberNavigationEventState(NavigationEventInfo.None)
-    LaunchedEffect(navState.transitionState) {
-        when (val state = navState.transitionState) {
-            is NavigationEventTransitionState.InProgress -> {
-                progress = state.latestEvent.progress
+    val scope = rememberCoroutineScope()
+
+    val currentOnBack by rememberUpdatedState(onBack)
+    val currentBackEndValue by rememberUpdatedState(backEndValue)
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+        val context = LocalContext.current
+        val activity = context as? Activity ?: return progressState
+        val dispatcher = activity.onBackInvokedDispatcher
+        val callback = remember {
+            object : OnBackAnimationCallback {
+                override fun onBackProgressed(backEvent: BackEvent) {
+                    progress = backEvent.progress
+                }
+
+                override fun onBackStarted(backEvent: BackEvent) {
+                    progress = backEvent.progress
+                }
+
+                override fun onBackInvoked() {
+                    scope.launch {
+                        currentOnBack()
+                        progress = currentBackEndValue(progress)
+                    }
+                }
+
+                override fun onBackCancelled() {
+                    scope.launch {
+                        animate(progress, 0f) { value, _ ->
+                            progress = value
+                        }
+                    }
+                }
             }
-            is NavigationEventTransitionState.Idle -> {
+        }
+        DisposableEffect(enabled) {
+            if (enabled) {
+                dispatcher.registerOnBackInvokedCallback(
+                    OnBackInvokedDispatcher.PRIORITY_DEFAULT, callback
+                )
+            }
+            onDispose {
+                dispatcher.unregisterOnBackInvokedCallback(callback)
+            }
+        }
+    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        val context = LocalContext.current
+        val activity = context as? Activity ?: return progressState
+        val dispatcher = activity.onBackInvokedDispatcher
+        val callback = remember {
+            OnBackInvokedCallback {
+                scope.launch {
+                    currentOnBack()
+                    progress = currentBackEndValue(progress)
+                }
+            }
+        }
+        DisposableEffect(enabled) {
+            if (enabled) {
+                dispatcher.registerOnBackInvokedCallback(
+                    OnBackInvokedDispatcher.PRIORITY_DEFAULT, callback
+                )
+            }
+            onDispose {
+                dispatcher.unregisterOnBackInvokedCallback(callback)
             }
         }
     }
-    val scope = rememberCoroutineScope()
-    NavigationBackHandler(
-        state = navState,
-        isBackEnabled = enabled,
-        onBackCompleted = {
-            scope.launch {
-                onBack()
-                progress = backEndValue(progress)
-            }
-        },
-        onBackCancelled = {
-            scope.launch {
-                animate(progress, 0f) { value, _ ->
-                    progress = value
-                }
-            }
-        },
-    )
 
     LaunchedEffect(enabled) {
         if (enabled) {
