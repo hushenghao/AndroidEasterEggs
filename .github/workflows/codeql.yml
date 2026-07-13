@@ -3,6 +3,22 @@ name: CodeQL
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'app/**'
+      - 'basic/**'
+      - 'core/**'
+      - 'feature/**'
+      - 'eggs/**'
+      - 'build-logic/**'
+      - 'jvm-basic/**'
+      - 'gradle/**'
+      - 'script/**/*.py'
+      - 'fastlane/**'
+      - 'Gemfile'
+      - 'Gemfile.lock'
+      - '*.kts'
+      - 'gradle.properties'
+      - '.github/workflows/codeql.yml'
   pull_request:
     branches: [ main ]
   schedule:
@@ -13,17 +29,32 @@ permissions:
   contents: read
   security-events: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   analyze:
-    name: Analyze (Java/Kotlin)
+    name: Analyze (${{ matrix.language }})
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: java-kotlin
+            build-mode: manual
+          - language: python
+            build-mode: none
+          - language: ruby
+            build-mode: none
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
 
       - name: Set up JDK
+        if: matrix.language == 'java-kotlin'
         uses: actions/setup-java@v5
         with:
           java-version: '17'
@@ -33,10 +64,11 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: java-kotlin
-          build-mode: manual
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
 
-      - name: Build project for CodeQL
+      - name: Build project for CodeQL (Java/Kotlin)
+        if: matrix.language == 'java-kotlin'
         run: |
           chmod +x ./gradlew
           ./gradlew app:assembleFossAlphaDebug
@@ -44,4 +76,4 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
-          category: '/language:java-kotlin'
+          category: '/language:${{ matrix.language }}'
