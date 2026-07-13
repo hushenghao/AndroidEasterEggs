@@ -20,6 +20,7 @@
 </br>
 [![Crowdin](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fbadges.crowdin.net%2Feaster-eggs%2Flocalized.svg&query=%2F*%5Blocal-name()%3D'svg'%5D%2F*%5Blocal-name()%3D'g'%5D%2F*%5Blocal-name()%3D'text'%5D%5Blast()%5D&style=for-the-badge&logo=crowdin&label=Localized&labelColor=%23555&color=%234c1)](https://crowdin.com/project/easter-eggs)
 [![GitHub Pgyer CI status](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/pgyer.yml?logo=githubactions&logoColor=white&label=Pgyer%20CI&style=for-the-badge)](https://github.com/hushenghao/AndroidEasterEggs/actions/workflows/pgyer.yml)
+[![GitHub CodeQL Status](https://img.shields.io/github/actions/workflow/status/hushenghao/AndroidEasterEggs/codeql.yml?style=for-the-badge&label=CodeQL)](https://github.com/hushenghao/AndroidEasterEggs/security/code-scanning)
 
 </div>
 
