@@ -5,7 +5,6 @@ module, and run the smallest useful verification command.
 
 ## Repository Rules
 
-- Keep commit message style consistent with the existing project history.
 - Do not revert unrelated working tree changes.
 - Prefer focused fixes in the module or method named by the task.
 - Use `rg` / `rg --files` for code search.
@@ -135,45 +134,7 @@ Common verification commands:
 
 Prefer the smallest module-specific compile/test command that covers the change.
 
-## Commit Conventions
 
-**AI Submission Identifier**: AI-generated code commits should infer identity from runtime context first (`copilot` / `codex` / `opencode` / `gemini` / `claude`), then fall back to `opencode`. Only override per commit (never global config).
-
-The AI identity applies to the **committer** only; the **author** remains unchanged (the human developer's local git config).
-
-```sh
-AI_COMMIT_TOOL="<infer-from-runtime-context>" # copilot | codex | opencode | gemini | claude
-case "$AI_COMMIT_TOOL" in
-  opencode|codex|gemini|claude) AI_INFERRED_NAME="$AI_COMMIT_TOOL" ;;
-  copilot) AI_INFERRED_NAME="github" ;;
-  *) AI_INFERRED_NAME="opencode" ;;
-esac
-case "$AI_INFERRED_NAME" in
-  github) AI_INFERRED_EMAIL="noreply@github.com" ;;
-  *) AI_INFERRED_EMAIL="${AI_INFERRED_NAME}[bot]@users.noreply.github.com" ;;
-esac
-
-GIT_COMMITTER_NAME="$AI_INFERRED_NAME" \
-GIT_COMMITTER_EMAIL="$AI_INFERRED_EMAIL" \
-git commit -m "xxx"
-```
-
-The project uses **Conventional Commits** without scope parentheses. PR references
-appear as `(#NNN)` at the end.
-
-Observed types: `feat`, `fix`, `chore`, `build`, `ci`, `del`.
-
-Examples:
-```
-feat: New translations from Crowdin (#896)
-fix: CinnamonBun notification not dismissed on exit (#883)
-chore: Update dependencies
-build: Bump gradle-wrapper from 9.5.1 to 9.6.0 (#890)
-ci: Bump actions/checkout from 6 to 7 (#894)
-del: Remove easter egg log script
-```
-
-Do not invent new types. Match the existing style exactly.
 
 ## Coding Conventions
 
