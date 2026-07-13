@@ -5,8 +5,13 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: read
+
 jobs:
   github-release:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
 
     steps:
