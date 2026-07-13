@@ -1,5 +1,10 @@
 name: Crowdin Synchronize
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
 on:
   push:
     paths:
