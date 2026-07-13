@@ -183,7 +183,7 @@ private fun ColorSourceCard(
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.Edit,
-                        contentDescription = stringResource(StringsR.string.action_customize_color),
+                        contentDescription = stringResource(labelRes),
                         modifier = Modifier.size(16.dp),
                     )
                 }
