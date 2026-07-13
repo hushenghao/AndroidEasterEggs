@@ -52,7 +52,7 @@ unchanged (the human developer's local git config).
 AI_COMMIT_TOOL="<infer-from-runtime-context>"
 case "$AI_COMMIT_TOOL" in
   opencode|codex|gemini|claude) AI_INFERRED_NAME="$AI_COMMIT_TOOL" ;;
-  copilot) AI_INFERRED_NAME="github" ;;
+  copilot) AI_INFERRED_NAME="Github" ;;
   *) AI_INFERRED_NAME="opencode" ;;
 esac
 case "$AI_INFERRED_NAME" in
