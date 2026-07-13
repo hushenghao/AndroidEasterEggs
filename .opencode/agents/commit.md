@@ -3,6 +3,7 @@ description: Commits code following the project's commit conventions. Use when t
 mode: subagent
 permission:
   bash:
+    "*": deny
     "git status": allow
     "git diff": allow
     "git diff --cached": allow
@@ -12,7 +13,6 @@ permission:
     "git restore *": ask
     "git revert *": ask
     "git reset *": ask
-    "*": deny
   edit: allow
   read: allow
   glob: allow
