@@ -97,6 +97,7 @@ dependencies {
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
+    implementation(libs.androidx.navigationevent.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.livedata)
     implementation(libs.androidx.compose.ui)
