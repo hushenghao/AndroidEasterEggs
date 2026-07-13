@@ -5,12 +5,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.Palette
@@ -31,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -83,26 +86,26 @@ fun ColorSourcePref() {
 
     Column() {
 
-    ExpandOptionsPref(
-        leadingIcon = Icons.Rounded.Palette,
-        title = stringResource(StringsR.string.pref_title_color_source),
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ExpandOptionsPref(
+            leadingIcon = Icons.Rounded.Palette,
+            title = stringResource(StringsR.string.pref_title_color_source),
         ) {
-            options.forEach { source ->
-                ColorSourceCard(
-                    modifier = Modifier.weight(1f),
-                    source = source,
-                    selected = currentSource == source,
-                    colorSourcePacked = colorSourcePacked,
-                    onCardClick = { updateSource(source) },
-                    onEditClick = { showColorPicker = true },
-                )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                options.forEach { source ->
+                    ColorSourceCard(
+                        modifier = Modifier.weight(1f),
+                        source = source,
+                        selected = currentSource == source,
+                        colorSourcePacked = colorSourcePacked,
+                        onCardClick = { updateSource(source) },
+                        onEditClick = { showColorPicker = true },
+                    )
+                }
             }
         }
-    }
     }
 
     ColorPickerDialog(
@@ -160,6 +163,7 @@ private fun ColorSourceCard(
                 ThemeColorPreview(
                     scheme = scheme,
                     modifier = Modifier.size(48.dp),
+                    shape = IconShapePrefUtil.getIconShape(),
                 )
                 Text(
                     text = stringResource(labelRes),
@@ -193,10 +197,12 @@ private fun ColorSourceCard(
 private fun ThemeColorPreview(
     modifier: Modifier = Modifier,
     scheme: ColorScheme = colorScheme,
+    shape: Shape = CircleShape
 ) {
     Box(
         modifier = modifier
-            .clip(IconShapePrefUtil.getIconShape()),
+            .aspectRatio(1f)
+            .clip(shape),
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             Box(
@@ -226,7 +232,3 @@ private fun ThemeColorPreview(
         }
     }
 }
-
-private const val SOURCE_DEFAULT = SOURCE_DEFAULT
-private const val SOURCE_DYNAMIC = SOURCE_DYNAMIC
-private const val SOURCE_CUSTOM = SOURCE_CUSTOM

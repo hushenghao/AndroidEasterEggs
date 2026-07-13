@@ -2,6 +2,7 @@
 
 ### v5.2.1
 
+- Add custom seed color theme generation
 - Add more SplashScreen icon
 - Add data backup and restore feature
 - Fix landroid camera zoom not resetting after exiting autopilot [#913](https://github.com/hushenghao/AndroidEasterEggs/issues/913)

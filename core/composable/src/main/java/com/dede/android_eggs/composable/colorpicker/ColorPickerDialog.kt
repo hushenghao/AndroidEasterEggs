@@ -52,6 +52,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.copy
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -112,7 +113,7 @@ fun ColorPickerDialog(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Box(
-                    modifier = Modifier.clip(MaterialTheme.shapes.small),
+                    modifier = Modifier.clip(IconShapePrefUtil.getIconShape()),
                     contentAlignment = Alignment.Center,
                 ) {
                     Checkerboard(
@@ -149,7 +150,7 @@ fun ColorPickerDialog(
                         )
 
                         FilledTonalIconButton(
-                            shape = MaterialTheme.shapes.small,
+                            shape = IconShapePrefUtil.getIconShape(),
                             onClick = {
                                 val h = Random.nextFloat() * 360f
                                 val s = Random.nextFloat()
@@ -167,7 +168,7 @@ fun ColorPickerDialog(
                         }
 
                         FilledTonalIconButton(
-                            shape = MaterialTheme.shapes.small,
+                            shape = IconShapePrefUtil.getIconShape(),
                             onClick = {
                                 context.copy(ColorPickerUtilities.getHexColor(finalColor, withAlphaPalette))
                             },
@@ -204,7 +205,7 @@ fun ColorPickerDialog(
                     FilledTonalIconButton(
                         modifier = Modifier
                             .align(Alignment.BottomEnd),
-                        shape = MaterialTheme.shapes.small,
+                        shape = IconShapePrefUtil.getIconShape(),
                         onClick = {
                             scope.launch {
                                 sheetState.hide()
