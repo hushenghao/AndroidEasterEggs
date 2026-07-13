@@ -139,17 +139,23 @@ Prefer the smallest module-specific compile/test command that covers the change.
 
 **AI Submission Identifier**: AI-generated code commits should infer identity from runtime context first (`copilot` / `codex` / `opencode` / `gemini` / `claude`), then fall back to `opencode`. Only override per commit (never global config).
 
+The AI identity applies to the **committer** only; the **author** remains unchanged (the human developer's local git config).
+
 ```sh
 AI_COMMIT_TOOL="<infer-from-runtime-context>" # copilot | codex | opencode | gemini | claude
 case "$AI_COMMIT_TOOL" in
-  copilot|codex|opencode|gemini|claude) AI_INFERRED_NAME="$AI_COMMIT_TOOL" ;;
+  opencode|codex|gemini|claude) AI_INFERRED_NAME="$AI_COMMIT_TOOL" ;;
+  copilot) AI_INFERRED_NAME="github" ;;
   *) AI_INFERRED_NAME="opencode" ;;
 esac
-AI_INFERRED_EMAIL="${AI_INFERRED_NAME}[bot]@users.noreply.github.com"
+case "$AI_INFERRED_NAME" in
+  github) AI_INFERRED_EMAIL="noreply@github.com" ;;
+  *) AI_INFERRED_EMAIL="${AI_INFERRED_NAME}[bot]@users.noreply.github.com" ;;
+esac
 
-git -c user.name="$AI_INFERRED_NAME" \
-    -c user.email="$AI_INFERRED_EMAIL" \
-    commit -m "xxx"
+GIT_COMMITTER_NAME="$AI_INFERRED_NAME" \
+GIT_COMMITTER_EMAIL="$AI_INFERRED_EMAIL" \
+git commit -m "xxx"
 ```
 
 The project uses **Conventional Commits** without scope parentheses. PR references
