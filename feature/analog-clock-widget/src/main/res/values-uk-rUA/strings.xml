@@ -6,4 +6,9 @@
     <string name="analog_clock_widget_action_open_egg">Відкрити яйце</string>
     <string name="analog_clock_widget_action_open_app">Відкрити програму</string>
     <string name="analog_clock_widget_action_none">Без дій</string>
+    <string name="analog_clock_widget_dial_style_title">Циферблат годинника</string>
+    <string name="analog_clock_widget_dial_style_summary">Виберіть стиль циферблата аналогового годинника.</string>
+    <string name="analog_clock_widget_dial_android_icons">Значки</string>
+    <string name="analog_clock_widget_dial_simple">Простий</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">СіннаБон</string>
 </resources>
