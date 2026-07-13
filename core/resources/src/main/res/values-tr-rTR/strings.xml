@@ -33,6 +33,9 @@
     <string name="summary_theme_dark_mode">Karanlık</string>
     <string name="summary_theme_light_mode">Aydınlık</string>
     <string name="summary_theme_amoled_mode">Siyah</string>
+    <string name="pref_title_color_source">Renk</string>
+    <string name="summary_color_source_dynamic">Dinamik</string>
+    <string name="summary_color_source_custom">Özel</string>
     <string name="label_add_shortcut">Kısayol</string>
     <string name="label_donate">Bağış Yap</string>
     <string name="label_update">Güncelle</string>
