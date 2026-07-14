@@ -111,7 +111,7 @@ fun EasterEggHighestItem(
             .format(context)
     }
     val apiLevel = remember(egg) {
-        EasterEggHelp.ApiLevelFormatter.create(egg.apiLevelRange).format(context)
+        EasterEggHelp.ApiLevelFormatter.create(egg.fullApiLevelRange).format(context)
     }
     val dateFormat = remember(egg, LocalConfiguration.current) {
         AppLocaleDateFormatter.getInstance("MMM yyyy")
@@ -197,7 +197,7 @@ fun EasterEggHighestItem(
                     if (LocalInspectionMode.current)
                         Date()
                     else
-                        AndroidReleaseDateMatcher.findReleaseDateByApiLevel(egg.apiLevel)
+                        AndroidReleaseDateMatcher.findReleaseDateByFullApiLevel(egg.fullApiLevel)
                 )
             )
         }
@@ -483,8 +483,8 @@ private fun EasterEggItemFloor(
         EasterEggHelp.VersionFormatter.create(egg.fullApiLevelRange)
             .format(content)
     }
-    val apiVersion = remember(egg.apiLevelRange, content) {
-        EasterEggHelp.ApiLevelFormatter.create(egg.apiLevelRange)
+    val apiVersion = remember(egg.fullApiLevelRange, content) {
+        EasterEggHelp.ApiLevelFormatter.create(egg.fullApiLevelRange)
             .format(content)
     }
     Row(

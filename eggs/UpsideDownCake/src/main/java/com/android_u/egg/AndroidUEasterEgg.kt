@@ -25,7 +25,7 @@ object AndroidUEasterEgg : EasterEggProvider {
             iconRes = R.drawable.u_android14_patch_adaptive,
             nameRes = R.string.u_egg_name,
             nicknameRes = R.string.u_android_nickname,
-            apiLevel = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+            fullApiLevel = Build.VERSION_CODES_FULL.UPSIDE_DOWN_CAKE,
             actionClass = PlatLogoActivity::class.java
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
@@ -41,7 +41,7 @@ object AndroidUEasterEgg : EasterEggProvider {
         return listOf(
             TimelineEvent(
                 2023, Calendar.SEPTEMBER,
-                Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+                Build.VERSION_CODES_FULL.UPSIDE_DOWN_CAKE,
                 "Upside Down Cake."
             )
         )

@@ -11,9 +11,9 @@ import androidx.core.util.putAll
 import com.dede.android_eggs.R
 import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.basic.provider.EasterEgg
-import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.isFullApiLevel
 import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
 import com.dede.basic.provider.EasterEggProvider
+import com.dede.basic.provider.toApiLevelRange
 import dagger.Module
 import com.dede.android_eggs.resources.R as StringsR
 
@@ -45,17 +45,20 @@ object EasterEggHelp {
     ) {
 
         companion object {
-            fun create(apiLevel: IntRange, @StringRes nicknameRes: Int = -1): VersionFormatter {
-                return if (apiLevel.first == apiLevel.last) {
+            fun create(
+                fullApiLevelRange: IntRange,
+                @StringRes nicknameRes: Int = -1
+            ): VersionFormatter {
+                return if (fullApiLevelRange.first == fullApiLevelRange.last) {
                     VersionFormatter(
                         nicknameRes,
-                        getVersionNameByApiLevel(apiLevel.first)
+                        getVersionNameByFullApiLevel(fullApiLevelRange.first)
                     )
                 } else {
                     VersionFormatter(
                         nicknameRes,
-                        getVersionNameByApiLevel(apiLevel.first),
-                        getVersionNameByApiLevel(apiLevel.last),
+                        getVersionNameByFullApiLevel(fullApiLevelRange.first),
+                        getVersionNameByFullApiLevel(fullApiLevelRange.last),
                     )
                 }
             }
@@ -77,15 +80,16 @@ object EasterEggHelp {
         }
     }
 
-    class ApiLevelFormatter private constructor(private val apiLevel: IntRange) {
+    class ApiLevelFormatter private constructor(private val fullApiLevelRange: IntRange) {
 
         companion object {
-            fun create(apiLevel: IntRange): ApiLevelFormatter {
-                return ApiLevelFormatter(apiLevel)
+            fun create(fullApiLevelRange: IntRange): ApiLevelFormatter {
+                return ApiLevelFormatter(fullApiLevelRange)
             }
         }
 
         fun format(context: Context): String {
+            val apiLevel = fullApiLevelRange.toApiLevelRange()
             return if (apiLevel.first == apiLevel.last) {
                 context.getString(R.string.api_version_format, apiLevel.first.toString())
             } else {
@@ -102,16 +106,14 @@ object EasterEggHelp {
             .append(last)
     }
 
-    fun getVersionNameByApiLevel(
-        @androidx.annotation.IntRange(from = Build.VERSION_CODES.BASE.toLong())
-        level: Int
-    ): String {
-        if (level.isFullApiLevel()) {
-            return apiLevelArrays[level] ?: throw IllegalArgumentException("Illegal full Api level: $level")
-        }
-        return apiLevelArrays[level.toFullApiLevel()]
-            ?: apiLevelArrays[level]
-            ?: throw IllegalArgumentException("Illegal Api level: $level")
+    fun getVersionNameByFullApiLevel(fullApiLevel: Int): String {
+        return apiLevelArrays[fullApiLevel.toFullApiLevel()]
+            ?: throw IllegalArgumentException("Illegal full api level: $fullApiLevel")
+    }
+
+    fun getVersionNameByApiLevel(apiLevel: Int): String {
+        return apiLevelArrays[apiLevel]
+            ?: throw IllegalArgumentException("Illegal api level: $apiLevel")
     }
 
     private val apiLevelArrays = SparseArray<String>()

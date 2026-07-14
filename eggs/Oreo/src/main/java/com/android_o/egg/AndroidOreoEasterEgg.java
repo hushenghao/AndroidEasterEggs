@@ -37,7 +37,7 @@ public class AndroidOreoEasterEgg implements EasterEggProvider {
                         R.drawable.o_android_logo,
                         R.string.o_app_name,
                         R.string.o_android_nickname,
-                        Build.VERSION_CODES.O,
+                        Build.VERSION_CODES_FULL.O,
                         PlatLogoActivity.class
                 ) {
                     @Override
@@ -49,7 +49,7 @@ public class AndroidOreoEasterEgg implements EasterEggProvider {
                         R.drawable.o_android_logo,
                         R.string.o_app_name,
                         R.string.o_android_nickname,
-                        Build.VERSION_CODES.O_MR1,
+                        Build.VERSION_CODES_FULL.O_MR1,
                         PlatLogoActivity.Point1.class
                 ) {
                     @Override
@@ -68,11 +68,11 @@ public class AndroidOreoEasterEgg implements EasterEggProvider {
     public List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES.O_MR1,
+                        Build.VERSION_CODES_FULL.O_MR1,
                         "O MR1.\nReleased publicly as Android 8.1 in December 2017."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES.O,
+                        Build.VERSION_CODES_FULL.O,
                         "O.\nReleased publicly as Android 8.0 in August 2017."
                 )
         );

@@ -1,6 +1,7 @@
 package com.android_next.egg
 
 import android.content.Context
+import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
@@ -9,6 +10,7 @@ import com.dede.android_eggs.navigation.EasterEggsDestination.AndroidNextTimelin
 import com.dede.android_eggs.navigation.Navigator
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.SnapshotProvider
 import com.dede.basic.provider.TimelineEvent
@@ -28,11 +30,9 @@ object AndroidNextEasterEgg : EasterEggProvider {
     internal const val RELEASE_YEAR = 2026
     internal const val RELEASE_MONTH = Calendar.AUGUST
 
-    // private const val NEXT_API = Build.VERSION_CODES.CUR_DEVELOPMENT// android next
-    private const val NEXT_API = EasterEgg.VERSION_CODES.CINNAMON_BUN
+    private const val NEXT_API = Build.VERSION_CODES.CUR_DEVELOPMENT// android next
 
-    // private const val TIMELINE_EVENT = "Wow, Android Next."
-    private const val TIMELINE_EVENT = "Hello, Android CinnamonBun.\nAndroid 17"
+     private const val TIMELINE_EVENT = "Wow, Android Next."
 
     @StringRes
     private val NICKNAME_RES: Int = R.string.nickname_android_next
@@ -51,7 +51,7 @@ object AndroidNextEasterEgg : EasterEggProvider {
             iconRes = LOGO_RES,
             nameRes = NICKNAME_RES,
             nicknameRes = NICKNAME_RES,
-            apiLevel = NEXT_API,
+            fullApiLevel = NEXT_API.toFullApiLevel(),
         ) {
             override fun onEasterEggAction(context: Context): Boolean {
                 Navigator.findNavigator()?.navigate(AndroidNextTimelineDialog)
@@ -81,7 +81,7 @@ object AndroidNextEasterEgg : EasterEggProvider {
             TimelineEvent(
                 year = RELEASE_YEAR,
                 month = RELEASE_MONTH,
-                apiLevel = NEXT_API,
+                fullApiLevel = NEXT_API.toFullApiLevel(),
                 event = TIMELINE_EVENT,
             )
         )

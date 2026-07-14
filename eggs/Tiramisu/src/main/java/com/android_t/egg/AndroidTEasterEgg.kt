@@ -15,7 +15,6 @@ import com.dede.basic.provider.EasterEggGroup
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.SnapshotProvider
 import com.dede.basic.provider.TimelineEvent
-import com.dede.basic.provider.toRange
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,7 +36,7 @@ object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
                 iconRes = R.drawable.t_android_logo,
                 nameRes = R.string.t_egg_name,
                 nicknameRes = R.string.t_android_nickname,
-                apiLevel = Build.VERSION_CODES.TIRAMISU,
+                fullApiLevel = Build.VERSION_CODES_FULL.TIRAMISU,
                 actionClass = PlatLogoActivity::class.java
             ) {
                 override fun provideSnapshotProvider(): SnapshotProvider {
@@ -48,9 +47,8 @@ object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
                 iconRes = R.drawable.t_android_logo_beta,
                 nameRes = R.string.t_egg_name,
                 nicknameRes = R.string.t_android_nickname_beta,
+                fullApiLevel = VERSION_CODES_FULL.T_BETA,
                 actionClass = com.android_t.egg.beta.PlatLogoActivity::class.java,
-                apiLevelRange = Build.VERSION_CODES.TIRAMISU.toRange(),
-                fullApiLevelRange = VERSION_CODES_FULL.T_BETA.toRange()
             ) {
                 override fun provideSnapshotProvider(): SnapshotProvider {
                     return com.android_t.egg.beta.SnapshotProvider()
@@ -66,7 +64,7 @@ object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
         return listOf(
             TimelineEvent(
                 2022, Calendar.SEPTEMBER,
-                Build.VERSION_CODES.TIRAMISU,
+                Build.VERSION_CODES_FULL.TIRAMISU,
                 "Tiramisu."
             )
         )
@@ -80,7 +78,7 @@ object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.t_ic_fullcat_icon,
             nameRes = R.string.t_egg_name,
             nicknameRes = R.string.t_android_nickname,
-            apiLevel = Build.VERSION_CODES.TIRAMISU
+            fullApiLevel = Build.VERSION_CODES_FULL.TIRAMISU
         ) {
             @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.R)
             override fun isSupported(): Boolean {

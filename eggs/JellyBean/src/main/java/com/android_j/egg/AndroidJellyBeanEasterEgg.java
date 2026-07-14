@@ -39,7 +39,7 @@ public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentPr
                 R.drawable.j_android_logo,
                 R.string.j_egg_name,
                 R.string.j_android_nickname,
-                new IntRange(Build.VERSION_CODES.JELLY_BEAN, Build.VERSION_CODES.JELLY_BEAN_MR2),
+                new IntRange(Build.VERSION_CODES_FULL.JELLY_BEAN, Build.VERSION_CODES_FULL.JELLY_BEAN_MR2),
                 PlatLogoActivity.class
         ) {
             @Override
@@ -59,7 +59,7 @@ public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentPr
                 R.drawable.j_redbean2,
                 R.string.j_jelly_bean_dream_name,
                 R.string.j_android_nickname,
-                new IntRange(Build.VERSION_CODES.JELLY_BEAN, Build.VERSION_CODES.JELLY_BEAN_MR2)
+                new IntRange(Build.VERSION_CODES_FULL.JELLY_BEAN, Build.VERSION_CODES_FULL.JELLY_BEAN_MR2)
         ) {
             @Override
             public boolean isSupported() {
@@ -88,15 +88,15 @@ public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentPr
     public List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES.JELLY_BEAN_MR2,
+                        Build.VERSION_CODES_FULL.JELLY_BEAN_MR2,
                         "J MR2.\nReleased publicly as Android 4.3 in July 2013."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES.JELLY_BEAN_MR1,
+                        Build.VERSION_CODES_FULL.JELLY_BEAN_MR1,
                         "J MR1.\nReleased publicly as Android 4.2 in November 2012."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES.JELLY_BEAN,
+                        Build.VERSION_CODES_FULL.JELLY_BEAN,
                         "J.\nReleased publicly as Android 4.1 in July 2012."
                 )
         );

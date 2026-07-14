@@ -15,7 +15,6 @@ import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.SnapshotProvider
 import com.dede.basic.provider.TimelineEvent
-import com.dede.basic.provider.toRange
 import com.dede.basic.requireDrawable
 import dagger.Module
 import dagger.Provides
@@ -63,9 +62,8 @@ object AndroidCinnamonBunEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.cinnamon_bun_android17_patch_adaptive,
             nameRes = R.string.cinnamon_bun_egg_name,
             nicknameRes = R.string.cinnamon_bun_egg_name,
-            apiLevelRange = Build.VERSION_CODES.CINNAMON_BUN.toRange(),
+            fullApiLevelRange = Build.VERSION_CODES_FULL.CINNAMON_BUN..Build.VERSION_CODES_FULL.CINNAMON_BUN_1,
             actionClass = PlatLogoActivity::class.java,
-            fullApiLevelRange = Build.VERSION_CODES_FULL.CINNAMON_BUN..Build.VERSION_CODES_FULL.CINNAMON_BUN_1
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
                 return SP()
@@ -81,15 +79,14 @@ object AndroidCinnamonBunEasterEgg : EasterEggProvider, ComponentProvider {
             TimelineEvent(
                 year = 2026,
                 month = Calendar.MAY,
-                apiLevel = Build.VERSION_CODES.CINNAMON_BUN,
+                fullApiLevel = Build.VERSION_CODES_FULL.CINNAMON_BUN,
                 event = "Cinnamon Bun."
             ),
             TimelineEvent(
                 year = 2026,
                 month = Calendar.AUGUST,
-                apiLevel = Build.VERSION_CODES.CINNAMON_BUN,
+                fullApiLevel = Build.VERSION_CODES_FULL.CINNAMON_BUN_1,
                 event = "Cinnamon Bun.\nAndroid 17.1",
-                fullApiLevel = Build.VERSION_CODES_FULL.CINNAMON_BUN_1
             )
         )
     }
@@ -102,7 +99,7 @@ object AndroidCinnamonBunEasterEgg : EasterEggProvider, ComponentProvider {
             R.drawable.cinnamon_bun_android17_patch_adaptive,
             R.string.cinnamon_bun_egg_name,
             R.string.cinnamon_bun_egg_name,
-            Build.VERSION_CODES.CINNAMON_BUN
+            Build.VERSION_CODES_FULL.CINNAMON_BUN..Build.VERSION_CODES_FULL.CINNAMON_BUN_1
         ) {
             override fun isSupported(): Boolean = true
 

@@ -36,7 +36,7 @@ public class AndroidHoneycombEasterEgg implements EasterEggProvider {
                 R.drawable.h_android_logo,
                 R.string.h_egg_name,
                 R.string.h_egg_name,
-                new IntRange(Build.VERSION_CODES.HONEYCOMB, Build.VERSION_CODES.HONEYCOMB_MR2),
+                new IntRange(Build.VERSION_CODES_FULL.HONEYCOMB, Build.VERSION_CODES_FULL.HONEYCOMB_MR2),
                 PlatLogoActivity.class
         ) {
             @Override
@@ -54,15 +54,15 @@ public class AndroidHoneycombEasterEgg implements EasterEggProvider {
     public List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES.HONEYCOMB_MR2,
+                        Build.VERSION_CODES_FULL.HONEYCOMB_MR2,
                         "H MR2.\nReleased publicly as Android 3.2 in July 2011."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES.HONEYCOMB_MR1,
+                        Build.VERSION_CODES_FULL.HONEYCOMB_MR1,
                         "H MR1.\nReleased publicly as Android 3.1 in May 2011."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES.HONEYCOMB,
+                        Build.VERSION_CODES_FULL.HONEYCOMB,
                         "H.\nReleased publicly as Android 3.0 in February 2011."
                 )
         );

@@ -15,21 +15,21 @@ interface ComponentProvider {
         @DrawableRes val iconRes: Int,
         @StringRes val nameRes: Int,
         @StringRes val nicknameRes: Int,
-        val apiLevelRange: IntRange,
+        val fullApiLevelRange: IntRange,
     ) {
 
-        val apiLevel: Int
-            get() = apiLevelRange.first
+        val fullApiLevel: Int
+            get() = fullApiLevelRange.first
 
         override fun hashCode(): Int {
-            return apiLevelRange.hashCode()
+            return fullApiLevelRange.hashCode()
         }
 
         override fun equals(other: Any?): Boolean {
             if (other !is Component) {
                 return false
             }
-            return apiLevelRange == other.apiLevelRange
+            return fullApiLevelRange == other.fullApiLevelRange
         }
 
         companion object {
@@ -53,8 +53,8 @@ interface ComponentProvider {
             @DrawableRes iconRes: Int,
             @StringRes nameRes: Int,
             @StringRes nicknameRes: Int,
-            apiLevel: Int,
-        ) : this(iconRes, nameRes, nicknameRes, apiLevel..apiLevel)
+            fullApiLevel: Int,
+        ) : this(iconRes, nameRes, nicknameRes, fullApiLevel..fullApiLevel)
 
         abstract fun isSupported(): Boolean
 

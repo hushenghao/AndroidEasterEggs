@@ -1,7 +1,5 @@
 package com.dede.android_eggs.views.main.util
 
-import android.os.Build
-import androidx.annotation.IntRange
 import com.dede.basic.globalContext
 import com.dede.basic.provider.TimelineEvent
 import dagger.hilt.EntryPoint
@@ -28,11 +26,14 @@ object AndroidReleaseDateMatcher {
         timelines = entryPoint.timelineEventList()
     }
 
-    fun findReleaseDateByApiLevel(@IntRange(from = Build.VERSION_CODES.BASE.toLong()) apiLevel: Int): Date {
-        val event = timelines.findLast { it.apiLevel == apiLevel }
-            ?: throw IllegalArgumentException("Api level %d release date not fount!".format(apiLevel))
+    fun findReleaseDateByFullApiLevel(fullApiLevel: Int): Date {
+        val event = timelines.findLast { it.fullApiLevel == fullApiLevel }
+            ?: throw IllegalArgumentException(
+                "Full api level %d release date not found!".format(fullApiLevel)
+            )
         val calendar = Calendar.getInstance(TimeZone.getDefault())
         calendar.set(event.year, event.month, 1)
         return calendar.time
     }
+
 }

@@ -10,6 +10,7 @@ import com.dede.android_eggs.navigation.DeepLink
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.views.settings.compose.prefs.launchRocketLauncher
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
 import dagger.hilt.android.qualifiers.ActivityContext
 import java.util.Calendar
 import javax.inject.Inject
@@ -73,7 +74,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
                 // com.dede.android_eggs.views.widget.AnalogClockWidgetClickAction.OPEN_EGG
                 val hour = Calendar.getInstance().get(Calendar.HOUR)
                 val apiLevel = hourApiLevelArray[hour]
-                val egg = eggIntent.easterEggs.find { apiLevel in it.apiLevelRange }
+                val egg = eggIntent.easterEggs.find { apiLevel.toFullApiLevel() in it.fullApiLevelRange }
                 if (egg != null) {
                     EggActionHelp.launchEgg(eggIntent.context, egg)
                 }
@@ -102,7 +103,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
             // egg://easter_egg/api/34
             val levelStr = uri.pathSegments.getOrNull(1) ?: return false
             val level = levelStr.toIntOrNull() ?: return false
-            val egg = eggIntent.easterEggs.find { level in it.apiLevelRange }
+            val egg = eggIntent.easterEggs.find { level.toFullApiLevel() in it.fullApiLevelRange }
             if (egg != null) {
                 EggActionHelp.launchEgg(eggIntent.context, egg)
             }

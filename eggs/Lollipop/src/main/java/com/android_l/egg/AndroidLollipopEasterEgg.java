@@ -40,7 +40,7 @@ public class AndroidLollipopEasterEgg implements EasterEggProvider {
                         R.drawable.l_android_logo,
                         R.string.l_lland,
                         R.string.l_android_nickname,
-                        new IntRange(Build.VERSION_CODES.LOLLIPOP, Build.VERSION_CODES.LOLLIPOP_MR1),
+                        new IntRange(Build.VERSION_CODES_FULL.LOLLIPOP, Build.VERSION_CODES_FULL.LOLLIPOP_MR1),
                         com.android_l.egg.PlatLogoActivity.class
                 ) {
                     @Override
@@ -52,9 +52,8 @@ public class AndroidLollipopEasterEgg implements EasterEggProvider {
                         R.drawable.l_android_preview_logo,
                         R.string.l_webdriver_torso,
                         R.string.l_preview_nickname,
-                        EasterEggProviderKt.toRange(Build.VERSION_CODES.LOLLIPOP),
-                        com.android_l.egg.preview.PlatLogoActivity.class,
-                        EasterEggProviderKt.toRange(EasterEgg.VERSION_CODES_FULL.L_PREVIEW)
+                        EasterEggProviderKt.toRange(EasterEgg.VERSION_CODES_FULL.L_PREVIEW),
+                        com.android_l.egg.preview.PlatLogoActivity.class
                 ) {
                     @Override
                     public SnapshotProvider provideSnapshotProvider() {
@@ -71,13 +70,13 @@ public class AndroidLollipopEasterEgg implements EasterEggProvider {
     @Override
     public List<TimelineEvent> provideTimelineEvents() {
         TimelineEvent e2 = timelineEvent(
-                Build.VERSION_CODES.LOLLIPOP,
+                Build.VERSION_CODES_FULL.LOLLIPOP,
                 "L.\nReleased publicly as Android 5.0 in November 2014."
         );
         e2.setAndroidLogo(R.drawable.l_android_logo_2015_2019);
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES.LOLLIPOP_MR1,
+                        Build.VERSION_CODES_FULL.LOLLIPOP_MR1,
                         "L MR1.\nReleased publicly as Android 5.1 in March 2015."
                 ),
                 e2

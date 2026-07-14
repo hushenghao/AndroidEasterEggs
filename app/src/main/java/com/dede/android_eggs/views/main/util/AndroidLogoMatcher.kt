@@ -28,18 +28,18 @@ object AndroidLogoMatcher {
         easterEggs = entryPoint.pureEasterEggList()
     }
 
-    fun findEasterEgg(apiLevel: Int): EasterEgg? {
-        return easterEggs.find { apiLevel in it.apiLevelRange }
+    fun findEasterEggByFullApiLevel(fullApiLevel: Int): EasterEgg? {
+        return easterEggs.find { fullApiLevel in it.fullApiLevelRange }
     }
 
     @DrawableRes
-    fun findAndroidLogo(apiLevel: Int): Int {
-        if (cache.indexOfKey(apiLevel) >= 0) {
-            return cache[apiLevel]
+    fun findAndroidLogoByFullApiLevel(fullApiLevel: Int): Int {
+        if (cache.indexOfKey(fullApiLevel) >= 0) {
+            return cache[fullApiLevel]
         }
-        val easterEgg = findEasterEgg(apiLevel)
-            ?: throw IllegalArgumentException("Not found Android logo res, level: $apiLevel")
-        cache[apiLevel] = easterEgg.iconRes
+        val easterEgg = findEasterEggByFullApiLevel(fullApiLevel)
+            ?: throw IllegalArgumentException("Not found Android logo res, fullApiLevel: $fullApiLevel")
+        cache[fullApiLevel] = easterEgg.iconRes
         return easterEgg.iconRes
     }
 

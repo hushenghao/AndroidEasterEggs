@@ -25,7 +25,7 @@ object AndroidPieEasterEgg : EasterEggProvider {
             iconRes = R.drawable.p_icon,
             nameRes = R.string.p_app_name,
             nicknameRes = R.string.p_android_nickname,
-            apiLevel = Build.VERSION_CODES.P,
+            fullApiLevel = Build.VERSION_CODES_FULL.P,
             actionClass = PlatLogoActivity::class.java
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
@@ -40,7 +40,7 @@ object AndroidPieEasterEgg : EasterEggProvider {
     override fun provideTimelineEvents(): List<TimelineEvent> {
         return listOf(
             timelineEvent(
-                Build.VERSION_CODES.P,
+                Build.VERSION_CODES_FULL.P,
                 "P.\nReleased publicly as Android 9 in August 2018."
             )
         )

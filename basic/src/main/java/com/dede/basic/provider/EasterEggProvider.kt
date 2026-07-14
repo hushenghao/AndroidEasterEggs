@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Build
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.times
 
 interface EasterEggProvider {
     fun provideEasterEgg(): BaseEasterEgg
@@ -15,28 +14,30 @@ interface EasterEggProvider {
 
 interface BaseEasterEgg {
 
-    val apiLevelRange: IntRange
+    val fullApiLevelRange: IntRange
 
-    val apiLevel: Int
-        get() = apiLevelRange.first
+    val fullApiLevel: Int
+        get() = fullApiLevelRange.first
 }
 
 class EasterEggGroup(vararg val eggs: EasterEgg) : BaseEasterEgg {
 
+    private val _fixedFullApiLevelRange: IntRange = 
+        eggs.minOf { it.fullApiLevelRange.first }..eggs.maxOf { it.fullApiLevelRange.last }
+
     var selectedIndex: Int = 0
 
-    override val apiLevelRange: IntRange
-        get() = eggs.first().apiLevelRange.first..eggs.last().apiLevelRange.last
+    override val fullApiLevelRange: IntRange = _fixedFullApiLevelRange
 
     override fun hashCode(): Int {
-        return apiLevelRange.hashCode()
+        return fullApiLevelRange.hashCode()
     }
 
     override fun equals(other: Any?): Boolean {
         if (other !is EasterEggGroup) {
             return false
         }
-        return apiLevelRange == other.apiLevelRange
+        return fullApiLevelRange == other.fullApiLevelRange
     }
 }
 
@@ -44,28 +45,39 @@ fun Int.toRange(): IntRange {
     return this..this
 }
 
+fun IntRange.toApiLevelRange(): IntRange {
+    return with(EasterEgg.VERSION_CODES_FULL) {
+        first.toApiLevel()..last.toApiLevel()
+    }
+}
+
 open class EasterEgg @JvmOverloads constructor(
     @DrawableRes val iconRes: Int,
     @StringRes val nameRes: Int,
     @StringRes val nicknameRes: Int,
-    override val apiLevelRange: IntRange,
+    override val fullApiLevelRange: IntRange,
     val actionClass: Class<out Activity>? = null,
-    val fullApiLevelRange: IntRange = apiLevelRange * VERSION_CODES_FULL.SDK_INT_MULTIPLIER,
 ) : BaseEasterEgg {
 
     @Suppress("ClassName")
     object VERSION_CODES_FULL {
 
-        internal operator fun IntRange.times(multiplier: Int): IntRange {
-            return (this.first * multiplier)..(this.last * multiplier)
+        fun Int.toFullApiLevel(): Int {
+            return if (isFullApiLevel()) this else this * SDK_INT_MULTIPLIER
         }
 
-        fun Int.toFullApiLevel(): Int {
-            return this * SDK_INT_MULTIPLIER
+        fun Int.toApiLevel(): Int {
+            return if (!isFullApiLevel()) {
+                this
+            } else {
+                val majorSdkVersion = Build.getMajorSdkVersion(this)
+                val minorSdkVersion = Build.getMinorSdkVersion(this)
+                majorSdkVersion + if (minorSdkVersion == SDK_INT_MULTIPLIER - 1) 1 else 0
+            }
         }
 
         fun Int.isFullApiLevel(): Boolean {
-            return this > SDK_INT_MULTIPLIER
+            return this >= SDK_INT_MULTIPLIER
         }
 
         // android.os.Build.VERSION_CODES_FULL#SDK_INT_MULTIPLIER
@@ -87,9 +99,9 @@ open class EasterEgg @JvmOverloads constructor(
         @DrawableRes iconRes: Int,
         @StringRes nameRes: Int,
         @StringRes nicknameRes: Int,
-        apiLevel: Int,
+        fullApiLevel: Int,
         actionClass: Class<out Activity>? = null,
-    ) : this(iconRes, nameRes, nicknameRes, apiLevel.toRange(), actionClass)
+    ) : this(iconRes, nameRes, nicknameRes, fullApiLevel.toRange(), actionClass)
 
     open fun onEasterEggAction(context: Context): Boolean {
         return false
@@ -100,14 +112,14 @@ open class EasterEgg @JvmOverloads constructor(
     }
 
     final override fun hashCode(): Int {
-        return apiLevelRange.hashCode() * 31 + fullApiLevelRange.hashCode()
+        return fullApiLevelRange.hashCode()
     }
 
     final override fun equals(other: Any?): Boolean {
         if (other !is EasterEgg) {
             return false
         }
-        return apiLevelRange == other.apiLevelRange && fullApiLevelRange == other.fullApiLevelRange
+        return fullApiLevelRange == other.fullApiLevelRange
     }
 
 }

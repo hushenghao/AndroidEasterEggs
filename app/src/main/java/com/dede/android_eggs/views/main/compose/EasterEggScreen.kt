@@ -57,7 +57,9 @@ import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
 import com.dede.basic.provider.EasterEggGroup
+import com.dede.basic.provider.toApiLevelRange
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -182,7 +184,7 @@ private const val HIGHEST_COUNT = 1
 
 private fun BaseEasterEgg.lazyItemKey(): String {
     return when (this) {
-        is EasterEggGroup -> "group:${apiLevelRange.first}-${apiLevelRange.last}"
+        is EasterEggGroup -> "group:${fullApiLevelRange.first}-${fullApiLevelRange.last}"
         is EasterEgg -> "egg:${fullApiLevelRange.first}-${fullApiLevelRange.last}"
         else -> throw IllegalArgumentException("Unsupported EasterEgg type: ${this::class.java}")
     }
@@ -304,7 +306,7 @@ private fun filterEasterEggs(
         val isApiLevel = Regex("^\\d{1,2}$").matches(searchText)
         if (isApiLevel) {
             val apiLevel = searchText.toIntOrNull() ?: return false
-            return apiLevelRange.contains(apiLevel)
+            return fullApiLevelRange.contains(apiLevel.toFullApiLevel())
         }
         return false
     }
@@ -312,14 +314,15 @@ private fun filterEasterEggs(
     fun EasterEgg.matchAndroidVersion(searchText: String): Boolean {
         val versionNameResult = Regex("[\\d.]{1,3}").find(searchText) ?: return false
         val versionNameValue = versionNameResult.value
-        for (level in apiLevelRange) {
-            val versionName = try {
-                EasterEggHelp.getVersionNameByApiLevel(level)
-            } catch (_: IllegalArgumentException) {
-                // illegal api level, skip
-                return false
+        val versionNames = buildSet {
+            add(EasterEggHelp.getVersionNameByFullApiLevel(fullApiLevelRange.first))
+            add(EasterEggHelp.getVersionNameByFullApiLevel(fullApiLevelRange.last))
+            for (apiLevel in fullApiLevelRange.toApiLevelRange()) {
+                add(EasterEggHelp.getVersionNameByApiLevel(apiLevel))
             }
-            if (versionName.startsWith(versionNameValue, true)) {
+        }
+        for (versionName in versionNames) {
+            if (versionName.contains(versionNameValue, true)) {
                 return true
             }
         }

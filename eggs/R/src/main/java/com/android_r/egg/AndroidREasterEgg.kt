@@ -31,7 +31,7 @@ object AndroidREasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.r_icon,
             nameRes = R.string.r_egg_name,
             nicknameRes = R.string.r_android_nickname,
-            apiLevel = Build.VERSION_CODES.R,
+            fullApiLevel = Build.VERSION_CODES_FULL.R,
             actionClass = PlatLogoActivity::class.java
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
@@ -46,7 +46,7 @@ object AndroidREasterEgg : EasterEggProvider, ComponentProvider {
     override fun provideTimelineEvents(): List<TimelineEvent> {
         return listOf(
             timelineEvent(
-                Build.VERSION_CODES.R,
+                Build.VERSION_CODES_FULL.R,
                 "R.\nReleased publicly as Android 11 in September 2020."
             )
         )
@@ -60,7 +60,7 @@ object AndroidREasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.r_ic_fullcat_icon,
             nameRes = R.string.r_egg_name,
             nicknameRes = R.string.r_android_nickname,
-            apiLevel = Build.VERSION_CODES.R
+            fullApiLevel = Build.VERSION_CODES_FULL.R
         ) {
             @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.R)
             override fun isSupported(): Boolean {

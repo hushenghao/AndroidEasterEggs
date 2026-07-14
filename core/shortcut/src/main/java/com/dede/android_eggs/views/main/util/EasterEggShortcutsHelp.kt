@@ -31,6 +31,7 @@ import com.dede.basic.delay
 import com.dede.basic.dp
 import com.dede.basic.isAdaptiveIconDrawable
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toApiLevel
 import com.dede.basic.requireDrawable
 import com.dede.basic.toast
 import kotlin.math.max
@@ -160,7 +161,7 @@ object EasterEggShortcutsHelp {
             .setShortLabel(label)
             .setLongLabel(label)
             .applyIf(!isPinShortcut) {
-                setRank(egg.apiLevel)
+                setRank(egg.fullApiLevel)
             }
             .applyNotNull(clazz) {
                 val eggIntent = createTargetIntent(context, clazz)

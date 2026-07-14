@@ -10,7 +10,6 @@ import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggGroup;
 import com.dede.basic.provider.EasterEggProvider;
-import com.dede.basic.provider.EasterEggProviderKt;
 import com.dede.basic.provider.SnapshotProvider;
 import com.dede.basic.provider.TimelineEvent;
 
@@ -39,7 +38,7 @@ public class AndroidMarshmallowEasterEgg implements EasterEggProvider {
                         R.drawable.m_android_logo,
                         R.string.m_mland,
                         R.string.m_android_nickname,
-                        Build.VERSION_CODES.M,
+                        Build.VERSION_CODES_FULL.M,
                         PlatLogoActivity.class
                 ) {
                     @Override
@@ -51,9 +50,8 @@ public class AndroidMarshmallowEasterEgg implements EasterEggProvider {
                         R.drawable.m_android_preview_logo,
                         R.string.m_preview_land,
                         R.string.m_preview_nickname,
-                        EasterEggProviderKt.toRange(Build.VERSION_CODES.M),
-                        com.android_m.egg.preview.PlatLogoActivity.class,
-                        EasterEggProviderKt.toRange(EasterEgg.VERSION_CODES_FULL.M_PREVIEW)
+                        EasterEgg.VERSION_CODES_FULL.M_PREVIEW,
+                        com.android_m.egg.preview.PlatLogoActivity.class
                 ) {
                     @Override
                     public SnapshotProvider provideSnapshotProvider() {
@@ -71,7 +69,7 @@ public class AndroidMarshmallowEasterEgg implements EasterEggProvider {
     public List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES.M,
+                        Build.VERSION_CODES_FULL.M,
                         "M.\nReleased publicly as Android 6.0 in October 2015."
                 )
         );

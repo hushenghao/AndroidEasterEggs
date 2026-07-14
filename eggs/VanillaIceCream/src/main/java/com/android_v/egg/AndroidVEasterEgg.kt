@@ -29,7 +29,7 @@ object AndroidVEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.v_android15_patch_adaptive,
             nameRes = R.string.v_egg_name,
             nicknameRes = R.string.v_android_nickname,
-            apiLevel = Build.VERSION_CODES.VANILLA_ICE_CREAM,
+            fullApiLevel = Build.VERSION_CODES_FULL.VANILLA_ICE_CREAM,
             actionClass = PlatLogoActivity::class.java
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
@@ -45,7 +45,7 @@ object AndroidVEasterEgg : EasterEggProvider, ComponentProvider {
         return listOf(
             TimelineEvent(
                 2024, Calendar.SEPTEMBER,
-                Build.VERSION_CODES.VANILLA_ICE_CREAM,
+                Build.VERSION_CODES_FULL.VANILLA_ICE_CREAM,
                 "Vanilla Ice Cream."
             ).apply {
                 androidLogo = R.drawable.v_android_logo_2024_
@@ -61,7 +61,7 @@ object AndroidVEasterEgg : EasterEggProvider, ComponentProvider {
             R.drawable.v_android15_patch_adaptive,
             R.string.v_egg_name,
             R.string.v_android_nickname,
-            Build.VERSION_CODES.VANILLA_ICE_CREAM
+            Build.VERSION_CODES_FULL.VANILLA_ICE_CREAM
         ) {
             override fun isSupported(): Boolean = true
 

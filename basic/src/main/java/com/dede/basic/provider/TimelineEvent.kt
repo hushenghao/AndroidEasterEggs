@@ -1,10 +1,9 @@
 package com.dede.basic.provider
 
 import androidx.annotation.DrawableRes
-import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
 import java.util.Calendar
 
-data class TimelineEvent(
+class TimelineEvent(
     /**
      * Event year
      * @see Calendar.YEAR
@@ -15,17 +14,17 @@ data class TimelineEvent(
      * @see Calendar.MONTH
      */
     val month: Int,
-    val apiLevel: Int,
+    val fullApiLevel: Int,
     val event: CharSequence,
-    val fullApiLevel: Int = apiLevel.toFullApiLevel(),
 ) {
+
     @DrawableRes
     var androidLogo: Int = -1
 
     companion object {
 
         @JvmStatic
-        fun timelineEvent(apiLevel: Int, event: CharSequence): TimelineEvent {
+        fun timelineEvent(fullApiLevel: Int, event: CharSequence): TimelineEvent {
             val regex =
                 Regex("(January|February|March|April|May|June|July|August|September|October|November|December) +(\\d{4,})")
             val result = regex.find(event)
@@ -55,7 +54,7 @@ data class TimelineEvent(
                 "December" -> Calendar.DECEMBER
                 else -> throw IllegalArgumentException("Illegal event month: $monthStr")
             }
-            return TimelineEvent(year, month, apiLevel, event)
+            return TimelineEvent(year, month, fullApiLevel, event)
         }
     }
 }

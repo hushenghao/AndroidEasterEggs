@@ -13,11 +13,10 @@ import androidx.annotation.RequiresApi;
 import com.android_n.egg.neko.NekoTile;
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.ComponentProvider;
-import com.dede.basic.provider.SnapshotProvider;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggGroup;
 import com.dede.basic.provider.EasterEggProvider;
-import com.dede.basic.provider.EasterEggProviderKt;
+import com.dede.basic.provider.SnapshotProvider;
 import com.dede.basic.provider.TimelineEvent;
 
 import java.util.List;
@@ -46,7 +45,7 @@ public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvi
                         R.drawable.n_android_logo,
                         R.string.n_app_name,
                         R.string.n_android_nickname,
-                        new IntRange(Build.VERSION_CODES.N, Build.VERSION_CODES.N_MR1),
+                        new IntRange(Build.VERSION_CODES_FULL.N, Build.VERSION_CODES_FULL.N_MR1),
                         PlatLogoActivity.class
                 ) {
                     @Override
@@ -58,9 +57,8 @@ public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvi
                         R.drawable.n_android_logo,
                         R.string.n_app_name,
                         R.string.n_android_nickname_preview,
-                        EasterEggProviderKt.toRange(Build.VERSION_CODES.N),
-                        com.android_n.egg.preview.PlatLogoActivity.class,
-                        EasterEggProviderKt.toRange(EasterEgg.VERSION_CODES_FULL.N_PREVIEW)
+                        EasterEgg.VERSION_CODES_FULL.N_PREVIEW,
+                        com.android_n.egg.preview.PlatLogoActivity.class
                 ) {
                     @Override
                     public SnapshotProvider provideSnapshotProvider() {
@@ -80,7 +78,7 @@ public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvi
                 R.drawable.n_stat_tint_icon,
                 R.string.n_default_tile_name,
                 R.string.n_android_nickname,
-                new IntRange(Build.VERSION_CODES.N, Build.VERSION_CODES.N_MR1)
+                new IntRange(Build.VERSION_CODES_FULL.N, Build.VERSION_CODES_FULL.N_MR1)
         ) {
 
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -113,11 +111,11 @@ public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvi
     public List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES.N_MR1,
+                        Build.VERSION_CODES_FULL.N_MR1,
                         "N MR1.\nReleased publicly as Android 7.1 in October 2016."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES.N,
+                        Build.VERSION_CODES_FULL.N,
                         "N.\nReleased publicly as Android 7.0 in August 2016."
                 )
         );

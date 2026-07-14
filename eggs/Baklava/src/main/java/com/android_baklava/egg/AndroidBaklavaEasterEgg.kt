@@ -15,7 +15,6 @@ import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.SnapshotProvider
 import com.dede.basic.provider.TimelineEvent
-import com.dede.basic.provider.toRange
 import com.dede.basic.requireDrawable
 import dagger.Module
 import dagger.Provides
@@ -38,9 +37,8 @@ object AndroidBaklavaEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.baklava_android16_patch_adaptive,
             nameRes = R.string.baklava_egg_name,
             nicknameRes = R.string.baklava_android_nickname,
-            apiLevelRange = Build.VERSION_CODES.BAKLAVA.toRange(),
+            fullApiLevelRange = Build.VERSION_CODES_FULL.BAKLAVA..Build.VERSION_CODES_FULL.BAKLAVA_1,
             actionClass = PlatLogoActivity::class.java,
-            fullApiLevelRange = Build.VERSION_CODES_FULL.BAKLAVA..Build.VERSION_CODES_FULL.BAKLAVA_1
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
                 return SP()
@@ -55,14 +53,13 @@ object AndroidBaklavaEasterEgg : EasterEggProvider, ComponentProvider {
         return listOf(
             TimelineEvent(
                 2025, Calendar.MAY,
-                Build.VERSION_CODES.BAKLAVA,
+                Build.VERSION_CODES_FULL.BAKLAVA,
                 "Baklava."
             ),
             TimelineEvent(
                 2025, Calendar.DECEMBER,
-                Build.VERSION_CODES.BAKLAVA,
+                Build.VERSION_CODES_FULL.BAKLAVA_1,
                 "Baklava.\nAndroid 16.1",
-                Build.VERSION_CODES_FULL.BAKLAVA_1
             )
         )
     }
@@ -75,7 +72,7 @@ object AndroidBaklavaEasterEgg : EasterEggProvider, ComponentProvider {
             R.drawable.baklava_android16_patch_adaptive,
             R.string.baklava_egg_name,
             R.string.baklava_android_nickname,
-            Build.VERSION_CODES.BAKLAVA
+            Build.VERSION_CODES_FULL.BAKLAVA..Build.VERSION_CODES_FULL.BAKLAVA_1
         ) {
             override fun isSupported(): Boolean = true
 

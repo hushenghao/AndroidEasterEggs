@@ -36,7 +36,7 @@ public class AndroidGingerbreadEasterEgg implements EasterEggProvider {
                 R.drawable.g_android_logo,
                 R.string.g_egg_name,
                 R.string.g_egg_name,
-                new IntRange(Build.VERSION_CODES.GINGERBREAD, Build.VERSION_CODES.GINGERBREAD_MR1),
+                new IntRange(Build.VERSION_CODES_FULL.GINGERBREAD, Build.VERSION_CODES_FULL.GINGERBREAD_MR1),
                 PlatLogoActivity.class
         ) {
             @Override
@@ -54,11 +54,11 @@ public class AndroidGingerbreadEasterEgg implements EasterEggProvider {
     public List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES.GINGERBREAD_MR1,
+                        Build.VERSION_CODES_FULL.GINGERBREAD_MR1,
                         "G MR1.\nReleased publicly as Android 2.3.3 in February 2011."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES.GINGERBREAD,
+                        Build.VERSION_CODES_FULL.GINGERBREAD,
                         "G.\nReleased publicly as Android 2.3 in December 2010."
                 )
         );

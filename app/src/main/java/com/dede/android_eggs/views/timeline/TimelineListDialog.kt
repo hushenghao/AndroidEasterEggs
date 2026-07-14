@@ -136,7 +136,7 @@ fun TimelineListDialog(
             ) {
                 TimelineItem(
                     event = it,
-                    logoRes = AndroidLogoMatcher.findAndroidLogo(it.apiLevel),
+                    logoRes = AndroidLogoMatcher.findAndroidLogoByFullApiLevel(it.fullApiLevel),
                     isNewGroup = it.isNewGroup(viewModel.timelines)
                 )
             }
@@ -213,7 +213,7 @@ private fun TimelineHeader() {
 @Composable
 @Preview(showBackground = true)
 private fun TimelineItem(
-    event: TimelineEvent = TimelineEvent(2025, Calendar.SEPTEMBER, 99, "Demo event name"),
+    event: TimelineEvent = TimelineEvent(2025, Calendar.SEPTEMBER, 9900000, "Demo event name"),
     @DrawableRes logoRes: Int = R.mipmap.ic_launcher_17,
     isNewGroup: Boolean = true
 ) {

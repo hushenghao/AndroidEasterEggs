@@ -63,8 +63,8 @@ class PlatLogoActivity : ComponentActivity() {
     }
 }
 
-private fun getVersionNameByApiLevel(level: Int): String {
-    return when (level) {
+private fun getVersionNameByApiLevel(apiLevel: Int): String {
+    return when (apiLevel) {
         Build.VERSION_CODES.FROYO -> "2.2"
         Build.VERSION_CODES.ECLAIR_MR1 -> "2.1"
         Build.VERSION_CODES.ECLAIR_0_1 -> "2.0.1"
