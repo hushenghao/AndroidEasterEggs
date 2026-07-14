@@ -71,18 +71,16 @@ open class EasterEgg @JvmOverloads constructor(
         // android.os.Build.VERSION_CODES_FULL#SDK_INT_MULTIPLIER
         const val SDK_INT_MULTIPLIER = 100000
 
-        const val T_BETA = Build.VERSION_CODES.TIRAMISU * SDK_INT_MULTIPLIER - 1
-        const val N_PREVIEW = Build.VERSION_CODES.N * SDK_INT_MULTIPLIER - 1
-        const val M_PREVIEW = Build.VERSION_CODES.M * SDK_INT_MULTIPLIER - 1
-        const val L_PREVIEW = Build.VERSION_CODES.LOLLIPOP * SDK_INT_MULTIPLIER - 1
-        const val K_PREVIEW = Build.VERSION_CODES.KITKAT * SDK_INT_MULTIPLIER - 1
-        const val ICS_PREVIEW = Build.VERSION_CODES.ICE_CREAM_SANDWICH * SDK_INT_MULTIPLIER - 1
-        const val BAKLAVA_1 = Build.VERSION_CODES.BAKLAVA * SDK_INT_MULTIPLIER + 1
+        const val T_BETA = Build.VERSION_CODES_FULL.TIRAMISU - 1
+        const val N_PREVIEW = Build.VERSION_CODES_FULL.N - 1
+        const val M_PREVIEW = Build.VERSION_CODES_FULL.M - 1
+        const val L_PREVIEW = Build.VERSION_CODES_FULL.LOLLIPOP - 1
+        const val K_PREVIEW = Build.VERSION_CODES_FULL.KITKAT - 1
+        const val ICS_PREVIEW = Build.VERSION_CODES_FULL.ICE_CREAM_SANDWICH - 1
     }
 
     @Suppress("ClassName")
     object VERSION_CODES {
-        const val CINNAMON_BUN = 37// android 17
     }
 
     constructor(

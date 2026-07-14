@@ -65,6 +65,7 @@ object AndroidCinnamonBunEasterEgg : EasterEggProvider, ComponentProvider {
             nicknameRes = R.string.cinnamon_bun_egg_name,
             apiLevelRange = Build.VERSION_CODES.CINNAMON_BUN.toRange(),
             actionClass = PlatLogoActivity::class.java,
+            fullApiLevelRange = Build.VERSION_CODES_FULL.CINNAMON_BUN..Build.VERSION_CODES_FULL.CINNAMON_BUN_1
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
                 return SP()
@@ -80,8 +81,15 @@ object AndroidCinnamonBunEasterEgg : EasterEggProvider, ComponentProvider {
             TimelineEvent(
                 year = 2026,
                 month = Calendar.MAY,
-                apiLevel = EasterEgg.VERSION_CODES.CINNAMON_BUN,
-                event = "Hello, Android CinnamonBun.\nAndroid 17",
+                apiLevel = Build.VERSION_CODES.CINNAMON_BUN,
+                event = "Cinnamon Bun."
+            ),
+            TimelineEvent(
+                year = 2026,
+                month = Calendar.AUGUST,
+                apiLevel = Build.VERSION_CODES.CINNAMON_BUN,
+                event = "Cinnamon Bun.\nAndroid 17.1",
+                fullApiLevel = Build.VERSION_CODES_FULL.CINNAMON_BUN_1
             )
         )
     }

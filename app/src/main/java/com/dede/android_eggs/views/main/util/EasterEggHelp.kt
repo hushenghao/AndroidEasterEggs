@@ -118,7 +118,7 @@ object EasterEggHelp {
 
     init {
         // api level mappings
-        apiLevelArrays[EasterEgg.VERSION_CODES.CINNAMON_BUN] = "17"
+        apiLevelArrays[Build.VERSION_CODES.CINNAMON_BUN] = "17"
         apiLevelArrays[Build.VERSION_CODES.BAKLAVA] = "16"
         apiLevelArrays[Build.VERSION_CODES.VANILLA_ICE_CREAM] = "15"
         apiLevelArrays[Build.VERSION_CODES.UPSIDE_DOWN_CAKE] = "14"
@@ -162,6 +162,9 @@ object EasterEggHelp {
             fullApiLevelArrays.put(apiLevel.toFullApiLevel(), value)
         }
         apiLevelArrays.putAll(fullApiLevelArrays)
+        // full api level minor release
+        apiLevelArrays[Build.VERSION_CODES_FULL.BAKLAVA_1] = "16.1"
+        apiLevelArrays[Build.VERSION_CODES_FULL.CINNAMON_BUN_1] = "17.1"
 
         // static full api level mappings
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.ICS_PREVIEW] = "ICS"
@@ -170,7 +173,6 @@ object EasterEggHelp {
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.M_PREVIEW] = "M"
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.N_PREVIEW] = "N"
         apiLevelArrays[EasterEgg.VERSION_CODES_FULL.T_BETA] = "T"
-        apiLevelArrays[EasterEgg.VERSION_CODES_FULL.BAKLAVA_1] = "16.1"
 
         // development version
         apiLevelArrays[Build.VERSION_CODES.CUR_DEVELOPMENT] = "Next"

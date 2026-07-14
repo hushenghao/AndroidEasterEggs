@@ -35,7 +35,6 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.alterable_adaptive_icon.AlterableAdaptiveIcon
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
-import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.toRange
 import com.dede.android_eggs.resources.R as StringsR
 
@@ -48,7 +47,7 @@ internal enum class AppIcon(
     Android17(
         aliasName = "Android17IconAlias",
         iconRes = R.mipmap.ic_launcher_17,
-        apiLevel = EasterEgg.VERSION_CODES.CINNAMON_BUN,
+        apiLevel = Build.VERSION_CODES.CINNAMON_BUN,
         manifestEnabled = true,
     ),
     Android16(
