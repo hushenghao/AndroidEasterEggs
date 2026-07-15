@@ -20,7 +20,7 @@
     <string name="locale_lang_fr">Francia</string>
     <string name="locale_lang_uk_UA">Ukrán</string>
     <string name="locale_lang_tr_TR">Török</string>
-    <string name="locale_lang_ko_KR">Kóreai</string>
+    <string name="locale_lang_ko_KR">Koreai</string>
     <string name="locale_lang_el_GR">Görög</string>
     <string name="locale_lang_fi_FI">Finn</string>
     <string name="locale_lang_vi_VN">Vietnámi</string>
@@ -35,4 +35,6 @@
     <string name="locale_lang_sv_SE">Svéd</string>
     <string name="locale_lang_my_MM">Mianmari</string>
     <string name="locale_lang_bn_BD">Bengáli</string>
+    <string name="locale_lang_sq">Albán</string>
+    <string name="locale_lang_bg">Bolgár</string>
 </resources>
