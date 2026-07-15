@@ -1,6 +1,6 @@
 # Changelog
 
-### v5.2.1
+### v5.3.0 (2026-07-15)
 
 - Add custom seed color theme generation
 - Add more SplashScreen icon
