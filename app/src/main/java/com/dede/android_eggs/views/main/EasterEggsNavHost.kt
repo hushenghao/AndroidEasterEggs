@@ -11,14 +11,8 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
@@ -26,22 +20,16 @@ import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import com.dede.android_eggs.local_provider.rememberCustomTabsUriHandler
 import com.dede.android_eggs.navigation.BottomSheetSceneStrategy
-import com.dede.android_eggs.navigation.DeepLink
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.EasterEggsDestination.AnimatorDisabledAlertDialog
 import com.dede.android_eggs.navigation.EasterEggsDestination.DestinationProps
 import com.dede.android_eggs.navigation.EasterEggsDestination.EasterEggs
-import com.dede.android_eggs.navigation.EasterEggsDestination.WelcomeDialog
 import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.navigation.Navigator.Companion.rememberNavigator
 import com.dede.android_eggs.navigation.rememberEasterEggsDestinations
 import com.dede.android_eggs.navigation.rememberNavigationState
 import com.dede.android_eggs.navigation.toEntries
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
-import com.dede.android_eggs.views.main.compose.isAgreedPrivacyPolicy
 import com.dede.android_eggs.views.main.compose.rememberKonfettiController
-import com.dede.basic.Utils
-import com.dede.android_eggs.views.main.compose.AnimatorDisabledAlertDialog as AnimatorDisabledAlert
 
 private const val DURATION = 400
 private const val SCALE = 0.88f
@@ -73,7 +61,6 @@ fun EasterEggsNavHost(
     val navigator = rememberNavigator(navigationState)
     val currentRoute = navigator.currentRoute
     val konfettiController = rememberKonfettiController()
-    val context = LocalContext.current
     val uriHandler = rememberCustomTabsUriHandler()
     CompositionLocalProvider(
         LocalUriHandler provides uriHandler,
@@ -121,28 +108,7 @@ fun EasterEggsNavHost(
             predictivePopTransitionSpec = { popTransition() },
         )
 
-        var welcomeDialogNavigated by rememberSaveable { mutableStateOf(false) }
-        var animatorAlertNavigated by rememberSaveable { mutableStateOf(false) }
-
-        LaunchedEffect(navigator, currentRoute) {
-            if (currentRoute == WelcomeDialog || currentRoute == AnimatorDisabledAlertDialog) {
-                return@LaunchedEffect
-            }
-
-            if (!welcomeDialogNavigated && !isAgreedPrivacyPolicy(context)) {
-                navigator.navigate(WelcomeDialog, true)
-                welcomeDialogNavigated = true
-            } else if (
-                !animatorAlertNavigated &&
-                !Utils.areAnimatorEnabled(context) &&
-                !AnimatorDisabledAlert.isDontShowAgain(context)
-            ) {
-                navigator.navigate(AnimatorDisabledAlertDialog, true)
-                animatorAlertNavigated = true
-            } else {
-                DeepLink.handleNavKey(navigator)
-            }
-        }
+        LaunchFlowEffect(navigator = navigator, currentRoute = currentRoute)
 
     }
 }
