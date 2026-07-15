@@ -32,8 +32,8 @@
   <g class="font12" transform="translate(0,78)">
     <text style="text-anchor:end;" x="200" y="18">Bulgarian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="131.2" x="210" y="11.4"/>
-    <text x="380" y="18">82%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
+    <text x="380" y="18">100%</text>
   </g>
   <g class="font12" transform="translate(0,104)">
     <text style="text-anchor:end;" x="200" y="18">Burmese</text>
@@ -107,14 +107,14 @@
   <g class="font12" transform="translate(0,390)">
     <text style="text-anchor:end;" x="200" y="18">Greek</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="113.6" x="210" y="11.4"/>
-    <text x="380" y="18">71%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
+    <text x="380" y="18">100%</text>
   </g>
   <g class="font12" transform="translate(0,416)">
     <text style="text-anchor:end;" x="200" y="18">Hungarian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="112.0" x="210" y="11.4"/>
-    <text x="380" y="18">70%</text>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="129.60000000000002" x="210" y="11.4"/>
+    <text x="380" y="18">81%</text>
   </g>
   <g class="font12" transform="translate(0,442)">
     <text style="text-anchor:end;" x="200" y="18">Indonesian</text>
@@ -179,9 +179,9 @@
   <g class="font12" transform="translate(0,702)">
     <text style="text-anchor:end;" x="200" y="18">Romanian</text>
     <rect fill="#999" height="6" rx="3" ry="3" style="filter:opacity(30%);" width="160" x="210" y="11.4"/>
-    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="131.2" x="210" y="11.4"/>
+    <rect fill="#5D89C3" height="6" rx="3" ry="3" width="160.0" x="210" y="11.4"/>
     <rect fill="#71C277" height="6" rx="3" ry="3" width="3.2" x="210" y="11.4"/>
-    <text x="380" y="18">82%</text>
+    <text x="380" y="18">100%</text>
   </g>
   <g class="font12" transform="translate(0,728)">
     <text style="text-anchor:end;" x="200" y="18">Russian</text>

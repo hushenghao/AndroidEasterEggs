@@ -33,6 +33,9 @@
     <string name="summary_theme_dark_mode">Тъмна</string>
     <string name="summary_theme_light_mode">Светла</string>
     <string name="summary_theme_amoled_mode">Амолед</string>
+    <string name="pref_title_color_source">Цвят</string>
+    <string name="summary_color_source_dynamic">Динамичен</string>
+    <string name="summary_color_source_custom">Персонализиран</string>
     <string name="label_add_shortcut">Пряк Път</string>
     <string name="label_donate">Дарение</string>
     <string name="label_update">Актуализация</string>
@@ -42,7 +45,7 @@
     <string name="toast_no_egg_detail">Тази версия на Android няма Easter Egg</string>
     <string name="toast_no_update_found">Няма намерена актуализация</string>
     <string name="label_widgets">Приспособления</string>
-    <string name="app_widget_description">Това е аналоговият часовник на Easter egg-овете</string>
+    <string name="app_widget_description">Аналогов Часовник</string>
     <string name="action_agree">Съгласявам се</string>
     <string name="summary_browse_privacy_policy">Продължавайки, вие се съгласявате с политиката за поверителност.</string>
     <string name="label_welcome">Добре Дошли В Easter Eggs! 🎉</string>
@@ -51,7 +54,7 @@
     <string name="label_component_manager">Мениджър На Компоненти</string>
     <string name="pref_more_settings">Още Настройки</string>
     <string name="pref_retain_recent_egg_tasks">Запазване на задачите на Easter egg-а</string>
-    <string name="pref_summary_retain_recent_egg_tasks">Запазва задачите на Easter egg-а в екрана с последните приложения. Могат да се запазят до 5. Не е налично при вграден режим на активност</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Запазва задачите на Easter egg-овете в екрана за скорошни приложения. Могат да се запазят до 5. Не е налично при вграден режим на активност</string>
     <string name="label_about">За</string>
     <string name="label_contribute">Допринесете</string>
     <string name="animator_disabled_alert_message">Системните анимации са деактивирани. Някои функции може да не работят правилно. Моля, отидете на „Опции за разработчици“ и задайте опцията „Мащаб на продължителност на аниматора“, за да активирате анимациите</string>
@@ -63,4 +66,17 @@
     <string name="rocket_launcher_all_app_icons">Приложения</string>
     <string name="rocket_launcher_all_icons">Easter egg-ове и приложения</string>
     <string name="rocket_launcher_query_all_app_desc">Трябва да се получи списък с приложенията, показани на началния екран</string>
+    <string name="label_data_backup">Съзаване на резервно копие &amp; и възстановяване</string>
+    <string name="pref_data_backup_desc">Експортиране или импортиране на потребителските данни</string>
+    <string name="action_export_backup">Експортиране на резервно копие</string>
+    <string name="action_export_backup_desc">Запазване на настройките, котките и конфигурациите на приспособленията във файл</string>
+    <string name="action_import_backup">Импортиране на резервно копие</string>
+    <string name="action_import_backup_desc">Възстановяване от предварително експортирано резервно копие</string>
+    <string name="toast_backup_success">Резервното копие е експортирано успешно</string>
+    <string name="toast_restore_success">Възстановяването завърши. Приложението ще се рестартира.</string>
+    <string name="toast_backup_failed">Създаване на резервното копие не бе успешно: %s</string>
+    <string name="toast_restore_failed">Възстановяването не бе успешно: %s</string>
+    <string name="dialog_import_backup_title">Импортиране на резервно копие</string>
+    <string name="dialog_import_backup_message">Това ще презапише всички текущи данни на приложението, включително настройки, запазени котки и конфигурации на приспособления. Това действие не може да бъде отменено. Наистина ли искате да продължите?</string>
+    <string name="action_confirm_import">Импортиране</string>
 </resources>
