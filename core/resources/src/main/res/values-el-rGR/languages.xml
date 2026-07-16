@@ -35,4 +35,6 @@
     <string name="locale_lang_sv_SE">Σουηδικά</string>
     <string name="locale_lang_my_MM">Βιρμανικά</string>
     <string name="locale_lang_bn_BD">Μπενγκάλι</string>
+    <string name="locale_lang_sq">Αλβανικά</string>
+    <string name="locale_lang_bg">Βουλγαρικά</string>
 </resources>

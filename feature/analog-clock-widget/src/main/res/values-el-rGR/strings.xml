@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Διαμόρφωση γραφικού στοιχείου</string>
+    <string name="analog_clock_widget_config_summary">Επιλέξτε τι συμβαίνει όταν πατάτε το γραφικό στοιχείο του αναλογικού ρολογιού.</string>
+    <string name="analog_clock_widget_click_action_title">Δράση πατήματος</string>
+    <string name="analog_clock_widget_action_open_egg">Άνοιξε αυγό</string>
+    <string name="analog_clock_widget_action_open_app">Άνοιξε εφαρμογή</string>
+    <string name="analog_clock_widget_action_none">Καμία ενέργεια</string>
+    <string name="analog_clock_widget_dial_style_title">Καντράν ρολογιού</string>
+    <string name="analog_clock_widget_dial_style_summary">Επιλέξτε το στυλ του καντράν του αναλογικού ρολογιού.</string>
+    <string name="analog_clock_widget_dial_android_icons">Εικονίδια</string>
+    <string name="analog_clock_widget_dial_simple">Απλό</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

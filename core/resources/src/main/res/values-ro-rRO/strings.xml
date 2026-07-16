@@ -33,6 +33,9 @@
     <string name="summary_theme_dark_mode">Întunecată</string>
     <string name="summary_theme_light_mode">Luminoasă</string>
     <string name="summary_theme_amoled_mode">Neagră</string>
+    <string name="pref_title_color_source">Culoare</string>
+    <string name="summary_color_source_dynamic">Dinamică</string>
+    <string name="summary_color_source_custom">Personalizată</string>
     <string name="label_add_shortcut">Comandă rapidă</string>
     <string name="label_donate">Donează</string>
     <string name="label_update">Actualizare</string>
@@ -63,4 +66,17 @@
     <string name="rocket_launcher_all_app_icons">Aplicații</string>
     <string name="rocket_launcher_all_icons">Easter egg-uri și aplicații</string>
     <string name="rocket_launcher_query_all_app_desc">Este necesară obținerea listei tuturor aplicațiilor</string>
+    <string name="label_data_backup">Backup și restaurare a datelor</string>
+    <string name="pref_data_backup_desc">Exportați sau importați datele de utilizator</string>
+    <string name="action_export_backup">Exportați backup</string>
+    <string name="action_export_backup_desc">Salvați setările, pisicile și configurațiile widgetului într-un fișier</string>
+    <string name="action_import_backup">Importați backup</string>
+    <string name="action_import_backup_desc">Restaurați dintr-un fișier de backup exportat anterior</string>
+    <string name="toast_backup_success">Backup exportat cu succes</string>
+    <string name="toast_restore_success">Restaurare finalizată. Aplicația se va reporni.</string>
+    <string name="toast_backup_failed">Backup eșuat: %s</string>
+    <string name="toast_restore_failed">Restaurare eșuată: %s</string>
+    <string name="dialog_import_backup_title">Importați backup</string>
+    <string name="dialog_import_backup_message">Aceasta acțiune va suprascrie toate datele curente ale aplicației, inclusiv setările, pisicile salvate și configurațiile widgetului. Această acțiune nu poate fi anulată. Sigur doriți să continuați?</string>
+    <string name="action_confirm_import">Importă</string>
 </resources>
