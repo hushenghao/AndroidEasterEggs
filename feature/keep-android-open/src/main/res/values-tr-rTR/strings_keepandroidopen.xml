@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keep_android_open_message">Android kısıtlı bir platform haline gelecek.</string>
+    <string name="keep_android_open_countdown">%1$dg %2$ds %3$dd %4$dsn</string>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keep_android_open_message">Androidจะเป็นแพลตฟอร์มที่ถูกล็อค</string>
+    <string name="keep_android_open_countdown">%1$dวัน %2$dชม. %3$dnาที %4$dวินาที</string>
+</resources>

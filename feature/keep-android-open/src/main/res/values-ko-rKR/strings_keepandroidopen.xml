@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keep_android_open_message">Android가 폐쇄된 플랫폼이 되기까지 남은 시간:</string>
+    <string name="keep_android_open_countdown">%1$d일 %2$d시간 %3$d분 %4$d초</string>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keep_android_open_message">安卓将成为封闭平台</string>
+    <string name="keep_android_open_countdown">%1$d天%2$d小时%3$d分%4$d秒</string>
+</resources>

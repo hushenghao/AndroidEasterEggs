@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keep_android_open_message">Android wird eine geschlossene Plattform werden.</string>
+    <string name="keep_android_open_countdown">%1$dT %2$dStd. %3$dMin. %4$dSek.</string>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keep_android_open_message">Az Android egy lezárt platform lesz</string>
+    <string name="keep_android_open_countdown">%1$dnap %2$dóra %3$dperc %4$dmásodperc</string>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keep_android_open_message">Android ay magiging isang naka-lock na platform</string>
+    <string name="keep_android_open_countdown">%1$dd %2$dh %3$dm %4$ds</string>
+</resources>

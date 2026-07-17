@@ -137,6 +137,7 @@ dependencies {
     implementation(project(":feature:crash"))
     implementation(project(":feature:embedding-splits"))
     implementation(project(":feature:libraries-info"))
+    implementation(project(":feature:keep-android-open"))
 
     implementation(project(":eggs:RocketLauncher"))
     implementation(project(":eggs:CinnamonBun"))

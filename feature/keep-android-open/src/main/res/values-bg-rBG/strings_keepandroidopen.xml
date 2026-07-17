@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keep_android_open_message">Android ще стане заключена платформа</string>
+    <string name="keep_android_open_countdown">%1$dд %2$dч %3$dм %4$dс</string>
+</resources>

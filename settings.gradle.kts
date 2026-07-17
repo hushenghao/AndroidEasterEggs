@@ -54,6 +54,7 @@ include(
     ":feature:crash",
     ":feature:embedding-splits",
     ":feature:libraries-info",
+    ":feature:keep-android-open",
 
     ":basic",
     ":jvm-basic",

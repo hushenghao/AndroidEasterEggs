@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keep_android_open_message">Androidista tulee suljettu alusta</string>
+    <string name="keep_android_open_countdown">%1$dpv %2$dt %3$dmin %4$ds</string>
+</resources>
