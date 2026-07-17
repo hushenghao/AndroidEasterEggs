@@ -108,8 +108,7 @@ Two dimensions: `app` and `track`:
 |----------|-----------|-------------|
 | `foss`   | `app`     | FOSS variant |
 | `market` | `app`     | Google Play variant (enabled only when track=`product`) |
-| `alpha`  | `track`   | Alpha track, versionNameSuffix=`-alpha` |
-| `beta`   | `track`   | Beta track, versionNameSuffix=`-beta01` |
+| `beta`   | `track`   | Beta track, versionNameSuffix=`-beta` |
 | `product` | `track`  | Production track |
 
 Market-specific dependencies use the `marketImplementation()` extension function:

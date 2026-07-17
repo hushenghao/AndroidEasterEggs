@@ -46,13 +46,9 @@ android {
             dimension = "app"
         }
 
-        create("alpha") {
-            dimension = "track"
-            versionNameSuffix = "-alpha"
-        }
         create("beta") {
             dimension = "track"
-            versionNameSuffix = "-beta01"
+            versionNameSuffix = "-beta"
         }
         create("product") {
             dimension = "track"

@@ -8,7 +8,6 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.R
 import com.dede.android_eggs.ui.composes.icons.Crowdin
-import com.dede.android_eggs.ui.composes.icons.rounded.Experiment
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
@@ -20,7 +19,6 @@ fun ContributeGroup() {
     val uriHandler = LocalUriHandler.current
     val translationUrl = stringResource(R.string.url_translation)
     val sponsorUrl = stringResource(R.string.url_sponsor)
-    val pgyerUrl = stringResource(R.string.url_pgyer)
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.Hive,
         title = stringResource(id = StringsR.string.label_contribute)
@@ -45,19 +43,8 @@ fun ContributeGroup() {
             title = stringResource(StringsR.string.label_donate),
             onClick = {
                 uriHandler.openUri(sponsorUrl)
-            }
-        )
-        Option(
-            leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Rounded.Experiment,
-                contentDescription = stringResource(StringsR.string.label_experiment),
-            ),
-            title = stringResource(StringsR.string.label_experiment),
-            desc = pgyerUrl,
-            onClick = {
-                uriHandler.openUri(pgyerUrl)
             },
-            shape = OptionShapes.lastShape(),
+            shape = OptionShapes.lastShape()
         )
     }
 }

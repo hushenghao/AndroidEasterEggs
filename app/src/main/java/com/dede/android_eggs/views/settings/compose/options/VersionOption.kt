@@ -3,8 +3,6 @@
 package com.dede.android_eggs.views.settings.compose.options
 
 import androidx.activity.compose.LocalActivity
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,7 +20,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,7 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.platform.LocalUriHandler
@@ -104,33 +100,12 @@ private fun UpgradeIconButton(
     val activity = LocalActivity.current
     val coroutineScope = rememberCoroutineScope()
 
-    var scaleAnimatable by remember { mutableStateOf(newVersion == null) }
-    val scaleAnim = remember { Animatable(1f) }
-    LaunchedEffect(scaleAnimatable) {
-        while (scaleAnimatable) {
-            scaleAnim.animateTo(
-                targetValue = 1.2f,
-                animationSpec = tween(durationMillis = 800)
-            )
-            scaleAnim.animateTo(
-                targetValue = 1f,
-                animationSpec = tween(durationMillis = 800)
-            )
-        }
-        scaleAnim.animateTo(1f, tween(durationMillis = 300))
-    }
     FilledTonalIconButton(
         modifier = Modifier
-            .offset(x = 4.dp)// fix padding end of Option
-            .graphicsLayer {
-                val s = scaleAnim.value
-                scaleY = s
-                scaleX = s
-            },
+            .offset(x = 4.dp),// fix padding end of Option
         shape = IconShapePrefUtil.getIconShape(),
         onClick = onClick@{
             if (activity == null) {
-                scaleAnimatable = false
                 return@onClick
             }
             coroutineScope.launch {
@@ -142,13 +117,9 @@ private fun UpgradeIconButton(
                         ) > 0
                     ) {
                         onNewVersionChange(latestVersion)
-                        scaleAnimatable = false
                     } else {
                         context.toast(StringR.string.toast_no_update_found)
-                        scaleAnimatable = false
                     }
-                } else {
-                    scaleAnimatable = false
                 }
             }
         }

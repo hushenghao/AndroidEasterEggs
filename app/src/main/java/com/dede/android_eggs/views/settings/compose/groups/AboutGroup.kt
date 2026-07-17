@@ -14,7 +14,7 @@ import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavigator
-import com.dede.android_eggs.ui.composes.icons.outlined.Beta
+import com.dede.android_eggs.ui.composes.icons.Pgyer
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
@@ -39,7 +39,7 @@ fun AboutGroup() {
         VersionOption(shape = OptionShapes.firstShape())
         Option(
             leadingIcon = imageVectorIconBlock(
-                imageVector = Icons.Outlined.Beta,
+                imageVector = Icons.Pgyer,
                 contentDescription = stringResource(StringsR.string.label_beta),
             ),
             title = stringResource(StringsR.string.label_beta),
