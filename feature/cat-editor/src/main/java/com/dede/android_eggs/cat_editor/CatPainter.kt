@@ -33,17 +33,10 @@ internal class CatPainter(private val cat: Cat) : Painter() {
 
         if (useAndroidCanvasDraw && bitmap != null) {
             // android canvas draw
-            androidCanvasDraw(
-                canvasMatrix.asAndroidMatrix(),
-                bitmap,
-                partColor
-            )
+            androidCanvasDraw(canvasMatrix.asAndroidMatrix(), bitmap, partColor)
         } else {
             // compose canvas draw
-            composeCanvasDraw(
-                canvasMatrix,
-                partColor
-            )
+            composeCanvasDraw(canvasMatrix, partColor)
         }
     }
 }

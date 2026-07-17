@@ -1,6 +1,7 @@
 package com.dede.android_eggs.cat_editor
 
 import android.graphics.Bitmap
+import android.graphics.BlurMaskFilter
 import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.Paint
@@ -8,10 +9,14 @@ import android.os.Build
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toArgb
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.withMatrix
+import androidx.compose.ui.graphics.Color as ComposeColor
+import androidx.compose.ui.graphics.Matrix as ComposeMatrix
 
 
 internal fun createAndroidBitmap(size: Size): Bitmap {
@@ -35,7 +40,7 @@ private val androidPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 internal fun DrawScope.androidCanvasDraw(
     matrix: Matrix,
     bitmap: Bitmap,
-    onPartColor: (index: Int) -> androidx.compose.ui.graphics.Color,
+    onPartColor: (index: Int) -> ComposeColor,
 ) {
     // clear bitmap
     bitmap.eraseColor(Color.TRANSPARENT)
@@ -52,5 +57,32 @@ internal fun DrawScope.androidCanvasDraw(
     // draw native canvas
     drawIntoCanvas { c ->
         c.nativeCanvas.drawBitmap(bitmap, 0f, 0f, null)
+    }
+}
+
+
+internal fun DrawScope.drawShadowLayer(
+    canvasMatrix: ComposeMatrix,
+    shadowColor: ComposeColor,
+    shadowBlurRadius: Float = CatParts.SHADOW_BLUR_RADIUS,
+) {
+    if (shadowColor == ComposeColor.Transparent || shadowBlurRadius <= 0f) return
+
+    val scale = this.size.minDimension / CatParts.VIEW_PORT_SIZE
+    val pixelBlur = shadowBlurRadius * scale
+
+    val onPartColor: (index: Int) -> ComposeColor = { shadowColor }
+
+    withTransform({ transform(canvasMatrix) }) {
+        drawIntoCanvas { canvas ->
+            val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                this.color = shadowColor.toArgb()
+                style = Paint.Style.FILL
+                maskFilter = BlurMaskFilter(pixelBlur, BlurMaskFilter.Blur.NORMAL)
+            }
+            forEachCatDrawPart(onPartColor) { part, color ->
+                part.androidDrawLambda(canvas.nativeCanvas, color, paint)
+            }
+        }
     }
 }

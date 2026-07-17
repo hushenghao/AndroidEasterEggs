@@ -17,6 +17,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -166,6 +167,11 @@ internal fun CatEditor(
                 color
             }
 
+            val isDarkTheme = isSystemInDarkTheme()
+            val shadowColor = remember(isDarkTheme) {
+                if (isDarkTheme) Color.White.copy(alpha = 0.2f) else Color.Black.copy(alpha = 0.15f)
+            }
+
             var canvasSize by remember { mutableStateOf(Size.Zero) }
             val canvasMatrix = remember(canvasSize) { createCanvasMatrix(canvasSize) }
 
@@ -180,16 +186,27 @@ internal fun CatEditor(
                 if (useAndroidCanvasDraw) createAndroidBitmap(canvasSize) else null
             }
             val rotationYAnim by animateFloatAsState(if (controllerImpl.isMirrorMode) 180f else 0f)
+
+            val canvasModifier = Modifier
+                .fillMaxSize()
+                .aspectRatio(1f)
+                .graphicsLayer {
+                    // for mirror mode
+                    rotationY = rotationYAnim
+                }
+
+            Canvas(
+                modifier = canvasModifier,
+                onDraw = {
+                    drawShadowLayer(canvasMatrix, shadowColor)
+                }
+            )
+
             Canvas(
                 contentDescription = stringResource(StringR.string.cat_editor),
                 modifier = Modifier
-                    .fillMaxSize()
-                    .aspectRatio(1f)
+                    .then(canvasModifier)
                     .capturable(captureController.getDelegate())
-                    .graphicsLayer {
-                        // for mirror mode
-                        rotationY = rotationYAnim
-                    }
                     .pointerInput(controllerImpl.isSelectEnabled) {
                         if (!controllerImpl.isSelectEnabled) {
                             return@pointerInput
@@ -225,17 +242,10 @@ internal fun CatEditor(
 
                     if (useAndroidCanvasDraw && bitmap != null) {
                         // android canvas draw
-                        androidCanvasDraw(
-                            canvasMatrix.asAndroidMatrix(),
-                            bitmap,
-                            partColorBlend
-                        )
+                        androidCanvasDraw(canvasMatrix.asAndroidMatrix(), bitmap, partColorBlend)
                     } else {
                         // compose canvas draw
-                        composeCanvasDraw(
-                            canvasMatrix,
-                            partColorBlend
-                        )
+                        composeCanvasDraw(canvasMatrix, partColorBlend)
                     }
                 }
             )

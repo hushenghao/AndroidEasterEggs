@@ -17,7 +17,7 @@ internal fun forEachCatDrawPart(
 
 internal fun DrawScope.composeCanvasDraw(
     matrix: Matrix,
-    onPartColor: (index: Int) -> Color
+    onPartColor: (index: Int) -> Color,
 ) {
     withTransform({ transform(matrix) }) {
         forEachCatDrawPart(onPartColor) { part, color ->
