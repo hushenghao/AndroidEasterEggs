@@ -71,7 +71,7 @@ jobs:
         if: matrix.language == 'java-kotlin'
         run: |
           chmod +x ./gradlew
-          ./gradlew app:assembleFossAlphaDebug
+          ./gradlew app:assembleFossBetaDebug
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v4
