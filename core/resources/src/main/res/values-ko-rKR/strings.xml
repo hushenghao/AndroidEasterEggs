@@ -27,11 +27,15 @@
     <string name="pref_title_language_more">더보기</string>
     <string name="pref_title_theme">테마</string>
     <string name="pref_title_dynamic_color">동적 색상</string>
+    <string name="pref_title_app_icon">앱 아이콘</string>
     <string name="pref_title_icon_visual_effects">아이콘 시각 효과</string>
     <string name="summary_system_default">기본</string>
     <string name="summary_theme_dark_mode">어둡게</string>
     <string name="summary_theme_light_mode">밝게</string>
     <string name="summary_theme_amoled_mode">검은색</string>
+    <string name="pref_title_color_source">색상</string>
+    <string name="summary_color_source_dynamic">동적</string>
+    <string name="summary_color_source_custom">사용자 지정</string>
     <string name="label_add_shortcut">바로가기</string>
     <string name="label_donate">기부</string>
     <string name="label_update">업데이트</string>
@@ -62,4 +66,17 @@
     <string name="rocket_launcher_all_app_icons">앱</string>
     <string name="rocket_launcher_all_icons">이스터에그와 앱</string>
     <string name="rocket_launcher_query_all_app_desc">홈 에 표시되는 앱의 목록을 가져와야 합니다</string>
+    <string name="label_data_backup">데이터 백업 &amp; 복원</string>
+    <string name="pref_data_backup_desc">사용자 데이터 내보내기 또는 가져오기</string>
+    <string name="action_export_backup">백업 내보내기</string>
+    <string name="action_export_backup_desc">설정, 고양이 정보, 위젯 구성을 파일에 저장합니다</string>
+    <string name="action_import_backup">백업 가져오기</string>
+    <string name="action_import_backup_desc">이전에 내보낸 백업 파일에서 복원합니다</string>
+    <string name="toast_backup_success">백업 파일이 성공적으로 내보내졌습니다</string>
+    <string name="toast_restore_success">복원이 완료되었습니다. 앱이 다시 시작됩니다.</string>
+    <string name="toast_backup_failed">백업 실패: %s</string>
+    <string name="toast_restore_failed">복원 실패: %s</string>
+    <string name="dialog_import_backup_title">백업 가져오기</string>
+    <string name="dialog_import_backup_message">이렇게 하면 설정, 저장된 고양이, 위젯 구성 등 현재 앱 데이터가 모두 덮어쓰여집니다. 이 작업은 되돌릴 수 없습니다. 계속하시겠습니까?</string>
+    <string name="action_confirm_import">가져오기</string>
 </resources>
