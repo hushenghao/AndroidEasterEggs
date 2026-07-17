@@ -7,7 +7,7 @@
     <string name="label_back">Kembali</string>
     <string name="label_github">Kode sumber</string>
     <string name="label_translation">Terjemahan</string>
-    <string name="label_beta">Versi Beta</string>
+    <string name="label_beta">Unduh beta</string>
     <string name="label_experiment">Versi Eksperimental</string>
     <string name="label_timeline">Linimasa</string>
     <string name="label_privacy_policy">Kebijakan Privasi</string>
@@ -33,6 +33,9 @@
     <string name="summary_theme_dark_mode">Gelap</string>
     <string name="summary_theme_light_mode">Terang</string>
     <string name="summary_theme_amoled_mode">Hitam</string>
+    <string name="pref_title_color_source">Warna</string>
+    <string name="summary_color_source_dynamic">Dinamis</string>
+    <string name="summary_color_source_custom">Kostum</string>
     <string name="label_add_shortcut">Pintasan</string>
     <string name="label_donate">Donasi</string>
     <string name="label_update">Pembaruan</string>
@@ -63,7 +66,7 @@
     <string name="rocket_launcher_all_app_icons">Aplikasi</string>
     <string name="rocket_launcher_all_icons">Easter eggs dan aplikasi</string>
     <string name="rocket_launcher_query_all_app_desc">Perlu mendapatkan daftar aplikasi yang ditampilkan di beranda</string>
-    <string name="label_data_backup">Cadangan data &amp; pulihkan</string>
+    <string name="label_data_backup">Cadangkan data &amp; pulihkan</string>
     <string name="pref_data_backup_desc">Ekspor atau impor data pengguna</string>
     <string name="action_export_backup">Ekspor Cadangan</string>
     <string name="action_export_backup_desc">Simpan pengaturan, cats, dan konfigurasi widget ke dalam sebuah berkas</string>
