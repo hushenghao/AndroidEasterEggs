@@ -2,6 +2,10 @@
 
 package com.dede.android_eggs.composable.colorpicker
 
+import android.app.Activity
+import android.content.Intent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -65,16 +69,31 @@ fun ColorPickerDialog(
     withAlphaPalette: Boolean = false,
     onColorSelected: (Color) -> Unit = {},
     isColorStrawEnabled: Boolean = true,
-    onColorStrawClick: () -> Unit = {},
     onDismiss: () -> Unit = {},
 ) {
+    val performColorSelected by rememberUpdatedState(onColorSelected)
+
+    val eyeDropperLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data
+                if (data != null) {
+                    val colorInt = data.getIntExtra(ColorPickerUtilities.EXTRA_COLOR, 0)
+                    if (colorInt != 0) {
+                        val pickedColor = Color(colorInt)
+                        if (initialColor != pickedColor) {
+                            performColorSelected(pickedColor)
+                        }
+                    }
+                }
+            }
+        }
+
     if (!visible) {
         return
     }
 
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-
-    val performColorSelected by rememberUpdatedState(onColorSelected)
 
     val hsv = colorToHsv(initialColor)
     var hue by remember { mutableFloatStateOf(hsv[0]) }
@@ -91,6 +110,7 @@ fun ColorPickerDialog(
     val context = LocalContext.current
 
     val scope = rememberCoroutineScope()
+
     val scrollState = rememberScrollState()
 
     val paddingValues = BottomSheetDefaults.modalWindowInsets.asPaddingValues()
@@ -210,7 +230,9 @@ fun ColorPickerDialog(
                             scope.launch {
                                 sheetState.hide()
                                 onDismiss()
-                                onColorStrawClick()
+                                eyeDropperLauncher.launch(
+                                    Intent(ColorPickerUtilities.ACTION_OPEN_EYE_DROPPER)
+                                )
                             }
                         },
                     ) {

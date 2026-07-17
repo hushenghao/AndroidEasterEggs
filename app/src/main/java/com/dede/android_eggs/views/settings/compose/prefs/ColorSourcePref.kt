@@ -35,11 +35,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
 import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePrefUtil.ColorSource
@@ -70,6 +72,8 @@ fun ColorSourcePref() {
     }
 
     var showColorPicker by remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
 
     val options = buildList {
         add(ColorSource.DEFAULT)
@@ -107,7 +111,7 @@ fun ColorSourcePref() {
         visible = showColorPicker,
         initialColor = Color(currentSeedColor),
         withAlphaPalette = false,
-        isColorStrawEnabled = false,
+        isColorStrawEnabled = ColorPickerUtilities.isEyeDropperSupported(context),
         onColorSelected = { color ->
             updateSeed(color.toArgb())
         },
