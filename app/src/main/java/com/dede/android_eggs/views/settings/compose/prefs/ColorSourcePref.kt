@@ -42,9 +42,7 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
-import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePrefUtil.SOURCE_CUSTOM
-import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePrefUtil.SOURCE_DEFAULT
-import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePrefUtil.SOURCE_DYNAMIC
+import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePrefUtil.ColorSource
 import com.dede.android_eggs.views.theme.resolveColorScheme
 import com.dede.android_eggs.resources.R as StringsR
 
@@ -54,22 +52,19 @@ import com.dede.android_eggs.resources.R as StringsR
 fun ColorSourcePref() {
     var colorSourcePacked by rememberPrefIntState(
         ColorSourcePrefUtil.KEY_COLOR_SOURCE,
-        ColorSourcePrefUtil.encode(
-            SOURCE_DEFAULT,
-            ColorSourcePrefUtil.DEFAULT_SEED_COLOR,
-        ),
+        ColorSourcePrefUtil.DEFAULT_VALUE,
     )
     val currentSource = ColorSourcePrefUtil.decodeSource(colorSourcePacked)
     val currentSeedColor = ColorSourcePrefUtil.decodeSeedColor(colorSourcePacked)
 
-    val updateSource = { source: Int ->
+    val updateSource = { source: ColorSource ->
         val newPacked = ColorSourcePrefUtil.encode(source, currentSeedColor)
         colorSourcePacked = newPacked
         ColorSourcePrefUtil.colorSourceState.intValue = newPacked
     }
 
     val updateSeed = { seedColor: Int ->
-        val newPacked = ColorSourcePrefUtil.encode(SOURCE_CUSTOM, seedColor)
+        val newPacked = ColorSourcePrefUtil.encode(ColorSource.CUSTOM, seedColor)
         colorSourcePacked = newPacked
         ColorSourcePrefUtil.colorSourceState.intValue = newPacked
     }
@@ -77,11 +72,11 @@ fun ColorSourcePref() {
     var showColorPicker by remember { mutableStateOf(false) }
 
     val options = buildList {
-        add(SOURCE_DEFAULT)
+        add(ColorSource.DEFAULT)
         if (ColorSourcePrefUtil.isDynamicColorSupported()) {
-            add(SOURCE_DYNAMIC)
+            add(ColorSource.DYNAMIC)
         }
-        add(SOURCE_CUSTOM)
+        add(ColorSource.CUSTOM)
     }
 
     Column() {
@@ -123,22 +118,21 @@ fun ColorSourcePref() {
 @Composable
 private fun ColorSourceCard(
     modifier: Modifier = Modifier,
-    source: Int,
+    source: ColorSource,
     selected: Boolean,
     colorSourcePacked: Int,
     onCardClick: () -> Unit,
     onEditClick: () -> Unit,
 ) {
     val labelRes = when (source) {
-        SOURCE_DEFAULT -> StringsR.string.summary_system_default
-        SOURCE_DYNAMIC -> StringsR.string.summary_color_source_dynamic
-        SOURCE_CUSTOM -> StringsR.string.summary_color_source_custom
-        else -> StringsR.string.summary_system_default
+        ColorSource.DEFAULT -> StringsR.string.summary_system_default
+        ColorSource.DYNAMIC -> StringsR.string.summary_color_source_dynamic
+        ColorSource.CUSTOM -> StringsR.string.summary_color_source_custom
     }
 
     val themeMode by ThemePrefUtil.themeModeState
     val seedColor = when (source) {
-        SOURCE_CUSTOM -> ColorSourcePrefUtil.decodeSeedColor(colorSourcePacked)
+        ColorSource.CUSTOM -> ColorSourcePrefUtil.decodeSeedColor(colorSourcePacked)
         else -> ColorSourcePrefUtil.DEFAULT_SEED_COLOR
     }
     val scheme = resolveColorScheme(themeMode, source, seedColor)
@@ -172,7 +166,7 @@ private fun ColorSourceCard(
                 )
             }
 
-            if (source == SOURCE_CUSTOM && selected) {
+            if (source == ColorSource.CUSTOM && selected) {
                 FilledTonalIconButton(
                     modifier = Modifier
                         .align(Alignment.TopEnd)

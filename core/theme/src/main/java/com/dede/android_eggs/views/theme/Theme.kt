@@ -15,13 +15,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePrefUtil
+import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePrefUtil.ColorSource
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 
 
 @Composable
 fun resolveColorScheme(
     themeMode: Int,
-    source: Int,
+    source: ColorSource,
     seedColor: Int,
 ): ColorScheme {
     val isDark = if (themeMode == ThemePrefUtil.FOLLOW_SYSTEM) {
@@ -30,10 +31,10 @@ fun resolveColorScheme(
         themeMode == ThemePrefUtil.DARK || themeMode == ThemePrefUtil.AMOLED
     }
     val colorScheme = when (source) {
-        ColorSourcePrefUtil.SOURCE_CUSTOM -> {
+        ColorSource.CUSTOM -> {
             generateColorSchemeFromSeed(seedColor, isDark)
         }
-        ColorSourcePrefUtil.SOURCE_DYNAMIC -> {
+        ColorSource.DYNAMIC -> {
             if (ColorSourcePrefUtil.isDynamicColorSupported()) {
                 val context: Context = LocalContext.current
                 if (isDark) dynamicDarkColorScheme(context)
@@ -42,7 +43,7 @@ fun resolveColorScheme(
                 if (isDark) darkScheme else lightScheme
             }
         }
-        else -> {
+        ColorSource.DEFAULT -> {
             if (isDark) darkScheme else lightScheme
         }
     }
