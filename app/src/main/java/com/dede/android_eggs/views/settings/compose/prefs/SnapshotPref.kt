@@ -29,19 +29,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
-import androidx.navigation3.runtime.NavKey
-import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.LocalNavigator
+import com.dede.android_eggs.navigation.LocalOverlayManager
+import com.dede.android_eggs.navigation.OverlayRoute
 import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.views.settings.compose.basic.SettingPref
 import com.dede.basic.provider.EasterEgg
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.components.SingletonComponent
-import dagger.multibindings.IntoSet
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
@@ -50,32 +45,15 @@ import com.dede.android_eggs.resources.R as StringR
 
 @Composable
 fun SnapshotPref() {
-    val navigator = LocalNavigator.current
+    val overlayManager = LocalOverlayManager.current
     SettingPref(
         title = stringResource(StringR.string.label_snapshot_preview),
         leadingIcon = Icons.Rounded.ViewCarousel,
         trailingContent = Icons.AutoMirrored.Rounded.NavigateNext,
         onClick = {
-            navigator.navigate(EasterEggsDestination.SnapshotDialog)
+            overlayManager.show(OverlayRoute.SnapshotDialog)
         }
     )
-}
-
-@Module
-@InstallIn(SingletonComponent::class)
-object SnapshotDialog : EasterEggsDestination, EasterEggsDestination.Provider {
-    override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.Dialog
-
-    override val route: NavKey = EasterEggsDestination.SnapshotDialog
-
-    @Composable
-    override fun Content(properties: EasterEggsDestination.DestinationProps) {
-        SnapshotDialogView()
-    }
-
-    @IntoSet
-    @Provides
-    override fun provider(): EasterEggsDestination = this
 }
 
 @HiltViewModel

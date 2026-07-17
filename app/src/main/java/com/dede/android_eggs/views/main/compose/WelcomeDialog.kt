@@ -22,40 +22,15 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.R
-import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil.KEY_PRIVACY_POLICY_AGREED
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
 import com.dede.android_eggs.views.settings.compose.prefs.SnapshotDialogView
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import dagger.multibindings.IntoSet
 import com.dede.android_eggs.resources.R as StringsR
 
 fun isAgreedPrivacyPolicy(context: Context): Boolean {
     return context.pref.getBoolean(KEY_PRIVACY_POLICY_AGREED, false)
-}
-
-@Module
-@InstallIn(SingletonComponent::class)
-object WelcomeDialog : EasterEggsDestination, EasterEggsDestination.Provider {
-
-    override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.Dialog
-
-    override val route: NavKey = EasterEggsDestination.WelcomeDialog
-
-    @Composable
-    override fun Content(properties: EasterEggsDestination.DestinationProps) {
-        WelcomeDialog(onDismiss = properties.onBack)
-    }
-
-    @Provides
-    @IntoSet
-    override fun provider(): EasterEggsDestination = this
 }
 
 @Preview

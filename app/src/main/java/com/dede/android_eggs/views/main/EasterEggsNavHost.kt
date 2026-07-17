@@ -11,21 +11,19 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import com.dede.android_eggs.local_provider.rememberCustomTabsUriHandler
-import com.dede.android_eggs.navigation.BottomSheetSceneStrategy
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.navigation.EasterEggsDestination.DestinationProps
 import com.dede.android_eggs.navigation.EasterEggsDestination.EasterEggs
 import com.dede.android_eggs.navigation.LocalNavigator
+import com.dede.android_eggs.navigation.LocalOverlayManager
 import com.dede.android_eggs.navigation.Navigator.Companion.rememberNavigator
 import com.dede.android_eggs.navigation.rememberEasterEggsDestinations
+import com.dede.android_eggs.navigation.rememberOverlayContentProviders
+import com.dede.android_eggs.navigation.rememberOverlayManager
 import com.dede.android_eggs.navigation.rememberNavigationState
 import com.dede.android_eggs.navigation.toEntries
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
@@ -59,40 +57,21 @@ fun EasterEggsNavHost(
 ) {
     val navigationState = rememberNavigationState(startRoute = EasterEggs)
     val navigator = rememberNavigator(navigationState)
-    val currentRoute = navigator.currentRoute
+    val overlayManager = rememberOverlayManager()
     val konfettiController = rememberKonfettiController()
     val uriHandler = rememberCustomTabsUriHandler()
     CompositionLocalProvider(
         LocalUriHandler provides uriHandler,
         LocalNavigator provides navigator,
+        LocalOverlayManager provides overlayManager,
         LocalKonfettiState provides konfettiController,
     ) {
         val onBack = { navigator.goBack() }
         val entryProvider = entryProvider {
             val navDestinations = rememberEasterEggsDestinations()
             navDestinations.forEach { dest ->
-                when (dest.type) {
-                    EasterEggsDestination.Type.Composable -> {
-                        entry(dest.route) {
-                            val properties = DestinationProps(it)
-                            dest.Content(properties)
-                        }
-                    }
-                    EasterEggsDestination.Type.Dialog -> {
-                        entry(key = dest.route, metadata = DialogSceneStrategy.dialog()) {
-                            val properties = DestinationProps(it, onBack = onBack)
-                            dest.Content(properties)
-                        }
-                    }
-                    EasterEggsDestination.Type.BottomSheet -> {
-                        entry(
-                            key = dest.route,
-                            metadata = BottomSheetSceneStrategy.bottomSheet(customBottomSheet = true)
-                        ) {
-                            val properties = DestinationProps(it, onBack = onBack)
-                            dest.Content(properties)
-                        }
-                    }
+                entry(dest.route) {
+                    dest.Content()
                 }
             }
         }
@@ -100,15 +79,17 @@ fun EasterEggsNavHost(
             modifier = modifier,
             entries = navigationState.toEntries(entryProvider),
             onBack = onBack,
-            sceneStrategies = remember {
-                listOf(DialogSceneStrategy<NavKey>(), BottomSheetSceneStrategy<NavKey>())
-            },
             transitionSpec = { navTransition() },
             popTransitionSpec = { popTransition() },
             predictivePopTransitionSpec = { popTransition() },
         )
 
-        LaunchFlowEffect(navigator = navigator, currentRoute = currentRoute)
+        LaunchOverlayFlow(overlayManager = overlayManager, navigator = navigator)
 
+        val overlayContentProviders = rememberOverlayContentProviders()
+        OverlayHost(
+            overlayManager = overlayManager,
+            contentProviders = overlayContentProviders,
+        )
     }
 }

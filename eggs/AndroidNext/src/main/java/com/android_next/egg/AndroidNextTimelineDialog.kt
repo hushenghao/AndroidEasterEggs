@@ -28,9 +28,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.alterable_adaptive_icon.AlterableAdaptiveIcon
-import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.navigation.OverlayContentProvider
+import com.dede.android_eggs.navigation.OverlayRoute
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import dagger.Module
 import dagger.Provides
@@ -39,21 +39,22 @@ import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import java.util.Calendar
 
+object AndroidNextTimelineRoute : OverlayRoute
+
 @Module
 @InstallIn(SingletonComponent::class)
-object AndroidNextTimelineDialog : EasterEggsDestination, EasterEggsDestination.Provider {
-    override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.Dialog
+object AndroidNextOverlayProvider : OverlayContentProvider {
 
-    override val route: NavKey = EasterEggsDestination.AndroidNextTimelineDialog
-
-    @Composable
-    override fun Content(properties: EasterEggsDestination.DestinationProps) {
-        AndroidNextTimelineDialog(onDismiss = properties.onBack)
-    }
+    override val route: OverlayRoute = AndroidNextTimelineRoute
 
     @Provides
     @IntoSet
-    override fun provider(): EasterEggsDestination = this
+    fun provide(): OverlayContentProvider = this
+
+    @Composable
+    override fun Content(onDismiss: () -> Unit) {
+        AndroidNextTimelineDialog(onDismiss = onDismiss)
+    }
 }
 
 @Composable

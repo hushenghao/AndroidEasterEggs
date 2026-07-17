@@ -12,21 +12,7 @@ import kotlinx.serialization.Serializable
 
 interface EasterEggsDestination {
 
-    enum class Type {
-        Composable,
-        Dialog,
-        BottomSheet,
-    }
-
-    val type: Type
-        get() = Type.Composable
-
     val route: NavKey
-
-    @Composable
-    fun Content(properties: DestinationProps) {
-        Content()
-    }
 
     @Composable
     fun Content() {
@@ -36,20 +22,10 @@ interface EasterEggsDestination {
         fun provider(): EasterEggsDestination
     }
 
-    data class DestinationProps(
-        val navKey: NavKey,
-        val onBack: () -> Unit = {},
-    )
-
     // @formatter:off
     @Serializable data object EasterEggs : NavKey
-    @Serializable data object WelcomeDialog : NavKey
-    @Serializable data object SnapshotDialog : NavKey
-    @Serializable data object AndroidNextTimelineDialog : NavKey
-    @Serializable data object AnimatorDisabledAlertDialog : NavKey
     @Serializable data object CatEditor : NavKey
     @Serializable data object LibrariesInfo : NavKey
-    @Serializable data object TimelineDialog : NavKey
     // @formatter:on
 }
 

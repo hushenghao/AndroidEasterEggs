@@ -15,28 +15,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.edit
-import androidx.navigation3.runtime.NavKey
-import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.util.pref
 import com.dede.basic.Utils
 import com.dede.basic.toast
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import dagger.multibindings.IntoSet
 import com.dede.android_eggs.resources.R as StringsR
 
-@Module
-@InstallIn(SingletonComponent::class)
-object AnimatorDisabledAlertDialog : EasterEggsDestination, EasterEggsDestination.Provider {
+private const val PREF_DONT_SHOW_AGAIN = "animator_disabled_alert_dialog_dont_show_again"
 
-    override val type: EasterEggsDestination.Type = EasterEggsDestination.Type.Dialog
-
-    override val route: NavKey = EasterEggsDestination.AnimatorDisabledAlertDialog
-
-    private const val PREF_DONT_SHOW_AGAIN = "animator_disabled_alert_dialog_dont_show_again"
-
+object AnimatorAlertPrefs {
     fun isDontShowAgain(context: Context): Boolean {
         return context.pref.getBoolean(PREF_DONT_SHOW_AGAIN, false)
     }
@@ -44,15 +30,6 @@ object AnimatorDisabledAlertDialog : EasterEggsDestination, EasterEggsDestinatio
     fun setDontShowAgain(context: Context) {
         context.pref.edit { putBoolean(PREF_DONT_SHOW_AGAIN, true) }
     }
-
-    @Composable
-    override fun Content(properties: EasterEggsDestination.DestinationProps) {
-        AnimatorDisabledAlertDialog(onDismiss = properties.onBack)
-    }
-
-    @Provides
-    @IntoSet
-    override fun provider(): EasterEggsDestination = this
 }
 
 @Composable
@@ -76,7 +53,7 @@ fun AnimatorDisabledAlertDialog(onDismiss: () -> Unit = {}) {
         },
         dismissButton = {
             TextButton(onClick = {
-                AnimatorDisabledAlertDialog.setDontShowAgain(context)
+                AnimatorAlertPrefs.setDontShowAgain(context)
                 onDismiss()
             }) {
                 Text(text = stringResource(StringsR.string.action_dont_show_again))

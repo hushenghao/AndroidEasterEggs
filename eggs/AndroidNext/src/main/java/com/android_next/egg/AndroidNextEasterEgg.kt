@@ -6,8 +6,8 @@ import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.dede.android_eggs.navigation.EasterEggsDestination.AndroidNextTimelineDialog
-import com.dede.android_eggs.navigation.Navigator
+import com.dede.android_eggs.navigation.OverlayManagerEntryPoint
+import com.dede.android_eggs.navigation.OverlayRoute
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
@@ -18,6 +18,7 @@ import com.dede.basic.requireDrawable
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import java.util.Calendar
@@ -54,7 +55,10 @@ object AndroidNextEasterEgg : EasterEggProvider {
             fullApiLevel = NEXT_API.toFullApiLevel(),
         ) {
             override fun onEasterEggAction(context: Context): Boolean {
-                Navigator.findNavigator()?.navigate(AndroidNextTimelineDialog)
+                val manager = EntryPointAccessors.fromApplication<OverlayManagerEntryPoint>(
+                    context.applicationContext
+                ).overlayManager
+                manager.show(AndroidNextTimelineRoute)
                 return true
             }
 
