@@ -1,0 +1,3 @@
+- Merge alpha track into beta, remove experimental version UI
+- Remove zoom animation from version check update button
+- Code cleanup and refactoring

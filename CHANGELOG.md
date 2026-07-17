@@ -1,5 +1,11 @@
 # Changelog
 
+### v5.3.1 (2026-07-17)
+
+- Merge alpha track into beta, remove experimental version UI
+- Remove zoom animation from version check update button
+- Code cleanup and refactoring
+
 ### v5.3.0 (2026-07-15)
 
 - Add custom seed color theme generation

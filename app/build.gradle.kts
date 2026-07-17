@@ -26,8 +26,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dede.android_eggs"
-        versionCode = 79
-        versionName = "5.3.0"
+        versionCode = 80
+        versionName = "5.3.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         base.archivesName.set("easter_eggs_${versionName}_${versionCode}")
