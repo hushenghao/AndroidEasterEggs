@@ -169,7 +169,7 @@ internal fun CatEditor(
 
             val isDarkTheme = isSystemInDarkTheme()
             val shadowColor = remember(isDarkTheme) {
-                if (isDarkTheme) Color.White.copy(alpha = 0.2f) else Color.Black.copy(alpha = 0.15f)
+                if (isDarkTheme) Color.White.copy(alpha = 0.15f) else Color.Black.copy(alpha = 0.18f)
             }
 
             var canvasSize by remember { mutableStateOf(Size.Zero) }

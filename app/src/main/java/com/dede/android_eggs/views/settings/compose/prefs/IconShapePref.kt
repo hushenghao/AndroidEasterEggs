@@ -52,8 +52,8 @@ fun IconShapePref() {
         IconShapeGridLayout {
             polygonItems.forEachIndexed { index, roundedPolygon ->
                 ShapeItem(
-                    modifier = Modifier.padding(2.dp),
-                    shape = MaterialShapes.Cookie4Sided.toShape(),
+                    modifier = Modifier.padding(4.dp),
+                    shape = IconShapePrefUtil.getIconShape(),//MaterialShapes.Cookie4Sided.toShape(),
                     isSelected = index == selectedIndex,
                     roundedPolygon = roundedPolygon,
                     onClick = onClick@{
@@ -111,24 +111,25 @@ private fun ShapeItem(
             contentColor = colorScheme.onSurface,
         ),
     ) {
+        val shapeColor = colorScheme.onSurfaceVariant
         if (roundedPolygon.isRandomPolygon()) {
             Icon(
                 imageVector = Icons.Rounded.Shuffle,
                 contentDescription = null,
-                tint = colorScheme.primary,
+                tint = shapeColor,
             )
         } else if (roundedPolygon.isSystemShape()) {
             Icon(
                 imageVector = Icons.Rounded.Android,
                 contentDescription = null,
-                tint = colorScheme.primary,
+                tint = shapeColor,
             )
         } else {
             val polygonShape = roundedPolygon.toShapePlus()
             Box(
                 modifier = Modifier
                     .clip(polygonShape)
-                    .border(1.6.dp, colorScheme.primary, polygonShape)
+                    .border(1.6.dp, shapeColor, polygonShape)
                     .size(24.dp)
             )
         }

@@ -20,7 +20,7 @@ import android.graphics.Canvas as AndroidCanvas
 internal object CatParts {
 
     const val VIEW_PORT_SIZE = 48f
-    const val SHADOW_BLUR_RADIUS = 1.3f
+    const val SHADOW_BLUR_RADIUS = 0.3f
 
     private const val MOUTH_STROKE_WIDTH = 1.2f
     private const val TAIL_STROKE_WIDTH = 5f
