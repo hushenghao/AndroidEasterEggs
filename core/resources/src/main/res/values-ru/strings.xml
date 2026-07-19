@@ -17,7 +17,7 @@
     <string name="label_star">Оценить приложение</string>
     <string name="label_contact_me">Связаться со мной</string>
     <string name="label_email_title">Эл. почта</string>
-    <string name="label_snapshot_preview">Предварительный снимок</string>
+    <string name="label_snapshot_preview">Предпросмотр снимков</string>
     <string name="message_trypophobia_warning">Это предупреждение для тех, у кого &lt;b&gt;трипофобия&lt;/b&gt;. Некоторые изображения могут вызывать дискомфорт. Вы хотите продолжить?</string>
     <string name="label_settings">Настройки</string>
     <string name="label_project_desc">Этот проект, призванный организовать и обеспечить совместимость со всеми пасхальными яйцами (пасхалками) Android, содержит полный код всех пасхальных яиц Android. Цель состоит в том, чтобы на большинстве устройств можно было наслаждаться разными версиями пасхальных яиц с минимальными изменениями в коде пасхального яйца.</string>
@@ -32,6 +32,9 @@
     <string name="summary_theme_dark_mode">Тёмная</string>
     <string name="summary_theme_light_mode">Светлая</string>
     <string name="summary_theme_amoled_mode">Чёрная</string>
+    <string name="pref_title_color_source">Цвета</string>
+    <string name="summary_color_source_dynamic">Динамические</string>
+    <string name="summary_color_source_custom">Пользовательские</string>
     <string name="label_add_shortcut">Ярлык</string>
     <string name="label_donate">Пожертвование</string>
     <string name="label_update">Обновить</string>
