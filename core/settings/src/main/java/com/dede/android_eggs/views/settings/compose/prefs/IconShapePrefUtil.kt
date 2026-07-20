@@ -37,7 +37,7 @@ fun ShapeSpec.toShape(): Shape = when (this) {
     }
     is ShapeSpec.Squircle -> squircleShape
     is ShapeSpec.Random -> {
-        val index = Random.nextInt(IconShapePrefUtil.indexOfRandom)
+        val index = remember { Random.nextInt(IconShapePrefUtil.indexOfRandom) }
         IconShapePrefUtil.getIconShape(index)
     }
 }
