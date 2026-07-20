@@ -82,7 +82,7 @@ jobs:
           if grep -q "KotlinVersionTooRecentError\|Kotlin version.*too recent" \
             "$RUNNER_TEMP/build.log" 2>/dev/null; then
             echo "kotlin_ok=false" >> "$GITHUB_OUTPUT"
-            echo "CodeQL extractor: Kotlin version too recent. Skipping analysis."
+            echo "::warning::Kotlin version too recent for CodeQL extractor. Skipping java-kotlin analysis."
           else
             echo "kotlin_ok=true" >> "$GITHUB_OUTPUT"
           fi
