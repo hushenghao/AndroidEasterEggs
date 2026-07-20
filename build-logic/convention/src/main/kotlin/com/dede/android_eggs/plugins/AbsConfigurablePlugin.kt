@@ -11,6 +11,7 @@ import com.dede.android_eggs.dls.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidExtension
 import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 
 abstract class AbsConfigurablePlugin(
@@ -91,6 +92,17 @@ abstract class AbsConfigurablePlugin(
 
         kotlinExtension.jvmToolchain {
             languageVersion.set(Versions.JAVA_VERSION)
+        }
+
+        extensions.configure<KotlinAndroidExtension>("kotlin") {
+            compilerOptions {
+                freeCompilerArgs.addAll(
+                    // https://kotlinlang.org/docs/annotations.html#annotation-use-site-targets
+                    "-Xannotation-default-target=param-property",
+                    // https://kotlinlang.org/docs/whatsnew24.html#support-for-collection-literals
+                    "-Xcollection-literals",
+                )
+            }
         }
     }
 

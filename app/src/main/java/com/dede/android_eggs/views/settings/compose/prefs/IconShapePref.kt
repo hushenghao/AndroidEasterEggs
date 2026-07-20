@@ -16,27 +16,21 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme.colorScheme
-import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
-import androidx.graphics.shapes.RoundedPolygon
 import com.dede.android_eggs.ui.composes.icons.rounded.Shapes
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.isRandomPolygon
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.isSystemShape
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.polygonItems
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.toShapePlus
+import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.shapeSpecs
 import com.dede.android_eggs.resources.R as StringsR
 
 private const val SPAN_COUNT = 5
@@ -50,12 +44,11 @@ fun IconShapePref() {
         title = stringResource(StringsR.string.pref_title_icon_shape_override),
     ) {
         IconShapeGridLayout {
-            polygonItems.forEachIndexed { index, roundedPolygon ->
+            shapeSpecs.forEachIndexed { index, shapeSpec ->
                 ShapeItem(
                     modifier = Modifier.padding(4.dp),
-                    shape = IconShapePrefUtil.getIconShape(),//MaterialShapes.Cookie4Sided.toShape(),
                     isSelected = index == selectedIndex,
-                    roundedPolygon = roundedPolygon,
+                    shapeSpec = shapeSpec,
                     onClick = onClick@{
                         if (selectedIndex == index) return@onClick
                         selectedIndex = index
@@ -98,10 +91,10 @@ private fun IconShapeGridLayout(spanCount: Int = SPAN_COUNT, content: @Composabl
 private fun ShapeItem(
     modifier: Modifier = Modifier,
     isSelected: Boolean = false,
-    shape: Shape = MaterialShapes.Cookie4Sided.toShape(),
-    roundedPolygon: RoundedPolygon = MaterialShapes.Circle,
+    shapeSpec: ShapeSpec = ShapeSpec.Polygon(MaterialShapes.Circle),
     onClick: () -> Unit = {}
 ) {
+    val shape = shapeSpec.toShape()
     FilledTonalIconButton(
         shape = shape,
         onClick = onClick,
@@ -112,26 +105,29 @@ private fun ShapeItem(
         ),
     ) {
         val shapeColor = colorScheme.onSurfaceVariant
-        if (roundedPolygon.isRandomPolygon()) {
-            Icon(
-                imageVector = Icons.Rounded.Shuffle,
-                contentDescription = null,
-                tint = shapeColor,
-            )
-        } else if (roundedPolygon.isSystemShape()) {
-            Icon(
-                imageVector = Icons.Rounded.Android,
-                contentDescription = null,
-                tint = shapeColor,
-            )
-        } else {
-            val polygonShape = roundedPolygon.toShapePlus()
-            Box(
-                modifier = Modifier
-                    .clip(polygonShape)
-                    .border(1.6.dp, shapeColor, polygonShape)
-                    .size(24.dp)
-            )
+        when (shapeSpec) {
+            is ShapeSpec.Random -> {
+                Icon(
+                    imageVector = Icons.Rounded.Shuffle,
+                    contentDescription = null,
+                    tint = shapeColor,
+                )
+            }
+            is ShapeSpec.System -> {
+                Icon(
+                    imageVector = Icons.Rounded.Android,
+                    contentDescription = null,
+                    tint = shapeColor,
+                )
+            }
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .clip(shape)
+                        .border(1.6.dp, shapeColor, shape)
+                        .size(24.dp)
+                )
+            }
         }
     }
 }

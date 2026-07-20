@@ -6,12 +6,12 @@ import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.graphics.shapes.CornerRounding
 import androidx.graphics.shapes.RoundedPolygon
-import androidx.graphics.shapes.rectangle
 import androidx.graphics.shapes.star
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.utils.SystemIconMaskUtil
@@ -19,49 +19,44 @@ import com.dede.android_eggs.views.settings.compose.utils.rotated
 import sv.lib.squircleshape.SquircleShape
 import kotlin.random.Random
 
+@Stable
+sealed interface ShapeSpec {
+    @Stable
+    data class Polygon(val polygon: RoundedPolygon) : ShapeSpec
+    data object System : ShapeSpec
+    data object Squircle : ShapeSpec
+    data object Random : ShapeSpec
+}
+
+@Composable
+fun ShapeSpec.toShape(): Shape = when (this) {
+    is ShapeSpec.Polygon -> polygon.toShape()
+    is ShapeSpec.System -> {
+        SystemIconMaskUtil.getIconMaskShape(LocalContext.current)
+            ?: MaterialShapes.Circle.toShape()
+    }
+    is ShapeSpec.Squircle -> squircleShape
+    is ShapeSpec.Random -> {
+        val index = Random.nextInt(IconShapePrefUtil.indexOfRandom)
+        IconShapePrefUtil.getIconShape(index)
+    }
+}
+
+private val squircleShape = SquircleShape()
+
+private val circleShapeSpec = ShapeSpec.Polygon(MaterialShapes.Circle)
+
 object IconShapePrefUtil {
 
     const val KEY_ICON_SHAPE = "pref_key_override_icon_shape"
 
     @Composable
     fun getIconShape(index: Int = SettingPrefUtil.iconShapeValueState.intValue): Shape {
-        val polygon = polygonItems.getOrNull(index) ?: defaultCircle
-        return polygon.toShapePlus()
+        return shapeSpecs.getOrElse(index) { circleShapeSpec }.toShape()
     }
-
-    fun RoundedPolygon.isSystemShape(): Boolean = this === systemShape
-
-    fun RoundedPolygon.isRandomPolygon(): Boolean = this === randomPolygon
-
-    internal fun RoundedPolygon.isSquircle(): Boolean = this === fakeSquircle
-
-    @Composable
-    fun RoundedPolygon.toShapePlus(): Shape {
-        if (this.isRandomPolygon()) {
-            val index = remember { Random.nextInt(indexOfRandom) }
-            return getIconShape(index)
-        }
-        if (this.isSystemShape()) {
-            return SystemIconMaskUtil.getIconMaskShape(LocalContext.current)
-                ?: defaultCircle.toShape()
-        }
-        if (this.isSquircle()) {
-            return squircleShape
-        }
-        return this.toShape()
-    }
-
-    private val defaultCircle = MaterialShapes.Circle
-
-    private val fakeSquircle = RoundedPolygon.rectangle()
-    private val squircleShape = SquircleShape()
-    private val systemShape = RoundedPolygon.rectangle()
-    private val randomPolygon = RoundedPolygon.rectangle()
-
-    private val privatePolygonSet = setOf(systemShape, fakeSquircle, randomPolygon)
 
     fun providerPolygonItems(): Array<RoundedPolygon> {
-        return polygonItems.filter { !privatePolygonSet.contains(it) }.toTypedArray()
+        return shapeSpecs.filterIsInstance<ShapeSpec.Polygon>().map { it.polygon }.toTypedArray()
     }
 
     private val cornerRound30 = CornerRounding(0.3f)
@@ -93,65 +88,68 @@ object IconShapePrefUtil {
         ).rotated(rotate).normalized()
     }
 
-    val polygonItems: Array<RoundedPolygon> = arrayOf(
-        systemShape,
-        MaterialShapes.Square,
+    val shapeSpecs: List<ShapeSpec> = [
+        ShapeSpec.System,
+        ShapeSpec.Polygon(MaterialShapes.Square),
         // Squircle
-        fakeSquircle,
-        defaultCircle,
+        ShapeSpec.Squircle,
+        circleShapeSpec,
         // CornerSE
-        RoundedPolygon(
-            vertices = floatArrayOf(1f, 1f, -1f, 1f, -1f, -1f, 1f, -1f),
-            perVertexRounding = listOf(
-                CornerRounding(0.4f),
-                CornerRounding(1f),
-                CornerRounding(1f),
-                CornerRounding(1f),
-            ),
-        ).normalized(),
+        ShapeSpec.Polygon(
+            RoundedPolygon(
+                vertices = floatArrayOf(1f, 1f, -1f, 1f, -1f, -1f, 1f, -1f),
+                perVertexRounding = listOf(
+                    CornerRounding(0.4f),
+                    CornerRounding(1f),
+                    CornerRounding(1f),
+                    CornerRounding(1f),
+                ),
+            ).normalized()
+        ),
 
-        MaterialShapes.Pill,
-        MaterialShapes.Slanted,
-        MaterialShapes.Arch,
-        MaterialShapes.Ghostish,
-        MaterialShapes.Gem,
+        ShapeSpec.Polygon(MaterialShapes.Pill),
+        ShapeSpec.Polygon(MaterialShapes.Slanted),
+        ShapeSpec.Polygon(MaterialShapes.Arch),
+        ShapeSpec.Polygon(MaterialShapes.Ghostish),
+        ShapeSpec.Polygon(MaterialShapes.Gem),
 
-        MaterialShapes.Cookie4Sided,
-        MaterialShapes.Cookie6Sided,
-        MaterialShapes.Cookie7Sided,
-        MaterialShapes.Cookie9Sided,
-        MaterialShapes.Cookie12Sided,
+        ShapeSpec.Polygon(MaterialShapes.Cookie4Sided),
+        ShapeSpec.Polygon(MaterialShapes.Cookie6Sided),
+        ShapeSpec.Polygon(MaterialShapes.Cookie7Sided),
+        ShapeSpec.Polygon(MaterialShapes.Cookie9Sided),
+        ShapeSpec.Polygon(MaterialShapes.Cookie12Sided),
 
-        MaterialShapes.Clover4Leaf,
-        cloverLeaf(6, -60f),
-        MaterialShapes.Clover8Leaf,
+        ShapeSpec.Polygon(MaterialShapes.Clover4Leaf),
+        ShapeSpec.Polygon(cloverLeaf(6, -60f)),
+        ShapeSpec.Polygon(MaterialShapes.Clover8Leaf),
         // Scallop
-        scallop(8),
-        scallop(10),
-        scallop(13),
+        ShapeSpec.Polygon(scallop(8)),
+        ShapeSpec.Polygon(scallop(10)),
+        ShapeSpec.Polygon(scallop(13)),
 
-        polygon(4, rotate = 90f),
-        polygon(5, rotate = 126f),
-        polygon(6),
-        polygon(8),
-        MaterialShapes.Sunny,
+        ShapeSpec.Polygon(polygon(4, rotate = 90f)),
+        ShapeSpec.Polygon(polygon(5, rotate = 126f)),
+        ShapeSpec.Polygon(polygon(6)),
+        ShapeSpec.Polygon(polygon(8)),
+        ShapeSpec.Polygon(MaterialShapes.Sunny),
 
-        MaterialShapes.ClamShell,
-        MaterialShapes.Bun,
-        MaterialShapes.Flower,
-        MaterialShapes.PuffyDiamond,
-        MaterialShapes.PixelCircle,
+        ShapeSpec.Polygon(MaterialShapes.ClamShell),
+        ShapeSpec.Polygon(MaterialShapes.Bun),
+        ShapeSpec.Polygon(MaterialShapes.Flower),
+        ShapeSpec.Polygon(MaterialShapes.PuffyDiamond),
+        ShapeSpec.Polygon(MaterialShapes.PixelCircle),
 
-        RoundedPolygon.star(
-            numVerticesPerRadius = 17,// android 17
-            innerRadius = 0.88f,
-            rounding = CornerRounding(0.08f),
-            innerRounding = CornerRounding.Unrounded,
-        ).rotated(17f).normalized(),
+        ShapeSpec.Polygon(
+            RoundedPolygon.star(
+                numVerticesPerRadius = 17,// android 17
+                innerRadius = 0.88f,
+                rounding = CornerRounding(0.08f),
+                innerRounding = CornerRounding.Unrounded,
+            ).rotated(17f).normalized()
+        ),
 
-        randomPolygon
-    )
+        ShapeSpec.Random
+    ]
 
-    internal val indexOfRandom: Int = polygonItems.size - 1
-
+    internal val indexOfRandom: Int = shapeSpecs.size - 1
 }
