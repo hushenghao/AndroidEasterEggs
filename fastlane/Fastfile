@@ -86,9 +86,9 @@ platform :android do
     Dir.chdir(mapping_dir) do
       sh("zip", "mapping.zip", File::basename(mapping_path))
     end
-    missing_rules = File::join(mapping_dir, "missing_rules.txt")
-    if File::exist?(missing_rules)
-      sh("cat", missing_rules)
+    missing_rules = File.join(mapping_dir, "missing_rules.txt")
+    if File.exist?(missing_rules)
+      File.foreach(missing_rules) { |line| puts "::warning file=missing_rules.txt::#{line.strip}" }
     end
 
     # Generate release notes from git Conventional Commits
