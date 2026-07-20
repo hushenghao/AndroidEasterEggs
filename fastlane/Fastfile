@@ -60,9 +60,15 @@ platform :android do
 
     is_pre_release = is_pre_release_ref(ref_name)
     if is_pre_release
-      gradle(tasks: ["clean", "app:assembleFossBetaRelease"])
+      gradle(
+        tasks: ["clean", "app:assembleFossBetaRelease"],
+        flags: "--no-daemon",
+      )
     else
-      gradle(tasks: ["clean", "app:assembleFossProductRelease"])
+      gradle(
+        tasks: ["clean", "app:assembleFossProductRelease"],
+        flags: "--no-daemon",
+      )
     end
 
     # https://docs.fastlane.tools/actions/gradle/
@@ -118,10 +124,11 @@ platform :android do
 
     # all track use "MarketProductRelease" build variant,
     tasks = ["clean", "app:bundleMarketProductRelease"]
+    flags = "--no-daemon"
     ref_name = options[:ref_name]
     if is_pre_release_ref(ref_name)
       # Upload new beta version
-      gradle(tasks: tasks)
+      gradle(tasks: tasks, flags: flags)
       upload_to_play_store(
         skip_upload_metadata: true,
         skip_upload_images: true,
@@ -159,11 +166,11 @@ platform :android do
       )
     when "full"
       # Upload All
-      gradle(tasks: tasks)
+      gradle(tasks: tasks, flags: flags)
       upload_to_play_store
     else
       # Upload new version
-      gradle(tasks: tasks)
+      gradle(tasks: tasks, flags: flags)
       upload_to_play_store(
         skip_upload_metadata: true,
         sync_image_upload: true,

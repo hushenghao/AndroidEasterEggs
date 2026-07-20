@@ -69,11 +69,26 @@ jobs:
 
       - name: Build project for CodeQL (Java/Kotlin)
         if: matrix.language == 'java-kotlin'
+        id: build
+        continue-on-error: true
         run: |
           chmod +x ./gradlew
-          ./gradlew app:assembleFossBetaDebug
+          ./gradlew app:assembleFossBetaDebug --no-daemon 2>&1 | tee "$RUNNER_TEMP/build.log"
+
+      - name: Check CodeQL extractor for Kotlin version too recent
+        id: check-extractor
+        if: matrix.language == 'java-kotlin'
+        run: |
+          if grep -q "KotlinVersionTooRecentError\|Kotlin version.*too recent" \
+            "$RUNNER_TEMP/build.log" 2>/dev/null; then
+            echo "kotlin_ok=false" >> "$GITHUB_OUTPUT"
+            echo "CodeQL extractor: Kotlin version too recent. Skipping analysis."
+          else
+            echo "kotlin_ok=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Perform CodeQL Analysis
+        if: steps.check-extractor.outputs.kotlin_ok != 'false' || matrix.language != 'java-kotlin'
         uses: github/codeql-action/analyze@v4
         with:
           category: '/language:${{ matrix.language }}'
