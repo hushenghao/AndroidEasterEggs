@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.outlined.NewReleases
 import androidx.compose.material.icons.rounded.Upgrade
 import androidx.compose.material3.AlertDialog
@@ -38,6 +37,9 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.flavor.FlavorFeatures
 import com.dede.android_eggs.flavor.LatestVersion
+import com.dede.android_eggs.local_provider.currentOutInspectionMode
+import com.dede.android_eggs.navigation.LocalOverlayManager
+import com.dede.android_eggs.navigation.OverlayRoute
 import com.dede.android_eggs.util.AGPUtils
 import com.dede.android_eggs.util.compareStringVersion
 import com.dede.android_eggs.views.main.compose.isAgreedPrivacyPolicy
@@ -64,17 +66,9 @@ fun VersionOption(shape: Shape = OptionShapes.defaultShape) {
         title = stringResource(R.string.label_version, versionName, versionCode),
         desc = AGPUtils.getVcsRevision(7),
         trailingContent = {
-            if (isAgreedPrivacyPolicy(context)) {
-                UpgradeIconButton(
-                    newVersion = newVersion,
-                    onNewVersionChange = { newVersion = it },
-                )
-            } else {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.NavigateNext,
-                    contentDescription = null
-                )
-            }
+            UpgradeIconButton(
+                onNewVersion = { newVersion = it },
+            )
         },
         onClick = {
             val revision = AGPUtils.getVcsRevision()
@@ -92,23 +86,33 @@ fun VersionOption(shape: Shape = OptionShapes.defaultShape) {
 }
 
 @Composable
-private fun UpgradeIconButton(
-    newVersion: LatestVersion?,
-    onNewVersionChange: (LatestVersion?) -> Unit,
-) {
+private fun UpgradeIconButton(onNewVersion: (LatestVersion) -> Unit) {
     val context = LocalContext.current
     val activity = LocalActivity.current
+    val overlayManager = LocalOverlayManager.currentOutInspectionMode
+
+    var enabled by remember { mutableStateOf(true) }
     val coroutineScope = rememberCoroutineScope()
 
     FilledTonalIconButton(
         modifier = Modifier
             .offset(x = 4.dp),// fix padding end of Option
         shape = IconShapePrefUtil.getIconShape(),
+        enabled = enabled,
         onClick = onClick@{
             if (activity == null) {
                 return@onClick
             }
             coroutineScope.launch {
+                enabled = false
+                if (!isAgreedPrivacyPolicy(context)) {
+                    overlayManager?.awaitDialog(OverlayRoute.WelcomeDialog)
+                }
+                if (!isAgreedPrivacyPolicy(context)) {
+                    enabled = true
+                    return@launch
+                }
+
                 val latestVersion = FlavorFeatures.get().checkUpdate(activity).getOrNull()
                 if (latestVersion != null) {
                     if (compareStringVersion(
@@ -116,11 +120,12 @@ private fun UpgradeIconButton(
                             Utils.getAppVersionPair(context).first
                         ) > 0
                     ) {
-                        onNewVersionChange(latestVersion)
+                        onNewVersion(latestVersion)
                     } else {
                         context.toast(StringR.string.toast_no_update_found)
                     }
                 }
+                enabled = true
             }
         }
     ) {
