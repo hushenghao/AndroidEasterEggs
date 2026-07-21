@@ -29,7 +29,7 @@ import com.dede.android_eggs.resources.R as StringsR
 fun AboutGroup() {
     val navigator = LocalNavigator.current
     val uriHandler = LocalUriHandler.current
-    val betaUrl = stringResource(R.string.url_beta)
+    val betaUrl = stringResource(R.string.url_pgyer)
     val privacyUrl = stringResource(R.string.url_privacy)
     val wikiUrl = stringResource(R.string.url_wiki)
     ExpandOptionsPref(
