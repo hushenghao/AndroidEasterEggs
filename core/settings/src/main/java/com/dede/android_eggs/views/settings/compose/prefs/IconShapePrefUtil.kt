@@ -90,6 +90,7 @@ object IconShapePrefUtil {
 
     val shapeSpecs: List<ShapeSpec> = [
         ShapeSpec.System,
+        ShapeSpec.Random,
         ShapeSpec.Polygon(MaterialShapes.Square),
         // Squircle
         ShapeSpec.Squircle,
@@ -148,7 +149,6 @@ object IconShapePrefUtil {
             ).rotated(17f).normalized()
         ),
 
-        ShapeSpec.Random
     ]
 
     internal val indexOfRandom: Int = shapeSpecs.size - 1
