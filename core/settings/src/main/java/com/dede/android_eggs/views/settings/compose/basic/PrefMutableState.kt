@@ -7,9 +7,17 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.edit
 import com.dede.android_eggs.util.pref
+
+@Composable
+fun rememberPrefColorState(key: String, default: Color): MutableState<Color> {
+    val context = LocalContext.current
+    return remember { PrefMutableColorState(context, key, default) }
+}
 
 @Composable
 fun rememberPrefIntState(key: String, default: Int): MutableIntState {
@@ -46,6 +54,34 @@ private class PrefMutableBooleanState(
         return delegate.component2()
     }
 
+}
+
+private class PrefMutableColorState(
+    val context: Context,
+    val key: String,
+    default: Color,
+) : MutableState<Color> {
+
+    private val delegate = mutableStateOf(
+        Color(context.pref.getInt(key, default.toArgb()))
+    )
+
+    override var value: Color
+        get() {
+            return delegate.value
+        }
+        set(value) {
+            delegate.value = value
+            context.pref.edit { putInt(key, value.toArgb()) }
+        }
+
+    override fun component1(): Color {
+        return delegate.component1()
+    }
+
+    override fun component2(): (Color) -> Unit {
+        return delegate.component2()
+    }
 }
 
 private class PrefMutableIntState(

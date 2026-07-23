@@ -34,7 +34,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -43,45 +42,53 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
+import com.dede.android_eggs.views.settings.compose.basic.rememberPrefColorState
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
-import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePrefUtil.ColorSource
-import com.dede.android_eggs.views.theme.resolveColorScheme
+import com.dede.android_eggs.views.theme.defaultSeedColor
+import com.dede.android_eggs.views.theme.rememberEasterEggColorScheme
 import com.dede.android_eggs.resources.R as StringsR
 
+
+private data class ColorSourceOption(
+    val labelRes: Int,
+    val value: Int,
+)
+
+private val options = buildList {
+    add(ColorSourceOption(StringsR.string.summary_system_default, ColorSourcePrefUtil.SOURCE_DEFAULT))
+    if (ColorSourcePrefUtil.isDynamicColorSupported()) {
+        add(ColorSourceOption(StringsR.string.summary_color_source_dynamic, ColorSourcePrefUtil.SOURCE_DYNAMIC))
+    }
+    add(ColorSourceOption(StringsR.string.summary_color_source_custom, ColorSourcePrefUtil.SOURCE_CUSTOM))
+}
 
 @Preview
 @Composable
 fun ColorSourcePref() {
-    var colorSourcePacked by rememberPrefIntState(
+    var currentSource by rememberPrefIntState(
         ColorSourcePrefUtil.KEY_COLOR_SOURCE,
-        ColorSourcePrefUtil.DEFAULT_VALUE,
+        ColorSourcePrefUtil.DEFAULT_SOURCE,
     )
-    val currentSource = ColorSourcePrefUtil.decodeSource(colorSourcePacked)
-    val currentSeedColor = ColorSourcePrefUtil.decodeSeedColor(colorSourcePacked)
+    var currentSeedColor by rememberPrefColorState(
+        ColorSourcePrefUtil.KEY_SEED_COLOR,
+        defaultSeedColor,
+    )
 
-    val updateSource = { source: ColorSource ->
-        val newPacked = ColorSourcePrefUtil.encode(source, currentSeedColor)
-        colorSourcePacked = newPacked
-        ColorSourcePrefUtil.colorSourceState.intValue = newPacked
+    val updateSource = { source: Int ->
+        currentSource = source
+        ColorSourcePrefUtil.sourceState.intValue = source
     }
 
-    val updateSeed = { seedColor: Int ->
-        val newPacked = ColorSourcePrefUtil.encode(ColorSource.CUSTOM, seedColor)
-        colorSourcePacked = newPacked
-        ColorSourcePrefUtil.colorSourceState.intValue = newPacked
+    val updateSeed = { seedColor: Color ->
+        currentSeedColor = seedColor
+        ColorSourcePrefUtil.seedColorState.value = seedColor
+        currentSource = ColorSourcePrefUtil.SOURCE_CUSTOM
+        ColorSourcePrefUtil.sourceState.intValue = ColorSourcePrefUtil.SOURCE_CUSTOM
     }
 
     var showColorPicker by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
-
-    val options = buildList {
-        add(ColorSource.DEFAULT)
-        if (ColorSourcePrefUtil.isDynamicColorSupported()) {
-            add(ColorSource.DYNAMIC)
-        }
-        add(ColorSource.CUSTOM)
-    }
 
     Column() {
 
@@ -93,13 +100,13 @@ fun ColorSourcePref() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                options.forEach { source ->
+                options.forEach { option ->
                     ColorSourceCard(
                         modifier = Modifier.weight(1f),
-                        source = source,
-                        selected = currentSource == source,
-                        colorSourcePacked = colorSourcePacked,
-                        onCardClick = { updateSource(source) },
+                        option = option,
+                        selected = currentSource == option.value,
+                        seedColor = currentSeedColor,
+                        onCardClick = { updateSource(option.value) },
                         onEditClick = { showColorPicker = true },
                     )
                 }
@@ -109,11 +116,11 @@ fun ColorSourcePref() {
 
     ColorPickerDialog(
         visible = showColorPicker,
-        initialColor = Color(currentSeedColor),
+        initialColor = currentSeedColor,
         withAlphaPalette = false,
         isColorStrawEnabled = ColorPickerUtilities.isEyeDropperSupported(context),
         onColorSelected = { color ->
-            updateSeed(color.toArgb())
+            updateSeed(color)
         },
         onDismiss = { showColorPicker = false },
     )
@@ -122,30 +129,24 @@ fun ColorSourcePref() {
 @Composable
 private fun ColorSourceCard(
     modifier: Modifier = Modifier,
-    source: ColorSource,
+    option: ColorSourceOption,
     selected: Boolean,
-    colorSourcePacked: Int,
+    seedColor: Color,
     onCardClick: () -> Unit,
     onEditClick: () -> Unit,
 ) {
-    val labelRes = when (source) {
-        ColorSource.DEFAULT -> StringsR.string.summary_system_default
-        ColorSource.DYNAMIC -> StringsR.string.summary_color_source_dynamic
-        ColorSource.CUSTOM -> StringsR.string.summary_color_source_custom
-    }
-
     val themeMode by ThemePrefUtil.themeModeState
-    val seedColor = when (source) {
-        ColorSource.CUSTOM -> ColorSourcePrefUtil.decodeSeedColor(colorSourcePacked)
-        else -> ColorSourcePrefUtil.DEFAULT_SEED_COLOR
+    val previewSeedColor = when (option.value) {
+        ColorSourcePrefUtil.SOURCE_CUSTOM -> seedColor
+        else -> defaultSeedColor
     }
-    val scheme = resolveColorScheme(themeMode, source, seedColor)
+    val scheme = rememberEasterEggColorScheme(themeMode, option.value, previewSeedColor)
 
     Card(
         onClick = onCardClick,
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
-            containerColor = if (selected) colorScheme.primaryContainer else colorScheme.surface,
+            containerColor = if (selected) colorScheme.surfaceVariant else colorScheme.surface,
             contentColor = colorScheme.onSurface,
         ),
         modifier = modifier.heightIn(min = 88.dp),
@@ -164,13 +165,13 @@ private fun ColorSourceCard(
                     shape = IconShapePrefUtil.getIconShape(),
                 )
                 Text(
-                    text = stringResource(labelRes),
+                    text = stringResource(option.labelRes),
                     style = MaterialTheme.typography.labelSmall,
                     textAlign = TextAlign.Center,
                 )
             }
 
-            if (source == ColorSource.CUSTOM && selected) {
+            if (option.value == ColorSourcePrefUtil.SOURCE_CUSTOM && selected) {
                 FilledTonalIconButton(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
@@ -181,7 +182,7 @@ private fun ColorSourceCard(
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.Edit,
-                        contentDescription = stringResource(labelRes),
+                        contentDescription = stringResource(option.labelRes),
                         modifier = Modifier.size(16.dp),
                     )
                 }

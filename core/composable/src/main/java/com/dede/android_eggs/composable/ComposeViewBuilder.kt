@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.LoadingIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
@@ -80,9 +81,12 @@ fun ComposeViewThemeBuilder(
 
 fun buildDarkThemeLoadingIndicator(activity: Activity): View {
     return ComposeViewBuilder(activity) {
+        val colorSource by ColorSourcePrefUtil.sourceState
+        val seedColor by ColorSourcePrefUtil.seedColorState
         EasterEggsTheme(
             themeMode = ThemePrefUtil.DARK,
-            colorSourcePacked = ColorSourcePrefUtil.getPackedValue(activity),
+            colorSource = colorSource,
+            seedColor = seedColor,
             updateGlobalColorScheme = false,
         ) {
             LoadingIndicator(

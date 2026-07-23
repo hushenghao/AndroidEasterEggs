@@ -14,6 +14,8 @@ room = "2.8.4"
 about-libraries = "15.0.4"
 ktor = "3.5.1"
 nav3 = "1.1.3"
+materialkolor = "5.0.0"
+
 # test
 androidx-junit = "1.3.0"
 espresso = "3.7.0"
@@ -81,6 +83,7 @@ ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation",
 ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 aboutlibraries-m3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "about-libraries" }
+materialkolor = { module = "com.materialkolor:material-kolor", version.ref = "materialkolor" }
 shreyaspatil-capturable = "dev.shreyaspatil:capturable:3.0.1"
 dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.5"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
