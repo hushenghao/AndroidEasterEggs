@@ -1,9 +1,7 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.runtime.mutableIntStateOf
-import com.dede.android_eggs.util.pref
+import com.dede.android_eggs.views.settings.compose.basic.mutablePrefIntState
 
 
 object ThemePrefUtil {
@@ -17,17 +15,14 @@ object ThemePrefUtil {
 
     const val ACTION_NIGHT_MODE_CHANGED = "action_night_mode_changed"
 
-    fun getThemeModeValue(context: Context): Int {
-        return context.pref.getInt(KEY_NIGHT_MODE, FOLLOW_SYSTEM)
+    fun getThemeModeValue(): Int {
+        return themeModeState.intValue
     }
 
-    val themeModeState = mutableIntStateOf(FOLLOW_SYSTEM)
+    val themeModeState = mutablePrefIntState(KEY_NIGHT_MODE, FOLLOW_SYSTEM)
 
-    fun apply(context: Context) {
-        var mode = getThemeModeValue(context)
-        themeModeState.intValue = mode
-        ColorSourcePrefUtil.apply(context)
-
+    fun apply() {
+        var mode = getThemeModeValue()
         if (mode == AMOLED) {
             mode = DARK
         }

@@ -9,7 +9,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.views.main.compose.LocalDrawerState
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
-import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil.setBooleanValue
 import com.dede.android_eggs.views.settings.compose.basic.SwitchIntPref
 import kotlinx.coroutines.launch
 import com.dede.android_eggs.resources.R as StringsR
@@ -27,17 +26,15 @@ fun IconVisualEffectsPref() {
     val drawerState = LocalDrawerState.current
     val scope = rememberCoroutineScope()
     SwitchIntPref(
-        key = SettingPrefUtil.KEY_ICON_VISUAL_EFFECTS,
+        state = SettingPrefUtil.iconVisualEffectsState,
         leadingIcon = Icons.Rounded.Animation,
         title = stringResource(StringsR.string.pref_title_icon_visual_effects),
-        default = SettingPrefUtil.OFF,
         onCheckedChange = {
             if (it == SettingPrefUtil.ON) {
                 scope.launch {
                     drawerState.close()
                 }
             }
-            SettingPrefUtil.iconVisualEffectsState.setBooleanValue(it)
         }
     )
 }

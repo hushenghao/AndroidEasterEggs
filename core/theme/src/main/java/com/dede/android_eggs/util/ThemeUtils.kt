@@ -8,9 +8,6 @@ import androidx.compose.ui.graphics.toArgb
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 import com.dede.android_eggs.views.theme.currentColorScheme
 
-const val PREF_ON = 1
-const val PREF_OFF = 0
-
 object ThemeUtils {
 
     private fun isSystemNightMode(resources: Resources): Boolean {
@@ -19,7 +16,7 @@ object ThemeUtils {
     }
 
     fun isDarkMode(context: Context): Boolean {
-        val themeMode = ThemePrefUtil.getThemeModeValue(context)
+        val themeMode = ThemePrefUtil.getThemeModeValue()
         return themeMode == ThemePrefUtil.DARK ||
                 themeMode == ThemePrefUtil.AMOLED ||
                 (themeMode == ThemePrefUtil.FOLLOW_SYSTEM && isSystemNightMode(context.resources))

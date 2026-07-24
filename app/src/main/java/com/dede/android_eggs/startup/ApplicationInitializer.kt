@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import androidx.startup.Initializer
 import com.dede.android_eggs.BuildConfig
-import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.AppIconPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
 import com.dede.basic.GlobalContext
@@ -16,10 +15,8 @@ class ApplicationInitializer : Initializer<Unit> {
         val application = context.applicationContext as Application
         // Keep at least one launcher alias enabled if a previous switch was interrupted.
         AppIconPrefUtil.ensureValidLauncherIcon(application)
-        // setup states value
-        SettingPrefUtil.setup(application)
         // apply compat style
-        ThemePrefUtil.apply(application)
+        ThemePrefUtil.apply()
 
         // Enable recomposition tracking ONLY in debug builds
         ComposeStabilityAnalyzer.setEnabled(BuildConfig.DEBUG)

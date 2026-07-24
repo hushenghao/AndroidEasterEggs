@@ -7,6 +7,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:settings"))
+
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)
     implementation(libs.google.material)

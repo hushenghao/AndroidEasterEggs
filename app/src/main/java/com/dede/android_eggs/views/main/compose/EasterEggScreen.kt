@@ -97,7 +97,7 @@ fun EasterEggScreen(
     val logoSensor = remember { EasterEggLogoSensorMatrixConvert() }
     if (IconVisualEffectsPrefUtil.isSupported()) {
         val lifecycleOwner = LocalLifecycleOwner.current
-        val iconVisualEffectsEnabled = SettingPrefUtil.iconVisualEffectsState.value
+        val iconVisualEffectsEnabled = SettingPrefUtil.iconVisualEffectsState.intValue == SettingPrefUtil.ON
         DisposableEffect(iconVisualEffectsEnabled) {
             var orientationAngleSensor: OrientationAngleSensor? = null
             if (iconVisualEffectsEnabled) {

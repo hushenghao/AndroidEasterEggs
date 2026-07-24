@@ -42,8 +42,6 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
-import com.dede.android_eggs.views.settings.compose.basic.rememberPrefColorState
-import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
 import com.dede.android_eggs.views.theme.defaultSeedColor
 import com.dede.android_eggs.views.theme.rememberEasterEggColorScheme
 import com.dede.android_eggs.resources.R as StringsR
@@ -55,61 +53,64 @@ private data class ColorSourceOption(
 )
 
 private val options = buildList {
-    add(ColorSourceOption(StringsR.string.summary_system_default, ColorSourcePrefUtil.SOURCE_DEFAULT))
+    add(
+        ColorSourceOption(
+            StringsR.string.summary_system_default,
+            ColorSourcePrefUtil.SOURCE_DEFAULT
+        )
+    )
     if (ColorSourcePrefUtil.isDynamicColorSupported()) {
-        add(ColorSourceOption(StringsR.string.summary_color_source_dynamic, ColorSourcePrefUtil.SOURCE_DYNAMIC))
+        add(
+            ColorSourceOption(
+                StringsR.string.summary_color_source_dynamic,
+                ColorSourcePrefUtil.SOURCE_DYNAMIC
+            )
+        )
     }
-    add(ColorSourceOption(StringsR.string.summary_color_source_custom, ColorSourcePrefUtil.SOURCE_CUSTOM))
+    add(
+        ColorSourceOption(
+            StringsR.string.summary_color_source_custom,
+            ColorSourcePrefUtil.SOURCE_CUSTOM
+        )
+    )
 }
 
 @Preview
 @Composable
 fun ColorSourcePref() {
-    var currentSource by rememberPrefIntState(
-        ColorSourcePrefUtil.KEY_COLOR_SOURCE,
-        ColorSourcePrefUtil.DEFAULT_SOURCE,
-    )
-    var currentSeedColor by rememberPrefColorState(
-        ColorSourcePrefUtil.KEY_SEED_COLOR,
-        defaultSeedColor,
-    )
+    var currentSource by ColorSourcePrefUtil.colorSourceState
+    var currentSeedColor by ColorSourcePrefUtil.seedColorState
 
     val updateSource = { source: Int ->
         currentSource = source
-        ColorSourcePrefUtil.sourceState.intValue = source
     }
 
     val updateSeed = { seedColor: Color ->
         currentSeedColor = seedColor
-        ColorSourcePrefUtil.seedColorState.value = seedColor
         currentSource = ColorSourcePrefUtil.SOURCE_CUSTOM
-        ColorSourcePrefUtil.sourceState.intValue = ColorSourcePrefUtil.SOURCE_CUSTOM
     }
 
     var showColorPicker by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
 
-    Column() {
-
-        ExpandOptionsPref(
-            leadingIcon = Icons.Rounded.Palette,
-            title = stringResource(StringsR.string.pref_title_color_source),
+    ExpandOptionsPref(
+        leadingIcon = Icons.Rounded.Palette,
+        title = stringResource(StringsR.string.pref_title_color_source),
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                options.forEach { option ->
-                    ColorSourceCard(
-                        modifier = Modifier.weight(1f),
-                        option = option,
-                        selected = currentSource == option.value,
-                        seedColor = currentSeedColor,
-                        onCardClick = { updateSource(option.value) },
-                        onEditClick = { showColorPicker = true },
-                    )
-                }
+            options.forEach { option ->
+                ColorSourceCard(
+                    modifier = Modifier.weight(1f),
+                    option = option,
+                    selected = currentSource == option.value,
+                    seedColor = currentSeedColor,
+                    onCardClick = { updateSource(option.value) },
+                    onEditClick = { showColorPicker = true },
+                )
             }
         }
     }

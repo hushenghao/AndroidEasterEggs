@@ -9,26 +9,33 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.edit
 import com.dede.android_eggs.util.pref
+import com.dede.basic.globalContext
 
-@Composable
-fun rememberPrefColorState(key: String, default: Color): MutableState<Color> {
-    val context = LocalContext.current
-    return remember { PrefMutableColorState(context, key, default) }
-}
+internal const val PREF_ON = 1
+internal const val PREF_OFF = 0
 
 @Composable
 fun rememberPrefIntState(key: String, default: Int): MutableIntState {
-    val context = LocalContext.current
-    return remember { PrefMutableIntState(context, key, default) }
+    return remember { mutablePrefIntState(key, default) }
 }
 
 @Composable
 fun rememberPrefBoolState(key: String, default: Boolean): MutableState<Boolean> {
-    val context = LocalContext.current
-    return remember { PrefMutableBooleanState(context, key, default) }
+    return remember { mutablePrefBoolState(key, default) }
+}
+
+fun mutablePrefColorState(key: String, default: Color): MutableState<Color> {
+    return PrefMutableColorState(globalContext, key, default)
+}
+
+fun mutablePrefIntState(key: String, default: Int): MutableIntState {
+    return PrefMutableIntState(globalContext, key, default)
+}
+
+internal fun mutablePrefBoolState(key: String, default: Boolean): MutableState<Boolean> {
+    return PrefMutableBooleanState(globalContext, key, default)
 }
 
 private class PrefMutableBooleanState(

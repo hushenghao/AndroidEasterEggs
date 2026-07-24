@@ -7,8 +7,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:theme"))
-
     implementation(libs.androidx.core)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.runtime)

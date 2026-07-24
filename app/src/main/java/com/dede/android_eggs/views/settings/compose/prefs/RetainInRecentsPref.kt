@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ViewCarousel
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.settings.compose.basic.SwitchPref
@@ -22,17 +20,13 @@ object RetainInRecentsPrefUtil {
 
 @Composable
 fun RetainInRecentsPref() {
-    var state by rememberPrefBoolState(
-        key = RetainInRecentsPrefUtil.KEY_RETAIN_IN_RECENTS,
-        default = false
-    )
     SwitchPref(
-        key = RetainInRecentsPrefUtil.KEY_RETAIN_IN_RECENTS,
+        state = rememberPrefBoolState(
+            RetainInRecentsPrefUtil.KEY_RETAIN_IN_RECENTS,
+            false
+        ),
         leadingIcon = Icons.Rounded.ViewCarousel,
         title = stringResource(id = StringsR.string.pref_retain_recent_egg_tasks),
         desc = stringResource(id = StringsR.string.pref_summary_retain_recent_egg_tasks),
-        default = state
-    ) {
-        state = it
-    }
+    )
 }

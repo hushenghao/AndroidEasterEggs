@@ -106,7 +106,7 @@ fun EasterEggsTheme(
     content: @Composable () -> Unit
 ) {
     val currentThemeMode by ThemePrefUtil.themeModeState
-    val currentSource by ColorSourcePrefUtil.sourceState
+    val currentSource by ColorSourcePrefUtil.colorSourceState
     val currentSeedColor by ColorSourcePrefUtil.seedColorState
     EasterEggsTheme(
         themeMode = currentThemeMode,

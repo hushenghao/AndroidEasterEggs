@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.ui.composes.icons.rounded.Shapes
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
-import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil.shapeSpecs
 import com.dede.android_eggs.resources.R as StringsR
 
@@ -38,7 +37,7 @@ private const val SPAN_COUNT = 5
 @Preview
 @Composable
 fun IconShapePref() {
-    var selectedIndex by rememberPrefIntState(IconShapePrefUtil.KEY_ICON_SHAPE, 0)
+    var selectedIndex by SettingPrefUtil.iconShapeValueState
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.Shapes,
         title = stringResource(StringsR.string.pref_title_icon_shape_override),
@@ -52,7 +51,6 @@ fun IconShapePref() {
                     onClick = onClick@{
                         if (selectedIndex == index) return@onClick
                         selectedIndex = index
-                        SettingPrefUtil.iconShapeValueState.intValue = index
                     }
                 )
             }
