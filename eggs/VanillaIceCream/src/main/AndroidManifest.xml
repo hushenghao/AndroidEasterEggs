@@ -11,6 +11,7 @@
             android:enableOnBackInvokedCallback="true"
             android:exported="true"
             android:icon="@drawable/v_android15_patch_adaptive"
+            android:label="@string/v_egg_name"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             tools:targetApi="tiramisu" />
 

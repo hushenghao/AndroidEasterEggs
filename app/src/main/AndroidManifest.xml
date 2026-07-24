@@ -80,6 +80,37 @@
             android:theme="@style/Theme.EasterEggs.Starting.Android15"
             android:windowSoftInputMode="adjustResize" />
 
+        <!-- Proxy activities for retaining easter egg tasks in recents.
+             Each stub has a unique taskAffinity (manifest declarative, OEM reliable).
+             retainInRecents is set at runtime via FLAG_ACTIVITY_RETAIN_IN_RECENTS,
+             because android:retainInRecents is not a public manifest attribute.
+             LRU reuse, max 5 tasks. -->
+        <activity
+            android:name=".views.main.util.EggProxyActivity0"
+            android:exported="false"
+            android:taskAffinity="com.dede.android_eggs.egg.stub0"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <activity
+            android:name=".views.main.util.EggProxyActivity1"
+            android:exported="false"
+            android:taskAffinity="com.dede.android_eggs.egg.stub1"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <activity
+            android:name=".views.main.util.EggProxyActivity2"
+            android:exported="false"
+            android:taskAffinity="com.dede.android_eggs.egg.stub2"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <activity
+            android:name=".views.main.util.EggProxyActivity3"
+            android:exported="false"
+            android:taskAffinity="com.dede.android_eggs.egg.stub3"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <activity
+            android:name=".views.main.util.EggProxyActivity4"
+            android:exported="false"
+            android:taskAffinity="com.dede.android_eggs.egg.stub4"
+            android:theme="@android:style/Theme.NoDisplay" />
+
         <activity-alias
             android:name=".Android17IconAlias"
             android:enabled="true"

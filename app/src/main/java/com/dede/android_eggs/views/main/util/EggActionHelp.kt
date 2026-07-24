@@ -2,18 +2,13 @@ package com.dede.android_eggs.views.main.util
 
 import android.app.Activity
 import android.app.ActivityManager
-import android.app.ActivityManager.AppTask
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.widget.Toast
 import androidx.core.content.getSystemService
 import com.dede.android_eggs.R
 import com.dede.android_eggs.util.SplitUtils
-import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPrefUtil
-import com.dede.basic.Utils
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.toast
 import com.dede.basic.uiHandler
@@ -23,31 +18,15 @@ import com.dede.android_eggs.resources.R as StringR
 
 object EggActionHelp {
 
-    private const val MAX_APP_TASK_COUNT = 5
+    private const val PROXY_COUNT = 5
 
-    /**
-     * android:documentLaunchMode="intoExisting" and Retain in recents.
-     * * [Retain finished tasks](https://developer.android.google.cn/guide/components/activities/recents#retain-finished)
-     * * [documentLaunchMode intoExisting](https://developer.android.google.cn/guide/components/activities/recents#attr-doclaunch)
-     *
-     * @see [Intent.FLAG_ACTIVITY_NEW_DOCUMENT](https://developer.android.google.cn/reference/android/content/Intent#FLAG_ACTIVITY_NEW_DOCUMENT)
-     * @see [Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS](https://developer.android.google.cn/reference/android/content/Intent#FLAG_ACTIVITY_RETAIN_IN_RECENTS)
-     */
-    private const val RETAIN_TASK_AND_LAUNCH_MODE_INTO_EXISTING =
-        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
-                Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
-
-    fun createIntent(
-        context: Context,
-        targetClass: Class<out Activity>,
-        retainInRecents: Boolean = true,
-    ): Intent {
-        return Intent(Intent.ACTION_VIEW)
-            .setClass(context, targetClass)
-            .applyIf(retainInRecents) {
-                addFlags(RETAIN_TASK_AND_LAUNCH_MODE_INTO_EXISTING)
-            }
-    }
+    private val proxyClasses = listOf(
+        EggProxyActivity0::class.java,
+        EggProxyActivity1::class.java,
+        EggProxyActivity2::class.java,
+        EggProxyActivity3::class.java,
+        EggProxyActivity4::class.java,
+    )
 
     private object NoEggAction : Function1<Context, Unit>, Runnable {
         private const val RESET_DELAY = 3000L
@@ -85,59 +64,77 @@ object EggActionHelp {
 
         val retainInRecents = !SplitUtils.isActivityEmbedded(context) &&
                 RetainInRecentsPrefUtil.isRetainInRecentsEnabled(context)
-        val intent = createIntent(context, targetClass, retainInRecents)
-        val task: AppTask? = findTaskWithTrim(context, targetClass)
-        if (task != null) {
-            if (!retainInRecents) {
-                // finish retained task
-                task.finishAndRemoveTask()
-            }
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                // android M Recent task list:
-                // Not following `android:documentLaunchMode="intoExisting"` behavior.
-                // ???
-                // remove it
-                task.finishAndRemoveTask()
+
+        if (!retainInRecents) {
+            context.startActivity(Intent(context, targetClass))
+            return
+        }
+
+        val proxyClass = findOrPickProxy(context, targetClass.name)
+        context.startActivity(
+            Intent(context, proxyClass)
+                .putExtra(EggProxyActivity.EXTRA_TARGET_EGG_CLASS, targetClass.name)
+                .addFlags(
+                    Intent.FLAG_ACTIVITY_NEW_TASK or
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                            Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS
+                )
+        )
+    }
+
+    /**
+     * Pick a proxy activity for [targetClassName].
+     *
+     * Queries [ActivityManager.appTasks] directly as the single source of truth:
+     *
+     * 1. If a proxy task is already running [targetClassName] → reuse it.
+     * 2. Otherwise, pick the first unused proxy slot.
+     * 3. If all slots are occupied, recycle the least-recently-used proxy
+     *    (last in `appTasks`, which is most-recent-first).
+     */
+    private fun findOrPickProxy(context: Context, targetClassName: String): Class<out Activity> {
+        val activityManager = context.getSystemService<ActivityManager>()
+            ?: return proxyClasses[0]
+
+        val appTasks = activityManager.appTasks
+        val usedIndices = mutableListOf<Int>()
+
+        for (task in appTasks) {
+            val info = task.taskInfo ?: continue
+            val className = info.baseIntent.component?.className ?: continue
+            val index = proxyClasses.indexOfFirst { it.name == className }
+            if (index < 0) continue
+
+            usedIndices.add(index)
+
+            val runningEgg = info.baseIntent.getStringExtra(EggProxyActivity.EXTRA_TARGET_EGG_CLASS)
+            if (targetClassName == runningEgg) {
+                return proxyClasses[index]
             }
         }
-        context.startActivity(intent)
+
+        // No matching proxy — prefer an unused slot.
+        val usedSet = usedIndices.toSet()
+        for (i in 0 until PROXY_COUNT) {
+            if (i !in usedSet) {
+                return proxyClasses[i]
+            }
+        }
+
+        // All proxies are in use — recycle the least recently used one.
+        // appTasks returns most-recent-first, so the last entry is the oldest.
+        return proxyClasses[usedIndices.lastOrNull() ?: 0]
     }
 
-    private fun AppTask.isThisTask(component: ComponentName): Boolean {
-        return taskInfo?.baseIntent?.component?.className == component.className
-    }
-
-    private fun AppTask.isThisTask(target: Class<out Activity>): Boolean {
-        return taskInfo?.baseIntent?.component?.className == target.name
-    }
-
-    private fun findTaskWithTrim(context: Context, target: Class<out Activity>): AppTask? {
-        val mainComponent = Utils.getLaunchIntent(context)?.component ?: return null
-
-        val activityManager = context.getSystemService<ActivityManager>() ?: return null
-        var targetTask: AppTask? = null
-        val appTasks = ArrayList<AppTask>()
+    fun cleanupProxyTasks(context: Context) {
+        val activityManager = context.getSystemService<ActivityManager>() ?: return
+        val proxyClassNames = proxyClasses.map { it.name }.toHashSet()
         for (task in activityManager.appTasks) {
-            if (task.isThisTask(mainComponent)) {
-                // exclude main task
-                continue
-            }
-            if (task.isThisTask(target)) {
-                // exclude about to task
-                targetTask = task
-                continue
-            }
-            appTasks.add(task)
-        }
-        // trim app task
-        val count = MAX_APP_TASK_COUNT - 1 // minus about to task
-        if (appTasks.size > count) {
-            val subList = appTasks.subList(count, appTasks.size)
-            for (task in subList) {
+            val className = task.taskInfo?.baseIntent?.component?.className ?: continue
+            if (className in proxyClassNames) {
                 task.finishAndRemoveTask()
             }
         }
-        return targetTask
     }
 
 }
