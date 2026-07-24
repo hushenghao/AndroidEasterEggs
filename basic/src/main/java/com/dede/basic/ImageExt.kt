@@ -4,11 +4,10 @@ package com.dede.basic
 
 import android.Manifest
 import android.content.ContentResolver
-import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -170,9 +169,9 @@ private fun Uri.finishPending(
         }
         resolver.update(this, imageValues, null, null)
         // 通知媒体库更新
-        @Suppress("DEPRECATION")
-        val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, this)
-        context.sendBroadcast(intent)
+        outputFile?.let {
+            MediaScannerConnection.scanFile(context, arrayOf(it.absolutePath), null, null)
+        }
     } else {
         // Android Q添加了IS_PENDING状态，为0时其他应用才可见
         imageValues.put(MediaStore.Images.Media.IS_PENDING, 0)
@@ -217,19 +216,7 @@ private fun ContentResolver.insertMediaImage(
             return null
         }
 
-        // 文件路径查重，重复的话在文件名后拼接数字
-        var imageFile = File(saveDir, fileName)
-        val fileNameWithoutExtension = imageFile.nameWithoutExtension
-        val fileExtension = imageFile.extension
-
-        var queryUri = this.queryMediaImage28(imageFile.absolutePath)
-        var suffix = 1
-        while (queryUri != null) {
-            val newName = fileNameWithoutExtension + "(${suffix++})." + fileExtension
-            imageFile = File(saveDir, newName)
-            queryUri = this.queryMediaImage28(imageFile.absolutePath)
-        }
-
+        val imageFile = resolveConflict(saveDir, fileName)
         imageValues.apply {
             put(MediaStore.Images.Media.DISPLAY_NAME, imageFile.name)
             // 保存路径
@@ -245,36 +232,19 @@ private fun ContentResolver.insertMediaImage(
 }
 
 /**
- * Android Q以下版本，查询媒体库中当前路径是否存在
- * @return Uri 返回null时说明不存在，可以进行图片插入逻辑
+ * 同名文件冲突时追加递增序号，避免重复创建
  */
-private fun ContentResolver.queryMediaImage28(imagePath: String): Uri? {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) return null
+private fun resolveConflict(dir: File, fileName: String): File {
+    val file = File(dir, fileName)
+    if (!file.exists()) return file
 
-    val imageFile = File(imagePath)
-    if (imageFile.canRead() && imageFile.exists()) {
-        Log.v(TAG, "query: path: $imagePath exists")
-        // 文件已存在，返回一个file://xxx的uri
-        return Uri.fromFile(imageFile)
-    }
-    // 保存的位置
-    val collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-
-    // 查询是否已经存在相同图片
-    val query = this.query(
-        collection,
-        arrayOf(MediaStore.Images.Media._ID, MediaStore.Images.Media.DATA),
-        "${MediaStore.Images.Media.DATA} == ?",
-        arrayOf(imagePath), null
-    )
-    query?.use {
-        while (it.moveToNext()) {
-            val idColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
-            val id = it.getLong(idColumn)
-            val existsUri = ContentUris.withAppendedId(collection, id)
-            Log.v(TAG, "query: path: $imagePath exists uri: $existsUri")
-            return existsUri
-        }
-    }
-    return null
+    val nameWithoutExtension = file.nameWithoutExtension
+    val extension = file.extension
+    var counter = 1
+    var resolved: File
+    do {
+        resolved = File(dir, "$nameWithoutExtension ($counter).$extension")
+        counter++
+    } while (resolved.exists())
+    return resolved
 }

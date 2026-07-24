@@ -22,6 +22,7 @@ import com.dede.basic.saveToAlbum
 import com.dede.basic.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.IOException
 import androidx.appcompat.R as appCompatR
 
 
@@ -31,6 +32,8 @@ import androidx.appcompat.R as appCompatR
  * @since 2020/10/28 1:40 PM
  */
 object ShareCatUtils {
+
+    private const val TAG = "ShareCatUtils"
 
     private const val CATS_DIR = "Cats"
 
@@ -52,7 +55,11 @@ object ShareCatUtils {
         withContext(Dispatchers.IO) {
             try {
                 bitmap.saveToAlbum(context, catName.toFileName(), CATS_DIR, 0)
-            } catch (e: Throwable) {
+            } catch (e: SecurityException) {
+                Log.w(TAG, "saveCat: permission denied", e)
+                null
+            } catch (e: IOException) {
+                Log.e(TAG, "saveCat: io error", e)
                 null
             }
         }
