@@ -32,6 +32,9 @@
     <string name="summary_theme_dark_mode">Ciemny</string>
     <string name="summary_theme_light_mode">Jasny</string>
     <string name="summary_theme_amoled_mode">Amoled</string>
+    <string name="pref_title_color_source">Kolor</string>
+    <string name="summary_color_source_dynamic">Dynamiczny</string>
+    <string name="summary_color_source_custom">Własny</string>
     <string name="label_add_shortcut">Skrót</string>
     <string name="label_donate">Darowizna</string>
     <string name="label_update">Aktualizacje</string>
@@ -62,4 +65,17 @@
     <string name="rocket_launcher_all_app_icons">Aplikacje</string>
     <string name="rocket_launcher_all_icons">Wszystkie</string>
     <string name="rocket_launcher_query_all_app_desc">Potrzebuje listy aplikacji wyświetlanych w aplikacjach ekranu głównego</string>
+    <string name="label_data_backup">Przywracanie zapisanych danych &amp;</string>
+    <string name="pref_data_backup_desc">Eksportuj lub importuj zapisane dane</string>
+    <string name="action_export_backup">Eksportuj zapisane dane</string>
+    <string name="action_export_backup_desc">Zapisz ustawienia, koty, i konfigurację widżetów do pliku</string>
+    <string name="action_import_backup">Zaimportuj zapisane dane</string>
+    <string name="action_import_backup_desc">Zaimportuj z poprzedniego pliku zapisu</string>
+    <string name="toast_backup_success">Zapisywanie danych zakończyło się powodzeniem</string>
+    <string name="toast_restore_success">Importowanie ukończone. Aplikacja zostanie zrestartowania.</string>
+    <string name="toast_backup_failed">Zapisywanie nieudane: %s</string>
+    <string name="toast_restore_failed">Importowanie nieudane: %s</string>
+    <string name="dialog_import_backup_title">Zaimportuj zapisane dane</string>
+    <string name="dialog_import_backup_message">To może nadpisać wszystkie dane aplikacji, łącznie z ustawieniami, zapisanymi kotami, i konfiguracjami widżetów. To nie może zostać cofnięte. Chcesz kontynuować?</string>
+    <string name="action_confirm_import">Importuj</string>
 </resources>
