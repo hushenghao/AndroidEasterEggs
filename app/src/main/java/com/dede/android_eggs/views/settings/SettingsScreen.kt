@@ -38,25 +38,26 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.keep_android_open.KeepAndroidOpen
 import com.dede.android_eggs.util.SplitUtils
+import com.dede.android_eggs.util.isVivo
 import com.dede.android_eggs.views.settings.compose.basic.SettingDivider
 import com.dede.android_eggs.views.settings.compose.groups.AboutGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContactMeGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContributeGroup
 import com.dede.android_eggs.views.settings.compose.prefs.AppIconPref
 import com.dede.android_eggs.views.settings.compose.prefs.CatEditorPref
+import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePref
 import com.dede.android_eggs.views.settings.compose.prefs.ComponentManagerPref
+import com.dede.android_eggs.views.settings.compose.prefs.DataBackupPref
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePref
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPref
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
-import com.dede.android_eggs.keep_android_open.KeepAndroidOpen
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePref
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePrefUtil
-import com.dede.android_eggs.views.settings.compose.prefs.DataBackupPref
 import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPref
 import com.dede.android_eggs.views.settings.compose.prefs.RocketLauncherPref
 import com.dede.android_eggs.views.settings.compose.prefs.SnapshotPref
-import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePref
 import com.dede.android_eggs.views.settings.compose.prefs.ThemePref
 import com.dede.android_eggs.views.settings.compose.prefs.TimelinePref
 import com.dede.android_eggs.views.settings.compose.prefs.WidgetsPref
@@ -149,7 +150,10 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
 
             ComponentManagerPref()
 
-            if (!SplitUtils.isActivityEmbedded(context)) {
+            // Hidden on VIVO: its recents merges all of an app's tasks into one
+            // card regardless of task/process/affinity, so this feature can't
+            // work there (issue #935).
+            if (!SplitUtils.isActivityEmbedded(context) && !isVivo()) {
                 RetainInRecentsPref()
             }
 

@@ -15,6 +15,11 @@ fun isXiaomi(): Boolean {
     return Build.MANUFACTURER.lowercase(Locale.ENGLISH) == "xiaomi"
 }
 
+fun isVivo(): Boolean {
+    return Build.MANUFACTURER.lowercase(Locale.ENGLISH) == "vivo" ||
+        Build.BRAND.lowercase(Locale.ENGLISH) == "vivo"
+}
+
 fun compareStringVersion(version1: String, version2: String): Int {
     var v1 = version1
     if (v1.startsWith("v")) {
