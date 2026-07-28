@@ -11,4 +11,5 @@ local.properties
 key.properties
 .codex/environments
 .vscode
+/.zcode
 fastlane/report.xml

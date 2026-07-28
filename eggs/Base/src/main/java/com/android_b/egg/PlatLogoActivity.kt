@@ -1,9 +1,10 @@
 package com.android_b.egg
 
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -22,16 +23,26 @@ import com.dede.basic.requireDrawable
 import com.dede.basic.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
-class PlatLogoActivity : ComponentActivity() {
+/**
+ * Base [ComponentActivity] for the early Android platform Easter eggs
+ * (Android 1.0 – 2.2), which only ship a static logo and a toast.
+ *
+ * Each API level is represented by a concrete nested subclass supplying its
+ * [iconRes], [nicknameRes] and [versionName].
+ */
+abstract class PlatLogoActivity : ComponentActivity() {
+
+    @get:DrawableRes
+    abstract val iconRes: Int
+
+    @get:StringRes
+    abstract val nicknameRes: Int
+
+    abstract val versionName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val iconRes = intent.getIntExtra(EXTRA_ICON_RES, 0)
-        val nicknameRes = intent.getIntExtra(EXTRA_NICKNAME_RES, 0)
-        val apiLevel = intent.getIntExtra(EXTRA_API_LEVEL, 0)
-
-        val versionName = getVersionNameByApiLevel(apiLevel)
         val nickname = getString(nicknameRes)
 
         setContent {
@@ -56,24 +67,46 @@ class PlatLogoActivity : ComponentActivity() {
         }
     }
 
-    companion object {
-        const val EXTRA_ICON_RES = "extra_icon_res"
-        const val EXTRA_NICKNAME_RES = "extra_nickname_res"
-        const val EXTRA_API_LEVEL = "extra_api_level"
+    /** Android 2.2 (API 8, Froyo) */
+    class Froyo : PlatLogoActivity() {
+        override val iconRes: Int = R.drawable.b_android_froyo
+        override val nicknameRes: Int = R.string.b_nickname_android_froyo
+        override val versionName: String = "2.2"
     }
-}
 
-private fun getVersionNameByApiLevel(apiLevel: Int): String {
-    return when (apiLevel) {
-        Build.VERSION_CODES.FROYO -> "2.2"
-        Build.VERSION_CODES.ECLAIR_MR1 -> "2.1"
-        Build.VERSION_CODES.ECLAIR_0_1 -> "2.0.1"
-        Build.VERSION_CODES.ECLAIR -> "2.0"
-        Build.VERSION_CODES.DONUT -> "1.6"
-        Build.VERSION_CODES.CUPCAKE -> "1.5"
-        Build.VERSION_CODES.BASE_1_1 -> "1.1"
-        Build.VERSION_CODES.BASE -> "1.0"
-        else -> "???"
+    /** Android 2.0 – 2.1 (API 5–7, Eclair) */
+    class Eclair : PlatLogoActivity() {
+        override val iconRes: Int = R.drawable.b_android_eclair
+        override val nicknameRes: Int = R.string.b_nickname_android_eclair
+        override val versionName: String = "2.0"
+    }
+
+    /** Android 1.6 (API 4, Donut) */
+    class Donut : PlatLogoActivity() {
+        override val iconRes: Int = R.drawable.b_android_donut
+        override val nicknameRes: Int = R.string.b_nickname_android_donut
+        override val versionName: String = "1.6"
+    }
+
+    /** Android 1.5 (API 3, Cupcake) */
+    class Cupcake : PlatLogoActivity() {
+        override val iconRes: Int = R.drawable.b_android_cupcake
+        override val nicknameRes: Int = R.string.b_nickname_android_cupcake
+        override val versionName: String = "1.5"
+    }
+
+    /** Android 1.1 (API 2, Petit Four) */
+    class PetitFour : PlatLogoActivity() {
+        override val iconRes: Int = R.drawable.b_android_classic
+        override val nicknameRes: Int = R.string.b_nickname_android_petit_four
+        override val versionName: String = "1.1"
+    }
+
+    /** Android 1.0 (API 1, Base) */
+    class Base : PlatLogoActivity() {
+        override val iconRes: Int = R.drawable.b_android_classic
+        override val nicknameRes: Int = R.string.b_nickname_android_base
+        override val versionName: String = "1.0"
     }
 }
 

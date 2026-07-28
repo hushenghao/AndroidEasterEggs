@@ -19,8 +19,11 @@ internal class EggActivityAction : ActivityActionDispatcher.ActivityAction {
         com.android_i.egg.Nyandroid::class.java,
     )
 
+    /** Matches `PlatLogoActivity` as a class-name segment, covering nested classes too. */
+    private val regexPlatLogoActivity = Regex("""(^|[.$])PlatLogoActivity($|[.$])""")
+
     private val Activity.isPlatLogoActivity: Boolean
-        get() = javaClass.simpleName == "PlatLogoActivity"
+        get() = regexPlatLogoActivity.containsMatchIn(javaClass.name)
 
     override fun onPreCreate(activity: Activity) {
         if (activity.isPlatLogoActivity || edgeToEdgePagers.contains(activity.javaClass)) {

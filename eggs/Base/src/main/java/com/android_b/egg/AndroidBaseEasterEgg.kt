@@ -27,36 +27,42 @@ object AndroidBaseEasterEgg : EasterEggProvider {
                 nameRes = R.string.b_nickname_android_froyo,
                 nicknameRes = R.string.b_nickname_android_froyo,
                 fullApiLevel = Build.VERSION_CODES_FULL.FROYO,
+                actionClass = PlatLogoActivity.Froyo::class.java,
             ),
             BaseEasterEgg(
                 iconRes = R.drawable.b_android_eclair,
                 nameRes = R.string.b_nickname_android_eclair,
                 nicknameRes = R.string.b_nickname_android_eclair,
                 fullApiLevelRange = Build.VERSION_CODES_FULL.ECLAIR..Build.VERSION_CODES_FULL.ECLAIR_MR1,
+                actionClass = PlatLogoActivity.Eclair::class.java,
             ),
             BaseEasterEgg(
                 iconRes = R.drawable.b_android_donut,
                 nameRes = R.string.b_nickname_android_donut,
                 nicknameRes = R.string.b_nickname_android_donut,
                 fullApiLevel = Build.VERSION_CODES_FULL.DONUT,
+                actionClass = PlatLogoActivity.Donut::class.java,
             ),
             BaseEasterEgg(
                 iconRes = R.drawable.b_android_cupcake,
                 nameRes = R.string.b_nickname_android_cupcake,
                 nicknameRes = R.string.b_nickname_android_cupcake,
                 fullApiLevel = Build.VERSION_CODES_FULL.CUPCAKE,
+                actionClass = PlatLogoActivity.Cupcake::class.java,
             ),
             BaseEasterEgg(
                 iconRes = R.drawable.b_android_classic,
                 nameRes = R.string.b_nickname_android_petit_four,
                 nicknameRes = R.string.b_nickname_android_petit_four,
                 fullApiLevel = Build.VERSION_CODES_FULL.BASE_1_1,
+                actionClass = PlatLogoActivity.PetitFour::class.java,
             ),
             BaseEasterEgg(
                 iconRes = R.drawable.b_android_classic,
                 nameRes = R.string.b_nickname_android_base,
                 nicknameRes = R.string.b_nickname_android_base,
                 fullApiLevel = Build.VERSION_CODES_FULL.BASE,
+                actionClass = PlatLogoActivity.Base::class.java,
             ),
         )
     }

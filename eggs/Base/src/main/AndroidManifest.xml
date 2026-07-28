@@ -3,7 +3,27 @@
 
     <application>
         <activity
-            android:name=".PlatLogoActivity"
+            android:name=".PlatLogoActivity$Froyo"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+
+        <activity
+            android:name=".PlatLogoActivity$Eclair"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+
+        <activity
+            android:name=".PlatLogoActivity$Donut"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+
+        <activity
+            android:name=".PlatLogoActivity$Cupcake"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+
+        <activity
+            android:name=".PlatLogoActivity$PetitFour"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
+
+        <activity
+            android:name=".PlatLogoActivity$Base"
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen" />
     </application>
 </manifest>
