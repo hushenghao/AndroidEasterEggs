@@ -7,7 +7,7 @@
         <attr name="hand_minute" format="reference" />
     </declare-styleable>
 
-    <attr name="supportAdaptiveIcon" format="boolean" />
+    <attr name="withBackground" format="boolean" />
 
     <string name="title_open_with">Open with</string>
 </resources>

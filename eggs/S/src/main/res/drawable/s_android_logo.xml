@@ -19,7 +19,7 @@ Copyright (C) 2021 The Android Open Source Project
     android:height="128dp"
     android:viewportWidth="128"
     android:viewportHeight="128"
-    app:supportAdaptiveIcon="true">
+    app:withBackground="true">
     <path
         android:fillColor="@color/system_accent3_500"
         android:pathData="M0,0 L128,0 L128,128 L0,128z" />

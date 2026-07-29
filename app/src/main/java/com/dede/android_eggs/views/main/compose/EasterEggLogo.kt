@@ -14,10 +14,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Matrix
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -31,6 +31,9 @@ import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.isAdaptiveIconDrawable
 import com.dede.basic.provider.EasterEgg
+import com.dede.basic.requireDrawable
+import com.dede.basic.withBackground
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 
 @Preview(widthDp = 200)
@@ -47,9 +50,9 @@ fun PreviewEasterEggLogo() {
 @Composable
 fun EasterEggLogo(
     modifier: Modifier = Modifier,
-    contentDescription: String? = null,
-    sensor: Boolean = false,
     @DrawableRes res: Int,
+    sensor: Boolean = false,
+    contentDescription: String? = null,
 ) {
     val context = LocalContext.current
     val isAdaptiveIcon = remember(res) { context.isAdaptiveIconDrawable(res) }
@@ -75,14 +78,24 @@ fun EasterEggLogo(
             }
         }
         AlterableAdaptiveIcon(
-            modifier = modifier.onSizeChanged { size = it },
+            modifier = Modifier
+                .then(modifier)
+                .onSizeChanged { size = it },
             clipShape = IconShapePrefUtil.getIconShape(),
             foregroundTransformState = foregroundTransformState,
             res = res,
         )
     } else {
+        val drawable = remember(res, context) { context.requireDrawable(res) }
+        val withBackground = remember(res) { context.withBackground(res) }
+        var modifier = modifier
+        if (withBackground) {
+            modifier = Modifier
+                .then(modifier)
+                .clip(IconShapePrefUtil.getIconShape())
+        }
         Image(
-            painter = painterResource(res),
+            painter = rememberDrawablePainter(drawable),
             contentDescription = contentDescription,
             modifier = modifier
         )

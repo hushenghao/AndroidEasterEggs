@@ -29,11 +29,10 @@ import com.dede.basic.cachedExecutor
 import com.dede.basic.cancel
 import com.dede.basic.delay
 import com.dede.basic.dp
-import com.dede.basic.isAdaptiveIconDrawable
 import com.dede.basic.provider.EasterEgg
-import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toApiLevel
 import com.dede.basic.requireDrawable
 import com.dede.basic.toast
+import com.dede.basic.withBackground
 import kotlin.math.max
 import kotlin.math.min
 
@@ -138,7 +137,7 @@ object EasterEggShortcutsHelp {
         }
         val label = context.getString(egg.nameRes)
         val icon = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            if (context.isAdaptiveIconDrawable(egg.iconRes)) {
+            if (context.withBackground(egg.iconRes)) {
                 val size = max(48.dp, 192)
                 val circleBitmap = context.requireDrawable(egg.iconRes)
                     .toBitmap(size, size)

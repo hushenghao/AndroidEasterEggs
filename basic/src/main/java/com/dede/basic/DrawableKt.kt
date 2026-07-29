@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.util.AttributeSet
 import android.util.LruCache
 import android.util.TypedValue
 import android.util.Xml
@@ -108,16 +109,16 @@ fun Context.getPackageDrawable(id: Int, pkg: String? = null): Drawable? {
 
 private val sharedTypedValue = TypedValue()
 
-/**
- * Check is SupportAdaptiveIconDrawable
- */
-fun Context.isAdaptiveIconDrawable(@DrawableRes id: Int): Boolean {
+internal fun Resources.withXmlAttributes(
+    id: Int,
+    block: (parser: XmlPullParser, attrs: AttributeSet) -> Unit
+) {
     val outValue = sharedTypedValue
-    val resources = this.resources
+    val resources = this
     resources.getValue(id, outValue, true)
     val path: CharSequence? = outValue.string
     if (path?.endsWith(".xml") != true) {
-        return false
+        return
     }
 
     @Suppress("ResourceType")
@@ -129,17 +130,38 @@ fun Context.isAdaptiveIconDrawable(@DrawableRes id: Int): Boolean {
         type = parser.next()
     }
     if (type != XmlPullParser.START_TAG) {
-        return false
-    }
-    if (parser.name == "adaptive-icon") {
-        return true
+        return
     }
 
-    var supportAdaptiveIcon = false
-    withStyledAttributes(attrs, intArrayOf(R.attr.supportAdaptiveIcon)) {
-        supportAdaptiveIcon = getBoolean(0, supportAdaptiveIcon)
+    block(parser, attrs)
+}
+
+fun Context.withBackground(@DrawableRes id: Int): Boolean {
+    var withBackground = false
+    resources.withXmlAttributes(id) { parser, attrs ->
+        if (parser.name == "adaptive-icon") {
+            withBackground = true
+            return@withXmlAttributes
+        }
+
+        withStyledAttributes(attrs, intArrayOf(R.attr.withBackground)) {
+            withBackground = getBoolean(0, withBackground)
+        }
     }
-    return supportAdaptiveIcon
+    return withBackground
+}
+
+/**
+ * Check is AdaptiveIconDrawable
+ */
+fun Context.isAdaptiveIconDrawable(@DrawableRes id: Int): Boolean {
+    var isAdaptiveIcon = false
+    resources.withXmlAttributes(id) { parser, _ ->
+        if (parser.name == "adaptive-icon") {
+            isAdaptiveIcon = true
+        }
+    }
+    return isAdaptiveIcon
 }
 
 fun Context.requireDrawable(@DrawableRes id: Int): Drawable {

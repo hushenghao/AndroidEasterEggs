@@ -5,7 +5,7 @@
     android:height="108dp"
     android:viewportWidth="512"
     android:viewportHeight="512"
-    app:supportAdaptiveIcon="true">
+    app:withBackground="true">
 
     <path
         android:fillColor="#f86734"

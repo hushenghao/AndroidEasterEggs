@@ -15,7 +15,7 @@
 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:supportAdaptiveIcon="true">
+    app:withBackground="true">
 
     <item android:drawable="@drawable/p_icon_bg" />
     <item>

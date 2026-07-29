@@ -30,8 +30,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Text
 import androidx.compose.material3.SheetValue
+import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -57,9 +57,9 @@ import com.dede.android_eggs.views.timeline.TimelineEventHelp.eventAnnotatedStri
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.isNewGroup
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localMonth
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localYear
-import com.dede.basic.isAdaptiveIconDrawable
 import com.dede.basic.provider.TimelineEvent
 import com.dede.basic.requireDrawable
+import com.dede.basic.withBackground
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Calendar
@@ -215,18 +215,19 @@ private fun TimelineItem(
                 }
         )
 
+        val logoSize = 40
         var imageModifier = Modifier
-            .size(40.dp)
+            .size(logoSize.dp)
             .constrainAs(img) {
                 top.linkTo(parent.top, 16.dp)
                 centerHorizontallyTo(line)
             }
-        val isAdaptiveIcon = context.isAdaptiveIconDrawable(logoRes)
-        if (!isAdaptiveIcon) {
+        val withBackground = context.withBackground(logoRes)
+        if (!withBackground) {
             imageModifier = Modifier
                 .background(colorScheme.secondaryContainer, IconShapePrefUtil.getIconShape())
                 .then(imageModifier)
-                .padding(6.dp)
+                .padding((logoSize * .15f).dp)
         }
         EasterEggLogo(
             res = logoRes,

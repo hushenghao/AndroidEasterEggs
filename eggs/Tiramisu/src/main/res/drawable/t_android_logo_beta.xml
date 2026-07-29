@@ -4,7 +4,7 @@
     android:height="128dp"
     android:viewportWidth="24"
     android:viewportHeight="24"
-    app:supportAdaptiveIcon="true">
+    app:withBackground="true">
 
     <path
         android:fillColor="@color/system_accent3_800"

@@ -15,12 +15,12 @@ Copyright (C) 2018 The Android Open Source Project
 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:supportAdaptiveIcon="true">
+    app:withBackground="true">
     <item android:drawable="@drawable/r_icon_bg" />
     <item>
         <inset
             android:drawable="@drawable/r_android_11_dial"
-            android:inset="-13dp" />
+            android:inset="-12dp" />
         <!--outset 18dp-->
         <!-- https://developer.android.google.cn/guide/practices/ui_guidelines/icon_design_adaptive -->
     </item>
