@@ -64,9 +64,9 @@
 
 <a href="https://www.star-history.com/?repos=hushenghao%2FAndroidEasterEggs&type=date&logscale=&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=hushenghao/AndroidEasterEggs&type=date&theme=dark&logscale&legend=top-left&sealed_token=Ty5ybFEZlJp_1CqlNzmQqipwoi4AP7J7V8-phofj4X_6F2m540nanChWXD151L_o64ATu9YL8YxU_ej4-N-Uktzy_On_pE6C3eoGNxvgC9KmogbERrb6pyT2TcVfiEdebtMkXRiSLCBt5NJc2bjch7MUNGoKiEAY4EGde8WXpFRRqSdZoXcTY0Ib7NDS" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=hushenghao/AndroidEasterEggs&type=date&logscale&legend=top-left&sealed_token=Ty5ybFEZlJp_1CqlNzmQqipwoi4AP7J7V8-phofj4X_6F2m540nanChWXD151L_o64ATu9YL8YxU_ej4-N-Uktzy_On_pE6C3eoGNxvgC9KmogbERrb6pyT2TcVfiEdebtMkXRiSLCBt5NJc2bjch7MUNGoKiEAY4EGde8WXpFRRqSdZoXcTY0Ib7NDS" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=hushenghao/AndroidEasterEggs&type=date&logscale&legend=top-left&sealed_token=Ty5ybFEZlJp_1CqlNzmQqipwoi4AP7J7V8-phofj4X_6F2m540nanChWXD151L_o64ATu9YL8YxU_ej4-N-Uktzy_On_pE6C3eoGNxvgC9KmogbERrb6pyT2TcVfiEdebtMkXRiSLCBt5NJc2bjch7MUNGoKiEAY4EGde8WXpFRRqSdZoXcTY0Ib7NDS" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=hushenghao/AndroidEasterEggs&type=date&theme=dark&logscale&legend=top-left&sealed_token=dMn43n3oBEqu2n_w-oiFZCyjkw56PuN6WmpSrHB_JS4hQCWhvSfTw55hG9WgdQKilGUhz5YfdQ6qB-AhrznMn6zBi8DDW5s6-oHEM7Jbb0t7fZdpObRW2jmwOAWIIWtUGRz_Q4SPtc-Vz2Jfylu5Ruj6wH8fpeu74geU8Cg2ffm2BuOWM0t6DT2LI1Le" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=hushenghao/AndroidEasterEggs&type=date&logscale&legend=top-left&sealed_token=dMn43n3oBEqu2n_w-oiFZCyjkw56PuN6WmpSrHB_JS4hQCWhvSfTw55hG9WgdQKilGUhz5YfdQ6qB-AhrznMn6zBi8DDW5s6-oHEM7Jbb0t7fZdpObRW2jmwOAWIIWtUGRz_Q4SPtc-Vz2Jfylu5Ruj6wH8fpeu74geU8Cg2ffm2BuOWM0t6DT2LI1Le" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=hushenghao/AndroidEasterEggs&type=date&logscale&legend=top-left&sealed_token=dMn43n3oBEqu2n_w-oiFZCyjkw56PuN6WmpSrHB_JS4hQCWhvSfTw55hG9WgdQKilGUhz5YfdQ6qB-AhrznMn6zBi8DDW5s6-oHEM7Jbb0t7fZdpObRW2jmwOAWIIWtUGRz_Q4SPtc-Vz2Jfylu5Ruj6wH8fpeu74geU8Cg2ffm2BuOWM0t6DT2LI1Le" />
  </picture>
 </a>
 
