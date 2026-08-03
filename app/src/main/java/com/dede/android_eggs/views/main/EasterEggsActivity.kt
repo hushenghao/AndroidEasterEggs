@@ -2,11 +2,15 @@
 
 package com.dede.android_eggs.views.main
 
+import android.app.HandoffActivityData
+import android.app.HandoffActivityDataRequestInfo
 import android.app.assist.AssistContent
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import com.dede.android_eggs.R
@@ -50,6 +54,10 @@ open class EasterEggsActivity : AppCompatActivity() {
 
         // call flavor features
         FlavorFeatures.get().launchReview(this)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN) {
+            setHandoffEnabled(true, null)
+        }
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -62,5 +70,12 @@ open class EasterEggsActivity : AppCompatActivity() {
         if (outContent != null) {
             outContent.webUri = getString(R.string.url_github).toUri()
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.CINNAMON_BUN)
+    override fun onHandoffActivityDataRequested(requestInfo: HandoffActivityDataRequestInfo): HandoffActivityData? {
+        return HandoffActivityData.Builder(componentName)
+            .setFallbackUri(getString(R.string.url_github).toUri())
+            .build()
     }
 }
