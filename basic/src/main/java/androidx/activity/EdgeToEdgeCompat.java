@@ -1,5 +1,6 @@
 package androidx.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
@@ -118,6 +119,7 @@ public class EdgeToEdgeCompat {
         impl.adjustLayoutInDisplayCutoutMode(window);
     }
 
+    @SuppressLint("VisibleForTests")
     public static void enable(Activity activity) {
         enable(activity, SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT),
                 SystemBarStyle.auto(EdgeToEdge.getDefaultLightScrim(), EdgeToEdge.getDefaultDarkScrim()));
