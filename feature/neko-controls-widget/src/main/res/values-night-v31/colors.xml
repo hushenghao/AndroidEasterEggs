@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="neko_widget_background_color">@android:color/system_neutral1_800</color>
+</resources>
