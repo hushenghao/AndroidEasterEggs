@@ -172,7 +172,7 @@ private fun AppIconOption(
         onClick = onClick,
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
-            containerColor = if (selected) colorScheme.primaryContainer else colorScheme.surface,
+            containerColor = if (selected) colorScheme.surfaceVariant else colorScheme.surface,
             contentColor = colorScheme.onSurface,
         ),
         modifier = modifier,
