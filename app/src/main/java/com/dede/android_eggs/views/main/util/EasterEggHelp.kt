@@ -178,6 +178,7 @@ object EasterEggHelp {
 
         // development version
         apiLevelArrays[Build.VERSION_CODES.CUR_DEVELOPMENT] = "Next"
+        apiLevelArrays[Build.VERSION_CODES.CUR_DEVELOPMENT.toFullApiLevel()] = "Next"
     }
 
 }

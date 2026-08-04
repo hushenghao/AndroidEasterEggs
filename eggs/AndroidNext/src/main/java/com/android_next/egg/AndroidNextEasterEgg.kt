@@ -7,7 +7,6 @@ import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.dede.android_eggs.navigation.OverlayManagerEntryPoint
-import com.dede.android_eggs.navigation.OverlayRoute
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
@@ -33,7 +32,7 @@ object AndroidNextEasterEgg : EasterEggProvider {
 
     private const val NEXT_API = Build.VERSION_CODES.CUR_DEVELOPMENT// android next
 
-     private const val TIMELINE_EVENT = "Wow, Android Next."
+    private const val TIMELINE_EVENT = "Wow, Android Next."
 
     @StringRes
     private val NICKNAME_RES: Int = R.string.nickname_android_next
