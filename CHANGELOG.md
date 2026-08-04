@@ -1,7 +1,11 @@
 # Changelog
 
-### v5.3.1 (2026-07-17)
+### v5.4.0 (2026-08-04)
 
+- Add shadow/glow effect to cat editor drawing
+- Base eggs support add shortcut
+- Neko controls widget use system color
+- Change icon shape sort
 - Merge alpha track into beta, remove experimental version UI
 - Remove zoom animation from version check update button
 - Code cleanup and refactoring
