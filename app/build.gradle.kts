@@ -161,7 +161,6 @@ dependencies {
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.nanohttpd)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.bundles.android.test)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
