@@ -85,7 +85,6 @@
             android:enabled="true"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_17"
-            android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_17_round"
             android:targetActivity=".views.main.EasterEggsActivity">
             <intent-filter>
@@ -104,7 +103,6 @@
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_16"
-            android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_16_round"
             android:targetActivity=".views.main.Android16SplashActivity">
             <intent-filter>
@@ -123,7 +121,6 @@
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_15"
-            android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_15_round"
             android:targetActivity=".views.main.Android15SplashActivity">
             <intent-filter>
