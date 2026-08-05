@@ -96,9 +96,7 @@ abstract class AbsConfigurablePlugin(
 
         extensions.configure<KotlinAndroidExtension>("kotlin") {
             compilerOptions {
-                freeCompilerArgs.addAll(
-                    // https://kotlinlang.org/docs/annotations.html#annotation-use-site-targets
-                    "-Xannotation-default-target=param-property",
+                freeCompilerArgs.add(
                     // https://kotlinlang.org/docs/whatsnew24.html#support-for-collection-literals
                     "-Xcollection-literals",
                 )

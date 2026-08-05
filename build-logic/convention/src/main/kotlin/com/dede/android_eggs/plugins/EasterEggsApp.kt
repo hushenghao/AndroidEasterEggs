@@ -66,7 +66,7 @@ class EasterEggsApp : AbsConfigurablePlugin(
         }
 
         dependencies {
-            val enableAndroidNext = properties[KEY_ENABLE_ANDROID_NEXT]?.toString()?.toBoolean()
+            val enableAndroidNext = providers.gradleProperty(KEY_ENABLE_ANDROID_NEXT).orNull?.toBoolean()
             println("Enable Android Next: $enableAndroidNext")
             if (enableAndroidNext == true) {
                 add("implementation", project(":eggs:AndroidNext"))
