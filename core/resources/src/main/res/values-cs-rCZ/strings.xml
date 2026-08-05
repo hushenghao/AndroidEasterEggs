@@ -32,6 +32,9 @@
     <string name="summary_theme_dark_mode">Tmavý</string>
     <string name="summary_theme_light_mode">Světlý</string>
     <string name="summary_theme_amoled_mode">Černá (Režim Amoled)</string>
+    <string name="pref_title_color_source">Barva</string>
+    <string name="summary_color_source_dynamic">Dynamická</string>
+    <string name="summary_color_source_custom">Vlastní</string>
     <string name="label_add_shortcut">Zkratka</string>
     <string name="label_donate">Přispět</string>
     <string name="label_update">Aktualizovat</string>
@@ -62,4 +65,17 @@
     <string name="rocket_launcher_all_app_icons">Aplikace</string>
     <string name="rocket_launcher_all_icons">Easter Eggy a aplikace</string>
     <string name="rocket_launcher_query_all_app_desc">Je potřeba získat seznam aplikací na domovské obrazovce</string>
+    <string name="label_data_backup">Zálohování dat &amp; obnovení dat</string>
+    <string name="pref_data_backup_desc">Exportovat či importovat uživatelská data</string>
+    <string name="action_export_backup">Exportovat zálohu</string>
+    <string name="action_export_backup_desc">Uložit nastavení, kočky, a nastavení widgetů do souboru</string>
+    <string name="action_import_backup">Importovat zálohu</string>
+    <string name="action_import_backup_desc">Obnova z dříve uloženého souboru se zálohou</string>
+    <string name="toast_backup_success">Záloha byla úspěšně exportována</string>
+    <string name="toast_restore_success">Obnovení zálohy dokončeno. Aplikace se restartuje.</string>
+    <string name="toast_backup_failed">Zálohování se nezdařilo: %s</string>
+    <string name="toast_restore_failed">Obnovení se nezdařilo: %s</string>
+    <string name="dialog_import_backup_title">Importovat zálohu</string>
+    <string name="dialog_import_backup_message">Tato akce přepíše aktuální data aplikace, jako například nastavení, uložené kočky, a nastavení widgetů. Tuto akci nelze vrátit zpět. Chcete pokračovat?</string>
+    <string name="action_confirm_import">Importovat</string>
 </resources>

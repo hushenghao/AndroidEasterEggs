@@ -35,4 +35,6 @@
     <string name="locale_lang_sv_SE">スウェーデン語</string>
     <string name="locale_lang_my_MM">ビルマ語</string>
     <string name="locale_lang_bn_BD">ベンガル語</string>
+    <string name="locale_lang_sq">アルバニア語</string>
+    <string name="locale_lang_bg">ブルガリア語</string>
 </resources>

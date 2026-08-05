@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">ウィジェットの設定</string>
+    <string name="analog_clock_widget_config_summary">アナログ時計ウィジェットをタップしたときの動作を選択してください。</string>
+    <string name="analog_clock_widget_click_action_title">タップアクション</string>
+    <string name="analog_clock_widget_action_open_egg">Eggを開く</string>
+    <string name="analog_clock_widget_action_open_app">アプリを開く</string>
+    <string name="analog_clock_widget_action_none">何もしない</string>
+    <string name="analog_clock_widget_dial_style_title">時計の文字盤</string>
+    <string name="analog_clock_widget_dial_style_summary">アナログ時計の文字盤スタイルを選択してください。</string>
+    <string name="analog_clock_widget_dial_android_icons">アイコン</string>
+    <string name="analog_clock_widget_dial_simple">シンプル</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

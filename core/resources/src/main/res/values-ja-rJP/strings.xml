@@ -28,11 +28,15 @@
     <string name="pref_title_language_more">その他</string>
     <string name="pref_title_theme">テーマ</string>
     <string name="pref_title_dynamic_color">システムカラーと同期</string>
+    <string name="pref_title_app_icon">アプリアイコン</string>
     <string name="pref_title_icon_visual_effects">アイコンの視覚効果</string>
     <string name="summary_system_default">システムのデフォルト</string>
     <string name="summary_theme_dark_mode">ダーク</string>
     <string name="summary_theme_light_mode">ライト</string>
     <string name="summary_theme_amoled_mode">AMOLED</string>
+    <string name="pref_title_color_source">カラー</string>
+    <string name="summary_color_source_dynamic">ダイナミック</string>
+    <string name="summary_color_source_custom">カスタム</string>
     <string name="label_add_shortcut">ショートカット</string>
     <string name="label_donate">寄付</string>
     <string name="label_update">アップデート</string>
@@ -41,6 +45,7 @@
     <string name="toast_shortcut_added">ホーム画面にショートカットを作成しました</string>
     <string name="toast_no_egg_detail">このAndroidバージョンにはイースターエッグが搭載されていません</string>
     <string name="toast_no_update_found">アップデートはありません</string>
+    <string name="label_widgets">ウィジェット</string>
     <string name="app_widget_description">Easter Eggsのアナログ時計</string>
     <string name="action_agree">同意して続行</string>
     <string name="summary_browse_privacy_policy">このアプリを使用するには、プライバシーポリシーに同意する必要があります。</string>
@@ -62,4 +67,17 @@
     <string name="rocket_launcher_all_app_icons">アプリ</string>
     <string name="rocket_launcher_all_icons">Easter eggsとアプリ</string>
     <string name="rocket_launcher_query_all_app_desc">ホーム画面に表示されているアプリの一覧を取得する必要があります</string>
+    <string name="label_data_backup">データバックアップ &amp; 復元</string>
+    <string name="pref_data_backup_desc">ユーザーデータのエクスポートまたはインポート</string>
+    <string name="action_export_backup">バックアップをエクスポート</string>
+    <string name="action_export_backup_desc">設定、Cats、ウィジェットの設定をファイルに保存します</string>
+    <string name="action_import_backup">バックアップをインポート</string>
+    <string name="action_import_backup_desc">以前にエクスポートしたバックアップファイルから復元します</string>
+    <string name="toast_backup_success">バックアップが正常にエクスポートされました</string>
+    <string name="toast_restore_success">復元が完了しました。アプリを再起動します。</string>
+    <string name="toast_backup_failed">バックアップ失敗： %s</string>
+    <string name="toast_restore_failed">復元失敗： %s</string>
+    <string name="dialog_import_backup_title">バックアップをインポート</string>
+    <string name="dialog_import_backup_message">これにより、設定、保存済みのCats、ウィジェットの設定など、アプリの現在のデータがすべて上書きされます。この操作は元に戻せません。続行しますか？</string>
+    <string name="action_confirm_import">インポート</string>
 </resources>
