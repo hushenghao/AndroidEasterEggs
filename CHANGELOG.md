@@ -2,6 +2,7 @@
 
 ### v5.4.1
 
+- Add print support to the Cat Editor
 - Fix the Cat Editor's favorite records crash issue [#688](https://github.com/hushenghao/AndroidEasterEggs/issues/688)
 - Code cleanup and refactoring
 

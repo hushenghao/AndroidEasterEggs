@@ -41,6 +41,7 @@ import androidx.compose.material.icons.rounded.GridOff
 import androidx.compose.material.icons.rounded.GridOn
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.Palette
+import androidx.compose.material.icons.rounded.Print
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material.icons.rounded.Save
 import androidx.compose.material.icons.rounded.Share
@@ -96,8 +97,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation3.runtime.NavKey
+import androidx.print.PrintHelper
 import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
 import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEditorRecords
+import com.dede.android_eggs.cat_editor.Utilities.toPrintBitmap
 import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.navigation.EasterEggsDestination
@@ -309,6 +312,12 @@ fun CatEditorScreen() {
             }
         )
     }
+    val printButton: @Composable () -> Unit = {
+        PrintCatButton(
+            catName = catName,
+            captureController = captureController,
+        )
+    }
     val copyButton: @Composable () -> Unit = {
         IconButton(onClick = { context.copy(catSeed.toString()) }) {
             Icon(
@@ -375,7 +384,7 @@ fun CatEditorScreen() {
             paletteButton, gridButton,
             favoriteButton, saveButton,
             mirrorButton, zoomIn, zoomOut, resetGraphicsLayer,
-            shareButton, copyButton, svgButton,
+            shareButton, printButton, copyButton, svgButton,
             inputCatButton, refreshButton,
         )
     }
@@ -598,6 +607,39 @@ private fun SaveCatButton(
         enabled = !isSaving
     ) {
         Icon(imageVector = imageVector, contentDescription = contentDescription)
+    }
+}
+
+@Composable
+private fun PrintCatButton(
+    catName: String,
+    captureController: CaptureControllerDelegate,
+) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
+    var isPrinting by remember { mutableStateOf(false) }
+
+    fun printCat() {
+        isPrinting = true
+        val deferred = captureController.captureAsync()
+        scope.launch {
+            val bitmap = deferred.await().asAndroidBitmap().toPrintBitmap()
+            PrintHelper(context).apply {
+                scaleMode = PrintHelper.SCALE_MODE_FIT
+            }.printBitmap(catName, bitmap)
+            isPrinting = false
+        }
+    }
+
+    IconButton(
+        onClick = { printCat() },
+        enabled = !isPrinting
+    ) {
+        Icon(
+            imageVector = Icons.Rounded.Print,
+            contentDescription = null
+        )
     }
 }
 

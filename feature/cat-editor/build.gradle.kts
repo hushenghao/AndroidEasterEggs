@@ -21,6 +21,7 @@ dependencies {
     implementation(project(":core:composable"))
 
     implementation(libs.androidx.core)
+    implementation(libs.androidx.print)
     implementation(libs.google.material)
     implementation(libs.androidx.room)
     implementation(libs.androidx.sqlite.bundled)

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 9.3.1" type="baseline" client="gradle" dependencies="false" name="AGP (9.3.1)" variant="all" version="9.3.1">
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="Unnecessary; `SDK_INT` is never &lt; 23"
+        errorLine1="    if (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.M || isNotRequire) {"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/dede/android_eggs/cat_editor/MultiplePermissionsStateCompat.kt"
+            line="21"
+            column="9"/>
+    </issue>
+
+</issues>

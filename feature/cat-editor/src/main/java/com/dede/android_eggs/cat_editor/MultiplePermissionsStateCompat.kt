@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalPermissionsApi::class)
+
 package com.dede.android_eggs.cat_editor
 
 import android.os.Build
@@ -10,7 +12,6 @@ import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 
-@ExperimentalPermissionsApi
 @Composable
 internal fun rememberMultiplePermissionsStateCompat(
     permissions: Array<String>,
@@ -28,7 +29,6 @@ internal fun rememberMultiplePermissionsStateCompat(
     )
 }
 
-@ExperimentalPermissionsApi
 @Stable
 private class AllPermissionsGrantedState(permissions: Array<String>) : MultiplePermissionsState {
     override val allPermissionsGranted: Boolean = true
@@ -39,7 +39,6 @@ private class AllPermissionsGrantedState(permissions: Array<String>) : MultipleP
     override fun launchMultiplePermissionRequest() {}
 }
 
-@ExperimentalPermissionsApi
 @Stable
 private class PermissionsGrantedState(override val permission: String) : PermissionState {
     override val status: PermissionStatus = PermissionStatus.Granted

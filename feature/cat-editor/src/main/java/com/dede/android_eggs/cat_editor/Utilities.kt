@@ -1,12 +1,18 @@
 package com.dede.android_eggs.cat_editor
 
+import android.graphics.Bitmap
+import android.graphics.BlendMode
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.Region
+import android.os.Build
 import android.util.Log
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Matrix
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.asAndroidPath
 import androidx.compose.ui.graphics.toAndroidRectF
+import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.toRegion
 import java.util.Objects
 import kotlin.math.roundToInt
@@ -70,5 +76,28 @@ internal object Utilities {
     fun isPointInRegion(point: Offset, pointMatrix: Matrix, region: Region): Boolean {
         val p = pointMatrix.map(point)
         return region.contains(p.x.roundToInt(), p.y.roundToInt())
+    }
+
+    /**
+     * PrintHelper writes the bitmap into the PDF without compositing alpha, so a
+     * transparent background (the cat canvas is transparent) prints black.
+     * Flatten the image onto a white background before printing. Hardware-backed
+     * or immutable bitmaps are copied into a mutable software bitmap first,
+     * since a software Canvas cannot draw hardware bitmaps.
+     */
+    fun Bitmap.toPrintBitmap(): Bitmap {
+        if (!hasAlpha()) {
+            return this
+        }
+        // Composite white behind the image in place — a single draw pass with
+        // no extra bitmap allocation.
+        val source = if (isMutable) this else copy(Bitmap.Config.ARGB_8888, true)
+        return source.applyCanvas {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                drawColor(Color.WHITE, BlendMode.DST_OVER)
+            } else {
+                drawColor(Color.WHITE, PorterDuff.Mode.DST_OVER)
+            }
+        }
     }
 }
