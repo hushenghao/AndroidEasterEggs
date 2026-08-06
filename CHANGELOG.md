@@ -1,5 +1,9 @@
 # Changelog
 
+### v5.4.1
+
+- Code cleanup and refactoring
+
 ### v5.4.0 (2026-08-04)
 
 - Add shadow/glow effect to cat editor drawing
