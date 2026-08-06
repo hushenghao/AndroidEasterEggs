@@ -2,22 +2,24 @@ package com.dede.android_eggs.cat_editor
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.room.ColumnInfo
-import androidx.room.Dao
-import androidx.room.Database
-import androidx.room.Delete
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.PrimaryKey
-import androidx.room.Query
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.room3.ColumnInfo
+import androidx.room3.ColumnTypeConverter
+import androidx.room3.ColumnTypeConverters
+import androidx.room3.Dao
+import androidx.room3.Database
+import androidx.room3.Delete
+import androidx.room3.Entity
+import androidx.room3.Ignore
+import androidx.room3.Insert
+import androidx.room3.OnConflictStrategy
+import androidx.room3.PrimaryKey
+import androidx.room3.Query
+import androidx.room3.Room
+import androidx.room3.RoomDatabase
+import androidx.room3.migration.Migration
+import androidx.sqlite.SQLiteConnection
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
+import androidx.sqlite.execSQL
 import com.dede.android_eggs.cat_editor.Cat.Companion.createCat
 import com.dede.basic.globalContext
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +33,7 @@ object CatRememberDataStore {
     private val db by lazy {
         Room.databaseBuilder<CatRememberDatabase>(globalContext, "cat_remember.db")
             .addMigrations(MIGRATION_1_2)
+            .setDriver(BundledSQLiteDriver())
             .build()
     }
 
@@ -72,7 +75,7 @@ object CatRememberDataStore {
     entities = [Cat::class],
     exportSchema = true,
 )
-@TypeConverters(value = [CatColorsConverter::class])
+@ColumnTypeConverters(value = [CatColorsConverter::class])
 abstract class CatRememberDatabase : RoomDatabase() {
     abstract fun catDao(): CatDao
 }
@@ -82,15 +85,15 @@ abstract class CatRememberDatabase : RoomDatabase() {
  * Recreate the table without it so both schema variants converge.
  */
 private val MIGRATION_1_2 = object : Migration(1, 2) {
-    override fun migrate(db: SupportSQLiteDatabase) {
-        db.execSQL(
+    override suspend fun migrate(connection: SQLiteConnection) {
+        connection.execSQL(
             "CREATE TABLE IF NOT EXISTS `remember_cats_new` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `seed` INTEGER NOT NULL, `colors` TEXT NOT NULL)"
         )
-        db.execSQL(
+        connection.execSQL(
             "INSERT INTO `remember_cats_new` (`id`, `seed`, `colors`) SELECT `id`, `seed`, `colors` FROM `remember_cats`"
         )
-        db.execSQL("DROP TABLE `remember_cats`")
-        db.execSQL("ALTER TABLE `remember_cats_new` RENAME TO `remember_cats`")
+        connection.execSQL("DROP TABLE `remember_cats`")
+        connection.execSQL("ALTER TABLE `remember_cats_new` RENAME TO `remember_cats`")
     }
 }
 
@@ -132,14 +135,14 @@ interface CatDao {
     suspend fun getAllCats(): List<Cat>
 }
 
-@TypeConverters
+@ColumnTypeConverters
 class CatColorsConverter {
-    @TypeConverter
+    @ColumnTypeConverter
     fun colorsToString(value: List<Color>?): String? {
         return value?.joinToString(separator = ",") { it.toArgb().toString() }
     }
 
-    @TypeConverter
+    @ColumnTypeConverter
     fun stringToColors(string: String?): List<Color>? {
         return string?.split(",")?.map { Color(it.toInt()) }
     }

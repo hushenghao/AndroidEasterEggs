@@ -1,12 +1,12 @@
 plugins {
     id("easter.eggs.compose.library")
-    id("androidx.room")
+    id("androidx.room3")
 }
 
 android {
     namespace = "com.dede.android_eggs.cat_editor"
 
-    room {
+    room3 {
         schemaDirectory("$projectDir/schemas")
     }
 }
@@ -23,6 +23,7 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.google.material)
     implementation(libs.androidx.room)
+    implementation(libs.androidx.sqlite.bundled)
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.androidx.navigation3.ui)
