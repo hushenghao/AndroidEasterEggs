@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<full-backup-conten>
+<full-backup-content>
     <include
         domain="sharedpref"
         path="." />
@@ -12,4 +12,4 @@
     <include
         domain="file"
         path="datastore" />
-</full-backup-conten>
+</full-backup-content>
