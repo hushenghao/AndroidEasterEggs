@@ -1,1 +1,2 @@
+- Fix the Cat Editor's favorite records crash issue #688
 - Code cleanup and refactoring

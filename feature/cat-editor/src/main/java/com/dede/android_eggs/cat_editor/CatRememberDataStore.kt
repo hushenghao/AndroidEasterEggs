@@ -16,6 +16,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.dede.android_eggs.cat_editor.Cat.Companion.createCat
 import com.dede.basic.globalContext
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +30,7 @@ object CatRememberDataStore {
 
     private val db by lazy {
         Room.databaseBuilder<CatRememberDatabase>(globalContext, "cat_remember.db")
+            .addMigrations(MIGRATION_1_2)
             .build()
     }
 
@@ -65,13 +68,30 @@ object CatRememberDataStore {
 }
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [Cat::class],
     exportSchema = true,
 )
 @TypeConverters(value = [CatColorsConverter::class])
 abstract class CatRememberDatabase : RoomDatabase() {
     abstract fun catDao(): CatDao
+}
+
+/**
+ * v4.3.0 wrote an extra `isMirrorMode` column (identity hash 9638cec1...).
+ * Recreate the table without it so both schema variants converge.
+ */
+private val MIGRATION_1_2 = object : Migration(1, 2) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL(
+            "CREATE TABLE IF NOT EXISTS `remember_cats_new` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `seed` INTEGER NOT NULL, `colors` TEXT NOT NULL)"
+        )
+        db.execSQL(
+            "INSERT INTO `remember_cats_new` (`id`, `seed`, `colors`) SELECT `id`, `seed`, `colors` FROM `remember_cats`"
+        )
+        db.execSQL("DROP TABLE `remember_cats`")
+        db.execSQL("ALTER TABLE `remember_cats_new` RENAME TO `remember_cats`")
+    }
 }
 
 @Entity(tableName = "remember_cats")
