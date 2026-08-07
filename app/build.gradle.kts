@@ -160,6 +160,8 @@ dependencies {
     marketImplementation(libs.google.play.update)
 
     testImplementation(libs.junit)
+    @Suppress("AvoidDuplicateDependencies")
+    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.nanohttpd)
     androidTestImplementation(libs.bundles.android.test)
     debugImplementation(libs.androidx.compose.ui.test.manifest)

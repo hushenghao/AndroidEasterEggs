@@ -11,12 +11,6 @@ plugins {
     alias(libs.plugins.stability.analyzer) apply false
 }
 
-buildscript {
-    dependencies {
-        classpath(libs.kotlin.gradle.plugin)
-    }
-}
-
 tasks.wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
