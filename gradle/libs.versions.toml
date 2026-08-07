@@ -47,7 +47,7 @@ androidx-browser = "androidx.browser:browser:1.10.0"
 androidx-window = "androidx.window:window:1.5.1"
 androidx-room = { module = "androidx.room3:room3-runtime", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room3:room3-compiler", version.ref = "room" }
-androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+androidx-sqlite-framework = { module = "androidx.sqlite:sqlite-framework", version.ref = "sqlite" }
 google-material = "com.google.android.material:material:1.14.0"
 androidx-startup = "androidx.startup:startup-runtime:1.2.0"
 androidx-shapes = "androidx.graphics:graphics-shapes:1.1.0"

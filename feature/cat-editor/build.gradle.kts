@@ -24,7 +24,7 @@ dependencies {
     implementation(libs.androidx.print)
     implementation(libs.google.material)
     implementation(libs.androidx.room)
-    implementation(libs.androidx.sqlite.bundled)
+    implementation(libs.androidx.sqlite.framework)
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.androidx.navigation3.ui)

@@ -18,7 +18,7 @@ import androidx.room3.Room
 import androidx.room3.RoomDatabase
 import androidx.room3.migration.Migration
 import androidx.sqlite.SQLiteConnection
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
+import androidx.sqlite.driver.AndroidSQLiteDriver
 import androidx.sqlite.execSQL
 import com.dede.android_eggs.cat_editor.Cat.Companion.createCat
 import com.dede.basic.globalContext
@@ -33,7 +33,7 @@ object CatRememberDataStore {
     private val db by lazy {
         Room.databaseBuilder<CatRememberDatabase>(globalContext, "cat_remember.db")
             .addMigrations(MIGRATION_1_2)
-            .setDriver(BundledSQLiteDriver())
+            .setDriver(AndroidSQLiteDriver())
             .build()
     }
 
