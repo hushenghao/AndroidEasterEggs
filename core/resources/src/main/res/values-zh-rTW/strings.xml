@@ -26,11 +26,15 @@
     <string name="pref_title_language_more">更多</string>
     <string name="pref_title_theme">主題</string>
     <string name="pref_title_dynamic_color">動態色彩</string>
+    <string name="pref_title_app_icon">應用程式圖示</string>
     <string name="pref_title_icon_visual_effects">圖示視覺效果</string>
     <string name="summary_system_default">預設</string>
     <string name="summary_theme_dark_mode">深色</string>
     <string name="summary_theme_light_mode">淺色</string>
     <string name="summary_theme_amoled_mode">黑色</string>
+    <string name="pref_title_color_source">顏色</string>
+    <string name="summary_color_source_dynamic">動態</string>
+    <string name="summary_color_source_custom">自訂</string>
     <string name="label_add_shortcut">捷徑</string>
     <string name="label_donate">捐贈</string>
     <string name="label_update">更新</string>
@@ -61,4 +65,17 @@
     <string name="rocket_launcher_all_app_icons">應用程式</string>
     <string name="rocket_launcher_all_icons">彩蛋和應用程式</string>
     <string name="rocket_launcher_query_all_app_desc">需要取得主畫面應用程式中顯示的應用程式清單</string>
+    <string name="label_data_backup">資料備份 &amp; 還原</string>
+    <string name="pref_data_backup_desc">匯出或匯入使用者資料</string>
+    <string name="action_export_backup">匯出備份</string>
+    <string name="action_export_backup_desc">將設定、貓咪和小工具配置儲存到檔案中</string>
+    <string name="action_import_backup">匯入備份</string>
+    <string name="action_import_backup_desc">從先前匯出的備份檔案中恢復</string>
+    <string name="toast_backup_success">備份已成功匯出</string>
+    <string name="toast_restore_success">恢復完成。應用程式將重新啟動。</string>
+    <string name="toast_backup_failed">備份失敗： %s</string>
+    <string name="toast_restore_failed">恢復失敗： %s</string>
+    <string name="dialog_import_backup_title">匯入備份</string>
+    <string name="dialog_import_backup_message">這將覆蓋所有當前應用程式資料，包括設定、已保存的貓咪和組件配置。此操作無法撤銷。您確定要繼續嗎？</string>
+    <string name="action_confirm_import">匯入</string>
 </resources>
