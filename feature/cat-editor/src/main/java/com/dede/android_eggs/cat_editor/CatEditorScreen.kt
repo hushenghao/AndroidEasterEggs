@@ -2,6 +2,7 @@
 
 package com.dede.android_eggs.cat_editor
 
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
@@ -621,14 +622,27 @@ private fun PrintCatButton(
     var isPrinting by remember { mutableStateOf(false) }
 
     fun printCat() {
+        if (!context.packageManager.hasSystemFeature(PackageManager.FEATURE_PRINTING)) {
+            // Devices without the print framework (stripped ROMs) silently
+            // ignore print requests; notify the user instead.
+            context.toast("🚫")
+            return
+        }
         isPrinting = true
         val deferred = captureController.captureAsync()
         scope.launch {
             val bitmap = deferred.await().asAndroidBitmap().toPrintBitmap()
-            PrintHelper(context).apply {
-                scaleMode = PrintHelper.SCALE_MODE_FIT
-            }.printBitmap(catName, bitmap)
-            isPrinting = false
+            try {
+                PrintHelper(context).apply {
+                    scaleMode = PrintHelper.SCALE_MODE_FIT
+                }.printBitmap(catName, bitmap)
+            } catch (_: RuntimeException) {
+                // e.g. RemoteException when the system print service is
+                // unavailable; the system print dialog cannot open.
+                context.toast("🚫")
+            } finally {
+                isPrinting = false
+            }
         }
     }
 
