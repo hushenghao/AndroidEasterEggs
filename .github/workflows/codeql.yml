@@ -62,7 +62,7 @@ jobs:
           cache: gradle
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4.37.3
+        uses: github/codeql-action/init@v4.37.6
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
@@ -89,6 +89,6 @@ jobs:
 
       - name: Perform CodeQL Analysis
         if: steps.check-extractor.outputs.kotlin_ok != 'false' || matrix.language != 'java-kotlin'
-        uses: github/codeql-action/analyze@v4.37.3
+        uses: github/codeql-action/analyze@v4.37.6
         with:
           category: '/language:${{ matrix.language }}'
