@@ -147,7 +147,8 @@ fun EasterEggScreen(
                     }
                 }
             },
-            drawerState = drawerState
+            drawerState = drawerState,
+            gesturesEnabled = drawerState.isOpen,
         ) {
             val searchBarState = rememberBottomSearchBarState()
             val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
