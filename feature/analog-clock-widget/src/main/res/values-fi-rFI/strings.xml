@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Muokkaa widgettiä</string>
+    <string name="analog_clock_widget_config_summary">Valitse, mitä tapahtuu kun sinä painat kello widgettiä.</string>
+    <string name="analog_clock_widget_click_action_title">Napautus</string>
+    <string name="analog_clock_widget_action_open_egg">Avaa muna</string>
+    <string name="analog_clock_widget_action_open_app">Avaa sovellus</string>
+    <string name="analog_clock_widget_action_none">Ei toimenpidettä</string>
+    <string name="analog_clock_widget_dial_style_title">Kellotaulu</string>
+    <string name="analog_clock_widget_dial_style_summary">Valitse kellotaulun tyyli.</string>
+    <string name="analog_clock_widget_dial_android_icons">Kuvakkeet</string>
+    <string name="analog_clock_widget_dial_simple">Yksinkertainen</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">Korvapuusti</string>
+</resources>
