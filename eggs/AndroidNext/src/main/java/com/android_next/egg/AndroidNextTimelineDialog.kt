@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.android_next.egg
 
 import android.content.Context
@@ -6,12 +8,28 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.AlertDialog
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -27,6 +45,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 object AndroidNextTimelineRoute : OverlayRoute
@@ -56,9 +75,34 @@ fun AndroidNextTimelineDialog(
     val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
     val androidReleasesUrl = stringResource(R.string.url_android_releases)
-    AlertDialog(
+    val scope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
+    val sheetState = rememberBottomSheetState(
+        initialValue = SheetValue.Hidden,
+        enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
+    )
+    // https://issuetracker.google.com/issues/353304855
+    val sheetGesturesEnabled by remember {
+        derivedStateOf { !scrollState.canScrollBackward }
+    }
+    val paddingValues = WindowInsets.safeDrawing.asPaddingValues()
+
+    ModalBottomSheet(
         onDismissRequest = onDismiss,
-        title = {
+        sheetState = sheetState,
+        sheetGesturesEnabled = sheetGesturesEnabled,
+        contentWindowInsets = {
+            WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
+        },
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(state = scrollState)
+                .padding(horizontal = 24.dp)
+                .padding(bottom = 12.dp + paddingValues.calculateBottomPadding()),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -68,37 +112,47 @@ fun AndroidNextTimelineDialog(
                     clipShape = IconShapePrefUtil.getIconShape(),
                     res = logoRes,
                 )
-                Text(text = stringResource(id = titleRes))
-            }
-        },
-        text = {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-            ) {
                 Text(
-                    text = getTimelineMessage(context),
-                    style = MaterialTheme.typography.bodyMedium
-                )
-                AndroidScheduleArtist(
-                    betaReleaseMonth = AndroidNextEasterEgg.BETA_RELEASE_MONTH,
-                    platformStabilityMonth = AndroidNextEasterEgg.PLATFORM_STABILITY_MONTH,
+                    text = stringResource(id = titleRes),
+                    style = MaterialTheme.typography.titleLarge,
                 )
             }
-        },
-        confirmButton = {
-            TextButton(onClick = {
-                onDismiss()
-                uriHandler.openUri(androidReleasesUrl)
-            }) {
-                Text(text = stringResource(id = R.string.label_timeline_releases))
+
+            Text(
+                text = getTimelineMessage(context),
+                style = MaterialTheme.typography.bodyMedium
+            )
+
+            AndroidScheduleArtist(
+                betaReleaseMonth = AndroidNextEasterEgg.BETA_RELEASE_MONTH,
+                platformStabilityMonth = AndroidNextEasterEgg.PLATFORM_STABILITY_MONTH,
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                TextButton(onClick = {
+                    scope.launch {
+                        sheetState.hide()
+                        onDismiss()
+                    }
+                }) {
+                    Text(text = stringResource(id = android.R.string.cancel))
+                }
+                TextButton(onClick = {
+                    scope.launch {
+                        sheetState.hide()
+                        onDismiss()
+                    }
+                    uriHandler.openUri(androidReleasesUrl)
+                }) {
+                    Text(text = stringResource(id = R.string.label_timeline_releases))
+                }
             }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text(text = stringResource(id = android.R.string.cancel))
-            }
-        },
-    )
+        }
+    }
 }
 
 private fun getTimelineMessage(context: Context): String {

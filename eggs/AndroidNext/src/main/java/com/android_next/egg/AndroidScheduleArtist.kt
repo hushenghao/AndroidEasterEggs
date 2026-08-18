@@ -40,7 +40,7 @@ private class ArtistDrawScope(private val delegate: DrawScope) : DrawScope by de
 
     val fullStroke: Float = 30.dp.toPx()
     val innerStroke: Float = 14.dp.toPx()
-    val lineStroke: Float = (1.5).dp.toPx()
+    val lineStroke: Float = 1.5.dp.toPx()
 
     val labelSpace: Float = 6.dp.toPx()
 
@@ -48,7 +48,7 @@ private class ArtistDrawScope(private val delegate: DrawScope) : DrawScope by de
     val pointRadius = 11.dp.toPx()
 
     val rect: Rect = Rect(
-        top = height * 0.25f,
+        top = height * 0.2f,
         left = fullStroke / 2f,
         right = width - fullStroke / 2f,
         bottom = height - fullStroke / 2f
@@ -399,7 +399,7 @@ internal fun AndroidScheduleArtist(
         Canvas(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1f)
+                .aspectRatio(4 / 3f)
                 .then(modifier)
         ) {
             val drawScope = ArtistDrawScope(this)
