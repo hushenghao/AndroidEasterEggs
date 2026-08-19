@@ -16,15 +16,14 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.dede.android_eggs.local_provider.rememberCustomTabsUriHandler
-import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.EasterEggsDestination.EasterEggs
 import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.navigation.LocalOverlayManager
 import com.dede.android_eggs.navigation.Navigator.Companion.rememberNavigator
 import com.dede.android_eggs.navigation.rememberEasterEggsDestinations
+import com.dede.android_eggs.navigation.rememberNavigationState
 import com.dede.android_eggs.navigation.rememberOverlayContentProviders
 import com.dede.android_eggs.navigation.rememberOverlayManager
-import com.dede.android_eggs.navigation.rememberNavigationState
 import com.dede.android_eggs.navigation.toEntries
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiController
