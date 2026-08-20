@@ -10,6 +10,7 @@ dependencies {
     implementation(project(":basic"))
     implementation(project(":core:theme"))
     implementation(project(":core:settings"))
+    implementation(project(":core:resources"))
     implementation(libs.google.material)
 
     implementation(platform(libs.androidx.compose.bom))
@@ -18,4 +19,6 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.activity)
+
+    implementation(libs.haze.blur)
 }

@@ -16,25 +16,19 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.DismissibleDrawerSheet
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme.shapes
-import androidx.compose.material3.ModalDrawerSheet
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -42,13 +36,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.R
+import com.dede.android_eggs.composable.appbar.HazeScaffold
+import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeAppBarModifier
 import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.android_eggs.navigation.EasterEggsDestination
-import com.dede.android_eggs.ui.composes.PredictiveBackProgressHandler.predictiveBackShrink
-import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
-import com.dede.android_eggs.ui.composes.predictiveBackProgressState
+import com.dede.android_eggs.ui.composes.ReverseDismissibleNavigationDrawer
 import com.dede.android_eggs.util.OrientationAngleSensor
-import com.dede.android_eggs.util.compose.end
 import com.dede.android_eggs.util.compose.plus
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
@@ -66,6 +59,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
+import dev.chrisbanes.haze.rememberHazeState
 import javax.inject.Inject
 
 @Module
@@ -97,7 +91,8 @@ fun EasterEggScreen(
     val logoSensor = remember { EasterEggLogoSensorMatrixConvert() }
     if (IconVisualEffectsPrefUtil.isSupported()) {
         val lifecycleOwner = LocalLifecycleOwner.current
-        val iconVisualEffectsEnabled = SettingPrefUtil.iconVisualEffectsState.intValue == SettingPrefUtil.ON
+        val iconVisualEffectsEnabled =
+            SettingPrefUtil.iconVisualEffectsState.intValue == SettingPrefUtil.ON
         DisposableEffect(iconVisualEffectsEnabled) {
             var orientationAngleSensor: OrientationAngleSensor? = null
             if (iconVisualEffectsEnabled) {
@@ -118,25 +113,10 @@ fun EasterEggScreen(
         LocalEasterEggLogoSensor provides logoSensor,
         LocalDrawerState provides drawerState,
     ) {
-        ReverseModalNavigationDrawer(
+        ReverseDismissibleNavigationDrawer(
             drawerContent = {
-                val backProgress by predictiveBackProgressState(
-                    enabled = drawerState.isOpen,
-                    backEndValue = { 0f },
-                ) {
-                    drawerState.close()
-                }
-                val layoutDirection = LocalLayoutDirection.current
-                ModalDrawerSheet(
-                    modifier = Modifier
-                        .graphicsLayer {
-                            predictiveBackShrink(
-                                progress = backProgress,
-                                shrinkOrigin = Alignment.CenterEnd,
-                                layoutDirection = layoutDirection
-                            )
-                        },
-                    drawerShape = shapes.extraLarge.end(0.dp),
+                DismissibleDrawerSheet(
+                    drawerState = drawerState,
                     windowInsets = WindowInsets(0, 0, 0, 0),
                 ) {
                     val maxWidth = LocalConfiguration.current.smallestScreenWidthDp * 0.8f
@@ -151,20 +131,23 @@ fun EasterEggScreen(
             gesturesEnabled = drawerState.isOpen,
         ) {
             val searchBarState = rememberBottomSearchBarState()
-            val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-            Scaffold(
+            val hazeState = rememberHazeState()
+            HazeScaffold(
+                hazeState = hazeState,
                 topBar = {
                     MainTitleBar(
-                        scrollBehavior = scrollBehavior,
+                        modifier = Modifier.hazeAppBarModifier(hazeState),
                         searchBarState = searchBarState,
                         drawerState = drawerState,
                     )
                 },
-                modifier = Modifier
-                    .nestedScroll(scrollBehavior.nestedScrollConnection),
                 bottomBar = {
-                    BottomSearchBar(state = searchBarState)
-                }
+                    BottomSearchBar(
+                        elevation = 0.dp,
+                        containerColor = Color.Transparent,
+                        state = searchBarState,
+                    )
+                },
             ) { contentPadding ->
                 EasterEggList(
                     easterEggs = viewModel.easterEggs,

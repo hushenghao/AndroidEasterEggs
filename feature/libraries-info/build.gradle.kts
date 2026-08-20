@@ -10,6 +10,7 @@ dependencies {
     implementation(project(":core:theme"))
     implementation(project(":core:resources"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:composable"))
     implementation(project(":core:custom-tab-browser"))
 
     implementation(libs.androidx.navigation3.ui)

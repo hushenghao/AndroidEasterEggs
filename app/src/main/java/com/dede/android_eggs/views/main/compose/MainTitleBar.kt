@@ -9,22 +9,20 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults.pinnedScrollBehavior
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.R
+import com.dede.android_eggs.composable.appbar.HazeAppBar
 import com.dede.android_eggs.ui.composes.icons.rounded.SettingsOutline
 import kotlinx.coroutines.launch
 import com.dede.android_eggs.resources.R as StringsR
@@ -32,13 +30,16 @@ import com.dede.android_eggs.resources.R as StringsR
 @Composable
 @Preview
 fun MainTitleBar(
+    modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior = pinnedScrollBehavior(),
     searchBarState: BottomSearchBarState = rememberBottomSearchBarState(),
-    drawerState: DrawerState? = null
+    drawerState: DrawerState? = null,
 ) {
     val scope = rememberCoroutineScope()
-    CenterAlignedTopAppBar(
+    HazeAppBar(
+        modifier = modifier,
         scrollBehavior = scrollBehavior,
+        title = stringResource(R.string.app_name),
         navigationIcon = {
             AnimatedVisibility(
                 visible = !searchBarState.visible,
@@ -47,7 +48,6 @@ fun MainTitleBar(
             ) {
                 IconButton(
                     onClick = {
-                        // show searchBar
                         searchBarState.open()
                     },
                 ) {
@@ -57,14 +57,6 @@ fun MainTitleBar(
                     )
                 }
             }
-        },
-        title = {
-            Text(
-                text = stringResource(R.string.app_name),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                fontWeight = FontWeight.Medium
-            )
         },
         actions = {
             IconButton(
@@ -78,9 +70,9 @@ fun MainTitleBar(
                 Icon(
                     imageVector = Icons.Rounded.SettingsOutline,
                     contentDescription = stringResource(StringsR.string.label_settings),
-                    tint = MaterialTheme.colorScheme.onSurface
+                    tint = MaterialTheme.colorScheme.onSurface,
                 )
             }
-        }
+        },
     )
 }

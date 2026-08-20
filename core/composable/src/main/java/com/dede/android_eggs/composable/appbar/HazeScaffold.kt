@@ -1,0 +1,165 @@
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
+
+package com.dede.android_eggs.composable.appbar
+
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScaffoldDefaults
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import com.dede.android_eggs.composable.appbar.HazeAppBarDefaults.HazeAppBarBackButton
+import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeAppBarModifier
+import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeBottomBarModifier
+import dev.chrisbanes.haze.HazeInput
+import dev.chrisbanes.haze.HazeProgressive
+import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.blur.hazeBlur
+import dev.chrisbanes.haze.blur.materials.HazeMaterials
+import dev.chrisbanes.haze.hazeSource
+import dev.chrisbanes.haze.rememberHazeState
+
+@Composable
+fun HazeScaffold(
+    title: String,
+    modifier: Modifier = Modifier,
+    hazeState: HazeState = rememberHazeState(),
+    subtitle: String? = null,
+    onBackClick: (() -> Unit)? = null,
+    actions: @Composable RowScope.() -> Unit = {},
+    bottomBar: @Composable (() -> Unit)? = null,
+    floatingActionButton: @Composable () -> Unit = {},
+    floatingActionButtonPosition: FabPosition = FabPosition.End,
+    snackbarHost: @Composable () -> Unit = {},
+    containerColor: Color = MaterialTheme.colorScheme.background,
+    contentWindowInsets: WindowInsets = ScaffoldDefaults.contentWindowInsets,
+    topBarWindowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
+    scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
+    content: @Composable (PaddingValues) -> Unit,
+) {
+    HazeScaffold(
+        modifier = modifier,
+        hazeState = hazeState,
+        topBar = {
+            HazeAppBar(
+                title = title,
+                subtitle = subtitle,
+                modifier = Modifier.hazeAppBarModifier(hazeState),
+                navigationIcon = {
+                    if (onBackClick != null) {
+                        HazeAppBarBackButton(onClick = onBackClick)
+                    }
+                },
+                actions = actions,
+                windowInsets = topBarWindowInsets,
+                scrollBehavior = scrollBehavior,
+            )
+        },
+        bottomBar = bottomBar,
+        floatingActionButton = floatingActionButton,
+        floatingActionButtonPosition = floatingActionButtonPosition,
+        snackbarHost = snackbarHost,
+        containerColor = containerColor,
+        contentWindowInsets = contentWindowInsets,
+        scrollBehavior = scrollBehavior,
+        content = content,
+    )
+}
+
+@Composable
+fun HazeScaffold(
+    modifier: Modifier = Modifier,
+    hazeState: HazeState = rememberHazeState(),
+    topBar: @Composable () -> Unit = {},
+    bottomBar: @Composable (() -> Unit)? = null,
+    floatingActionButton: @Composable () -> Unit = {},
+    floatingActionButtonPosition: FabPosition = FabPosition.End,
+    snackbarHost: @Composable () -> Unit = {},
+    containerColor: Color = MaterialTheme.colorScheme.background,
+    contentWindowInsets: WindowInsets = ScaffoldDefaults.contentWindowInsets,
+    scrollBehavior: TopAppBarScrollBehavior? = TopAppBarDefaults.pinnedScrollBehavior(),
+    content: @Composable (PaddingValues) -> Unit,
+) {
+    val scaffoldModifier = if (scrollBehavior != null) {
+        modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
+    } else {
+        modifier
+    }
+
+    Scaffold(
+        modifier = scaffoldModifier,
+        topBar = topBar,
+        // Scaffold uses bottomBar height instead of bottom window insets when the
+        // bottomBar slot emits placeables. Keep it empty unless a real bar is provided,
+        // otherwise an empty Box (height 0) drops the bottom safe area padding.
+        bottomBar = {
+            if (bottomBar != null) {
+                Box(
+                    modifier = Modifier.hazeBottomBarModifier(hazeState),
+                ) {
+                    bottomBar()
+                }
+            }
+        },
+        floatingActionButton = floatingActionButton,
+        floatingActionButtonPosition = floatingActionButtonPosition,
+        snackbarHost = snackbarHost,
+        containerColor = containerColor,
+        contentWindowInsets = contentWindowInsets,
+    ) { contentPadding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .hazeSource(hazeState),
+        ) {
+            content(contentPadding)
+        }
+    }
+}
+
+
+object HazeScaffoldDefaults {
+
+    @Composable
+    fun Modifier.hazeAppBarModifier(state: HazeState): Modifier = Modifier
+        .hazeBlur(
+            input = HazeInput.Sources(state),
+            style = HazeMaterials.thick().then {
+                progressive(
+                    HazeProgressive.verticalGradient(
+                        startIntensity = 1f,
+                        endIntensity = 0f,
+                    )
+                )
+            }
+        )
+        .then(this)
+
+    @Composable
+    fun Modifier.hazeBottomBarModifier(state: HazeState): Modifier = Modifier
+        .hazeBlur(
+            input = HazeInput.Sources(state),
+            style = HazeMaterials.ultraThick().then {
+                progressive(
+                    HazeProgressive.verticalGradient(
+                        easing = LinearEasing,
+                        startIntensity = 0f,
+                        endIntensity = 1f,
+                    )
+                )
+            }
+        )
+        .then(this)
+}

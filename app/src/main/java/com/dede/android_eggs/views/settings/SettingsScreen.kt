@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.dede.android_eggs.views.settings
 
 import androidx.compose.animation.animateContentSize
@@ -15,29 +13,18 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.composable.appbar.HazeScaffold
 import com.dede.android_eggs.keep_android_open.KeepAndroidOpen
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.isVivo
@@ -67,41 +54,18 @@ import com.dede.android_eggs.resources.R as StringsR
 @Preview(widthDp = 320)
 @Composable
 fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed)) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val scope = rememberCoroutineScope()
     val windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout)
-    Scaffold(
-        modifier = Modifier,
+    HazeScaffold(
+        title = stringResource(StringsR.string.label_settings),
+        onBackClick = {
+            scope.launch {
+                drawerState.close()
+            }
+        },
         contentWindowInsets = windowInsets
             .only(WindowInsetsSides.End + WindowInsetsSides.Vertical),
-        topBar = {
-            CenterAlignedTopAppBar(
-                scrollBehavior = scrollBehavior,
-                windowInsets = windowInsets.only(WindowInsetsSides.End + WindowInsetsSides.Top),
-                title = {
-                    Text(
-                        text = stringResource(StringsR.string.label_settings),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        fontWeight = FontWeight.Medium
-                    )
-                },
-                navigationIcon = {
-                    val scope = rememberCoroutineScope()
-                    IconButton(
-                        onClick = {
-                            scope.launch {
-                                drawerState.close()
-                            }
-                        },
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = null
-                        )
-                    }
-                }
-            )
-        }
+        topBarWindowInsets = windowInsets.only(WindowInsetsSides.End + WindowInsetsSides.Top),
     ) { contentPadding ->
         val layoutDirection = LocalLayoutDirection.current
         Column(
@@ -110,7 +74,6 @@ fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Cl
                     start = 12.dp,
                     end = 12.dp + contentPadding.calculateEndPadding(layoutDirection),
                 )// 1. horizontal padding
-                .nestedScroll(scrollBehavior.nestedScrollConnection)
                 .verticalScroll(rememberScrollState())// 2. scrollable
                 .padding(// 3. vertical padding
                     top = contentPadding.calculateTopPadding() + 8.dp,

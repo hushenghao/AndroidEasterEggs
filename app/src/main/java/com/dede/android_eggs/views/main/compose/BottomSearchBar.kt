@@ -48,6 +48,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.ui.composes.predictiveBackProgressState
 import com.dede.basic.bundleBuilder
@@ -119,8 +120,12 @@ fun rememberBottomSearchBarState(
 @Composable
 @Preview
 fun BottomSearchBar(
+    modifier: Modifier = Modifier,
     state: BottomSearchBarState = rememberBottomSearchBarState(true),
-    onClose: (() -> Unit)? = null
+    elevation: Dp = 4.dp,
+    containerColor: Color = colorScheme.surfaceColorAtElevation(elevation),
+    contentColor: Color = colorScheme.onSurface,
+    onClose: (() -> Unit)? = null,
 ) {
     val backProgress by predictiveBackProgressState(enabled = state.visible) {
         state.close()
@@ -135,12 +140,16 @@ fun BottomSearchBar(
             modifier = Modifier
                 .graphicsLayer {
                     translationY = size.height * 0.3f * backProgress
-                },
+                }
+                .then(modifier),
             shape = RoundedCornerShape(
-                topStart = (28 * backProgress).dp,
-                topEnd = (28 * backProgress).dp
+                topStart = (14 + 14 * backProgress).dp,
+                topEnd = (14 + 14 * backProgress).dp
             ),
             onClose = onClose,
+            elevation = elevation,
+            containerColor = containerColor,
+            contentColor = contentColor,
         )
     }
 }
@@ -151,6 +160,9 @@ private fun BottomSearchBarView(
     modifier: Modifier,
     shape: Shape,
     onClose: (() -> Unit)?,
+    elevation: Dp = 4.dp,
+    containerColor: Color = colorScheme.surfaceColorAtElevation(elevation),
+    contentColor: Color = colorScheme.onSurface,
 ) {
     val currentOnClose by rememberUpdatedState(newValue = onClose)
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -166,13 +178,13 @@ private fun BottomSearchBarView(
     }
     Surface(
         modifier = Modifier
-            .then(modifier)
-            .imePadding(),
+            .imePadding()
+            .then(modifier),
         shape = shape,
-        color = colorScheme.surfaceColorAtElevation(4.dp),
-        contentColor = colorScheme.onSurface,
-        tonalElevation = 4.dp,
-        shadowElevation = 4.dp,
+        color = containerColor,
+        contentColor = contentColor,
+        tonalElevation = elevation,
+        shadowElevation = elevation,
     ) {
         TextField(
             modifier = Modifier
@@ -196,6 +208,11 @@ private fun BottomSearchBarView(
                 focusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
+                errorIndicatorColor = Color.Transparent,
+                errorContainerColor = Color.Transparent,
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                disabledContainerColor = Color.Transparent,
             ),
             leadingIcon = {
                 IconButton(

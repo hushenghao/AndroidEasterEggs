@@ -108,6 +108,7 @@ dependencies {
     implementation(libs.squareup.okio)
     implementation(libs.blurhash.android)
     implementation(libs.squircle.shape)
+    implementation(libs.haze.blur)
     debugImplementation(libs.squareup.leakcanary)
     implementation(libs.ktor.core)
     implementation(libs.ktor.android)

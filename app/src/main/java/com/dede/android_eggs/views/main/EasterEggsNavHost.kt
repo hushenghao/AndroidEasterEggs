@@ -65,7 +65,6 @@ fun EasterEggsNavHost(
         LocalOverlayManager provides overlayManager,
         LocalKonfettiState provides konfettiController,
     ) {
-        val onBack = { navigator.goBack() }
         val entryProvider = entryProvider {
             val navDestinations = rememberEasterEggsDestinations()
             navDestinations.forEach { dest ->
@@ -77,7 +76,7 @@ fun EasterEggsNavHost(
         NavDisplay(
             modifier = modifier,
             entries = navigationState.toEntries(entryProvider),
-            onBack = onBack,
+            onBack = { navigator.goBack() },
             transitionSpec = { navTransition() },
             popTransitionSpec = { popTransition() },
             predictivePopTransitionSpec = { popTransition() },

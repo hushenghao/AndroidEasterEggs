@@ -18,7 +18,6 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -51,7 +50,6 @@ import androidx.compose.material.icons.rounded.ZoomOut
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults.cardColors
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
@@ -59,13 +57,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
-import androidx.compose.material3.PlainTooltip
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TooltipAnchorPosition
-import androidx.compose.material3.TooltipBox
-import androidx.compose.material3.TooltipDefaults.rememberTooltipPositionProvider
-import androidx.compose.material3.rememberTooltipState
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -92,16 +84,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation3.runtime.NavKey
 import androidx.print.PrintHelper
 import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
 import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEditorRecords
 import com.dede.android_eggs.cat_editor.Utilities.toPrintBitmap
+import com.dede.android_eggs.composable.appbar.HazeScaffold
 import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.navigation.EasterEggsDestination
@@ -392,61 +382,18 @@ fun CatEditorScreen() {
 
     var bottomButtonCount by remember { mutableIntStateOf(bottomMenuButtonList.size) }
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                navigationIcon = {
-                    TooltipBox(
-                        positionProvider = rememberTooltipPositionProvider(TooltipAnchorPosition.Below),
-                        tooltip = {
-                            PlainTooltip { Text(stringResource(StringR.string.label_back)) }
-                        },
-                        state = rememberTooltipState(),
-                    ) {
-                        IconButton(
-                            onClick = {
-                                navigator.goBack()
-                            }
-                        ) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                                contentDescription = null,
-                                tint = colorScheme.onSurface
-                            )
-                        }
-                    }
-                },
-                title = {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = stringResource(StringR.string.cat_editor),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Text(
-                            text = stringResource(R.string.label_cat_seed, catSeed),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            style = typography.labelSmall.copy(
-                                fontSize = 9.sp,
-                                fontWeight = FontWeight.Normal
-                            ),
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { rememberCatsDialogVisible = true }) {
-                        Icon(
-                            imageVector = Icons.Rounded.Cat,
-                            contentDescription = null,
-                            tint = colorScheme.onSurface
-                        )
-                    }
-                }
-            )
+    HazeScaffold(
+        title = stringResource(StringR.string.cat_editor),
+        subtitle = stringResource(R.string.label_cat_seed, catSeed),
+        onBackClick = navigator::goBack,
+        actions = {
+            IconButton(onClick = { rememberCatsDialogVisible = true }) {
+                Icon(
+                    imageVector = Icons.Rounded.Cat,
+                    contentDescription = null,
+                    tint = colorScheme.onSurface
+                )
+            }
         },
         bottomBar = {
             BottomOptionsBar(
@@ -714,6 +661,7 @@ private fun BottomOptionsBar(
     options: @Composable RowScope.() -> Unit,
 ) {
     BottomAppBar(
+        containerColor = Color.Transparent,
         actions = {
             var moreOptionsVisible by remember { mutableStateOf(false) }
             var iconButtonCount by remember { mutableIntStateOf(totalOptionsCount) }
