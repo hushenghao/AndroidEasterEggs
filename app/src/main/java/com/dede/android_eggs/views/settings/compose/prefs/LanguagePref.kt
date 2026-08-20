@@ -35,8 +35,8 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Text
 import androidx.compose.material3.SheetValue
+import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -59,8 +59,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.BuildConfig
-import com.dede.android_eggs.local_provider.currentOutInspectionMode
-import com.dede.android_eggs.views.main.compose.LocalDrawerState
 import com.dede.android_eggs.views.settings.compose.basic.SettingPref
 import com.dede.basic.createLocalesContext
 import kotlinx.coroutines.launch
@@ -292,13 +290,10 @@ fun LanguagePref() {
     }
 
     val context = LocalContext.current
-    val drawerState = LocalDrawerState.currentOutInspectionMode
     val scope = rememberCoroutineScope()
 
     fun performOnOptionSelected(option: Int) {
         scope.launch {
-            drawerState?.close()
-
             languageOptionValue = option
             val result = LanguagePrefUtil.setApplicationLocalesValue(option)
             if (!result) {

@@ -67,7 +67,15 @@ fun HazeScaffold(
                 scrollBehavior = scrollBehavior,
             )
         },
-        bottomBar = bottomBar,
+        bottomBar = {
+            if (bottomBar != null) {
+                Box(
+                    modifier = Modifier.hazeBottomBarModifier(hazeState),
+                ) {
+                    bottomBar()
+                }
+            }
+        },
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
         snackbarHost = snackbarHost,
@@ -83,7 +91,7 @@ fun HazeScaffold(
     modifier: Modifier = Modifier,
     hazeState: HazeState = rememberHazeState(),
     topBar: @Composable () -> Unit = {},
-    bottomBar: @Composable (() -> Unit)? = null,
+    bottomBar: @Composable () -> Unit = {},
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     snackbarHost: @Composable () -> Unit = {},
@@ -101,18 +109,7 @@ fun HazeScaffold(
     Scaffold(
         modifier = scaffoldModifier,
         topBar = topBar,
-        // Scaffold uses bottomBar height instead of bottom window insets when the
-        // bottomBar slot emits placeables. Keep it empty unless a real bar is provided,
-        // otherwise an empty Box (height 0) drops the bottom safe area padding.
-        bottomBar = {
-            if (bottomBar != null) {
-                Box(
-                    modifier = Modifier.hazeBottomBarModifier(hazeState),
-                ) {
-                    bottomBar()
-                }
-            }
-        },
+        bottomBar = bottomBar,
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
         snackbarHost = snackbarHost,

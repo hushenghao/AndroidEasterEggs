@@ -26,7 +26,14 @@ object AndroidReleaseDateMatcher {
         timelines = entryPoint.timelineEventList()
     }
 
-    fun findReleaseDateByFullApiLevel(fullApiLevel: Int): Date {
+    fun findReleaseDateByFullApiLevel(fullApiLevel: Int): Date? {
+        val event = timelines.findLast { it.fullApiLevel == fullApiLevel } ?: return null
+        val calendar = Calendar.getInstance(TimeZone.getDefault())
+        calendar.set(event.year, event.month, 1)
+        return calendar.time
+    }
+
+    fun requireReleaseDateByFullApiLevel(fullApiLevel: Int): Date {
         val event = timelines.findLast { it.fullApiLevel == fullApiLevel }
             ?: throw IllegalArgumentException(
                 "Full api level %d release date not found!".format(fullApiLevel)

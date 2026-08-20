@@ -10,6 +10,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.graphics.shapes.CornerRounding
 import androidx.graphics.shapes.RoundedPolygon
 import androidx.graphics.shapes.star
@@ -51,7 +52,17 @@ object IconShapePrefUtil {
     const val KEY_ICON_SHAPE = "pref_key_override_icon_shape"
 
     @Composable
-    fun getIconShape(index: Int = SettingPrefUtil.iconShapeValueState.intValue): Shape {
+    fun getIconShape(index: Int): Shape {
+        return shapeSpecs.getOrElse(index) { circleShapeSpec }.toShape()
+    }
+
+    @Composable
+    fun getIconShape(): Shape {
+        val index: Int = if (LocalInspectionMode.current) {
+            Random.nextInt(indexOfRandom)
+        } else {
+            SettingPrefUtil.iconShapeValueState.intValue
+        }
         return shapeSpecs.getOrElse(index) { circleShapeSpec }.toShape()
     }
 

@@ -103,7 +103,7 @@ fun EasterEggLogo(
 }
 
 @Composable
-fun EasterEggLogo(egg: EasterEgg, size: Dp = 44.dp, sensor: Boolean = false) {
+fun EasterEggLogo(egg: EasterEgg, size: Dp = 50.dp, sensor: Boolean = false) {
     EasterEggLogo(
         modifier = Modifier.size(size),
         res = egg.iconRes,
