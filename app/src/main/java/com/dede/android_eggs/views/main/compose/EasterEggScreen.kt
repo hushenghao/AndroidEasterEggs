@@ -23,8 +23,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.composable.appbar.HazeScaffold
-import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeAppBarModifier
-import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeBottomBarModifier
+import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeAppBar
+import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeBottomBar
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.ui.composes.ReverseDismissibleNavigationDrawer
 import com.dede.android_eggs.util.OrientationAngleSensor
@@ -114,14 +114,14 @@ fun EasterEggScreen(
                 hazeState = hazeState,
                 topBar = {
                     MainTitleBar(
-                        modifier = Modifier.hazeAppBarModifier(hazeState),
+                        modifier = Modifier.hazeAppBar(hazeState),
                         searchBarState = searchBarState,
                         drawerState = drawerState,
                     )
                 },
                 bottomBar = {
                     BottomSearchBar(
-                        modifier = Modifier.hazeBottomBarModifier(hazeState),
+                        modifier = Modifier.hazeBottomBar(hazeState),
                         elevation = 0.dp,
                         containerColor = Color.Transparent,
                         state = searchBarState,

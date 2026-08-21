@@ -92,7 +92,7 @@ import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.reme
 import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEditorRecords
 import com.dede.android_eggs.cat_editor.Utilities.toPrintBitmap
 import com.dede.android_eggs.composable.appbar.HazeScaffold
-import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeBottomBarModifier
+import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeBottomBar
 import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.navigation.EasterEggsDestination
@@ -398,7 +398,7 @@ fun CatEditorScreen() {
         },
         bottomBar = {
             BottomOptionsBar(
-                modifier = Modifier.hazeBottomBarModifier(),
+                modifier = Modifier.hazeBottomBar(),
                 containerColor = Color.Transparent,
                 totalOptionsCount = bottomMenuButtonList.size,
                 onVisibleOptionCountChanged = { visibleCount, _ ->

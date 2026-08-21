@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FabPosition
@@ -22,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.dede.android_eggs.composable.appbar.HazeAppBarDefaults.HazeAppBarBackButton
-import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeAppBarModifier
+import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeAppBar
 import dev.chrisbanes.haze.HazeInput
 import dev.chrisbanes.haze.HazeProgressive
 import dev.chrisbanes.haze.HazeState
@@ -56,7 +55,7 @@ fun HazeScaffold(
             HazeAppBar(
                 title = title,
                 subtitle = subtitle,
-                modifier = Modifier.hazeAppBarModifier(hazeState),
+                modifier = Modifier.hazeAppBar(hazeState),
                 navigationIcon = {
                     if (onBackClick != null) {
                         HazeAppBarBackButton(onClick = onBackClick)
@@ -110,9 +109,7 @@ fun HazeScaffold(
             contentWindowInsets = contentWindowInsets,
         ) { contentPadding ->
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .hazeSource(hazeState),
+                modifier = Modifier.hazeSource(hazeState),
             ) {
                 content(contentPadding)
             }
@@ -124,7 +121,7 @@ fun HazeScaffold(
 object HazeScaffoldDefaults {
 
     @Composable
-    fun Modifier.hazeAppBarModifier(state: HazeState = LocalHazeState.current): Modifier = Modifier
+    fun Modifier.hazeAppBar(state: HazeState = LocalHazeState.current): Modifier = Modifier
         .hazeBlur(
             input = HazeInput.Sources(state),
             style = HazeMaterials.thick().then {
@@ -139,18 +136,19 @@ object HazeScaffoldDefaults {
         .then(this)
 
     @Composable
-    fun Modifier.hazeBottomBarModifier(state: HazeState = LocalHazeState.current): Modifier = Modifier
-        .hazeBlur(
-            input = HazeInput.Sources(state),
-            style = HazeMaterials.ultraThick().then {
-                progressive(
-                    HazeProgressive.verticalGradient(
-                        easing = LinearEasing,
-                        startIntensity = 0f,
-                        endIntensity = 1f,
+    fun Modifier.hazeBottomBar(state: HazeState = LocalHazeState.current): Modifier =
+        Modifier
+            .hazeBlur(
+                input = HazeInput.Sources(state),
+                style = HazeMaterials.ultraThick().then {
+                    progressive(
+                        HazeProgressive.verticalGradient(
+                            easing = LinearEasing,
+                            startIntensity = 0f,
+                            endIntensity = 1f,
+                        )
                     )
-                )
-            }
-        )
-        .then(this)
+                }
+            )
+            .then(this)
 }

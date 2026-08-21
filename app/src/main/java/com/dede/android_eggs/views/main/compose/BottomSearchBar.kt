@@ -179,7 +179,8 @@ private fun BottomSearchBarView(
     Surface(
         modifier = Modifier
             .imePadding()
-            .then(modifier),
+            .then(modifier)
+            .navigationBarsPadding(),
         shape = shape,
         color = containerColor,
         contentColor = contentColor,
@@ -188,7 +189,6 @@ private fun BottomSearchBarView(
     ) {
         TextField(
             modifier = Modifier
-                .navigationBarsPadding()
                 .fillMaxWidth()
                 .focusRequester(focusRequester)
                 .padding(horizontal = 16.dp, vertical = 10.dp),
