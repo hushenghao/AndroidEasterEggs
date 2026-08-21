@@ -55,7 +55,7 @@ import com.dede.android_eggs.resources.R as StringsR
 @Composable
 @Preview
 fun EasterEggHighestItem(
-    base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first()
+    base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first(),
 ) {
     val context = LocalContext.current
     val easterEggState = rememberEasterEggState(base)

@@ -4,6 +4,7 @@
 
 - Cat Editor 添加打印功能
 - 修复 Cat Editor 收藏记录崩溃问题 [#688](https://github.com/hushenghao/AndroidEasterEggs/issues/688)
+- 分组选择器下拉菜单改用毛玻璃模糊效果
 - 代码清理和重构
 
 ### v5.4.0 (2026-08-04)

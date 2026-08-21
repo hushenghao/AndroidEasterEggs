@@ -17,6 +17,7 @@ import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -121,7 +122,9 @@ fun HazeScaffold(
                 .fillMaxSize()
                 .hazeSource(hazeState),
         ) {
-            content(contentPadding)
+            CompositionLocalProvider(LocalHazeState provides hazeState) {
+                content(contentPadding)
+            }
         }
     }
 }
