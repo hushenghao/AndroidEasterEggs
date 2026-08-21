@@ -92,6 +92,7 @@ import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.reme
 import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEditorRecords
 import com.dede.android_eggs.cat_editor.Utilities.toPrintBitmap
 import com.dede.android_eggs.composable.appbar.HazeScaffold
+import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeBottomBarModifier
 import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.navigation.EasterEggsDestination
@@ -397,6 +398,8 @@ fun CatEditorScreen() {
         },
         bottomBar = {
             BottomOptionsBar(
+                modifier = Modifier.hazeBottomBarModifier(),
+                containerColor = Color.Transparent,
                 totalOptionsCount = bottomMenuButtonList.size,
                 onVisibleOptionCountChanged = { visibleCount, _ ->
                     bottomButtonCount = visibleCount
@@ -655,13 +658,16 @@ private fun ZoomValuePopup(zoomValue: String, modifier: Modifier = Modifier) {
 
 @Composable
 private fun BottomOptionsBar(
+    modifier: Modifier = Modifier,
+    containerColor: Color = colorScheme.surfaceContainer,
     totalOptionsCount: Int,
     onVisibleOptionCountChanged: (visibleCount: Int, hasMoreOptions: Boolean) -> Unit,
     onMoreOptionsClick: () -> Unit,
     options: @Composable RowScope.() -> Unit,
 ) {
     BottomAppBar(
-        containerColor = Color.Transparent,
+        modifier = modifier,
+        containerColor = containerColor,
         actions = {
             var moreOptionsVisible by remember { mutableStateOf(false) }
             var iconButtonCount by remember { mutableIntStateOf(totalOptionsCount) }

@@ -23,7 +23,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.dede.android_eggs.composable.appbar.HazeAppBarDefaults.HazeAppBarBackButton
 import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeAppBarModifier
-import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeBottomBarModifier
 import dev.chrisbanes.haze.HazeInput
 import dev.chrisbanes.haze.HazeProgressive
 import dev.chrisbanes.haze.HazeState
@@ -40,7 +39,7 @@ fun HazeScaffold(
     subtitle: String? = null,
     onBackClick: (() -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
-    bottomBar: @Composable (() -> Unit)? = null,
+    bottomBar: @Composable () -> Unit = {},
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     snackbarHost: @Composable () -> Unit = {},
@@ -68,15 +67,7 @@ fun HazeScaffold(
                 scrollBehavior = scrollBehavior,
             )
         },
-        bottomBar = {
-            if (bottomBar != null) {
-                Box(
-                    modifier = Modifier.hazeBottomBarModifier(hazeState),
-                ) {
-                    bottomBar()
-                }
-            }
-        },
+        bottomBar = bottomBar,
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
         snackbarHost = snackbarHost,
@@ -107,22 +98,22 @@ fun HazeScaffold(
         modifier
     }
 
-    Scaffold(
-        modifier = scaffoldModifier,
-        topBar = topBar,
-        bottomBar = bottomBar,
-        floatingActionButton = floatingActionButton,
-        floatingActionButtonPosition = floatingActionButtonPosition,
-        snackbarHost = snackbarHost,
-        containerColor = containerColor,
-        contentWindowInsets = contentWindowInsets,
-    ) { contentPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .hazeSource(hazeState),
-        ) {
-            CompositionLocalProvider(LocalHazeState provides hazeState) {
+    CompositionLocalProvider(LocalHazeState provides hazeState) {
+        Scaffold(
+            modifier = scaffoldModifier,
+            topBar = topBar,
+            bottomBar = bottomBar,
+            floatingActionButton = floatingActionButton,
+            floatingActionButtonPosition = floatingActionButtonPosition,
+            snackbarHost = snackbarHost,
+            containerColor = containerColor,
+            contentWindowInsets = contentWindowInsets,
+        ) { contentPadding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .hazeSource(hazeState),
+            ) {
                 content(contentPadding)
             }
         }
@@ -133,7 +124,7 @@ fun HazeScaffold(
 object HazeScaffoldDefaults {
 
     @Composable
-    fun Modifier.hazeAppBarModifier(state: HazeState): Modifier = Modifier
+    fun Modifier.hazeAppBarModifier(state: HazeState = LocalHazeState.current): Modifier = Modifier
         .hazeBlur(
             input = HazeInput.Sources(state),
             style = HazeMaterials.thick().then {
@@ -148,7 +139,7 @@ object HazeScaffoldDefaults {
         .then(this)
 
     @Composable
-    fun Modifier.hazeBottomBarModifier(state: HazeState): Modifier = Modifier
+    fun Modifier.hazeBottomBarModifier(state: HazeState = LocalHazeState.current): Modifier = Modifier
         .hazeBlur(
             input = HazeInput.Sources(state),
             style = HazeMaterials.ultraThick().then {
