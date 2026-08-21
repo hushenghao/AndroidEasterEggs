@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
@@ -74,8 +73,7 @@ fun ProjectDescription() {
         Wavy(
             modifier = Modifier.fillMaxWidth()
                 .padding(vertical = 26.dp),
-            color = colorScheme.secondaryContainer,
-            strokeWidth = 0.9.dp,
+            strokeWidth = 1.dp,
             amplitude = 0.7f,
             wavelength = 26.dp,
         )

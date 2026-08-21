@@ -32,7 +32,7 @@ fun PreviewWavy() {
 @Composable
 fun Wavy(
     modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colorScheme.secondaryContainer,
+    color: Color = MaterialTheme.colorScheme.primaryFixedDim,
     strokeWidth: Dp = 1.2.dp,
     amplitude: Float = 0.8f,
     wavelength: Dp = 30.dp,
