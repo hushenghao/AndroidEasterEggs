@@ -1,5 +1,5 @@
 Outlined.Beta
+Rounded.BookmarkAddOutline
 Rounded.Cat
-Rounded.Experiment
 Rounded.SettingsOutline
 Rounded.Shapes

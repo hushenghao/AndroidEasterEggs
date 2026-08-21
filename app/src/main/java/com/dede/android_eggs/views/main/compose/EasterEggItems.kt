@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.BookmarkAdd
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -40,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
+import com.dede.android_eggs.ui.composes.icons.rounded.BookmarkAddOutline
 import com.dede.android_eggs.views.main.util.AndroidReleaseDateMatcher
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
@@ -245,7 +245,7 @@ private fun EasterEggItemContent(
                     shape = IconShapePrefUtil.getIconShape(),
                 ) {
                     Icon(
-                        imageVector = Icons.Outlined.BookmarkAdd,
+                        imageVector = Icons.Rounded.BookmarkAddOutline,
                         contentDescription = stringResource(id = StringsR.string.label_add_shortcut)
                     )
                 }
