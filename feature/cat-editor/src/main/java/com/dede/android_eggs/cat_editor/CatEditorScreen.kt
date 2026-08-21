@@ -54,7 +54,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
@@ -79,9 +78,8 @@ import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -401,17 +399,14 @@ fun CatEditorScreen() {
                 modifier = Modifier.hazeBottomBar(),
                 containerColor = Color.Transparent,
                 totalOptionsCount = bottomMenuButtonList.size,
+                options = bottomMenuButtonList,
                 onVisibleOptionCountChanged = { visibleCount, _ ->
                     bottomButtonCount = visibleCount
                 },
                 onMoreOptionsClick = {
                     moreOptionsPopVisible = !moreOptionsPopVisible
                 }
-            ) {
-                for (i in 0..<bottomButtonCount) {
-                    bottomMenuButtonList[i]()
-                }
-            }
+            )
         }
     ) { contentPadding ->
         Box(
@@ -663,7 +658,7 @@ private fun BottomOptionsBar(
     totalOptionsCount: Int,
     onVisibleOptionCountChanged: (visibleCount: Int, hasMoreOptions: Boolean) -> Unit,
     onMoreOptionsClick: () -> Unit,
-    options: @Composable RowScope.() -> Unit,
+    options: List<@Composable () -> Unit>,
 ) {
     BottomAppBar(
         modifier = modifier,
@@ -676,36 +671,62 @@ private fun BottomOptionsBar(
                 onVisibleOptionCountChanged(iconButtonCount, iconButtonCount < totalOptionsCount)
             }
 
-            val density = LocalDensity.current
-            val componentSize = LocalMinimumInteractiveComponentSize.current
-            Row(
-                modifier = Modifier
-                    .weight(1f)
-                    .onSizeChanged {
-                        val groupWidth = with(density) { it.width.toDp() }
-                        val count = (groupWidth / componentSize).toInt()
-                        if (count < totalOptionsCount) {
-                            // Add 'more options' button
-                            iconButtonCount = count - 1
-                            moreOptionsVisible = true
-                        } else {
-                            // Show all options
-                            iconButtonCount = totalOptionsCount
-                            moreOptionsVisible = false
-                        }
-                    }
-            ) {
-                options()
-
-                // more options button
-                if (moreOptionsVisible) {
-                    Spacer(modifier = Modifier.weight(1f))
-
+            SubcomposeLayout(modifier = Modifier.weight(1f)) { constraints ->
+                // Measure the actual width of every option and the 'more' button,
+                // then greedily place as many options as fit in the available width.
+                // The incoming constraints may enforce a minimum width (from the
+                // parent's weight/fill), which would stretch each button; measure
+                // children with an unconstrained width to get their real size.
+                val measureConstraints = constraints.copy(minWidth = 0)
+                val optionPlaceables = options.mapIndexed { index, content ->
+                    subcompose("option$index", content)[0].measure(measureConstraints)
+                }
+                val morePlaceable = subcompose("moreButton") {
                     FilledTonalIconButton(onClick = onMoreOptionsClick) {
                         Icon(
                             imageVector = Icons.Rounded.MoreVert,
                             contentDescription = stringResource(AppCompatR.string.abc_action_menu_overflow_description)
                         )
+                    }
+                }[0].measure(measureConstraints)
+
+                val availableWidth = constraints.maxWidth
+
+                fun fitCount(reserveMoreWidth: Int): Int {
+                    var used = reserveMoreWidth
+                    var count = 0
+                    while (count < optionPlaceables.size) {
+                        val w = optionPlaceables[count].width
+                        if (used + w > availableWidth) break
+                        used += w
+                        count++
+                    }
+                    return count
+                }
+
+                // First try to fit every option without the 'more' button; if not
+                // all fit, reserve space for the 'more' button and recompute.
+                val allFit = fitCount(0) == optionPlaceables.size
+                val count = if (allFit) optionPlaceables.size else fitCount(morePlaceable.width)
+                val showMore = count < optionPlaceables.size
+
+                iconButtonCount = count
+                moreOptionsVisible = showMore
+
+                val height = (
+                    (0 until count).map { optionPlaceables[it].height } +
+                        if (showMore) listOf(morePlaceable.height) else emptyList()
+                    ).maxOrNull() ?: 0
+
+                layout(availableWidth, height) {
+                    var x = 0
+                    for (i in 0 until count) {
+                        val p = optionPlaceables[i]
+                        p.placeRelative(x, 0)
+                        x += p.width
+                    }
+                    if (showMore) {
+                        morePlaceable.placeRelative(availableWidth - morePlaceable.width, 0)
                     }
                 }
             }
