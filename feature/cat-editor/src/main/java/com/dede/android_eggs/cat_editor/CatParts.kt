@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.PathBuilder
 import androidx.compose.ui.graphics.vector.toPath
 import com.dede.android_eggs.cat_editor.Utilities.getRegion
+import com.dede.android_eggs.cat_editor.Utilities.toSvgPathData
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.basic.trimZeroAndDot
 import android.graphics.Canvas as AndroidCanvas
@@ -34,36 +35,6 @@ internal object CatParts {
         const val FORMAT_PATH = "<path id='%s' d='%s' fill='%s' />"
         const val FORMAT_PATH_STROKE =
             "<path id='%s' d='%s' stroke-width='%s' stroke='%s' stroke-linecap='round' fill='none' />"
-
-        const val HEAD = "M9,18.5c0,-8.3 6.8,-15 15,-15s15,6.7 15,15H9z"
-        const val LEG1 = "M9,37h5v6h-5z"
-        const val LEG2 = "M16,37h5v6h-5z"
-        const val LEG3 = "M27,37h5v6h-5z"
-        const val LEG4 = "M34,37h5v6h-5z"
-        const val TAIL = "M35,35.5h5.9c2.1,0 3.8,-1.7 3.8,-3.8v-6.2"
-        const val LEFT_EAR = "M15.4,1l5.1000004,5.3l-6.3,2.8000002z"
-        const val RIGHT_EAR = "M32.6,1l-5.0999985,5.3l6.299999,2.8000002z"
-        const val RIGHT_EAR_INSIDE = "M33.8,9.1l-4.7,-1.9l3.5,-6.2z"
-        const val LEFT_EAR_INSIDE = "M15.4,1l3.5,6.2l-4.7,1.9z"
-        const val FACE_SPOT = "M19.5,15.2a4.5,3.2 0,1 0,9 0a4.5,3.2 0,1 0,-9 0z"
-        const val CAP =
-            "M27.2,3.8c-1,-0.2 -2.1,-0.3 -3.2,-0.3s-2.1,0.1 -3.2,0.3c0.2,1.3 1.5,2.2 3.2,2.2C25.6,6.1 26.9,5.1 27.2,3.8z"
-        const val MOUTH =
-            "M29,14.3c-0.4,0.8 -1.3,1.4 -2.3,1.4c-1.4,0 -2.7,-1.3 -2.7,-2.7 M24,13c0,1.5 -1.2,2.7 -2.7,2.7c-1,0 -1.9,-0.5 -2.3,-1.4"
-        const val FOOT4 = "M36.5,43m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0"
-        const val FOOT3 = "M29.5,43m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0"
-        const val FOOT1 = "M11.5,43m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0"
-        const val FOOT2 = "M18.5,43m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0"
-        const val LEG2_SHADOW = "M16,37h5v3h-5z"
-        const val TAIL_SHADOW = "M40,38l0,-5l-1,0l0,5z"
-        const val TAIL_CAP = "M42.2,25.5c0,-1.4 1.1,-2.5 2.5,-2.5s2.5,1.1 2.5,2.5H42.2z"
-        const val BELLY = "M20.5,25c-3.6,0 -6.5,2.9 -6.5,6.5V38h13v-6.5C27,27.9 24.1,25 20.5,25z"
-        const val BODY = "M9,20h30v18h-30z"
-        const val RIGHT_EYE = "M30.5,11c0,1.7 -3,1.7 -3,0C27.5,9.3 30.5,9.3 30.5,11z"
-        const val LEFT_EYE = "M20.5,11c0,1.7 -3,1.7 -3,0C17.5,9.3 20.5,9.3 20.5,11z"
-        const val NOSE = "M25.2,13c0,1.3 -2.3,1.3 -2.3,0S25.2,11.7 25.2,13z"
-        const val COLLAR = "M9,18.4h30v1.7h-30z"
-        const val BOWTIE = "M29,16.8l-10,5l0,-5l10,5z"
     }
 
     private val head = vectorPath {
@@ -374,32 +345,33 @@ internal object CatParts {
         }
 
     val drawOrders = arrayOf(
-        ClosedPD(collar, SvgParts.COLLAR, "collar"),
-        ClosedPD(leftEar, SvgParts.LEFT_EAR, "left_ear"),
-        ClosedPD(leftEarInside, SvgParts.LEFT_EAR_INSIDE, "left_ear_inside"),
-        ClosedPD(rightEar, SvgParts.RIGHT_EAR, "right_ear"),
-        ClosedPD(rightEarInside, SvgParts.RIGHT_EAR_INSIDE, "right_ear_inside"),
-        ClosedPD(head, SvgParts.HEAD, "head"),
-        ClosedPD(faceSpot, SvgParts.FACE_SPOT, "face_spot"),
-        ClosedPD(cap, SvgParts.CAP, "cap"),
-        ClosedPD(leftEye, SvgParts.LEFT_EYE, "left_eye"),
-        ClosedPD(rightEye, SvgParts.RIGHT_EYE, "right_eye"),
-        RoundStrokePD(mouth, SvgParts.MOUTH, MOUTH_STROKE_WIDTH, "mouth"),
-        ClosedPD(nose, SvgParts.NOSE, "nose"),
-        RoundStrokePD(tail, SvgParts.TAIL, TAIL_STROKE_WIDTH, "tail"),
-        ClosedPD(tailCap, SvgParts.TAIL_CAP, "tail_cap"),
-        ClosedPD(tailShadow, SvgParts.TAIL_SHADOW, "tail_shadow", false),
-        ClosedPD(foot1, SvgParts.FOOT1, "foot1"),
-        ClosedPD(leg1, SvgParts.LEG1, "leg1"),
-        ClosedPD(foot2, SvgParts.FOOT2, "foot2"),
-        ClosedPD(leg2, SvgParts.LEG2, "leg2"),
-        ClosedPD(foot3, SvgParts.FOOT3, "foot3"),
-        ClosedPD(leg3, SvgParts.LEG3, "leg3"),
-        ClosedPD(foot4, SvgParts.FOOT4, "foot4"),
-        ClosedPD(leg4, SvgParts.LEG4, "leg4"),
-        ClosedPD(leg2Shadow, SvgParts.LEG2_SHADOW, "leg2_shadow", false),
-        ClosedPD(body, SvgParts.BODY, "body"), ClosedPD(belly, SvgParts.BELLY, "belly"),
-        ClosedPD(bowtie, SvgParts.BOWTIE, "bowtie"),
+        ClosedPD(collar, "collar"),
+        ClosedPD(leftEar, "left_ear"),
+        ClosedPD(leftEarInside, "left_ear_inside"),
+        ClosedPD(rightEar, "right_ear"),
+        ClosedPD(rightEarInside, "right_ear_inside"),
+        ClosedPD(head, "head"),
+        ClosedPD(faceSpot, "face_spot"),
+        ClosedPD(cap, "cap"),
+        ClosedPD(leftEye, "left_eye"),
+        ClosedPD(rightEye, "right_eye"),
+        RoundStrokePD(mouth, MOUTH_STROKE_WIDTH, "mouth"),
+        ClosedPD(nose, "nose"),
+        RoundStrokePD(tail, TAIL_STROKE_WIDTH, "tail"),
+        ClosedPD(tailCap, "tail_cap"),
+        ClosedPD(tailShadow, "tail_shadow", false),
+        ClosedPD(foot1, "foot1"),
+        ClosedPD(leg1, "leg1"),
+        ClosedPD(foot2, "foot2"),
+        ClosedPD(leg2, "leg2"),
+        ClosedPD(foot3, "foot3"),
+        ClosedPD(leg3, "leg3"),
+        ClosedPD(foot4, "foot4"),
+        ClosedPD(leg4, "leg4"),
+        ClosedPD(leg2Shadow, "leg2_shadow", false),
+        ClosedPD(body, "body"),
+        ClosedPD(belly, "belly"),
+        ClosedPD(bowtie, "bowtie"),
     )
 
     fun toSvg(colors: List<Color>, isMirrorMode: Boolean, size: Int = 512): String {
@@ -412,10 +384,9 @@ internal object CatParts {
 
     private class RoundStrokePD(
         path: Path,
-        pathData: String,
         val strokeWidth: Float,
         name: String,
-    ) : PathDraw(path, pathData, name) {
+    ) : PathDraw(path, name) {
         override fun DrawScope.draw(color: Color) {
             drawPath(path, color, style = Stroke(width = strokeWidth, cap = StrokeCap.Round))
         }
@@ -429,7 +400,7 @@ internal object CatParts {
 
         override fun toSvgNode(color: Color): String {
             return SvgParts.FORMAT_PATH_STROKE.format(
-                name, pathData, strokeWidth.toString().trimZeroAndDot(),
+                name, path.toSvgPathData(), strokeWidth.toString().trimZeroAndDot(),
                 ColorPickerUtilities.getHexColor(color, color.alpha < 1f)
             )
         }
@@ -437,10 +408,9 @@ internal object CatParts {
 
     private class ClosedPD(
         path: Path,
-        pathData: String,
         name: String,
         touchable: Boolean = true,
-    ) : PathDraw(path, pathData, name, touchable) {
+    ) : PathDraw(path, name, touchable) {
         override fun DrawScope.draw(color: Color) {
             drawPath(path, color, style = Fill)
         }
@@ -452,7 +422,7 @@ internal object CatParts {
 
         override fun toSvgNode(color: Color): String {
             return SvgParts.FORMAT_PATH.format(
-                name, pathData,
+                name, path.toSvgPathData(),
                 ColorPickerUtilities.getHexColor(color, color.alpha < 1f)
             )
         }
@@ -460,9 +430,8 @@ internal object CatParts {
 
     abstract class PathDraw(
         val path: Path,
-        val pathData: String,
         val name: String,
-        val touchable: Boolean = true
+        val touchable: Boolean = true,
     ) {
 
         val drawLambda: DrawScope.(color: Color) -> Unit = { draw(it) }

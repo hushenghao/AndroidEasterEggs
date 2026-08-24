@@ -10,6 +10,7 @@ import android.util.Log
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Matrix
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathSegment
 import androidx.compose.ui.graphics.asAndroidPath
 import androidx.compose.ui.graphics.toAndroidRectF
 import androidx.core.graphics.applyCanvas
@@ -76,6 +77,100 @@ internal object Utilities {
     fun isPointInRegion(point: Offset, pointMatrix: Matrix, region: Region): Boolean {
         val p = pointMatrix.map(point)
         return region.contains(p.x.roundToInt(), p.y.roundToInt())
+    }
+
+    /**
+     * Converts a Compose [Path] to an SVG path data string (the `d` attribute of a `<path>` element).
+     *
+     * This reverses the transformation done by [vectorPath] / [PathBuilder.toPath]:
+     * the [Path]'s internal segment list (flattening arcs to cubics via [Path.iterator])
+     * is serialized back to SVG command strings.
+     *
+     * Note: elliptical arcs are approximated as cubic beziers during [Path] construction,
+     * so the output uses `C` commands rather than `A` commands. The visual result is identical.
+     */
+    fun Path.toSvgPathData(): String {
+        val sb = StringBuilder()
+        for (segment in this) {
+            when (segment.type) {
+                PathSegment.Type.Move -> {
+                    sb.append('M')
+                    appendFloat(sb, segment.points[0])
+                    sb.append(',')
+                    appendFloat(sb, segment.points[1])
+                }
+                PathSegment.Type.Line -> {
+                    sb.append('L')
+                    appendFloat(sb, segment.points[2])
+                    sb.append(',')
+                    appendFloat(sb, segment.points[3])
+                }
+                PathSegment.Type.Quadratic -> {
+                    sb.append('Q')
+                    appendFloat(sb, segment.points[2])
+                    sb.append(',')
+                    appendFloat(sb, segment.points[3])
+                    sb.append(' ')
+                    appendFloat(sb, segment.points[4])
+                    sb.append(',')
+                    appendFloat(sb, segment.points[5])
+                }
+                PathSegment.Type.Conic -> {
+                    // Conic (quadratic with weight) — approximate as Q for SVG compatibility
+                    // Weight is at segment.weight; SVG arc doesn't support conic weight directly
+                    sb.append('Q')
+                    appendFloat(sb, segment.points[2])
+                    sb.append(',')
+                    appendFloat(sb, segment.points[3])
+                    sb.append(' ')
+                    appendFloat(sb, segment.points[4])
+                    sb.append(',')
+                    appendFloat(sb, segment.points[5])
+                }
+                PathSegment.Type.Cubic -> {
+                    sb.append('C')
+                    appendFloat(sb, segment.points[2])
+                    sb.append(',')
+                    appendFloat(sb, segment.points[3])
+                    sb.append(' ')
+                    appendFloat(sb, segment.points[4])
+                    sb.append(',')
+                    appendFloat(sb, segment.points[5])
+                    sb.append(' ')
+                    appendFloat(sb, segment.points[6])
+                    sb.append(',')
+                    appendFloat(sb, segment.points[7])
+                }
+                PathSegment.Type.Close -> sb.append('z')
+                PathSegment.Type.Done -> {} // end of iteration, ignore
+            }
+        }
+        return sb.toString()
+    }
+
+    /**
+     * Appends a float value to [sb] in SVG-path-friendly format:
+     * 1. Rounds to at most 3 decimal places (SVG path precision is well within this)
+     * 2. Removes trailing `.0` for whole numbers (e.g. `15.0` → `15`)
+     * 3. Removes unnecessary trailing zeros after the decimal point (e.g. `6.700` → `6.7`)
+     */
+    private fun appendFloat(sb: StringBuilder, value: Float) {
+        // Round to 3 decimal places: multiply, truncate, divide back
+        val rounded = (value * 1000f).toInt() / 1000f
+        val s = rounded.toString()
+        val len = s.length
+        val last = len - 1
+        // Remove trailing '.0'
+        if (last >= 2 && s[last] == '0' && s[last - 1] == '.') {
+            sb.append(s, 0, last - 1)
+            return
+        }
+        // Remove unnecessary trailing zeros after the decimal point
+        var i = last
+        while (i > 0 && s[i] == '0' && s[i - 1] != '.') {
+            i--
+        }
+        sb.append(s, 0, i + 1)
     }
 
     /**
