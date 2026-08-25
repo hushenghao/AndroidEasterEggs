@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -53,14 +51,16 @@ import com.dede.android_eggs.resources.R as StringsR
 
 @Preview(widthDp = 320)
 @Composable
-fun SettingsScreen(drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed)) {
+fun SettingsScreen(drawerState: DrawerState? = null) {
     val scope = rememberCoroutineScope()
     val windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout)
     HazeScaffold(
         title = stringResource(StringsR.string.label_settings),
-        onBackClick = {
-            scope.launch {
-                drawerState.close()
+        onBackClick = drawerState?.let { state ->
+            {
+                scope.launch {
+                    state.close()
+                }
             }
         },
         contentWindowInsets = windowInsets

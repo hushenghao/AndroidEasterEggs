@@ -32,6 +32,7 @@ fun MainTitleBar(
     modifier: Modifier = Modifier,
     searchBarState: BottomSearchBarState = rememberBottomSearchBarState(),
     drawerState: DrawerState? = null,
+    showSettingsAction: Boolean = true,
 ) {
     val scope = rememberCoroutineScope()
     HazeAppBar(
@@ -58,7 +59,7 @@ fun MainTitleBar(
         actions = {
             val drawerOpen = drawerState?.currentValue == DrawerValue.Open
             AnimatedVisibility(
-                visible = !drawerOpen,
+                visible = showSettingsAction && !drawerOpen,
                 enter = fadeIn() + scaleIn(),
                 exit = fadeOut() + scaleOut(),
             ) {

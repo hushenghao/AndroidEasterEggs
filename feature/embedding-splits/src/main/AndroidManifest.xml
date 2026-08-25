@@ -6,7 +6,7 @@
 
         <property
             android:name="android.window.PROPERTY_ACTIVITY_EMBEDDING_SPLITS_ENABLED"
-            android:value="true" />
+            android:value="false" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"
