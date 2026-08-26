@@ -64,7 +64,6 @@ fun EasterEggHighestItem(
         colors = CardDefaults.cardColors(containerColor = colorScheme.surfaceColorAtElevation(2.dp)),
         shape = shapes.extraLarge,
         modifier = Modifier
-            .padding(horizontal = 12.dp)
             .fillMaxWidth(),
         onClick = {
             EggActionHelp.launchEgg(context, egg)
@@ -96,8 +95,7 @@ fun EasterEggSimpleItem(
         colors = CardDefaults.cardColors(containerColor = colorScheme.surfaceColorAtElevation(2.dp)),
         shape = shapes.extraLarge,
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 12.dp),
+            .fillMaxWidth(),
         onClick = {
             EggActionHelp.launchEgg(context, egg)
         },

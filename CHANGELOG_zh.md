@@ -2,6 +2,7 @@
 
 ### v5.4.1
 
+- 大屏下列表双列展示
 - 首页设置抽屉大屏适配
 - Cat Editor 添加打印功能
 - 修复 Cat Editor 收藏记录崩溃问题 [#688](https://github.com/hushenghao/AndroidEasterEggs/issues/688)
