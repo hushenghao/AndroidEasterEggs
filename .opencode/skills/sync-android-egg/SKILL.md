@@ -87,6 +87,8 @@ contain new features or logic changes. Follow this process:
 
 3. Confirm the branch exists on
    `https://android.googlesource.com/platform/frameworks/base/+/refs/heads/<branch>/`
+   If googlesource.com is unreachable or asks for login, see
+   [Fallback: source access](#fallback-source-access-when-googlesourcecom-fails).
 
 4. **Scan upstream for new content**: Fetch the upstream `EasterEgg/AndroidManifest.xml`
    and `EasterEgg/src/com/android/egg/` directory listing. Identify any new
@@ -235,11 +237,24 @@ Copy from the most recent existing egg (e.g. `eggs/Baklava`) and adapt:
    ic_spacecraft, ic_spacecraft_filled, ic_spacecraft_rotated
    ```
 
-3. Create `res/values/landroid_strings.xml` from the most recent egg,
-   renaming all `baklava_` prefixes (or equivalent) to `<prefix>_`.
+3. **Fetch the upstream `landroid_strings.xml` from the target branch** (do NOT
+   copy it from an existing egg module) and add the resource prefix:
+   ```sh
+   curl -sL "https://android.googlesource.com/platform/frameworks/base/+/<BRANCH>/packages/EasterEgg/res/values/landroid_strings.xml?format=TEXT" \
+     | base64 -d \
+     | sed "s/name=\"/name=\"<prefix>_/g" \
+     > res/values/landroid_strings.xml
+   ```
 
-   **IMPORTANT**: Remove any duplicate string (e.g. `<prefix>_egg_name`) that
-   already exists in `res/values/strings.xml`.
+   **Why not copy from the previous egg**: upstream expands this word pool in
+   every release cycle (new descriptors, constellations, planet names).
+   Copying from an older egg silently drops those entries — this happened with
+   CinnamonBun, which missed upstream commit `4f583d60b6f9` ("IMPROVEMENTS TO
+   SHIP SENSORS", ~28 entries) because its strings were copied from Baklava.
+
+   **IMPORTANT**: Remove any duplicate string (e.g. `<prefix>_egg_name`,
+   historical `u_egg_name`/`v_egg_name` leftovers) that already exists in
+   `res/values/strings.xml`.
 
 4. Create `res/values/themes.xml` with `<prefix>_Theme.Landroid` style.
 
@@ -481,3 +496,48 @@ listing and the previous egg module to determine the correct set of files to syn
 | landroid resources | `platform/frameworks/base/+/<BRANCH>/packages/EasterEgg/res/` |
 
 Use `curl` with proxy to fetch files in `base64` format, then decode with `base64 -d`.
+
+---
+
+## Fallback: source access when googlesource.com fails
+
+The `?format=TEXT` file endpoint used throughout this skill requires no login.
+The only authenticated part of android.googlesource.com is the web history UI
+(`/+log/...` returns `403 Forbidden`). Pick a fallback by what you need:
+
+### Browse code or history manually (human-readable, no login)
+
+Use Android Code Search:
+
+```
+https://cs.android.com/android/platform/superproject/main/frameworks/base/packages/EasterEgg
+```
+
+Open this in a browser and switch the branch selector (top bar) to the target
+release branch. Note that cs.android.com is a JavaScript app — it renders
+nothing for `curl`, so it can never replace the scripted `?format=TEXT`
+fetches in this skill.
+
+### Fetch commit history programmatically
+
+Partial-clone over the git protocol (no login required) and read history
+locally — verified working for `refs/heads/android17-release`:
+
+```sh
+mkdir fb && cd fb && git init -q
+git remote add origin https://android.googlesource.com/platform/frameworks/base
+git config extensions.partialClone origin
+git fetch --depth=300 --filter=blob:none origin refs/heads/<BRANCH>
+git log --oneline FETCH_HEAD -- packages/EasterEgg/
+git show <commit> --stat          # blobs are fetched on demand
+git show <commit> -- <path>       # full diff of one file
+```
+
+### Raw-file mirror for older eggs (works up to android16-release)
+
+The official GitHub mirror serves raw files directly, but its branches lag
+behind AOSP — do not rely on it for the newest egg:
+
+```sh
+curl -sL "https://raw.githubusercontent.com/aosp-mirror/platform_frameworks_base/<BRANCH>/<PATH>"
+```

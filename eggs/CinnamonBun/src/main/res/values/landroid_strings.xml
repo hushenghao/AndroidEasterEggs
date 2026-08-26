@@ -39,6 +39,7 @@
         <item>metallic</item>
         <item>burned-out</item>
         <item>bucolic</item>
+        <item>polyhedral</item>
     </string-array>
 
     <string-array name="cinnamon_bun_life_descriptors" translatable="false">
@@ -91,6 +92,7 @@
         <item>oblivious</item>
         <item>passive</item>
         <item>bonsai</item>
+        <item>enormous</item>
     </string-array>
 
     <string-array name="cinnamon_bun_any_descriptors" translatable="false">
@@ -170,6 +172,16 @@
         <item>overengineered</item>
         <item>bioengineered</item>
         <item>impossible</item>
+        <item>commercial</item>
+        <item>cooked</item>
+        <item>pumpkin-spiced</item>
+        <item>salted</item>
+        <item>minty</item>
+        <item>textured</item>
+        <item>shaded</item>
+        <item>dithered</item>
+        <item>unsequenced</item>
+        <item>super-effective</item>
     </string-array>
 
     <string-array name="cinnamon_bun_constellations" translatable="false">
@@ -190,7 +202,6 @@
         <item>Draco</item>
         <item>Alcor</item>
         <item>Calamari</item>
-        <item>Cuckoo</item>
         <item>Neko</item>
         <item>Monoceros</item>
         <item>Norma</item>
@@ -221,6 +232,9 @@
         <item>Binder</item>
         <item>Campanile</item>
         <item>Dread</item>
+        <item>Eridani</item>
+        <item>Baklava</item>
+        <item>Cinnamonbun</item>
     </string-array>
 
     <!-- prob: 5% -->
@@ -232,7 +246,7 @@
         <item>Flan</item>
         <item>Untitled-1</item>
         <item>Expedit</item>
-        <item>Petit Four</item>
+        <item>Petitfour</item>
         <item>Worcester</item>
         <item>Xylophone</item>
         <item>Yellowpeep</item>
@@ -242,8 +256,11 @@
         <item>Frogblast</item>
         <item>Exo</item>
         <item>Keylimepie</item>
-        <item>Nat</item>
+        <item>Nov</item>
         <item>Nrp</item>
+        <item>Waffle</item>
+        <item>Helloworld</item>
+        <item>Cuckoo</item>
     </string-array>
 
     <!-- prob: 75% -->
@@ -356,6 +373,7 @@
         <item>skunky</item>
         <item>breezy</item>
         <item>soup</item>
+        <item>glitter</item>
     </string-array>
 
     <string-array name="cinnamon_bun_fauna_generic_plurals" translatable="false">
@@ -368,6 +386,7 @@
         <item>specimens</item>
         <item>life</item>
         <item>cells</item>
+        <item>agents</item>
     </string-array>
 
     <string-array name="cinnamon_bun_flora_generic_plurals" translatable="false">
@@ -379,6 +398,10 @@
         <item>specimens</item>
         <item>life</item>
         <item>cells</item>
+        <item>spores</item>
+        <item>fungi</item>
+        <item>nuts</item>
+        <item>algae</item>
     </string-array>
 
     <string-array name="cinnamon_bun_atmo_generic_plurals" translatable="false">
@@ -413,6 +436,14 @@
         <item>breathing {atmo}</item>
         <item>reprocessing {atmo}</item>
         <item>bottling {atmo}</item>
+        <item>dithering</item>
+        <item>petting {fauna}</item>
+        <item>petting {flora}</item>
+        <item>grafting {flora}</item>
+        <item>healing</item>
+        <item>rehearsing</item>
+        <item>vibing</item>
+        <item>[REDACTED]</item>
     </string-array>
 
 </resources>

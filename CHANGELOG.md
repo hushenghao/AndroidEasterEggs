@@ -6,6 +6,7 @@
 - Add print support to the Cat Editor
 - Fix the Cat Editor's favorite records crash issue [#688](https://github.com/hushenghao/AndroidEasterEggs/issues/688)
 - Add haze blur effect to the group selector dropdown menu
+- Sync Android 17 Landroid word pool with upstream AOSP
 - Code cleanup and refactoring
 
 ### v5.4.0 (2026-08-04)
