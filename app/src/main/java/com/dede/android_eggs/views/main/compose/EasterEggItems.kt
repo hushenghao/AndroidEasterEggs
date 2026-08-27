@@ -216,8 +216,7 @@ private fun EasterEggItemContent(
             FlowRow(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(horizontal = 18.dp)
-                    .padding(top = 12.dp, bottom = 18.dp),
+                    .padding(start = 18.dp, end = 0.dp, top = 12.dp, bottom = 18.dp),
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {

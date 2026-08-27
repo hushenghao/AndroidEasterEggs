@@ -2,7 +2,6 @@ package com.dede.android_eggs.views.main.compose
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,12 +14,14 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.WindowWidthPane
 import com.dede.android_eggs.composable.currentWindowWidthPane
+import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.android_eggs.util.compose.plus
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.basic.provider.BaseEasterEgg
@@ -29,6 +30,32 @@ import com.dede.basic.provider.EasterEggGroup
 
 
 private const val HIGHEST_COUNT = 1
+
+/**
+ * The content type of the egg list, drives the Crossfade between the browsing
+ * layouts and the search result/empty states.
+ */
+private enum class EasterEggListType {
+    /** Single-column browsing list on compact windows. */
+    COLUMN_LIST,
+
+    /** Two-column browsing grid on medium and expanded windows. */
+    GRID,
+
+    /** Non-empty search results. */
+    SEARCH_RESULT,
+
+    /** Nothing matches the search text. */
+    SEARCH_EMPTY,
+}
+
+private fun <T> List<T>.highest(count: Int): Pair<List<T>, List<T>> {
+    if (size <= count) return this to emptyList()
+
+    val highestList = subList(0, count)
+    val normalList = subList(count, size)
+    return highestList to normalList
+}
 
 internal fun BaseEasterEgg.lazyItemKey(): String {
     return when (this) {
@@ -40,9 +67,9 @@ internal fun BaseEasterEgg.lazyItemKey(): String {
 
 /**
  * The egg list entry: the searched results, or the browsing list grouped by the highest
- * egg, wavy dividers and the footer. The browsing list is a two-column staggered grid on
- * medium and expanded window widths, single column with the 560.dp centered limit on
- * compact widths.
+ * egg, wavy dividers and the footer. The browsing list is a two-column grid on
+ * medium and expanded window widths, single column on compact widths. A single
+ * Crossfade switches between the browsing layouts and the search result/empty states.
  */
 @Composable
 @Preview(showBackground = true)
@@ -52,37 +79,50 @@ fun EasterEggList(
     searchText: String = "",
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
+    val context = LocalContext.current
+    val pureEasterEggs = remember(easterEggs) {
+        EasterEggModules.providePureEasterEggList(easterEggs)
+    }
+    val searchResults = remember(searchText, pureEasterEggs) {
+        filterEasterEggs(context, pureEasterEggs, searchText)
+    }
+    val type = when {
+        searchText.isNotBlank() -> {
+            if (searchResults.isEmpty()) EasterEggListType.SEARCH_EMPTY else EasterEggListType.SEARCH_RESULT
+        }
+        currentWindowWidthPane() != WindowWidthPane.COMPACT -> EasterEggListType.GRID
+        else -> EasterEggListType.COLUMN_LIST
+    }
+
     val listContentPadding = contentPadding +
             PaddingValues(vertical = 10.dp, horizontal = 12.dp)
-    Box(
+    Crossfade(
         modifier = Modifier
             .then(modifier)
             .fillMaxSize(),
-        contentAlignment = Alignment.TopCenter,
-    ) {
-        Crossfade(
-            targetState = searchText.isNotBlank(),
-            label = "EasterEggList",
-        ) { isSearchMode ->
-            if (isSearchMode) {
-                EasterEggSearchList(
+        targetState = type,
+        label = "EasterEggList",
+    ) { currentType ->
+        when (currentType) {
+            EasterEggListType.COLUMN_LIST -> {
+                EasterEggColumnList(
                     easterEggs = easterEggs,
-                    searchText = searchText,
                     contentPadding = listContentPadding,
                 )
-            } else {
-                if (currentWindowWidthPane() != WindowWidthPane.COMPACT) {
-                    EasterEggGrid(
-                        easterEggs = easterEggs,
-                        contentPadding = listContentPadding,
-                    )
-                } else {
-                    EasterEggColumnList(
-                        easterEggs = easterEggs,
-                        contentPadding = listContentPadding,
-                    )
-                }
             }
+            EasterEggListType.GRID -> {
+                EasterEggGrid(
+                    easterEggs = easterEggs,
+                    contentPadding = listContentPadding,
+                )
+            }
+            EasterEggListType.SEARCH_RESULT -> {
+                EasterEggSearchList(
+                    easterEggs = searchResults,
+                    contentPadding = listContentPadding,
+                )
+            }
+            EasterEggListType.SEARCH_EMPTY -> SearchEmpty(contentPadding)
         }
     }
 }
@@ -94,12 +134,10 @@ private fun EasterEggColumnList(
     contentPadding: PaddingValues,
 ) {
     LazyColumn(
-        modifier = Modifier.sizeIn(maxWidth = 560.dp),
         contentPadding = contentPadding,
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        val highestList = easterEggs.subList(0, HIGHEST_COUNT)
-        val normalList = easterEggs.subList(HIGHEST_COUNT, easterEggs.size)
+        val (highestList, normalList) = easterEggs.highest(HIGHEST_COUNT)
         items(
             items = highestList,
             key = BaseEasterEgg::lazyItemKey,
@@ -107,11 +145,7 @@ private fun EasterEggColumnList(
             EasterEggHighestItem(it)
         }
         item("wavy1") {
-            Wavy(
-                modifier = Modifier
-                    .fillMaxWidth(0.4f)
-                    .padding(vertical = 26.dp),
-            )
+            ItemWavy()
         }
         items(
             items = normalList,
@@ -120,11 +154,7 @@ private fun EasterEggColumnList(
             EasterEggSimpleItem(base = it)
         }
         item("wavy2") {
-            Wavy(
-                modifier = Modifier
-                    .fillMaxWidth(0.4f)
-                    .padding(vertical = 26.dp),
-            )
+            ItemWavy()
         }
         item("footer") {
             ProjectDescription()
@@ -144,8 +174,7 @@ private fun EasterEggGrid(
         verticalItemSpacing = 12.dp,
         modifier = Modifier.fillMaxSize(),
     ) {
-        val highestList = easterEggs.subList(0, HIGHEST_COUNT)
-        val normalList = easterEggs.subList(HIGHEST_COUNT, easterEggs.size)
+        val (highestList, normalList) = easterEggs.highest(HIGHEST_COUNT)
         items(
             items = highestList,
             key = BaseEasterEgg::lazyItemKey,
@@ -159,14 +188,20 @@ private fun EasterEggGrid(
             EasterEggSimpleItem(base = it)
         }
         item("wavy2", span = StaggeredGridItemSpan.FullLine) {
-            Wavy(
-                modifier = Modifier
-                    .fillMaxWidth(0.4f)
-                    .padding(vertical = 26.dp),
-            )
+            ItemWavy()
         }
         item("footer", span = StaggeredGridItemSpan.FullLine) {
             ProjectDescription()
         }
     }
+}
+
+@Composable
+private fun ItemWavy() {
+    Wavy(
+        modifier = Modifier
+            .sizeIn(maxWidth = 420.dp)
+            .fillMaxWidth(0.4f)
+            .padding(vertical = 26.dp),
+    )
 }
