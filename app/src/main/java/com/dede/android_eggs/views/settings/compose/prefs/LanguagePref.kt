@@ -13,12 +13,11 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
@@ -52,7 +51,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -378,15 +376,10 @@ private fun LanguageSelectedBottomSheet(
         sheetGesturesEnabled = sheetGesturesEnabled,
     ) {
         val paddingValues = WindowInsets.safeDrawing.asPaddingValues()
-        val layoutDirection = LocalLayoutDirection.current
         LazyColumn(
             state = lazyListState,
-            modifier = Modifier
-                .padding(
-                    start = paddingValues.calculateStartPadding(layoutDirection) + 14.dp,
-                    end = paddingValues.calculateEndPadding(layoutDirection) + 14.dp,
-                    bottom = paddingValues.calculateBottomPadding(),
-                )
+            modifier = Modifier.padding(horizontal = 14.dp),
+            contentPadding = PaddingValues(bottom = paddingValues.calculateBottomPadding())
         ) {
             item {
                 LanguageItem(
