@@ -10,6 +10,7 @@ dependencies {
     implementation(project(":core:theme"))
     implementation(project(":core:resources"))
     implementation(project(":core:settings"))
+    implementation(project(":core:composable"))
     implementation(project(":core:icons"))
     implementation(libs.androidx.core)
     implementation(libs.androidx.datastore)

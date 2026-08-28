@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,7 +25,6 @@ import androidx.compose.material.icons.rounded.ContentCopy
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.Shuffle
 import androidx.compose.material3.BottomSheetDefaults
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -35,9 +33,9 @@ import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
@@ -57,6 +55,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.composable.ScrollableModalBottomSheet
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
 import com.dede.basic.copy
 import kotlinx.coroutines.launch
@@ -119,11 +118,11 @@ fun ColorPickerDialog(
 
     val paddingValues = BottomSheetDefaults.modalWindowInsets.asPaddingValues()
 
-    ModalBottomSheet(
+    ScrollableModalBottomSheet(
         modifier = Modifier.sizeIn(maxWidth = 420.dp),
         sheetState = sheetState,
         onDismissRequest = onDismiss,
-        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
+        scrollState = scrollState,
     ) {
         Column(
             modifier = Modifier
@@ -277,7 +276,7 @@ fun ColorPickerDialog(
             Row(
                 modifier = Modifier.align(Alignment.End),
             ) {
-                Button(
+                TextButton(
                     onClick = {
                         scope.launch {
                             sheetState.hide()
@@ -290,7 +289,7 @@ fun ColorPickerDialog(
 
                 Spacer(modifier = Modifier.width(14.dp))
 
-                Button(
+                TextButton(
                     onClick = {
                         scope.launch {
                             sheetState.hide()

@@ -8,11 +8,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
@@ -29,13 +27,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -50,6 +43,7 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import com.dede.android_eggs.R
+import com.dede.android_eggs.composable.ScrollableModalBottomSheet
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
@@ -77,28 +71,13 @@ fun TimelineListDialog(
     if (!visible) {
         return
     }
-    val sheetState = rememberBottomSheetState(
-        initialValue = SheetValue.Hidden,
-        enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
-    )
     val paddingValues = WindowInsets.safeDrawing.asPaddingValues()
 
     val lazyListState = rememberLazyListState()
-    // https://issuetracker.google.com/issues/353304855
-    val sheetGesturesEnabled by remember {
-        // disable sheet gestures when can scroll backward
-        derivedStateOf { !lazyListState.canScrollBackward }
-    }
-    ModalBottomSheet(
-        onDismissRequest = {
-            onDismiss()
-        },
+    ScrollableModalBottomSheet(
+        onDismissRequest = onDismiss,
         scrimColor = scrimColor,
-        sheetState = sheetState,
-        contentWindowInsets = {
-            WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
-        },
-        sheetGesturesEnabled = sheetGesturesEnabled,
+        scrollState = lazyListState,
     ) {
         LazyColumn(
             state = lazyListState,

@@ -12,9 +12,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonGroupDefaults
@@ -23,7 +26,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TonalToggleButton
@@ -46,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.drawable.toDrawable
 import androidx.lifecycle.lifecycleScope
+import com.dede.android_eggs.composable.ScrollableModalBottomSheet
 import com.dede.android_eggs.views.theme.EasterEggsTheme
 import com.dede.basic.requireDrawable
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
@@ -120,6 +123,8 @@ private fun AnalogClockWidgetConfigureSheet(
         initialValue = SheetValue.Hidden,
         enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
     )
+    val scrollState = rememberScrollState()
+    val paddingValues = WindowInsets.safeDrawing.asPaddingValues()
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     var selectedAction by remember { mutableStateOf(AnalogClockWidgetClickAction.OPEN_EGG) }
@@ -139,18 +144,19 @@ private fun AnalogClockWidgetConfigureSheet(
         }
     }
 
-    ModalBottomSheet(
+    ScrollableModalBottomSheet(
         onDismissRequest = {
             closeAfterAnimation(onDismissRequest)
         },
         sheetState = sheetState,
+        scrollState = scrollState,
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scrollState)
                 .padding(horizontal = 24.dp)
-                .padding(bottom = 12.dp),
+                .padding(bottom = 12.dp + paddingValues.calculateBottomPadding()),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             Text(

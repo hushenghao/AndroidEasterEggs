@@ -9,10 +9,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
@@ -20,13 +18,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -37,6 +33,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.alterable_adaptive_icon.AlterableAdaptiveIcon
+import com.dede.android_eggs.composable.ScrollableModalBottomSheet
 import com.dede.android_eggs.navigation.OverlayContentProvider
 import com.dede.android_eggs.navigation.OverlayRoute
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
@@ -81,19 +78,12 @@ fun AndroidNextTimelineDialog(
         initialValue = SheetValue.Hidden,
         enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
     )
-    // https://issuetracker.google.com/issues/353304855
-    val sheetGesturesEnabled by remember {
-        derivedStateOf { !scrollState.canScrollBackward }
-    }
     val paddingValues = WindowInsets.safeDrawing.asPaddingValues()
 
-    ModalBottomSheet(
+    ScrollableModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
-        sheetGesturesEnabled = sheetGesturesEnabled,
-        contentWindowInsets = {
-            WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
-        },
+        scrollState = scrollState,
     ) {
         Column(
             modifier = Modifier

@@ -19,6 +19,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(project(":core:custom-tab-browser"))
+    implementation(project(":core:composable"))
     implementation(project(":core:navigation"))
     implementation(project(":core:alterable-adaptive-icon"))
     implementation(project(":core:settings"))

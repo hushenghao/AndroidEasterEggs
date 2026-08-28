@@ -16,10 +16,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
@@ -32,15 +30,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -57,6 +51,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.BuildConfig
+import com.dede.android_eggs.composable.ScrollableModalBottomSheet
 import com.dede.android_eggs.views.settings.compose.basic.SettingPref
 import com.dede.basic.createLocalesContext
 import kotlinx.coroutines.launch
@@ -358,28 +353,19 @@ private fun LanguageSelectedBottomSheet(
     onDismissRequest: () -> Unit,
     onLanguageSelected: (Int) -> Unit
 ) {
-    val sheetState = rememberBottomSheetState(
-        initialValue = SheetValue.Hidden,
-        enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
-    )
     val lazyListState = rememberLazyListState()
-    val sheetGesturesEnabled by remember {
-        // disable sheet gestures when the list can scroll backward
-        derivedStateOf { !lazyListState.canScrollBackward }
-    }
-    ModalBottomSheet(
+    ScrollableModalBottomSheet(
         onDismissRequest = onDismissRequest,
-        sheetState = sheetState,
-        contentWindowInsets = {
-            WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
-        },
-        sheetGesturesEnabled = sheetGesturesEnabled,
+        scrollState = lazyListState,
     ) {
         val paddingValues = WindowInsets.safeDrawing.asPaddingValues()
         LazyColumn(
             state = lazyListState,
-            modifier = Modifier.padding(horizontal = 14.dp),
-            contentPadding = PaddingValues(bottom = paddingValues.calculateBottomPadding())
+            contentPadding = PaddingValues(
+                start = 14.dp,
+                end = 14.dp,
+                bottom = paddingValues.calculateBottomPadding()
+            )
         ) {
             item {
                 LanguageItem(

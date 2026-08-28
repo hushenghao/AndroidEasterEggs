@@ -4,7 +4,6 @@ package com.dede.android_eggs.cat_editor
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
-import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
@@ -16,13 +15,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Clear
@@ -30,10 +33,7 @@ import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
-import androidx.compose.material3.SheetValue
-import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -49,6 +49,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.composable.ScrollableModalBottomSheet
 import com.dede.android_eggs.ui.composes.icons.rounded.Cat
 import kotlinx.coroutines.launch
 
@@ -75,22 +76,23 @@ fun CatRememberBottomSheet(
     }
     var isDeletedMode by remember { mutableStateOf(false) }
 
-    val sheetState = rememberBottomSheetState(
-        initialValue = SheetValue.Hidden,
-        enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
-    )
+    val lazyGridState = rememberLazyGridState()
+    val paddingValues = WindowInsets.safeDrawing.asPaddingValues()
 
-    ModalBottomSheet(
+    ScrollableModalBottomSheet(
         modifier = modifier,
         onDismissRequest = onDismiss,
-        sheetState = sheetState,
+        // the grid leaves the composition when empty, null keeps the sheet gestures enabled
+        scrollState = if (allCats.isEmpty()) null else lazyGridState,
     ) {
         Crossfade(targetState = allCats.isEmpty()) { isEmpty ->
             if (isEmpty) {
                 Row(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = paddingValues.calculateBottomPadding())
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.Favorite,
@@ -106,11 +108,15 @@ fun CatRememberBottomSheet(
                 }
             } else {
                 LazyVerticalGrid(
+                    state = lazyGridState,
                     columns = GridCells.Adaptive(76.dp),
-                    contentPadding = PaddingValues(start = 20.dp, end = 20.dp, bottom = 30.dp),
+                    contentPadding = PaddingValues(
+                        start = 20.dp,
+                        end = 20.dp,
+                        bottom = paddingValues.calculateBottomPadding(),
+                    ),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.animateContentSize()
                 ) {
                     items(allCats, key = { it.id }) { cat ->
                         CatItem(

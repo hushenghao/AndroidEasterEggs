@@ -1,6 +1,7 @@
 package com.dede.android_eggs.views.main.compose
 
 import androidx.compose.animation.Crossfade
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -136,6 +137,7 @@ private fun EasterEggColumnList(
     LazyColumn(
         contentPadding = contentPadding,
         verticalArrangement = Arrangement.spacedBy(12.dp),
+        modifier = Modifier.animateContentSize(),
     ) {
         val (highestList, normalList) = easterEggs.highest(HIGHEST_COUNT)
         items(
@@ -172,7 +174,7 @@ private fun EasterEggGrid(
         contentPadding = contentPadding,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalItemSpacing = 12.dp,
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().animateContentSize(),
     ) {
         val (highestList, normalList) = easterEggs.highest(HIGHEST_COUNT)
         items(
