@@ -36,4 +36,5 @@
     <locale android:name="bn-BD" />
     <locale android:name="sq" />
     <locale android:name="bg-BG" />
+    <locale android:name="fa" />
 </locale-config>

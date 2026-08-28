@@ -106,6 +106,7 @@ object LanguagePrefUtil {
     private const val BENGALI = 35              // bn-BD
     private const val ALBANIAN = 36             // sq
     private const val BULGARIAN = 37            // bg-BG
+    private const val PERSIAN = 38              // fa
 
     @Stable
     @Immutable
@@ -151,6 +152,7 @@ object LanguagePrefUtil {
         LangOp(BENGALI,             StringsR.string.locale_lang_bn_BD,  createLocale("bn","BD")),
         LangOp(ALBANIAN,            StringsR.string.locale_lang_sq,     createLocale("sq")),
         LangOp(BULGARIAN,           StringsR.string.locale_lang_bg,     createLocale("bg","BG")),
+        LangOp(PERSIAN,             StringsR.string.locale_lang_fa,     createLocale("fa")),
     )
     // @formatter:on
 
