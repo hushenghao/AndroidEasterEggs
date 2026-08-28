@@ -1,6 +1,11 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.dede.android_eggs.libraries_info
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.BottomSheetDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -8,7 +13,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import com.mikepenz.aboutlibraries.Libs
+import com.mikepenz.aboutlibraries.ui.compose.LibraryDefaults
 import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
+import com.mikepenz.aboutlibraries.ui.compose.m3.style.m3VariantColors
 import com.mikepenz.aboutlibraries.ui.compose.style.LibraryActionBadges
 import com.mikepenz.aboutlibraries.ui.compose.variant.LibraryActionKind
 import com.mikepenz.aboutlibraries.ui.compose.variant.LibraryActionMode
@@ -30,6 +37,10 @@ fun LibrariesInfoContent(
         libraries = libraries,
         modifier = modifier,
         contentPadding = contentPadding,
+        variantColors = LibraryDefaults.m3VariantColors(
+            sheetScrim = BottomSheetDefaults.ScrimColor,
+            sheetDragHandle = MaterialTheme.colorScheme.onSurfaceVariant
+        ),
         badges = LibraryBadges(
             author = true,
             description = true,
