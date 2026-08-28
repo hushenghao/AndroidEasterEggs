@@ -95,7 +95,6 @@ import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavigator
-import com.dede.android_eggs.ui.composes.icons.rounded.Cat
 import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
 import com.dede.basic.copy
 import com.dede.basic.toast
@@ -388,7 +387,7 @@ fun CatEditorScreen() {
         actions = {
             IconButton(onClick = { rememberCatsDialogVisible = true }) {
                 Icon(
-                    imageVector = Icons.Rounded.Cat,
+                    imageVector = Icons.Rounded.FavoriteBorder,
                     contentDescription = null,
                     tint = colorScheme.onSurface
                 )
