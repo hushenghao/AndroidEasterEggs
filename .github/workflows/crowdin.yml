@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Crowdin push
-        uses: crowdin/github-action@v2 # https://github.com/marketplace/actions/crowdin-action
+        uses: crowdin/github-action@v3 # https://github.com/marketplace/actions/crowdin-action
         with:
           upload_sources: true
           upload_translations: true
@@ -57,7 +57,7 @@ jobs:
           python start.py ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
       - name: Crowdin pull
-        uses: crowdin/github-action@v2
+        uses: crowdin/github-action@v3
         with:
           upload_sources: false
           upload_translations: false
