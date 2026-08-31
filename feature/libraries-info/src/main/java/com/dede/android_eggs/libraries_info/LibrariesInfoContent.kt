@@ -38,6 +38,7 @@ fun LibrariesInfoContent(
         modifier = modifier,
         contentPadding = contentPadding,
         variantColors = LibraryDefaults.m3VariantColors(
+            sheetSurface = BottomSheetDefaults.ContainerColor,
             sheetScrim = BottomSheetDefaults.ScrimColor,
             sheetDragHandle = MaterialTheme.colorScheme.onSurfaceVariant
         ),
