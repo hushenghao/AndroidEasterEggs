@@ -25,8 +25,17 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 @Throws(Resources.NotFoundException::class)
 fun Context.getSystemColor(resName: String): Int {
-    val id = getIdentifier(resName, DefType.COLOR, "android")
-    return ContextCompat.getColor(this, id)
+    // Resolve the local resource first, so the static fallbacks (values, values-night)
+    // apply on API < 31 and the values-v31 aliases forward to the system dynamic colors.
+    val id = getIdentifier(resName, DefType.COLOR)
+    if (id != 0) {
+        return ContextCompat.getColor(this, id)
+    }
+    val sysId = getIdentifier(resName, DefType.COLOR, "android")
+    if (sysId != 0) {
+        return ContextCompat.getColor(this, sysId)
+    }
+    throw Resources.NotFoundException(resName)
 }
 
 enum class DefType {
