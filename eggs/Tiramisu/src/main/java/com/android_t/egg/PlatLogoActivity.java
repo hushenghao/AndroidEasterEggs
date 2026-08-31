@@ -46,7 +46,7 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 
 import com.dede.basic.views.AnalogClock;
-import com.dede.basic.DrawableKt;
+import com.dede.basic.ResourcesUtils;
 import com.dede.basic.SpUtils;
 
 import java.io.File;
@@ -404,7 +404,7 @@ public class PlatLogoActivity extends Activity {
         BubblesDrawable() {
             try {
                 for (int i = 0; i < mColorIds.length; i++) {
-                    mColors[i] = DrawableKt.getSystemColor(PlatLogoActivity.this, mColorIds[i]);
+                    mColors[i] = ResourcesUtils.getSystemColor(PlatLogoActivity.this, mColorIds[i]);
                 }
             } catch (Exception ignore) {
             }

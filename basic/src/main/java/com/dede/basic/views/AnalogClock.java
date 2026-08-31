@@ -31,6 +31,7 @@ import androidx.annotation.NonNull;
 
 import com.dede.basic.DrawableKt;
 import com.dede.basic.R;
+import com.dede.basic.ResourcesUtils;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -110,7 +111,7 @@ public class AnalogClock extends View {
     private void setDrawableTint(Drawable drawable, String tintColor) {
         if (drawable == null) return;
         try {
-            int systemColor = DrawableKt.getSystemColor(getContext(), tintColor);
+            int systemColor = ResourcesUtils.getSystemColor(getContext(), tintColor);
             drawable.setTint(systemColor);
         } catch (Exception ignore) {
         }
