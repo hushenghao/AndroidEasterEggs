@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
@@ -27,6 +28,9 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation3.runtime.NavKey
+import androidx.navigationevent.NavigationEventInfo
+import androidx.navigationevent.compose.NavigationBackHandler
+import androidx.navigationevent.compose.rememberNavigationEventState
 import com.dede.android_eggs.composable.WindowWidthPane
 import com.dede.android_eggs.composable.appbar.HazeScaffold
 import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeAppBar
@@ -50,6 +54,7 @@ import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import dev.chrisbanes.haze.rememberHazeState
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -115,6 +120,7 @@ fun EasterEggScreen(
                             val maxWidth = LocalConfiguration.current.smallestScreenWidthDp * 0.8f
                             Box(modifier = Modifier.width(maxWidth.dp)) {
                                 SettingsScreen(drawerState)
+                                CloseDrawerOnBack(drawerState)
                             }
                         }
                     },
@@ -133,6 +139,7 @@ fun EasterEggScreen(
                             windowInsets = WindowInsets(0, 0, 0, 0),
                         ) {
                             SettingsScreen(drawerState)
+                            CloseDrawerOnBack(drawerState)
                         }
                     },
                     drawerState = drawerState,
@@ -194,4 +201,22 @@ private fun EggScreenScaffold(
             contentPadding = contentPadding,
         )
     }
+}
+
+/**
+ * Closes the navigation drawer on system back while it is open.
+ *
+ * Uses the navigationevent [NavigationBackHandler] (not the legacy
+ * `BackHandler`) so it takes priority over [androidx.navigation3.ui.NavDisplay]'s
+ * own back handling, which would otherwise swallow the event.
+ */
+@Composable
+private fun CloseDrawerOnBack(drawerState: DrawerState) {
+    val scope = rememberCoroutineScope()
+    val state = rememberNavigationEventState(NavigationEventInfo.None)
+    NavigationBackHandler(
+        state = state,
+        isBackEnabled = drawerState.targetValue == DrawerValue.Open,
+        onBackCompleted = { scope.launch { drawerState.close() } },
+    )
 }
