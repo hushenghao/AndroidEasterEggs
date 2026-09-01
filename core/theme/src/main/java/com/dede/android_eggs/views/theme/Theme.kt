@@ -38,7 +38,14 @@ fun rememberEasterEggColorScheme(
         }
     }
     val context: Context = LocalContext.current
-    return remember(themeMode, colorSource, seedColor) {
+    val wallpaperSeedColor = if (colorSource == ColorSourcePrefUtil.SOURCE_DYNAMIC &&
+        !ColorSourcePrefUtil.isDynamicColorSupported()
+    ) {
+        rememberWallpaperSeedColor()
+    } else {
+        defaultSeedColor
+    }
+    return remember(themeMode, colorSource, seedColor, wallpaperSeedColor) {
         val colorScheme = when (colorSource) {
             ColorSourcePrefUtil.SOURCE_DEFAULT -> {
                 dynamicColorScheme(seedColor = defaultSeedColor, isDark = isDark)
@@ -50,8 +57,7 @@ fun rememberEasterEggColorScheme(
                 if (ColorSourcePrefUtil.isDynamicColorSupported()) {
                     if (isDark) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
                 } else {
-                    Log.w(TAG, "rememberEasterEggColorScheme: Dynamic color is not supported")
-                    dynamicColorScheme(seedColor = defaultSeedColor, isDark = isDark)
+                    dynamicColorScheme(seedColor = wallpaperSeedColor, isDark = isDark)
                 }
             }
             else -> {

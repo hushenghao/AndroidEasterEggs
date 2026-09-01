@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
+import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePrefUtil.isDynamicColorSourceSupported
 import com.dede.android_eggs.views.theme.defaultSeedColor
 import com.dede.android_eggs.views.theme.rememberEasterEggColorScheme
 import com.dede.android_eggs.resources.R as StringsR
@@ -59,7 +60,7 @@ private val options = buildList {
             ColorSourcePrefUtil.SOURCE_DEFAULT
         )
     )
-    if (ColorSourcePrefUtil.isDynamicColorSupported()) {
+    if (isDynamicColorSourceSupported()) {
         add(
             ColorSourceOption(
                 StringsR.string.summary_color_source_dynamic,
