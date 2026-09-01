@@ -38,7 +38,7 @@ fun rememberEasterEggColorScheme(
         }
     }
     val context: Context = LocalContext.current
-    return remember(isDark, colorSource, seedColor) {
+    return remember(themeMode, colorSource, seedColor) {
         val colorScheme = when (colorSource) {
             ColorSourcePrefUtil.SOURCE_DEFAULT -> {
                 dynamicColorScheme(seedColor = defaultSeedColor, isDark = isDark)
