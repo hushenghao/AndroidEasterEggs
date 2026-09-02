@@ -44,9 +44,9 @@ import android.widget.ImageView;
 
 import com.android_t.egg.ComponentActivationActivity;
 import com.android_t.egg.R;
-import com.dede.basic.ResourcesUtils;
+import com.dede.android_eggs.system_colors.ResourcesUtils;
 import com.dede.basic.SpUtils;
-import com.dede.basic.views.AnalogClock;
+import com.dede.android_eggs.analog_clock.AnalogClock;
 
 import java.util.Calendar;
 

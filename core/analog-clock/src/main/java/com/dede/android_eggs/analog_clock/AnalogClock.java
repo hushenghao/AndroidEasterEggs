@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.dede.basic.views;
+package com.dede.android_eggs.analog_clock;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -29,9 +29,9 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import com.dede.android_eggs.system_colors.ResourcesUtils;
 import com.dede.basic.DrawableKt;
-import com.dede.basic.R;
-import com.dede.basic.ResourcesUtils;
+import com.dede.android_eggs.analog_clock.R;
 
 import java.util.Calendar;
 import java.util.Objects;

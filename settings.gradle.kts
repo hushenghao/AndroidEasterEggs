@@ -48,6 +48,9 @@ include(
     ":core:shortcut",
     ":core:alterable-adaptive-icon",
     ":core:custom-tab-browser",
+    ":core:system-colors",
+    ":core:analog-clock",
+    ":core:basic",
 
     ":feature:cat-editor",
     ":feature:analog-clock-widget",
@@ -57,7 +60,6 @@ include(
     ":feature:libraries-info",
     ":feature:keep-android-open",
 
-    ":basic",
     ":jvm-basic",
 
     ":eggs:Base",

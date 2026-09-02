@@ -7,6 +7,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:system-colors"))
     implementation(project(":core:theme"))
     implementation(project(":core:resources"))
     implementation(project(":core:settings"))

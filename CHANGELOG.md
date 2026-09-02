@@ -2,7 +2,7 @@
 
 ### v5.4.1
 
-- Use the wallpaper color as the theme seed on devices without dynamic color
+- Get wallpaper colors for dynamic color on unsupported devices
 - Show the egg list in two columns on large screens
 - Adapt the home settings drawer for large screens
 - Add print support to the Cat Editor

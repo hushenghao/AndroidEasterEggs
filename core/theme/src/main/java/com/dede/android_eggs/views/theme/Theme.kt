@@ -38,13 +38,14 @@ fun rememberEasterEggColorScheme(
         }
     }
     val context: Context = LocalContext.current
-    val wallpaperSeedColor = if (colorSource == ColorSourcePrefUtil.SOURCE_DYNAMIC &&
+    val wallpaperSeedColor = if (
+        colorSource == ColorSourcePrefUtil.SOURCE_DYNAMIC &&
         !ColorSourcePrefUtil.isDynamicColorSupported()
     ) {
-        rememberWallpaperSeedColor()
-    } else {
-        defaultSeedColor
-    }
+        // The wallpaper tonal palette is initialized at app startup on pre-S devices and
+        // feeds both this theme and the egg system colors, see WallpaperTonalColors.
+        rememberWallpaperSeedColor(defaultColor = defaultSeedColor)
+    } else defaultSeedColor
     return remember(themeMode, colorSource, seedColor, wallpaperSeedColor) {
         val colorScheme = when (colorSource) {
             ColorSourcePrefUtil.SOURCE_DEFAULT -> {

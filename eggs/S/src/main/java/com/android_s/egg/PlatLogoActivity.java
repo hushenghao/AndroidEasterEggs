@@ -32,7 +32,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -44,11 +43,10 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import androidx.core.content.ContextCompat;
-
-import com.dede.basic.views.AnalogClock;
-import com.dede.basic.ResourcesUtils;
+import com.dede.basic.DrawableKt;
+import com.dede.android_eggs.system_colors.ResourcesUtils;
 import com.dede.basic.SpUtils;
+import com.dede.android_eggs.analog_clock.AnalogClock;
 
 import java.util.Calendar;
 
@@ -114,13 +112,13 @@ public class PlatLogoActivity extends Activity {
         } catch (Exception ignore) {
         }
         if (color != -1) {
-            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.s_platlogo_nobg);
+            Drawable drawable = DrawableKt.requireDrawable(this, R.drawable.s_platlogo_nobg);
             GradientDrawable bg = new GradientDrawable();
             bg.setShape(GradientDrawable.OVAL);
             bg.setColor(color);
             return new LayerDrawable(new Drawable[]{bg, drawable});
         }
-        return ContextCompat.getDrawable(this, R.drawable.s_platlogo);
+        return DrawableKt.requireDrawable(this, R.drawable.s_platlogo);
     }
 
     private boolean shouldWriteSettings() {

@@ -5,7 +5,7 @@ import androidx.annotation.ChecksSdkIntAtLeast
 import com.dede.android_eggs.views.settings.compose.basic.mutablePrefColorState
 import com.dede.android_eggs.views.settings.compose.basic.mutablePrefIntState
 import com.dede.android_eggs.views.theme.defaultSeedColor
-import com.dede.android_eggs.views.theme.isWallpaperColorSupported
+import com.dede.android_eggs.system_colors.isWallpaperColorSupported
 
 object ColorSourcePrefUtil {
 

@@ -4,6 +4,11 @@ plugins {
 
 android {
     namespace = "com.dede.basic"
+    lint {
+        // False positive: the Initializer meta-data is declared in the library manifest,
+        // but the check cannot match the inner class name GlobalContext$Initializer.
+        disable += "EnsureInitializerMetadata"
+    }
 }
 
 dependencies {

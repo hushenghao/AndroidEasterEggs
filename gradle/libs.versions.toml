@@ -88,6 +88,7 @@ ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 aboutlibraries-m3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "about-libraries" }
 materialkolor = { module = "com.materialkolor:material-kolor", version = "5.0.0" }
+material-color-utilities = { module = "com.materialkolor:material-color-utilities-android", version = "5.0.0" }
 shreyaspatil-capturable = "dev.shreyaspatil:capturable:3.0.1"
 dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.5"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"

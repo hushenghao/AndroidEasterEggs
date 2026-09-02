@@ -169,7 +169,7 @@ abstract class AbsConfigurablePlugin(
             when (configurable.moduleType) {
                 ModuleType.APP,
                 ModuleType.LIBRARY -> {
-                    "implementation"(project(":basic"))
+                    "implementation"(project(":core:basic"))
                 }
                 ModuleType.BASIC -> {
                     "api"(project(":jvm-basic"))

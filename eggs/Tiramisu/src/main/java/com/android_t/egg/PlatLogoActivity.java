@@ -45,8 +45,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
-import com.dede.basic.views.AnalogClock;
-import com.dede.basic.ResourcesUtils;
+import com.dede.android_eggs.analog_clock.AnalogClock;
+import com.dede.android_eggs.system_colors.ResourcesUtils;
 import com.dede.basic.SpUtils;
 
 import java.io.File;

@@ -7,6 +7,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:system-colors"))
     implementation(project(":core:settings"))
 
     implementation(libs.androidx.appcompat)
