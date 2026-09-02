@@ -47,6 +47,7 @@ import androidx.annotation.Nullable;
 
 import com.dede.android_eggs.analog_clock.AnalogClock;
 import com.dede.android_eggs.system_colors.ResourcesUtils;
+import com.dede.android_eggs.system_colors.SystemColorDrawables;
 import com.dede.basic.SpUtils;
 
 import java.io.File;
@@ -93,7 +94,8 @@ public class PlatLogoActivity extends Activity {
 
         mLogo = new ImageView(this);
         mLogo.setVisibility(View.GONE);
-        mLogo.setImageResource(R.drawable.t_platlogo);
+//        mLogo.setImageResource(R.drawable.t_platlogo);
+        mLogo.setImageDrawable(createDrawable());
         layout.addView(mLogo, lp);
 
         mBg = new BubblesDrawable();
@@ -105,6 +107,11 @@ public class PlatLogoActivity extends Activity {
         layout.setOnLongClickListener(mBg);
 
         setContentView(layout);
+    }
+
+    private Drawable createDrawable() {
+        return SystemColorDrawables.create(this, "system_accent1_400",
+                R.drawable.t_platlogo_bg, R.drawable.t_platlogo_nobg, R.drawable.t_platlogo);
     }
 
     private boolean shouldWriteSettings() {
