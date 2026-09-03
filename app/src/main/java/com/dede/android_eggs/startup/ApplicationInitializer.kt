@@ -16,7 +16,7 @@ class ApplicationInitializer : Initializer<Unit> {
         // Keep at least one launcher alias enabled if a previous switch was interrupted.
         AppIconPrefUtil.ensureValidLauncherIcon(application)
         // apply compat style
-        ThemePrefUtil.apply()
+        ThemePrefUtil.apply(application)
 
         // Enable recomposition tracking ONLY in debug builds
         ComposeStabilityAnalyzer.setEnabled(BuildConfig.DEBUG)

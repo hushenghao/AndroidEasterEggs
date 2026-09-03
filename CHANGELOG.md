@@ -9,6 +9,7 @@
 - Fix the Cat Editor's favorite records crash issue [#688](https://github.com/hushenghao/AndroidEasterEggs/issues/688)
 - Sync Android 17 Landroid word pool with upstream AOSP
 - Use a static splash icon below Android 12 to avoid animation jank
+- Sync the in-app night mode to the system, so the splash screen follows the theme setting on Android 12+
 - Code cleanup and refactoring
 
 ### v5.4.0 (2026-08-04)

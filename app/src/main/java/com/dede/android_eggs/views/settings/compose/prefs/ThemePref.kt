@@ -10,6 +10,7 @@ import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.util.LocalEvent
@@ -29,6 +30,7 @@ import com.dede.android_eggs.resources.R as StringsR
 @Preview
 @Composable
 fun ThemePref() {
+    val context = LocalContext.current
     var themeModeValue by ThemePrefUtil.themeModeState
     val onOptionClick = click@{ mode: Int ->
         if (themeModeValue == mode) {
@@ -40,6 +42,7 @@ fun ThemePref() {
             appCompatMode = DARK
         }
         AppCompatDelegate.setDefaultNightMode(appCompatMode)
+        context.applyApplicationNightMode(appCompatMode)
         LocalEvent.poster().post(ACTION_NIGHT_MODE_CHANGED)
     }
 
