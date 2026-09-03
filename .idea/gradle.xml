@@ -22,12 +22,13 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/basic" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/convention" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/activity-actions" />
             <option value="$PROJECT_DIR$/core/alterable-adaptive-icon" />
+            <option value="$PROJECT_DIR$/core/analog-clock" />
+            <option value="$PROJECT_DIR$/core/basic" />
             <option value="$PROJECT_DIR$/core/composable" />
             <option value="$PROJECT_DIR$/core/custom-tab-browser" />
             <option value="$PROJECT_DIR$/core/icons" />
@@ -36,6 +37,7 @@
             <option value="$PROJECT_DIR$/core/resources" />
             <option value="$PROJECT_DIR$/core/settings" />
             <option value="$PROJECT_DIR$/core/shortcut" />
+            <option value="$PROJECT_DIR$/core/system-colors" />
             <option value="$PROJECT_DIR$/core/theme" />
             <option value="$PROJECT_DIR$/eggs" />
             <option value="$PROJECT_DIR$/eggs/AndroidNext" />

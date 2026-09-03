@@ -13,9 +13,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.dede.android_eggs.R
 import com.dede.android_eggs.flavor.FlavorFeatures
-import com.dede.android_eggs.util.setupSplashScreen
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.IntentHandler
 import com.dede.android_eggs.views.theme.EasterEggsTheme
@@ -39,7 +39,9 @@ open class EasterEggsActivity : AppCompatActivity() {
     lateinit var intentHandler: IntentHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setupSplashScreen()
+        // Applies postSplashScreenTheme; the splash icon is static below API 31,
+        // the animated icon only plays on the API 31+ system splash screen.
+        installSplashScreen()
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 

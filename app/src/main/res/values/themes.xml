@@ -1,15 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- https://developer.android.google.cn/develop/ui/views/launch/splash-screen?hl=zh-cn#splash-screen-animate-reqs -->
+    <!-- https://developer.android.google.cn/develop/ui/views/launch/splash-screen?hl=zh-cn#splash-screen-animate-reqs
+         Animated icons only play on the API 31+ system splash screen. Below API 31 the icon
+         shows statically through the window background, values-v31 overrides them with the
+         animated versions. -->
     <style name="Theme.EasterEggs.Starting" parent="Theme.SplashScreen">
-        <!-- Set the splash screen background, animated icon, and animation
-        duration. -->
         <item name="windowSplashScreenBackground">@color/md_theme_background</item>
-        <!-- Use windowSplashScreenAnimatedIcon to add a drawable or an animated
-             drawable. One of these is required. -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/avd_anim_cinnamon_bun_platlogo</item>
-        <!-- Required for animated icons. -->
-        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/platlogo_cinnamon_bun</item>
         <!-- Set the theme of the Activity that directly follows your splash
         screen. This is required. -->
         <item name="postSplashScreenTheme">@style/Theme.EasterEggs</item>
@@ -17,13 +14,11 @@
     </style>
 
     <style name="Theme.EasterEggs.Starting.Android16" parent="Theme.EasterEggs.Starting">
-        <item name="windowSplashScreenAnimatedIcon">@drawable/avd_anim_baklava_platlogo</item>
-        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/platlogo_baklava</item>
     </style>
 
     <style name="Theme.EasterEggs.Starting.Android15" parent="Theme.EasterEggs.Starting">
-        <item name="windowSplashScreenAnimatedIcon">@drawable/avd_anim_v_platlogo</item>
-        <item name="windowSplashScreenAnimationDuration">600</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/platlogo_v</item>
     </style>
 
     <!-- Base application theme. -->

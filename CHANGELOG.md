@@ -8,6 +8,7 @@
 - Add print support to the Cat Editor
 - Fix the Cat Editor's favorite records crash issue [#688](https://github.com/hushenghao/AndroidEasterEggs/issues/688)
 - Sync Android 17 Landroid word pool with upstream AOSP
+- Use a static splash icon below Android 12 to avoid animation jank
 - Code cleanup and refactoring
 
 ### v5.4.0 (2026-08-04)
