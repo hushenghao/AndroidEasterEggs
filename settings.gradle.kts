@@ -50,6 +50,7 @@ include(
     ":core:custom-tab-browser",
     ":core:system-colors",
     ":core:analog-clock",
+    ":core:provider",
     ":core:basic",
 
     ":feature:cat-editor",

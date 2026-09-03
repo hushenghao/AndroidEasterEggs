@@ -1,5 +1,6 @@
 package com.dede.android_eggs.util
 
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
@@ -12,6 +13,12 @@ fun CoroutineScope.launchCatchable(
     block: suspend CoroutineScope.() -> Unit
 ) {
     launch(context, start) {
-        runCatching { block() }.exceptionOrNull()?.printStackTrace()
+        try {
+            block()
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
     }
 }

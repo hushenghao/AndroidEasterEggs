@@ -27,7 +27,7 @@ This is a multi-module Android project using Kotlin DSL Gradle files.
 
 - Root project name: `Easter Eggs`
 - Main application module: `:app`
-- Shared Android/Kotlin modules: `:core:*` (including `:core:basic`, `:core:system-colors`), `:jvm-basic`
+- Shared Android/Kotlin modules: `:core:*` (including `:core:basic`, `:core:provider`, `:core:system-colors`), `:jvm-basic`
 - Feature modules: `:feature:*`
 - Android Easter egg implementation modules: `:eggs:*`
 - Build convention plugins: `build-logic`
@@ -50,7 +50,7 @@ easter.eggs.basic.library     →  :jvm-basic (api)
 
 | Plugin ID                      | Module Type | Hilt | Compose | Lint Baseline | Used By |
 |-------------------------------|-------------|------|---------|---------------|---------|
-| `easter.eggs.basic.library`   | LIBRARY     | No   | No      | No            | `:core:analog-clock`, `:core:basic`, `:core:system-colors` |
+| `easter.eggs.basic.library`   | LIBRARY     | No   | No      | No            | `:core:analog-clock`, `:core:basic`, `:core:provider`, `:core:system-colors` |
 | `easter.eggs.library`         | LIBRARY     | Yes  | No      | Yes           | Older `:eggs:*` (Base–Tiramisu), `:core:custom-tab-browser`, `:core:resources`, `:core:shortcut` |
 | `easter.eggs.compose.library` | LIBRARY     | Yes  | Yes     | Yes           | All `:core:*` (except above 3), `:feature:*`, newer `:eggs:*` (UpsideDownCake+) |
 | `easter.eggs.app`             | APP         | Yes  | Yes     | No            | `:app` only |
@@ -227,6 +227,7 @@ All core modules use `easter.eggs.compose.library` except where noted.
 | `:core:shortcut`                  | library (non-Compose)    | `com.dede.android_eggs.shortcut`                    | Launcher shortcut and app-icon shortcut support. |
 | `:core:system-colors`             | basic.library (non-Compose) | `com.dede.android_eggs.system_colors`            | Wallpaper-seeded dynamic system colors: startup color extraction engine (App Startup, API 27–30), tonal palette cache, bundled static palette resources (`values`/`values-v31`), and the `getSystemColor` resolver (`ResourcesUtils` for Java). Eggs drawables referencing `@color/system_*` declare `implementation(project(":core:system-colors"))` explicitly (eggs/S, eggs/Tiramisu, analog-clock-widget, core/theme, app). |
 | `:core:analog-clock`              | basic.library (non-Compose) | `com.dede.android_eggs.analog_clock`             | `AnalogClock` view tinted by `getSystemColor` runtime palette (dial/hands drawables + attrs migrated with it). Consumers: eggs/S, eggs/Tiramisu PlatLogo activities. |
+| `:core:provider`                  | basic.library (non-Compose) | `com.dede.basic.provider`                        | Easter egg provider contracts (`EasterEggProvider`, `ComponentProvider`, `SnapshotProvider`, `TimelineEvent`). Package/namespace kept as `com.dede.basic.provider`. Exposed to consumers via `:core:basic` `api` dependency. |
 | `:core:theme`                     | compose.library          | `com.dede.android_eggs.views.theme`                 | Material 3 theme, colors, typography, theme resources. |
 
 ### Dependency Rules for Core
@@ -273,7 +274,7 @@ All feature modules use `easter.eggs.compose.library`.
 
 | Module      | Plugin                     | Namespace        | Purpose |
 |-------------|----------------------------|------------------|---------|
-| `:core:basic` | `easter.eggs.basic.library` | `com.dede.basic` | Shared Android utility code (namespace/package kept as `com.dede.basic`). `api`-depends on `:jvm-basic`. Uses Okio, AppCompat, Lifecycle, ViewModel, Startup, Activity. |
+| `:core:basic` | `easter.eggs.basic.library` | `com.dede.basic` | Shared Android utility code (namespace/package kept as `com.dede.basic`). `api`-depends on `:jvm-basic` and `:core:provider`. Uses Okio, AppCompat, Lifecycle, ViewModel, Startup, Activity. |
 | `:jvm-basic` | `java-library` + `kotlin.jvm` | (none)          | Shared JVM-only utility code. Used by script modules (e.g., `:script:emoji-svg-xml-convertor`). Java 17. |
 
 ## Easter Egg Modules

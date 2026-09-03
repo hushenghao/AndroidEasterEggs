@@ -12,6 +12,7 @@ android {
 }
 
 dependencies {
+    api(project(":core:provider"))
     implementation(libs.squareup.okio)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)

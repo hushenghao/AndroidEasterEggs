@@ -128,6 +128,7 @@ dependencies {
     implementation(project(":core:alterable-adaptive-icon"))
     implementation(project(":core:custom-tab-browser"))
     implementation(project(":core:system-colors"))
+    implementation(project(":core:provider"))
 
     implementation(project(":feature:cat-editor"))
     implementation(project(":feature:analog-clock-widget"))
