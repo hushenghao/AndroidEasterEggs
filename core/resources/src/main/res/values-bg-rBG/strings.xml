@@ -53,7 +53,7 @@
     <string name="label_component_manager">Мениджър На Компоненти</string>
     <string name="pref_more_settings">Още Настройки</string>
     <string name="pref_retain_recent_egg_tasks">Запазване на задачите на Easter egg-а</string>
-    <string name="pref_summary_retain_recent_egg_tasks">Запазва задачите на Easter egg-овете в екрана за скорошни приложения. Могат да се запазят до 5. Не е налично при вграден режим на активност</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Запазва задачите на Easter egg-овете в екрана за скорошни приложения. Могат да се запазят до 5.</string>
     <string name="label_about">За</string>
     <string name="label_contribute">Допринесете</string>
     <string name="animator_disabled_alert_message">Системните анимации са деактивирани. Някои функции може да не работят правилно. Моля, отидете на „Опции за разработчици“ и задайте опцията „Мащаб на продължителност на аниматора“, за да активирате анимациите</string>

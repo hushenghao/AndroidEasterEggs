@@ -38,6 +38,6 @@
     <string name="label_component_manager">Komponenthanterare</string>
     <string name="pref_more_settings">Fler inställningar</string>
     <string name="pref_retain_recent_egg_tasks">Behåll de senaste Ägguppgifterna</string>
-    <string name="pref_summary_retain_recent_egg_tasks">Behåll ägguppgifter på skärmen Senaste, maximalt 5 (ogiltigt för inbäddat aktivitetsläge)</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Behåll ägguppgifter på skärmen Senaste, maximalt 5</string>
     <string name="label_about">Om</string>
 </resources>

@@ -53,7 +53,7 @@
     <string name="label_component_manager">구성 요소 관리자</string>
     <string name="pref_more_settings">더 많은 설정</string>
     <string name="pref_retain_recent_egg_tasks">최근 Egg 작업 유지</string>
-    <string name="pref_summary_retain_recent_egg_tasks">최근 화면에 Egg 작업 유지, 최대 5개 유지 (활동 포함 모드에는 유효하지 않음)</string>
+    <string name="pref_summary_retain_recent_egg_tasks">최근 화면에 Egg 작업 유지, 최대 5개 유지</string>
     <string name="label_about">정보</string>
     <string name="label_contribute">기여하기</string>
     <string name="animator_disabled_alert_message">시스템 애니메이션이 비활성화되어 일부 기능이 제대로 작동하지 않을 수 있습니다. 설정으로 들어가 휴대폰 정보에서 소프트웨어 정보로 이동하여 빌드번호를 7번 터치하고 다시 설정 홈에 들어가 개발자 옵션으로 이동하여 \"Animator 길이 배율\" 옵션을 활성화하여 애니메이션을 활성화하세요</string>

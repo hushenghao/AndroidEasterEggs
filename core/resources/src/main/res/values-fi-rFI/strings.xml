@@ -53,7 +53,7 @@
     <string name="label_component_manager">Komponenttien hallinta</string>
     <string name="pref_more_settings">Lisää asetuksia</string>
     <string name="pref_retain_recent_egg_tasks">Säilytä pääsiäismunatehtävät</string>
-    <string name="pref_summary_retain_recent_egg_tasks">Säilytä pääsiäismuna-tehtävät Viimeisimmät-näkymässä. Enintään 5 tehtävää voidaan säilyttää. Ei käytettävissä upotetussa Aktiiviteetti-tilassa</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Säilytä pääsiäismuna-tehtävät Viimeisimmät-näkymässä. Enintään 5 tehtävää voidaan säilyttää.</string>
     <string name="label_about">Lisätietoja</string>
     <string name="label_contribute">Myötävaikuttaminen</string>
     <string name="animator_disabled_alert_message">Järjestelmän animaatiot on poistettu käytöstä. Jotkin toiminnot eivät ehkä toimi oikein. Siirry kohtaan ”Kehittäjäasetukset” ja ota animaatiot käyttöön muuttamalla ”Animaation keston mittakaava” -asetusta</string>

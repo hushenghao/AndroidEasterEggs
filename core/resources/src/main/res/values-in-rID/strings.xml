@@ -53,7 +53,7 @@
     <string name="label_component_manager">Pengelola komponen</string>
     <string name="pref_more_settings">Setelah tambahan</string>
     <string name="pref_retain_recent_egg_tasks">Pertahankan tugas-tugas Easter egg</string>
-    <string name="pref_summary_retain_recent_egg_tasks">Simpan tugas Easter egg di layar Riwayat. Hingga 5 tugas dapat disimpan. Tidak tersedia untuk mode tertanam aktivitas</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Simpan tugas Easter egg di layar Riwayat. Hingga 5 tugas dapat disimpan.</string>
     <string name="label_about">Tentang</string>
     <string name="label_contribute">Berpartisipasi</string>
     <string name="animator_disabled_alert_message">Animasi sistem telah dinonaktifkan. Beberapa fungsi mungkin tidak berfungsi dengan baik. Silakan buka \"Opsi Pengembang\" dan atur opsi \"Skala Durasi Animator\" untuk mengaktifkan animasi</string>

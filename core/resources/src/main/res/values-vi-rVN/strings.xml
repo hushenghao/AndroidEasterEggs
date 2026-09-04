@@ -50,7 +50,7 @@
     <string name="label_component_manager">Quản lý thành phần</string>
     <string name="pref_more_settings">Cài đặt bổ sung</string>
     <string name="pref_retain_recent_egg_tasks">Giữ lại nhiệm vụ Trứng Phục sinh</string>
-    <string name="pref_summary_retain_recent_egg_tasks">Giữ lại các nhiệm vụ Trứng Phục sinh trên màn hình Gần đây. Có thể giữ lại tối đa 5 nhiệm vụ. Không khả dụng cho chế độ nhúng hoạt động</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Giữ lại các nhiệm vụ Trứng Phục sinh trên màn hình Gần đây. Có thể giữ lại tối đa 5 nhiệm vụ.</string>
     <string name="label_about">Giới thiệu</string>
     <string name="label_contribute">Đóng góp</string>
     <string name="animator_disabled_alert_message">Do hoạt ảnh hệ thống bị vô hiệu hóa, một số tính năng có thể không hoạt động bình thường. Vui lòng vào \"Tùy chọn dành cho nhà phát triển\" và đặt tùy chọn \"Tỷ lệ thời gian của bộ hiệu ứng động\" để kích hoạt hoạt ảnh</string>

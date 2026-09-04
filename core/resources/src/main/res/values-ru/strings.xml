@@ -53,7 +53,7 @@
     <string name="label_component_manager">Менеджер компонентов</string>
     <string name="pref_more_settings">Другие настройки</string>
     <string name="pref_retain_recent_egg_tasks">Оставлять задачи открытия пасхальных яиц</string>
-    <string name="pref_summary_retain_recent_egg_tasks">Оставлять открытые пасхальные яйца на экране «Недавние приложения». Может быть сохранено до 5 яиц. Недоступно в режиме встраивания активности (двухпанельный режим)</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Оставлять открытые пасхальные яйца на экране «Недавние приложения». Может быть сохранено до 5 яиц.</string>
     <string name="label_about">О приложении</string>
     <string name="label_contribute">Внести вклад</string>
     <string name="animator_disabled_alert_message">Системные анимации отключены. Некоторые функции могут работать неправильно. Пожалуйста, зайдите в настройки «Для разработчиков» и настройте опцию «Длительность анимации», чтобы активировать анимации</string>

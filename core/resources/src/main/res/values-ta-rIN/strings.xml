@@ -42,7 +42,7 @@
     <string name="label_component_manager">கூறுகளின் நிர்வாகம்</string>
     <string name="pref_more_settings">மேலும் அமைப்புகள்</string>
     <string name="pref_retain_recent_egg_tasks">சமீபத்திய ஈஸ்டர் முட்டை பணிகளைத் தக்கவைக்கவும்</string>
-    <string name="pref_summary_retain_recent_egg_tasks">சமீபத்திய திரையில் முட்டைப் பணிகளைத் தக்கவைக்கவும், அதிகபட்சம் 5 பணிகள் (உட்பொதிக்கப்பட்ட செயல்பாட்டில் பயன்பாட்டிற்கு இல்லை)</string>
+    <string name="pref_summary_retain_recent_egg_tasks">சமீபத்திய திரையில் முட்டைப் பணிகளைத் தக்கவைக்கவும், அதிகபட்சம் 5 பணிகள்</string>
     <string name="label_about">செயலிபற்றி</string>
     <string name="label_contribute">பங்களி</string>
     <string name="animator_disabled_alert_message">சிஸ்டம் அனிமேஷன் முடக்கப்பட்டுள்ளதால், சில அம்சங்கள் சரியாக வேலை செய்யாமல் போகலாம். அனிமேஷனைச் செயல்படுத்த \"டெவலப்பர் விருப்பங்கள்\" என்பதற்குச் சென்று \"அனிமேட்டர் கால அளவு\" விருப்பத்தை இயக்கவும்.</string>

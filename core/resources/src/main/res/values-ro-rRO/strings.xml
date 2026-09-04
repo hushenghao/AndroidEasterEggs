@@ -53,7 +53,7 @@
     <string name="label_component_manager">Manager de componente</string>
     <string name="pref_more_settings">Mai multe setări</string>
     <string name="pref_retain_recent_egg_tasks">Păstrați sarcinile easter egg-urilor</string>
-    <string name="pref_summary_retain_recent_egg_tasks">Păstrați sarcinile easter egg-urilor pe ecranul Recente. Până la 5 sarcini pot fi păstrate (Indisponibil pentru modul Activitate încorporată)</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Păstrați sarcinile easter egg-urilor pe ecranul Recente. Până la 5 sarcini pot fi păstrate</string>
     <string name="label_about">Despre</string>
     <string name="label_contribute">Contribuie</string>
     <string name="animator_disabled_alert_message">Deoarece animațiile de sistem sunt dezactivate, s-ar putea ca unele funcții să nu funcționeze cum trebuie. Te rugăm să mergi la \"Opțiuni dezvoltator\" și să activezi opțiunea \"Scară durată animator\" pentru a activa animațiile</string>

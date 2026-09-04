@@ -53,7 +53,7 @@
     <string name="label_component_manager">Správce komponent</string>
     <string name="pref_more_settings">Více nastavení</string>
     <string name="pref_retain_recent_egg_tasks">Zachovat nedávné úkoly Easter eggů</string>
-    <string name="pref_summary_retain_recent_egg_tasks">Zachovat úlohy Easter Eggu na obrazovce nedávných aplikací, maximálně zachování pěti, toto je neplatné pro Vložený režim aktivity</string>
+    <string name="pref_summary_retain_recent_egg_tasks">Zachovat úlohy Easter Eggu na obrazovce nedávných aplikací, maximálně zachování pěti</string>
     <string name="label_about">O aplikaci</string>
     <string name="label_contribute">Pomozte autorovi</string>
     <string name="animator_disabled_alert_message">Systémové animace jsou vypnuté. Pro správnou funkci v Možnostech pro vývojáře aktivujte animace</string>
