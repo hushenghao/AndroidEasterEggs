@@ -43,6 +43,7 @@ fun AboutGroup() {
                 contentDescription = stringResource(StringsR.string.label_beta),
             ),
             title = stringResource(StringsR.string.label_beta),
+            desc = betaUrl,
             trailingContent = imageVectorIconBlock(imageVector = Icons.Rounded.Download),
             onClick = {
                 uriHandler.openUri(betaUrl)
