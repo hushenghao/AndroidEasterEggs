@@ -37,3 +37,10 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "chore"
+
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"

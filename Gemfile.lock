@@ -260,7 +260,7 @@ PLATFORMS
 
 DEPENDENCIES
   fastlane
-  fastlane-plugin-pgyer (~> 0.4.0)
+  fastlane-plugin-pgyer
 
 BUNDLED WITH
    2.7.1
