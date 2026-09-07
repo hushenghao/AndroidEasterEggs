@@ -192,6 +192,9 @@ private fun EasterEggItemContent(
                     Text(
                         text = androidVersion,
                         style = typography.bodyMedium,
+                        // Weighted children are measured last, so the group
+                        // arrow icon keeps its space when the text wraps.
+                        modifier = Modifier.weight(1f, fill = false),
                     )
                     if (eggState.isGroup) {
                         Icon(

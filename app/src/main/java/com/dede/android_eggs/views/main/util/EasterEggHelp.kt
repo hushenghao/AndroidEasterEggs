@@ -10,11 +10,12 @@ import androidx.core.util.forEach
 import androidx.core.util.putAll
 import com.dede.android_eggs.R
 import com.dede.android_eggs.inject.EasterEggModules
+import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
-import com.dede.basic.provider.EasterEggProvider
 import com.dede.basic.provider.toApiLevelRange
 import dagger.Module
+import dagger.Provides
 import com.dede.android_eggs.resources.R as StringsR
 
 
@@ -27,14 +28,18 @@ object EasterEggHelp {
         }
         val module = EasterEggModules::class.java.getAnnotation(Module::class.java)
             ?: throw IllegalStateException("EasterEggModules is empty")
-        val baseEasterEggs = module.includes.map {
+        val baseEasterEggs = module.includes.flatMap { moduleClass ->
             val instance = try {
-                it.java.getField("INSTANCE").get(null)
+                moduleClass.java.getField("INSTANCE").get(null)
             } catch (e: Exception) {
-                it.java.getConstructor().newInstance()
+                moduleClass.java.getConstructor().newInstance()
             }
-            val provider = instance as EasterEggProvider
-            provider.provideEasterEgg()
+            moduleClass.java.declaredMethods
+                .filter {
+                    it.isAnnotationPresent(Provides::class.java) &&
+                            BaseEasterEgg::class.java.isAssignableFrom(it.returnType)
+                }
+                .map { it.invoke(instance) as BaseEasterEgg }
         }
         return EasterEggModules.providePureEasterEggList(baseEasterEggs)
     }
