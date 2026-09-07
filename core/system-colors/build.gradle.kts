@@ -13,7 +13,7 @@ android {
 
 dependencies {
     implementation(project(":core:basic"))
-    implementation(libs.material.color.utilities)
+    implementation(libs.material.kolor.utilities)
     implementation(libs.androidx.core)
     implementation(libs.androidx.startup)
 }

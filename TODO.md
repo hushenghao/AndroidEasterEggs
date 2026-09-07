@@ -8,7 +8,7 @@
 |   ❓   |    Idea    | Just some ideas, not necessarily put into practice. |
 
 * ✅模拟时钟小组件添加点击配置开关
-* 首页大屏适配
+* ✅首页大屏适配
 * ❓删除 IconVisualEffects
 * SharePreferences 迁移到 DataStore
 * 时间线列表 Android logo 布局优化
