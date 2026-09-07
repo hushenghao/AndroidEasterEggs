@@ -7,14 +7,17 @@ import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.LocalPolice
 import androidx.compose.material.icons.rounded.Policy
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.net.toUri
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.R
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.ui.composes.icons.Pgyer
+import com.dede.android_eggs.util.CustomTabsBrowser
 import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
 import com.dede.android_eggs.views.settings.compose.basic.Option
 import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
@@ -28,6 +31,7 @@ import com.dede.android_eggs.resources.R as StringsR
 @Composable
 fun AboutGroup() {
     val navigator = LocalNavigator.current
+    val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
     val betaUrl = stringResource(R.string.url_pgyer)
     val privacyUrl = stringResource(R.string.url_privacy)
@@ -46,7 +50,8 @@ fun AboutGroup() {
             desc = betaUrl,
             trailingContent = imageVectorIconBlock(imageVector = Icons.Rounded.Download),
             onClick = {
-                uriHandler.openUri(betaUrl)
+                // Custom Tabs download may hang at 100%, open in the default browser
+                CustomTabsBrowser.launchUrlByBrowser(context, betaUrl.toUri())
             }
         )
 
