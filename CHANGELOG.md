@@ -3,7 +3,6 @@
 ### v5.5.0 (2026-09-08)
 
 - Get wallpaper colors for dynamic color on unsupported devices
-- Show the egg list in two columns on large screens
 - Adapt the home settings drawer for large screens
 - Add print support to the Cat Editor
 - Fix the Cat Editor's favorite records crash issue [#688](https://github.com/hushenghao/AndroidEasterEggs/issues/688)

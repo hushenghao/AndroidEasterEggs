@@ -78,7 +78,7 @@ def get_commit_messages(from_ref: Optional[str], to_ref: str) -> list[str]:
 
 _CONVENTIONAL_RE = re.compile(
     r'^(?P<type>feat|fix|chore|build|ci|del|style|doc|docs|refactor|perf|pref|test)'
-    r':\s*(?P<desc>.*?)(?:\s*\(#(?P<pr>\d+)\))?\s*$'
+    r':\s*(?P<desc>.*?)(?:\s*[(（]\s*#(?P<pr>\d+)\s*[)）])?\s*$'
 )
 
 _FIX_PREFIX_RE = re.compile(
@@ -100,8 +100,13 @@ def polish_description(desc: str, *, is_fix: bool) -> Optional[str]:
     return d
 
 
-def parse_conventional_commits(lines: list[str]) -> dict[str, list[str]]:
-    grouped: dict[str, list[str]] = {t: [] for t in TYPE_ORDER}
+def parse_conventional_commits(
+    lines: list[str],
+) -> dict[str, list[tuple[str, list[str]]]]:
+    """Group commits by type, merging duplicates that differ only in PR refs."""
+    grouped: dict[str, dict[str, tuple[str, list[str]]]] = {
+        t: {} for t in TYPE_ORDER
+    }
     for line in lines:
         line = line.strip()
         if not line:
@@ -127,14 +132,26 @@ def parse_conventional_commits(lines: list[str]) -> dict[str, list[str]]:
         polished = polish_description(raw_desc, is_fix=(raw_type == 'fix'))
         if polished is None:
             continue
-        if pr:
-            grouped[raw_type].append(f'{polished} (#{pr})')
+        key = polished.casefold()
+        existing = grouped[raw_type].get(key)
+        if existing is not None:
+            if pr and pr not in existing[1]:
+                existing[1].append(pr)
         else:
-            grouped[raw_type].append(polished)
-    return grouped
+            grouped[raw_type][key] = (polished, [pr] if pr else [])
+    return {t: list(entries.values()) for t, entries in grouped.items()}
 
 
-def format_release(grouped: dict[str, list[str]], tag: str) -> str:
+def format_entry(text: str, prs: list[str]) -> str:
+    if prs:
+        refs = ', '.join(f'#{p}' for p in sorted(prs, key=int))
+        return f'{text} ({refs})'
+    return text
+
+
+def format_release(
+    grouped: dict[str, list[tuple[str, list[str]]]], tag: str,
+) -> str:
     parts = [f'## {tag}', '']
     any_items = False
     for t in TYPE_ORDER:
@@ -143,14 +160,16 @@ def format_release(grouped: dict[str, list[str]], tag: str) -> str:
             continue
         any_items = True
         parts.append(f'### {TYPE_LABELS.get(t, t.capitalize())}')
-        parts.extend(f'- {i}' for i in items)
+        parts.extend(f'- {format_entry(*i)}' for i in items)
         parts.append('')
     if not any_items:
         parts.append('_No notable changes_')
     return '\n'.join(parts).strip() + '\n'
 
 
-def format_draft(grouped: dict[str, list[str]], tag: str) -> str:
+def format_draft(
+    grouped: dict[str, list[tuple[str, list[str]]]], tag: str,
+) -> str:
     today = datetime.date.today().strftime('(%Y-%m-%d)')
     parts = [f'### v{tag.lstrip("v")} {today}', '']
     any_items = False
@@ -159,7 +178,7 @@ def format_draft(grouped: dict[str, list[str]], tag: str) -> str:
         if not items:
             continue
         any_items = True
-        parts.extend(f'- {i}' for i in items)
+        parts.extend(f'- {format_entry(*i)}' for i in items)
     if not any_items:
         parts.append('- No significant changes')
     return '\n'.join(parts).strip() + '\n'

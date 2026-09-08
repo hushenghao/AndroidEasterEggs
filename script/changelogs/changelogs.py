@@ -23,6 +23,9 @@ REGEX_LINK_SUB = r'\[([#@]?\S+)]\([^)]+\)'
 # version script path
 VERSION_SCRIPT = "../../app/build.gradle.kts"
 
+# Google Play release notes max length, per language
+MAX_CHANGELOG_LENGTH = 500
+
 # versionName = "5.3.1" or "5.3.1-beta1"
 REGEX_VERSION_NAME = r'versionName\s+=\s+"([\d.]+(?:-[a-z]+\d+)?)"'
 # versionCode = 80
@@ -101,7 +104,8 @@ def output_fastlane_changelog(changelog_md: str, output_dir: str) -> None:
         output_dir: Output dir.
 
     Raises:
-        ValueError: App versionName != Changelog versionName, or Changelog content isEmpty.
+        ValueError: App versionName != Changelog versionName, Changelog content isEmpty,
+            or Changelog length exceeds MAX_CHANGELOG_LENGTH.
     """
     version_info = get_app_version_info(getpath(VERSION_SCRIPT))
     print(f"Get app info: {version_info}")
@@ -119,9 +123,14 @@ def output_fastlane_changelog(changelog_md: str, output_dir: str) -> None:
         )
     if not changelog:
         raise ValueError("Changelog isEmpty!")
+    if len(changelog) > MAX_CHANGELOG_LENGTH:
+        raise ValueError(
+            f"Changelog length: {len(changelog)}, exceeds the max limit {MAX_CHANGELOG_LENGTH}, "
+            f"Google Play will reject the release notes, please shorten it: {changelog_md}"
+        )
 
     output_path = output_changelog_txt(getpath(output_dir), version_code, changelog)
-    print(f"Output changelog path: {output_path}")
+    print(f"Output changelog path: {output_path} (length: {len(changelog)}/{MAX_CHANGELOG_LENGTH})")
 
 
 def main():

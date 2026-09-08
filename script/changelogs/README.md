@@ -66,5 +66,7 @@ python3 generate_release_notes.py --current-tag v5.3.0 --output release_notes.md
 - Runs `git log` between `v5.2.0..v5.3.0` (auto-detects previous tag if `--from-ref` omitted)
 - Parses Conventional Commits (`feat:`, `fix:`, `chore:`, etc.)
 - Groups by type and outputs Markdown
+- Deduplicates entries with the same description, merging their PR/issue refs
+  (e.g. repeated `New translations from Crowdin` commits become one line: `(#942, #945, ...)`)
 - `ci:` commits are excluded (infrastructure noise)
 - `--draft` mode produces a flat list suitable for pasting into `CHANGELOG.md`
