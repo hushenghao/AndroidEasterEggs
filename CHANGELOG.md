@@ -1,6 +1,6 @@
 # Changelog
 
-### v5.4.1
+### v5.5.0 (2026-09-08)
 
 - Get wallpaper colors for dynamic color on unsupported devices
 - Show the egg list in two columns on large screens
