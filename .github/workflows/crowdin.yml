@@ -34,33 +34,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Crowdin push
+      - name: Crowdin synchronize
         uses: crowdin/github-action@v3 # https://github.com/marketplace/actions/crowdin-action
         with:
           upload_sources: true
           upload_translations: true
-          download_translations: false
-        env:
-          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
-          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-
-      - name: Set up python
-        uses: actions/setup-python@v7
-        with:
-          python-version: '3.10'
-          cache: 'pip' # caching pip dependencies
-
-      - name: Update Crowdin progress
-        run: |
-          cd script/crowdin
-          pip install -r requirements.txt
-          python start.py ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-
-      - name: Crowdin pull
-        uses: crowdin/github-action@v3
-        with:
-          upload_sources: false
-          upload_translations: false
           download_translations: true
 
           create_pull_request: true
@@ -75,3 +53,42 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+  progress:
+    needs: crowdin
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check secrets
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+        if: ${{ env.CROWDIN_PROJECT_ID == '' || env.CROWDIN_PERSONAL_TOKEN == '' }}
+        run: exit 0
+
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.10'
+          cache: 'pip' # caching pip dependencies
+
+      - name: Update Crowdin progress
+        run: |
+          cd script/crowdin
+          pip install -r requirements.txt
+          python start.py ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Commit progress SVG
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet script/crowdin/crowdin_project_progress.svg; then
+            echo "No changes to progress SVG"
+            exit 0
+          fi
+          git add script/crowdin/crowdin_project_progress.svg
+          git commit -m "doc: Update Crowdin project progress"
+          git push
