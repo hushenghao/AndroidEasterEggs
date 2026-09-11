@@ -1,5 +1,9 @@
 # Changelog
 
+### v5.5.1
+
+- Adapt the home settings drawer for large screens
+
 ### v5.5.0 (2026-09-08)
 
 - Get wallpaper colors for dynamic color on unsupported devices

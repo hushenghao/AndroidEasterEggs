@@ -3,11 +3,13 @@
 package com.dede.android_eggs.views.main.compose
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -47,6 +49,11 @@ fun MainTitleBar(
                 IconButton(
                     onClick = {
                         searchBarState.open()
+                        if (drawerState != null && drawerState.isOpen) {
+                            scope.launch {
+                                drawerState.close()
+                            }
+                        }
                     },
                 ) {
                     Icon(
@@ -57,25 +64,43 @@ fun MainTitleBar(
             }
         },
         actions = {
-            val drawerOpen = drawerState?.currentValue == DrawerValue.Open
-            AnimatedVisibility(
-                visible = showSettingsAction && !drawerOpen,
-                enter = fadeIn() + scaleIn(),
-                exit = fadeOut() + scaleOut(),
-            ) {
-                IconButton(
-                    onClick = {
-                        searchBarState.close()
-                        scope.launch {
-                            drawerState?.open()
+            if (showSettingsAction) {
+                val drawerOpen = drawerState?.currentValue == DrawerValue.Open
+                Crossfade(drawerOpen) { isOpen ->
+                    if (isOpen) {
+                        // close drawer
+                        IconButton(
+                            onClick = {
+                                if (drawerState != null && drawerState.isOpen) {
+                                    scope.launch {
+                                        drawerState.close()
+                                    }
+                                }
+                            },
+                        ) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Rounded.ArrowForward,
+                                contentDescription = stringResource(StringsR.string.label_back),
+                                tint = MaterialTheme.colorScheme.onSurface,
+                            )
                         }
-                    },
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.SettingsOutline,
-                        contentDescription = stringResource(StringsR.string.label_settings),
-                        tint = MaterialTheme.colorScheme.onSurface,
-                    )
+                    } else {
+                        // open drawer
+                        IconButton(
+                            onClick = {
+                                searchBarState.close()
+                                scope.launch {
+                                    drawerState?.open()
+                                }
+                            },
+                        ) {
+                            Icon(
+                                imageVector = Icons.Rounded.SettingsOutline,
+                                contentDescription = stringResource(StringsR.string.label_settings),
+                                tint = MaterialTheme.colorScheme.onSurface,
+                            )
+                        }
+                    }
                 }
             }
         },

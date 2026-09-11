@@ -3,9 +3,11 @@ package com.dede.android_eggs.views.settings
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
@@ -23,7 +25,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.appbar.HazeScaffold
-import com.dede.android_eggs.keep_android_open.KeepAndroidOpen
 import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.isVivo
 import com.dede.android_eggs.views.settings.compose.basic.SettingDivider
@@ -51,7 +52,10 @@ import com.dede.android_eggs.resources.R as StringsR
 
 @Preview(widthDp = 320)
 @Composable
-fun SettingsScreen(drawerState: DrawerState? = null) {
+fun SettingsScreen(
+    drawerState: DrawerState? = null,
+    contentModifier: Modifier = Modifier.padding(horizontal = 12.dp),
+) {
     val scope = rememberCoroutineScope()
     val windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout)
     HazeScaffold(
@@ -67,72 +71,80 @@ fun SettingsScreen(drawerState: DrawerState? = null) {
             .only(WindowInsetsSides.End + WindowInsetsSides.Vertical),
         topBarWindowInsets = windowInsets.only(WindowInsetsSides.End + WindowInsetsSides.Top),
     ) { contentPadding ->
-        val layoutDirection = LocalLayoutDirection.current
-        Column(
-            modifier = Modifier
-                .padding(
-                    start = 12.dp,
-                    end = 12.dp + contentPadding.calculateEndPadding(layoutDirection),
-                )// 1. horizontal padding
-                .verticalScroll(rememberScrollState())// 2. scrollable
-                .padding(// 3. vertical padding
-                    top = contentPadding.calculateTopPadding() + 8.dp,
-                    bottom = contentPadding.calculateBottomPadding() + 12.dp
-                )
-                .animateContentSize(),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            val context = LocalContext.current
-            ThemePref()
+        SettingsContent(
+            modifier = contentModifier,
+            contentPadding = contentPadding
+        )
+    }
+}
 
-            ColorSourcePref()
+@Composable
+fun SettingsContent(
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+) {
+    val layoutDirection = LocalLayoutDirection.current
+    Column(
+        modifier = Modifier
+            .padding(
+                start = contentPadding.calculateStartPadding(layoutDirection),
+                end = contentPadding.calculateEndPadding(layoutDirection)
+            )// 1. horizontal padding
+            .verticalScroll(rememberScrollState())// 2. scrollable
+            .padding(// 3. vertical padding
+                top = contentPadding.calculateTopPadding() + 8.dp,
+                bottom = contentPadding.calculateBottomPadding() + 14.dp
+            )
+            .animateContentSize()
+            .then(modifier),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        val context = LocalContext.current
+        ThemePref()
 
-            AppIconPref()
+        ColorSourcePref()
 
-            IconShapePref()
+        AppIconPref()
 
-            if (LanguagePrefUtil.isSupported()) {
-                LanguagePref()
-            }
+        IconShapePref()
 
-            if (IconVisualEffectsPrefUtil.isSupported()) {
-                IconVisualEffectsPref()
-            }
-
-            SettingDivider()
-
-            SnapshotPref()
-
-            TimelinePref()
-
-            CatEditorPref()
-
-            RocketLauncherPref()
-
-            WidgetsPref()
-
-            ComponentManagerPref()
-
-            // Hidden on VIVO: its recents merges all of an app's tasks into one
-            // card regardless of task/process/affinity, so this feature can't
-            // work there (issue #935).
-            if (!SplitUtils.isActivityEmbedded(context) && !isVivo()) {
-                RetainInRecentsPref()
-            }
-
-            DataBackupPref()
-
-            SettingDivider()
-
-            AboutGroup()
-
-            ContributeGroup()
-
-            ContactMeGroup()
-
-            SettingDivider()
-
-            KeepAndroidOpen()
+        if (LanguagePrefUtil.isSupported()) {
+            LanguagePref()
         }
+
+        if (IconVisualEffectsPrefUtil.isSupported()) {
+            IconVisualEffectsPref()
+        }
+
+        SettingDivider()
+
+        SnapshotPref()
+
+        TimelinePref()
+
+        CatEditorPref()
+
+        RocketLauncherPref()
+
+        WidgetsPref()
+
+        ComponentManagerPref()
+
+        // Hidden on VIVO: its recents merges all of an app's tasks into one
+        // card regardless of task/process/affinity, so this feature can't
+        // work there (issue #935).
+        if (!SplitUtils.isActivityEmbedded(context) && !isVivo()) {
+            RetainInRecentsPref()
+        }
+
+        DataBackupPref()
+
+        SettingDivider()
+
+        AboutGroup()
+
+        ContributeGroup()
+
+        ContactMeGroup()
     }
 }

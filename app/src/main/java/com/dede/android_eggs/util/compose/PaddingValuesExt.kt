@@ -4,6 +4,9 @@ package com.dede.android_eggs.util.compose
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.only
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.unit.Density
@@ -17,6 +20,11 @@ inline operator fun PaddingValues.plus(other: PaddingValues): PaddingValues {
 
 inline operator fun PaddingValues.minus(other: PaddingValues): PaddingValues {
     return OperatorPaddingValues(this, other, OperatorPaddingValues.Minus)
+}
+
+@Composable
+fun PaddingValues.only(slides: WindowInsetsSides): PaddingValues {
+    return asInsets().only(slides).asPaddingValues()
 }
 
 private typealias Operator = Dp.(other: Dp) -> Dp
@@ -76,7 +84,6 @@ class OperatorPaddingValues(
 
 }
 
-@Composable
 fun PaddingValues.asInsets(): WindowInsets = PaddingValuesInsets(this)
 
 @Stable

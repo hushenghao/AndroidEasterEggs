@@ -1,0 +1,1 @@
+- Adapt the home settings drawer for large screens

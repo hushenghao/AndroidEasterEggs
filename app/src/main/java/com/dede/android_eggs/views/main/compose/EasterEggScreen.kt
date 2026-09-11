@@ -3,8 +3,11 @@
 package com.dede.android_eggs.views.main.compose
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.DismissibleDrawerSheet
 import androidx.compose.material3.DrawerState
@@ -21,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -41,7 +43,9 @@ import com.dede.android_eggs.ui.composes.ReverseDismissibleNavigationDrawer
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.ui.composes.ReversePermanentNavigationDrawer
 import com.dede.android_eggs.util.OrientationAngleSensor
+import com.dede.android_eggs.util.compose.only
 import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
+import com.dede.android_eggs.views.settings.SettingsContent
 import com.dede.android_eggs.views.settings.SettingsScreen
 import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
@@ -53,8 +57,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import dev.chrisbanes.haze.rememberHazeState
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -107,57 +111,13 @@ fun EasterEggScreen(
     ) {
         when (currentWindowWidthPane()) {
             WindowWidthPane.COMPACT -> {
-                val drawerState = rememberDrawerState(DrawerValue.Closed)
-                ReverseModalNavigationDrawer(
-                    drawerContent = {
-                        ModalDrawerSheet(
-                            drawerShape = MaterialTheme.shapes.extraLarge.copy(
-                                topEnd = CornerSize(0.dp),
-                                bottomEnd = CornerSize(0.dp),
-                            ),
-                            windowInsets = WindowInsets(0, 0, 0, 0),
-                        ) {
-                            val maxWidth = LocalConfiguration.current.smallestScreenWidthDp * 0.8f
-                            Box(modifier = Modifier.width(maxWidth.dp)) {
-                                SettingsScreen(drawerState)
-                                CloseDrawerOnBack(drawerState)
-                            }
-                        }
-                    },
-                    drawerState = drawerState,
-                ) {
-                    EggScreenScaffold(viewModel, drawerState, showSettingsAction = true)
-                }
+                EggScreenScaffoldCompact(viewModel)
             }
-
             WindowWidthPane.MEDIUM -> {
-                val drawerState = rememberDrawerState(DrawerValue.Closed)
-                ReverseDismissibleNavigationDrawer(
-                    drawerContent = {
-                        DismissibleDrawerSheet(
-                            drawerState = drawerState,
-                            windowInsets = WindowInsets(0, 0, 0, 0),
-                        ) {
-                            SettingsScreen(drawerState)
-                            CloseDrawerOnBack(drawerState)
-                        }
-                    },
-                    drawerState = drawerState,
-                ) {
-                    EggScreenScaffold(viewModel, drawerState, showSettingsAction = true)
-                }
+                EggScreenScaffoldMedium(viewModel)
             }
-
             WindowWidthPane.EXPANDED -> {
-                ReversePermanentNavigationDrawer(
-                    drawerContent = {
-                        PermanentDrawerSheet(windowInsets = WindowInsets(0, 0, 0, 0)) {
-                            SettingsScreen(drawerState = null)
-                        }
-                    },
-                ) {
-                    EggScreenScaffold(viewModel, null, showSettingsAction = false)
-                }
+                EggScreenScaffoldExpanded(viewModel)
             }
         }
 
@@ -169,12 +129,113 @@ fun EasterEggScreen(
 }
 
 @Composable
-private fun EggScreenScaffold(
-    viewModel: EasterEggViewModel,
-    drawerState: DrawerState?,
-    showSettingsAction: Boolean,
-) {
+private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel) {
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    ReverseModalNavigationDrawer(
+        drawerContent = {
+            ModalDrawerSheet(
+                drawerShape = MaterialTheme.shapes.extraLarge.copy(
+                    topEnd = CornerSize(0.dp),
+                    bottomEnd = CornerSize(0.dp),
+                ),
+                windowInsets = WindowInsets(0, 0, 0, 0),
+            ) {
+                Box(modifier = Modifier.sizeIn(maxWidth = MaxDrawerWidth)) {
+                    SettingsScreen(drawerState)
+                }
+            }
+            CloseDrawerOnBack(drawerState)
+        },
+        drawerState = drawerState,
+    ) {
+        val searchBarState = rememberBottomSearchBarState()
+        EggScreenScaffold(
+            drawerState = drawerState,
+            searchBarState = searchBarState,
+        ) { contentPadding ->
+            EasterEggList(
+                easterEggs = viewModel.easterEggs,
+                searchText = searchBarState.searchText,
+                contentPadding = contentPadding,
+            )
+        }
+    }
+}
+
+private val MaxDrawerWidth = 300.dp
+
+@Composable
+private fun EggScreenScaffoldMedium(viewModel: EasterEggViewModel) {
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
     val searchBarState = rememberBottomSearchBarState()
+    EggScreenScaffold(
+        drawerState = drawerState,
+        searchBarState = searchBarState,
+    ) { contentPadding ->
+        ReverseDismissibleNavigationDrawer(
+            drawerContent = {
+                DismissibleDrawerSheet(
+                    drawerState = drawerState,
+                    windowInsets = WindowInsets(0, 0, 0, 0),
+                ) {
+                    SettingsContent(
+                        modifier = Modifier
+                            .padding(end = 10.dp)
+                            .sizeIn(maxWidth = MaxDrawerWidth),
+                        contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.End),
+                    )
+                }
+                CloseDrawerOnBack(drawerState)
+            },
+            drawerState = drawerState,
+        ) {
+            EasterEggList(
+                easterEggs = viewModel.easterEggs,
+                searchText = searchBarState.searchText,
+                contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
+            )
+        }
+    }
+}
+
+@Composable
+private fun EggScreenScaffoldExpanded(viewModel: EasterEggViewModel) {
+    val searchBarState = rememberBottomSearchBarState()
+    EggScreenScaffold(
+        drawerState = null,
+        showSettingsAction = false,
+        searchBarState = searchBarState,
+    ) { contentPadding ->
+        ReversePermanentNavigationDrawer(
+            drawerContent = {
+                PermanentDrawerSheet(
+                    windowInsets = WindowInsets(0, 0, 0, 0)
+                ) {
+                    SettingsContent(
+                        modifier = Modifier
+                            .padding(end = 10.dp)
+                            .sizeIn(maxWidth = MaxDrawerWidth),
+                        contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.End),
+                    )
+                }
+            },
+        ) {
+            EasterEggList(
+                easterEggs = viewModel.easterEggs,
+                searchText = searchBarState.searchText,
+                contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
+            )
+        }
+    }
+}
+
+@Composable
+private fun EggScreenScaffold(
+    searchBarState: BottomSearchBarState,
+    drawerState: DrawerState? = null,
+    showSettingsAction: Boolean = true,
+    content: @Composable (contentPadding: PaddingValues) -> Unit,
+) {
     val hazeState = rememberHazeState()
     HazeScaffold(
         hazeState = hazeState,
@@ -195,11 +256,7 @@ private fun EggScreenScaffold(
             )
         },
     ) { contentPadding ->
-        EasterEggList(
-            easterEggs = viewModel.easterEggs,
-            searchText = searchBarState.searchText,
-            contentPadding = contentPadding,
-        )
+        content(contentPadding)
     }
 }
 
