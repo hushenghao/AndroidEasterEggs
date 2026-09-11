@@ -165,6 +165,16 @@ private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel) {
 private val MaxDrawerWidth = 300.dp
 
 @Composable
+fun SettingsDrawerEndPane(contentPadding: PaddingValues) {
+    SettingsContent(
+        modifier = Modifier
+            .sizeIn(maxWidth = MaxDrawerWidth)
+            .padding(end = 12.dp),
+        contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.End),
+    )
+}
+
+@Composable
 private fun EggScreenScaffoldMedium(viewModel: EasterEggViewModel) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val searchBarState = rememberBottomSearchBarState()
@@ -178,12 +188,7 @@ private fun EggScreenScaffoldMedium(viewModel: EasterEggViewModel) {
                     drawerState = drawerState,
                     windowInsets = WindowInsets(0, 0, 0, 0),
                 ) {
-                    SettingsContent(
-                        modifier = Modifier
-                            .padding(end = 10.dp)
-                            .sizeIn(maxWidth = MaxDrawerWidth),
-                        contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.End),
-                    )
+                    SettingsDrawerEndPane(contentPadding)
                 }
                 CloseDrawerOnBack(drawerState)
             },
@@ -211,12 +216,7 @@ private fun EggScreenScaffoldExpanded(viewModel: EasterEggViewModel) {
                 PermanentDrawerSheet(
                     windowInsets = WindowInsets(0, 0, 0, 0)
                 ) {
-                    SettingsContent(
-                        modifier = Modifier
-                            .padding(end = 10.dp)
-                            .sizeIn(maxWidth = MaxDrawerWidth),
-                        contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.End),
-                    )
+                    SettingsDrawerEndPane(contentPadding)
                 }
             },
         ) {

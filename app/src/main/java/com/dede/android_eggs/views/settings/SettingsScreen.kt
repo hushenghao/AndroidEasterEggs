@@ -52,10 +52,7 @@ import com.dede.android_eggs.resources.R as StringsR
 
 @Preview(widthDp = 320)
 @Composable
-fun SettingsScreen(
-    drawerState: DrawerState? = null,
-    contentModifier: Modifier = Modifier.padding(horizontal = 12.dp),
-) {
+fun SettingsScreen(drawerState: DrawerState? = null) {
     val scope = rememberCoroutineScope()
     val windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout)
     HazeScaffold(
@@ -72,7 +69,7 @@ fun SettingsScreen(
         topBarWindowInsets = windowInsets.only(WindowInsetsSides.End + WindowInsetsSides.Top),
     ) { contentPadding ->
         SettingsContent(
-            modifier = contentModifier,
+            modifier = Modifier.padding(horizontal = 12.dp),
             contentPadding = contentPadding
         )
     }
