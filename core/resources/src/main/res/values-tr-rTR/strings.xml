@@ -14,11 +14,11 @@
     <string name="label_wiki">Bir hafta</string>
     <string name="label_license">Lisans</string>
     <string name="label_feedback">Geri Bildirim</string>
-    <string name="label_star">Uygulamayı Değerlendir</string>
+    <string name="label_star">Uygulamayı değerlendir</string>
     <string name="label_contact_me">Benimle İletişime Geç</string>
     <string name="label_email_title">E posta</string>
     <string name="label_snapshot_preview">Anlık görüntü görmesi</string>
-    <string name="message_trypophobia_warning">Bu, &lt;b&gt;trypophobia&lt;/b&gt; olanlar için bir uyarıdır. Bazı görüntüler rahatsızlığa neden olabilir. Devam etmek istiyor musunuz?</string>
+    <string name="message_trypophobia_warning">Bu, &lt;b&gt;delik fobisi&lt;/b&gt; olanlar için bir uyarıdır. Bazı görüntüler rahatsızlığa neden olabilir. Devam etmek istiyor musunuz?</string>
     <string name="label_settings">Ayarlar</string>
     <string name="label_project_desc">Bu proje, tüm gizli özelliklerinin paskalya yumurtalarının eksiksiz kodunu içerir ve tüm gizli özelliklerinin uyumluluğunu düzenlemeyi ve sağlamayı amaçlar. Amaç, çoğu cihazın gizli özelliklerin kodunda minimum değişikliklerle farklı sürümlerini denemesini sağlamaktır.</string>
     <string name="pref_title_icon_shape_override">Simge Şekli</string>
@@ -27,7 +27,7 @@
     <string name="pref_title_theme">Tema</string>
     <string name="pref_title_dynamic_color">Dinamik Renk</string>
     <string name="pref_title_app_icon">Uygulama ikonu</string>
-    <string name="pref_title_icon_visual_effects">Simge Görsel Efektleri</string>
+    <string name="pref_title_icon_visual_effects">İkon Görsel Efektleri</string>
     <string name="summary_system_default">Varsayılan</string>
     <string name="summary_theme_dark_mode">Karanlık</string>
     <string name="summary_theme_light_mode">Aydınlık</string>
@@ -36,7 +36,7 @@
     <string name="summary_color_source_dynamic">Dinamik</string>
     <string name="summary_color_source_custom">Özel</string>
     <string name="label_add_shortcut">Kısayol</string>
-    <string name="label_donate">Bağış Yap</string>
+    <string name="label_donate">Bağış Yapmak</string>
     <string name="label_update">Güncelle</string>
     <string name="preference_on">Açık</string>
     <string name="preference_off">Kapalı</string>
@@ -61,9 +61,9 @@
     <string name="action_dont_show_again">Tekrar gösterme</string>
     <string name="cat_editor">Kedi editörü</string>
     <string name="cat_editor_input_seed">Kedi tohumu girdisi</string>
-    <string name="rocket_launcher_easter_egg_icons">Paskalya Yumurtası simgeleri</string>
-    <string name="rocket_launcher_all_app_icons">Tüm uygulama simgeleri</string>
-    <string name="rocket_launcher_all_icons">Tüm simgeler</string>
+    <string name="rocket_launcher_easter_egg_icons">Paskalya Yumurtası ikonları</string>
+    <string name="rocket_launcher_all_app_icons">Tüm uygulama ikonları</string>
+    <string name="rocket_launcher_all_icons">Tüm ikonlar</string>
     <string name="rocket_launcher_query_all_app_desc">Tüm uygulamaların listesinin alınması gerekiyor</string>
     <string name="label_data_backup">Veri yedekleme &amp; geri yükleme</string>
     <string name="pref_data_backup_desc">Kullanıcı verilerini dışa aktar veya içe aktar</string>
