@@ -30,7 +30,6 @@ flowchart LR
         feature_cat_editor(":feature:cat-editor")
         feature_crash(":feature:crash")
         feature_embedding_splits(":feature:embedding-splits")
-        feature_keep_android_open(":feature:keep-android-open")
         feature_libraries_info(":feature:libraries-info")
         feature_neko_controls_widget(":feature:neko-controls-widget")
     end
