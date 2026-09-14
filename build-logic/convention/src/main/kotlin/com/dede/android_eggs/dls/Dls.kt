@@ -13,8 +13,8 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.io.readProperties
 import java.util.Properties
-import org.jetbrains.kotlin.konan.properties.loadProperties as konanLoadProperties
 
 private lateinit var _keyprops: Properties
 
@@ -30,7 +30,7 @@ val Project.keyprops: Properties
 
 fun Project.loadProperties(path: String): Properties {
     return with(file(path)) {
-        if (exists()) konanLoadProperties(absolutePath) else Properties()
+        if (exists()) toPath().readProperties() else Properties()
     }
 }
 
