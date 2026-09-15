@@ -25,7 +25,7 @@ module, and run the smallest useful verification command.
 
 This is a multi-module Android project using Kotlin DSL Gradle files.
 
-- Root project name: `Easter Eggs`
+- Root project name: `AndroidEasterEggs`
 - Main application module: `:app`
 - Shared Android/Kotlin modules: `:core:*` (including `:core:basic`, `:core:provider`, `:core:system-colors`), `:jvm-basic`
 - Feature modules: `:feature:*`
@@ -51,8 +51,8 @@ easter.eggs.basic.library     →  :jvm-basic (api)
 | Plugin ID                      | Module Type | Hilt | Compose | Lint Baseline | Used By |
 |-------------------------------|-------------|------|---------|---------------|---------|
 | `easter.eggs.basic.library`   | LIBRARY     | No   | No      | No            | `:core:analog-clock`, `:core:basic`, `:core:provider`, `:core:system-colors` |
-| `easter.eggs.library`         | LIBRARY     | Yes  | No      | Yes           | Older `:eggs:*` (Base–Tiramisu), `:core:custom-tab-browser`, `:core:resources`, `:core:shortcut` |
-| `easter.eggs.compose.library` | LIBRARY     | Yes  | Yes     | Yes           | All `:core:*` (except above 3), `:feature:*`, newer `:eggs:*` (UpsideDownCake+) |
+| `easter.eggs.library`         | LIBRARY     | Yes  | No      | Yes           | Older `:eggs:*` (Gingerbread–Tiramisu), `:eggs:RocketLauncher`, `:core:custom-tab-browser`, `:core:resources`, `:core:shortcut` |
+| `easter.eggs.compose.library` | LIBRARY     | Yes  | Yes     | Yes           | All `:core:*` except the four basic-library modules above, `:feature:*`, newer `:eggs:*` (UpsideDownCake+) |
 | `easter.eggs.app`             | APP         | Yes  | Yes     | No            | `:app` only |
 
 Auto-injected dependencies (no explicit declaration needed in module build file):
@@ -60,30 +60,34 @@ Auto-injected dependencies (no explicit declaration needed in module build file)
 - BASIC modules → `:jvm-basic` (api)
 - Hilt-enabled → Hilt runtime + compiler (ksp)
 - Compose-enabled → Compose BOM + `foundation` + `ui`
-- Lint-baseline-enabled → `lint-baseline.xml` in module root
+- Lint-baseline-enabled → `<module>/lint-baseline.xml` is configured as the module's lint
+  baseline. The plugin only points lint at that path; the file itself is per-module state
+  and not every module has one — see Lint configuration below.
 
 ## Version & Environment Constants
 
 | Constant     | Value  | Defined In                                              |
 |-------------|--------|---------------------------------------------------------|
-| compileSdk  | 37     | `build-logic/convention/src/main/kotlin/Versions.kt`   |
+| compileSdk  | 37.2   | `build-logic/convention/src/main/kotlin/Versions.kt`   |
 | targetSdk   | 37     | `build-logic/convention/src/main/kotlin/Versions.kt`   |
 | minSdk      | 23     | `build-logic/convention/src/main/kotlin/Versions.kt`   |
 | buildTools  | 37.0.0 | `build-logic/convention/src/main/kotlin/Versions.kt`   |
 | Java        | 17     | `build-logic/convention/src/main/kotlin/Versions.kt`   |
-| Kotlin      | 2.4.0  | `gradle/libs.versions.toml`                             |
-| AGP         | 9.2.1  | `gradle/libs.versions.toml`                             |
-| Hilt        | 2.59.2 | `gradle/libs.versions.toml`                             |
-| Compose BOM | 2026.06.00 | `gradle/libs.versions.toml`                         |
+| Kotlin      | 2.4.20 | `gradle/libs.versions.toml`                             |
+| AGP         | 9.3.1  | `gradle/libs.versions.toml`                             |
+| Hilt        | 2.60.1 | `gradle/libs.versions.toml`                             |
+| Compose BOM | 2026.08.00 | `gradle/libs.versions.toml`                         |
 | applicationId | `com.dede.android_eggs` | `app/build.gradle.kts`                      |
-| versionName | 5.0.1  | `app/build.gradle.kts`                                  |
-| versionCode | 77     | `app/build.gradle.kts`                                  |
+| versionName | 5.5.1  | `app/build.gradle.kts`                                  |
+| versionCode | 82     | `app/build.gradle.kts`                                  |
 
 ## Build System
 
 ### Build Files
 
-- `build.gradle.kts` — declares top-level plugin aliases, applies `kotlin-gradle-plugin` in buildscript.
+- `build.gradle.kts` — declares the top-level plugin aliases with `apply false`. Those
+  lines are not redundant: they are also what puts AGP/KGP on `build-logic`'s runtime
+  classpath (the convention plugins compile against them with `compileOnly`).
 - `settings.gradle.kts` — includes all Gradle modules and the `build-logic` included build.
 - `gradle/libs.versions.toml` — centralized version catalog for dependencies and plugins.
 - `gradle.properties` — JVM args, parallel, configuration-cache, `android.useAndroidX=true`,
@@ -93,11 +97,12 @@ Auto-injected dependencies (no explicit declaration needed in module build file)
 
 | Property                     | Default | Purpose |
 |------------------------------|---------|---------|
-| `eggs.androidNext.enable`    | `false` | Conditionally include `:eggs:AndroidNext` module |
+| `eggs.androidNext.enable`    | `false` | Gates `:app`'s dependency on `:eggs:AndroidNext` (build-logic `EasterEggsApp.kt`). The module is always listed in `settings.gradle.kts`. |
 | `org.gradle.parallel`        | `true`  | Parallel project execution |
 | `org.gradle.configuration-cache` | `true` | Enable configuration cache |
 | `android.nonTransitiveRClass` | `true` | Non-transitive R class generation |
 | `android.nonFinalResIds`     | `true`  | Non-final resource IDs (legacy eggs compatibility) |
+| `android.enableR8.fullMode`  | `true`  | R8 full mode for minified builds |
 | `kotlin.code.style`          | `official` | Kotlin coding style |
 
 ### Product Flavors
@@ -119,7 +124,12 @@ marketImplementation(libs.google.play.update)
 
 Lint configuration:
 - `NewApi` and `InlinedApi` are treated as **fatal** (build-breaking).
-- Lint baselines exist per module (in modules using `easter.eggs.library` or `easter.eggs.compose.library`).
+- Modules using `easter.eggs.library` or `easter.eggs.compose.library` have a lint baseline
+  path configured, but only some of them have committed the file (22 of 38 as of
+  2026-09-15; most `:eggs:*`, `:core:theme`, `:feature:cat-editor`,
+  `:feature:neko-controls-widget`). Running `:module:lintDebug` on a module **without**
+  the file makes AGP create an empty baseline and fail once — that is pre-existing state,
+  not a regression, and the generated file should be removed rather than committed.
 
 Common verification commands:
 
@@ -183,8 +193,12 @@ Path: `app/`
 
 ### Module Dependency List
 
-The `:app` module depends on **every** `:core:*`, `:feature:*`, and `:eggs:*` module
-(excluding optional `:eggs:AndroidNext`, which is conditionally added).
+`app/build.gradle.kts` lists every `:core:*`, `:feature:*` and `:eggs:*` module, with
+three exceptions:
+
+- `:core:basic` — injected into every APP/LIBRARY module by the convention plugins.
+- `:core:analog-clock` — reached transitively via `:eggs:S` and `:eggs:Tiramisu`.
+- `:eggs:AndroidNext` — added by build-logic only when `eggs.androidNext.enable=true`.
 
 ### Flavor-specific Source Sets
 
@@ -198,12 +212,17 @@ The `:app` module depends on **every** `:core:*`, `:feature:*`, and `:eggs:*` mo
 
 ### Important Paths
 
-- `app/src/main/AndroidManifest.xml` — activities, activity-aliases, providers, receivers.
+- `app/src/main/AndroidManifest.xml` — activities, launcher icon activity-aliases (`Android15/16/17IconAlias`), providers, receivers.
+- `app/src/main/java/com/dede/android_eggs/EasterEggsApp.kt` — `Application` / Hilt entry point.
 - `app/src/main/java/com/dede/android_eggs/views/main/` — main app navigation and home flow.
+  - `EasterEggsActivity.kt` — the single launcher activity (splash activities live beside it).
   - `EasterEggsNavHost.kt` — top-level NavHost wiring.
-  - `MainActivity.kt` — single-activity entry point.
-- `app/src/main/java/com/dede/android_eggs/views/settings/` — settings UI and preferences.
-  - `compose/prefs/AppIconPref.kt` — adaptive icon switching preference.
+  - `compose/` — home screen composables (`EasterEggScreen.kt` and its `EggScreenScaffold*`
+    branches, `EasterEggList.kt`, `EasterEggItems.kt`, `MainTitleBar.kt`, `BottomSearchBar.kt`).
+- `app/src/main/java/com/dede/android_eggs/views/settings/` — settings screen and preferences UI.
+  - `SettingsScreen.kt` — settings screen entry.
+  - `compose/prefs/` — one preference composable per setting (`AppIconPref.kt`, `IconShapePref.kt`, `DataBackupPref.kt`, …).
+  - `backup/` — `DataBackupManager.kt`, `DefaultSettings.kt`.
 - `app/src/main/res/` — app resources, launcher icons (`mipmap-*`).
 - `app/proguard-rules.pro` — release ProGuard/R8 rules.
 
@@ -240,7 +259,9 @@ All core modules use `easter.eggs.compose.library` except where noted.
   former reference the latter with no import at all. Core-module code packages are
   named after the module (`com.dede.android_eggs.settings_ui`, `...icon_shape`,
   `...views.theme`). `com.dede.android_eggs.util` is the known remaining exception —
-  seven modules still share it, including a `Utils.kt` in two of them.
+  six modules still share it (`:app`, `:core:basic`, `:core:activity-actions`,
+  `:core:composable`, `:core:custom-tab-browser`, `:core:theme`), including a `Utils.kt`
+  in two of them.
 - **`custom-tab-browser`** is the only non-Compose core module with browser responsibility.
   Do not add Compose UI dependents to it.
 - **`local-provider`** owns Compose provider logic and URI handling that needs Compose.
@@ -369,7 +390,7 @@ Prefer minimal changes when editing AOSP-derived code.
 | `:eggs:Baklava`          | 16              | 36    | Landroid         | compose.library   | `baklava_`        | Kotlin `.gradle.kts` |
 | `:eggs:CinnamonBun`      | (next)          | —     | —                | compose.library   | `cinnamon_bun_`   | Kotlin `.gradle.kts` |
 | `:eggs:AndroidNext`      | (future)        | —     | —                | compose.library   | —                 | Kotlin `.gradle.kts` |
-| `:eggs:Base`             | —               | —     | Shared base code | library           | `b_`              | Kotlin `.gradle.kts` |
+| `:eggs:Base`             | —               | —     | Shared base code | compose.library   | `b_`              | Kotlin `.gradle.kts` |
 | `:eggs:RocketLauncher`   | —               | —     | Legacy launcher  | library           | —                 | Kotlin `.gradle.kts` |
 
 ### Key Notes
@@ -377,8 +398,9 @@ Prefer minimal changes when editing AOSP-derived code.
 - **Plugin threshold**: Gingerbread through Tiramisu use `easter.eggs.library` (non-Compose).
   UpsideDownCake and later use `easter.eggs.compose.library` (Compose). All older eggs
   use Groovy `build.gradle`; newer eggs use Kotlin `build.gradle.kts`.
-- `:eggs:AndroidNext` is conditionally included only when `eggs.androidNext.enable=true`
-  in `gradle.properties`. The check happens in `EasterEggsApp.kt`.
+- `:eggs:AndroidNext` is always part of the Gradle build, but `:app` only depends on it
+  when `eggs.androidNext.enable=true` in `gradle.properties`; build-logic
+  (`EasterEggsApp.kt`) reads the flag.
 - `:eggs:RocketLauncher` contains launcher/dream-related legacy code used by
   older Easter eggs.
 - `:eggs:Base` is a shared base module for egg-internal utilities.
@@ -446,7 +468,9 @@ Path: `build-logic/convention/`
 - `compose-bom` — Compose UI versions (managed by BOM)
 - `accompanist` — Compose accompanist utilities
 - `lifecycle`, `activity` — AndroidX lifecycle/activity
-- `room` — Room database
+- `room` — Room database. Note this is Room 3: the `androidx.room3` group plus the
+  `androidx.room3` Gradle plugin, and the driver is `sqlite-framework` (not the bundled
+  SQLite). `:feature:cat-editor` is the only user.
 - `about-libraries` — OSS license UI
 - `ktor` — HTTP client
 - `nav3` — Navigation3
@@ -470,7 +494,7 @@ Path: `build-logic/convention/`
 | DI | Hilt (dagger) |
 | UI | Compose BOM, Material3, Navigation3, Konfetti, Squircle shapes |
 | Data | Room, DataStore, Ktor, Okio |
-| Images | BlurHash, Accompanist drawablepainter |
+| Images | BlurHash, Accompanist drawablepainter, Capturable (cat-editor capture) |
 | Debug | LeakCanary, Curtains, Compose tooling |
 | Market | Google Play Review, Play In-App Update |
 
