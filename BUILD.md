@@ -29,7 +29,6 @@ flowchart LR
         feature_analog_clock_widget(":feature:analog-clock-widget")
         feature_cat_editor(":feature:cat-editor")
         feature_crash(":feature:crash")
-        feature_embedding_splits(":feature:embedding-splits")
         feature_libraries_info(":feature:libraries-info")
         feature_neko_controls_widget(":feature:neko-controls-widget")
     end
@@ -118,8 +117,6 @@ flowchart LR
     app --> feature_analog_clock_widget
     app --> feature_cat_editor
     app --> feature_crash
-    app --> feature_embedding_splits
-    app --> feature_keep_android_open
     app --> feature_libraries_info
     app --> feature_neko_controls_widget
     core_activity_actions --> core_basic

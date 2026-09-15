@@ -57,7 +57,6 @@ include(
     ":feature:analog-clock-widget",
     ":feature:neko-controls-widget",
     ":feature:crash",
-    ":feature:embedding-splits",
     ":feature:libraries-info",
 
     ":jvm-basic",
