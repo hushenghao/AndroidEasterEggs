@@ -1,0 +1,379 @@
+package com.dede.android_eggs.settings_ui.basic
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.VisibilityThreshold
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInVertically
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.CornerBasedShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.NavigateNext
+import androidx.compose.material.icons.rounded.KeyboardArrowDown
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
+@Composable
+internal fun ExpandOptionsPrefTrailing(
+    expanded: Boolean,
+    modifier: Modifier = Modifier
+) {
+    val rotate by animateFloatAsState(targetValue = if (expanded) 180f else 0f, label = "Arrow")
+    Box(modifier = Modifier.padding(end = 12.dp)) {
+        Icon(
+            imageVector = Icons.Rounded.KeyboardArrowDown,
+            contentDescription = null,
+            modifier = Modifier
+                .rotate(rotate)
+                .then(modifier)
+        )
+    }
+}
+
+@Composable
+fun ExpandOptionsPref(
+    modifier: Modifier = Modifier,
+    expended: Boolean,
+    leadingIcon: ImageVector,
+    title: String,
+    desc: String? = null,
+    onClick: () -> Unit = {},
+    trailingContent: @Composable (expended: Boolean) -> Unit = {
+        ExpandOptionsPrefTrailing(it)
+    },
+    options: @Composable ColumnScope.() -> Unit
+) {
+    SettingPref(
+        modifier = modifier,
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        trailingContent = {
+            trailingContent(expended)
+        },
+        onClick = onClick,
+    ) {
+        AnimatedVisibility(
+            visible = expended,
+            enter = slideInVertically() + fadeIn(),
+            exit = shrinkVertically(
+                animationSpec = spring(
+                    stiffness = Spring.StiffnessMedium,
+                    visibilityThreshold = IntSize.VisibilityThreshold
+                )
+            ) + fadeOut(),
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 10.dp)
+                    .padding(top = 4.dp, bottom = 10.dp),
+                verticalArrangement = Arrangement.spacedBy(6.dp),
+                content = options
+            )
+        }
+    }
+}
+
+@Composable
+fun ExpandOptionsPref(
+    modifier: Modifier = Modifier,
+    expanded: Boolean,
+    onExpandedChange: (Boolean) -> Unit,
+    leadingIcon: ImageVector,
+    title: String,
+    desc: String? = null,
+    requestFocusOnExpanded: Boolean = true,
+    trailingContent: @Composable (expended: Boolean) -> Unit = {
+        ExpandOptionsPrefTrailing(it)
+    },
+    options: @Composable ColumnScope.() -> Unit
+) {
+    val focusRequester = remember { FocusRequester() }
+    if (requestFocusOnExpanded) {
+        val lifecycleOwner = LocalLifecycleOwner.current
+        DisposableEffect(lifecycleOwner) {
+            val observer = object : DefaultLifecycleObserver {
+                override fun onPause(owner: LifecycleOwner) {
+                    focusRequester.freeFocus()
+                }
+            }
+            lifecycleOwner.lifecycle.addObserver(observer)
+
+            onDispose {
+                lifecycleOwner.lifecycle.removeObserver(observer)
+            }
+        }
+    }
+
+    val coroutineScope = rememberCoroutineScope()
+    ExpandOptionsPref(
+        modifier = Modifier
+            .focusRequester(focusRequester)
+            .focusable()
+            .then(modifier),
+        expended = expanded,
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        trailingContent = trailingContent,
+        onClick = onClick@{
+            val nextExpanded = !expanded
+            onExpandedChange(nextExpanded)
+
+            if (!requestFocusOnExpanded) {
+                return@onClick
+            }
+            coroutineScope.launch {
+                if (nextExpanded) {
+                    delay(300)
+                    focusRequester.requestFocus()
+                } else {
+                    focusRequester.freeFocus()
+                }
+            }
+        },
+        options = options,
+    )
+}
+
+@Composable
+fun ExpandOptionsPref(
+    modifier: Modifier = Modifier,
+    leadingIcon: ImageVector,
+    title: String,
+    desc: String? = null,
+    initializeExpanded: Boolean = false,
+    options: @Composable ColumnScope.() -> Unit
+) {
+    val expanded = rememberSaveable { mutableStateOf(initializeExpanded) }
+    ExpandOptionsPref(
+        modifier = modifier,
+        expanded = expanded.value,
+        onExpandedChange = { expanded.value = it },
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        options = options
+    )
+}
+
+object OptionShapes {
+
+    val defaultShape: CornerBasedShape
+        @Composable
+        get() = MaterialTheme.shapes.small
+
+    val borderShape: CornerBasedShape
+        @Composable
+        get() = MaterialTheme.shapes.medium
+
+    @Composable
+    fun indexOfShape(index: Int, optionsCount: Int): Shape {
+        return if (optionsCount == 1) {
+            borderShape
+        } else if (index == 0 && optionsCount > 1) {
+            firstShape()
+        } else if (index == optionsCount - 1 && optionsCount > 1) {
+            lastShape()
+        } else {
+            defaultShape
+        }
+    }
+
+    @Composable
+    fun lastShape(): Shape {
+        return defaultShape.bottom(borderShape)
+    }
+
+    @Composable
+    fun firstShape(): Shape {
+        return defaultShape.top(borderShape)
+    }
+}
+
+
+@Composable
+fun imageVectorIconBlock(
+    imageVector: ImageVector,
+    contentDescription: String? = null
+): @Composable () -> Unit {
+    return {
+        Icon(imageVector = imageVector, contentDescription = contentDescription)
+    }
+}
+
+@Composable
+fun radioButtonBlock(selected: Boolean): @Composable () -> Unit {
+    return {
+        RadioButton(selected = selected, onClick = null)
+    }
+}
+
+@Composable
+fun <T : Any> ValueOption(
+    leadingIcon: (@Composable () -> Unit)?,
+    title: String,
+    desc: String? = null,
+    trailingContent: (@Composable () -> Unit)?,
+    shape: Shape = OptionShapes.defaultShape,
+    onOptionClick: (value: T) -> Unit,
+    value: T,
+) {
+    Option(
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        trailingContent = trailingContent,
+        shape = shape,
+        onClick = {
+            onOptionClick(value)
+        }
+    )
+}
+
+@Composable
+fun <T : Any> RadioOption(
+    leadingIcon: (@Composable () -> Unit)?,
+    title: String,
+    desc: String? = null,
+    shape: Shape = OptionShapes.defaultShape,
+    value: T,
+    currentValue: T,
+    onOptionClick: (value: T) -> Unit,
+    trailingContent: @Composable () -> Unit = radioButtonBlock(currentValue == value),
+) {
+    Option(
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        trailingContent = trailingContent,
+        shape = shape,
+        onClick = {
+            onOptionClick(value)
+        }
+    )
+}
+
+@Composable
+fun SwitchOption(
+    leadingIcon: (@Composable () -> Unit)?,
+    title: String,
+    desc: String? = null,
+    shape: Shape = OptionShapes.defaultShape,
+    checked: Boolean = false,
+    onCheckedChange: (checked: Boolean) -> Unit
+) {
+    Option(
+        shape = shape,
+        leadingIcon = leadingIcon,
+        title = title,
+        desc = desc,
+        trailingContent = {
+            Switch(
+                checked = checked,
+                onCheckedChange = onCheckedChange,
+            )
+        },
+        onClick = {
+            onCheckedChange(!checked)
+        }
+    )
+}
+
+@Composable
+fun Option(
+    modifier: Modifier = Modifier,
+    leadingIcon: (@Composable () -> Unit)?,
+    title: String,
+    desc: String? = null,
+    trailingContent: (@Composable () -> Unit)? = {
+        Icon(imageVector = Icons.AutoMirrored.Rounded.NavigateNext, contentDescription = title)
+    },
+    shape: Shape = OptionShapes.defaultShape,
+    colors: CardColors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+    onClick: () -> Unit = {},
+) {
+    Card(
+        onClick = onClick,
+        shape = shape,
+        colors = colors,
+        modifier = modifier
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .defaultMinSize(minHeight = 48.dp)
+                .padding(start = 12.dp, top = 8.dp, end = 12.dp, bottom = 8.dp)
+        ) {
+            if (leadingIcon != null) {
+                Box(modifier = Modifier.widthIn(0.dp, 30.dp)) {
+                    leadingIcon()
+                }
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 10.dp)
+                    .animateContentSize()
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleSmall,
+                )
+                if (desc != null) {
+                    Text(
+                        text = desc,
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 2.dp),
+                        maxLines = 5,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+            }
+            if (trailingContent != null) {
+                trailingContent()
+            }
+        }
+    }
+}

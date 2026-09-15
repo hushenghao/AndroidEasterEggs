@@ -8,7 +8,7 @@ import android.provider.Browser
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
+import com.dede.android_eggs.views.theme.settings.ThemePrefUtil
 import com.dede.basic.bundleBuilder
 import com.dede.basic.createChooser
 import com.dede.basic.getConfigurationLocales

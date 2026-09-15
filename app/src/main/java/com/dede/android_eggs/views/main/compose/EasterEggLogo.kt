@@ -28,7 +28,7 @@ import com.dede.android_eggs.alterable_adaptive_icon.rememberAdaptiveIconForegro
 import com.dede.android_eggs.local_provider.currentOutInspectionMode
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
+import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.basic.isAdaptiveIconDrawable
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.requireDrawable

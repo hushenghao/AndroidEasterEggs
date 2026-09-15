@@ -95,7 +95,8 @@ import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavigator
-import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
+import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.settings_ui.basic.rememberPrefBoolState
 import com.dede.basic.copy
 import com.dede.basic.toast
 import com.dede.basic.trimZeroAndDot
@@ -751,7 +752,7 @@ private fun MoreOptionsPopup(
             shape = CircleShape,
             colors = cardColors(containerColor = colorScheme.surfaceColorAtElevation(4.dp))
         ) {
-            var moreOptionGuide by rememberPrefBoolState("cat_editor_more_option_guide", true)
+            var moreOptionGuide by rememberPrefBoolState(AppSettings.catEditorMoreOptionGuide)
             val scrollState = rememberScrollState()
             LaunchedEffect(scrollState) {
                 if (moreOptionGuide && scrollState.canScrollForward) {

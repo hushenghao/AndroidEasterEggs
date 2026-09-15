@@ -24,7 +24,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,7 +35,7 @@ import com.dede.android_eggs.alterable_adaptive_icon.AlterableAdaptiveIcon
 import com.dede.android_eggs.composable.ScrollableModalBottomSheet
 import com.dede.android_eggs.navigation.OverlayContentProvider
 import com.dede.android_eggs.navigation.OverlayRoute
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
+import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

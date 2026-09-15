@@ -31,15 +31,15 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.core.text.HtmlCompat
 import com.dede.android_eggs.activity_actions.WallpaperPlatLogoUtils
 import com.dede.android_eggs.composable.ComposeViewThemeBuilder
+import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.preferences.PrefKey
 import com.dede.android_eggs.resources.R
 import com.dede.android_eggs.util.ActivityActionDispatcher
-import com.dede.basic.getBoolean
-import com.dede.basic.putBoolean
 
 internal class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
 
     private class WarningInfo(
-        val key: String,
+        val key: PrefKey<Boolean>,
         @StringRes val title: Int,
         @StringRes val message: Int,
     )
@@ -47,17 +47,17 @@ internal class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
     companion object {
         private val target = mapOf(
             com.android_t.egg.PlatLogoActivity::class to WarningInfo(
-                "key_t_trypophobia_warning",
+                AppSettings.tTrypophobiaWarning,
                 android.R.string.dialog_alert_title,
                 R.string.message_trypophobia_warning
             ),
             com.android_s.egg.PlatLogoActivity::class to WarningInfo(
-                "key_s_trypophobia_warning",
+                AppSettings.sTrypophobiaWarning,
                 android.R.string.dialog_alert_title,
                 R.string.message_trypophobia_warning
             ),
             com.android_t.egg.beta.PlatLogoActivity::class to WarningInfo(
-                "key_s_trypophobia_warning",
+                AppSettings.sTrypophobiaWarning,
                 android.R.string.dialog_alert_title,
                 R.string.message_trypophobia_warning
             ),
@@ -66,7 +66,7 @@ internal class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
 
     override fun onCreate(activity: Activity) {
         val info = target[activity.javaClass.kotlin] ?: return
-        if (activity.getBoolean(info.key, false)) return
+        if (info.key.get(activity)) return
 
         val composeView = ComposeViewThemeBuilder(activity) {
             val context = LocalContext.current
@@ -74,7 +74,7 @@ internal class WarningDialogAction : ActivityActionDispatcher.ActivityAction {
                 info.title,
                 info.message,
                 onConfirm = {
-                    context.putBoolean(info.key, true)
+                    info.key.set(context, true)
                 },
                 onCancel = {
                     WallpaperPlatLogoUtils.finishWithAnimation(activity)

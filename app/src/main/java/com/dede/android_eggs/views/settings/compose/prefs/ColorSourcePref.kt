@@ -41,8 +41,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
-import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
-import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePrefUtil.isDynamicColorSourceSupported
+import com.dede.android_eggs.icon_shape.IconShapePrefUtil
+import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
+import com.dede.android_eggs.views.theme.settings.ColorSourcePrefUtil
+import com.dede.android_eggs.views.theme.settings.ColorSourcePrefUtil.isDynamicColorSourceSupported
+import com.dede.android_eggs.views.theme.settings.ThemePrefUtil
 import com.dede.android_eggs.views.theme.defaultSeedColor
 import com.dede.android_eggs.views.theme.rememberEasterEggColorScheme
 import com.dede.android_eggs.resources.R as StringsR

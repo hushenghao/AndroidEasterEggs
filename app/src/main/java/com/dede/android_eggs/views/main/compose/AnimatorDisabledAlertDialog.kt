@@ -14,21 +14,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.content.edit
-import com.dede.android_eggs.util.pref
+import com.dede.android_eggs.preferences.AppSettings
 import com.dede.basic.Utils
 import com.dede.basic.toast
 import com.dede.android_eggs.resources.R as StringsR
 
-private const val PREF_DONT_SHOW_AGAIN = "animator_disabled_alert_dialog_dont_show_again"
-
 object AnimatorAlertPrefs {
     fun isDontShowAgain(context: Context): Boolean {
-        return context.pref.getBoolean(PREF_DONT_SHOW_AGAIN, false)
+        return AppSettings.animatorDisabledDialogDontShowAgain.get(context)
     }
 
     fun setDontShowAgain(context: Context) {
-        context.pref.edit { putBoolean(PREF_DONT_SHOW_AGAIN, true) }
+        AppSettings.animatorDisabledDialogDontShowAgain.set(context, true)
     }
 }
 

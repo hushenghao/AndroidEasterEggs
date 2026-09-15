@@ -14,10 +14,10 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.toClipEntry
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.R
-import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
-import com.dede.android_eggs.views.settings.compose.basic.Option
-import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
-import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
+import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
+import com.dede.android_eggs.settings_ui.basic.Option
+import com.dede.android_eggs.settings_ui.basic.OptionShapes
+import com.dede.android_eggs.settings_ui.basic.imageVectorIconBlock
 import com.dede.basic.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

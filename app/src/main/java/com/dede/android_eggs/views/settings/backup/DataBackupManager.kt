@@ -2,6 +2,7 @@ package com.dede.android_eggs.views.settings.backup
 
 import android.content.Context
 import android.net.Uri
+import com.dede.android_eggs.preferences.AppSettings
 import com.dede.android_eggs.util.flushPendingWrites
 import com.dede.android_eggs.util.makePreferencesName
 import com.dede.android_eggs.views.settings.compose.prefs.AppIcon
@@ -143,13 +144,10 @@ internal object DataBackupManager {
     }
 
     private fun flushPendingWrites(context: Context) {
-        val prefNames = listOf(
-            makePreferencesName(context.packageName),
-            "N_mPrefs",
-            "R_mPrefs",
-            "S_mPrefs",
-            "T_mPrefs",
-        )
+        val prefNames = buildList {
+            add(makePreferencesName(context.packageName))
+            addAll(AppSettings.nekoPrefFiles)
+        }
         for (name in prefNames) {
             val prefs = context.getSharedPreferences(name, Context.MODE_PRIVATE)
             prefs.flushPendingWrites()

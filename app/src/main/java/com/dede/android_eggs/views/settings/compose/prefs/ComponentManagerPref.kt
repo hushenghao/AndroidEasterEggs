@@ -17,9 +17,9 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.EasterEggHelp.VersionFormatter
-import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
-import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
-import com.dede.android_eggs.views.settings.compose.basic.SwitchOption
+import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
+import com.dede.android_eggs.settings_ui.basic.OptionShapes
+import com.dede.android_eggs.settings_ui.basic.SwitchOption
 import com.dede.basic.provider.ComponentProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

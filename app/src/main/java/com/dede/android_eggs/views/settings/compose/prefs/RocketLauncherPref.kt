@@ -24,11 +24,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.android.launcher2.RocketLauncher
 import com.android.launcher2.RocketLauncherPrefUtil
-import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
-import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
-import com.dede.android_eggs.views.settings.compose.basic.RadioOption
-import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
-import com.dede.android_eggs.views.settings.compose.basic.rememberPrefIntState
+import com.dede.android_eggs.icon_shape.IconShapePrefUtil
+import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
+import com.dede.android_eggs.settings_ui.basic.OptionShapes
+import com.dede.android_eggs.settings_ui.basic.RadioOption
+import com.dede.android_eggs.settings_ui.basic.imageVectorIconBlock
+import com.dede.android_eggs.settings_ui.basic.rememberPrefIntState
 import com.dede.android_eggs.resources.R as StringR
 
 fun launchRocketLauncher(context: Context) {
@@ -39,10 +41,7 @@ fun launchRocketLauncher(context: Context) {
 fun RocketLauncherPref() {
     val context = LocalContext.current
     var expanded by rememberSaveable { mutableStateOf(false) }
-    var currentIconsValue by rememberPrefIntState(
-        RocketLauncherPrefUtil.KEY_ROCKET_LAUNCHER_ICONS_SOURCE,
-        RocketLauncherPrefUtil.VALUE_DEFAULT
-    )
+    var currentIconsValue by rememberPrefIntState(AppSettings.rocketLauncherIconsSource)
     ExpandOptionsPref(
         expended = expanded,
         leadingIcon = Icons.Rounded.RocketLaunch,

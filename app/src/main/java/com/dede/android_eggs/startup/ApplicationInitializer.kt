@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.startup.Initializer
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.views.settings.compose.prefs.AppIconPrefUtil
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
+import com.dede.android_eggs.views.theme.settings.ThemePrefUtil
 import com.dede.basic.GlobalContext
 import com.skydoves.compose.stability.runtime.ComposeStabilityAnalyzer
 

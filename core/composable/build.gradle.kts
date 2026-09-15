@@ -9,7 +9,7 @@ android {
 dependencies {
     implementation(project(":core:basic"))
     implementation(project(":core:theme"))
-    implementation(project(":core:settings"))
+    implementation(project(":core:icon-shape"))
     implementation(project(":core:resources"))
     implementation(libs.google.material)
 

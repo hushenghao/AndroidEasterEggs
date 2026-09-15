@@ -44,7 +44,7 @@ import com.dede.android_eggs.views.main.util.AndroidReleaseDateMatcher
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.EggActionHelp
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
+import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup

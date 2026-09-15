@@ -6,8 +6,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Animation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
-import com.dede.android_eggs.views.settings.compose.basic.SwitchIntPref
+import com.dede.android_eggs.settings_ui.basic.SettingPrefUtil
+import com.dede.android_eggs.settings_ui.basic.SwitchIntPref
 import com.dede.android_eggs.resources.R as StringsR
 
 object IconVisualEffectsPrefUtil {

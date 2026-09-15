@@ -39,6 +39,7 @@ import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeAppBar
 import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeBottomBar
 import com.dede.android_eggs.composable.currentWindowWidthPane
 import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.settings_ui.basic.SettingPrefUtil
 import com.dede.android_eggs.ui.composes.ReverseDismissibleNavigationDrawer
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.ui.composes.ReversePermanentNavigationDrawer
@@ -47,7 +48,6 @@ import com.dede.android_eggs.util.compose.only
 import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
 import com.dede.android_eggs.views.settings.SettingsContent
 import com.dede.android_eggs.views.settings.SettingsScreen
-import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
 import com.dede.basic.provider.BaseEasterEgg
 import dagger.Module

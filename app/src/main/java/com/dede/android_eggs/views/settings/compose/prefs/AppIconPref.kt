@@ -33,8 +33,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.alterable_adaptive_icon.AlterableAdaptiveIcon
+import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.views.main.util.EasterEggHelp
-import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
+import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
 import com.dede.basic.provider.toRange
 import com.dede.android_eggs.resources.R as StringsR
 

@@ -5,7 +5,7 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import androidx.annotation.ColorInt
 import androidx.compose.ui.graphics.toArgb
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
+import com.dede.android_eggs.views.theme.settings.ThemePrefUtil
 import com.dede.android_eggs.views.theme.currentColorScheme
 
 object ThemeUtils {

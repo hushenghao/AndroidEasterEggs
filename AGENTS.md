@@ -219,23 +219,39 @@ All core modules use `easter.eggs.compose.library` except where noted.
 | `:core:alterable-adaptive-icon`   | compose.library          | `com.dede.android_eggs.alterable_adaptive_icon`     | Adaptive launcher icon switching with Compose UI preview. |
 | `:core:composable`                | compose.library          | `com.dede.android_eggs.composable`                  | Shared Compose UI utilities and reusable composables. |
 | `:core:custom-tab-browser`        | library (non-Compose)    | `com.dede.android_eggs.browser`                     | AndroidX Custom Tabs browser integration. Keep this module browser-focused; do not add Compose UI here. |
-| `:core:icons`                     | compose.library          | `com.dede.android_eggs.ui.composes.icons`           | Compose Material icon assets and wrappers. |
+| `:core:icon-shape`                | compose.library          | `com.dede.android_eggs.icon_shape`                  | Launcher-icon masking shapes: `ShapeSpec` / `shapeSpecs`, the system icon mask (`SystemIconMaskUtil`) and path/polygon shape helpers. `IconShapePreference` holds the live `pref_key_override_icon_shape` state, so icon renderers depend on this instead of on the settings UI kit. |
+| `:core:icons`                     | compose.library          | `com.dede.android_eggs.ui.composes.icons`           | Compose Material icon assets and wrappers. Output target of `:script:compose-material-icons-generator` — keep hand-written or business code out of it. |
 | `:core:local-provider`            | compose.library          | `com.dede.android_eggs.local_provider`              | CompositionLocal providers and URI handling (when Compose-dependent). |
 | `:core:navigation`                | compose.library          | `com.dede.android_eggs.navigation`                  | Navigation3 route definitions and contracts. Uses `kotlinx.serialization`. |
 | `:core:resources`                 | library (non-Compose)    | `com.dede.android_eggs.resources`                   | Shared strings, drawables, XML resources, localized values. |
-| `:core:settings`                  | compose.library          | `com.dede.android_eggs.settings`                    | Settings storage and setting-related shared APIs. |
+| `:core:settings-ui`               | compose.library          | `com.dede.android_eggs.settings_ui`                 | Settings **UI** kit: the `SettingPref` / `SwitchPref` / `ExpandOptionsPref` composables, `PrefKey`-backed Compose preference state (`PrefMutableState`), and app-widget pin / preview helpers. Preference **storage** lives in `:core:basic` (`com.dede.android_eggs.preferences`) and icon masking shapes in `:core:icon-shape` — do not move keys, defaults or shape geometry here. |
 | `:core:shortcut`                  | library (non-Compose)    | `com.dede.android_eggs.shortcut`                    | Launcher shortcut and app-icon shortcut support. |
 | `:core:system-colors`             | basic.library (non-Compose) | `com.dede.android_eggs.system_colors`            | Wallpaper-seeded dynamic system colors: startup color extraction engine (App Startup, API 27–30), tonal palette cache, bundled static palette resources (`values`/`values-v31`), and the `getSystemColor` resolver (`ResourcesUtils` for Java). Eggs drawables referencing `@color/system_*` declare `implementation(project(":core:system-colors"))` explicitly (eggs/S, eggs/Tiramisu, analog-clock-widget, core/theme, app). |
 | `:core:analog-clock`              | basic.library (non-Compose) | `com.dede.android_eggs.analog_clock`             | `AnalogClock` view tinted by `getSystemColor` runtime palette (dial/hands drawables + attrs migrated with it). Consumers: eggs/S, eggs/Tiramisu PlatLogo activities. |
 | `:core:provider`                  | basic.library (non-Compose) | `com.dede.basic.provider`                        | Easter egg provider contracts (`EasterEggProvider`, `ComponentProvider`, `SnapshotProvider`, `TimelineEvent`). Package/namespace kept as `com.dede.basic.provider`. Exposed to consumers via `:core:basic` `api` dependency. |
-| `:core:theme`                     | compose.library          | `com.dede.android_eggs.views.theme`                 | Material 3 theme, colors, typography, theme resources. |
+| `:core:theme`                     | compose.library          | `com.dede.android_eggs.views.theme`                 | Material 3 theme, colors, typography, theme resources, plus the night-mode and color-source preference accessors in `views.theme.settings`. |
 
 ### Dependency Rules for Core
 
 - **Do not** add circular dependencies between core modules.
+- **Do not** put a package in two modules. A shared package makes a class's owner
+  invisible to the reader: `app`'s `ThemePref.kt` and `:core:theme`'s `ThemePrefUtil`
+  used to share `com.dede.android_eggs.views.settings.compose.prefs`, which let the
+  former reference the latter with no import at all. Core-module code packages are
+  named after the module (`com.dede.android_eggs.settings_ui`, `...icon_shape`,
+  `...views.theme`). `com.dede.android_eggs.util` is the known remaining exception —
+  seven modules still share it, including a `Utils.kt` in two of them.
 - **`custom-tab-browser`** is the only non-Compose core module with browser responsibility.
   Do not add Compose UI dependents to it.
 - **`local-provider`** owns Compose provider logic and URI handling that needs Compose.
+- **`settings-ui`** owns the settings screen widget kit, not preference storage. Persisted
+  keys, defaults and `PrefKey` live in `:core:basic`
+  (`core/basic/src/main/java/com/dede/android_eggs/preferences/`).
+- **`icon-shape`** owns icon masking shapes. Its `shapeSpecs` list is **append-only**: the
+  selected shape is stored as an index into it (`pref_key_override_icon_shape`), so
+  inserting a shape in the middle renumbers every later entry and silently changes the
+  shape of existing installs. `IconShapePreference` is the single live state for that
+  index — do not add a second `PrefKey`-backed state for it elsewhere.
 - **`resources`** owns shared non-code Android resources; avoid putting strings here
   that should be feature-local.
 
@@ -250,7 +266,6 @@ All feature modules use `easter.eggs.compose.library`.
 | `:feature:analog-clock-widget` | `com.dede.android_eggs.views.widget`              | DataStore                | Analog clock app widget, widget configuration activity, XML metadata, preview resources. |
 | `:feature:cat-editor`          | `com.dede.android_eggs.cat_editor`                | Room, Navigation3, Capturable | Neko cat editor UI with local Room database. Schemas exported to `feature/cat-editor/schemas/`. |
 | `:feature:crash`               | `com.dede.android_eggs.crash`                     | Curtains, Startup        | Crash test / display feature. Initialized at app startup. |
-| `:feature:embedding-splits`    | `com.dede.android_eggs.embedding_splits`          | AndroidX Window          | Large-screen / split embedding support. |
 | `:feature:libraries-info`      | `com.dede.android_eggs.libraries_info`            | AboutLibraries compose-m3 | Open source libraries information UI, external link handling. |
 | `:feature:neko-controls-widget` | `com.dede.android_eggs.neko_controls_widget`     | DataStore, Material       | Neko controls app widget with RemoteViews layouts and night-mode theming. |
 
@@ -274,8 +289,48 @@ All feature modules use `easter.eggs.compose.library`.
 
 | Module      | Plugin                     | Namespace        | Purpose |
 |-------------|----------------------------|------------------|---------|
-| `:core:basic` | `easter.eggs.basic.library` | `com.dede.basic` | Shared Android utility code (namespace/package kept as `com.dede.basic`). `api`-depends on `:jvm-basic` and `:core:provider`. Uses Okio, AppCompat, Lifecycle, ViewModel, Startup, Activity. |
+| `:core:basic` | `easter.eggs.basic.library` | `com.dede.basic` | Shared Android utility code (namespace/package kept as `com.dede.basic`). `api`-depends on `:jvm-basic` and `:core:provider`. Uses Okio, AppCompat, Lifecycle, ViewModel, Startup, Activity. Also hosts the settings key registry `com.dede.android_eggs.preferences.AppSettings` (see Settings Keys below), which is why it must stay free of `:core:theme` / `:core:system-colors` dependencies. |
 | `:jvm-basic` | `java-library` + `kotlin.jvm` | (none)          | Shared JVM-only utility code. Used by script modules (e.g., `:script:emoji-svg-xml-convertor`). Java 17. |
+
+## Settings Keys
+
+`core/basic/src/main/java/com/dede/android_eggs/preferences/` is the single source of
+truth for every setting persisted in the default `<packageName>_preferences` file:
+
+- `PrefKey<T>` — one setting: the storage key plus the value used when nothing is
+  written yet.
+- `AppSettings` — all keys grouped by owning module, plus the extra SharedPreferences
+  file names that backup has to flush. Its `init` block rejects duplicate key names.
+
+Rules when adding or changing a setting:
+
+- Declare the key in `AppSettings`; do not write a string literal at the call site.
+- Read and write through `PrefKey.get` / `PrefKey.set`, so the declared default is
+  always the one used:
+
+  ```kotlin
+  val enabled = AppSettings.retainInRecents.get(context)
+  AppSettings.retainInRecents.set(context, true)
+  ```
+
+  Build keys with the `PrefKey.boolean` / `PrefKey.int` / `PrefKey.string` factories
+  rather than the constructor: the stored type belongs to the key, not to a guess from
+  the default value, which is what keeps a nullable default expressible.
+  For Compose state use `rememberPrefBoolState` / `rememberPrefIntState` /
+  `mutablePrefColorState` in `:core:settings-ui`, which take a `PrefKey` too.
+- Key names are part of the on-disk format. Renaming one resets that setting on every
+  existing install, so a rename must ship with a migration.
+- The registry lives in `:core:basic` because the convention plugins already inject that
+  module into every APP and LIBRARY module. Keep it that way: it cannot reference
+  `:core:theme` or `:core:system-colors`, so device-capability defaults stay in the
+  owning module (see `ColorSourcePrefUtil.DEFAULT_SOURCE`).
+- Long values have no `PrefKey` factory yet. `SpEx.kt` keeps the string-keyed
+  `Context.getLong` / `putLong` for the AOSP-derived `PlatLogoActivity` classes
+  (`SpUtils` in Java). Leave them alone.
+
+Not in the registry: the AOSP-derived `N_mPrefs` / `R_mPrefs` / `S_mPrefs` / `T_mPrefs`
+neko state, the two DataStore files (per-widget config), the launcher icon state
+(`PackageManager` component state) and the language (`AppCompatDelegate` locales).
 
 ## Easter Egg Modules
 
@@ -480,6 +535,9 @@ Use these first for common tasks:
   - `app/src/main/res/mipmap-*`
   - `app/src/main/java/com/dede/android_eggs/views/settings/compose/prefs/AppIconPref.kt`
   - `core/basic/src/main/java/com/dede/basic/Utils.kt`
+- **Icon masking shapes**:
+  - `core/icon-shape/src/main/java/com/dede/android_eggs/icon_shape/` — the catalog and the live selection state
+  - `app/src/main/java/com/dede/android_eggs/views/settings/compose/prefs/IconShapePref.kt` — the shape picker UI
 - **Shortcuts**:
   - `core/shortcut/`
   - `core/shortcut/src/main/java/com/dede/android_eggs/views/main/util/EasterEggShortcutsHelp.kt`
@@ -505,6 +563,14 @@ Use these first for common tasks:
   - `eggs/R/` (Cat Controls)
 - **Easter egg code by Android version**:
   - `eggs/<VersionName>/` — see Easter Egg Modules table for version mapping
+- **Settings keys (persisted preferences)**:
+  - `core/basic/src/main/java/com/dede/android_eggs/preferences/` — see Settings Keys section
+  - `core/basic/src/main/java/com/dede/android_eggs/util/Pref.kt` — the default prefs file
+  - `core/settings-ui/src/main/java/com/dede/android_eggs/settings_ui/basic/PrefMutableState.kt` — Compose state over a `PrefKey`
+- **Settings screen UI**:
+  - `app/src/main/java/com/dede/android_eggs/views/settings/SettingsScreen.kt`
+  - `app/src/main/java/com/dede/android_eggs/views/settings/compose/prefs/`
+  - `core/settings-ui/src/main/java/com/dede/android_eggs/settings_ui/basic/`
 - **Build plugin logic**:
   - `build-logic/convention/src/main/kotlin/com/dede/android_eggs/plugins/`
 - **Gradle version catalog**:

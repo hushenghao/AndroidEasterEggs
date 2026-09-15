@@ -27,8 +27,8 @@ import androidx.lifecycle.ViewModel
 import com.dede.android_eggs.ui.composes.LoopHorizontalPager
 import com.dede.android_eggs.ui.composes.LoopPagerIndicator
 import com.dede.android_eggs.ui.composes.rememberLoopPagerState
-import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
-import com.dede.android_eggs.views.settings.compose.widgets.WidgetPreviewProvider
+import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
+import com.dede.android_eggs.settings_ui.widgets.WidgetPreviewProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.dede.android_eggs.resources.R as StringsR

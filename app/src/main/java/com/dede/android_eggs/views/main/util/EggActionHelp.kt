@@ -9,7 +9,6 @@ import android.os.Build
 import android.widget.Toast
 import androidx.core.content.getSystemService
 import com.dede.android_eggs.R
-import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPrefUtil
 import com.dede.basic.Utils
@@ -82,8 +81,7 @@ object EggActionHelp {
             return
         }
 
-        val retainInRecents = !SplitUtils.isActivityEmbedded(context) &&
-                RetainInRecentsPrefUtil.isRetainInRecentsEnabled(context)
+        val retainInRecents = RetainInRecentsPrefUtil.isRetainInRecentsEnabled(context)
         val intent = createIntent(context, targetClass, retainInRecents)
         val task: AppTask? = findTaskWithTrim(context, targetClass)
         if (task != null) {

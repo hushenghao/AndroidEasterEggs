@@ -18,10 +18,10 @@ import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.ui.composes.icons.Pgyer
 import com.dede.android_eggs.util.CustomTabsBrowser
-import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
-import com.dede.android_eggs.views.settings.compose.basic.Option
-import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
-import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
+import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
+import com.dede.android_eggs.settings_ui.basic.Option
+import com.dede.android_eggs.settings_ui.basic.OptionShapes
+import com.dede.android_eggs.settings_ui.basic.imageVectorIconBlock
 import com.dede.android_eggs.views.settings.compose.options.GithubOption
 import com.dede.android_eggs.views.settings.compose.options.TestCrashOption
 import com.dede.android_eggs.views.settings.compose.options.VersionOption

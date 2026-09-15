@@ -19,10 +19,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.views.settings.backup.DataBackupManager
-import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
-import com.dede.android_eggs.views.settings.compose.basic.Option
-import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
-import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
+import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
+import com.dede.android_eggs.settings_ui.basic.Option
+import com.dede.android_eggs.settings_ui.basic.OptionShapes
+import com.dede.android_eggs.settings_ui.basic.imageVectorIconBlock
 import com.dede.basic.Utils
 import com.dede.basic.toast
 import kotlinx.coroutines.Dispatchers

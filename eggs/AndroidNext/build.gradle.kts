@@ -22,5 +22,5 @@ dependencies {
     implementation(project(":core:composable"))
     implementation(project(":core:navigation"))
     implementation(project(":core:alterable-adaptive-icon"))
-    implementation(project(":core:settings"))
+    implementation(project(":core:icon-shape"))
 }

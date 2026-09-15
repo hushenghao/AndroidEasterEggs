@@ -33,7 +33,7 @@ import com.dede.android_eggs.navigation.LocalOverlayManager
 import com.dede.android_eggs.navigation.OverlayRoute
 import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
-import com.dede.android_eggs.views.settings.compose.basic.SettingPref
+import com.dede.android_eggs.settings_ui.basic.SettingPref
 import com.dede.basic.provider.EasterEgg
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

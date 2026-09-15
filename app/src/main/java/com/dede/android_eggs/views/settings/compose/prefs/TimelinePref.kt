@@ -8,7 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.navigation.LocalOverlayManager
 import com.dede.android_eggs.navigation.OverlayRoute
-import com.dede.android_eggs.views.settings.compose.basic.SettingPref
+import com.dede.android_eggs.settings_ui.basic.SettingPref
 import com.dede.android_eggs.resources.R as StringsR
 
 @Preview

@@ -14,16 +14,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.dede.android_eggs.util.LocalEvent
-import com.dede.android_eggs.views.settings.compose.basic.ExpandOptionsPref
-import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
-import com.dede.android_eggs.views.settings.compose.basic.ValueOption
-import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
-import com.dede.android_eggs.views.settings.compose.basic.radioButtonBlock
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.ACTION_NIGHT_MODE_CHANGED
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.AMOLED
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.DARK
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.FOLLOW_SYSTEM
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil.LIGHT
+import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
+import com.dede.android_eggs.settings_ui.basic.OptionShapes
+import com.dede.android_eggs.settings_ui.basic.ValueOption
+import com.dede.android_eggs.settings_ui.basic.imageVectorIconBlock
+import com.dede.android_eggs.settings_ui.basic.radioButtonBlock
+import com.dede.android_eggs.views.theme.settings.ThemePrefUtil
+import com.dede.android_eggs.views.theme.settings.ThemePrefUtil.ACTION_NIGHT_MODE_CHANGED
+import com.dede.android_eggs.views.theme.settings.ThemePrefUtil.AMOLED
+import com.dede.android_eggs.views.theme.settings.ThemePrefUtil.DARK
+import com.dede.android_eggs.views.theme.settings.ThemePrefUtil.FOLLOW_SYSTEM
+import com.dede.android_eggs.views.theme.settings.ThemePrefUtil.LIGHT
+import com.dede.android_eggs.views.theme.settings.applyApplicationNightMode
 import com.dede.android_eggs.resources.R as StringsR
 
 

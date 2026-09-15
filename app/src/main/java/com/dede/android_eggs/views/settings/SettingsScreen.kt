@@ -19,13 +19,11 @@ import androidx.compose.material3.DrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.appbar.HazeScaffold
-import com.dede.android_eggs.util.SplitUtils
 import com.dede.android_eggs.util.isVivo
 import com.dede.android_eggs.views.settings.compose.basic.SettingDivider
 import com.dede.android_eggs.views.settings.compose.groups.AboutGroup
@@ -96,7 +94,6 @@ fun SettingsContent(
             .then(modifier),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        val context = LocalContext.current
         ThemePref()
 
         ColorSourcePref()
@@ -130,7 +127,7 @@ fun SettingsContent(
         // Hidden on VIVO: its recents merges all of an app's tasks into one
         // card regardless of task/process/affinity, so this feature can't
         // work there (issue #935).
-        if (!SplitUtils.isActivityEmbedded(context) && !isVivo()) {
+        if (!isVivo()) {
             RetainInRecentsPref()
         }
 

@@ -8,7 +8,7 @@ android {
 
 dependencies {
     implementation(project(":core:theme"))
-    implementation(project(":core:settings"))
+    implementation(project(":core:settings-ui"))
     implementation(libs.androidx.core)
     implementation(libs.androidx.datastore)
     implementation(libs.google.material)

@@ -52,7 +52,7 @@ import androidx.core.net.toUri
 import androidx.core.os.LocaleListCompat
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.composable.ScrollableModalBottomSheet
-import com.dede.android_eggs.views.settings.compose.basic.SettingPref
+import com.dede.android_eggs.settings_ui.basic.SettingPref
 import com.dede.basic.createLocalesContext
 import kotlinx.coroutines.launch
 import java.util.Locale

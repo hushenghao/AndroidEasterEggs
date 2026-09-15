@@ -10,7 +10,7 @@ dependencies {
     implementation(project(":core:system-colors"))
     implementation(project(":core:theme"))
     implementation(project(":core:resources"))
-    implementation(project(":core:settings"))
+    implementation(project(":core:settings-ui"))
     implementation(project(":core:composable"))
     implementation(project(":core:icons"))
     implementation(libs.androidx.core)

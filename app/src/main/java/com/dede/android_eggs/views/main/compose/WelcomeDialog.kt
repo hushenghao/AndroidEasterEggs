@@ -23,20 +23,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
-import com.dede.android_eggs.util.pref
-import com.dede.android_eggs.views.settings.compose.basic.SettingPrefUtil.KEY_PRIVACY_POLICY_AGREED
-import com.dede.android_eggs.views.settings.compose.basic.rememberPrefBoolState
+import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.settings_ui.basic.rememberPrefBoolState
 import com.dede.android_eggs.views.settings.compose.prefs.SnapshotDialogView
 import com.dede.android_eggs.resources.R as StringsR
 
 fun isAgreedPrivacyPolicy(context: Context): Boolean {
-    return context.pref.getBoolean(KEY_PRIVACY_POLICY_AGREED, false)
+    return AppSettings.privacyPolicyAgreed.get(context)
 }
 
 @Preview
 @Composable
 fun WelcomeDialog(onDismiss: () -> Unit = {}) {
-    var privacyPolicyAgreed by rememberPrefBoolState(KEY_PRIVACY_POLICY_AGREED, false)
+    var privacyPolicyAgreed by rememberPrefBoolState(AppSettings.privacyPolicyAgreed)
     val uriHandler = LocalUriHandler.current
     val privacyUrl = stringResource(R.string.url_privacy)
     val konfettiController = LocalKonfettiState.current

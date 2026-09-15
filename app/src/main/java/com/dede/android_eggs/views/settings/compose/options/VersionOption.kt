@@ -43,10 +43,10 @@ import com.dede.android_eggs.navigation.OverlayRoute
 import com.dede.android_eggs.util.AGPUtils
 import com.dede.android_eggs.util.compareStringVersion
 import com.dede.android_eggs.views.main.compose.isAgreedPrivacyPolicy
-import com.dede.android_eggs.views.settings.compose.basic.Option
-import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
-import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
+import com.dede.android_eggs.settings_ui.basic.Option
+import com.dede.android_eggs.settings_ui.basic.OptionShapes
+import com.dede.android_eggs.settings_ui.basic.imageVectorIconBlock
+import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.basic.Utils
 import com.dede.basic.toast
 import kotlinx.coroutines.launch

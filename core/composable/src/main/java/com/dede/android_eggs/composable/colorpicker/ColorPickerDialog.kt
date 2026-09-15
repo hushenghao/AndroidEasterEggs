@@ -56,7 +56,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.ScrollableModalBottomSheet
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
+import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.basic.copy
 import kotlinx.coroutines.launch
 import kotlin.random.Random

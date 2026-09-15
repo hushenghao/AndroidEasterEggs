@@ -4,10 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import androidx.activity.ComponentActivity
-import androidx.core.content.edit
 import androidx.lifecycle.lifecycleScope
+import com.dede.android_eggs.preferences.AppSettings
 import com.dede.android_eggs.util.launchCatchable
-import com.dede.android_eggs.util.pref
 import com.dede.android_eggs.views.main.compose.isAgreedPrivacyPolicy
 import com.dede.basic.toast
 import com.google.android.gms.common.ConnectionResult
@@ -24,14 +23,12 @@ object GooglePlayCore {
 
     private const val TAG = "GooglePlayCore"
 
-    private const val KEY_LAUNCH_REVIEW_COUNT = "key_launch_review_count"
-
     private fun isLaunchReviewTiming(context: Context): Boolean {
-        val count = context.pref.getInt(KEY_LAUNCH_REVIEW_COUNT, 0)
+        val count = AppSettings.launchReviewCount.get(context)
         try {
             return count == 3 || (count >= 10 && count % 10 == 0)
         } finally {
-            context.pref.edit { putInt(KEY_LAUNCH_REVIEW_COUNT, count + 1) }
+            AppSettings.launchReviewCount.set(context, count + 1)
         }
     }
 

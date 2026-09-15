@@ -46,7 +46,7 @@ import com.dede.android_eggs.R
 import com.dede.android_eggs.composable.ScrollableModalBottomSheet
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
-import com.dede.android_eggs.views.settings.compose.prefs.IconShapePrefUtil
+import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.eventAnnotatedString
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.isNewGroup
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localMonth

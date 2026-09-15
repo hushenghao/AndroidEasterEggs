@@ -14,8 +14,8 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.withStyledAttributes
-import com.dede.android_eggs.views.settings.compose.widgets.AppWidgetPinUtils
-import com.dede.android_eggs.views.settings.compose.widgets.WidgetPreviewProvider
+import com.dede.android_eggs.settings_ui.widgets.AppWidgetPinUtils
+import com.dede.android_eggs.settings_ui.widgets.WidgetPreviewProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

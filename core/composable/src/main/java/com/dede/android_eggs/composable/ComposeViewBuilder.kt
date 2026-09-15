@@ -21,8 +21,8 @@ import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.lifecycle.setViewTreeViewModelStoreOwner
 import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
-import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePrefUtil
-import com.dede.android_eggs.views.settings.compose.prefs.ThemePrefUtil
+import com.dede.android_eggs.views.theme.settings.ColorSourcePrefUtil
+import com.dede.android_eggs.views.theme.settings.ThemePrefUtil
 import com.dede.android_eggs.views.theme.EasterEggsTheme
 import com.dede.basic.lifecycleOwnerCompat
 import com.dede.basic.savedStateOwnerCompat

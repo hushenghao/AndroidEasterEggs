@@ -5,9 +5,9 @@ import androidx.compose.material.icons.rounded.SentimentDissatisfied
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import com.dede.android_eggs.views.settings.compose.basic.Option
-import com.dede.android_eggs.views.settings.compose.basic.OptionShapes
-import com.dede.android_eggs.views.settings.compose.basic.imageVectorIconBlock
+import com.dede.android_eggs.settings_ui.basic.Option
+import com.dede.android_eggs.settings_ui.basic.OptionShapes
+import com.dede.android_eggs.settings_ui.basic.imageVectorIconBlock
 import com.dede.basic.uiHandler
 
 @Composable

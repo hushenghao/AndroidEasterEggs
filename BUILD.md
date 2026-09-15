@@ -15,11 +15,13 @@ flowchart LR
         core_basic(":core:basic")
         core_composable(":core:composable")
         core_custom_tab_browser(":core:custom-tab-browser")
+        core_icon_shape(":core:icon-shape")
         core_icons(":core:icons")
         core_local_provider(":core:local-provider")
         core_navigation(":core:navigation")
+        core_provider(":core:provider")
         core_resources(":core:resources")
-        core_settings(":core:settings")
+        core_settings_ui(":core:settings-ui")
         core_shortcut(":core:shortcut")
         core_system_colors(":core:system-colors")
         core_theme(":core:theme")
@@ -71,8 +73,8 @@ flowchart LR
 
     class app appModule
     class jvm_basic baseModule
-    class core_activity_actions,core_alterable_adaptive_icon,core_analog_clock,core_basic,core_composable,core_custom_tab_browser,core_icons,core_local_provider,core_navigation,core_resources,core_settings,core_shortcut,core_system_colors,core_theme coreModule
-    class feature_analog_clock_widget,feature_cat_editor,feature_crash,feature_embedding_splits,feature_keep_android_open,feature_libraries_info,feature_neko_controls_widget featureModule
+    class core_activity_actions,core_alterable_adaptive_icon,core_analog_clock,core_basic,core_composable,core_custom_tab_browser,core_icon_shape,core_icons,core_local_provider,core_navigation,core_provider,core_resources,core_settings_ui,core_shortcut,core_system_colors,core_theme coreModule
+    class feature_analog_clock_widget,feature_cat_editor,feature_crash,feature_libraries_info,feature_neko_controls_widget featureModule
     class eggs_android_next,eggs_baklava,eggs_base,eggs_cinnamon_bun,eggs_gingerbread,eggs_honeycomb,eggs_ice_cream_sandwich,eggs_jelly_bean,eggs_kit_kat,eggs_lollipop,eggs_marshmallow,eggs_nougat,eggs_oreo,eggs_pie,eggs_q,eggs_r,eggs_rocket_launcher,eggs_s,eggs_tiramisu,eggs_upside_down_cake,eggs_vanilla_ice_cream eggsModule
     class script_compose_material_icons_generator,script_emoji_svg_xml_convertor scriptModule
 
@@ -86,11 +88,13 @@ flowchart LR
     app --> core_basic
     app --> core_composable
     app --> core_custom_tab_browser
+    app --> core_icon_shape
     app --> core_icons
     app --> core_local_provider
     app --> core_navigation
+    app --> core_provider
     app --> core_resources
-    app --> core_settings
+    app --> core_settings_ui
     app --> core_shortcut
     app --> core_system_colors
     app --> core_theme
@@ -136,37 +140,41 @@ flowchart LR
     core_activity_actions --> eggs_s
     core_activity_actions --> eggs_tiramisu
     core_alterable_adaptive_icon --> core_basic
-    core_alterable_adaptive_icon --> core_settings
     core_analog_clock --> jvm_basic
     core_analog_clock --> core_basic
     core_analog_clock --> core_system_colors
     core_basic --> jvm_basic
+    core_basic --> core_provider
     core_composable --> core_basic
+    core_composable --> core_icon_shape
     core_composable --> core_resources
-    core_composable --> core_settings
     core_composable --> core_theme
     core_custom_tab_browser --> core_basic
     core_custom_tab_browser --> core_theme
+    core_icon_shape --> core_basic
     core_icons --> core_basic
     core_local_provider --> core_basic
     core_local_provider --> core_custom_tab_browser
     core_navigation --> core_basic
     core_navigation --> core_local_provider
+    core_provider --> jvm_basic
     core_resources --> core_basic
-    core_settings --> core_basic
+    core_settings_ui --> core_basic
+    core_settings_ui --> core_icon_shape
     core_shortcut --> core_alterable_adaptive_icon
     core_shortcut --> core_basic
     core_shortcut --> core_resources
     core_system_colors --> jvm_basic
+    core_system_colors --> core_basic
     core_theme --> core_basic
-    core_theme --> core_settings
+    core_theme --> core_settings_ui
     core_theme --> core_system_colors
     eggs_android_next --> core_alterable_adaptive_icon
     eggs_android_next --> core_basic
     eggs_android_next --> core_composable
     eggs_android_next --> core_custom_tab_browser
+    eggs_android_next --> core_icon_shape
     eggs_android_next --> core_navigation
-    eggs_android_next --> core_settings
     eggs_baklava --> core_basic
     eggs_base --> core_basic
     eggs_base --> core_theme
@@ -199,7 +207,7 @@ flowchart LR
     feature_analog_clock_widget --> core_composable
     feature_analog_clock_widget --> core_icons
     feature_analog_clock_widget --> core_resources
-    feature_analog_clock_widget --> core_settings
+    feature_analog_clock_widget --> core_settings_ui
     feature_analog_clock_widget --> core_system_colors
     feature_analog_clock_widget --> core_theme
     feature_cat_editor --> core_basic
@@ -208,15 +216,10 @@ flowchart LR
     feature_cat_editor --> core_local_provider
     feature_cat_editor --> core_navigation
     feature_cat_editor --> core_resources
-    feature_cat_editor --> core_settings
+    feature_cat_editor --> core_settings_ui
     feature_cat_editor --> core_theme
     feature_crash --> core_basic
     feature_crash --> core_theme
-    feature_embedding_splits --> core_basic
-    feature_embedding_splits --> core_settings
-    feature_embedding_splits --> core_theme
-    feature_keep_android_open --> core_basic
-    feature_keep_android_open --> core_settings
     feature_libraries_info --> core_basic
     feature_libraries_info --> core_composable
     feature_libraries_info --> core_custom_tab_browser
@@ -224,14 +227,14 @@ flowchart LR
     feature_libraries_info --> core_resources
     feature_libraries_info --> core_theme
     feature_neko_controls_widget --> core_basic
-    feature_neko_controls_widget --> core_settings
+    feature_neko_controls_widget --> core_settings_ui
     feature_neko_controls_widget --> core_theme
     script_emoji_svg_xml_convertor --> jvm_basic
 
-    linkStyle 0,1,2,3,4,5,6,7,8,9,10,11,12,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81 stroke:#2f80ed,stroke-width:2px
-    linkStyle 13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115 stroke:#f2994a,stroke-width:2px
-    linkStyle 33,34,35,36,37,38,39,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146 stroke:#27ae60,stroke-width:2px
-    linkStyle 147 stroke:#9b51e0,stroke-width:2px
+    linkStyle 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85 stroke:#2f80ed,stroke-width:2px
+    linkStyle 15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119 stroke:#f2994a,stroke-width:2px
+    linkStyle 35,36,37,38,39,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145 stroke:#27ae60,stroke-width:2px
+    linkStyle 146 stroke:#9b51e0,stroke-width:2px
 ```
 <!-- modularization-graph:end -->
 

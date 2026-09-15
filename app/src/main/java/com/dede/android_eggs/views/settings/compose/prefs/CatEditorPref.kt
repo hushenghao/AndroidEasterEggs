@@ -7,7 +7,7 @@ import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.ui.composes.icons.rounded.Cat
-import com.dede.android_eggs.views.settings.compose.basic.SettingPref
+import com.dede.android_eggs.settings_ui.basic.SettingPref
 import com.dede.android_eggs.resources.R as StringR
 
 @Composable

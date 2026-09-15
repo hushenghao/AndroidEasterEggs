@@ -16,9 +16,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.edit
-import com.dede.android_eggs.cat_editor.CatEditorControllerImpl.SaverImpl.KEY_GRID_VISIBLE
-import com.dede.android_eggs.util.pref
+import com.dede.android_eggs.preferences.AppSettings
 import com.dede.basic.bundleBuilder
 
 
@@ -33,7 +31,7 @@ internal class CatEditorControllerImpl(private val seed: Long) : CatEditorContro
         private const val KEY_SELECTED_ENABLED = "selected_enabled"
         private const val KEY_SELECTED_PART = "selected_part"
         private const val KEY_GESTURES_ENABLED = "gestures_enabled"
-        internal const val KEY_GRID_VISIBLE = "cat_editor_grid_visible"// pref key
+        private const val KEY_GRID_VISIBLE = "cat_editor_grid_visible"
         private const val KEY_MIRROR_MODE = "cat_editor_mirror_mode"
 
         override fun restore(value: Bundle): CatEditorControllerImpl {
@@ -196,13 +194,10 @@ internal fun rememberCatEditorController(seed: Long = Utilities.randomSeed()): C
     }
     val context = LocalContext.current
     LaunchedEffect(controller) {
-        controller.isGridVisible =
-            context.pref.getBoolean(KEY_GRID_VISIBLE, controller.isGridVisible)
+        controller.isGridVisible = AppSettings.catEditorGridVisible.get(context)
     }
     LaunchedEffect(controller.isGridVisible) {
-        context.pref.edit {
-            putBoolean(KEY_GRID_VISIBLE, controller.isGridVisible)
-        }
+        AppSettings.catEditorGridVisible.set(context, controller.isGridVisible)
     }
     return controller
 }

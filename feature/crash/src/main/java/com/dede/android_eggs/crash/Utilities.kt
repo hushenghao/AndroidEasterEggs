@@ -15,6 +15,7 @@ import androidx.core.content.IntentCompat
 import androidx.core.content.edit
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
+import com.dede.android_eggs.preferences.AppSettings
 import com.dede.android_eggs.util.AGPUtils
 import com.dede.android_eggs.util.pref
 import com.dede.basic.Utils
@@ -22,22 +23,17 @@ import com.dede.basic.copy
 
 internal object Utilities {
 
-    private const val KEY_SAVE_VCS_REVISION = "pref_save_vcs_revision"
-    private const val KEY_LAST_VCS_REVISION = "pref_last_vcs_revision"
-
     private const val VCS_REVISION_LENGTH = 7
 
     fun saveVcsRevision(context: Context) {
         val vcsRevision = AGPUtils.getVcsRevision(VCS_REVISION_LENGTH)
-        with(context.pref) {
-            val savedVersion = getString(KEY_SAVE_VCS_REVISION, null)
-            if (savedVersion == vcsRevision) {
-                return
-            }
-            edit {
-                putString(KEY_SAVE_VCS_REVISION, vcsRevision)
-                putString(KEY_LAST_VCS_REVISION, savedVersion)
-            }
+        val savedVersion = AppSettings.savedVcsRevision.get(context)
+        if (savedVersion == vcsRevision) {
+            return
+        }
+        context.pref.edit {
+            AppSettings.savedVcsRevision.set(this, vcsRevision)
+            AppSettings.lastVcsRevision.set(this, savedVersion)
         }
     }
 
@@ -111,7 +107,7 @@ internal object Utilities {
             Build.VERSION.RELEASE, Build.VERSION.SDK_INT,
             versionName, versionCode,
             AGPUtils.getVcsRevision(VCS_REVISION_LENGTH),
-            pref.getString(KEY_LAST_VCS_REVISION, null),
+            AppSettings.lastVcsRevision.get(this),
         )
     }
 
