@@ -1,1 +1,2 @@
+- Add "restore default settings" to data backup & restore
 - Adapt the home settings drawer for large screens

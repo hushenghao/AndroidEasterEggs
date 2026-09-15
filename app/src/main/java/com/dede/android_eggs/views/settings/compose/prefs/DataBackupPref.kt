@@ -6,6 +6,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Backup
 import androidx.compose.material.icons.rounded.Restore
 import androidx.compose.material.icons.rounded.SaveAs
+import androidx.compose.material.icons.rounded.SettingsBackupRestore
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -19,6 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.views.settings.backup.DataBackupManager
+import com.dede.android_eggs.views.settings.backup.DefaultSettings
 import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
 import com.dede.android_eggs.settings_ui.basic.Option
 import com.dede.android_eggs.settings_ui.basic.OptionShapes
@@ -59,6 +61,7 @@ fun DataBackupPref() {
     }
 
     var showImportConfirmDialog by rememberSaveable { mutableStateOf(false) }
+    var showRestoreDefaultsConfirmDialog by rememberSaveable { mutableStateOf(false) }
 
     val importLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument(),
@@ -104,6 +107,37 @@ fun DataBackupPref() {
         )
     }
 
+    if (showRestoreDefaultsConfirmDialog) {
+        AlertDialog(
+            onDismissRequest = { showRestoreDefaultsConfirmDialog = false },
+            title = {
+                Text(text = stringResource(StringsR.string.dialog_restore_defaults_title))
+            },
+            text = {
+                Text(text = stringResource(StringsR.string.dialog_restore_defaults_message))
+            },
+            dismissButton = {
+                TextButton(onClick = { showRestoreDefaultsConfirmDialog = false }) {
+                    Text(text = stringResource(android.R.string.cancel))
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    showRestoreDefaultsConfirmDialog = false
+                    scope.launch {
+                        withContext(Dispatchers.IO) {
+                            DefaultSettings.restore(context)
+                        }
+                        context.toast(StringsR.string.toast_restore_defaults_success)
+                        Utils.restartApp(context)
+                    }
+                }) {
+                    Text(text = stringResource(StringsR.string.action_confirm_restore_defaults))
+                }
+            },
+        )
+    }
+
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.Backup,
         title = stringResource(StringsR.string.label_data_backup),
@@ -127,9 +161,18 @@ fun DataBackupPref() {
             leadingIcon = imageVectorIconBlock(Icons.Rounded.Restore),
             title = stringResource(StringsR.string.action_import_backup),
             desc = stringResource(StringsR.string.action_import_backup_desc),
-            shape = OptionShapes.lastShape(),
+            shape = OptionShapes.defaultShape,
             onClick = {
                 showImportConfirmDialog = true
+            },
+        )
+        Option(
+            leadingIcon = imageVectorIconBlock(Icons.Rounded.SettingsBackupRestore),
+            title = stringResource(StringsR.string.action_restore_defaults),
+            desc = stringResource(StringsR.string.action_restore_defaults_desc),
+            shape = OptionShapes.lastShape(),
+            onClick = {
+                showRestoreDefaultsConfirmDialog = true
             },
         )
     }

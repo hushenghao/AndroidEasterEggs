@@ -332,6 +332,13 @@ Not in the registry: the AOSP-derived `N_mPrefs` / `R_mPrefs` / `S_mPrefs` / `T_
 neko state, the two DataStore files (per-widget config), the launcher icon state
 (`PackageManager` component state) and the language (`AppCompatDelegate` locales).
 
+Resetting to defaults is `AppSettings.reset(context)`: one transaction that drops every
+registered key, so each reads back its declared default (committed synchronously, because
+the settings screen restarts the app right after). Settings outside the registry need
+their own reset — `DefaultSettings.restore` in `:app` (`views/settings/backup/`) also
+switches the launcher icon back and clears the app locale. Do not add a second, partial
+reset path.
+
 ## Easter Egg Modules
 
 Path group: `eggs/`

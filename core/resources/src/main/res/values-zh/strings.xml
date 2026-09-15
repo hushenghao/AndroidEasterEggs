@@ -78,4 +78,10 @@
     <string name="dialog_import_backup_title">导入备份</string>
     <string name="dialog_import_backup_message">此操作将覆盖当前所有应用数据，包括设置、保存的猫咪和小部件配置。此操作不可撤销。确定要继续吗？</string>
     <string name="action_confirm_import">导入</string>
+    <string name="action_restore_defaults">恢复默认设置</string>
+    <string name="action_restore_defaults_desc">将所有设置恢复为默认值</string>
+    <string name="dialog_restore_defaults_title">恢复默认设置</string>
+    <string name="dialog_restore_defaults_message">此操作会将所有设置（包括主题、应用图标和语言）恢复为默认值。已保存的猫咪和小部件配置不受影响。此操作不可撤销。确定要继续吗？</string>
+    <string name="action_confirm_restore_defaults">重置</string>
+    <string name="toast_restore_defaults_success">已恢复默认设置，应用将重启</string>
 </resources>

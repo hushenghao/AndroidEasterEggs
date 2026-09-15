@@ -89,4 +89,10 @@
     <string name="dialog_import_backup_title">Import backup</string>
     <string name="dialog_import_backup_message">This will overwrite all current app data, including settings, saved cats, and widget configurations. This action cannot be undone. Are you sure you want to continue?</string>
     <string name="action_confirm_import">Import</string>
+    <string name="action_restore_defaults">Restore default settings</string>
+    <string name="action_restore_defaults_desc">Reset all settings to their default values</string>
+    <string name="dialog_restore_defaults_title">Restore default settings</string>
+    <string name="dialog_restore_defaults_message">This will reset all settings, including the theme, launcher icon, and language. Saved cats and widget configurations are not affected. This action cannot be undone. Are you sure you want to continue?</string>
+    <string name="action_confirm_restore_defaults">Reset</string>
+    <string name="toast_restore_defaults_success">Settings restored to defaults. App will restart.</string>
 </resources>

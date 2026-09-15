@@ -1,6 +1,10 @@
 package com.dede.android_eggs.preferences
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
+import com.dede.android_eggs.preferences.AppSettings.COLOR_SOURCE_DYNAMIC
+import com.dede.android_eggs.util.pref
 
 /**
  * Single source of truth for the settings persisted in the default
@@ -62,7 +66,7 @@ object AppSettings {
 
     // Cat editor, owned by :feature:cat-editor -------------------------------
 
-    val catEditorGridVisible = PrefKey.boolean("cat_editor_grid_visible", false)
+    val catEditorGridVisible = PrefKey.boolean("cat_editor_grid_visible", true)
 
     val catEditorMoreOptionGuide = PrefKey.boolean("cat_editor_more_option_guide", true)
 
@@ -112,5 +116,22 @@ object AppSettings {
     init {
         val duplicates = all.groupBy { it.name }.filterValues { it.size > 1 }.keys
         require(duplicates.isEmpty()) { "Duplicate setting keys: $duplicates" }
+    }
+
+    /**
+     * Drops every registered setting in one transaction, so each of them reads
+     * back its declared [PrefKey.default] again.
+     *
+     * Committed synchronously on purpose: the settings screen restarts the
+     * process right after a reset, and a queued `apply()` would die with it.
+     * Settings stored outside this file (launcher icon, language, the eggs'
+     * neko state) need their own reset.
+     */
+    fun reset(context: Context) {
+        context.pref.edit(commit = true) {
+            for (key in all) {
+                key.reset(this)
+            }
+        }
     }
 }

@@ -45,6 +45,14 @@ class PrefKey<T> private constructor(
         editor.writer(name, value)
     }
 
+    /**
+     * Drops the stored value through a caller-owned [SharedPreferences.Editor], so
+     * the next [get] falls back to [default] again.
+     */
+    fun reset(editor: SharedPreferences.Editor) {
+        editor.remove(name)
+    }
+
     companion object {
 
         fun boolean(name: String, default: Boolean): PrefKey<Boolean> {

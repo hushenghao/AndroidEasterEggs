@@ -71,10 +71,13 @@ internal enum class AppIcon(
 
 internal object AppIconPrefUtil {
 
+    /** The alias the manifest enables, i.e. the icon a fresh install starts with. */
+    val defaultIcon = AppIcon.Android17
+
     fun ensureValidLauncherIcon(context: Context) {
         val current = getCurrentIcon(context)
         if (current != null) return
-        setIcon(context, AppIcon.Android17)
+        setIcon(context, defaultIcon)
     }
 
     private fun getCurrentIcon(context: Context): AppIcon? {
@@ -126,7 +129,7 @@ internal object AppIconPrefUtil {
     }
 
     fun currentOrDefault(context: Context): AppIcon {
-        return getCurrentIcon(context) ?: AppIcon.Android17
+        return getCurrentIcon(context) ?: defaultIcon
     }
 
     fun switchIcon(context: Context, icon: AppIcon) {

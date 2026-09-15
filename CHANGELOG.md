@@ -2,6 +2,7 @@
 
 ### v5.5.1
 
+- Add "restore default settings" to data backup & restore
 - Adapt the home settings drawer for large screens
 
 ### v5.5.0 (2026-09-08)
