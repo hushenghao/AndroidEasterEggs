@@ -113,6 +113,7 @@ jobs:
           cd script/crowdin
           pip install -r requirements.txt
           python start.py ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+          cd "$GITHUB_WORKSPACE" # start.py writes the SVG relative to its cwd, but the git commands below need repo-root-relative paths
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --quiet script/crowdin/crowdin_project_progress.svg; then
