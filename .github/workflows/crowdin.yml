@@ -22,6 +22,8 @@ on:
 jobs:
   crowdin:
     runs-on: ubuntu-latest
+    outputs:
+      has_open_pr: ${{ steps.pr.outputs.has_open_pr }}
 
     steps:
       - name: Check secrets
@@ -33,6 +35,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # full history so Enrich PR body can diff against origin/main
 
       - name: Crowdin synchronize
         uses: crowdin/github-action@v3 # https://github.com/marketplace/actions/crowdin-action
@@ -54,8 +58,32 @@ jobs:
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
+      - name: Enrich PR body
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR=$(gh pr list --head l10n_crowdin_translations --state open --json number --jq '.[0].number // empty')
+          if [ -z "$PR" ]; then
+            echo "No open Crowdin PR to update"
+            echo "has_open_pr=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "has_open_pr=true" >> "$GITHUB_OUTPUT"
+          LANGS=$(git diff --name-only origin/main...HEAD -- '**/values-*/strings*.xml' '**/values-*/languages.xml' \
+            | sed -E 's|.*/values-([^/]+)/.*|\1|' | sort -u | paste -sd ',' -)
+          STATS=$(git diff --shortstat origin/main...HEAD -- ':!script/crowdin/crowdin_project_progress.svg')
+          gh pr edit "$PR" --body "$(cat <<EOF
+          New Crowdin pull request with translations 🚀
+
+          **Languages:** ${LANGS//,/, }
+          **Changes:** ${STATS:-(no file changes)}
+          EOF
+          )"
+
   progress:
     needs: crowdin
+    if: needs.crowdin.outputs.has_open_pr == 'true'
     runs-on: ubuntu-latest
 
     steps:
@@ -77,12 +105,14 @@ jobs:
 
       - name: Update Crowdin progress
         run: |
+          if ! git fetch origin l10n_crowdin_translations; then
+            echo "No translations branch, skip progress update"
+            exit 0
+          fi
+          git checkout l10n_crowdin_translations
           cd script/crowdin
           pip install -r requirements.txt
           python start.py ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-
-      - name: Commit progress SVG
-        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --quiet script/crowdin/crowdin_project_progress.svg; then
@@ -91,4 +121,4 @@ jobs:
           fi
           git add script/crowdin/crowdin_project_progress.svg
           git commit -m "doc: Update Crowdin project progress"
-          git push
+          git push origin l10n_crowdin_translations
