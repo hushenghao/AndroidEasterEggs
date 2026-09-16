@@ -78,4 +78,10 @@
     <string name="dialog_import_backup_title">Yedeği içe aktar</string>
     <string name="dialog_import_backup_message">Bu, ayarlar, kayıtlı kediler ve araç yapılandırmaları dahil olmak üzere mevcut tüm uygulama verilerinin üzerine yazılacaktır. Bu eylem geri alınamaz. Devam etmek istediğinizden emin misiniz?</string>
     <string name="action_confirm_import">İçe Aktar</string>
+    <string name="action_restore_defaults">Varsayılan ayarları geri yükle</string>
+    <string name="action_restore_defaults_desc">Tüm ayarları varsayılan değerlerine sıfırla</string>
+    <string name="dialog_restore_defaults_title">Tüm ayarları varsayılan değerlerine sıfırla</string>
+    <string name="dialog_restore_defaults_message">Bu işlem, tema, başlatıcı simgesi ve dil dahil olmak üzere tüm ayarları sıfırlayacaktır. Kaydedilen kedi ve araç yapılandırmaları etkilenmeyecektir. Bu işlem geri alınamaz. Devam etmek istediğinizden emin misiniz?</string>
+    <string name="action_confirm_restore_defaults">Sıfırla</string>
+    <string name="toast_restore_defaults_success">Ayarlar varsayılan değerlere geri yüklendi. Uygulama yeniden başlatılacak.</string>
 </resources>
