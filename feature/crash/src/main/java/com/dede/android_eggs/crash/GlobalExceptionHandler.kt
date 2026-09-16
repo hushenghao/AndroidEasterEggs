@@ -3,6 +3,7 @@ package com.dede.android_eggs.crash
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Looper
 import android.util.Log
 import com.dede.android_eggs.crash.Utilities.getStackTraceString
 import com.dede.android_eggs.util.applyNotNull
@@ -19,6 +20,16 @@ private class GlobalExceptionHandler private constructor(
 ) : Thread.UncaughtExceptionHandler {
 
     override fun uncaughtException(t: Thread, e: Throwable) {
+        if (e.isIgnoredException()) {
+            Log.e(TAG, "Ignored system exception on ${t.name}:\n${e.getStackTraceString()}")
+            // A dead main looper leaves the process unusable, any other thread just dies
+            // and the app keeps running.
+            if (t == Looper.getMainLooper().thread) {
+                exitProcess(-1)
+            }
+            return
+        }
+
         Utilities.tryPostCrashNotification(applicationContext, e)
 
         val screenshotFile = runBlocking {
@@ -61,6 +72,8 @@ private class GlobalExceptionHandler private constructor(
     }
 
     companion object {
+
+        private const val TAG = "GlobalExceptionHandler"
 
         private const val DEF_INTENT_FLAGS = Intent.FLAG_ACTIVITY_CLEAR_TOP or
                 Intent.FLAG_ACTIVITY_NEW_TASK or
