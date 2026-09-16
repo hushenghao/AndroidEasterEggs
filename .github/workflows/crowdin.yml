@@ -70,9 +70,10 @@ jobs:
             exit 0
           fi
           echo "has_open_pr=true" >> "$GITHUB_OUTPUT"
-          LANGS=$(git diff --name-only origin/main...HEAD -- '**/values-*/strings*.xml' '**/values-*/languages.xml' \
+          # crowdin action switches back to main before this step, so diff against the l10n branch itself
+          LANGS=$(git diff --name-only origin/main...origin/l10n_crowdin_translations -- '**/values-*/strings*.xml' '**/values-*/languages.xml' \
             | sed -E 's|.*/values-([^/]+)/.*|\1|' | sort -u | paste -sd ',' -)
-          STATS=$(git diff --shortstat origin/main...HEAD -- ':!script/crowdin/crowdin_project_progress.svg')
+          STATS=$(git diff --shortstat origin/main...origin/l10n_crowdin_translations -- ':!script/crowdin/crowdin_project_progress.svg')
           gh pr edit "$PR" --body "$(cat <<EOF
           New Crowdin pull request with translations 🚀
 
