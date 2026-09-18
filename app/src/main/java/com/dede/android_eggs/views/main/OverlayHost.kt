@@ -1,18 +1,14 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.dede.android_eggs.views.main
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dede.android_eggs.navigation.OverlayContentProvider
 import com.dede.android_eggs.navigation.OverlayManager
 import com.dede.android_eggs.navigation.OverlayRoute
 import com.dede.android_eggs.views.main.compose.AnimatorDisabledAlertDialog
 import com.dede.android_eggs.views.main.compose.WelcomeDialog
-import com.dede.android_eggs.views.settings.compose.prefs.SnapshotDialogView
+import com.dede.android_eggs.views.settings.compose.prefs.SnapshotOverlay
 import com.dede.android_eggs.views.timeline.TimelineListDialog
 
 @Composable
@@ -31,10 +27,8 @@ fun OverlayHost(
             AnimatorDisabledAlertDialog(onDismiss = overlayManager::dismiss)
         }
 
-        OverlayRoute.SnapshotDialog -> {
-            Dialog(onDismissRequest = overlayManager::dismiss) {
-                SnapshotDialogView()
-            }
+        OverlayRoute.SnapshotPreview -> {
+            SnapshotOverlay(onDismiss = overlayManager::dismiss)
         }
 
         OverlayRoute.TimelineDialog -> {

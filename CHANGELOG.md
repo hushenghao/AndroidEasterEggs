@@ -4,6 +4,7 @@
 
 - Add "restore default settings" to data backup & restore
 - Adapt the home settings drawer for large screens
+- Blur the whole screen behind the snapshot preview
 
 ### v5.5.0 (2026-09-08)
 

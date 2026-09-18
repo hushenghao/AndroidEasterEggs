@@ -13,8 +13,17 @@ import dagger.multibindings.Multibinds
 interface OverlayRoute {
     data object WelcomeDialog : OverlayRoute
     data object AnimatorAlertDialog : OverlayRoute
-    data object SnapshotDialog : OverlayRoute
+    data object SnapshotPreview : InWindowOverlay
     data object TimelineDialog : OverlayRoute
+
+    /**
+     * An [OverlayRoute] whose overlay draws inside the app window instead of a window of its own.
+     *
+     * A window of its own keeps the content behind it out of reach of accessibility services. An
+     * overlay in the same window does not, so the host has to hide that content while such a
+     * route is shown.
+     */
+    interface InWindowOverlay : OverlayRoute
 }
 
 interface OverlayContentProvider {

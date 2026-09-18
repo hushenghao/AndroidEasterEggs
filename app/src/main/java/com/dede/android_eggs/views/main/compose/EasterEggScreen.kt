@@ -236,12 +236,12 @@ private fun EggScreenScaffold(
     showSettingsAction: Boolean = true,
     content: @Composable (contentPadding: PaddingValues) -> Unit,
 ) {
-    val hazeState = rememberHazeState()
+    val contentHazeState = rememberHazeState()
     HazeScaffold(
-        hazeState = hazeState,
+        contentHazeState = contentHazeState,
         topBar = {
             MainTitleBar(
-                modifier = Modifier.hazeAppBar(hazeState),
+                modifier = Modifier.hazeAppBar(contentHazeState),
                 searchBarState = searchBarState,
                 drawerState = drawerState,
                 showSettingsAction = showSettingsAction,
@@ -249,7 +249,7 @@ private fun EggScreenScaffold(
         },
         bottomBar = {
             BottomSearchBar(
-                modifier = Modifier.hazeBottomBar(hazeState),
+                modifier = Modifier.hazeBottomBar(contentHazeState),
                 elevation = 0.dp,
                 containerColor = Color.Transparent,
                 state = searchBarState,

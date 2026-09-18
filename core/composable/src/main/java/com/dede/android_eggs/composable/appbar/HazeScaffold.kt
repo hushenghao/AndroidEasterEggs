@@ -34,7 +34,7 @@ import dev.chrisbanes.haze.rememberHazeState
 fun HazeScaffold(
     title: String,
     modifier: Modifier = Modifier,
-    hazeState: HazeState = rememberHazeState(),
+    contentHazeState: HazeState = rememberHazeState(),
     subtitle: String? = null,
     onBackClick: (() -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
@@ -50,12 +50,12 @@ fun HazeScaffold(
 ) {
     HazeScaffold(
         modifier = modifier,
-        hazeState = hazeState,
+        contentHazeState = contentHazeState,
         topBar = {
             HazeAppBar(
                 title = title,
                 subtitle = subtitle,
-                modifier = Modifier.hazeAppBar(hazeState),
+                modifier = Modifier.hazeAppBar(contentHazeState),
                 navigationIcon = {
                     if (onBackClick != null) {
                         HazeAppBarBackButton(onClick = onBackClick)
@@ -80,7 +80,7 @@ fun HazeScaffold(
 @Composable
 fun HazeScaffold(
     modifier: Modifier = Modifier,
-    hazeState: HazeState = rememberHazeState(),
+    contentHazeState: HazeState = rememberHazeState(),
     topBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
     floatingActionButton: @Composable () -> Unit = {},
@@ -97,7 +97,7 @@ fun HazeScaffold(
         modifier
     }
 
-    CompositionLocalProvider(LocalHazeState provides hazeState) {
+    CompositionLocalProvider(LocalHazeState provides contentHazeState) {
         Scaffold(
             modifier = scaffoldModifier,
             topBar = topBar,
@@ -109,7 +109,7 @@ fun HazeScaffold(
             contentWindowInsets = contentWindowInsets,
         ) { contentPadding ->
             Box(
-                modifier = Modifier.hazeSource(hazeState),
+                modifier = Modifier.hazeSource(contentHazeState),
             ) {
                 content(contentPadding)
             }
@@ -149,6 +149,29 @@ object HazeScaffoldDefaults {
                         )
                     )
                 }
+            )
+            .then(this)
+
+    /**
+     * Blurs everything the window Haze source of [overlayState] captured, for a full screen
+     * overlay drawn above it.
+     *
+     * The overlay has to sit outside that source, otherwise the effect would draw its own source.
+     * [overlayState] has to be the state of a source which was already marked behind the overlay,
+     * see [LocalOverlayHazeState].
+     *
+     * [progressive] optionally shapes how strong the effect is across the overlay, for example to
+     * unblur the part a back gesture has peeled away.
+     */
+    @Composable
+    fun Modifier.hazeOverlayBackdrop(
+        overlayState: HazeState = LocalOverlayHazeState.current,
+        progressive: HazeProgressive? = null,
+    ): Modifier =
+        Modifier
+            .hazeBlur(
+                input = HazeInput.Sources(overlayState),
+                style = HazeMaterials.thin().then { progressive(progressive) },
             )
             .then(this)
 }

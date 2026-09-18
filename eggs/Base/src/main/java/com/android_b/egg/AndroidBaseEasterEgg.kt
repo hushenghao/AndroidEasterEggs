@@ -2,7 +2,6 @@ package com.android_b.egg
 
 import android.os.Build
 import com.dede.basic.provider.BaseEasterEgg
-import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.TimelineEvent
 import com.dede.basic.provider.TimelineEvent.Companion.timelineEvent
 import dagger.Module
@@ -20,7 +19,7 @@ object AndroidBaseEasterEgg {
     @IntoSet
     @Singleton
     fun provideFroyoEgg(): BaseEasterEgg {
-        return EasterEgg(
+        return BaseEasterEgg(
             iconRes = R.drawable.b_android_froyo,
             nameRes = R.string.b_nickname_android_froyo,
             nicknameRes = R.string.b_nickname_android_froyo,
@@ -33,7 +32,7 @@ object AndroidBaseEasterEgg {
     @IntoSet
     @Singleton
     fun provideEclairEgg(): BaseEasterEgg {
-        return EasterEgg(
+        return BaseEasterEgg(
             iconRes = R.drawable.b_android_eclair,
             nameRes = R.string.b_nickname_android_eclair,
             nicknameRes = R.string.b_nickname_android_eclair,
@@ -46,7 +45,7 @@ object AndroidBaseEasterEgg {
     @IntoSet
     @Singleton
     fun provideDonutEgg(): BaseEasterEgg {
-        return EasterEgg(
+        return BaseEasterEgg(
             iconRes = R.drawable.b_android_donut,
             nameRes = R.string.b_nickname_android_donut,
             nicknameRes = R.string.b_nickname_android_donut,
@@ -59,7 +58,7 @@ object AndroidBaseEasterEgg {
     @IntoSet
     @Singleton
     fun provideCupcakeEgg(): BaseEasterEgg {
-        return EasterEgg(
+        return BaseEasterEgg(
             iconRes = R.drawable.b_android_cupcake,
             nameRes = R.string.b_nickname_android_cupcake,
             nicknameRes = R.string.b_nickname_android_cupcake,
@@ -72,7 +71,7 @@ object AndroidBaseEasterEgg {
     @IntoSet
     @Singleton
     fun providePetitFourEgg(): BaseEasterEgg {
-        return EasterEgg(
+        return BaseEasterEgg(
             iconRes = R.drawable.b_android_classic,
             nameRes = R.string.b_nickname_android_petit_four,
             nicknameRes = R.string.b_nickname_android_petit_four,
@@ -85,7 +84,7 @@ object AndroidBaseEasterEgg {
     @IntoSet
     @Singleton
     fun provideBaseEgg(): BaseEasterEgg {
-        return EasterEgg(
+        return BaseEasterEgg(
             iconRes = R.drawable.b_android_classic,
             nameRes = R.string.b_nickname_android_base,
             nicknameRes = R.string.b_nickname_android_base,

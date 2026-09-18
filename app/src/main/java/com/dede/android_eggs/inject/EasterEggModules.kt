@@ -84,7 +84,7 @@ object EasterEggModules {
                     add(easterEgg)
                 }
             }
-        }
+        }.sortedByDescending { it.fullApiLevel }
     }
 
 }

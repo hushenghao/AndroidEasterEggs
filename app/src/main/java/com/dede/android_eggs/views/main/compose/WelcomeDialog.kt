@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.preferences.AppSettings
 import com.dede.android_eggs.settings_ui.basic.rememberPrefBoolState
-import com.dede.android_eggs.views.settings.compose.prefs.SnapshotDialogView
+import com.dede.android_eggs.views.settings.compose.prefs.SnapshotCarousel
 import com.dede.android_eggs.resources.R as StringsR
 
 fun isAgreedPrivacyPolicy(context: Context): Boolean {
@@ -45,7 +45,7 @@ fun WelcomeDialog(onDismiss: () -> Unit = {}) {
         },
         text = {
             Column {
-                SnapshotDialogView(showEasterEggName = false, carouselFeedback = false)
+                SnapshotCarousel(showEasterEggName = false, carouselFeedback = false)
                 Text(
                     text = stringResource(StringsR.string.summary_browse_privacy_policy),
                     modifier = Modifier.padding(vertical = 12.dp)
