@@ -52,7 +52,7 @@
     <string name="label_search_hint">Поиск…</string>
     <string name="label_component_manager">Менеджер компонентов</string>
     <string name="pref_more_settings">Другие настройки</string>
-    <string name="pref_retain_recent_egg_tasks">Оставлять задачи открытия пасхальных яиц</string>
+    <string name="pref_retain_recent_egg_tasks">Оставлять задачи пасхальных яиц</string>
     <string name="pref_summary_retain_recent_egg_tasks">Оставлять открытые пасхальные яйца на экране «Недавние приложения». Может быть сохранено до 5 яиц.</string>
     <string name="label_about">О приложении</string>
     <string name="label_contribute">Внести вклад</string>
@@ -72,10 +72,16 @@
     <string name="action_import_backup">Импорт резервной копии</string>
     <string name="action_import_backup_desc">Восстановление из ранее экспортированного файла резервной копии</string>
     <string name="toast_backup_success">Резервная копия успешно экспортирована</string>
-    <string name="toast_restore_success">Восстановление завершено. Приложение будет перезапущено.</string>
+    <string name="toast_restore_success">Восстановление завершено. Приложение перезапустится.</string>
     <string name="toast_backup_failed">Резервное копирование не удалось: %s</string>
     <string name="toast_restore_failed">Восстановление не удалось: %s</string>
     <string name="dialog_import_backup_title">Импорт резервной копии</string>
-    <string name="dialog_import_backup_message">Это перезапишет все текущие данные приложения, включая настройки, кошек и конфигурацию виджетов. Это действие нельзя будет отменить. Вы уверены, что хотите продолжить?</string>
+    <string name="dialog_import_backup_message">Это действие перезапишет все текущие данные приложения, включая настройки, сохранённых кошек и конфигурацию виджетов. Данное действие нельзя будет отменить. Вы уверены, что хотите продолжить?</string>
     <string name="action_confirm_import">Импорт</string>
+    <string name="action_restore_defaults">Восстановить настройки по умолчанию</string>
+    <string name="action_restore_defaults_desc">Сброс всех настроек на их значения по умолчанию</string>
+    <string name="dialog_restore_defaults_title">Восстановление настроек по умолчанию</string>
+    <string name="dialog_restore_defaults_message">Это действие сбросит все настройки, включая тему, значок в лаунчере и язык. Сохранённые кошки и настройки виджетов затронуты не будут. Данное действие нельзя будет отменить. Вы уверены, что хотите продолжить?</string>
+    <string name="action_confirm_restore_defaults">Сбросить</string>
+    <string name="toast_restore_defaults_success">Настройки восстановлены до значений по умолчанию. Приложение перезапустится.</string>
 </resources>

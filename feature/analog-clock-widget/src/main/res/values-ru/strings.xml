@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="analog_clock_widget_config_title">Настроить виджет</string>
+    <string name="analog_clock_widget_config_title">Настройка виджета</string>
     <string name="analog_clock_widget_config_summary">Выберите, что произойдёт при нажатии на виджет аналоговых часов.</string>
     <string name="analog_clock_widget_click_action_title">Действие при нажатии</string>
     <string name="analog_clock_widget_action_open_egg">Открыть пасхальное яйцо</string>
