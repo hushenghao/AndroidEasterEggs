@@ -11,7 +11,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -19,18 +18,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
-import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.rounded.ViewCarousel
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PlainTooltip
-import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipAnchorPosition
 import androidx.compose.material3.TooltipBox
@@ -54,7 +54,6 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -66,6 +65,7 @@ import com.dede.android_eggs.settings_ui.basic.SettingPref
 import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.ui.composes.predictiveBackProgressState
+import com.dede.android_eggs.views.main.util.EasterEggHelp.ApiLevelFormatter
 import com.dede.android_eggs.views.main.util.EasterEggHelp.VersionFormatter
 import com.dede.basic.provider.EasterEgg
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -183,11 +183,7 @@ fun SnapshotCarousel(
             }
         }
     }
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(14.dp),
-    ) {
+    Column(modifier = modifier) {
         val carouselState = rememberCarouselState { pairList.size }
         if (carouselFeedback) {
             val hapticFeedback = LocalHapticFeedback.current
@@ -222,32 +218,38 @@ fun SnapshotCarousel(
                     Box(
                         modifier = Modifier
                             .align(Alignment.TopEnd)
-                            .padding(6.dp)
+                            .padding(8.dp)
                     ) {
                         val tooltipState = rememberTooltipState()
                         val scope = rememberCoroutineScope()
                         TooltipBox(
                             state = tooltipState,
                             positionProvider = TooltipDefaults.rememberTooltipPositionProvider(
-                                TooltipAnchorPosition.Start
+                                TooltipAnchorPosition.Above,
+                                spacingBetweenTooltipAndAnchor = 12.dp,
                             ),
                             tooltip = {
                                 PlainTooltip {
                                     val egg = pairList[i].second
                                     val eggName = stringResource(egg.nameRes)
                                     val context = LocalContext.current
-                                    val tooltip = remember(egg, eggName) {
+                                    val tooltip = remember(egg.fullApiLevelRange, eggName) {
                                         val versionFormatter =
-                                            VersionFormatter.create(
-                                                egg.fullApiLevelRange, egg.nicknameRes
-                                            )
-                                        "${versionFormatter.format(context)}\n$eggName"
+                                            VersionFormatter.create(egg.fullApiLevelRange)
+                                        val apiLevelFormatter =
+                                            ApiLevelFormatter.create(egg.fullApiLevelRange)
+                                        """
+                                            ${versionFormatter.format(context)}
+                                            ${apiLevelFormatter.format(context)}
+                                            $eggName
+                                        """.trimIndent()
                                     }
-                                    Text(text = tooltip, textAlign = TextAlign.End)
+                                    Text(text = tooltip)
                                 }
                             },
                         ) {
-                            SmallFloatingActionButton(
+                            FloatingActionButton(
+                                modifier = Modifier.size(36.dp),
                                 shape = CircleShape,
                                 elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation(),
                                 onClick = {
@@ -256,7 +258,7 @@ fun SnapshotCarousel(
                                     }
                                 },
                             ) {
-                                Icon(Icons.Outlined.Info, contentDescription = null)
+                                Icon(Icons.Outlined.Lightbulb, contentDescription = null)
                             }
                         }
                     }
