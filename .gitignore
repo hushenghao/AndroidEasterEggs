@@ -14,3 +14,7 @@ key.properties
 .vscode
 /.zcode
 fastlane/report.xml
+
+# Compose stability analyzer reports; only the foss product debug baseline is tracked
+/app/stability/*
+!/app/stability/app-fossProductDebug.stability
