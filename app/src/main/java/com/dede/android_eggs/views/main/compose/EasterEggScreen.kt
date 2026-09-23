@@ -155,7 +155,7 @@ private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel) {
         ) { contentPadding ->
             EasterEggList(
                 easterEggs = viewModel.easterEggs,
-                searchText = searchBarState.searchText,
+                searchText = searchBarState.text,
                 contentPadding = contentPadding,
             )
         }
@@ -196,7 +196,7 @@ private fun EggScreenScaffoldMedium(viewModel: EasterEggViewModel) {
         ) {
             EasterEggList(
                 easterEggs = viewModel.easterEggs,
-                searchText = searchBarState.searchText,
+                searchText = searchBarState.text,
                 contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
             )
         }
@@ -222,7 +222,7 @@ private fun EggScreenScaffoldExpanded(viewModel: EasterEggViewModel) {
         ) {
             EasterEggList(
                 easterEggs = viewModel.easterEggs,
-                searchText = searchBarState.searchText,
+                searchText = searchBarState.text,
                 contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
             )
         }

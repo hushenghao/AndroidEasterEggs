@@ -1,11 +1,16 @@
 package com.dede.android_eggs.views.main.compose
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleIn
-import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +23,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Clear
+import androidx.compose.material.icons.rounded.Mic
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -43,10 +49,13 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -59,31 +68,33 @@ class BottomSearchBarState(initVisible: Boolean, initSearchText: String) {
 
     var visible: Boolean by mutableStateOf(initVisible)
         private set
-    var searchText: String by mutableStateOf(initSearchText)
+
+    // Text and cursor as a single editing state: programmatic updates (voice
+    // input, clear) decide where the cursor lands, no view-side syncing needed.
+    var textFieldValue: TextFieldValue by mutableStateOf(
+        TextFieldValue(initSearchText, TextRange(initSearchText.length))
+    )
+        private set
+
+    var text: String
+        get() = textFieldValue.text
+        set(value) {
+            // Replace the whole text with the cursor moved to the end.
+            textFieldValue = TextFieldValue(value, TextRange(value.length))
+        }
+
+    /** Write back the editing state as-is, preserving cursor and IME composition. */
+    fun onTextChange(value: TextFieldValue) {
+        textFieldValue = value
+    }
 
     fun close() {
         visible = false
-        searchText = ""
+        text = ""
     }
 
     fun open() {
         visible = true
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is BottomSearchBarState) return false
-
-        if (visible != other.visible) return false
-        if (searchText != other.searchText) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = visible.hashCode()
-        result = 31 * result + searchText.hashCode()
-        return result
     }
 
     object BundleSaver : Saver<BottomSearchBarState, Bundle> {
@@ -101,7 +112,7 @@ class BottomSearchBarState(initVisible: Boolean, initSearchText: String) {
         override fun SaverScope.save(value: BottomSearchBarState): Bundle {
             return bundleBuilder {
                 putBoolean(KEY_VISIBLE, value.visible)
-                putString(KEY_SEARCH_TEXT, value.searchText)
+                putString(KEY_SEARCH_TEXT, value.text)
             }
         }
     }
@@ -167,6 +178,25 @@ private fun BottomSearchBarView(
     val currentOnClose by rememberUpdatedState(newValue = onClose)
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = remember { FocusRequester() }
+    val context = LocalContext.current
+    val searchHint = stringResource(StringsR.string.label_search_hint)
+    val hasText = state.text.isNotBlank()
+
+    val voiceLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        val text = result.data
+            ?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            ?.firstOrNull()
+        if (!text.isNullOrBlank()) {
+            state.text = text
+        }
+    }
+    val voiceSearchAvailable = remember(context) {
+        Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            .resolveActivity(context.packageManager) != null
+    }
+
     LaunchedEffect(state.visible) {
         if (state.visible) {
             focusRequester.requestFocus()
@@ -192,12 +222,10 @@ private fun BottomSearchBarView(
                 .fillMaxWidth()
                 .focusRequester(focusRequester)
                 .padding(horizontal = 16.dp, vertical = 10.dp),
-            value = state.searchText,
-            onValueChange = {
-                state.searchText = it
-            },
+            value = state.textFieldValue,
+            onValueChange = state::onTextChange,
             placeholder = {
-                Text(text = stringResource(StringsR.string.label_search_hint))
+                Text(text = searchHint)
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Ascii, imeAction = ImeAction.Search
@@ -229,18 +257,47 @@ private fun BottomSearchBarView(
                 }
             },
             trailingIcon = {
-                AnimatedVisibility(
-                    visible = state.searchText.isNotBlank(),
-                    enter = fadeIn() + scaleIn(),
-                    exit = fadeOut() + scaleOut(),
-                ) {
-                    IconButton(onClick = { state.searchText = "" }) {
-                        Icon(
-                            imageVector = Icons.Rounded.Clear,
-                            contentDescription = null,
-                        )
+                Crossfade(targetState = hasText, label = "TrailingIcon") { hasContent ->
+                    if (hasContent) {
+                        IconButton(onClick = { state.text = "" }) {
+                            Icon(
+                                imageVector = Icons.Rounded.Clear,
+                                contentDescription = null,
+                            )
+                        }
+                    } else if (voiceSearchAvailable) {
+                        IconButton(
+                            onClick = {
+                                val intent =
+                                    Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                                        putExtra(
+                                            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                                            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM,
+                                        )
+                                        putExtra(RecognizerIntent.EXTRA_PROMPT, searchHint)
+                                        // Match the in-app language, not the system one
+                                        val appLocales =
+                                            AppCompatDelegate.getApplicationLocales()
+                                        if (!appLocales.isEmpty) {
+                                            putExtra(
+                                                RecognizerIntent.EXTRA_LANGUAGE,
+                                                appLocales.get(0)?.toLanguageTag(),
+                                            )
+                                        }
+                                    }
+                                try {
+                                    voiceLauncher.launch(intent)
+                                } catch (_: ActivityNotFoundException) {
+                                    // The recognizer may disappear between the availability check and launch
+                                }
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Rounded.Mic,
+                                contentDescription = null,
+                            )
+                        }
                     }
-
                 }
             })
     }
