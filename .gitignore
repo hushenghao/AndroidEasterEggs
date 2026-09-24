@@ -13,6 +13,7 @@ key.properties
 .codex/environments
 .vscode
 /.zcode
+.zcodeignore
 fastlane/report.xml
 
 # Compose stability analyzer reports; only the foss product debug baseline is tracked

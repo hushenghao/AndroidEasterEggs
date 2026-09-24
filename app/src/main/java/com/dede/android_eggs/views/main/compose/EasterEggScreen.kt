@@ -128,6 +128,8 @@ fun EasterEggScreen(
     }
 }
 
+private val MaxCompactDrawerWidth = 320.dp
+
 @Composable
 private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -140,7 +142,7 @@ private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel) {
                 ),
                 windowInsets = WindowInsets(0, 0, 0, 0),
             ) {
-                Box(modifier = Modifier.sizeIn(maxWidth = MaxDrawerWidth)) {
+                Box(modifier = Modifier.sizeIn(maxWidth = MaxCompactDrawerWidth)) {
                     SettingsScreen(drawerState)
                 }
             }
