@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Configurar Piaget</string>
+    <string name="analog_clock_widget_config_summary">Elija lo que sucede cuando toque el Piaget.</string>
+    <string name="analog_clock_widget_click_action_title">Acción</string>
+    <string name="analog_clock_widget_action_open_egg">Abrir huevo</string>
+    <string name="analog_clock_widget_action_open_app">Abrir aplicación</string>
+    <string name="analog_clock_widget_action_none">Ninguna acción</string>
+    <string name="analog_clock_widget_dial_style_title">Marcar reloj</string>
+    <string name="analog_clock_widget_dial_style_summary">Elija el estilo de reloj analógico.</string>
+    <string name="analog_clock_widget_dial_android_icons">Icono</string>
+    <string name="analog_clock_widget_dial_simple">Simple</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">Rollo de canela</string>
+</resources>
