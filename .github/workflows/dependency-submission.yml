@@ -1,0 +1,42 @@
+name: Dependency Submission
+
+# Submits the resolved Gradle dependency graph to GitHub. The server cannot
+# parse this build statically (Kotlin DSL + version catalog + convention
+# plugins), so without this workflow the Gradle ecosystem is invisible to the
+# dependency graph, Dependabot alerts and the dependency review check.
+# See: https://github.com/gradle/actions/blob/main/docs/dependency-submission.md
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '*.gradle'
+      - '*.gradle.kts'
+      - '**/*.gradle'
+      - '**/*.gradle.kts'
+      - 'gradle/**'
+      - 'build-logic/**'
+      - 'gradle.properties'
+      - '.github/workflows/dependency-submission.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dependency-submission-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dependency-submission:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6.0.1
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@v6
