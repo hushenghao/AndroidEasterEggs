@@ -2,7 +2,8 @@
 
 package com.dede.android_eggs.composable.colorpicker
 
-import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.animate
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -10,8 +11,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.rememberSliderState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,8 +37,30 @@ fun LinearGradientSlider(
     val sliderColors = SliderDefaults.colors()
     val interactionSource = remember { MutableInteractionSource() }
 
-    val animValue by animateFloatAsState(value, label = "SliderValue")
+    val state = rememberSliderState(value)
+
+    // rememberSliderState takes `value` as its initial value only. Sync external
+    // changes (e.g. the shuffle button) back to the state with the same default
+    // spring animateFloatAsState used; drag-driven changes are already reflected
+    // by the gesture itself.
+    LaunchedEffect(value) {
+        if (value != state.value) {
+            if (state.isDragging) {
+                state.value = value
+            } else {
+                animate(
+                    initialValue = state.value,
+                    targetValue = value,
+                    animationSpec = spring(),
+                ) { animated, _ ->
+                    state.value = animated
+                }
+            }
+        }
+    }
+
     Slider(
+        state = state,
         colors = sliderColors,
         modifier = Modifier.then(modifier),
         interactionSource = interactionSource,
@@ -66,8 +90,10 @@ fun LinearGradientSlider(
                     },
             )
         },
-        value = animValue,
-        onValueChange = onValueChange,
+        onValueChange = {
+            state.value = it
+            onValueChange(it)
+        },
         onValueChangeFinished = onValueChangeFinished,
     )
 }

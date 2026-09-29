@@ -5,16 +5,16 @@ agp = "9.4.1"
 # https://github.com/google/dagger
 hilt = "2.60.1"
 # https://developer.android.com/develop/ui/compose/bom/bom-mapping
-compose-bom = "2026.08.00"
+compose-bom = "2026.09.00"
 # https://google.github.io/accompanist
 accompanist = "0.37.3"
 lifecycle = "2.11.0"
 activity = "1.13.0"
-room = "3.0.1"
-sqlite = "2.7.0"
+room = "3.0.3"
+sqlite = "2.7.1"
 about-libraries = "15.2.0"
 ktor = "3.6.0"
-nav3 = "1.1.6"
+nav3 = "1.2.0"
 haze-blur = "2.0.0"
 material-kolor = "5.0.1"
 
@@ -36,15 +36,15 @@ stability-analyzer = { id = "com.github.skydoves.compose.stability.analyzer", ve
 
 [libraries]
 kotlin-metadata-jvm = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kotlin" }
-androidx-appcompat = "androidx.appcompat:appcompat:1.7.1"
-androidx-core = "androidx.core:core-ktx:1.19.0"
+androidx-appcompat = "androidx.appcompat:appcompat:1.8.0"
+androidx-core = "androidx.core:core-ktx:1.19.1"
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "lifecycle" }
 androidx-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
 androidx-livedata = { module = "androidx.lifecycle:lifecycle-livedata", version.ref = "lifecycle" }
 androidx-recyclerview = "androidx.recyclerview:recyclerview:1.4.0"
 androidx-dynamicanimation = "androidx.dynamicanimation:dynamicanimation:1.1.0"
-androidx-annotation = "androidx.annotation:annotation:1.10.0"
+androidx-annotation = "androidx.annotation:annotation:1.11.0"
 androidx-browser = "androidx.browser:browser:1.10.0"
 androidx-window = "androidx.window:window:1.5.1"
 androidx-room = { module = "androidx.room3:room3-runtime", version.ref = "room" }
@@ -59,20 +59,20 @@ androidx-datastore = "androidx.datastore:datastore-preferences:1.2.1"
 androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 androidx-compose-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
-androidx-compose-hilt-viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel-compose:1.3.0"
+androidx-compose-hilt-viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel-compose:1.4.0"
 androidx-navigation3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "nav3" }
 androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "nav3" }
-androidx-navigationevent-compose = "androidx.navigationevent:navigationevent-compose:1.2.0-alpha03" # fix https://github.com/hushenghao/AndroidEasterEggs/issues/919
+androidx-navigationevent-compose = "androidx.navigationevent:navigationevent-compose:1.2.0-rc01" # fix https://github.com/hushenghao/AndroidEasterEggs/issues/919
 androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "lifecycle" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 androidx-compose-livedata = { module = "androidx.compose.runtime:runtime-livedata" }
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-material = { module = "androidx.compose.material:material" }
-androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.5.0-alpha24" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.5.0-alpha29" }
 androidx-compose-material3-adaptive = { module = "androidx.compose.material3.adaptive:adaptive", version = "1.3.0" }
 androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended" }
-androidx-compose-constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.1.1"
+androidx-compose-constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.1.2"
 google-accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
 google-accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 # Preview support

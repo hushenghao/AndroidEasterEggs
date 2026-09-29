@@ -6,6 +6,8 @@
 - Adapt the home settings drawer for large screens
 - Blur the whole screen behind the snapshot preview
 - Add voice search to the home search bar
+- Upgrade the minimum supported version to Android 7.0
+- Upgrade project dependencies
 
 ### v5.5.0 (2026-09-08)
 

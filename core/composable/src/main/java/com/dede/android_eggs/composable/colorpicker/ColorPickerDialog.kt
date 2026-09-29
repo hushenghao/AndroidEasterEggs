@@ -54,6 +54,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.ScrollableModalBottomSheet
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
@@ -163,12 +164,14 @@ fun ColorPickerDialog(
                 ) {
                     Row(
                         modifier = Modifier
-                            .padding(start = 14.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
+                            .padding(start = 12.dp, end = 6.dp, top = 6.dp, bottom = 6.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
                             text = ColorPickerUtilities.getHexColor(finalColor, withAlphaPalette),
-                            style = MaterialTheme.typography.titleLarge,
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                fontFamily = FontFamily.Monospace,
+                            ),
                             modifier = Modifier.weight(1f),
                         )
 
@@ -193,7 +196,9 @@ fun ColorPickerDialog(
                         FilledTonalIconButton(
                             shape = IconShapePrefUtil.getIconShape(),
                             onClick = {
-                                context.copy(ColorPickerUtilities.getHexColor(finalColor, withAlphaPalette))
+                                val hexColor =
+                                    ColorPickerUtilities.getHexColor(finalColor, withAlphaPalette)
+                                context.copy(hexColor)
                             },
                         ) {
                             Icon(
