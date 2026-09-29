@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -128,8 +129,6 @@ fun EasterEggScreen(
     }
 }
 
-private val MaxCompactDrawerWidth = 320.dp
-
 @Composable
 private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -142,7 +141,8 @@ private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel) {
                 ),
                 windowInsets = WindowInsets(0, 0, 0, 0),
             ) {
-                Box(modifier = Modifier.sizeIn(maxWidth = MaxCompactDrawerWidth)) {
+                val maxWidth = LocalConfiguration.current.smallestScreenWidthDp * 0.8f
+                Box(modifier = Modifier.sizeIn(maxWidth = maxWidth.dp)) {
                     SettingsScreen(drawerState)
                 }
             }
