@@ -70,8 +70,10 @@ open class EasterEgg @JvmOverloads constructor(
             return if (!isFullApiLevel()) {
                 this
             } else {
-                val majorSdkVersion = Build.getMajorSdkVersion(this)
-                val minorSdkVersion = Build.getMinorSdkVersion(this)
+                // Not Build#getMajorSdkVersion/#getMinorSdkVersion: they are @FlaggedApi
+                // since 36 and report minor=0 for preview codes on some devices.
+                val majorSdkVersion = this / SDK_INT_MULTIPLIER
+                val minorSdkVersion = this % SDK_INT_MULTIPLIER
                 majorSdkVersion + if (minorSdkVersion == SDK_INT_MULTIPLIER - 1) 1 else 0
             }
         }
