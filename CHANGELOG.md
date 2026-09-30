@@ -6,6 +6,8 @@
 - Adapt the home settings drawer for large screens
 - Blur the whole screen behind the snapshot preview
 - Add voice search to the home search bar
+- Search the eggs with keywords in any order
+- Fixed preview easter egg API level display error
 - Upgrade the minimum supported version to Android 7.0
 - Upgrade project dependencies
 
