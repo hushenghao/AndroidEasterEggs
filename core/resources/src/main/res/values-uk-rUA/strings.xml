@@ -47,7 +47,7 @@
     <string name="app_widget_description">Це аналоговий годинник Великодних Яєць</string>
     <string name="action_agree">Я приймаю</string>
     <string name="summary_browse_privacy_policy">Прочитайте і погодьтеся з нашою Політикою конфіденційності для продовження.</string>
-    <string name="label_welcome">Ласкаво просимо до Великодніх Яєць 🎉🎉🎉</string>
+    <string name="label_welcome">Ласкаво просимо до Великодніх Яєць 🎉</string>
     <string name="label_share">Поділитись</string>
     <string name="label_search_hint">Пошук…</string>
     <string name="label_component_manager">Менеджер віджетів</string>
@@ -66,7 +66,7 @@
     <string name="rocket_launcher_all_icons">Всі значки</string>
     <string name="rocket_launcher_query_all_app_desc">Необхідно отримати список всіх програм</string>
     <string name="label_data_backup">Резервне копіювання &amp; відновлення даних</string>
-    <string name="pref_data_backup_desc">Export or import user data</string>
+    <string name="pref_data_backup_desc">Експорт або імпорт даних користувача</string>
     <string name="action_export_backup">Експорт резервної копії</string>
     <string name="action_export_backup_desc">Збереження налаштувань, котів та конфігурацій віджетів у файл</string>
     <string name="action_import_backup">Імпорт резервної копії</string>
@@ -78,4 +78,10 @@
     <string name="dialog_import_backup_title">Імпорт резервної копії</string>
     <string name="dialog_import_backup_message">Це перезапише всі поточні дані програми, включаючи налаштування, збережених котів та конфігурації віджетів. Цю дію не можна скасувати. Ви впевнені, що хочете продовжити?</string>
     <string name="action_confirm_import">Імпорт</string>
+    <string name="action_restore_defaults">Відновити стандартні налаштування</string>
+    <string name="action_restore_defaults_desc">Скинути всі налаштування до значень за замовчуванням</string>
+    <string name="dialog_restore_defaults_title">Відновити стандартні налаштування</string>
+    <string name="dialog_restore_defaults_message">Це скине всі налаштування, зокрема тему, значок програми та мову. Збережені коти та конфігурації віджетів залишаться без змін. Цю дію неможливо скасувати. Ви впевнені, що хочете продовжити?</string>
+    <string name="action_confirm_restore_defaults">Скинути</string>
+    <string name="toast_restore_defaults_success">Налаштування відновлено до значень за замовчуванням. Програма перезапуститься.</string>
 </resources>
