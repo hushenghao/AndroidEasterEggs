@@ -260,7 +260,7 @@ public class NekoLand extends Activity implements PrefsListener {
                         return;
                     }
                     String[] permissions = ShareCatUtils.getStoragePermissions();
-                    if (ContextExt.checkSelfPermissions(NekoLand.this, permissions)) {
+                    if (!ContextExt.checkSelfPermissions(NekoLand.this, permissions)) {
                         mPendingShareCat = cat;
                         requestPermissions(permissions, STORAGE_PERM_REQUEST);
                         return;
