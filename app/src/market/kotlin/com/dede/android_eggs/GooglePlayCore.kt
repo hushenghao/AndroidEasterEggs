@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
-import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.util.RatingPromptScheduler
 import com.dede.android_eggs.util.launchCatchable
 import com.dede.android_eggs.views.main.compose.isAgreedPrivacyPolicy
 import com.dede.basic.toast
@@ -22,15 +22,6 @@ import com.google.android.play.core.review.ReviewManagerFactory
 object GooglePlayCore {
 
     private const val TAG = "GooglePlayCore"
-
-    private fun isLaunchReviewTiming(context: Context): Boolean {
-        val count = AppSettings.launchReviewCount.get(context)
-        try {
-            return count == 3 || (count >= 10 && count % 10 == 0)
-        } finally {
-            AppSettings.launchReviewCount.set(context, count + 1)
-        }
-    }
 
     @JvmStatic
     fun isGooglePlayServicesAvailable(context: Context): Boolean {
@@ -54,18 +45,27 @@ object GooglePlayCore {
     }
 
     @JvmStatic
-    fun launchReview(activity: ComponentActivity) {
+    fun promptForRating(activity: ComponentActivity) {
         if (!isAgreedPrivacyPolicy(activity) ||
-            !isGooglePlayServicesAvailable(activity) ||
-            !isLaunchReviewTiming(activity)
+            !isGooglePlayServicesAvailable(activity)
         ) {
             return
         }
 
+        val scheduler = RatingPromptScheduler(activity) { markRequested ->
+            requestReviewFlow(activity, markRequested)
+        }
+        activity.lifecycle.addObserver(scheduler)
+    }
+
+    private fun requestReviewFlow(activity: ComponentActivity, markRequested: () -> Unit) {
         activity.lifecycleScope.launchCatchable {
             // https://developer.android.com/guide/playcore/in-app-review
             val reviewManager = ReviewManagerFactory.create(activity)
             val reviewInfo = reviewManager.requestReview()
+            // Consumed only when Play accepted the request: a failure leaves the
+            // schedule untouched, so a later session tries again.
+            markRequested()
             reviewManager.launchReview(activity, reviewInfo)
         }
     }

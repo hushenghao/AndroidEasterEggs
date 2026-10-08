@@ -6,8 +6,8 @@ import com.dede.android_eggs.flavor.FlavorFeatures
 import com.dede.android_eggs.flavor.LatestVersion
 
 class FlavorFeaturesImpl : FlavorFeatures {
-    override fun launchReview(activity: ComponentActivity) {
-        GooglePlayCore.launchReview(activity)
+    override fun promptForRating(activity: ComponentActivity) {
+        GooglePlayCore.promptForRating(activity)
     }
 
     override suspend fun checkUpdate(activity: Activity): Result<LatestVersion> {

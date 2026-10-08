@@ -1,9 +1,10 @@
 package com.dede.android_eggs.navigation
 
-import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.ui.platform.LocalContext
+import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import com.dede.android_eggs.local_provider.noLocalProvidedFor
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
@@ -56,10 +57,12 @@ val LocalOverlayManager = compositionLocalOf<OverlayManager> {
     noLocalProvidedFor("LocalOverlayManager")
 }
 
+fun createOverlayManager(context: Context): OverlayManager {
+    return EntryPointAccessors.fromApplication<OverlayManagerEntryPoint>(context).overlayManager
+}
+
 @Composable
 fun rememberOverlayManager(): OverlayManager {
     val context = LocalContext.current.applicationContext
-    return remember {
-        EntryPointAccessors.fromApplication<OverlayManagerEntryPoint>(context).overlayManager
-    }
+    return remember { createOverlayManager(context) }
 }

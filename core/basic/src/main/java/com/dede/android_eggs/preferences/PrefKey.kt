@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.dede.android_eggs.preferences.PrefKey.Companion.boolean
 import com.dede.android_eggs.preferences.PrefKey.Companion.int
+import com.dede.android_eggs.preferences.PrefKey.Companion.long
 import com.dede.android_eggs.preferences.PrefKey.Companion.string
 import com.dede.android_eggs.util.pref
 
@@ -12,7 +13,7 @@ import com.dede.android_eggs.util.pref
  * A persisted setting: the storage key, the value read back when nothing has
  * been written yet, and the typed accessors for its SharedPreferences entry.
  *
- * Build one through [boolean], [int] or [string] instead of the constructor, so
+ * Build one through [boolean], [int], [long] or [string] instead of the constructor, so
  * the stored type is declared by the factory rather than guessed from [default].
  * That is what keeps a nullable default such as [AppSettings.savedVcsRevision]
  * expressible.
@@ -70,6 +71,15 @@ class PrefKey<T> private constructor(
                 default = default,
                 reader = { key, fallback -> getInt(key, fallback) },
                 writer = { key, value -> putInt(key, value) },
+            )
+        }
+
+        fun long(name: String, default: Long): PrefKey<Long> {
+            return PrefKey(
+                name = name,
+                default = default,
+                reader = { key, fallback -> getLong(key, fallback) },
+                writer = { key, value -> putLong(key, value) },
             )
         }
 

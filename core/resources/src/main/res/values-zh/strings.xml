@@ -59,6 +59,9 @@
     <string name="animator_disabled_alert_message">由于系统动画被禁用，可能导致一些功能无法正常使用。请进入“开发者选项”并启用“Animator 时长缩放”选项以开启动画</string>
     <string name="action_goto_settings">去设置</string>
     <string name="action_dont_show_again">不再提示</string>
+    <string name="github_star_alert_title">喜欢这个应用吗？</string>
+    <string name="github_star_alert_message">本应用免费且开源。如果喜欢这些彩蛋，欢迎在 GitHub 上为项目点亮 Star，帮助它成长</string>
+    <string name="action_star_github">去点 Star</string>
     <string name="cat_editor">猫咪编辑器</string>
     <string name="cat_editor_input_seed">输入猫咪种子</string>
     <string name="rocket_launcher_easter_egg_icons">Easter Egg 图标</string>

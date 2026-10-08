@@ -334,9 +334,9 @@ Rules when adding or changing a setting:
   AppSettings.retainInRecents.set(context, true)
   ```
 
-  Build keys with the `PrefKey.boolean` / `PrefKey.int` / `PrefKey.string` factories
-  rather than the constructor: the stored type belongs to the key, not to a guess from
-  the default value, which is what keeps a nullable default expressible.
+  Build keys with the `PrefKey.boolean` / `PrefKey.int` / `PrefKey.long` / `PrefKey.string`
+  factories rather than the constructor: the stored type belongs to the key, not to a
+  guess from the default value, which is what keeps a nullable default expressible.
   For Compose state use `rememberPrefBoolState` / `rememberPrefIntState` /
   `mutablePrefColorState` in `:core:settings-ui`, which take a `PrefKey` too.
 - Key names are part of the on-disk format. Renaming one resets that setting on every
@@ -345,7 +345,7 @@ Rules when adding or changing a setting:
   module into every APP and LIBRARY module. Keep it that way: it cannot reference
   `:core:theme` or `:core:system-colors`, so device-capability defaults stay in the
   owning module (see `ColorSourcePrefUtil.DEFAULT_SOURCE`).
-- Long values have no `PrefKey` factory yet. `SpEx.kt` keeps the string-keyed
+- Long values use `PrefKey.long`. `SpEx.kt` keeps the string-keyed
   `Context.getLong` / `putLong` for the AOSP-derived `PlatLogoActivity` classes
   (`SpUtils` in Java). Leave them alone.
 

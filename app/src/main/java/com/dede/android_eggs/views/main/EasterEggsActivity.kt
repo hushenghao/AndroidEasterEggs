@@ -55,7 +55,7 @@ open class EasterEggsActivity : AppCompatActivity() {
         EasterEggShortcutsHelp.updateShortcuts(this, pureEasterEggs)
 
         // call flavor features
-        FlavorFeatures.get().launchReview(this)
+        FlavorFeatures.get().promptForRating(this)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN) {
             setHandoffEnabled(true, null)

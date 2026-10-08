@@ -79,7 +79,11 @@ object AppSettings {
     val animatorDisabledDialogDontShowAgain =
         PrefKey.boolean("animator_disabled_alert_dialog_dont_show_again", false)
 
+    /** Sessions counted since the last rating prompt; reset when the app asks for one. */
     val launchReviewCount = PrefKey.int("key_launch_review_count", 0)
+
+    /** Epoch millis of the last rating prompt, `0` when the app has never asked. */
+    val lastRatingPromptTime = PrefKey.long("key_last_rating_prompt_time", 0L)
 
     val savedVcsRevision = PrefKey.string("pref_save_vcs_revision", null)
 
@@ -109,6 +113,7 @@ object AppSettings {
         privacyPolicyAgreed,
         animatorDisabledDialogDontShowAgain,
         launchReviewCount,
+        lastRatingPromptTime,
         savedVcsRevision,
         lastVcsRevision,
     )
