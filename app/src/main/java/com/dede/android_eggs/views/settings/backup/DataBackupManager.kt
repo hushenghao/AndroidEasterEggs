@@ -10,6 +10,7 @@ import com.dede.android_eggs.views.settings.compose.prefs.AppIconPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePrefUtil
 import com.dede.basic.Utils
 import kotlinx.serialization.json.Json
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.security.MessageDigest
 import java.util.zip.ZipEntry
@@ -22,6 +23,12 @@ internal object DataBackupManager {
 
     private const val BACKUP_VERSION = 1
     private const val BACKUP_JSON = "backup.json"
+
+    // Bounds for untrusted zips: entries are buffered fully in memory, so an
+    // import must cap entry count, per-entry size and total size.
+    private const val MAX_ENTRY_COUNT = 10_000
+    private const val MAX_ENTRY_BYTES = 32L * 1024 * 1024
+    private const val MAX_TOTAL_BYTES = 64L * 1024 * 1024
 
     private val BACKUP_DIRS = listOf("databases", "files", "shared_prefs")
 
@@ -88,12 +95,22 @@ internal object DataBackupManager {
             ?: throw IllegalStateException("Cannot access app data directory")
 
         val zipEntries = mutableMapOf<String, ByteArray>()
+        var entryCount = 0
+        var totalBytes = 0L
 
         applicationContext.contentResolver.openInputStream(uri)?.use { `is` ->
             ZipInputStream(`is`).use { zis ->
                 var entry = zis.nextEntry
                 while (entry != null) {
-                    zipEntries[entry.name] = zis.readBytes()
+                    if (++entryCount > MAX_ENTRY_COUNT) {
+                        throw IllegalArgumentException("Too many backup entries")
+                    }
+                    val bytes = zis.readEntryBytes(MAX_ENTRY_BYTES)
+                    totalBytes += bytes.size
+                    if (totalBytes > MAX_TOTAL_BYTES) {
+                        throw IllegalArgumentException("Backup is too large: $totalBytes bytes")
+                    }
+                    zipEntries[entry.name] = bytes
                     zis.closeEntry()
                     entry = zis.nextEntry
                 }
@@ -108,7 +125,10 @@ internal object DataBackupManager {
             throw IllegalArgumentException("Unsupported backup version: ${data.version}")
         }
 
+        // Every check must pass before the destructive delete below: a rejected
+        // import must abort without touching the existing app data.
         for (fileEntry in data.files) {
+            validateRestorePath(fileEntry.path)
             val actualBytes = zipEntries[fileEntry.path]
                 ?: throw IllegalArgumentException("Missing file: ${fileEntry.path}")
             val actualHash = sha256(actualBytes)
@@ -141,6 +161,33 @@ internal object DataBackupManager {
         if (data.appLanguage != LanguagePrefUtil.SYSTEM) {
             LanguagePrefUtil.setApplicationLocalesValue(data.appLanguage)
         }
+    }
+
+    // The manifest path is attacker-supplied: only the exported layout is
+    // restorable, so a path can never leave appDataDir (".." rejected, no
+    // absolute path passes the BACKUP_DIRS prefix check).
+    private fun validateRestorePath(path: String) {
+        val restorable = BACKUP_DIRS.any { dir -> path.startsWith("$dir/") } &&
+            path.split('/').none { it == ".." }
+        if (!restorable) {
+            throw IllegalArgumentException("Invalid backup file path: $path")
+        }
+    }
+
+    private fun ZipInputStream.readEntryBytes(limit: Long): ByteArray {
+        val out = ByteArrayOutputStream()
+        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+        var total = 0L
+        while (true) {
+            val read = read(buffer)
+            if (read == -1) break
+            total += read
+            if (total > limit) {
+                throw IllegalArgumentException("Backup entry is too large: $total bytes")
+            }
+            out.write(buffer, 0, read)
+        }
+        return out.toByteArray()
     }
 
     private fun flushPendingWrites(context: Context) {
