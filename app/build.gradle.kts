@@ -109,6 +109,7 @@ dependencies {
     implementation(libs.blurhash.android)
     implementation(libs.squircle.shape)
     implementation(libs.haze.blur)
+    implementation(libs.material.kolor.utilities)
     debugImplementation(libs.squareup.leakcanary)
     implementation(libs.ktor.core)
     implementation(libs.ktor.android)

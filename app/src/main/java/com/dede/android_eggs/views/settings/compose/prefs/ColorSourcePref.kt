@@ -1,6 +1,7 @@
 package com.dede.android_eggs.views.settings.compose.prefs
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +22,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
@@ -34,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -43,11 +46,13 @@ import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
+import com.dede.android_eggs.util.ThemeUtils
+import com.dede.android_eggs.views.theme.defaultSeedColor
+import com.dede.android_eggs.views.theme.rememberEasterEggColorScheme
 import com.dede.android_eggs.views.theme.settings.ColorSourcePrefUtil
 import com.dede.android_eggs.views.theme.settings.ColorSourcePrefUtil.isDynamicColorSourceSupported
 import com.dede.android_eggs.views.theme.settings.ThemePrefUtil
-import com.dede.android_eggs.views.theme.defaultSeedColor
-import com.dede.android_eggs.views.theme.rememberEasterEggColorScheme
+import com.materialkolor.hct.Hct
 import com.dede.android_eggs.resources.R as StringsR
 
 
@@ -141,6 +146,7 @@ private fun ColorSourceCard(
     onEditClick: () -> Unit,
 ) {
     val themeMode by ThemePrefUtil.themeModeState
+    val isDark = ThemeUtils.isDarkMode(LocalContext.current)
     val previewSeedColor = when (option.value) {
         ColorSourcePrefUtil.SOURCE_CUSTOM -> seedColor
         else -> defaultSeedColor
@@ -166,6 +172,7 @@ private fun ColorSourceCard(
             ) {
                 ThemeColorPreview(
                     scheme = scheme,
+                    isDark = isDark,
                     modifier = Modifier.size(48.dp),
                     shape = IconShapePrefUtil.getIconShape(),
                 )
@@ -181,8 +188,9 @@ private fun ColorSourceCard(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(2.dp)
-                        .size(28.dp),
+                        .size(30.dp),
                     onClick = onEditClick,
+                    colors = IconButtonDefaults.filledTonalIconButtonColors(containerColor = colorScheme.surfaceContainer),
                     shape = IconShapePrefUtil.getIconShape(),
                 ) {
                     Icon(
@@ -201,14 +209,23 @@ private fun ColorSourceCard(
 private fun ThemeColorPreview(
     modifier: Modifier = Modifier,
     scheme: ColorScheme = colorScheme,
+    isDark: Boolean = isSystemInDarkTheme(),
     shape: Shape = CircleShape
 ) {
+    // ThemePicker preview tones (ColorProvider.getLightColorPreview/getDarkColorPreview):
+    // secondary at L* 85 (light) / 35 (dark) and tertiary at L* 70, not the same-tone
+    // secondary/tertiary roles, which read as one flat color in a swatch this small.
+    val secondary = scheme.secondary.withLStar(if (isDark) 35f else 85f)
+    val tertiary = scheme.tertiary.withLStar(70f)
     Box(
         modifier = modifier
             .aspectRatio(1f)
             .clip(shape),
     ) {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(0.5.dp),
+        ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -219,20 +236,25 @@ private fun ThemeColorPreview(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
+                horizontalArrangement = Arrangement.spacedBy(0.5.dp),
             ) {
                 Box(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
-                        .background(scheme.secondary),
+                        .background(secondary),
                 )
                 Box(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
-                        .background(scheme.tertiary),
+                        .background(tertiary),
                 )
             }
         }
     }
 }
+
+// Same modulation as ColorStateList#withLStar: keep CAM16 hue and chroma, replace the L* value.
+private fun Color.withLStar(lStar: Float): Color =
+    Color(Hct.fromInt(toArgb()).withTone(lStar.toDouble()).toInt())
