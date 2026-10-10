@@ -37,12 +37,12 @@ public class EdgeToEdgeCompat {
     private static EdgeToEdgeImpl createEdgeToEdgeImpl() {
         String className = "androidx.activity.EdgeToEdgeBase";
         final int[] apis = {
+                Build.VERSION_CODES.VANILLA_ICE_CREAM, // 35
                 Build.VERSION_CODES.R,      // 30
                 Build.VERSION_CODES.Q,      // 29
                 Build.VERSION_CODES.P,      // 28
                 Build.VERSION_CODES.O,      // 26
                 Build.VERSION_CODES.M,      // 23
-                Build.VERSION_CODES.LOLLIPOP,// 21
         };
         for (int api : apis) {
             if (Build.VERSION.SDK_INT >= api) {
