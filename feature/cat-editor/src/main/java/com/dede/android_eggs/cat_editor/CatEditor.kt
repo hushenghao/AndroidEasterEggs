@@ -63,9 +63,12 @@ internal fun range(float: Float, max: Float, min: Float): Float {
 internal const val S_STEP = 1.5f
 
 private fun nextScaleLevel(scale: Float, max: Float, min: Float): Float {
+    if (scale == max) {
+        return min
+    }
     val ns = scale * S_STEP
     if (ns > max) {
-        return min
+        return max
     }
     return ns
 }

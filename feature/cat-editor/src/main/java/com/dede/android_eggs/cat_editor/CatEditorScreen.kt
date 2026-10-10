@@ -111,6 +111,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import kotlin.math.abs
+import kotlin.time.Duration.Companion.seconds
 import androidx.appcompat.R as AppCompatR
 import com.dede.android_eggs.resources.R as StringR
 
@@ -626,7 +627,7 @@ private fun ZoomValuePopup(zoomValue: String, modifier: Modifier = Modifier) {
     var visible by remember { mutableStateOf(true) }
     LaunchedEffect(zoomValue) {
         visible = true
-        delay(1000)
+        delay(1.seconds)
         visible = false
     }
     AnimatedVisibility(
@@ -637,7 +638,7 @@ private fun ZoomValuePopup(zoomValue: String, modifier: Modifier = Modifier) {
     ) {
         Card(
             shape = CircleShape,
-            colors = cardColors(containerColor = colorScheme.surfaceColorAtElevation(4.dp))
+            colors = cardColors(containerColor = colorScheme.surfaceColorAtElevation(4.dp)),
         ) {
             Text(
                 text = zoomValue,
@@ -685,7 +686,9 @@ private fun BottomOptionsBar(
                     FilledTonalIconButton(onClick = onMoreOptionsClick) {
                         Icon(
                             imageVector = Icons.Rounded.MoreVert,
-                            contentDescription = stringResource(AppCompatR.string.abc_action_menu_overflow_description)
+                            contentDescription = @Suppress("PrivateResource") stringResource(
+                                AppCompatR.string.abc_action_menu_overflow_description
+                            )
                         )
                     }
                 }[0].measure(measureConstraints)
@@ -714,9 +717,9 @@ private fun BottomOptionsBar(
                 moreOptionsVisible = showMore
 
                 val height = (
-                    (0 until count).map { optionPlaceables[it].height } +
-                        if (showMore) listOf(morePlaceable.height) else emptyList()
-                    ).maxOrNull() ?: 0
+                        (0 until count).map { optionPlaceables[it].height } +
+                                if (showMore) listOf(morePlaceable.height) else emptyList()
+                        ).maxOrNull() ?: 0
 
                 layout(availableWidth, height) {
                     var x = 0

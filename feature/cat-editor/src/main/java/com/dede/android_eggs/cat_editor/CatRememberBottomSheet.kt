@@ -113,7 +113,7 @@ fun CatRememberBottomSheet(
                     contentPadding = PaddingValues(
                         start = 20.dp,
                         end = 20.dp,
-                        bottom = paddingValues.calculateBottomPadding(),
+                        bottom = paddingValues.calculateBottomPadding() + 12.dp,
                     ),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
