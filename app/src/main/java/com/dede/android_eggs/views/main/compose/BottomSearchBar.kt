@@ -13,10 +13,14 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -208,10 +212,14 @@ private fun BottomSearchBarView(
         }
     }
     Surface(
+        // Padding must be inside `modifier` (hazeBlur) so the blur backdrop keeps
+        // drawing to the screen edge. The navigation bar padding excludes the IME
+        // inset: with 3-button nav the IME inset already spans the nav bar, so
+        // padding both insets would double-pad above the keyboard.
         modifier = Modifier
             .imePadding()
             .then(modifier)
-            .navigationBarsPadding(),
+            .windowInsetsPadding(WindowInsets.navigationBars.exclude(WindowInsets.ime)),
         shape = shape,
         color = containerColor,
         contentColor = contentColor,

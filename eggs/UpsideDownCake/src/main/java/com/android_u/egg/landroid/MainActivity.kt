@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -37,9 +38,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContent
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -189,6 +193,7 @@ fun Telemetry(universe: VisibleUniverse) {
         modifier = Modifier
             .fillMaxSize()
             .padding(6.dp)
+            .windowInsetsPadding(WindowInsets.safeContent)
     ) {
         universe.triggerDraw.value // recompose on every frame
         val explored = universe.planets.filter { it.explored }
@@ -256,6 +261,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         onWindowLayoutInfoChange()
+
+        enableEdgeToEdge()
 
         val universe = VisibleUniverse(namer = Namer(resources), randomSeed = randomSeed())
 
