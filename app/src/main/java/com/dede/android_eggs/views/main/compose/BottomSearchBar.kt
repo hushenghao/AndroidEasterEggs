@@ -138,9 +138,10 @@ fun BottomSearchBar(
     contentColor: Color = colorScheme.onSurface,
     onClose: (() -> Unit)? = null,
 ) {
-    val backProgress by predictiveBackProgressState(enabled = state.visible) {
-        state.close()
-    }
+    val backProgress by predictiveBackProgressState(
+        enabled = state.visible,
+        onBackCompleted = { state.close() },
+    )
     AnimatedVisibility(
         visible = state.visible,
         enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),

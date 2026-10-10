@@ -20,14 +20,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.rounded.ViewCarousel
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PlainTooltip
@@ -47,6 +45,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
@@ -58,18 +57,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import androidx.navigationevent.NavigationEvent
 import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeOverlayBackdrop
+import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.navigation.LocalOverlayManager
 import com.dede.android_eggs.navigation.OverlayRoute
 import com.dede.android_eggs.settings_ui.basic.SettingPref
 import com.dede.android_eggs.ui.composes.PHI
+import com.dede.android_eggs.ui.composes.PredictiveBackProgressHandler.predictiveBackShrink
 import com.dede.android_eggs.ui.composes.SnapshotView
-import com.dede.android_eggs.ui.composes.predictiveBackProgressState
+import com.dede.android_eggs.ui.composes.predictiveBackProgressEventState
 import com.dede.android_eggs.views.main.util.EasterEggHelp.ApiLevelFormatter
 import com.dede.android_eggs.views.main.util.EasterEggHelp.VersionFormatter
 import com.dede.basic.provider.EasterEgg
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.chrisbanes.haze.HazeProgressive
+import dev.chrisbanes.haze.blur.materials.HazeMaterials
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
@@ -93,7 +96,7 @@ fun SnapshotPref() {
 private val SnapshotOverlayMaxWidth = 560.dp
 
 private const val SNAPSHOT_OVERLAY_ENTER_DURATION = 220
-private const val SNAPSHOT_OVERLAY_EXIT_DURATION = 160
+private const val SNAPSHOT_OVERLAY_EXIT_DURATION = 180
 
 /**
  * Full screen snapshot preview over a blurred copy of the screen.
@@ -110,9 +113,26 @@ fun SnapshotOverlay(onDismiss: () -> Unit) {
     val dismiss = { visibility.targetState = false }
 
     // The predictive back gesture dissolves the blur as it progresses, and dismissing it once the
-    // gesture is let go fades the rest out. A cancelled gesture walks the progress back to 0.
-    val backProgress by predictiveBackProgressState(enabled = visibility.targetState) { dismiss() }
+    // gesture is let go fades the rest out. A cancelled gesture walks the progress back to 0. The
+    // swipe edge side fades out along the progress while the opposite side stays fully blurred,
+    // evenly for a non-edge back.
+    val backEvent by predictiveBackProgressEventState(
+        enabled = visibility.targetState,
+        onBackCompleted = dismiss
+    )
+    val backProgress = backEvent.progress.coerceIn(0f, 1f)
     val opacity = 1f - backProgress
+    val (startIntensity, endIntensity) = when (backEvent.swipeEdge) {
+        NavigationEvent.EDGE_LEFT -> opacity to 1f
+        NavigationEvent.EDGE_RIGHT -> 1f to opacity
+        else -> opacity to opacity
+    }
+    val shrinkOrigin = when (backEvent.swipeEdge) {
+        // LayoutDirection.Ltr
+        NavigationEvent.EDGE_LEFT -> Alignment.CenterEnd
+        NavigationEvent.EDGE_RIGHT -> Alignment.CenterStart
+        else -> Alignment.Center
+    }
 
     AnimatedVisibility(
         label = "SnapshotOverlay",
@@ -135,11 +155,15 @@ fun SnapshotOverlay(onDismiss: () -> Unit) {
                 modifier = Modifier
                     .fillMaxSize()
                     .hazeOverlayBackdrop(
-                        progressive = HazeProgressive.verticalGradient(
-                            easing = LinearEasing,
-                            startIntensity = opacity,
-                            endIntensity = opacity,
-                        ),
+                        style = HazeMaterials.thin().then {
+                            progressive(
+                                HazeProgressive.horizontalGradient(
+                                    easing = LinearEasing,
+                                    startIntensity = startIntensity,
+                                    endIntensity = endIntensity,
+                                )
+                            )
+                        }
                     )
                     .pointerInput(Unit) {
                         detectTapGestures { dismiss() }
@@ -147,6 +171,13 @@ fun SnapshotOverlay(onDismiss: () -> Unit) {
             )
             SnapshotCarousel(
                 modifier = Modifier
+                    .graphicsLayer {
+                        predictiveBackShrink(
+                            progress = backProgress,
+                            shrinkFactor = 0.1f,
+                            shrinkOrigin = shrinkOrigin,
+                        )
+                    }
                     .safeDrawingPadding()
                     .widthIn(max = SnapshotOverlayMaxWidth)
                     .padding(horizontal = 24.dp),
@@ -248,17 +279,19 @@ fun SnapshotCarousel(
                                 }
                             },
                         ) {
-                            FloatingActionButton(
+                            FilledTonalIconButton(
                                 modifier = Modifier.size(36.dp),
-                                shape = CircleShape,
-                                elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation(),
+                                shape = IconShapePrefUtil.getIconShape(),
                                 onClick = {
                                     scope.launch {
                                         tooltipState.show()
                                     }
                                 },
                             ) {
-                                Icon(Icons.Outlined.Lightbulb, contentDescription = null)
+                                Icon(
+                                    imageVector = Icons.Outlined.Lightbulb,
+                                    contentDescription = null
+                                )
                             }
                         }
                     }

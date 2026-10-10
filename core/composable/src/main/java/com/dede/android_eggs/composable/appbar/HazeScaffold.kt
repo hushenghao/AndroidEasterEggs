@@ -25,6 +25,7 @@ import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeAppBar
 import dev.chrisbanes.haze.HazeInput
 import dev.chrisbanes.haze.HazeProgressive
 import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.blur.HazeBlurStyle
 import dev.chrisbanes.haze.blur.hazeBlur
 import dev.chrisbanes.haze.blur.materials.HazeMaterials
 import dev.chrisbanes.haze.hazeSource
@@ -160,18 +161,16 @@ object HazeScaffoldDefaults {
      * [overlayState] has to be the state of a source which was already marked behind the overlay,
      * see [LocalOverlayHazeState].
      *
-     * [progressive] optionally shapes how strong the effect is across the overlay, for example to
-     * unblur the part a back gesture has peeled away.
+     * [style] Explicit Blur Style.
      */
     @Composable
     fun Modifier.hazeOverlayBackdrop(
         overlayState: HazeState = LocalOverlayHazeState.current,
-        progressive: HazeProgressive? = null,
-    ): Modifier =
-        Modifier
-            .hazeBlur(
-                input = HazeInput.Sources(overlayState),
-                style = HazeMaterials.thin().then { progressive(progressive) },
-            )
-            .then(this)
+        style: HazeBlurStyle = HazeMaterials.thin(),
+    ): Modifier = Modifier
+        .hazeBlur(
+            input = HazeInput.Sources(overlayState),
+            style = style,
+        )
+        .then(this)
 }

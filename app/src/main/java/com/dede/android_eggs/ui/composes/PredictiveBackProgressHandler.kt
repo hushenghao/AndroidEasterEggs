@@ -1,11 +1,13 @@
 package com.dede.android_eggs.ui.composes
 
 import androidx.compose.animation.core.animate
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -15,6 +17,7 @@ import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.toOffset
+import androidx.navigationevent.NavigationEvent
 import androidx.navigationevent.NavigationEventInfo
 import androidx.navigationevent.NavigationEventTransitionState
 import androidx.navigationevent.compose.NavigationBackHandler
@@ -25,8 +28,8 @@ object PredictiveBackProgressHandler {
 
     private const val SHRINK_FACTOR = 0.15f
 
-    private fun computeBackShrinkProgress(progress: Float): Float {
-        return 1f - (SHRINK_FACTOR * progress.coerceIn(0f, 1f))
+    private fun computeBackShrinkProgress(progress: Float, shrinkFactor: Float): Float {
+        return 1f - (shrinkFactor * progress.coerceIn(0f, 1f))
     }
 
     private val Size = IntSize(100, 100)
@@ -39,10 +42,11 @@ object PredictiveBackProgressHandler {
 
     fun GraphicsLayerScope.predictiveBackShrink(
         progress: Float,
+        shrinkFactor: Float = SHRINK_FACTOR,
         shrinkOrigin: Alignment = Alignment.Center,
         layoutDirection: LayoutDirection = LayoutDirection.Ltr
     ) {
-        val shrinkProgress = computeBackShrinkProgress(progress)
+        val shrinkProgress = computeBackShrinkProgress(progress, shrinkFactor)
         this.scaleX = shrinkProgress
         this.scaleY = shrinkProgress
 
@@ -50,20 +54,28 @@ object PredictiveBackProgressHandler {
     }
 }
 
+private fun NavigationEvent.copy(
+    swipeEdge: Int = this.swipeEdge,
+    progress: Float = this.progress,
+    touchX: Float = this.touchX,
+    touchY: Float = this.touchY,
+    frameTimeMillis: Long = this.frameTimeMillis,
+) = NavigationEvent(swipeEdge, progress, touchX, touchY, frameTimeMillis)
+
 @Composable
-fun predictiveBackProgressState(
+fun predictiveBackProgressEventState(
     enabled: Boolean,
-    backEndValue: (progress: Float) -> Float = { it },
-    onBack: suspend () -> Unit
-): State<Float> {
-    val progressState = remember { mutableFloatStateOf(0f) }
-    var progress by progressState
+    onBackCompleted: () -> Unit,
+    onBackCancelled: () -> Unit = {},
+): State<NavigationEvent> {
+    val navEventState = remember { mutableStateOf(NavigationEvent()) }
+    var navEvent by navEventState
 
     val navState = rememberNavigationEventState(NavigationEventInfo.None)
     LaunchedEffect(navState.transitionState) {
         when (val state = navState.transitionState) {
             is NavigationEventTransitionState.InProgress -> {
-                progress = state.latestEvent.progress
+                navEvent = state.latestEvent
             }
             is NavigationEventTransitionState.Idle -> {
             }
@@ -74,24 +86,32 @@ fun predictiveBackProgressState(
         state = navState,
         isBackEnabled = enabled,
         onBackCompleted = {
-            scope.launch {
-                onBack()
-                progress = backEndValue(progress)
-            }
+            onBackCompleted()
         },
         onBackCancelled = {
             scope.launch {
-                animate(progress, 0f) { value, _ ->
-                    progress = value
+                animate(navEvent.progress, 0f, animationSpec = tween()) { value, _ ->
+                    navEvent = navEvent.copy(progress = value)
                 }
             }
+            onBackCancelled()
         },
     )
 
     LaunchedEffect(enabled) {
         if (enabled) {
-            progress = 0f
+            navEvent = navEvent.copy(progress = 0f)
         }
     }
-    return progressState
+    return navEventState
+}
+
+@Composable
+fun predictiveBackProgressState(
+    enabled: Boolean,
+    onBackCompleted: () -> Unit,
+    onBackCancelled: () -> Unit = {},
+): State<Float> {
+    val navEventState = predictiveBackProgressEventState(enabled, onBackCompleted, onBackCancelled)
+    return remember { derivedStateOf { navEventState.value.progress } }
 }
