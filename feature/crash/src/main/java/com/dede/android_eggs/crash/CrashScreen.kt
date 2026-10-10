@@ -35,7 +35,7 @@ import androidx.compose.material.icons.rounded.RestartAlt
 import androidx.compose.material.icons.rounded.Screenshot
 import androidx.compose.material.icons.rounded.SentimentDissatisfied
 import androidx.compose.material3.Card
-import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -52,6 +52,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -60,12 +61,32 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.crash.Utilities.getCrashTitle
 import com.dede.android_eggs.crash.Utilities.getDeviceInfo
 import com.dede.android_eggs.crash.Utilities.getStackTraceString
 import com.dede.basic.Utils
 import kotlin.system.exitProcess
+
+@Composable
+private fun floatingActionButtonElevation(elevation: Dp = 0.dp) =
+    FloatingActionButtonDefaults.elevation(elevation, elevation, elevation, elevation)
+
+@Composable
+private fun IconActionButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    imageVector: ImageVector,
+    contentDescription: String? = null,
+) {
+    FilledTonalIconButton(
+        onClick = onClick,
+        modifier = Modifier.size(56.dp) then modifier,
+    ) {
+        Icon(imageVector = imageVector, contentDescription = contentDescription)
+    }
+}
 
 @Composable
 @Preview(showSystemUi = true)
@@ -169,7 +190,7 @@ internal fun CrashScreen(
                 .fillMaxWidth(fraction = 0.8f),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            FloatingActionButton(
+            IconActionButton(
                 onClick = {
                     val intent = Utils.getLaunchIntent(context)
                     if (intent != null) {
@@ -177,38 +198,23 @@ internal fun CrashScreen(
                         context.startActivity(intent)
                     }
                 },
-                shape = FloatingActionButtonDefaults.largeShape
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.RestartAlt,
-                    contentDescription = null
-                )
-            }
+                imageVector = Icons.Rounded.RestartAlt,
+            )
             if (screenshotPath != null) {
-                FloatingActionButton(
+                IconActionButton(
                     onClick = {
                         showScreenshot = true
                     },
-                    shape = FloatingActionButtonDefaults.largeShape
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.Screenshot,
-                        contentDescription = null
-                    )
-                }
+                    imageVector = Icons.Rounded.Screenshot,
+                )
             }
-            FloatingActionButton(
+            IconActionButton(
                 onClick = {
                     Utilities.copyThrowablePlantText(context, tr)
                 },
-                shape = FloatingActionButtonDefaults.largeShape
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.ContentCopy,
-                    contentDescription = null
-                )
-            }
-            FloatingActionButton(
+                imageVector = Icons.Rounded.ContentCopy,
+            )
+            IconActionButton(
                 onClick = {
                     val intent = Utilities.createNewIssueIntent(context, tr)
                     try {
@@ -217,13 +223,8 @@ internal fun CrashScreen(
                     }
                     Utilities.copyThrowablePlantText(context, tr)
                 },
-                shape = FloatingActionButtonDefaults.largeShape
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.BugReport,
-                    contentDescription = null
-                )
-            }
+                imageVector = Icons.Rounded.BugReport,
+            )
         }
 
         AnimatedVisibility(
