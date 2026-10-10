@@ -37,24 +37,24 @@ public class AndroidOreoEasterEgg implements EasterEggProvider {
                         R.drawable.o_android_logo,
                         R.string.o_app_name,
                         R.string.o_android_nickname,
-                        Build.VERSION_CODES_FULL.O,
-                        PlatLogoActivity.class
-                ) {
-                    @Override
-                    public SnapshotProvider provideSnapshotProvider() {
-                        return new SnapshotProvider();
-                    }
-                },
-                new EasterEgg(
-                        R.drawable.o_android_logo,
-                        R.string.o_app_name,
-                        R.string.o_android_nickname,
                         Build.VERSION_CODES_FULL.O_MR1,
                         PlatLogoActivity.Point1.class
                 ) {
                     @Override
                     public SnapshotProvider provideSnapshotProvider() {
                         return new SnapshotProvider(true);
+                    }
+                },
+                new EasterEgg(
+                        R.drawable.o_android_logo,
+                        R.string.o_app_name,
+                        R.string.o_android_nickname,
+                        Build.VERSION_CODES_FULL.O,
+                        PlatLogoActivity.class
+                ) {
+                    @Override
+                    public SnapshotProvider provideSnapshotProvider() {
+                        return new SnapshotProvider();
                     }
                 }
         );
