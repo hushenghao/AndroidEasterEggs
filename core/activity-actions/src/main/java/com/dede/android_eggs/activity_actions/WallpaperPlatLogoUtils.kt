@@ -12,6 +12,16 @@ import android.window.OnBackInvokedDispatcher.PRIORITY_OVERLAY
  */
 object WallpaperPlatLogoUtils {
 
+    /**
+     * Theme-based variant of [isShowWallpaper] for onPreCreate: window attributes are still
+     * empty at that point (FLAG_SHOW_WALLPAPER not applied yet), but the theme is resolved.
+     */
+    fun isShowWallpaperTheme(activity: Activity): Boolean {
+        val attrs =
+            activity.theme.obtainStyledAttributes(intArrayOf(android.R.attr.windowShowWallpaper))
+        return attrs.getBoolean(0, false).also { attrs.recycle() }
+    }
+
     fun isShowWallpaper(activity: Activity): Boolean {
         val flags = activity.window.attributes.flags
         return (flags and FLAG_SHOW_WALLPAPER) == FLAG_SHOW_WALLPAPER
