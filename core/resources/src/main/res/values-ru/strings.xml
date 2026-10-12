@@ -59,6 +59,9 @@
     <string name="animator_disabled_alert_message">Системные анимации отключены. Некоторые функции могут работать неправильно. Пожалуйста, зайдите в настройки «Для разработчиков» и настройте опцию «Длительность анимации», чтобы активировать анимации</string>
     <string name="action_goto_settings">Перейти в настройки</string>
     <string name="action_dont_show_again">Больше не показывать</string>
+    <string name="github_star_alert_title">Понравилось приложение?</string>
+    <string name="github_star_alert_message">Это приложение бесплатно и имеет открытый исходный код. Если вам нравятся эти пасхальные яйца, поставьте этому проекту звезду на GitHub и помогите ему развиваться</string>
+    <string name="action_star_github">Поставить звезду на GitHub</string>
     <string name="cat_editor">Редактор кошек</string>
     <string name="cat_editor_input_seed">Введите ключ генерации (сид) кошки</string>
     <string name="rocket_launcher_easter_egg_icons">Пасхальные яйца</string>
