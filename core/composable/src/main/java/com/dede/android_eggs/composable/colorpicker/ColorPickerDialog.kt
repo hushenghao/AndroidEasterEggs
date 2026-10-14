@@ -6,11 +6,14 @@ import android.app.Activity
 import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -41,7 +44,6 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
@@ -51,12 +53,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.ScrollableModalBottomSheet
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getHsv
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.basic.copy
 import kotlinx.coroutines.launch
@@ -99,14 +101,17 @@ fun ColorPickerDialog(
         enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
     )
 
-    val hsv = colorToHsv(initialColor)
+    val hsv = initialColor.getHsv()
     var hue by remember { mutableFloatStateOf(hsv[0]) }
     var saturation by remember { mutableFloatStateOf(hsv[1]) }
     var value by remember { mutableFloatStateOf(hsv[2]) }
-    var alpha by remember {
+    var alpha by remember(withAlphaPalette) {
         mutableFloatStateOf(if (withAlphaPalette) initialColor.alpha else 1f)
     }
-    var hsvColor by remember { mutableStateOf(Color.hsv(hue, saturation, 1f)) }
+
+    // The color being edited with alpha stripped out; the alpha slider fades from
+    // it to transparent so the gradient always reflects the current color.
+    val opaqueColor = remember(hue, saturation, value) { Color.hsv(hue, saturation, value) }
 
     val finalColor =
         remember(hue, saturation, value, alpha) { Color.hsv(hue, saturation, value, alpha) }
@@ -184,7 +189,6 @@ fun ColorPickerDialog(
                                 hue = h
                                 saturation = s
                                 value = v
-                                hsvColor = Color.hsv(hue, saturation, 1f)
                             },
                         ) {
                             Icon(
@@ -210,29 +214,65 @@ fun ColorPickerDialog(
                 }
             }
 
-            Spacer(modifier = Modifier.height(14.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-            Box(
+            Row(
                 modifier = Modifier
                     .sizeIn(maxWidth = 360.dp)
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
+                    .aspectRatio(3f / 2f)
                     .align(Alignment.CenterHorizontally),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
-                ColorHsvPalette(
-                    modifier = Modifier.fillMaxWidth(),
-                    defaultColor = Color.hsv(hue, saturation, 1f),
-                    onColorChanged = { hsv, h, s ->
-                        hue = h
+                ColorSvPalette(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight(),
+                    hue = hue,
+                    defaultColor = Color.hsv(hue, saturation, value),
+                    onColorChanged = { _, s, v ->
                         saturation = s
-                        hsvColor = hsv
+                        value = v
                     },
                 )
 
+                VerticalGradientSlider(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(30.dp),
+                    value = hue,
+                    colors = listOf(
+                        Color.Red, Color.Yellow, Color.Green,
+                        Color.Cyan, Color.Blue, Color.Magenta, Color.Red,
+                    ),
+                    valueRange = 0f..360f,
+                    onValueChange = { newValue ->
+                        hue = newValue
+                    },
+                )
+
+                if (withAlphaPalette) {
+                    VerticalGradientSlider(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .width(30.dp),
+                        value = alpha,
+                        colors = listOf(Color.Transparent, opaqueColor),
+                        onValueChange = { newValue ->
+                            alpha = newValue
+                        },
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
                 if (isColorStrawEnabled) {
                     FilledTonalIconButton(
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd),
                         shape = IconShapePrefUtil.getIconShape(),
                         onClick = {
                             scope.launch {
@@ -250,37 +290,9 @@ fun ColorPickerDialog(
                         )
                     }
                 }
-            }
 
-            Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.weight(1f))
 
-            LinearGradientSlider(
-                modifier = Modifier.padding(horizontal = 10.dp),
-                value = value,
-                startColor = Color.Black,
-                endColor = hsvColor,
-                onValueChange = { newValue ->
-                    value = newValue
-                },
-            )
-
-            if (withAlphaPalette) {
-                LinearGradientSlider(
-                    modifier = Modifier.padding(horizontal = 10.dp),
-                    value = alpha,
-                    startColor = Color.Transparent,
-                    endColor = hsvColor,
-                    onValueChange = { newValue ->
-                        alpha = newValue
-                    },
-                )
-            }
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Row(
-                modifier = Modifier.align(Alignment.End),
-            ) {
                 TextButton(
                     onClick = {
                         scope.launch {
@@ -310,10 +322,4 @@ fun ColorPickerDialog(
             }
         }
     }
-}
-
-private fun colorToHsv(color: Color): FloatArray {
-    val hsv = floatArrayOf(0f, 0f, 1f)
-    android.graphics.Color.colorToHSV(color.toArgb(), hsv)
-    return hsv
 }

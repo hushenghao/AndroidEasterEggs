@@ -2,10 +2,10 @@ package com.dede.android_eggs.composable.colorpicker
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.VectorConverter
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -15,13 +15,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.geometry.isSpecified
 import androidx.compose.ui.geometry.toRect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipPath
@@ -32,17 +33,17 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toIntSize
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getHighlightColor
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getHsvPaletteColorByPoint
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getHsvPalettePointByColor
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.rangeHsvPaletteColor
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.rangeHsvPalettePoint
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getSvPaletteColorByPoint
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getSvPalettePointByColor
+import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.rangeSvPalettePoint
 import kotlinx.coroutines.launch
 
 @Composable
-fun ColorHsvPalette(
+fun ColorSvPalette(
     modifier: Modifier = Modifier,
+    hue: Float,
     defaultColor: Color = Color.White,
-    onColorChanged: (hsv: Color, hue: Float, saturation: Float) -> Unit = { _, _, _ -> },
+    onColorChanged: (hsv: Color, saturation: Float, value: Float) -> Unit = { _, _, _ -> },
 ) {
     val performColorChanged by rememberUpdatedState(onColorChanged)
 
@@ -50,11 +51,16 @@ fun ColorHsvPalette(
     val palettePoint = remember {
         Animatable(Offset.Unspecified, Offset.VectorConverter)
     }
+    var indicatorPressed by remember { mutableStateOf(false) }
+    val indicatorScale by animateFloatAsState(
+        targetValue = if (indicatorPressed) 1.5f else 1f,
+        label = "indicatorScale",
+    )
     var onDefaultColorUpdate by remember { mutableStateOf(true) }
 
     LaunchedEffect(defaultColor) {
         if (defaultColor != paletteColor) {
-            paletteColor = rangeHsvPaletteColor(defaultColor)
+            paletteColor = defaultColor
             onDefaultColorUpdate = true
         }
     }
@@ -65,10 +71,9 @@ fun ColorHsvPalette(
     val touchStrokeWidth = with(LocalDensity.current) { 1.5.dp.toPx() }
 
     fun onTouched(anim: Boolean, position: Offset, size: IntSize) {
-        val pos = rangeHsvPalettePoint(position, size)
-        val hsv = getHsvPaletteColorByPoint(pos, size)
+        val pos = rangeSvPalettePoint(position, size)
+        val hsv = getSvPaletteColorByPoint(pos, size, hue)
 
-        val hue = hsv[0]
         val saturation = hsv[1]
         val value = hsv[2]
         val selectedColor = Color.hsv(hue, saturation, value)
@@ -82,64 +87,83 @@ fun ColorHsvPalette(
             }
         }
 
-        performColorChanged(selectedColor, hue, saturation)
+        performColorChanged(selectedColor, saturation, value)
     }
 
     Canvas(
         modifier = Modifier
             .then(modifier)
             .pointerInput(Unit) {
-                detectTapGestures {
-                    onTouched(true, it, size)
-                }
+                detectTapGestures(
+                    onPress = { offset ->
+                        indicatorPressed = true
+                        onTouched(true, offset, size)
+                        // A press that turns into a drag cancels the tap gesture;
+                        // detectDragGestures owns the release in that case.
+                        if (tryAwaitRelease()) {
+                            indicatorPressed = false
+                        }
+                    },
+                )
             }
             .pointerInput(Unit) {
-                detectDragGestures { change, _ ->
+                detectDragGestures(
+                    onDragStart = {
+                        indicatorPressed = true
+                    },
+                    onDragEnd = {
+                        indicatorPressed = false
+                    },
+                    onDragCancel = {
+                        indicatorPressed = false
+                    },
+                ) { change, _ ->
                     change.consume()
                     onTouched(false, change.position, size)
                 }
             }
-            .aspectRatio(1f)
     ) {
-        val sweep = Brush.sweepGradient(
-            colors = listOf(
-                Color.Red, Color.Magenta,
-                Color.Blue, Color.Cyan,
-                Color.Green, Color.Yellow, Color.Red,
-            ),
-        )
-        drawCircle(sweep)
-        val radial = Brush.radialGradient(
-            colors = listOf(Color.White, Color(0x00FFFFFF)),
-            tileMode = TileMode.Clamp,
-        )
-        drawCircle(radial)
+        // Only the gradient is clipped to the rounded rect so the indicator
+        // circle can overhang the palette edge without being cut off.
+        val paletteClip = Path().apply {
+            addRoundRect(RoundRect(size.toRect(), CornerRadius(8.dp.toPx())))
+        }
+        clipPath(paletteClip) {
+            drawRect(
+                Brush.horizontalGradient(
+                    listOf(Color.White, Color.hsv(hue, 1f, 1f)),
+                ),
+            )
+            drawRect(
+                Brush.verticalGradient(
+                    listOf(Color.Transparent, Color.Black),
+                ),
+            )
+        }
 
         if (onDefaultColorUpdate) {
             onDefaultColorUpdate = false
 
-            val point = getHsvPalettePointByColor(paletteColor, size.toIntSize())
+            val point = getSvPalettePointByColor(paletteColor, size.toIntSize())
             scope.launch {
                 palettePoint.animateTo(point)
             }
         }
 
         if (paletteColor.isSpecified && palettePoint.value.isSpecified) {
-            val clipPath = Path().apply { addOval(size.toRect()) }
-            clipPath(clipPath) {
-                drawCircle(
-                    color = paletteColor,
-                    radius = touchCircleRadius,
-                    center = palettePoint.value,
-                    style = Fill,
-                )
-                drawCircle(
-                    color = getHighlightColor(paletteColor),
-                    radius = touchCircleRadius,
-                    center = palettePoint.value,
-                    style = Stroke(width = touchStrokeWidth),
-                )
-            }
+            val radius = touchCircleRadius * indicatorScale
+            drawCircle(
+                color = paletteColor,
+                radius = radius,
+                center = palettePoint.value,
+                style = Fill,
+            )
+            drawCircle(
+                color = getHighlightColor(paletteColor),
+                radius = radius,
+                center = palettePoint.value,
+                style = Stroke(width = touchStrokeWidth),
+            )
         }
     }
 }

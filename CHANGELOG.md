@@ -2,15 +2,16 @@
 
 ### v5.5.1
 
-- Add "restore default settings" to data backup & restore
-- Adapt the home settings drawer for large screens
-- Blur the whole screen behind the snapshot preview
+- Add "restore default settings" to data backup
+- Adapt home settings drawer for large screens
+- Blur the screen behind the snapshot preview
 - Add voice search to the home search bar
-- Search the eggs with keywords in any order
-- Improve the Play Store review prompt timing
-- Add a GitHub star prompt to F-Droid builds
+- Search eggs with keywords in any order
+- Improve Play Store review prompt timing
+- Add a GitHub star prompt to F-Droid
 - Fixed preview easter egg API level display error
 - Upgrade the minimum supported version to Android 7.0
+- Replace the color wheel with a square palette
 - Upgrade project dependencies
 
 ### v5.5.0 (2026-09-08)
