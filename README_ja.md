@@ -41,7 +41,7 @@
 
 </div>
 
-* **Play Store** は [Play アプリ署名機能](https://support.google.com/googleplay/android-developer/answer/9842756) を使用しており、他のダウンロードチャネルからのアップグレードができない場合があります。
+* **Play Store** と **Aptoide** は [Play アプリ署名機能](https://support.google.com/googleplay/android-developer/answer/9842756) を使用しており、Aptoide のパッケージは Google Play から同期されています。他のダウンロードチャネルからのアップグレードができない場合があります。
 * **Pgyer** にはベータ版があり、まだ安定していない新機能が含まれている場合があります。
 
 ## 貢献

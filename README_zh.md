@@ -41,7 +41,7 @@
 
 </div>
 
-* **Play Store** 使用 [Play 应用签名功能](https://support.google.com/googleplay/android-developer/answer/9842756)，可能出现无法和其他下载渠道互相升级的问题。
+* **Play Store** 和 **Aptoide** 使用 [Play 应用签名功能](https://support.google.com/googleplay/android-developer/answer/9842756)，Aptoide 的安装包由 Google Play 同步分发，可能出现无法和其他下载渠道互相升级的问题。
 * **Pgyer** 下载的是Alpha版本，可能包含了一些尚未稳定的新功能。
 
 ## 贡献
