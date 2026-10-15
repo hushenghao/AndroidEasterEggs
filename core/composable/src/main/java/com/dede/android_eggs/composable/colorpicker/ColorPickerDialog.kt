@@ -7,7 +7,6 @@ import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,30 +16,21 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Colorize
-import androidx.compose.material.icons.rounded.ContentCopy
-import androidx.compose.material.icons.rounded.Palette
-import androidx.compose.material.icons.rounded.Shuffle
 import androidx.compose.material3.BottomSheetDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberBottomSheetState
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -50,17 +40,12 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.ScrollableModalBottomSheet
 import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getHsv
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
-import com.dede.basic.copy
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
@@ -116,8 +101,6 @@ fun ColorPickerDialog(
     val finalColor =
         remember(hue, saturation, value, alpha) { Color.hsv(hue, saturation, value, alpha) }
 
-    val context = LocalContext.current
-
     val scope = rememberCoroutineScope()
 
     val scrollState = rememberScrollState()
@@ -137,84 +120,31 @@ fun ColorPickerDialog(
                 .padding(horizontal = 20.dp)
                 .padding(bottom = 20.dp + paddingValues.calculateBottomPadding()),
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
+            PresetColorSwatches(
+                hue = hue,
+                saturation = saturation,
+                value = value,
+                onColorSelected = { h, s, v ->
+                    hue = h
+                    saturation = s
+                    value = v
+                },
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            ColorPickerHeader(
                 modifier = Modifier.fillMaxWidth(),
-            ) {
-                Box(
-                    modifier = Modifier.clip(IconShapePrefUtil.getIconShape()),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Checkerboard(
-                        modifier = Modifier
-                            .size(IconButtonDefaults.mediumContainerSize())
-                            .drawWithContent {
-                                drawContent()
-                                drawRect(finalColor)
-                            },
-                    )
-                    Icon(
-                        imageVector = Icons.Rounded.Palette,
-                        contentDescription = null,
-                        tint = ColorPickerUtilities.getHighlightColor(finalColor),
-                    )
-                }
+                color = finalColor,
+                withAlphaPalette = withAlphaPalette,
+                onShuffle = {
+                    hue = Random.nextFloat() * 360f
+                    saturation = Random.nextFloat()
+                    value = Random.nextFloat()
+                },
+            )
 
-                Spacer(modifier = Modifier.width(16.dp))
-
-                Card(
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
-                    ),
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .padding(start = 12.dp, end = 6.dp, top = 6.dp, bottom = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Text(
-                            text = ColorPickerUtilities.getHexColor(finalColor, withAlphaPalette),
-                            style = MaterialTheme.typography.titleLarge.copy(
-                                fontFamily = FontFamily.Monospace,
-                            ),
-                            modifier = Modifier.weight(1f),
-                        )
-
-                        FilledTonalIconButton(
-                            shape = IconShapePrefUtil.getIconShape(),
-                            onClick = {
-                                val h = Random.nextFloat() * 360f
-                                val s = Random.nextFloat()
-                                val v = Random.nextFloat()
-                                hue = h
-                                saturation = s
-                                value = v
-                            },
-                        ) {
-                            Icon(
-                                imageVector = Icons.Rounded.Shuffle,
-                                contentDescription = null,
-                            )
-                        }
-
-                        FilledTonalIconButton(
-                            shape = IconShapePrefUtil.getIconShape(),
-                            onClick = {
-                                val hexColor =
-                                    ColorPickerUtilities.getHexColor(finalColor, withAlphaPalette)
-                                context.copy(hexColor)
-                            },
-                        ) {
-                            Icon(
-                                imageVector = Icons.Rounded.ContentCopy,
-                                contentDescription = stringResource(android.R.string.copy),
-                            )
-                        }
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(14.dp))
 
             Row(
                 modifier = Modifier
@@ -265,7 +195,7 @@ fun ColorPickerDialog(
                 }
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),

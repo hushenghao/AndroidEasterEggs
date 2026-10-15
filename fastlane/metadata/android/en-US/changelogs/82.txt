@@ -1,11 +1,11 @@
-- Add "restore default settings" to data backup
+- Add restore defaults to data backup
 - Adapt home settings drawer for large screens
 - Blur the screen behind the snapshot preview
 - Add voice search to the home search bar
 - Search eggs with keywords in any order
-- Improve Play Store review prompt timing
+- Improve Play review prompt timing
 - Add a GitHub star prompt to F-Droid
-- Fixed preview easter egg API level display error
-- Upgrade the minimum supported version to Android 7.0
-- Replace the color wheel with a square palette
+- Fix preview easter egg API level display
+- Upgrade min supported version to Android 7.0
+- Rework the color picker with a square palette and preset swatches
 - Upgrade project dependencies

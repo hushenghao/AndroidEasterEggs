@@ -68,7 +68,7 @@ fun ColorSvPalette(
     val scope = rememberCoroutineScope()
 
     val touchCircleRadius = with(LocalDensity.current) { 10.dp.toPx() }
-    val touchStrokeWidth = with(LocalDensity.current) { 1.5.dp.toPx() }
+    val touchStrokeWidth = with(LocalDensity.current) { 1.dp.toPx() }
 
     fun onTouched(anim: Boolean, position: Offset, size: IntSize) {
         val pos = rangeSvPalettePoint(position, size)

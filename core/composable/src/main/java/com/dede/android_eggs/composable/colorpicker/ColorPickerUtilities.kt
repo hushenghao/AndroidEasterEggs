@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.IntSize
 import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.toColorInt
-import com.google.android.material.color.MaterialColors
 import android.graphics.Color as AndroidColor
 
 object ColorPickerUtilities {
@@ -66,13 +66,8 @@ object ColorPickerUtilities {
         color: Color,
         lightColor: Color = Color.White,
         darkColor: Color = Color.DarkGray,
-    ): Color {
-        return if (MaterialColors.isColorLight(color.toArgb())) {
-            darkColor
-        } else {
-            lightColor
-        }
-    }
+    ) = if (color.luminance() > 0.5f) darkColor else lightColor
+
 
     fun blendColor(color1: Color, color2: Color, ratio: Float): Color {
         return Color(ColorUtils.blendARGB(color1.toArgb(), color2.toArgb(), ratio))
