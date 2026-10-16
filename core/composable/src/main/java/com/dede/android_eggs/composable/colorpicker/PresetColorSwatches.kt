@@ -52,12 +52,19 @@ private data class SwatchColor(
 private fun SwatchColor.matches(hue: Float, saturation: Float, value: Float): Boolean {
     val h = ((hue % 360f) + 360f) % 360f
     val hueDiff = abs(h - this.hue).let { min(it, 360f - it) }
-    val hueMatches = saturation <= 0f ||
+    // Hue and saturation carry no information on black (value 0), the same way
+    // hue carries none on gray (saturation 0); skipping them there is what
+    // lets a black picked from the palette match the black swatch, whatever
+    // hue and saturation the palette reported.
+    val black = value <= 0f || this.value <= 0f
+    val hueMatches = black ||
+            saturation <= 0f ||
             this.saturation <= 0f ||
             hueDiff <= 180f / HUE_SEGMENT_COUNT
     val svTolerance = 1f / (max(BRIGHTNESS_SEGMENT_COUNT, RED_BRIGHTNESS_SEGMENT_COUNT) * 2)
+    val saturationMatches = black || abs(saturation - this.saturation) <= svTolerance
     return hueMatches &&
-            abs(saturation - this.saturation) <= svTolerance &&
+            saturationMatches &&
             abs(value - this.value) <= svTolerance
 }
 
@@ -113,8 +120,8 @@ fun PresetColorSwatches(
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
             state = listState,
-            contentPadding = PaddingValues(10.dp),
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            contentPadding = PaddingValues(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(swatches.size) { index ->
                 val swatch = swatches[index]

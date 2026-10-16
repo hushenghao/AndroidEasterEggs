@@ -160,7 +160,7 @@ fun ColorPickerDialog(
                         .fillMaxHeight(),
                     hue = hue,
                     defaultColor = Color.hsv(hue, saturation, value),
-                    onColorChanged = { _, s, v ->
+                    onColorChanged = { s, v ->
                         saturation = s
                         value = v
                     },
