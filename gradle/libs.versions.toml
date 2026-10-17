@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.4.20"
+kotlin = "2.4.21"
 ksp = "2.3.12"
 agp = "9.4.1"
 # https://github.com/google/dagger
