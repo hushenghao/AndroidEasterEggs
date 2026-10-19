@@ -89,10 +89,10 @@ import androidx.print.PrintHelper
 import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
 import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEditorRecords
 import com.dede.android_eggs.cat_editor.Utilities.toPrintBitmap
+import com.dede.android_eggs.color_picker.ColorPickerDialog
+import com.dede.android_eggs.color_picker.ColorPickerUtilities
 import com.dede.android_eggs.composable.appbar.HazeScaffold
 import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeBottomBar
-import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.preferences.AppSettings

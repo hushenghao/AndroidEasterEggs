@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.vector.PathBuilder
 import androidx.compose.ui.graphics.vector.toPath
 import com.dede.android_eggs.cat_editor.Utilities.getRegion
 import com.dede.android_eggs.cat_editor.Utilities.toSvgPathData
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
+import com.dede.android_eggs.color_picker.ColorPickerUtilities
 import com.dede.basic.trimZeroAndDot
 import android.graphics.Canvas as AndroidCanvas
 

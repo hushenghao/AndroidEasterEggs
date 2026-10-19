@@ -45,6 +45,7 @@ include(
     ":core:icons",
     ":core:activity-actions",
     ":core:icon-shape",
+    ":core:color-picker",
     ":core:settings-ui",
     ":core:shortcut",
     ":core:alterable-adaptive-icon",

@@ -38,8 +38,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.blendColor
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.toColorOrNull
+import com.dede.android_eggs.color_picker.ColorPickerUtilities.blendColor
+import com.dede.android_eggs.color_picker.ColorPickerUtilities.toColorOrNull
 import com.dede.basic.copy
 
 @Composable

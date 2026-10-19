@@ -42,8 +42,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.composable.colorpicker.ColorPickerDialog
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
+import com.dede.android_eggs.color_picker.ColorPickerDialog
+import com.dede.android_eggs.color_picker.ColorPickerUtilities
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
 import com.dede.android_eggs.util.ThemeUtils

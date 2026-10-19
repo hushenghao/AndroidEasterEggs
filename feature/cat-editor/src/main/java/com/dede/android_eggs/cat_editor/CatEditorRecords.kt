@@ -15,7 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.os.BundleCompat
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
+import com.dede.android_eggs.color_picker.ColorPickerUtilities
 import com.dede.android_eggs.util.applyIf
 
 /**

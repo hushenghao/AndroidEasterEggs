@@ -19,6 +19,7 @@ dependencies {
     implementation(project(":core:icons"))
     implementation(project(":core:settings-ui"))
     implementation(project(":core:composable"))
+    implementation(project(":core:color-picker"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.print)

@@ -9,9 +9,7 @@ android {
 dependencies {
     implementation(project(":core:basic"))
     implementation(project(":core:theme"))
-    implementation(project(":core:icon-shape"))
     implementation(project(":core:resources"))
-    implementation(libs.google.material)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.runtime)

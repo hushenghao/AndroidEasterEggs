@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 
-package com.dede.android_eggs.composable.colorpicker
+package com.dede.android_eggs.color_picker
 
 import android.app.Activity
 import android.content.Intent
@@ -43,8 +43,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.color_picker.ColorPickerUtilities.getHsv
 import com.dede.android_eggs.composable.ScrollableModalBottomSheet
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getHsv
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import kotlinx.coroutines.launch
 import kotlin.random.Random

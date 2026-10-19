@@ -1,4 +1,4 @@
-package com.dede.android_eggs.composable.colorpicker
+package com.dede.android_eggs.color_picker
 
 import android.content.Context
 import android.content.Intent

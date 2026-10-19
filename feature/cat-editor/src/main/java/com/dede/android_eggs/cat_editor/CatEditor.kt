@@ -45,7 +45,7 @@ import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.reme
 import com.dede.android_eggs.cat_editor.CatParts.VIEW_PORT_SIZE
 import com.dede.android_eggs.cat_editor.Utilities.asAndroidMatrix
 import com.dede.android_eggs.cat_editor.Utilities.toInvert
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities
+import com.dede.android_eggs.color_picker.ColorPickerUtilities
 import dev.shreyaspatil.capturable.capturable
 import kotlin.math.max
 import kotlin.math.min

@@ -1,4 +1,4 @@
-package com.dede.android_eggs.composable.colorpicker
+package com.dede.android_eggs.color_picker
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.VectorConverter
@@ -33,10 +33,10 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getHighlightColor
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getSvPaletteColorByPoint
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.getSvPalettePointByColor
-import com.dede.android_eggs.composable.colorpicker.ColorPickerUtilities.rangeSvPalettePoint
+import com.dede.android_eggs.color_picker.ColorPickerUtilities.getHighlightColor
+import com.dede.android_eggs.color_picker.ColorPickerUtilities.getSvPaletteColorByPoint
+import com.dede.android_eggs.color_picker.ColorPickerUtilities.getSvPalettePointByColor
+import com.dede.android_eggs.color_picker.ColorPickerUtilities.rangeSvPalettePoint
 import kotlinx.coroutines.launch
 
 @Composable

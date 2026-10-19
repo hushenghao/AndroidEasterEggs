@@ -1,4 +1,4 @@
-package com.dede.android_eggs.composable.colorpicker
+package com.dede.android_eggs.color_picker
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
