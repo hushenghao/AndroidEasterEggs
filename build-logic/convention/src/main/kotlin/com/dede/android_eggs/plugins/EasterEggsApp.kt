@@ -52,9 +52,9 @@ class EasterEggsApp : AbsConfigurablePlugin(
                     "META-INF/NOTICE.*",
                     "META-INF/LICENSE",
                     "META-INF/**/LICENSE.txt",
+                    "META-INF/**/*.properties",
                     "kotlin/**.kotlin_builtins",
                     "DebugProbesKt.bin",
-                    "*.properties"
                 )
             }
 

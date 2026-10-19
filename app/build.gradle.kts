@@ -58,7 +58,7 @@ android {
     with(androidComponents) {
         onVariants(selector().withBuildType("release")) { variant ->
             with(variant.packaging.resources.excludes) {
-                // keep compose ui version for layout inspector
+                // Keep compose ui version for layout inspector on debug
                 // https://issuetracker.google.com/issues/246355403
                 add("META-INF/*.version")
             }
