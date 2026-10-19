@@ -50,7 +50,7 @@ fun EasterEggSearchList(
             items = easterEggs,
             key = BaseEasterEgg::lazyItemKey,
         ) {
-            EasterEggSimpleItem(it)
+            EasterEggSimpleItem(base = it, modifier = Modifier.animateItem())
         }
     }
 }

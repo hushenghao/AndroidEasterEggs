@@ -37,6 +37,7 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.ui.composes.icons.rounded.BookmarkAddOutline
@@ -44,7 +45,6 @@ import com.dede.android_eggs.views.main.util.AndroidReleaseDateMatcher
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.EggActionHelp
-import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
@@ -55,6 +55,7 @@ import com.dede.android_eggs.resources.R as StringsR
 @Composable
 @Preview
 fun EasterEggHighestItem(
+    modifier: Modifier = Modifier,
     base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first(),
 ) {
     val context = LocalContext.current
@@ -63,7 +64,7 @@ fun EasterEggHighestItem(
     Card(
         colors = CardDefaults.cardColors(containerColor = colorScheme.surfaceColorAtElevation(2.dp)),
         shape = shapes.extraLarge,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         onClick = {
             EggActionHelp.launchEgg(context, egg)
@@ -86,6 +87,7 @@ fun EasterEggHighestItem(
 @Composable
 @Preview
 fun EasterEggSimpleItem(
+    modifier: Modifier = Modifier,
     base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first(),
 ) {
     val context = LocalContext.current
@@ -94,7 +96,7 @@ fun EasterEggSimpleItem(
     Card(
         colors = CardDefaults.cardColors(containerColor = colorScheme.surfaceColorAtElevation(2.dp)),
         shape = shapes.extraLarge,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         onClick = {
             EggActionHelp.launchEgg(context, egg)

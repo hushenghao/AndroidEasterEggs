@@ -144,7 +144,7 @@ private fun EasterEggColumnList(
             items = highestList,
             key = BaseEasterEgg::lazyItemKey,
         ) {
-            EasterEggHighestItem(it)
+            EasterEggHighestItem(base = it, modifier = Modifier.animateItem())
         }
         item("wavy1") {
             ItemWavy()
@@ -153,7 +153,7 @@ private fun EasterEggColumnList(
             items = normalList,
             key = BaseEasterEgg::lazyItemKey,
         ) {
-            EasterEggSimpleItem(base = it)
+            EasterEggSimpleItem(base = it, modifier = Modifier.animateItem())
         }
         item("wavy2") {
             ItemWavy()
@@ -181,13 +181,13 @@ private fun EasterEggGrid(
             items = highestList,
             key = BaseEasterEgg::lazyItemKey,
         ) {
-            EasterEggHighestItem(it)
+            EasterEggHighestItem(base = it, modifier = Modifier.animateItem())
         }
         items(
             items = normalList,
             key = BaseEasterEgg::lazyItemKey,
         ) {
-            EasterEggSimpleItem(base = it)
+            EasterEggSimpleItem(base = it, modifier = Modifier.animateItem())
         }
         item("wavy2", span = StaggeredGridItemSpan.FullLine) {
             ItemWavy()
