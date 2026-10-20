@@ -55,6 +55,27 @@ SOURCES = [
 
 BADGE_BLOCK = re.compile(r'<div align="center">.*?</div>\s*', re.DOTALL)
 
+# Material renders the theme toggle before the language switcher; flex order
+# swaps them visually (search first, then language, then theme, then repo).
+SITE_CSS = """\
+.md-header__inner > label[for="__search"],
+.md-header__inner > .md-search {
+    order: 1;
+}
+
+.md-header__inner > div.md-header__option {
+    order: 2;
+}
+
+.md-header__inner > form.md-header__option {
+    order: 3;
+}
+
+.md-header__inner > .md-header__source {
+    order: 4;
+}
+"""
+
 
 def strip_badges(text: str) -> str:
     return BADGE_BLOCK.sub("", text, count=1)
@@ -88,6 +109,10 @@ def main() -> None:
         text = rewrite_links(text, posixpath.dirname(target))
         target_path.write_text(text, encoding="utf-8")
         print(f"  {source} -> {target}")
+    assets_dir = DOCS_DIR / "assets"
+    assets_dir.mkdir(parents=True, exist_ok=True)
+    (assets_dir / "site.css").write_text(SITE_CSS, encoding="utf-8")
+    print("  <site css> -> assets/site.css")
 
 
 if __name__ == "__main__":
