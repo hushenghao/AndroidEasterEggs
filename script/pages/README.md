@@ -48,3 +48,7 @@ commits made only in the wiki repository do not trigger a build.
 The `mkdocs-material` version in `requirements.txt` is pinned because MkDocs 2.0 has
 announced backward-incompatible changes without a migration path — do not upgrade it
 casually.
+
+The header language switcher links are absolute and bound to the GitHub Pages project
+path, so they only resolve on the deployed site; local previews (`mkdocs serve`,
+opening `site/` from a file server) hit a 404 when switching languages.

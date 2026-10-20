@@ -4,6 +4,20 @@ site_url: https://hushenghao.github.io/AndroidEasterEggs/
 repo_name: hushenghao/AndroidEasterEggs
 repo_url: https://github.com/hushenghao/AndroidEasterEggs
 
+# Language switcher in the header; zh pages are reachable from there only.
+extra:
+  alternate:
+    - name: English
+      link: /AndroidEasterEggs/
+      lang: en
+    - name: 中文
+      link: /AndroidEasterEggs/zh/
+      lang: zh
+
+# zh pages are not part of the (English) navigation index
+not_in_nav: |
+  zh/*
+
 docs_dir: pages-docs
 site_dir: site
 
@@ -26,12 +40,17 @@ nav:
   - Failed to Uninstall: the-application-failed-to-uninstall.md
   - Sponsor: sponsor.md
   - Privacy Policy: privacy-policy.md
-  - 中文:
-      - 首页: zh/index.md
-      - Android 版本: zh/android-versions.md
-      - 应用卸载失败: zh/the-application-failed-to-uninstall.md
-      - 捐赠: zh/sponsor.md
-      - 隐私协议: zh/privacy-policy.md
+  - Downloads:
+      - F-Droid: "https://f-droid.org/packages/com.dede.android_eggs"
+      - IzzyOnDroid: "https://apt.izzysoft.de/fdroid/index/apk/com.dede.android_eggs"
+      - GitHub: "https://github.com/hushenghao/AndroidEasterEggs/releases"
+      - Play Store: "https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+      - Aptoide: "https://aptoide-mmp.aptoide.com/api/v1/download?package_name=com.dede.android_eggs&oemid=0d5b567e4c00ce0d0f0b816d0d88c339&redirect_url=https%3A%2F%2Fws.catappult.io%2Fapi%2FdirectToConsumer%2Fcom.dede.android_eggs%2Fdownload"
+      - Pgyer (beta): "https://www.pgyer.com/eggs"
+  - Developers:
+      - Contributing: "https://github.com/hushenghao/AndroidEasterEggs/blob/main/.github/CONTRIBUTING.md"
+      - Translation: "https://crowdin.com/project/easter-eggs"
+  - License: "https://github.com/hushenghao/AndroidEasterEggs/blob/main/LICENSE"
 
 markdown_extensions:
   - toc:
