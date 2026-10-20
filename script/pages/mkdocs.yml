@@ -33,6 +33,9 @@ extra_javascript:
 
 theme:
   name: material
+  # App icon served straight from the repository, no generated asset needed
+  logo: https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/assets/image/ic_launcher_round.png
+  favicon: https://raw.githubusercontent.com/hushenghao/AndroidEasterEggs/main/assets/image/ic_launcher_round.png
   features:
     - navigation.top
     - navigation.footer
