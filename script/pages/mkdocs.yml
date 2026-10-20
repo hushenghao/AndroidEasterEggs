@@ -4,7 +4,10 @@ site_url: https://hushenghao.github.io/AndroidEasterEggs/
 repo_name: hushenghao/AndroidEasterEggs
 repo_url: https://github.com/hushenghao/AndroidEasterEggs
 
-# Language switcher in the header; zh pages are reachable from there only.
+# Language switcher in the header; language pages are reachable from there
+# only. Adding a language: an entry here (name/lang/link), a not_in_nav
+# pattern below, the LANGUAGES registry in build_pages.py, and the
+# translated pages in the wiki.
 extra:
   alternate:
     - name: English
@@ -14,7 +17,8 @@ extra:
       link: /AndroidEasterEggs/zh/
       lang: zh
 
-# zh pages are not part of the (English) navigation index
+# Language pages are not part of the (English) navigation index.
+# Add "<lang>/*" here for each new language.
 not_in_nav: |
   zh/*
 

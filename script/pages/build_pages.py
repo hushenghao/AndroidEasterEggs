@@ -23,35 +23,43 @@ DOCS_DIR = Path(__file__).resolve().parent / "pages-docs"
 
 WIKI_URL_PREFIX = "https://github.com/hushenghao/AndroidEasterEggs/wiki/"
 
-# Wiki page name (case-insensitive) -> docs-relative .md target
-PAGE_TARGETS = {
-    "home": "index.md",
-    "android-versions": "android-versions.md",
-    "sponsor": "sponsor.md",
-    "privacy-policy": "privacy-policy.md",
-    "the-application-failed-to-uninstall": "the-application-failed-to-uninstall.md",
-    "home-zh-cn": "zh/index.md",
-    "android-versions-zh-cn": "zh/android-versions.md",
-    "sponsor-zh-cn": "zh/sponsor.md",
-    "privacy-policy-zh-cn": "zh/privacy-policy.md",
-    "the-application-failed-to-uninstall-zh-cn": "zh/the-application-failed-to-uninstall.md",
+# Wiki pages published to the site; Home becomes the language's index page.
+PAGES = [
+    "Home",
+    "Android-versions",
+    "The-application-failed-to-uninstall",
+    "Sponsor",
+    "Privacy-policy",
+]
+
+# One entry per published language: wiki locale ("" = English, pages at the
+# wiki root) -> docs URL prefix ("" = English, pages at the docs root).
+# Adding a language means adding it here (plus the five translated pages in
+# the wiki), an extra.alternate entry and a not_in_nav pattern in mkdocs.yml.
+LANGUAGES = {
+    "": "",
+    "zh-CN": "zh",
 }
 
-# (wiki file, docs-relative target). The retired 隐私协议.md placeholder and
-# the _Sidebar.md files are intentionally not published; navigation lives in
-# mkdocs.yml instead.
-SOURCES = [
-    ("Home.md", "index.md"),
-    ("Android-versions.md", "android-versions.md"),
-    ("The-application-failed-to-uninstall.md", "the-application-failed-to-uninstall.md"),
-    ("Sponsor.md", "sponsor.md"),
-    ("Privacy-policy.md", "privacy-policy.md"),
-    ("locale/zh-CN/Home-zh-CN.md", "zh/index.md"),
-    ("locale/zh-CN/Android-versions-zh-CN.md", "zh/android-versions.md"),
-    ("locale/zh-CN/The-application-failed-to-uninstall-zh-CN.md", "zh/the-application-failed-to-uninstall.md"),
-    ("locale/zh-CN/Sponsor-zh-CN.md", "zh/sponsor.md"),
-    ("locale/zh-CN/Privacy-policy-zh-CN.md", "zh/privacy-policy.md"),
-]
+
+def build_language_maps():
+    """Derive the wiki-to-docs source/target maps from PAGES and LANGUAGES."""
+    sources = []
+    targets = {}
+    for locale, prefix in LANGUAGES.items():
+        for page in PAGES:
+            suffix = f"-{locale}" if locale else ""
+            slug = "index.md" if page == "Home" else f"{page.lower()}.md"
+            target = posixpath.join(prefix, slug) if prefix else slug
+            source = (
+                f"locale/{locale}/{page}{suffix}.md" if locale else f"{page}.md"
+            )
+            sources.append((source, target))
+            targets[f"{page}{suffix}".lower()] = target
+    return sources, targets
+
+
+SOURCES, PAGE_TARGETS = build_language_maps()
 
 BADGE_BLOCK = re.compile(r'<div align="center">.*?</div>\s*', re.DOTALL)
 
@@ -77,8 +85,11 @@ SITE_CSS = """\
 """
 
 # Rewrite the header language switcher to the current page's counterpart
-# instead of the other language's home page. Falls back to the configured
-# links when the path is outside the deployed site root (local previews).
+# instead of the other language's home page. The canonical URL always
+# carries the deployed path of the current page, so this works under any
+# hosting root; local previews link to the deployed counterpart page.
+# Language roots come from the switcher itself, so new languages need no
+# changes here (longest root prefix wins).
 SITE_JS = """\
 function updateLanguageLinks() {
     var links = document.querySelectorAll(".md-select__link[hreflang]");
@@ -86,19 +97,28 @@ function updateLanguageLinks() {
     links.forEach(function (link) {
         byLang[link.getAttribute("hreflang")] = link.getAttribute("href");
     });
-    var enRoot = byLang.en;
-    var zhRoot = byLang.zh;
-    if (!enRoot || !zhRoot) {
+    var langs = Object.keys(byLang);
+    var canonical = document.querySelector('link[rel="canonical"]');
+    if (!langs.length || !canonical) {
         return;
     }
-    var path = window.location.pathname;
-    var root = path.indexOf(zhRoot) === 0 ? zhRoot : enRoot;
-    if (path.indexOf(root) !== 0) {
+    var path = new URL(canonical.href).pathname;
+    langs.sort(function (a, b) {
+        return byLang[b].length - byLang[a].length;
+    });
+    var current = null;
+    for (var i = 0; i < langs.length; i++) {
+        if (path.indexOf(byLang[langs[i]]) === 0) {
+            current = langs[i];
+            break;
+        }
+    }
+    if (!current) {
         return;
     }
-    var slug = path.slice(root.length);
+    var slug = path.slice(byLang[current].length);
     links.forEach(function (link) {
-        var base = link.getAttribute("hreflang") === "zh" ? zhRoot : enRoot;
+        var base = byLang[link.getAttribute("hreflang")];
         link.setAttribute("href", base + slug);
     });
 }

@@ -51,4 +51,19 @@ casually.
 
 The header language switcher links are absolute and bound to the GitHub Pages project
 path, so they only resolve on the deployed site; local previews (`mkdocs serve`,
-opening `site/` from a file server) hit a 404 when switching languages.
+opening `site/` from a file server) hit a 404 when switching languages. The switcher
+script (`assets/site.js`) rewrites those links to the current page's counterpart in
+the other language, derived from the canonical URL.
+
+## Adding a language
+
+1. Publish the translated pages in the wiki under `locale/<locale>/` as
+   `<Page>-<locale>.md` (one for each entry of `PAGES`), then bump the wiki submodule
+   pointer in the main repository.
+2. `build_pages.py`: add the locale to `LANGUAGES` (`"<locale>": "<url prefix>"`).
+3. `mkdocs.yml`: add an `extra.alternate` switcher entry (`name`/`lang`/`link`) and
+   a `<lang>/*` pattern to `not_in_nav`.
+
+The badge strip, link rewriting and the switcher script pick the new language up
+automatically. Page sets must stay symmetric across languages — the switcher jumps
+by equal page slug, and a missing translation would 404.
