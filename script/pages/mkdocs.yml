@@ -1,0 +1,38 @@
+site_name: Android Easter Eggs
+site_description: All Android Easter eggs in one app.
+site_url: https://hushenghao.github.io/AndroidEasterEggs/
+repo_name: hushenghao/AndroidEasterEggs
+repo_url: https://github.com/hushenghao/AndroidEasterEggs
+
+docs_dir: pages-docs
+site_dir: site
+
+theme:
+  name: material
+  features:
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+
+nav:
+  - Home: index.md
+  - Android Versions: android-versions.md
+  - Failed to Uninstall: the-application-failed-to-uninstall.md
+  - Sponsor: sponsor.md
+  - Privacy Policy: privacy-policy.md
+  - 中文:
+      - 首页: zh/index.md
+      - Android 版本: zh/android-versions.md
+      - 应用卸载失败: zh/the-application-failed-to-uninstall.md
+      - 捐赠: zh/sponsor.md
+      - 隐私协议: zh/privacy-policy.md
+
+markdown_extensions:
+  - toc:
+      permalink: true

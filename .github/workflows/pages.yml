@@ -1,0 +1,63 @@
+name: Pages
+
+on:
+  push:
+    paths:
+      # The wiki submodule pointer
+      - 'wiki'
+      - 'wiki/**'
+      - 'script/pages/**'
+      - '.github/workflows/pages.yml'
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install MkDocs
+        run: pip install -r script/pages/requirements.txt
+
+      - name: Build docs from wiki
+        run: python3 script/pages/build_pages.py
+
+      - name: Build site
+        run: mkdocs build --strict -f script/pages/mkdocs.yml
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: script/pages/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

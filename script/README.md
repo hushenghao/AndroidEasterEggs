@@ -8,3 +8,4 @@
 | ~~[icons](icons)~~                                                   | python3     | FontTools Subset [Material Design Icons](https://fonts.google.com/icons) font.                                  |
 | [compose-material-icons-generator](compose-material-icons-generator) | gradle(jvm) | Material Icons generator.                                                                                       |
 | [emoji-svg-xml-convertor](emoji-svg-xml-convertor)                   | gradle(jvm) | Svg convert to drawable xml.                                                                                    |
+| [pages](pages)                                                       | python3     | Build the GitHub Pages site from the wiki submodule ([MkDocs Material](https://squidfunk.github.io/mkdocs-material/)). |

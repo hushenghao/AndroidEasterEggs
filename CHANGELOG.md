@@ -1,5 +1,9 @@
 # Changelog
 
+### v5.6.1
+
+- Add GitHub Pagers
+
 ### v5.6.0 (2026-10-20)
 
 - Add restore defaults to data backup
