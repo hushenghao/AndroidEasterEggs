@@ -67,3 +67,47 @@ the other language, derived from the canonical URL.
 The badge strip, link rewriting and the switcher script pick the new language up
 automatically. Page sets must stay symmetric across languages — the switcher jumps
 by equal page slug, and a missing translation would 404.
+
+## Solution research (2026-10-20)
+
+Survey of popular GitHub Pages documentation generators, evaluated against this
+project's requirements: theme switching, i18n, index navigation and client-side
+search. Star counts taken from the GitHub API on 2026-10-20.
+
+| Solution                  | Stars  | Stack        | Theme switch | i18n                              | Navigation | Search                | Status                                   |
+|---------------------------|--------|--------------|--------------|-----------------------------------|------------|-----------------------|------------------------------------------|
+| MkDocs Material (current)| 27.6k  | Python       | ✅            | custom (`build_pages.py`)         | ✅          | ✅ built-in           | ⚠️ Maintenance mode, EOL 2027-05          |
+| Zensical (successor)      | 6.0k   | Python/Rust  | ✅            | ⚠️ single language only            | ✅          | ✅ Disco engine       | ✅ Active, 0.1.0 stable line 2026-11     |
+| Docusaurus                | 66.5k  | Node/React   | ✅            | ✅ native                          | ✅          | ✅ local (hosted opt) | ✅ Meta-maintained                       |
+| VitePress                 | 18.4k  | Node/Vue     | ✅            | ✅ native                          | ✅          | ✅ built-in           | ✅ Active (2.0 in prerelease)            |
+| Starlight (Astro)         | 9.4k   | Astro        | ✅            | ✅ native (auto UI translation)    | ✅          | ✅ built-in           | ✅ Active                                |
+| Docsify                   | 31.6k  | Browser JS   | ✅            | ⚠️ plugins                         | ✅          | ⚠️ plugins            | ⚠️ No static build, weak SEO             |
+| Hugo + Docsy              | 90.2k  | Go           | ✅            | ✅                                 | ✅          | ✅ Algolia or built-in| ✅ Active, complex config                |
+
+### Key findings
+
+- **Material for MkDocs entered maintenance mode in 2025-11** (announced with 9.7.0,
+  the last feature release); the team moved to Zensical. Critical fixes are committed
+  through 2027-05-05 ([mkdocs-material#8523](https://github.com/squidfunk/mkdocs-material/issues/8523)).
+  MkDocs core itself has been quiet since 2024; MkDocs 2.0 (prerelease) drops the
+  plugin system, which is why `requirements.txt` stays pinned.
+- **Zensical** is the official successor (MIT, free): a rewrite with a much faster
+  build engine and the Disco search engine (~20× faster than Material's). Its config
+  mirrors `mkdocs.yml`, so a migration is a config-level switch. Multi-language
+  support is only on its roadmap — not a blocker here, because i18n in this site is
+  already implemented by `build_pages.py` rather than by the theme.
+- **Docusaurus** is the popularity leader with native i18n/versioning, but adds a
+  Node + React toolchain; overkill for a ~10-page site sourced from the wiki.
+- **Hugo** has the largest community overall but is a general-purpose generator whose
+  documentation features come from themes (Docsy/Doks) with high config overhead.
+
+### Decision
+
+- **Keep MkDocs Material for now.** All four requirements are already met and
+  deployed; migration cost (rewriting `build_pages.py`, new toolchain) outweighs the
+  benefit of a maintenance-mode theme with fixes until 2027-05.
+- **Re-evaluate Zensical after its 0.1.0 stable line (2026-11)** as a drop-in
+  upgrade path (`mkdocs.yml` compatible), which would also pick up the new search
+  engine and future features.
+- **Consider Docusaurus** only if the site outgrows the wiki conversion model (blog,
+  API docs, versioned docs).
