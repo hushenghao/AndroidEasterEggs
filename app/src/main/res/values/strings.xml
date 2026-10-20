@@ -6,11 +6,11 @@
     <string name="url_github_issues" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/issues</string>
     <string name="url_github_issues_id" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/issues/%s</string>
     <string name="url_pgyer" translatable="false">https://www.pgyer.com/eggs</string>
-    <string name="url_privacy" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy</string>
-    <string name="url_wiki" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki</string>
+    <string name="url_privacy" translatable="false">https://hushenghao.github.io/AndroidEasterEggs/privacy-policy</string>
+    <string name="url_wiki" translatable="false">https://hushenghao.github.io/AndroidEasterEggs</string>
     <string name="url_license" translatable="false">https://www.apache.org/licenses/LICENSE-2.0.txt</string>
     <string name="url_translation" translatable="false">https://crowdin.com/project/easter-eggs</string>
-    <string name="url_sponsor" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Sponsor</string>
+    <string name="url_sponsor" translatable="false">https://hushenghao.github.io/AndroidEasterEggs/sponsor</string>
 
     <string name="label_version" translatable="false">v%s (%d)</string>
     <string name="toast_no_egg" translatable="false">🤖🚫🥚</string>
