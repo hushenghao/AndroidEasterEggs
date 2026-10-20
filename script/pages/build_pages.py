@@ -134,6 +134,34 @@ def build_site_js() -> str:
 SITE_JS = """\
 var NAV_LABELS = /*__NAV_LABELS__*/{};
 
+/* Directory-relative href from the directory of fromDir (a page URL:
+   trailing "/" is optional, "index.html" forms are normalized away) to
+   an absolute directory path toPath (ending in "/"). Algorithm: drop the
+   common prefix, climb back with "..", descend into the remainder. */
+function relativeHref(toPath, fromDir) {
+    var from = fromDir.replace(/(index\.html?)?$/, "").split("/");
+    var to = toPath.split("/");
+    var i = 0;
+    while (i < from.length - 1 && i < to.length - 1 && from[i] === to[i]) {
+        i++;
+    }
+    var parts = [];
+    for (var k = i; k < from.length - 1; k++) {
+        parts.push("..");
+    }
+    for (var j = i; j < to.length - 1; j++) {
+        parts.push(to[j]);
+    }
+    var rel = parts.join("/");
+    return rel === "" ? "./" : rel + "/";
+}
+
+/* Point the header language switcher and the sidebar navigation at the
+   current page's counterparts. The canonical URL provides the page slug;
+   the hosting root is derived from the current page URL itself (it is
+   <root><langPrefix><slug>, whatever the deployment form: project
+   subpath, plain local root or file://). Language prefixes come from the
+   switcher, so new languages need no changes here. */
 function updateLanguageLinks() {
     var links = document.querySelectorAll(".md-select__link[hreflang]");
     var byLang = {};
@@ -145,13 +173,13 @@ function updateLanguageLinks() {
     if (!langs.length || !canonical) {
         return;
     }
-    var path = new URL(canonical.href).pathname;
+    var canonicalPath = new URL(canonical.href).pathname;
     langs.sort(function (a, b) {
         return byLang[b].length - byLang[a].length;
     });
     var current = null;
     for (var i = 0; i < langs.length; i++) {
-        if (path.indexOf(byLang[langs[i]]) === 0) {
+        if (canonicalPath.indexOf(byLang[langs[i]]) === 0) {
             current = langs[i];
             break;
         }
@@ -159,27 +187,47 @@ function updateLanguageLinks() {
     if (!current) {
         return;
     }
-    var slug = path.slice(byLang[current].length);
+    var slug = canonicalPath.slice(byLang[current].length);
+    var langPrefix = byLang[current].slice(byLang.en.length);
+    var tail = "/" + langPrefix + slug;
+    var cur = location.pathname.replace(/index\\.html?$/i, "");
+    if (cur.slice(cur.length - tail.length) !== tail) {
+        return;
+    }
+    var root = cur.slice(0, cur.length - tail.length);
+    var localRoots = {};
+    for (var l = 0; l < langs.length; l++) {
+        var lang = langs[l];
+        var pfx = byLang[langs[l]].slice(byLang.en.length).replace(/\\/$/, "");
+        localRoots[langs[l]] = root + (pfx ? "/" + pfx : "");
+    }
+    function languageDirs(lang) {
+        /* root may be an empty string (plain local root = "/"), already
+           ending in "/", so only non-empty roots get the separator */
+        var languageRoot = localRoots[lang] === "" ? "/" : localRoots[lang] + "/";
+        return languageRoot;
+    }
     links.forEach(function (link) {
-        var base = byLang[link.getAttribute("hreflang")];
-        link.setAttribute("href", base + slug);
+        var target = languageDirs(link.getAttribute("hreflang")) + slug;
+        link.setAttribute("href", relativeHref(target, cur));
     });
-    localizeNav(current, byLang);
+    localizeNav(current, languageDirs, relativeHref, cur, byLang);
 }
 
 /* Localize the primary sidebar navigation for non-English pages: entries
-   pointing at English pages get rewritten to their counterpart under the
-   current language root and their labels translated via NAV_LABELS.
-   External links keep their href and only get a translated label. */
-function localizeNav(current, byLang) {
+   pointing at English pages get rewritten to the language's counterpart
+   (relative href) and their labels translated via NAV_LABELS. External
+   links keep their href and only get a translated label. */
+function localizeNav(current, languageDirs, relativeHref, fromDir, byLang) {
     var labels = NAV_LABELS[current];
     if (!labels) {
         return;
     }
-    var enRoot = byLang.en;
-    var prefix = byLang[current];
+    var enDir = languageDirs("en");
+    var enCanonicalRoot = byLang.en;
+    var ownDir = languageDirs(current);
     function entrySlug(href) {
-        if (!href || enRoot === undefined) {
+        if (!href) {
             return null;
         }
         var resolved = new URL(href, location.href);
@@ -188,19 +236,30 @@ function localizeNav(current, byLang) {
         }
         var p = resolved.pathname;
         for (var lang in byLang) {
-            if (p.indexOf(byLang[lang]) === 0) {
+            if (lang !== "en" && p.indexOf(byLang[lang]) === 0) {
                 return null;
             }
         }
-        if (p.indexOf(enRoot) === 0) {
-            return p.slice(enRoot.length);
+        /* Prefer the local hosting root: tree links resolve against the
+           page URL, so under most hosting forms the target carries the
+           local root prefix. The deployed root is only a fallback for
+           mismatched forms. */
+        if (p === enDir) {
+            return "";
+        }
+        if (p.indexOf(enDir) === 0) {
+            return p.slice(enDir.length);
+        }
+        if (enCanonicalRoot && p.indexOf(enCanonicalRoot) === 0) {
+            return p.slice(enCanonicalRoot.length);
         }
         return p.charAt(0) === "/" ? p.slice(1) : p;
     }
     document.querySelectorAll(".md-sidebar--primary .md-nav__link").forEach(function (a) {
-        var slug = entrySlug(a.getAttribute("href"));
-        if (slug !== null) {
-            a.setAttribute("href", prefix + slug);
+        var entrySlugValue = entrySlug(a.getAttribute("href"));
+        if (entrySlugValue !== null) {
+            var target = ownDir + entrySlugValue;
+            a.setAttribute("href", relativeHref(target, fromDir));
         }
         var ell = a.querySelector(".md-ellipsis");
         var label = ell ? ell.textContent.trim() : "";

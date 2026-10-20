@@ -49,11 +49,12 @@ The `mkdocs-material` version in `requirements.txt` is pinned because MkDocs 2.0
 announced backward-incompatible changes without a migration path — do not upgrade it
 casually.
 
-The header language switcher links are absolute and bound to the GitHub Pages project
-path, so they only resolve on the deployed site; local previews (`mkdocs serve`,
-opening `site/` from a file server) hit a 404 when switching languages. The switcher
-script (`assets/site.js`) rewrites those links to the current page's counterpart in
-the other language, derived from the canonical URL.
+At page load `assets/site.js` rewrites the header language switcher and the primary
+sidebar for non-English pages: links point at the current page's counterpart in the
+other language (the canonical URL supplies the page slug) and sidebar labels are
+translated via `NAV_LABELS`. All generated links are relative to the current page,
+so they resolve identically on the deployed project path, plain-root local servers
+and `file://` previews.
 
 ## Adding a language
 
