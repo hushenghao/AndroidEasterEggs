@@ -76,6 +76,40 @@ SITE_CSS = """\
 }
 """
 
+# Rewrite the header language switcher to the current page's counterpart
+# instead of the other language's home page. Falls back to the configured
+# links when the path is outside the deployed site root (local previews).
+SITE_JS = """\
+function updateLanguageLinks() {
+    var links = document.querySelectorAll(".md-select__link[hreflang]");
+    var byLang = {};
+    links.forEach(function (link) {
+        byLang[link.getAttribute("hreflang")] = link.getAttribute("href");
+    });
+    var enRoot = byLang.en;
+    var zhRoot = byLang.zh;
+    if (!enRoot || !zhRoot) {
+        return;
+    }
+    var path = window.location.pathname;
+    var root = path.indexOf(zhRoot) === 0 ? zhRoot : enRoot;
+    if (path.indexOf(root) !== 0) {
+        return;
+    }
+    var slug = path.slice(root.length);
+    links.forEach(function (link) {
+        var base = link.getAttribute("hreflang") === "zh" ? zhRoot : enRoot;
+        link.setAttribute("href", base + slug);
+    });
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", updateLanguageLinks);
+} else {
+    updateLanguageLinks();
+}
+"""
+
 
 def strip_badges(text: str) -> str:
     return BADGE_BLOCK.sub("", text, count=1)
@@ -112,7 +146,8 @@ def main() -> None:
     assets_dir = DOCS_DIR / "assets"
     assets_dir.mkdir(parents=True, exist_ok=True)
     (assets_dir / "site.css").write_text(SITE_CSS, encoding="utf-8")
-    print("  <site css> -> assets/site.css")
+    (assets_dir / "site.js").write_text(SITE_JS, encoding="utf-8")
+    print("  <site css/js> -> assets/site.css, assets/site.js")
 
 
 if __name__ == "__main__":

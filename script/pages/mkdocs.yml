@@ -24,6 +24,9 @@ site_dir: site
 extra_css:
   - assets/site.css
 
+extra_javascript:
+  - assets/site.js
+
 theme:
   name: material
   features:
