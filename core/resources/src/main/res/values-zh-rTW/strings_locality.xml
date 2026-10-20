@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="url_privacy" translatable="false">https://github.com/hushenghao/AndroidEasterEggs/wiki/Privacy-policy-zh-CN</string>
+    <string name="url_translation">https://zh.crowdin.com/project/easter-eggs</string>
+    <string name="url_wiki">https://hushenghao.github.io/AndroidEasterEggs/zh</string>
+    <string name="url_privacy">https://hushenghao.github.io/AndroidEasterEggs/zh/privacy-policy</string>
 </resources>
