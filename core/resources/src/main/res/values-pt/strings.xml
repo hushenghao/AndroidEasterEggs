@@ -59,6 +59,9 @@
     <string name="animator_disabled_alert_message">As animações do sistema foram desativadas. Algumas das funções podem não funcionar corretamente. Aceda a \"Opções de programador\" e defina a opção \"Escala de duração do animador\" para ativar as animações</string>
     <string name="action_goto_settings">Ir para as Configurações</string>
     <string name="action_dont_show_again">Não mostrar de novo</string>
+    <string name="github_star_alert_title">A gostar da aplicação?</string>
+    <string name="github_star_alert_message">Esta aplicação é gratuita e de código aberto. Se gostou destes Easter Eggs, dê uma estrela ao projeto no GitHub para ajudar no seu crescimento.</string>
+    <string name="action_star_github">Dê uma estrela no GitHub</string>
     <string name="cat_editor">Editor de gatos</string>
     <string name="cat_editor_input_seed">Insira a semente do gato</string>
     <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
