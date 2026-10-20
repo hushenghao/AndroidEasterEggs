@@ -65,3 +65,5 @@ nav:
 markdown_extensions:
   - toc:
       permalink: true
+  # GitHub-style ~~strikethrough~~ used by wiki pages
+  - pymdownx.tilde
