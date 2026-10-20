@@ -1,6 +1,6 @@
 # Changelog
 
-### v5.5.1
+### v5.6.0 (2026-10-20)
 
 - Add restore defaults to data backup
 - Adapt home settings drawer for large screens
