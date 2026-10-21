@@ -107,7 +107,8 @@ NAV_LABELS = {
     "zh": {
         "Home": "首页",
         "Android Versions": "Android 版本",
-        "Failed to Uninstall": "应用卸载失败",
+        "Known issues": "已知问题",
+        "The application failed to uninstall": "应用卸载失败",
         "Sponsor": "捐赠",
         "Privacy Policy": "隐私协议",
         "Downloads": "下载",

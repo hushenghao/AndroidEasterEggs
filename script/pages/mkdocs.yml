@@ -60,9 +60,7 @@ theme:
 nav:
   - Home: index.md
   - Android Versions: android-versions.md
-  - Failed to Uninstall: the-application-failed-to-uninstall.md
   - Sponsor: sponsor.md
-  - Privacy Policy: privacy-policy.md
   - Downloads:
       - F-Droid: "https://f-droid.org/packages/com.dede.android_eggs"
       - IzzyOnDroid: "https://apt.izzysoft.de/fdroid/index/apk/com.dede.android_eggs"
@@ -70,10 +68,13 @@ nav:
       - Play Store: "https://play.google.com/store/apps/details?id=com.dede.android_eggs&utm_source=Github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
       - Aptoide: "https://aptoide-mmp.aptoide.com/api/v1/download?package_name=com.dede.android_eggs&oemid=0d5b567e4c00ce0d0f0b816d0d88c339&redirect_url=https%3A%2F%2Fws.catappult.io%2Fapi%2FdirectToConsumer%2Fcom.dede.android_eggs%2Fdownload"
       - Pgyer (beta): "https://www.pgyer.com/eggs"
+  - Known issues:
+      - The application failed to uninstall: the-application-failed-to-uninstall.md
   - Developers:
       - Contributing: "https://github.com/hushenghao/AndroidEasterEggs/blob/main/.github/CONTRIBUTING.md"
       - Translation: "https://crowdin.com/project/easter-eggs"
   - License: "https://github.com/hushenghao/AndroidEasterEggs/blob/main/LICENSE"
+  - Privacy Policy: privacy-policy.md
 
 markdown_extensions:
   - toc:
