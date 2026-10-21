@@ -99,6 +99,12 @@ body[data-md-color-scheme="slate"] {
 .md-header__inner > .md-header__source {
     order: 4;
 }
+
+/* Python-Markdown appends a phantom empty <tbody> row to header-only
+   tables (GitHub renders them without one); hide fully-empty rows. */
+.md-typeset table tbody tr:not(:has(td:not(:empty))) {
+    display: none;
+}
 """
 
 # Sidebar navigation label translations, injected into assets/site.js.
