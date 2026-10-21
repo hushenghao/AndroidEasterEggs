@@ -53,6 +53,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 internal fun ExpandOptionsPrefTrailing(
@@ -108,7 +109,7 @@ fun ExpandOptionsPref(
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
                     .padding(top = 4.dp, bottom = 10.dp),
-                verticalArrangement = Arrangement.spacedBy(6.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
                 content = options
             )
         }
@@ -166,7 +167,7 @@ fun ExpandOptionsPref(
             }
             coroutineScope.launch {
                 if (nextExpanded) {
-                    delay(300)
+                    delay(300.milliseconds)
                     focusRequester.requestFocus()
                 } else {
                     focusRequester.freeFocus()
@@ -202,7 +203,7 @@ object OptionShapes {
 
     val defaultShape: CornerBasedShape
         @Composable
-        get() = MaterialTheme.shapes.small
+        get() = MaterialTheme.shapes.extraSmall
 
     val borderShape: CornerBasedShape
         @Composable
