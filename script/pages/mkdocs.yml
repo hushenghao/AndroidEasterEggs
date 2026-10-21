@@ -60,6 +60,7 @@ theme:
 nav:
   - Home: index.md
   - Android Versions: android-versions.md
+  - Project Timeline: project-timeline.md
   - Sponsor: sponsor.md
   - Downloads:
       - F-Droid: "https://f-droid.org/packages/com.dede.android_eggs"
@@ -81,3 +82,9 @@ markdown_extensions:
       permalink: true
   # GitHub-style ~~strikethrough~~ used by wiki pages
   - pymdownx.tilde
+  # Mermaid diagrams; Material loads mermaid.js lazily for fences named mermaid
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format

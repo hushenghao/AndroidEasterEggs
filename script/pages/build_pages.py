@@ -28,6 +28,7 @@ WIKI_URL_PREFIX = "https://github.com/hushenghao/AndroidEasterEggs/wiki/"
 PAGES = [
     "Home",
     "Android-versions",
+    "Project-timeline",
     "The-application-failed-to-uninstall",
     "Sponsor",
     "Privacy-policy",
@@ -107,6 +108,7 @@ NAV_LABELS = {
     "zh": {
         "Home": "首页",
         "Android Versions": "Android 版本",
+        "Project Timeline": "项目时间线",
         "Known issues": "已知问题",
         "The application failed to uninstall": "应用卸载失败",
         "Sponsor": "捐赠",
@@ -293,6 +295,117 @@ function localizeNav(current, languageDirs, relativeHref, fromDir, byLang) {
         }
     });
 }
+
+/* Material renders mermaid diagrams lazily with a fixed theme and never
+   re-renders them on palette switches (its themeCSS variables adapt some
+   diagram types live, but e.g. timeline bakes in a light theme). Material
+   reads each source from the static <pre> markup and then replaces the
+   element, so the sources are snapshotted here into document order before
+   that happens, and stale diagrams are re-rendered from the snapshots on
+   scheme changes. The mermaid global-config hook below makes Material's
+   own first render follow the active scheme. */
+var MERMAID_SOURCES = [];
+var MERMAID_THEME_ATTR = "data-mermaid-theme";
+var mermaidRenderToken = 0;
+var mermaidFollowUp = 0;
+
+Array.prototype.forEach.call(
+    document.querySelectorAll("pre.mermaid > code"),
+    function (code) {
+        var source = (code.textContent || "").trim();
+        if (source) {
+            MERMAID_SOURCES.push(source);
+        }
+    }
+);
+
+function mermaidTheme(scheme) {
+    return scheme === "slate" ? "dark" : "default";
+}
+
+/* mermaid.js is loaded by Material from the CDN; catch the moment the
+   global appears (before Material initializes it) to pin the theme, so
+   the lazy first render already matches the scheme. Material's own
+   initialize call merges its options without resetting the theme. */
+try {
+    var mermaidGlobal;
+    Object.defineProperty(window, "mermaid", {
+        configurable: true,
+        get: function () {
+            return mermaidGlobal;
+        },
+        set: function (value) {
+            mermaidGlobal = value;
+            if (value && value.initialize) {
+                /* mermaid.initialize resets its config, so Material's later
+                   theme-less call would wipe a plain theme pin. Wrap it and
+                   inject the theme into every theme-less call instead. */
+                var originalInitialize = value.initialize;
+                value.initialize = function (options) {
+                    options = options || {};
+                    if (!options.theme) {
+                        options.theme = mermaidTheme(document.body.dataset.mdColorScheme);
+                    }
+                    return originalInitialize.call(value, options);
+                };
+            }
+        }
+    });
+} catch (e) {
+    /* defineProperty unavailable; diagrams keep Material's fixed theme */
+}
+
+function rerenderMermaid() {
+    if (!window.mermaid || !MERMAID_SOURCES.length) {
+        return;
+    }
+    var scheme = document.body.dataset.mdColorScheme;
+    var pending = [];
+    /* div.mermaid placeholders appear in the order of the snapshotted
+       sources; only Material-rendered ones (an svg inside) are ours to
+       redraw — pending placeholders get the theme from the config. */
+    Array.prototype.forEach.call(
+        document.querySelectorAll("div.mermaid"),
+        function (el, index) {
+            if (MERMAID_SOURCES[index] !== undefined &&
+                el.querySelector("svg") &&
+                el.getAttribute(MERMAID_THEME_ATTR) !== scheme) {
+                pending.push([el, MERMAID_SOURCES[index]]);
+            }
+        }
+    );
+    if (!pending.length) {
+        return;
+    }
+    var token = ++mermaidRenderToken;
+    window.mermaid.initialize({ startOnLoad: false, theme: mermaidTheme(scheme) });
+    pending.forEach(function (pair) {
+        /* Material's renders tag the container data-processed; mermaid.run
+           skips processed nodes, so lift the tag before redrawing. */
+        pair[0].removeAttribute("data-processed");
+        pair[0].textContent = pair[1];
+    });
+    window.mermaid.run({ nodes: pending.map(function (pair) { return pair[0]; }) })
+        .then(function () {
+            pending.forEach(function (pair) {
+                pair[0].setAttribute(MERMAID_THEME_ATTR, scheme);
+            });
+            if (token !== mermaidRenderToken) {
+                rerenderMermaid();
+            }
+        })
+        .catch(function () {
+            /* Sources stay snapshotted; the next scheme change retries. */
+        });
+}
+
+new MutationObserver(function () {
+    rerenderMermaid();
+    /* A lazy render still in flight when the scheme changed finishes with
+       the old theme; catch it once rendering has settled. */
+    clearTimeout(mermaidFollowUp);
+    mermaidFollowUp = setTimeout(rerenderMermaid, 3000);
+}).observe(document.body, { attributes: true, attributeFilter: ["data-md-color-scheme"] });
 
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", updateLanguageLinks);
