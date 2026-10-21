@@ -135,6 +135,23 @@ def build_site_js() -> str:
 SITE_JS = """\
 var NAV_LABELS = /*__NAV_LABELS__*/{};
 
+/* Sidebar sections pre-expanded by title text (must match the mkdocs.yml
+   nav keys); matched BEFORE label localization swaps the text. */
+var EXPANDED_NAV_SECTIONS = ["Downloads"];
+
+function expandNavSections() {
+    document.querySelectorAll(".md-sidebar--primary label.md-nav__link").forEach(function (label) {
+        var title = (label.textContent || "").trim();
+        if (EXPANDED_NAV_SECTIONS.indexOf(title) === -1 || !label.htmlFor) {
+            return;
+        }
+        var toggle = document.getElementById(label.htmlFor);
+        if (toggle && !toggle.checked) {
+            toggle.checked = true;
+        }
+    });
+}
+
 /* Directory-relative href from the directory of fromDir (a page URL:
    trailing "/" is optional, "index.html" forms are normalized away) to
    an absolute directory path toPath (ending in "/"). Algorithm: drop the
@@ -212,6 +229,7 @@ function updateLanguageLinks() {
         var target = languageDirs(link.getAttribute("hreflang")) + slug;
         link.setAttribute("href", relativeHref(target, cur));
     });
+    expandNavSections();
     localizeNav(current, languageDirs, relativeHref, cur, byLang);
 }
 
