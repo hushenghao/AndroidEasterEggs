@@ -18,18 +18,19 @@ class CrashActivity : AppCompatActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        val throwable: Throwable? = Utilities.getUncaughtException(intent)
-        if (throwable == null) {
+        val title = intent.getStringExtra(Utilities.EXTRA_CRASH_TITLE)
+        val details = intent.getStringExtra(Utilities.EXTRA_CRASH_DETAILS)
+        if (title == null || details == null) {
             finish()
             return
         }
 
         if (Utilities.hasPostNotificationPermission(this)) {
-            Utilities.tryPostCrashNotification(this, throwable)
+            Utilities.tryPostCrashNotification(this, title, details)
         } else {
             val request =
                 registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                    Utilities.tryPostCrashNotification(this, throwable)
+                    Utilities.tryPostCrashNotification(this, title, details)
                 }
             request.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
@@ -38,7 +39,7 @@ class CrashActivity : AppCompatActivity() {
         setContent {
             EasterEggsTheme {
                 Scaffold {
-                    CrashScreen(it, throwable, screenshotPath)
+                    CrashScreen(it, title, details, screenshotPath)
                 }
             }
         }

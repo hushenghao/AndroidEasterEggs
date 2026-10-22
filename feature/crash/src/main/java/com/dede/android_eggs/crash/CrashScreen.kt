@@ -35,8 +35,8 @@ import androidx.compose.material.icons.rounded.RestartAlt
 import androidx.compose.material.icons.rounded.Screenshot
 import androidx.compose.material.icons.rounded.SentimentDissatisfied
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledTonalIconButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -44,6 +44,7 @@ import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,6 +52,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
@@ -58,20 +60,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.dede.android_eggs.crash.Utilities.getCrashTitle
 import com.dede.android_eggs.crash.Utilities.getDeviceInfo
-import com.dede.android_eggs.crash.Utilities.getStackTraceString
 import com.dede.basic.Utils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlin.system.exitProcess
-
-@Composable
-private fun floatingActionButtonElevation(elevation: Dp = 0.dp) =
-    FloatingActionButtonDefaults.elevation(elevation, elevation, elevation, elevation)
 
 @Composable
 private fun IconActionButton(
@@ -92,20 +88,23 @@ private fun IconActionButton(
 @Preview(showSystemUi = true)
 internal fun CrashScreen(
     padding: PaddingValues = PaddingValues(0.dp),
-    tr: Throwable = IllegalStateException("test"),
+    title: String = "[Bug] App Crash: java.lang.IllegalStateException: test",
+    details: String = "Thread: main, Time: 2026-10-22 15:04:05,\n" +
+        "java.lang.IllegalStateException: test\n" +
+        "\tat com.dede.android_eggs.crash.CrashScreen(CrashScreen.kt:1)",
     screenshotPath: String? = null
 ) {
     var expanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
 
-    val titleSpan = remember(tr) {
+    val titleSpan = remember(title) {
         buildAnnotatedString {
             withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
-                append(tr.getCrashTitle())
+                append(title)
             }
         }
     }
-    val bodySpan = remember(tr) {
+    val bodySpan = remember(details) {
         buildAnnotatedString {
             withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
                 append(context.getDeviceInfo())
@@ -113,11 +112,21 @@ internal fun CrashScreen(
 
             append("\n")
 
-            append(tr.getStackTraceString())
+            append(details)
         }
     }
 
     var showScreenshot by remember { mutableStateOf(false) }
+    var screenshotBitmap by remember(screenshotPath) { mutableStateOf<ImageBitmap?>(null) }
+
+    LaunchedEffect(showScreenshot, screenshotPath) {
+        val path = screenshotPath
+        if (showScreenshot && path != null && screenshotBitmap == null) {
+            screenshotBitmap = withContext(Dispatchers.IO) {
+                BitmapFactory.decodeFile(path)?.asImageBitmap()
+            }
+        }
+    }
 
     Box(modifier = Modifier.padding(padding)) {
         Column(
@@ -157,7 +166,6 @@ internal fun CrashScreen(
                             .weight(1f)
                             .padding(16.dp),
                         style = typography.bodySmall,
-                        overflow = TextOverflow.Ellipsis,
                     )
                     if (!expanded) {
                         Icon(
@@ -210,18 +218,18 @@ internal fun CrashScreen(
             }
             IconActionButton(
                 onClick = {
-                    Utilities.copyThrowablePlantText(context, tr)
+                    Utilities.copyCrashReport(context, title, details)
                 },
                 imageVector = Icons.Rounded.ContentCopy,
             )
             IconActionButton(
                 onClick = {
-                    val intent = Utilities.createNewIssueIntent(context, tr)
+                    val intent = Utilities.createNewIssueIntent(context, title, details)
                     try {
                         context.startActivity(intent)
                     } catch (_: ActivityNotFoundException) {
                     }
-                    Utilities.copyThrowablePlantText(context, tr)
+                    Utilities.copyCrashReport(context, title, details)
                 },
                 imageVector = Icons.Rounded.BugReport,
             )
@@ -233,18 +241,20 @@ internal fun CrashScreen(
             enter = fadeIn() + slideInVertically { it / 2 },
             exit = fadeOut() + slideOutVertically { it / 2 },
         ) {
-            val imageBitmap = remember(screenshotPath) {
-                BitmapFactory.decodeFile(screenshotPath).asImageBitmap()
+            val bitmap = screenshotBitmap
+            if (bitmap != null) {
+                Image(
+                    bitmap = bitmap,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .border(2.dp, Color.Red)
+                        .clickable {
+                            showScreenshot = false
+                        },
+                )
+            } else {
+                CircularProgressIndicator()
             }
-            Image(
-                bitmap = imageBitmap,
-                contentDescription = null,
-                modifier = Modifier
-                    .border(2.dp, Color.Red)
-                    .clickable {
-                        showScreenshot = false
-                    },
-            )
         }
     }
 }

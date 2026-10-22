@@ -11,7 +11,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.IntentCompat
 import androidx.core.content.edit
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
@@ -20,10 +19,17 @@ import com.dede.android_eggs.util.AGPUtils
 import com.dede.android_eggs.util.pref
 import com.dede.basic.Utils
 import com.dede.basic.copy
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 internal object Utilities {
 
+    private const val TAG = "CrashUtilities"
+
     private const val VCS_REVISION_LENGTH = 7
+    private const val MAX_ISSUE_TITLE_LENGTH = 256
+    private const val MAX_ISSUE_BODY_LENGTH = 6000
 
     fun saveVcsRevision(context: Context) {
         val vcsRevision = AGPUtils.getVcsRevision(VCS_REVISION_LENGTH)
@@ -37,7 +43,8 @@ internal object Utilities {
         }
     }
 
-    const val EXTRA_THROWABLE = "extra_throwable"
+    const val EXTRA_CRASH_TITLE = "extra_crash_title"
+    const val EXTRA_CRASH_DETAILS = "extra_crash_details"
     const val EXTRA_SCREENSHOT_PATH = "extra_screenshot"
 
     private const val NOTIFICATION_ID = 1
@@ -50,8 +57,19 @@ internal object Utilities {
                 ) == PackageManager.PERMISSION_GRANTED
     }
 
-    fun tryPostCrashNotification(context: Context, tr: Throwable?) {
-        if (tr == null || !hasPostNotificationPermission(context)) {
+    fun tryPostCrashNotification(context: Context, title: String, details: String) {
+        // Never let the notification break the crash flow: PendingIntent registration can
+        // fail with a huge details payload (binder transaction limit), while the crash
+        // screenshot and the crash screen must still run.
+        runCatching {
+            postCrashNotification(context, title, details)
+        }.onFailure {
+            Log.e(TAG, "Failed to post the crash notification", it)
+        }
+    }
+
+    private fun postCrashNotification(context: Context, title: String, details: String) {
+        if (!hasPostNotificationPermission(context)) {
             return
         }
 
@@ -71,22 +89,22 @@ internal object Utilities {
         notificationManager.createNotificationChannel(notificationChannel)
 
         val bigTextStyle = NotificationCompat.BigTextStyle()
-            .bigText(context.getDeviceInfo() + tr.getStackTraceString())
+            .bigText(context.getDeviceInfo() + details)
 
         val flags = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         val copyIntent = PendingIntent.getBroadcast(
-            context, 0, CrashNotificationActionsReceiver.copyActionIntent(context, tr), flags
+            context, 0, CrashNotificationActionsReceiver.copyActionIntent(context, title, details), flags
         )
         val newIssueIntent = PendingIntent.getActivity(
-            context, 0, createNewIssueIntent(context, tr), flags
+            context, 0, createNewIssueIntent(context, title, details), flags
         )
         val notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL)
             .setSmallIcon(
                 IconCompat.createWithResource(context, R.drawable.round_sentiment_dissatisfied)
             )
             .setStyle(bigTextStyle)
-            .setContentTitle(tr.getCrashTitle())
-            .setContentText(tr.getStackTraceString())
+            .setContentTitle(title)
+            .setContentText(details)
             .setAutoCancel(true)
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)
             .addAction(-1, context.getString(android.R.string.copy), copyIntent)
@@ -98,6 +116,13 @@ internal object Utilities {
 
     fun Throwable.getCrashTitle(): String {
         return "[Bug] App Crash: %s".format(this.toString())
+    }
+
+    fun getCrashDetails(thread: Thread, tr: Throwable): String {
+        val time = SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z", Locale.US).format(Date())
+        return "Thread: %s, Time: %s,\n%s".format(
+            thread.name, time, tr.getStackTraceString()
+        )
     }
 
     fun Context.getDeviceInfo(): String {
@@ -114,36 +139,46 @@ internal object Utilities {
     fun Throwable.getStackTraceString(): String {
         return try {
             Log.getStackTraceString(this)
-        } catch (ignore: Throwable) {
+        } catch (_: Throwable) {
             this.toString()
         }
     }
 
-    fun copyThrowablePlantText(context: Context, tr: Throwable) {
+    fun copyCrashReport(context: Context, title: String, details: String) {
         val text = "%s\n\n%s\n%s".format(
-            tr.getCrashTitle(),
+            title,
             context.getDeviceInfo(),
-            tr.getStackTraceString()
+            details
         )
         context.copy(text)
     }
 
-    fun createNewIssueIntent(context: Context, tr: Throwable): Intent {
-        val title = tr.getCrashTitle()
-        val body = context.getDeviceInfo() + "\n" + tr.getStackTraceString()
+    fun createNewIssueIntent(context: Context, title: String, details: String): Intent {
+        val body = buildString {
+            append(context.getDeviceInfo())
+            append('\n')
+            append(details)
+        }
+        // Keep the final URL within common browser limits: deep stacks make the
+        // query too long for the browser to open. The copy button carries the
+        // full text as the fallback.
+        val clippedBody = if (body.length > MAX_ISSUE_BODY_LENGTH) {
+            body.substring(0, MAX_ISSUE_BODY_LENGTH) + "\n... [truncated]"
+        } else {
+            body
+        }
+        val clippedTitle = if (title.length > MAX_ISSUE_TITLE_LENGTH) {
+            title.substring(0, MAX_ISSUE_TITLE_LENGTH) + "..."
+        } else {
+            title
+        }
         val uri = context.getString(R.string.url_github_issues).toUri()
             .buildUpon()
             .appendPath("new")
-            .appendQueryParameter("title", title)
-            .appendQueryParameter("body", "```\n%s\n```".format(body))
+            .appendQueryParameter("title", clippedTitle)
+            .appendQueryParameter("body", "```\n%s\n```".format(clippedBody))
             .build()
         return Intent(Intent.ACTION_VIEW, uri)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-    }
-
-    fun getUncaughtException(intent: Intent?): Throwable? {
-        return IntentCompat.getSerializableExtra(
-            intent ?: return null, EXTRA_THROWABLE, Throwable::class.java
-        )
     }
 }

@@ -5,11 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Looper
 import android.util.Log
+import com.dede.android_eggs.crash.Utilities.getCrashTitle
 import com.dede.android_eggs.crash.Utilities.getStackTraceString
 import com.dede.android_eggs.util.applyNotNull
 import kotlinx.coroutines.runBlocking
 import java.io.File
-import java.io.Serializable
 import kotlin.system.exitProcess
 import androidx.startup.Initializer as AndroidxInitializer
 
@@ -30,7 +30,10 @@ private class GlobalExceptionHandler private constructor(
             return
         }
 
-        Utilities.tryPostCrashNotification(applicationContext, e)
+        val title = e.getCrashTitle()
+        val details = Utilities.getCrashDetails(t, e)
+
+        Utilities.tryPostCrashNotification(applicationContext, title, details)
 
         val screenshotFile = runBlocking {
             CrashScreenshotCapture.tryCaptureScreenshot(applicationContext)
@@ -40,7 +43,9 @@ private class GlobalExceptionHandler private constructor(
             val stackTraceMsg = e.getStackTraceString()
             Log.e(this.toString(), stackTraceMsg)
 
-            applicationContext.launchCrashActivity(activityToBeLaunched, e, screenshotFile)
+            applicationContext.launchCrashActivity(
+                activityToBeLaunched, title, details, screenshotFile
+            )
             exitProcess(-1)
         }.getOrElse {
             defaultHandler?.uncaughtException(t, e)
@@ -49,11 +54,13 @@ private class GlobalExceptionHandler private constructor(
 
     private fun Context.launchCrashActivity(
         activity: Class<out Activity>,
-        e: Throwable,
+        title: String,
+        details: String,
         screenshotFile: File?
     ) {
         val crashedIntent = Intent(applicationContext, activity)
-            .putExtra(Utilities.EXTRA_THROWABLE, e as Serializable)
+            .putExtra(Utilities.EXTRA_CRASH_TITLE, title)
+            .putExtra(Utilities.EXTRA_CRASH_DETAILS, details)
             .applyNotNull(screenshotFile) {
                 putExtra(Utilities.EXTRA_SCREENSHOT_PATH, it.absolutePath)
             }
@@ -65,7 +72,7 @@ private class GlobalExceptionHandler private constructor(
 
         override fun create(context: Context) {
             initialize(context)
-            CrashScreenshotCapture.initialize(context)
+            CrashScreenshotCapture.initialize()
         }
 
         override fun dependencies(): List<Class<out AndroidxInitializer<*>>> = emptyList()
