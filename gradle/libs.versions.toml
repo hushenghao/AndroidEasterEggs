@@ -90,7 +90,7 @@ aboutlibraries-m3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version
 material-kolor = { module = "com.materialkolor:material-kolor", version.ref = "material-kolor" }
 material-kolor-utilities = { module = "com.materialkolor:material-color-utilities", version.ref = "material-kolor" }
 shreyaspatil-capturable = "dev.shreyaspatil:capturable:3.0.1"
-dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.0.5"
+dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.2.0"
 blurhash-android = "io.github.hushenghao:blurhash-android:1.0.1"
 squircle-shape = "com.stoyanvuchev:squircle-shape:5.4.0"
 haze-blur = { module = "dev.chrisbanes.haze:haze-blur-materials", version.ref = "haze-blur" }
