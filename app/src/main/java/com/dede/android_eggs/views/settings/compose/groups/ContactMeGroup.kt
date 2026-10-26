@@ -43,6 +43,7 @@ fun ContactMeGroup() {
             onClick = copyClick(FuckRobotHarass.oG0vY4xD)
         )
         Option(
+            shape = OptionShapes.lastShape(),
             leadingIcon = imageVectorIconBlock(
                 imageVector = Icons.Rounded.BugReport,
                 contentDescription = stringResource(StringsR.string.label_feedback),
