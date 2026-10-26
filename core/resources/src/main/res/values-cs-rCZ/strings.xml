@@ -59,6 +59,9 @@
     <string name="animator_disabled_alert_message">Systémové animace jsou vypnuté. Pro správnou funkci v Možnostech pro vývojáře aktivujte animace</string>
     <string name="action_goto_settings">Otevřít nastavení</string>
     <string name="action_dont_show_again">Znovu nezobrazovat</string>
+    <string name="github_star_alert_title">Líbí se vám aplikace?</string>
+    <string name="github_star_alert_message">Tato aplikace je zdarma a open-source. Pokud se vám Easter eggy líbí, dejte projektu hvězdičku na GitHubu</string>
+    <string name="action_star_github">Hvězdička na GitHubu</string>
     <string name="cat_editor">Editor kočky</string>
     <string name="cat_editor_input_seed">Zadejte kód kočky</string>
     <string name="rocket_launcher_easter_egg_icons">Easter eggy</string>
@@ -78,4 +81,10 @@
     <string name="dialog_import_backup_title">Importovat zálohu</string>
     <string name="dialog_import_backup_message">Tato akce přepíše aktuální data aplikace, jako například nastavení, uložené kočky, a nastavení widgetů. Tuto akci nelze vrátit zpět. Chcete pokračovat?</string>
     <string name="action_confirm_import">Importovat</string>
+    <string name="action_restore_defaults">Obnovit výchozí nastavení</string>
+    <string name="action_restore_defaults_desc">Obnovit všechna nastavení do jejich výchozích hodnot</string>
+    <string name="dialog_restore_defaults_title">Obnovit výchozí nastavení</string>
+    <string name="dialog_restore_defaults_message">Toto obnoví všechna nastavení, včetně motivu, ikony aplikace, a jazyka. Uložené kočky a nastavení widgetů nebudou změněny. Jste si jisti, že chcete pokračovat?</string>
+    <string name="action_confirm_restore_defaults">Obnovit</string>
+    <string name="toast_restore_defaults_success">Nastavení obnoveny na výchozí. Aplikace se restartuje.</string>
 </resources>
