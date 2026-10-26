@@ -54,7 +54,7 @@ androidx-startup = "androidx.startup:startup-runtime:1.2.0"
 androidx-shapes = "androidx.graphics:graphics-shapes:1.1.0"
 androidx-splashscreen = "androidx.core:core-splashscreen:1.2.0"
 androidx-print = "androidx.print:print:1.1.0"
-androidx-datastore = "androidx.datastore:datastore-preferences:1.2.1"
+androidx-datastore = "androidx.datastore:datastore-preferences:1.3.0"
 androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 androidx-compose-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
