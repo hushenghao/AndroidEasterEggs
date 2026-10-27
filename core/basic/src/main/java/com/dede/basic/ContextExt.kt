@@ -67,6 +67,7 @@ fun Context.createChooser(target: Intent, title: CharSequence? = null): Intent {
 
 fun Context.copy(text: String) {
     val service = getSystemService<ClipboardManager>() ?: return
+    @Suppress("UsePropertyAccessSyntax")
     service.setPrimaryClip(ClipData.newPlainText(null, text))
     toast(android.R.string.copy)
 }
