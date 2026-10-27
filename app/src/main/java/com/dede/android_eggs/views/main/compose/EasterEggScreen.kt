@@ -64,7 +64,7 @@ object EasterEggsScreen : EasterEggsDestination, EasterEggsDestination.Provider 
     override val route: NavKey = EasterEggsDestination.EasterEggs
 
     @Composable
-    override fun Content() {
+    override fun Content(route: NavKey) {
         EasterEggScreen()
     }
 

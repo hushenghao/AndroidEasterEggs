@@ -86,15 +86,6 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
 
     private class UriHandler : EggHandler {
 
-        companion object {
-            private const val SCHEME = "egg"
-            private const val HOST = "easter_egg"
-
-            private const val PATH_API_LEVEL = "api"
-            private const val PATH_ROCKET_LAUNCHER = "rocket_launcher"
-            private const val PATH_CAT_EDITOR = "cat_editor"
-        }
-
         private fun filterUri(uri: Uri?): Boolean {
             return uri != null && uri.scheme == SCHEME && uri.host == HOST
         }
@@ -110,6 +101,13 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
             return egg != null
         }
 
+        private fun handleCatEditorPath(uri: Uri): Boolean {
+            // egg://easter_egg/cat_editor/12345
+            val seed = uri.pathSegments.getOrNull(1)?.toLongOrNull()
+            DeepLink.setNavKey(EasterEggsDestination.CatEditor(seed))
+            return true
+        }
+
         override fun handleEggIntent(eggIntent: EggIntent): Boolean {
             val uri = eggIntent.uri ?: return false
             if (!filterUri(uri)) {
@@ -118,10 +116,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
             Log.i(TAG, "handleScheme: $uri")
             return when (uri.pathSegments.firstOrNull()) {
                 PATH_API_LEVEL -> handleApiPath(eggIntent, uri)
-                PATH_CAT_EDITOR -> {
-                    DeepLink.setNavKey(EasterEggsDestination.CatEditor)
-                    true
-                }
+                PATH_CAT_EDITOR -> handleCatEditorPath(uri)
                 PATH_ROCKET_LAUNCHER -> {
                     launchRocketLauncher(eggIntent.context)
                     true
@@ -142,5 +137,33 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
 
     private interface EggHandler {
         fun handleEggIntent(eggIntent: EggIntent): Boolean
+    }
+
+    companion object {
+        private const val SCHEME = "egg"
+        private const val HOST = "easter_egg"
+        private const val PATH_API_LEVEL = "api"
+        private const val PATH_ROCKET_LAUNCHER = "rocket_launcher"
+        private const val PATH_CAT_EDITOR = "cat_editor"
+
+        /** egg://easter_egg/api/34 */
+        internal fun createEggUri(apiLevel: Int): Uri {
+            return Uri.Builder()
+                .scheme(SCHEME)
+                .authority(HOST)
+                .appendPath(PATH_API_LEVEL)
+                .appendPath(apiLevel.toString())
+                .build()
+        }
+
+        /** egg://easter_egg/cat_editor/12345 */
+        internal fun createCatEditorUri(seed: Long): Uri {
+            return Uri.Builder()
+                .scheme(SCHEME)
+                .authority(HOST)
+                .appendPath(PATH_CAT_EDITOR)
+                .appendPath(seed.toString())
+                .build()
+        }
     }
 }

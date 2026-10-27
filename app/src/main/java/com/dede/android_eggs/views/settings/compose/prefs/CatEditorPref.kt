@@ -18,7 +18,7 @@ fun CatEditorPref() {
         title = stringResource(StringR.string.cat_editor),
         trailingContent = Icons.AutoMirrored.Rounded.NavigateNext,
         onClick = {
-            navigator.navigate(EasterEggsDestination.CatEditor)
+            navigator.navigate(EasterEggsDestination.CatEditor())
         }
     )
 }

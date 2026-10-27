@@ -15,7 +15,7 @@ interface EasterEggsDestination {
     val route: NavKey
 
     @Composable
-    fun Content() {
+    fun Content(route: NavKey) {
     }
 
     interface Provider {
@@ -24,7 +24,7 @@ interface EasterEggsDestination {
 
     // @formatter:off
     @Serializable data object EasterEggs : NavKey
-    @Serializable data object CatEditor : NavKey
+    @Serializable data class CatEditor(val seed: Long? = null) : NavKey
     @Serializable data object LibrariesInfo : NavKey
     // @formatter:on
 }

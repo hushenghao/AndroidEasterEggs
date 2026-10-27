@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
+@file:OptIn(ExperimentalPermissionsApi::class)
 
 package com.dede.android_eggs.cat_editor
 
@@ -50,7 +50,6 @@ import androidx.compose.material.icons.rounded.ZoomOut
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults.cardColors
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -118,11 +117,12 @@ import com.dede.android_eggs.resources.R as StringR
 @Module
 @InstallIn(SingletonComponent::class)
 object CatEditorScreen : EasterEggsDestination, EasterEggsDestination.Provider {
-    override val route: NavKey = EasterEggsDestination.CatEditor
+    override val route: NavKey = EasterEggsDestination.CatEditor()
 
     @Composable
-    override fun Content() {
-        CatEditorScreen()
+    override fun Content(route: NavKey) {
+        val editorRoute = route as? EasterEggsDestination.CatEditor
+        CatEditorScreen(editorRoute?.seed)
     }
 
     @IntoSet
@@ -131,13 +131,15 @@ object CatEditorScreen : EasterEggsDestination, EasterEggsDestination.Provider {
 }
 
 @Composable
-fun CatEditorScreen() {
+fun CatEditorScreen(initialSeed: Long? = null) {
     val captureController = rememberCaptureControllerDelegate()
 
     val navigator = LocalNavigator.current
     val context = LocalContext.current
 
-    val catSeedState = rememberSaveable { mutableLongStateOf(Utilities.randomSeed()) }
+    val catSeedState = rememberSaveable {
+        mutableLongStateOf(initialSeed ?: Utilities.randomSeed())
+    }
     var catSeed by catSeedState
     val catName = stringResource(R.string.default_cat_name, catSeed)// full seed name
 

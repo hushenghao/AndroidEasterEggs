@@ -20,7 +20,7 @@ object LibrariesInfoScreen : EasterEggsDestination, EasterEggsDestination.Provid
     override val route: NavKey = EasterEggsDestination.LibrariesInfo
 
     @Composable
-    override fun Content() {
+    override fun Content(route: NavKey) {
         LibrariesInfoScreen()
     }
 

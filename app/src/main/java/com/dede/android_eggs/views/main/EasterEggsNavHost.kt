@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.dede.android_eggs.views.main
 
 import androidx.compose.animation.ContentTransform
@@ -10,16 +8,17 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.NavDisplay
 import com.dede.android_eggs.composable.appbar.LocalOverlayHazeState
 import com.dede.android_eggs.local_provider.rememberCustomTabsUriHandler
@@ -79,13 +78,20 @@ fun EasterEggsNavHost(
         LocalKonfettiState provides konfettiController,
         LocalOverlayHazeState provides overlayHazeState,
     ) {
-        val entryProvider = entryProvider {
-            val navDestinations = rememberEasterEggsDestinations()
-            navDestinations.forEach { dest ->
-                entry(dest.route) {
-                    dest.Content()
-                }
+        // Entries are resolved by route class, mirroring the official "direct entry provider
+        // function" pattern from the Navigation3 docs (developer.android.com/guide/navigation/
+        // navigation-3/basics): parameterized routes like CatEditor(seed) navigate with
+        // instances that differ from dest.route, so the nav3 DSL's instance-keyed entry()
+        // cannot match them and NavEntry(key) is built manually per resolved destination.
+        val navDestinations = rememberEasterEggsDestinations()
+        val entryProvider = remember(navDestinations) {
+            val destinationsByClass = navDestinations.associateBy { it.route::class }
+            val fallback: (NavKey) -> Nothing = { throw IllegalStateException("Unknown screen $it") }
+            val lookup: (NavKey) -> NavEntry<NavKey> = { key ->
+                val destination = destinationsByClass[key::class] ?: fallback(key)
+                NavEntry(key) { destination.Content(key) }
             }
+            lookup
         }
         // Overlays which are not windows of their own draw in this Box, above the navigation
         // content, and being the topmost hit target they also keep it from being touched.
