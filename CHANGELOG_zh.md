@@ -2,6 +2,7 @@
 
 ### v5.6.1
 
+- 添加 Android App Functions 支持(Android 16+)
 - 添加 GitHub Pagers
 
 ### v5.6.0 (2026-10-20)

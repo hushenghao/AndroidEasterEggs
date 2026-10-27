@@ -19,7 +19,7 @@ import java.util.Objects
 import kotlin.math.roundToInt
 import android.graphics.Matrix as AndroidMatrix
 
-internal object Utilities {
+object Utilities {
 
     private const val TAG = "Utilities"
 

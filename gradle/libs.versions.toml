@@ -17,6 +17,7 @@ ktor = "3.6.0"
 nav3 = "1.2.0"
 haze-blur = "2.0.1"
 material-kolor = "5.0.1"
+appfunctions = "1.0.0-alpha10"
 
 # test
 androidx-junit = "1.3.0"
@@ -55,6 +56,8 @@ androidx-shapes = "androidx.graphics:graphics-shapes:1.1.0"
 androidx-splashscreen = "androidx.core:core-splashscreen:1.2.0"
 androidx-print = "androidx.print:print:1.1.0"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.3.0"
+androidx-appfunctions = { module = "androidx.appfunctions:appfunctions", version.ref = "appfunctions" }
+androidx-appfunctions-compiler = { module = "androidx.appfunctions:appfunctions-compiler", version.ref = "appfunctions" }
 androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 androidx-compose-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }

@@ -1,1 +1,2 @@
+- 添加 Android App Functions 支持(Android 16+)
 - 添加 GitHub Pagers

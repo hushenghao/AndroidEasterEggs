@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AppFunctionAppMetadata
+    xmlns:appfn="http://schemas.android.com/apk/androidx.appfunctions"
+    appfn:description="This app provides access to all Android platform Easter eggs.
+    Operational Patterns:
+    - Use 'listEasterEggs' to discover all available Easter eggs with API levels and version names.
+    - Use 'searchEasterEggs' to find eggs by name, nickname, API level, or Android version.
+    - Use 'launchEasterEgg' with the apiLevel obtained from 'listEasterEggs' or 'searchEasterEggs',
+    then fire the returned 'launchIntent' PendingIntent to display the egg.
+    - Use 'getEasterEggIcon' with the apiLevel to retrieve the egg's logo as PNG image bytes,
+    for displaying the egg in cards or previews.
+    - Use 'generateRandomCat' to create a Neko cat seed, then fire the returned 'editorIntent'
+    PendingIntent to edit that cat in the Cat Editor.
+    Constraints:
+    - Eggs are read-only experiences; this app does not create or modify data."
+    appfn:displayDescription="@string/app_function_description" />

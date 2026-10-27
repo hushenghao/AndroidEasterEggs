@@ -2,6 +2,7 @@
 
 ### v5.6.1
 
+- Add Android App Functions support (Android 16+)
 - Add GitHub Pagers
 
 ### v5.6.0 (2026-10-20)

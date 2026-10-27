@@ -1,1 +1,2 @@
+- Add Android App Functions support (Android 16+)
 - Add GitHub Pagers
