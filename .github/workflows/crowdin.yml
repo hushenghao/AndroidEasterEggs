@@ -22,8 +22,6 @@ on:
 jobs:
   crowdin:
     runs-on: ubuntu-latest
-    outputs:
-      has_open_pr: ${{ steps.pr.outputs.has_open_pr }}
 
     steps:
       - name: Check secrets
@@ -35,8 +33,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v7
-        with:
-          fetch-depth: 0 # full history so Enrich PR body can diff against origin/main
 
       - name: Crowdin synchronize
         uses: crowdin/github-action@v3 # https://github.com/marketplace/actions/crowdin-action
@@ -58,33 +54,8 @@ jobs:
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
-      - name: Enrich PR body
-        id: pr
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          PR=$(gh pr list --head l10n_crowdin_translations --state open --json number --jq '.[0].number // empty')
-          if [ -z "$PR" ]; then
-            echo "No open Crowdin PR to update"
-            echo "has_open_pr=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          echo "has_open_pr=true" >> "$GITHUB_OUTPUT"
-          # crowdin action switches back to main before this step, so diff against the l10n branch itself
-          LANGS=$(git diff --name-only origin/main...origin/l10n_crowdin_translations -- '**/values-*/strings*.xml' '**/values-*/languages.xml' \
-            | sed -E 's|.*/values-([^/]+)/.*|\1|' | sort -u | paste -sd ',' -)
-          STATS=$(git diff --shortstat origin/main...origin/l10n_crowdin_translations -- ':!script/crowdin/crowdin_project_progress.svg')
-          gh pr edit "$PR" --body "$(cat <<EOF
-          New Crowdin pull request with translations 🚀
-
-          **Languages:** ${LANGS//,/, }
-          **Changes:** ${STATS:-(no file changes)}
-          EOF
-          )"
-
   progress:
     needs: crowdin
-    if: needs.crowdin.outputs.has_open_pr == 'true'
     runs-on: ubuntu-latest
 
     steps:
@@ -105,7 +76,13 @@ jobs:
           cache: 'pip' # caching pip dependencies
 
       - name: Update Crowdin progress
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          if [ -z "$(gh pr list --head l10n_crowdin_translations --state open --json number --jq '.[0].number // empty')" ]; then
+            echo "No open Crowdin PR, skip progress update"
+            exit 0
+          fi
           if ! git fetch origin l10n_crowdin_translations; then
             echo "No translations branch, skip progress update"
             exit 0
