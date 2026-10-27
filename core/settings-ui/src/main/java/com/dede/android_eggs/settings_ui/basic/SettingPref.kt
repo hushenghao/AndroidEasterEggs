@@ -1,6 +1,7 @@
 package com.dede.android_eggs.settings_ui.basic
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -17,6 +18,7 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -143,33 +145,35 @@ fun SettingPref(
     Card(
         shape = shape,
         colors = cardColors,
-        modifier = Modifier.animateContentSize() then modifier,
+        modifier = Modifier
+            .clip(shape)
+            .animateContentSize()
+            .then(modifier),
     ) {
-        Card(
-            onClick = onClick,
-            shape = shape,
-            colors = cardColors,
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .defaultMinSize(minHeight = 60.dp)
+                // clip before clickable bounds the ripple to the card shape;
+                // the expanded content() below stays outside the click target
+                .clip(shape)
+                .clickable(onClick = onClick),
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.defaultMinSize(minHeight = 60.dp)
+            if (leadingIcon != null) {
+                leadingIcon()
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(10.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
-                if (leadingIcon != null) {
-                    leadingIcon()
-                }
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(10.dp),
-                    verticalArrangement = Arrangement.spacedBy(2.dp)
-                ) {
-                    title()
+                title()
 
-                    desc()
-                }
-                if (trailingContent != null) {
-                    trailingContent()
-                }
+                desc()
+            }
+            if (trailingContent != null) {
+                trailingContent()
             }
         }
 
