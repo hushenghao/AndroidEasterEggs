@@ -15,10 +15,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -40,9 +44,17 @@ fun launchRocketLauncher(context: Context) {
 @Composable
 fun RocketLauncherPref() {
     val context = LocalContext.current
+    // D-pad navigation wiring: directional focus search only visits siblings, so the
+    // trailing expand button (a descendant of the card's clickable) is unreachable
+    // unless the card and the button are linked explicitly.
+    val cardFocusRequester = remember { FocusRequester() }
+    val expandFocusRequester = remember { FocusRequester() }
     var expanded by rememberSaveable { mutableStateOf(false) }
     var currentIconsValue by rememberPrefIntState(AppSettings.rocketLauncherIconsSource)
     ExpandOptionsPref(
+        modifier = Modifier
+            .focusRequester(cardFocusRequester)
+            .focusProperties { end = expandFocusRequester },
         expended = expanded,
         leadingIcon = Icons.Rounded.RocketLaunch,
         title = stringResource(com.android.launcher2.R.string.rocket_launcher_dream_name),
@@ -57,7 +69,10 @@ fun RocketLauncherPref() {
             )
             FilledTonalIconButton(
                 onClick = { expanded = !expanded },
-                modifier = Modifier.padding(end = 8.dp),
+                modifier = Modifier
+                    .focusRequester(expandFocusRequester)
+                    .focusProperties { start = cardFocusRequester }
+                    .padding(end = 8.dp),
                 shape = IconShapePrefUtil.getIconShape()
             ) {
                 Icon(
