@@ -10,15 +10,18 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInVertically
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
@@ -32,25 +35,24 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
@@ -124,35 +126,18 @@ fun ExpandOptionsPref(
     leadingIcon: ImageVector,
     title: String,
     desc: String? = null,
-    requestFocusOnExpanded: Boolean = true,
     trailingContent: @Composable (expended: Boolean) -> Unit = {
         ExpandOptionsPrefTrailing(it)
     },
     options: @Composable ColumnScope.() -> Unit
 ) {
-    val focusRequester = remember { FocusRequester() }
-    if (requestFocusOnExpanded) {
-        val lifecycleOwner = LocalLifecycleOwner.current
-        DisposableEffect(lifecycleOwner) {
-            val observer = object : DefaultLifecycleObserver {
-                override fun onPause(owner: LifecycleOwner) {
-                    focusRequester.freeFocus()
-                }
-            }
-            lifecycleOwner.lifecycle.addObserver(observer)
-
-            onDispose {
-                lifecycleOwner.lifecycle.removeObserver(observer)
-            }
-        }
-    }
-
+    val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
+    val currentExpanded by rememberUpdatedState(expanded)
+    var contentSize by remember { mutableStateOf(IntSize.Zero) }
+    val navBarBottom = WindowInsets.navigationBars.getBottom(LocalDensity.current)
     ExpandOptionsPref(
-        modifier = Modifier
-            .focusRequester(focusRequester)
-            .focusable()
-            .then(modifier),
+        modifier = modifier,
         expended = expanded,
         leadingIcon = leadingIcon,
         title = title,
@@ -162,19 +147,34 @@ fun ExpandOptionsPref(
             val nextExpanded = !expanded
             onExpandedChange(nextExpanded)
 
-            if (!requestFocusOnExpanded) {
+            if (!nextExpanded) {
                 return@onClick
             }
             coroutineScope.launch {
-                if (nextExpanded) {
-                    delay(300.milliseconds)
-                    focusRequester.requestFocus()
-                } else {
-                    focusRequester.freeFocus()
+                // Wait for the expand animation to settle, then scroll the
+                // options into view without touching the focus system
+                delay(300.milliseconds)
+                if (currentExpanded) {
+                    // Request extra height equal to the navigation bar inset so
+                    // the bottom options are not covered by the system bar
+                    bringIntoViewRequester.bringIntoView(
+                        Rect(
+                            0f, 0f,
+                            contentSize.width.toFloat(),
+                            (contentSize.height + navBarBottom).toFloat()
+                        )
+                    )
                 }
             }
         },
-        options = options,
+        options = {
+            Column(
+                modifier = Modifier
+                    .onSizeChanged { contentSize = it }
+                    .bringIntoViewRequester(bringIntoViewRequester),
+                content = options
+            )
+        },
     )
 }
 
