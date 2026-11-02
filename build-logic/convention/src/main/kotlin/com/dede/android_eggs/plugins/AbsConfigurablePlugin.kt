@@ -122,6 +122,15 @@ abstract class AbsConfigurablePlugin(
                 compose = configurable.isComposeEnabled
             }
 
+            // AGP 9.5 registers GenerateComposePreviewRunfilesTask on every
+            // compose-enabled module; task creation fails unless unit tests
+            // include Android resources. The project has no unit tests, so
+            // this only satisfies that task's resource APK requirement.
+            // Property chain: CommonExtension has no testOptions{} DSL function.
+            if (configurable.isComposeEnabled) {
+                testOptions.unitTests.isIncludeAndroidResources = true
+            }
+
             when (configurable.moduleType) {
                 ModuleType.APP -> {
                     with(this as ApplicationExtension) {
