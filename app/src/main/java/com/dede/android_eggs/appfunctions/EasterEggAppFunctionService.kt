@@ -7,7 +7,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.appfunctions.AppFunction
+import androidx.appfunctions.AppFunctionDeclaration
 import androidx.appfunctions.AppFunctionElementNotFoundException
 import androidx.appfunctions.AppFunctionSerializable
 import androidx.appfunctions.AppFunctionService
@@ -89,7 +89,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
      *
      * @return A list of [EasterEggInfo] describing each available egg.
      */
-    @AppFunction(isDescribedByKDoc = true)
+    @AppFunctionDeclaration(isDescribedByKDoc = true)
     internal suspend fun listEasterEggs(): List<EasterEggInfo> = withContext(Dispatchers.IO) {
         val latestApiLevel = latestPlainApiLevel()
         pureEasterEggs.map { it.toEasterEggInfo(latestApiLevel) }
@@ -103,7 +103,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
      * or Android version (e.g., "4.4").
      * @return A list of [EasterEggInfo] matching the query, or an empty list if no matches.
      */
-    @AppFunction(isDescribedByKDoc = true)
+    @AppFunctionDeclaration(isDescribedByKDoc = true)
     internal suspend fun searchEasterEggs(query: String): List<EasterEggInfo> =
         withContext(Dispatchers.IO) {
             val latestApiLevel = latestPlainApiLevel()
@@ -118,7 +118,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
      * @param seed An optional seed to recreate a specific cat. If null, a random seed is generated.
      * @return A [GeneratedCat] with the seed and the deep link opening it in the Cat Editor.
      */
-    @AppFunction(isDescribedByKDoc = true)
+    @AppFunctionDeclaration(isDescribedByKDoc = true)
     internal suspend fun generateRandomCat(seed: Long? = null): GeneratedCat =
         withContext(Dispatchers.IO) {
             val finalSeed = seed ?: Utilities.randomSeed()
@@ -142,7 +142,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
      * @return An [EasterEggLaunch] with the egg info and the launch token opening the egg.
      * @throws AppFunctionElementNotFoundException if no egg exists for the given API level.
      */
-    @AppFunction(isDescribedByKDoc = true)
+    @AppFunctionDeclaration(isDescribedByKDoc = true)
     internal suspend fun launchEasterEgg(apiLevel: Int): EasterEggLaunch =
         withContext(Dispatchers.IO) {
             val egg = pureEasterEggs.find { apiLevel in it.fullApiLevelRange.toApiLevelRange() }
@@ -170,7 +170,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
      * @return The egg logo rendered at 192x192 pixels as a PNG [EggIcon].
      * @throws AppFunctionElementNotFoundException if no egg exists for the given API level.
      */
-    @AppFunction(isDescribedByKDoc = true)
+    @AppFunctionDeclaration(isDescribedByKDoc = true)
     internal suspend fun getEasterEggIcon(apiLevel: Int): EggIcon =
         withContext(Dispatchers.IO) {
             val egg = pureEasterEggs.find { apiLevel in it.fullApiLevelRange.toApiLevelRange() }

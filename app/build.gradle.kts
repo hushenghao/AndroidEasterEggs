@@ -75,10 +75,6 @@ android {
 
 }
 
-ksp {
-    arg("appfunctions:aggregateAppFunctions", "true")
-}
-
 dependencies {
     ksp(libs.kotlin.metadata.jvm)
     implementation(libs.androidx.appfunctions)
