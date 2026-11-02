@@ -16,7 +16,7 @@ about-libraries = "15.3.0"
 ktor = "3.6.0"
 nav3 = "1.2.0"
 haze-blur = "2.0.1"
-material-kolor = "5.0.1"
+material-kolor = "6.0.0"
 appfunctions = "1.0.0-beta01"
 
 # test
@@ -90,7 +90,7 @@ ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation",
 ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 aboutlibraries-m3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "about-libraries" }
-material-kolor = { module = "com.materialkolor:material-kolor", version.ref = "material-kolor" }
+material-kolor-material3 = { module = "com.materialkolor:material-kolor-material3", version.ref = "material-kolor" }
 material-kolor-utilities = { module = "com.materialkolor:material-color-utilities", version.ref = "material-kolor" }
 shreyaspatil-capturable = "dev.shreyaspatil:capturable:3.0.1"
 dionsegijn-konfetti = "nl.dionsegijn:konfetti-compose:2.2.0"

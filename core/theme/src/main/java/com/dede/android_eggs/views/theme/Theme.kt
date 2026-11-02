@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import com.dede.android_eggs.views.theme.settings.ColorSourcePrefUtil
 import com.dede.android_eggs.views.theme.settings.ThemePrefUtil
-import com.materialkolor.dynamicColorScheme
+import com.materialkolor.material3.dynamicColorScheme
 
 private const val TAG = "Theme"
 
