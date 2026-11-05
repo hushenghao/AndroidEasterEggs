@@ -35,10 +35,10 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -54,7 +54,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
@@ -87,6 +86,32 @@ fun ExpandOptionsPref(
     },
     options: @Composable ColumnScope.() -> Unit
 ) {
+    val bringIntoViewRequester = remember { BringIntoViewRequester() }
+    val currentExpanded by rememberUpdatedState(expended)
+    var contentSize by remember { mutableStateOf(IntSize.Zero) }
+    // Track the previous value so only a collapse→expand transition scrolls;
+    // an initially expanded pref (restored state) must not scroll
+    var wasExpanded by remember { mutableStateOf(expended) }
+    val navBarBottom = WindowInsets.navigationBars.getBottom(LocalDensity.current)
+    LaunchedEffect(expended) {
+        if (expended && !wasExpanded) {
+            // Wait for the expand animation to settle, then scroll the
+            // options into view without touching the focus system
+            delay(300.milliseconds)
+            if (currentExpanded) {
+                // Request extra height equal to the navigation bar inset so
+                // the bottom options are not covered by the system bar
+                bringIntoViewRequester.bringIntoView(
+                    Rect(
+                        0f, 0f,
+                        contentSize.width.toFloat(),
+                        (contentSize.height + navBarBottom).toFloat()
+                    )
+                )
+            }
+        }
+        wasExpanded = expended
+    }
     SettingPref(
         modifier = modifier,
         leadingIcon = leadingIcon,
@@ -110,7 +135,9 @@ fun ExpandOptionsPref(
             Column(
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
-                    .padding(top = 4.dp, bottom = 10.dp),
+                    .padding(top = 4.dp, bottom = 10.dp)
+                    .onSizeChanged { contentSize = it }
+                    .bringIntoViewRequester(bringIntoViewRequester),
                 verticalArrangement = Arrangement.spacedBy(4.dp),
                 content = options
             )
@@ -131,11 +158,6 @@ fun ExpandOptionsPref(
     },
     options: @Composable ColumnScope.() -> Unit
 ) {
-    val bringIntoViewRequester = remember { BringIntoViewRequester() }
-    val coroutineScope = rememberCoroutineScope()
-    val currentExpanded by rememberUpdatedState(expanded)
-    var contentSize by remember { mutableStateOf(IntSize.Zero) }
-    val navBarBottom = WindowInsets.navigationBars.getBottom(LocalDensity.current)
     ExpandOptionsPref(
         modifier = modifier,
         expended = expanded,
@@ -143,38 +165,8 @@ fun ExpandOptionsPref(
         title = title,
         desc = desc,
         trailingContent = trailingContent,
-        onClick = onClick@{
-            val nextExpanded = !expanded
-            onExpandedChange(nextExpanded)
-
-            if (!nextExpanded) {
-                return@onClick
-            }
-            coroutineScope.launch {
-                // Wait for the expand animation to settle, then scroll the
-                // options into view without touching the focus system
-                delay(300.milliseconds)
-                if (currentExpanded) {
-                    // Request extra height equal to the navigation bar inset so
-                    // the bottom options are not covered by the system bar
-                    bringIntoViewRequester.bringIntoView(
-                        Rect(
-                            0f, 0f,
-                            contentSize.width.toFloat(),
-                            (contentSize.height + navBarBottom).toFloat()
-                        )
-                    )
-                }
-            }
-        },
-        options = {
-            Column(
-                modifier = Modifier
-                    .onSizeChanged { contentSize = it }
-                    .bringIntoViewRequester(bringIntoViewRequester),
-                content = options
-            )
-        },
+        onClick = { onExpandedChange(!expanded) },
+        options = options,
     )
 }
 
