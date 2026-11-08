@@ -59,6 +59,9 @@
     <string name="animator_disabled_alert_message">Animasi sistem telah dinonaktifkan. Beberapa fungsi mungkin tidak berfungsi dengan baik. Silakan buka \"Opsi Pengembang\" dan atur opsi \"Skala Durasi Animator\" untuk mengaktifkan animasi</string>
     <string name="action_goto_settings">Buka Pengaturan</string>
     <string name="action_dont_show_again">Jangan tampilkan lagi</string>
+    <string name="github_star_alert_title">Menikmati aplikasinya?</string>
+    <string name="github_star_alert_message">Aplikasi ini gratis dan open source. Jika Anda menyukai Easter Egg ini, beri star pada proyek ini di GitHub untuk membantu pertumbuhannya</string>
+    <string name="action_star_github">Beri star di GitHub</string>
     <string name="cat_editor">Cat editor</string>
     <string name="cat_editor_input_seed">Masukkan Benih Kucing</string>
     <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
@@ -78,4 +81,11 @@
     <string name="dialog_import_backup_title">Impor cadangan</string>
     <string name="dialog_import_backup_message">Tindakan ini akan menimpa semua data aplikasi saat ini, termasuk pengaturan, cats yang disimpan, dan konfigurasi widget. Tindakan ini tidak dapat dibatalkan. Apakah Anda yakin ingin melanjutkan?</string>
     <string name="action_confirm_import">Impor</string>
+    <string name="action_restore_defaults">Kembalikan pengaturan default</string>
+    <string name="action_restore_defaults_desc">Atur ulang semua pengaturan ke nilai defaultnya</string>
+    <string name="dialog_restore_defaults_title">Kembalikan pengaturan default</string>
+    <string name="dialog_restore_defaults_message">Ini akan mengatur ulang semua pengaturan, termasuk tema, ikon launcher, dan bahasa. Konfigurasi cats dan widget yang tersimpan tidak terpengaruh. Tindakan ini tidak dapat dibatalkan. Apakah Anda yakin ingin melanjutkan?</string>
+    <string name="action_confirm_restore_defaults">Reset</string>
+    <string name="toast_restore_defaults_success">Pengaturan dikembalikan ke pengaturan default. Aplikasi akan
+memulai ulang.</string>
 </resources>
