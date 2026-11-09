@@ -17,7 +17,7 @@ ktor = "3.6.1"
 nav3 = "1.2.0"
 haze-blur = "2.1.0"
 material-kolor = "6.0.0"
-appfunctions = "1.0.0-beta01"
+appfunctions = "1.0.0-rc01"
 
 # test
 androidx-junit = "1.3.0"
