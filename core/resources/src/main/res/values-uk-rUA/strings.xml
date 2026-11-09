@@ -59,6 +59,9 @@
     <string name="animator_disabled_alert_message">Через те, що системну анімацію вимкнено, деякі функції можуть працювати некоректно. Будь ласка, зайдіть у \"Для розробників\" та увімкніть опцію \"Тривалість анімації\", щоб активувати анімацію.</string>
     <string name="action_goto_settings">Відкрити налаштування</string>
     <string name="action_dont_show_again">Більше не показувати</string>
+    <string name="github_star_alert_title">Подобається додаток?</string>
+    <string name="github_star_alert_message">Цей додаток безкоштовний та з відкритим вихідним кодом. Якщо вам подобаються ці пасхальні яйця, позначте проєкт зірочкою на GitHub, щоб допомогти йому розвиватися.</string>
+    <string name="action_star_github">Зірка на GitHub</string>
     <string name="cat_editor">Редактор котів</string>
     <string name="cat_editor_input_seed">Введіть насіння кота</string>
     <string name="rocket_launcher_easter_egg_icons">Значки Великодніх Яєць</string>
