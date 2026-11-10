@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72">
+<g transform="translate(6,0) scale(3)">
+<path d="M4,1 h12 v6 h-12 z" fill="#A4C639" />
+<path d="M6.5,1 v1 M5,2.5 h1 M6,0.5 h-1.5 v4.5 M7,3.5 h1.5 v1.5 M11,3.5 h1.5 v1.5 M7,0.5 h6 M13.5,1 v1 M14,0.5 h1.5 v4.5 M14.5,2 v1" fill="none" stroke="#000000" stroke-width="1" />
+<path d="M7,4.5 h1 M11,4.5 h1" fill="none" stroke="#FFFFFF" stroke-width="1" />
+<path d="M0.5,8 v7 M1,15.5 h2.5 M19.5,8 v7 M19,15.5 h-2.5" fill="none" stroke="#000000" stroke-width="1" />
+<path d="M2,8 v7 M18,8 v7" fill="none" stroke="#A4C639" stroke-width="2" />
+<path d="M5.5,23 v-3 M8.5,23 v-3 M6,23.5 h2 M11.5,23 v-3 M14.5,23 v-3 M12,23.5 h2" fill="none" stroke="#000000" stroke-width="1" />
+<path d="M7,20 v3 M13,20 v3" fill="none" stroke="#A4C639" stroke-width="2" />
+<path d="M4,8 h12 v11.5 h-12 z" fill="#492700" />
+<path d="M1,7.5 h18 M3.5,5 v14 M16.5,5 v14 M4,19.5 h12" fill="none" stroke="#000000" stroke-width="1" />
+<path d="M6,9.5 h1 M10,9.5 h1 M8,11.5 h1 M6,13.5 h1 M10,13.5 h1 M8,15.5 h1 M6,17.5 h1 M10,17.5 h1" fill="none" stroke="#000000" stroke-width="1" />
+<path d="M14,8 v11" fill="none" stroke="#CACACA" stroke-width="2" />
+<path d="M14,9 v9" fill="none" stroke="#FFFFFF" stroke-width="2" />
+</g>
+</svg>

@@ -9,6 +9,7 @@ site.
 |--------------------------|---------|----------------------------------------------------------------|
 | `mkdocs.yml`             | yes     | Site config, navigation (replaces the wiki `_Sidebar.md`)      |
 | `build_pages.py`         | yes     | Converts the wiki submodule into the `pages-docs/` source tree |
+| `vector_to_svg.py`       | yes     | Exports VectorDrawable / adaptive-icon XML to SVG              |
 | `requirements.txt`       | yes     | Pinned `mkdocs-material` version                               |
 | `.gitignore`             | yes     | Ignores the two generated paths below, scoped to this directory|
 | `pages-docs/`            | no      | Generated MkDocs sources                                       |
@@ -22,7 +23,33 @@ site.
 - Absolute `github.com/.../wiki/<Page>` URLs are rewritten to site-relative links.
   Pages that are not published here (the retired `隐私协议.md` placeholder, `_Sidebar.md`)
   keep their GitHub URL, so links to them still reach the wiki.
-- The wiki submodule is read-only and never modified.
+- The wiki submodule is read-only for `build_pages.py`; the script never modifies it.
+  Wiki content changes are committed in the wiki repository and picked up through the
+  submodule pointer.
+
+## Version logos
+
+The version tables embed one logo per Android release from
+`assets/image/android-versions/`. The wiki pages use absolute
+`raw.githubusercontent.com` URLs, so the same markup renders on GitHub wiki and on the
+MkDocs site.
+
+Android drawables cannot be referenced directly from Markdown: browsers only render
+SVG, not VectorDrawable XML (`<vector android:pathData=...>`). Regenerate the exported
+files after a drawable change:
+
+```sh
+python3 script/pages/vector_to_svg.py SOURCE_XML OUTPUT_SVG [...]
+```
+
+The script resolves `@drawable/` and `@color/` references against the source module's
+`res` directory, including `aapt:attr` gradient fills and chained color aliases. An
+`<adaptive-icon>` source is composited from its background and foreground layers
+(background first, regardless of the XML order) and clipped to the 72dp launcher mask,
+so the exported icon matches what launchers display. Every export is normalized to a
+72×72 square canvas with the artwork centered, so the wiki tables use one fixed
+24×24 image size. Releases without a logo drawable fall back to the classic robot;
+Gingerbread, Honeycomb, Jelly Bean and KitKat are still legacy `.webp` bitmaps.
 
 ## Usage
 
