@@ -1,6 +1,6 @@
 # Marshmallow
 
-<img alt="Plat Logo" height="128" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Android_Marshmallow_logo.svg"/>
+<img alt="Plat Logo" height="128" src="../../assets/image/android-versions/android-6.0-marshmallow.svg"/>
 
 Android 6.0 , API 23
 
