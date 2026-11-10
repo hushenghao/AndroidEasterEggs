@@ -457,6 +457,8 @@ Path: `build-logic/convention/`
 - `assets/` — Design, image, and shapeshifter source assets.
 - `fastlane/` — Store metadata and release assets.
 - `wiki/` — Git submodule for documentation and localized wiki pages (remote: `git@github.com:hushenghao/AndroidEasterEggs.wiki.git`).
+- `.agents/skills/` — Project-level agent skill definitions, one `<name>/SKILL.md` per skill
+  (e.g. `sync-android-egg` referenced by the new-egg checklist above).
 
 ## Dependency Management
 
