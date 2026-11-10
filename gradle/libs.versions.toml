@@ -1,6 +1,9 @@
 [versions]
 kotlin = "2.4.21"
-ksp = "2.3.13"
+# 2.3.13 is a known-bad release: https://github.com/google/ksp/issues/3286
+# It drops library symbols/factories under concurrent KSP executions,
+# making :app:hiltJavaCompile* fail intermittently with [Dagger/MissingBinding].
+ksp = "2.3.12"
 agp = "9.5.1"
 # https://github.com/google/dagger
 hilt = "2.60.1"

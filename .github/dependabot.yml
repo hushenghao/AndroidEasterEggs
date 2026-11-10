@@ -19,6 +19,12 @@ updates:
         patterns:
           - "com.android.*"
           - "com.android.tools:sdk-common"
+    ignore:
+      # 2.3.13 is a known-bad release, see
+      # https://github.com/google/ksp/issues/3286. Drop this entry once a
+      # fixed release is out.
+      - dependency-name: "com.google.devtools.ksp"
+        versions: ["2.3.13"]
     commit-message:
       prefix: "build"
 
