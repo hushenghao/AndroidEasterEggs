@@ -74,12 +74,12 @@ Auto-injected dependencies (no explicit declaration needed in module build file)
 | buildTools  | 37.0.0 | `build-logic/convention/src/main/kotlin/Versions.kt`   |
 | Java        | 17     | `build-logic/convention/src/main/kotlin/Versions.kt`   |
 | Kotlin      | 2.4.21 | `gradle/libs.versions.toml`                             |
-| AGP         | 9.5.0  | `gradle/libs.versions.toml`                             |
+| AGP         | 9.5.1  | `gradle/libs.versions.toml`                             |
 | Hilt        | 2.60.1 | `gradle/libs.versions.toml`                             |
 | Compose BOM | 2026.09.00 | `gradle/libs.versions.toml`                         |
 | applicationId | `com.dede.android_eggs` | `app/build.gradle.kts`                      |
-| versionName | 5.5.1  | `app/build.gradle.kts`                                  |
-| versionCode | 82     | `app/build.gradle.kts`                                  |
+| versionName | 5.6.1  | `app/build.gradle.kts`                                  |
+| versionCode | 83     | `app/build.gradle.kts`                                  |
 
 ## Build System
 
