@@ -59,6 +59,9 @@
     <string name="animator_disabled_alert_message">由於系統動畫被停用，某些功能可能無法正常使用。請前往「開發人員選項」並啟用「動畫影片長度比例」選項來啟動動畫</string>
     <string name="action_goto_settings">前往設定</string>
     <string name="action_dont_show_again">不再顯示</string>
+    <string name="github_star_alert_title">喜歡這個應用程式嗎？</string>
+    <string name="github_star_alert_message">這個應用程式是免費且開放原始碼的。如果你喜歡這些彩蛋，請在 GitHub 上給專案按星星，幫助它成長</string>
+    <string name="action_star_github">在 GitHub 上按星星</string>
     <string name="cat_editor">Cat 編輯器</string>
     <string name="cat_editor_input_seed">輸入貓咪種子</string>
     <string name="rocket_launcher_easter_egg_icons">Easter Egg 圖示</string>
