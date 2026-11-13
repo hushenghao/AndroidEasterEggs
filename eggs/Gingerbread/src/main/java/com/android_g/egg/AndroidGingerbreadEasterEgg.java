@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
-import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.TimelineEvent;
 
 import java.util.List;
@@ -24,14 +23,13 @@ import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
-public class AndroidGingerbreadEasterEgg implements EasterEggProvider {
+public class AndroidGingerbreadEasterEgg {
 
     @NonNull
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public BaseEasterEgg provideEasterEgg() {
+    public static BaseEasterEgg provideEasterEgg() {
         return new EasterEgg(
                 R.drawable.g_android_logo,
                 R.string.g_egg_name,
@@ -50,8 +48,7 @@ public class AndroidGingerbreadEasterEgg implements EasterEggProvider {
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public List<TimelineEvent> provideTimelineEvents() {
+    public static List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
                         Build.VERSION_CODES_FULL.GINGERBREAD_MR1,

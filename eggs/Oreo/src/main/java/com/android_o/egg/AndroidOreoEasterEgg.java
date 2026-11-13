@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggGroup;
-import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.TimelineEvent;
 
 import java.util.List;
@@ -24,14 +23,13 @@ import dagger.multibindings.IntoSet;
 
 @Module
 @InstallIn(SingletonComponent.class)
-public class AndroidOreoEasterEgg implements EasterEggProvider {
+public class AndroidOreoEasterEgg {
 
     @NonNull
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public BaseEasterEgg provideEasterEgg() {
+    public static BaseEasterEgg provideEasterEgg() {
         return new EasterEggGroup(
                 new EasterEgg(
                         R.drawable.o_android_logo,
@@ -64,8 +62,7 @@ public class AndroidOreoEasterEgg implements EasterEggProvider {
     @Provides
     @Singleton
     @NonNull
-    @Override
-    public List<TimelineEvent> provideTimelineEvents() {
+    public static List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
                         Build.VERSION_CODES_FULL.O_MR1,

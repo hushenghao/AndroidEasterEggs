@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggGroup;
-import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.EasterEggProviderKt;
 import com.dede.basic.provider.TimelineEvent;
 
@@ -26,14 +25,13 @@ import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
-public class AndroidIceCreamSandwichEasterEgg implements EasterEggProvider {
+public class AndroidIceCreamSandwichEasterEgg {
 
     @NonNull
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public BaseEasterEgg provideEasterEgg() {
+    public static BaseEasterEgg provideEasterEgg() {
         return new EasterEggGroup(
                 new EasterEgg(
                         R.drawable.i_platlogo_rectangle,
@@ -69,8 +67,7 @@ public class AndroidIceCreamSandwichEasterEgg implements EasterEggProvider {
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public List<TimelineEvent> provideTimelineEvents() {
+    public static List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
                         Build.VERSION_CODES_FULL.ICE_CREAM_SANDWICH_MR1,

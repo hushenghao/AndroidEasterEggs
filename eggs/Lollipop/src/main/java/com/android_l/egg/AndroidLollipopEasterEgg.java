@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggGroup;
-import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.EasterEggProviderKt;
 import com.dede.basic.provider.SnapshotProvider;
 import com.dede.basic.provider.TimelineEvent;
@@ -27,14 +26,13 @@ import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
-public class AndroidLollipopEasterEgg implements EasterEggProvider {
+public class AndroidLollipopEasterEgg {
 
     @NonNull
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public BaseEasterEgg provideEasterEgg() {
+    public static BaseEasterEgg provideEasterEgg() {
         return new EasterEggGroup(
                 new EasterEgg(
                         R.drawable.l_android_logo,
@@ -67,8 +65,7 @@ public class AndroidLollipopEasterEgg implements EasterEggProvider {
     @Provides
     @Singleton
     @NonNull
-    @Override
-    public List<TimelineEvent> provideTimelineEvents() {
+    public static List<TimelineEvent> provideTimelineEvents() {
         TimelineEvent e2 = timelineEvent(
                 Build.VERSION_CODES_FULL.LOLLIPOP,
                 "L.\nReleased publicly as Android 5.0 in November 2014."

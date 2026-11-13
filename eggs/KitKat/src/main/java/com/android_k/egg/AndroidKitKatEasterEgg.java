@@ -9,10 +9,9 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 
 import com.dede.basic.provider.BaseEasterEgg;
-import com.dede.basic.provider.ComponentProvider;
+import com.dede.basic.provider.ComponentProvider.Component;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggGroup;
-import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.SnapshotProvider;
 import com.dede.basic.provider.TimelineEvent;
 
@@ -29,14 +28,13 @@ import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
-public class AndroidKitKatEasterEgg implements EasterEggProvider, ComponentProvider {
+public class AndroidKitKatEasterEgg {
 
     @NonNull
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public BaseEasterEgg provideEasterEgg() {
+    public static BaseEasterEgg provideEasterEgg() {
         return new EasterEggGroup(
                 new EasterEgg(
                         R.drawable.k_android_logo,
@@ -69,8 +67,7 @@ public class AndroidKitKatEasterEgg implements EasterEggProvider, ComponentProvi
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public Component provideComponent() {
+    public static Component provideComponent() {
         return new Component(
                 R.drawable.k_platlogo,
                 R.string.k_dessert_case,
@@ -100,8 +97,7 @@ public class AndroidKitKatEasterEgg implements EasterEggProvider, ComponentProvi
     @Provides
     @Singleton
     @NonNull
-    @Override
-    public List<TimelineEvent> provideTimelineEvents() {
+    public static List<TimelineEvent> provideTimelineEvents() {
         TimelineEvent e2 = timelineEvent(
                 Build.VERSION_CODES_FULL.KITKAT,
                 "K.\nReleased publicly as Android 4.4 in October 2013."

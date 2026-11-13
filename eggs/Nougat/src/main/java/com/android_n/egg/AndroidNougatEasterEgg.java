@@ -13,9 +13,9 @@ import androidx.annotation.RequiresApi;
 import com.android_n.egg.neko.NekoTile;
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.ComponentProvider;
+import com.dede.basic.provider.ComponentProvider.Component;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggGroup;
-import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.SnapshotProvider;
 import com.dede.basic.provider.TimelineEvent;
 
@@ -32,14 +32,13 @@ import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
-public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvider {
+public class AndroidNougatEasterEgg {
 
     @NonNull
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public BaseEasterEgg provideEasterEgg() {
+    public static BaseEasterEgg provideEasterEgg() {
         return new EasterEggGroup(
                 new EasterEgg(
                         R.drawable.n_android_logo,
@@ -72,8 +71,7 @@ public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvi
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public Component provideComponent() {
+    public static Component provideComponent() {
         return new ComponentProvider.Component(
                 R.drawable.n_stat_tint_icon,
                 R.string.n_default_tile_name,
@@ -107,8 +105,7 @@ public class AndroidNougatEasterEgg implements EasterEggProvider, ComponentProvi
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public List<TimelineEvent> provideTimelineEvents() {
+    public static List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
                         Build.VERSION_CODES_FULL.N_MR1,

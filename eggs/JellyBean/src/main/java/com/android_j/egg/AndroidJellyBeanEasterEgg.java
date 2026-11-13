@@ -9,9 +9,8 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 
 import com.dede.basic.provider.BaseEasterEgg;
-import com.dede.basic.provider.ComponentProvider;
+import com.dede.basic.provider.ComponentProvider.Component;
 import com.dede.basic.provider.EasterEgg;
-import com.dede.basic.provider.EasterEggProvider;
 import com.dede.basic.provider.TimelineEvent;
 
 import java.util.List;
@@ -27,14 +26,13 @@ import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
-public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentProvider {
+public class AndroidJellyBeanEasterEgg {
 
     @NonNull
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public BaseEasterEgg provideEasterEgg() {
+    public static BaseEasterEgg provideEasterEgg() {
         return new EasterEgg(
                 R.drawable.j_android_logo,
                 R.string.j_egg_name,
@@ -53,8 +51,7 @@ public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentPr
     @IntoSet
     @Provides
     @Singleton
-    @Override
-    public Component provideComponent() {
+    public static Component provideComponent() {
         return new Component(
                 R.drawable.j_redbean2,
                 R.string.j_jelly_bean_dream_name,
@@ -84,8 +81,7 @@ public class AndroidJellyBeanEasterEgg implements EasterEggProvider, ComponentPr
     @Provides
     @Singleton
     @NonNull
-    @Override
-    public List<TimelineEvent> provideTimelineEvents() {
+    public static List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
                         Build.VERSION_CODES_FULL.JELLY_BEAN_MR2,
