@@ -50,6 +50,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
@@ -67,6 +68,7 @@ import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.PredictiveBackProgressHandler.predictiveBackShrink
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.ui.composes.predictiveBackProgressEventState
+import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggHelp.ApiLevelFormatter
 import com.dede.android_eggs.views.main.util.EasterEggHelp.VersionFormatter
 import com.dede.basic.provider.EasterEgg
@@ -82,13 +84,13 @@ import com.dede.android_eggs.resources.R as StringR
 
 @Composable
 fun SnapshotPref() {
-    val overlayManager = LocalOverlayManager.current
+    val overlayManager = if (LocalInspectionMode.current) null else LocalOverlayManager.current
     SettingPref(
         title = stringResource(StringR.string.label_snapshot_preview),
         leadingIcon = Icons.Rounded.ViewCarousel,
         trailingContent = Icons.AutoMirrored.Rounded.NavigateNext,
         onClick = {
-            overlayManager.show(OverlayRoute.SnapshotPreview)
+            overlayManager?.show(OverlayRoute.SnapshotPreview)
         }
     )
 }
@@ -198,17 +200,32 @@ class SnapshotViewModel @Inject constructor(
     val easterEggs: List<@JvmSuppressWildcards EasterEgg>
 ) : ViewModel()
 
-@Preview
 @Composable
 fun SnapshotCarousel(
     modifier: Modifier = Modifier,
-    viewModel: SnapshotViewModel = hiltViewModel(),
     showEasterEggName: Boolean = true,
     carouselFeedback: Boolean = true,
 ) {
-    val pairList = remember(viewModel) {
+    val viewModel: SnapshotViewModel = hiltViewModel()
+    SnapshotCarouselContent(
+        modifier = modifier,
+        easterEggs = viewModel.easterEggs,
+        showEasterEggName = showEasterEggName,
+        carouselFeedback = carouselFeedback,
+    )
+}
+
+@Preview
+@Composable
+fun SnapshotCarouselContent(
+    modifier: Modifier = Modifier,
+    easterEggs: List<EasterEgg> = EasterEggHelp.previewEasterEggs(),
+    showEasterEggName: Boolean = true,
+    carouselFeedback: Boolean = true,
+) {
+    val pairList = remember(easterEggs) {
         buildList {
-            for (egg in viewModel.easterEggs) {
+            for (egg in easterEggs) {
                 val snapshot = egg.provideSnapshotProvider() ?: continue
                 add(snapshot to egg)
             }

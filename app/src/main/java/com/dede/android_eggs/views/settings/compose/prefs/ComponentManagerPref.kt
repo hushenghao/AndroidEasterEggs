@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
@@ -26,12 +27,20 @@ import javax.inject.Inject
 import com.dede.android_eggs.resources.R as StringsR
 
 @Composable
-fun ComponentManagerPref(viewModel: ComponentManagerViewModel = hiltViewModel()) {
+fun ComponentManagerPref() {
     val componentList = if (LocalInspectionMode.current) {
         emptyList()
     } else {
-        viewModel.componentList
+        hiltViewModel<ComponentManagerViewModel>().componentList
     }
+    ComponentManagerPrefContent(componentList)
+}
+
+@Preview
+@Composable
+internal fun ComponentManagerPrefContent(
+    componentList: List<ComponentProvider.Component> = emptyList(),
+) {
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.AppRegistration,
         title = stringResource(id = StringsR.string.label_component_manager),
