@@ -3,30 +3,16 @@ package com.dede.android_eggs.views.main.util
 import android.util.SparseIntArray
 import androidx.annotation.DrawableRes
 import androidx.core.util.set
-import com.dede.basic.globalContext
 import com.dede.basic.provider.EasterEgg
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.components.SingletonComponent
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object AndroidLogoMatcher {
-
-    @EntryPoint
-    @InstallIn(SingletonComponent::class)
-    interface PureEasterEggListEntryPoint {
-        fun pureEasterEggList(): List<@JvmSuppressWildcards EasterEgg>
-    }
+@Singleton
+class AndroidLogoMatcher @Inject constructor(
+    private val easterEggs: List<@JvmSuppressWildcards EasterEgg>,
+) {
 
     private val cache = SparseIntArray()
-
-    private val easterEggs: List<EasterEgg>
-
-    init {
-        val entryPoint = EntryPointAccessors
-            .fromApplication(globalContext, PureEasterEggListEntryPoint::class.java)
-        easterEggs = entryPoint.pureEasterEggList()
-    }
 
     fun findEasterEggByFullApiLevel(fullApiLevel: Int): EasterEgg? {
         return easterEggs.find { fullApiLevel in it.fullApiLevelRange }

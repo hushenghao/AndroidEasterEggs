@@ -43,6 +43,7 @@ import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
 import com.dede.android_eggs.ui.composes.ReversePermanentNavigationDrawer
 import com.dede.android_eggs.util.OrientationAngleSensor
 import com.dede.android_eggs.util.compose.only
+import com.dede.android_eggs.views.main.util.AndroidReleaseDateMatcher
 import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
 import com.dede.android_eggs.views.settings.SettingsContent
 import com.dede.android_eggs.views.settings.SettingsScreen
@@ -76,7 +77,10 @@ object EasterEggsScreen : EasterEggsDestination, EasterEggsDestination.Provider 
 @HiltViewModel
 class EasterEggViewModel @Inject constructor(
     val easterEggs: List<@JvmSuppressWildcards BaseEasterEgg>,
-) : ViewModel()
+    releaseDateMatcher: AndroidReleaseDateMatcher,
+) : ViewModel() {
+    val releaseDateLookup = releaseDateMatcher::findReleaseDateByFullApiLevel
+}
 
 @Composable
 fun EasterEggScreen(
@@ -154,6 +158,7 @@ private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel) {
         ) { contentPadding ->
             EasterEggList(
                 easterEggs = viewModel.easterEggs,
+                releaseDateLookup = viewModel.releaseDateLookup,
                 searchText = searchBarState.text,
                 contentPadding = contentPadding,
             )
@@ -195,6 +200,7 @@ private fun EggScreenScaffoldMedium(viewModel: EasterEggViewModel) {
         ) {
             EasterEggList(
                 easterEggs = viewModel.easterEggs,
+                releaseDateLookup = viewModel.releaseDateLookup,
                 searchText = searchBarState.text,
                 contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
             )
@@ -221,6 +227,7 @@ private fun EggScreenScaffoldExpanded(viewModel: EasterEggViewModel) {
         ) {
             EasterEggList(
                 easterEggs = viewModel.easterEggs,
+                releaseDateLookup = viewModel.releaseDateLookup,
                 searchText = searchBarState.text,
                 contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
             )

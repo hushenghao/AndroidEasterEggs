@@ -1,15 +1,7 @@
 package com.dede.android_eggs.navigation
 
-import android.content.Context
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
 import com.dede.android_eggs.local_provider.noLocalProvidedFor
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -47,22 +39,6 @@ class OverlayManager @Inject constructor() {
     }
 }
 
-@InstallIn(SingletonComponent::class)
-@EntryPoint
-interface OverlayManagerEntryPoint {
-    val overlayManager: OverlayManager
-}
-
 val LocalOverlayManager = compositionLocalOf<OverlayManager> {
     noLocalProvidedFor("LocalOverlayManager")
-}
-
-fun createOverlayManager(context: Context): OverlayManager {
-    return EntryPointAccessors.fromApplication<OverlayManagerEntryPoint>(context).overlayManager
-}
-
-@Composable
-fun rememberOverlayManager(): OverlayManager {
-    val context = LocalContext.current.applicationContext
-    return remember { createOverlayManager(context) }
 }

@@ -22,15 +22,15 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.NavDisplay
 import com.dede.android_eggs.composable.appbar.LocalOverlayHazeState
 import com.dede.android_eggs.local_provider.rememberCustomTabsUriHandler
+import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.EasterEggsDestination.EasterEggs
 import com.dede.android_eggs.navigation.LocalNavigator
 import com.dede.android_eggs.navigation.LocalOverlayManager
 import com.dede.android_eggs.navigation.Navigator.Companion.rememberNavigator
+import com.dede.android_eggs.navigation.OverlayContentProvider
+import com.dede.android_eggs.navigation.OverlayManager
 import com.dede.android_eggs.navigation.OverlayRoute
-import com.dede.android_eggs.navigation.rememberEasterEggsDestinations
 import com.dede.android_eggs.navigation.rememberNavigationState
-import com.dede.android_eggs.navigation.rememberOverlayContentProviders
-import com.dede.android_eggs.navigation.rememberOverlayManager
 import com.dede.android_eggs.navigation.toEntries
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiController
@@ -61,11 +61,13 @@ private fun popTransition(): ContentTransform {
 
 @Composable
 fun EasterEggsNavHost(
+    destinations: Set<@JvmSuppressWildcards EasterEggsDestination>,
+    overlayContentProviders: Set<@JvmSuppressWildcards OverlayContentProvider>,
+    overlayManager: OverlayManager,
     modifier: Modifier = Modifier,
 ) {
     val navigationState = rememberNavigationState(startRoute = EasterEggs)
     val navigator = rememberNavigator(navigationState)
-    val overlayManager = rememberOverlayManager()
     val konfettiController = rememberKonfettiController()
     val uriHandler = rememberCustomTabsUriHandler()
     // Sources everything the window draws, so a full screen overlay can blur the whole screen
@@ -83,9 +85,8 @@ fun EasterEggsNavHost(
         // navigation-3/basics): parameterized routes like CatEditor(seed) navigate with
         // instances that differ from dest.route, so the nav3 DSL's instance-keyed entry()
         // cannot match them and NavEntry(key) is built manually per resolved destination.
-        val navDestinations = rememberEasterEggsDestinations()
-        val entryProvider = remember(navDestinations) {
-            val destinationsByClass = navDestinations.associateBy { it.route::class }
+        val entryProvider = remember(destinations) {
+            val destinationsByClass = destinations.associateBy { it.route::class }
             val fallback: (NavKey) -> Nothing = { throw IllegalStateException("Unknown screen $it") }
             val lookup: (NavKey) -> NavEntry<NavKey> = { key ->
                 val destination = destinationsByClass[key::class] ?: fallback(key)
@@ -119,7 +120,6 @@ fun EasterEggsNavHost(
 
             LaunchOverlayFlow(overlayManager = overlayManager, navigator = navigator)
 
-            val overlayContentProviders = rememberOverlayContentProviders()
             OverlayHost(
                 overlayManager = overlayManager,
                 contentProviders = overlayContentProviders,

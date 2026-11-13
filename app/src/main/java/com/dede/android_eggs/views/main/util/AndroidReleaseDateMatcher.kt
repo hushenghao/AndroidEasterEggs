@@ -1,30 +1,16 @@
 package com.dede.android_eggs.views.main.util
 
-import com.dede.basic.globalContext
 import com.dede.basic.provider.TimelineEvent
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.components.SingletonComponent
 import java.util.Calendar
 import java.util.Date
 import java.util.TimeZone
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object AndroidReleaseDateMatcher {
-
-    @EntryPoint
-    @InstallIn(SingletonComponent::class)
-    interface TimelineEventListEntryPoint {
-        fun timelineEventList(): List<@JvmSuppressWildcards TimelineEvent>
-    }
-
-    private val timelines: List<TimelineEvent>
-
-    init {
-        val entryPoint = EntryPointAccessors
-            .fromApplication(globalContext, TimelineEventListEntryPoint::class.java)
-        timelines = entryPoint.timelineEventList()
-    }
+@Singleton
+class AndroidReleaseDateMatcher @Inject constructor(
+    private val timelines: List<@JvmSuppressWildcards TimelineEvent>,
+) {
 
     fun findReleaseDateByFullApiLevel(fullApiLevel: Int): Date? {
         val event = timelines.findLast { it.fullApiLevel == fullApiLevel } ?: return null

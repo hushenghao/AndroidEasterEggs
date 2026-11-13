@@ -41,7 +41,6 @@ import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.ui.composes.icons.rounded.BookmarkAddOutline
-import com.dede.android_eggs.views.main.util.AndroidReleaseDateMatcher
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.EggActionHelp
@@ -57,6 +56,7 @@ import com.dede.android_eggs.resources.R as StringsR
 fun EasterEggHighestItem(
     modifier: Modifier = Modifier,
     base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first(),
+    releaseDateLookup: (Int) -> Date? = { null },
 ) {
     val context = LocalContext.current
     val easterEggState = rememberEasterEggState(base)
@@ -80,7 +80,10 @@ fun EasterEggHighestItem(
             snapshot = snapshot
         )
 
-        EasterEggItemContent(eggState = easterEggState)
+        EasterEggItemContent(
+            eggState = easterEggState,
+            releaseDateLookup = releaseDateLookup,
+        )
     }
 }
 
@@ -89,6 +92,7 @@ fun EasterEggHighestItem(
 fun EasterEggSimpleItem(
     modifier: Modifier = Modifier,
     base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first(),
+    releaseDateLookup: (Int) -> Date? = { null },
 ) {
     val context = LocalContext.current
     val easterEggState = rememberEasterEggState(base)
@@ -102,7 +106,10 @@ fun EasterEggSimpleItem(
             EggActionHelp.launchEgg(context, egg)
         },
     ) {
-        EasterEggItemContent(eggState = easterEggState)
+        EasterEggItemContent(
+            eggState = easterEggState,
+            releaseDateLookup = releaseDateLookup,
+        )
     }
 }
 
@@ -153,6 +160,7 @@ private fun rememberEasterEggState(base: BaseEasterEgg): EasterEggState {
 private fun EasterEggItemContent(
     modifier: Modifier = Modifier,
     eggState: EasterEggState,
+    releaseDateLookup: (Int) -> Date?,
 ) {
     val context = LocalContext.current
     val egg = eggState.getEasterEgg()
@@ -229,7 +237,7 @@ private fun EasterEggItemContent(
                 val releaseDate = if (LocalInspectionMode.current) {
                     Date()
                 } else {
-                    AndroidReleaseDateMatcher.findReleaseDateByFullApiLevel(egg.fullApiLevel)
+                    releaseDateLookup(egg.fullApiLevel)
                 }
                 if (releaseDate != null) {
                     Chip(text = dateFormat.format(releaseDate))

@@ -22,6 +22,7 @@ import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.toApiLevelRange
+import java.util.Date
 
 /**
  * The searched egg list, a two-column grid on medium and expanded window widths,
@@ -34,6 +35,7 @@ fun EasterEggSearchList(
     modifier: Modifier = Modifier,
     easterEggs: List<EasterEgg> = EasterEggHelp.previewEasterEggs(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
+    releaseDateLookup: (Int) -> Date? = { null },
 ) {
     val isCompact = currentWindowWidthPane() == WindowWidthPane.COMPACT
     LazyVerticalGrid(
@@ -50,7 +52,11 @@ fun EasterEggSearchList(
             items = easterEggs,
             key = BaseEasterEgg::lazyItemKey,
         ) {
-            EasterEggSimpleItem(base = it, modifier = Modifier.animateItem())
+            EasterEggSimpleItem(
+                base = it,
+                modifier = Modifier.animateItem(),
+                releaseDateLookup = releaseDateLookup,
+            )
         }
     }
 }

@@ -3,6 +3,7 @@ package com.dede.android_eggs.flavor
 import android.app.Activity
 import androidx.activity.ComponentActivity
 import com.dede.android_eggs.FlavorFeaturesImpl
+import com.dede.android_eggs.navigation.OverlayManager
 
 interface FlavorFeatures {
 
@@ -15,7 +16,7 @@ interface FlavorFeatures {
         }
     }
 
-    fun promptForRating(activity: ComponentActivity)
+    fun promptForRating(activity: ComponentActivity, overlayManager: OverlayManager)
 
     suspend fun checkUpdate(activity: Activity): Result<LatestVersion>
 }

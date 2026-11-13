@@ -16,6 +16,9 @@ import androidx.core.net.toUri
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.dede.android_eggs.R
 import com.dede.android_eggs.flavor.FlavorFeatures
+import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.navigation.OverlayContentProvider
+import com.dede.android_eggs.navigation.OverlayManager
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.IntentHandler
 import com.dede.android_eggs.views.theme.EasterEggsTheme
@@ -35,6 +38,15 @@ open class EasterEggsActivity : AppCompatActivity() {
     lateinit var pureEasterEggs: List<@JvmSuppressWildcards EasterEgg>
 
     @Inject
+    lateinit var destinations: Set<@JvmSuppressWildcards EasterEggsDestination>
+
+    @Inject
+    lateinit var overlayContentProviders: Set<@JvmSuppressWildcards OverlayContentProvider>
+
+    @Inject
+    lateinit var overlayManager: OverlayManager
+
+    @Inject
     @ActivityScoped
     lateinit var intentHandler: IntentHandler
 
@@ -47,7 +59,11 @@ open class EasterEggsActivity : AppCompatActivity() {
 
         setContent {
             EasterEggsTheme {
-                EasterEggsNavHost()
+                EasterEggsNavHost(
+                    destinations = destinations,
+                    overlayContentProviders = overlayContentProviders,
+                    overlayManager = overlayManager,
+                )
             }
         }
 
@@ -55,7 +71,7 @@ open class EasterEggsActivity : AppCompatActivity() {
         EasterEggShortcutsHelp.updateShortcuts(this, pureEasterEggs)
 
         // call flavor features
-        FlavorFeatures.get().promptForRating(this)
+        FlavorFeatures.get().promptForRating(this, overlayManager)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN) {
             setHandoffEnabled(true, null)

@@ -94,7 +94,7 @@ fun TimelineListDialog(
             ) {
                 TimelineItem(
                     event = it,
-                    logoRes = AndroidLogoMatcher.findAndroidLogoByFullApiLevel(it.fullApiLevel),
+                    logoRes = viewModel.findAndroidLogoByFullApiLevel(it.fullApiLevel),
                     isNewGroup = it.isNewGroup(viewModel.timelines)
                 )
             }
@@ -269,8 +269,11 @@ private fun TimelineItem(
 }
 
 @HiltViewModel
-class TimelineViewModel @Inject constructor() : ViewModel() {
-
-    @Inject
-    lateinit var timelines: List<TimelineEvent>
+class TimelineViewModel @Inject constructor(
+    val timelines: List<@JvmSuppressWildcards TimelineEvent>,
+    private val androidLogoMatcher: AndroidLogoMatcher,
+) : ViewModel() {
+    fun findAndroidLogoByFullApiLevel(fullApiLevel: Int): Int {
+        return androidLogoMatcher.findAndroidLogoByFullApiLevel(fullApiLevel)
+    }
 }

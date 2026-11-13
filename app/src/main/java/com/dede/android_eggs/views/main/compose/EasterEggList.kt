@@ -28,6 +28,7 @@ import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
+import java.util.Date
 
 
 private const val HIGHEST_COUNT = 1
@@ -79,6 +80,7 @@ fun EasterEggList(
     easterEggs: List<BaseEasterEgg> = EasterEggHelp.previewEasterEggs(),
     searchText: String = "",
     contentPadding: PaddingValues = PaddingValues(0.dp),
+    releaseDateLookup: (Int) -> Date? = { null },
 ) {
     val context = LocalContext.current
     val pureEasterEggs = remember(easterEggs) {
@@ -109,18 +111,21 @@ fun EasterEggList(
                 EasterEggColumnList(
                     easterEggs = easterEggs,
                     contentPadding = listContentPadding,
+                    releaseDateLookup = releaseDateLookup,
                 )
             }
             EasterEggListType.GRID -> {
                 EasterEggGrid(
                     easterEggs = easterEggs,
                     contentPadding = listContentPadding,
+                    releaseDateLookup = releaseDateLookup,
                 )
             }
             EasterEggListType.SEARCH_RESULT -> {
                 EasterEggSearchList(
                     easterEggs = searchResults,
                     contentPadding = listContentPadding,
+                    releaseDateLookup = releaseDateLookup,
                 )
             }
             EasterEggListType.SEARCH_EMPTY -> SearchEmpty(contentPadding)
@@ -133,6 +138,7 @@ fun EasterEggList(
 private fun EasterEggColumnList(
     easterEggs: List<BaseEasterEgg>,
     contentPadding: PaddingValues,
+    releaseDateLookup: (Int) -> Date?,
 ) {
     LazyColumn(
         contentPadding = contentPadding,
@@ -144,7 +150,11 @@ private fun EasterEggColumnList(
             items = highestList,
             key = BaseEasterEgg::lazyItemKey,
         ) {
-            EasterEggHighestItem(base = it, modifier = Modifier.animateItem())
+            EasterEggHighestItem(
+                base = it,
+                modifier = Modifier.animateItem(),
+                releaseDateLookup = releaseDateLookup,
+            )
         }
         item("wavy1") {
             ItemWavy()
@@ -153,7 +163,11 @@ private fun EasterEggColumnList(
             items = normalList,
             key = BaseEasterEgg::lazyItemKey,
         ) {
-            EasterEggSimpleItem(base = it, modifier = Modifier.animateItem())
+            EasterEggSimpleItem(
+                base = it,
+                modifier = Modifier.animateItem(),
+                releaseDateLookup = releaseDateLookup,
+            )
         }
         item("wavy2") {
             ItemWavy()
@@ -168,6 +182,7 @@ private fun EasterEggColumnList(
 private fun EasterEggGrid(
     easterEggs: List<BaseEasterEgg>,
     contentPadding: PaddingValues,
+    releaseDateLookup: (Int) -> Date?,
 ) {
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
@@ -181,13 +196,21 @@ private fun EasterEggGrid(
             items = highestList,
             key = BaseEasterEgg::lazyItemKey,
         ) {
-            EasterEggHighestItem(base = it, modifier = Modifier.animateItem())
+            EasterEggHighestItem(
+                base = it,
+                modifier = Modifier.animateItem(),
+                releaseDateLookup = releaseDateLookup,
+            )
         }
         items(
             items = normalList,
             key = BaseEasterEgg::lazyItemKey,
         ) {
-            EasterEggSimpleItem(base = it, modifier = Modifier.animateItem())
+            EasterEggSimpleItem(
+                base = it,
+                modifier = Modifier.animateItem(),
+                releaseDateLookup = releaseDateLookup,
+            )
         }
         item("wavy2", span = StaggeredGridItemSpan.FullLine) {
             ItemWavy()
