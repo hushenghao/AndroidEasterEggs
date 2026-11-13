@@ -5,17 +5,15 @@ import android.os.Build
 import android.util.SparseArray
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.core.util.forEach
 import androidx.core.util.putAll
 import com.dede.android_eggs.R
 import com.dede.android_eggs.inject.EasterEggModules
-import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
 import com.dede.basic.provider.toApiLevelRange
-import dagger.Module
-import dagger.Provides
 import com.dede.android_eggs.resources.R as StringsR
 
 
@@ -26,22 +24,11 @@ object EasterEggHelp {
         if (!LocalInspectionMode.current) {
             throw IllegalStateException("Only call from Inspection Mode")
         }
-        val module = EasterEggModules::class.java.getAnnotation(Module::class.java)
-            ?: throw IllegalStateException("EasterEggModules is empty")
-        val baseEasterEggs = module.includes.flatMap { moduleClass ->
-            val instance = try {
-                moduleClass.java.getField("INSTANCE").get(null)
-            } catch (e: Exception) {
-                moduleClass.java.getConstructor().newInstance()
-            }
-            moduleClass.java.declaredMethods
-                .filter {
-                    it.isAnnotationPresent(Provides::class.java) &&
-                            BaseEasterEgg::class.java.isAssignableFrom(it.returnType)
-                }
-                .map { it.invoke(instance) as BaseEasterEgg }
+        return remember {
+            EasterEggModules.providePureEasterEggList(
+                EasterEggPreviewFactoryRegistry.createBaseEasterEggs()
+            )
         }
-        return EasterEggModules.providePureEasterEggList(baseEasterEggs)
     }
 
     class VersionFormatter private constructor(
