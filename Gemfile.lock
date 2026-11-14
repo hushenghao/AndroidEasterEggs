@@ -117,7 +117,7 @@ GEM
       xcodeproj (>= 1.13.0, < 2.0.0)
       xcpretty (~> 0.4.1)
       xcpretty-travis-formatter (>= 0.0.3, < 2.0.0)
-    fastlane-plugin-pgyer (0.4.0)
+    fastlane-plugin-pgyer (0.5.0)
       faraday-multipart (~> 1.0)
     fastlane-sirp (1.1.0)
     gh_inspector (1.1.3)
