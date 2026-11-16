@@ -12,29 +12,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@Module(
-    includes = [
-        AndroidCinnamonBunEasterEgg::class,
-        AndroidBaklavaEasterEgg::class,
-        AndroidVEasterEgg::class,
-        AndroidUEasterEgg::class,
-        AndroidTEasterEgg::class,
-        AndroidSEasterEgg::class,
-        AndroidREasterEgg::class,
-        AndroidQEasterEgg::class,
-        AndroidPieEasterEgg::class,
-        AndroidOreoEasterEgg::class,
-        AndroidNougatEasterEgg::class,
-        AndroidMarshmallowEasterEgg::class,
-        AndroidLollipopEasterEgg::class,
-        AndroidKitKatEasterEgg::class,
-        AndroidJellyBeanEasterEgg::class,
-        AndroidIceCreamSandwichEasterEgg::class,
-        AndroidHoneycombEasterEgg::class,
-        AndroidGingerbreadEasterEgg::class,
-        AndroidBaseEasterEgg::class,
-    ],
-)
+@Module
 @InstallIn(SingletonComponent::class)
 object EasterEggModules {
 
@@ -70,17 +48,7 @@ object EasterEggModules {
 
 }
 
-@Module(
-    includes = [
-        AndroidVEasterEgg::class,
-        AndroidTEasterEgg::class,
-        AndroidSEasterEgg::class,
-        AndroidREasterEgg::class,
-        AndroidNougatEasterEgg::class,
-        AndroidKitKatEasterEgg::class,
-        AndroidJellyBeanEasterEgg::class,
-    ],
-)
+@Module
 @InstallIn(SingletonComponent::class)
 object EasterEggComponentModules {
 
