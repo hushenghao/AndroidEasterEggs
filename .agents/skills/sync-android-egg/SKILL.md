@@ -1,6 +1,6 @@
 ---
 name: sync-android-egg
-description: Use ONLY when syncing a new Android version Easter egg from AOSP source. Covers fetching PlatLogoActivity and landroid game code from android.googlesource.com, adapting package names, adding minSdk compatibility guards, updating manifests, registering with Hilt/DI, and handling permission requests. Triggered by phrases like "sync android 18 egg", "add new android easter egg", or "基于android XX源码同步彩蛋".
+description: Use ONLY when syncing a new Android version Easter egg from AOSP source. Covers fetching PlatLogoActivity and landroid game code from android.googlesource.com, adapting package names, adding minSdk compatibility guards, updating manifests, registering with Hilt/DI, and handling permission requests. Triggered by phrases like "sync android 17 egg", "add new android easter egg", or "基于android XX源码同步彩蛋".
 ---
 
 # Sync Android Easter Egg from AOSP
@@ -10,15 +10,16 @@ description: Use ONLY when syncing a new Android version Easter egg from AOSP so
 This skill documents the end-to-end workflow for syncing a new Android platform
 Easter egg from AOSP source into this project. The goal is to produce a module
 under `eggs/<VersionName>/` that matches the style of existing modules like
-`eggs/Baklava`.
+`eggs/CinnamonBun`.
 
-**Always copy or read an existing recent egg module (e.g. `eggs/Baklava` or
-`eggs/VanillaIceCream`) and mimic its package structure, resource naming, and
-Compose/Hilt wiring. Do not invent new conventions.**
+**Always copy or read the most recent egg module (`eggs/CinnamonBun`, Android 17,
+API 37 — `eggs/Baklava` is the previous one) and mimic its package structure,
+resource naming, and Compose/Hilt wiring. Do not invent new conventions.**
 
 ## minSdk Compatibility (CRITICAL)
 
-The project's **minSdk is 23** (Android 6.0 Marshmallow). All AOSP upstream
+The project's **minSdk is 24** (Android 7.0 Nougat, see
+`build-logic/convention/src/main/kotlin/Versions.kt`). All AOSP upstream
 code targets the current platform API level and contains **no compatibility
 guards**. Every file synced from upstream MUST be checked against the API
 reference below.
@@ -62,7 +63,7 @@ contain new features or logic changes. Follow this process:
 
 1. Fetch the upstream version as part of Phase 2.1.
 2. Compare it against the most recent existing egg module's
-   `UniverseProgressNotifier.kt` (e.g. `eggs/Baklava`):
+   `UniverseProgressNotifier.kt` (e.g. `eggs/CinnamonBun`):
    ```sh
    diff eggs/<ExistingEgg>/.../UniverseProgressNotifier.kt eggs/<NewEgg>/.../UniverseProgressNotifier.kt
    ```
@@ -82,8 +83,14 @@ contain new features or logic changes. Follow this process:
 1. Identify the **Android version name** (e.g. CinnamonBun), **API level**,
    **AOSP branch name** (e.g. `android17-release`).
 
-2. Decide on a **module namespace** (`com.android_<lowercamel>_egg`), **resource
-   prefix** (`<lowercamel>_`), and **setting key** (`egg_mode_<lowercamel>`).
+2. Decide on a **module namespace**, **resource prefix**, and **setting key**.
+   Follow the most recent egg module's pattern — naming has varied by era:
+   - Single-letter versions use the letter: `com.android_u` / `com.android_v`, prefix `u_` / `v_`
+   - Dessert-name versions use the full lowercase name: `com.android_baklava` /
+     `com.android_cinnamon_bun`, prefix `baklava_` / `cinnamon_bun_` (multi-word
+     names joined with `_`)
+   - Setting key: `egg_mode_<name>` (e.g. `egg_mode_cinnamon_bun`, see
+     `PlatLogoActivity.EGG_UNLOCK_SETTING`)
 
 3. Confirm the branch exists on
    `https://android.googlesource.com/platform/frameworks/base/+/refs/heads/<branch>/`
@@ -188,7 +195,10 @@ Known historical subdirectories (for reference):
 
 4. Replace `getDessertCode()` body with delegation to `com.dede.basic.utils.DessertUtils.getDessertCode()`
 
-5. Copy `UniverseProgressNotifier.kt` from the most recent existing egg (not upstream) to preserve compatibility guards for minSdk 23
+5. Keep the existing egg module's `UniverseProgressNotifier.kt` (with its
+   compatibility guards for minSdk 24) unless upstream has meaningful new logic
+   — port new logic into the guarded version instead of replacing it. See the
+   [Critical file](#critical-file-universeprogressnotifierkt) section above.
 
 ### 2.2 Sync other new content (if discovered)
 
@@ -215,7 +225,7 @@ For any subdirectory found in step 2.0 that is **not** `landroid/` and is
 
 ## Phase 3: Add support Java files
 
-Copy from the most recent existing egg (e.g. `eggs/Baklava`) and adapt:
+Copy from the most recent existing egg (e.g. `eggs/CinnamonBun`) and adapt:
 
 1. **`flags/Flags.java`** — package `com.android_<name>_egg.flags`, always returns `true`
 2. **`ComponentActivationActivity.java`** — enables DreamUniverse after egg unlock
@@ -230,14 +240,25 @@ Copy from the most recent existing egg (e.g. `eggs/Baklava`) and adapt:
    ```
    Save as `res/drawable-nodpi/<prefix>_platlogo.xml`
 
-2. Copy planet/spacecraft icon drawables from the most recent existing egg,
-   renaming the prefix:
+2. Copy planet/spacecraft icon drawables from the most recent existing egg
+   (e.g. `eggs/CinnamonBun`), renaming the prefix:
    ```
    ic_planet_large, ic_planet_medium, ic_planet_small, ic_planet_tiny,
    ic_spacecraft, ic_spacecraft_filled, ic_spacecraft_rotated
    ```
 
-3. **Fetch the upstream `landroid_strings.xml` from the target branch** (do NOT
+3. Copy the egg's own launcher-style icon set (used in the app's egg list,
+   component list and timeline), renaming the prefix:
+   ```
+   drawable/<prefix>_android<N>_patch_adaptive.xml
+   drawable-v26/<prefix>_android<N>_patch_adaptive.xml
+   drawable/<prefix>_android<N>_patch_adaptive_foreground.xml
+   values/<prefix>_android<N>_patch_adaptive_background.xml
+   ```
+   These are project-made (not fetched from AOSP). Update `<N>` to the new
+   version number and the icon artwork itself if the release has a new logo.
+
+4. **Fetch the upstream `landroid_strings.xml` from the target branch** (do NOT
    copy it from an existing egg module) and add the resource prefix:
    ```sh
    curl -sL "https://android.googlesource.com/platform/frameworks/base/+/<BRANCH>/packages/EasterEgg/res/values/landroid_strings.xml?format=TEXT" \
@@ -253,18 +274,19 @@ Copy from the most recent existing egg (e.g. `eggs/Baklava`) and adapt:
    SHIP SENSORS", ~28 entries) because its strings were copied from Baklava.
 
    **IMPORTANT**: Remove any duplicate string (e.g. `<prefix>_egg_name`,
-   historical `u_egg_name`/`v_egg_name` leftovers) that already exists in
-   `res/values/strings.xml`.
+   historical `u_egg_name`/`v_egg_name`/`baklava_egg_name` leftovers) that
+   already exists in `res/values/strings.xml`.
 
-4. Create `res/values/themes.xml` with `<prefix>_Theme.Landroid` style.
+5. Create `res/values/themes.xml` with `<prefix>_Theme.Landroid` style.
 
-5. Create `res/xml/<prefix>_landroid_dream.xml` referencing `@drawable/<prefix>_platlogo`.
+6. Create `res/xml/<prefix>_landroid_dream.xml` referencing `@drawable/<prefix>_platlogo`.
 
 ---
 
 ## Phase 5: AndroidManifest.xml
 
-Following the Baklava module pattern, declare:
+Follow the latest egg module's manifest (currently `eggs/CinnamonBun`). It
+declares:
 
 ```xml
 <uses-permission android:name="android.permission.VIBRATE"/>
@@ -275,6 +297,12 @@ Following the Baklava module pattern, declare:
 <service android:name=".landroid.DreamUniverse" android:enabled="false" ... />
 <activity android:name=".landroid.MainActivity" ... />
 ```
+
+The `DreamUniverse` service needs the daydream wiring to be registered as a
+screensaver (`BIND_DREAM_SERVICE` intent filter + `android.service.dream`
+meta-data pointing at `@xml/<prefix>_landroid_dream`), and `PlatLogoActivity`
+uses `enableOnBackInvokedCallback="true"` with `tools:targetApi="33"`. Copy the
+exact attributes from the latest module rather than re-inventing them.
 
 ---
 
@@ -287,6 +315,12 @@ object implementing both `EasterEggProvider` and `ComponentProvider`.
 - `provideComponent()`: provide enable/disable logic for `DreamUniverse`
 - `provideTimelineEvents()`: add release timeline entries
 - `SnapshotProvider`: create a preview using `Starfield` + plat logo
+
+> **Forward-compat note**: the `kmp/migration` branch replaces the Hilt module
+> with a framework-free `EggContributor` interface (`object ... : EggContributor`
+> with `override val eggs` / `override val components`). If that has been merged
+> to `main`, copy the registration pattern from the latest egg module instead
+> of the Hilt wiring described here.
 
 ---
 
@@ -311,7 +345,8 @@ If runtime permissions are declared:
    ```
 
 2. Add the new `MainActivity` class to the `pagers` list in
-   `core/activity-actions/src/main/java/com/dede/android_eggs/util/actions/RequestNotificationPermissionAction.kt`:
+   `core/activity-actions/src/main/java/com/dede/android_eggs/util/actions/RequestNotificationPermissionAction.kt`
+   (newest egg first — the list is ordered newest to oldest):
    ```kotlin
    com.android_<name>_egg.landroid.MainActivity::class, // auto pilot
    ```
@@ -342,6 +377,22 @@ startActivity(eggActivity);
 ./gradlew :eggs:<VersionName>:compileDebugJavaWithJavac
 ./gradlew :core:activity-actions:compileDebugKotlin
 ```
+
+Before compiling, create the module's `lint-baseline.xml` (required by
+`easter.eggs.compose.library`, which configures it as the lint baseline). The
+file format matches the neighboring egg modules (e.g. `eggs/Baklava/lint-baseline.xml`):
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 8.10.1" type="baseline" client="gradle" dependencies="false" name="AGP (8.10.1)" variant="all" version="8.10.1">
+</issues>
+```
+
+Copy the header from the latest egg module and leave the issue list empty —
+run `:eggs:<VersionName>:lintDebug` once to populate it. Do **not** use
+`lintDebug` as the first verification command on a module without the file:
+AGP creates an empty baseline and fails that run (pre-existing AGP behavior,
+not a regression).
 
 Common errors:
 - **Duplicate resources**: remove duplicates from `landroid_strings.xml`
@@ -453,11 +504,12 @@ if (Build.VERSION.SDK_INT_FULL >= Build.VERSION_CODES_FULL.BAKLAVA_1) {
 ```
 eggs/<VersionName>/
 ├── build.gradle.kts                              # plugin: easter.eggs.compose.library
+├── lint-baseline.xml                             # required by the convention plugin
 ├── src/main/AndroidManifest.xml                  # permissions + components
 ├── src/main/java/com/android_<name>_egg/
 │   ├── PlatLogoActivity.java                     # splash / starfield + Heptadecagram
 │   ├── ComponentActivationActivity.java          # enables unlockable components
-│   ├── Android<Name>EasterEgg.kt                 # Hilt registration
+│   ├── Android<Name>EasterEgg.kt                 # Hilt registration (see Phase 6)
 │   ├── flags/Flags.java                          # feature flag (always true)
 │   └── landroid/                                 # space exploration game
 │       ├── MainActivity.kt
@@ -471,8 +523,11 @@ eggs/<VersionName>/
 │   └── <other>/                                  # any new content discovered in Phase 2.0
 └── src/main/res/
     ├── drawable-nodpi/<prefix>_platlogo.xml
+    ├── drawable/<prefix>_android<N>_patch_adaptive*.xml   # egg list icon set
+    ├── drawable-v26/<prefix>_android<N>_patch_adaptive.xml
     ├── drawable/<prefix>_ic_planet_*.xml         # (if landroid present)
     ├── drawable/<prefix>_ic_spacecraft*.xml      # (if landroid present)
+    ├── values/<prefix>_android<N>_patch_adaptive_background.xml
     ├── values/landroid_strings.xml               # (if landroid present)
     ├── values/strings.xml
     ├── values/themes.xml
