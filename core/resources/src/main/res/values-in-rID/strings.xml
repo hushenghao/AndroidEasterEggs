@@ -18,6 +18,20 @@
     <string name="label_contact_me">Hubungi saya</string>
     <string name="label_email_title">Email</string>
     <string name="label_snapshot_preview">Pratinjau cuplikan</string>
+    <string name="label_egg_stats">Statistik Easter egg</string>
+    <string name="label_egg_stats_desc">Riwayat bermain lokal untuk setiap Easter egg</string>
+    <string name="egg_stats_summary_format">%1$d dari %2$d egg dimainkan · total %3$d kali bermain</string>
+    <string name="egg_stats_sort_most_played">Paling sering dimainkan</string>
+    <string name="egg_stats_sort_recently_played">Baru-baru ini dimainkan</string>
+    <string name="egg_stats_first_opened">Pertama kali dibuka</string>
+    <string name="egg_stats_last_played">Terakhir dimainkan</string>
+    <string name="egg_stats_play_count">Jumlah bermain</string>
+    <string name="egg_stats_played_count">Dimainkan %d×</string>
+    <string name="egg_stats_never_played">Belum dimainkan</string>
+    <string name="egg_stats_clear">Hapus statistik</string>
+    <string name="egg_stats_clear_confirm_title">Hapus statistik?</string>
+    <string name="egg_stats_clear_confirm_message">Ini akan menghapus riwayat bermain semua Easter egg dan tidak dapat dibatalkan.</string>
+    <string name="egg_stats_cleared">Statistik dihapus</string>
     <string name="message_trypophobia_warning">Ini adalah peringatan bagi pengidap &lt;b&gt;Trypophobia&lt;/b&gt; bahwa beberapa gambar mungkin menyebabkan ketidaknyamanan. Apakah Anda ingin melanjutkan?</string>
     <string name="label_settings">Setelan</string>
     <string name="label_project_desc">Proyek ini berisi kode lengkap Easter Egg sistem, yang bertujuan untuk mengatur dan kompatibel dengan Easter Egg sistem, untuk memastikan bahwa sebagian besar perangkat dapat mengalami versi Easter Egg yang berbeda dan tidak akan membuat terlalu banyak modifikasi pada kode Easter Egg sistem. Beberapa versi menggunakan fitur sistem baru, dan versi yang lebih rendah hanya dapat menggunakan beberapa fungsi.</string>
@@ -28,6 +42,9 @@
     <string name="pref_title_dynamic_color">Warna Dinamis (Mengikuti wallpaper)</string>
     <string name="pref_title_app_icon">Ikon Aplikasi</string>
     <string name="pref_title_icon_visual_effects">Efek Ikon</string>
+    <string name="pref_title_highest_egg_count">Telur yang disorot</string>
+    <string name="pref_desc_highest_egg_count">Jumlah kartu besar yang ditampilkan di bagian atas layar utama.</string>
+    <string name="pref_summary_highest_egg_count_all">Semua</string>
     <string name="summary_system_default">Bawaan</string>
     <string name="summary_theme_dark_mode">Gelap</string>
     <string name="summary_theme_light_mode">Terang</string>
@@ -88,22 +105,4 @@
     <string name="action_confirm_restore_defaults">Reset</string>
     <string name="toast_restore_defaults_success">Pengaturan dikembalikan ke pengaturan default. Aplikasi akan
 memulai ulang.</string>
-
-    <string name="label_egg_stats">Statistik Easter egg</string>
-    <string name="label_egg_stats_desc">Riwayat bermain lokal untuk setiap Easter egg</string>
-    <string name="egg_stats_summary_format">%1$d dari %2$d egg dimainkan · total %3$d kali bermain</string>
-    <string name="egg_stats_sort_most_played">Paling sering dimainkan</string>
-    <string name="egg_stats_sort_recently_played">Baru-baru ini dimainkan</string>
-    <string name="egg_stats_first_opened">Pertama kali dibuka</string>
-    <string name="egg_stats_last_played">Terakhir dimainkan</string>
-    <string name="egg_stats_play_count">Jumlah bermain</string>
-    <string name="egg_stats_played_count">Dimainkan %d×</string>
-    <string name="egg_stats_never_played">Belum dimainkan</string>
-    <string name="egg_stats_clear">Hapus statistik</string>
-    <string name="egg_stats_clear_confirm_title">Hapus statistik?</string>
-    <string name="egg_stats_clear_confirm_message">Ini akan menghapus riwayat bermain semua Easter egg dan tidak dapat dibatalkan.</string>
-    <string name="egg_stats_cleared">Statistik dihapus</string>
-    <string name="pref_title_highest_egg_count">Telur yang disorot</string>
-    <string name="pref_desc_highest_egg_count">Jumlah kartu besar yang ditampilkan di bagian atas layar utama.</string>
-    <string name="pref_summary_highest_egg_count_all">Semua</string>
 </resources>

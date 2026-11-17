@@ -42,6 +42,9 @@
     <string name="pref_title_dynamic_color">动态颜色</string>
     <string name="pref_title_app_icon">应用图标</string>
     <string name="pref_title_icon_visual_effects">图标视觉动效</string>
+    <string name="pref_title_highest_egg_count">高亮彩蛋</string>
+    <string name="pref_desc_highest_egg_count">首页顶部显示的大卡片数量。</string>
+    <string name="pref_summary_highest_egg_count_all">全部</string>
     <string name="summary_system_default">默认</string>
     <string name="summary_theme_dark_mode">深色</string>
     <string name="summary_theme_light_mode">浅色</string>
@@ -101,8 +104,4 @@
     <string name="dialog_restore_defaults_message">此操作会将所有设置（包括主题、应用图标和语言）恢复为默认值。已保存的猫咪和小部件配置不受影响。此操作不可撤销。确定要继续吗？</string>
     <string name="action_confirm_restore_defaults">重置</string>
     <string name="toast_restore_defaults_success">已恢复默认设置，应用将重启</string>
-
-    <string name="pref_title_highest_egg_count">高亮彩蛋</string>
-    <string name="pref_desc_highest_egg_count">首页顶部显示的大卡片数量。</string>
-    <string name="pref_summary_highest_egg_count_all">全部</string>
 </resources>

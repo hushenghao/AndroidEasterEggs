@@ -18,6 +18,20 @@
     <string name="label_contact_me">Связаться со мной</string>
     <string name="label_email_title">Эл. почта</string>
     <string name="label_snapshot_preview">Предпросмотр снимков</string>
+    <string name="label_egg_stats">Статистика пасхальных яиц</string>
+    <string name="label_egg_stats_desc">Локальная история запусков каждого пасхального яйца</string>
+    <string name="egg_stats_summary_format">Запущено %1$d из %2$d яиц · всего %3$d раз</string>
+    <string name="egg_stats_sort_most_played">Чаще всего запускаемые</string>
+    <string name="egg_stats_sort_recently_played">Недавно запущенные</string>
+    <string name="egg_stats_first_opened">Первое открытие</string>
+    <string name="egg_stats_last_played">Последний запуск</string>
+    <string name="egg_stats_play_count">Число запусков</string>
+    <string name="egg_stats_played_count">Запущено %d×</string>
+    <string name="egg_stats_never_played">Ещё не запускалось</string>
+    <string name="egg_stats_clear">Очистить статистику</string>
+    <string name="egg_stats_clear_confirm_title">Очистить статистику?</string>
+    <string name="egg_stats_clear_confirm_message">Это удалит историю запусков всех пасхальных яиц, отменить это нельзя.</string>
+    <string name="egg_stats_cleared">Статистика очищена</string>
     <string name="message_trypophobia_warning">Это предупреждение для тех, у кого &lt;b&gt;трипофобия&lt;/b&gt;. Некоторые изображения могут вызывать дискомфорт. Вы хотите продолжить?</string>
     <string name="label_settings">Настройки</string>
     <string name="label_project_desc">Этот проект, призванный организовать и обеспечить совместимость со всеми пасхальными яйцами (пасхалками) Android, содержит полный код всех пасхальных яиц Android. Цель состоит в том, чтобы на большинстве устройств можно было наслаждаться разными версиями пасхальных яиц с минимальными изменениями в коде пасхального яйца.</string>
@@ -28,6 +42,9 @@
     <string name="pref_title_dynamic_color">Динамические цвета</string>
     <string name="pref_title_app_icon">Значок приложения</string>
     <string name="pref_title_icon_visual_effects">Визуальные эффекты значков</string>
+    <string name="pref_title_highest_egg_count">Выделенные яйца</string>
+    <string name="pref_desc_highest_egg_count">Количество крупных карточек в верхней части главного экрана.</string>
+    <string name="pref_summary_highest_egg_count_all">Все</string>
     <string name="summary_system_default">По умолчанию</string>
     <string name="summary_theme_dark_mode">Тёмная</string>
     <string name="summary_theme_light_mode">Светлая</string>
@@ -87,22 +104,4 @@
     <string name="dialog_restore_defaults_message">Это действие сбросит все настройки, включая тему, значок в лаунчере и язык. Сохранённые кошки и настройки виджетов затронуты не будут. Данное действие нельзя будет отменить. Вы уверены, что хотите продолжить?</string>
     <string name="action_confirm_restore_defaults">Сбросить</string>
     <string name="toast_restore_defaults_success">Настройки восстановлены до значений по умолчанию. Приложение перезапустится.</string>
-
-    <string name="label_egg_stats">Статистика пасхальных яиц</string>
-    <string name="label_egg_stats_desc">Локальная история запусков каждого пасхального яйца</string>
-    <string name="egg_stats_summary_format">Запущено %1$d из %2$d яиц · всего %3$d раз</string>
-    <string name="egg_stats_sort_most_played">Чаще всего запускаемые</string>
-    <string name="egg_stats_sort_recently_played">Недавно запущенные</string>
-    <string name="egg_stats_first_opened">Первое открытие</string>
-    <string name="egg_stats_last_played">Последний запуск</string>
-    <string name="egg_stats_play_count">Число запусков</string>
-    <string name="egg_stats_played_count">Запущено %d×</string>
-    <string name="egg_stats_never_played">Ещё не запускалось</string>
-    <string name="egg_stats_clear">Очистить статистику</string>
-    <string name="egg_stats_clear_confirm_title">Очистить статистику?</string>
-    <string name="egg_stats_clear_confirm_message">Это удалит историю запусков всех пасхальных яиц, отменить это нельзя.</string>
-    <string name="egg_stats_cleared">Статистика очищена</string>
-    <string name="pref_title_highest_egg_count">Выделенные яйца</string>
-    <string name="pref_desc_highest_egg_count">Количество крупных карточек в верхней части главного экрана.</string>
-    <string name="pref_summary_highest_egg_count_all">Все</string>
 </resources>
