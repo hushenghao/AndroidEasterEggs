@@ -9,6 +9,10 @@ module, and run the smallest useful verification command.
 - Prefer focused fixes in the module or method named by the task.
 - Use `rg` / `rg --files` for code search.
 - For Android changes, verify with the most relevant Gradle module task when possible.
+- Every commit must carry a detailed message: a conventional-commit summary line
+  (`feat:`, `fix:`, `docs:`, `chore:`, …) followed by a body that explains what
+  changed and why, referencing the affected modules or issue numbers when relevant.
+  Do not commit with a bare summary line or an empty body.
 
 ## Maintenance
 
