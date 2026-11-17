@@ -55,6 +55,19 @@ object AppSettings {
 
     // Easter eggs ------------------------------------------------------------
 
+    /**
+     * Sentinel value: every egg gets the large highlighted card. The other
+     * values are literal card counts.
+     */
+    const val HIGHEST_EGG_COUNT_ALL = 4
+
+    /**
+     * Number of eggs rendered as the large highlighted card at the top of the
+     * home list, `0`-`4`; `0` means every egg uses the small card, and
+     * [HIGHEST_EGG_COUNT_ALL] highlights every egg.
+     */
+    val highestEggCount = PrefKey.int("pref_key_highest_egg_count", 1)
+
     /** One of `RocketLauncherPrefUtil.VALUE_EASTER_EGG_ICONS` / `VALUE_ALL_APP_ICONS` / `VALUE_ALL_ICONS`. */
     val rocketLauncherIconsSource = PrefKey.int("pref_key_rocket_launcher_icons_source", 0)
 
@@ -105,6 +118,7 @@ object AppSettings {
         iconShape,
         iconVisualEffects,
         retainInRecents,
+        highestEggCount,
         rocketLauncherIconsSource,
         sTrypophobiaWarning,
         tTrypophobiaWarning,

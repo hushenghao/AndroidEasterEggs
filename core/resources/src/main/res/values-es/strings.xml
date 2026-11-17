@@ -99,4 +99,7 @@
     <string name="egg_stats_clear_confirm_title">¿Borrar estadísticas?</string>
     <string name="egg_stats_clear_confirm_message">Esto elimina el historial de juego de todos los Easter Eggs y no se puede deshacer.</string>
     <string name="egg_stats_cleared">Estadísticas borradas</string>
+    <string name="pref_title_highest_egg_count">Huevos destacados</string>
+    <string name="pref_desc_highest_egg_count">Número de tarjetas grandes que se muestran en la parte superior de la pantalla de inicio.</string>
+    <string name="pref_summary_highest_egg_count_all">Todos</string>
 </resources>

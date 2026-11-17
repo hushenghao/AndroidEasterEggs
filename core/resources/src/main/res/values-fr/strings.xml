@@ -61,4 +61,7 @@
     <string name="egg_stats_clear_confirm_title">Effacer les statistiques ?</string>
     <string name="egg_stats_clear_confirm_message">Cela supprime l\'historique de jeu de tous les Œufs de Pâques et est irréversible.</string>
     <string name="egg_stats_cleared">Statistiques effacées</string>
+    <string name="pref_title_highest_egg_count">Œufs mis en avant</string>
+    <string name="pref_desc_highest_egg_count">Nombre de grandes cartes affichées en haut de l'écran d'accueil.</string>
+    <string name="pref_summary_highest_egg_count_all">Tous</string>
 </resources>

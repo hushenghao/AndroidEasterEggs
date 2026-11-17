@@ -49,4 +49,7 @@
     <string name="egg_stats_clear_confirm_title">Statistieken wissen?</string>
     <string name="egg_stats_clear_confirm_message">Hiermee wordt de speelgeschiedenis van alle Easter eggs verwijderd. Dit kan niet ongedaan worden gemaakt.</string>
     <string name="egg_stats_cleared">Statistieken gewist</string>
+    <string name="pref_title_highest_egg_count">Uitgelichte eieren</string>
+    <string name="pref_desc_highest_egg_count">Aantal grote kaarten bovenaan het startscherm.</string>
+    <string name="pref_summary_highest_egg_count_all">Alle</string>
 </resources>

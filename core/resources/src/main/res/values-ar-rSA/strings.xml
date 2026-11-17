@@ -69,4 +69,7 @@
     <string name="egg_stats_clear_confirm_title">مسح الإحصائيات؟</string>
     <string name="egg_stats_clear_confirm_message">سيؤدي هذا إلى حذف سجل اللعب لكل بيضة ولا يمكن التراجع عنه.</string>
     <string name="egg_stats_cleared">تم مسح الإحصائيات</string>
+    <string name="pref_title_highest_egg_count">البيض المميَّز</string>
+    <string name="pref_desc_highest_egg_count">عدد البطاقات الكبيرة المعروضة أعلى الشاشة الرئيسية.</string>
+    <string name="pref_summary_highest_egg_count_all">الكل</string>
 </resources>

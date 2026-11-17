@@ -6,6 +6,7 @@
 - Add GitHub Pagers
 - Migrate clock and date handling to java.time (core library desugaring)
 - Add local Easter egg play statistics (first opened, last played, play count)
+- Add a settings slider for the number of highlighted eggs on the home screen
 
 ### v5.6.0 (2026-10-20)
 

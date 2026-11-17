@@ -77,4 +77,7 @@
     <string name="egg_stats_clear_confirm_title">Xóa thống kê?</string>
     <string name="egg_stats_clear_confirm_message">Thao tác này sẽ xóa lịch sử chơi của tất cả Trứng Phục sinh và không thể hoàn tác.</string>
     <string name="egg_stats_cleared">Đã xóa thống kê</string>
+    <string name="pref_title_highest_egg_count">Trứng được làm nổi bật</string>
+    <string name="pref_desc_highest_egg_count">Số lượng thẻ lớn hiển thị ở đầu màn hình chính.</string>
+    <string name="pref_summary_highest_egg_count_all">Tất cả</string>
 </resources>

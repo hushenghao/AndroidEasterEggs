@@ -93,4 +93,7 @@
     <string name="egg_stats_clear_confirm_title">Tyhjennä tilastot?</string>
     <string name="egg_stats_clear_confirm_message">Tämä poistaa kaikkien pääsiäismunien pelihistorian, eikä sitä voi kumota.</string>
     <string name="egg_stats_cleared">Tilastot tyhjennetty</string>
+    <string name="pref_title_highest_egg_count">Korostetut munat</string>
+    <string name="pref_desc_highest_egg_count">Aloitusnäytön yläreunassa näkyvien suurten korttien määrä.</string>
+    <string name="pref_summary_highest_egg_count_all">Kaikki</string>
 </resources>

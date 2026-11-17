@@ -102,4 +102,7 @@
     <string name="egg_stats_clear_confirm_title">Очистить статистику?</string>
     <string name="egg_stats_clear_confirm_message">Это удалит историю запусков всех пасхальных яиц, отменить это нельзя.</string>
     <string name="egg_stats_cleared">Статистика очищена</string>
+    <string name="pref_title_highest_egg_count">Выделенные яйца</string>
+    <string name="pref_desc_highest_egg_count">Количество крупных карточек в верхней части главного экрана.</string>
+    <string name="pref_summary_highest_egg_count_all">Все</string>
 </resources>

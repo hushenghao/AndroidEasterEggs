@@ -93,4 +93,7 @@
     <string name="egg_stats_clear_confirm_title">Изчистване на статистиката?</string>
     <string name="egg_stats_clear_confirm_message">Това изтрива историята на играта на всяко Easter Egg и не може да бъде отменено.</string>
     <string name="egg_stats_cleared">Статистиката е изчистена</string>
+    <string name="pref_title_highest_egg_count">Подчертани яйца</string>
+    <string name="pref_desc_highest_egg_count">Брой големи карти, показвани в горната част на началния екран.</string>
+    <string name="pref_summary_highest_egg_count_all">Всички</string>
 </resources>

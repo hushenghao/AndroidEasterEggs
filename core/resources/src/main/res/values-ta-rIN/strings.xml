@@ -68,4 +68,7 @@
     <string name="egg_stats_clear_confirm_title">புள்ளிவிவரங்களை அழிக்கவா?</string>
     <string name="egg_stats_clear_confirm_message">இது அனைத்து ஈஸ்டர் முட்டைகளின் விளையாட்டு வரலாற்றையும் அழிக்கும், மீட்டெடுக்க முடியாது.</string>
     <string name="egg_stats_cleared">புள்ளிவிவரங்கள் அழிக்கப்பட்டன</string>
+    <string name="pref_title_highest_egg_count">சிறப்பிக்கப்பட்ட முட்டைகள்</string>
+    <string name="pref_desc_highest_egg_count">முகப்புத் திரையின் மேலே காட்டப்படும் பெரிய அட்டைகளின் எண்ணிக்கை.</string>
+    <string name="pref_summary_highest_egg_count_all">அனைத்தும்</string>
 </resources>

@@ -77,4 +77,7 @@
     <string name="egg_stats_clear_confirm_title">পরিসংখ্যান মুছবেন?</string>
     <string name="egg_stats_clear_confirm_message">এটি প্রতিটি ইস্টার এগের খেলার ইতিহাস মুছে ফেলবে এবং ফিরিয়ে আনা যাবে না।</string>
     <string name="egg_stats_cleared">পরিসংখ্যান মুছে ফেলা হয়েছে</string>
+    <string name="pref_title_highest_egg_count">হাইলাইট করা ডিম</string>
+    <string name="pref_desc_highest_egg_count">হোম স্ক্রিনের উপরে দেখানো বড় কার্ডের সংখ্যা।</string>
+    <string name="pref_summary_highest_egg_count_all">সব</string>
 </resources>

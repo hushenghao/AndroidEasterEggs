@@ -103,4 +103,7 @@ memulai ulang.</string>
     <string name="egg_stats_clear_confirm_title">Hapus statistik?</string>
     <string name="egg_stats_clear_confirm_message">Ini akan menghapus riwayat bermain semua Easter egg dan tidak dapat dibatalkan.</string>
     <string name="egg_stats_cleared">Statistik dihapus</string>
+    <string name="pref_title_highest_egg_count">Telur yang disorot</string>
+    <string name="pref_desc_highest_egg_count">Jumlah kartu besar yang ditampilkan di bagian atas layar utama.</string>
+    <string name="pref_summary_highest_egg_count_all">Semua</string>
 </resources>

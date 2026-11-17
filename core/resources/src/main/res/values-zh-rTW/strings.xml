@@ -102,4 +102,7 @@
     <string name="egg_stats_clear_confirm_title">清除統計？</string>
     <string name="egg_stats_clear_confirm_message">將刪除所有彩蛋的遊玩記錄，無法復原。</string>
     <string name="egg_stats_cleared">統計已清除</string>
+    <string name="pref_title_highest_egg_count">醒目彩蛋</string>
+    <string name="pref_desc_highest_egg_count">首頁頂部顯示的大卡片數量。</string>
+    <string name="pref_summary_highest_egg_count_all">全部</string>
 </resources>

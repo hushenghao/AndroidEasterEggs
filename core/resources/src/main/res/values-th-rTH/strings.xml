@@ -49,4 +49,7 @@
     <string name="egg_stats_clear_confirm_title">ล้างสถิติหรือไม่?</string>
     <string name="egg_stats_clear_confirm_message">การดำเนินการนี้จะลบประวัติการเล่นของไข่อีสเตอร์ทั้งหมดและไม่สามารถยกเลิกได้</string>
     <string name="egg_stats_cleared">ล้างสถิติแล้ว</string>
+    <string name="pref_title_highest_egg_count">ไข่ที่ไฮไลต์</string>
+    <string name="pref_desc_highest_egg_count">จำนวนการ์ดขนาดใหญ่ที่แสดงที่ด้านบนของหน้าจอหลัก</string>
+    <string name="pref_summary_highest_egg_count_all">ทั้งหมด</string>
 </resources>

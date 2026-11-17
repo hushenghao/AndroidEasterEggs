@@ -50,4 +50,7 @@
     <string name="egg_stats_clear_confirm_title">ລຶບສະຖິຕິບໍ?</string>
     <string name="egg_stats_clear_confirm_message">ການດຳເນີນການນີ້ຈະລຶບປະຫວັດການຫຼິ້ນຂອງໄຂ່ອີສເຕີທັງໝົດ ແລະ ບໍ່ສາມາດຍົກເລີກໄດ້.</string>
     <string name="egg_stats_cleared">ລຶບສະຖິຕິແລ້ວ</string>
+    <string name="pref_title_highest_egg_count">ໄຂ່ທີ່ເນັ້ນໃຫ້ເດັ່ນ</string>
+    <string name="pref_desc_highest_egg_count">ຈຳນວນບັດໃຫຍ່ທີ່ສະແດງຢູ່ເທິງສຸດຂອງໜ້າຈໍຫຼັກ.</string>
+    <string name="pref_summary_highest_egg_count_all">ທັງໝົດ</string>
 </resources>

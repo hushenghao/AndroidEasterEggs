@@ -31,4 +31,7 @@
     <string name="egg_stats_clear_confirm_title">စာရင်းအင်း ရှင်းလင်းမလား?</string>
     <string name="egg_stats_clear_confirm_message">၎င်းသည် အီစတာဥအားလုံး၏ ကစားမှုမှတ်တမ်းကို ဖျက်ပစ်မည်ဖြစ်ပြီး ပြန်လည်မရနိုင်ပါ။</string>
     <string name="egg_stats_cleared">စာရင်းအင်း ရှင်းလင်းပြီး</string>
+    <string name="pref_title_highest_egg_count">မီးမောင်းထိုးထားသော ဥများ</string>
+    <string name="pref_desc_highest_egg_count">ပင်မစခရင်၏ထိပ်တွင်ပြသထားသော ကတ်ကြီးအရေအတွက်။</string>
+    <string name="pref_summary_highest_egg_count_all">အားလုံး</string>
 </resources>

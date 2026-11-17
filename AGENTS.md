@@ -183,6 +183,8 @@ Prefer the smallest module-specific compile/test command that covers the change.
 - Widget XML (RemoteViews) must use concrete resource values, not Compose theme
   references.
 - Localized strings go in `core/resources` unless feature-specific.
+- When adding a new string, also add AI translations to every `core/resources`
+  locale directory, **except Latin** (`values-la-rLA`).
 
 ### Documentation & Comments
 

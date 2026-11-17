@@ -55,4 +55,7 @@
     <string name="egg_stats_clear_confirm_title">Rensa statistiken?</string>
     <string name="egg_stats_clear_confirm_message">Detta tar bort spelhistoriken för alla påskägg och kan inte ångras.</string>
     <string name="egg_stats_cleared">Statistiken rensad</string>
+    <string name="pref_title_highest_egg_count">Markerade ägg</string>
+    <string name="pref_desc_highest_egg_count">Antal stora kort som visas överst på startskärmen.</string>
+    <string name="pref_summary_highest_egg_count_all">Alla</string>
 </resources>

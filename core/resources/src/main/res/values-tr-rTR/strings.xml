@@ -102,4 +102,7 @@
     <string name="egg_stats_clear_confirm_title">İstatistikler temizlensin mi?</string>
     <string name="egg_stats_clear_confirm_message">Bu, tüm Paskalya Yumurtalarının oynama geçmişini siler ve geri alınamaz.</string>
     <string name="egg_stats_cleared">İstatistikler temizlendi</string>
+    <string name="pref_title_highest_egg_count">Vurgulanan yumurtalar</string>
+    <string name="pref_desc_highest_egg_count">Ana ekranın üst kısmında gösterilen büyük kartların sayısı.</string>
+    <string name="pref_summary_highest_egg_count_all">Tümü</string>
 </resources>

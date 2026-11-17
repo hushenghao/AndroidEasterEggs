@@ -28,6 +28,7 @@ import com.dede.android_eggs.composable.currentWindowWidthPane
 import com.dede.android_eggs.egg_stats.EggStatsRepository
 import com.dede.android_eggs.egg_stats.EggStatsSummary
 import com.dede.android_eggs.inject.EasterEggModules
+import com.dede.android_eggs.preferences.AppSettings
 import com.dede.android_eggs.util.compose.plus
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.basic.provider.BaseEasterEgg
@@ -98,6 +99,7 @@ fun EasterEggList(
     searchText: String = "",
     contentPadding: PaddingValues = PaddingValues(0.dp),
     releaseDateLookup: (Int) -> Date? = { null },
+    highestCount: Int = HIGHEST_COUNT,
 ) {
     val context = LocalContext.current
     val pureEasterEggs = remember(easterEggs) {
@@ -116,7 +118,15 @@ fun EasterEggList(
 
     val listContentPadding = contentPadding +
             PaddingValues(vertical = 10.dp, horizontal = 12.dp)
+
     val statsMap = rememberEggStats()
+
+    // `HIGHEST_EGG_COUNT_ALL` highlights every egg; the other values are literal card counts.
+    val effectiveHighestCount = if (highestCount == AppSettings.HIGHEST_EGG_COUNT_ALL) {
+        easterEggs.size
+    } else {
+        highestCount
+    }
     Crossfade(
         modifier = Modifier
             .then(modifier)
@@ -131,6 +141,7 @@ fun EasterEggList(
                     contentPadding = listContentPadding,
                     releaseDateLookup = releaseDateLookup,
                     statsMap = statsMap,
+                    highestCount = effectiveHighestCount,
                 )
             }
             EasterEggListType.GRID -> {
@@ -139,6 +150,7 @@ fun EasterEggList(
                     contentPadding = listContentPadding,
                     releaseDateLookup = releaseDateLookup,
                     statsMap = statsMap,
+                    highestCount = effectiveHighestCount,
                 )
             }
             EasterEggListType.SEARCH_RESULT -> {
@@ -161,13 +173,14 @@ private fun EasterEggColumnList(
     contentPadding: PaddingValues,
     releaseDateLookup: (Int) -> Date?,
     statsMap: Map<IntRange, EggStatsSummary>,
+    highestCount: Int,
 ) {
     LazyColumn(
         contentPadding = contentPadding,
         verticalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier.animateContentSize(),
     ) {
-        val (highestList, normalList) = easterEggs.highest(HIGHEST_COUNT)
+        val (highestList, normalList) = easterEggs.highest(highestCount)
         items(
             items = highestList,
             key = BaseEasterEgg::lazyItemKey,
@@ -179,8 +192,11 @@ private fun EasterEggColumnList(
                 statsMap = statsMap,
             )
         }
-        item("wavy1") {
-            ItemWavy()
+        // Separate the highlighted and the normal sections only when both exist.
+        if (highestList.isNotEmpty() && normalList.isNotEmpty()) {
+            item("wavy1") {
+                ItemWavy()
+            }
         }
         items(
             items = normalList,
@@ -208,6 +224,7 @@ private fun EasterEggGrid(
     contentPadding: PaddingValues,
     releaseDateLookup: (Int) -> Date?,
     statsMap: Map<IntRange, EggStatsSummary>,
+    highestCount: Int,
 ) {
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
@@ -216,7 +233,7 @@ private fun EasterEggGrid(
         verticalItemSpacing = 12.dp,
         modifier = Modifier.fillMaxSize().animateContentSize(),
     ) {
-        val (highestList, normalList) = easterEggs.highest(HIGHEST_COUNT)
+        val (highestList, normalList) = easterEggs.highest(highestCount)
         items(
             items = highestList,
             key = BaseEasterEgg::lazyItemKey,

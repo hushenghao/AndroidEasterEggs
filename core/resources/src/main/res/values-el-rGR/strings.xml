@@ -93,4 +93,7 @@
     <string name="egg_stats_clear_confirm_title">Εκκαθάριση στατιστικών;</string>
     <string name="egg_stats_clear_confirm_message">Αυτό διαγράφει το ιστορικό παιχνιδιού όλων των Πασχαλινών Αυγών και δεν μπορεί να αναιρεθεί.</string>
     <string name="egg_stats_cleared">Τα στατιστικά εκκαθαρίστηκαν</string>
+    <string name="pref_title_highest_egg_count">Επισημασμένα αυγά</string>
+    <string name="pref_desc_highest_egg_count">Αριθμός μεγάλων καρτών που εμφανίζονται στο πάνω μέρος της αρχικής οθόνης.</string>
+    <string name="pref_summary_highest_egg_count_all">Όλα</string>
 </resources>

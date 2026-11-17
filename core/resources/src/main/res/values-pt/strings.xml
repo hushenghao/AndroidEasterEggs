@@ -102,4 +102,7 @@
     <string name="egg_stats_clear_confirm_title">Limpar estatísticas?</string>
     <string name="egg_stats_clear_confirm_message">Isto remove o histórico de jogo de todos os Easter Eggs e não pode ser anulado.</string>
     <string name="egg_stats_cleared">Estatísticas limpas</string>
+    <string name="pref_title_highest_egg_count">Ovos em destaque</string>
+    <string name="pref_desc_highest_egg_count">Número de cartões grandes mostrados no topo do ecrã inicial.</string>
+    <string name="pref_summary_highest_egg_count_all">Todos</string>
 </resources>

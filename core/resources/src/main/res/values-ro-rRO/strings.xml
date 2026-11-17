@@ -93,4 +93,7 @@
     <string name="egg_stats_clear_confirm_title">Ștergi statisticile?</string>
     <string name="egg_stats_clear_confirm_message">Aceasta elimină istoricul de joc al tuturor easter egg-urilor și nu poate fi anulată.</string>
     <string name="egg_stats_cleared">Statisticile au fost șterse</string>
+    <string name="pref_title_highest_egg_count">Ouă evidențiate</string>
+    <string name="pref_desc_highest_egg_count">Numărul de carduri mari afișate în partea de sus a ecranului de pornire.</string>
+    <string name="pref_summary_highest_egg_count_all">Toate</string>
 </resources>

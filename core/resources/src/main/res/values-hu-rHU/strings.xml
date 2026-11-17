@@ -49,4 +49,7 @@
     <string name="egg_stats_clear_confirm_title">Törli a statisztikákat?</string>
     <string name="egg_stats_clear_confirm_message">Ez törli az összes húsvéti tojás játékelőzményeit, és nem vonható vissza.</string>
     <string name="egg_stats_cleared">Statisztikák törölve</string>
+    <string name="pref_title_highest_egg_count">Kiemelt tojások</string>
+    <string name="pref_desc_highest_egg_count">A kezdőképernyő tetején megjelenő nagy kártyák száma.</string>
+    <string name="pref_summary_highest_egg_count_all">Mind</string>
 </resources>

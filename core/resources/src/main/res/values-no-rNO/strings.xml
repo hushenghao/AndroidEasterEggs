@@ -49,4 +49,7 @@
     <string name="egg_stats_clear_confirm_title">Slette statistikk?</string>
     <string name="egg_stats_clear_confirm_message">Dette fjerner spillhistorikken til alle påskeegg og kan ikke angres.</string>
     <string name="egg_stats_cleared">Statistikken er slettet</string>
+    <string name="pref_title_highest_egg_count">Fremhevede egg</string>
+    <string name="pref_desc_highest_egg_count">Antall store kort som vises øverst på startskjermen.</string>
+    <string name="pref_summary_highest_egg_count_all">Alle</string>
 </resources>

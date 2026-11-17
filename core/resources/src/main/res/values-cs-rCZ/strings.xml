@@ -102,4 +102,7 @@
     <string name="egg_stats_clear_confirm_title">Vymazat statistiky?</string>
     <string name="egg_stats_clear_confirm_message">Tím se odstraní historie hraní všech Easter eggů a nelze to vrátit.</string>
     <string name="egg_stats_cleared">Statistiky vymazány</string>
+    <string name="pref_title_highest_egg_count">Zvýrazněná vajíčka</string>
+    <string name="pref_desc_highest_egg_count">Počet velkých karet zobrazených v horní části domovské obrazovky.</string>
+    <string name="pref_summary_highest_egg_count_all">Vše</string>
 </resources>

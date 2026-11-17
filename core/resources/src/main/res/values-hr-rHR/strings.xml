@@ -75,4 +75,7 @@
     <string name="egg_stats_clear_confirm_title">Očistiti statistiku?</string>
     <string name="egg_stats_clear_confirm_message">Ovo briše povijest igranja svih Easter Eggova i ne može se poništiti.</string>
     <string name="egg_stats_cleared">Statistika je očišćena</string>
+    <string name="pref_title_highest_egg_count">Istaknuta jaja</string>
+    <string name="pref_desc_highest_egg_count">Broj velikih kartica prikazanih na vrhu početnog zaslona.</string>
+    <string name="pref_summary_highest_egg_count_all">Sve</string>
 </resources>

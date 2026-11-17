@@ -49,4 +49,7 @@
     <string name="egg_stats_clear_confirm_title">I-clear ang estadistika?</string>
     <string name="egg_stats_clear_confirm_message">Tatanggalin nito ang kasaysayan ng paglalaro ng lahat ng Easter egg at hindi na ito maibabalik.</string>
     <string name="egg_stats_cleared">Na-clear ang estadistika</string>
+    <string name="pref_title_highest_egg_count">Mga naka-highlight na itlog</string>
+    <string name="pref_desc_highest_egg_count">Bilang ng malalaking card na ipinapakita sa itaas ng home screen.</string>
+    <string name="pref_summary_highest_egg_count_all">Lahat</string>
 </resources>

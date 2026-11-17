@@ -95,4 +95,7 @@
     <string name="egg_stats_clear_confirm_title">統計を消去しますか？</string>
     <string name="egg_stats_clear_confirm_message">すべてのイースターエッグのプレイ履歴が削除され、元に戻せません。</string>
     <string name="egg_stats_cleared">統計を消去しました</string>
+    <string name="pref_title_highest_egg_count">ハイライト表示する卵</string>
+    <string name="pref_desc_highest_egg_count">ホーム画面の上部に表示する大きなカードの数。</string>
+    <string name="pref_summary_highest_egg_count_all">すべて</string>
 </resources>

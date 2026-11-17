@@ -93,4 +93,7 @@
     <string name="egg_stats_clear_confirm_title">통계를 지울까요?</string>
     <string name="egg_stats_clear_confirm_message">모든 이스터 에그의 플레이 기록이 삭제되며 되돌릴 수 없습니다.</string>
     <string name="egg_stats_cleared">통계를 지웠습니다</string>
+    <string name="pref_title_highest_egg_count">강조 표시된 달걀</string>
+    <string name="pref_desc_highest_egg_count">홈 화면 상단에 표시되는 큰 카드의 수.</string>
+    <string name="pref_summary_highest_egg_count_all">전체</string>
 </resources>

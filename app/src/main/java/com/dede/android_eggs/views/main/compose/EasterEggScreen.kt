@@ -108,18 +108,19 @@ fun EasterEggScreen(
     }
 
     val konfettiController = LocalKonfettiState.current
+    val highestCount = SettingPrefUtil.highestEggCountState.intValue
     CompositionLocalProvider(
         LocalEasterEggLogoSensor provides logoSensor,
     ) {
         when (currentWindowWidthPane()) {
             WindowWidthPane.COMPACT -> {
-                EggScreenScaffoldCompact(viewModel)
+                EggScreenScaffoldCompact(viewModel, highestCount)
             }
             WindowWidthPane.MEDIUM -> {
-                EggScreenScaffoldMedium(viewModel)
+                EggScreenScaffoldMedium(viewModel, highestCount)
             }
             WindowWidthPane.EXPANDED -> {
-                EggScreenScaffoldExpanded(viewModel)
+                EggScreenScaffoldExpanded(viewModel, highestCount)
             }
         }
 
@@ -131,7 +132,7 @@ fun EasterEggScreen(
 }
 
 @Composable
-private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel) {
+private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel, highestCount: Int) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     ReverseModalNavigationDrawer(
         drawerContent = {
@@ -161,6 +162,7 @@ private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel) {
                 releaseDateLookup = viewModel.releaseDateLookup,
                 searchText = searchBarState.text,
                 contentPadding = contentPadding,
+                highestCount = highestCount,
             )
         }
     }
@@ -179,7 +181,7 @@ fun SettingsDrawerEndPane(contentPadding: PaddingValues) {
 }
 
 @Composable
-private fun EggScreenScaffoldMedium(viewModel: EasterEggViewModel) {
+private fun EggScreenScaffoldMedium(viewModel: EasterEggViewModel, highestCount: Int) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val searchBarState = rememberBottomSearchBarState()
     EggScreenScaffold(
@@ -203,13 +205,14 @@ private fun EggScreenScaffoldMedium(viewModel: EasterEggViewModel) {
                 releaseDateLookup = viewModel.releaseDateLookup,
                 searchText = searchBarState.text,
                 contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
+                highestCount = highestCount,
             )
         }
     }
 }
 
 @Composable
-private fun EggScreenScaffoldExpanded(viewModel: EasterEggViewModel) {
+private fun EggScreenScaffoldExpanded(viewModel: EasterEggViewModel, highestCount: Int) {
     val searchBarState = rememberBottomSearchBarState()
     EggScreenScaffold(
         drawerState = null,
@@ -230,6 +233,7 @@ private fun EggScreenScaffoldExpanded(viewModel: EasterEggViewModel) {
                 releaseDateLookup = viewModel.releaseDateLookup,
                 searchText = searchBarState.text,
                 contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
+                highestCount = highestCount,
             )
         }
     }
