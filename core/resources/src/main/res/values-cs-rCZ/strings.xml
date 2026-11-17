@@ -18,6 +18,20 @@
     <string name="label_contact_me">Kontaktujte mě</string>
     <string name="label_email_title">Email</string>
     <string name="label_snapshot_preview">Náhled snapshotu</string>
+    <string name="label_egg_stats">Statistiky Easter eggů</string>
+    <string name="label_egg_stats_desc">Místní historie hraní pro každý Easter egg</string>
+    <string name="egg_stats_summary_format">Hráno %1$d z %2$d vajec · celkem %3$d her</string>
+    <string name="egg_stats_sort_most_played">Nejhranější</string>
+    <string name="egg_stats_sort_recently_played">Nedávno hrané</string>
+    <string name="egg_stats_first_opened">Poprvé otevřeno</string>
+    <string name="egg_stats_last_played">Naposledy hráno</string>
+    <string name="egg_stats_play_count">Počet her</string>
+    <string name="egg_stats_played_count">Hráno %d×</string>
+    <string name="egg_stats_never_played">Zatím nehráno</string>
+    <string name="egg_stats_clear">Vymazat statistiky</string>
+    <string name="egg_stats_clear_confirm_title">Vymazat statistiky?</string>
+    <string name="egg_stats_clear_confirm_message">Tím se odstraní historie hraní všech Easter eggů a nelze to vrátit.</string>
+    <string name="egg_stats_cleared">Statistiky vymazány</string>
     <string name="message_trypophobia_warning">Toto je varování pro osoby s &lt;b&gt;trypofobií&lt;/b&gt;. Některé obrázky mohou vyvolat nepohodlí. Chcete pokračovat?</string>
     <string name="label_settings">Nastavení</string>
     <string name="label_project_desc">Tento projekt obsahuje kompletní kód všech Easter eggů systému Android. Naší snahou je je seskupit a zajistit kompatibilní se všemi Easter eggy. Cílem je, aby co nejvíce zařízení mohlo vyzkoušet různé verze Easter eggů s minimálními zásahy do jejich kódu.</string>
@@ -28,6 +42,9 @@
     <string name="pref_title_dynamic_color">Dynamická barva</string>
     <string name="pref_title_app_icon">Ikonka aplikace</string>
     <string name="pref_title_icon_visual_effects">Vizuální Efekty Ikony</string>
+    <string name="pref_title_highest_egg_count">Zvýrazněná vajíčka</string>
+    <string name="pref_desc_highest_egg_count">Počet velkých karet zobrazených v horní části domovské obrazovky.</string>
+    <string name="pref_summary_highest_egg_count_all">Vše</string>
     <string name="summary_system_default">Výchozí</string>
     <string name="summary_theme_dark_mode">Tmavý</string>
     <string name="summary_theme_light_mode">Světlý</string>
@@ -87,22 +104,4 @@
     <string name="dialog_restore_defaults_message">Toto obnoví všechna nastavení, včetně motivu, ikony aplikace, a jazyka. Uložené kočky a nastavení widgetů nebudou změněny. Jste si jisti, že chcete pokračovat?</string>
     <string name="action_confirm_restore_defaults">Obnovit</string>
     <string name="toast_restore_defaults_success">Nastavení obnoveny na výchozí. Aplikace se restartuje.</string>
-
-    <string name="label_egg_stats">Statistiky Easter eggů</string>
-    <string name="label_egg_stats_desc">Místní historie hraní pro každý Easter egg</string>
-    <string name="egg_stats_summary_format">Hráno %1$d z %2$d vajec · celkem %3$d her</string>
-    <string name="egg_stats_sort_most_played">Nejhranější</string>
-    <string name="egg_stats_sort_recently_played">Nedávno hrané</string>
-    <string name="egg_stats_first_opened">Poprvé otevřeno</string>
-    <string name="egg_stats_last_played">Naposledy hráno</string>
-    <string name="egg_stats_play_count">Počet her</string>
-    <string name="egg_stats_played_count">Hráno %d×</string>
-    <string name="egg_stats_never_played">Zatím nehráno</string>
-    <string name="egg_stats_clear">Vymazat statistiky</string>
-    <string name="egg_stats_clear_confirm_title">Vymazat statistiky?</string>
-    <string name="egg_stats_clear_confirm_message">Tím se odstraní historie hraní všech Easter eggů a nelze to vrátit.</string>
-    <string name="egg_stats_cleared">Statistiky vymazány</string>
-    <string name="pref_title_highest_egg_count">Zvýrazněná vajíčka</string>
-    <string name="pref_desc_highest_egg_count">Počet velkých karet zobrazených v horní části domovské obrazovky.</string>
-    <string name="pref_summary_highest_egg_count_all">Vše</string>
 </resources>

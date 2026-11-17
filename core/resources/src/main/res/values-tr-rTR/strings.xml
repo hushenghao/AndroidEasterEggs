@@ -18,6 +18,20 @@
     <string name="label_contact_me">Benimle İletişime Geç</string>
     <string name="label_email_title">E-Posta</string>
     <string name="label_snapshot_preview">Anlık görüntü görmesi</string>
+    <string name="label_egg_stats">Paskalya Yumurtası istatistikleri</string>
+    <string name="label_egg_stats_desc">Her Paskalya Yumurtası için yerel oynama geçmişi</string>
+    <string name="egg_stats_summary_format">%2$d yumurtadan %1$d tanesi oynandı · toplam %3$d oynama</string>
+    <string name="egg_stats_sort_most_played">En çok oynanan</string>
+    <string name="egg_stats_sort_recently_played">Son oynananlar</string>
+    <string name="egg_stats_first_opened">İlk açılış</string>
+    <string name="egg_stats_last_played">Son oynama</string>
+    <string name="egg_stats_play_count">Oynama sayısı</string>
+    <string name="egg_stats_played_count">%d× oynandı</string>
+    <string name="egg_stats_never_played">Henüz oynanmadı</string>
+    <string name="egg_stats_clear">İstatistikleri temizle</string>
+    <string name="egg_stats_clear_confirm_title">İstatistikler temizlensin mi?</string>
+    <string name="egg_stats_clear_confirm_message">Bu, tüm Paskalya Yumurtalarının oynama geçmişini siler ve geri alınamaz.</string>
+    <string name="egg_stats_cleared">İstatistikler temizlendi</string>
     <string name="message_trypophobia_warning">Bu, &lt;b&gt;tripofobisi&lt;/b&gt; olanlar için bir uyarıdır ve Bazı görüntüler rahatsızlığa neden olabilir. Devam etmek istiyor musunuz?</string>
     <string name="label_settings">Ayarlar</string>
     <string name="label_project_desc">Bu proje, tüm gizli özelliklerinin paskalya yumurtalarının eksiksiz kodunu içerir ve tüm gizli özelliklerinin uyumluluğunu düzenlemeyi ve sağlamayı amaçlar. Amaç, çoğu cihazın gizli özelliklerin kodunda minimum değişikliklerle farklı sürümlerini denemesini sağlamaktır.</string>
@@ -28,6 +42,9 @@
     <string name="pref_title_dynamic_color">Dinamik Renk</string>
     <string name="pref_title_app_icon">Uygulama ikonu</string>
     <string name="pref_title_icon_visual_effects">İkon Görsel Efektleri</string>
+    <string name="pref_title_highest_egg_count">Vurgulanan yumurtalar</string>
+    <string name="pref_desc_highest_egg_count">Ana ekranın üst kısmında gösterilen büyük kartların sayısı.</string>
+    <string name="pref_summary_highest_egg_count_all">Tümü</string>
     <string name="summary_system_default">Varsayılan</string>
     <string name="summary_theme_dark_mode">Karanlık</string>
     <string name="summary_theme_light_mode">Aydınlık</string>
@@ -87,22 +104,4 @@
     <string name="dialog_restore_defaults_message">Bu işlem, tema, başlatıcı simgesi ve dil dahil olmak üzere tüm ayarları sıfırlayacaktır. Kaydedilen kedi ve araç yapılandırmaları etkilenmeyecektir. Bu işlem geri alınamaz. Devam etmek istediğinizden emin misiniz?</string>
     <string name="action_confirm_restore_defaults">Sıfırla</string>
     <string name="toast_restore_defaults_success">Ayarlar varsayılan değerlere geri yüklendi. Uygulama yeniden başlatılacak.</string>
-
-    <string name="label_egg_stats">Paskalya Yumurtası istatistikleri</string>
-    <string name="label_egg_stats_desc">Her Paskalya Yumurtası için yerel oynama geçmişi</string>
-    <string name="egg_stats_summary_format">%2$d yumurtadan %1$d tanesi oynandı · toplam %3$d oynama</string>
-    <string name="egg_stats_sort_most_played">En çok oynanan</string>
-    <string name="egg_stats_sort_recently_played">Son oynananlar</string>
-    <string name="egg_stats_first_opened">İlk açılış</string>
-    <string name="egg_stats_last_played">Son oynama</string>
-    <string name="egg_stats_play_count">Oynama sayısı</string>
-    <string name="egg_stats_played_count">%d× oynandı</string>
-    <string name="egg_stats_never_played">Henüz oynanmadı</string>
-    <string name="egg_stats_clear">İstatistikleri temizle</string>
-    <string name="egg_stats_clear_confirm_title">İstatistikler temizlensin mi?</string>
-    <string name="egg_stats_clear_confirm_message">Bu, tüm Paskalya Yumurtalarının oynama geçmişini siler ve geri alınamaz.</string>
-    <string name="egg_stats_cleared">İstatistikler temizlendi</string>
-    <string name="pref_title_highest_egg_count">Vurgulanan yumurtalar</string>
-    <string name="pref_desc_highest_egg_count">Ana ekranın üst kısmında gösterilen büyük kartların sayısı.</string>
-    <string name="pref_summary_highest_egg_count_all">Tümü</string>
 </resources>

@@ -18,6 +18,20 @@
     <string name="label_contact_me">Entrar em contacto</string>
     <string name="label_email_title">E-mail</string>
     <string name="label_snapshot_preview">Pré-visualização de snapshot</string>
+    <string name="label_egg_stats">Estatísticas de Easter Egg</string>
+    <string name="label_egg_stats_desc">Histórico de jogo local para cada Easter Egg</string>
+    <string name="egg_stats_summary_format">Jogados %1$d de %2$d eggs · %3$d partidas no total</string>
+    <string name="egg_stats_sort_most_played">Mais jogados</string>
+    <string name="egg_stats_sort_recently_played">Jogados recentemente</string>
+    <string name="egg_stats_first_opened">Primeira abertura</string>
+    <string name="egg_stats_last_played">Última partida</string>
+    <string name="egg_stats_play_count">Partidas</string>
+    <string name="egg_stats_played_count">Jogado %d×</string>
+    <string name="egg_stats_never_played">Ainda não jogado</string>
+    <string name="egg_stats_clear">Limpar estatísticas</string>
+    <string name="egg_stats_clear_confirm_title">Limpar estatísticas?</string>
+    <string name="egg_stats_clear_confirm_message">Isto remove o histórico de jogo de todos os Easter Eggs e não pode ser anulado.</string>
+    <string name="egg_stats_cleared">Estatísticas limpas</string>
     <string name="message_trypophobia_warning">Isto é um aviso para aqueles com &lt;b&gt;Tripofobia&lt;/b&gt; de que algumas imagens podem causar desconforto. Quer continuar?</string>
     <string name="label_settings">Configurações</string>
     <string name="label_project_desc">Este projeto contém o código completo de todos os Easter Eggs do Android, para organizar e garantir a compatibilidade com todos eles. O objetivo é permitir que a maioria dos dispositivos experimente diferentes versões dos Easter Eggs com o mínimo de modificações no código original.</string>
@@ -28,6 +42,9 @@
     <string name="pref_title_dynamic_color">Cor Dinâmica</string>
     <string name="pref_title_app_icon">Ícone da aplicação</string>
     <string name="pref_title_icon_visual_effects">Efeitos Visuais do Ícone</string>
+    <string name="pref_title_highest_egg_count">Ovos em destaque</string>
+    <string name="pref_desc_highest_egg_count">Número de cartões grandes mostrados no topo do ecrã inicial.</string>
+    <string name="pref_summary_highest_egg_count_all">Todos</string>
     <string name="summary_system_default">Predefinido</string>
     <string name="summary_theme_dark_mode">Escuro</string>
     <string name="summary_theme_light_mode">Claro</string>
@@ -87,22 +104,4 @@
     <string name="dialog_restore_defaults_message">Isto irá repor todas as definições, incluindo o tema, o ícone do launcher e o idioma. Os gatos e as definições de widgets guardados não serão afetados. Esta ação não pode ser anulada. Tem a certeza que quer continuar?</string>
     <string name="action_confirm_restore_defaults">Reiniciar</string>
     <string name="toast_restore_defaults_success">As definições foram restauradas para os valores predefinidos. A aplicação será reiniciada.</string>
-
-    <string name="label_egg_stats">Estatísticas de Easter Egg</string>
-    <string name="label_egg_stats_desc">Histórico de jogo local para cada Easter Egg</string>
-    <string name="egg_stats_summary_format">Jogados %1$d de %2$d eggs · %3$d partidas no total</string>
-    <string name="egg_stats_sort_most_played">Mais jogados</string>
-    <string name="egg_stats_sort_recently_played">Jogados recentemente</string>
-    <string name="egg_stats_first_opened">Primeira abertura</string>
-    <string name="egg_stats_last_played">Última partida</string>
-    <string name="egg_stats_play_count">Partidas</string>
-    <string name="egg_stats_played_count">Jogado %d×</string>
-    <string name="egg_stats_never_played">Ainda não jogado</string>
-    <string name="egg_stats_clear">Limpar estatísticas</string>
-    <string name="egg_stats_clear_confirm_title">Limpar estatísticas?</string>
-    <string name="egg_stats_clear_confirm_message">Isto remove o histórico de jogo de todos os Easter Eggs e não pode ser anulado.</string>
-    <string name="egg_stats_cleared">Estatísticas limpas</string>
-    <string name="pref_title_highest_egg_count">Ovos em destaque</string>
-    <string name="pref_desc_highest_egg_count">Número de cartões grandes mostrados no topo do ecrã inicial.</string>
-    <string name="pref_summary_highest_egg_count_all">Todos</string>
 </resources>
