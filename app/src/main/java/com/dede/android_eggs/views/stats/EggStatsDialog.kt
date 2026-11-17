@@ -23,11 +23,13 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -146,19 +148,25 @@ fun EggStatsDialog(
                 )
             }
             item("sort") {
-                FlowRow(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    EggStatsSorts.forEachIndexed { index, option ->
-                        FilterChip(
-                            selected = index == sortIndex,
-                            onClick = { sortIndex = index },
-                            label = { Text(stringResource(option.labelRes)) },
-                        )
+                // FilterChip wraps its 32.dp container in a 48.dp touch target, so the
+                // default 8.dp line spacing would leave a 24.dp visual gap when the chips
+                // wrap. A 40.dp target with zero line spacing keeps an 8.dp visual gap
+                // while retaining a touch area larger than the chip itself.
+                CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 40.dp) {
+                    FlowRow(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 24.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(0.dp),
+                    ) {
+                        EggStatsSorts.forEachIndexed { index, option ->
+                            FilterChip(
+                                selected = index == sortIndex,
+                                onClick = { sortIndex = index },
+                                label = { Text(stringResource(option.labelRes)) },
+                            )
+                        }
                     }
                 }
             }
