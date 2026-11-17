@@ -1,7 +1,5 @@
 package com.dede.basic.utils
 
-import android.icu.text.SimpleDateFormat
-import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import java.text.DateFormat
 import java.text.FieldPosition
@@ -28,11 +26,7 @@ class AppLocaleDateFormatter private constructor(pattern: String, locale: Locale
         }
     }
 
-    private val format: Format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        SimpleDateFormat(pattern, locale)
-    } else {
-        java.text.SimpleDateFormat(pattern, locale)
-    }
+    private val format: Format = android.icu.text.SimpleDateFormat(pattern, locale)
 
     override fun format(
         date: Date,

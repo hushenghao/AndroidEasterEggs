@@ -19,8 +19,8 @@ import com.dede.android_eggs.util.AGPUtils
 import com.dede.android_eggs.util.pref
 import com.dede.basic.Utils
 import com.dede.basic.copy
-import java.text.SimpleDateFormat
-import java.util.Date
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 internal object Utilities {
@@ -119,7 +119,8 @@ internal object Utilities {
     }
 
     fun getCrashDetails(thread: Thread, tr: Throwable): String {
-        val time = SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z", Locale.US).format(Date())
+        val time = ZonedDateTime.now()
+            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss Z", Locale.US))
         return "Thread: %s, Time: %s,\n%s".format(
             thread.name, time, tr.getStackTraceString()
         )

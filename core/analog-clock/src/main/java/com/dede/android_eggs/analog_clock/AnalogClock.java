@@ -29,27 +29,32 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import com.dede.android_eggs.analog_clock.R;
 import com.dede.android_eggs.system_colors.ResourcesUtils;
 import com.dede.basic.DrawableKt;
-import com.dede.android_eggs.analog_clock.R;
 
-import java.util.Calendar;
-import java.util.Objects;
-import java.util.TimeZone;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.util.Formatter;
+import java.util.Locale;
 
 /**
  * This widget display an analogic clock with two hands for hours and
  * minutes.
  * <p>
- * Copy from <a href="https://cs.android.com/android/platform/superproject/+/android-7.1.2_r39:frameworks/base/core/java/android/widget/AnalogClock.java">android-7.1.2_r39:frameworks:AnalogClock.java</a>.
+ * Copy from <a href="https://cs.android.com/android/platform/superproject/+/android13-release:frameworks/base/core/java/android/widget/AnalogClock.java">android13-release:frameworks:AnalogClock.java</a>.
+ * The second hand and the configurable time zone support are removed, and the
+ * default dial/hands are tinted with the system palette colors.
  *
  * @attr ref android.R.styleable#AnalogClock_dial
  * @attr ref android.R.styleable#AnalogClock_hand_hour
  * @attr ref android.R.styleable#AnalogClock_hand_minute
  */
 public class AnalogClock extends View {
-    // Use java.util.Calendar replace android.text.format.Time
-    private Calendar mCalendar;
+    private Clock mClock;
 
     private Drawable mHourHand;
     private Drawable mMinuteHand;
@@ -58,7 +63,7 @@ public class AnalogClock extends View {
     private final int mDialWidth;
     private final int mDialHeight;
 
-    private boolean mAttached;
+    private boolean mVisible;
 
     private float mMinutes;
     private float mHour;
@@ -102,7 +107,7 @@ public class AnalogClock extends View {
         }
         a.recycle();
 
-        mCalendar = Calendar.getInstance();
+        mClock = Clock.systemDefaultZone();
 
         mDialWidth = mDial.getIntrinsicWidth();
         mDialHeight = mDial.getIntrinsicHeight();
@@ -118,14 +123,22 @@ public class AnalogClock extends View {
     }
 
     @Override
+    public void onVisibilityAggregated(boolean isVisible) {
+        super.onVisibilityAggregated(isVisible);
+
+        if (isVisible) {
+            onVisible();
+        } else {
+            onInvisible();
+        }
+    }
+
+    @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        IntentFilter filter = new IntentFilter();
 
-        if (!mAttached) {
-            mAttached = true;
-            IntentFilter filter = new IntentFilter();
-
-            filter.addAction(Intent.ACTION_TIME_TICK);
+        if (!mReceiverAttached) {
             filter.addAction(Intent.ACTION_TIME_CHANGED);
             filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
 
@@ -138,13 +151,14 @@ public class AnalogClock extends View {
             // user not the one the context is for.
             getContext().registerReceiver(mIntentReceiver,
                     filter, null, getHandler());
+            mReceiverAttached = true;
         }
 
         // NOTE: It's safe to do these after registering the receiver since the receiver always runs
         // in the main thread, therefore the receiver can't run before this method returns.
 
-        // The time zone may have changed while the receiver wasn't registered, so update the Time
-        mCalendar = Calendar.getInstance();
+        // The time zone may have changed while the receiver wasn't registered, so update the clock.
+        createClock();
 
         // Make sure we update to the current time
         onTimeChanged();
@@ -152,10 +166,24 @@ public class AnalogClock extends View {
 
     @Override
     protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        if (mAttached) {
+        if (mReceiverAttached) {
             getContext().unregisterReceiver(mIntentReceiver);
-            mAttached = false;
+            mReceiverAttached = false;
+        }
+        super.onDetachedFromWindow();
+    }
+
+    private void onVisible() {
+        if (!mVisible) {
+            mVisible = true;
+            mTick.run();
+        }
+    }
+
+    private void onInvisible() {
+        if (mVisible) {
+            removeCallbacks(mTick);
+            mVisible = false;
         }
     }
 
@@ -252,43 +280,90 @@ public class AnalogClock extends View {
         }
     }
 
-    protected Calendar now() {
-        mCalendar.setTimeInMillis(System.currentTimeMillis());
-        return mCalendar;
+    protected Instant now() {
+        return mClock.instant();
     }
 
     protected void onTimeChanged() {
-        Calendar now = this.now();
-
-        int hour = now.get(Calendar.HOUR_OF_DAY);
-        int minute = now.get(Calendar.MINUTE);
-        int second = now.get(Calendar.SECOND);
-
-        mMinutes = minute + second / 60.0f;
-        mHour = hour + mMinutes / 60.0f;
-        mChanged = true;
-
-        updateContentDescription(now);
+        Instant now = now();
+        onTimeChanged(now.atZone(mClock.getZone()).toLocalTime(), now.toEpochMilli());
     }
 
+    private void onTimeChanged(LocalTime localTime, long nowMillis) {
+        float previousHour = mHour;
+        float previousMinutes = mMinutes;
+
+        mMinutes = localTime.getMinute() + localTime.getSecond() / 60.0f;
+        mHour = localTime.getHour() + mMinutes / 60.0f;
+        mChanged = true;
+
+        // Update the content description only if the announced hours and minutes have changed.
+        if ((int) previousHour != (int) mHour || (int) previousMinutes != (int) mMinutes) {
+            updateContentDescription(nowMillis);
+        }
+    }
+
+    /** Intent receiver for the time or time zone changing. */
     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (Objects.equals(intent.getAction(), Intent.ACTION_TIMEZONE_CHANGED)) {
-                String tz = intent.getStringExtra("time-zone");
-                mCalendar = Calendar.getInstance(TimeZone.getTimeZone(tz));
+            if (Intent.ACTION_TIMEZONE_CHANGED.equals(intent.getAction())) {
+                createClock();
             }
 
-            onTimeChanged();
+            mTick.run();
+        }
+    };
+    private boolean mReceiverAttached;
+
+    private final Runnable mTick = new Runnable() {
+        @Override
+        public void run() {
+            removeCallbacks(this);
+            if (!mVisible) {
+                return;
+            }
+
+            Instant now = now();
+            ZonedDateTime zonedDateTime = now.atZone(mClock.getZone());
+            LocalTime localTime = zonedDateTime.toLocalTime();
+
+            // If there's no second hand, then tick at the start of the next minute.
+            //
+            // This must be done with ZonedDateTime as opposed to LocalDateTime to ensure proper
+            // handling of DST. Also note that because of leap seconds, it should not be assumed
+            // that one minute == 60 seconds.
+            Instant startOfNextMinute = zonedDateTime.plusMinutes(1).withSecond(0).toInstant();
+            long millisUntilNextTick = Duration.between(now, startOfNextMinute).toMillis();
+            if (millisUntilNextTick <= 0) {
+                // This should never occur, but if it does, then just check the tick again in
+                // one minute to ensure we're always moving forward.
+                millisUntilNextTick = Duration.ofMinutes(1).toMillis();
+            }
+
+            // Schedule a callback for when the next tick should occur.
+            postDelayed(this, millisUntilNextTick);
+
+            onTimeChanged(localTime, now.toEpochMilli());
 
             invalidate();
         }
     };
 
-    private void updateContentDescription(Calendar time) {
+    private void createClock() {
+        mClock = Clock.systemDefaultZone();
+    }
+
+    private void updateContentDescription(long timeMillis) {
         final int flags = DateUtils.FORMAT_SHOW_TIME;// | DateUtils.FORMAT_24HOUR;
-        String contentDescription = DateUtils.formatDateTime(getContext(),
-                time.getTimeInMillis(), flags);
+        String contentDescription = DateUtils.formatDateRange(
+                getContext(),
+                new Formatter(new StringBuilder(50), Locale.getDefault()),
+                timeMillis /* startMillis */,
+                timeMillis /* endMillis */,
+                flags,
+                null /* timeZone */)
+                .toString();
         setContentDescription(contentDescription);
     }
 }

@@ -12,7 +12,7 @@ import com.dede.android_eggs.views.settings.compose.prefs.launchRocketLauncher
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
 import dagger.hilt.android.qualifiers.ActivityContext
-import java.util.Calendar
+import java.time.LocalTime
 import javax.inject.Inject
 
 private const val TAG = "IntentHandler"
@@ -47,7 +47,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
                 "extra_from_analog_clock_widget_action"
 
             private val hourApiLevelArray: IntArray = intArrayOf(
-                // Calendar.HOUR [0-11]
+                // 12-hour clock [0-11]
                 Build.VERSION_CODES.S,// 0:00
                 // [1-11]
                 Build.VERSION_CODES.CUPCAKE,
@@ -72,7 +72,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
             }
             if (action == 0) {
                 // com.dede.android_eggs.views.widget.AnalogClockWidgetClickAction.OPEN_EGG
-                val hour = Calendar.getInstance().get(Calendar.HOUR)
+                val hour = LocalTime.now().hour % 12
                 val apiLevel = hourApiLevelArray[hour]
                 val egg = eggIntent.easterEggs.find { apiLevel.toFullApiLevel() in it.fullApiLevelRange }
                 if (egg != null) {

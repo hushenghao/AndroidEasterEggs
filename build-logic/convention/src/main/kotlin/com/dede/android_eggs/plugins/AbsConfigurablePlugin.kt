@@ -109,6 +109,11 @@ abstract class AbsConfigurablePlugin(
             compileSdk(Versions.compileSdk)
             buildToolsVersion = Versions.BUILD_TOOLS
 
+            // java.time needs API 26; core library desugaring backports it to
+            // minSdk. Declaring it here also makes lint's fatal NewApi check
+            // accept desugared API usage in every module.
+            compileOptions.isCoreLibraryDesugaringEnabled = true
+
             with(defaultConfig) {
                 minSdk = Versions.MIN_SDK
 
@@ -175,6 +180,8 @@ abstract class AbsConfigurablePlugin(
 
     private fun Project.addDependencies(configurable: Configurable) {
         dependencies {
+            "coreLibraryDesugaring"(libs.library("desugar.jdk.libs"))
+
             when (configurable.moduleType) {
                 ModuleType.APP,
                 ModuleType.LIBRARY -> {

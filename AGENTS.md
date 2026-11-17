@@ -60,6 +60,10 @@ Auto-injected dependencies (no explicit declaration needed in module build file)
 - BASIC modules → `:jvm-basic` (api)
 - Hilt-enabled → Hilt runtime + compiler (ksp)
 - Compose-enabled → Compose BOM + `foundation` + `ui`
+- All APP/LIBRARY/BASIC modules → core library desugaring enabled
+  (`compileOptions.isCoreLibraryDesugaringEnabled = true`) + `coreLibraryDesugaring`
+  (desugar_jdk_libs) so `java.time` works below API 26 — injected in
+  `AbsConfigurablePlugin`, do not re-declare per module
 - Lint-baseline-enabled → `<module>/lint-baseline.xml` is configured as the module's lint
   baseline. The plugin only points lint at that path; the file itself is per-module state
   and not every module has one — see Lint configuration below.
@@ -123,13 +127,19 @@ marketImplementation(libs.google.play.update)
 ```
 
 Lint configuration:
-- `NewApi` and `InlinedApi` are treated as **fatal** (build-breaking).
+- `NewApi` and `InlinedApi` are treated as **fatal** (build-breaking). Core library
+  desugaring (declared for every module in `AbsConfigurablePlugin`) makes lint accept
+  desugared APIs such as `java.time` against `NewApi`.
 - Modules using `easter.eggs.library` or `easter.eggs.compose.library` have a lint baseline
-  path configured, but only some of them have committed the file (22 of 38 as of
-  2026-09-15; most `:eggs:*`, `:core:theme`, `:feature:cat-editor`,
-  `:feature:neko-controls-widget`). Running `:module:lintDebug` on a module **without**
-  the file makes AGP create an empty baseline and fail once — that is pre-existing state,
-  not a regression, and the generated file should be removed rather than committed.
+  path configured, but only some of them have committed the file (23 of 38 as of
+  2026-11-17; most `:eggs:*`, `:core:theme`, `:feature:cat-editor`,
+  `:feature:neko-controls-widget`, `:feature:crash`). Running `:module:lintDebug` on a module
+  **without** the file makes AGP create a baseline and fail once — that is pre-existing state,
+  not a regression. A baseline that pins real, intentionally-deferred issues should be
+  committed; an empty one may be committed as an anchor so `lintDebug` stops failing once
+  (what `:feature:crash` does). False positives belong in a `disable +=` in the module's
+  `lint {}` block instead (see `:core:basic` and `:feature:crash` for
+  `EnsureInitializerMetadata`).
 
 Common verification commands:
 
@@ -504,6 +514,7 @@ Path: `build-logic/convention/`
 | Data | Room, DataStore, Ktor, Okio |
 | Images | BlurHash, Accompanist drawablepainter, Capturable (cat-editor capture) |
 | Debug | LeakCanary, Curtains, Compose tooling |
+| Build | desugar_jdk_libs (core library desugaring, injected by build-logic for `java.time`) |
 | Market | Google Play Review, Play In-App Update |
 
 ## Adding a New Easter Egg Module

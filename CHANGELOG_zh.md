@@ -4,6 +4,7 @@
 
 - 添加 Android App Functions 支持(Android 16+)
 - 添加 GitHub Pagers
+- 时钟与日期处理迁移到 java.time（核心库脱糖）
 
 ### v5.6.0 (2026-10-20)
 

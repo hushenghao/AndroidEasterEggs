@@ -30,8 +30,8 @@ import com.dede.basic.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.text.SimpleDateFormat
-import java.util.Date
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 import com.dede.android_eggs.resources.R as StringsR
 
@@ -152,7 +152,8 @@ fun DataBackupPref() {
             shape = OptionShapes.firstShape(),
             onClick = {
                 val fileName = "easter_eggs_backup_${
-                    SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
+                    LocalDateTime.now()
+                        .format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss", Locale.US))
                 }.zip"
                 exportLauncher.launch(fileName)
             },

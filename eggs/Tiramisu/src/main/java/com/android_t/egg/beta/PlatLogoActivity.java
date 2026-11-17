@@ -49,7 +49,10 @@ import com.dede.android_eggs.system_colors.SystemColorDrawables;
 import com.dede.basic.SpUtils;
 import com.dede.android_eggs.analog_clock.AnalogClock;
 
-import java.util.Calendar;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 /**
  * @hide
@@ -237,17 +240,22 @@ public class PlatLogoActivity extends Activity {
         }
 
         @Override
-        public Calendar now() {
-            Calendar realNow = super.now();
+        protected Instant now() {
+            final Instant realNow = super.now();
+            final ZoneId tz = Clock.systemDefaultZone().getZone();
+            final ZonedDateTime zdTime = realNow.atZone(tz);
             if (mOverride) {
                 if (mOverrideHour < 0) {
-                    mOverrideHour = realNow.get(Calendar.HOUR_OF_DAY);
+                    mOverrideHour = zdTime.getHour();
                 }
-                realNow.set(Calendar.HOUR_OF_DAY, mOverrideHour);
-                realNow.set(Calendar.MINUTE, mOverrideMinute);
-                realNow.set(Calendar.SECOND, 0);
+                return Clock.fixed(zdTime
+                        .withHour(mOverrideHour)
+                        .withMinute(mOverrideMinute)
+                        .withSecond(0)
+                        .toInstant(), tz).instant();
+            } else {
+                return realNow;
             }
-            return realNow;
         }
 
         double toPositiveDegrees(double rad) {

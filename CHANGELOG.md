@@ -4,6 +4,7 @@
 
 - Add Android App Functions support (Android 16+)
 - Add GitHub Pagers
+- Migrate clock and date handling to java.time (core library desugaring)
 
 ### v5.6.0 (2026-10-20)
 
