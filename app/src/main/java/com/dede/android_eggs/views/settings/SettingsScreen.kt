@@ -96,6 +96,7 @@ fun SettingsContent(
             .then(modifier),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        // Appearance
         ThemePref()
 
         ColorSourcePref()
@@ -108,27 +109,20 @@ fun SettingsContent(
             LanguagePref()
         }
 
+        SettingDivider()
+
+        // Home
         if (IconVisualEffectsPrefUtil.isSupported()) {
             IconVisualEffectsPref()
         }
 
         HighestEggCountPref()
 
-        SettingDivider()
-
         SnapshotPref()
 
         TimelinePref()
 
         EggStatsPref()
-
-        CatEditorPref()
-
-        RocketLauncherPref()
-
-        WidgetsPref()
-
-        ComponentManagerPref()
 
         // Hidden on VIVO: its recents merges all of an app's tasks into one
         // card regardless of task/process/affinity, so this feature can't
@@ -137,10 +131,22 @@ fun SettingsContent(
             RetainInRecentsPref()
         }
 
+        SettingDivider()
+
+        // General
+        CatEditorPref()
+
+        RocketLauncherPref()
+
+        WidgetsPref()
+
+        ComponentManagerPref()
+
         DataBackupPref()
 
         SettingDivider()
 
+        // About
         AboutGroup()
 
         ContributeGroup()

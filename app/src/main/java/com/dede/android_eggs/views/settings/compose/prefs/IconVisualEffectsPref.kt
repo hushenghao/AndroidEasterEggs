@@ -12,6 +12,11 @@ import com.dede.android_eggs.resources.R as StringsR
 
 object IconVisualEffectsPrefUtil {
 
+    // The effect matrix only applies to an adaptive icon's foreground layer
+    // (AlterableAdaptiveIconDrawable#setForegroundMatrix), and adaptive icons
+    // (AdaptiveIconDrawable) only exist from API 26. Simulating adaptive icons
+    // below API 26 with VectorDrawable + layer-list looked bad, so the feature
+    // is simply hidden on Android 8.0-.
     @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.O)
     fun isSupported(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
