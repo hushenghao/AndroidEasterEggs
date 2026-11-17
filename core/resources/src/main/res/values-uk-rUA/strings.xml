@@ -87,4 +87,19 @@
     <string name="dialog_restore_defaults_message">Це скине всі налаштування, зокрема тему, значок програми та мову. Збережені коти та конфігурації віджетів залишаться без змін. Цю дію неможливо скасувати. Ви впевнені, що хочете продовжити?</string>
     <string name="action_confirm_restore_defaults">Скинути</string>
     <string name="toast_restore_defaults_success">Налаштування відновлено до значень за замовчуванням. Програма перезапуститься.</string>
+
+    <string name="label_egg_stats">Статистика великодніх яєць</string>
+    <string name="label_egg_stats_desc">Локальна історія запусків кожного великоднього яйця</string>
+    <string name="egg_stats_summary_format">Запущено %1$d з %2$d яєць · усього %3$d разів</string>
+    <string name="egg_stats_sort_most_played">Найчастіше запускаються</string>
+    <string name="egg_stats_sort_recently_played">Нещодавно запущені</string>
+    <string name="egg_stats_first_opened">Перше відкриття</string>
+    <string name="egg_stats_last_played">Останній запуск</string>
+    <string name="egg_stats_play_count">Кількість запусків</string>
+    <string name="egg_stats_played_count">Запущено %d×</string>
+    <string name="egg_stats_never_played">Ще не запускалося</string>
+    <string name="egg_stats_clear">Очистити статистику</string>
+    <string name="egg_stats_clear_confirm_title">Очистити статистику?</string>
+    <string name="egg_stats_clear_confirm_message">Це видалить історію запусків усіх великодніх яєць, скасувати це неможливо.</string>
+    <string name="egg_stats_cleared">Статистику очищено</string>
 </resources>

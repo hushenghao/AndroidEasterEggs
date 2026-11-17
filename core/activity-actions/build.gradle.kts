@@ -10,6 +10,7 @@ dependencies {
     implementation(project(":core:composable"))
     implementation(project(":core:resources"))
     implementation(project(":core:shortcut"))
+    implementation(project(":core:egg-stats"))
 
     // cats
     implementation(project(":eggs:CinnamonBun"))

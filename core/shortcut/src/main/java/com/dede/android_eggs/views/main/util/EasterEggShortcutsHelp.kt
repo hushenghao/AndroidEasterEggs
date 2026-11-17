@@ -40,6 +40,10 @@ object EasterEggShortcutsHelp {
 
     private const val EXTRA_SHORTCUT_ID = "extra_shortcut_id"
 
+    /** Full api level range of the shortcut target, used to record the play history. */
+    const val EXTRA_EGG_API_LEVEL_FIRST = "extra_egg_api_level_first"
+    const val EXTRA_EGG_API_LEVEL_LAST = "extra_egg_api_level_last"
+
     private const val FORMAT_DYNAMIC_SHORTCUT_ID = "dynamic_shortcut_android_%d"
     private const val FORMAT_PIN_SHORTCUT_ID = "android_%d"
 
@@ -163,7 +167,7 @@ object EasterEggShortcutsHelp {
                 setRank(egg.fullApiLevel)
             }
             .applyNotNull(clazz) {
-                val eggIntent = createTargetIntent(context, clazz)
+                val eggIntent = createTargetIntent(context, egg, it)
                     .putExtra(EXTRA_SHORTCUT_ID, shortcutId)
 
                 val mainIntent = Utils.getLaunchIntent(context)
@@ -177,8 +181,14 @@ object EasterEggShortcutsHelp {
             .build()
     }
 
-    private fun createTargetIntent(context: Context, targetClass: Class<out Activity>): Intent {
+    private fun createTargetIntent(
+        context: Context,
+        egg: EasterEgg,
+        targetClass: Class<out Activity>,
+    ): Intent {
         return Intent(Intent.ACTION_VIEW).setClass(context, targetClass)
+            .putExtra(EXTRA_EGG_API_LEVEL_FIRST, egg.fullApiLevelRange.first)
+            .putExtra(EXTRA_EGG_API_LEVEL_LAST, egg.fullApiLevelRange.last)
     }
 
     fun isSupportShortcut(egg: EasterEgg): Boolean {

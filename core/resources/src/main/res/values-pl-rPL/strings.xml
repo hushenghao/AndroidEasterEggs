@@ -78,4 +78,19 @@
     <string name="dialog_import_backup_title">Zaimportuj zapisane dane</string>
     <string name="dialog_import_backup_message">To może nadpisać wszystkie dane aplikacji, łącznie z ustawieniami, zapisanymi kotami, i konfiguracjami widżetów. To nie może zostać cofnięte. Chcesz kontynuować?</string>
     <string name="action_confirm_import">Importuj</string>
+
+    <string name="label_egg_stats">Statystyki Easter Eggów</string>
+    <string name="label_egg_stats_desc">Lokalna historia grania dla każdego Easter Egga</string>
+    <string name="egg_stats_summary_format">Zagrano %1$d z %2$d jajek · łącznie %3$d razy</string>
+    <string name="egg_stats_sort_most_played">Najczęściej grane</string>
+    <string name="egg_stats_sort_recently_played">Ostatnio grane</string>
+    <string name="egg_stats_first_opened">Pierwsze otwarcie</string>
+    <string name="egg_stats_last_played">Ostatnia gra</string>
+    <string name="egg_stats_play_count">Liczba gier</string>
+    <string name="egg_stats_played_count">Zagrano %d×</string>
+    <string name="egg_stats_never_played">Jeszcze nie zagrano</string>
+    <string name="egg_stats_clear">Wyczyść statystyki</string>
+    <string name="egg_stats_clear_confirm_title">Wyczyścić statystyki?</string>
+    <string name="egg_stats_clear_confirm_message">Spowoduje to usunięcie historii grania wszystkich Easter Eggów i nie można tego cofnąć.</string>
+    <string name="egg_stats_cleared">Statystyki wyczyszczone</string>
 </resources>

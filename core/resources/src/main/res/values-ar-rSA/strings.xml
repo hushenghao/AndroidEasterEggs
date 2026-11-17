@@ -54,4 +54,19 @@
     <string name="rocket_launcher_all_app_icons">جميع أيقونات التطبيق</string>
     <string name="rocket_launcher_all_icons">جميع الأيقونات</string>
     <string name="rocket_launcher_query_all_app_desc">تحتاج إلى الحصول على قائمة جميع التطبيقات</string>
+
+    <string name="label_egg_stats">إحصائيات البيض</string>
+    <string name="label_egg_stats_desc">سجل اللعب المحلي لكل بيضة</string>
+    <string name="egg_stats_summary_format">تم لعب %1$d من %2$d بيضة · إجمالي %3$d مرة</string>
+    <string name="egg_stats_sort_most_played">الأكثر لعباً</string>
+    <string name="egg_stats_sort_recently_played">تم لعبها مؤخراً</string>
+    <string name="egg_stats_first_opened">أول فتح</string>
+    <string name="egg_stats_last_played">آخر لعب</string>
+    <string name="egg_stats_play_count">مرات اللعب</string>
+    <string name="egg_stats_played_count">تم لعبها %d مرة</string>
+    <string name="egg_stats_never_played">لم تُلعب بعد</string>
+    <string name="egg_stats_clear">مسح الإحصائيات</string>
+    <string name="egg_stats_clear_confirm_title">مسح الإحصائيات؟</string>
+    <string name="egg_stats_clear_confirm_message">سيؤدي هذا إلى حذف سجل اللعب لكل بيضة ولا يمكن التراجع عنه.</string>
+    <string name="egg_stats_cleared">تم مسح الإحصائيات</string>
 </resources>

@@ -15,13 +15,18 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dede.android_eggs.composable.WindowWidthPane
 import com.dede.android_eggs.composable.currentWindowWidthPane
+import com.dede.android_eggs.egg_stats.EggStatsRepository
+import com.dede.android_eggs.egg_stats.EggStatsSummary
 import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.android_eggs.util.compose.plus
 import com.dede.android_eggs.views.main.util.EasterEggHelp
@@ -67,6 +72,18 @@ internal fun BaseEasterEgg.lazyItemKey(): String {
     }
 }
 
+@Composable
+private fun rememberEggStats(): Map<IntRange, EggStatsSummary> {
+    if (LocalInspectionMode.current) {
+        return emptyMap()
+    }
+    val summaries by EggStatsRepository.observeSummaries()
+        .collectAsStateWithLifecycle(initialValue = emptyList())
+    return remember(summaries) {
+        summaries.associateBy { it.apiLevelFirst..it.apiLevelLast }
+    }
+}
+
 /**
  * The egg list entry: the searched results, or the browsing list grouped by the highest
  * egg, wavy dividers and the footer. The browsing list is a two-column grid on
@@ -99,6 +116,7 @@ fun EasterEggList(
 
     val listContentPadding = contentPadding +
             PaddingValues(vertical = 10.dp, horizontal = 12.dp)
+    val statsMap = rememberEggStats()
     Crossfade(
         modifier = Modifier
             .then(modifier)
@@ -112,6 +130,7 @@ fun EasterEggList(
                     easterEggs = easterEggs,
                     contentPadding = listContentPadding,
                     releaseDateLookup = releaseDateLookup,
+                    statsMap = statsMap,
                 )
             }
             EasterEggListType.GRID -> {
@@ -119,6 +138,7 @@ fun EasterEggList(
                     easterEggs = easterEggs,
                     contentPadding = listContentPadding,
                     releaseDateLookup = releaseDateLookup,
+                    statsMap = statsMap,
                 )
             }
             EasterEggListType.SEARCH_RESULT -> {
@@ -126,6 +146,7 @@ fun EasterEggList(
                     easterEggs = searchResults,
                     contentPadding = listContentPadding,
                     releaseDateLookup = releaseDateLookup,
+                    statsMap = statsMap,
                 )
             }
             EasterEggListType.SEARCH_EMPTY -> SearchEmpty(contentPadding)
@@ -139,6 +160,7 @@ private fun EasterEggColumnList(
     easterEggs: List<BaseEasterEgg>,
     contentPadding: PaddingValues,
     releaseDateLookup: (Int) -> Date?,
+    statsMap: Map<IntRange, EggStatsSummary>,
 ) {
     LazyColumn(
         contentPadding = contentPadding,
@@ -154,6 +176,7 @@ private fun EasterEggColumnList(
                 base = it,
                 modifier = Modifier.animateItem(),
                 releaseDateLookup = releaseDateLookup,
+                statsMap = statsMap,
             )
         }
         item("wavy1") {
@@ -167,6 +190,7 @@ private fun EasterEggColumnList(
                 base = it,
                 modifier = Modifier.animateItem(),
                 releaseDateLookup = releaseDateLookup,
+                statsMap = statsMap,
             )
         }
         item("wavy2") {
@@ -183,6 +207,7 @@ private fun EasterEggGrid(
     easterEggs: List<BaseEasterEgg>,
     contentPadding: PaddingValues,
     releaseDateLookup: (Int) -> Date?,
+    statsMap: Map<IntRange, EggStatsSummary>,
 ) {
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
@@ -200,6 +225,7 @@ private fun EasterEggGrid(
                 base = it,
                 modifier = Modifier.animateItem(),
                 releaseDateLookup = releaseDateLookup,
+                statsMap = statsMap,
             )
         }
         items(
@@ -210,6 +236,7 @@ private fun EasterEggGrid(
                 base = it,
                 modifier = Modifier.animateItem(),
                 releaseDateLookup = releaseDateLookup,
+                statsMap = statsMap,
             )
         }
         item("wavy2", span = StaggeredGridItemSpan.FullLine) {

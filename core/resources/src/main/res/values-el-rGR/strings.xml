@@ -78,4 +78,19 @@
     <string name="dialog_import_backup_title">Εισαγωγή αντίγραφου ασφαλείας</string>
     <string name="dialog_import_backup_message">Αυτό θα αντικαταστήσει όλα τα τρέχοντα δεδομένα εφαρμογής, συμπεριλαμβανομένων των ρυθμίσεων, των αποθηκευμένων γατών και των διαμορφώσεων γραφικών στοιχείων. Αυτή η ενέργεια δεν μπορεί να αναιρεθεί. Είστε βέβαιοι ότι θέλετε να συνεχίσετε;</string>
     <string name="action_confirm_import">Εισαγωγή</string>
+
+    <string name="label_egg_stats">Στατιστικά Πασχαλινών Αυγών</string>
+    <string name="label_egg_stats_desc">Τοπικό ιστορικό παιχνιδιού για κάθε Πασχαλινό Αυγό</string>
+    <string name="egg_stats_summary_format">Παίχτηκαν %1$d από %2$d αυγά · %3$d παιχνίδια συνολικά</string>
+    <string name="egg_stats_sort_most_played">Περισσότερο παιγμένα</string>
+    <string name="egg_stats_sort_recently_played">Πρόσφατα παιγμένα</string>
+    <string name="egg_stats_first_opened">Πρώτο άνοιγμα</string>
+    <string name="egg_stats_last_played">Τελευταίο παίξιμο</string>
+    <string name="egg_stats_play_count">Παιχνίδια</string>
+    <string name="egg_stats_played_count">Παίχτηκε %d×</string>
+    <string name="egg_stats_never_played">Δεν έχει παιχτεί ακόμη</string>
+    <string name="egg_stats_clear">Εκκαθάριση στατιστικών</string>
+    <string name="egg_stats_clear_confirm_title">Εκκαθάριση στατιστικών;</string>
+    <string name="egg_stats_clear_confirm_message">Αυτό διαγράφει το ιστορικό παιχνιδιού όλων των Πασχαλινών Αυγών και δεν μπορεί να αναιρεθεί.</string>
+    <string name="egg_stats_cleared">Τα στατιστικά εκκαθαρίστηκαν</string>
 </resources>

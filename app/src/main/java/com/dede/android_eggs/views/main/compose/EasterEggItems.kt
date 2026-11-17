@@ -37,6 +37,8 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.egg_stats.EggLaunchSource
+import com.dede.android_eggs.egg_stats.EggStatsSummary
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
@@ -57,6 +59,8 @@ fun EasterEggHighestItem(
     modifier: Modifier = Modifier,
     base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first(),
     releaseDateLookup: (Int) -> Date? = { null },
+    statsMap: Map<IntRange, EggStatsSummary> = emptyMap(),
+    launchSource: EggLaunchSource = EggLaunchSource.LIST,
 ) {
     val context = LocalContext.current
     val easterEggState = rememberEasterEggState(base)
@@ -67,7 +71,7 @@ fun EasterEggHighestItem(
         modifier = modifier
             .fillMaxWidth(),
         onClick = {
-            EggActionHelp.launchEgg(context, egg)
+            EggActionHelp.launchEgg(context, egg, launchSource)
         }
     ) {
         val snapshot = remember(egg) {
@@ -83,6 +87,7 @@ fun EasterEggHighestItem(
         EasterEggItemContent(
             eggState = easterEggState,
             releaseDateLookup = releaseDateLookup,
+            statsMap = statsMap,
         )
     }
 }
@@ -93,6 +98,8 @@ fun EasterEggSimpleItem(
     modifier: Modifier = Modifier,
     base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first(),
     releaseDateLookup: (Int) -> Date? = { null },
+    statsMap: Map<IntRange, EggStatsSummary> = emptyMap(),
+    launchSource: EggLaunchSource = EggLaunchSource.LIST,
 ) {
     val context = LocalContext.current
     val easterEggState = rememberEasterEggState(base)
@@ -103,12 +110,13 @@ fun EasterEggSimpleItem(
         modifier = modifier
             .fillMaxWidth(),
         onClick = {
-            EggActionHelp.launchEgg(context, egg)
+            EggActionHelp.launchEgg(context, egg, launchSource)
         },
     ) {
         EasterEggItemContent(
             eggState = easterEggState,
             releaseDateLookup = releaseDateLookup,
+            statsMap = statsMap,
         )
     }
 }
@@ -161,9 +169,11 @@ private fun EasterEggItemContent(
     modifier: Modifier = Modifier,
     eggState: EasterEggState,
     releaseDateLookup: (Int) -> Date?,
+    statsMap: Map<IntRange, EggStatsSummary>,
 ) {
     val context = LocalContext.current
     val egg = eggState.getEasterEgg()
+    val stats = statsMap[egg.fullApiLevelRange]
 
     val androidVersion = remember(egg.fullApiLevelRange) {
         EasterEggHelp.VersionFormatter.create(egg.fullApiLevelRange, egg.nicknameRes)
@@ -241,6 +251,15 @@ private fun EasterEggItemContent(
                 }
                 if (releaseDate != null) {
                     Chip(text = dateFormat.format(releaseDate))
+                }
+                val playCount = stats?.playCount ?: 0
+                if (playCount > 0) {
+                    Chip(
+                        text = stringResource(
+                            StringsR.string.egg_stats_played_count,
+                            playCount,
+                        )
+                    )
                 }
             }
 

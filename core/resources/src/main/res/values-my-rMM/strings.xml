@@ -16,4 +16,19 @@
     <string name="message_trypophobia_warning">ဤသည်မှာ &lt;b&gt;Trypophobia&lt;/b&gt; ရှိသူအား အချို့သောပုံများတွင် မသက်မသာဖြစ်စေနိုင်သော သတိပေးချက်ဖြစ်သည်။ ဘာပဲဖြစ်ဖြစ် ဆက်လုပ်ချင်ပါသလား။?</string>
     <string name="label_settings">ဆက်တင်များ</string>
     <string name="label_project_desc">ဤပရောဂျက်တွင် အီစတာကြက်ဥ၏ကုဒ်ကို ပြုပြင်ပြောင်းလဲမှုများစွာမပြုလုပ်ဘဲ စက်ပစ္စည်းအများစုသည် ကွဲပြားခြားနားသော အီစတာကြက်ဥ၏ ဗားရှင်းကို အများအပြားမွမ်းမံပြင်ဆင်မှုမပြုလုပ်ဘဲ စနစ်အီစတာကြက်ဥအားလုံးနှင့် တွဲဖက်အသုံးပြုနိုင်စေရန် ရည်ရွယ်သည့် စနစ်အားလုံး၏ ကုဒ်အပြည့်အစုံပါရှိသည်။ ဗားရှင်းအသစ်များသည် အဆိုပါစနစ်၏ အင်္ဂါရပ်အသစ်များကို အသုံးပြုသော်လည်း အောက်ဗားရှင်းများသည် အချို့သောလုပ်ဆောင်ချက်များကိုသာ အသုံးပြုနိုင်ပါသည်။.</string>
+
+    <string name="label_egg_stats">အီစတာဥ စာရင်းအင်း</string>
+    <string name="label_egg_stats_desc">အီစတာဥတစ်ခုစီအတွက် စက်တွင်းကစားမှု မှတ်တမ်း</string>
+    <string name="egg_stats_summary_format">ဥ %2$d ခုအနက် %1$d ခု ကစားပြီး · စုစုပေါင်း %3$d ကြိမ်</string>
+    <string name="egg_stats_sort_most_played">အများဆုံး ကစားသော</string>
+    <string name="egg_stats_sort_recently_played">မကြာသေးမီက ကစားသော</string>
+    <string name="egg_stats_first_opened">ပထမဆုံး ဖွင့်ခြင်း</string>
+    <string name="egg_stats_last_played">နောက်ဆုံး ကစားခြင်း</string>
+    <string name="egg_stats_play_count">ကစားမှု အရေအတွက်</string>
+    <string name="egg_stats_played_count">%d ကြိမ် ကစားပြီး</string>
+    <string name="egg_stats_never_played">မကစားရသေးပါ</string>
+    <string name="egg_stats_clear">စာရင်းအင်း ရှင်းလင်းရန်</string>
+    <string name="egg_stats_clear_confirm_title">စာရင်းအင်း ရှင်းလင်းမလား?</string>
+    <string name="egg_stats_clear_confirm_message">၎င်းသည် အီစတာဥအားလုံး၏ ကစားမှုမှတ်တမ်းကို ဖျက်ပစ်မည်ဖြစ်ပြီး ပြန်လည်မရနိုင်ပါ။</string>
+    <string name="egg_stats_cleared">စာရင်းအင်း ရှင်းလင်းပြီး</string>
 </resources>

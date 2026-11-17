@@ -34,4 +34,19 @@
     <string name="label_welcome">ยินดีต้อนรับสู่แคตตาล็อกไข่อีสเตอร์ 🎉🎉🎉</string>
     <string name="label_share">แบ่งปัน</string>
     <string name="label_search_hint">ค้นหา…</string>
+
+    <string name="label_egg_stats">สถิติไข่อีสเตอร์</string>
+    <string name="label_egg_stats_desc">ประวัติการเล่นในเครื่องสำหรับไข่อีสเตอร์แต่ละฟอง</string>
+    <string name="egg_stats_summary_format">เล่นแล้ว %1$d จาก %2$d ฟอง · รวม %3$d ครั้ง</string>
+    <string name="egg_stats_sort_most_played">เล่นมากที่สุด</string>
+    <string name="egg_stats_sort_recently_played">เล่นล่าสุด</string>
+    <string name="egg_stats_first_opened">เปิดครั้งแรก</string>
+    <string name="egg_stats_last_played">เล่นล่าสุด</string>
+    <string name="egg_stats_play_count">จำนวนครั้งที่เล่น</string>
+    <string name="egg_stats_played_count">เล่นแล้ว %d ครั้ง</string>
+    <string name="egg_stats_never_played">ยังไม่ได้เล่น</string>
+    <string name="egg_stats_clear">ล้างสถิติ</string>
+    <string name="egg_stats_clear_confirm_title">ล้างสถิติหรือไม่?</string>
+    <string name="egg_stats_clear_confirm_message">การดำเนินการนี้จะลบประวัติการเล่นของไข่อีสเตอร์ทั้งหมดและไม่สามารถยกเลิกได้</string>
+    <string name="egg_stats_cleared">ล้างสถิติแล้ว</string>
 </resources>

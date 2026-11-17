@@ -60,4 +60,19 @@
     <string name="rocket_launcher_all_app_icons">Aplikacije</string>
     <string name="rocket_launcher_all_icons">Sve ikone</string>
     <string name="rocket_launcher_query_all_app_desc">Potrebno dohvaćanje popisa aplikacija prikazanih u početnim aplikacijama</string>
+
+    <string name="label_egg_stats">Statistika Easter Egga</string>
+    <string name="label_egg_stats_desc">Lokalna povijest igranja za svaki Easter Egg</string>
+    <string name="egg_stats_summary_format">Igrano %1$d od %2$d jaja · ukupno %3$d igara</string>
+    <string name="egg_stats_sort_most_played">Najigraniji</string>
+    <string name="egg_stats_sort_recently_played">Nedavno igrani</string>
+    <string name="egg_stats_first_opened">Prvo otvaranje</string>
+    <string name="egg_stats_last_played">Posljednje igranje</string>
+    <string name="egg_stats_play_count">Broj igara</string>
+    <string name="egg_stats_played_count">Igrano %d×</string>
+    <string name="egg_stats_never_played">Još nije igrano</string>
+    <string name="egg_stats_clear">Očisti statistiku</string>
+    <string name="egg_stats_clear_confirm_title">Očistiti statistiku?</string>
+    <string name="egg_stats_clear_confirm_message">Ovo briše povijest igranja svih Easter Eggova i ne može se poništiti.</string>
+    <string name="egg_stats_cleared">Statistika je očišćena</string>
 </resources>

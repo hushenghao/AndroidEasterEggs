@@ -48,6 +48,7 @@ include(
     ":core:color-picker",
     ":core:settings-ui",
     ":core:shortcut",
+    ":core:egg-stats",
     ":core:alterable-adaptive-icon",
     ":core:custom-tab-browser",
     ":core:system-colors",

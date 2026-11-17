@@ -40,4 +40,19 @@
     <string name="pref_retain_recent_egg_tasks">Behåll de senaste Ägguppgifterna</string>
     <string name="pref_summary_retain_recent_egg_tasks">Behåll ägguppgifter på skärmen Senaste, maximalt 5</string>
     <string name="label_about">Om</string>
+
+    <string name="label_egg_stats">Påskäggsstatistik</string>
+    <string name="label_egg_stats_desc">Lokal spelhistorik för varje påskägg</string>
+    <string name="egg_stats_summary_format">Spelade %1$d av %2$d ägg · %3$d spel totalt</string>
+    <string name="egg_stats_sort_most_played">Mest spelade</string>
+    <string name="egg_stats_sort_recently_played">Nyligen spelade</string>
+    <string name="egg_stats_first_opened">Först öppnad</string>
+    <string name="egg_stats_last_played">Senast spelad</string>
+    <string name="egg_stats_play_count">Antal spel</string>
+    <string name="egg_stats_played_count">Spelad %d×</string>
+    <string name="egg_stats_never_played">Inte spelad än</string>
+    <string name="egg_stats_clear">Rensa statistiken</string>
+    <string name="egg_stats_clear_confirm_title">Rensa statistiken?</string>
+    <string name="egg_stats_clear_confirm_message">Detta tar bort spelhistoriken för alla påskägg och kan inte ångras.</string>
+    <string name="egg_stats_cleared">Statistiken rensad</string>
 </resources>

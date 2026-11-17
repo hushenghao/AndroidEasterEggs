@@ -128,6 +128,7 @@ dependencies {
     implementation(project(":core:settings-ui"))
     implementation(project(":core:composable"))
     implementation(project(":core:shortcut"))
+    implementation(project(":core:egg-stats"))
     implementation(project(":core:activity-actions"))
     implementation(project(":core:resources"))
     implementation(project(":core:alterable-adaptive-icon"))

@@ -78,4 +78,19 @@
     <string name="dialog_import_backup_title">백업 가져오기</string>
     <string name="dialog_import_backup_message">이렇게 하면 설정, 저장된 고양이, 위젯 구성 등 현재 앱 데이터가 모두 덮어쓰여집니다. 이 작업은 되돌릴 수 없습니다. 계속하시겠습니까?</string>
     <string name="action_confirm_import">가져오기</string>
+
+    <string name="label_egg_stats">이스터 에그 통계</string>
+    <string name="label_egg_stats_desc">각 이스터 에그의 로컬 플레이 기록</string>
+    <string name="egg_stats_summary_format">%1$d/%2$d개 에그 플레이 · 총 %3$d회</string>
+    <string name="egg_stats_sort_most_played">가장 많이 플레이</string>
+    <string name="egg_stats_sort_recently_played">최근 플레이</string>
+    <string name="egg_stats_first_opened">첫 실행</string>
+    <string name="egg_stats_last_played">마지막 플레이</string>
+    <string name="egg_stats_play_count">플레이 횟수</string>
+    <string name="egg_stats_played_count">%d회 플레이</string>
+    <string name="egg_stats_never_played">아직 플레이하지 않음</string>
+    <string name="egg_stats_clear">통계 지우기</string>
+    <string name="egg_stats_clear_confirm_title">통계를 지울까요?</string>
+    <string name="egg_stats_clear_confirm_message">모든 이스터 에그의 플레이 기록이 삭제되며 되돌릴 수 없습니다.</string>
+    <string name="egg_stats_cleared">통계를 지웠습니다</string>
 </resources>

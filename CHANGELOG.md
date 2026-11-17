@@ -5,6 +5,7 @@
 - Add Android App Functions support (Android 16+)
 - Add GitHub Pagers
 - Migrate clock and date handling to java.time (core library desugaring)
+- Add local Easter egg play statistics (first opened, last played, play count)
 
 ### v5.6.0 (2026-10-20)
 

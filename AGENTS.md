@@ -55,7 +55,7 @@ easter.eggs.basic.library     →  :jvm-basic (api)
 | Plugin ID                      | Module Type | Hilt | Compose | Lint Baseline | Used By |
 |-------------------------------|-------------|------|---------|---------------|---------|
 | `easter.eggs.basic.library`   | LIBRARY     | No   | No      | No            | `:core:analog-clock`, `:core:basic`, `:core:provider`, `:core:system-colors` |
-| `easter.eggs.library`         | LIBRARY     | Yes  | No      | Yes           | Older `:eggs:*` (Gingerbread–Tiramisu), `:eggs:RocketLauncher`, `:core:custom-tab-browser`, `:core:resources`, `:core:shortcut` |
+| `easter.eggs.library`         | LIBRARY     | Yes  | No      | Yes           | Older `:eggs:*` (Gingerbread–Tiramisu), `:eggs:RocketLauncher`, `:core:custom-tab-browser`, `:core:resources`, `:core:shortcut`, `:core:egg-stats` |
 | `easter.eggs.compose.library` | LIBRARY     | Yes  | Yes     | Yes           | All `:core:*` except the four basic-library modules above, `:feature:*`, newer `:eggs:*` (UpsideDownCake+) |
 | `easter.eggs.app`             | APP         | Yes  | Yes     | No            | `:app` only |
 
@@ -135,7 +135,7 @@ Lint configuration:
   desugaring (declared for every module in `AbsConfigurablePlugin`) makes lint accept
   desugared APIs such as `java.time` against `NewApi`.
 - Modules using `easter.eggs.library` or `easter.eggs.compose.library` have a lint baseline
-  path configured, but only some of them have committed the file (23 of 38 as of
+  path configured, but only some of them have committed the file (24 of 39 as of
   2026-11-17; most `:eggs:*`, `:core:theme`, `:feature:cat-editor`,
   `:feature:neko-controls-widget`, `:feature:crash`). Running `:module:lintDebug` on a module
   **without** the file makes AGP create a baseline and fail once — that is pre-existing state,
@@ -253,6 +253,7 @@ All core modules use `easter.eggs.compose.library` except where noted.
 | `:core:color-picker`              | compose.library          | `com.dede.android_eggs.color_picker`                | Compose color picker: `ColorPickerDialog`, the square SV palette, linear/vertical gradient sliders, preset swatches, `Checkerboard` and `ColorPickerUtilities`. |
 | `:core:composable`                | compose.library          | `com.dede.android_eggs.composable`                  | Shared Compose UI utilities and reusable composables. |
 | `:core:custom-tab-browser`        | library (non-Compose)    | `com.dede.android_eggs.browser`                     | AndroidX Custom Tabs browser integration. Keep this module browser-focused; do not add Compose UI here. |
+| `:core:egg-stats`                 | library (non-Compose)    | `com.dede.android_eggs.egg_stats`                   | Easter egg play history in a Room 3 database (`egg_stats.db`). One `egg_play_events` row per launch stores the egg's full api level range, timestamp and launch source; first opened, last played and play count are aggregated by SQL rather than persisted separately. The `(api_level_first, api_level_last)` pair is the stats identity, matching `EasterEgg.equals/hashCode` and `lazyItemKey`: do not switch to public api level or first-only, and do not add a separate eggs table. A range change orphans history; migrate to a stable `egg_key` only if that becomes a real case. |
 | `:core:icon-shape`                | compose.library          | `com.dede.android_eggs.icon_shape`                  | Launcher-icon masking shapes: `ShapeSpec` / `shapeSpecs`, the system icon mask (`SystemIconMaskUtil`) and path/polygon shape helpers. `IconShapePreference` holds the live `pref_key_override_icon_shape` state, so icon renderers depend on this instead of on the settings UI kit. |
 | `:core:icons`                     | compose.library          | `com.dede.android_eggs.ui.composes.icons`           | Compose Material icon assets and wrappers. Output target of `:script:compose-material-icons-generator` — keep hand-written or business code out of it. |
 | `:core:local-provider`            | compose.library          | `com.dede.android_eggs.local_provider`              | CompositionLocal providers and URI handling (when Compose-dependent). |
@@ -366,7 +367,8 @@ Rules when adding or changing a setting:
 
 Not in the registry: the AOSP-derived `N_mPrefs` / `R_mPrefs` / `S_mPrefs` / `T_mPrefs`
 neko state, the two DataStore files (per-widget config), the launcher icon state
-(`PackageManager` component state) and the language (`AppCompatDelegate` locales).
+(`PackageManager` component state), the language (`AppCompatDelegate` locales) and the
+easter egg play history (`egg_stats.db` in `:core:egg-stats`).
 
 Resetting to defaults is `AppSettings.reset(context)`: one transaction that drops every
 registered key, so each reads back its declared default (committed synchronously, because
@@ -492,7 +494,7 @@ Path: `build-logic/convention/`
 - `lifecycle`, `activity` — AndroidX lifecycle/activity
 - `room` — Room database. Note this is Room 3: the `androidx.room3` group plus the
   `androidx.room3` Gradle plugin, and the driver is `sqlite-framework` (not the bundled
-  SQLite). `:feature:cat-editor` is the only user.
+  SQLite). `:feature:cat-editor` and `:core:egg-stats` are the users.
 - `about-libraries` — OSS license UI
 - `ktor` — HTTP client
 - `nav3` — Navigation3
@@ -625,6 +627,9 @@ Use these first for common tasks:
   - `app/src/main/java/com/dede/android_eggs/views/settings/SettingsScreen.kt`
   - `app/src/main/java/com/dede/android_eggs/views/settings/compose/prefs/`
   - `core/settings-ui/src/main/java/com/dede/android_eggs/settings_ui/basic/`
+- **Easter egg play statistics**:
+  - `core/egg-stats/src/main/java/com/dede/android_eggs/egg_stats/` — Room event table, DAO and repository
+  - `app/src/main/java/com/dede/android_eggs/views/stats/EggStatsDialog.kt` — statistics sheet
 - **Build plugin logic**:
   - `build-logic/convention/src/main/kotlin/com/dede/android_eggs/plugins/`
 - **Gradle version catalog**:

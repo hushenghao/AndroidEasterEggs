@@ -9,6 +9,8 @@ import android.os.Build
 import android.widget.Toast
 import androidx.core.content.getSystemService
 import com.dede.android_eggs.R
+import com.dede.android_eggs.egg_stats.EggLaunchSource
+import com.dede.android_eggs.egg_stats.EggStatsRepository
 import com.dede.android_eggs.util.applyIf
 import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPrefUtil
 import com.dede.basic.Utils
@@ -72,11 +74,17 @@ object EggActionHelp {
         }
     }
 
-    fun launchEgg(context: Context, egg: EasterEgg) {
+    fun launchEgg(
+        context: Context,
+        egg: EasterEgg,
+        source: EggLaunchSource = EggLaunchSource.OTHER,
+    ) {
         val targetClass = egg.actionClass
         if (targetClass == null) {
             if (!egg.onEasterEggAction(context)) {
                 NoEggAction.invoke(context)
+            } else {
+                EggStatsRepository.recordPlayAsync(egg.fullApiLevelRange, source)
             }
             return
         }
@@ -99,6 +107,8 @@ object EggActionHelp {
             }
         }
         context.startActivity(intent)
+        // The full api level range is the play history identity, see EggPlayEvent.
+        EggStatsRepository.recordPlayAsync(egg.fullApiLevelRange, source)
     }
 
     private fun findTaskWithTrim(context: Context, clazz: Class<out Activity>): AppTask? {

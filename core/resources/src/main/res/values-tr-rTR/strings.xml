@@ -87,4 +87,19 @@
     <string name="dialog_restore_defaults_message">Bu işlem, tema, başlatıcı simgesi ve dil dahil olmak üzere tüm ayarları sıfırlayacaktır. Kaydedilen kedi ve araç yapılandırmaları etkilenmeyecektir. Bu işlem geri alınamaz. Devam etmek istediğinizden emin misiniz?</string>
     <string name="action_confirm_restore_defaults">Sıfırla</string>
     <string name="toast_restore_defaults_success">Ayarlar varsayılan değerlere geri yüklendi. Uygulama yeniden başlatılacak.</string>
+
+    <string name="label_egg_stats">Paskalya Yumurtası istatistikleri</string>
+    <string name="label_egg_stats_desc">Her Paskalya Yumurtası için yerel oynama geçmişi</string>
+    <string name="egg_stats_summary_format">%2$d yumurtadan %1$d tanesi oynandı · toplam %3$d oynama</string>
+    <string name="egg_stats_sort_most_played">En çok oynanan</string>
+    <string name="egg_stats_sort_recently_played">Son oynananlar</string>
+    <string name="egg_stats_first_opened">İlk açılış</string>
+    <string name="egg_stats_last_played">Son oynama</string>
+    <string name="egg_stats_play_count">Oynama sayısı</string>
+    <string name="egg_stats_played_count">%d× oynandı</string>
+    <string name="egg_stats_never_played">Henüz oynanmadı</string>
+    <string name="egg_stats_clear">İstatistikleri temizle</string>
+    <string name="egg_stats_clear_confirm_title">İstatistikler temizlensin mi?</string>
+    <string name="egg_stats_clear_confirm_message">Bu, tüm Paskalya Yumurtalarının oynama geçmişini siler ve geri alınamaz.</string>
+    <string name="egg_stats_cleared">İstatistikler temizlendi</string>
 </resources>

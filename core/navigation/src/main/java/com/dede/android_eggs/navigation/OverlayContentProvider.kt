@@ -11,6 +11,7 @@ interface OverlayRoute {
     data object AnimatorAlertDialog : OverlayRoute
     data object SnapshotPreview : InWindowOverlay
     data object TimelineDialog : OverlayRoute
+    data object EggStatsDialog : OverlayRoute
 
     /**
      * An [OverlayRoute] whose overlay draws inside the app window instead of a window of its own.

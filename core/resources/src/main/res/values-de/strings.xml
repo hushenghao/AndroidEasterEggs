@@ -44,4 +44,19 @@
     <string name="pref_summary_retain_recent_egg_tasks">Behalten Sie Easter Egg-Aufgaben auf dem Bildschirm „Letzte“ bei, maximal 5</string>
     <string name="label_about">Über</string>
     <string name="label_contribute">Mithelfen</string>
+
+    <string name="label_egg_stats">Easter-Egg-Statistiken</string>
+    <string name="label_egg_stats_desc">Lokaler Spielverlauf für jedes Easter Egg</string>
+    <string name="egg_stats_summary_format">Gespielt: %1$d von %2$d Eggs · insgesamt %3$d Spiele</string>
+    <string name="egg_stats_sort_most_played">Am meisten gespielt</string>
+    <string name="egg_stats_sort_recently_played">Zuletzt gespielt</string>
+    <string name="egg_stats_first_opened">Zuerst geöffnet</string>
+    <string name="egg_stats_last_played">Zuletzt gespielt</string>
+    <string name="egg_stats_play_count">Spiele</string>
+    <string name="egg_stats_played_count">%d× gespielt</string>
+    <string name="egg_stats_never_played">Noch nicht gespielt</string>
+    <string name="egg_stats_clear">Statistiken löschen</string>
+    <string name="egg_stats_clear_confirm_title">Statistiken löschen?</string>
+    <string name="egg_stats_clear_confirm_message">Dadurch wird der Spielverlauf aller Easter Eggs gelöscht. Dies kann nicht rückgängig gemacht werden.</string>
+    <string name="egg_stats_cleared">Statistiken gelöscht</string>
 </resources>

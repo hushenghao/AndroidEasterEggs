@@ -78,4 +78,19 @@
     <string name="dialog_import_backup_title">Импортиране на резервно копие</string>
     <string name="dialog_import_backup_message">Това ще презапише всички текущи данни на приложението, включително настройки, запазени котки и конфигурации на приспособления. Това действие не може да бъде отменено. Наистина ли искате да продължите?</string>
     <string name="action_confirm_import">Импортиране</string>
+
+    <string name="label_egg_stats">Статистика на Easter Egg</string>
+    <string name="label_egg_stats_desc">Локална история на играта за всяко Easter Egg</string>
+    <string name="egg_stats_summary_format">Играни %1$d от %2$d яйца · общо %3$d игри</string>
+    <string name="egg_stats_sort_most_played">Най-играни</string>
+    <string name="egg_stats_sort_recently_played">Играни наскоро</string>
+    <string name="egg_stats_first_opened">Първо отваряне</string>
+    <string name="egg_stats_last_played">Последно играно</string>
+    <string name="egg_stats_play_count">Брой игри</string>
+    <string name="egg_stats_played_count">Играно %d×</string>
+    <string name="egg_stats_never_played">Все още не е играно</string>
+    <string name="egg_stats_clear">Изчистване на статистиката</string>
+    <string name="egg_stats_clear_confirm_title">Изчистване на статистиката?</string>
+    <string name="egg_stats_clear_confirm_message">Това изтрива историята на играта на всяко Easter Egg и не може да бъде отменено.</string>
+    <string name="egg_stats_cleared">Статистиката е изчистена</string>
 </resources>

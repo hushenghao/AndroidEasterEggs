@@ -47,4 +47,19 @@
     <string name="animator_disabled_alert_message">Poiché l\'animazione di sistema è disabilitata, alcune funzionalità potrebbero non funzionare correttamente. Vai su \"Opzioni sviluppatore\" e abilita l\'opzione \"Scala durata animatore\" per attivare l\'animazione.</string>
     <string name="action_goto_settings">Vai nelle impostazioni</string>
     <string name="cat_editor">Modifica gatto</string>
+
+    <string name="label_egg_stats">Statistiche degli Easter Egg</string>
+    <string name="label_egg_stats_desc">Cronologia di gioco locale per ogni Easter Egg</string>
+    <string name="egg_stats_summary_format">Giocati %1$d su %2$d egg · %3$d partite totali</string>
+    <string name="egg_stats_sort_most_played">Più giocati</string>
+    <string name="egg_stats_sort_recently_played">Giocati di recente</string>
+    <string name="egg_stats_first_opened">Prima apertura</string>
+    <string name="egg_stats_last_played">Ultima partita</string>
+    <string name="egg_stats_play_count">Partite</string>
+    <string name="egg_stats_played_count">Giocato %d×</string>
+    <string name="egg_stats_never_played">Non ancora giocato</string>
+    <string name="egg_stats_clear">Cancella statistiche</string>
+    <string name="egg_stats_clear_confirm_title">Cancella statistiche?</string>
+    <string name="egg_stats_clear_confirm_message">Questo elimina la cronologia di gioco di tutti gli Easter Egg e non può essere annullato.</string>
+    <string name="egg_stats_cleared">Statistiche cancellate</string>
 </resources>

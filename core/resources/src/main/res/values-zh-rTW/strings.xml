@@ -87,4 +87,19 @@
     <string name="dialog_restore_defaults_message">這將重設所有設定，包括主題、啟動器圖示與語言。已儲存的貓咪與小工具設定不會受到影響。此操作無法復原。確定要繼續嗎？</string>
     <string name="action_confirm_restore_defaults">重設</string>
     <string name="toast_restore_defaults_success">設定已還原為預設值。應用程式將重新啟動。</string>
+
+    <string name="label_egg_stats">彩蛋統計</string>
+    <string name="label_egg_stats_desc">記錄每個彩蛋的首次開啟、最近遊玩和次數</string>
+    <string name="egg_stats_summary_format">已玩 %1$d / %2$d 個 · 共 %3$d 次</string>
+    <string name="egg_stats_sort_most_played">玩得最多</string>
+    <string name="egg_stats_sort_recently_played">最近遊玩</string>
+    <string name="egg_stats_first_opened">首次開啟</string>
+    <string name="egg_stats_last_played">最近遊玩</string>
+    <string name="egg_stats_play_count">遊玩次數</string>
+    <string name="egg_stats_played_count">已玩 %d 次</string>
+    <string name="egg_stats_never_played">未玩過</string>
+    <string name="egg_stats_clear">清除統計</string>
+    <string name="egg_stats_clear_confirm_title">清除統計？</string>
+    <string name="egg_stats_clear_confirm_message">將刪除所有彩蛋的遊玩記錄，無法復原。</string>
+    <string name="egg_stats_cleared">統計已清除</string>
 </resources>

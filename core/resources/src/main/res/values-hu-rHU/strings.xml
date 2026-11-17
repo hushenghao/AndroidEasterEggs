@@ -34,4 +34,19 @@
     <string name="label_welcome">Üdvözöljük a húsvéti tojás katalógusokban 🎉🎉🎉</string>
     <string name="label_share">Ossza meg</string>
     <string name="label_search_hint">Keresés…</string>
+
+    <string name="label_egg_stats">Húsvéti tojás statisztikák</string>
+    <string name="label_egg_stats_desc">Helyi játékelőzmények minden húsvéti tojáshoz</string>
+    <string name="egg_stats_summary_format">%1$d / %2$d tojás kipróbálva · összesen %3$d játék</string>
+    <string name="egg_stats_sort_most_played">Legtöbbet játszott</string>
+    <string name="egg_stats_sort_recently_played">Legutóbb játszott</string>
+    <string name="egg_stats_first_opened">Első megnyitás</string>
+    <string name="egg_stats_last_played">Utolsó játék</string>
+    <string name="egg_stats_play_count">Játékok száma</string>
+    <string name="egg_stats_played_count">%d× játszva</string>
+    <string name="egg_stats_never_played">Még nem játszott</string>
+    <string name="egg_stats_clear">Statisztikák törlése</string>
+    <string name="egg_stats_clear_confirm_title">Törli a statisztikákat?</string>
+    <string name="egg_stats_clear_confirm_message">Ez törli az összes húsvéti tojás játékelőzményeit, és nem vonható vissza.</string>
+    <string name="egg_stats_cleared">Statisztikák törölve</string>
 </resources>

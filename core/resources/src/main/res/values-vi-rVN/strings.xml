@@ -62,4 +62,19 @@
     <string name="rocket_launcher_all_app_icons">Ứng dụng</string>
     <string name="rocket_launcher_all_icons">Trứng Phục sinh và các ứng dụng</string>
     <string name="rocket_launcher_query_all_app_desc">Cần có danh sách các ứng dụng được hiển thị trong ứng dụng trang chủ</string>
+
+    <string name="label_egg_stats">Thống kê Trứng Phục sinh</string>
+    <string name="label_egg_stats_desc">Lịch sử chơi cục bộ cho từng Trứng Phục sinh</string>
+    <string name="egg_stats_summary_format">Đã chơi %1$d trên %2$d trứng · tổng cộng %3$d lần</string>
+    <string name="egg_stats_sort_most_played">Chơi nhiều nhất</string>
+    <string name="egg_stats_sort_recently_played">Chơi gần đây</string>
+    <string name="egg_stats_first_opened">Lần đầu mở</string>
+    <string name="egg_stats_last_played">Lần chơi cuối</string>
+    <string name="egg_stats_play_count">Số lần chơi</string>
+    <string name="egg_stats_played_count">Đã chơi %d×</string>
+    <string name="egg_stats_never_played">Chưa chơi</string>
+    <string name="egg_stats_clear">Xóa thống kê</string>
+    <string name="egg_stats_clear_confirm_title">Xóa thống kê?</string>
+    <string name="egg_stats_clear_confirm_message">Thao tác này sẽ xóa lịch sử chơi của tất cả Trứng Phục sinh và không thể hoàn tác.</string>
+    <string name="egg_stats_cleared">Đã xóa thống kê</string>
 </resources>

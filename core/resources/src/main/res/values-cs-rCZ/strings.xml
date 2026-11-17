@@ -87,4 +87,19 @@
     <string name="dialog_restore_defaults_message">Toto obnoví všechna nastavení, včetně motivu, ikony aplikace, a jazyka. Uložené kočky a nastavení widgetů nebudou změněny. Jste si jisti, že chcete pokračovat?</string>
     <string name="action_confirm_restore_defaults">Obnovit</string>
     <string name="toast_restore_defaults_success">Nastavení obnoveny na výchozí. Aplikace se restartuje.</string>
+
+    <string name="label_egg_stats">Statistiky Easter eggů</string>
+    <string name="label_egg_stats_desc">Místní historie hraní pro každý Easter egg</string>
+    <string name="egg_stats_summary_format">Hráno %1$d z %2$d vajec · celkem %3$d her</string>
+    <string name="egg_stats_sort_most_played">Nejhranější</string>
+    <string name="egg_stats_sort_recently_played">Nedávno hrané</string>
+    <string name="egg_stats_first_opened">Poprvé otevřeno</string>
+    <string name="egg_stats_last_played">Naposledy hráno</string>
+    <string name="egg_stats_play_count">Počet her</string>
+    <string name="egg_stats_played_count">Hráno %d×</string>
+    <string name="egg_stats_never_played">Zatím nehráno</string>
+    <string name="egg_stats_clear">Vymazat statistiky</string>
+    <string name="egg_stats_clear_confirm_title">Vymazat statistiky?</string>
+    <string name="egg_stats_clear_confirm_message">Tím se odstraní historie hraní všech Easter eggů a nelze to vrátit.</string>
+    <string name="egg_stats_cleared">Statistiky vymazány</string>
 </resources>

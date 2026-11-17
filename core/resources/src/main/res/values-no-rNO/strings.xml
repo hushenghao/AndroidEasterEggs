@@ -34,4 +34,19 @@
     <string name="label_welcome">Velkommen til påskeeggkataloger 🎉🎉🎉</string>
     <string name="label_share">Del</string>
     <string name="label_search_hint">Søk…</string>
+
+    <string name="label_egg_stats">Påskeeggstatistikk</string>
+    <string name="label_egg_stats_desc">Lokal spillhistorikk for hvert påskeegg</string>
+    <string name="egg_stats_summary_format">Spilt %1$d av %2$d egg · %3$d spill totalt</string>
+    <string name="egg_stats_sort_most_played">Mest spilt</string>
+    <string name="egg_stats_sort_recently_played">Nylig spilt</string>
+    <string name="egg_stats_first_opened">Først åpnet</string>
+    <string name="egg_stats_last_played">Sist spilt</string>
+    <string name="egg_stats_play_count">Antall spill</string>
+    <string name="egg_stats_played_count">Spilt %d×</string>
+    <string name="egg_stats_never_played">Ikke spilt ennå</string>
+    <string name="egg_stats_clear">Slett statistikk</string>
+    <string name="egg_stats_clear_confirm_title">Slette statistikk?</string>
+    <string name="egg_stats_clear_confirm_message">Dette fjerner spillhistorikken til alle påskeegg og kan ikke angres.</string>
+    <string name="egg_stats_cleared">Statistikken er slettet</string>
 </resources>

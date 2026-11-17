@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.composable.WindowWidthPane
 import com.dede.android_eggs.composable.currentWindowWidthPane
+import com.dede.android_eggs.egg_stats.EggLaunchSource
+import com.dede.android_eggs.egg_stats.EggStatsSummary
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
@@ -36,6 +38,7 @@ fun EasterEggSearchList(
     easterEggs: List<EasterEgg> = EasterEggHelp.previewEasterEggs(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     releaseDateLookup: (Int) -> Date? = { null },
+    statsMap: Map<IntRange, EggStatsSummary> = emptyMap(),
 ) {
     val isCompact = currentWindowWidthPane() == WindowWidthPane.COMPACT
     LazyVerticalGrid(
@@ -56,6 +59,8 @@ fun EasterEggSearchList(
                 base = it,
                 modifier = Modifier.animateItem(),
                 releaseDateLookup = releaseDateLookup,
+                statsMap = statsMap,
+                launchSource = EggLaunchSource.SEARCH,
             )
         }
     }

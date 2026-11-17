@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import com.dede.android_eggs.egg_stats.EggLaunchSource
 import com.dede.android_eggs.navigation.DeepLink
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.views.settings.compose.prefs.launchRocketLauncher
@@ -76,7 +77,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
                 val apiLevel = hourApiLevelArray[hour]
                 val egg = eggIntent.easterEggs.find { apiLevel.toFullApiLevel() in it.fullApiLevelRange }
                 if (egg != null) {
-                    EggActionHelp.launchEgg(eggIntent.context, egg)
+                    EggActionHelp.launchEgg(eggIntent.context, egg, EggLaunchSource.WIDGET)
                 }
                 return egg != null
             }
@@ -96,7 +97,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
             val level = levelStr.toIntOrNull() ?: return false
             val egg = eggIntent.easterEggs.find { level.toFullApiLevel() in it.fullApiLevelRange }
             if (egg != null) {
-                EggActionHelp.launchEgg(eggIntent.context, egg)
+                EggActionHelp.launchEgg(eggIntent.context, egg, EggLaunchSource.DEEP_LINK)
             }
             return egg != null
         }

@@ -35,4 +35,19 @@
     <string name="label_share">ແບ່ງປັນ</string>
     <string name="label_search_hint">ຊອກຫາ…</string>
     <string name="label_component_manager">ຜູ້ຈັດການອົງປະກອບ</string>
+
+    <string name="label_egg_stats">ສະຖິຕິໄຂ່ອີສເຕີ</string>
+    <string name="label_egg_stats_desc">ປະຫວັດການຫຼິ້ນທ້ອງຖິ່ນສຳລັບແຕ່ລະໄຂ່ອີສເຕີ</string>
+    <string name="egg_stats_summary_format">ຫຼິ້ນ %1$d ຈາກ %2$d ໄຂ່ · ທັງໝົດ %3$d ຄັ້ງ</string>
+    <string name="egg_stats_sort_most_played">ຫຼິ້ນຫຼາຍທີ່ສຸດ</string>
+    <string name="egg_stats_sort_recently_played">ຫຼິ້ນຫຼ້າສຸດ</string>
+    <string name="egg_stats_first_opened">ເປີດຄັ້ງທຳອິດ</string>
+    <string name="egg_stats_last_played">ຫຼິ້ນຫຼ້າສຸດ</string>
+    <string name="egg_stats_play_count">ຈຳນວນການຫຼິ້ນ</string>
+    <string name="egg_stats_played_count">ຫຼິ້ນ %d ຄັ້ງ</string>
+    <string name="egg_stats_never_played">ຍັງບໍ່ໄດ້ຫຼິ້ນ</string>
+    <string name="egg_stats_clear">ລຶບສະຖິຕິ</string>
+    <string name="egg_stats_clear_confirm_title">ລຶບສະຖິຕິບໍ?</string>
+    <string name="egg_stats_clear_confirm_message">ການດຳເນີນການນີ້ຈະລຶບປະຫວັດການຫຼິ້ນຂອງໄຂ່ອີສເຕີທັງໝົດ ແລະ ບໍ່ສາມາດຍົກເລີກໄດ້.</string>
+    <string name="egg_stats_cleared">ລຶບສະຖິຕິແລ້ວ</string>
 </resources>

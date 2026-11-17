@@ -88,4 +88,19 @@
     <string name="action_confirm_restore_defaults">Reset</string>
     <string name="toast_restore_defaults_success">Pengaturan dikembalikan ke pengaturan default. Aplikasi akan
 memulai ulang.</string>
+
+    <string name="label_egg_stats">Statistik Easter egg</string>
+    <string name="label_egg_stats_desc">Riwayat bermain lokal untuk setiap Easter egg</string>
+    <string name="egg_stats_summary_format">%1$d dari %2$d egg dimainkan · total %3$d kali bermain</string>
+    <string name="egg_stats_sort_most_played">Paling sering dimainkan</string>
+    <string name="egg_stats_sort_recently_played">Baru-baru ini dimainkan</string>
+    <string name="egg_stats_first_opened">Pertama kali dibuka</string>
+    <string name="egg_stats_last_played">Terakhir dimainkan</string>
+    <string name="egg_stats_play_count">Jumlah bermain</string>
+    <string name="egg_stats_played_count">Dimainkan %d×</string>
+    <string name="egg_stats_never_played">Belum dimainkan</string>
+    <string name="egg_stats_clear">Hapus statistik</string>
+    <string name="egg_stats_clear_confirm_title">Hapus statistik?</string>
+    <string name="egg_stats_clear_confirm_message">Ini akan menghapus riwayat bermain semua Easter egg dan tidak dapat dibatalkan.</string>
+    <string name="egg_stats_cleared">Statistik dihapus</string>
 </resources>

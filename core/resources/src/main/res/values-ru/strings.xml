@@ -87,4 +87,19 @@
     <string name="dialog_restore_defaults_message">Это действие сбросит все настройки, включая тему, значок в лаунчере и язык. Сохранённые кошки и настройки виджетов затронуты не будут. Данное действие нельзя будет отменить. Вы уверены, что хотите продолжить?</string>
     <string name="action_confirm_restore_defaults">Сбросить</string>
     <string name="toast_restore_defaults_success">Настройки восстановлены до значений по умолчанию. Приложение перезапустится.</string>
+
+    <string name="label_egg_stats">Статистика пасхальных яиц</string>
+    <string name="label_egg_stats_desc">Локальная история запусков каждого пасхального яйца</string>
+    <string name="egg_stats_summary_format">Запущено %1$d из %2$d яиц · всего %3$d раз</string>
+    <string name="egg_stats_sort_most_played">Чаще всего запускаемые</string>
+    <string name="egg_stats_sort_recently_played">Недавно запущенные</string>
+    <string name="egg_stats_first_opened">Первое открытие</string>
+    <string name="egg_stats_last_played">Последний запуск</string>
+    <string name="egg_stats_play_count">Число запусков</string>
+    <string name="egg_stats_played_count">Запущено %d×</string>
+    <string name="egg_stats_never_played">Ещё не запускалось</string>
+    <string name="egg_stats_clear">Очистить статистику</string>
+    <string name="egg_stats_clear_confirm_title">Очистить статистику?</string>
+    <string name="egg_stats_clear_confirm_message">Это удалит историю запусков всех пасхальных яиц, отменить это нельзя.</string>
+    <string name="egg_stats_cleared">Статистика очищена</string>
 </resources>

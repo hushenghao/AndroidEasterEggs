@@ -34,4 +34,19 @@
     <string name="label_welcome">Maligayang pagdating sa Easter Egg Catalogs 🎉🎉🎉</string>
     <string name="label_share">Ibahagi</string>
     <string name="label_search_hint">Maghanap…</string>
+
+    <string name="label_egg_stats">Mga estadistika ng Easter egg</string>
+    <string name="label_egg_stats_desc">Lokal na kasaysayan ng paglalaro para sa bawat Easter egg</string>
+    <string name="egg_stats_summary_format">Nalaruan ang %1$d sa %2$d na egg · %3$d kabuuang paglalaro</string>
+    <string name="egg_stats_sort_most_played">Pinakamadalas laruin</string>
+    <string name="egg_stats_sort_recently_played">Kapapalaro lang</string>
+    <string name="egg_stats_first_opened">Unang binuksan</string>
+    <string name="egg_stats_last_played">Huling nalaro</string>
+    <string name="egg_stats_play_count">Bilang ng paglalaro</string>
+    <string name="egg_stats_played_count">Nalaruan %d×</string>
+    <string name="egg_stats_never_played">Hindi pa nalalaro</string>
+    <string name="egg_stats_clear">I-clear ang estadistika</string>
+    <string name="egg_stats_clear_confirm_title">I-clear ang estadistika?</string>
+    <string name="egg_stats_clear_confirm_message">Tatanggalin nito ang kasaysayan ng paglalaro ng lahat ng Easter egg at hindi na ito maibabalik.</string>
+    <string name="egg_stats_cleared">Na-clear ang estadistika</string>
 </resources>

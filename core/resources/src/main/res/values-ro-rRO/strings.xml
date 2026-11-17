@@ -78,4 +78,19 @@
     <string name="dialog_import_backup_title">Importați backup</string>
     <string name="dialog_import_backup_message">Aceasta acțiune va suprascrie toate datele curente ale aplicației, inclusiv setările, pisicile salvate și configurațiile widgetului. Această acțiune nu poate fi anulată. Sigur doriți să continuați?</string>
     <string name="action_confirm_import">Importă</string>
+
+    <string name="label_egg_stats">Statistici easter egg</string>
+    <string name="label_egg_stats_desc">Istoric local de joc pentru fiecare easter egg</string>
+    <string name="egg_stats_summary_format">Jucate %1$d din %2$d ouă · %3$d jocuri în total</string>
+    <string name="egg_stats_sort_most_played">Cele mai jucate</string>
+    <string name="egg_stats_sort_recently_played">Jucate recent</string>
+    <string name="egg_stats_first_opened">Prima deschidere</string>
+    <string name="egg_stats_last_played">Ultima jucare</string>
+    <string name="egg_stats_play_count">Număr de jocuri</string>
+    <string name="egg_stats_played_count">Jucat %d×</string>
+    <string name="egg_stats_never_played">Încă nejucat</string>
+    <string name="egg_stats_clear">Șterge statisticile</string>
+    <string name="egg_stats_clear_confirm_title">Ștergi statisticile?</string>
+    <string name="egg_stats_clear_confirm_message">Aceasta elimină istoricul de joc al tuturor easter egg-urilor și nu poate fi anulată.</string>
+    <string name="egg_stats_cleared">Statisticile au fost șterse</string>
 </resources>

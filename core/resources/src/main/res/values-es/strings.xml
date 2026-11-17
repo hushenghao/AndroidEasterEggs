@@ -84,4 +84,19 @@
     <string name="dialog_restore_defaults_message">Esto restablecerá todos los ajustes, incluyendo el tema, icono del lanzador y el idioma. Los gatos guardados y las configuraciones de accesos directos no se ven afectados. Esta acción no se puede deshacer. ¿Está seguro de que desea continuar?</string>
     <string name="action_confirm_restore_defaults">Reiniciar</string>
     <string name="toast_restore_defaults_success">La configuración se ha restablecido a los valores predeterminados. La aplicación se reiniciará.</string>
+
+    <string name="label_egg_stats">Estadísticas de Easter Eggs</string>
+    <string name="label_egg_stats_desc">Historial de juego local de cada Easter Egg</string>
+    <string name="egg_stats_summary_format">Jugados %1$d de %2$d eggs · %3$d partidas en total</string>
+    <string name="egg_stats_sort_most_played">Más jugados</string>
+    <string name="egg_stats_sort_recently_played">Jugados recientemente</string>
+    <string name="egg_stats_first_opened">Primera apertura</string>
+    <string name="egg_stats_last_played">Última partida</string>
+    <string name="egg_stats_play_count">Partidas</string>
+    <string name="egg_stats_played_count">Jugado %d×</string>
+    <string name="egg_stats_never_played">Aún no jugado</string>
+    <string name="egg_stats_clear">Borrar estadísticas</string>
+    <string name="egg_stats_clear_confirm_title">¿Borrar estadísticas?</string>
+    <string name="egg_stats_clear_confirm_message">Esto elimina el historial de juego de todos los Easter Eggs y no se puede deshacer.</string>
+    <string name="egg_stats_cleared">Estadísticas borradas</string>
 </resources>

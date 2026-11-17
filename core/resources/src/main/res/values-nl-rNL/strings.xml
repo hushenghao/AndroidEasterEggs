@@ -34,4 +34,19 @@
     <string name="label_welcome">Welkom bij Easter Egg Catalogi 🎉🎉🎉</string>
     <string name="label_share">Deel</string>
     <string name="label_search_hint">Zoek…</string>
+
+    <string name="label_egg_stats">Easter egg-statistieken</string>
+    <string name="label_egg_stats_desc">Lokale speelgeschiedenis voor elk Easter egg</string>
+    <string name="egg_stats_summary_format">%1$d van %2$d eggs gespeeld · %3$d keer totaal</string>
+    <string name="egg_stats_sort_most_played">Meest gespeeld</string>
+    <string name="egg_stats_sort_recently_played">Onlangs gespeeld</string>
+    <string name="egg_stats_first_opened">Eerst geopend</string>
+    <string name="egg_stats_last_played">Laatst gespeeld</string>
+    <string name="egg_stats_play_count">Aantal keren gespeeld</string>
+    <string name="egg_stats_played_count">%d× gespeeld</string>
+    <string name="egg_stats_never_played">Nog niet gespeeld</string>
+    <string name="egg_stats_clear">Statistieken wissen</string>
+    <string name="egg_stats_clear_confirm_title">Statistieken wissen?</string>
+    <string name="egg_stats_clear_confirm_message">Hiermee wordt de speelgeschiedenis van alle Easter eggs verwijderd. Dit kan niet ongedaan worden gemaakt.</string>
+    <string name="egg_stats_cleared">Statistieken gewist</string>
 </resources>

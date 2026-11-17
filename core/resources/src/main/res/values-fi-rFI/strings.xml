@@ -78,4 +78,19 @@
     <string name="dialog_import_backup_title">Tuo varmuuskopio</string>
     <string name="dialog_import_backup_message">Tämä poistaa kaiken nykyisen sovelluksen datan, mukaanluettuna asetukset, tallennetut kissat, ja widgettejen muutokset. Tätä ei voi epä-tehdä. Oletko varma, että haluat jatkaa?</string>
     <string name="action_confirm_import">Tuo</string>
+
+    <string name="label_egg_stats">Pääsiäismunatilastot</string>
+    <string name="label_egg_stats_desc">Paikallinen pelihistoria jokaiselle pääsiäismunalle</string>
+    <string name="egg_stats_summary_format">Pelattu %1$d / %2$d munaa · yhteensä %3$d peliä</string>
+    <string name="egg_stats_sort_most_played">Eniten pelatut</string>
+    <string name="egg_stats_sort_recently_played">Äskettäin pelatut</string>
+    <string name="egg_stats_first_opened">Ensimmäinen avaus</string>
+    <string name="egg_stats_last_played">Viimeksi pelattu</string>
+    <string name="egg_stats_play_count">Pelikerrat</string>
+    <string name="egg_stats_played_count">Pelattu %d×</string>
+    <string name="egg_stats_never_played">Ei vielä pelattu</string>
+    <string name="egg_stats_clear">Tyhjennä tilastot</string>
+    <string name="egg_stats_clear_confirm_title">Tyhjennä tilastot?</string>
+    <string name="egg_stats_clear_confirm_message">Tämä poistaa kaikkien pääsiäismunien pelihistorian, eikä sitä voi kumota.</string>
+    <string name="egg_stats_cleared">Tilastot tyhjennetty</string>
 </resources>

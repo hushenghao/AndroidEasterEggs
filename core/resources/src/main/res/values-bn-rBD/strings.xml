@@ -62,4 +62,19 @@
     <string name="rocket_launcher_all_app_icons">সকল অ্যাপ আইকন</string>
     <string name="rocket_launcher_all_icons">সমস্ত আইকন</string>
     <string name="rocket_launcher_query_all_app_desc">সকল অ্যাপের তালিকা নেওয়া লাগবে</string>
+
+    <string name="label_egg_stats">ইস্টার এগ পরিসংখ্যান</string>
+    <string name="label_egg_stats_desc">প্রতিটি ইস্টার এগের স্থানীয় খেলার ইতিহাস</string>
+    <string name="egg_stats_summary_format">%1$d / %2$dটি ইস্টার এগ খেলা হয়েছে · মোট %3$d বার</string>
+    <string name="egg_stats_sort_most_played">সবচেয়ে বেশি খেলা</string>
+    <string name="egg_stats_sort_recently_played">সম্প্রতি খেলা</string>
+    <string name="egg_stats_first_opened">প্রথম খোলা</string>
+    <string name="egg_stats_last_played">সর্বশেষ খেলা</string>
+    <string name="egg_stats_play_count">খেলার সংখ্যা</string>
+    <string name="egg_stats_played_count">%d বার খেলা হয়েছে</string>
+    <string name="egg_stats_never_played">এখনও খেলা হয়নি</string>
+    <string name="egg_stats_clear">পরিসংখ্যান মুছুন</string>
+    <string name="egg_stats_clear_confirm_title">পরিসংখ্যান মুছবেন?</string>
+    <string name="egg_stats_clear_confirm_message">এটি প্রতিটি ইস্টার এগের খেলার ইতিহাস মুছে ফেলবে এবং ফিরিয়ে আনা যাবে না।</string>
+    <string name="egg_stats_cleared">পরিসংখ্যান মুছে ফেলা হয়েছে</string>
 </resources>

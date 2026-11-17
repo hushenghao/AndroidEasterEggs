@@ -80,4 +80,19 @@
     <string name="dialog_import_backup_title">バックアップをインポート</string>
     <string name="dialog_import_backup_message">これにより、設定、保存済みのCats、ウィジェットの設定など、アプリの現在のデータがすべて上書きされます。この操作は元に戻せません。続行しますか？</string>
     <string name="action_confirm_import">インポート</string>
+
+    <string name="label_egg_stats">イースターエッグの統計</string>
+    <string name="label_egg_stats_desc">各イースターエッグのローカルプレイ履歴</string>
+    <string name="egg_stats_summary_format">%1$d / %2$d 個のエッグをプレイ · 合計 %3$d 回</string>
+    <string name="egg_stats_sort_most_played">最もプレイした</string>
+    <string name="egg_stats_sort_recently_played">最近プレイした</string>
+    <string name="egg_stats_first_opened">初回オープン</string>
+    <string name="egg_stats_last_played">最終プレイ</string>
+    <string name="egg_stats_play_count">プレイ回数</string>
+    <string name="egg_stats_played_count">%d 回プレイ</string>
+    <string name="egg_stats_never_played">まだプレイしていません</string>
+    <string name="egg_stats_clear">統計を消去</string>
+    <string name="egg_stats_clear_confirm_title">統計を消去しますか？</string>
+    <string name="egg_stats_clear_confirm_message">すべてのイースターエッグのプレイ履歴が削除され、元に戻せません。</string>
+    <string name="egg_stats_cleared">統計を消去しました</string>
 </resources>

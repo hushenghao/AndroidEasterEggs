@@ -21,6 +21,21 @@
     <string name="label_email_title">Email</string>
     <string name="label_snapshot_preview">Snapshot preview</string>
 
+    <string name="label_egg_stats">Easter egg statistics</string>
+    <string name="label_egg_stats_desc">Local play history for each Easter egg</string>
+    <string name="egg_stats_summary_format">Played %1$d of %2$d eggs · %3$d total plays</string>
+    <string name="egg_stats_sort_most_played">Most played</string>
+    <string name="egg_stats_sort_recently_played">Recently played</string>
+    <string name="egg_stats_first_opened">First opened</string>
+    <string name="egg_stats_last_played">Last played</string>
+    <string name="egg_stats_play_count">Plays</string>
+    <string name="egg_stats_played_count">Played %d×</string>
+    <string name="egg_stats_never_played">Not played yet</string>
+    <string name="egg_stats_clear">Clear statistics</string>
+    <string name="egg_stats_clear_confirm_title">Clear statistics?</string>
+    <string name="egg_stats_clear_confirm_message">This removes the play history of every Easter egg and cannot be undone.</string>
+    <string name="egg_stats_cleared">Statistics cleared</string>
+
     <string name="message_trypophobia_warning">This is a trigger warning to those with &lt;b&gt;trypophobia&lt;/b&gt;. Some images may cause discomfort. Do you want to continue?</string>
 
     <string name="label_settings">Settings</string>

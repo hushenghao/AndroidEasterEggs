@@ -46,4 +46,19 @@
     <string name="label_contribute">Contribuer</string>
     <string name="animator_disabled_alert_message">En raison de la désactivation de l\'animation système, certaines fonctionnalités peuvent ne pas fonctionner correctement. Veuillez accéder aux « Options de développeur » et activer l\'option « Échelle de durée de l\'animation » pour activer l\'animation.</string>
     <string name="action_goto_settings">Accéder aux paramètres</string>
+
+    <string name="label_egg_stats">Statistiques des Œufs de Pâques</string>
+    <string name="label_egg_stats_desc">Historique de jeu local pour chaque Œuf de Pâques</string>
+    <string name="egg_stats_summary_format">%1$d Œufs sur %2$d joués · %3$d parties au total</string>
+    <string name="egg_stats_sort_most_played">Les plus joués</string>
+    <string name="egg_stats_sort_recently_played">Joués récemment</string>
+    <string name="egg_stats_first_opened">Première ouverture</string>
+    <string name="egg_stats_last_played">Dernière partie</string>
+    <string name="egg_stats_play_count">Parties jouées</string>
+    <string name="egg_stats_played_count">Joué %d×</string>
+    <string name="egg_stats_never_played">Pas encore joué</string>
+    <string name="egg_stats_clear">Effacer les statistiques</string>
+    <string name="egg_stats_clear_confirm_title">Effacer les statistiques ?</string>
+    <string name="egg_stats_clear_confirm_message">Cela supprime l\'historique de jeu de tous les Œufs de Pâques et est irréversible.</string>
+    <string name="egg_stats_cleared">Statistiques effacées</string>
 </resources>

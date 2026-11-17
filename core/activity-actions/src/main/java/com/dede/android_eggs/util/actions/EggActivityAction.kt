@@ -6,6 +6,8 @@ import android.view.WindowManager
 import androidx.activity.EdgeToEdgeCompat
 import com.dede.android_eggs.activity_actions.DisableForceDarkUtils
 import com.dede.android_eggs.activity_actions.WallpaperPlatLogoUtils
+import com.dede.android_eggs.egg_stats.EggLaunchSource
+import com.dede.android_eggs.egg_stats.EggStatsRepository
 import com.dede.android_eggs.util.ActivityActionDispatcher
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 
@@ -49,6 +51,29 @@ internal class EggActivityAction : ActivityActionDispatcher.ActivityAction {
         if (activity.isPlatLogoActivity) {
             EasterEggShortcutsHelp.autoReportShortcutUsed(activity, activity.intent)
         }
+        recordShortcutPlay(activity)
+    }
+
+    /**
+     * Shortcuts start the egg activity directly, bypassing the in-app launch
+     * helper that records launches itself, so their plays are recorded here.
+     * In-app launch intents carry no such extra.
+     */
+    private fun recordShortcutPlay(activity: Activity) {
+        val intent = activity.intent
+        if (!intent.hasExtra(EasterEggShortcutsHelp.EXTRA_EGG_API_LEVEL_FIRST)) {
+            return
+        }
+        val apiLevelFirst = intent.getIntExtra(
+            EasterEggShortcutsHelp.EXTRA_EGG_API_LEVEL_FIRST, Int.MIN_VALUE
+        )
+        val apiLevelLast = intent.getIntExtra(
+            EasterEggShortcutsHelp.EXTRA_EGG_API_LEVEL_LAST, Int.MIN_VALUE
+        )
+        if (apiLevelFirst == Int.MIN_VALUE || apiLevelLast == Int.MIN_VALUE) {
+            return
+        }
+        EggStatsRepository.recordPlayAsync(apiLevelFirst, apiLevelLast, EggLaunchSource.SHORTCUT)
     }
 
     override fun onResume(activity: Activity) {
