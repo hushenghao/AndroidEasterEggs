@@ -184,7 +184,9 @@ Prefer the smallest module-specific compile/test command that covers the change.
   references.
 - Localized strings go in `core/resources` unless feature-specific.
 - When adding a new string, also add AI translations to every `core/resources`
-  locale directory, **except Latin** (`values-la-rLA`).
+  locale directory, **except Latin** (`values-la-rLA`). Escape AAPT/XML special
+  characters in the translated text: apostrophes as `\'` (e.g. French
+  `l\'écran`), `&` as `&amp;`, and `<` as `&lt;`.
 
 ### Documentation & Comments
 
