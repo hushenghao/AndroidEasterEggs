@@ -6,7 +6,12 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.BoxWithConstraintsScope
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,23 +35,27 @@ import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import com.dede.android_eggs.R
 import com.dede.android_eggs.composable.ScrollableModalBottomSheet
+import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
-import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.eventAnnotatedString
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.isNewGroup
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localMonth
@@ -60,6 +69,28 @@ import java.util.Calendar
 import javax.inject.Inject
 
 private const val TIMELINE_HORIZONTAL_BIAS = 0.3f
+
+/** Horizontal center of the timeline rail in this box, at [TIMELINE_HORIZONTAL_BIAS] of the width. */
+private val BoxWithConstraintsScope.timelineCenterX: Dp
+    get() = maxWidth * TIMELINE_HORIZONTAL_BIAS
+
+/** Places this element so that its horizontal center sits at [centerX]. */
+private fun Modifier.centerAt(centerX: Dp): Modifier = layout { measurable, constraints ->
+    val placeable = measurable.measure(constraints)
+    layout(constraints.maxWidth, placeable.height) {
+        placeable.place(centerX.roundToPx() - placeable.width / 2, 0)
+    }
+}
+
+/** Draws the 2dp vertical rail line, horizontally centered at [TIMELINE_HORIZONTAL_BIAS] of the width. */
+private fun Modifier.drawTimelineRail(color: Color): Modifier = drawBehind {
+    val lineWidth = 2.dp.toPx()
+    drawRect(
+        color = color,
+        topLeft = Offset(size.width * TIMELINE_HORIZONTAL_BIAS - lineWidth / 2, 0f),
+        size = Size(lineWidth, size.height),
+    )
+}
 
 @Composable
 fun TimelineListDialog(
@@ -107,30 +138,25 @@ fun TimelineListDialog(
 
 @Composable
 private fun TimelineFooter() {
-    ConstraintLayout(
+    BoxWithConstraints(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 10.dp)
     ) {
-        val (lineStart, line) = createRefs()
+        val centerX = timelineCenterX
         Box(
             modifier = Modifier
+                .align(Alignment.TopStart)
+                .centerAt(centerX)
                 .size(2.dp)
                 .background(colorScheme.secondary)
-                .constrainAs(line) {
-                    top.linkTo(parent.top)
-                    centerHorizontallyTo(parent, TIMELINE_HORIZONTAL_BIAS)
-                }
         )
         Box(
             modifier = Modifier
-                .width(8.dp)
-                .height(8.dp)
+                .align(Alignment.TopStart)
+                .centerAt(centerX)
+                .size(8.dp)
                 .background(colorScheme.secondary, CircleShape)
-                .constrainAs(lineStart) {
-                    top.linkTo(parent.top)
-                    centerHorizontallyTo(line)
-                }
         )
     }
 }
@@ -138,31 +164,25 @@ private fun TimelineFooter() {
 @Composable
 @Preview(showBackground = true)
 private fun TimelineHeader() {
-    ConstraintLayout(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        val (arrow, line) = createRefs()
+    BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
+        val centerX = timelineCenterX
         Box(
             modifier = Modifier
+                .align(Alignment.BottomStart)
+                .centerAt(centerX)
                 .width(2.dp)
                 .height(2.dp)
                 .background(colorScheme.secondary, RoundedCornerShape(50, 50, 0, 0))
-                .constrainAs(line) {
-                    bottom.linkTo(parent.bottom)
-                    centerHorizontallyTo(parent, TIMELINE_HORIZONTAL_BIAS)
-                }
         )
         Icon(
             imageVector = Icons.Outlined.RocketLaunch,
             contentDescription = null,
             modifier = Modifier
+                .align(Alignment.BottomStart)
+                .centerAt(centerX)
                 .size(36.dp)
                 .padding(6.dp)
-                .rotate(-45f)
-                .constrainAs(arrow) {
-                    bottom.linkTo(parent.bottom)
-                    centerHorizontallyTo(line)
-                },
+                .rotate(-45f),
             tint = colorScheme.secondary
         )
     }
@@ -176,95 +196,75 @@ private fun TimelineItem(
     isNewGroup: Boolean = true
 ) {
     val context = LocalContext.current
-    ConstraintLayout(
-        modifier = Modifier.fillMaxWidth()
+    BoxWithConstraints(
+        modifier = Modifier
+            .fillMaxWidth()
+            .drawTimelineRail(colorScheme.secondary)
     ) {
-        val (year, img, month,
-            androidLogo, desc, line) = createRefs()
-
-        Box(
-            modifier = Modifier
-                .width(2.dp)
-                .background(colorScheme.secondary)
-                .constrainAs(line) {
-                    height = Dimension.fillToConstraints
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    centerHorizontallyTo(parent, TIMELINE_HORIZONTAL_BIAS)
-                }
-        )
-
+        val centerX = timelineCenterX
         val logoSize = 40
-        var imageModifier = Modifier
-            .size(logoSize.dp)
-            .constrainAs(img) {
-                top.linkTo(parent.top, 16.dp)
-                centerHorizontallyTo(line)
-            }
-        val withBackground = context.withBackground(logoRes)
-        if (!withBackground) {
-            imageModifier = Modifier
-                .background(colorScheme.secondaryContainer, IconShapePrefUtil.getIconShape())
-                .then(imageModifier)
-                .padding((logoSize * .15f).dp)
-        }
-        EasterEggLogo(
-            res = logoRes,
-            contentDescription = null,
-            modifier = imageModifier
-        )
-        if (isNewGroup) {
-            Text(
-                text = event.localYear,
-                style = typography.titleLarge,
-                fontWeight = FontWeight.Medium,
-                modifier = Modifier.constrainAs(year) {
-                    end.linkTo(img.start, 12.dp)
-                    centerVerticallyTo(img)
-                }
-            )
-        }
-        Text(
-            text = event.localMonth,
-            style = typography.titleMedium,
-            fontWeight = FontWeight.Medium,
-            modifier = Modifier.constrainAs(month) {
-                start.linkTo(img.end, 12.dp)
-                top.linkTo(img.top)
-            }
-        )
-        if (event.androidLogo != -1) {
-            val drawable = remember(LocalResources.current) {
-                context.requireDrawable(event.androidLogo)
-            }
-            Image(
-                painter = rememberDrawablePainter(drawable),
+        val gap = 12.dp
+
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
+            Box(
                 modifier = Modifier
-                    .height(20.dp)
-                    .padding(bottom = 3.dp)
-                    .constrainAs(androidLogo) {
-                        top.linkTo(month.bottom)
-                        start.linkTo(month.start)
-                    },
-                contentDescription = null
-            )
-        }
-        Text(
-            text = event.eventAnnotatedString,
-            style = typography.bodySmall,
-            modifier = Modifier
-                .padding(bottom = 12.dp)
-                .constrainAs(desc) {
-                    width = Dimension.fillToConstraints
-                    linkTo(
-                        start = month.start,
-                        end = parent.end,
-                        endMargin = 16.dp,
-                        bias = 0f,
+                    .width(centerX - logoSize.dp / 2 - gap)
+                    .padding(top = 16.dp)
+                    .height(logoSize.dp),
+                contentAlignment = Alignment.CenterEnd,
+            ) {
+                if (isNewGroup) {
+                    Text(
+                        text = event.localYear,
+                        style = typography.titleLarge,
+                        fontWeight = FontWeight.Medium,
                     )
-                    top.linkTo(if (event.androidLogo != -1) androidLogo.bottom else month.bottom)
                 }
-        )
+            }
+            Spacer(Modifier.width(gap))
+
+            var imageModifier = Modifier
+                .size(logoSize.dp)
+            val withBackground = context.withBackground(logoRes)
+            if (!withBackground) {
+                imageModifier = Modifier
+                    .background(colorScheme.secondaryContainer, IconShapePrefUtil.getIconShape())
+                    .then(imageModifier)
+                    .padding((logoSize * .15f).dp)
+            }
+            EasterEggLogo(
+                res = logoRes,
+                contentDescription = null,
+                modifier = Modifier.padding(top = 16.dp).then(imageModifier),
+            )
+
+            Spacer(Modifier.width(gap))
+
+            Column(Modifier.padding(top = 16.dp, end = 16.dp)) {
+                Text(
+                    text = event.localMonth,
+                    style = typography.titleMedium,
+                    fontWeight = FontWeight.Medium,
+                )
+                if (event.androidLogo != -1) {
+                    val drawable = remember(LocalResources.current) {
+                        context.requireDrawable(event.androidLogo)
+                    }
+                    Image(
+                        painter = rememberDrawablePainter(drawable),
+                        modifier = Modifier
+                            .height(20.dp)
+                            .padding(bottom = 3.dp),
+                        contentDescription = null,
+                    )
+                }
+                Text(
+                    text = event.eventAnnotatedString,
+                    style = typography.bodySmall,
+                    modifier = Modifier.padding(bottom = 12.dp),
+                )
+            }
+        }
     }
 }
 
