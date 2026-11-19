@@ -13,6 +13,12 @@ class Egg(val apiLevel: Int, val activity: String)
  * when a level opens something else, so a new or renamed egg shows up there first.
  */
 val EGGS: List<Egg> = listOf(
+    1..1 to "com.android_b.egg.PlatLogoActivity\$Base",
+    2..2 to "com.android_b.egg.PlatLogoActivity\$PetitFour",
+    3..3 to "com.android_b.egg.PlatLogoActivity\$Cupcake",
+    4..4 to "com.android_b.egg.PlatLogoActivity\$Donut",
+    5..7 to "com.android_b.egg.PlatLogoActivity\$Eclair",
+    8..8 to "com.android_b.egg.PlatLogoActivity\$Froyo",
     9..10 to "com.android_g.egg.PlatLogoActivity",
     11..13 to "com.android_h.egg.PlatLogoActivity",
     14..15 to "com.android_i.egg.PlatLogoActivity",

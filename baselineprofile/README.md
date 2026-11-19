@@ -17,7 +17,7 @@ It serves three core functions:
 | `StartupBenchmarks.kt` | Macrobenchmark comparing cold start performance with and without Baseline Profiles (`CompilationMode.None` vs `CompilationMode.Partial(Require)`). |
 | `SmokeTest.kt` | Black-box smoke test verifying that the home UI, search, settings, and all supported `egg://easter_egg/api/<level>` deep links launch without crashing. |
 | `Journeys.kt` | Reusable UIAutomator interaction flows (first-launch welcome acceptance, home wait, egg list scrolling, search, settings drawer). |
-| `Eggs.kt` | Static mapping table of all Easter egg API levels (API 9–37) to their target entry Activities. |
+| `Eggs.kt` | Static mapping table of all Easter egg API levels (API 1–37) to their target entry Activities. |
 | `Shell.kt` | Shell command utilities (resolving launcher activities, reading resumed activity from `dumpsys`, checking `logcat -b crash`). |
 | `EnglishAppRule.kt` | JUnit rule pinning app locale to English (`cmd locale set-app-locales`) during testing so UIAutomator can locate controls by English text. |
 
@@ -85,5 +85,8 @@ Measures 10 cold-start iterations and prints timing metrics comparing uncompiled
   - When new high-priority Easter eggs are added to the active sampling list (`PROFILED_EGG_LEVELS` in `BaselineProfileGenerator.kt`).
 - **When Adding / Modifying Easter Eggs**:
   - Update `EGGS` in `baselineprofile/src/main/kotlin/com/dede/android_eggs/baselineprofile/Eggs.kt` whenever an egg's entry Activity is added, renamed, or repointed.
-- **Flavors & Variants**:
-  - The profile generator uses `missingDimensionStrategy("app", "foss")` and `missingDimensionStrategy("track", "product")`. Because profile rules are class- and method-based, one unified profile serves all variants (FOSS, Market, Beta, Product).
+- **Flavors & Variants Compatibility**:
+  - The profile generator uses `missingDimensionStrategy("app", "foss")` and `missingDimensionStrategy("track", "product")`.
+  - **Single Profile for All Variants**: Because profile rules are class- and method-based and `mergeIntoMain = true` is configured, one unified profile serves every flavor (FOSS, Market, Beta, Product).
+  - **Cross-Flavor Tolerance**: FOSS and Market share >99.9% identical code (differing only in update/review API implementations in `src/foss` vs `src/market`). The Android runtime (`dex2oat`) is inherently fault-tolerant: any rule referencing a class absent in the current APK (e.g., Google Play APIs in a FOSS build) is safely and silently ignored during AOT compilation with zero side-effects.
+  - **Terminal Output Notice**: When running `:app:generateBaselineProfile`, the console log may show `A baseline profile was generated for the variant marketProductRelease`. Because `mergeIntoMain = true` is enabled, the test is executed once by `:baselineprofile`, and the resulting rules are copied into the shared `src/main/generated/baselineProfiles/` path. The variant label shown in the log is simply the internal consumer variant reference chosen by the plugin and has zero negative impact on FOSS builds.

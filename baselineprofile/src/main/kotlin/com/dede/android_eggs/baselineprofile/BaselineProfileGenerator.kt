@@ -48,6 +48,6 @@ class BaselineProfileGenerator {
     }
 
     private companion object {
-        val PROFILED_EGG_LEVELS = listOf(31, 33, 34, 35, 36)
+        val PROFILED_EGG_LEVELS = listOf(31, 33, 34, 35, 36, 37)
     }
 }
