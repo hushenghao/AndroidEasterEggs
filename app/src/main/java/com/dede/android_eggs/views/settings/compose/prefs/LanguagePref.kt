@@ -375,7 +375,7 @@ private fun LanguageSelectedBottomSheet(
                     onLanguageSelected(LanguagePrefUtil.SYSTEM)
                 }
             }
-            items(languageOptions, key = { it.value }) {
+            items(languageOptions, key = { it.value }, contentType = { "lang" }) {
                 LanguageItem(it, it == selectedLangOp) {
                     onLanguageSelected(it.value)
                 }

@@ -37,8 +37,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.neverEqualPolicy
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -66,12 +66,11 @@ fun CatRememberBottomSheet(
     if (!visible) {
         return
     }
-    val allCats = remember { mutableStateListOf<Cat>() }
+    var allCats by remember { mutableStateOf<List<Cat>>(emptyList(), neverEqualPolicy()) }
     val scope = rememberCoroutineScope()
     LaunchedEffect(Unit) {
         launch {
-            allCats.clear()
-            allCats.addAll(CatRememberDataStore.getAllCats())
+            allCats = CatRememberDataStore.getAllCats()
         }
     }
     var isDeletedMode by remember { mutableStateOf(false) }
@@ -118,7 +117,7 @@ fun CatRememberBottomSheet(
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
-                    items(allCats, key = { it.id }) { cat ->
+                    items(allCats, key = { it.id }, contentType = { "cat" }) { cat ->
                         CatItem(
                             cat = cat,
                             isDeletedMode = isDeletedMode,
@@ -133,7 +132,7 @@ fun CatRememberBottomSheet(
                             onCatDeleteClick = {
                                 scope.launch {
                                     CatRememberDataStore.forgetById(cat.id)
-                                    allCats.remove(cat)
+                                    allCats = allCats.filter { it.id != cat.id }
                                 }
                             }
                         )

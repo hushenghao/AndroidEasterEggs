@@ -54,6 +54,7 @@ fun EasterEggSearchList(
         items(
             items = easterEggs,
             key = BaseEasterEgg::lazyItemKey,
+            contentType = { "egg" },
         ) {
             EasterEggSimpleItem(
                 base = it,

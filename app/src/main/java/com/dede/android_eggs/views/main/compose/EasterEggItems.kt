@@ -24,7 +24,6 @@ import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -134,7 +133,6 @@ private fun Chip(text: String) {
     }
 }
 
-@Immutable
 private class EasterEggState(val base: BaseEasterEgg, index: Int) {
     private val indexState: MutableState<Int> = mutableIntStateOf(index)
 

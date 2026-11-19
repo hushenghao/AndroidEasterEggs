@@ -184,6 +184,7 @@ private fun EasterEggColumnList(
         items(
             items = highestList,
             key = BaseEasterEgg::lazyItemKey,
+            contentType = { "highest" },
         ) {
             EasterEggHighestItem(
                 base = it,
@@ -194,13 +195,14 @@ private fun EasterEggColumnList(
         }
         // Separate the highlighted and the normal sections only when both exist.
         if (highestList.isNotEmpty() && normalList.isNotEmpty()) {
-            item("wavy1") {
+            item("wavy1", contentType = "wavy") {
                 ItemWavy()
             }
         }
         items(
             items = normalList,
             key = BaseEasterEgg::lazyItemKey,
+            contentType = { "simple" },
         ) {
             EasterEggSimpleItem(
                 base = it,
@@ -209,10 +211,10 @@ private fun EasterEggColumnList(
                 statsMap = statsMap,
             )
         }
-        item("wavy2") {
+        item("wavy2", contentType = "wavy") {
             ItemWavy()
         }
-        item("footer") {
+        item("footer", contentType = "footer") {
             ProjectDescription()
         }
     }
@@ -237,6 +239,7 @@ private fun EasterEggGrid(
         items(
             items = highestList,
             key = BaseEasterEgg::lazyItemKey,
+            contentType = { "highest" },
         ) {
             EasterEggHighestItem(
                 base = it,
@@ -248,6 +251,7 @@ private fun EasterEggGrid(
         items(
             items = normalList,
             key = BaseEasterEgg::lazyItemKey,
+            contentType = { "simple" },
         ) {
             EasterEggSimpleItem(
                 base = it,
@@ -256,10 +260,10 @@ private fun EasterEggGrid(
                 statsMap = statsMap,
             )
         }
-        item("wavy2", span = StaggeredGridItemSpan.FullLine) {
+        item("wavy2", span = StaggeredGridItemSpan.FullLine, contentType = "wavy") {
             ItemWavy()
         }
-        item("footer", span = StaggeredGridItemSpan.FullLine) {
+        item("footer", span = StaggeredGridItemSpan.FullLine, contentType = "footer") {
             ProjectDescription()
         }
     }

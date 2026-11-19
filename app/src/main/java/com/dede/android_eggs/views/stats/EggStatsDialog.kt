@@ -174,6 +174,7 @@ fun EggStatsDialog(
                 key = { row ->
                     "${row.egg.fullApiLevelRange.first}-${row.egg.fullApiLevelRange.last}"
                 },
+                contentType = { "egg" },
             ) { row ->
                 EggStatsItem(row = row)
             }

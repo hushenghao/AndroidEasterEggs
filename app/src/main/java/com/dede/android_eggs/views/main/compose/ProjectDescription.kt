@@ -40,7 +40,7 @@ fun ProjectDescription() {
             EasterEggLogo(
                 res = R.mipmap.ic_launcher_17_round,
                 modifier = Modifier
-                    .size(40.dp)
+                    .size(44.dp)
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = ripple(false)

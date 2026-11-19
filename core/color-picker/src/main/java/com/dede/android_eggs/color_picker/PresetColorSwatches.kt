@@ -123,7 +123,7 @@ fun PresetColorSwatches(
             contentPadding = PaddingValues(12.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            items(swatches.size) { index ->
+            items(swatches.size, contentType = { "swatch" }) { index ->
                 val swatch = swatches[index]
                 val selected = index == selectedIndex
                 Box(

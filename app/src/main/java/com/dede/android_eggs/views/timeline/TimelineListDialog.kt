@@ -110,40 +110,44 @@ fun TimelineListDialog(
         scrimColor = scrimColor,
         scrollState = lazyListState,
     ) {
-        LazyColumn(
-            state = lazyListState,
-            contentPadding = PaddingValues(bottom = paddingValues.calculateBottomPadding())
-        ) {
-            item {
-                TimelineHeader()
-            }
-            items(
-                items = viewModel.timelines,
-                key = { event ->
-                    "${event.fullApiLevel}:${event.year}-${event.month}-${event.event}"
-                }
+        BoxWithConstraints(Modifier.fillMaxWidth()) {
+            val centerX = timelineCenterX
+            LazyColumn(
+                state = lazyListState,
+                contentPadding = PaddingValues(bottom = paddingValues.calculateBottomPadding())
             ) {
-                TimelineItem(
-                    event = it,
-                    logoRes = viewModel.findAndroidLogoByFullApiLevel(it.fullApiLevel),
-                    isNewGroup = it.isNewGroup(viewModel.timelines)
-                )
-            }
-            item {
-                TimelineFooter()
+                item {
+                    TimelineHeader(centerX)
+                }
+                items(
+                    items = viewModel.timelines,
+                    key = { event ->
+                        "${event.fullApiLevel}:${event.year}-${event.month}-${event.event}"
+                    },
+                    contentType = { "event" },
+                ) {
+                    TimelineItem(
+                        event = it,
+                        logoRes = viewModel.findAndroidLogoByFullApiLevel(it.fullApiLevel),
+                        isNewGroup = it.isNewGroup(viewModel.timelines),
+                        centerX = centerX,
+                    )
+                }
+                item {
+                    TimelineFooter(centerX)
+                }
             }
         }
     }
 }
 
 @Composable
-private fun TimelineFooter() {
-    BoxWithConstraints(
+private fun TimelineFooter(centerX: Dp) {
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 10.dp)
     ) {
-        val centerX = timelineCenterX
         Box(
             modifier = Modifier
                 .align(Alignment.TopStart)
@@ -163,9 +167,8 @@ private fun TimelineFooter() {
 
 @Composable
 @Preview(showBackground = true)
-private fun TimelineHeader() {
-    BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
-        val centerX = timelineCenterX
+private fun TimelineHeader(centerX: Dp = 120.dp) {
+    Box(modifier = Modifier.fillMaxWidth()) {
         Box(
             modifier = Modifier
                 .align(Alignment.BottomStart)
@@ -193,16 +196,16 @@ private fun TimelineHeader() {
 private fun TimelineItem(
     event: TimelineEvent = TimelineEvent(2025, Calendar.SEPTEMBER, 9900000, "Demo event name"),
     @DrawableRes logoRes: Int = R.mipmap.ic_launcher_17,
-    isNewGroup: Boolean = true
+    isNewGroup: Boolean = true,
+    centerX: Dp = 120.dp,
 ) {
     val context = LocalContext.current
-    BoxWithConstraints(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .drawTimelineRail(colorScheme.secondary)
     ) {
-        val centerX = timelineCenterX
-        val logoSize = 40
+        val logoSize = 44
         val gap = 12.dp
 
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {

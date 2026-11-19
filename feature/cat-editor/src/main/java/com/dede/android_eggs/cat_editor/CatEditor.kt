@@ -210,6 +210,7 @@ internal fun CatEditor(
                 modifier = Modifier
                     .then(canvasModifier)
                     .capturable(captureController.getDelegate())
+                    .onSizeChanged { canvasSize = it.toSize() }
                     .pointerInput(controllerImpl.isSelectEnabled) {
                         if (!controllerImpl.isSelectEnabled) {
                             return@pointerInput
@@ -237,12 +238,6 @@ internal fun CatEditor(
                         }
                     },
                 onDraw = {
-                    if (size != canvasSize) {
-                        // canvas size changed
-                        canvasSize = size
-                        return@Canvas
-                    }
-
                     if (useAndroidCanvasDraw && bitmap != null) {
                         // android canvas draw
                         androidCanvasDraw(canvasMatrix.asAndroidMatrix(), bitmap, partColorBlend)
