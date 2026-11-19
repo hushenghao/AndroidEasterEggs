@@ -7,6 +7,7 @@
 - Migrate clock and date handling to java.time (core library desugaring)
 - Add local Easter egg play statistics (first opened, last played, play count)
 - Add a settings slider for the number of highlighted eggs on the home screen
+- Improve app startup time with Baseline Profiles
 
 ### v5.6.0 (2026-10-20)
 

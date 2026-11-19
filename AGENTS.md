@@ -35,6 +35,7 @@ This is a multi-module Android project using Kotlin DSL Gradle files.
 - Feature modules: `:feature:*`
 - Android Easter egg implementation modules: `:eggs:*`
 - Build convention plugins: `build-logic`
+- Baseline Profile, benchmark and smoke test module: `:baselineprofile`
 - Utility script modules and scripts: `:script:*`, `script/`
 
 Primary module registration lives in `settings.gradle.kts`.
@@ -58,6 +59,11 @@ easter.eggs.basic.library     →  :jvm-basic (api)
 | `easter.eggs.library`         | LIBRARY     | Yes  | No      | Yes           | Older `:eggs:*` (Gingerbread–Tiramisu), `:eggs:RocketLauncher`, `:core:custom-tab-browser`, `:core:resources`, `:core:shortcut`, `:core:egg-stats` |
 | `easter.eggs.compose.library` | LIBRARY     | Yes  | Yes     | Yes           | All `:core:*` except the four basic-library modules above, `:feature:*`, newer `:eggs:*` (UpsideDownCake+) |
 | `easter.eggs.app`             | APP         | Yes  | Yes     | No            | `:app` only |
+| `easter.eggs.benchmark`       | TEST        | No   | No      | No            | `:baselineprofile` only |
+
+`easter.eggs.benchmark` stands outside the stack above. It is a small standalone plugin (not
+an `AbsConfigurablePlugin`) that applies `com.android.test` with the shared SDK constants and
+`minSdk = 28`, and injects none of the dependencies listed below.
 
 Auto-injected dependencies (no explicit declaration needed in module build file):
 - APP and LIBRARY modules → `:core:basic` (implementation)
@@ -106,6 +112,7 @@ Auto-injected dependencies (no explicit declaration needed in module build file)
 | Property                     | Default | Purpose |
 |------------------------------|---------|---------|
 | `eggs.androidNext.enable`    | `false` | Gates `:app`'s dependency on `:eggs:AndroidNext` (build-logic `EasterEggsApp.kt`). The module is always listed in `settings.gradle.kts`. |
+| `eggs.baselineProfile.connected` | `false` | `:baselineprofile` generates Baseline Profiles on the attached device instead of its managed device (`-Peggs.baselineProfile.connected=true`). |
 | `org.gradle.parallel`        | `true`  | Parallel project execution |
 | `org.gradle.configuration-cache` | `true` | Enable configuration cache |
 | `android.nonTransitiveRClass` | `true` | Non-transitive R class generation |
@@ -153,6 +160,7 @@ Common verification commands:
 ./gradlew :feature:analog-clock-widget:compileDebugKotlin
 ./gradlew :feature:neko-controls-widget:compileDebugKotlin
 ./gradlew :core:local-provider:compileDebugKotlin
+./gradlew :baselineprofile:assembleBenchmarkRelease
 ```
 
 Prefer the smallest module-specific compile/test command that covers the change.
@@ -218,6 +226,9 @@ three exceptions:
 - `:core:analog-clock` — reached transitively via `:eggs:S` and `:eggs:Tiramisu`.
 - `:eggs:AndroidNext` — added by build-logic only when `eggs.androidNext.enable=true`.
 
+`:baselineprofile` is wired in through `baselineProfile(project(":baselineprofile"))`, not
+`implementation`.
+
 ### Flavor-specific Source Sets
 
 | Source Set           | Purpose |
@@ -243,6 +254,8 @@ three exceptions:
   - `backup/` — `DataBackupManager.kt`, `DefaultSettings.kt`.
 - `app/src/main/res/` — app resources, launcher icons (`mipmap-*`).
 - `app/proguard-rules.pro` — release ProGuard/R8 rules.
+- `app/src/main/generated/baselineProfiles/` — the committed Baseline and Startup Profile
+  rules, written by `:app:generateBaselineProfile`; do not edit them by hand.
 
 ## Core Modules
 
@@ -428,6 +441,44 @@ Prefer minimal changes when editing AOSP-derived code.
 - Some eggs have local `README.md` files with version-specific context (17 eggs have them;
   AndroidNext, Base, CinnamonBun, RocketLauncher do not).
 
+## Baseline Profile, Benchmark & Smoke Test Module
+
+Path: `baselineprofile/` · plugin `easter.eggs.benchmark` · namespace
+`com.dede.android_eggs.baselineprofile`
+
+A self-instrumenting `com.android.test` module (`targetProjectPath = ":app"`, `minSdk = 28`)
+that drives the app from the outside through UiAutomator and never sees its code.
+
+| Class | Purpose |
+|-------|---------|
+| `BaselineProfileGenerator` | Journeys recorded into the Baseline and Startup Profile: cold start (with the first-launch dialog), home scroll, search, the settings drawer and a few eggs |
+| `StartupBenchmarks` | Cold start without precompilation vs. with the Baseline Profile; run it on a physical device |
+| `SmokeTest` | Minified `benchmarkRelease` build: home, search and settings work, and every `egg://easter_egg/api/<level>` deep link resumes the expected egg Activity without a crash |
+
+```sh
+# Generate the profile on the managed device (pixel6Api33, downloads an AOSP image once)
+./gradlew :app:generateBaselineProfile
+# ... or on the attached device (API 33+, or rooted)
+./gradlew :app:generateBaselineProfile -Peggs.baselineProfile.connected=true
+# Benchmark or smoke test the minified build on the attached device
+./gradlew :baselineprofile:connectedBenchmarkReleaseAndroidTest \
+  -Pandroid.testInstrumentationRunnerArguments.class=com.dede.android_eggs.baselineprofile.SmokeTest
+```
+
+- The rules are class/method based, so one profile serves every flavor: only `fossProductRelease`
+  is generated from, written to `app/src/main/generated/baselineProfiles/` and committed.
+  Regenerate it before a release or after a large change to startup or the egg list.
+- The first-launch dialog only shows on a fresh install, so generate the committed profile on the
+  managed device (or after clearing the app data), not on a device the app was already used on.
+- The app has no test tags, so controls are found by their English text. `EnglishAppRule` pins
+  the app (not the device) to English through `cmd locale` (API 33+) and restores it afterwards.
+- `Eggs.kt` is the hand-written table of the Activity each deep link API level opens, which
+  `SmokeTest` asserts. Update it whenever an egg is added, renamed or re-pointed.
+- The gradle property `android.injected.androidTest.leaveApksInstalledAfterRun=true` is set in
+  `gradle.properties` to prevent AGP from uninstalling the app and test package at the end of
+  connected tests, which would also wipe the app's data on the device.
+- Benchmarks belong on physical devices; do not run them on emulators or on every pull request.
+
 ## Build Logic
 
 Path: `build-logic/convention/`
@@ -442,6 +493,7 @@ Path: `build-logic/convention/`
 | `src/main/kotlin/com/dede/android_eggs/plugins/EasterEggsLibrary.kt` | Non-Compose library plugin |
 | `src/main/kotlin/com/dede/android_eggs/plugins/EasterEggsComposeLibrary.kt` | Compose library plugin |
 | `src/main/kotlin/com/dede/android_eggs/plugins/EasterEggsBasicLibrary.kt` | Basic library plugin for `:core:basic` |
+| `src/main/kotlin/com/dede/android_eggs/plugins/EasterEggsBenchmark.kt` | Standalone test-module plugin for `:baselineprofile` |
 | `src/main/kotlin/com/dede/android_eggs/dls/Dls.kt` | DSL extensions: `keyprops`, `libs`, `marketImplementation()`, `android<>` accessor |
 | `src/main/kotlin/com/dede/android_eggs/tasks/UpdateChangelogsTask.kt` | Task that runs `python3 changelogs.py` to update fastlane changelogs |
 | `src/main/kotlin/com/dede/android_eggs/tasks/UpdateModularizationGraphTask.kt` | Task that auto-generates a Mermaid modularization graph |
@@ -502,6 +554,7 @@ Path: `build-logic/convention/`
 - `about-libraries` — OSS license UI
 - `ktor` — HTTP client
 - `nav3` — Navigation3
+- `benchmark` — Macrobenchmark and the Baseline Profile Gradle plugin (one version)
 
 ### Adding Dependencies
 
@@ -525,6 +578,7 @@ Path: `build-logic/convention/`
 | Images | BlurHash, Accompanist drawablepainter, Capturable (cat-editor capture) |
 | Debug | LeakCanary, Curtains, Compose tooling |
 | Build | desugar_jdk_libs (core library desugaring, injected by build-logic for `java.time`) |
+| Performance | Baseline Profile Gradle plugin, Macrobenchmark, ProfileInstaller, UiAutomator |
 | Market | Google Play Review, Play In-App Update |
 
 ## Adding a New Easter Egg Module
@@ -546,6 +600,8 @@ Follow this checklist when adding a new Android version Easter egg:
 7. **Create `lint-baseline.xml`** in the module root (if using a plugin with baseline enabled)
 8. **Wire up activity actions** in `:core:activity-actions` if the egg has launchable activities
 9. **Use `sync-android-egg` skill** for AOSP-derived content fetch and adaptation
+10. **Add the egg to the smoke test**: `baselineprofile/src/main/kotlin/com/dede/android_eggs/baselineprofile/Eggs.kt`
+    maps every deep link API level to the Activity it opens
 
 ## Testing & Verification
 
@@ -582,6 +638,8 @@ Follow this checklist when adding a new Android version Easter egg:
 ### Test Infrastructure
 
 - **Instrumentation tests**: `app/src/androidTest/` using `AndroidJUnitRunner`.
+- **Baseline Profile, benchmark and smoke tests**: `:baselineprofile` (see its section above);
+  they need a connected or a managed device.
 - **No `src/test/` unit tests** exist in any module.
 - **Room schemas** exported from `feature/cat-editor/schemas/` for migration verification.
 - Test dependencies are in the `android-test` bundle in `libs.versions.toml`.
@@ -634,6 +692,9 @@ Use these first for common tasks:
 - **Easter egg play statistics**:
   - `core/egg-stats/src/main/java/com/dede/android_eggs/egg_stats/` — Room event table, DAO and repository
   - `app/src/main/java/com/dede/android_eggs/views/stats/EggStatsDialog.kt` — statistics sheet
+- **Baseline Profile / benchmark / smoke tests**:
+  - `baselineprofile/src/main/kotlin/com/dede/android_eggs/baselineprofile/`
+  - `app/src/main/generated/baselineProfiles/` — the committed profile rules
 - **Build plugin logic**:
   - `build-logic/convention/src/main/kotlin/com/dede/android_eggs/plugins/`
 - **Gradle version catalog**:

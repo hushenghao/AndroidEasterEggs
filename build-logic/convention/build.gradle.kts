@@ -36,5 +36,9 @@ gradlePlugin {
             id = "easter.eggs.app"
             implementationClass = "com.dede.android_eggs.plugins.EasterEggsApp"
         }
+        register("benchmark") {
+            id = "easter.eggs.benchmark"
+            implementationClass = "com.dede.android_eggs.plugins.EasterEggsBenchmark"
+        }
     }
 }

@@ -36,6 +36,7 @@ dependencyResolutionManagement {
 
 include(
     ":app",
+    ":baselineprofile",
 
     ":core:composable",
     ":core:theme",

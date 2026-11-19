@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage", "AvoidDuplicateDependencies")
 
+import com.android.build.api.variant.HostTestBuilder
 import com.dede.android_eggs.dls.marketImplementation
 
 plugins {
@@ -7,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.aboutlibraries)
     alias(libs.plugins.stability.analyzer)
+    alias(libs.plugins.androidx.baselineprofile)
 }
 
 android {
@@ -71,8 +73,25 @@ android {
             // Enable product only for market build
             variantBuilder.enable = track == "product"
         }
+
+        // The Baseline Profile plugin turns unit tests off on its nonMinified/benchmark variants,
+        // but AGP 9.5's Compose Preview task requires them on every variant. Registered after
+        // the plugin's own callback so that this one wins.
+        beforeVariants { variantBuilder ->
+            variantBuilder.hostTests[HostTestBuilder.UNIT_TEST_TYPE]?.enable = true
+        }
     }
 
+}
+
+baselineProfile {
+    // The rules are class/method based, so one profile in src/main/generated/baselineProfiles
+    // serves every flavor; without this each variant gets its own copy in src/<variant>/.
+    mergeIntoMain = true
+    warnings {
+        // The disabled market + beta variants are intentional, see beforeVariants above.
+        disabledVariants = false
+    }
 }
 
 dependencies {
@@ -164,6 +183,9 @@ dependencies {
 
     marketImplementation(libs.google.play.review)
     marketImplementation(libs.google.play.update)
+
+    implementation(libs.androidx.profileinstaller)
+    baselineProfile(project(":baselineprofile"))
 
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
