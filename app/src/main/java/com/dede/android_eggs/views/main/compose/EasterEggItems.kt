@@ -3,15 +3,18 @@
 package com.dede.android_eggs.views.main.compose
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material3.Card
@@ -29,7 +32,13 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
@@ -80,6 +89,7 @@ fun EasterEggHighestItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(PHI),
+            shape = RoundedCornerShape(0f),
             snapshot = snapshot
         )
 
@@ -183,98 +193,124 @@ private fun EasterEggItemContent(
     val dateFormat = remember(egg, LocalConfiguration.current) {
         AppLocaleDateFormatter.getInstance("MMM yyyy")
     }
-    Column(modifier = modifier) {
-        Row(
-            modifier = Modifier
-                .padding(start = 18.dp, top = 14.dp, end = 18.dp)
-                .fillMaxWidth()
+    val cardColor = colorScheme.surfaceColorAtElevation(2.dp)
+    Box(modifier = modifier) {
+        Box(
+            modifier = Modifier.matchParentSize(),
+            contentAlignment = Alignment.CenterEnd,
         ) {
-            Column(
+            EasterEggLogo(
                 modifier = Modifier
-                    .padding(end = 8.dp)
-                    .weight(1f, true)
+                    .fillMaxHeight()
+                    .aspectRatio(1f)
+                    .drawWithContent {
+                        drawContent()
+                        drawRect(
+                            brush = Brush.horizontalGradient(
+                                colors = listOf(cardColor, Color.Transparent),
+                            ),
+                        )
+                    }
+                    .alpha(0.4f)
+                    .blur(14.dp, 14.dp),
+                res = egg.iconRes,
+                contentDescription = null,
+                iconShape = RectangleShape,
+            )
+        }
+        Column {
+            Row(
+                modifier = Modifier
+                    .padding(start = 18.dp, top = 14.dp, end = 18.dp)
+                    .fillMaxWidth()
             ) {
-                Text(
-                    text = stringResource(id = egg.nameRes),
-                    style = typography.headlineSmall,
-                )
-                Row(
+                Column(
                     modifier = Modifier
-                        .padding(top = 6.dp)
-                        .clip(shapes.extraSmall)
-                        .withEasterEggGroupSelector(eggState.base) {
-                            eggState.selectedEgg(it)
-                        },
-                    verticalAlignment = Alignment.CenterVertically
+                        .padding(end = 8.dp)
+                        .weight(1f, true)
                 ) {
                     Text(
-                        text = androidVersion,
-                        style = typography.bodyMedium,
-                        // Weighted children are measured last, so the group
-                        // arrow icon keeps its space when the text wraps.
-                        modifier = Modifier.weight(1f, fill = false),
+                        text = stringResource(id = egg.nameRes),
+                        style = typography.headlineSmall,
                     )
-                    if (eggState.isGroup) {
-                        Icon(
-                            modifier = Modifier
-                                .padding(start = 4.dp)
-                                .size(22.dp),
-                            imageVector = Icons.Rounded.KeyboardArrowDown,
-                            contentDescription = stringResource(StringsR.string.pref_title_language_more)
+                    Row(
+                        modifier = Modifier
+                            .padding(top = 6.dp)
+                            .clip(shapes.extraSmall)
+                            .withEasterEggGroupSelector(eggState.base) {
+                                eggState.selectedEgg(it)
+                            },
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = androidVersion,
+                            style = typography.bodyMedium,
+                            // Weighted children are measured last, so the group
+                            // arrow icon keeps its space when the text wraps.
+                            modifier = Modifier.weight(1f, fill = false),
+                        )
+                        if (eggState.isGroup) {
+                            Icon(
+                                modifier = Modifier
+                                    .padding(start = 4.dp)
+                                    .size(22.dp),
+                                imageVector = Icons.Rounded.KeyboardArrowDown,
+                                contentDescription = stringResource(StringsR.string.pref_title_language_more)
+                            )
+                        }
+                    }
+                }
+                EasterEggLogo(egg = egg, sensor = true)
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(end = 10.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                FlowRow(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 18.dp, end = 0.dp, top = 12.dp, bottom = 18.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Chip(text = apiLevel)
+                    val releaseDate = if (LocalInspectionMode.current) {
+                        Date()
+                    } else {
+                        releaseDateLookup(egg.fullApiLevel)
+                    }
+                    if (releaseDate != null) {
+                        Chip(text = dateFormat.format(releaseDate))
+                    }
+                    val playCount = stats?.playCount ?: 0
+                    if (playCount > 0) {
+                        Chip(
+                            text = stringResource(
+                                StringsR.string.egg_stats_played_count,
+                                playCount,
+                            )
                         )
                     }
                 }
-            }
-            EasterEggLogo(egg = egg, sensor = true)
-        }
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(end = 10.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            FlowRow(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 18.dp, end = 0.dp, top = 12.dp, bottom = 18.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Chip(text = apiLevel)
-                val releaseDate = if (LocalInspectionMode.current) {
-                    Date()
-                } else {
-                    releaseDateLookup(egg.fullApiLevel)
+                val isSupportShortcut = remember(egg) {
+                    EasterEggShortcutsHelp.isSupportShortcut(egg)
                 }
-                if (releaseDate != null) {
-                    Chip(text = dateFormat.format(releaseDate))
-                }
-                val playCount = stats?.playCount ?: 0
-                if (playCount > 0) {
-                    Chip(
-                        text = stringResource(
-                            StringsR.string.egg_stats_played_count,
-                            playCount,
+                if (isSupportShortcut) {
+                    IconButton(
+                        onClick = {
+                            EasterEggShortcutsHelp.pinShortcut(context, egg)
+                        },
+                        shape = IconShapePrefUtil.getIconShape(),
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.BookmarkAddOutline,
+                            contentDescription = stringResource(id = StringsR.string.label_add_shortcut)
                         )
-                    )
-                }
-            }
-
-            val isSupportShortcut = remember(egg) {
-                EasterEggShortcutsHelp.isSupportShortcut(egg)
-            }
-            if (isSupportShortcut) {
-                IconButton(
-                    onClick = {
-                        EasterEggShortcutsHelp.pinShortcut(context, egg)
-                    },
-                    shape = IconShapePrefUtil.getIconShape(),
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.BookmarkAddOutline,
-                        contentDescription = stringResource(id = StringsR.string.label_add_shortcut)
-                    )
+                    }
                 }
             }
         }

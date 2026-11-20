@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Matrix
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -53,8 +54,10 @@ fun EasterEggLogo(
     @DrawableRes res: Int,
     sensor: Boolean = false,
     contentDescription: String? = null,
+    iconShape: Shape? = null,
 ) {
     val context = LocalContext.current
+    val shape = iconShape ?: IconShapePrefUtil.getIconShape()
     val isAdaptiveIcon = remember(res) { context.isAdaptiveIconDrawable(res) }
     if (isAdaptiveIcon) {
         val foregroundTransformState = rememberAdaptiveIconForegroundTransformState()
@@ -81,7 +84,7 @@ fun EasterEggLogo(
             modifier = Modifier
                 .then(modifier)
                 .onSizeChanged { size = it },
-            clipShape = IconShapePrefUtil.getIconShape(),
+            clipShape = shape,
             foregroundTransformState = foregroundTransformState,
             res = res,
         )
@@ -92,7 +95,7 @@ fun EasterEggLogo(
         if (withBackground) {
             modifier = Modifier
                 .then(modifier)
-                .clip(IconShapePrefUtil.getIconShape())
+                .clip(shape)
         }
         Image(
             painter = rememberDrawablePainter(drawable),
