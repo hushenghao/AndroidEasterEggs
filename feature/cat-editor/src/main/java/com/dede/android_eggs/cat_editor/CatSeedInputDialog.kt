@@ -1,6 +1,7 @@
 package com.dede.android_eggs.cat_editor
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.CapturedAnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
@@ -114,7 +115,7 @@ fun CatSeedInputDialog(
                 },
                 isError = inputError,
                 supportingText = {
-                    AnimatedVisibility(
+                    CapturedAnimatedVisibility(
                         visible = inputSeedText.isNotEmpty(),
                         enter = fadeIn() + slideInVertically(),
                         exit = fadeOut() + slideOutVertically(),
