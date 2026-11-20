@@ -86,10 +86,10 @@
     <string name="rocket_launcher_all_icons">Easter egg-uri și aplicații</string>
     <string name="rocket_launcher_query_all_app_desc">Este necesară obținerea listei tuturor aplicațiilor</string>
     <string name="label_data_backup">Backup și restaurare a datelor</string>
-    <string name="pref_data_backup_desc">Exportă sau importă datele de utilizator</string>
-    <string name="action_export_backup">Exportă backup</string>
+    <string name="pref_data_backup_desc">Exportați sau importați datele de utilizator</string>
+    <string name="action_export_backup">Exportați backup</string>
     <string name="action_export_backup_desc">Salvează setările, pisicile și configurațiile widgetului într-un fișier</string>
-    <string name="action_import_backup">Importă backup</string>
+    <string name="action_import_backup">Importați backup</string>
     <string name="action_import_backup_desc">Restaurează dintr-un fișier de backup exportat anterior</string>
     <string name="toast_backup_success">Backup exportat cu succes</string>
     <string name="toast_restore_success">Restaurare finalizată. Aplicația se va reporni.</string>
