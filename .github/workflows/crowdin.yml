@@ -18,6 +18,12 @@ on:
   schedule:
     - cron: '0 1 * * 0'
   workflow_dispatch:
+    inputs:
+      upload_only:
+        description: 'Only upload sources and translations (skip download and PR creation)'
+        type: boolean
+        default: false
+        required: false
 
 jobs:
   crowdin:
@@ -39,9 +45,10 @@ jobs:
         with:
           upload_sources: true
           upload_translations: true
-          download_translations: true
+          auto_approve_imported: true
+          download_translations: ${{ !inputs.upload_only }}
 
-          create_pull_request: true
+          create_pull_request: ${{ !inputs.upload_only }}
           localization_branch_name: l10n_crowdin_translations
           pull_request_title: 'feat: New Crowdin translations'
           pull_request_body: 'New Crowdin pull request with translations 🚀'
