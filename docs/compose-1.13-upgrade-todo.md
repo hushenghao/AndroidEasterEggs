@@ -67,6 +67,16 @@ FlowRow 未弃用（官方只建议**新代码**用 FlexBox）；FlexBox 是 `Fl
 
 - Compose 性能静态分析 skill（`android/skills` 的 `jetpack-compose-performance`）：已对主界面 + 核心 UI 模块跑过审计，**未发现显著可行动问题**（懒布局 `key`/`contentType`、`collectAsStateWithLifecycle`、无 `Modifier.composed`/热路径 `onGloballyPositioned` 等均合规）。
 - `TestFailurePolicy`：`baselineprofile` 冒烟测试失败时自动导出截图 + 语义树（可选，未接入）。
+- **诊断堆栈跟踪（Diagnostic Stack Traces）**：已在 `EasterEggsApp.onCreate` 启用 `Composer.setDiagnosticStackTraceMode(ComposeStackTraceMode.Auto)`。在发生崩溃时会自动附加包含 `@Composable` 组件调用树的堆栈信息；线上混淆包使用 `GroupKeys` 模式配合 R8 映射表还原，未混淆包无额外开销。
+
+## 六、渐进式模糊 / 背景模糊 vs Haze（评估结论：Haze 保留）
+
+1.13 的图形特性里有两类「模糊」，与项目现有的 Haze 磨砂不是一回事，**替代不了 Haze**：
+
+- **`Modifier.blur { blurRadiusSpec = ... }`（渐进式模糊）**：**自模糊**——只模糊它自己那块内容（图边渐隐、径向聚光），不采样背后内容；且仅 API 31+ 生效（`Blur.kt` 注释），项目 `minSdk 24` 兜不住。
+- **`DialogProperties.blurBehindRadius` / `backgroundBlurRadius`**：**跨窗口**背景模糊（Dialog/Popup 窗口级），而项目磨砂是窗口内（app bar + overlay host），且历史上已刻意放弃 Dialog 方案（入场闪动）、否决 popup 模糊。
+
+项目两处 Haze（app bar 磨砂、overlay 全屏磨砂）都是「采样背后内容」，1.13 上述能力覆盖不了，**Haze 保留**。渐进式模糊可另作新视觉特效考虑（如列表卡片底边渐隐），但属于「加效果」而非「替换磨砂」。
 
 ## 暂不相关
 
