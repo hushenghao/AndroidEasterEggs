@@ -35,4 +35,7 @@
     <string name="locale_lang_sv_SE">ஸ்வீடிஷ்</string>
     <string name="locale_lang_my_MM">பர்மியம்</string>
     <string name="locale_lang_bn_BD">வங்காளம்</string>
+    <string name="locale_lang_sq">அல்பேனிய மொழி</string>
+    <string name="locale_lang_bg">பல்கேரிய மொழி</string>
+    <string name="locale_lang_fa">பாரசீக மொழி</string>
 </resources>

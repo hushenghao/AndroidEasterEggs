@@ -36,4 +36,6 @@
     <string name="locale_lang_my_MM">Birman</string>
     <string name="locale_lang_bn_BD">Bengali</string>
     <string name="locale_lang_sq">Albanais</string>
+    <string name="locale_lang_bg">bulgare</string>
+    <string name="locale_lang_fa">persan</string>
 </resources>

@@ -35,4 +35,7 @@
     <string name="locale_lang_sv_SE">Sueco</string>
     <string name="locale_lang_my_MM">Birmanês</string>
     <string name="locale_lang_bn_BD">Bengali</string>
+    <string name="locale_lang_sq">albanês</string>
+    <string name="locale_lang_bg">búlgaro</string>
+    <string name="locale_lang_fa">persa</string>
 </resources>

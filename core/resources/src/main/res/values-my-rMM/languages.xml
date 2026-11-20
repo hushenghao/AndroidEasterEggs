@@ -34,4 +34,8 @@
     <string name="locale_lang_ro">ရိုမေးနီးယား</string>
     <string name="locale_lang_sv_SE">ဒိ</string>
     <string name="locale_lang_my_MM">မြန်မာ</string>
+    <string name="locale_lang_bn_BD">ဘင်္ဂါလီ</string>
+    <string name="locale_lang_sq">အယ်လ်ဘေးနီးယန်း</string>
+    <string name="locale_lang_bg">ဘူဂေးရီးယန်း</string>
+    <string name="locale_lang_fa">ပါရှန်း</string>
 </resources>

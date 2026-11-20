@@ -35,4 +35,7 @@
     <string name="locale_lang_sv_SE">السويدية</string>
     <string name="locale_lang_my_MM">البورمية</string>
     <string name="locale_lang_bn_BD">البنغالية</string>
+    <string name="locale_lang_sq">الألبانية</string>
+    <string name="locale_lang_bg">البلغارية</string>
+    <string name="locale_lang_fa">الفارسية</string>
 </resources>
