@@ -18,6 +18,20 @@
     <string name="label_contact_me">Contáctame</string>
     <string name="label_email_title">Correo electrónico</string>
     <string name="label_snapshot_preview">Vista previa instantánea</string>
+    <string name="label_egg_stats">Estadísticas de Easter Eggs</string>
+    <string name="label_egg_stats_desc">Historial de juego local de cada Easter Egg</string>
+    <string name="egg_stats_summary_format">Jugados %1$d de %2$d eggs · %3$d partidas en total</string>
+    <string name="egg_stats_sort_most_played">Más jugados</string>
+    <string name="egg_stats_sort_recently_played">Jugados recientemente</string>
+    <string name="egg_stats_first_opened">Primera apertura</string>
+    <string name="egg_stats_last_played">Última partida</string>
+    <string name="egg_stats_play_count">Partidas</string>
+    <string name="egg_stats_played_count">Jugado %d×</string>
+    <string name="egg_stats_never_played">Aún no jugado</string>
+    <string name="egg_stats_clear">Borrar estadísticas</string>
+    <string name="egg_stats_clear_confirm_title">¿Borrar estadísticas?</string>
+    <string name="egg_stats_clear_confirm_message">Esto elimina el historial de juego de todos los Easter Eggs y no se puede deshacer.</string>
+    <string name="egg_stats_cleared">Estadísticas borradas</string>
     <string name="message_trypophobia_warning">Esta es una advertencia para personas con &lt;b&gt;Tripofobia&lt;/b&gt;. Algunas imágenes podrían causar incomodidad. ¿Quieres continuar?</string>
     <string name="label_settings">Configuración</string>
     <string name="label_project_desc">Este proyecto contiene el código completo de todos los Easter Eggs de Android, apuntando a la organización y compatibilidad con todos ellos. La meta es que la mayor cantidad de dispositivos posibles puedan probar dichos Easter Eggs con la mínima modificación del código original de estos.</string>
@@ -28,6 +42,9 @@
     <string name="pref_title_dynamic_color">Color Dinámico</string>
     <string name="pref_title_app_icon">Icono de la App</string>
     <string name="pref_title_icon_visual_effects">Efectos Visuales del Icono</string>
+    <string name="pref_title_highest_egg_count">Huevos destacados</string>
+    <string name="pref_desc_highest_egg_count">Número de tarjetas grandes que se muestran en la parte superior de la pantalla de inicio.</string>
+    <string name="pref_summary_highest_egg_count_all">Todos</string>
     <string name="summary_system_default">Predeterminado</string>
     <string name="summary_theme_dark_mode">Oscuro</string>
     <string name="summary_theme_light_mode">Claro</string>
@@ -59,6 +76,9 @@
     <string name="animator_disabled_alert_message">Las animaciones del sistema están deshabilitadas. Algunas características podrían no funcionar correctamente. Por favor, vaya a \"Opciones de desarrollador\" y configure la opción \"Escala de duración de animador\" para activar las animaciones</string>
     <string name="action_goto_settings">Ir a Ajustes</string>
     <string name="action_dont_show_again">No mostrar de nuevo</string>
+    <string name="github_star_alert_title">¿Te gusta la aplicación?</string>
+    <string name="github_star_alert_message">Esta aplicación es gratuita y de código abierto. Si te gustan estos huevos de Pascua, da una estrella al proyecto en GitHub para ayudarlo a crecer</string>
+    <string name="action_star_github">Dar estrella en GitHub</string>
     <string name="cat_editor">Editor de Gatos</string>
     <string name="cat_editor_input_seed">Introduce la semilla del gato</string>
     <string name="rocket_launcher_easter_egg_icons">Huevos de Pascua</string>
@@ -84,26 +104,4 @@
     <string name="dialog_restore_defaults_message">Esto restablecerá todos los ajustes, incluyendo el tema, icono del lanzador y el idioma. Los gatos guardados y las configuraciones de accesos directos no se ven afectados. Esta acción no se puede deshacer. ¿Está seguro de que desea continuar?</string>
     <string name="action_confirm_restore_defaults">Reiniciar</string>
     <string name="toast_restore_defaults_success">La configuración se ha restablecido a los valores predeterminados. La aplicación se reiniciará.</string>
-
-    <string name="label_egg_stats">Estadísticas de Easter Eggs</string>
-    <string name="label_egg_stats_desc">Historial de juego local de cada Easter Egg</string>
-    <string name="egg_stats_summary_format">Jugados %1$d de %2$d eggs · %3$d partidas en total</string>
-    <string name="egg_stats_sort_most_played">Más jugados</string>
-    <string name="egg_stats_sort_recently_played">Jugados recientemente</string>
-    <string name="egg_stats_first_opened">Primera apertura</string>
-    <string name="egg_stats_last_played">Última partida</string>
-    <string name="egg_stats_play_count">Partidas</string>
-    <string name="egg_stats_played_count">Jugado %d×</string>
-    <string name="egg_stats_never_played">Aún no jugado</string>
-    <string name="egg_stats_clear">Borrar estadísticas</string>
-    <string name="egg_stats_clear_confirm_title">¿Borrar estadísticas?</string>
-    <string name="egg_stats_clear_confirm_message">Esto elimina el historial de juego de todos los Easter Eggs y no se puede deshacer.</string>
-    <string name="egg_stats_cleared">Estadísticas borradas</string>
-    <string name="pref_title_highest_egg_count">Huevos destacados</string>
-    <string name="pref_desc_highest_egg_count">Número de tarjetas grandes que se muestran en la parte superior de la pantalla de inicio.</string>
-    <string name="pref_summary_highest_egg_count_all">Todos</string>
-
-    <string name="github_star_alert_title">¿Te gusta la aplicación?</string>
-    <string name="github_star_alert_message">Esta aplicación es gratuita y de código abierto. Si te gustan estos huevos de Pascua, da una estrella al proyecto en GitHub para ayudarlo a crecer</string>
-    <string name="action_star_github">Dar estrella en GitHub</string>
 </resources>

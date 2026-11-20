@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="summary_android_waiting">กำลังรอ…</string>
-    <string name="summary_android_release_pushed">รุ่นสุดท้ายได้ผลักดันแล้ว</string>
+    <string name="summary_android_release_pushed">The final release version has been released</string>
     <string name="label_timeline_title">ไทม์ไลน์ เหตุการณ์สำคัญ และการอัปเดต</string>
     <string name="label_timeline_releases">ข่าวประชาสัมพันธ์</string>
     <string name="label_timeline_developer_previews">ตัวอย่างสำหรับนักพัฒนา</string>
