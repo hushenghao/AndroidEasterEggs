@@ -24,7 +24,7 @@
     <string name="egg_stats_sort_most_played">Cele mai jucate</string>
     <string name="egg_stats_sort_recently_played">Jucate recent</string>
     <string name="egg_stats_first_opened">Prima deschidere</string>
-    <string name="egg_stats_last_played">Ultima jucare</string>
+    <string name="egg_stats_last_played">Ultimul joc</string>
     <string name="egg_stats_play_count">Număr de jocuri</string>
     <string name="egg_stats_played_count">Jucat %d×</string>
     <string name="egg_stats_never_played">Încă nejucat</string>
@@ -86,22 +86,22 @@
     <string name="rocket_launcher_all_icons">Easter egg-uri și aplicații</string>
     <string name="rocket_launcher_query_all_app_desc">Este necesară obținerea listei tuturor aplicațiilor</string>
     <string name="label_data_backup">Backup și restaurare a datelor</string>
-    <string name="pref_data_backup_desc">Exportați sau importați datele de utilizator</string>
-    <string name="action_export_backup">Exportați backup</string>
-    <string name="action_export_backup_desc">Salvați setările, pisicile și configurațiile widgetului într-un fișier</string>
-    <string name="action_import_backup">Importați backup</string>
+    <string name="pref_data_backup_desc">Exportă sau importă datele de utilizator</string>
+    <string name="action_export_backup">Exportă backup</string>
+    <string name="action_export_backup_desc">Salvează setările, pisicile și configurațiile widgetului într-un fișier</string>
+    <string name="action_import_backup">Importă backup</string>
     <string name="action_import_backup_desc">Restaurează dintr-un fișier de backup exportat anterior</string>
     <string name="toast_backup_success">Backup exportat cu succes</string>
     <string name="toast_restore_success">Restaurare finalizată. Aplicația se va reporni.</string>
     <string name="toast_backup_failed">Backup eșuat: %s</string>
     <string name="toast_restore_failed">Restaurare eșuată: %s</string>
     <string name="dialog_import_backup_title">Importă backup</string>
-    <string name="dialog_import_backup_message">Aceasta acțiune va suprascrie toate datele curente ale aplicației, inclusiv setările, pisicile salvate și configurațiile widgetului. Această acțiune nu poate fi anulată. Sigur doriți să continuați?</string>
+    <string name="dialog_import_backup_message">Această acțiune va suprascrie toate datele curente ale aplicației, inclusiv setările, pisicile salvate și configurațiile widgetului. Această acțiune nu poate fi anulată. Ești sigur(ă) că vrei să continui?</string>
     <string name="action_confirm_import">Importă</string>
     <string name="action_restore_defaults">Restaurează setările implicite</string>
     <string name="action_restore_defaults_desc">Resetează toate setările la valorile lor implicite</string>
     <string name="dialog_restore_defaults_title">Restaurează setările implicite</string>
-    <string name="dialog_restore_defaults_message">Această acțiune va reseta toate setările, inclusiv tema, pictograma din lansator și limba. Pisicile salvate și configurațiile salvate ale widgeturilor nu vor fi afectate. Ești sigur(ă) că vrei să continui?</string>
+    <string name="dialog_restore_defaults_message">Această acțiune va reseta toate setările, inclusiv tema, pictograma din lansator și limba. Pisicile salvate și configurațiile salvate ale widgeturilor nu vor fi afectate. Această acțiune nu poate fi anulată. Ești sigur(ă) că vrei să continui?</string>
     <string name="action_confirm_restore_defaults">Resetează</string>
     <string name="toast_restore_defaults_success">Setările au fost restaurate la cele implicite. Aplicația va reporni.</string>
 </resources>
