@@ -24,32 +24,31 @@
 
 > 附：1.13 中 `Grid` 已转正、`ExperimentalGridApi` 注解被移除，`app/.../views/settings/compose/prefs/IconShapePref.kt` 已去掉该 OptIn/import 以通过编译。
 
-## 二、后续优化（按优先级，BOM 升级后逐个评估）
+## 二、后续优化（✅ 已评估完毕 2026-11-20）
 
-### 1. `PolygonShape` / `MorphPolygonShape` 简化 icon-shape（中）
+### 1. `PolygonShape` / `MorphPolygonShape` 简化 icon-shape —— 无需改
 
-`:core:icon-shape` 现在直接用 `graphics-shapes` 手写 `RoundedPolygon`→`Path`→`Shape`（`IconShapePrefUtil.kt`、`Utilities.kt`）。1.13 的 `PolygonShape` 是原生 `Shape`（自动适配布局尺寸），`MorphPolygonShape` 绘制期无重组形变，可用于图标形状预览动画。
-⚠️ `shapeSpecs` 是 **append-only** 索引存储，改动时严禁插入/重排。
+`:core:icon-shape` 已通过 Material3 的 `RoundedPolygon.toShape()`（`IconShapePrefUtil.kt:31`）转换，不存在博客所说的「手写 `RoundedPolygon`→`Path`→`Shape`」；`PathShape` 只服务系统图标遮罩（Path 而非多边形）。`MorphPolygonShape` 属新增形变动画功能、非简化，且 `shapeSpecs` 是 **append-only** 索引，不为微优化改动。
 
-### 2. `CapturedAnimatedVisibility` 排查面板退出动画（中）
+### 2. `CapturedAnimatedVisibility` —— ✅ 已完成（2 处）
 
-13 个源文件用了 `AnimatedVisibility`。凡是「退出动画期间内容依赖已置空状态」（选中项清 null 的面板）的场景都值得换，可消除空白/闪烁、退出快 7–8%。候选集中在 `CatRememberBottomSheet.kt`、`CatEditorScreen.kt`、`ExpandOptionsPref.kt`、`SnapshotPref.kt`、`BottomSearchBar.kt` 等。
+仅替换「退出动画期间内容依赖被清空状态」的两处：`BottomSearchBar.kt`（`close()` 立即清空 `text`）、`CatSeedInputDialog.kt`（supporting 文本依赖 `inputSeedText`）。其余 `AnimatedVisibility` 的退出内容仍存活（bitmap/选项/轮播/静态文本）或属 AOSP 派生彩蛋，保持原样。
 
-### 3. `BottomSearchBar` 迁移到状态化 `TextFieldState`（中）
+### 3. `BottomSearchBar` → 状态化 `TextFieldState` —— 暂缓
 
-`BottomSearchBar.kt:78` 现为 value-based `TextFieldValue`。1.13 已弃用 value-based `BasicTextField`，状态化 `TextFieldState` 同步状态、性能更好、自带撤销/重做。
+M3 value-based `TextField` 在 1.5.0 **未弃用**；单字段收益小，且会动到 `BottomSearchBarState` 的 Saver 与游标管理。等官方正式弃用 value-based 重载后再迁。
 
-### 4. `FlexBox` 替换 `FlowRow`（低）
+### 4. `FlexBox` 替换 `FlowRow` —— 不做
 
-现有 2 处 `FlowRow`：`EasterEggItems.kt:239`、`EggStatsDialog.kt:155`。FlexBox 已转正且新增 `maxItemsInEachLine`（每行最多 N 个）。FlowRow 未删，可只在新代码用。
+FlowRow 未弃用（官方只建议**新代码**用 FlexBox）；FlexBox 是 `FlexBoxConfig { columnGap/rowGap }` DSL，与 FlowRow 参数异构，现有 2 处也无 `maxItemsInEachLine` 需求。纯「将来式」迁移，零行为收益。
 
-### 5. `LazyLayoutCacheWindow` 彩蛋列表窗口级预取（低）
+### 5. `LazyLayoutCacheWindow` 窗口级预取 —— 已自动生效
 
-首页列表用 `LazyColumn`/`StaggeredGrid`/`Grid` 三种布局。窗口级预取（cache window 参数从 scroll state 挪到布局组件）对离屏组合有收益。
+1.13 的 `LazyColumn`/`LazyVerticalStaggeredGrid` 默认 `cacheWindow = LazyListDefaults.cacheWindow(state)`，即动态窗口级预取（替代旧 item 级），彩蛋列表用默认值已自动受益。仅在需要按 benchmark 调 ahead/behind 窗口时才需自定义。
 
-### 6. `LineHeightStyle.Mode.PerLine` 多语言行高（低）
+### 6. `LineHeightStyle.Mode.PerLine` 多语言行高 —— 不做
 
-项目 36 个语言目录，缅/高棉/泰文高字身文字混排会撞行。多语言文本场景可按需引入（当前无 `LineHeightStyle` 用法）。
+该模式针对「同一段落内混合字号/多语言混排」导致高字身文字撞行；彩蛋列表文本均为单一字号、单一段落（蛋名 `headlineSmall`、版本 `bodyMedium`、chip `labelMedium`），无撞行场景。
 
 ## 三、免费/自动收益（无需改代码）
 
@@ -66,8 +65,8 @@
 
 ## 五、工具 / CI
 
-- Compose 性能静态分析 skill（`android/skills` 的 `jetpack-compose-performance`，经 Android CLI 跑）。
-- `TestFailurePolicy`：`baselineprofile` 冒烟测试失败时自动导出截图 + 语义树。
+- Compose 性能静态分析 skill（`android/skills` 的 `jetpack-compose-performance`）：已对主界面 + 核心 UI 模块跑过审计，**未发现显著可行动问题**（懒布局 `key`/`contentType`、`collectAsStateWithLifecycle`、无 `Modifier.composed`/热路径 `onGloballyPositioned` 等均合规）。
+- `TestFailurePolicy`：`baselineprofile` 冒烟测试失败时自动导出截图 + 语义树（可选，未接入）。
 
 ## 暂不相关
 
