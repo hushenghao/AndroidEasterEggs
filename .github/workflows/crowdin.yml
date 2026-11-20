@@ -46,6 +46,7 @@ jobs:
           upload_sources: true
           upload_translations: true
           auto_approve_imported: true
+          import_eq_suggestions: true
           download_translations: ${{ !inputs.upload_only }}
 
           create_pull_request: ${{ !inputs.upload_only }}
