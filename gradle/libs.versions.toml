@@ -5,7 +5,7 @@ agp = "9.5.1"
 # https://github.com/google/dagger
 hilt = "2.60.1"
 # https://developer.android.com/develop/ui/compose/bom/bom-mapping
-compose-bom = "2026.09.00"
+compose-bom = "2026.11.01"
 # https://google.github.io/accompanist
 accompanist = "0.37.3"
 lifecycle = "2.11.0"

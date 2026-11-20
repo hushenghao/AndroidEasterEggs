@@ -1,17 +1,17 @@
 # Compose 1.13 升级与优化清单
 
 > 依据 [Jetpack Compose November '26 release](https://developer.android.com/blog/posts/jetpack-compose-november-2026-release) 梳理。
-> 项目现状：BOM `2026.09.00`、Kotlin `2.4.21`、compileSdk `37.2` —— 升级前置条件（Kotlin ≥ 2.2、compileSdk ≥ 37.1）已全部满足。
+> 项目现状：BOM `2026.11.01`、Kotlin `2.4.21`、compileSdk `37.2` —— 升级前置条件（Kotlin ≥ 2.2、compileSdk ≥ 37.1）已全部满足。
 
-## 一、一次性小升级（优先做）
+## 一、一次性小升级（✅ 已完成 2026-11-20）
 
 ### 1. Compose BOM 2026.09.00 → 2026.11.01
 
 - 位置：`gradle/libs.versions.toml` 的 `compose-bom`
-- **阻塞**：截至 2026-11-19，`2026.11.01` 在 Google Maven 上 404（`https://dl.google.com/dl/android/maven2/androidx/compose/compose-bom/` 元数据最新仍为 `2026.09.00`）。博客已发但制品未同步，等 Maven 可用后再升。
+- ✅ 已完成：`2026.11.01` 已于 2026-11-20 发布到 Google Maven（`runtime`/`ui` `1.13.0`、`material3` `1.5.0` 均可解析）。
 - 验证命令：`./gradlew app:compileFossProductDebugKotlin`
 
-### 2. `computedStateOf` 替换 `derivedStateOf`（随 BOM 一起做）
+### 2. `computedStateOf` 替换 `derivedStateOf`（✅ 已完成）
 
 `computedStateOf` 是 1.13 新 API，BOM 升级后才存在。官方建议：轻量条件/过滤状态用 `computedStateOf`（不缓存、开销更小），`derivedStateOf` 只留给重计算/需缓存场景。项目里 4 处全是轻量场景，直接换函数名 + import 即可：
 
@@ -21,6 +21,8 @@
 | `feature/cat-editor/.../CatEditorScreen.kt` | :427 | 缩放值格式化字符串 |
 | `app/.../ui/composes/PredictiveBackProgressHandler.kt` | :116 | 单纯读 `progress` |
 | `core/composable/.../ScrollableModalBottomSheet.kt` | :56 | `canScrollBackward != true` |
+
+> 附：1.13 中 `Grid` 已转正、`ExperimentalGridApi` 注解被移除，`app/.../views/settings/compose/prefs/IconShapePref.kt` 已去掉该 OptIn/import 以通过编译。
 
 ## 二、后续优化（按优先级，BOM 升级后逐个评估）
 

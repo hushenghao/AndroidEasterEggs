@@ -1,10 +1,9 @@
-@file:OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalGridApi::class)
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
 
 package com.dede.android_eggs.views.settings.compose.prefs
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ExperimentalGridApi
 import androidx.compose.foundation.layout.Grid
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth

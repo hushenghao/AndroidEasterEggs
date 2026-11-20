@@ -5,7 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
-import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.computedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -113,5 +113,5 @@ fun predictiveBackProgressState(
     onBackCancelled: () -> Unit = {},
 ): State<Float> {
     val navEventState = predictiveBackProgressEventState(enabled, onBackCompleted, onBackCancelled)
-    return remember { derivedStateOf { navEventState.value.progress } }
+    return remember { computedStateOf { navEventState.value.progress } }
 }

@@ -23,7 +23,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.computedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -149,7 +149,7 @@ internal fun CatEditor(
         ) {
             val infiniteTransition = rememberInfiniteTransition(label = "CatEditor_SelectedPart")
             val hasSelected by remember {
-                derivedStateOf { selectedPart != CatEditorController.UNSELECTED_PART }
+                computedStateOf { selectedPart != CatEditorController.UNSELECTED_PART }
             }
             val blendRatio by infiniteTransition.animateFloat(
                 initialValue = 0f,

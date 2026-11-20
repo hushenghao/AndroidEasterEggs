@@ -59,7 +59,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.computedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
@@ -424,7 +424,7 @@ fun CatEditorScreen(initialSeed: Long? = null) {
             )
 
             val zoomValue by remember(catEditorController) {
-                derivedStateOf { "x${"%.1f".format(catEditorController.zoom).trimZeroAndDot()}" }
+                computedStateOf { "x${"%.1f".format(catEditorController.zoom).trimZeroAndDot()}" }
             }
             ZoomValuePopup(
                 zoomValue = zoomValue,

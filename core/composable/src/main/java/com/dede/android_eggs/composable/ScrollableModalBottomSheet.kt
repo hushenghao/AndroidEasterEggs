@@ -14,7 +14,7 @@ import androidx.compose.material3.SheetState
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.computedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -53,7 +53,7 @@ fun ScrollableModalBottomSheet(
     // https://issuetracker.google.com/issues/353304855
     val sheetGesturesEnabled by remember(scrollState) {
         // disable sheet gestures when the content can scroll backward
-        derivedStateOf { scrollState?.canScrollBackward != true }
+        computedStateOf { scrollState?.canScrollBackward != true }
     }
     ModalBottomSheet(
         modifier = modifier,
