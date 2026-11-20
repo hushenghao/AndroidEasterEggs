@@ -9,6 +9,8 @@
 - Add a settings slider for the number of highlighted eggs on the home screen
 - Improve app startup time with Baseline Profiles
 - Complete translations across all modules
+- Add a subtle logo backdrop to the home egg cards
+- Upgrade Compose to 1.13 (Material 3 1.5.0)
 
 ### v5.6.0 (2026-10-20)
 
