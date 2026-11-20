@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">تخصيص الأداة</string>
+    <string name="analog_clock_widget_config_summary">اختر ما يحدث عند النقر على أداة الساعة التناظرية.</string>
+    <string name="analog_clock_widget_click_action_title">إجراء النقر</string>
+    <string name="analog_clock_widget_action_open_egg">فتح البيضة</string>
+    <string name="analog_clock_widget_action_open_app">فتح التطبيق</string>
+    <string name="analog_clock_widget_action_none">بدون إجراء</string>
+    <string name="analog_clock_widget_dial_style_title">قرص الساعة</string>
+    <string name="analog_clock_widget_dial_style_summary">اختر نمط قرص الساعة التناظرية.</string>
+    <string name="analog_clock_widget_dial_android_icons">الأيقونات</string>
+    <string name="analog_clock_widget_dial_simple">بسيط</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

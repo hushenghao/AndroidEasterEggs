@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">Aktualisht i padisponueshëm</string>
+    <string name="summary_android_release_pushed">Versioni përfundimtar është publikuar.</string>
+    <string name="label_timeline_title">Afati kohor, arritjet dhe përditësimet</string>
+    <string name="label_timeline_releases">Publikimet</string>
+    <string name="label_timeline_developer_previews">Parapamjet e zhvilluesve</string>
+    <string name="label_timeline_beta_release">Publikimet Beta</string>
+    <string name="label_timeline_platform_stability">Stabiliteti i platformës</string>
+    <string name="label_timeline_final_release">Publikimi përfundimtar</string>
+</resources>

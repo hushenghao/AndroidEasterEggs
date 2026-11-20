@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">پیکربندی ویجت</string>
+    <string name="analog_clock_widget_config_summary">انتخاب کنید با لمس ویجت ساعت آنالوگ چه اتفاقی بیفتد.</string>
+    <string name="analog_clock_widget_click_action_title">عمل لمس</string>
+    <string name="analog_clock_widget_action_open_egg">باز کردن تخم‌مرغ</string>
+    <string name="analog_clock_widget_action_open_app">باز کردن برنامه</string>
+    <string name="analog_clock_widget_action_none">بدون عمل</string>
+    <string name="analog_clock_widget_dial_style_title">صفحه ساعت</string>
+    <string name="analog_clock_widget_dial_style_summary">سبک صفحه ساعت آنالوگ را انتخاب کنید.</string>
+    <string name="analog_clock_widget_dial_android_icons">آیکون‌ها</string>
+    <string name="analog_clock_widget_dial_simple">ساده</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

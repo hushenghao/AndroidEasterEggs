@@ -4,4 +4,8 @@
     <string name="summary_android_release_pushed">နောက်ဆုံးထွက်ဗားရှင်း ထွက်လာပါပြီ။</string>
     <string name="label_timeline_title">အချိန်ဇယား၊ မှတ်တိုင်များနှင့် အပ်ဒိတ်များ</string>
     <string name="label_timeline_releases">ထုတ်ဝေသည်။</string>
+    <string name="label_timeline_developer_previews">Developer အစမ်းကြည့်ရှုမှုများ</string>
+    <string name="label_timeline_beta_release">Beta ထုတ်ဝေမှုများ</string>
+    <string name="label_timeline_platform_stability">ပလက်ဖောင်း တည်ငြိမ်မှု</string>
+    <string name="label_timeline_final_release">နောက်ဆုံး ထုတ်ဝေမှု</string>
 </resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Konfiguro widget-in</string>
+    <string name="analog_clock_widget_config_summary">Zgjidhni çfarë ndodh kur prekni widget-in e orës analoge.</string>
+    <string name="analog_clock_widget_click_action_title">Veprimi i prekjes</string>
+    <string name="analog_clock_widget_action_open_egg">Hape vezën</string>
+    <string name="analog_clock_widget_action_open_app">Hape aplikacionin</string>
+    <string name="analog_clock_widget_action_none">Pa veprim</string>
+    <string name="analog_clock_widget_dial_style_title">Numri i orës</string>
+    <string name="analog_clock_widget_dial_style_summary">Zgjidhni stilin e numrit të orës analoge.</string>
+    <string name="analog_clock_widget_dial_android_icons">Ikonat</string>
+    <string name="analog_clock_widget_dial_simple">E thjeshtë</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

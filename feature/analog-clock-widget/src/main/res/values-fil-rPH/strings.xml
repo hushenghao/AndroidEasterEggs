@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">I-configure ang widget</string>
+    <string name="analog_clock_widget_config_summary">Piliin kung ano ang mangyayari kapag tina-tap mo ang analog na widget ng orasan.</string>
+    <string name="analog_clock_widget_click_action_title">Aksyon sa pag-tap</string>
+    <string name="analog_clock_widget_action_open_egg">Buksan ang egg</string>
+    <string name="analog_clock_widget_action_open_app">Buksan ang app</string>
+    <string name="analog_clock_widget_action_none">Walang aksyon</string>
+    <string name="analog_clock_widget_dial_style_title">Dial ng orasan</string>
+    <string name="analog_clock_widget_dial_style_summary">Piliin ang istilo ng dial ng analog na orasan.</string>
+    <string name="analog_clock_widget_dial_android_icons">Mga icon</string>
+    <string name="analog_clock_widget_dial_simple">Simple</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

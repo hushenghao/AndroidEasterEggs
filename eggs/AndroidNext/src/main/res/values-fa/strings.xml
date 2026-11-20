@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_android_waiting">در حال حاضر در دسترس نیست</string>
+    <string name="summary_android_release_pushed">نسخه نهایی منتشر شده است.</string>
+    <string name="label_timeline_title">خط زمانی، نقاط عطف و به‌روزرسانی‌ها</string>
+    <string name="label_timeline_releases">انتشارها</string>
+    <string name="label_timeline_developer_previews">پیش‌نمایش‌های توسعه‌دهنده</string>
+    <string name="label_timeline_beta_release">انتشارهای بتا</string>
+    <string name="label_timeline_platform_stability">پایداری پلتفرم</string>
+    <string name="label_timeline_final_release">انتشار نهایی</string>
+</resources>

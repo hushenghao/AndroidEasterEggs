@@ -96,4 +96,14 @@
     <string name="pref_title_highest_egg_count">Подчертани яйца</string>
     <string name="pref_desc_highest_egg_count">Брой големи карти, показвани в горната част на началния екран.</string>
     <string name="pref_summary_highest_egg_count_all">Всички</string>
+
+    <string name="github_star_alert_title">Харесва ли ви приложението?</string>
+    <string name="github_star_alert_message">Това приложение е безплатно и с отворен код. Ако харесвате тези великденски яйца, дайте звезда на проекта в GitHub, за да му помогнете да расте</string>
+    <string name="action_star_github">Дайте звезда в GitHub</string>
+    <string name="action_restore_defaults">Възстановяване на настройките по подразбиране</string>
+    <string name="action_restore_defaults_desc">Нулиране на всички настройки до стойностите им по подразбиране</string>
+    <string name="dialog_restore_defaults_title">Възстановяване на настройките по подразбиране</string>
+    <string name="dialog_restore_defaults_message">Това ще нулира всички настройки, включително темата, иконата на стартовия екран и езика. Запазените котки и конфигурациите на джаджите не са засегнати. Това действие не може да бъде отменено. Сигурни ли сте, че искате да продължите?</string>
+    <string name="action_confirm_restore_defaults">Нулиране</string>
+    <string name="toast_restore_defaults_success">Настройките са възстановени по подразбиране. Приложението ще се рестартира.</string>
 </resources>

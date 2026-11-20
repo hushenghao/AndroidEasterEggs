@@ -4,4 +4,8 @@
     <string name="summary_android_release_pushed">Ang huling bersyon ng paglabas ay inilabas na</string>
     <string name="label_timeline_title">Timeline, milestone, at update</string>
     <string name="label_timeline_releases">Mga release</string>
+    <string name="label_timeline_developer_previews">Mga Developer Preview</string>
+    <string name="label_timeline_beta_release">Mga Beta Release</string>
+    <string name="label_timeline_platform_stability">Katatagan ng Platform</string>
+    <string name="label_timeline_final_release">Huling Release</string>
 </resources>

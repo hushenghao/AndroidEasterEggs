@@ -80,4 +80,30 @@
     <string name="pref_title_highest_egg_count">Trứng được làm nổi bật</string>
     <string name="pref_desc_highest_egg_count">Số lượng thẻ lớn hiển thị ở đầu màn hình chính.</string>
     <string name="pref_summary_highest_egg_count_all">Tất cả</string>
+
+    <string name="pref_title_color_source">Màu sắc</string>
+    <string name="summary_color_source_dynamic">Động</string>
+    <string name="summary_color_source_custom">Tùy chỉnh</string>
+    <string name="github_star_alert_title">Bạn có thích ứng dụng này không?</string>
+    <string name="github_star_alert_message">Ứng dụng này miễn phí và mã nguồn mở. Nếu bạn thích những Trứng Phục sinh này, hãy tặng dự án một ngôi sao trên GitHub để giúp nó phát triển</string>
+    <string name="action_star_github">Tặng sao trên GitHub</string>
+    <string name="label_data_backup">Sao lưu và khôi phục dữ liệu</string>
+    <string name="pref_data_backup_desc">Xuất hoặc nhập dữ liệu người dùng</string>
+    <string name="action_export_backup">Xuất bản sao lưu</string>
+    <string name="action_export_backup_desc">Lưu cài đặt, mèo và cấu hình tiện ích vào một tệp</string>
+    <string name="action_import_backup">Nhập bản sao lưu</string>
+    <string name="action_import_backup_desc">Khôi phục từ tệp sao lưu đã xuất trước đó</string>
+    <string name="toast_backup_success">Đã xuất bản sao lưu thành công</string>
+    <string name="toast_restore_success">Khôi phục hoàn tất. Ứng dụng sẽ khởi động lại.</string>
+    <string name="toast_backup_failed">Sao lưu thất bại: %s</string>
+    <string name="toast_restore_failed">Khôi phục thất bại: %s</string>
+    <string name="dialog_import_backup_title">Nhập bản sao lưu</string>
+    <string name="dialog_import_backup_message">Thao tác này sẽ ghi đè tất cả dữ liệu ứng dụng hiện tại, bao gồm cài đặt, mèo đã lưu và cấu hình tiện ích. Không thể hoàn tác hành động này. Bạn có chắc chắn muốn tiếp tục không?</string>
+    <string name="action_confirm_import">Nhập</string>
+    <string name="action_restore_defaults">Khôi phục cài đặt mặc định</string>
+    <string name="action_restore_defaults_desc">Đặt lại tất cả cài đặt về giá trị mặc định</string>
+    <string name="dialog_restore_defaults_title">Khôi phục cài đặt mặc định</string>
+    <string name="dialog_restore_defaults_message">Thao tác này sẽ đặt lại tất cả cài đặt, bao gồm chủ đề, biểu tượng trình khởi chạy và ngôn ngữ. Mèo đã lưu và cấu hình tiện ích không bị ảnh hưởng. Không thể hoàn tác hành động này. Bạn có chắc chắn muốn tiếp tục không?</string>
+    <string name="action_confirm_restore_defaults">Đặt lại</string>
+    <string name="toast_restore_defaults_success">Đã khôi phục cài đặt về mặc định. Ứng dụng sẽ khởi động lại.</string>
 </resources>

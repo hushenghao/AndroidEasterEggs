@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">ဝစ်ဂျက်ကို ပြင်ဆင်ပါ</string>
+    <string name="analog_clock_widget_config_summary">အန်နာလော့ဂ်နာရီဝစ်ဂျက်ကို နှိပ်သည့်အခါ ဖြစ်မည့်အရာကို ရွေးပါ။</string>
+    <string name="analog_clock_widget_click_action_title">နှိပ်ခြင်းလုပ်ဆောင်ချက်</string>
+    <string name="analog_clock_widget_action_open_egg">ဥ ဖွင့်ပါ</string>
+    <string name="analog_clock_widget_action_open_app">အက်ပ် ဖွင့်ပါ</string>
+    <string name="analog_clock_widget_action_none">လုပ်ဆောင်ချက်မရှိ</string>
+    <string name="analog_clock_widget_dial_style_title">နာရီဒိုင်ခွက်</string>
+    <string name="analog_clock_widget_dial_style_summary">အန်နာလော့ဂ်နာရီဒိုင်ခွက် စတိုင်ကို ရွေးပါ။</string>
+    <string name="analog_clock_widget_dial_android_icons">အိုင်ကွန်များ</string>
+    <string name="analog_clock_widget_dial_simple">ရိုးရှင်း</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

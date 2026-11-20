@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Widget configurare</string>
+    <string name="analog_clock_widget_config_summary">Elige quid fiat cum widget horologii analogici tangitur.</string>
+    <string name="analog_clock_widget_click_action_title">Actio tactus</string>
+    <string name="analog_clock_widget_action_open_egg">Ovum aperire</string>
+    <string name="analog_clock_widget_action_open_app">App aperire</string>
+    <string name="analog_clock_widget_action_none">Nulla actio</string>
+    <string name="analog_clock_widget_dial_style_title">Facies horologii</string>
+    <string name="analog_clock_widget_dial_style_summary">Elige stilum faciei horologii analogici.</string>
+    <string name="analog_clock_widget_dial_android_icons">Icones</string>
+    <string name="analog_clock_widget_dial_simple">Simplex</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

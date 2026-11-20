@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">กำหนดค่าวิดเจ็ต</string>
+    <string name="analog_clock_widget_config_summary">เลือกสิ่งที่เกิดขึ้นเมื่อแตะวิดเจ็ตนาฬิกาแอนะล็อก</string>
+    <string name="analog_clock_widget_click_action_title">การกระทำเมื่อแตะ</string>
+    <string name="analog_clock_widget_action_open_egg">เปิดไข่</string>
+    <string name="analog_clock_widget_action_open_app">เปิดแอป</string>
+    <string name="analog_clock_widget_action_none">ไม่มีการกระทำ</string>
+    <string name="analog_clock_widget_dial_style_title">หน้าปัดนาฬิกา</string>
+    <string name="analog_clock_widget_dial_style_summary">เลือกสไตล์หน้าปัดนาฬิกาแอนะล็อก</string>
+    <string name="analog_clock_widget_dial_android_icons">ไอคอน</string>
+    <string name="analog_clock_widget_dial_simple">เรียบง่าย</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

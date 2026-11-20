@@ -96,4 +96,14 @@
     <string name="pref_title_highest_egg_count">Επισημασμένα αυγά</string>
     <string name="pref_desc_highest_egg_count">Αριθμός μεγάλων καρτών που εμφανίζονται στο πάνω μέρος της αρχικής οθόνης.</string>
     <string name="pref_summary_highest_egg_count_all">Όλα</string>
+
+    <string name="github_star_alert_title">Σας αρέσει η εφαρμογή;</string>
+    <string name="github_star_alert_message">Αυτή η εφαρμογή είναι δωρεάν και ανοιχτού κώδικα. Αν σας αρέσουν αυτά τα πασχαλινά αυγά, δώστε ένα αστέρι στο έργο στο GitHub για να το βοηθήσετε να αναπτυχθεί</string>
+    <string name="action_star_github">Αστέρι στο GitHub</string>
+    <string name="action_restore_defaults">Επαναφορά προεπιλεγμένων ρυθμίσεων</string>
+    <string name="action_restore_defaults_desc">Επαναφορά όλων των ρυθμίσεων στις προεπιλεγμένες τιμές τους</string>
+    <string name="dialog_restore_defaults_title">Επαναφορά προεπιλεγμένων ρυθμίσεων</string>
+    <string name="dialog_restore_defaults_message">Αυτό θα επαναφέρει όλες τις ρυθμίσεις, συμπεριλαμβανομένων του θέματος, του εικονιδίου εκκίνησης και της γλώσσας. Οι αποθηκευμένες γάτες και οι ρυθμίσεις των γραφικών στοιχείων δεν επηρεάζονται. Αυτή η ενέργεια δεν μπορεί να αναιρεθεί. Είστε βέβαιοι ότι θέλετε να συνεχίσετε;</string>
+    <string name="action_confirm_restore_defaults">Επαναφορά</string>
+    <string name="toast_restore_defaults_success">Οι ρυθμίσεις επαναφέρθηκαν στις προεπιλογές. Η εφαρμογή θα επανεκκινήσει.</string>
 </resources>

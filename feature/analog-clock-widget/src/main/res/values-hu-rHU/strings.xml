@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Widget beállítása</string>
+    <string name="analog_clock_widget_config_summary">Válaszd ki, mi történjen az analóg óra widget megérintésekor.</string>
+    <string name="analog_clock_widget_click_action_title">Érintési művelet</string>
+    <string name="analog_clock_widget_action_open_egg">Tojás megnyitása</string>
+    <string name="analog_clock_widget_action_open_app">Alkalmazás megnyitása</string>
+    <string name="analog_clock_widget_action_none">Nincs művelet</string>
+    <string name="analog_clock_widget_dial_style_title">Óra számlap</string>
+    <string name="analog_clock_widget_dial_style_summary">Válaszd ki az analóg óra számlapjának stílusát.</string>
+    <string name="analog_clock_widget_dial_android_icons">Ikonok</string>
+    <string name="analog_clock_widget_dial_simple">Egyszerű</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

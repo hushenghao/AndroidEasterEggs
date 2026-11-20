@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="summary_android_waiting">Exspectat…</string>
-    <string name="summary_android_release_pushed">Finalis release versio protrusit</string>
+    <string name="summary_android_release_pushed">Editio finalis emissa est.</string>
+
+    <string name="label_timeline_title">Linea temporis, metae et novationes</string>
+    <string name="label_timeline_releases">Editiones</string>
+    <string name="label_timeline_developer_previews">Praevisiones programmatorum</string>
+    <string name="label_timeline_beta_release">Editiones beta</string>
+    <string name="label_timeline_platform_stability">Stabilitas suggesti</string>
+    <string name="label_timeline_final_release">Editio finalis</string>
 </resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Konfigurera widget</string>
+    <string name="analog_clock_widget_config_summary">Välj vad som händer när du trycker på widgeten för den analoga klockan.</string>
+    <string name="analog_clock_widget_click_action_title">Tryckåtgärd</string>
+    <string name="analog_clock_widget_action_open_egg">Öppna ägg</string>
+    <string name="analog_clock_widget_action_open_app">Öppna app</string>
+    <string name="analog_clock_widget_action_none">Ingen åtgärd</string>
+    <string name="analog_clock_widget_dial_style_title">Urtavla</string>
+    <string name="analog_clock_widget_dial_style_summary">Välj stilen på den analoga urtavlan.</string>
+    <string name="analog_clock_widget_dial_android_icons">Ikoner</string>
+    <string name="analog_clock_widget_dial_simple">Enkel</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

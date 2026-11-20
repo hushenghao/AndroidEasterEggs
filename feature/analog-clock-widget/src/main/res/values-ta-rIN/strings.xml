@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">விட்ஜெட்டை உள்ளமைக்கவும்</string>
+    <string name="analog_clock_widget_config_summary">அனலாக் கடிகார விட்ஜெட்டை தட்டும்போது என்ன நடக்கும் என்பதைத் தேர்வுசெய்யவும்.</string>
+    <string name="analog_clock_widget_click_action_title">தட்டுதல் செயல்</string>
+    <string name="analog_clock_widget_action_open_egg">முட்டையைத் திற</string>
+    <string name="analog_clock_widget_action_open_app">பயன்பாட்டைத் திற</string>
+    <string name="analog_clock_widget_action_none">செயல் இல்லை</string>
+    <string name="analog_clock_widget_dial_style_title">கடிகார முகப்பு</string>
+    <string name="analog_clock_widget_dial_style_summary">அனலாக் கடிகார முகப்பின் பாணியைத் தேர்வுசெய்யவும்.</string>
+    <string name="analog_clock_widget_dial_android_icons">ஐகான்கள்</string>
+    <string name="analog_clock_widget_dial_simple">எளிமையானது</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Configurer le widget</string>
+    <string name="analog_clock_widget_config_summary">Choisissez ce qui se passe lorsque vous touchez le widget d\'horloge analogique.</string>
+    <string name="analog_clock_widget_click_action_title">Action du toucher</string>
+    <string name="analog_clock_widget_action_open_egg">Ouvrir l\'œuf</string>
+    <string name="analog_clock_widget_action_open_app">Ouvrir l\'application</string>
+    <string name="analog_clock_widget_action_none">Aucune action</string>
+    <string name="analog_clock_widget_dial_style_title">Cadran de l\'horloge</string>
+    <string name="analog_clock_widget_dial_style_summary">Choisissez le style du cadran de l\'horloge analogique.</string>
+    <string name="analog_clock_widget_dial_android_icons">Icônes</string>
+    <string name="analog_clock_widget_dial_simple">Simple</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

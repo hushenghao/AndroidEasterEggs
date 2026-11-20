@@ -8,6 +8,7 @@
 - Add local Easter egg play statistics (first opened, last played, play count)
 - Add a settings slider for the number of highlighted eggs on the home screen
 - Improve app startup time with Baseline Profiles
+- Complete translations across all modules and add Albanian, Persian, and Latin
 
 ### v5.6.0 (2026-10-20)
 

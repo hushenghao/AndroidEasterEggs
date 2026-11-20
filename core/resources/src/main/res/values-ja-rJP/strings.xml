@@ -98,4 +98,14 @@
     <string name="pref_title_highest_egg_count">ハイライト表示する卵</string>
     <string name="pref_desc_highest_egg_count">ホーム画面の上部に表示する大きなカードの数。</string>
     <string name="pref_summary_highest_egg_count_all">すべて</string>
+
+    <string name="github_star_alert_title">アプリをお楽しみいただけていますか？</string>
+    <string name="github_star_alert_message">このアプリは無料のオープンソースです。これらのイースターエッグが気に入ったら、GitHub でプロジェクトにスターを付けて成長を応援してください</string>
+    <string name="action_star_github">GitHub でスターを付ける</string>
+    <string name="action_restore_defaults">デフォルト設定に戻す</string>
+    <string name="action_restore_defaults_desc">すべての設定をデフォルト値にリセットします</string>
+    <string name="dialog_restore_defaults_title">デフォルト設定に戻す</string>
+    <string name="dialog_restore_defaults_message">テーマ、ランチャーアイコン、言語を含むすべての設定がリセットされます。保存済みの猫とウィジェット設定は影響を受けません。この操作は元に戻せません。続行しますか？</string>
+    <string name="action_confirm_restore_defaults">リセット</string>
+    <string name="toast_restore_defaults_success">設定をデフォルトに戻しました。アプリを再起動します。</string>
 </resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Widget konfigurieren</string>
+    <string name="analog_clock_widget_config_summary">Wähle, was passiert, wenn du auf das analoge Uhr-Widget tippst.</string>
+    <string name="analog_clock_widget_click_action_title">Tipp-Aktion</string>
+    <string name="analog_clock_widget_action_open_egg">Ei öffnen</string>
+    <string name="analog_clock_widget_action_open_app">App öffnen</string>
+    <string name="analog_clock_widget_action_none">Keine Aktion</string>
+    <string name="analog_clock_widget_dial_style_title">Zifferblatt</string>
+    <string name="analog_clock_widget_dial_style_summary">Wähle den Stil des analogen Zifferblatts.</string>
+    <string name="analog_clock_widget_dial_android_icons">Symbole</string>
+    <string name="analog_clock_widget_dial_simple">Einfach</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

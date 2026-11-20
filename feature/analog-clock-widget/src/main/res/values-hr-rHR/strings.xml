@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Konfiguriraj widget</string>
+    <string name="analog_clock_widget_config_summary">Odaberite što se događa kada dodirnete widget analognog sata.</string>
+    <string name="analog_clock_widget_click_action_title">Radnja dodira</string>
+    <string name="analog_clock_widget_action_open_egg">Otvori jaje</string>
+    <string name="analog_clock_widget_action_open_app">Otvori aplikaciju</string>
+    <string name="analog_clock_widget_action_none">Bez radnje</string>
+    <string name="analog_clock_widget_dial_style_title">Brojčanik sata</string>
+    <string name="analog_clock_widget_dial_style_summary">Odaberite stil brojčanika analognog sata.</string>
+    <string name="analog_clock_widget_dial_android_icons">Ikone</string>
+    <string name="analog_clock_widget_dial_simple">Jednostavno</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

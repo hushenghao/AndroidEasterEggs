@@ -79,9 +79,9 @@
     <string name="github_star_alert_title">Menikmati aplikasinya?</string>
     <string name="github_star_alert_message">Aplikasi ini gratis dan open source. Jika Anda menyukai Easter Egg ini, beri star pada proyek ini di GitHub untuk membantu pertumbuhannya</string>
     <string name="action_star_github">Beri star di GitHub</string>
-    <string name="cat_editor">Cat editor</string>
+    <string name="cat_editor">Editor kucing</string>
     <string name="cat_editor_input_seed">Masukkan Benih Kucing</string>
-    <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
+    <string name="rocket_launcher_easter_egg_icons">Telur Paskah</string>
     <string name="rocket_launcher_all_app_icons">Aplikasi</string>
     <string name="rocket_launcher_all_icons">Easter eggs dan aplikasi</string>
     <string name="rocket_launcher_query_all_app_desc">Perlu mendapatkan daftar aplikasi yang ditampilkan di beranda</string>
@@ -102,7 +102,7 @@
     <string name="action_restore_defaults_desc">Atur ulang semua pengaturan ke nilai defaultnya</string>
     <string name="dialog_restore_defaults_title">Kembalikan pengaturan default</string>
     <string name="dialog_restore_defaults_message">Ini akan mengatur ulang semua pengaturan, termasuk tema, ikon launcher, dan bahasa. Konfigurasi cats dan widget yang tersimpan tidak terpengaruh. Tindakan ini tidak dapat dibatalkan. Apakah Anda yakin ingin melanjutkan?</string>
-    <string name="action_confirm_restore_defaults">Reset</string>
+    <string name="action_confirm_restore_defaults">Atur ulang</string>
     <string name="toast_restore_defaults_success">Pengaturan dikembalikan ke pengaturan default. Aplikasi akan
 memulai ulang.</string>
 </resources>

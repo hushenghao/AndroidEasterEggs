@@ -80,4 +80,30 @@
     <string name="pref_title_highest_egg_count">হাইলাইট করা ডিম</string>
     <string name="pref_desc_highest_egg_count">হোম স্ক্রিনের উপরে দেখানো বড় কার্ডের সংখ্যা।</string>
     <string name="pref_summary_highest_egg_count_all">সব</string>
+
+    <string name="pref_title_color_source">রঙ</string>
+    <string name="summary_color_source_dynamic">ডাইনামিক</string>
+    <string name="summary_color_source_custom">কাস্টম</string>
+    <string name="github_star_alert_title">অ্যাপটি ভালো লাগছে?</string>
+    <string name="github_star_alert_message">এই অ্যাপটি ফ্রি এবং ওপেন সোর্স। এই ইস্টার এগগুলো যদি ভালো লাগে, তাহলে GitHub-এ প্রজেক্টটিকে স্টার দিন যাতে এটি বেড়ে উঠতে পারে</string>
+    <string name="action_star_github">GitHub-এ স্টার দিন</string>
+    <string name="label_data_backup">ডেটা ব্যাকআপ ও পুনরুদ্ধার</string>
+    <string name="pref_data_backup_desc">ব্যবহারকারীর ডেটা এক্সপোর্ট বা ইমপোর্ট করুন</string>
+    <string name="action_export_backup">ব্যাকআপ এক্সপোর্ট করুন</string>
+    <string name="action_export_backup_desc">সেটিংস, বিড়াল এবং উইজেট কনফিগারেশন একটি ফাইলে সংরক্ষণ করুন</string>
+    <string name="action_import_backup">ব্যাকআপ ইমপোর্ট করুন</string>
+    <string name="action_import_backup_desc">পূর্বে এক্সপোর্ট করা ব্যাকআপ ফাইল থেকে পুনরুদ্ধার করুন</string>
+    <string name="toast_backup_success">ব্যাকআপ সফলভাবে এক্সপোর্ট হয়েছে</string>
+    <string name="toast_restore_success">পুনরুদ্ধার সম্পন্ন হয়েছে। অ্যাপটি পুনরায় চালু হবে।</string>
+    <string name="toast_backup_failed">ব্যাকআপ ব্যর্থ হয়েছে: %s</string>
+    <string name="toast_restore_failed">পুনরুদ্ধার ব্যর্থ হয়েছে: %s</string>
+    <string name="dialog_import_backup_title">ব্যাকআপ ইমপোর্ট করুন</string>
+    <string name="dialog_import_backup_message">এটি সেটিংস, সংরক্ষিত বিড়াল এবং উইজেট কনফিগারেশন সহ অ্যাপের সমস্ত বর্তমান ডেটা ওভাররাইট করবে। এই কাজটি বাতিল করা যাবে না। আপনি কি নিশ্চিতভাবে চালিয়ে যেতে চান?</string>
+    <string name="action_confirm_import">ইমপোর্ট করুন</string>
+    <string name="action_restore_defaults">ডিফল্ট সেটিংস পুনরুদ্ধার করুন</string>
+    <string name="action_restore_defaults_desc">সমস্ত সেটিংস তাদের ডিফল্ট মানে রিসেট করুন</string>
+    <string name="dialog_restore_defaults_title">ডিফল্ট সেটিংস পুনরুদ্ধার করুন</string>
+    <string name="dialog_restore_defaults_message">এটি থিম, লঞ্চার আইকন এবং ভাষা সহ সমস্ত সেটিংস রিসেট করবে। সংরক্ষিত বিড়াল এবং উইজেট কনফিগারেশন প্রভাবিত হবে না। এই কাজটি বাতিল করা যাবে না। আপনি কি নিশ্চিতভাবে চালিয়ে যেতে চান?</string>
+    <string name="action_confirm_restore_defaults">রিসেট করুন</string>
+    <string name="toast_restore_defaults_success">সেটিংস ডিফল্টে পুনরুদ্ধার করা হয়েছে। অ্যাপটি পুনরায় চালু হবে।</string>
 </resources>

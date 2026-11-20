@@ -78,4 +78,32 @@
     <string name="pref_title_highest_egg_count">Istaknuta jaja</string>
     <string name="pref_desc_highest_egg_count">Broj velikih kartica prikazanih na vrhu početnog zaslona.</string>
     <string name="pref_summary_highest_egg_count_all">Sve</string>
+
+    <string name="pref_title_app_icon">Ikona aplikacije</string>
+    <string name="pref_title_color_source">Boja</string>
+    <string name="summary_color_source_dynamic">Dinamična</string>
+    <string name="summary_color_source_custom">Prilagođena</string>
+    <string name="label_widgets">Widgeti</string>
+    <string name="github_star_alert_title">Sviđa li vam se aplikacija?</string>
+    <string name="github_star_alert_message">Ova je aplikacija besplatna i otvorenog koda. Ako vam se sviđaju ovi easter eggovi, dajte projektu zvjezdicu na GitHubu kako biste mu pomogli da raste</string>
+    <string name="action_star_github">Daj zvjezdicu na GitHubu</string>
+    <string name="label_data_backup">Sigurnosna kopija i vraćanje podataka</string>
+    <string name="pref_data_backup_desc">Izvezi ili uvezi korisničke podatke</string>
+    <string name="action_export_backup">Izvezi sigurnosnu kopiju</string>
+    <string name="action_export_backup_desc">Spremi postavke, mačke i konfiguracije widgeta u datoteku</string>
+    <string name="action_import_backup">Uvezi sigurnosnu kopiju</string>
+    <string name="action_import_backup_desc">Vrati iz prethodno izvezene datoteke sigurnosne kopije</string>
+    <string name="toast_backup_success">Sigurnosna kopija uspješno izvezena</string>
+    <string name="toast_restore_success">Vraćanje dovršeno. Aplikacija će se ponovno pokrenuti.</string>
+    <string name="toast_backup_failed">Sigurnosno kopiranje nije uspjelo: %s</string>
+    <string name="toast_restore_failed">Vraćanje nije uspjelo: %s</string>
+    <string name="dialog_import_backup_title">Uvezi sigurnosnu kopiju</string>
+    <string name="dialog_import_backup_message">Ovo će prebrisati sve trenutne podatke aplikacije, uključujući postavke, spremljene mačke i konfiguracije widgeta. Ova se radnja ne može poništiti. Jeste li sigurni da želite nastaviti?</string>
+    <string name="action_confirm_import">Uvezi</string>
+    <string name="action_restore_defaults">Vrati zadane postavke</string>
+    <string name="action_restore_defaults_desc">Vrati sve postavke na zadane vrijednosti</string>
+    <string name="dialog_restore_defaults_title">Vrati zadane postavke</string>
+    <string name="dialog_restore_defaults_message">Ovo će vratiti sve postavke, uključujući temu, ikonu pokretača i jezik. Spremljene mačke i konfiguracije widgeta nisu zahvaćene. Ova se radnja ne može poništiti. Jeste li sigurni da želite nastaviti?</string>
+    <string name="action_confirm_restore_defaults">Vrati</string>
+    <string name="toast_restore_defaults_success">Postavke vraćene na zadane vrijednosti. Aplikacija će se ponovno pokrenuti.</string>
 </resources>

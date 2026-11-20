@@ -102,4 +102,8 @@
     <string name="pref_title_highest_egg_count">Huevos destacados</string>
     <string name="pref_desc_highest_egg_count">Número de tarjetas grandes que se muestran en la parte superior de la pantalla de inicio.</string>
     <string name="pref_summary_highest_egg_count_all">Todos</string>
+
+    <string name="github_star_alert_title">¿Te gusta la aplicación?</string>
+    <string name="github_star_alert_message">Esta aplicación es gratuita y de código abierto. Si te gustan estos huevos de Pascua, da una estrella al proyecto en GitHub para ayudarlo a crecer</string>
+    <string name="action_star_github">Dar estrella en GitHub</string>
 </resources>

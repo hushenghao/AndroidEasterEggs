@@ -4,4 +4,8 @@
     <string name="summary_android_release_pushed">Den slutliga versionen har släppts</string>
     <string name="label_timeline_title">Tidslinje, milstolpar och uppdateringar</string>
     <string name="label_timeline_releases">Släpps</string>
+    <string name="label_timeline_developer_previews">Utvecklarförhandsvisningar</string>
+    <string name="label_timeline_beta_release">Betaversioner</string>
+    <string name="label_timeline_platform_stability">Plattformsstabilitet</string>
+    <string name="label_timeline_final_release">Slutlig version</string>
 </resources>

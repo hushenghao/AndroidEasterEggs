@@ -96,4 +96,14 @@
     <string name="pref_title_highest_egg_count">강조 표시된 달걀</string>
     <string name="pref_desc_highest_egg_count">홈 화면 상단에 표시되는 큰 카드의 수.</string>
     <string name="pref_summary_highest_egg_count_all">전체</string>
+
+    <string name="github_star_alert_title">앱이 마음에 드시나요?</string>
+    <string name="github_star_alert_message">이 앱은 무료 오픈소스입니다. 이 이스터 에그가 마음에 든다면 GitHub에서 프로젝트에 별을 눌러 성장을 도와주세요</string>
+    <string name="action_star_github">GitHub에서 별 주기</string>
+    <string name="action_restore_defaults">기본 설정 복원</string>
+    <string name="action_restore_defaults_desc">모든 설정을 기본값으로 초기화합니다</string>
+    <string name="dialog_restore_defaults_title">기본 설정 복원</string>
+    <string name="dialog_restore_defaults_message">테마, 런처 아이콘, 언어를 포함한 모든 설정이 초기화됩니다. 저장된 고양이와 위젯 설정은 영향을 받지 않습니다. 이 작업은 되돌릴 수 없습니다. 계속하시겠습니까?</string>
+    <string name="action_confirm_restore_defaults">초기화</string>
+    <string name="toast_restore_defaults_success">설정을 기본값으로 복원했습니다. 앱이 다시 시작됩니다.</string>
 </resources>

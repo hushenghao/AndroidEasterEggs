@@ -96,4 +96,14 @@
     <string name="pref_title_highest_egg_count">Wyróżnione jajka</string>
     <string name="pref_desc_highest_egg_count">Liczba dużych kart wyświetlanych u góry ekranu głównego.</string>
     <string name="pref_summary_highest_egg_count_all">Wszystkie</string>
+
+    <string name="github_star_alert_title">Podoba Ci się aplikacja?</string>
+    <string name="github_star_alert_message">Ta aplikacja jest darmowa i open source. Jeśli podobają Ci się te pisanki, dodaj gwiazdkę projektowi na GitHubie, aby pomóc mu się rozwijać</string>
+    <string name="action_star_github">Dodaj gwiazdkę na GitHubie</string>
+    <string name="action_restore_defaults">Przywróć ustawienia domyślne</string>
+    <string name="action_restore_defaults_desc">Zresetuj wszystkie ustawienia do wartości domyślnych</string>
+    <string name="dialog_restore_defaults_title">Przywróć ustawienia domyślne</string>
+    <string name="dialog_restore_defaults_message">Spowoduje to zresetowanie wszystkich ustawień, w tym motywu, ikony aplikacji i języka. Zapisane koty i konfiguracje widżetów nie zostaną zmienione. Tej czynności nie można cofnąć. Czy na pewno chcesz kontynuować?</string>
+    <string name="action_confirm_restore_defaults">Resetuj</string>
+    <string name="toast_restore_defaults_success">Ustawienia przywrócono do wartości domyślnych. Aplikacja uruchomi się ponownie.</string>
 </resources>

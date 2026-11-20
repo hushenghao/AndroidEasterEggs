@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">Widget configureren</string>
+    <string name="analog_clock_widget_config_summary">Kies wat er gebeurt wanneer je op de analoge klokwidget tikt.</string>
+    <string name="analog_clock_widget_click_action_title">Tikactie</string>
+    <string name="analog_clock_widget_action_open_egg">Egg openen</string>
+    <string name="analog_clock_widget_action_open_app">App openen</string>
+    <string name="analog_clock_widget_action_none">Geen actie</string>
+    <string name="analog_clock_widget_dial_style_title">Klokwijzerplaat</string>
+    <string name="analog_clock_widget_dial_style_summary">Kies de stijl van de analoge klokwijzerplaat.</string>
+    <string name="analog_clock_widget_dial_android_icons">Pictogrammen</string>
+    <string name="analog_clock_widget_dial_simple">Eenvoudig</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>

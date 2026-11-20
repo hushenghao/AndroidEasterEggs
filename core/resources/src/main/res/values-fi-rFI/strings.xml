@@ -96,4 +96,14 @@
     <string name="pref_title_highest_egg_count">Korostetut munat</string>
     <string name="pref_desc_highest_egg_count">Aloitusnäytön yläreunassa näkyvien suurten korttien määrä.</string>
     <string name="pref_summary_highest_egg_count_all">Kaikki</string>
+
+    <string name="github_star_alert_title">Pidätkö sovelluksesta?</string>
+    <string name="github_star_alert_message">Tämä sovellus on ilmainen ja avoimen lähdekoodin. Jos pidät näistä pääsiäismunista, anna projektille tähti GitHubissa auttaaksesi sitä kasvamaan</string>
+    <string name="action_star_github">Anna tähti GitHubissa</string>
+    <string name="action_restore_defaults">Palauta oletusasetukset</string>
+    <string name="action_restore_defaults_desc">Nollaa kaikki asetukset oletusarvoihinsa</string>
+    <string name="dialog_restore_defaults_title">Palauta oletusasetukset</string>
+    <string name="dialog_restore_defaults_message">Tämä nollaa kaikki asetukset, mukaan lukien teeman, käynnistyskuvakkeen ja kielen. Tallennetut kissat ja widgetien asetukset eivät muutu. Tätä toimintoa ei voi kumota. Haluatko varmasti jatkaa?</string>
+    <string name="action_confirm_restore_defaults">Nollaa</string>
+    <string name="toast_restore_defaults_success">Asetukset palautettu oletuksiin. Sovellus käynnistyy uudelleen.</string>
 </resources>

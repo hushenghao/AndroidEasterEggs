@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analog_clock_widget_config_title">ຕັ້ງຄ່າວິດເຈັດ</string>
+    <string name="analog_clock_widget_config_summary">ເລືອກສິ່ງທີ່ຈະເກີດຂຶ້ນເມື່ອທ່ານແຕະວິດເຈັດໂມງອະນາລັອກ.</string>
+    <string name="analog_clock_widget_click_action_title">ການກະທຳການແຕະ</string>
+    <string name="analog_clock_widget_action_open_egg">ເປີດໄຂ່</string>
+    <string name="analog_clock_widget_action_open_app">ເປີດແອັບ</string>
+    <string name="analog_clock_widget_action_none">ບໍ່ມີການກະທຳ</string>
+    <string name="analog_clock_widget_dial_style_title">ໜ້າປັດໂມງ</string>
+    <string name="analog_clock_widget_dial_style_summary">ເລືອກຮູບແບບຂອງໜ້າປັດໂມງອະນາລັອກ.</string>
+    <string name="analog_clock_widget_dial_android_icons">ໄອຄອນ</string>
+    <string name="analog_clock_widget_dial_simple">ແບບງ່າຍ</string>
+    <string name="analog_clock_widget_dial_cinnamon_bun">CinnamonBun</string>
+</resources>
