@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- locality language -->
-    <string name="locale_lang_nl_NL">Nederlands</string>
     <string name="locale_lang_zh_SC">Chinees (vereenvoudigd)</string>
     <string name="locale_lang_zh_TC">Chinees (traditioneel)</string>
     <string name="locale_lang_de">Duits</string>
@@ -16,6 +15,7 @@
     <string name="locale_lang_ar_SA">Arabisch</string>
     <string name="locale_lang_ja_JP">Japans</string>
     <string name="locale_lang_pl_PL">Pools</string>
+    <string name="locale_lang_nl_NL">Nederlands</string>
     <string name="locale_lang_la_LA">Latijn</string>
     <string name="locale_lang_fr">Frans</string>
     <string name="locale_lang_uk_UA">Oekraïens</string>

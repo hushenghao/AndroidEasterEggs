@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- locality language -->
-    <string name="locale_lang_th_TH">ภาษาไทย</string>
     <string name="locale_lang_zh_SC">จีนตัวย่อ</string>
     <string name="locale_lang_zh_TC">จีนตัวเต็ม</string>
     <string name="locale_lang_de">เยอรมัน</string>
@@ -26,6 +25,7 @@
     <string name="locale_lang_fi_FI">ฟินแลนด์</string>
     <string name="locale_lang_vi_VN">เวียดนาม</string>
     <string name="locale_lang_hu_HU">ฮังการี</string>
+    <string name="locale_lang_th_TH">ภาษาไทย</string>
     <string name="locale_lang_no_NO">นอร์เวย์</string>
     <string name="locale_lang_fil_PH">ฟิลิปปินส์</string>
     <string name="locale_lang_lo_LA">ลาว</string>

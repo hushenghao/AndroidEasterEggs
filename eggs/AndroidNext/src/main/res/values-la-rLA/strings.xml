@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="summary_android_waiting">Exspectat…</string>
     <string name="summary_android_release_pushed">Editio finalis emissa est.</string>
-
     <string name="label_timeline_title">Linea temporis, metae et novationes</string>
     <string name="label_timeline_releases">Editiones</string>
     <string name="label_timeline_developer_previews">Praevisiones programmatorum</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- locality language -->
-    <string name="locale_lang_fil_PH">Filipino</string>
     <string name="locale_lang_zh_SC">Tsino (Pinasimple)</string>
     <string name="locale_lang_zh_TC">Tsino (Tradisyonal)</string>
     <string name="locale_lang_de">Aleman</string>
@@ -28,6 +27,7 @@
     <string name="locale_lang_hu_HU">Hungaro</string>
     <string name="locale_lang_th_TH">Thai</string>
     <string name="locale_lang_no_NO">Noruwego</string>
+    <string name="locale_lang_fil_PH">Filipino</string>
     <string name="locale_lang_lo_LA">Laotian</string>
     <string name="locale_lang_cs_CZ">Tseko</string>
     <string name="locale_lang_ta">Tamil</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- locality language -->
-    <string name="locale_lang_lo_LA">ພາສາລາວ</string>
     <string name="locale_lang_zh_SC">ຈີນ (ແບບງ່າຍ)</string>
     <string name="locale_lang_zh_TC">ຈີນ (ແບບດັ້ງເດີມ)</string>
     <string name="locale_lang_de">ເຢຍລະມັນ</string>
@@ -29,6 +28,7 @@
     <string name="locale_lang_th_TH">ໄທ</string>
     <string name="locale_lang_no_NO">ນໍເວ</string>
     <string name="locale_lang_fil_PH">ຟີລິບປິນ</string>
+    <string name="locale_lang_lo_LA">ພາສາລາວ</string>
     <string name="locale_lang_cs_CZ">ເຊັກ</string>
     <string name="locale_lang_ta">ທະມິນ</string>
     <string name="locale_lang_ro">ໂຣມາເນຍ</string>

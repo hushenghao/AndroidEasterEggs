@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Ova Paschalia</string>
     <string name="title_open_with">Aperire cum</string>
     <string name="char_separator">/</string>
     <string name="char_en_dash">-</string>
-
-    <string name="app_name">Ova Paschalia</string>
     <string name="label_back">Retro</string>
     <string name="label_github">Codex fontis</string>
     <string name="label_translation">Interpretationes</string>
