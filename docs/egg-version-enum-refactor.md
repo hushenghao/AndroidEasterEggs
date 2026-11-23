@@ -1,6 +1,6 @@
 # 彩蛋标识重构：full API Level → 自定义枚举
 
-- **状态**：规划中（未开始）
+- **状态**：实施中（P0 定稿，P1 进行中）
 - **记录日期**：2026-11-17
 - **范围**：`:core:provider`、`:core:egg-stats`、`:app`、`:core:activity-actions`、`:core:shortcut`、`:eggs:*`
 - **目标版本**：待定
@@ -66,27 +66,49 @@ open class EasterEgg(
 
 ```kotlin
 // :core:provider，纯 Kotlin，不依赖 Android
+enum class ReleaseType { RELEASE, PREVIEW, BETA }
+
 enum class AndroidVersion(
     val id: String,             // 稳定、append-only，落库/快捷方式用
     val versionName: String,    // "13"、"12L"、"T"、"16.1"
-    val apiLevel: Int?,         // 公开 API，用于深链/AppFunctions/API X
-    val apiLevelLabel: String,  // 显示用，可表达 "36.1"
-    val sortOrder: Int,         // 显式排序，避免依赖 ordinal
-    val isPreview: Boolean = false,
-    val isBeta: Boolean = false,
+    val fullApiLevel: Int,      // 旧全码 major*100000+minor；预览=stable-1；排序键
+    val releaseType: ReleaseType = ReleaseType.RELEASE,
 ) {
-    BASE("android_1_0", "1.0", 1, "1", 1),
+    BASE("android_1_0", "1.0", 100_000),
     // ...
-    S("android_12", "12", 31, "31", 3100),
-    S_V2("android_12l", "12L", 32, "32", 3200),
-    T_BETA("android_t_beta", "T", 33, "33", 3299, isBeta = true),
-    TIRAMISU("android_13", "13", 33, "33", 3300),
+    S("android_12", "12", 3_100_000),
+    S_V2("android_12l", "12L", 3_200_000),
+    T_BETA("android_t_beta", "T", 3_299_999, ReleaseType.BETA),
+    TIRAMISU("android_13", "13", 3_300_000),
     // ...
-    BAKLAVA("android_16", "16", 36, "36", 3600),
-    BAKLAVA_1("android_16_1", "16.1", 36, "36.1", 3601),
-    CINNAMON_BUN("android_17", "17", 37, "37", 3700),
-    CINNAMON_BUN_1("android_17_1", "17.1", 37, "37.1", 3701),
-    NEXT("android_next", "Next", null, "Next", 9999, isPreview = true),
+    BAKLAVA("android_16", "16", 3_600_000),
+    BAKLAVA_1("android_16_1", "16.1", 3_600_001),
+    CINNAMON_BUN("android_17", "17", 3_700_000),
+    CINNAMON_BUN_1("android_17_1", "17.1", 3_700_001),
+    NEXT("android_next", "Next", 3_800_000, ReleaseType.PREVIEW),
+    ;
+
+    companion object {
+        const val SDK_INT_MULTIPLIER = 100_000
+        val byFullApiLevel: Map<Int, AndroidVersion> = entries.associateBy { it.fullApiLevel }
+        fun fromFullApiLevel(fullApiLevel: Int): AndroidVersion? = byFullApiLevel[fullApiLevel]
+        fun fromFullApiLevelRange(range: IntRange): List<AndroidVersion> =
+            entries.filter { it.fullApiLevel in range }.sortedBy { it.fullApiLevel }
+    }
+
+    /** 公开 API，深链/AppFunctions/"API X" 用；预览解析到其所预告的稳定 API，NEXT 为 null。 */
+    val apiLevel: Int?
+        get() = if (this == NEXT) null
+        else fullApiLevel / SDK_INT_MULTIPLIER +
+            if (fullApiLevel % SDK_INT_MULTIPLIER == SDK_INT_MULTIPLIER - 1) 1 else 0
+
+    /** "API X" 显示：RELEASE 且 minor>0 显示小数（"36.1"），否则整数；NEXT 显示 "Next"。 */
+    val apiLevelLabel: String
+        get() {
+            val api = apiLevel ?: return "Next"
+            val minor = fullApiLevel % SDK_INT_MULTIPLIER
+            return if (releaseType == ReleaseType.RELEASE && minor > 0) "$api.$minor" else "$api"
+        }
 }
 ```
 
@@ -248,12 +270,13 @@ egg_play_events(
 )
 ```
 
-迁移方式：
+迁移方式（保留数据，beta 装机可无损升级到 release）：
 
-1. 新增 `egg_key TEXT NOT NULL`
-2. 用 legacy 映射表把 `(api_level_first, api_level_last)` 转成 `EasterEgg.id`
-3. 删除旧两列/重建表
-4. 无匹配的旧 key 保留 `legacy_<first>_<last>` 兜底，避免丢数据
+1. `Migration(1, 2)` 新增 `egg_key TEXT NOT NULL DEFAULT ''`
+2. 逐行回填：`egg_key = AndroidVersion.byFullApiLevel[api_level_first]?.id`
+   （`fullApiLevelRange.first` 恒等于主版本 `fullApiLevel`，单列即可唯一确定 id）
+3. 重建表去掉 `api_level_first` / `api_level_last`
+4. 未命中旧 key 兜底 `legacy_<first>_<last>`，绝不丢数据、不启用 `fallbackToDestructiveMigration`
 
 ### 快捷方式
 
@@ -298,13 +321,13 @@ egg_play_events(
 
 合计约 **4–6 人日**，其中 P4 的文件数量最多，P5 的迁移风险最高。
 
-## 8. 待确认
+## 8. 已定决策（2026-11-23）
 
-- 枚举命名：`AndroidVersion` 还是 `EggVersion` / `EasterEggVersion`
-- `sortOrder` 用显式 Int，还是声明顺序（推荐显式 Int）
-- “API X” 是否展示小数 QPR（`36.1` / `37.1`）
-- 区间彩蛋的 `EasterEggGroup` 排序用最小还是最大成员
-- 统计表迁移是否随本次一起发布，还是先保留旧列一个版本
+- 枚举命名：**`AndroidVersion`**；发布阶段类型用独立枚举 **`ReleaseType`（RELEASE / PREVIEW / BETA）**，取代 `isPreview`/`isBeta` 两个布尔
+- 排序键：**`fullApiLevel`** 即排序键（不再单列 `sortOrder`），显式全码字面量，不依赖 ordinal
+- “API X”：**展示小数 QPR**（`36.1` / `37.1`），由 `fullApiLevel % 100000` 得出 minor，结合 `releaseType` 区分 QPR 与预览（预览 minor=99999 只显示整数）
+- 区间彩蛋的 `EasterEggGroup` 排序：**取最小成员**（复刻现状 `fullApiLevelRange.first`）
+- 统计表迁移：**随本次一起迁移**，采用真实 `Migration(1,2)` 无损回填（见第 5 节），不丢数据、兼容 beta→release 升级
 
 ## 9. 参考文件
 
