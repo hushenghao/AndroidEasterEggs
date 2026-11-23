@@ -1,5 +1,7 @@
 package com.android_t.egg
 
+import com.dede.basic.provider.AndroidVersion
+
 import android.content.ComponentName
 import android.content.Context
 import android.os.Build
@@ -36,7 +38,7 @@ object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
                 iconRes = R.drawable.t_android_logo,
                 nameRes = R.string.t_egg_name,
                 nicknameRes = R.string.t_android_nickname,
-                fullApiLevel = Build.VERSION_CODES_FULL.TIRAMISU,
+                version = AndroidVersion.TIRAMISU,
                 actionClass = PlatLogoActivity::class.java
             ) {
                 override fun provideSnapshotProvider(): SnapshotProvider {
@@ -47,7 +49,7 @@ object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
                 iconRes = R.drawable.t_android_logo_beta,
                 nameRes = R.string.t_egg_name,
                 nicknameRes = R.string.t_android_nickname_beta,
-                fullApiLevel = VERSION_CODES_FULL.T_BETA,
+                version = AndroidVersion.T_BETA,
                 actionClass = com.android_t.egg.beta.PlatLogoActivity::class.java,
             ) {
                 override fun provideSnapshotProvider(): SnapshotProvider {
@@ -64,7 +66,7 @@ object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
         return listOf(
             TimelineEvent(
                 2022, Calendar.SEPTEMBER,
-                Build.VERSION_CODES_FULL.TIRAMISU,
+                AndroidVersion.TIRAMISU,
                 "Tiramisu."
             )
         )
@@ -78,7 +80,7 @@ object AndroidTEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.t_ic_fullcat_icon,
             nameRes = R.string.t_egg_name,
             nicknameRes = R.string.t_android_nickname,
-            fullApiLevel = Build.VERSION_CODES_FULL.TIRAMISU
+            version = AndroidVersion.TIRAMISU
         ) {
             @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.R)
             override fun isSupported(): Boolean {

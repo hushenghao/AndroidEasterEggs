@@ -1,5 +1,7 @@
 package com.android_r.egg
 
+import com.dede.basic.provider.AndroidVersion
+
 import android.content.ComponentName
 import android.content.Context
 import android.os.Build
@@ -31,7 +33,7 @@ object AndroidREasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.r_icon,
             nameRes = R.string.r_egg_name,
             nicknameRes = R.string.r_android_nickname,
-            fullApiLevel = Build.VERSION_CODES_FULL.R,
+            version = AndroidVersion.R,
             actionClass = PlatLogoActivity::class.java
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
@@ -46,7 +48,7 @@ object AndroidREasterEgg : EasterEggProvider, ComponentProvider {
     override fun provideTimelineEvents(): List<TimelineEvent> {
         return listOf(
             timelineEvent(
-                Build.VERSION_CODES_FULL.R,
+                AndroidVersion.R,
                 "R.\nReleased publicly as Android 11 in September 2020."
             )
         )
@@ -60,7 +62,7 @@ object AndroidREasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.r_ic_fullcat_icon,
             nameRes = R.string.r_egg_name,
             nicknameRes = R.string.r_android_nickname,
-            fullApiLevel = Build.VERSION_CODES_FULL.R
+            version = AndroidVersion.R
         ) {
             @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.R)
             override fun isSupported(): Boolean {

@@ -1,8 +1,9 @@
 package com.android_g.egg;
 
+import com.dede.basic.provider.AndroidVersion;
+
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 
@@ -19,7 +20,6 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 import dagger.multibindings.IntoSet;
-import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
@@ -34,8 +34,9 @@ public class AndroidGingerbreadEasterEgg {
                 R.drawable.g_android_logo,
                 R.string.g_egg_name,
                 R.string.g_egg_name,
-                new IntRange(Build.VERSION_CODES_FULL.GINGERBREAD, Build.VERSION_CODES_FULL.GINGERBREAD_MR1),
-                PlatLogoActivity.class
+                AndroidVersion.GINGERBREAD,
+                PlatLogoActivity.class,
+                List.of(AndroidVersion.GINGERBREAD_MR1)
         ) {
             @Override
             public SnapshotProvider provideSnapshotProvider() {
@@ -51,11 +52,11 @@ public class AndroidGingerbreadEasterEgg {
     public static List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.GINGERBREAD_MR1,
+                        AndroidVersion.GINGERBREAD_MR1,
                         "G MR1.\nReleased publicly as Android 2.3.3 in February 2011."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.GINGERBREAD,
+                        AndroidVersion.GINGERBREAD,
                         "G.\nReleased publicly as Android 2.3 in December 2010."
                 )
         );

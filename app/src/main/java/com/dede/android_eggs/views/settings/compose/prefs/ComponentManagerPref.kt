@@ -51,7 +51,7 @@ internal fun ComponentManagerPrefContent(
         val componentCount = supportedList.size
         supportedList.forEachIndexed { index, component ->
             var checked by remember { mutableStateOf(component.isEnabled(context)) }
-            val formatter = VersionFormatter.create(component.fullApiLevelRange, component.nicknameRes)
+            val formatter = VersionFormatter.create(component.versions, component.nicknameRes)
             SwitchOption(
                 shape = OptionShapes.indexOfShape(index = index, optionsCount = componentCount),
                 leadingIcon = {

@@ -14,17 +14,20 @@ class TimelineEvent(
      * @see Calendar.MONTH
      */
     val month: Int,
-    val fullApiLevel: Int,
+    val version: AndroidVersion,
     val event: CharSequence,
 ) {
 
     @DrawableRes
     var androidLogo: Int = -1
 
+    val versions: List<AndroidVersion>
+        get() = listOf(version)
+
     companion object {
 
         @JvmStatic
-        fun timelineEvent(fullApiLevel: Int, event: CharSequence): TimelineEvent {
+        fun timelineEvent(version: AndroidVersion, event: CharSequence): TimelineEvent {
             val regex =
                 Regex("(January|February|March|April|May|June|July|August|September|October|November|December) +(\\d{4,})")
             val result = regex.find(event)
@@ -54,7 +57,7 @@ class TimelineEvent(
                 "December" -> Calendar.DECEMBER
                 else -> throw IllegalArgumentException("Illegal event month: $monthStr")
             }
-            return TimelineEvent(year, month, fullApiLevel, event)
+            return TimelineEvent(year, month, version, event)
         }
     }
 }

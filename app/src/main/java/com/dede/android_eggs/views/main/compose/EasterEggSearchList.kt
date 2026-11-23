@@ -21,9 +21,9 @@ import com.dede.android_eggs.composable.currentWindowWidthPane
 import com.dede.android_eggs.egg_stats.EggLaunchSource
 import com.dede.android_eggs.egg_stats.EggStatsSummary
 import com.dede.android_eggs.views.main.util.EasterEggHelp
+import com.dede.basic.provider.AndroidVersion
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
-import com.dede.basic.provider.toApiLevelRange
 import java.util.Date
 
 /**
@@ -37,8 +37,8 @@ fun EasterEggSearchList(
     modifier: Modifier = Modifier,
     easterEggs: List<EasterEgg> = EasterEggHelp.previewEasterEggs(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    releaseDateLookup: (Int) -> Date? = { null },
-    statsMap: Map<IntRange, EggStatsSummary> = emptyMap(),
+    releaseDateLookup: (AndroidVersion) -> Date? = { null },
+    statsMap: Map<String, EggStatsSummary> = emptyMap(),
 ) {
     val isCompact = currentWindowWidthPane() == WindowWidthPane.COMPACT
     LazyVerticalGrid(
@@ -115,16 +115,8 @@ internal fun filterEasterEggs(
     searchText: String,
 ): List<EasterEgg> {
 
-    fun EasterEgg.versionNames(): Set<String> {
-        val range = fullApiLevelRange
-        return buildSet {
-            add(EasterEggHelp.getVersionNameByFullApiLevel(range.first))
-            add(EasterEggHelp.getVersionNameByFullApiLevel(range.last))
-            for (apiLevel in range.toApiLevelRange()) {
-                add(EasterEggHelp.getVersionNameByApiLevel(apiLevel))
-            }
-        }
-    }
+    fun EasterEgg.versionNames(): Set<String> =
+        versions.mapTo(mutableSetOf()) { it.versionName }
 
     fun EasterEgg.matches(token: SearchToken): Boolean {
         if (context.getString(nameRes).contains(token.text, true) ||
@@ -132,9 +124,8 @@ internal fun filterEasterEggs(
         ) {
             return true
         }
-        val apiLevelRange = fullApiLevelRange.toApiLevelRange()
         val apiLevel = token.apiLevel
-        if (apiLevel != null && apiLevelRange.contains(apiLevel)) {
+        if (apiLevel != null && versions.any { it.apiLevel == apiLevel }) {
             return true
         }
         val versionValue = token.versionValue ?: return false

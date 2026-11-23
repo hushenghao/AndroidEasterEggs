@@ -1,10 +1,11 @@
 package com.android_j.egg;
 
+import com.dede.basic.provider.AndroidVersion;
+
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 
@@ -22,7 +23,6 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 import dagger.multibindings.IntoSet;
-import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
@@ -37,8 +37,9 @@ public class AndroidJellyBeanEasterEgg {
                 R.drawable.j_android_logo,
                 R.string.j_egg_name,
                 R.string.j_android_nickname,
-                new IntRange(Build.VERSION_CODES_FULL.JELLY_BEAN, Build.VERSION_CODES_FULL.JELLY_BEAN_MR2),
-                PlatLogoActivity.class
+                AndroidVersion.JELLY_BEAN,
+                PlatLogoActivity.class,
+                List.of(AndroidVersion.JELLY_BEAN_MR1, AndroidVersion.JELLY_BEAN_MR2)
         ) {
             @Override
             public SnapshotProvider provideSnapshotProvider() {
@@ -56,7 +57,7 @@ public class AndroidJellyBeanEasterEgg {
                 R.drawable.j_redbean2,
                 R.string.j_jelly_bean_dream_name,
                 R.string.j_android_nickname,
-                new IntRange(Build.VERSION_CODES_FULL.JELLY_BEAN, Build.VERSION_CODES_FULL.JELLY_BEAN_MR2)
+                AndroidVersion.JELLY_BEAN, List.of(AndroidVersion.JELLY_BEAN_MR1, AndroidVersion.JELLY_BEAN_MR2)
         ) {
             @Override
             public boolean isSupported() {
@@ -84,15 +85,15 @@ public class AndroidJellyBeanEasterEgg {
     public static List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.JELLY_BEAN_MR2,
+                        AndroidVersion.JELLY_BEAN_MR2,
                         "J MR2.\nReleased publicly as Android 4.3 in July 2013."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.JELLY_BEAN_MR1,
+                        AndroidVersion.JELLY_BEAN_MR1,
                         "J MR1.\nReleased publicly as Android 4.2 in November 2012."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.JELLY_BEAN,
+                        AndroidVersion.JELLY_BEAN,
                         "J.\nReleased publicly as Android 4.1 in July 2012."
                 )
         );

@@ -1,6 +1,7 @@
 package com.android_q.egg
 
-import android.os.Build
+import com.dede.basic.provider.AndroidVersion
+
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
@@ -25,7 +26,7 @@ object AndroidQEasterEgg : EasterEggProvider {
             iconRes = R.drawable.q_icon,
             nameRes = R.string.q_egg_name,
             nicknameRes = R.string.q_android_nickname,
-            fullApiLevel = Build.VERSION_CODES_FULL.Q,
+            version = AndroidVersion.Q,
             actionClass = PlatLogoActivity::class.java
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
@@ -40,7 +41,7 @@ object AndroidQEasterEgg : EasterEggProvider {
     override fun provideTimelineEvents(): List<TimelineEvent> {
         return listOf(
             timelineEvent(
-                Build.VERSION_CODES_FULL.Q,
+                AndroidVersion.Q,
                 "Q.\nReleased publicly as Android 10 in September 2019."
             ).apply {
                 androidLogo = R.drawable.q_android_logo_2019_2023

@@ -1,8 +1,9 @@
 package com.android_baklava.egg
 
+import com.dede.basic.provider.AndroidVersion
+
 import android.content.ComponentName
 import android.content.Context
-import android.os.Build
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
@@ -37,7 +38,7 @@ object AndroidBaklavaEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.baklava_android16_patch_adaptive,
             nameRes = R.string.baklava_egg_name,
             nicknameRes = R.string.baklava_android_nickname,
-            fullApiLevelRange = Build.VERSION_CODES_FULL.BAKLAVA..Build.VERSION_CODES_FULL.BAKLAVA_1,
+            version = AndroidVersion.BAKLAVA, additionalVersions = listOf(AndroidVersion.BAKLAVA_1),
             actionClass = PlatLogoActivity::class.java,
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
@@ -53,12 +54,12 @@ object AndroidBaklavaEasterEgg : EasterEggProvider, ComponentProvider {
         return listOf(
             TimelineEvent(
                 2025, Calendar.MAY,
-                Build.VERSION_CODES_FULL.BAKLAVA,
+                AndroidVersion.BAKLAVA,
                 "Baklava."
             ),
             TimelineEvent(
                 2025, Calendar.DECEMBER,
-                Build.VERSION_CODES_FULL.BAKLAVA_1,
+                AndroidVersion.BAKLAVA_1,
                 "Baklava.\nAndroid 16.1",
             )
         )
@@ -72,7 +73,7 @@ object AndroidBaklavaEasterEgg : EasterEggProvider, ComponentProvider {
             R.drawable.baklava_android16_patch_adaptive,
             R.string.baklava_egg_name,
             R.string.baklava_android_nickname,
-            Build.VERSION_CODES_FULL.BAKLAVA..Build.VERSION_CODES_FULL.BAKLAVA_1
+            AndroidVersion.BAKLAVA, listOf(AndroidVersion.BAKLAVA_1)
         ) {
             override fun isSupported(): Boolean = true
 

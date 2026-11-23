@@ -1,8 +1,7 @@
 package com.dede.android_eggs.views.main.util
 
-import android.util.SparseIntArray
 import androidx.annotation.DrawableRes
-import androidx.core.util.set
+import com.dede.basic.provider.AndroidVersion
 import com.dede.basic.provider.EasterEgg
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -12,20 +11,18 @@ class AndroidLogoMatcher @Inject constructor(
     private val easterEggs: List<@JvmSuppressWildcards EasterEgg>,
 ) {
 
-    private val cache = SparseIntArray()
+    private val cache = HashMap<AndroidVersion, Int>()
 
-    fun findEasterEggByFullApiLevel(fullApiLevel: Int): EasterEgg? {
-        return easterEggs.find { fullApiLevel in it.fullApiLevelRange }
+    fun findEasterEggByVersion(version: AndroidVersion): EasterEgg? {
+        return easterEggs.find { version in it.versions }
     }
 
     @DrawableRes
-    fun findAndroidLogoByFullApiLevel(fullApiLevel: Int): Int {
-        if (cache.indexOfKey(fullApiLevel) >= 0) {
-            return cache[fullApiLevel]
-        }
-        val easterEgg = findEasterEggByFullApiLevel(fullApiLevel)
-            ?: throw IllegalArgumentException("Not found Android logo res, fullApiLevel: $fullApiLevel")
-        cache[fullApiLevel] = easterEgg.iconRes
+    fun findAndroidLogoByVersion(version: AndroidVersion): Int {
+        cache[version]?.let { return it }
+        val easterEgg = findEasterEggByVersion(version)
+            ?: throw IllegalArgumentException("Not found Android logo res, version: $version")
+        cache[version] = easterEgg.iconRes
         return easterEgg.iconRes
     }
 

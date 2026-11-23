@@ -11,7 +11,7 @@ import com.dede.android_eggs.navigation.DeepLink
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.views.settings.compose.prefs.launchRocketLauncher
 import com.dede.basic.provider.EasterEgg
-import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
+import com.dede.basic.provider.findEggByPublicApiLevel
 import dagger.hilt.android.qualifiers.ActivityContext
 import java.time.LocalTime
 import javax.inject.Inject
@@ -75,7 +75,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
                 // com.dede.android_eggs.views.widget.AnalogClockWidgetClickAction.OPEN_EGG
                 val hour = LocalTime.now().hour % 12
                 val apiLevel = hourApiLevelArray[hour]
-                val egg = eggIntent.easterEggs.find { apiLevel.toFullApiLevel() in it.fullApiLevelRange }
+                val egg = eggIntent.easterEggs.findEggByPublicApiLevel(apiLevel)
                 if (egg != null) {
                     EggActionHelp.launchEgg(eggIntent.context, egg, EggLaunchSource.WIDGET)
                 }
@@ -95,7 +95,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
             // egg://easter_egg/api/34
             val levelStr = uri.pathSegments.getOrNull(1) ?: return false
             val level = levelStr.toIntOrNull() ?: return false
-            val egg = eggIntent.easterEggs.find { level.toFullApiLevel() in it.fullApiLevelRange }
+            val egg = eggIntent.easterEggs.findEggByPublicApiLevel(level)
             if (egg != null) {
                 EggActionHelp.launchEgg(eggIntent.context, egg, EggLaunchSource.DEEP_LINK)
             }

@@ -36,31 +36,31 @@ import com.dede.android_eggs.alterable_adaptive_icon.AlterableAdaptiveIcon
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
-import com.dede.basic.provider.toRange
+import com.dede.basic.provider.AndroidVersion
 import com.dede.android_eggs.resources.R as StringsR
 
 internal enum class AppIcon(
     val aliasName: String,
     @DrawableRes val iconRes: Int,
-    val apiLevel: Int,
+    val version: AndroidVersion,
     val manifestEnabled: Boolean,
 ) {
     Android17(
         aliasName = "Android17IconAlias",
         iconRes = R.mipmap.ic_launcher_17,
-        apiLevel = Build.VERSION_CODES.CINNAMON_BUN,
+        version = AndroidVersion.CINNAMON_BUN,
         manifestEnabled = true,
     ),
     Android16(
         aliasName = "Android16IconAlias",
         iconRes = R.mipmap.ic_launcher_16,
-        apiLevel = Build.VERSION_CODES.BAKLAVA,
+        version = AndroidVersion.BAKLAVA,
         manifestEnabled = false,
     ),
     Android15(
         aliasName = "Android15IconAlias",
         iconRes = R.mipmap.ic_launcher_15,
-        apiLevel = Build.VERSION_CODES.VANILLA_ICE_CREAM,
+        version = AndroidVersion.VANILLA_ICE_CREAM,
         manifestEnabled = false,
     );
 
@@ -194,8 +194,8 @@ private fun AppIconOption(
                 clipShape = IconShapePrefUtil.getIconShape(),
             )
             val context = LocalContext.current
-            val title = remember(icon.apiLevel, context) {
-                EasterEggHelp.VersionFormatter.create(icon.apiLevel.toRange())
+            val title = remember(icon.version, context) {
+                EasterEggHelp.VersionFormatter.create(listOf(icon.version))
                     .format(context)
             }
             Text(

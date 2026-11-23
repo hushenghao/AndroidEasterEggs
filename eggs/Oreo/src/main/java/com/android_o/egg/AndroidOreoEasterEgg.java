@@ -1,8 +1,9 @@
 package com.android_o.egg;
 
+import com.dede.basic.provider.AndroidVersion;
+
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 
@@ -35,7 +36,7 @@ public class AndroidOreoEasterEgg {
                         R.drawable.o_android_logo,
                         R.string.o_app_name,
                         R.string.o_android_nickname,
-                        Build.VERSION_CODES_FULL.O_MR1,
+                        AndroidVersion.O_MR1,
                         PlatLogoActivity.Point1.class
                 ) {
                     @Override
@@ -47,7 +48,7 @@ public class AndroidOreoEasterEgg {
                         R.drawable.o_android_logo,
                         R.string.o_app_name,
                         R.string.o_android_nickname,
-                        Build.VERSION_CODES_FULL.O,
+                        AndroidVersion.O,
                         PlatLogoActivity.class
                 ) {
                     @Override
@@ -65,11 +66,11 @@ public class AndroidOreoEasterEgg {
     public static List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.O_MR1,
+                        AndroidVersion.O_MR1,
                         "O MR1.\nReleased publicly as Android 8.1 in December 2017."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.O,
+                        AndroidVersion.O,
                         "O.\nReleased publicly as Android 8.0 in August 2017."
                 )
         );

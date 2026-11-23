@@ -15,10 +15,9 @@ import androidx.appfunctions.AppFunctionServiceEntryPoint
 import androidx.core.graphics.drawable.toBitmap
 import com.dede.android_eggs.cat_editor.Utilities
 import com.dede.android_eggs.views.main.compose.filterEasterEggs
-import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.IntentHandler
 import com.dede.basic.provider.EasterEgg
-import com.dede.basic.provider.toApiLevelRange
+import com.dede.basic.provider.findEggByPublicApiLevel
 import com.dede.basic.requireDrawable
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -92,7 +91,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
     @AppFunctionDeclaration(isDescribedByKDoc = true)
     internal suspend fun listEasterEggs(): List<EasterEggInfo> = withContext(Dispatchers.IO) {
         val latestApiLevel = latestPlainApiLevel()
-        pureEasterEggs.map { it.toEasterEggInfo(latestApiLevel) }
+        pureEasterEggs.mapNotNull { it.toEasterEggInfoOrNull(latestApiLevel) }
     }
 
     /**
@@ -108,7 +107,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
         withContext(Dispatchers.IO) {
             val latestApiLevel = latestPlainApiLevel()
             filterEasterEggs(applicationContext, pureEasterEggs, query)
-                .map { it.toEasterEggInfo(latestApiLevel) }
+                .mapNotNull { it.toEasterEggInfoOrNull(latestApiLevel) }
         }
 
     /**
@@ -145,7 +144,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
     @AppFunctionDeclaration(isDescribedByKDoc = true)
     internal suspend fun launchEasterEgg(apiLevel: Int): EasterEggLaunch =
         withContext(Dispatchers.IO) {
-            val egg = pureEasterEggs.find { apiLevel in it.fullApiLevelRange.toApiLevelRange() }
+            val egg = pureEasterEggs.findEggByPublicApiLevel(apiLevel)
                 ?: throw AppFunctionElementNotFoundException(
                     "No Easter egg for API level $apiLevel",
                 )
@@ -155,7 +154,9 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
             // launches the egg itself, see IntentHandler.UriHandler.
             val launchUri = IntentHandler.createEggUri(apiLevel)
             EasterEggLaunch(
-                egg = egg.toEasterEggInfo(latestPlainApiLevel()),
+                egg = requireNotNull(egg.toEasterEggInfoOrNull(latestPlainApiLevel())) {
+                    "No public api level for egg ${egg.id}"
+                },
                 launchIntent = createDeepLinkPendingIntent(launchUri, requestCode = apiLevel),
                 launchUri = launchUri,
             )
@@ -173,7 +174,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
     @AppFunctionDeclaration(isDescribedByKDoc = true)
     internal suspend fun getEasterEggIcon(apiLevel: Int): EggIcon =
         withContext(Dispatchers.IO) {
-            val egg = pureEasterEggs.find { apiLevel in it.fullApiLevelRange.toApiLevelRange() }
+            val egg = pureEasterEggs.findEggByPublicApiLevel(apiLevel)
                 ?: throw AppFunctionElementNotFoundException(
                     "No Easter egg for API level $apiLevel",
                 )
@@ -199,18 +200,19 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
         )
     }
 
-    private fun EasterEgg.toEasterEggInfo(latestApiLevel: Int): EasterEggInfo {
-        val plainApiLevel = fullApiLevelRange.toApiLevelRange().first
+    private fun EasterEgg.toEasterEggInfoOrNull(latestApiLevel: Int): EasterEggInfo? {
+        // NEXT has no public api level yet, so it is not listed via an API level.
+        val plainApiLevel = version.apiLevel ?: return null
         return EasterEggInfo(
             apiLevel = plainApiLevel,
-            versionName = EasterEggHelp.getVersionNameByApiLevel(plainApiLevel),
+            versionName = version.versionName,
             nickname = getString(nicknameRes),
             isLatest = plainApiLevel == latestApiLevel,
         )
     }
 
     private fun latestPlainApiLevel(): Int =
-        pureEasterEggs.maxOf { it.fullApiLevelRange.toApiLevelRange().first }
+        pureEasterEggs.mapNotNull { it.version.apiLevel }.max()
 }
 
 private const val ICON_SIZE_PX = 192

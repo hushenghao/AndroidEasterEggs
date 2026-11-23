@@ -1,15 +1,15 @@
 package com.android_l.egg;
 
+import com.dede.basic.provider.AndroidVersion;
+
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 
 import com.dede.basic.provider.BaseEasterEgg;
 import com.dede.basic.provider.EasterEgg;
 import com.dede.basic.provider.EasterEggGroup;
-import com.dede.basic.provider.EasterEggProviderKt;
 import com.dede.basic.provider.SnapshotProvider;
 import com.dede.basic.provider.TimelineEvent;
 
@@ -22,7 +22,6 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 import dagger.multibindings.IntoSet;
-import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
@@ -38,8 +37,9 @@ public class AndroidLollipopEasterEgg {
                         R.drawable.l_android_logo,
                         R.string.l_lland,
                         R.string.l_android_nickname,
-                        new IntRange(Build.VERSION_CODES_FULL.LOLLIPOP, Build.VERSION_CODES_FULL.LOLLIPOP_MR1),
-                        com.android_l.egg.PlatLogoActivity.class
+                        AndroidVersion.LOLLIPOP,
+                        com.android_l.egg.PlatLogoActivity.class,
+                        List.of(AndroidVersion.LOLLIPOP_MR1)
                 ) {
                     @Override
                     public SnapshotProvider provideSnapshotProvider() {
@@ -50,7 +50,7 @@ public class AndroidLollipopEasterEgg {
                         R.drawable.l_android_preview_logo,
                         R.string.l_webdriver_torso,
                         R.string.l_preview_nickname,
-                        EasterEggProviderKt.toRange(EasterEgg.VERSION_CODES_FULL.L_PREVIEW),
+                        AndroidVersion.LOLLIPOP_PREVIEW,
                         com.android_l.egg.preview.PlatLogoActivity.class
                 ) {
                     @Override
@@ -67,13 +67,13 @@ public class AndroidLollipopEasterEgg {
     @NonNull
     public static List<TimelineEvent> provideTimelineEvents() {
         TimelineEvent e2 = timelineEvent(
-                Build.VERSION_CODES_FULL.LOLLIPOP,
+                AndroidVersion.LOLLIPOP,
                 "L.\nReleased publicly as Android 5.0 in November 2014."
         );
         e2.setAndroidLogo(R.drawable.l_android_logo_2015_2019);
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.LOLLIPOP_MR1,
+                        AndroidVersion.LOLLIPOP_MR1,
                         "L MR1.\nReleased publicly as Android 5.1 in March 2015."
                 ),
                 e2

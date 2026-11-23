@@ -1,5 +1,7 @@
 package com.android_n.egg;
 
+import com.dede.basic.provider.AndroidVersion;
+
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
 import android.content.ComponentName;
@@ -28,7 +30,6 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 import dagger.multibindings.IntoSet;
-import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
@@ -44,8 +45,9 @@ public class AndroidNougatEasterEgg {
                         R.drawable.n_android_logo,
                         R.string.n_app_name,
                         R.string.n_android_nickname,
-                        new IntRange(Build.VERSION_CODES_FULL.N, Build.VERSION_CODES_FULL.N_MR1),
-                        PlatLogoActivity.class
+                        AndroidVersion.N,
+                        PlatLogoActivity.class,
+                        List.of(AndroidVersion.N_MR1)
                 ) {
                     @Override
                     public SnapshotProvider provideSnapshotProvider() {
@@ -56,7 +58,7 @@ public class AndroidNougatEasterEgg {
                         R.drawable.n_android_logo,
                         R.string.n_app_name,
                         R.string.n_android_nickname_preview,
-                        EasterEgg.VERSION_CODES_FULL.N_PREVIEW,
+                        AndroidVersion.N_PREVIEW,
                         com.android_n.egg.preview.PlatLogoActivity.class
                 ) {
                     @Override
@@ -76,7 +78,7 @@ public class AndroidNougatEasterEgg {
                 R.drawable.n_stat_tint_icon,
                 R.string.n_default_tile_name,
                 R.string.n_android_nickname,
-                new IntRange(Build.VERSION_CODES_FULL.N, Build.VERSION_CODES_FULL.N_MR1)
+                AndroidVersion.N, List.of(AndroidVersion.N_MR1)
         ) {
 
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -108,11 +110,11 @@ public class AndroidNougatEasterEgg {
     public static List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.N_MR1,
+                        AndroidVersion.N_MR1,
                         "N MR1.\nReleased publicly as Android 7.1 in October 2016."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.N,
+                        AndroidVersion.N,
                         "N.\nReleased publicly as Android 7.0 in August 2016."
                 )
         );

@@ -40,7 +40,10 @@ object EasterEggShortcutsHelp {
 
     private const val EXTRA_SHORTCUT_ID = "extra_shortcut_id"
 
-    /** Full api level range of the shortcut target, used to record the play history. */
+    /** Stable egg id of the shortcut target, used to record the play history. */
+    const val EXTRA_EGG_ID = "extra_egg_id"
+
+    /** Legacy full api level range extras, kept to read old pinned shortcuts. */
     const val EXTRA_EGG_API_LEVEL_FIRST = "extra_egg_api_level_first"
     const val EXTRA_EGG_API_LEVEL_LAST = "extra_egg_api_level_last"
 
@@ -48,7 +51,9 @@ object EasterEggShortcutsHelp {
     private const val FORMAT_PIN_SHORTCUT_ID = "android_%d"
 
     private fun EasterEgg.shortcutIdNum(): Int {
-        return this.hashCode()
+        // Derived from the stable string id. Pinned shortcuts created before the id
+        // refactor keep their old id and may show up as duplicates; that is accepted.
+        return id.hashCode()
     }
 
     private class UpdateShortcutsRunnable(
@@ -164,7 +169,7 @@ object EasterEggShortcutsHelp {
             .setShortLabel(label)
             .setLongLabel(label)
             .applyIf(!isPinShortcut) {
-                setRank(egg.fullApiLevel)
+                setRank(egg.version.fullApiLevel)
             }
             .applyNotNull(clazz) {
                 val eggIntent = createTargetIntent(context, egg, it)
@@ -187,8 +192,7 @@ object EasterEggShortcutsHelp {
         targetClass: Class<out Activity>,
     ): Intent {
         return Intent(Intent.ACTION_VIEW).setClass(context, targetClass)
-            .putExtra(EXTRA_EGG_API_LEVEL_FIRST, egg.fullApiLevelRange.first)
-            .putExtra(EXTRA_EGG_API_LEVEL_LAST, egg.fullApiLevelRange.last)
+            .putExtra(EXTRA_EGG_ID, egg.id)
     }
 
     fun isSupportShortcut(egg: EasterEgg): Boolean {

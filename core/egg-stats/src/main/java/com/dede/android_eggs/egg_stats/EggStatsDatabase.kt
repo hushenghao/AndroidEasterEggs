@@ -14,7 +14,7 @@ import androidx.room3.RoomDatabase
 import kotlinx.coroutines.flow.Flow
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [EggPlayEvent::class],
     exportSchema = true,
 )
@@ -28,38 +28,23 @@ abstract class EggStatsDatabase : RoomDatabase() {
  * are aggregated from these events instead of being stored separately, so a
  * per-egg history view needs no extra bookkeeping.
  *
- * Identity: [apiLevelFirst] and [apiLevelLast] are the egg's full api level range,
- * the same identity used by `EasterEgg.equals/hashCode` and
- * `BaseEasterEgg.lazyItemKey()`. Keep both columns and treat the pair as the egg
- * id — the range is the identity, not a display detail:
- *
- * - A single `apiLevelFirst` is not enough: eggs can span a range (e.g. 2.3-2.3.3),
- *   and nothing guarantees that two ranges never share their first level.
- * - Do not key stats by public api level either: preview eggs such as T Beta share
- *   their public api level with the stable release and would be merged.
- * - Egg metadata is code-defined and localized, so there is deliberately no separate
- *   `eggs` table to join against.
- *
- * If an egg's range is ever changed, its history becomes orphaned under the old pair.
- * That is the point to migrate to a single stable `egg_key` column (optionally backed
- * by an overridable `EasterEgg.id`), not a reason to normalize the pair early.
+ * Identity: [eggKey] is the egg's stable string id (see `EasterEgg.id` /
+ * `AndroidVersion.id`), the same identity used by `EasterEgg.equals/hashCode` and
+ * `BaseEasterEgg.lazyItemKey()`. It replaced the old full api level range pair, so a
+ * future range change no longer orphans history and preview eggs keep their own key.
  */
 @Entity(
     tableName = "egg_play_events",
     indices = [
-        // Per-egg history: the range pair is the identity, played_at orders the events.
-        Index(value = ["api_level_first", "api_level_last", "played_at"]),
-        // Global recent records, reserved for a future history screen.
+        Index(value = ["egg_key", "played_at"]),
         Index(value = ["played_at"]),
     ],
 )
 data class EggPlayEvent(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Long = 0,
-    /** Full api level range start; together with [apiLevelLast] it is the egg identity. */
-    @ColumnInfo(name = "api_level_first") val apiLevelFirst: Int,
-    /** Full api level range end; see [apiLevelFirst] and the class docs. */
-    @ColumnInfo(name = "api_level_last") val apiLevelLast: Int,
+    /** The egg's stable string id; the play-history identity. */
+    @ColumnInfo(name = "egg_key") val eggKey: String,
     @ColumnInfo(name = "played_at") val playedAt: Long,
     @ColumnInfo(name = "source") val source: EggLaunchSource,
 )
@@ -90,12 +75,10 @@ class EggLaunchSourceConverter {
 }
 
 /**
- * Aggregate of [EggPlayEvent] rows for one Easter egg, keyed by its full api level
- * range. See [EggPlayEvent] for why the range pair, not a public api level, is the id.
+ * Aggregate of [EggPlayEvent] rows for one Easter egg, keyed by its stable [eggKey].
  */
 data class EggStatsSummary(
-    val apiLevelFirst: Int,
-    val apiLevelLast: Int,
+    val eggKey: String,
     val firstOpenedAt: Long,
     val lastPlayedAt: Long,
     val playCount: Int,
@@ -108,31 +91,30 @@ interface EggPlayEventDao {
     suspend fun insert(event: EggPlayEvent)
 
     /**
-     * Per-egg totals. Grouping by the full range pair keeps preview eggs such as
-     * T Beta separate from their stable release.
+     * Per-egg totals, grouped by the stable egg key. A single key keeps preview eggs
+     * such as T Beta separate from their stable release.
      */
     @Query(
         """
-        SELECT api_level_first AS apiLevelFirst,
-               api_level_last AS apiLevelLast,
+        SELECT egg_key AS eggKey,
                MIN(played_at) AS firstOpenedAt,
                MAX(played_at) AS lastPlayedAt,
                COUNT(*) AS playCount
         FROM egg_play_events
-        GROUP BY api_level_first, api_level_last
+        GROUP BY egg_key
         """
     )
     fun observeSummaries(): Flow<List<EggStatsSummary>>
 
-    /** Every play of one egg, newest first; the pair must match [EggPlayEvent]'s id. */
+    /** Every play of one egg, newest first; reserved for a per-egg history view. */
     @Query(
         """
         SELECT * FROM egg_play_events
-        WHERE api_level_first = :apiLevelFirst AND api_level_last = :apiLevelLast
+        WHERE egg_key = :eggKey
         ORDER BY played_at DESC
         """
     )
-    fun observeHistory(apiLevelFirst: Int, apiLevelLast: Int): Flow<List<EggPlayEvent>>
+    fun observeHistory(eggKey: String): Flow<List<EggPlayEvent>>
 
     @Query("SELECT * FROM egg_play_events ORDER BY played_at DESC")
     fun observeRecentEvents(): Flow<List<EggPlayEvent>>

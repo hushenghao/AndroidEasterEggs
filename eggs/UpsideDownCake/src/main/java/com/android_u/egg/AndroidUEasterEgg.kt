@@ -1,6 +1,7 @@
 package com.android_u.egg
 
-import android.os.Build
+import com.dede.basic.provider.AndroidVersion
+
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggProvider
@@ -25,7 +26,7 @@ object AndroidUEasterEgg : EasterEggProvider {
             iconRes = R.drawable.u_android14_patch_adaptive,
             nameRes = R.string.u_egg_name,
             nicknameRes = R.string.u_android_nickname,
-            fullApiLevel = Build.VERSION_CODES_FULL.UPSIDE_DOWN_CAKE,
+            version = AndroidVersion.UPSIDE_DOWN_CAKE,
             actionClass = PlatLogoActivity::class.java
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
@@ -41,7 +42,7 @@ object AndroidUEasterEgg : EasterEggProvider {
         return listOf(
             TimelineEvent(
                 2023, Calendar.SEPTEMBER,
-                Build.VERSION_CODES_FULL.UPSIDE_DOWN_CAKE,
+                AndroidVersion.UPSIDE_DOWN_CAKE,
                 "Upside Down Cake."
             )
         )

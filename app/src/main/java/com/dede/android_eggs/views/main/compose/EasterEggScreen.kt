@@ -79,7 +79,7 @@ class EasterEggViewModel @Inject constructor(
     val easterEggs: List<@JvmSuppressWildcards BaseEasterEgg>,
     releaseDateMatcher: AndroidReleaseDateMatcher,
 ) : ViewModel() {
-    val releaseDateLookup = releaseDateMatcher::findReleaseDateByFullApiLevel
+    val releaseDateLookup = releaseDateMatcher::findReleaseDateByVersion
 }
 
 @Composable

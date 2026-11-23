@@ -10,6 +10,7 @@ import com.dede.android_eggs.egg_stats.EggLaunchSource
 import com.dede.android_eggs.egg_stats.EggStatsRepository
 import com.dede.android_eggs.util.ActivityActionDispatcher
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
+import com.dede.basic.provider.AndroidVersion
 
 internal class EggActivityAction : ActivityActionDispatcher.ActivityAction {
 
@@ -61,19 +62,26 @@ internal class EggActivityAction : ActivityActionDispatcher.ActivityAction {
      */
     private fun recordShortcutPlay(activity: Activity) {
         val intent = activity.intent
-        if (!intent.hasExtra(EasterEggShortcutsHelp.EXTRA_EGG_API_LEVEL_FIRST)) {
+        val eggId = intent.getStringExtra(EasterEggShortcutsHelp.EXTRA_EGG_ID)
+        val eggKey: String = if (eggId != null) {
+            eggId
+        } else if (intent.hasExtra(EasterEggShortcutsHelp.EXTRA_EGG_API_LEVEL_FIRST)) {
+            // Legacy pinned shortcut from before the egg id refactor.
+            val apiLevelFirst = intent.getIntExtra(
+                EasterEggShortcutsHelp.EXTRA_EGG_API_LEVEL_FIRST, Int.MIN_VALUE
+            )
+            val apiLevelLast = intent.getIntExtra(
+                EasterEggShortcutsHelp.EXTRA_EGG_API_LEVEL_LAST, Int.MIN_VALUE
+            )
+            if (apiLevelFirst == Int.MIN_VALUE || apiLevelLast == Int.MIN_VALUE) {
+                return
+            }
+            AndroidVersion.byFullApiLevel[apiLevelFirst]?.id
+                ?: "legacy_${apiLevelFirst}_${apiLevelLast}"
+        } else {
             return
         }
-        val apiLevelFirst = intent.getIntExtra(
-            EasterEggShortcutsHelp.EXTRA_EGG_API_LEVEL_FIRST, Int.MIN_VALUE
-        )
-        val apiLevelLast = intent.getIntExtra(
-            EasterEggShortcutsHelp.EXTRA_EGG_API_LEVEL_LAST, Int.MIN_VALUE
-        )
-        if (apiLevelFirst == Int.MIN_VALUE || apiLevelLast == Int.MIN_VALUE) {
-            return
-        }
-        EggStatsRepository.recordPlayAsync(apiLevelFirst, apiLevelLast, EggLaunchSource.SHORTCUT)
+        EggStatsRepository.recordPlayAsync(eggKey, EggLaunchSource.SHORTCUT)
     }
 
     override fun onResume(activity: Activity) {

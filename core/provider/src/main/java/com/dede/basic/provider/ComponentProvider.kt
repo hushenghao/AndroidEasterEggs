@@ -11,25 +11,26 @@ interface ComponentProvider {
 
     fun provideComponent(): Component
 
-    abstract class Component(
+    abstract class Component @JvmOverloads constructor(
         @DrawableRes val iconRes: Int,
         @StringRes val nameRes: Int,
         @StringRes val nicknameRes: Int,
-        val fullApiLevelRange: IntRange,
+        val version: AndroidVersion,
+        val additionalVersions: List<AndroidVersion> = emptyList(),
     ) {
 
-        val fullApiLevel: Int
-            get() = fullApiLevelRange.first
+        val versions: List<AndroidVersion> =
+            (listOf(version) + additionalVersions).distinct().sortedBy { it.fullApiLevel }
 
         override fun hashCode(): Int {
-            return fullApiLevelRange.hashCode()
+            return version.hashCode()
         }
 
         override fun equals(other: Any?): Boolean {
             if (other !is Component) {
                 return false
             }
-            return fullApiLevelRange == other.fullApiLevelRange
+            return version == other.version
         }
 
         companion object {
@@ -48,13 +49,6 @@ interface ComponentProvider {
                 return state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
             }
         }
-
-        constructor(
-            @DrawableRes iconRes: Int,
-            @StringRes nameRes: Int,
-            @StringRes nicknameRes: Int,
-            fullApiLevel: Int,
-        ) : this(iconRes, nameRes, nicknameRes, fullApiLevel..fullApiLevel)
 
         abstract fun isSupported(): Boolean
 

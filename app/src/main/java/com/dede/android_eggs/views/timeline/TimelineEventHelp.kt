@@ -19,7 +19,7 @@ object TimelineEventHelp {
                 order = o2.month.compareTo(o1.month)
             }
             if (order == 0) {
-                order = o2.fullApiLevel.compareTo(o1.fullApiLevel)
+                order = o2.version.fullApiLevel.compareTo(o1.version.fullApiLevel)
             }
             return order
         }

@@ -60,6 +60,7 @@ import com.dede.android_eggs.views.timeline.TimelineEventHelp.eventAnnotatedStri
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.isNewGroup
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localMonth
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localYear
+import com.dede.basic.provider.AndroidVersion
 import com.dede.basic.provider.TimelineEvent
 import com.dede.basic.requireDrawable
 import com.dede.basic.withBackground
@@ -122,13 +123,13 @@ fun TimelineListDialog(
                 items(
                     items = viewModel.timelines,
                     key = { event ->
-                        "${event.fullApiLevel}:${event.year}-${event.month}-${event.event}"
+                        "${event.version.id}:${event.year}-${event.month}-${event.event}"
                     },
                     contentType = { "event" },
                 ) {
                     TimelineItem(
                         event = it,
-                        logoRes = viewModel.findAndroidLogoByFullApiLevel(it.fullApiLevel),
+                        logoRes = viewModel.findAndroidLogoByVersion(it.version),
                         isNewGroup = it.isNewGroup(viewModel.timelines),
                         centerX = centerX,
                     )
@@ -194,7 +195,7 @@ private fun TimelineHeader(centerX: Dp = 120.dp) {
 @Composable
 @Preview(showBackground = true)
 private fun TimelineItem(
-    event: TimelineEvent = TimelineEvent(2025, Calendar.SEPTEMBER, 9900000, "Demo event name"),
+    event: TimelineEvent = TimelineEvent(2025, Calendar.SEPTEMBER, AndroidVersion.CINNAMON_BUN, "Demo event name"),
     @DrawableRes logoRes: Int = R.mipmap.ic_launcher_17,
     isNewGroup: Boolean = true,
     centerX: Dp = 120.dp,
@@ -276,7 +277,7 @@ class TimelineViewModel @Inject constructor(
     val timelines: List<@JvmSuppressWildcards TimelineEvent>,
     private val androidLogoMatcher: AndroidLogoMatcher,
 ) : ViewModel() {
-    fun findAndroidLogoByFullApiLevel(fullApiLevel: Int): Int {
-        return androidLogoMatcher.findAndroidLogoByFullApiLevel(fullApiLevel)
+    fun findAndroidLogoByVersion(version: AndroidVersion): Int {
+        return androidLogoMatcher.findAndroidLogoByVersion(version)
     }
 }

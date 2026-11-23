@@ -281,11 +281,11 @@ fun SnapshotCarouselContent(
                                     val egg = pairList[i].second
                                     val eggName = stringResource(egg.nameRes)
                                     val context = LocalContext.current
-                                    val tooltip = remember(egg.fullApiLevelRange, eggName) {
+                                    val tooltip = remember(egg.versions, eggName) {
                                         val versionFormatter =
-                                            VersionFormatter.create(egg.fullApiLevelRange)
+                                            VersionFormatter.create(egg.versions)
                                         val apiLevelFormatter =
-                                            ApiLevelFormatter.create(egg.fullApiLevelRange)
+                                            ApiLevelFormatter.create(egg.versions)
                                         """
                                             ${versionFormatter.format(context)}
                                             ${apiLevelFormatter.format(context)}

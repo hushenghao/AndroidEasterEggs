@@ -2,13 +2,13 @@ package com.android_cinnamon_bun.egg
 
 import android.content.ComponentName
 import android.content.Context
-import android.os.Build
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.android_cinnamon_bun.egg.PlatLogoActivity.Starfield
 import com.android_cinnamon_bun.egg.landroid.DreamUniverse
+import com.dede.basic.provider.AndroidVersion
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.ComponentProvider
 import com.dede.basic.provider.EasterEgg
@@ -62,7 +62,7 @@ object AndroidCinnamonBunEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.cinnamon_bun_android17_patch_adaptive,
             nameRes = R.string.cinnamon_bun_egg_name,
             nicknameRes = R.string.cinnamon_bun_egg_name,
-            fullApiLevelRange = Build.VERSION_CODES_FULL.CINNAMON_BUN..Build.VERSION_CODES_FULL.CINNAMON_BUN_1,
+            version = AndroidVersion.CINNAMON_BUN, additionalVersions = listOf(AndroidVersion.CINNAMON_BUN_1, AndroidVersion.CINNAMON_BUN_2),
             actionClass = PlatLogoActivity::class.java,
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
@@ -79,14 +79,20 @@ object AndroidCinnamonBunEasterEgg : EasterEggProvider, ComponentProvider {
             TimelineEvent(
                 year = 2026,
                 month = Calendar.MAY,
-                fullApiLevel = Build.VERSION_CODES_FULL.CINNAMON_BUN,
+                version = AndroidVersion.CINNAMON_BUN,
                 event = "Cinnamon Bun."
             ),
             TimelineEvent(
                 year = 2026,
                 month = Calendar.AUGUST,
-                fullApiLevel = Build.VERSION_CODES_FULL.CINNAMON_BUN_1,
+                version = AndroidVersion.CINNAMON_BUN_1,
                 event = "Cinnamon Bun.\nAndroid 17.1",
+            ),
+            TimelineEvent(
+                year = 2026,
+                month = Calendar.NOVEMBER,
+                version = AndroidVersion.CINNAMON_BUN_2,
+                event = "Cinnamon Bun.\nAndroid 17.2",
             )
         )
     }
@@ -99,7 +105,7 @@ object AndroidCinnamonBunEasterEgg : EasterEggProvider, ComponentProvider {
             R.drawable.cinnamon_bun_android17_patch_adaptive,
             R.string.cinnamon_bun_egg_name,
             R.string.cinnamon_bun_egg_name,
-            Build.VERSION_CODES_FULL.CINNAMON_BUN..Build.VERSION_CODES_FULL.CINNAMON_BUN_1
+            AndroidVersion.CINNAMON_BUN, listOf(AndroidVersion.CINNAMON_BUN_1, AndroidVersion.CINNAMON_BUN_2)
         ) {
             override fun isSupported(): Boolean = true
 

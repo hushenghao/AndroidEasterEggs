@@ -2,7 +2,6 @@ package com.dede.basic.provider
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
@@ -14,96 +13,72 @@ interface EasterEggProvider {
 
 interface BaseEasterEgg {
 
-    val fullApiLevelRange: IntRange
+    val versions: List<AndroidVersion>
 
-    val fullApiLevel: Int
-        get() = fullApiLevelRange.first
+    val primaryVersion: AndroidVersion
+        get() = versions.first()
+
+    val id: String
 }
 
 class EasterEggGroup(vararg val eggs: EasterEgg) : BaseEasterEgg {
 
-    private val _fixedFullApiLevelRange: IntRange = 
-        eggs.minOf { it.fullApiLevelRange.first }..eggs.maxOf { it.fullApiLevelRange.last }
-
     var selectedIndex: Int = 0
 
-    override val fullApiLevelRange: IntRange = _fixedFullApiLevelRange
+    override val versions: List<AndroidVersion> =
+        eggs.flatMap { it.versions }.distinct().sortedBy { it.fullApiLevel }
+
+    override val id: String
+        get() = versions.first().id
 
     override fun hashCode(): Int {
-        return fullApiLevelRange.hashCode()
+        return id.hashCode()
     }
 
     override fun equals(other: Any?): Boolean {
         if (other !is EasterEggGroup) {
             return false
         }
-        return fullApiLevelRange == other.fullApiLevelRange
+        return id == other.id
     }
 }
 
-fun Int.toRange(): IntRange {
-    return this..this
-}
+/**
+ * Resolves a public api level to the egg that owns it. When several eggs share a level
+ * (e.g. 33 -> Tiramisu and T Beta), prefers stable releases over beta/preview and then
+ * the highest [AndroidVersion.fullApiLevel].
+ */
+fun Iterable<EasterEgg>.findEggByPublicApiLevel(apiLevel: Int): EasterEgg? =
+    filter { egg -> egg.versions.any { it.apiLevel == apiLevel } }
+        .sortedWith(
+            compareByDescending<EasterEgg> { it.version.releaseType.priority() }
+                .thenByDescending { it.version.fullApiLevel }
+        )
+        .firstOrNull()
 
-fun IntRange.toApiLevelRange(): IntRange {
-    return with(EasterEgg.VERSION_CODES_FULL) {
-        first.toApiLevel()..last.toApiLevel()
-    }
+private fun ReleaseType.priority(): Int = when (this) {
+    ReleaseType.RELEASE -> 3
+    ReleaseType.BETA -> 2
+    ReleaseType.PREVIEW -> 1
 }
 
 open class EasterEgg @JvmOverloads constructor(
     @DrawableRes val iconRes: Int,
     @StringRes val nameRes: Int,
     @StringRes val nicknameRes: Int,
-    override val fullApiLevelRange: IntRange,
+    val version: AndroidVersion,
     val actionClass: Class<out Activity>? = null,
+    val additionalVersions: List<AndroidVersion> = emptyList(),
 ) : BaseEasterEgg {
 
-    @Suppress("ClassName")
-    object VERSION_CODES_FULL {
+    override val versions: List<AndroidVersion> =
+        (listOf(version) + additionalVersions).distinct().sortedBy { it.fullApiLevel }
 
-        fun Int.toFullApiLevel(): Int {
-            return if (isFullApiLevel()) this else this * SDK_INT_MULTIPLIER
-        }
+    override val primaryVersion: AndroidVersion
+        get() = version
 
-        fun Int.toApiLevel(): Int {
-            return if (!isFullApiLevel()) {
-                this
-            } else {
-                // Not Build#getMajorSdkVersion/#getMinorSdkVersion: they are @FlaggedApi
-                // since 36 and report minor=0 for preview codes on some devices.
-                val majorSdkVersion = this / SDK_INT_MULTIPLIER
-                val minorSdkVersion = this % SDK_INT_MULTIPLIER
-                majorSdkVersion + if (minorSdkVersion == SDK_INT_MULTIPLIER - 1) 1 else 0
-            }
-        }
-
-        fun Int.isFullApiLevel(): Boolean {
-            return this >= SDK_INT_MULTIPLIER
-        }
-
-        // android.os.Build.VERSION_CODES_FULL#SDK_INT_MULTIPLIER
-        const val SDK_INT_MULTIPLIER = 100000
-
-        const val T_BETA = Build.VERSION_CODES_FULL.TIRAMISU - 1
-        const val N_PREVIEW = Build.VERSION_CODES_FULL.N - 1
-        const val M_PREVIEW = Build.VERSION_CODES_FULL.M - 1
-        const val L_PREVIEW = Build.VERSION_CODES_FULL.LOLLIPOP - 1
-        const val K_PREVIEW = Build.VERSION_CODES_FULL.KITKAT - 1
-        const val ICS_PREVIEW = Build.VERSION_CODES_FULL.ICE_CREAM_SANDWICH - 1
-    }
-
-    @Suppress("ClassName")
-    object VERSION_CODES {
-    }
-
-    constructor(
-        @DrawableRes iconRes: Int,
-        @StringRes nameRes: Int,
-        @StringRes nicknameRes: Int,
-        fullApiLevel: Int,
-        actionClass: Class<out Activity>? = null,
-    ) : this(iconRes, nameRes, nicknameRes, fullApiLevel.toRange(), actionClass)
+    override val id: String
+        get() = version.id
 
     open fun onEasterEggAction(context: Context): Boolean {
         return false
@@ -114,14 +89,14 @@ open class EasterEgg @JvmOverloads constructor(
     }
 
     final override fun hashCode(): Int {
-        return fullApiLevelRange.hashCode()
+        return id.hashCode()
     }
 
     final override fun equals(other: Any?): Boolean {
         if (other !is EasterEgg) {
             return false
         }
-        return fullApiLevelRange == other.fullApiLevelRange
+        return id == other.id
     }
 
 }

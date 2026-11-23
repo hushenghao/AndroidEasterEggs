@@ -111,8 +111,8 @@ fun EggStatsDialog(
     val summaries by EggStatsRepository.observeSummaries()
         .collectAsStateWithLifecycle(initialValue = emptyList())
     val rows = remember(viewModel.easterEggs, summaries) {
-        val summaryMap = summaries.associateBy { it.apiLevelFirst..it.apiLevelLast }
-        viewModel.easterEggs.map { EggStatsRow(it, summaryMap[it.fullApiLevelRange]) }
+        val summaryMap = summaries.associateBy { it.eggKey }
+        viewModel.easterEggs.map { EggStatsRow(it, summaryMap[it.id]) }
     }
     val playedCount = rows.count { (it.stats?.playCount ?: 0) > 0 }
     val totalPlays = rows.sumOf { it.stats?.playCount ?: 0 }
@@ -172,7 +172,7 @@ fun EggStatsDialog(
             items(
                 items = sortedRows,
                 key = { row ->
-                    "${row.egg.fullApiLevelRange.first}-${row.egg.fullApiLevelRange.last}"
+                    row.egg.id
                 },
                 contentType = { "egg" },
             ) { row ->
@@ -212,15 +212,15 @@ private fun EggStatsSort.comparator(): Comparator<EggStatsRow> {
     return when (this) {
         EggStatsSort.MOST_PLAYED -> {
             compareByDescending<EggStatsRow> { it.stats?.playCount ?: 0 }
-                .thenByDescending { it.egg.fullApiLevel }
+                .thenByDescending { it.egg.primaryVersion.fullApiLevel }
         }
         EggStatsSort.RECENTLY_PLAYED -> {
             compareByDescending<EggStatsRow> { it.stats?.lastPlayedAt ?: 0L }
-                .thenByDescending { it.egg.fullApiLevel }
+                .thenByDescending { it.egg.primaryVersion.fullApiLevel }
         }
         EggStatsSort.FIRST_OPENED -> {
             compareBy<EggStatsRow> { it.stats?.firstOpenedAt?.takeIf { t -> t > 0 } ?: Long.MAX_VALUE }
-                .thenByDescending { it.egg.fullApiLevel }
+                .thenByDescending { it.egg.primaryVersion.fullApiLevel }
         }
     }
 }
@@ -268,12 +268,12 @@ private fun EggStatsItem(row: EggStatsRow) {
     val context = LocalContext.current
     val egg = row.egg
     val stats = row.stats
-    val version = remember(egg.fullApiLevelRange) {
-        EasterEggHelp.VersionFormatter.create(egg.fullApiLevelRange, egg.nicknameRes)
+    val version = remember(egg.versions) {
+        EasterEggHelp.VersionFormatter.create(egg.versions, egg.nicknameRes)
             .format(context)
     }
-    val apiLevel = remember(egg.fullApiLevelRange) {
-        EasterEggHelp.ApiLevelFormatter.create(egg.fullApiLevelRange).format(context)
+    val apiLevel = remember(egg.versions) {
+        EasterEggHelp.ApiLevelFormatter.create(egg.versions).format(context)
     }
     val dateFormat = remember(LocalConfiguration.current) {
         AppLocaleDateFormatter.getInstance("MMM d, yyyy")

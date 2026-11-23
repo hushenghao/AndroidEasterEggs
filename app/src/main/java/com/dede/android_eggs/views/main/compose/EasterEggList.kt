@@ -31,6 +31,7 @@ import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.android_eggs.preferences.AppSettings
 import com.dede.android_eggs.util.compose.plus
 import com.dede.android_eggs.views.main.util.EasterEggHelp
+import com.dede.basic.provider.AndroidVersion
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
@@ -67,21 +68,21 @@ private fun <T> List<T>.highest(count: Int): Pair<List<T>, List<T>> {
 
 internal fun BaseEasterEgg.lazyItemKey(): String {
     return when (this) {
-        is EasterEgg -> "egg:${fullApiLevelRange.first}-${fullApiLevelRange.last}"
-        is EasterEggGroup -> "group:${fullApiLevelRange.first}-${fullApiLevelRange.last}"
+        is EasterEgg -> "egg:$id"
+        is EasterEggGroup -> "group:$id"
         else -> throw IllegalArgumentException("Unsupported EasterEgg type: ${this::class.java}")
     }
 }
 
 @Composable
-private fun rememberEggStats(): Map<IntRange, EggStatsSummary> {
+private fun rememberEggStats(): Map<String, EggStatsSummary> {
     if (LocalInspectionMode.current) {
         return emptyMap()
     }
     val summaries by EggStatsRepository.observeSummaries()
         .collectAsStateWithLifecycle(initialValue = emptyList())
     return remember(summaries) {
-        summaries.associateBy { it.apiLevelFirst..it.apiLevelLast }
+        summaries.associateBy { it.eggKey }
     }
 }
 
@@ -98,7 +99,7 @@ fun EasterEggList(
     easterEggs: List<BaseEasterEgg> = EasterEggHelp.previewEasterEggs(),
     searchText: String = "",
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    releaseDateLookup: (Int) -> Date? = { null },
+    releaseDateLookup: (AndroidVersion) -> Date? = { null },
     highestCount: Int = HIGHEST_COUNT,
 ) {
     val context = LocalContext.current
@@ -171,8 +172,8 @@ fun EasterEggList(
 private fun EasterEggColumnList(
     easterEggs: List<BaseEasterEgg>,
     contentPadding: PaddingValues,
-    releaseDateLookup: (Int) -> Date?,
-    statsMap: Map<IntRange, EggStatsSummary>,
+    releaseDateLookup: (AndroidVersion) -> Date?,
+    statsMap: Map<String, EggStatsSummary>,
     highestCount: Int,
 ) {
     LazyColumn(
@@ -224,8 +225,8 @@ private fun EasterEggColumnList(
 private fun EasterEggGrid(
     easterEggs: List<BaseEasterEgg>,
     contentPadding: PaddingValues,
-    releaseDateLookup: (Int) -> Date?,
-    statsMap: Map<IntRange, EggStatsSummary>,
+    releaseDateLookup: (AndroidVersion) -> Date?,
+    statsMap: Map<String, EggStatsSummary>,
     highestCount: Int,
 ) {
     LazyVerticalStaggeredGrid(

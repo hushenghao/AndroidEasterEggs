@@ -54,6 +54,7 @@ import com.dede.android_eggs.ui.composes.icons.rounded.BookmarkAddOutline
 import com.dede.android_eggs.views.main.util.EasterEggHelp
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.EggActionHelp
+import com.dede.basic.provider.AndroidVersion
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
 import com.dede.basic.provider.EasterEggGroup
@@ -66,8 +67,8 @@ import com.dede.android_eggs.resources.R as StringsR
 fun EasterEggHighestItem(
     modifier: Modifier = Modifier,
     base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first(),
-    releaseDateLookup: (Int) -> Date? = { null },
-    statsMap: Map<IntRange, EggStatsSummary> = emptyMap(),
+    releaseDateLookup: (AndroidVersion) -> Date? = { null },
+    statsMap: Map<String, EggStatsSummary> = emptyMap(),
     launchSource: EggLaunchSource = EggLaunchSource.LIST,
 ) {
     val context = LocalContext.current
@@ -106,8 +107,8 @@ fun EasterEggHighestItem(
 fun EasterEggSimpleItem(
     modifier: Modifier = Modifier,
     base: BaseEasterEgg = EasterEggHelp.previewEasterEggs().first(),
-    releaseDateLookup: (Int) -> Date? = { null },
-    statsMap: Map<IntRange, EggStatsSummary> = emptyMap(),
+    releaseDateLookup: (AndroidVersion) -> Date? = { null },
+    statsMap: Map<String, EggStatsSummary> = emptyMap(),
     launchSource: EggLaunchSource = EggLaunchSource.LIST,
 ) {
     val context = LocalContext.current
@@ -176,19 +177,19 @@ private fun rememberEasterEggState(base: BaseEasterEgg): EasterEggState {
 private fun EasterEggItemContent(
     modifier: Modifier = Modifier,
     eggState: EasterEggState,
-    releaseDateLookup: (Int) -> Date?,
-    statsMap: Map<IntRange, EggStatsSummary>,
+    releaseDateLookup: (AndroidVersion) -> Date?,
+    statsMap: Map<String, EggStatsSummary>,
 ) {
     val context = LocalContext.current
     val egg = eggState.getEasterEgg()
-    val stats = statsMap[egg.fullApiLevelRange]
+    val stats = statsMap[egg.id]
 
-    val androidVersion = remember(egg.fullApiLevelRange) {
-        EasterEggHelp.VersionFormatter.create(egg.fullApiLevelRange, egg.nicknameRes)
+    val androidVersion = remember(egg.versions) {
+        EasterEggHelp.VersionFormatter.create(egg.versions, egg.nicknameRes)
             .format(context)
     }
-    val apiLevel = remember(egg.fullApiLevelRange) {
-        EasterEggHelp.ApiLevelFormatter.create(egg.fullApiLevelRange).format(context)
+    val apiLevel = remember(egg.versions) {
+        EasterEggHelp.ApiLevelFormatter.create(egg.versions).format(context)
     }
     val dateFormat = remember(egg, LocalConfiguration.current) {
         AppLocaleDateFormatter.getInstance("MMM yyyy")
@@ -280,7 +281,7 @@ private fun EasterEggItemContent(
                     val releaseDate = if (LocalInspectionMode.current) {
                         Date()
                     } else {
-                        releaseDateLookup(egg.fullApiLevel)
+                        releaseDateLookup(egg.primaryVersion)
                     }
                     if (releaseDate != null) {
                         Chip(text = dateFormat.format(releaseDate))

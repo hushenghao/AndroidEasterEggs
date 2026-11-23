@@ -1,19 +1,14 @@
 package com.dede.android_eggs.views.main.util
 
 import android.content.Context
-import android.os.Build
-import android.util.SparseArray
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalInspectionMode
-import androidx.core.util.forEach
-import androidx.core.util.putAll
 import com.dede.android_eggs.R
 import com.dede.android_eggs.inject.EasterEggModules
+import com.dede.basic.provider.AndroidVersion
 import com.dede.basic.provider.EasterEgg
-import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
-import com.dede.basic.provider.toApiLevelRange
 import com.dede.android_eggs.resources.R as StringsR
 
 
@@ -38,19 +33,16 @@ object EasterEggHelp {
 
         companion object {
             fun create(
-                fullApiLevelRange: IntRange,
-                @StringRes nicknameRes: Int = -1
+                versions: List<AndroidVersion>,
+                @StringRes nicknameRes: Int = -1,
             ): VersionFormatter {
-                return if (fullApiLevelRange.first == fullApiLevelRange.last) {
-                    VersionFormatter(
-                        nicknameRes,
-                        getVersionNameByFullApiLevel(fullApiLevelRange.first)
-                    )
+                return if (versions.size == 1) {
+                    VersionFormatter(nicknameRes, versions.first().versionName)
                 } else {
                     VersionFormatter(
                         nicknameRes,
-                        getVersionNameByFullApiLevel(fullApiLevelRange.first),
-                        getVersionNameByFullApiLevel(fullApiLevelRange.last),
+                        versions.first().versionName,
+                        versions.last().versionName,
                     )
                 }
             }
@@ -64,7 +56,7 @@ object EasterEggHelp {
                 val nickname = context.getString(nicknameRes)
                 context.getString(
                     R.string.android_version_nickname_format,
-                    sb.toString(), nickname
+                    sb.toString(), nickname,
                 )
             } else {
                 context.getString(R.string.android_version_format, sb.toString())
@@ -72,105 +64,26 @@ object EasterEggHelp {
         }
     }
 
-    class ApiLevelFormatter private constructor(private val fullApiLevelRange: IntRange) {
+    class ApiLevelFormatter private constructor(private val versions: List<AndroidVersion>) {
 
         companion object {
-            fun create(fullApiLevelRange: IntRange): ApiLevelFormatter {
-                return ApiLevelFormatter(fullApiLevelRange)
+            fun create(versions: List<AndroidVersion>): ApiLevelFormatter {
+                return ApiLevelFormatter(versions)
             }
         }
 
         fun format(context: Context): String {
-            val apiLevel = fullApiLevelRange.toApiLevelRange()
-            return if (apiLevel.first == apiLevel.last) {
-                context.getString(R.string.api_version_format, apiLevel.first.toString())
+            val first = versions.first()
+            val last = versions.last()
+            return if (first.apiLevelLabel == last.apiLevelLabel) {
+                context.getString(R.string.api_version_format, last.apiLevelLabel)
             } else {
                 val enDash = context.getString(StringsR.string.char_en_dash)
-                context.getString(R.string.api_version_format, apiLevel.join(enDash))
+                context.getString(
+                    R.string.api_version_format,
+                    first.apiLevelLabel + enDash + last.apiLevelLabel,
+                )
             }
         }
     }
-
-    private fun IntRange.join(s: CharSequence): CharSequence {
-        return StringBuilder()
-            .append(first)
-            .append(s)
-            .append(last)
-    }
-
-    fun getVersionNameByFullApiLevel(fullApiLevel: Int): String {
-        return apiLevelArrays[fullApiLevel.toFullApiLevel()]
-            ?: throw IllegalArgumentException("Illegal full api level: $fullApiLevel")
-    }
-
-    fun getVersionNameByApiLevel(apiLevel: Int): String {
-        return apiLevelArrays[apiLevel]
-            ?: throw IllegalArgumentException("Illegal api level: $apiLevel")
-    }
-
-    private val apiLevelArrays = SparseArray<String>()
-
-    init {
-        // api level mappings
-        apiLevelArrays[Build.VERSION_CODES.CINNAMON_BUN] = "17"
-        apiLevelArrays[Build.VERSION_CODES.BAKLAVA] = "16"
-        apiLevelArrays[Build.VERSION_CODES.VANILLA_ICE_CREAM] = "15"
-        apiLevelArrays[Build.VERSION_CODES.UPSIDE_DOWN_CAKE] = "14"
-        apiLevelArrays[Build.VERSION_CODES.TIRAMISU] = "13"
-        apiLevelArrays[Build.VERSION_CODES.S_V2] = "12L"
-        apiLevelArrays[Build.VERSION_CODES.S] = "12"
-        apiLevelArrays[Build.VERSION_CODES.R] = "11"
-        apiLevelArrays[Build.VERSION_CODES.Q] = "10"
-        apiLevelArrays[Build.VERSION_CODES.P] = "9"
-        apiLevelArrays[Build.VERSION_CODES.O_MR1] = "8.1"
-        apiLevelArrays[Build.VERSION_CODES.O] = "8.0"
-        apiLevelArrays[Build.VERSION_CODES.N_MR1] = "7.1"
-        apiLevelArrays[Build.VERSION_CODES.N] = "7.0"
-        apiLevelArrays[Build.VERSION_CODES.M] = "6.0"
-        apiLevelArrays[Build.VERSION_CODES.LOLLIPOP_MR1] = "5.1"
-        apiLevelArrays[Build.VERSION_CODES.LOLLIPOP] = "5.0"
-        apiLevelArrays[Build.VERSION_CODES.KITKAT_WATCH] = "4.4W"
-        apiLevelArrays[Build.VERSION_CODES.KITKAT] = "4.4"
-        apiLevelArrays[Build.VERSION_CODES.JELLY_BEAN_MR2] = "4.3"
-        apiLevelArrays[Build.VERSION_CODES.JELLY_BEAN_MR1] = "4.2"
-        apiLevelArrays[Build.VERSION_CODES.JELLY_BEAN] = "4.1"
-        apiLevelArrays[Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1] = "4.0.3"
-        apiLevelArrays[Build.VERSION_CODES.ICE_CREAM_SANDWICH] = "4.0"
-        apiLevelArrays[Build.VERSION_CODES.HONEYCOMB_MR2] = "3.2"
-        apiLevelArrays[Build.VERSION_CODES.HONEYCOMB_MR1] = "3.1"
-        apiLevelArrays[Build.VERSION_CODES.HONEYCOMB] = "3.0"
-        apiLevelArrays[Build.VERSION_CODES.GINGERBREAD_MR1] = "2.3.3"
-        apiLevelArrays[Build.VERSION_CODES.GINGERBREAD] = "2.3"
-        apiLevelArrays[Build.VERSION_CODES.FROYO] = "2.2"
-        apiLevelArrays[Build.VERSION_CODES.ECLAIR_MR1] = "2.1"
-        apiLevelArrays[Build.VERSION_CODES.ECLAIR_0_1] = "2.0.1"
-        apiLevelArrays[Build.VERSION_CODES.ECLAIR] = "2.0"
-        apiLevelArrays[Build.VERSION_CODES.DONUT] = "1.6"
-        apiLevelArrays[Build.VERSION_CODES.CUPCAKE] = "1.5"
-        apiLevelArrays[Build.VERSION_CODES.BASE_1_1] = "1.1"
-        apiLevelArrays[Build.VERSION_CODES.BASE] = "1.0"
-
-        // full api level mappings
-        val fullApiLevelArrays = SparseArray<String>()
-        apiLevelArrays.forEach { apiLevel, value ->
-            fullApiLevelArrays.put(apiLevel.toFullApiLevel(), value)
-        }
-        apiLevelArrays.putAll(fullApiLevelArrays)
-        // full api level minor release
-        apiLevelArrays[Build.VERSION_CODES_FULL.BAKLAVA_1] = "16.1"
-        apiLevelArrays[Build.VERSION_CODES_FULL.CINNAMON_BUN_1] = "17.1"
-
-        // static full api level mappings
-        apiLevelArrays[EasterEgg.VERSION_CODES_FULL.ICS_PREVIEW] = "ICS"
-        apiLevelArrays[EasterEgg.VERSION_CODES_FULL.K_PREVIEW] = "K"
-        apiLevelArrays[EasterEgg.VERSION_CODES_FULL.L_PREVIEW] = "L"
-        apiLevelArrays[EasterEgg.VERSION_CODES_FULL.M_PREVIEW] = "M"
-        apiLevelArrays[EasterEgg.VERSION_CODES_FULL.N_PREVIEW] = "N"
-        apiLevelArrays[EasterEgg.VERSION_CODES_FULL.T_BETA] = "T"
-
-        // development version
-        apiLevelArrays[Build.VERSION_CODES.CUR_DEVELOPMENT] = "Next"
-        apiLevelArrays[Build.VERSION_CODES.CUR_DEVELOPMENT.toFullApiLevel()] = "Next"
-    }
-
 }

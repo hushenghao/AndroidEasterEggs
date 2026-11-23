@@ -1,5 +1,7 @@
 package com.android_s.egg
 
+import com.dede.basic.provider.AndroidVersion
+
 import android.content.ComponentName
 import android.content.Context
 import android.os.Build
@@ -33,7 +35,7 @@ object AndroidSEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.s_android_logo,
             nameRes = R.string.s_egg_name,
             nicknameRes = R.string.s_android_nickname,
-            fullApiLevelRange = Build.VERSION_CODES_FULL.S..Build.VERSION_CODES_FULL.S_V2,
+            version = AndroidVersion.S, additionalVersions = listOf(AndroidVersion.S_V2),
             actionClass = PlatLogoActivity::class.java
         ) {
             override fun provideSnapshotProvider(): SnapshotProvider {
@@ -49,12 +51,12 @@ object AndroidSEasterEgg : EasterEggProvider, ComponentProvider {
         return listOf(
             TimelineEvent(
                 2021, Calendar.DECEMBER,
-                Build.VERSION_CODES_FULL.S_V2,
+                AndroidVersion.S_V2,
                 "S V2.\nOnce more unto the breach, dear friends, once more."
             ),
             TimelineEvent(
                 2021, Calendar.SEPTEMBER,
-                Build.VERSION_CODES_FULL.S,
+                AndroidVersion.S,
                 "S."
             )
         )
@@ -68,7 +70,7 @@ object AndroidSEasterEgg : EasterEggProvider, ComponentProvider {
             iconRes = R.drawable.s_ic_fullcat_icon,
             nameRes = R.string.s_egg_name,
             nicknameRes = R.string.s_android_nickname,
-            fullApiLevelRange = Build.VERSION_CODES_FULL.S..Build.VERSION_CODES_FULL.S_V2
+            version = AndroidVersion.S, additionalVersions = listOf(AndroidVersion.S_V2)
         ) {
             @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.R)
             override fun isSupported(): Boolean {

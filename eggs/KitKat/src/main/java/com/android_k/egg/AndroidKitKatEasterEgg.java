@@ -1,10 +1,11 @@
 package com.android_k.egg;
 
+import com.dede.basic.provider.AndroidVersion;
+
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 
@@ -24,7 +25,6 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 import dagger.multibindings.IntoSet;
-import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
@@ -40,8 +40,9 @@ public class AndroidKitKatEasterEgg {
                         R.drawable.k_android_logo,
                         R.string.k_dessert_case,
                         R.string.k_android_nickname,
-                        new IntRange(Build.VERSION_CODES_FULL.KITKAT, Build.VERSION_CODES_FULL.KITKAT_WATCH),
-                        PlatLogoActivity.class
+                        AndroidVersion.KITKAT,
+                        PlatLogoActivity.class,
+                        List.of(AndroidVersion.KITKAT_WATCH)
                 ) {
                     @Override
                     public SnapshotProvider provideSnapshotProvider() {
@@ -52,7 +53,7 @@ public class AndroidKitKatEasterEgg {
                         R.drawable.k_platlogo_preview,
                         R.string.k_key_lime_pie,
                         R.string.k_preview_nickname,
-                        EasterEgg.VERSION_CODES_FULL.K_PREVIEW,
+                        AndroidVersion.KITKAT_PREVIEW,
                         com.android_k.egg.preview.PlatLogoActivity.class
                 ) {
                     @Override
@@ -72,7 +73,7 @@ public class AndroidKitKatEasterEgg {
                 R.drawable.k_platlogo,
                 R.string.k_dessert_case,
                 R.string.k_android_nickname,
-                new IntRange(Build.VERSION_CODES_FULL.KITKAT, Build.VERSION_CODES_FULL.KITKAT_WATCH)
+                AndroidVersion.KITKAT, List.of(AndroidVersion.KITKAT_WATCH)
         ) {
             @Override
             public boolean isSupported() {
@@ -99,13 +100,13 @@ public class AndroidKitKatEasterEgg {
     @NonNull
     public static List<TimelineEvent> provideTimelineEvents() {
         TimelineEvent e2 = timelineEvent(
-                Build.VERSION_CODES_FULL.KITKAT,
+                AndroidVersion.KITKAT,
                 "K.\nReleased publicly as Android 4.4 in October 2013."
         );
         e2.setAndroidLogo(R.drawable.k_android_logo_2014_2015);
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.KITKAT_WATCH,
+                        AndroidVersion.KITKAT_WATCH,
                         "K for watches.\nReleased publicly as Android 4.4W in June 2014."
                 ),
                 e2

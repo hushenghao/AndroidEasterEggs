@@ -1,15 +1,14 @@
 package com.android_next.egg
 
 import android.content.Context
-import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.dede.android_eggs.navigation.OverlayManager
+import com.dede.basic.provider.AndroidVersion
 import com.dede.basic.provider.BaseEasterEgg
 import com.dede.basic.provider.EasterEgg
-import com.dede.basic.provider.EasterEgg.VERSION_CODES_FULL.toFullApiLevel
 import com.dede.basic.provider.SnapshotProvider
 import com.dede.basic.provider.TimelineEvent
 import com.dede.basic.requireDrawable
@@ -30,8 +29,6 @@ object AndroidNextEasterEgg {
     internal const val PLATFORM_STABILITY_MONTH = Calendar.MAY
     internal const val RELEASE_MONTH = Calendar.AUGUST
 
-    private const val NEXT_API = Build.VERSION_CODES.CUR_DEVELOPMENT// android next
-
     private const val TIMELINE_EVENT = "Wow, Android Next."
 
     @StringRes
@@ -51,7 +48,7 @@ object AndroidNextEasterEgg {
             iconRes = LOGO_RES,
             nameRes = NICKNAME_RES,
             nicknameRes = NICKNAME_RES,
-            fullApiLevel = NEXT_API.toFullApiLevel(),
+            version = AndroidVersion.NEXT,
         ) {
             override fun onEasterEggAction(context: Context): Boolean {
                 overlayManager.show(AndroidNextTimelineRoute)
@@ -81,7 +78,7 @@ object AndroidNextEasterEgg {
             TimelineEvent(
                 year = RELEASE_YEAR,
                 month = RELEASE_MONTH,
-                fullApiLevel = NEXT_API.toFullApiLevel(),
+                version = AndroidVersion.NEXT,
                 event = TIMELINE_EVENT,
             )
         )

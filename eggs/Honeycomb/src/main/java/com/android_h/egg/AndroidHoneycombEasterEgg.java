@@ -1,8 +1,9 @@
 package com.android_h.egg;
 
+import com.dede.basic.provider.AndroidVersion;
+
 import static com.dede.basic.provider.TimelineEvent.timelineEvent;
 
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 
@@ -19,7 +20,6 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 import dagger.multibindings.IntoSet;
-import kotlin.ranges.IntRange;
 
 @Module
 @InstallIn(SingletonComponent.class)
@@ -34,8 +34,9 @@ public class AndroidHoneycombEasterEgg {
                 R.drawable.h_android_logo,
                 R.string.h_egg_name,
                 R.string.h_egg_name,
-                new IntRange(Build.VERSION_CODES_FULL.HONEYCOMB, Build.VERSION_CODES_FULL.HONEYCOMB_MR2),
-                PlatLogoActivity.class
+                AndroidVersion.HONEYCOMB,
+                PlatLogoActivity.class,
+                List.of(AndroidVersion.HONEYCOMB_MR1, AndroidVersion.HONEYCOMB_MR2)
         ) {
             @Override
             public SnapshotProvider provideSnapshotProvider() {
@@ -51,15 +52,15 @@ public class AndroidHoneycombEasterEgg {
     public static List<TimelineEvent> provideTimelineEvents() {
         return List.of(
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.HONEYCOMB_MR2,
+                        AndroidVersion.HONEYCOMB_MR2,
                         "H MR2.\nReleased publicly as Android 3.2 in July 2011."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.HONEYCOMB_MR1,
+                        AndroidVersion.HONEYCOMB_MR1,
                         "H MR1.\nReleased publicly as Android 3.1 in May 2011."
                 ),
                 timelineEvent(
-                        Build.VERSION_CODES_FULL.HONEYCOMB,
+                        AndroidVersion.HONEYCOMB,
                         "H.\nReleased publicly as Android 3.0 in February 2011."
                 )
         );
