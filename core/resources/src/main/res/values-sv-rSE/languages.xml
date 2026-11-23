@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- locality language -->
-    <string name="locale_lang_sv_SE">Svenska</string>
     <string name="locale_lang_zh_SC">kinesiska (förenklad)</string>
     <string name="locale_lang_zh_TC">kinesiska (traditionell)</string>
     <string name="locale_lang_de">tyska</string>
@@ -33,6 +32,7 @@
     <string name="locale_lang_cs_CZ">tjeckiska</string>
     <string name="locale_lang_ta">tamil</string>
     <string name="locale_lang_ro">rumänska</string>
+    <string name="locale_lang_sv_SE">Svenska</string>
     <string name="locale_lang_my_MM">burmesiska</string>
     <string name="locale_lang_bn_BD">bengali</string>
     <string name="locale_lang_sq">albanska</string>

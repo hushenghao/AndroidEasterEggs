@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- locality language -->
-    <string name="locale_lang_no_NO">Norsk</string>
     <string name="locale_lang_zh_SC">kinesisk (forenklet)</string>
     <string name="locale_lang_zh_TC">kinesisk (tradisjonell)</string>
     <string name="locale_lang_de">tysk</string>
@@ -27,6 +26,7 @@
     <string name="locale_lang_vi_VN">vietnamesisk</string>
     <string name="locale_lang_hu_HU">ungarsk</string>
     <string name="locale_lang_th_TH">thai</string>
+    <string name="locale_lang_no_NO">Norsk</string>
     <string name="locale_lang_fil_PH">filippinsk</string>
     <string name="locale_lang_lo_LA">laotisk</string>
     <string name="locale_lang_cs_CZ">tsjekkisk</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- locality language -->
-    <string name="locale_lang_la_LA">Latīna</string>
     <string name="locale_lang_zh_SC">Sinica (simplicior)</string>
     <string name="locale_lang_zh_TC">Sinica (traditionalis)</string>
     <string name="locale_lang_de">Theodisca</string>
@@ -17,6 +16,7 @@
     <string name="locale_lang_ja_JP">Iaponica</string>
     <string name="locale_lang_pl_PL">Polonica</string>
     <string name="locale_lang_nl_NL">Neerlandica</string>
+    <string name="locale_lang_la_LA">Latīna</string>
     <string name="locale_lang_fr">Francogallica</string>
     <string name="locale_lang_uk_UA">Ucrainica</string>
     <string name="locale_lang_tr_TR">Turcica</string>
