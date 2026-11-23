@@ -15,6 +15,7 @@ const val POLL_INTERVAL = 250L
 private const val DESC_SETTINGS = "Settings"
 private const val DESC_SEARCH = "Search"
 private const val TEXT_SETTINGS = "Settings"
+private const val TEXT_THEME = "Theme"
 private const val TEXT_AGREE = "I agree"
 
 /**
@@ -30,16 +31,17 @@ fun UiDevice.acceptWelcomeIfNeeded() {
             waitForIdle()
             return
         }
-        if (hasObject(By.desc(DESC_SETTINGS))) {
+        if (hasObject(By.desc(DESC_SEARCH))) {
             return
         }
         SystemClock.sleep(POLL_INTERVAL)
     }
 }
 
-/** The settings action only exists once the home screen has been composed. */
+/** The search action only exists once the home screen has been composed, in both the
+ *  compact (drawer) and expanded (permanent settings pane) layouts. */
 fun UiDevice.waitForHome(): Boolean {
-    return wait(Until.hasObject(By.desc(DESC_SETTINGS)), UI_TIMEOUT) ?: false
+    return wait(Until.hasObject(By.desc(DESC_SEARCH)), UI_TIMEOUT) ?: false
 }
 
 /** Returns whether there was a scrollable egg list. */
@@ -71,13 +73,20 @@ fun UiDevice.searchEggs(query: String): Boolean {
  * scrim, so the title tells whether it opened. Returns whether it did.
  */
 fun UiDevice.browseSettings(): Boolean {
-    findObject(By.desc(DESC_SETTINGS))?.click()
-    val opened = wait(Until.hasObject(By.text(TEXT_SETTINGS)), UI_TIMEOUT) ?: false
-    findObject(By.scrollable(true))?.fling(Direction.DOWN)
-    waitForIdle()
-    pressBack()
-    waitForIdle()
-    return opened
+    // Compact/medium layouts open settings as a drawer behind an action icon; expanded
+    // layouts show it as a permanent pane with no action icon.
+    val action = findObject(By.desc(DESC_SETTINGS))
+    if (action != null) {
+        action.click()
+        val opened = wait(Until.hasObject(By.text(TEXT_SETTINGS)), UI_TIMEOUT) ?: false
+        findObject(By.scrollable(true))?.fling(Direction.DOWN)
+        waitForIdle()
+        pressBack()
+        waitForIdle()
+        return opened
+    }
+    // The permanent pane has no title, so the first row stands in for it.
+    return hasObject(By.text(TEXT_THEME))
 }
 
 fun MacrobenchmarkScope.openEgg(apiLevel: Int) {

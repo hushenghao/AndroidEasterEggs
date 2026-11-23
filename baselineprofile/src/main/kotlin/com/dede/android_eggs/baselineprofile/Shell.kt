@@ -4,8 +4,10 @@ import android.os.SystemClock
 import androidx.test.uiautomator.UiDevice
 
 // "  ResumedActivity: ActivityRecord{261853612 u0 com.dede.android_eggs/com.android_u.egg.PlatLogoActivity t42}"
+// The fields after the component differ per OEM (e.g. Flyme), so extract only the
+// component and keep the closing brace out of it.
 private val RESUMED_ACTIVITY =
-    Regex("""(?:topResumedActivity=|[mM]?ResumedActivity: )ActivityRecord\{\S+ u\d+ (\S+) t\d+\}""")
+    Regex("""(?:topResumedActivity=|[mM]?ResumedActivity: )ActivityRecord\{\S+ u\d+ ([^\s{}]+)""")
 
 /**
  * `am start -p <pkg> -a MAIN -c LAUNCHER` cannot resolve the launcher: its intent filter has no
