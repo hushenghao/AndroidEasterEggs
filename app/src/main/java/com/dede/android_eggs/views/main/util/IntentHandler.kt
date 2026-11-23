@@ -6,12 +6,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import com.dede.android_eggs.data.EasterEggRepository
 import com.dede.android_eggs.egg_stats.EggLaunchSource
 import com.dede.android_eggs.navigation.DeepLink
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.views.settings.compose.prefs.launchRocketLauncher
-import com.dede.basic.provider.EasterEgg
-import com.dede.basic.provider.findEggByPublicApiLevel
 import dagger.hilt.android.qualifiers.ActivityContext
 import java.time.LocalTime
 import javax.inject.Inject
@@ -21,7 +20,7 @@ private const val TAG = "IntentHandler"
 class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
 
     @Inject
-    lateinit var easterEggs: List<@JvmSuppressWildcards EasterEgg>
+    lateinit var repository: EasterEggRepository
 
     private val eggHandlers: Array<EggHandler> = arrayOf(
         FromWidgetHandler(),
@@ -31,7 +30,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
     fun handleIntent(intent: Intent?): Boolean {
         if (intent == null) return false
 
-        val eggIntent = EggIntent(context, easterEggs, intent)
+        val eggIntent = EggIntent(context, repository, intent)
         for (callback in eggHandlers) {
             if (callback.handleEggIntent(eggIntent)) {
                 return true
@@ -75,7 +74,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
                 // com.dede.android_eggs.views.widget.AnalogClockWidgetClickAction.OPEN_EGG
                 val hour = LocalTime.now().hour % 12
                 val apiLevel = hourApiLevelArray[hour]
-                val egg = eggIntent.easterEggs.findEggByPublicApiLevel(apiLevel)
+                val egg = eggIntent.repository.findEggByPublicApiLevel(apiLevel)
                 if (egg != null) {
                     EggActionHelp.launchEgg(eggIntent.context, egg, EggLaunchSource.WIDGET)
                 }
@@ -95,7 +94,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
             // egg://easter_egg/api/34
             val levelStr = uri.pathSegments.getOrNull(1) ?: return false
             val level = levelStr.toIntOrNull() ?: return false
-            val egg = eggIntent.easterEggs.findEggByPublicApiLevel(level)
+            val egg = eggIntent.repository.findEggByPublicApiLevel(level)
             if (egg != null) {
                 EggActionHelp.launchEgg(eggIntent.context, egg, EggLaunchSource.DEEP_LINK)
             }
@@ -129,7 +128,7 @@ class IntentHandler @Inject constructor(@ActivityContext val context: Context) {
 
     private class EggIntent(
         val context: Context,
-        val easterEggs: List<EasterEgg>,
+        val repository: EasterEggRepository,
         intent: Intent,
     ) {
         val uri: Uri? = intent.data

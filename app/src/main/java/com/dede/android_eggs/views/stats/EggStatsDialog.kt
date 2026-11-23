@@ -45,6 +45,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dede.android_eggs.composable.ScrollableModalBottomSheet
+import com.dede.android_eggs.data.EasterEggRepository
 import com.dede.android_eggs.egg_stats.EggStatsRepository
 import com.dede.android_eggs.egg_stats.EggStatsSummary
 import com.dede.android_eggs.navigation.OverlayContentProvider
@@ -83,8 +84,10 @@ object EggStatsOverlayProvider : OverlayContentProvider {
 
 @HiltViewModel
 class EggStatsViewModel @Inject constructor(
-    val easterEggs: List<@JvmSuppressWildcards EasterEgg>,
-) : ViewModel()
+    repository: EasterEggRepository,
+) : ViewModel() {
+    val easterEggs = repository.pureEasterEggs
+}
 
 private data class EggStatsRow(
     val egg: EasterEgg,

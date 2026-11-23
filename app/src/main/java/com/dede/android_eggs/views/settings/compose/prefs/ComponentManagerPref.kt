@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import com.dede.android_eggs.data.EasterEggRepository
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
 import com.dede.android_eggs.views.main.util.EasterEggHelp.VersionFormatter
 import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
@@ -75,5 +76,7 @@ internal fun ComponentManagerPrefContent(
 
 @HiltViewModel
 class ComponentManagerViewModel @Inject constructor(
-    val componentList: List<@JvmSuppressWildcards ComponentProvider.Component>
-) : ViewModel()
+    repository: EasterEggRepository,
+) : ViewModel() {
+    val componentList = repository.components
+}

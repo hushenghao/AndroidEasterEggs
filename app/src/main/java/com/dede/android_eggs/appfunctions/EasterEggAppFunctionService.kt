@@ -13,11 +13,11 @@ import androidx.appfunctions.AppFunctionSerializable
 import androidx.appfunctions.AppFunctionService
 import androidx.appfunctions.AppFunctionServiceEntryPoint
 import androidx.core.graphics.drawable.toBitmap
+import com.dede.android_eggs.data.EasterEggRepository
 import com.dede.android_eggs.cat_editor.Utilities
 import com.dede.android_eggs.views.main.compose.filterEasterEggs
 import com.dede.android_eggs.views.main.util.IntentHandler
 import com.dede.basic.provider.EasterEgg
-import com.dede.basic.provider.findEggByPublicApiLevel
 import com.dede.basic.requireDrawable
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -80,7 +80,7 @@ data class EggIcon(
 abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
 
     @Inject
-    internal lateinit var pureEasterEggs: List<@JvmSuppressWildcards EasterEgg>
+    internal lateinit var repository: EasterEggRepository
 
     /**
      * List all available Android platform Easter eggs with their API levels, version names,
@@ -91,7 +91,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
     @AppFunctionDeclaration(isDescribedByKDoc = true)
     internal suspend fun listEasterEggs(): List<EasterEggInfo> = withContext(Dispatchers.IO) {
         val latestApiLevel = latestPlainApiLevel()
-        pureEasterEggs.mapNotNull { it.toEasterEggInfoOrNull(latestApiLevel) }
+        repository.pureEasterEggs.mapNotNull { it.toEasterEggInfoOrNull(latestApiLevel) }
     }
 
     /**
@@ -106,7 +106,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
     internal suspend fun searchEasterEggs(query: String): List<EasterEggInfo> =
         withContext(Dispatchers.IO) {
             val latestApiLevel = latestPlainApiLevel()
-            filterEasterEggs(applicationContext, pureEasterEggs, query)
+            filterEasterEggs(applicationContext, repository.pureEasterEggs, query)
                 .mapNotNull { it.toEasterEggInfoOrNull(latestApiLevel) }
         }
 
@@ -144,7 +144,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
     @AppFunctionDeclaration(isDescribedByKDoc = true)
     internal suspend fun launchEasterEgg(apiLevel: Int): EasterEggLaunch =
         withContext(Dispatchers.IO) {
-            val egg = pureEasterEggs.findEggByPublicApiLevel(apiLevel)
+            val egg = repository.findEggByPublicApiLevel(apiLevel)
                 ?: throw AppFunctionElementNotFoundException(
                     "No Easter egg for API level $apiLevel",
                 )
@@ -174,7 +174,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
     @AppFunctionDeclaration(isDescribedByKDoc = true)
     internal suspend fun getEasterEggIcon(apiLevel: Int): EggIcon =
         withContext(Dispatchers.IO) {
-            val egg = pureEasterEggs.findEggByPublicApiLevel(apiLevel)
+            val egg = repository.findEggByPublicApiLevel(apiLevel)
                 ?: throw AppFunctionElementNotFoundException(
                     "No Easter egg for API level $apiLevel",
                 )
@@ -212,7 +212,7 @@ abstract class BaseEasterEggAppFunctionService : AppFunctionService() {
     }
 
     private fun latestPlainApiLevel(): Int =
-        pureEasterEggs.mapNotNull { it.version.apiLevel }.max()
+        repository.pureEasterEggs.mapNotNull { it.version.apiLevel }.max()
 }
 
 private const val ICON_SIZE_PX = 192

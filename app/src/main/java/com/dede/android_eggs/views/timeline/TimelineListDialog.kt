@@ -53,9 +53,9 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import com.dede.android_eggs.R
 import com.dede.android_eggs.composable.ScrollableModalBottomSheet
+import com.dede.android_eggs.data.EasterEggRepository
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.views.main.compose.EasterEggLogo
-import com.dede.android_eggs.views.main.util.AndroidLogoMatcher
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.eventAnnotatedString
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.isNewGroup
 import com.dede.android_eggs.views.timeline.TimelineEventHelp.localMonth
@@ -274,10 +274,11 @@ private fun TimelineItem(
 
 @HiltViewModel
 class TimelineViewModel @Inject constructor(
-    val timelines: List<@JvmSuppressWildcards TimelineEvent>,
-    private val androidLogoMatcher: AndroidLogoMatcher,
+    private val repository: EasterEggRepository,
 ) : ViewModel() {
+    val timelines = repository.timelines
+
     fun findAndroidLogoByVersion(version: AndroidVersion): Int {
-        return androidLogoMatcher.findAndroidLogoByVersion(version)
+        return repository.findAndroidLogoByVersion(version)
     }
 }

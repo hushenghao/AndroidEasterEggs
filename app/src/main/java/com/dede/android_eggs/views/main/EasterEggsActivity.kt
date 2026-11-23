@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.dede.android_eggs.R
+import com.dede.android_eggs.data.EasterEggRepository
 import com.dede.android_eggs.flavor.FlavorFeatures
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.OverlayContentProvider
@@ -22,7 +23,6 @@ import com.dede.android_eggs.navigation.OverlayManager
 import com.dede.android_eggs.views.main.util.EasterEggShortcutsHelp
 import com.dede.android_eggs.views.main.util.IntentHandler
 import com.dede.android_eggs.views.theme.EasterEggsTheme
-import com.dede.basic.provider.EasterEgg
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
@@ -35,7 +35,7 @@ class Android15SplashActivity : EasterEggsActivity()
 open class EasterEggsActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var pureEasterEggs: List<@JvmSuppressWildcards EasterEgg>
+    lateinit var repository: EasterEggRepository
 
     @Inject
     lateinit var destinations: Set<@JvmSuppressWildcards EasterEggsDestination>
@@ -68,7 +68,7 @@ open class EasterEggsActivity : AppCompatActivity() {
         }
 
         intentHandler.handleIntent(intent)
-        EasterEggShortcutsHelp.updateShortcuts(this, pureEasterEggs)
+        EasterEggShortcutsHelp.updateShortcuts(this, repository.pureEasterEggs)
 
         // call flavor features
         FlavorFeatures.get().promptForRating(this, overlayManager)

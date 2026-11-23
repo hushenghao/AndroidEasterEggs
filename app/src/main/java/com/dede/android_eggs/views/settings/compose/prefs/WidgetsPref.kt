@@ -29,6 +29,7 @@ import androidx.lifecycle.ViewModel
 import com.dede.android_eggs.ui.composes.LoopHorizontalPager
 import com.dede.android_eggs.ui.composes.LoopPagerIndicator
 import com.dede.android_eggs.ui.composes.rememberLoopPagerState
+import com.dede.android_eggs.data.EasterEggRepository
 import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
 import com.dede.android_eggs.settings_ui.widgets.WidgetPreviewProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -111,7 +112,7 @@ internal fun WidgetsPrefContent(widgets: List<WidgetPreviewProvider> = emptyList
 
 @HiltViewModel
 class WidgetsPrefViewModel @Inject constructor(
-    widgetSet: Set<@JvmSuppressWildcards WidgetPreviewProvider>,
+    repository: EasterEggRepository,
 ) : ViewModel() {
-    val widgets: List<WidgetPreviewProvider> = widgetSet.sortedBy { it.order }
+    val widgets = repository.widgets
 }

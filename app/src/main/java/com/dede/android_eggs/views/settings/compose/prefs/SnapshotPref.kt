@@ -60,6 +60,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.navigationevent.NavigationEvent
 import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeOverlayBackdrop
+import com.dede.android_eggs.data.EasterEggRepository
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.navigation.LocalOverlayManager
 import com.dede.android_eggs.navigation.OverlayRoute
@@ -197,8 +198,10 @@ fun SnapshotOverlay(onDismiss: () -> Unit) {
 
 @HiltViewModel
 class SnapshotViewModel @Inject constructor(
-    val easterEggs: List<@JvmSuppressWildcards EasterEgg>
-) : ViewModel()
+    repository: EasterEggRepository,
+) : ViewModel() {
+    val easterEggs = repository.pureEasterEggs
+}
 
 @Composable
 fun SnapshotCarousel(
