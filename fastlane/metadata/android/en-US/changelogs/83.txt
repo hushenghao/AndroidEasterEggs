@@ -1,9 +1,10 @@
 - Add Android App Functions support (Android 16+)
 - Add GitHub Pagers
-- Migrate clock and date handling to java.time (core library desugaring)
-- Add local Easter egg play statistics (first opened, last played, play count)
-- Add a settings slider for the number of highlighted eggs on the home screen
-- Improve app startup time with Baseline Profiles
-- Complete translations across all modules
+- Add local egg play statistics
+- Add a slider for highlighted egg count
 - Add a subtle logo backdrop to the home egg cards
-- Upgrade Compose to 1.13 (Material 3 1.5.0)
+- Improve app startup time with Baseline Profiles
+- Fix QPR API level range display (e.g. 36–36.1) and add Android 17.2
+- Migrate clock and date handling to java.time (core library desugaring)
+- Complete translations across all modules
+- Upgrade project dependencies
