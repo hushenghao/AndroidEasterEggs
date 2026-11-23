@@ -46,11 +46,16 @@ fun UiDevice.waitForHome(): Boolean {
 
 /** Returns whether there was a scrollable egg list. */
 fun UiDevice.scrollEggList(): Boolean {
-    val list = findObject(By.scrollable(true)) ?: return false
-    list.setGestureMargin(displayWidth / 5)
-    list.fling(Direction.DOWN)
+    fun findList() = findObject(By.scrollable(true))
+    val down = findList() ?: return false
+    down.setGestureMargin(displayWidth / 5)
+    down.fling(Direction.DOWN)
     waitForIdle()
-    list.fling(Direction.UP)
+    // A fling refreshes the accessibility tree, so the previously resolved node is stale; the
+    // reverse fling has to re-resolve the list or UiObject2.fling throws StaleObjectException.
+    val up = findList() ?: return false
+    up.setGestureMargin(displayWidth / 5)
+    up.fling(Direction.UP)
     waitForIdle()
     return true
 }
