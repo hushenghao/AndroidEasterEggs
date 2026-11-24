@@ -71,6 +71,8 @@
     <string name="pref_more_settings">Περισσότερες Ρυθμίσεις</string>
     <string name="pref_retain_recent_egg_tasks">Διατήρηση πρόσφατων διεργασιών Πασχαλινών Αυγών</string>
     <string name="pref_summary_retain_recent_egg_tasks">Διατήρηση εργασιών Πασχαλινών Αυγών στην οθόνη Πρόσφατων. Μέχρι 5 μπορούν να διατηρηθούν.</string>
+    <string name="pref_title_dynamic_egg_colors">Χρώματα Material You για τα Πασχαλινά Αυγά</string>
+    <string name="pref_summary_dynamic_egg_colors">Αλλάξτε τα χρώματα των κλασικών Πασχαλινών Αβγών με χρώματα από την ταπετσαρία σας. Ισχύει προς το παρόν για το Πασχαλινό Αυγό Jelly Bean.</string>
     <string name="label_about">Σχετικά</string>
     <string name="label_contribute">Συνεισφορά</string>
     <string name="animator_disabled_alert_message">Λόγω της απενεργοποίησης της κινούμενων εικόνων του συστήματος, ορισμένες λειτουργίες ενδέχεται να μη λειτουργούν σωστά. Μεταβείτε στις \"Επιλογές προγραμματιστή\" και ενεργοποιήστε την επιλογή \"Κλίμακα διάρκειας Animator\" για να ενεργοποιήσετε την κινούμενη εικόνα.</string>

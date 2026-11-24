@@ -71,6 +71,8 @@
     <string name="pref_more_settings">Mais Configurações</string>
     <string name="pref_retain_recent_egg_tasks">Tarefas recentes de Easter Egg</string>
     <string name="pref_summary_retain_recent_egg_tasks">Reter tarefas de Easter Egg na tela Recentes, máximo de 5 tarefas retidas</string>
+    <string name="pref_title_dynamic_egg_colors">Cores Material You para os Ovos</string>
+    <string name="pref_summary_dynamic_egg_colors">Recolore os Ovos clássicos com cores derivadas do seu papel de parede. Atualmente aplica-se ao Ovo Jelly Bean.</string>
     <string name="label_about">Sobre</string>
     <string name="label_contribute">Contribuir</string>
     <string name="animator_disabled_alert_message">As animações do sistema foram desativadas. Algumas das funções podem não funcionar corretamente. Aceda a \"Opções de programador\" e defina a opção \"Escala de duração do animador\" para ativar as animações</string>

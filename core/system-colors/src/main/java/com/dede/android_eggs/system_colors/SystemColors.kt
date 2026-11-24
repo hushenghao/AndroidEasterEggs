@@ -36,3 +36,11 @@ fun Context.getSystemColor(resName: String): Int {
     }
     throw Resources.NotFoundException(resName)
 }
+
+/**
+ * Typed overload for code that references a palette entry directly, see [SystemColor].
+ */
+@Throws(Resources.NotFoundException::class)
+fun Context.getSystemColor(color: SystemColor): Int {
+    return getSystemColor(color.resName)
+}

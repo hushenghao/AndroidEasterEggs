@@ -71,6 +71,8 @@
     <string name="pref_more_settings">Mai multe setări</string>
     <string name="pref_retain_recent_egg_tasks">Păstrează sarcinile easter egg-urilor</string>
     <string name="pref_summary_retain_recent_egg_tasks">Păstrează sarcinile easter egg-urilor pe ecranul Recente. Până la 5 sarcini pot fi păstrate.</string>
+    <string name="pref_title_dynamic_egg_colors">Culori Material You pentru ouăle de Paște</string>
+    <string name="pref_summary_dynamic_egg_colors">Recolorează ouăle de Paște clasice cu culori derivate din fundal. Deocamdată se aplică doar ouălui Jelly Bean.</string>
     <string name="label_about">Despre</string>
     <string name="label_contribute">Contribuie</string>
     <string name="animator_disabled_alert_message">Deoarece animațiile de sistem sunt dezactivate, s-ar putea ca unele funcții să nu funcționeze cum trebuie. Te rugăm să mergi la \"Opțiuni dezvoltator\" și să activezi opțiunea \"Scară durată animator\" pentru a activa animațiile</string>

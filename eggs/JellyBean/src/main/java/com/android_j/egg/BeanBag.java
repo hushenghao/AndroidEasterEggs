@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -35,6 +36,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import com.dede.android_eggs.preferences.AppSettings;
+import com.dede.android_eggs.system_colors.ResourcesUtils;
+import com.dede.android_eggs.system_colors.SystemColor;
 
 import java.util.Random;
 
@@ -118,6 +123,37 @@ public class BeanBag extends Activity {
                 0xFF333333,
         };
 
+        /**
+         * Wallpaper-seeded palette colors, used instead of {@link #COLORS}
+         * when the "Material You egg colors" setting is on. Two hue families
+         * (accent1 and accent3, 60 degrees apart) give the beans distinguishable
+         * colors, and the 200-500 shades carry the palette's highest chroma;
+         * accent2 is left out because it shares accent1's hue with a much lower
+         * chroma, which reads as washed-out on the black board.
+         */
+        static final SystemColor[] DYNAMIC_COLORS = {
+                SystemColor.ACCENT1_200,
+                SystemColor.ACCENT1_300,
+                SystemColor.ACCENT1_400,
+                SystemColor.ACCENT1_500,
+                SystemColor.ACCENT3_200,
+                SystemColor.ACCENT3_300,
+                SystemColor.ACCENT3_400,
+                SystemColor.ACCENT3_500,
+        };
+
+        static int pickBeanColor(Context context) {
+            if (AppSettings.INSTANCE.getDynamicEggColors().get(context)) {
+                try {
+                    return ResourcesUtils.getSystemColor(context, pick(DYNAMIC_COLORS));
+                } catch (Resources.NotFoundException ignored) {
+                    // The bundled palette always provides these names, fall back
+                    // to the original colors rather than crash the egg.
+                }
+            }
+            return pickInt(COLORS);
+        }
+
         public class Bean extends ImageView {
             public static final float VMAX = 1000.0f;
             public static final float VMIN = 100.0f;
@@ -164,7 +200,7 @@ public class BeanBag extends Activity {
                 this.setImageDrawable(bean);
 
                 Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
-                final int color = pickInt(COLORS);
+                final int color = pickBeanColor(getContext());
                 ColorMatrix CM = new ColorMatrix();
                 float[] M = CM.getArray();
                 // we assume the color information is in the red channel

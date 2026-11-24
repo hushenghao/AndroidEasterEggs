@@ -71,6 +71,8 @@
     <string name="pref_more_settings">Más ajustes</string>
     <string name="pref_retain_recent_egg_tasks">Mantener tareas de Easter Eggs</string>
     <string name="pref_summary_retain_recent_egg_tasks">Guardar tareas de Huevos de Pascua en la pantalla Recientes, máximo 5 tareas guardadas.</string>
+    <string name="pref_title_dynamic_egg_colors">Colores Material You para los Easter Eggs</string>
+    <string name="pref_summary_dynamic_egg_colors">Recolorea los Easter Eggs clásicos con colores derivados de tu fondo de pantalla. Actualmente se aplica al Easter Egg de Jelly Bean.</string>
     <string name="label_about">Acerca de</string>
     <string name="label_contribute">Contribuir</string>
     <string name="animator_disabled_alert_message">Las animaciones del sistema están deshabilitadas. Algunas características podrían no funcionar correctamente. Por favor, vaya a \"Opciones de desarrollador\" y configure la opción \"Escala de duración de animador\" para activar las animaciones</string>

@@ -71,6 +71,8 @@
     <string name="pref_more_settings">Plus de réglages</string>
     <string name="pref_retain_recent_egg_tasks">Conserver les Œufs de Pâques récents</string>
     <string name="pref_summary_retain_recent_egg_tasks">Conserver les tâches Easter Egg sur l\'écran Récents, maximum de 5 tâches conservées</string>
+    <string name="pref_title_dynamic_egg_colors">Couleurs Material You pour les Œufs de Pâques</string>
+    <string name="pref_summary_dynamic_egg_colors">Recolorez les Œufs de Pâques classiques avec des couleurs issues de votre fond d\'écran. S\'applique actuellement à l\'Œuf de Pâques Jelly Bean.</string>
     <string name="label_about">À propos</string>
     <string name="label_contribute">Contribuer</string>
     <string name="animator_disabled_alert_message">En raison de la désactivation de l\'animation système, certaines fonctionnalités peuvent ne pas fonctionner correctement. Veuillez accéder aux « Options de développeur » et activer l\'option « Échelle de durée de l\'animation » pour activer l\'animation.</string>

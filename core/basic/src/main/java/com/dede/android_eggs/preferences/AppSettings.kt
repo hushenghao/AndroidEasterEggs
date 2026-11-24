@@ -68,6 +68,13 @@ object AppSettings {
      */
     val highestEggCount = PrefKey.int("pref_key_highest_egg_count", 1)
 
+    /**
+     * Global "Material You" coloring for the AOSP-derived legacy eggs: they draw
+     * with the wallpaper-seeded system palette instead of their hardcoded original
+     * colors. Currently read only by `:eggs:JellyBean`.
+     */
+    val dynamicEggColors = PrefKey.boolean("pref_key_dynamic_egg_colors", false)
+
     /** One of `RocketLauncherPrefUtil.VALUE_EASTER_EGG_ICONS` / `VALUE_ALL_APP_ICONS` / `VALUE_ALL_ICONS`. */
     val rocketLauncherIconsSource = PrefKey.int("pref_key_rocket_launcher_icons_source", 0)
 
@@ -119,6 +126,7 @@ object AppSettings {
         iconVisualEffects,
         retainInRecents,
         highestEggCount,
+        dynamicEggColors,
         rocketLauncherIconsSource,
         sTrypophobiaWarning,
         tTrypophobiaWarning,

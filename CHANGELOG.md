@@ -1,5 +1,9 @@
 # Changelog
 
+### v5.7.1
+
+- Add Material You colors to the Jelly Bean egg
+
 ### v5.7.0 (2026-11-24)
 
 - Add Android App Functions support (Android 16+)

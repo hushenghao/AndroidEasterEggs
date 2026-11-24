@@ -10,6 +10,7 @@ public class SnapshotProvider extends com.dede.basic.provider.SnapshotProvider {
         ImageView mContent = new ImageView(context);
         mContent.setImageResource(R.drawable.j_platlogo);
         mContent.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        DynamicBeanColors.applyTo(mContent);
 
         return mContent;
     }

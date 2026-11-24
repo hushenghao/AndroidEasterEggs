@@ -71,6 +71,8 @@
     <string name="pref_more_settings">تنظیمات بیشتر</string>
     <string name="pref_retain_recent_egg_tasks">نگه‌داشتن وظایف تخم‌مرغ عید پاک</string>
     <string name="pref_summary_retain_recent_egg_tasks">نگه‌داشتن وظایف تخم‌مرغ عید پاک در صفحه برنامه‌های اخیر. حداکثر ۵ مورد قابل نگه‌داری است.</string>
+    <string name="pref_title_dynamic_egg_colors">رنگ‌های Material You برای تخم‌مرغ عید پاک</string>
+    <string name="pref_summary_dynamic_egg_colors">تخم‌مرغ‌های عید پاک کلاسیک را با رنگ‌های برگرفته از تصویر پس‌زمینه رنگ‌آمیزی کنید. در حال حاضر فقط برای تخم‌مرغ Jelly Bean اعمال می‌شود.</string>
     <string name="label_about">درباره</string>
     <string name="label_contribute">مشارکت</string>
     <string name="animator_disabled_alert_message">انیمیشن‌های سیستم غیرفعال شده‌اند. برخی عملکردها ممکن است به‌درستی کار نکنند. لطفاً به «گزینه‌های توسعه‌دهنده» بروید و گزینه «مقیاس مدت انیماتور» را برای فعال کردن انیمیشن‌ها تنظیم کنید</string>

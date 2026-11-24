@@ -71,6 +71,8 @@
     <string name="pref_more_settings">Më shumë cilësime</string>
     <string name="pref_retain_recent_egg_tasks">Mbaj detyrat e vezëve të Pashkëve</string>
     <string name="pref_summary_retain_recent_egg_tasks">Mbaj detyrat e vezëve të Pashkëve në ekranin e të fundit. Mund të mbahen deri në 5.</string>
+    <string name="pref_title_dynamic_egg_colors">Ngjyra Material You për vezët</string>
+    <string name="pref_summary_dynamic_egg_colors">Ringjyëroni vezët klasike të Pashkëve me ngjyra që vijnë nga sfondi juaj. Aktualisht zbatohet vetëm për vezën Jelly Bean.</string>
     <string name="label_about">Rreth</string>
     <string name="label_contribute">Kontribuo</string>
     <string name="animator_disabled_alert_message">Animacionet e sistemit janë çaktivizuar. Disa funksione mund të mos funksionojnë siç duhet. Ju lutemi shkoni te \"Opsionet e zhvilluesit\" dhe vendosni opsionin \"Shkalla e kohëzgjatjes së animatorit\" për të aktivizuar animacionet</string>

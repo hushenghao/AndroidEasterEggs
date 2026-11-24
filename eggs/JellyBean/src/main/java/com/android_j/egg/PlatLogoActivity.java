@@ -97,6 +97,7 @@ public class PlatLogoActivity extends Activity {
         mContent = new ImageView(this);
         mContent.setImageResource(R.drawable.j_platlogo_alt);
         mContent.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        DynamicBeanColors.applyTo(mContent);
 
         final int p = (int) (32 * metrics.density);
         mContent.setPadding(p, p, p, p);

@@ -1,5 +1,9 @@
 # 更新日志
 
+### v5.7.1
+
+- 为 Jelly Bean 彩蛋添加 Material You 动态配色
+
 ### v5.7.0 (2026-11-24)
 
 - 添加 Android App Functions 支持(Android 16+)

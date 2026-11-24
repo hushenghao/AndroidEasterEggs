@@ -71,6 +71,8 @@
     <string name="pref_more_settings">ການຕັ້ງຄ່າເພີ່ມເຕີມ</string>
     <string name="pref_retain_recent_egg_tasks">ເກັບໜ້າວຽກໄຂ່ອີສເຕີໄວ້</string>
     <string name="pref_summary_retain_recent_egg_tasks">ເກັບໜ້າວຽກໄຂ່ອີສເຕີໄວ້ໃນໜ້າຈໍລ່າສຸດ. ເກັບໄດ້ສູງສຸດ 5 ລາຍການ.</string>
+    <string name="pref_title_dynamic_egg_colors">ສີໄຂ່ອີສເຕີ Material You</string>
+    <string name="pref_summary_dynamic_egg_colors">ເປີດສີໄຂ່ອີສເຕີແບບຄລາສສິກດ້ວຍສີທີ່ມາຈາກພາບພື້ນຫຼັງ. ປັດຈຸບັນໃຊ້ກັບໄຂ່ Jelly Bean ເທົ່ານັ້ນ.</string>
     <string name="label_about">ກ່ຽວກັບ</string>
     <string name="label_contribute">ມີສ່ວນຮ່ວມ</string>
     <string name="animator_disabled_alert_message">ການເຄື່ອນໄຫວຂອງລະບົບຖືກປິດໃຊ້ງານ. ບາງຟັງຊັນອາດບໍ່ເຮັດວຽກຢ່າງຖືກຕ້ອງ. ກະລຸນາໄປທີ່ \"ຕົວເລືອກຜູ້ພັດທະນາ\" ແລະຕັ້ງຄ່າ \"ມາດຕາສ່ວນໄລຍະເວລາ Animator\" ເພື່ອເປີດໃຊ້ການເຄື່ອນໄຫວ</string>

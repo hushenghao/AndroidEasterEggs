@@ -6,3 +6,7 @@ android {
     namespace = "com.android_j.egg"
     resourcePrefix = "j_"
 }
+
+dependencies {
+    implementation(project(":core:system-colors"))
+}

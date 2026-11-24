@@ -80,6 +80,8 @@
     <string name="pref_more_settings">More settings</string>
     <string name="pref_retain_recent_egg_tasks">Retain Easter egg tasks</string>
     <string name="pref_summary_retain_recent_egg_tasks">Retain Easter egg tasks on Recents screen. Up to 5 can be retained.</string>
+    <string name="pref_title_dynamic_egg_colors">Material You egg colors</string>
+    <string name="pref_summary_dynamic_egg_colors">Recolor classic Easter eggs with colors derived from your wallpaper. Currently applies to the Jelly Bean egg.</string>
     <string name="label_about">About</string>
     <string name="label_contribute">Contribute</string>
     <string name="animator_disabled_alert_message">System animations have been disabled. Some functions may not work properly. Please go to \"Developer options\" and set the \"Animator duration scale\" option to activate the animations</string>

@@ -71,6 +71,8 @@
     <string name="pref_more_settings">Додаткові налаштування</string>
     <string name="pref_retain_recent_egg_tasks">Відкриття Великодніх яєць в окремих вікнах</string>
     <string name="pref_summary_retain_recent_egg_tasks">Відкривати окремі, Великодні яйця максимумом до 5 вікон</string>
+    <string name="pref_title_dynamic_egg_colors">Кольори Material You для великодніх яєць</string>
+    <string name="pref_summary_dynamic_egg_colors">Перефарбуйте класичні великодні яйця кольорами, похідними від ваших шпалер. Наразі застосовується до великоднього яйця Jelly Bean.</string>
     <string name="label_about">Про додаток</string>
     <string name="label_contribute">Допомогти автору</string>
     <string name="animator_disabled_alert_message">Через те, що системну анімацію вимкнено, деякі функції можуть працювати некоректно. Будь ласка, зайдіть у \"Для розробників\" та увімкніть опцію \"Тривалість анімації\", щоб активувати анімацію.</string>

@@ -34,6 +34,7 @@ import com.dede.android_eggs.views.settings.compose.prefs.CatEditorPref
 import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePref
 import com.dede.android_eggs.views.settings.compose.prefs.ComponentManagerPref
 import com.dede.android_eggs.views.settings.compose.prefs.DataBackupPref
+import com.dede.android_eggs.views.settings.compose.prefs.DynamicEggColorsPref
 import com.dede.android_eggs.views.settings.compose.prefs.EggStatsPref
 import com.dede.android_eggs.views.settings.compose.prefs.HighestEggCountPref
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePref
@@ -117,6 +118,8 @@ fun SettingsContent(
         }
 
         HighestEggCountPref()
+
+        DynamicEggColorsPref()
 
         SnapshotPref()
 
