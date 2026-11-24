@@ -33,6 +33,15 @@ class PrefKey<T> private constructor(
         return context.pref.reader(name, default)
     }
 
+    /**
+     * Whether a value has been written, i.e. [default] is the effective value
+     * rather than a value the user chose. Needed by settings whose default
+     * depends on the device capabilities, such as `colorSource`.
+     */
+    fun isSet(context: Context): Boolean {
+        return context.pref.contains(name)
+    }
+
     fun set(context: Context, value: T) {
         context.pref.edit { this.writer(name, value) }
     }

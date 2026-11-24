@@ -3,6 +3,7 @@
 ### v5.7.1
 
 - Add Material You colors to the Jelly Bean egg
+- Fix the Easter egg colors to follow the app color source
 
 ### v5.7.0 (2026-11-24)
 

@@ -1,0 +1,2 @@
+- Add Material You colors to the Jelly Bean egg
+- Fix the Easter egg colors to follow the app color source
