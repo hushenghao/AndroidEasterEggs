@@ -1,9 +1,9 @@
 # 更新日志
 
-### v5.6.1
+### v5.7.0 (2026-11-24)
 
 - 添加 Android App Functions 支持(Android 16+)
-- 添加 GitHub Pagers
+- 添加 GitHub Pages
 - 添加彩蛋游玩统计
 - 添加高亮彩蛋数量滑块
 - 首页彩蛋卡片添加柔和的 Logo 背景

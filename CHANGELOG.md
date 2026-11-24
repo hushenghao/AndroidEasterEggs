@@ -1,9 +1,9 @@
 # Changelog
 
-### v5.6.1
+### v5.7.0 (2026-11-24)
 
 - Add Android App Functions support (Android 16+)
-- Add GitHub Pagers
+- Add GitHub Pages
 - Add local egg play statistics
 - Add a slider for highlighted egg count
 - Add a subtle logo backdrop to the home egg cards
