@@ -36,6 +36,9 @@ import androidx.compose.material3.FloatingToolbarDefaults
 import androidx.compose.material3.HorizontalFloatingToolbar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.shapes
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipAnchorPosition
@@ -46,6 +49,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -114,6 +118,13 @@ internal fun CatEditorFloatingToolbar(
     ) {
         val availableRowWidth = (maxWidth - FloatingToolbarFabReservedWidth).coerceAtLeast(0.dp)
 
+        val tooltipShape = shapes.extraSmall
+        // AppBarRow creates its internal DropdownMenu with MenuDefaults.shape
+        // (MaterialTheme.shapes.extraSmall) without exposing a shape parameter.
+        // Override extraSmall locally to shapes.extraLarge to match EasterEggGroupSelector,
+        // while preserving tooltipShape explicitly on PlainTooltip.
+        val menuShapes = shapes.copy(extraSmall = shapes.extraLarge)
+
         HorizontalFloatingToolbar(
             expanded = true,
             floatingActionButton = {
@@ -121,7 +132,7 @@ internal fun CatEditorFloatingToolbar(
                     positionProvider = TooltipDefaults.rememberTooltipPositionProvider(
                         TooltipAnchorPosition.Above
                     ),
-                    tooltip = { PlainTooltip { Text(randomLabel) } },
+                    tooltip = { PlainTooltip(shape = tooltipShape) { Text(randomLabel) } },
                     state = rememberTooltipState(),
                 ) {
                     FloatingToolbarDefaults.StandardFloatingActionButton(
@@ -135,175 +146,194 @@ internal fun CatEditorFloatingToolbar(
                 }
             },
         ) {
-            AppBarRow(
-                modifier = Modifier.widthIn(max = availableRowWidth),
-                overflowIndicator = { menuState ->
-                    TooltipBox(
-                        positionProvider = TooltipDefaults.rememberTooltipPositionProvider(
-                            TooltipAnchorPosition.Above
-                        ),
-                        tooltip = { PlainTooltip { Text(overflowDescription) } },
-                        state = rememberTooltipState(),
+            MaterialTheme(shapes = menuShapes) {
+                AppBarRow(
+                    modifier = Modifier.widthIn(max = availableRowWidth),
+                    overflowIndicator = { menuState ->
+                        TooltipBox(
+                            positionProvider = TooltipDefaults.rememberTooltipPositionProvider(
+                                TooltipAnchorPosition.Above
+                            ),
+                            tooltip = {
+                                PlainTooltip(shape = tooltipShape) {
+                                    Text(overflowDescription)
+                                }
+                            },
+                            state = rememberTooltipState(),
+                        ) {
+                            IconButton(onClick = { menuState.show() }) {
+                                Icon(
+                                    imageVector = Icons.Rounded.MoreVert,
+                                    contentDescription = overflowDescription,
+                                )
+                            }
+                        }
+                    },
+                ) {
+                    actionItem(
+                        onClick = onGoBack,
+                        label = undoLabel,
+                        enabled = canGoBack,
+                        tooltipShape = tooltipShape,
                     ) {
-                        IconButton(onClick = { menuState.show() }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                            contentDescription = undoLabel,
+                        )
+                    }
+
+                    actionItem(
+                        onClick = onGoNext,
+                        label = redoLabel,
+                        enabled = canGoNext,
+                        tooltipShape = tooltipShape,
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Rounded.ArrowForward,
+                            contentDescription = redoLabel,
+                        )
+                    }
+
+                    actionItem(
+                        onClick = onPaletteClick,
+                        label = paletteLabel,
+                        enabled = hasSelectedPart,
+                        tooltipShape = tooltipShape,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Palette,
+                            contentDescription = paletteLabel,
+                        )
+                    }
+
+                    actionItem(
+                        onClick = onFavoriteClick,
+                        label = favoriteLabel,
+                        enabled = !isFavoriteProcessing,
+                        tooltipShape = tooltipShape,
+                    ) {
+                        Crossfade(
+                            targetState = isFavorite,
+                            label = "Favorite Icon Crossfade",
+                        ) { favorite ->
                             Icon(
-                                imageVector = Icons.Rounded.MoreVert,
-                                contentDescription = overflowDescription,
+                                imageVector = if (favorite) {
+                                    Icons.Rounded.Favorite
+                                } else {
+                                    Icons.Rounded.FavoriteBorder
+                                },
+                                contentDescription = favoriteLabel,
                             )
                         }
                     }
-                },
-            ) {
-                actionItem(
-                    onClick = onGoBack,
-                    label = undoLabel,
-                    enabled = canGoBack,
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                        contentDescription = undoLabel,
-                    )
-                }
 
-                actionItem(
-                    onClick = onGoNext,
-                    label = redoLabel,
-                    enabled = canGoNext,
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Rounded.ArrowForward,
-                        contentDescription = redoLabel,
-                    )
-                }
-
-                actionItem(
-                    onClick = onPaletteClick,
-                    label = paletteLabel,
-                    enabled = hasSelectedPart,
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.Palette,
-                        contentDescription = paletteLabel,
-                    )
-                }
-
-                actionItem(
-                    onClick = onFavoriteClick,
-                    label = favoriteLabel,
-                    enabled = !isFavoriteProcessing,
-                ) {
-                    Crossfade(
-                        targetState = isFavorite,
-                        label = "Favorite Icon Crossfade",
-                    ) { favorite ->
+                    actionItem(
+                        onClick = onSaveClick,
+                        label = saveLabel,
+                        tooltipShape = tooltipShape,
+                    ) {
                         Icon(
-                            imageVector = if (favorite) {
-                                Icons.Rounded.Favorite
-                            } else {
-                                Icons.Rounded.FavoriteBorder
-                            },
-                            contentDescription = favoriteLabel,
+                            imageVector = Icons.Rounded.Save,
+                            contentDescription = saveLabel,
                         )
                     }
-                }
 
-                actionItem(
-                    onClick = onSaveClick,
-                    label = saveLabel,
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.Save,
-                        contentDescription = saveLabel,
-                    )
-                }
+                    actionItem(
+                        onClick = onMirrorClick,
+                        label = mirrorLabel,
+                        tooltipShape = tooltipShape,
+                    ) {
+                        val rotationY by animateFloatAsState(
+                            targetValue = if (isMirrorMode) 180f else 0f,
+                            label = "Cat Mirror Rotation",
+                        )
+                        Icon(
+                            modifier = Modifier.graphicsLayer { this.rotationY = rotationY },
+                            imageVector = Icons.Rounded.Flip,
+                            contentDescription = mirrorLabel,
+                        )
+                    }
 
-                actionItem(
-                    onClick = onMirrorClick,
-                    label = mirrorLabel,
-                ) {
-                    val rotationY by animateFloatAsState(
-                        targetValue = if (isMirrorMode) 180f else 0f,
-                        label = "Cat Mirror Rotation",
-                    )
-                    Icon(
-                        modifier = Modifier.graphicsLayer { this.rotationY = rotationY },
-                        imageVector = Icons.Rounded.Flip,
-                        contentDescription = mirrorLabel,
-                    )
-                }
+                    actionItem(
+                        onClick = onToggleGridClick,
+                        label = gridLabel,
+                        tooltipShape = tooltipShape,
+                    ) {
+                        Icon(
+                            imageVector = if (isGridVisible) {
+                                Icons.Rounded.GridOff
+                            } else {
+                                Icons.Rounded.GridOn
+                            },
+                            contentDescription = gridLabel,
+                        )
+                    }
 
-                actionItem(
-                    onClick = onToggleGridClick,
-                    label = gridLabel,
-                ) {
-                    Icon(
-                        imageVector = if (isGridVisible) {
-                            Icons.Rounded.GridOff
-                        } else {
-                            Icons.Rounded.GridOn
-                        },
-                        contentDescription = gridLabel,
-                    )
-                }
+                    actionItem(
+                        onClick = onShareClick,
+                        label = shareLabel,
+                        tooltipShape = tooltipShape,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Share,
+                            contentDescription = shareLabel,
+                        )
+                    }
 
-                actionItem(
-                    onClick = onShareClick,
-                    label = shareLabel,
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.Share,
-                        contentDescription = shareLabel,
-                    )
-                }
+                    actionItem(
+                        onClick = onResetViewClick,
+                        label = resetViewLabel,
+                        tooltipShape = tooltipShape,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.CenterFocusWeak,
+                            contentDescription = resetViewLabel,
+                        )
+                    }
 
-                actionItem(
-                    onClick = onResetViewClick,
-                    label = resetViewLabel,
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.CenterFocusWeak,
-                        contentDescription = resetViewLabel,
-                    )
-                }
+                    actionItem(
+                        onClick = onCopySeedClick,
+                        label = copySeedLabel,
+                        tooltipShape = tooltipShape,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.ContentCopy,
+                            contentDescription = copySeedLabel,
+                        )
+                    }
 
-                actionItem(
-                    onClick = onCopySeedClick,
-                    label = copySeedLabel,
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.ContentCopy,
-                        contentDescription = copySeedLabel,
-                    )
-                }
+                    actionItem(
+                        onClick = onExportSvgClick,
+                        label = exportSvgLabel,
+                        tooltipShape = tooltipShape,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Code,
+                            contentDescription = exportSvgLabel,
+                        )
+                    }
 
-                actionItem(
-                    onClick = onExportSvgClick,
-                    label = exportSvgLabel,
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.Code,
-                        contentDescription = exportSvgLabel,
-                    )
-                }
+                    actionItem(
+                        onClick = onInputSeedClick,
+                        label = inputSeedLabel,
+                        tooltipShape = tooltipShape,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Draw,
+                            contentDescription = inputSeedLabel,
+                        )
+                    }
 
-                actionItem(
-                    onClick = onInputSeedClick,
-                    label = inputSeedLabel,
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.Draw,
-                        contentDescription = inputSeedLabel,
-                    )
-                }
-
-                actionItem(
-                    onClick = onPrintClick,
-                    label = printLabel,
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.Print,
-                        contentDescription = printLabel,
-                    )
+                    actionItem(
+                        onClick = onPrintClick,
+                        label = printLabel,
+                        tooltipShape = tooltipShape,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Print,
+                            contentDescription = printLabel,
+                        )
+                    }
                 }
             }
         }
@@ -313,6 +343,7 @@ internal fun CatEditorFloatingToolbar(
 private fun AppBarScope.actionItem(
     onClick: () -> Unit,
     label: String,
+    tooltipShape: Shape,
     enabled: Boolean = true,
     icon: @Composable () -> Unit,
 ) {
@@ -322,7 +353,7 @@ private fun AppBarScope.actionItem(
                 positionProvider = TooltipDefaults.rememberTooltipPositionProvider(
                     TooltipAnchorPosition.Above
                 ),
-                tooltip = { PlainTooltip { Text(label) } },
+                tooltip = { PlainTooltip(shape = tooltipShape) { Text(label) } },
                 state = rememberTooltipState(),
             ) {
                 IconButton(
@@ -334,7 +365,12 @@ private fun AppBarScope.actionItem(
         },
         menuContent = { menuState ->
             DropdownMenuItem(
-                text = { Text(label) },
+                text = {
+                    Text(
+                        text = label,
+                        style = typography.bodyLarge,
+                    )
+                },
                 leadingIcon = icon,
                 enabled = enabled,
                 onClick = {
