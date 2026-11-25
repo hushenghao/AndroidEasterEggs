@@ -1,6 +1,11 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.cat_editor.ui
+
+import com.dede.android_eggs.cat_editor.Cat
+import com.dede.android_eggs.cat_editor.CatRememberDataStore
+import com.dede.android_eggs.cat_editor.R
+import com.dede.android_eggs.cat_editor.editor.rememberCatPainter
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade

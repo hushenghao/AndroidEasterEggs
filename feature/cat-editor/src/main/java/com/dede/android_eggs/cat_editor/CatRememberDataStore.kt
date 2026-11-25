@@ -21,6 +21,7 @@ import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.driver.AndroidSQLiteDriver
 import androidx.sqlite.execSQL
 import com.dede.android_eggs.cat_editor.Cat.Companion.createCat
+import com.dede.android_eggs.cat_editor.model.CatPartColors
 import com.dede.basic.globalContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

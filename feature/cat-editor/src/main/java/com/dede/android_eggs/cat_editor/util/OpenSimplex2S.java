@@ -1,4 +1,4 @@
-package com.dede.android_eggs.cat_editor;
+package com.dede.android_eggs.cat_editor.util;
 
 // OpenSimplex2 (https://github.com/KdotJPG/OpenSimplex2)
 //

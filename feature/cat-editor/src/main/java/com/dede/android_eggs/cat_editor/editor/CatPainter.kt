@@ -1,4 +1,6 @@
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.cat_editor.editor
+
+import com.dede.android_eggs.cat_editor.Cat
 
 import android.graphics.Bitmap
 import androidx.compose.runtime.Composable
@@ -7,7 +9,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
-import com.dede.android_eggs.cat_editor.Utilities.asAndroidMatrix
+import com.dede.android_eggs.cat_editor.util.Utilities.asAndroidMatrix
 
 @Composable
 internal fun rememberCatPainter(cat: Cat): CatPainter {

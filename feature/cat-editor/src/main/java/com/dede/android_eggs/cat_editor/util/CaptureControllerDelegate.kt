@@ -1,4 +1,4 @@
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.cat_editor.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

@@ -1,4 +1,7 @@
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.cat_editor.editor
+
+import com.dede.android_eggs.cat_editor.model.CatPartColors
+import com.dede.android_eggs.cat_editor.util.Utilities
 
 import android.os.Bundle
 import androidx.compose.runtime.Composable

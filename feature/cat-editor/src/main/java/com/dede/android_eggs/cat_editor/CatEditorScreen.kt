@@ -1,68 +1,18 @@
-@file:OptIn(ExperimentalPermissionsApi::class)
-
 package com.dede.android_eggs.cat_editor
 
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.net.Uri
 import android.util.Log
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.Crossfade
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.automirrored.rounded.ArrowForward
-import androidx.compose.material.icons.rounded.CenterFocusWeak
-import androidx.compose.material.icons.rounded.Code
-import androidx.compose.material.icons.rounded.ContentCopy
-import androidx.compose.material.icons.rounded.Draw
-import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
-import androidx.compose.material.icons.rounded.Flip
-import androidx.compose.material.icons.rounded.GridOff
-import androidx.compose.material.icons.rounded.GridOn
-import androidx.compose.material.icons.rounded.MoreVert
-import androidx.compose.material.icons.rounded.Palette
-import androidx.compose.material.icons.rounded.Print
-import androidx.compose.material.icons.rounded.Refresh
-import androidx.compose.material.icons.rounded.Save
-import androidx.compose.material.icons.rounded.Share
-import androidx.compose.material.icons.rounded.ZoomIn
-import androidx.compose.material.icons.rounded.ZoomOut
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults.cardColors
-import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
-import androidx.compose.material3.MaterialTheme.typography
-import androidx.compose.material3.Text
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.computedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -73,45 +23,40 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asAndroidBitmap
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
-import androidx.print.PrintHelper
-import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
-import com.dede.android_eggs.cat_editor.CatEditorRecords.Companion.rememberCatEditorRecords
-import com.dede.android_eggs.cat_editor.Utilities.toPrintBitmap
+import com.dede.android_eggs.cat_editor.editor.CatEditor
+import com.dede.android_eggs.cat_editor.editor.CatEditorController
+import com.dede.android_eggs.cat_editor.editor.CatEditorRecords
+import com.dede.android_eggs.cat_editor.editor.CatEditorRecords.Companion.rememberCatEditorRecords
+import com.dede.android_eggs.cat_editor.editor.rememberCatEditorController
+import com.dede.android_eggs.cat_editor.model.CatParts
+import com.dede.android_eggs.cat_editor.ui.CatEditorFloatingToolbar
+import com.dede.android_eggs.cat_editor.ui.CatRememberBottomSheet
+import com.dede.android_eggs.cat_editor.ui.CatSeedInputDialog
+import com.dede.android_eggs.cat_editor.ui.CatSvgCodeDialog
+import com.dede.android_eggs.cat_editor.ui.ZoomHapticFeedback
+import com.dede.android_eggs.cat_editor.ui.ZoomValuePopup
+import com.dede.android_eggs.cat_editor.util.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
+import com.dede.android_eggs.cat_editor.util.Utilities
+import com.dede.android_eggs.cat_editor.util.rememberPrintCatAction
+import com.dede.android_eggs.cat_editor.util.rememberSaveCatAction
 import com.dede.android_eggs.color_picker.ColorPickerDialog
 import com.dede.android_eggs.color_picker.ColorPickerUtilities
 import com.dede.android_eggs.composable.appbar.HazeScaffold
-import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeBottomBar
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.navigation.LocalNavigator
-import com.dede.android_eggs.preferences.AppSettings
-import com.dede.android_eggs.settings_ui.basic.rememberPrefBoolState
 import com.dede.basic.copy
-import com.dede.basic.toast
 import com.dede.basic.trimZeroAndDot
-import com.dede.basic.utils.ShareCatUtils
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
-import kotlin.math.abs
-import kotlin.time.Duration.Companion.seconds
-import androidx.appcompat.R as AppCompatR
 import com.dede.android_eggs.resources.R as StringR
 
 @Module
@@ -157,7 +102,6 @@ fun CatEditorScreen(initialSeed: Long? = null) {
             }
     }
 
-    var moreOptionsPopVisible by remember { mutableStateOf(false) }
     var inputSeedDialogVisible by remember { mutableStateOf(false) }
 
     var rememberCatsDialogVisible by rememberSaveable { mutableStateOf(false) }
@@ -191,198 +135,8 @@ fun CatEditorScreen(initialSeed: Long? = null) {
     var catSvgDialogVisible by remember { mutableStateOf(false) }
     var catSvgText by remember { mutableStateOf("") }
 
-    val goBackButton: @Composable () -> Unit = {
-        IconButton(
-            onClick = {
-                CatEditorRecords.restoreRecord(
-                    catEditorRecords.goBack(),
-                    catEditorController,
-                    catSeedState
-                )
-            },
-            enabled = catEditorRecords.canGoBack()
-        ) {
-            Icon(imageVector = Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = null)
-        }
-    }
-    val goNextButton: @Composable () -> Unit = {
-        IconButton(
-            onClick = {
-                CatEditorRecords.restoreRecord(
-                    catEditorRecords.goNext(),
-                    catEditorController,
-                    catSeedState
-                )
-            },
-            enabled = catEditorRecords.canGoNext()
-        ) {
-            Icon(imageVector = Icons.AutoMirrored.Rounded.ArrowForward, contentDescription = null)
-        }
-    }
-    val paletteButton: @Composable () -> Unit = {
-        IconButton(
-            onClick = { colorPaletteVisible = true },
-            enabled = catEditorController.hasSelectedPart
-        ) {
-            Icon(imageVector = Icons.Rounded.Palette, contentDescription = null)
-        }
-    }
-    val gridButton: @Composable () -> Unit = {
-        IconButton(
-            onClick = { catEditorController.isGridVisible = !catEditorController.isGridVisible }
-        ) {
-            Crossfade(catEditorController.isGridVisible) {
-                if (it) {
-                    Icon(imageVector = Icons.Rounded.GridOff, contentDescription = null)
-                } else {
-                    Icon(imageVector = Icons.Rounded.GridOn, contentDescription = null)
-                }
-            }
-        }
-    }
-    val mirrorButton: @Composable () -> Unit = {
-        IconButton(onClick = {
-            catEditorController.resetGraphicsLayer()
-            catEditorController.isMirrorMode = !catEditorController.isMirrorMode
-        }) {
-            val rotationY by animateFloatAsState(if (catEditorController.isMirrorMode) 180f else 0f)
-            Icon(
-                modifier = Modifier.graphicsLayer {
-                    this.rotationY = rotationY
-                },
-                imageVector = Icons.Rounded.Flip,
-                contentDescription = null
-            )
-        }
-    }
-    val zoomIn: @Composable () -> Unit = {
-        IconButton(
-            onClick = { catEditorController.zoom *= S_STEP },
-            enabled = catEditorController.zoom < S_MAX
-        ) {
-            Icon(
-                imageVector = Icons.Rounded.ZoomIn,
-                contentDescription = null
-            )
-        }
-    }
-    val zoomOut: @Composable () -> Unit = {
-        IconButton(
-            onClick = { catEditorController.zoom /= S_STEP },
-            enabled = catEditorController.zoom > S_MIN
-        ) {
-            Icon(
-                imageVector = Icons.Rounded.ZoomOut,
-                contentDescription = null
-            )
-        }
-    }
-    val resetGraphicsLayer: @Composable () -> Unit = {
-        IconButton(
-            onClick = { catEditorController.resetGraphicsLayer() },
-        ) {
-            Icon(
-                imageVector = Icons.Rounded.CenterFocusWeak,
-                contentDescription = null
-            )
-        }
-    }
-    val saveButton: @Composable () -> Unit = {
-        SaveCatButton(
-            catName = catName,
-            captureController = captureController,
-        )
-    }
-    val shareButton: @Composable () -> Unit = {
-        SaveCatButton(
-            imageVector = Icons.Rounded.Share,
-            catName = catName,
-            captureController = captureController,
-            onCatSaved = { _, uri, catName ->
-                if (uri != null) {
-                    ShareCatUtils.shareCatOnly(context, uri, catName)
-                }
-            }
-        )
-    }
-    val printButton: @Composable () -> Unit = {
-        PrintCatButton(
-            catName = catName,
-            captureController = captureController,
-        )
-    }
-    val copyButton: @Composable () -> Unit = {
-        IconButton(onClick = { context.copy(catSeed.toString()) }) {
-            Icon(
-                imageVector = Icons.Rounded.ContentCopy,
-                contentDescription = stringResource(android.R.string.copy)
-            )
-        }
-    }
-    val svgButton: @Composable () -> Unit = {
-        IconButton(onClick = {
-            catSvgText = CatParts.toSvg(
-                catEditorController.colorList, catEditorController.isMirrorMode
-            )
-            Log.i("CatEditor", "\n" + catSvgText)
-            catSvgDialogVisible = true
-        }) {
-            Icon(
-                imageVector = Icons.Rounded.Code,
-                contentDescription = null
-            )
-        }
-    }
-    val inputCatButton: @Composable () -> Unit = {
-        IconButton(onClick = { inputSeedDialogVisible = true }) {
-            Icon(imageVector = Icons.Rounded.Draw, contentDescription = null)
-        }
-    }
-    val refreshButton: @Composable () -> Unit = {
-        IconButton(onClick = {
-            updateCatSeed(Utilities.randomSeed())
-        }) {
-            Icon(imageVector = Icons.Rounded.Refresh, contentDescription = null)
-        }
-    }
-    val favoriteButton: @Composable () -> Unit = {
-        IconButton(
-            onClick = {
-                isRememberCatProcessing = true
-                scope.launch {
-                    if (isRememberCat) {
-                        CatRememberDataStore.forget(catSeed, catEditorController.colorList)
-                    } else {
-                        CatRememberDataStore.remember(catSeed, catEditorController.colorList)
-                    }
-                    isRememberCat = !isRememberCat
-                    isRememberCatProcessing = false
-                }
-            },
-            enabled = !isRememberCatProcessing
-        ) {
-            Crossfade(targetState = isRememberCat) {
-                if (it) {
-                    Icon(imageVector = Icons.Rounded.Favorite, contentDescription = null)
-                } else {
-                    Icon(imageVector = Icons.Rounded.FavoriteBorder, contentDescription = null)
-                }
-            }
-        }
-    }
-
-    val bottomMenuButtonList = remember {
-        listOf(
-            goBackButton, goNextButton,
-            paletteButton, gridButton,
-            favoriteButton, saveButton,
-            mirrorButton, zoomIn, zoomOut, resetGraphicsLayer,
-            shareButton, printButton, copyButton, svgButton,
-            inputCatButton, refreshButton,
-        )
-    }
-
-    var bottomButtonCount by remember { mutableIntStateOf(bottomMenuButtonList.size) }
+    val saveCatAction = rememberSaveCatAction(catName, captureController)
+    val printCatAction = rememberPrintCatAction(catName, captureController)
 
     HazeScaffold(
         title = stringResource(StringR.string.cat_editor),
@@ -396,20 +150,6 @@ fun CatEditorScreen(initialSeed: Long? = null) {
                     tint = colorScheme.onSurface
                 )
             }
-        },
-        bottomBar = {
-            BottomOptionsBar(
-                modifier = Modifier.hazeBottomBar(),
-                containerColor = Color.Transparent,
-                totalOptionsCount = bottomMenuButtonList.size,
-                options = bottomMenuButtonList,
-                onVisibleOptionCountChanged = { visibleCount, _ ->
-                    bottomButtonCount = visibleCount
-                },
-                onMoreOptionsClick = {
-                    moreOptionsPopVisible = !moreOptionsPopVisible
-                }
-            )
         }
     ) { contentPadding ->
         Box(
@@ -481,18 +221,75 @@ fun CatEditorScreen(initialSeed: Long? = null) {
                 onDismiss = { catSvgDialogVisible = false },
             )
 
-            if (bottomButtonCount < bottomMenuButtonList.size) {
-                MoreOptionsPopup(
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(horizontal = 14.dp),
-                    visible = moreOptionsPopVisible,
-                ) {
-                    for (i in bottomButtonCount..<bottomMenuButtonList.size) {
-                        bottomMenuButtonList[i]()
+            CatEditorFloatingToolbar(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 16.dp),
+                canGoBack = catEditorRecords.canGoBack(),
+                canGoNext = catEditorRecords.canGoNext(),
+                onGoBack = {
+                    CatEditorRecords.restoreRecord(
+                        catEditorRecords.goBack(),
+                        catEditorController,
+                        catSeedState
+                    )
+                },
+                onGoNext = {
+                    CatEditorRecords.restoreRecord(
+                        catEditorRecords.goNext(),
+                        catEditorController,
+                        catSeedState
+                    )
+                },
+                hasSelectedPart = catEditorController.hasSelectedPart,
+                onPaletteClick = { colorPaletteVisible = true },
+                isMirrorMode = catEditorController.isMirrorMode,
+                onMirrorClick = {
+                    catEditorController.resetGraphicsLayer()
+                    catEditorController.isMirrorMode = !catEditorController.isMirrorMode
+                },
+                isFavorite = isRememberCat,
+                isFavoriteProcessing = isRememberCatProcessing,
+                onFavoriteClick = {
+                    isRememberCatProcessing = true
+                    scope.launch {
+                        if (isRememberCat) {
+                            CatRememberDataStore.forget(catSeed, catEditorController.colorList)
+                        } else {
+                            CatRememberDataStore.remember(catSeed, catEditorController.colorList)
+                        }
+                        isRememberCat = !isRememberCat
+                        isRememberCatProcessing = false
                     }
+                },
+                onRefreshClick = {
+                    updateCatSeed(Utilities.randomSeed())
+                },
+                onSaveClick = saveCatAction.save,
+                onShareClick = saveCatAction.share,
+                onCopySeedClick = {
+                    context.copy(catSeed.toString())
+                },
+                onExportSvgClick = {
+                    catSvgText = CatParts.toSvg(
+                        catEditorController.colorList, catEditorController.isMirrorMode
+                    )
+                    Log.i("CatEditor", "\n" + catSvgText)
+                    catSvgDialogVisible = true
+                },
+                onPrintClick = printCatAction,
+                isGridVisible = catEditorController.isGridVisible,
+                onToggleGridClick = {
+                    catEditorController.isGridVisible = !catEditorController.isGridVisible
+                },
+                onResetViewClick = {
+                    catEditorController.resetGraphicsLayer()
+                },
+                onInputSeedClick = {
+                    inputSeedDialogVisible = true
                 }
-            }
+            )
         }
     }
 
@@ -503,278 +300,4 @@ fun CatEditorScreen(initialSeed: Long? = null) {
         },
         onDismiss = { rememberCatsDialogVisible = false }
     )
-}
-
-@Composable
-private fun SaveCatButton(
-    catName: String,
-    captureController: CaptureControllerDelegate,
-    imageVector: ImageVector = Icons.Rounded.Save,
-    contentDescription: String? = null,
-    onCatSaved: (bitmap: Bitmap, uri: Uri?, catName: String) -> Unit = { _, _, _ -> },
-) {
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-
-    var isSaving by remember { mutableStateOf(false) }
-
-    fun saveCatToAlbum() {
-        isSaving = true
-        val deferred = captureController.captureAsync()
-        scope.launch {
-            val bitmap = deferred.await().asAndroidBitmap()
-            val uri = ShareCatUtils.saveCat(context, bitmap, catName)
-            onCatSaved(bitmap, uri, catName)
-            if (uri != null) {
-                context.toast("🐱")
-            } else {
-                context.toast("🚫")
-            }
-            isSaving = false
-        }
-    }
-
-    val storagePermissionState = rememberMultiplePermissionsStateCompat(
-        permissions = ShareCatUtils.storagePermissions,
-        isNotRequire = ShareCatUtils.isNotRequireStoragePermissions,
-        onPermissionsResult = { result ->
-            if (result.all { it.value }) {
-                saveCatToAlbum()
-            } else {
-                context.toast("🚫")
-            }
-        }
-    )
-    IconButton(
-        onClick = {
-            when {
-                storagePermissionState.allPermissionsGranted -> saveCatToAlbum()
-                storagePermissionState.shouldShowRationale -> context.toast("🚫")
-                else -> storagePermissionState.launchMultiplePermissionRequest()
-            }
-        },
-        enabled = !isSaving
-    ) {
-        Icon(imageVector = imageVector, contentDescription = contentDescription)
-    }
-}
-
-@Composable
-private fun PrintCatButton(
-    catName: String,
-    captureController: CaptureControllerDelegate,
-) {
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-
-    var isPrinting by remember { mutableStateOf(false) }
-
-    fun printCat() {
-        if (!context.packageManager.hasSystemFeature(PackageManager.FEATURE_PRINTING)) {
-            // Devices without the print framework (stripped ROMs) silently
-            // ignore print requests; notify the user instead.
-            context.toast("🚫")
-            return
-        }
-        isPrinting = true
-        val deferred = captureController.captureAsync()
-        scope.launch {
-            val bitmap = deferred.await().asAndroidBitmap().toPrintBitmap()
-            try {
-                PrintHelper(context).apply {
-                    scaleMode = PrintHelper.SCALE_MODE_FIT
-                }.printBitmap(catName, bitmap)
-            } catch (_: RuntimeException) {
-                // e.g. RemoteException when the system print service is
-                // unavailable; the system print dialog cannot open.
-                context.toast("🚫")
-            } finally {
-                isPrinting = false
-            }
-        }
-    }
-
-    IconButton(
-        onClick = { printCat() },
-        enabled = !isPrinting
-    ) {
-        Icon(
-            imageVector = Icons.Rounded.Print,
-            contentDescription = null
-        )
-    }
-}
-
-@Composable
-private fun ZoomHapticFeedback(
-    zoom: Float,
-    hapticZoomStep: Float = 0.1f,
-    hapticInterval: Long = 80L,
-) {
-    val hapticFeedback = LocalHapticFeedback.current
-    var lastHapticTime by remember(hapticInterval) { mutableLongStateOf(System.currentTimeMillis()) }
-    var lastHapticZoom by remember(hapticZoomStep) { mutableFloatStateOf(zoom) }
-    LaunchedEffect(zoom) {
-        val now = System.currentTimeMillis()
-        if ((now - lastHapticTime) >= hapticInterval && abs(lastHapticZoom - zoom) > hapticZoomStep) {
-            hapticFeedback.performHapticFeedback(HapticFeedbackType.SegmentFrequentTick)
-            lastHapticTime = now
-            lastHapticZoom = zoom
-        }
-    }
-}
-
-@Composable
-private fun ZoomValuePopup(zoomValue: String, modifier: Modifier = Modifier) {
-    var visible by remember { mutableStateOf(true) }
-    LaunchedEffect(zoomValue) {
-        visible = true
-        delay(1.seconds)
-        visible = false
-    }
-    AnimatedVisibility(
-        visible = visible,
-        modifier = modifier,
-        enter = fadeIn(tween(500)),
-        exit = fadeOut(tween(500)),
-    ) {
-        Card(
-            shape = CircleShape,
-            colors = cardColors(containerColor = colorScheme.surfaceColorAtElevation(4.dp)),
-        ) {
-            Text(
-                text = zoomValue,
-                modifier = Modifier
-                    .padding(12.dp)
-                    .sizeIn(minWidth = 30.dp),
-                style = typography.labelMedium,
-                textAlign = TextAlign.Center,
-            )
-        }
-    }
-}
-
-@Composable
-private fun BottomOptionsBar(
-    modifier: Modifier = Modifier,
-    containerColor: Color = colorScheme.surfaceContainer,
-    totalOptionsCount: Int,
-    onVisibleOptionCountChanged: (visibleCount: Int, hasMoreOptions: Boolean) -> Unit,
-    onMoreOptionsClick: () -> Unit,
-    options: List<@Composable () -> Unit>,
-) {
-    BottomAppBar(
-        modifier = modifier,
-        containerColor = containerColor,
-        actions = {
-            var moreOptionsVisible by remember { mutableStateOf(false) }
-            var iconButtonCount by remember { mutableIntStateOf(totalOptionsCount) }
-
-            LaunchedEffect(iconButtonCount) {
-                onVisibleOptionCountChanged(iconButtonCount, iconButtonCount < totalOptionsCount)
-            }
-
-            SubcomposeLayout(modifier = Modifier.weight(1f)) { constraints ->
-                // Measure the actual width of every option and the 'more' button,
-                // then greedily place as many options as fit in the available width.
-                // The incoming constraints may enforce a minimum width (from the
-                // parent's weight/fill), which would stretch each button; measure
-                // children with an unconstrained width to get their real size.
-                val measureConstraints = constraints.copy(minWidth = 0)
-                val optionPlaceables = options.mapIndexed { index, content ->
-                    subcompose("option$index", content)[0].measure(measureConstraints)
-                }
-                val morePlaceable = subcompose("moreButton") {
-                    FilledTonalIconButton(onClick = onMoreOptionsClick) {
-                        Icon(
-                            imageVector = Icons.Rounded.MoreVert,
-                            contentDescription = @Suppress("PrivateResource") stringResource(
-                                AppCompatR.string.abc_action_menu_overflow_description
-                            )
-                        )
-                    }
-                }[0].measure(measureConstraints)
-
-                val availableWidth = constraints.maxWidth
-
-                fun fitCount(reserveMoreWidth: Int): Int {
-                    var used = reserveMoreWidth
-                    var count = 0
-                    while (count < optionPlaceables.size) {
-                        val w = optionPlaceables[count].width
-                        if (used + w > availableWidth) break
-                        used += w
-                        count++
-                    }
-                    return count
-                }
-
-                // First try to fit every option without the 'more' button; if not
-                // all fit, reserve space for the 'more' button and recompute.
-                val allFit = fitCount(0) == optionPlaceables.size
-                val count = if (allFit) optionPlaceables.size else fitCount(morePlaceable.width)
-                val showMore = count < optionPlaceables.size
-
-                iconButtonCount = count
-                moreOptionsVisible = showMore
-
-                val height = (
-                        (0 until count).map { optionPlaceables[it].height } +
-                                if (showMore) listOf(morePlaceable.height) else emptyList()
-                        ).maxOrNull() ?: 0
-
-                layout(availableWidth, height) {
-                    var x = 0
-                    for (i in 0 until count) {
-                        val p = optionPlaceables[i]
-                        p.placeRelative(x, 0)
-                        x += p.width
-                    }
-                    if (showMore) {
-                        morePlaceable.placeRelative(availableWidth - morePlaceable.width, 0)
-                    }
-                }
-            }
-        }
-    )
-}
-
-@Composable
-private fun MoreOptionsPopup(
-    modifier: Modifier = Modifier,
-    visible: Boolean,
-    content: @Composable RowScope.() -> Unit
-) {
-    AnimatedVisibility(
-        visible = visible,
-        modifier = modifier,
-        label = "More Options Visibility",
-        enter = slideInVertically(spring(Spring.DampingRatioLowBouncy)) { it / 2 } + fadeIn(),
-        exit = slideOutVertically(spring(Spring.DampingRatioLowBouncy)) { it / 2 } + fadeOut(),
-    ) {
-        Card(
-            modifier = Modifier.padding(vertical = 14.dp),
-            shape = CircleShape,
-            colors = cardColors(containerColor = colorScheme.surfaceColorAtElevation(4.dp))
-        ) {
-            var moreOptionGuide by rememberPrefBoolState(AppSettings.catEditorMoreOptionGuide)
-            val scrollState = rememberScrollState()
-            LaunchedEffect(scrollState) {
-                if (moreOptionGuide && scrollState.canScrollForward) {
-                    scrollState.animateScrollTo(scrollState.maxValue, tween(600, delayMillis = 200))
-                    scrollState.animateScrollTo(0, tween(600, delayMillis = 500))
-                    moreOptionGuide = false
-                }
-            }
-            Row(
-                modifier = Modifier
-                    .padding(4.dp)
-                    .horizontalScroll(scrollState),
-            ) {
-                Spacer(modifier = Modifier.width(4.dp))
-                content()
-                Spacer(modifier = Modifier.width(4.dp))
-            }
-        }
-    }
 }

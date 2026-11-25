@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalPermissionsApi::class)
 
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.cat_editor.util
 
 import android.os.Build
 import androidx.compose.runtime.Composable

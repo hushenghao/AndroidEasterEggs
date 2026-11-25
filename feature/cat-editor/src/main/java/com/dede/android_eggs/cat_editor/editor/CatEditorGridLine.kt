@@ -1,4 +1,4 @@
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.cat_editor.editor
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize

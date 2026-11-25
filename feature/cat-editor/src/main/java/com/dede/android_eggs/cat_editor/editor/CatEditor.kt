@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalComposeUiApi::class)
 
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.cat_editor.editor
 
 import android.graphics.Bitmap
 import androidx.compose.animation.AnimatedVisibility
@@ -41,10 +41,13 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.toSize
-import com.dede.android_eggs.cat_editor.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
-import com.dede.android_eggs.cat_editor.CatParts.VIEW_PORT_SIZE
-import com.dede.android_eggs.cat_editor.Utilities.asAndroidMatrix
-import com.dede.android_eggs.cat_editor.Utilities.toInvert
+import com.dede.android_eggs.cat_editor.model.CatParts
+import com.dede.android_eggs.cat_editor.model.CatParts.VIEW_PORT_SIZE
+import com.dede.android_eggs.cat_editor.util.CaptureControllerDelegate
+import com.dede.android_eggs.cat_editor.util.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
+import com.dede.android_eggs.cat_editor.util.Utilities
+import com.dede.android_eggs.cat_editor.util.Utilities.asAndroidMatrix
+import com.dede.android_eggs.cat_editor.util.Utilities.toInvert
 import com.dede.android_eggs.color_picker.ColorPickerUtilities
 import dev.shreyaspatil.capturable.capturable
 import kotlin.math.max

@@ -1,4 +1,4 @@
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.cat_editor.util
 
 import android.graphics.Bitmap
 import android.graphics.BlendMode

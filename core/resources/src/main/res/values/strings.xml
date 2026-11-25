@@ -93,6 +93,19 @@
 
     <string name="cat_editor">Cat editor</string>
     <string name="cat_editor_input_seed">Input cat\'s seed</string>
+    <string name="cat_editor_action_undo">Undo</string>
+    <string name="cat_editor_action_redo">Redo</string>
+    <string name="cat_editor_action_palette">Palette</string>
+    <string name="cat_editor_action_favorite">Favorite</string>
+    <string name="cat_editor_action_unfavorite">Unfavorite</string>
+    <string name="cat_editor_action_random">Random cat</string>
+    <string name="cat_editor_action_save">Save to gallery</string>
+    <string name="cat_editor_action_copy_seed">Copy seed</string>
+    <string name="cat_editor_action_export_svg">Export SVG</string>
+    <string name="cat_editor_action_print">Print</string>
+    <string name="cat_editor_action_grid">Grid</string>
+    <string name="cat_editor_action_mirror">Flip horizontally</string>
+    <string name="cat_editor_action_reset_view">Reset view</string>
 
     <string name="rocket_launcher_easter_egg_icons">Easter eggs</string>
     <string name="rocket_launcher_all_app_icons">Apps</string>

@@ -1,4 +1,6 @@
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.cat_editor.editor
+
+import com.dede.android_eggs.cat_editor.model.CatPartColors
 
 import android.os.Bundle
 import android.os.Parcel

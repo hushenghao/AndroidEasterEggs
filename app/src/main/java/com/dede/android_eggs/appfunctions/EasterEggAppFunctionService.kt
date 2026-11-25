@@ -14,7 +14,7 @@ import androidx.appfunctions.AppFunctionService
 import androidx.appfunctions.AppFunctionServiceEntryPoint
 import androidx.core.graphics.drawable.toBitmap
 import com.dede.android_eggs.data.EasterEggRepository
-import com.dede.android_eggs.cat_editor.Utilities
+import com.dede.android_eggs.cat_editor.util.Utilities
 import com.dede.android_eggs.views.main.compose.filterEasterEggs
 import com.dede.android_eggs.views.main.util.IntentHandler
 import com.dede.basic.provider.EasterEgg

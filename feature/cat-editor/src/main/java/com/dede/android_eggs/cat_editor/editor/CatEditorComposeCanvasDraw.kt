@@ -1,4 +1,6 @@
-package com.dede.android_eggs.cat_editor
+package com.dede.android_eggs.cat_editor.editor
+
+import com.dede.android_eggs.cat_editor.model.CatParts
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Matrix
