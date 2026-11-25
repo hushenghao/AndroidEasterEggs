@@ -31,11 +31,13 @@ object SystemTonalColors {
         100.0, 99.0, 95.0, 90.0, 80.0, 70.0, 60.0, 49.6, 40.0, 30.0, 20.0, 10.0, 0.0,
     )
 
-    @Volatile
-    private var colors: Map<String, Int> = emptyMap()
+    private data class TonalState(
+        val key: String?,
+        val colors: Map<String, Int>,
+    )
 
     @Volatile
-    private var appliedKey: String? = null
+    private var state = TonalState(key = null, colors = emptyMap())
 
     /**
      * Generate the five system tonal palettes from [sourceColor] and override the
@@ -46,6 +48,11 @@ object SystemTonalColors {
      * current night mode so the palette matches the active theme.
      */
     fun updateSourceColor(sourceColor: Int, isDark: Boolean = false) {
+        val generated = generatePalettes(sourceColor, isDark)
+        state = TonalState(key = null, colors = generated)
+    }
+
+    private fun generatePalettes(sourceColor: Int, isDark: Boolean): Map<String, Int> {
         val scheme = SchemeTonalSpot(Hct.fromInt(sourceColor), isDark, 0.0)
         val palettes = mapOf(
             "accent1" to scheme.primaryPalette,
@@ -60,12 +67,12 @@ object SystemTonalColors {
                 generated["system_${group}_${SHADES[i]}"] = palette.getHct(SHADE_TONES[i]).toInt()
             }
         }
-        colors = generated
+        return generated
     }
 
     /** Drop the override, so the framework colors or the static palette apply again. */
     fun clear() {
-        colors = emptyMap()
+        state = TonalState(key = null, colors = emptyMap())
     }
 
     /**
@@ -81,6 +88,7 @@ object SystemTonalColors {
      * Reads the settings on every call but regenerates only when the source, the seed
      * or the night mode changed, so [Context.getSystemColor] can call it directly.
      */
+    @Synchronized
     fun syncWithSettings(context: Context) {
         val source = resolveColorSource(context)
         val seed = when (source) {
@@ -90,15 +98,11 @@ object SystemTonalColors {
         }
         val isDark = isNightMode(context)
         val key = "$source:$seed:$isDark"
-        if (key == appliedKey) {
+        if (key == state.key) {
             return
         }
-        if (seed == null) {
-            clear()
-        } else {
-            updateSourceColor(seed, isDark)
-        }
-        appliedKey = key
+        val nextColors = if (seed == null) emptyMap() else generatePalettes(seed, isDark)
+        state = TonalState(key = key, colors = nextColors)
     }
 
     internal fun resolveColorSource(context: Context): Int {
@@ -114,9 +118,16 @@ object SystemTonalColors {
     }
 
     internal fun isNightMode(context: Context): Boolean {
-        val uiMode = context.resources.configuration.uiMode
-        return (uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+        return when (AppSettings.nightMode.get(context)) {
+            AppSettings.NIGHT_MODE_LIGHT -> false
+            AppSettings.NIGHT_MODE_DARK,
+            AppSettings.NIGHT_MODE_AMOLED -> true
+            else -> {
+                val uiMode = context.resources.configuration.uiMode
+                (uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+            }
+        }
     }
 
-    internal fun getColor(resName: String): Int? = colors[resName]
+    internal fun getColor(resName: String): Int? = state.colors[resName]
 }

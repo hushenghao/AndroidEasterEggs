@@ -9,7 +9,6 @@ import android.util.Log
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.annotation.RequiresApi
 import androidx.startup.Initializer
-import com.dede.android_eggs.preferences.AppSettings
 import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.Executors
 
@@ -79,11 +78,9 @@ object WallpaperTonalColors {
             .getWallpaperColors(WallpaperManager.FLAG_SYSTEM) ?: return
         val color = colors.primaryColor.toArgb()
         seedColor = color
-        // Keep the seed for a later switch to the dynamic source, but leave the
-        // palette alone while a custom or brand seed owns it.
-        if (SystemTonalColors.resolveColorSource(context) == AppSettings.COLOR_SOURCE_DYNAMIC) {
-            SystemTonalColors.updateSourceColor(color, SystemTonalColors.isNightMode(context))
-        }
+        // Keep the seed for a later switch to the dynamic source, and sync the
+        // palette only if the active color source uses it.
+        SystemTonalColors.syncWithSettings(context)
         Log.i(TAG, "Seed color: #$color")
         mainHandler.post {
             for (listener in listeners) {

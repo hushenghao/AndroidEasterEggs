@@ -17,8 +17,8 @@ import java.util.Random;
  * to the system accent color while keeping the black outline and the white
  * highlight intact, unlike a plain tint which would flatten the bean into a
  * silhouette. The rotation matrix preserves luminance (the standard CSS
- * hue-rotate weights), then a scale lifts the result out of the dark range the
- * red original sits in.
+ * hue-rotate weights), then saturation and a bounded brightness scale align
+ * the bean with the target tonal palette without clipping cooler hues.
  */
 final class DynamicBeanColors {
 
@@ -34,7 +34,10 @@ final class DynamicBeanColors {
             SystemColor.ACCENT3_400,
     };
 
-    private static final float BRIGHTNESS = 1.5f;
+    private static final float MIN_SATURATION = 0.35f;
+    private static final float SATURATION_BOOST = 1.15f;
+    private static final float BASE_BRIGHTNESS = 1.0f;
+    private static final float BRIGHTNESS_VALUE_WEIGHT = 0.35f;
 
     private static final Random RANDOM = new Random();
 
@@ -60,13 +63,22 @@ final class DynamicBeanColors {
         float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
         ColorMatrix matrix = hueRotationMatrix(hsv[0] - BEAN_HUE);
-        matrix.postConcat(brightnessMatrix());
+        matrix.postConcat(saturationMatrix(hsv[1]));
+        matrix.postConcat(brightnessMatrix(hsv[2]));
         view.setColorFilter(new ColorMatrixColorFilter(matrix));
     }
 
-    private static ColorMatrix brightnessMatrix() {
+    private static ColorMatrix saturationMatrix(float targetSaturation) {
+        float saturation = Math.max(MIN_SATURATION, Math.min(1f, targetSaturation * SATURATION_BOOST));
         ColorMatrix matrix = new ColorMatrix();
-        matrix.setScale(BRIGHTNESS, BRIGHTNESS, BRIGHTNESS, 1f);
+        matrix.setSaturation(saturation);
+        return matrix;
+    }
+
+    private static ColorMatrix brightnessMatrix(float targetValue) {
+        float scale = BASE_BRIGHTNESS + BRIGHTNESS_VALUE_WEIGHT * targetValue;
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setScale(scale, scale, scale, 1f);
         return matrix;
     }
 

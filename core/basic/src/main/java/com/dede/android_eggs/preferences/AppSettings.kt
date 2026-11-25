@@ -25,8 +25,13 @@ object AppSettings {
 
     // Appearance, owned by :core:theme and :core:settings-ui --------------------
 
+    const val NIGHT_MODE_AMOLED = -2
+    const val NIGHT_MODE_LIGHT = AppCompatDelegate.MODE_NIGHT_NO
+    const val NIGHT_MODE_DARK = AppCompatDelegate.MODE_NIGHT_YES
+    const val NIGHT_MODE_FOLLOW_SYSTEM = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+
     /** Night mode, one of `ThemePrefUtil.AMOLED` / `LIGHT` / `DARK` / `FOLLOW_SYSTEM`. */
-    val nightMode = PrefKey.int("pref_key_night_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+    val nightMode = PrefKey.int("pref_key_night_mode", NIGHT_MODE_FOLLOW_SYSTEM)
 
     const val COLOR_SOURCE_DEFAULT = 0
     const val COLOR_SOURCE_DYNAMIC = 1

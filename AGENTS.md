@@ -92,8 +92,8 @@ Auto-injected dependencies (no explicit declaration needed in module build file)
 | Hilt        | 2.60.1 | `gradle/libs.versions.toml`                             |
 | Compose BOM | 2026.11.01 | `gradle/libs.versions.toml`                         |
 | applicationId | `com.dede.android_eggs` | `app/build.gradle.kts`                      |
-| versionName | 5.7.0  | `app/build.gradle.kts`                                  |
-| versionCode | 83     | `app/build.gradle.kts`                                  |
+| versionName | 5.7.1  | `app/build.gradle.kts`                                  |
+| versionCode | 84     | `app/build.gradle.kts`                                  |
 
 ## Build System
 

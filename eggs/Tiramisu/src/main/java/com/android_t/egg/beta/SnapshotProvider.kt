@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import com.dede.android_eggs.system_colors.SystemColorDrawables
 import com.android_t.egg.R
 import com.dede.basic.provider.SnapshotProvider
 
@@ -14,7 +15,15 @@ class SnapshotProvider : SnapshotProvider() {
         val layout = FrameLayout(context)
 
         val logo = ImageView(context)
-        logo.setImageResource(R.drawable.t_platlogo_beta)
+        logo.setImageDrawable(
+            SystemColorDrawables.create(
+                context,
+                "system_accent3_400",
+                R.drawable.t_platlogo_bg,
+                R.drawable.t_platlogo_beta_nobg,
+                R.drawable.t_platlogo_beta,
+            )
+        )
         val lp: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
             FrameLayout.LayoutParams.MATCH_PARENT

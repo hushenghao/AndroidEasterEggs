@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,10 +17,13 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.dede.android_eggs.R
+import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.settings_ui.basic.rememberPrefBoolState
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.basic.provider.SnapshotProvider
 import kotlin.random.Random
@@ -59,14 +63,22 @@ fun SnapshotView(
             )
         }
         if (snapshot != null) {
-            AndroidView(
-                factory = {
-                    snapshot.create(it)
-                },
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(if (snapshot.includeBackground || !snapshot.insertPadding) 0.dp else 12.dp)
-            )
+            val dynamicEggColors = if (LocalInspectionMode.current) {
+                false
+            } else {
+                rememberPrefBoolState(AppSettings.dynamicEggColors).value
+            }
+            val colorScheme = MaterialTheme.colorScheme
+            key(snapshot, dynamicEggColors, colorScheme) {
+                AndroidView(
+                    factory = {
+                        snapshot.create(it)
+                    },
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(if (snapshot.includeBackground || !snapshot.insertPadding) 0.dp else 12.dp)
+                )
+            }
         }
     }
 }
