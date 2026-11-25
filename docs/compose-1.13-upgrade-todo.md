@@ -18,7 +18,7 @@
 | 文件 | 位置 | 内容 |
 |------|------|------|
 | `feature/cat-editor/.../CatEditor.kt` | :152 | `selectedPart != UNSELECTED_PART` 条件判断 |
-| `feature/cat-editor/.../CatEditorScreen.kt` | :427 | 缩放值格式化字符串 |
+| `feature/cat-editor/.../CatEditorScreen.kt` | :167 | 缩放值格式化字符串 |
 | `app/.../ui/composes/PredictiveBackProgressHandler.kt` | :116 | 单纯读 `progress` |
 | `core/composable/.../ScrollableModalBottomSheet.kt` | :56 | `canScrollBackward != true` |
 
@@ -59,14 +59,14 @@ FlowRow 未弃用（官方只建议**新代码**用 FlexBox）；FlexBox 是 `Fl
 ## 四、行为变化须知（本项目无落点）
 
 - `Modifier.onFocusedBoundsChanged` 实现已移除 —— 本项目 0 处使用，无影响。
-- `Modifier.clickable` 自动播放系统音效 —— 全局行为变化，需确认符合预期。
+- `Modifier.clickable` 自动播放系统音效 —— 已确认符合预期。
 - ConstraintLayout / MotionLayout 弃用 —— 本项目已无残留。
 - Material 2 弃用 —— 本项目已是 M3。
 
 ## 五、工具 / CI
 
 - Compose 性能静态分析 skill（`android/skills` 的 `jetpack-compose-performance`）：已对主界面 + 核心 UI 模块跑过审计，**未发现显著可行动问题**（懒布局 `key`/`contentType`、`collectAsStateWithLifecycle`、无 `Modifier.composed`/热路径 `onGloballyPositioned` 等均合规）。
-- `TestFailurePolicy`：`baselineprofile` 冒烟测试失败时自动导出截图 + 语义树（可选，未接入）。
+- `TestFailurePolicy`：不适用（`baselineprofile` 冒烟测试为 `UiAutomator` 跨进程黑盒测试，无 `ComposeTestRule` 与进程内语义树；项目当前也无进程内 Compose UI 测试）。
 - **诊断堆栈跟踪（Diagnostic Stack Traces）**：已在 `EasterEggsApp.onCreate` 启用 `Composer.setDiagnosticStackTraceMode(ComposeStackTraceMode.Auto)`。在发生崩溃时会自动附加包含 `@Composable` 组件调用树的堆栈信息；线上混淆包使用 `GroupKeys` 模式配合 R8 映射表还原，未混淆包无额外开销。
 
 ## 六、渐进式模糊 / 背景模糊 vs Haze（评估结论：Haze 保留）
@@ -76,7 +76,7 @@ FlowRow 未弃用（官方只建议**新代码**用 FlexBox）；FlexBox 是 `Fl
 - **`Modifier.blur { blurRadiusSpec = ... }`（渐进式模糊）**：**自模糊**——只模糊它自己那块内容（图边渐隐、径向聚光），不采样背后内容；且仅 API 31+ 生效（`Blur.kt` 注释），项目 `minSdk 24` 兜不住。
 - **`DialogProperties.blurBehindRadius` / `backgroundBlurRadius`**：**跨窗口**背景模糊（Dialog/Popup 窗口级），而项目磨砂是窗口内（app bar + overlay host），且历史上已刻意放弃 Dialog 方案（入场闪动）、否决 popup 模糊。
 
-项目两处 Haze（app bar 磨砂、overlay 全屏磨砂）都是「采样背后内容」，1.13 上述能力覆盖不了，**Haze 保留**。渐进式模糊可另作新视觉特效考虑（如列表卡片底边渐隐），但属于「加效果」而非「替换磨砂」。
+项目两处 Haze（app bar 磨砂、overlay 全屏磨砂）都是「采样背后内容」，1.13 上述能力覆盖不了，**Haze 保留**。卡片底边/背景渐隐已通过 `EasterEggItems.kt` 中的 `drawWithContent` + `Brush.horizontalGradient` + `alpha` + `blur` 方案实现，无需再引入 1.13 渐进式模糊。
 
 ## 暂不相关
 
