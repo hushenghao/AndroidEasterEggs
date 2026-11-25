@@ -2,7 +2,6 @@ package com.android_j.egg;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.widget.ImageView;
 
@@ -13,31 +12,39 @@ import com.dede.android_eggs.system_colors.SystemColor;
 import java.util.Random;
 
 /**
- * Material You coloring for the Jelly Bean artwork: rotates the red bean's hue
- * to the system accent color while keeping the black outline and the white
- * highlight intact, unlike a plain tint which would flatten the bean into a
- * silhouette. The rotation matrix preserves luminance (the standard CSS
- * hue-rotate weights), then saturation and a bounded brightness scale align
- * the bean with the target tonal palette without clipping cooler hues.
+ * Material You coloring for the Jelly Bean artwork: maps the red channel
+ * excess (R - W, where W = (G + B) / 2) to the target accent color while
+ * keeping the neutral gray component W intact.
+ *
+ * <pre>
+ *   R' = r * R + (1 - r) * W
+ *   G' = g * R + (1 - g) * W
+ *   B' = b * R + (1 - b) * W
+ * </pre>
+ *
+ * Black outlines (0, 0, 0) stay black, white highlights (1, 1, 1) stay white,
+ * and pure red bean pixels (1, 0, 0) map directly to (r, g, b) without the
+ * luminance distortion of CSS hue rotation.
  */
 final class DynamicBeanColors {
 
-    /** Hue of the bean body in the artwork, i.e. pure red. */
-    private static final float BEAN_HUE = 0f;
-
     /**
-     * Hue sources for the random rotation. accent2 shares accent1's hue with a
-     * lower chroma, so rotating to it would produce the same hue.
+     * Wallpaper-seeded palette colors shared by PlatLogo, Snapshot, and BeanBag.
+     * Two hue families (accent1 and accent3, 60 degrees apart) give distinguishable
+     * hues, and stepping across shades 100/300/500/700 (20 tone units apart)
+     * keeps clear light-to-dark contrast between beans; accent2 is left out
+     * because it shares accent1's hue with a much lower chroma.
      */
-    private static final SystemColor[] HUE_SOURCES = {
-            SystemColor.ACCENT1_400,
-            SystemColor.ACCENT3_400,
+    private static final SystemColor[] DYNAMIC_COLORS = {
+            SystemColor.ACCENT1_100,
+            SystemColor.ACCENT1_300,
+            SystemColor.ACCENT1_500,
+            SystemColor.ACCENT1_700,
+            SystemColor.ACCENT3_100,
+            SystemColor.ACCENT3_300,
+            SystemColor.ACCENT3_500,
+            SystemColor.ACCENT3_700,
     };
-
-    private static final float MIN_SATURATION = 0.35f;
-    private static final float SATURATION_BOOST = 1.15f;
-    private static final float BASE_BRIGHTNESS = 1.0f;
-    private static final float BRIGHTNESS_VALUE_WEIGHT = 0.35f;
 
     private static final Random RANDOM = new Random();
 
@@ -48,60 +55,40 @@ final class DynamicBeanColors {
         return AppSettings.INSTANCE.getDynamicEggColors().get(context);
     }
 
+    static int pickColor(Context context) {
+        SystemColor source = DYNAMIC_COLORS[RANDOM.nextInt(DYNAMIC_COLORS.length)];
+        return ResourcesUtils.getSystemColor(context, source);
+    }
+
     static void applyTo(ImageView view) {
         if (!isEnabled(view.getContext())) {
             return;
         }
-        SystemColor source = HUE_SOURCES[RANDOM.nextInt(HUE_SOURCES.length)];
         int color;
         try {
-            color = ResourcesUtils.getSystemColor(view.getContext(), source);
+            color = pickColor(view.getContext());
         } catch (Exception ignore) {
             // Keep the original artwork when the palette is unavailable.
             return;
         }
-        float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        ColorMatrix matrix = hueRotationMatrix(hsv[0] - BEAN_HUE);
-        matrix.postConcat(saturationMatrix(hsv[1]));
-        matrix.postConcat(brightnessMatrix(hsv[2]));
-        view.setColorFilter(new ColorMatrixColorFilter(matrix));
+        view.setColorFilter(createColorFilter(color));
     }
 
-    private static ColorMatrix saturationMatrix(float targetSaturation) {
-        float saturation = Math.max(MIN_SATURATION, Math.min(1f, targetSaturation * SATURATION_BOOST));
-        ColorMatrix matrix = new ColorMatrix();
-        matrix.setSaturation(saturation);
-        return matrix;
-    }
-
-    private static ColorMatrix brightnessMatrix(float targetValue) {
-        float scale = BASE_BRIGHTNESS + BRIGHTNESS_VALUE_WEIGHT * targetValue;
-        ColorMatrix matrix = new ColorMatrix();
-        matrix.setScale(scale, scale, scale, 1f);
-        return matrix;
-    }
-
-    private static ColorMatrix hueRotationMatrix(float degrees) {
-        double radians = Math.toRadians(degrees);
-        float cos = (float) Math.cos(radians);
-        float sin = (float) Math.sin(radians);
-        return new ColorMatrix(new float[]{
-                0.213f + cos * 0.787f - sin * 0.213f,
-                0.715f - cos * 0.715f - sin * 0.715f,
-                0.072f - cos * 0.072f + sin * 0.928f,
-                0f, 0f,
-
-                0.213f - cos * 0.213f + sin * 0.143f,
-                0.715f + cos * 0.285f + sin * 0.140f,
-                0.072f - cos * 0.072f - sin * 0.283f,
-                0f, 0f,
-
-                0.213f - cos * 0.213f - sin * 0.787f,
-                0.715f - cos * 0.715f + sin * 0.715f,
-                0.072f + cos * 0.928f + sin * 0.072f,
-                0f, 0f,
-
+    /**
+     * Build a filter that recolors the red bean artwork to [targetColor] while
+     * keeping the black outline and white highlight intact.
+     */
+    static ColorMatrixColorFilter createColorFilter(int targetColor) {
+        float r = Color.red(targetColor) / 255f;
+        float g = Color.green(targetColor) / 255f;
+        float b = Color.blue(targetColor) / 255f;
+        float rw = (1f - r) * 0.5f;
+        float gw = (1f - g) * 0.5f;
+        float bw = (1f - b) * 0.5f;
+        return new ColorMatrixColorFilter(new float[]{
+                r, rw, rw, 0f, 0f,
+                g, gw, gw, 0f, 0f,
+                b, bw, bw, 0f, 0f,
                 0f, 0f, 0f, 1f, 0f,
         });
     }

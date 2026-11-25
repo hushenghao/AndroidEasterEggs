@@ -37,10 +37,6 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.dede.android_eggs.preferences.AppSettings;
-import com.dede.android_eggs.system_colors.ResourcesUtils;
-import com.dede.android_eggs.system_colors.SystemColor;
-
 import java.util.Random;
 
 public class BeanBag extends Activity {
@@ -75,11 +71,6 @@ public class BeanBag extends Activity {
 
         static float dot(float x1, float y1, float x2, float y2) {
             return x1 * x2 + y1 + y2;
-        }
-
-        static <E> E pick(E[] array) {
-            if (array.length == 0) return null;
-            return array[sRNG.nextInt(array.length)];
         }
 
         static int pickInt(int[] array) {
@@ -123,29 +114,10 @@ public class BeanBag extends Activity {
                 0xFF333333,
         };
 
-        /**
-         * Wallpaper-seeded palette colors, used instead of {@link #COLORS}
-         * when the "Material You egg colors" setting is on. Two hue families
-         * (accent1 and accent3, 60 degrees apart) give the beans distinguishable
-         * colors, and the 200-500 shades carry the palette's highest chroma;
-         * accent2 is left out because it shares accent1's hue with a much lower
-         * chroma, which reads as washed-out on the black board.
-         */
-        static final SystemColor[] DYNAMIC_COLORS = {
-                SystemColor.ACCENT1_200,
-                SystemColor.ACCENT1_300,
-                SystemColor.ACCENT1_400,
-                SystemColor.ACCENT1_500,
-                SystemColor.ACCENT3_200,
-                SystemColor.ACCENT3_300,
-                SystemColor.ACCENT3_400,
-                SystemColor.ACCENT3_500,
-        };
-
         static int pickBeanColor(Context context) {
-            if (AppSettings.INSTANCE.getDynamicEggColors().get(context)) {
+            if (DynamicBeanColors.isEnabled(context)) {
                 try {
-                    return ResourcesUtils.getSystemColor(context, pick(DYNAMIC_COLORS));
+                    return DynamicBeanColors.pickColor(context);
                 } catch (Resources.NotFoundException ignored) {
                     // The bundled palette always provides these names, fall back
                     // to the original colors rather than crash the egg.
@@ -201,16 +173,22 @@ public class BeanBag extends Activity {
 
                 Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
                 final int color = pickBeanColor(getContext());
-                ColorMatrix CM = new ColorMatrix();
-                float[] M = CM.getArray();
-                // we assume the color information is in the red channel
-                /* R */
-                M[0] = (float) ((color & 0x00FF0000) >> 16) / 0xFF;
-                /* G */
-                M[5] = (float) ((color & 0x0000FF00) >> 8) / 0xFF;
-                /* B */
-                M[10] = (float) ((color & 0x000000FF)) / 0xFF;
-                pt.setColorFilter(new ColorMatrixColorFilter(M));
+                if (DynamicBeanColors.isEnabled(getContext())) {
+                    // Use hue-preserving transform so white highlights and dark outlines
+                    // keep their contrast instead of being flattened by channel scaling.
+                    pt.setColorFilter(DynamicBeanColors.createColorFilter(color));
+                } else {
+                    ColorMatrix CM = new ColorMatrix();
+                    float[] M = CM.getArray();
+                    // we assume the color information is in the red channel
+                    /* R */
+                    M[0] = (float) ((color & 0x00FF0000) >> 16) / 0xFF;
+                    /* G */
+                    M[5] = (float) ((color & 0x0000FF00) >> 8) / 0xFF;
+                    /* B */
+                    M[10] = (float) ((color & 0x000000FF)) / 0xFF;
+                    pt.setColorFilter(new ColorMatrixColorFilter(M));
+                }
                 setLayerType(View.LAYER_TYPE_HARDWARE, (beanId == R.drawable.j_jandycane) ? null : pt);
             }
 
