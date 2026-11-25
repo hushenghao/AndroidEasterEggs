@@ -47,13 +47,6 @@
 
 問題を報告したり、アプリを翻訳したり、開発を支援したりする方法については、[貢献ドキュメント](.github/CONTRIBUTING.md) を参照してください。
 
-<details>
-<summary>すべての言語の翻訳状況を表示します。</summary>
-
-[![Crowdin](script/crowdin/crowdin_project_progress.svg)](https://crowdin.com/project/easter-eggs)
-
-</details>
-
 ## 感謝
 
 * [AOSP](https://cs.android.com/android/platform/superproject/main)

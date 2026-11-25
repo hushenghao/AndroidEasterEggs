@@ -49,13 +49,6 @@ See our [contribution guide](.github/CONTRIBUTING.md) for information on how to 
 issues, [translate](https://crowdin.com/project/easter-eggs) the app into your language or help with
 development here.
 
-<details>
-<summary>View translation status for all languages.</summary>
-
-[![Crowdin](script/crowdin/crowdin_project_progress.svg)](https://crowdin.com/project/easter-eggs)
-
-</details>
-
 ## Thanks to
 
 * [All translation contributors](https://crowdin.com/project/easter-eggs/members)

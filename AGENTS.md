@@ -521,7 +521,6 @@ Path: `build-logic/convention/`
 | `script/blurhash/` | BlurHash image placeholder generation (`multi_blurhash.py`) |
 | `script/changelogs/` | Fastlane changelog generation from `CHANGELOG.md` and `CHANGELOG_zh.md` |
 | `script/pages/` | GitHub Pages site build (`build_pages.py`): converts the wiki submodule into MkDocs sources (`script/pages/pages-docs/`), strips the Home badge block and rewrites wiki URLs to site-relative links; `vector_to_svg.py` exports VectorDrawable / adaptive-icon drawables to SVG for the version-logo tables; configured by `script/pages/mkdocs.yml` and deployed by `.github/workflows/pages.yml`. All site paths (config, sources, output) live inside this directory |
-| `script/crowdin/` | Crowdin API v2 integration for translation progress SVG generation |
 | `script/icons/` | (Deprecated) Material Design Icons font subsetting using FontTools |
 
 ### Other Assets

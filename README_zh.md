@@ -48,13 +48,6 @@
 请查看我们的[贡献文档](.github/CONTRIBUTING.md)
 来报告问题，或参与应用程序和文档的[翻译](https://zh.crowdin.com/project/easter-eggs)。
 
-<details>
-<summary>查看所有语言的翻译状态。</summary>
-
-[![Crowdin](script/crowdin/crowdin_project_progress.svg)](https://zh.crowdin.com/project/easter-eggs)
-
-</details>
-
 ## 感谢
 
 * [AOSP](https://cs.android.com/android/platform/superproject/main)
