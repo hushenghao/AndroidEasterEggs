@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -91,7 +92,7 @@ fun EasterEggHighestItem(
         EasterEggItemContent(
             eggState = easterEggState,
             releaseDateLookup = releaseDateLookup,
-            statsMap = statsMap,
+            playCount = statsMap[egg.id]?.playCount ?: 0,
         )
     }
 }
@@ -120,7 +121,7 @@ fun EasterEggSimpleItem(
         EasterEggItemContent(
             eggState = easterEggState,
             releaseDateLookup = releaseDateLookup,
-            statsMap = statsMap,
+            playCount = statsMap[egg.id]?.playCount ?: 0,
         )
     }
 }
@@ -138,6 +139,7 @@ private fun Chip(text: String) {
     }
 }
 
+@Stable
 private class EasterEggState(val base: BaseEasterEgg, index: Int) {
     private val indexState: MutableState<Int> = mutableIntStateOf(index)
 
@@ -172,11 +174,10 @@ private fun EasterEggItemContent(
     modifier: Modifier = Modifier,
     eggState: EasterEggState,
     releaseDateLookup: (AndroidVersion) -> Date?,
-    statsMap: Map<String, EggStatsSummary>,
+    playCount: Int,
 ) {
     val context = LocalContext.current
     val egg = eggState.getEasterEgg()
-    val stats = statsMap[egg.id]
 
     val androidVersion = remember(egg.versions) {
         EasterEggHelp.VersionFormatter.create(egg.versions, egg.nicknameRes)
@@ -267,7 +268,6 @@ private fun EasterEggItemContent(
                     if (releaseDate != null) {
                         Chip(text = dateFormat.format(releaseDate))
                     }
-                    val playCount = stats?.playCount ?: 0
                     if (playCount > 0) {
                         Chip(
                             text = stringResource(
