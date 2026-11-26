@@ -4,24 +4,24 @@ import android.graphics.Paint
 import android.graphics.Region
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathOperation
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.asAndroidPath
+import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.PathBuilder
 import androidx.compose.ui.graphics.vector.toPath
 import com.dede.android_eggs.cat_editor.util.Utilities.getRegion
 import com.dede.android_eggs.cat_editor.util.Utilities.toSvgPathData
 import com.dede.android_eggs.color_picker.ColorPickerUtilities
 import com.dede.basic.trimZeroAndDot
-import android.graphics.Canvas as AndroidCanvas
 
 internal object CatParts {
 
     const val VIEW_PORT_SIZE = 48f
-    const val SHADOW_BLUR_RADIUS = 0.3f
+    const val SHADOW_BLUR_RADIUS = 2.5f
 
     private const val MOUTH_STROKE_WIDTH = 1.2f
     private const val TAIL_STROKE_WIDTH = 5f
@@ -374,6 +374,19 @@ internal object CatParts {
         ClosedPD(bowtie, "bowtie"),
     )
 
+    val shadowPath: Path by lazy {
+        val merged = Path()
+        drawOrders.forEachIndexed { index, part ->
+            val fillPath = part.toFillPath()
+            if (index == 0) {
+                merged.addPath(fillPath)
+            } else {
+                merged.op(merged, fillPath, PathOperation.Union)
+            }
+        }
+        merged
+    }
+
     fun toSvg(colors: List<Color>, isMirrorMode: Boolean, size: Int = 512): String {
         val nodes = drawOrders.mapIndexed { i, draw ->
             draw.toSvgNode(colors[i])
@@ -387,15 +400,23 @@ internal object CatParts {
         val strokeWidth: Float,
         name: String,
     ) : PathDraw(path, name) {
-        override fun DrawScope.draw(color: Color) {
-            drawPath(path, color, style = Stroke(width = strokeWidth, cap = StrokeCap.Round))
+        override fun DrawScope.draw(color: Color, path: Path, scale: Float) {
+            drawPath(
+                path = path,
+                color = color,
+                style = Stroke(width = strokeWidth * scale, cap = StrokeCap.Round),
+            )
         }
 
-        override fun AndroidCanvas.androidDraw(paint: Paint) {
-            paint.style = Paint.Style.STROKE
-            paint.strokeWidth = strokeWidth
-            paint.strokeCap = Paint.Cap.ROUND
-            drawPath(path.asAndroidPath(), paint)
+        override fun toFillPath(): Path {
+            val strokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                style = Paint.Style.STROKE
+                strokeWidth = this@RoundStrokePD.strokeWidth
+                strokeCap = Paint.Cap.ROUND
+            }
+            val fillPath = android.graphics.Path()
+            strokePaint.getFillPath(path.asAndroidPath(), fillPath)
+            return fillPath.asComposePath()
         }
 
         override fun toSvgNode(color: Color): String {
@@ -411,13 +432,8 @@ internal object CatParts {
         name: String,
         touchable: Boolean = true,
     ) : PathDraw(path, name, touchable) {
-        override fun DrawScope.draw(color: Color) {
-            drawPath(path, color, style = Fill)
-        }
-
-        override fun AndroidCanvas.androidDraw(paint: Paint) {
-            paint.style = Paint.Style.FILL
-            drawPath(path.asAndroidPath(), paint)
+        override fun DrawScope.draw(color: Color, path: Path, scale: Float) {
+            drawPath(path = path, color = color, style = Fill)
         }
 
         override fun toSvgNode(color: Color): String {
@@ -434,18 +450,15 @@ internal object CatParts {
         val touchable: Boolean = true,
     ) {
 
-        val drawLambda: DrawScope.(color: Color) -> Unit = { draw(it) }
-
-        val androidDrawLambda: AndroidCanvas.(color: Color, paint: Paint) -> Unit = { c, p ->
-            p.setColor(c.toArgb())
-            androidDraw(p)
-        }
-
         val regin: Region = path.getRegion(this.javaClass == ClosedPD::class.java)
 
-        protected abstract fun DrawScope.draw(color: Color)
+        abstract fun DrawScope.draw(
+            color: Color,
+            path: Path = this@PathDraw.path,
+            scale: Float = 1f,
+        )
 
-        protected abstract fun AndroidCanvas.androidDraw(paint: Paint)
+        open fun toFillPath(): Path = path
 
         abstract fun toSvgNode(color: Color): String
     }

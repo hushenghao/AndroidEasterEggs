@@ -2,7 +2,6 @@
 
 package com.dede.android_eggs.cat_editor.editor
 
-import android.graphics.Bitmap
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -46,7 +45,6 @@ import com.dede.android_eggs.cat_editor.model.CatParts.VIEW_PORT_SIZE
 import com.dede.android_eggs.cat_editor.util.CaptureControllerDelegate
 import com.dede.android_eggs.cat_editor.util.CaptureControllerDelegate.Companion.rememberCaptureControllerDelegate
 import com.dede.android_eggs.cat_editor.util.Utilities
-import com.dede.android_eggs.cat_editor.util.Utilities.asAndroidMatrix
 import com.dede.android_eggs.cat_editor.util.Utilities.toInvert
 import com.dede.android_eggs.color_picker.ColorPickerUtilities
 import dev.shreyaspatil.capturable.capturable
@@ -188,8 +186,11 @@ internal fun CatEditor(
                 }
             }
 
-            val bitmap: Bitmap? = remember(canvasSize) {
-                if (useAndroidCanvasDraw) createAndroidBitmap(canvasSize) else null
+            val catPaths = remember(canvasSize, canvasMatrix) {
+                if (canvasSize == Size.Zero) emptyList() else createTransformedCatPaths(canvasMatrix)
+            }
+            val pointMatrix = remember(canvasSize, canvasMatrix) {
+                if (canvasSize == Size.Zero) null else canvasMatrix.toInvert()
             }
             val rotationYAnim by animateFloatAsState(if (controllerImpl.isMirrorMode) 180f else 0f)
 
@@ -201,10 +202,17 @@ internal fun CatEditor(
                     rotationY = rotationYAnim
                 }
 
+            val catShadow = rememberCatShadow(canvasSize, canvasMatrix, shadowColor)
             Canvas(
                 modifier = canvasModifier,
                 onDraw = {
-                    drawShadowLayer(canvasMatrix, shadowColor)
+                    if (catShadow != null) {
+                        val (shadowBitmap, padding) = catShadow
+                        drawImage(
+                            image = shadowBitmap,
+                            topLeft = Offset(-padding.toFloat(), -padding.toFloat()),
+                        )
+                    }
                 }
             )
 
@@ -221,15 +229,15 @@ internal fun CatEditor(
                         detectTapGestures(
                             onDoubleTap = onDoubleTab,
                         ) {
+                            val invertMatrix = pointMatrix ?: return@detectTapGestures
                             var handler = false
-                            val pointMatrix = canvasMatrix.toInvert()
                             for (i in CatParts.drawOrders.size - 1 downTo 0) {
                                 val pathDraw = CatParts.drawOrders[i]
                                 if (!pathDraw.touchable) {
                                     continue
                                 }
 
-                                if (Utilities.isPointInRegion(it, pointMatrix, pathDraw.regin)) {
+                                if (Utilities.isPointInRegion(it, invertMatrix, pathDraw.regin)) {
                                     handler = selectedPart != i
                                     selectedPart = i
                                     break
@@ -241,13 +249,8 @@ internal fun CatEditor(
                         }
                     },
                 onDraw = {
-                    if (useAndroidCanvasDraw && bitmap != null) {
-                        // android canvas draw
-                        androidCanvasDraw(canvasMatrix.asAndroidMatrix(), bitmap, partColorBlend)
-                    } else {
-                        // compose canvas draw
-                        composeCanvasDraw(canvasMatrix, partColorBlend)
-                    }
+                    val catScale = size.minDimension / VIEW_PORT_SIZE
+                    composeCanvasDraw(catPaths, catScale, partColorBlend)
                 }
             )
         }
