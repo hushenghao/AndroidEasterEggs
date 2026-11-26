@@ -106,12 +106,16 @@ private class SearchToken(val text: String) {
 /**
  * Every whitespace-separated token must match the egg: the token contained in
  * the name or the nickname, or resolved to the egg's api level or version name.
+ * Returns an empty list when [searchText] is blank.
  */
 internal fun filterEasterEggs(
     context: Context,
     pureEasterEggs: List<EasterEgg>,
     searchText: String,
 ): List<EasterEgg> {
+    if (searchText.isBlank()) {
+        return emptyList()
+    }
 
     fun EasterEgg.versionNames(): Set<String> =
         versions.mapTo(mutableSetOf()) { it.versionName }
