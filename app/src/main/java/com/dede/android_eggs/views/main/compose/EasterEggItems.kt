@@ -2,6 +2,7 @@
 
 package com.dede.android_eggs.views.main.compose
 
+import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -212,7 +213,8 @@ private fun EasterEggItemContent(
                             ),
                         )
                     }
-                    .alpha(0.4f)
+                    // Modifier.blur is a no-op below Android 12; lower alpha keeps the unblurred background subtle.
+                    .alpha(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) 0.4f else 0.15f)
                     .blur(14.dp, 14.dp),
                 res = egg.iconRes,
                 contentDescription = null,
