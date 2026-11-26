@@ -2,7 +2,6 @@
 
 package com.dede.android_eggs.views.main.compose
 
-import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,13 +32,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
@@ -195,30 +188,16 @@ private fun EasterEggItemContent(
     val dateFormat = remember(egg, LocalConfiguration.current) {
         AppLocaleDateFormatter.getInstance("MMM yyyy")
     }
-    val cardColor = colorScheme.surfaceColorAtElevation(2.dp)
     Box(modifier = modifier) {
         Box(
             modifier = Modifier.matchParentSize(),
             contentAlignment = Alignment.CenterEnd,
         ) {
-            EasterEggLogo(
+            EasterEggLogoBackdrop(
+                res = egg.iconRes,
                 modifier = Modifier
                     .fillMaxHeight()
-                    .aspectRatio(1f)
-                    .drawWithContent {
-                        drawContent()
-                        drawRect(
-                            brush = Brush.horizontalGradient(
-                                colors = listOf(cardColor, Color.Transparent),
-                            ),
-                        )
-                    }
-                    // Modifier.blur is a no-op below Android 12; lower alpha keeps the unblurred background subtle.
-                    .alpha(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) 0.4f else 0.15f)
-                    .blur(14.dp, 14.dp),
-                res = egg.iconRes,
-                contentDescription = null,
-                iconShape = RectangleShape,
+                    .aspectRatio(1f),
             )
         }
         Column {
