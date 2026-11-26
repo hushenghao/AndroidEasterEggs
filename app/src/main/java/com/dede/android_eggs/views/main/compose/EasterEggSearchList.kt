@@ -1,7 +1,6 @@
 package com.dede.android_eggs.views.main.compose
 
 import android.content.Context
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -48,7 +47,6 @@ fun EasterEggSearchList(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier
             .then(modifier)
-            .animateContentSize()
             .fillMaxSize(),
     ) {
         items(
