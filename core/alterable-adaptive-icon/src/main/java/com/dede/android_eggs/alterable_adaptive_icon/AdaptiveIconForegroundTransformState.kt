@@ -30,4 +30,11 @@ class AdaptiveIconForegroundTransformState {
         matrix.setFrom(transformMatrix)
         version++
     }
+
+    internal fun obtainMatrix(): Matrix {
+        // Read `version` so the caller's snapshot observer (e.g. DrawScope)
+        // invalidates when `matrix` is mutated in place.
+        version
+        return matrix
+    }
 }

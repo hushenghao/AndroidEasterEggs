@@ -26,6 +26,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.withTransform
+import androidx.compose.ui.graphics.isIdentity
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -154,12 +155,17 @@ fun AlterableAdaptiveIcon(
 
         val foreground: Drawable? = childDrawables.getForeground()
         if (foreground != null) {
-            val foregroundTransformModifier = remember(foregroundTransformState.version) {
+            val foregroundTransformModifier = remember(foregroundTransformState) {
                 Modifier.drawWithContent {
-                    withTransform({
-                        transform(foregroundTransformState.matrix)
-                    }) {
-                        this@drawWithContent.drawContent()
+                    val matrix = foregroundTransformState.obtainMatrix()
+                    if (matrix.isIdentity()) {
+                        drawContent()
+                    } else {
+                        withTransform({
+                            transform(matrix)
+                        }) {
+                            this@drawWithContent.drawContent()
+                        }
                     }
                 }
             }
