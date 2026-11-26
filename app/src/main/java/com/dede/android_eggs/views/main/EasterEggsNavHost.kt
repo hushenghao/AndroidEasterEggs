@@ -34,8 +34,15 @@ import com.dede.android_eggs.navigation.rememberNavigationState
 import com.dede.android_eggs.navigation.toEntries
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiController
+import dev.chrisbanes.haze.blur.HazeBlurStyle
+import dev.chrisbanes.haze.blur.LocalHazeBlurStyle
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.rememberHazeState
+
+// Explicitly enable blur on pre-API 31 devices (Haze defaults to SDK_INT >= 31).
+private val GlobalHazeBlurStyle = HazeBlurStyle {
+    blurEnabled(true)
+}
 
 private const val DURATION = 400
 private const val SCALE = 0.88f
@@ -73,12 +80,17 @@ fun EasterEggsNavHost(
     // Sources everything the window draws, so a full screen overlay can blur the whole screen
     // behind it. Screens keep their own content scoped state, see HazeScaffold.
     val overlayHazeState = rememberHazeState()
+    val localHazeBlurStyle = LocalHazeBlurStyle.current
+    val hazeBlurStyle = remember(localHazeBlurStyle) {
+        localHazeBlurStyle.then(GlobalHazeBlurStyle)
+    }
     CompositionLocalProvider(
         LocalUriHandler provides uriHandler,
         LocalNavigator provides navigator,
         LocalOverlayManager provides overlayManager,
         LocalKonfettiState provides konfettiController,
         LocalOverlayHazeState provides overlayHazeState,
+        LocalHazeBlurStyle provides hazeBlurStyle,
     ) {
         // Entries are resolved by route class, mirroring the official "direct entry provider
         // function" pattern from the Navigation3 docs (developer.android.com/guide/navigation/
