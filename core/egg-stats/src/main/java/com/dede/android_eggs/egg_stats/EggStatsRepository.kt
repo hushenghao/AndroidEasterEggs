@@ -11,6 +11,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -35,8 +38,22 @@ object EggStatsRepository {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-    fun observeSummaries(): Flow<List<EggStatsSummary>> {
-        return db.eggPlayEventDao().observeSummaries()
+    private val summariesState: StateFlow<List<EggStatsSummary>> by lazy {
+        db.eggPlayEventDao().observeSummaries().stateIn(
+            scope = scope,
+            started = SharingStarted.Eagerly,
+            initialValue = emptyList(),
+        )
+    }
+
+    fun preload() {
+        scope.launch {
+            runCatching { summariesState }
+        }
+    }
+
+    fun observeSummaries(): StateFlow<List<EggStatsSummary>> {
+        return summariesState
     }
 
     fun observeHistory(eggKey: String): Flow<List<EggPlayEvent>> {

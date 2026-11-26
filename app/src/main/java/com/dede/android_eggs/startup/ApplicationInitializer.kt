@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.startup.Initializer
 import com.dede.android_eggs.BuildConfig
+import com.dede.android_eggs.egg_stats.EggStatsRepository
 import com.dede.android_eggs.views.settings.compose.prefs.AppIconPrefUtil
 import com.dede.android_eggs.views.theme.settings.ThemePrefUtil
 import com.dede.basic.GlobalContext
@@ -17,6 +18,8 @@ class ApplicationInitializer : Initializer<Unit> {
         AppIconPrefUtil.ensureValidLauncherIcon(application)
         // apply compat style
         ThemePrefUtil.apply(application)
+
+        EggStatsRepository.preload()
 
         // Enable recomposition tracking ONLY in debug builds
         ComposeStabilityAnalyzer.setEnabled(BuildConfig.DEBUG)

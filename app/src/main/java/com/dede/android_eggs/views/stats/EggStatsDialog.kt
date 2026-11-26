@@ -112,7 +112,7 @@ fun EggStatsDialog(
     viewModel: EggStatsViewModel = hiltViewModel(),
 ) {
     val summaries by EggStatsRepository.observeSummaries()
-        .collectAsStateWithLifecycle(initialValue = emptyList())
+        .collectAsStateWithLifecycle()
     val rows = remember(viewModel.easterEggs, summaries) {
         val summaryMap = summaries.associateBy { it.eggKey }
         viewModel.easterEggs.map { EggStatsRow(it, summaryMap[it.id]) }

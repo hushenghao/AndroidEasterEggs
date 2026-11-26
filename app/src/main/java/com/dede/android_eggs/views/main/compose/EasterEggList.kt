@@ -80,7 +80,7 @@ private fun rememberEggStats(): Map<String, EggStatsSummary> {
         return emptyMap()
     }
     val summaries by EggStatsRepository.observeSummaries()
-        .collectAsStateWithLifecycle(initialValue = emptyList())
+        .collectAsStateWithLifecycle()
     return remember(summaries) {
         summaries.associateBy { it.eggKey }
     }
