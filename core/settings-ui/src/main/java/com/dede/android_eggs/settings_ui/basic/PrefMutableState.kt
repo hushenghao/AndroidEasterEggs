@@ -54,6 +54,9 @@ private class PrefMutableBooleanState(
     override var value: Boolean
         get() = delegate.value
         set(value) {
+            if (delegate.value == value) {
+                return
+            }
             delegate.value = value
             context.pref.edit { putBoolean(key, value) }
         }
@@ -83,6 +86,9 @@ private class PrefMutableColorState(
             return delegate.value
         }
         set(value) {
+            if (delegate.value == value) {
+                return
+            }
             delegate.value = value
             context.pref.edit { putInt(key, value.toArgb()) }
         }
@@ -109,6 +115,9 @@ private class PrefMutableIntState(
             return delegate.intValue
         }
         set(value) {
+            if (delegate.intValue == value) {
+                return
+            }
             delegate.intValue = value
             context.pref.edit { putInt(key, value) }
         }
