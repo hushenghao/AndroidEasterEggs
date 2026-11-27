@@ -15,6 +15,7 @@ import androidx.compose.runtime.computedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.neverEqualPolicy
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -26,6 +27,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
 import androidx.navigation3.runtime.NavKey
 import com.dede.android_eggs.cat_editor.editor.CatEditor
 import com.dede.android_eggs.cat_editor.editor.CatEditorController
@@ -53,8 +56,10 @@ import com.dede.basic.trimZeroAndDot
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
+import javax.inject.Inject
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import com.dede.android_eggs.resources.R as StringR
@@ -75,8 +80,37 @@ object CatEditorScreen : EasterEggsDestination, EasterEggsDestination.Provider {
     override fun provider(): EasterEggsDestination = this
 }
 
+@HiltViewModel
+internal class CatEditorViewModel @Inject constructor(
+    private val catRepository: CatRepository,
+) : ViewModel() {
+
+    suspend fun remember(seed: Long, colors: List<Color>? = null) {
+        catRepository.remember(seed, colors)
+    }
+
+    suspend fun forgetById(id: Long) {
+        catRepository.forgetById(id)
+    }
+
+    suspend fun forget(seed: Long, colors: List<Color>? = null) {
+        catRepository.forget(seed, colors)
+    }
+
+    suspend fun isFavorite(seed: Long, colors: List<Color>): Boolean {
+        return catRepository.isFavorite(seed, colors)
+    }
+
+    suspend fun getAllCats(): List<Cat> {
+        return catRepository.getAllCats()
+    }
+}
+
 @Composable
-fun CatEditorScreen(initialSeed: Long? = null) {
+internal fun CatEditorScreen(
+    initialSeed: Long? = null,
+    viewModel: CatEditorViewModel = hiltViewModel(),
+) {
     val captureController = rememberCaptureControllerDelegate()
 
     val navigator = LocalNavigator.current
@@ -105,10 +139,17 @@ fun CatEditorScreen(initialSeed: Long? = null) {
     var inputSeedDialogVisible by remember { mutableStateOf(false) }
 
     var rememberCatsDialogVisible by rememberSaveable { mutableStateOf(false) }
+    var rememberedCats by remember { mutableStateOf<List<Cat>>(emptyList(), neverEqualPolicy()) }
     var isRememberCat by remember { mutableStateOf(false) }
     var isRememberCatProcessing by remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
+
+    LaunchedEffect(rememberCatsDialogVisible) {
+        if (rememberCatsDialogVisible) {
+            rememberedCats = viewModel.getAllCats()
+        }
+    }
 
     LaunchedEffect(catSeed, catEditorController.colorListVersion, rememberCatsDialogVisible) {
         if (rememberCatsDialogVisible) {
@@ -116,7 +157,7 @@ fun CatEditorScreen(initialSeed: Long? = null) {
         }
         isRememberCatProcessing = true
         launch {
-            isRememberCat = CatRememberDataStore.isFavorite(catSeed, catEditorController.colorList)
+            isRememberCat = viewModel.isFavorite(catSeed, catEditorController.colorList)
             isRememberCatProcessing = false
         }
     }
@@ -255,9 +296,9 @@ fun CatEditorScreen(initialSeed: Long? = null) {
                     isRememberCatProcessing = true
                     scope.launch {
                         if (isRememberCat) {
-                            CatRememberDataStore.forget(catSeed, catEditorController.colorList)
+                            viewModel.forget(catSeed, catEditorController.colorList)
                         } else {
-                            CatRememberDataStore.remember(catSeed, catEditorController.colorList)
+                            viewModel.remember(catSeed, catEditorController.colorList)
                         }
                         isRememberCat = !isRememberCat
                         isRememberCatProcessing = false
@@ -295,8 +336,15 @@ fun CatEditorScreen(initialSeed: Long? = null) {
 
     CatRememberBottomSheet(
         visible = rememberCatsDialogVisible,
+        cats = rememberedCats,
         onCatSelected = { cat ->
             updateCatSeed(cat.seed, cat.colors)
+        },
+        onCatDelete = { cat ->
+            scope.launch {
+                viewModel.forgetById(cat.id)
+                rememberedCats = rememberedCats.filter { it.id != cat.id }
+            }
         },
         onDismiss = { rememberCatsDialogVisible = false }
     )

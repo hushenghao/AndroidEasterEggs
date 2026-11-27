@@ -1,5 +1,6 @@
 package com.dede.android_eggs.cat_editor
 
+import android.content.Context
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.room3.ColumnInfo
@@ -22,21 +23,42 @@ import androidx.sqlite.driver.AndroidSQLiteDriver
 import androidx.sqlite.execSQL
 import com.dede.android_eggs.cat_editor.Cat.Companion.createCat
 import com.dede.android_eggs.cat_editor.model.CatPartColors
-import com.dede.basic.globalContext
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
- * A data store for remembering cats.
+ * Provides the Room database instance for remembered cats.
  */
-object CatRememberDataStore {
+@Module
+@InstallIn(SingletonComponent::class)
+internal object CatDatabaseModule {
 
-    private val db by lazy {
-        Room.databaseBuilder<CatRememberDatabase>(globalContext, "cat_remember.db")
+    @Provides
+    @Singleton
+    fun provideCatRememberDatabase(
+        @ApplicationContext context: Context,
+    ): CatRememberDatabase {
+        return Room.databaseBuilder<CatRememberDatabase>(context, "cat_remember.db")
             .addMigrations(MIGRATION_1_2)
             .setDriver(AndroidSQLiteDriver())
             .build()
     }
+}
+
+/**
+ * Repository for persisting and querying remembered cats.
+ */
+@Singleton
+internal class CatRepository @Inject constructor(
+    private val db: CatRememberDatabase,
+) {
 
     suspend fun remember(seed: Long, colors: List<Color>? = null) {
         withContext(Dispatchers.IO) {
@@ -77,7 +99,7 @@ object CatRememberDataStore {
     exportSchema = true,
 )
 @ColumnTypeConverters(value = [CatColorsConverter::class])
-abstract class CatRememberDatabase : RoomDatabase() {
+internal abstract class CatRememberDatabase : RoomDatabase() {
     abstract fun catDao(): CatDao
 }
 
@@ -99,7 +121,7 @@ private val MIGRATION_1_2 = object : Migration(1, 2) {
 }
 
 @Entity(tableName = "remember_cats")
-data class Cat(
+internal data class Cat(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Long,
     @ColumnInfo(name = "seed") val seed: Long,
@@ -119,7 +141,7 @@ data class Cat(
 }
 
 @Dao
-interface CatDao {
+internal interface CatDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun remember(cat: Cat)
 
@@ -137,7 +159,7 @@ interface CatDao {
 }
 
 @ColumnTypeConverters
-class CatColorsConverter {
+internal class CatColorsConverter {
     @ColumnTypeConverter
     fun colorsToString(value: List<Color>?): String? {
         return value?.joinToString(separator = ",") { it.toArgb().toString() }

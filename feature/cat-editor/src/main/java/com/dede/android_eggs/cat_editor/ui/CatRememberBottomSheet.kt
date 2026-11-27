@@ -3,7 +3,6 @@
 package com.dede.android_eggs.cat_editor.ui
 
 import com.dede.android_eggs.cat_editor.Cat
-import com.dede.android_eggs.cat_editor.CatRememberDataStore
 import com.dede.android_eggs.cat_editor.R
 import com.dede.android_eggs.cat_editor.editor.rememberCatPainter
 
@@ -40,12 +39,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.neverEqualPolicy
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,27 +52,21 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.composable.ScrollableModalBottomSheet
 import com.dede.android_eggs.ui.composes.icons.rounded.Cat
-import kotlinx.coroutines.launch
 
 /**
  * A bottom sheet for selecting remembered cats.
  */
 @Composable
-fun CatRememberBottomSheet(
+internal fun CatRememberBottomSheet(
     modifier: Modifier = Modifier,
     visible: Boolean,
+    cats: List<Cat>,
     onCatSelected: (cat: Cat) -> Unit,
+    onCatDelete: (cat: Cat) -> Unit,
     onDismiss: () -> Unit = {},
 ) {
     if (!visible) {
         return
-    }
-    var allCats by remember { mutableStateOf<List<Cat>>(emptyList(), neverEqualPolicy()) }
-    val scope = rememberCoroutineScope()
-    LaunchedEffect(Unit) {
-        launch {
-            allCats = CatRememberDataStore.getAllCats()
-        }
     }
     var isDeletedMode by remember { mutableStateOf(false) }
 
@@ -87,9 +77,9 @@ fun CatRememberBottomSheet(
         modifier = modifier,
         onDismissRequest = onDismiss,
         // the grid leaves the composition when empty, null keeps the sheet gestures enabled
-        scrollState = if (allCats.isEmpty()) null else lazyGridState,
+        scrollState = if (cats.isEmpty()) null else lazyGridState,
     ) {
-        Crossfade(targetState = allCats.isEmpty()) { isEmpty ->
+        Crossfade(targetState = cats.isEmpty()) { isEmpty ->
             if (isEmpty) {
                 Row(
                     horizontalArrangement = Arrangement.Center,
@@ -122,7 +112,7 @@ fun CatRememberBottomSheet(
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
-                    items(allCats, key = { it.id }, contentType = { "cat" }) { cat ->
+                    items(cats, key = { it.id }, contentType = { "cat" }) { cat ->
                         CatItem(
                             cat = cat,
                             isDeletedMode = isDeletedMode,
@@ -135,10 +125,7 @@ fun CatRememberBottomSheet(
                                 isDeletedMode = !isDeletedMode
                             },
                             onCatDeleteClick = {
-                                scope.launch {
-                                    CatRememberDataStore.forgetById(cat.id)
-                                    allCats = allCats.filter { it.id != cat.id }
-                                }
+                                onCatDelete(cat)
                             }
                         )
                     }
