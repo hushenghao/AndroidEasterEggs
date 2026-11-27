@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">Thao tác này sẽ đặt lại tất cả cài đặt, bao gồm chủ đề, biểu tượng trình khởi chạy và ngôn ngữ. Mèo đã lưu và cấu hình tiện ích không bị ảnh hưởng. Không thể hoàn tác hành động này. Bạn có chắc chắn muốn tiếp tục không?</string>
     <string name="action_confirm_restore_defaults">Đặt lại</string>
     <string name="toast_restore_defaults_success">Đã khôi phục cài đặt về mặc định. Ứng dụng sẽ khởi động lại.</string>
+
+    <string name="pref_title_ui_style">Kiểu giao diện</string>
+    <string name="pref_title_haze_blur">Làm mờ trong suốt</string>
+    <string name="pref_summary_haze_blur">Làm mờ nội dung phía sau thanh ứng dụng và lớp phủ toàn màn hình. Có thể ảnh hưởng đến hiệu năng trên một số thiết bị.</string>
+    <string name="pref_title_card_backdrop_blur">Nền thẻ làm mờ</string>
+    <string name="pref_summary_card_backdrop_blur">Hiển thị nền biểu tượng Easter egg được làm mờ trên các thẻ màn hình chính.</string>
 </resources>

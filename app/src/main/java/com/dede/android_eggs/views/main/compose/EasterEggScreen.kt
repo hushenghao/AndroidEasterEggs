@@ -1,26 +1,31 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.dede.android_eggs.views.main.compose
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.DismissibleDrawerSheet
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.PermanentDrawerSheet
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -34,7 +39,7 @@ import androidx.navigationevent.compose.rememberNavigationEventState
 import com.dede.android_eggs.composable.WindowWidthPane
 import com.dede.android_eggs.composable.appbar.HazeScaffold
 import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeAppBar
-import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeBottomBar
+import com.dede.android_eggs.composable.appbar.LocalHazeState
 import com.dede.android_eggs.composable.currentWindowWidthPane
 import com.dede.android_eggs.data.EasterEggRepository
 import com.dede.android_eggs.navigation.EasterEggsDestination
@@ -47,7 +52,7 @@ import com.dede.android_eggs.util.compose.only
 import com.dede.android_eggs.views.main.util.EasterEggLogoSensorMatrixConvert
 import com.dede.android_eggs.views.settings.SettingsContent
 import com.dede.android_eggs.views.settings.SettingsScreen
-import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
+import com.dede.android_eggs.views.settings.compose.options.IconVisualEffectsPrefUtil
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -162,6 +167,7 @@ private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel, highestCount
                 searchText = searchBarState.text,
                 contentPadding = contentPadding,
                 highestCount = highestCount,
+                searchBarVisible = searchBarState.visible,
             )
         }
     }
@@ -205,6 +211,7 @@ private fun EggScreenScaffoldMedium(viewModel: EasterEggViewModel, highestCount:
                 searchText = searchBarState.text,
                 contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
                 highestCount = highestCount,
+                searchBarVisible = searchBarState.visible,
             )
         }
     }
@@ -233,6 +240,7 @@ private fun EggScreenScaffoldExpanded(viewModel: EasterEggViewModel, highestCoun
                 searchText = searchBarState.text,
                 contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
                 highestCount = highestCount,
+                searchBarVisible = searchBarState.visible,
             )
         }
     }
@@ -246,26 +254,30 @@ private fun EggScreenScaffold(
     content: @Composable (contentPadding: PaddingValues) -> Unit,
 ) {
     val contentHazeState = rememberHazeState()
-    HazeScaffold(
-        contentHazeState = contentHazeState,
-        topBar = {
-            MainTitleBar(
-                modifier = Modifier.hazeAppBar(contentHazeState),
-                searchBarState = searchBarState,
-                drawerState = drawerState,
-                showSettingsAction = showSettingsAction,
-            )
-        },
-        bottomBar = {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    CompositionLocalProvider(LocalHazeState provides contentHazeState) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            HazeScaffold(
+                contentHazeState = contentHazeState,
+                scrollBehavior = scrollBehavior,
+                topBar = {
+                    MainTitleBar(
+                        modifier = Modifier.hazeAppBar(contentHazeState),
+                        searchBarState = searchBarState,
+                        drawerState = drawerState,
+                        showSettingsAction = showSettingsAction,
+                        scrollBehavior = scrollBehavior,
+                    )
+                },
+            ) { contentPadding ->
+                content(contentPadding)
+            }
+
             BottomSearchBar(
-                modifier = Modifier.hazeBottomBar(contentHazeState),
-                elevation = 0.dp,
-                containerColor = Color.Transparent,
+                modifier = Modifier.align(Alignment.BottomCenter),
                 state = searchBarState,
             )
-        },
-    ) { contentPadding ->
-        content(contentPadding)
+        }
     }
 }
 

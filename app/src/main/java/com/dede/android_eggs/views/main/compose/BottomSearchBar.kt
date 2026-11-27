@@ -7,22 +7,25 @@ import android.speech.RecognizerIntent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.animation.CapturedAnimatedVisibility
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.exclude
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.ime
-import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.union
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
@@ -30,12 +33,9 @@ import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material.icons.rounded.Mic
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme.colorScheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
@@ -47,11 +47,11 @@ import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.SaverScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -61,8 +61,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.dede.android_eggs.composable.appbar.HazeFloatingSurface
 import com.dede.android_eggs.ui.composes.predictiveBackProgressState
 import com.dede.basic.bundleBuilder
 import com.dede.android_eggs.resources.R as StringsR
@@ -132,41 +132,49 @@ fun rememberBottomSearchBarState(
     }
 }
 
+internal val BottomSearchBarClearance = 76.dp
+private val SearchBarMaxWidth = 560.dp
+
 @Composable
 @Preview
 fun BottomSearchBar(
     modifier: Modifier = Modifier,
     state: BottomSearchBarState = rememberBottomSearchBarState(true),
-    elevation: Dp = 4.dp,
-    containerColor: Color = colorScheme.surfaceColorAtElevation(elevation),
-    contentColor: Color = colorScheme.onSurface,
     onClose: (() -> Unit)? = null,
 ) {
     val backProgress by predictiveBackProgressState(
         enabled = state.visible,
         onBackCompleted = { state.close() },
     )
-    CapturedAnimatedVisibility(
-        visible = state.visible,
-        enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
-        exit = slideOutVertically(targetOffsetY = { it }) + fadeOut(),
-    ) {
-        BottomSearchBarView(
-            state = state,
-            modifier = Modifier
-                .graphicsLayer {
-                    translationY = size.height * 0.3f * backProgress
-                }
-                .then(modifier),
-            shape = RoundedCornerShape(
-                topStart = (14 + 14 * backProgress).dp,
-                topEnd = (14 + 14 * backProgress).dp
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .windowInsetsPadding(
+                WindowInsets.ime
+                    .union(WindowInsets.navigationBars)
+                    .union(WindowInsets.displayCutout.only(WindowInsetsSides.Horizontal))
             ),
-            onClose = onClose,
-            elevation = elevation,
-            containerColor = containerColor,
-            contentColor = contentColor,
-        )
+        contentAlignment = Alignment.BottomCenter,
+    ) {
+        AnimatedVisibility(
+            visible = state.visible,
+            enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
+            exit = slideOutVertically(targetOffsetY = { it }) + fadeOut(),
+        ) {
+            BottomSearchBarView(
+                state = state,
+                modifier = Modifier
+                    .widthIn(max = SearchBarMaxWidth)
+                    .padding(horizontal = 16.dp, vertical = 10.dp)
+                    .graphicsLayer {
+                        translationY = size.height * 0.3f * backProgress
+                        val scale = 1f - 0.05f * backProgress
+                        scaleX = scale
+                        scaleY = scale
+                    },
+                onClose = onClose,
+            )
+        }
     }
 }
 
@@ -174,18 +182,18 @@ fun BottomSearchBar(
 private fun BottomSearchBarView(
     state: BottomSearchBarState,
     modifier: Modifier,
-    shape: Shape,
     onClose: (() -> Unit)?,
-    elevation: Dp = 4.dp,
-    containerColor: Color = colorScheme.surfaceColorAtElevation(elevation),
-    contentColor: Color = colorScheme.onSurface,
 ) {
     val currentOnClose by rememberUpdatedState(newValue = onClose)
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = remember { FocusRequester() }
     val context = LocalContext.current
     val searchHint = stringResource(StringsR.string.label_search_hint)
-    val hasText = state.text.isNotBlank()
+    var displayTextFieldValue by remember { mutableStateOf(state.textFieldValue) }
+    if (state.visible) {
+        displayTextFieldValue = state.textFieldValue
+    }
+    val hasText = displayTextFieldValue.text.isNotBlank()
 
     val voiceLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
@@ -211,27 +219,16 @@ private fun BottomSearchBarView(
             keyboardController?.hide()
         }
     }
-    Surface(
-        // Padding must be inside `modifier` (hazeBlur) so the blur backdrop keeps
-        // drawing to the screen edge. The navigation bar padding excludes the IME
-        // inset: with 3-button nav the IME inset already spans the nav bar, so
-        // padding both insets would double-pad above the keyboard.
-        modifier = Modifier
-            .imePadding()
-            .then(modifier)
-            .windowInsetsPadding(WindowInsets.navigationBars.exclude(WindowInsets.ime)),
-        shape = shape,
-        color = containerColor,
-        contentColor = contentColor,
-        tonalElevation = elevation,
-        shadowElevation = elevation,
+    HazeFloatingSurface(
+        modifier = modifier,
+        shape = CircleShape,
     ) {
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(focusRequester)
-                .padding(horizontal = 16.dp, vertical = 10.dp),
-            value = state.textFieldValue,
+                .padding(horizontal = 4.dp),
+            value = displayTextFieldValue,
             onValueChange = state::onTextChange,
             placeholder = {
                 Text(text = searchHint)

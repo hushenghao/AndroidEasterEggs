@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">Kjo do të rivendosë të gjitha cilësimet, duke përfshirë temën, ikonën e lançuesit dhe gjuhën. Macet e ruajtura dhe konfigurimet e widget-eve nuk preken. Ky veprim nuk mund të zhbëhet. Jeni të sigurt që dëshironi të vazhdoni?</string>
     <string name="action_confirm_restore_defaults">Rivendos</string>
     <string name="toast_restore_defaults_success">Cilësimet u rikthyen në vlerat parazgjedhore. Aplikacioni do të riniset.</string>
+
+    <string name="pref_title_ui_style">Stili i ndërfaqes</string>
+    <string name="pref_title_haze_blur">Turbullim gjysmëtransparent</string>
+    <string name="pref_summary_haze_blur">Turbullon përmbajtjen pas shiritave të aplikacionit dhe mbivendosjeve në ekran të plotë. Mund të ndikojë në performancë në disa pajisje.</string>
+    <string name="pref_title_card_backdrop_blur">Sfondi i turbulluar i kartës</string>
+    <string name="pref_summary_card_backdrop_blur">Shfaq një sfond të turbulluar të ikonës së vezës së Pashkëve në kartat e ekranit kryesor.</string>
 </resources>

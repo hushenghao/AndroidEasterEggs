@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">การดำเนินการนี้จะรีเซ็ตการตั้งค่าทั้งหมด รวมถึงธีม ไอคอนตัวเรียกใช้ และภาษา แมวที่บันทึกไว้และการกำหนดค่าวิดเจ็ตจะไม่ได้รับผลกระทบ การดำเนินการนี้ไม่สามารถย้อนกลับได้ คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ?</string>
     <string name="action_confirm_restore_defaults">รีเซ็ต</string>
     <string name="toast_restore_defaults_success">คืนค่าการตั้งค่าเป็นค่าเริ่มต้นแล้ว แอปจะรีสตาร์ท</string>
+
+    <string name="pref_title_ui_style">สไตล์ UI</string>
+    <string name="pref_title_haze_blur">เบลอแบบโปร่งแสง</string>
+    <string name="pref_summary_haze_blur">เบลอเนื้อหาด้านหลังแถบแอปและโอเวอร์เลย์เต็มหน้าจอ อาจส่งผลต่อประสิทธิภาพในบางอุปกรณ์</string>
+    <string name="pref_title_card_backdrop_blur">พื้นหลังการ์ดแบบเบลอ</string>
+    <string name="pref_summary_card_backdrop_blur">แสดงพื้นหลังไอคอนไข่อีสเตอร์แบบเบลอบนการ์ดหน้าจอหลัก</string>
 </resources>

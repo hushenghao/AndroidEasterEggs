@@ -1,13 +1,18 @@
-package com.dede.android_eggs.views.settings.compose.prefs
+package com.dede.android_eggs.views.settings.compose.options
 
 import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Animation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
+import com.dede.android_eggs.settings_ui.basic.OptionShapes
 import com.dede.android_eggs.settings_ui.basic.SettingPrefUtil
-import com.dede.android_eggs.settings_ui.basic.SwitchIntPref
+import com.dede.android_eggs.settings_ui.basic.SwitchOption
+import com.dede.android_eggs.settings_ui.basic.imageVectorIconBlock
 import com.dede.android_eggs.resources.R as StringsR
 
 object IconVisualEffectsPrefUtil {
@@ -24,10 +29,19 @@ object IconVisualEffectsPrefUtil {
 }
 
 @Composable
-fun IconVisualEffectsPref() {
-    SwitchIntPref(
-        state = SettingPrefUtil.iconVisualEffectsState,
-        leadingIcon = Icons.Rounded.Animation,
+fun IconVisualEffectsOption(shape: Shape = OptionShapes.defaultShape) {
+    var intState by SettingPrefUtil.iconVisualEffectsState
+    SwitchOption(
+        shape = shape,
+        leadingIcon = imageVectorIconBlock(imageVector = Icons.Rounded.Animation),
         title = stringResource(StringsR.string.pref_title_icon_visual_effects),
+        checked = intState == SettingPrefUtil.ON,
+        onCheckedChange = {
+            intState = if (it) {
+                SettingPrefUtil.ON
+            } else {
+                SettingPrefUtil.OFF
+            }
+        },
     )
 }

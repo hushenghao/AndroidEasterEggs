@@ -46,7 +46,9 @@ import com.dede.android_eggs.color_picker.ColorPickerDialog
 import com.dede.android_eggs.color_picker.ColorPickerUtilities
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
 import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
+import com.dede.android_eggs.settings_ui.basic.OptionShapes
 import com.dede.android_eggs.util.ThemeUtils
+import com.dede.android_eggs.views.settings.compose.options.DynamicEggColorsOption
 import com.dede.android_eggs.views.theme.defaultSeedColor
 import com.dede.android_eggs.views.theme.rememberEasterEggColorScheme
 import com.dede.android_eggs.views.theme.settings.ColorSourcePrefUtil
@@ -121,6 +123,12 @@ fun ColorSourcePref() {
                     onEditClick = { showColorPicker = true },
                 )
             }
+        }
+
+        Column(modifier = Modifier.padding(top = 3.dp)) {
+            DynamicEggColorsOption(
+                shape = OptionShapes.borderShape,
+            )
         }
     }
 

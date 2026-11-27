@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">Verranno reimpostate tutte le impostazioni, inclusi tema, icona di avvio e lingua. I gatti salvati e le configurazioni dei widget non saranno interessati. Questa azione non può essere annullata. Vuoi davvero continuare?</string>
     <string name="action_confirm_restore_defaults">Reimposta</string>
     <string name="toast_restore_defaults_success">Impostazioni ripristinate ai valori predefiniti. L\'app verrà riavviata.</string>
+
+    <string name="pref_title_ui_style">Stile interfaccia</string>
+    <string name="pref_title_haze_blur">Sfocatura traslucida</string>
+    <string name="pref_summary_haze_blur">Sfoca il contenuto dietro le barre e le sovrapposizioni a schermo intero. Può influire sulle prestazioni su alcuni dispositivi.</string>
+    <string name="pref_title_card_backdrop_blur">Sfondo sfocato della scheda</string>
+    <string name="pref_summary_card_backdrop_blur">Mostra uno sfondo sfocato dell\'icona Easter egg sulle schede della schermata iniziale.</string>
 </resources>

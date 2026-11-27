@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">Tämä nollaa kaikki asetukset, mukaan lukien teeman, käynnistyskuvakkeen ja kielen. Tallennetut kissat ja widgetien asetukset eivät muutu. Tätä toimintoa ei voi kumota. Haluatko varmasti jatkaa?</string>
     <string name="action_confirm_restore_defaults">Nollaa</string>
     <string name="toast_restore_defaults_success">Asetukset palautettu oletuksiin. Sovellus käynnistyy uudelleen.</string>
+
+    <string name="pref_title_ui_style">Käyttöliittymän tyyli</string>
+    <string name="pref_title_haze_blur">Läpikuultava sumennus</string>
+    <string name="pref_summary_haze_blur">Sumentaa sisällön palkkien ja koko näytön peittokuvien takana. Saattaa vaikuttaa suorituskykyyn joillakin laitteilla.</string>
+    <string name="pref_title_card_backdrop_blur">Kortin sumennettu tausta</string>
+    <string name="pref_summary_card_backdrop_blur">Näyttää sumennetun pääsiäismunakuvakkeen taustan aloitusnäytön korteissa.</string>
 </resources>

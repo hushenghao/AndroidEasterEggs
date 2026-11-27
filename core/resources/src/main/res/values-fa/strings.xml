@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">این کار همه تنظیمات، از جمله تم، آیکون راه‌انداز و زبان را بازنشانی می‌کند. گربه‌های ذخیره‌شده و پیکربندی ویجت‌ها تحت تأثیر قرار نمی‌گیرند. این عمل قابل بازگشت نیست. آیا مطمئن هستید که می‌خواهید ادامه دهید؟</string>
     <string name="action_confirm_restore_defaults">بازنشانی</string>
     <string name="toast_restore_defaults_success">تنظیمات به مقادیر پیش‌فرض بازیابی شد. برنامه دوباره راه‌اندازی می‌شود.</string>
+
+    <string name="pref_title_ui_style">سبک رابط کاربری</string>
+    <string name="pref_title_haze_blur">تاری نیمه‌شفاف</string>
+    <string name="pref_summary_haze_blur">تار کردن محتوای پشت نوارهای برنامه و لایه‌های تمام‌صفحه. ممکن است در برخی دستگاه‌ها بر عملکرد تأثیر بگذارد.</string>
+    <string name="pref_title_card_backdrop_blur">پس‌زمینه تار کارت</string>
+    <string name="pref_summary_card_backdrop_blur">نمایش پس‌زمینه تار نماد تخم‌مرغ عید پاک روی کارت‌های صفحه اصلی.</string>
 </resources>

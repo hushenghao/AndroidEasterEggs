@@ -1,11 +1,18 @@
-package com.dede.android_eggs.views.settings.compose.prefs
+package com.dede.android_eggs.views.settings.compose.options
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderColors
@@ -17,13 +24,16 @@ import androidx.compose.material3.rememberSliderState
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.preferences.AppSettings
-import com.dede.android_eggs.settings_ui.basic.SettingPref
+import com.dede.android_eggs.settings_ui.basic.OptionShapes
 import com.dede.android_eggs.settings_ui.basic.SettingPrefUtil
 import kotlin.math.roundToInt
 import com.dede.android_eggs.resources.R as StringsR
@@ -32,7 +42,7 @@ private const val HIGHEST_EGG_COUNT_MIN = 0f
 private const val HIGHEST_EGG_COUNT_MAX = 4f
 
 @Composable
-fun HighestEggCountPref() {
+fun HighestEggCountOption(shape: Shape = OptionShapes.defaultShape) {
     val state = SettingPrefUtil.highestEggCountState
     val sliderState = rememberSliderState(
         value = state.intValue.toFloat(),
@@ -42,16 +52,46 @@ fun HighestEggCountPref() {
     )
     val interactionSource = remember { MutableInteractionSource() }
     val colors = SliderDefaults.colors()
-    SettingPref(
-        leadingIcon = Icons.Rounded.Star,
-        title = stringResource(StringsR.string.pref_title_highest_egg_count),
-        desc = stringResource(StringsR.string.pref_desc_highest_egg_count),
-        content = {
-            Column(
+    Card(
+        shape = shape,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+    ) {
+        Column {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .defaultMinSize(minHeight = 48.dp)
+                    .padding(start = 12.dp, top = 8.dp, end = 12.dp, bottom = 4.dp),
+            ) {
+                Box(modifier = Modifier.widthIn(0.dp, 30.dp)) {
+                    Icon(
+                        imageVector = Icons.Rounded.Star,
+                        contentDescription = stringResource(StringsR.string.pref_title_highest_egg_count),
+                    )
+                }
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 10.dp),
+                ) {
+                    Text(
+                        text = stringResource(StringsR.string.pref_title_highest_egg_count),
+                        style = MaterialTheme.typography.titleSmall,
+                    )
+                    Text(
+                        text = stringResource(StringsR.string.pref_desc_highest_egg_count),
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 2.dp),
+                        maxLines = 5,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+            }
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 12.dp)
-                    .padding(bottom = 10.dp),
+                    .padding(bottom = 8.dp),
             ) {
                 Slider(
                     state = sliderState,
@@ -71,8 +111,8 @@ fun HighestEggCountPref() {
                     modifier = Modifier.fillMaxWidth(),
                 )
             }
-        },
-    )
+        }
+    }
 }
 
 /**

@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">၎င်းသည် အပြင်အဆင်၊ လော့ချာအိုင်ကွန်နှင့် ဘာသာစကားအပါအဝင် ဆက်တင်အားလုံးကို ပြန်လည်သတ်မှတ်မည်။ သိမ်းဆည်းထားသော ကြောင်များနှင့် ဝစ်ဂျက်ဖွဲ့စည်းမှုများကို ထိခိုက်မည်မဟုတ်ပါ။ ဤလုပ်ဆောင်ချက်ကို ပြန်ပြင်မရပါ။ ဆက်လက်လုပ်ဆောင်လိုသည်မှာ သေချာပါသလား?</string>
     <string name="action_confirm_restore_defaults">ပြန်လည်သတ်မှတ်ပါ</string>
     <string name="toast_restore_defaults_success">ဆက်တင်များကို မူလတန်ဖိုးများသို့ ပြန်လည်ရယူပြီးပါပြီ။ အက်ပ်သည် ပြန်လည်စတင်ပါမည်။</string>
+
+    <string name="pref_title_ui_style">UI စတိုင်</string>
+    <string name="pref_title_haze_blur">အလင်းပေါက် မှုန်ဝါးမှု</string>
+    <string name="pref_summary_haze_blur">အက်ပ်ဘားများနှင့် မျက်နှာပြင်အပြည့် အလွှာများနောက်ရှိ အကြောင်းအရာကို မှုန်ဝါးစေသည်။ အချို့စက်ပစ္စည်းများတွင် စွမ်းဆောင်ရည်ကို ထိခိုက်နိုင်သည်။</string>
+    <string name="pref_title_card_backdrop_blur">ကတ်နောက်ခံ မှုန်ဝါးမှု</string>
+    <string name="pref_summary_card_backdrop_blur">ပင်မစာမျက်နှာ ကတ်များတွင် မှုန်ဝါးထားသော Easter egg အိုင်ကွန် နောက်ခံကို ပြသပါ။</string>
 </resources>

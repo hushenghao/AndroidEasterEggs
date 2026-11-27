@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">Bu işlem, tema, başlatıcı simgesi ve dil dahil olmak üzere tüm ayarları sıfırlayacaktır. Kaydedilen kedi ve araç yapılandırmaları etkilenmeyecektir. Bu işlem geri alınamaz. Devam etmek istediğinizden emin misiniz?</string>
     <string name="action_confirm_restore_defaults">Sıfırla</string>
     <string name="toast_restore_defaults_success">Ayarlar varsayılan değerlere geri yüklendi. Uygulama yeniden başlatılacak.</string>
+
+    <string name="pref_title_ui_style">Arayüz stili</string>
+    <string name="pref_title_haze_blur">Yarı saydam bulanıklık</string>
+    <string name="pref_summary_haze_blur">Uygulama çubuklarının ve tam ekran katmanların arkasındaki içeriği bulanıklaştırır. Bazı cihazlarda performansı etkileyebilir.</string>
+    <string name="pref_title_card_backdrop_blur">Bulanık kart arka planı</string>
+    <string name="pref_summary_card_backdrop_blur">Ana ekran kartlarında bulanıklaştırılmış Paskalya yumurtası simgesi arka planı gösterir.</string>
 </resources>

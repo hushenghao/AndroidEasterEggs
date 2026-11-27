@@ -39,7 +39,7 @@ fun mutablePrefIntState(key: PrefKey<Int>, default: Int = key.default): MutableI
     return PrefMutableIntState(globalContext, key.name, default)
 }
 
-internal fun mutablePrefBoolState(key: PrefKey<Boolean>): MutableState<Boolean> {
+fun mutablePrefBoolState(key: PrefKey<Boolean>): MutableState<Boolean> {
     return PrefMutableBooleanState(globalContext, key.name, key.default)
 }
 

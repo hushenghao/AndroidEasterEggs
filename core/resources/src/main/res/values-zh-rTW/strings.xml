@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">這將重設所有設定，包括主題、啟動器圖示與語言。已儲存的貓咪與小工具設定不會受到影響。此操作無法復原。確定要繼續嗎？</string>
     <string name="action_confirm_restore_defaults">重設</string>
     <string name="toast_restore_defaults_success">設定已還原為預設值。應用程式將重新啟動。</string>
+
+    <string name="pref_title_ui_style">介面樣式</string>
+    <string name="pref_title_haze_blur">毛玻璃模糊效果</string>
+    <string name="pref_summary_haze_blur">模糊頂欄、底欄與全螢幕浮層後方的內容，在部分裝置上可能影響效能</string>
+    <string name="pref_title_card_backdrop_blur">卡片模糊背景</string>
+    <string name="pref_summary_card_backdrop_blur">在首頁彩蛋卡片右側顯示模糊漸層的圖示背景</string>
 </resources>

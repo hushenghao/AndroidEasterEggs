@@ -29,17 +29,14 @@ import com.dede.android_eggs.views.settings.compose.basic.SettingDivider
 import com.dede.android_eggs.views.settings.compose.groups.AboutGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContactMeGroup
 import com.dede.android_eggs.views.settings.compose.groups.ContributeGroup
+import com.dede.android_eggs.views.settings.compose.groups.UiStyleGroup
 import com.dede.android_eggs.views.settings.compose.prefs.AppIconPref
 import com.dede.android_eggs.views.settings.compose.prefs.CatEditorPref
 import com.dede.android_eggs.views.settings.compose.prefs.ColorSourcePref
 import com.dede.android_eggs.views.settings.compose.prefs.ComponentManagerPref
 import com.dede.android_eggs.views.settings.compose.prefs.DataBackupPref
-import com.dede.android_eggs.views.settings.compose.prefs.DynamicEggColorsPref
 import com.dede.android_eggs.views.settings.compose.prefs.EggStatsPref
-import com.dede.android_eggs.views.settings.compose.prefs.HighestEggCountPref
 import com.dede.android_eggs.views.settings.compose.prefs.IconShapePref
-import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPref
-import com.dede.android_eggs.views.settings.compose.prefs.IconVisualEffectsPrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePref
 import com.dede.android_eggs.views.settings.compose.prefs.LanguagePrefUtil
 import com.dede.android_eggs.views.settings.compose.prefs.RetainInRecentsPref
@@ -113,13 +110,7 @@ fun SettingsContent(
         SettingDivider()
 
         // Home
-        if (IconVisualEffectsPrefUtil.isSupported()) {
-            IconVisualEffectsPref()
-        }
-
-        HighestEggCountPref()
-
-        DynamicEggColorsPref()
+        UiStyleGroup()
 
         SnapshotPref()
 

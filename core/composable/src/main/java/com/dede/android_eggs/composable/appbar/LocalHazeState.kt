@@ -1,7 +1,13 @@
 package com.dede.android_eggs.composable.appbar
 
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.staticCompositionLocalOf
 import dev.chrisbanes.haze.HazeState
+
+/**
+ * Whether real-time Haze glassmorphic blur is enabled across scaffolds and overlays.
+ */
+val LocalHazeEnabled = compositionLocalOf { false }
 
 /**
  * The [HazeState] of the nearest [HazeScaffold], provided to its content scope.

@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.egg_stats.EggLaunchSource
 import com.dede.android_eggs.egg_stats.EggStatsSummary
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
+import com.dede.android_eggs.settings_ui.basic.SettingPrefUtil
 import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.ui.composes.icons.rounded.BookmarkAddOutline
@@ -190,16 +191,18 @@ private fun EasterEggItemContent(
         AppLocaleDateFormatter.getInstance("MMM yyyy")
     }
     Box(modifier = modifier) {
-        Box(
-            modifier = Modifier.matchParentSize(),
-            contentAlignment = Alignment.CenterEnd,
-        ) {
-            EasterEggLogoBackdrop(
-                res = egg.iconRes,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .aspectRatio(1f),
-            )
+        if (SettingPrefUtil.eggItemBackdropBlurState.value) {
+            Box(
+                modifier = Modifier.matchParentSize(),
+                contentAlignment = Alignment.CenterEnd,
+            ) {
+                EasterEggLogoBackdrop(
+                    res = egg.iconRes,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .aspectRatio(1f),
+                )
+            }
         }
         Column {
             Row(

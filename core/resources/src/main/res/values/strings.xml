@@ -131,4 +131,10 @@
     <string name="dialog_restore_defaults_message">This will reset all settings, including the theme, launcher icon, and language. Saved cats and widget configurations are not affected. This action cannot be undone. Are you sure you want to continue?</string>
     <string name="action_confirm_restore_defaults">Reset</string>
     <string name="toast_restore_defaults_success">Settings restored to defaults. App will restart.</string>
+
+    <string name="pref_title_ui_style">UI style</string>
+    <string name="pref_title_haze_blur">Translucent blur</string>
+    <string name="pref_summary_haze_blur">Blur content behind app bars and full-screen overlays. May impact performance on some devices.</string>
+    <string name="pref_title_card_backdrop_blur">Card blurred backdrop</string>
+    <string name="pref_summary_card_backdrop_blur">Show a blurred Easter egg icon backdrop on home screen cards.</string>
 </resources>

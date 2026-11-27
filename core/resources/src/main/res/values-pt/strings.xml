@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">Isto irá repor todas as definições, incluindo o tema, o ícone do launcher e o idioma. Os gatos e as definições de widgets guardados não serão afetados. Esta ação não pode ser anulada. Tem a certeza que quer continuar?</string>
     <string name="action_confirm_restore_defaults">Reiniciar</string>
     <string name="toast_restore_defaults_success">As definições foram restauradas para os valores predefinidos. A aplicação será reiniciada.</string>
+
+    <string name="pref_title_ui_style">Estilo da interface</string>
+    <string name="pref_title_haze_blur">Desfoque translúcido</string>
+    <string name="pref_summary_haze_blur">Desfoca o conteúdo atrás das barras da aplicação e sobreposições em ecrã inteiro. Pode afetar o desempenho em alguns dispositivos.</string>
+    <string name="pref_title_card_backdrop_blur">Fundo desfocado do cartão</string>
+    <string name="pref_summary_card_backdrop_blur">Mostra um fundo desfocado do ícone do Easter egg nos cartões do ecrã inicial.</string>
 </resources>

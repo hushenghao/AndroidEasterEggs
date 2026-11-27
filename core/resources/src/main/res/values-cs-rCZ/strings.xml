@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">Toto obnoví všechna nastavení, včetně motivu, ikony aplikace, a jazyka. Uložené kočky a nastavení widgetů nebudou změněny. Jste si jisti, že chcete pokračovat?</string>
     <string name="action_confirm_restore_defaults">Obnovit</string>
     <string name="toast_restore_defaults_success">Nastavení obnoveny na výchozí. Aplikace se restartuje.</string>
+
+    <string name="pref_title_ui_style">Styl rozhraní</string>
+    <string name="pref_title_haze_blur">Průsvitné rozostření</string>
+    <string name="pref_summary_haze_blur">Rozostří obsah za panely a překryvy na celou obrazovku. Na některých zařízeních může ovlivnit výkon.</string>
+    <string name="pref_title_card_backdrop_blur">Rozostřené pozadí karty</string>
+    <string name="pref_summary_card_backdrop_blur">Zobrazí rozostřené pozadí ikony velikonočního vajíčka na kartách úvodní obrazovky.</string>
 </resources>

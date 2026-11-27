@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">இது தீம், லாஞ்சர் ஐகான் மற்றும் மொழி உட்பட எல்லா அமைப்புகளையும் மீட்டமைக்கும். சேமித்த பூனைகள் மற்றும் விட்ஜெட் உள்ளமைவுகள் பாதிக்கப்படாது. இந்த செயலை மாற்ற முடியாது. நீங்கள் நிச்சயமாக தொடர விரும்புகிறீர்களா?</string>
     <string name="action_confirm_restore_defaults">மீட்டமை</string>
     <string name="toast_restore_defaults_success">அமைப்புகள் இயல்புநிலைக்கு மீட்டமைக்கப்பட்டன. பயன்பாடு மறுதொடக்கம் செய்யும்.</string>
+
+    <string name="pref_title_ui_style">UI பாணி</string>
+    <string name="pref_title_haze_blur">ஒளிபுகும் மங்கலாக்கல்</string>
+    <string name="pref_summary_haze_blur">பயன்பாட்டுப் பட்டைகள் மற்றும் முழுத்திரை மேலடுக்குகளுக்குப் பின்னால் உள்ள உள்ளடக்கத்தை மங்கலாக்கும். சில சாதனங்களில் செயல்திறனைப் பாதிக்கலாம்.</string>
+    <string name="pref_title_card_backdrop_blur">அட்டை மங்கலான பின்னணி</string>
+    <string name="pref_summary_card_backdrop_blur">முகப்புத் திரை அட்டைகளில் மங்கலாக்கப்பட்ட ஈஸ்டர் எக் ஐகான் பின்னணியைக் காட்டும்.</string>
 </resources>

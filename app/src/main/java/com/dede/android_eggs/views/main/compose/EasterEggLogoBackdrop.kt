@@ -65,14 +65,14 @@ internal fun EasterEggLogoBackdrop(
     )
 }
 
-private data class BackdropCacheKey(
+internal data class BackdropCacheKey(
     @DrawableRes val res: Int,
     val uiMode: Int,
     val isRtl: Boolean,
     val systemAccentSample: Int,
 )
 
-private object EasterEggBackdropBitmapCache {
+internal object EasterEggBackdropBitmapCache {
 
     private val cache = LruCache<BackdropCacheKey, ImageBitmap>(MAX_CACHE_ENTRIES)
 
@@ -88,6 +88,10 @@ private object EasterEggBackdropBitmapCache {
         )
         cache.put(key, created)
         return created
+    }
+
+    fun clear() {
+        cache.evictAll()
     }
 }
 

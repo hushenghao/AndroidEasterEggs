@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">Ez visszaállítja az összes beállítást, beleértve a témát, az indító ikont és a nyelvet. A mentett macskák és widgetkonfigurációk nem érintettek. Ez a művelet nem vonható vissza. Biztosan folytatja?</string>
     <string name="action_confirm_restore_defaults">Visszaállítás</string>
     <string name="toast_restore_defaults_success">A beállítások visszaállítva az alapértelmezett értékekre. Az alkalmazás újraindul.</string>
+
+    <string name="pref_title_ui_style">Felület stílusa</string>
+    <string name="pref_title_haze_blur">Áttetsző elmosás</string>
+    <string name="pref_summary_haze_blur">Elhomályosítja az alkalmazássávok és a teljes képernyős fedvények mögötti tartalmat. Egyes eszközökön befolyásolhatja a teljesítményt.</string>
+    <string name="pref_title_card_backdrop_blur">Elmosott kártyaháttér</string>
+    <string name="pref_summary_card_backdrop_blur">Elmosott húsvéti tojás ikonhátteret jelenít meg a kezdőképernyő kártyáin.</string>
 </resources>

@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">Це скине всі налаштування, зокрема тему, значок програми та мову. Збережені коти та конфігурації віджетів залишаться без змін. Цю дію неможливо скасувати. Ви впевнені, що хочете продовжити?</string>
     <string name="action_confirm_restore_defaults">Скинути</string>
     <string name="toast_restore_defaults_success">Налаштування відновлено до значень за замовчуванням. Програма перезапуститься.</string>
+
+    <string name="pref_title_ui_style">Стиль інтерфейсу</string>
+    <string name="pref_title_haze_blur">Напівпрозоре розмиття</string>
+    <string name="pref_summary_haze_blur">Розмиває вміст за панелями застосунку та повноекранними накладаннями. Може впливати на продуктивність на деяких пристроях.</string>
+    <string name="pref_title_card_backdrop_blur">Розмитий фон картки</string>
+    <string name="pref_summary_card_backdrop_blur">Показувати розмитий фон значка великоднього яйця на картках головного екрана.</string>
 </resources>

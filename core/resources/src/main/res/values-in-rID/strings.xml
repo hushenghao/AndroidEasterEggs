@@ -120,4 +120,10 @@
     <string name="action_confirm_restore_defaults">Atur ulang</string>
     <string name="toast_restore_defaults_success">Pengaturan dikembalikan ke pengaturan default. Aplikasi akan
 memulai ulang.</string>
+
+    <string name="pref_title_ui_style">Gaya UI</string>
+    <string name="pref_title_haze_blur">Blur transparan</string>
+    <string name="pref_summary_haze_blur">Buramkan konten di balik bilah aplikasi dan hamparan layar penuh. Dapat memengaruhi performa pada beberapa perangkat.</string>
+    <string name="pref_title_card_backdrop_blur">Latar belakang kartu buram</string>
+    <string name="pref_summary_card_backdrop_blur">Tampilkan latar belakang ikon Easter egg yang buram pada kartu layar beranda.</string>
 </resources>

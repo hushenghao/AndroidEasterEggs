@@ -24,6 +24,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.rounded.ViewCarousel
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
@@ -154,6 +155,7 @@ fun SnapshotOverlay(onDismiss: () -> Unit) {
             // Full screen and the topmost hit target, so it both carries the blur and keeps the
             // screen behind it from being touched. Like the sheet scrim it sits below the
             // content, which keeps taps on the content from dismissing.
+            val scrimColor = BottomSheetDefaults.ScrimColor
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -166,7 +168,8 @@ fun SnapshotOverlay(onDismiss: () -> Unit) {
                                     endIntensity = endIntensity,
                                 )
                             )
-                        }
+                        },
+                        fallbackColor = scrimColor.copy(alpha = scrimColor.alpha * opacity),
                     )
                     .pointerInput(Unit) {
                         detectTapGestures { dismiss() }

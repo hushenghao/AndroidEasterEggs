@@ -58,6 +58,11 @@ object AppSettings {
 
     val retainInRecents = PrefKey.boolean("key_retain_in_recents", false)
 
+    /**
+     * Real-time glassmorphic Haze blur on app bars, bottom bars, and full-screen overlays.
+     */
+    val hazeBlur = PrefKey.boolean("pref_key_haze_blur", false)
+
     // Easter eggs ------------------------------------------------------------
 
     /**
@@ -72,6 +77,11 @@ object AppSettings {
      * [HIGHEST_EGG_COUNT_ALL] highlights every egg.
      */
     val highestEggCount = PrefKey.int("pref_key_highest_egg_count", 1)
+
+    /**
+     * Blurred decorative logo backdrop on the trailing edge of home screen Easter egg cards.
+     */
+    val eggItemBackdropBlur = PrefKey.boolean("pref_key_egg_item_backdrop_blur", false)
 
     /**
      * Global "Material You" coloring for the AOSP-derived legacy eggs: they draw
@@ -130,7 +140,9 @@ object AppSettings {
         iconShape,
         iconVisualEffects,
         retainInRecents,
+        hazeBlur,
         highestEggCount,
+        eggItemBackdropBlur,
         dynamicEggColors,
         rocketLauncherIconsSource,
         sTrypophobiaWarning,

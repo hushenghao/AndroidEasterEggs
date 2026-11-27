@@ -10,4 +10,8 @@ object SettingPrefUtil {
 
     /** Shared by the settings slider and the home list so slider drags recompose the home list. */
     val highestEggCountState = mutablePrefIntState(AppSettings.highestEggCount)
+
+    val hazeBlurState = mutablePrefBoolState(AppSettings.hazeBlur)
+
+    val eggItemBackdropBlurState = mutablePrefBoolState(AppSettings.eggItemBackdropBlur)
 }

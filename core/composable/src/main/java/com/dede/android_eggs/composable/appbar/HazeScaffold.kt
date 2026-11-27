@@ -2,11 +2,12 @@
 
 package com.dede.android_eggs.composable.appbar
 
-import androidx.compose.animation.core.LinearEasing
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FabPosition
@@ -98,6 +99,7 @@ fun HazeScaffold(
         modifier
     }
 
+    val hazeEnabled = LocalHazeEnabled.current
     CompositionLocalProvider(LocalHazeState provides contentHazeState) {
         Scaffold(
             modifier = scaffoldModifier,
@@ -110,7 +112,13 @@ fun HazeScaffold(
             contentWindowInsets = contentWindowInsets,
         ) { contentPadding ->
             Box(
-                modifier = Modifier.hazeSource(contentHazeState),
+                modifier = if (hazeEnabled) {
+                    Modifier
+                        .hazeSource(contentHazeState)
+                        .background(containerColor)
+                } else {
+                    Modifier
+                },
             ) {
                 content(contentPadding)
             }
@@ -122,36 +130,38 @@ fun HazeScaffold(
 object HazeScaffoldDefaults {
 
     @Composable
-    fun Modifier.hazeAppBar(state: HazeState = LocalHazeState.current): Modifier = Modifier
-        .hazeBlur(
-            input = HazeInput.Sources(state),
-            style = HazeMaterials.thick().then {
-                progressive(
-                    HazeProgressive.verticalGradient(
-                        startIntensity = 1f,
-                        endIntensity = 0f,
-                    )
-                )
-            }
-        )
-        .then(this)
-
-    @Composable
-    fun Modifier.hazeBottomBar(state: HazeState = LocalHazeState.current): Modifier =
-        Modifier
+    fun Modifier.hazeAppBar(state: HazeState = LocalHazeState.current): Modifier {
+        if (!LocalHazeEnabled.current) {
+            return this
+        }
+        return Modifier
             .hazeBlur(
                 input = HazeInput.Sources(state),
-                style = HazeMaterials.ultraThick().then {
+                style = HazeMaterials.thick().then {
                     progressive(
                         HazeProgressive.verticalGradient(
-                            easing = LinearEasing,
-                            startIntensity = 0f,
-                            endIntensity = 1f,
+                            startIntensity = 1f,
+                            endIntensity = 0f,
                         )
                     )
                 }
             )
             .then(this)
+    }
+
+    @Composable
+    fun Modifier.hazeBottomBar(
+        state: HazeState = LocalHazeState.current,
+        style: HazeBlurStyle = HazeMaterials.thin(MaterialTheme.colorScheme.surfaceContainerHigh),
+    ): Modifier {
+        if (!LocalHazeEnabled.current) {
+            return this
+        }
+        return this.hazeBlur(
+            input = HazeInput.Sources(state),
+            style = style,
+        )
+    }
 
     /**
      * Blurs everything the window Haze source of [overlayState] captured, for a full screen
@@ -167,10 +177,19 @@ object HazeScaffoldDefaults {
     fun Modifier.hazeOverlayBackdrop(
         overlayState: HazeState = LocalOverlayHazeState.current,
         style: HazeBlurStyle = HazeMaterials.thin(),
-    ): Modifier = Modifier
-        .hazeBlur(
-            input = HazeInput.Sources(overlayState),
-            style = style,
-        )
-        .then(this)
+        fallbackColor: Color = BottomSheetDefaults.ScrimColor,
+    ): Modifier {
+        return if (LocalHazeEnabled.current) {
+            Modifier
+                .hazeBlur(
+                    input = HazeInput.Sources(overlayState),
+                    style = style,
+                )
+                .then(this)
+        } else {
+            Modifier
+                .background(fallbackColor)
+                .then(this)
+        }
+    }
 }

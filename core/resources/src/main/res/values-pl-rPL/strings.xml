@@ -119,4 +119,10 @@
     <string name="dialog_restore_defaults_message">Spowoduje to zresetowanie wszystkich ustawień, w tym motywu, ikony aplikacji i języka. Zapisane koty i konfiguracje widżetów nie zostaną zmienione. Tej czynności nie można cofnąć. Czy na pewno chcesz kontynuować?</string>
     <string name="action_confirm_restore_defaults">Resetuj</string>
     <string name="toast_restore_defaults_success">Ustawienia przywrócono do wartości domyślnych. Aplikacja uruchomi się ponownie.</string>
+
+    <string name="pref_title_ui_style">Styl interfejsu</string>
+    <string name="pref_title_haze_blur">Półprzezroczyste rozmycie</string>
+    <string name="pref_summary_haze_blur">Rozmywa zawartość za paskami aplikacji i nakładkami pełnoekranowymi. Może wpływać na wydajność na niektórych urządzeniach.</string>
+    <string name="pref_title_card_backdrop_blur">Rozmyte tło karty</string>
+    <string name="pref_summary_card_backdrop_blur">Wyświetla rozmyte tło ikony pisanki na kartach ekranu głównego.</string>
 </resources>

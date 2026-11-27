@@ -20,6 +20,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.NavDisplay
+import com.dede.android_eggs.composable.appbar.LocalHazeEnabled
 import com.dede.android_eggs.composable.appbar.LocalOverlayHazeState
 import com.dede.android_eggs.local_provider.rememberCustomTabsUriHandler
 import com.dede.android_eggs.navigation.EasterEggsDestination
@@ -32,17 +33,13 @@ import com.dede.android_eggs.navigation.OverlayManager
 import com.dede.android_eggs.navigation.OverlayRoute
 import com.dede.android_eggs.navigation.rememberNavigationState
 import com.dede.android_eggs.navigation.toEntries
+import com.dede.android_eggs.settings_ui.basic.SettingPrefUtil
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiController
 import dev.chrisbanes.haze.blur.HazeBlurStyle
 import dev.chrisbanes.haze.blur.LocalHazeBlurStyle
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.rememberHazeState
-
-// Explicitly enable blur on pre-API 31 devices (Haze defaults to SDK_INT >= 31).
-private val GlobalHazeBlurStyle = HazeBlurStyle {
-    blurEnabled(true)
-}
 
 private const val DURATION = 400
 private const val SCALE = 0.88f
@@ -80,9 +77,10 @@ fun EasterEggsNavHost(
     // Sources everything the window draws, so a full screen overlay can blur the whole screen
     // behind it. Screens keep their own content scoped state, see HazeScaffold.
     val overlayHazeState = rememberHazeState()
+    val hazeEnabled by SettingPrefUtil.hazeBlurState
     val localHazeBlurStyle = LocalHazeBlurStyle.current
-    val hazeBlurStyle = remember(localHazeBlurStyle) {
-        localHazeBlurStyle.then(GlobalHazeBlurStyle)
+    val hazeBlurStyle = remember(localHazeBlurStyle, hazeEnabled) {
+        localHazeBlurStyle.then(HazeBlurStyle { blurEnabled(hazeEnabled) })
     }
     CompositionLocalProvider(
         LocalUriHandler provides uriHandler,
@@ -91,6 +89,7 @@ fun EasterEggsNavHost(
         LocalKonfettiState provides konfettiController,
         LocalOverlayHazeState provides overlayHazeState,
         LocalHazeBlurStyle provides hazeBlurStyle,
+        LocalHazeEnabled provides hazeEnabled,
     ) {
         // Entries are resolved by route class, mirroring the official "direct entry provider
         // function" pattern from the Navigation3 docs (developer.android.com/guide/navigation/
@@ -113,7 +112,13 @@ fun EasterEggsNavHost(
             NavDisplay(
                 modifier = Modifier
                     .fillMaxSize()
-                    .hazeSource(overlayHazeState)
+                    .then(
+                        if (hazeEnabled) {
+                            Modifier.hazeSource(overlayHazeState)
+                        } else {
+                            Modifier
+                        }
+                    )
                     .then(
                         // A window of its own already keeps the content behind it out of reach
                         // of accessibility services, an overlay in this window does not.

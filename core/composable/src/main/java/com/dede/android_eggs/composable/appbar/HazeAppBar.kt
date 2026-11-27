@@ -128,8 +128,14 @@ object HazeAppBarDefaults {
     }
 
     @Composable
-    fun colors(): TopAppBarColors = TopAppBarDefaults.topAppBarColors(
-        containerColor = Color.Transparent,
-        scrolledContainerColor = Color.Transparent,
-    )
+    fun colors(): TopAppBarColors {
+        return if (LocalHazeEnabled.current) {
+            TopAppBarDefaults.topAppBarColors(
+                containerColor = Color.Transparent,
+                scrolledContainerColor = Color.Transparent,
+            )
+        } else {
+            TopAppBarDefaults.topAppBarColors()
+        }
+    }
 }

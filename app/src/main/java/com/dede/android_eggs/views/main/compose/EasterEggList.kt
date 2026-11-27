@@ -3,8 +3,11 @@ package com.dede.android_eggs.views.main.compose
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,8 +21,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dede.android_eggs.composable.WindowWidthPane
@@ -100,6 +105,7 @@ fun EasterEggList(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     releaseDateLookup: (AndroidVersion) -> Date? = { null },
     highestCount: Int = HIGHEST_COUNT,
+    searchBarVisible: Boolean = false,
 ) {
     val context = LocalContext.current
     val pureEasterEggs = remember(easterEggs) {
@@ -117,7 +123,14 @@ fun EasterEggList(
     }
 
     val listContentPadding = contentPadding +
-            PaddingValues(vertical = 10.dp, horizontal = 12.dp)
+            PaddingValues(
+                start = 12.dp,
+                top = 10.dp,
+                end = 12.dp,
+                bottom = 10.dp +
+                        (if (searchBarVisible) BottomSearchBarClearance else 0.dp) +
+                        rememberExtraImeBottomPadding(),
+            )
 
     val statsMap = rememberEggStats()
 
@@ -161,9 +174,17 @@ fun EasterEggList(
                     statsMap = statsMap,
                 )
             }
-            EasterEggListType.SEARCH_EMPTY -> SearchEmpty(contentPadding)
+            EasterEggListType.SEARCH_EMPTY -> SearchEmpty(listContentPadding)
         }
     }
+}
+
+@Composable
+private fun rememberExtraImeBottomPadding(): Dp {
+    val density = LocalDensity.current
+    val imeBottom = WindowInsets.ime.getBottom(density)
+    val navBottom = WindowInsets.navigationBars.getBottom(density)
+    return with(density) { (imeBottom - navBottom).coerceAtLeast(0).toDp() }
 }
 
 /** Single column list for compact widths, centered with the 560.dp limit. */
