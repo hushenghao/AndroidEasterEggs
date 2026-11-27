@@ -119,7 +119,6 @@
     <string name="dialog_restore_defaults_message">ການກະທຳນີ້ຈະຣີເຊັດການຕັ້ງຄ່າທັງໝົດ, ລວມທັງຫົວຂໍ້, ໄອຄອນ launcher ແລະ ພາສາ. ແມວທີ່ບັນທຶກໄວ້ ແລະ ການຕັ້ງຄ່າວິດເຈັດຈະບໍ່ຖືກກະທົບ. ບໍ່ສາມາດຍົກເລີກໄດ້. ທ່ານແນ່ໃຈບໍວ່າຕ້ອງການສືບຕໍ່?</string>
     <string name="action_confirm_restore_defaults">ຣີເຊັດ</string>
     <string name="toast_restore_defaults_success">ກູ້ຄືນການຕັ້ງຄ່າໄປຫາເລີ່ມຕົ້ນແລ້ວ. ແອັບຈະເລີ່ມຄືນໃໝ່.</string>
-
     <string name="pref_title_ui_style">ຮູບແບບ UI</string>
     <string name="pref_title_haze_blur">ເບີໂປ່ງໃສ</string>
     <string name="pref_summary_haze_blur">ເບີເນື້ອຫາທາງຫຼັງແຖບແອັບ ແລະ ໜ້າຈໍຊ້ອນທັບເຕັມຈໍ. ອາດສົ່ງຜົນກະທົບຕໍ່ປະສິດທິພາບໃນບາງອຸປະກອນ.</string>

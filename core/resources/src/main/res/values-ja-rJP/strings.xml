@@ -121,7 +121,6 @@
     <string name="dialog_restore_defaults_message">テーマ、ランチャーアイコン、言語を含むすべての設定がリセットされます。保存済みの猫とウィジェット設定は影響を受けません。この操作は元に戻せません。続行しますか？</string>
     <string name="action_confirm_restore_defaults">リセット</string>
     <string name="toast_restore_defaults_success">設定をデフォルトに戻しました。アプリを再起動します。</string>
-
     <string name="pref_title_ui_style">UI スタイル</string>
     <string name="pref_title_haze_blur">すりガラスぼかし効果</string>
     <string name="pref_summary_haze_blur">アプリバーや全画面オーバーレイの背後をぼかします。一部の端末ではパフォーマンスに影響する場合があります。</string>

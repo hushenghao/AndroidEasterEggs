@@ -119,7 +119,6 @@
     <string name="dialog_restore_defaults_message">Esto restablecerá todos los ajustes, incluyendo el tema, icono del lanzador y el idioma. Los gatos guardados y las configuraciones de accesos directos no se ven afectados. Esta acción no se puede deshacer. ¿Está seguro de que desea continuar?</string>
     <string name="action_confirm_restore_defaults">Reiniciar</string>
     <string name="toast_restore_defaults_success">La configuración se ha restablecido a los valores predeterminados. La aplicación se reiniciará.</string>
-
     <string name="pref_title_ui_style">Estilo de interfaz</string>
     <string name="pref_title_haze_blur">Desenfoque translúcido</string>
     <string name="pref_summary_haze_blur">Desenfoca el contenido detrás de las barras y superposiciones a pantalla completa. Puede afectar el rendimiento en algunos dispositivos.</string>

@@ -119,7 +119,6 @@
     <string name="dialog_restore_defaults_message">Dies setzt alle Einstellungen zurück, einschließlich Design, Launcher-Symbol und Sprache. Gespeicherte Katzen und Widget-Konfigurationen sind nicht betroffen. Diese Aktion kann nicht rückgängig gemacht werden. Möchtest du wirklich fortfahren?</string>
     <string name="action_confirm_restore_defaults">Zurücksetzen</string>
     <string name="toast_restore_defaults_success">Einstellungen auf Standardwerte zurückgesetzt. Die App wird neu gestartet.</string>
-
     <string name="pref_title_ui_style">Oberflächenstil</string>
     <string name="pref_title_haze_blur">Transluzente Unschärfe</string>
     <string name="pref_summary_haze_blur">Inhalte hinter App-Leisten und Vollbild-Overlays weichzeichnen. Kann auf manchen Geräten die Leistung beeinträchtigen.</string>
