@@ -23,9 +23,30 @@ import androidx.core.os.ConfigurationCompat
 import androidx.core.os.LocaleListCompat
 
 
+/**
+ * Global application [Context] initialized via Jetpack App Startup.
+ *
+ * Deprecated because static global context introduces tight coupling, implicit dependency on
+ * startup initialization order, and makes unit tests and Compose previews harder to isolate.
+ * Prefer injecting `@ApplicationContext` with Hilt or passing `Context` explicitly.
+ */
+@Deprecated(
+    message = "Avoid static global Context; inject @ApplicationContext via Hilt or pass Context explicitly.",
+    level = DeprecationLevel.WARNING,
+)
 val globalContext: Context
+    @Suppress("DEPRECATION")
     get() = GlobalContext.globalContext
 
+/**
+ * Holds the process-wide [Context] populated by [GlobalContext.Initializer].
+ *
+ * Deprecated in favor of Hilt `@ApplicationContext` injection or explicit [Context] parameters.
+ */
+@Deprecated(
+    message = "Avoid static global Context; inject @ApplicationContext via Hilt or pass Context explicitly.",
+    level = DeprecationLevel.WARNING,
+)
 @SuppressLint("StaticFieldLeak")
 object GlobalContext {
 
