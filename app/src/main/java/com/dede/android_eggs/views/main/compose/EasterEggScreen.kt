@@ -43,6 +43,8 @@ import com.dede.android_eggs.composable.appbar.LocalHazeState
 import com.dede.android_eggs.composable.currentWindowWidthPane
 import com.dede.android_eggs.data.EasterEggRepository
 import com.dede.android_eggs.navigation.EasterEggsDestination
+import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.settings_state.rememberPrefValue
 import com.dede.android_eggs.settings_ui.basic.SettingPrefUtil
 import com.dede.android_eggs.ui.composes.ReverseDismissibleNavigationDrawer
 import com.dede.android_eggs.ui.composes.ReverseModalNavigationDrawer
@@ -96,7 +98,7 @@ fun EasterEggScreen(
     if (IconVisualEffectsPrefUtil.isSupported()) {
         val lifecycleOwner = LocalLifecycleOwner.current
         val iconVisualEffectsEnabled =
-            SettingPrefUtil.iconVisualEffectsState.intValue == SettingPrefUtil.ON
+            rememberPrefValue(AppSettings.iconVisualEffects) == SettingPrefUtil.ON
         DisposableEffect(iconVisualEffectsEnabled) {
             var orientationAngleSensor: OrientationAngleSensor? = null
             if (iconVisualEffectsEnabled) {
@@ -112,7 +114,7 @@ fun EasterEggScreen(
     }
 
     val konfettiController = LocalKonfettiState.current
-    val highestCount = SettingPrefUtil.highestEggCountState.intValue
+    val highestCount = rememberPrefValue(AppSettings.highestEggCount)
     CompositionLocalProvider(
         LocalEasterEggLogoSensor provides logoSensor,
     ) {

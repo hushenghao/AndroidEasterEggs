@@ -9,9 +9,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.settings_state.rememberPrefBoolState
 import com.dede.android_eggs.settings_ui.basic.ExpandOptionsPref
 import com.dede.android_eggs.settings_ui.basic.OptionShapes
-import com.dede.android_eggs.settings_ui.basic.SettingPrefUtil
 import com.dede.android_eggs.settings_ui.basic.SwitchOption
 import com.dede.android_eggs.settings_ui.basic.imageVectorIconBlock
 import com.dede.android_eggs.views.main.compose.EasterEggBackdropBitmapCache
@@ -23,8 +24,8 @@ import com.dede.android_eggs.resources.R as StringsR
 @Preview
 @Composable
 fun UiStyleGroup() {
-    var hazeBlur by SettingPrefUtil.hazeBlurState
-    var cardBackdropBlur by SettingPrefUtil.eggItemBackdropBlurState
+    var hazeBlur by rememberPrefBoolState(AppSettings.hazeBlur)
+    var cardBackdropBlur by rememberPrefBoolState(AppSettings.eggItemBackdropBlur)
 
     ExpandOptionsPref(
         leadingIcon = Icons.Rounded.AutoAwesome,

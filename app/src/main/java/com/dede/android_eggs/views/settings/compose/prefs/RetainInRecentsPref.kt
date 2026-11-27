@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.preferences.AppSettings
 import com.dede.android_eggs.util.isVivo
+import com.dede.android_eggs.settings_state.rememberPrefBoolState
 import com.dede.android_eggs.settings_ui.basic.SwitchPref
-import com.dede.android_eggs.settings_ui.basic.rememberPrefBoolState
 import com.dede.android_eggs.resources.R as StringsR
 
 object RetainInRecentsPrefUtil {

@@ -9,6 +9,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
+import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.settings_state.rememberPrefIntState
 import com.dede.android_eggs.settings_ui.basic.OptionShapes
 import com.dede.android_eggs.settings_ui.basic.SettingPrefUtil
 import com.dede.android_eggs.settings_ui.basic.SwitchOption
@@ -30,7 +32,7 @@ object IconVisualEffectsPrefUtil {
 
 @Composable
 fun IconVisualEffectsOption(shape: Shape = OptionShapes.defaultShape) {
-    var intState by SettingPrefUtil.iconVisualEffectsState
+    var intState by rememberPrefIntState(AppSettings.iconVisualEffects)
     SwitchOption(
         shape = shape,
         leadingIcon = imageVectorIconBlock(imageVector = Icons.Rounded.Animation),

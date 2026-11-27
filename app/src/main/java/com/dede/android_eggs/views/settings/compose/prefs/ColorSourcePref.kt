@@ -89,8 +89,8 @@ private val options = buildList {
 @Preview
 @Composable
 fun ColorSourcePref() {
-    var currentSource by ColorSourcePrefUtil.colorSourceState
-    var currentSeedColor by ColorSourcePrefUtil.seedColorState
+    var currentSource by ColorSourcePrefUtil.rememberColorSourceState()
+    var currentSeedColor by ColorSourcePrefUtil.rememberSeedColorState()
 
     val updateSource = { source: Int ->
         currentSource = source
@@ -153,7 +153,7 @@ private fun ColorSourceCard(
     onCardClick: () -> Unit,
     onEditClick: () -> Unit,
 ) {
-    val themeMode by ThemePrefUtil.themeModeState
+    val themeMode by ThemePrefUtil.rememberThemeModeState()
     val isDark = ThemeUtils.isDarkMode(LocalContext.current)
     val previewSeedColor = when (option.value) {
         ColorSourcePrefUtil.SOURCE_CUSTOM -> seedColor

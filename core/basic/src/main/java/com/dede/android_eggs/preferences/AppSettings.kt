@@ -2,14 +2,14 @@ package com.dede.android_eggs.preferences
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.edit
 import com.dede.android_eggs.preferences.AppSettings.COLOR_SOURCE_DYNAMIC
-import com.dede.android_eggs.util.pref
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 /**
- * Single source of truth for the settings persisted in the default
- * `<packageName>_preferences` file (`Context.pref` in
- * `com.dede.android_eggs.util.Pref`).
+ * Single source of truth for the settings persisted in the `app_settings`
+ * Preferences DataStore (migrated on first read from `<packageName>_preferences`
+ * via a key whitelist so AOSP egg unlock timestamps in `SpUtils` remain untouched).
  *
  * Every read and write goes through [PrefKey.get] and [PrefKey.set], every
  * absent value falls back to [PrefKey.default], so a setting's storage key and
@@ -162,19 +162,41 @@ object AppSettings {
         require(duplicates.isEmpty()) { "Duplicate setting keys: $duplicates" }
     }
 
+    fun preload(context: Context) {
+        AppSettingsStore.snapshot(context)
+    }
+
+    fun snapshot(context: Context): AppSettingsSnapshot {
+        return AppSettingsSnapshot(AppSettingsStore.snapshot(context))
+    }
+
+    fun snapshotFlow(context: Context): Flow<AppSettingsSnapshot> {
+        return AppSettingsStore.dataFlow(context).map(::AppSettingsSnapshot)
+    }
+
+    fun edit(context: Context, block: AppSettingsEditor.() -> Unit) {
+        AppSettingsStore.enqueueEdit(context) { prefs ->
+            AppSettingsEditor(prefs).block()
+        }
+    }
+
+    suspend fun flush() {
+        AppSettingsStore.flush()
+    }
+
     /**
      * Drops every registered setting in one transaction, so each of them reads
      * back its declared [PrefKey.default] again.
      *
-     * Committed synchronously on purpose: the settings screen restarts the
-     * process right after a reset, and a queued `apply()` would die with it.
-     * Settings stored outside this file (launcher icon, language, the eggs'
+     * Awaits disk commit on purpose: the settings screen restarts the process
+     * right after a reset, and an unawaited write would die with it.
+     * Settings stored outside this store (launcher icon, language, the eggs'
      * neko state) need their own reset.
      */
-    fun reset(context: Context) {
-        context.pref.edit(commit = true) {
+    suspend fun reset(context: Context) {
+        AppSettingsStore.editAndAwait(context) { prefs ->
             for (key in all) {
-                key.reset(this)
+                key.removeFrom(prefs)
             }
         }
     }

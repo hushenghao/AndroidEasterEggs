@@ -11,12 +11,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.edit
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
 import com.dede.android_eggs.preferences.AppSettings
 import com.dede.android_eggs.util.AGPUtils
-import com.dede.android_eggs.util.pref
 import com.dede.basic.Utils
 import com.dede.basic.copy
 import java.time.ZonedDateTime
@@ -37,9 +35,9 @@ internal object Utilities {
         if (savedVersion == vcsRevision) {
             return
         }
-        context.pref.edit {
-            AppSettings.savedVcsRevision.set(this, vcsRevision)
-            AppSettings.lastVcsRevision.set(this, savedVersion)
+        AppSettings.edit(context) {
+            set(AppSettings.savedVcsRevision, vcsRevision)
+            set(AppSettings.lastVcsRevision, savedVersion)
         }
     }
 

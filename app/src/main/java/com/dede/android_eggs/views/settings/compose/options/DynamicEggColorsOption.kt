@@ -8,10 +8,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.settings_state.rememberPrefBoolState
 import com.dede.android_eggs.settings_ui.basic.OptionShapes
 import com.dede.android_eggs.settings_ui.basic.SwitchOption
 import com.dede.android_eggs.settings_ui.basic.imageVectorIconBlock
-import com.dede.android_eggs.settings_ui.basic.rememberPrefBoolState
 import com.dede.android_eggs.resources.R as StringsR
 
 @Composable

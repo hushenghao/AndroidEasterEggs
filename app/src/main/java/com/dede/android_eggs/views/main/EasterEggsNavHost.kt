@@ -33,7 +33,8 @@ import com.dede.android_eggs.navigation.OverlayManager
 import com.dede.android_eggs.navigation.OverlayRoute
 import com.dede.android_eggs.navigation.rememberNavigationState
 import com.dede.android_eggs.navigation.toEntries
-import com.dede.android_eggs.settings_ui.basic.SettingPrefUtil
+import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.settings_state.rememberPrefValue
 import com.dede.android_eggs.views.main.compose.LocalKonfettiState
 import com.dede.android_eggs.views.main.compose.rememberKonfettiController
 import dev.chrisbanes.haze.blur.HazeBlurStyle
@@ -77,7 +78,7 @@ fun EasterEggsNavHost(
     // Sources everything the window draws, so a full screen overlay can blur the whole screen
     // behind it. Screens keep their own content scoped state, see HazeScaffold.
     val overlayHazeState = rememberHazeState()
-    val hazeEnabled by SettingPrefUtil.hazeBlurState
+    val hazeEnabled = rememberPrefValue(AppSettings.hazeBlur)
     val localHazeBlurStyle = LocalHazeBlurStyle.current
     val hazeBlurStyle = remember(localHazeBlurStyle, hazeEnabled) {
         localHazeBlurStyle.then(HazeBlurStyle { blurEnabled(hazeEnabled) })

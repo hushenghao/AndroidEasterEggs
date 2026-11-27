@@ -16,7 +16,7 @@ object ThemeUtils {
     }
 
     fun isDarkMode(context: Context): Boolean {
-        val themeMode = ThemePrefUtil.getThemeModeValue()
+        val themeMode = ThemePrefUtil.getThemeModeValue(context)
         return themeMode == ThemePrefUtil.DARK ||
                 themeMode == ThemePrefUtil.AMOLED ||
                 (themeMode == ThemePrefUtil.FOLLOW_SYSTEM && isSystemNightMode(context.resources))

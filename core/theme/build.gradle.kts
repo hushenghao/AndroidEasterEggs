@@ -8,7 +8,7 @@ android {
 
 dependencies {
     implementation(project(":core:system-colors"))
-    implementation(project(":core:settings-ui"))
+    implementation(project(":core:settings-state"))
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)

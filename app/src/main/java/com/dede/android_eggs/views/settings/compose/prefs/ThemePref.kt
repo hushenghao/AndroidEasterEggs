@@ -33,7 +33,7 @@ import com.dede.android_eggs.resources.R as StringsR
 @Composable
 fun ThemePref() {
     val context = LocalContext.current
-    var themeModeValue by ThemePrefUtil.themeModeState
+    var themeModeValue by ThemePrefUtil.rememberThemeModeState()
     val onOptionClick = click@{ mode: Int ->
         if (themeModeValue == mode) {
             return@click

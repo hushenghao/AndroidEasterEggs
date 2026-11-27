@@ -4,8 +4,10 @@ import android.app.UiModeManager
 import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableIntState
 import com.dede.android_eggs.preferences.AppSettings
-import com.dede.android_eggs.settings_ui.basic.mutablePrefIntState
+import com.dede.android_eggs.settings_state.rememberPrefIntState
 
 
 object ThemePrefUtil {
@@ -17,14 +19,17 @@ object ThemePrefUtil {
 
     const val ACTION_NIGHT_MODE_CHANGED = "action_night_mode_changed"
 
-    fun getThemeModeValue(): Int {
-        return themeModeState.intValue
+    fun getThemeModeValue(context: Context): Int {
+        return AppSettings.nightMode.get(context)
     }
 
-    val themeModeState = mutablePrefIntState(AppSettings.nightMode)
+    @Composable
+    fun rememberThemeModeState(): MutableIntState {
+        return rememberPrefIntState(AppSettings.nightMode)
+    }
 
     fun apply(context: Context) {
-        var mode = getThemeModeValue()
+        var mode = getThemeModeValue(context)
         if (mode == AMOLED) {
             mode = DARK
         }

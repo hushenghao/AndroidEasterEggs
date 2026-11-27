@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.startup.Initializer
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.egg_stats.EggStatsRepository
+import com.dede.android_eggs.preferences.AppSettings
 import com.dede.android_eggs.views.settings.compose.prefs.AppIconPrefUtil
 import com.dede.android_eggs.views.theme.settings.ThemePrefUtil
 import com.dede.basic.GlobalContext
@@ -14,6 +15,8 @@ class ApplicationInitializer : Initializer<Unit> {
 
     override fun create(context: Context) {
         val application = context.applicationContext as Application
+        // Preload DataStore snapshot before synchronous readers (theme, system colors, UI style).
+        AppSettings.preload(application)
         // Keep at least one launcher alias enabled if a previous switch was interrupted.
         AppIconPrefUtil.ensureValidLauncherIcon(application)
         // apply compat style

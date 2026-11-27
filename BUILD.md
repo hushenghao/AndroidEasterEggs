@@ -24,6 +24,7 @@ flowchart LR
         core_navigation(":core:navigation")
         core_provider(":core:provider")
         core_resources(":core:resources")
+        core_settings_state(":core:settings-state")
         core_settings_ui(":core:settings-ui")
         core_shortcut(":core:shortcut")
         core_system_colors(":core:system-colors")
@@ -76,7 +77,7 @@ flowchart LR
 
     class app appModule
     class baselineprofile,jvm_basic baseModule
-    class core_activity_actions,core_alterable_adaptive_icon,core_analog_clock,core_basic,core_color_picker,core_composable,core_custom_tab_browser,core_egg_stats,core_icon_shape,core_icons,core_local_provider,core_navigation,core_provider,core_resources,core_settings_ui,core_shortcut,core_system_colors,core_theme coreModule
+    class core_activity_actions,core_alterable_adaptive_icon,core_analog_clock,core_basic,core_color_picker,core_composable,core_custom_tab_browser,core_egg_stats,core_icon_shape,core_icons,core_local_provider,core_navigation,core_provider,core_resources,core_settings_state,core_settings_ui,core_shortcut,core_system_colors,core_theme coreModule
     class feature_analog_clock_widget,feature_cat_editor,feature_crash,feature_libraries_info,feature_neko_controls_widget featureModule
     class eggs_android_next,eggs_baklava,eggs_base,eggs_cinnamon_bun,eggs_gingerbread,eggs_honeycomb,eggs_ice_cream_sandwich,eggs_jelly_bean,eggs_kit_kat,eggs_lollipop,eggs_marshmallow,eggs_nougat,eggs_oreo,eggs_pie,eggs_q,eggs_r,eggs_rocket_launcher,eggs_s,eggs_tiramisu,eggs_upside_down_cake,eggs_vanilla_ice_cream eggsModule
     class script_compose_material_icons_generator,script_emoji_svg_xml_convertor scriptModule
@@ -100,6 +101,7 @@ flowchart LR
     app --> core_navigation
     app --> core_provider
     app --> core_resources
+    app --> core_settings_state
     app --> core_settings_ui
     app --> core_shortcut
     app --> core_system_colors
@@ -163,6 +165,7 @@ flowchart LR
     core_custom_tab_browser --> core_theme
     core_egg_stats --> core_basic
     core_icon_shape --> core_basic
+    core_icon_shape --> core_settings_state
     core_icons --> core_basic
     core_local_provider --> core_basic
     core_local_provider --> core_custom_tab_browser
@@ -170,6 +173,7 @@ flowchart LR
     core_navigation --> core_local_provider
     core_provider --> jvm_basic
     core_resources --> core_basic
+    core_settings_state --> core_basic
     core_settings_ui --> core_basic
     core_settings_ui --> core_icon_shape
     core_shortcut --> core_alterable_adaptive_icon
@@ -178,7 +182,7 @@ flowchart LR
     core_system_colors --> jvm_basic
     core_system_colors --> core_basic
     core_theme --> core_basic
-    core_theme --> core_settings_ui
+    core_theme --> core_settings_state
     core_theme --> core_system_colors
     eggs_android_next --> core_alterable_adaptive_icon
     eggs_android_next --> core_basic
@@ -243,11 +247,11 @@ flowchart LR
     feature_neko_controls_widget --> core_theme
     script_emoji_svg_xml_convertor --> jvm_basic
 
-    linkStyle 0,43 stroke:#6b7280,stroke-width:2px
-    linkStyle 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93 stroke:#2f80ed,stroke-width:2px
-    linkStyle 18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127 stroke:#f2994a,stroke-width:2px
-    linkStyle 38,39,40,41,42,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154 stroke:#27ae60,stroke-width:2px
-    linkStyle 155 stroke:#9b51e0,stroke-width:2px
+    linkStyle 0,44 stroke:#6b7280,stroke-width:2px
+    linkStyle 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96 stroke:#2f80ed,stroke-width:2px
+    linkStyle 19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130 stroke:#f2994a,stroke-width:2px
+    linkStyle 39,40,41,42,43,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157 stroke:#27ae60,stroke-width:2px
+    linkStyle 158 stroke:#9b51e0,stroke-width:2px
 ```
 <!-- modularization-graph:end -->
 

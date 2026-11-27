@@ -43,7 +43,8 @@ import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.egg_stats.EggLaunchSource
 import com.dede.android_eggs.egg_stats.EggStatsSummary
 import com.dede.android_eggs.icon_shape.IconShapePrefUtil
-import com.dede.android_eggs.settings_ui.basic.SettingPrefUtil
+import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.settings_state.rememberPrefValue
 import com.dede.android_eggs.ui.composes.PHI
 import com.dede.android_eggs.ui.composes.SnapshotView
 import com.dede.android_eggs.ui.composes.icons.rounded.BookmarkAddOutline
@@ -191,7 +192,7 @@ private fun EasterEggItemContent(
         AppLocaleDateFormatter.getInstance("MMM yyyy")
     }
     Box(modifier = modifier) {
-        if (SettingPrefUtil.eggItemBackdropBlurState.value) {
+        if (rememberPrefValue(AppSettings.eggItemBackdropBlur)) {
             Box(
                 modifier = Modifier.matchParentSize(),
                 contentAlignment = Alignment.CenterEnd,

@@ -81,8 +81,8 @@ fun ComposeViewThemeBuilder(
 
 fun buildDarkThemeLoadingIndicator(activity: Activity): View {
     return ComposeViewBuilder(activity) {
-        val colorSource by ColorSourcePrefUtil.colorSourceState
-        val seedColor by ColorSourcePrefUtil.seedColorState
+        val colorSource by ColorSourcePrefUtil.rememberColorSourceState()
+        val seedColor by ColorSourcePrefUtil.rememberSeedColorState()
         EasterEggsTheme(
             themeMode = ThemePrefUtil.DARK,
             colorSource = colorSource,

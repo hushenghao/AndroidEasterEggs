@@ -47,6 +47,7 @@ include(
     ":core:activity-actions",
     ":core:icon-shape",
     ":core:color-picker",
+    ":core:settings-state",
     ":core:settings-ui",
     ":core:shortcut",
     ":core:egg-stats",

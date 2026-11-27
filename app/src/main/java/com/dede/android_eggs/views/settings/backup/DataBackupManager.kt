@@ -37,7 +37,7 @@ internal object DataBackupManager {
         ignoreUnknownKeys = true
     }
 
-    fun export(context: Context, uri: Uri): BackupResult = runCatching {
+    suspend fun export(context: Context, uri: Uri): BackupResult = runCatching {
         val applicationContext = context.applicationContext
         val appDataDir = applicationContext.filesDir.parentFile
             ?: throw IllegalStateException("Cannot access app data directory")
@@ -89,7 +89,7 @@ internal object DataBackupManager {
         } ?: throw IllegalStateException("Unable to open output stream")
     }
 
-    fun import(context: Context, uri: Uri): BackupResult = runCatching {
+    suspend fun import(context: Context, uri: Uri): BackupResult = runCatching {
         val applicationContext = context.applicationContext
         val appDataDir = applicationContext.filesDir.parentFile
             ?: throw IllegalStateException("Cannot access app data directory")
@@ -136,6 +136,8 @@ internal object DataBackupManager {
                 throw IllegalArgumentException("Corrupted file: ${fileEntry.path}")
             }
         }
+
+        AppSettings.flush()
 
         for (dirName in BACKUP_DIRS) {
             val dir = File(appDataDir, dirName)
@@ -190,7 +192,8 @@ internal object DataBackupManager {
         return out.toByteArray()
     }
 
-    private fun flushPendingWrites(context: Context) {
+    private suspend fun flushPendingWrites(context: Context) {
+        AppSettings.flush()
         val prefNames = buildList {
             add(makePreferencesName(context.packageName))
             addAll(AppSettings.nekoPrefFiles)

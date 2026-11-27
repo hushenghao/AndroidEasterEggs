@@ -33,8 +33,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.settings_state.rememberPrefIntState
 import com.dede.android_eggs.settings_ui.basic.OptionShapes
-import com.dede.android_eggs.settings_ui.basic.SettingPrefUtil
 import kotlin.math.roundToInt
 import com.dede.android_eggs.resources.R as StringsR
 
@@ -43,7 +43,7 @@ private const val HIGHEST_EGG_COUNT_MAX = 4f
 
 @Composable
 fun HighestEggCountOption(shape: Shape = OptionShapes.defaultShape) {
-    val state = SettingPrefUtil.highestEggCountState
+    val state = rememberPrefIntState(AppSettings.highestEggCount)
     val sliderState = rememberSliderState(
         value = state.intValue.toFloat(),
         // 5 discrete stops (0-4) between the range ends; 4 means every egg.

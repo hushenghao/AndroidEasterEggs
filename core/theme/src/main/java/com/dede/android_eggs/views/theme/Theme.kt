@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import com.dede.android_eggs.views.theme.settings.ColorSourcePrefUtil
+import com.dede.android_eggs.settings_state.ProvideAppSettingsState
 import com.dede.android_eggs.views.theme.settings.ThemePrefUtil
 import com.materialkolor.material3.dynamicColorScheme
 
@@ -112,15 +113,17 @@ internal var currentColorScheme: ColorScheme = lightColorScheme()
 fun EasterEggsTheme(
     content: @Composable () -> Unit
 ) {
-    val currentThemeMode by ThemePrefUtil.themeModeState
-    val currentSource by ColorSourcePrefUtil.colorSourceState
-    val currentSeedColor by ColorSourcePrefUtil.seedColorState
-    EasterEggsTheme(
-        themeMode = currentThemeMode,
-        colorSource = currentSource,
-        seedColor = currentSeedColor,
-        content = content,
-    )
+    ProvideAppSettingsState {
+        val currentThemeMode by ThemePrefUtil.rememberThemeModeState()
+        val currentSource by ColorSourcePrefUtil.rememberColorSourceState()
+        val currentSeedColor by ColorSourcePrefUtil.rememberSeedColorState()
+        EasterEggsTheme(
+            themeMode = currentThemeMode,
+            colorSource = currentSource,
+            seedColor = currentSeedColor,
+            content = content,
+        )
+    }
 }
 
 @Composable
@@ -138,8 +141,10 @@ fun EasterEggsTheme(
             currentColorScheme = colors.copy()
         }
     }
-    MaterialTheme(
-        colorScheme = colors,
-        content = content,
-    )
+    ProvideAppSettingsState {
+        MaterialTheme(
+            colorScheme = colors,
+            content = content,
+        )
+    }
 }

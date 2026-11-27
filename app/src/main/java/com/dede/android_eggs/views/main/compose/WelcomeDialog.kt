@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dede.android_eggs.R
 import com.dede.android_eggs.preferences.AppSettings
-import com.dede.android_eggs.settings_ui.basic.rememberPrefBoolState
+import com.dede.android_eggs.settings_state.rememberPrefBoolState
 import com.dede.android_eggs.views.settings.compose.prefs.SnapshotCarousel
 import com.dede.android_eggs.resources.R as StringsR
 

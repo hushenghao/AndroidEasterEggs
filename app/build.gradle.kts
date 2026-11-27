@@ -143,6 +143,7 @@ dependencies {
     implementation(project(":core:icons"))
     implementation(project(":core:icon-shape"))
     implementation(project(":core:color-picker"))
+    implementation(project(":core:settings-state"))
     implementation(project(":core:settings-ui"))
     implementation(project(":core:composable"))
     implementation(project(":core:shortcut"))

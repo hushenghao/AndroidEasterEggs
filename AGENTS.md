@@ -271,12 +271,13 @@ All core modules use `easter.eggs.compose.library` except where noted.
 | `:core:composable`                | compose.library          | `com.dede.android_eggs.composable`                  | Shared Compose UI utilities and reusable composables. |
 | `:core:custom-tab-browser`        | library (non-Compose)    | `com.dede.android_eggs.browser`                     | AndroidX Custom Tabs browser integration. Keep this module browser-focused; do not add Compose UI here. |
 | `:core:egg-stats`                 | library (non-Compose)    | `com.dede.android_eggs.egg_stats`                   | Easter egg play history in a Room 3 database (`egg_stats.db`). One `egg_play_events` row per launch stores the egg's stable string id (`egg_key`), timestamp and launch source; first opened, last played and play count are aggregated by SQL rather than persisted separately. `egg_key` is the stats identity, equal to `EasterEgg.id` / `AndroidVersion.id` and matching `EasterEgg.equals/hashCode` and `lazyItemKey`; do not switch it back to a public/range api level and do not add a separate eggs table. `Migration(1, 2)` backfills `egg_key` from the v1 `api_level_first` column via `AndroidVersion.byFullApiLevel` so beta installs upgrade without losing data. |
-| `:core:icon-shape`                | compose.library          | `com.dede.android_eggs.icon_shape`                  | Launcher-icon masking shapes: `ShapeSpec` / `shapeSpecs`, the system icon mask (`SystemIconMaskUtil`) and path/polygon shape helpers. `IconShapePreference` holds the live `pref_key_override_icon_shape` state, so icon renderers depend on this instead of on the settings UI kit. |
+| `:core:icon-shape`                | compose.library          | `com.dede.android_eggs.icon_shape`                  | Launcher-icon masking shapes: `ShapeSpec` / `shapeSpecs`, the system icon mask (`SystemIconMaskUtil`) and path/polygon shape helpers. Reads `AppSettings.iconShape` via `:core:settings-state`, so icon renderers depend on this instead of on the settings UI kit. |
 | `:core:icons`                     | compose.library          | `com.dede.android_eggs.ui.composes.icons`           | Compose Material icon assets and wrappers. Output target of `:script:compose-material-icons-generator` — keep hand-written or business code out of it. |
 | `:core:local-provider`            | compose.library          | `com.dede.android_eggs.local_provider`              | CompositionLocal providers and URI handling (when Compose-dependent). |
 | `:core:navigation`                | compose.library          | `com.dede.android_eggs.navigation`                  | Navigation3 route definitions and contracts. Uses `kotlinx.serialization`. |
 | `:core:resources`                 | library (non-Compose)    | `com.dede.android_eggs.resources`                   | Shared strings, drawables, XML resources, localized values. |
-| `:core:settings-ui`               | compose.library          | `com.dede.android_eggs.settings_ui`                 | Settings **UI** kit: the `SettingPref` / `SwitchPref` / `ExpandOptionsPref` composables, `PrefKey`-backed Compose preference state (`PrefMutableState`), and app-widget pin / preview helpers. Preference **storage** lives in `:core:basic` (`com.dede.android_eggs.preferences`) and icon masking shapes in `:core:icon-shape` — do not move keys, defaults or shape geometry here. |
+| `:core:settings-state`            | compose.library          | `com.dede.android_eggs.settings_state`              | Reactive Compose state (`ProvideAppSettingsState`, read-only `rememberPrefValue`, and `rememberPrefIntState` / `rememberPrefBoolState` / `rememberPrefColorState`) over `PrefKey` / `AppSettingsStore` (`PrefMutableState`). `ProvideAppSettingsState` (mounted in `EasterEggsTheme`) holds a single shared `AppSettingsSnapshot` subscription from which readers derive per-key values via `derivedStateOf`. Has no dependencies on other `:core:*` modules except `:core:basic`, so `:core:icon-shape`, `:core:theme` and `:app` can share it without pulling in `:core:settings-ui`. |
+| `:core:settings-ui`               | compose.library          | `com.dede.android_eggs.settings_ui`                 | Settings **UI** kit: the `SettingPref` / `SwitchPref` / `ExpandOptionsPref` composables and app-widget pin / preview helpers. Preference **storage** lives in `:core:basic` (`com.dede.android_eggs.preferences`), Compose preference state in `:core:settings-state`, and icon masking shapes in `:core:icon-shape` — do not move keys, defaults, state bridges or shape geometry here. |
 | `:core:shortcut`                  | library (non-Compose)    | `com.dede.android_eggs.shortcut`                    | Launcher shortcut and app-icon shortcut support. |
 | `:core:system-colors`             | basic.library (non-Compose) | `com.dede.android_eggs.system_colors`            | Wallpaper-seeded dynamic system colors: startup color extraction engine (App Startup, API 27–30), tonal palette cache, bundled static palette resources (`values`/`values-v31`), and the `getSystemColor` resolver (`ResourcesUtils` for Java). The resolver follows the app color source (`AppSettings.colorSource`): custom/brand seeds generate the palettes from materialkolor's TonalSpot scheme (the same spec as the Compose theme), the dynamic source keeps the framework colors on API 31+ and the wallpaper seed on 27–30. Eggs using the system colors declare `implementation(project(":core:system-colors"))` explicitly, both for drawables referencing `@color/system_*` and for Java callers of `ResourcesUtils` (eggs/S, eggs/Tiramisu, eggs/JellyBean, analog-clock-widget, core/theme, app). |
 | `:core:analog-clock`              | basic.library (non-Compose) | `com.dede.android_eggs.analog_clock`             | `AnalogClock` view tinted by `getSystemColor` runtime palette (dial/hands drawables + attrs migrated with it). Consumers: eggs/S, eggs/Tiramisu PlatLogo activities. |
@@ -304,8 +305,8 @@ All core modules use `easter.eggs.compose.library` except where noted.
 - **`icon-shape`** owns icon masking shapes. Its `shapeSpecs` list is **append-only**: the
   selected shape is stored as an index into it (`pref_key_override_icon_shape`), so
   inserting a shape in the middle renumbers every later entry and silently changes the
-  shape of existing installs. `IconShapePreference` is the single live state for that
-  index — do not add a second `PrefKey`-backed state for it elsewhere.
+  shape of existing installs. Both `IconShapePrefUtil.getIconShape()` and `IconShapePref`
+  read/write `AppSettings.iconShape` directly via `rememberPrefIntState` in `:core:settings-state`.
 - **`resources`** owns shared non-code Android resources; avoid putting strings here
   that should be feature-local.
 
@@ -343,24 +344,28 @@ All feature modules use `easter.eggs.compose.library`.
 
 | Module      | Plugin                     | Namespace        | Purpose |
 |-------------|----------------------------|------------------|---------|
-| `:core:basic` | `easter.eggs.basic.library` | `com.dede.basic` | Shared Android utility code (namespace/package kept as `com.dede.basic`). `api`-depends on `:jvm-basic` and `:core:provider`. Uses Okio, AppCompat, Lifecycle, ViewModel, Startup, Activity. Also hosts the settings key registry `com.dede.android_eggs.preferences.AppSettings` (see Settings Keys below), which is why it must stay free of `:core:theme` / `:core:system-colors` dependencies. |
+| `:core:basic` | `easter.eggs.basic.library` | `com.dede.basic` | Shared Android utility code (namespace/package kept as `com.dede.basic`). `api`-depends on `:jvm-basic` and `:core:provider`. Uses DataStore, Okio, AppCompat, Lifecycle, ViewModel, Startup, Activity. Also hosts the settings key registry `com.dede.android_eggs.preferences.AppSettings` (see Settings Keys below), which is why it must stay free of `:core:theme` / `:core:system-colors` dependencies. |
 | `:jvm-basic` | `java-library` + `kotlin.jvm` | (none)          | Shared JVM-only utility code. Used by script modules (e.g., `:script:emoji-svg-xml-convertor`). Java 17. |
 
 ## Settings Keys
 
 `core/basic/src/main/java/com/dede/android_eggs/preferences/` is the single source of
-truth for every setting persisted in the default `<packageName>_preferences` file:
+truth for every setting persisted in the `app_settings` Preferences DataStore
+(`AppSettingsStore`, migrated on first read via a key whitelist from `<packageName>_preferences`):
 
-- `PrefKey<T>` — one setting: the storage key plus the value used when nothing is
-  written yet.
+- `PrefKey<T>` — one setting: the storage key, the value used when nothing is
+  written yet, and typed accessors (`get` / `isSet` / `set` / `flow`). Synchronous
+  reads (`get` / `isSet`) hit `AppSettingsStore`'s in-memory snapshot cache (preloaded
+  during `ApplicationInitializer`), while writes are serialized on `ioScope` with
+  optimistic cache updates.
 - `AppSettings` — all keys grouped by owning module, plus the extra SharedPreferences
   file names that backup has to flush. Its `init` block rejects duplicate key names.
 
 Rules when adding or changing a setting:
 
 - Declare the key in `AppSettings`; do not write a string literal at the call site.
-- Read and write through `PrefKey.get` / `PrefKey.set`, so the declared default is
-  always the one used:
+- Read and write through `PrefKey.get` / `PrefKey.set` (or `AppSettings.edit` for
+  multi-key transactions), so the declared default is always the one used:
 
   ```kotlin
   val enabled = AppSettings.retainInRecents.get(context)
@@ -370,8 +375,10 @@ Rules when adding or changing a setting:
   Build keys with the `PrefKey.boolean` / `PrefKey.int` / `PrefKey.long` / `PrefKey.string`
   factories rather than the constructor: the stored type belongs to the key, not to a
   guess from the default value, which is what keeps a nullable default expressible.
-  For Compose state use `rememberPrefBoolState` / `rememberPrefIntState` /
-  `mutablePrefColorState` in `:core:settings-ui`, which take a `PrefKey` too.
+  For Compose state use `rememberPrefValue` (read-only) or `rememberPrefBoolState` /
+  `rememberPrefIntState` / `rememberPrefColorState` in `:core:settings-state`, which
+  take a `PrefKey` too and share the single `ProvideAppSettingsState` subscription
+  provided by `EasterEggsTheme`.
 - Key names are part of the on-disk format. Renaming one resets that setting on every
   existing install, so a rename must ship with a migration.
 - The registry lives in `:core:basic` because the convention plugins already inject that
@@ -379,17 +386,18 @@ Rules when adding or changing a setting:
   `:core:theme` or `:core:system-colors`, so device-capability defaults stay in the
   owning module (see `ColorSourcePrefUtil.DEFAULT_SOURCE`).
 - Long values use `PrefKey.long`. `SpEx.kt` keeps the string-keyed
-  `Context.getLong` / `putLong` for the AOSP-derived `PlatLogoActivity` classes
-  (`SpUtils` in Java). Leave them alone.
+  `Context.getLong` / `putLong` on `<packageName>_preferences` (`Context.pref`) for the
+  AOSP-derived `PlatLogoActivity` classes (`SpUtils` in Java). Leave them alone.
 
 Not in the registry: the AOSP-derived `N_mPrefs` / `R_mPrefs` / `S_mPrefs` / `T_mPrefs`
-neko state, the two DataStore files (per-widget config), the launcher icon state
+neko state, the two per-widget DataStore files, the launcher icon state
 (`PackageManager` component state), the language (`AppCompatDelegate` locales) and the
 easter egg play history (`egg_stats.db` in `:core:egg-stats`).
 
-Resetting to defaults is `AppSettings.reset(context)`: one transaction that drops every
-registered key, so each reads back its declared default (committed synchronously, because
-the settings screen restarts the app right after). Settings outside the registry need
+Resetting to defaults is `suspend fun AppSettings.reset(context)`: one DataStore
+transaction that removes every registered key (preserving `isSet()` semantics), awaiting
+disk commit before the settings screen restarts the process; `AppSettings.flush()`
+similarly awaits pending writes before backup/restore. Settings outside the registry need
 their own reset — `DefaultSettings.restore` in `:app` (`views/settings/backup/`) also
 switches the launcher icon back and clears the app locale. Do not add a second, partial
 reset path.
@@ -683,7 +691,7 @@ Use these first for common tasks:
 - **Settings keys (persisted preferences)**:
   - `core/basic/src/main/java/com/dede/android_eggs/preferences/` — see Settings Keys section
   - `core/basic/src/main/java/com/dede/android_eggs/util/Pref.kt` — the default prefs file
-  - `core/settings-ui/src/main/java/com/dede/android_eggs/settings_ui/basic/PrefMutableState.kt` — Compose state over a `PrefKey`
+  - `core/settings-state/src/main/java/com/dede/android_eggs/settings_state/PrefMutableState.kt` — Compose state over a `PrefKey`
 - **Settings screen UI**:
   - `app/src/main/java/com/dede/android_eggs/views/settings/SettingsScreen.kt`
   - `app/src/main/java/com/dede/android_eggs/views/settings/compose/prefs/`

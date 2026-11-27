@@ -15,7 +15,7 @@ import com.dede.android_eggs.views.settings.compose.prefs.LanguagePrefUtil
  */
 internal object DefaultSettings {
 
-    fun restore(context: Context) {
+    suspend fun restore(context: Context) {
         AppSettings.reset(context)
         AppIconPrefUtil.switchIcon(context, AppIconPrefUtil.defaultIcon)
         LanguagePrefUtil.setApplicationLocalesValue(LanguagePrefUtil.SYSTEM)

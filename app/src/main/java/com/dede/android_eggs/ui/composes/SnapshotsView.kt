@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.dede.android_eggs.R
 import com.dede.android_eggs.preferences.AppSettings
-import com.dede.android_eggs.settings_ui.basic.rememberPrefBoolState
+import com.dede.android_eggs.settings_state.rememberPrefValue
 import com.dede.android_eggs.util.ThemeUtils
 import com.dede.basic.provider.SnapshotProvider
 import kotlin.random.Random
@@ -63,11 +63,7 @@ fun SnapshotView(
             )
         }
         if (snapshot != null) {
-            val dynamicEggColors = if (LocalInspectionMode.current) {
-                false
-            } else {
-                rememberPrefBoolState(AppSettings.dynamicEggColors).value
-            }
+            val dynamicEggColors = rememberPrefValue(AppSettings.dynamicEggColors)
             val colorScheme = MaterialTheme.colorScheme
             key(snapshot, dynamicEggColors, colorScheme) {
                 AndroidView(

@@ -40,6 +40,7 @@
             <option value="$PROJECT_DIR$/core/navigation" />
             <option value="$PROJECT_DIR$/core/provider" />
             <option value="$PROJECT_DIR$/core/resources" />
+            <option value="$PROJECT_DIR$/core/settings-state" />
             <option value="$PROJECT_DIR$/core/settings-ui" />
             <option value="$PROJECT_DIR$/core/shortcut" />
             <option value="$PROJECT_DIR$/core/system-colors" />

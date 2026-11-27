@@ -14,6 +14,8 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.graphics.shapes.CornerRounding
 import androidx.graphics.shapes.RoundedPolygon
 import androidx.graphics.shapes.star
+import com.dede.android_eggs.preferences.AppSettings
+import com.dede.android_eggs.settings_state.rememberPrefValue
 import sv.lib.squircleshape.SquircleShape
 import kotlin.random.Random
 
@@ -56,7 +58,7 @@ object IconShapePrefUtil {
         val index: Int = if (LocalInspectionMode.current) {
             Random.nextInt(indexOfRandom)
         } else {
-            IconShapePreference.selectedIndex.intValue
+            rememberPrefValue(AppSettings.iconShape)
         }
         return shapeSpecs.getOrElse(index) { circleShapeSpec }.toShape()
     }
