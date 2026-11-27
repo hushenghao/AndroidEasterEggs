@@ -195,6 +195,15 @@ Prefer the smallest module-specific compile/test command that covers the change.
   locale directory, **except Latin** (`values-la-rLA`). Escape AAPT/XML special
   characters in the translated text: apostrophes as `\'` (e.g. French
   `l\'écran`), `&` as `&amp;`, and `<` as `&lt;`.
+- Insert each new translation at the **same position** as in the source file
+  (after the same preceding key) and do **not** add blank lines or group
+  separators to `values-*` files. Crowdin exports Android XML in source order
+  and strips blank lines, so appending entries to the end of a locale file or
+  grouping them with blank lines makes the next sync reorder or delete lines
+  and open a formatting-only pull request. Grouping blank lines belong to the
+  source `values/` file only. The rule applies to every source in `crowdin.yml`
+  (`core/resources` `strings.xml` and `languages.xml`, `eggs/AndroidNext`,
+  `eggs/RocketLauncher`, `feature/analog-clock-widget`); Latin is exempt.
 
 ### Documentation & Comments
 
