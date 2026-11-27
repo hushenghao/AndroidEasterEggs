@@ -119,7 +119,6 @@
     <string name="dialog_restore_defaults_message">此操作会将所有设置（包括主题、应用图标和语言）恢复为默认值。已保存的猫咪和小部件配置不受影响。此操作不可撤销。确定要继续吗？</string>
     <string name="action_confirm_restore_defaults">重置</string>
     <string name="toast_restore_defaults_success">已恢复默认设置，应用将重启</string>
-
     <string name="pref_title_ui_style">界面样式</string>
     <string name="pref_title_haze_blur">毛玻璃模糊效果</string>
     <string name="pref_summary_haze_blur">模糊顶栏、底栏和全屏浮层后方的内容，在部分设备上可能影响性能</string>

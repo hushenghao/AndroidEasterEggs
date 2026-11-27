@@ -119,7 +119,6 @@
     <string name="dialog_restore_defaults_message">এটি থিম, লঞ্চার আইকন এবং ভাষা সহ সমস্ত সেটিংস রিসেট করবে। সংরক্ষিত বিড়াল এবং উইজেট কনফিগারেশন প্রভাবিত হবে না। এই কাজটি বাতিল করা যাবে না। আপনি কি নিশ্চিতভাবে চালিয়ে যেতে চান?</string>
     <string name="action_confirm_restore_defaults">রিসেট করুন</string>
     <string name="toast_restore_defaults_success">সেটিংস ডিফল্টে পুনরুদ্ধার করা হয়েছে। অ্যাপটি পুনরায় চালু হবে।</string>
-
     <string name="pref_title_ui_style">UI শৈলী</string>
     <string name="pref_title_haze_blur">অর্ধস্বচ্ছ ব্লার</string>
     <string name="pref_summary_haze_blur">অ্যাপ বার এবং পূর্ণ-স্ক্রিন ওভারলের পেছনের বিষয়বস্তু ব্লার করুন। কিছু ডিভাইসে পারফরম্যান্সে প্রভাব ফেলতে পারে।</string>

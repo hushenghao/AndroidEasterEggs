@@ -119,7 +119,6 @@
     <string name="dialog_restore_defaults_message">Това ще нулира всички настройки, включително темата, иконата на стартовия екран и езика. Запазените котки и конфигурациите на джаджите не са засегнати. Това действие не може да бъде отменено. Сигурни ли сте, че искате да продължите?</string>
     <string name="action_confirm_restore_defaults">Нулиране</string>
     <string name="toast_restore_defaults_success">Настройките са възстановени по подразбиране. Приложението ще се рестартира.</string>
-
     <string name="pref_title_ui_style">Стил на интерфейса</string>
     <string name="pref_title_haze_blur">Полупрозрачно замъгляване</string>
     <string name="pref_summary_haze_blur">Замъгляване на съдържанието зад лентите и наслагванията на цял екран. Може да повлияе на производителността на някои устройства.</string>

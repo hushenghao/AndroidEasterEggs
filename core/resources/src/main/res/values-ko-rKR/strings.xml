@@ -119,7 +119,6 @@
     <string name="dialog_restore_defaults_message">테마, 런처 아이콘, 언어를 포함한 모든 설정이 초기화됩니다. 저장된 고양이와 위젯 설정은 영향을 받지 않습니다. 이 작업은 되돌릴 수 없습니다. 계속하시겠습니까?</string>
     <string name="action_confirm_restore_defaults">초기화</string>
     <string name="toast_restore_defaults_success">설정을 기본값으로 복원했습니다. 앱이 다시 시작됩니다.</string>
-
     <string name="pref_title_ui_style">UI 스타일</string>
     <string name="pref_title_haze_blur">반투명 흐림 효과</string>
     <string name="pref_summary_haze_blur">앱 바와 전체 화면 오버레이 뒤의 콘텐츠를 흐리게 표시합니다. 일부 기기에서는 성능에 영향을 줄 수 있습니다.</string>

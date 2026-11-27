@@ -119,7 +119,6 @@
     <string name="dialog_restore_defaults_message">سيؤدي هذا إلى إعادة تعيين جميع الإعدادات، بما في ذلك المظهر وأيقونة المشغّل واللغة. لن تتأثر القطط المحفوظة وإعدادات الأدوات. لا يمكن التراجع عن هذا الإجراء. هل أنت متأكد أنك تريد المتابعة؟</string>
     <string name="action_confirm_restore_defaults">إعادة تعيين</string>
     <string name="toast_restore_defaults_success">تمت استعادة الإعدادات إلى الافتراضي. سيُعاد تشغيل التطبيق.</string>
-
     <string name="pref_title_ui_style">نمط الواجهة</string>
     <string name="pref_title_haze_blur">تمويه شفاف</string>
     <string name="pref_summary_haze_blur">تمويه المحتوى خلف الأشرطة والطبقات بملء الشاشة. قد يؤثر على الأداء في بعض الأجهزة.</string>
