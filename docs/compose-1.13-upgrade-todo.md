@@ -67,7 +67,7 @@ FlowRow 未弃用（官方只建议**新代码**用 FlexBox）；FlexBox 是 `Fl
 
 - Compose 性能静态分析 skill（`android/skills` 的 `jetpack-compose-performance`）：已对主界面 + 核心 UI 模块跑过审计，**未发现显著可行动问题**（懒布局 `key`/`contentType`、`collectAsStateWithLifecycle`、无 `Modifier.composed`/热路径 `onGloballyPositioned` 等均合规）。
 - `TestFailurePolicy`：不适用（`baselineprofile` 冒烟测试为 `UiAutomator` 跨进程黑盒测试，无 `ComposeTestRule` 与进程内语义树；项目当前也无进程内 Compose UI 测试）。
-- **诊断堆栈跟踪（Diagnostic Stack Traces）**：已在 `EasterEggsApp.onCreate` 启用 `Composer.setDiagnosticStackTraceMode(ComposeStackTraceMode.Auto)`。在发生崩溃时会自动附加包含 `@Composable` 组件调用树的堆栈信息；线上混淆包使用 `GroupKeys` 模式配合 R8 映射表还原，未混淆包无额外开销。
+- **诊断堆栈跟踪（Diagnostic Stack Traces）**：已在 `ApplicationInitializer.create` 启用 `Composer.setDiagnosticStackTraceMode(ComposeStackTraceMode.Auto)`。在发生崩溃时会自动附加包含 `@Composable` 组件调用树的堆栈信息；线上混淆包使用 `GroupKeys` 模式配合 R8 映射表还原，未混淆包无额外开销。
 
 ## 六、渐进式模糊 / 背景模糊 vs Haze（评估结论：Haze 保留）
 

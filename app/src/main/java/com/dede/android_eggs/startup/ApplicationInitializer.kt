@@ -2,6 +2,8 @@ package com.dede.android_eggs.startup
 
 import android.app.Application
 import android.content.Context
+import androidx.compose.runtime.Composer
+import androidx.compose.runtime.tooling.ComposeStackTraceMode
 import androidx.startup.Initializer
 import com.dede.android_eggs.BuildConfig
 import com.dede.android_eggs.egg_stats.EggStatsRepository
@@ -24,6 +26,8 @@ class ApplicationInitializer : Initializer<Unit> {
 
         EggStatsRepository.preload()
 
+        // Enable diagnostic stack traces for Compose crashes
+        Composer.setDiagnosticStackTraceMode(ComposeStackTraceMode.Auto)
         // Enable recomposition tracking ONLY in debug builds
         ComposeStabilityAnalyzer.setEnabled(BuildConfig.DEBUG)
     }
