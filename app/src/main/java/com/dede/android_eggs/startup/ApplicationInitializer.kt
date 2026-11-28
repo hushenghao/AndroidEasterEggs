@@ -6,11 +6,9 @@ import androidx.compose.runtime.Composer
 import androidx.compose.runtime.tooling.ComposeStackTraceMode
 import androidx.startup.Initializer
 import com.dede.android_eggs.BuildConfig
-import com.dede.android_eggs.egg_stats.EggStatsRepository
 import com.dede.android_eggs.preferences.AppSettings
 import com.dede.android_eggs.views.settings.compose.prefs.AppIconPrefUtil
 import com.dede.android_eggs.views.theme.settings.ThemePrefUtil
-import com.dede.basic.GlobalContext
 import com.skydoves.compose.stability.runtime.ComposeStabilityAnalyzer
 
 class ApplicationInitializer : Initializer<Unit> {
@@ -24,15 +22,11 @@ class ApplicationInitializer : Initializer<Unit> {
         // apply compat style
         ThemePrefUtil.apply(application)
 
-        EggStatsRepository.preload()
-
         // Enable diagnostic stack traces for Compose crashes
         Composer.setDiagnosticStackTraceMode(ComposeStackTraceMode.Auto)
         // Enable recomposition tracking ONLY in debug builds
         ComposeStabilityAnalyzer.setEnabled(BuildConfig.DEBUG)
     }
 
-    override fun dependencies(): List<Class<out Initializer<*>>> = listOf(
-        GlobalContext.Initializer::class.java
-    )
+    override fun dependencies(): List<Class<out Initializer<*>>> = emptyList()
 }

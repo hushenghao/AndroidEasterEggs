@@ -84,7 +84,7 @@ object EggActionHelp {
             if (!egg.onEasterEggAction(context)) {
                 NoEggAction.invoke(context)
             } else {
-                EggStatsRepository.recordPlayAsync(egg.id, source)
+                EggStatsRepository.from(context).recordPlayAsync(egg.id, source)
             }
             return
         }
@@ -108,7 +108,7 @@ object EggActionHelp {
         }
         context.startActivity(intent)
         // The full api level range is the play history identity, see EggPlayEvent.
-        EggStatsRepository.recordPlayAsync(egg.id, source)
+        EggStatsRepository.from(context).recordPlayAsync(egg.id, source)
     }
 
     private fun findTaskWithTrim(context: Context, clazz: Class<out Activity>): AppTask? {

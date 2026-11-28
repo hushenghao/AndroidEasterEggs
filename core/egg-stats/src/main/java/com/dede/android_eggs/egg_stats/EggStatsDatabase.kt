@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.Flow
     exportSchema = true,
 )
 @ColumnTypeConverters(value = [EggLaunchSourceConverter::class])
-abstract class EggStatsDatabase : RoomDatabase() {
+internal abstract class EggStatsDatabase : RoomDatabase() {
     abstract fun eggPlayEventDao(): EggPlayEventDao
 }
 
@@ -61,7 +61,7 @@ enum class EggLaunchSource {
 }
 
 @ColumnTypeConverters
-class EggLaunchSourceConverter {
+internal class EggLaunchSourceConverter {
 
     @ColumnTypeConverter
     fun sourceToString(value: EggLaunchSource): String {
@@ -85,7 +85,7 @@ data class EggStatsSummary(
 )
 
 @Dao
-interface EggPlayEventDao {
+internal interface EggPlayEventDao {
 
     @Insert
     suspend fun insert(event: EggPlayEvent)

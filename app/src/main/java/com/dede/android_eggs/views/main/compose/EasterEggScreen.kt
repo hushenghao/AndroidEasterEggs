@@ -22,6 +22,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.NavKey
 import androidx.navigationevent.NavigationEventInfo
 import androidx.navigationevent.compose.NavigationBackHandler
@@ -42,6 +44,8 @@ import com.dede.android_eggs.composable.appbar.HazeScaffoldDefaults.hazeAppBar
 import com.dede.android_eggs.composable.appbar.LocalHazeState
 import com.dede.android_eggs.composable.currentWindowWidthPane
 import com.dede.android_eggs.data.EasterEggRepository
+import com.dede.android_eggs.egg_stats.EggStatsRepository
+import com.dede.android_eggs.egg_stats.EggStatsSummary
 import com.dede.android_eggs.navigation.EasterEggsDestination
 import com.dede.android_eggs.preferences.AppSettings
 import com.dede.android_eggs.settings_state.rememberPrefValue
@@ -83,9 +87,11 @@ object EasterEggsScreen : EasterEggsDestination, EasterEggsDestination.Provider 
 @HiltViewModel
 class EasterEggViewModel @Inject constructor(
     repository: EasterEggRepository,
+    eggStatsRepository: EggStatsRepository,
 ) : ViewModel() {
     val easterEggs = repository.easterEggs
     val releaseDateLookup = repository::findReleaseDateByVersion
+    val eggStatsSummaries = eggStatsRepository.observeSummaries()
 }
 
 @Composable
@@ -115,18 +121,22 @@ fun EasterEggScreen(
 
     val konfettiController = LocalKonfettiState.current
     val highestCount = rememberPrefValue(AppSettings.highestEggCount)
+    val summaries by viewModel.eggStatsSummaries.collectAsStateWithLifecycle()
+    val statsMap = remember(summaries) {
+        summaries.associateBy { it.eggKey }
+    }
     CompositionLocalProvider(
         LocalEasterEggLogoSensor provides logoSensor,
     ) {
         when (currentWindowWidthPane()) {
             WindowWidthPane.COMPACT -> {
-                EggScreenScaffoldCompact(viewModel, highestCount)
+                EggScreenScaffoldCompact(viewModel, highestCount, statsMap)
             }
             WindowWidthPane.MEDIUM -> {
-                EggScreenScaffoldMedium(viewModel, highestCount)
+                EggScreenScaffoldMedium(viewModel, highestCount, statsMap)
             }
             WindowWidthPane.EXPANDED -> {
-                EggScreenScaffoldExpanded(viewModel, highestCount)
+                EggScreenScaffoldExpanded(viewModel, highestCount, statsMap)
             }
         }
 
@@ -138,7 +148,11 @@ fun EasterEggScreen(
 }
 
 @Composable
-private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel, highestCount: Int) {
+private fun EggScreenScaffoldCompact(
+    viewModel: EasterEggViewModel,
+    highestCount: Int,
+    statsMap: Map<String, EggStatsSummary>,
+) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     ReverseModalNavigationDrawer(
         drawerContent = {
@@ -170,6 +184,7 @@ private fun EggScreenScaffoldCompact(viewModel: EasterEggViewModel, highestCount
                 contentPadding = contentPadding,
                 highestCount = highestCount,
                 searchBarVisible = searchBarState.visible,
+                statsMap = statsMap,
             )
         }
     }
@@ -188,7 +203,11 @@ fun SettingsDrawerEndPane(contentPadding: PaddingValues) {
 }
 
 @Composable
-private fun EggScreenScaffoldMedium(viewModel: EasterEggViewModel, highestCount: Int) {
+private fun EggScreenScaffoldMedium(
+    viewModel: EasterEggViewModel,
+    highestCount: Int,
+    statsMap: Map<String, EggStatsSummary>,
+) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val searchBarState = rememberBottomSearchBarState()
     EggScreenScaffold(
@@ -214,13 +233,18 @@ private fun EggScreenScaffoldMedium(viewModel: EasterEggViewModel, highestCount:
                 contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
                 highestCount = highestCount,
                 searchBarVisible = searchBarState.visible,
+                statsMap = statsMap,
             )
         }
     }
 }
 
 @Composable
-private fun EggScreenScaffoldExpanded(viewModel: EasterEggViewModel, highestCount: Int) {
+private fun EggScreenScaffoldExpanded(
+    viewModel: EasterEggViewModel,
+    highestCount: Int,
+    statsMap: Map<String, EggStatsSummary>,
+) {
     val searchBarState = rememberBottomSearchBarState()
     EggScreenScaffold(
         drawerState = null,
@@ -243,6 +267,7 @@ private fun EggScreenScaffoldExpanded(viewModel: EasterEggViewModel, highestCoun
                 contentPadding = contentPadding.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
                 highestCount = highestCount,
                 searchBarVisible = searchBarState.visible,
+                statsMap = statsMap,
             )
         }
     }

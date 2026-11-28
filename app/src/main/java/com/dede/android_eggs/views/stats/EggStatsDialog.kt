@@ -85,8 +85,14 @@ object EggStatsOverlayProvider : OverlayContentProvider {
 @HiltViewModel
 class EggStatsViewModel @Inject constructor(
     repository: EasterEggRepository,
+    private val eggStatsRepository: EggStatsRepository,
 ) : ViewModel() {
     val easterEggs = repository.pureEasterEggs
+    val summaries = eggStatsRepository.observeSummaries()
+
+    suspend fun clearStats() {
+        eggStatsRepository.clear()
+    }
 }
 
 private data class EggStatsRow(
@@ -111,7 +117,7 @@ fun EggStatsDialog(
     onDismiss: () -> Unit,
     viewModel: EggStatsViewModel = hiltViewModel(),
 ) {
-    val summaries by EggStatsRepository.observeSummaries()
+    val summaries by viewModel.summaries
         .collectAsStateWithLifecycle()
     val rows = remember(viewModel.easterEggs, summaries) {
         val summaryMap = summaries.associateBy { it.eggKey }
@@ -199,7 +205,7 @@ fun EggStatsDialog(
                     onClick = {
                         showClearDialog = false
                         scope.launch {
-                            EggStatsRepository.clear()
+                            viewModel.clearStats()
                             context.toast(StringsR.string.egg_stats_cleared)
                         }
                     },

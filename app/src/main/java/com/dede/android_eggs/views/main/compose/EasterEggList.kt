@@ -17,19 +17,15 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dede.android_eggs.composable.WindowWidthPane
 import com.dede.android_eggs.composable.currentWindowWidthPane
-import com.dede.android_eggs.egg_stats.EggStatsRepository
 import com.dede.android_eggs.egg_stats.EggStatsSummary
 import com.dede.android_eggs.inject.EasterEggModules
 import com.dede.android_eggs.preferences.AppSettings
@@ -78,18 +74,6 @@ internal fun BaseEasterEgg.lazyItemKey(): String {
     }
 }
 
-@Composable
-private fun rememberEggStats(): Map<String, EggStatsSummary> {
-    if (LocalInspectionMode.current) {
-        return emptyMap()
-    }
-    val summaries by EggStatsRepository.observeSummaries()
-        .collectAsStateWithLifecycle()
-    return remember(summaries) {
-        summaries.associateBy { it.eggKey }
-    }
-}
-
 /**
  * The egg list entry: the searched results, or the browsing list grouped by the highest
  * egg, wavy dividers and the footer. The browsing list is a two-column grid on
@@ -106,6 +90,7 @@ fun EasterEggList(
     releaseDateLookup: (AndroidVersion) -> Date? = { null },
     highestCount: Int = HIGHEST_COUNT,
     searchBarVisible: Boolean = false,
+    statsMap: Map<String, EggStatsSummary> = emptyMap(),
 ) {
     val context = LocalContext.current
     val pureEasterEggs = remember(easterEggs) {
@@ -131,8 +116,6 @@ fun EasterEggList(
                         (if (searchBarVisible) BottomSearchBarClearance else 0.dp) +
                         rememberExtraImeBottomPadding(),
             )
-
-    val statsMap = rememberEggStats()
 
     // `HIGHEST_EGG_COUNT_ALL` highlights every egg; the other values are literal card counts.
     val effectiveHighestCount = if (highestCount == AppSettings.HIGHEST_EGG_COUNT_ALL) {

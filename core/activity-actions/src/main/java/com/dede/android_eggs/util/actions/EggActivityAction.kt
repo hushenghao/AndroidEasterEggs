@@ -81,7 +81,7 @@ internal class EggActivityAction : ActivityActionDispatcher.ActivityAction {
         } else {
             return
         }
-        EggStatsRepository.recordPlayAsync(eggKey, EggLaunchSource.SHORTCUT)
+        EggStatsRepository.from(activity).recordPlayAsync(eggKey, EggLaunchSource.SHORTCUT)
     }
 
     override fun onResume(activity: Activity) {

@@ -12,6 +12,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.startup)
     implementation(libs.androidx.room)
     implementation(libs.androidx.sqlite.framework)
     ksp(libs.androidx.room.compiler)

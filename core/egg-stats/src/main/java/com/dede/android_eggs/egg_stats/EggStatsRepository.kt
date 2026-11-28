@@ -1,12 +1,20 @@
 package com.dede.android_eggs.egg_stats
 
+import android.content.Context
 import androidx.room3.Room
 import androidx.room3.migration.Migration
 import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.driver.AndroidSQLiteDriver
 import androidx.sqlite.execSQL
-import com.dede.basic.globalContext
 import com.dede.basic.provider.AndroidVersion
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -17,23 +25,54 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@Module
+@InstallIn(SingletonComponent::class)
+internal object EggStatsDatabaseModule {
+
+    @Provides
+    @Singleton
+    fun provideEggStatsDatabase(
+        @ApplicationContext context: Context,
+    ): EggStatsDatabase {
+        return Room.databaseBuilder<EggStatsDatabase>(context, "egg_stats.db")
+            .setDriver(AndroidSQLiteDriver())
+            .addMigrations(MIGRATION_1_2)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideEggStatsRepository(
+        db: EggStatsDatabase,
+    ): EggStatsRepository {
+        return EggStatsRepository(db)
+    }
+}
+
+@EntryPoint
+@InstallIn(SingletonComponent::class)
+internal interface EggStatsEntryPoint {
+    fun eggStatsRepository(): EggStatsRepository
+}
+
 /**
  * Local play history of every Easter egg.
  *
  * Every write is keyed by the egg's stable string id [EggPlayEvent.eggKey], the same
  * identity the app uses for egg equality and list keys. See [EggPlayEvent] before
  * changing that identity.
- *
- * The database is process-wide and opened lazily, so recording a launch never
- * blocks the click that started it.
  */
-object EggStatsRepository {
+class EggStatsRepository internal constructor(
+    private val db: EggStatsDatabase,
+) {
 
-    private val db by lazy {
-        Room.databaseBuilder<EggStatsDatabase>(globalContext, "egg_stats.db")
-            .setDriver(AndroidSQLiteDriver())
-            .addMigrations(MIGRATION_1_2)
-            .build()
+    companion object {
+        fun from(context: Context): EggStatsRepository {
+            return EntryPointAccessors.fromApplication(
+                context.applicationContext,
+                EggStatsEntryPoint::class.java,
+            ).eggStatsRepository()
+        }
     }
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
@@ -46,7 +85,7 @@ object EggStatsRepository {
         )
     }
 
-    fun preload() {
+    internal fun preload() {
         scope.launch {
             runCatching { summariesState }
         }
